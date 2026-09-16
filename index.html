@@ -10,7 +10,7 @@ a{text-decoration:none;color:inherit}.nav{position:sticky;top:0;z-index:20;heigh
 .logo{font-weight:900;letter-spacing:-1px;font-size:22px;display:flex;gap:8px;align-items:center}.logo b{border:2px solid #fff;padding:3px 5px;font-size:16px}
 .navlinks{display:flex;gap:25px;margin-left:auto}.navlinks a{font-size:14px;color:#aeb5c0}.navlinks a:hover,.navlinks a.active{color:#fff}
 .btn{border:1px solid #fff;border-radius:7px;padding:11px 16px;font-weight:700;background:#fff;color:#050609;cursor:pointer}
-.hero{position:relative;overflow:hidden;min-height:650px;padding:90px 6% 70px;display:grid;grid-template-columns:1.1fr .9fr;gap:50px;align-items:center;max-width:none;margin:auto;background:#07090d} .hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;pointer-events:none} .hero-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(4,7,12,.88) 0%,rgba(4,7,12,.64) 48%,rgba(4,7,12,.50) 100%),linear-gradient(0deg,rgba(4,7,12,.72),rgba(4,7,12,.20));z-index:1;pointer-events:none} .hero>*:not(.hero-video):not(.hero-overlay){position:relative;z-index:2}
+.hero{padding:90px 6% 70px;display:grid;grid-template-columns:1.1fr .9fr;gap:50px;align-items:center;max-width:1300px;margin:auto}
 .eyebrow{font-size:12px;letter-spacing:2px;color:#9da6b2;font-weight:800}.hero h1{font-size:clamp(48px,7vw,82px);line-height:.93;margin:18px 0}.hero p{color:#aeb5c0;max-width:590px;font-size:18px;line-height:1.6}.actions{display:flex;gap:12px;margin-top:28px}.btn.secondary{background:transparent;color:#fff;border-color:#303641}
 .mock{border:1px solid #272c35;border-radius:18px;background:#0d1016;padding:20px;box-shadow:0 25px 80px #0008}.mocktop{display:flex;justify-content:space-between;color:#87909d;font-size:12px}.live{color:#7ee787}.match{margin-top:20px;padding:18px;border-radius:12px;background:#12161e}.teams{display:flex;justify-content:space-between;align-items:center;gap:12px}.teams b{display:inline-block;max-width:260px;line-height:1.15}.score{font-size:34px;font-weight:900;min-width:48px;text-align:right}.bar{height:6px;background:#292f38;border-radius:8px;margin:20px 0}.bar i{display:block;width:68%;height:100%;background:#f5f7fa;border-radius:8px}
 section{padding:75px 6%;max-width:1300px;margin:auto}.sectionhead{display:flex;justify-content:space-between;align-items:end;margin-bottom:30px}.sectionhead h2{font-size:38px;margin:0}.muted{color:#8e97a4}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.card{border:1px solid #252a33;background:#0c0f14;border-radius:14px;padding:25px}.card h3{margin-top:0}.card p{color:#929aa6;line-height:1.6}
@@ -116,7 +116,6 @@ footer{border-top:1px solid #20242c;padding:30px 6%;color:#777f8c;text-align:cen
 
 <main id="home">
 <div class="hero">
-<video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="assets/img-hero-poster.jpg"><source src="assets/img-hero-background.mp4" type="video/mp4"></video><div class="hero-overlay"></div>
 <div><div class="eyebrow">THE NEXT GENERATION OF SPORTS DATA</div><h1>Every game.<br>Every moment.</h1><p>IMG brings live scores, schedules, results and sports statistics into one fast, focused destination.</p><div class="actions"><a class="btn" href="#platform" onclick="showPlatform();return false;">Explore Live Scores</a><a class="btn secondary" href="#platform" onclick="showPlatform();return false;">View Scores</a></div></div>
 <div class="mock" id="heroGame"><div class="mocktop"><span>GAME CENTER</span><span class="live" id="heroStatus">● LIVE</span></div><div class="match"><div class="muted" id="heroSport" style="font-size:11px;text-transform:uppercase;letter-spacing:1px;margin-bottom:14px">LIVE SPORTS</div><div class="teams"><div><small>HOME</small><br><b id="heroHome">Loading…</b></div><div class="score" id="heroHomeScore">—</div></div><div class="teams"><div><small>AWAY</small><br><b id="heroAway">Loading…</b></div><div class="score" id="heroAwayScore">—</div></div><div class="bar"><i id="heroBar"></i></div><small class="muted" id="heroMeta">Loading live game data…</small></div></div>
 </div>
@@ -369,7 +368,7 @@ function render(){
 .lb-sports{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:25px}
 .lb-sport{border:1px solid #303640;background:#11151c;color:#fff;border-radius:10px;padding:11px 15px;cursor:pointer}
 .lb-sport.active{background:#fff;color:#090c11}
-.lb-leagues{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.lb-search{margin:0 0 18px}.lb-search input{width:100%;padding:14px 16px;border-radius:10px;border:1px solid #303640;background:#0c1016;color:#fff;font-size:15px;outline:none}.lb-search input:focus{border-color:#fff}.lb-search input::placeholder{color:#77808c}.lb-leagues{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
 .lb-league{display:block;padding:16px;border:1px solid #252b35;border-radius:12px;background:#11151c;color:#fff;text-decoration:none}
 .lb-league small{display:block;color:#8f98a5;margin-top:5px}
 .lb-close{position:absolute;right:18px;top:18px;border:1px solid #303640;background:#11151c;color:#fff;border-radius:10px;padding:10px 14px;cursor:pointer}
@@ -381,6 +380,7 @@ function render(){
     <h2 id="img-league-title">Basketball</h2>
     <p>Select a sport to see major leagues and competitions around the world.</p>
     <div class="lb-sports" id="img-sports-tabs"></div>
+    <div class="lb-search"><input id="img-league-search" type="search" placeholder="Search leagues…" aria-label="Search leagues"></div>
     <div class="lb-leagues" id="img-league-list"></div>
   </div>
 </div>
@@ -460,26 +460,20 @@ const title=document.getElementById('img-league-title');
 function render(sport){
  title.textContent=sport;
  tabs.querySelectorAll('button').forEach(b=>b.classList.toggle('active',b.dataset.sport===sport));
- list.innerHTML=data[sport].map(x=>`<a class="lb-league" href="#" data-league="${x[0].replace(/"/g,'&quot;')}"><b>${x[0]}</b><small>${x[1]}</small></a>`).join('');
+ const q=document.getElementById('img-league-search').value.trim().toLowerCase();
+ const filtered=data[sport].filter(x=>(x[0]+' '+x[1]).toLowerCase().includes(q));
+ list.innerHTML=filtered.length ? filtered.map(x=>`<a class="lb-league" href="#" data-league="${x[0].replace(/"/g,'&quot;')}"><b>${x[0]}</b><small>${x[1]}</small></a>`).join('') : '<div class="empty">No leagues found.</div>';
 }
+const search=document.getElementById('img-league-search');
+search.addEventListener('input',()=>render(title.textContent));
 sports.forEach(s=>{
  const b=document.createElement('button'); b.type='button'; b.className='lb-sport'; b.dataset.sport=s; b.textContent=s;
  b.onclick=()=>render(s); tabs.appendChild(b);
 });
 render('Basketball');
 document.getElementById('img-league-close').onclick=()=>root.style.display='none';
-window.IMGOpenSportsLeagues=()=>{root.style.display='block';render('Basketball')};
+window.IMGOpenSportsLeagues=()=>{root.style.display='block';search.value='';render('Basketball')};
 })();
 </script>
 
-<script>
-(function(){
-  const v=document.querySelector(".hero-video");
-  if(!v) return;
-  v.muted=true; v.defaultMuted=true; v.setAttribute("muted","");
-  const start=()=>{ const p=v.play(); if(p && p.catch) p.catch(()=>{}); };
-  if(document.readyState === "loading") document.addEventListener("DOMContentLoaded",start,{once:true}); else start();
-  document.addEventListener("visibilitychange",()=>{ if(!document.hidden) start(); });
-})();
-</script>
 </body></html>
