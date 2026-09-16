@@ -531,7 +531,16 @@ list.addEventListener('click',function(e){
  const card=e.target.closest('.lb-league');
  if(!card) return;
  e.preventDefault();
- IMGOpenLeagueDetail(card.getAttribute('data-league'),card.getAttribute('data-sport') || title.textContent);
+ e.stopPropagation();
+ const name=card.getAttribute('data-league');
+ const sport=card.getAttribute('data-sport') || title.textContent;
+ // Keep the Sports browser from swallowing the selection. Open the league profile explicitly.
+ root.style.display='none';
+ if(typeof window.IMGOpenLeagueDetail==='function'){
+   window.IMGOpenLeagueDetail(name,sport);
+ }else if(typeof IMGOpenLeagueDetail==='function'){
+   IMGOpenLeagueDetail(name,sport);
+ }
 });
 })();
 </script>

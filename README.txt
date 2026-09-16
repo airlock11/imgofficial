@@ -1,3 +1,4 @@
-IMG Search League Popup — Close Clears Search
+IMG Sports League Popup Fix
 
-This version ensures closing a league popup clears every homepage league search input and removes the suggestion dropdown.
+Fixes the Sports > league selection so tapping a league closes the Sports browser and immediately opens the league information popup.
+Search behavior and existing league data are preserved.
