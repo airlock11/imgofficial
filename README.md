@@ -1,4 +1,4 @@
-# IMGOFFICIAL
+# IMG
 
 GitHub Pages-ready sports website.
 
