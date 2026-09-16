@@ -1,9 +1,9 @@
-IMG Mobile Search Outside Behavior Fix
+IMG Mobile Search Popup Fix
 
-If a league is opened from the homepage league search:
-- Tapping/clicking outside the league detail automatically closes it.
-- The user returns directly to the homepage.
-- The homepage league search bar is cleared.
-- Search suggestions are cleared/closed.
-
-Direct navigation through Sports/league browser remains unchanged.
+When a league is opened from the homepage league search:
+- League information opens as a popup/detail overlay.
+- A dedicated X button appears in the upper-right corner.
+- Tapping/clicking outside the popup closes it and returns directly to Home.
+- Tapping X does the same.
+- The homepage league search field and suggestions are cleared.
+- Direct Sports/league navigation is not treated as a search popup.
