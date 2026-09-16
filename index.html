@@ -24,7 +24,7 @@ footer{border-top:1px solid #20242c;padding:30px 6%;color:#777f8c;text-align:cen
 <header class="nav">
 <div class="logo"><b>IMG</b>OFFICIAL</div>
 <nav class="navlinks">
-<a href="#home" class="active keep">Home</a><a href="#platform" onclick="showPlatform();return false;" class="keep">Live Scores</a><a href="#platform" onclick="showPlatform();return false;">Scores</a><a href="#platform" onclick="showPlatform();return false;">Statistics</a><a href="#sports" class="keep">Sports</a>
+<a href="#home" class="active keep" onclick="showHome();return false;">Home</a><a href="#platform" onclick="showPlatform();return false;" class="keep">Live Scores</a><a href="#platform" onclick="showPlatform();return false;">Scores</a><a href="#platform" onclick="showPlatform();return false;">Statistics</a><a href="#sports" class="keep">Sports</a>
 </nav>
 <a href="#platform" class="btn" style="margin-left:20px" onclick="showPlatform();return false;">Live Scores</a>
 </header>
@@ -40,7 +40,7 @@ footer{border-top:1px solid #20242c;padding:30px 6%;color:#777f8c;text-align:cen
 
 <section id="platform">
 <div class="dashboard">
-<div class="dashhead"><div><div class="eyebrow">IMGOFFICIAL LIVE</div><h1>Live Scores</h1><div class="muted">Real-time sports data</div></div><button class="btn" onclick="loadGames()">Refresh</button></div>
+<div class="dashhead"><div><div class="eyebrow">IMGOFFICIAL LIVE</div><h1>Live Scores</h1><div class="muted">Real-time sports data</div></div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn secondary" onclick="showHome()">← Home</button><button class="btn" onclick="loadGames()">Refresh</button></div></div>
 <div class="filters" id="filters"><button class="filter active" onclick="filterSport('All',this)">All</button><button class="filter" onclick="filterSport('Basketball',this)">Basketball</button><button class="filter" onclick="filterSport('Football',this)">Football</button><button class="filter" onclick="filterSport('Tennis',this)">Tennis</button><button class="filter" onclick="filterSport('Baseball',this)">Baseball</button><button class="filter" onclick="filterSport('Hockey',this)">Hockey</button></div>
 <div id="games" class="games"><div class="empty">Loading live scores…</div></div>
 </div>
@@ -51,7 +51,8 @@ footer{border-top:1px solid #20242c;padding:30px 6%;color:#777f8c;text-align:cen
 <script>
 const API='https://www.thesportsdb.com/api/v1/json/123/eventsday.php?d='+new Date().toISOString().slice(0,10);
 let allGames=[], current='All';
-function showPlatform(){document.getElementById('home').style.display='none';document.getElementById('platform').style.display='block';window.scrollTo(0,0);loadGames()}
+function showHome(){document.getElementById('platform').style.display='none';document.getElementById('home').style.display='block';window.location.hash='home';window.scrollTo(0,0)}
+function showPlatform(){document.getElementById('home').style.display='none';document.getElementById('platform').style.display='block';window.location.hash='platform';window.scrollTo(0,0);loadGames()}
 async function loadGames(){
 const box=document.getElementById('games');box.innerHTML='<div class="empty">Loading live scores…</div>';
 try{let r=await fetch(API);let j=await r.json();allGames=(j.events||[]);render()}
@@ -65,7 +66,17 @@ document.getElementById('games').innerHTML=arr.slice(0,50).map(g=>{
 let home=g.strHomeTeam||'Home Team',away=g.strAwayTeam||'Away Team';
 let hs=g.intHomeScore??'—',as=g.intAwayScore??'—';
 let st=(g.strStatus||g.strProgress||'Scheduled');let live=/live|in progress|quarter|half|period/i.test(st);
-return `<div class="game"><div class="status ${live?'live':''}">${live?'● LIVE':st}</div><div class="teams2"><div class="teamrow"><span>${home}</span></div><div class="teamrow"><span>${away}</span></div></div><div class="score2"><div>${hs}</div><div>${as}</div></div></div>`}).join('')
+let sport=g.strSport||'Sports', league=g.strLeague||'';
+let meta=[sport,league].filter(Boolean).join(' · ');
+return `<div class="game">
+<div class="status ${live?'live':''}">${live?'● LIVE':st}</div>
+<div class="teams2">
+<div style="font-size:11px;color:#8f98a5;text-transform:uppercase;letter-spacing:.7px;margin-bottom:3px">${meta}</div>
+<div class="teamrow"><span>${home}</span></div>
+<div class="teamrow"><span>${away}</span></div>
+</div>
+<div class="score2"><div>${hs}</div><div>${as}</div></div>
+</div>`}).join('')
 }
 </script>
 </body></html>
