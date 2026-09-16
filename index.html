@@ -392,4 +392,64 @@ function render(){
   window.IMGOpenNBA=showNBA;
 })();
 </script>
+
+<style id="img-global-sports-nav">
+.img-global-sports{position:relative;display:inline-block}
+.img-global-sports-btn{appearance:none;border:0;background:transparent;color:inherit;font:inherit;cursor:pointer;padding:8px 4px}
+.img-global-sports-menu{display:none;position:absolute;top:100%;left:0;min-width:220px;background:#11151c;border:1px solid #2a3039;border-radius:12px;padding:7px;z-index:10000;box-shadow:0 14px 40px rgba(0,0,0,.45)}
+.img-global-sports-menu.open{display:block}
+.img-global-sports-menu a{display:block!important;color:#fff!important;text-decoration:none!important;padding:12px 13px;border-radius:8px;white-space:nowrap}
+.img-global-sports-menu a:hover{background:#1d232c}
+</style>
+<script id="img-global-sports-nav-script">
+(function(){
+  function setup(){
+    const anchors=[...document.querySelectorAll('a')];
+    const old=anchors.find(a=>a.textContent.trim().toLowerCase()==='sports');
+    if(!old || document.querySelector('.img-global-sports')) return;
+
+    const wrap=document.createElement('span');
+    wrap.className='img-global-sports';
+
+    const btn=document.createElement('button');
+    btn.type='button';
+    btn.className='img-global-sports-btn';
+    btn.textContent='Sports ▾';
+
+    const menu=document.createElement('div');
+    menu.className='img-global-sports-menu';
+
+    const basketball=document.createElement('a');
+    basketball.href='./#nba-hub';
+    basketball.textContent='🏀 Basketball';
+    basketball.addEventListener('click',function(e){
+      e.preventDefault();
+      menu.classList.remove('open');
+      // Always return to the current document and reveal NBA hub.
+      const hub=document.getElementById('nba-hub');
+      if(hub){
+        hub.style.display='block';
+        location.hash='nba-hub';
+        setTimeout(()=>hub.scrollIntoView({behavior:'smooth',block:'start'}),30);
+      }else{
+        location.href='./#nba-hub';
+      }
+    });
+
+    menu.appendChild(basketball);
+    btn.addEventListener('click',function(e){
+      e.stopPropagation();
+      menu.classList.toggle('open');
+    });
+    document.addEventListener('click',function(){menu.classList.remove('open')});
+
+    wrap.appendChild(btn);
+    wrap.appendChild(menu);
+    old.replaceWith(wrap);
+  }
+
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',setup);
+  else setup();
+})();
+</script>
 </body></html>
