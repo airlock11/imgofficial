@@ -1,11 +1,8 @@
-# IMG — Clean Navigation Fix
+# IMG — Global Sports & League Directory
 
-Only navigation behavior was fixed.
+Sports now opens a global league browser.
 
-- Home works from every section.
-- Live Scores works from every section.
-- Sports works from Live Scores and other sections and scrolls to Sports.
-- About Us works from Live Scores and other sections.
-- Contact Us works from Live Scores and other sections.
-- No NBA Hub was added.
-- Fixed a JavaScript duplicate declaration that could stop all navigation click handlers.
+Basketball shows major basketball leagues and competitions worldwide.
+The same browser also provides league/competition lists for Football, Baseball, Tennis, Hockey, Cricket, Volleyball, Rugby, Golf, Boxing, Motorsport, Cycling, Athletics, Swimming and Combat Sports.
+
+This is a league directory/navigation layer; live data connections can be added per league/provider.

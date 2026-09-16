@@ -107,7 +107,7 @@ footer{border-top:1px solid #20242c;padding:30px 6%;color:#777f8c;text-align:cen
 <nav class="navlinks">
 <a href="#home" class="active keep" onclick="showHome();return false;">Home</a>
 <a href="#platform" class="keep" onclick="showPlatform();return false;">Live Scores</a>
-<a href="#sports" class="keep" onclick="showHomeSection('sports');return false;">Sports</a>
+<a href="#sports" class="keep" onclick="IMGOpenSportsLeagues();return false;">Sports</a>
 <a href="#about" class="keep" onclick="showHomeSection('about');return false;">About Us</a>
 <a href="#contact" class="keep" onclick="showHomeSection('contact');return false;">Contact Us</a>
 </nav>
@@ -359,4 +359,116 @@ function render(){
   }).join('');
 }
 </script>
+
+<style id="img-league-browser-style">
+#img-league-browser{display:none;position:fixed;inset:0;background:rgba(5,8,12,.97);z-index:20000;overflow:auto;padding:90px 18px 40px}
+#img-league-browser .lb-wrap{max-width:1100px;margin:auto}
+#img-league-browser h2{font-size:36px;margin:0 0 8px}
+#img-league-browser p{color:#9ca3af;margin:0 0 28px}
+.lb-sports{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:25px}
+.lb-sport{border:1px solid #303640;background:#11151c;color:#fff;border-radius:10px;padding:11px 15px;cursor:pointer}
+.lb-sport.active{background:#fff;color:#090c11}
+.lb-leagues{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.lb-league{display:block;padding:16px;border:1px solid #252b35;border-radius:12px;background:#11151c;color:#fff;text-decoration:none}
+.lb-league small{display:block;color:#8f98a5;margin-top:5px}
+.lb-close{position:absolute;right:18px;top:18px;border:1px solid #303640;background:#11151c;color:#fff;border-radius:10px;padding:10px 14px;cursor:pointer}
+</style>
+<div id="img-league-browser">
+  <button class="lb-close" type="button" id="img-league-close">Close ✕</button>
+  <div class="lb-wrap">
+    <div style="font-size:12px;letter-spacing:2px;color:#9ca3af;text-transform:uppercase">IMG Sports Directory</div>
+    <h2 id="img-league-title">Basketball</h2>
+    <p>Select a sport to see major leagues and competitions around the world.</p>
+    <div class="lb-sports" id="img-sports-tabs"></div>
+    <div class="lb-leagues" id="img-league-list"></div>
+  </div>
+</div>
+<script id="img-league-browser-script">
+(function(){
+const data={
+ Basketball:[
+  ["NBA","USA / Canada"],["WNBA","USA"],["NCAA","USA"],["G League","USA"],["EuroLeague","Europe"],
+  ["EuroCup","Europe"],["ACB / Liga Endesa","Spain"],["BBL","United Kingdom"],["Betclic Élite","France"],
+  ["BBL Bundesliga","Germany"],["Lega Basket Serie A","Italy"],["BSL","Türkiye"],["ABA League","Balkans"],
+  ["VTB United League","Eastern Europe"],["Greek Basket League","Greece"],["LNB Pro A","France"],
+  ["CBA","China"],["PBA","Philippines"],["B.League","Japan"],["KBL","South Korea"],["NBL","Australia"],
+  ["NBL Canada","Canada"],["LNBP","Mexico"],["BCLA","Americas"],["BAL","Africa"],["FIBA Basketball World Cup","International"]
+ ],
+ Football:[
+  ["Premier League","England"],["La Liga","Spain"],["Serie A","Italy"],["Bundesliga","Germany"],["Ligue 1","France"],
+  ["UEFA Champions League","Europe"],["UEFA Europa League","Europe"],["UEFA Conference League","Europe"],
+  ["MLS","USA / Canada"],["Liga MX","Mexico"],["Brasileirão Série A","Brazil"],["Liga Portugal","Portugal"],
+  ["Eredivisie","Netherlands"],["Saudi Pro League","Saudi Arabia"],["J1 League","Japan"],["A-League","Australia"],
+  ["Philippine Football League","Philippines"],["FIFA World Cup","International"]
+ ],
+ Baseball:[
+  ["MLB","USA / Canada"],["NPB","Japan"],["KBO League","South Korea"],["KBO Futures League","South Korea"],
+  ["CPBL","Chinese Taipei"],["LMB","Mexico"],["Liga de Béisbol Profesional","Latin America"],["World Baseball Classic","International"]
+ ],
+ Tennis:[
+  ["ATP Tour","International"],["WTA Tour","International"],["Grand Slam — Australian Open","Australia"],
+  ["Grand Slam — Roland-Garros","France"],["Grand Slam — Wimbledon","United Kingdom"],["Grand Slam — US Open","USA"],
+  ["Davis Cup","International"],["Billie Jean King Cup","International"]
+ ],
+ Hockey:[
+  ["NHL","USA / Canada"],["KHL","Eurasia"],["SHL","Sweden"],["Liiga","Finland"],["National League","Switzerland"],
+  ["DEL","Germany"],["ICE Hockey League","Central Europe"],["IIHF World Championship","International"]
+ ],
+ Cricket:[
+  ["IPL","India"],["Big Bash League","Australia"],["The Hundred","United Kingdom"],["T20 Blast","United Kingdom"],
+  ["PSL","Pakistan"],["BPL","Bangladesh"],["SA20","South Africa"],["CPL","Caribbean"],
+  ["Major League Cricket","USA"],["ICC Cricket World Cup","International"]
+ ],
+ Volleyball:[
+  ["Nations League","International"],["CEV Champions League","Europe"],["PlusLiga","Poland"],
+  ["SuperLega","Italy"],["Superliga","Brazil"],["V.League","Japan"],["PVL","Philippines"],["Asian Volleyball Championship","Asia"]
+ ],
+ Rugby:[
+  ["Six Nations","Europe"],["Rugby Championship","International"],["Premiership Rugby","England"],
+  ["Top 14","France"],["United Rugby Championship","Europe"],["Super Rugby Pacific","Oceania"],["Rugby World Cup","International"]
+ ],
+ Golf:[
+  ["PGA Tour","USA / International"],["DP World Tour","Europe / International"],["LPGA Tour","International"],
+  ["LIV Golf","International"],["Asian Tour","Asia"],["PGA Tour Champions","USA"],["The Masters","USA"],["Ryder Cup","International"]
+ ],
+ Boxing:[
+  ["WBC","International"],["WBA","International"],["IBF","International"],["WBO","International"]
+ ],
+ Motorsport:[
+  ["Formula 1","International"],["MotoGP","International"],["NASCAR Cup Series","USA"],["IndyCar Series","USA"],
+  ["World Rally Championship","International"],["Formula E","International"]
+ ],
+ Cycling:[
+  ["UCI WorldTour","International"],["Tour de France","France"],["Giro d'Italia","Italy"],["Vuelta a España","Spain"]
+ ],
+ Athletics:[
+  ["Diamond League","International"],["World Athletics Championships","International"],["World Indoor Championships","International"]
+ ],
+ Swimming:[
+  ["World Aquatics Championships","International"],["World Aquatics Swimming World Cup","International"]
+ ],
+ "Combat Sports":[
+  ["UFC","International"],["ONE Championship","International"],["PFL","International"],["Bellator","International"]
+ ]
+};
+const sports=Object.keys(data);
+const root=document.getElementById('img-league-browser');
+const tabs=document.getElementById('img-sports-tabs');
+const list=document.getElementById('img-league-list');
+const title=document.getElementById('img-league-title');
+function render(sport){
+ title.textContent=sport;
+ tabs.querySelectorAll('button').forEach(b=>b.classList.toggle('active',b.dataset.sport===sport));
+ list.innerHTML=data[sport].map(x=>`<a class="lb-league" href="#" data-league="${x[0].replace(/"/g,'&quot;')}"><b>${x[0]}</b><small>${x[1]}</small></a>`).join('');
+}
+sports.forEach(s=>{
+ const b=document.createElement('button'); b.type='button'; b.className='lb-sport'; b.dataset.sport=s; b.textContent=s;
+ b.onclick=()=>render(s); tabs.appendChild(b);
+});
+render('Basketball');
+document.getElementById('img-league-close').onclick=()=>root.style.display='none';
+window.IMGOpenSportsLeagues=()=>{root.style.display='block';render('Basketball')};
+})();
+</script>
+
 </body></html>
