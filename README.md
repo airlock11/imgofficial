@@ -1,28 +1,14 @@
-# IMG — BALLDONTLIE Connected Website
+# IMG V14 — Original Homepage + NBA Hub
 
-This version connects the IMG website to the secure Cloudflare Worker:
+The original IMG homepage is preserved as the main landing page.
 
-https://img-api-proxy.magsipocarnie.workers.dev/games
+Added around it:
+- NBA Hub
+- NBA Schedule section
+- NBA Teams section
+- NBA Standings section
+- NBA Players section
+- NBA News section
+- Live Scores remains available
 
-## Upload to GitHub Pages
-
-1. Extract this ZIP.
-2. Upload `index.html` to the root of your GitHub Pages repository.
-3. Commit/save the change.
-4. Open your IMG website.
-
-## API security
-
-The BALLDONTLIE API key is NOT inside this website.
-It is stored as the Cloudflare Worker secret:
-
-BALLDONTLIE_API_KEY
-
-The browser only calls the Cloudflare Worker.
-
-## Current coverage
-
-This build is configured for the NBA games endpoint through the Worker.
-The Live Scores page requests today's games and refreshes live data automatically.
-
-No betting odds are included.
+The existing Cloudflare Worker endpoint is retained for the live-score connection.
