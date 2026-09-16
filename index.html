@@ -83,11 +83,11 @@ footer{border-top:1px solid #20242c;padding:30px 6%;color:#777f8c;text-align:cen
   .about-cta h3{font-size:22px}
   .about-cta .btn{width:100%}
 }
-</style>
+.logo{color:inherit}.logo:hover{color:inherit}</style>
 </head>
 <body>
 <header class="nav">
-<div class="logo"><b>IMG</b>OFFICIAL</div>
+<a href="#home" class="logo" onclick="showHome();return false;" aria-label="IMGOFFICIAL Home"><b>IMG</b>OFFICIAL</a>
 <nav class="navlinks">
 <a href="#home" class="active keep" onclick="showHome();return false;">Home</a><a href="#platform" onclick="showPlatform();return false;" class="keep">Live Scores</a><a href="#platform" onclick="showPlatform();return false;">Scores</a><a href="#platform" onclick="showPlatform();return false;">Statistics</a><a href="#sports" class="keep">Sports</a><a href="#about" class="keep">About Us</a>
 </nav>
@@ -137,7 +137,7 @@ footer{border-top:1px solid #20242c;padding:30px 6%;color:#777f8c;text-align:cen
   </div>
 </section>
 
-<footer>© 2026 IMGOFFICIAL · Sports Data Platform</footer>
+<footer>© IMGOFFICIAL · Sports Data Platform</footer>
 
 <script>
 const API='https://www.thesportsdb.com/api/v1/json/123/eventsday.php?d='+new Date().toISOString().slice(0,10);
