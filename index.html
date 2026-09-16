@@ -582,12 +582,84 @@ function openDetail(name,sport){
   title.textContent='Basketball Super League (BSL)'; sub.textContent='Basketball · Canada / North America';
   content.innerHTML=`<div class="ld-grid"><div class="ld-card"><h3>League Profile</h3><p class="ld-sub">IMG lists the current Canadian competition under the corrected Basketball Super League name.</p><div class="ld-note"><b>Data rule:</b> season-specific teams and records are shown only after verification from the league or a reliable competition data provider.</div></div><div class="ld-card"><h3>Data Sections</h3><p class="ld-sub">Teams · Standings · Schedule · Results · Statistics · Players</p></div></div>`;
  }else{
-  title.textContent=name; sub.textContent=(sport||'Sports')+' · '+(data[sport]||[]).find(x=>x[0]===name)?.[1]+' · IMG League Hub';
+  title.textContent=name;
+  const location=((data[sport]||[]).find(x=>x[0]===name)||['',''])[1];
+  sub.textContent=(sport||'Sports')+' · '+location+' · Verified League Profile';
+  const facts={
+   'WNBA':'The Women’s National Basketball Association is the premier professional women’s basketball league in the United States.',
+   'NCAA':'The NCAA is the governing body for intercollegiate athletics in the United States; basketball competition is organized through its member conferences and championships.',
+   'WBSL — World Basketball Super League':'International basketball competition. IMG will display only season, teams and results verified from the competition organizer or its official channels.',
+   'EuroLeague':'European professional club basketball competition organized by Euroleague Basketball.',
+   'EuroCup':'European professional club basketball competition organized by Euroleague Basketball.',
+   'Liga Endesa (ACB)':'Spain’s top professional men’s basketball competition, organized by the Asociación de Clubs de Baloncesto.',
+   'Super League Basketball':'Professional basketball competition in the United Kingdom.',
+   'Betclic Élite (LNB Pro A)':'France’s top professional men’s basketball division.',
+   'easyCredit BBL':'Germany’s top professional men’s basketball division.',
+   'Lega Basket Serie A':'Italy’s top professional men’s basketball division.',
+   'Türkiye Sigorta Basketbol Süper Ligi':'Türkiye’s top professional men’s basketball division.',
+   'ABA League':'Regional professional basketball competition involving clubs from the Balkans and surrounding countries.',
+   'VTB United League':'Professional basketball competition based in Eastern Europe and surrounding markets.',
+   'Greek Basket League':'Greece’s top professional men’s basketball division.',
+   'LNB Pro A':'France’s top professional men’s basketball division.',
+   'Chinese Basketball Association (CBA)':'China’s top professional men’s basketball league.',
+   'PBA D-League':'Philippine developmental basketball competition associated with the PBA system.',
+   'KBL':'South Korea’s top professional men’s basketball league.',
+   'National Basketball League (NBL)':'Australia’s top professional men’s basketball league.',
+   'Liga Nacional de Baloncesto Profesional (LNBP)':'Mexico’s top professional men’s basketball league.',
+   'BCLA':'Basketball Champions League Americas is an international club competition in the Americas.',
+   'BAL':'Basketball Africa League is a professional club competition in Africa.',
+   'FIBA Basketball World Cup':'FIBA’s global men’s national-team basketball championship.',
+   'Premier League':'England’s top-level professional football league.',
+   'La Liga':'Spain’s top-level professional football league.',
+   'Serie A':'Italy’s top-level professional football league.',
+   'Bundesliga':'Germany’s top-level professional football league.',
+   'Ligue 1':'France’s top-level professional football league.',
+   'UEFA Champions League':'UEFA’s premier European club football competition.',
+   'UEFA Europa League':'UEFA European club football competition.',
+   'UEFA Conference League':'UEFA European club football competition.',
+   'MLS':'Major League Soccer is the top professional men’s football league in the United States and Canada.',
+   'Liga MX':'Mexico’s top professional football league.',
+   'Brasileirão Série A':'Brazil’s top professional men’s football division.',
+   'Liga Portugal':'Portugal’s top professional football division.',
+   'Eredivisie':'The Netherlands’ top professional football division.',
+   'Saudi Pro League':'Saudi Arabia’s top professional football division.',
+   'J1 League':'Japan’s top professional football division.',
+   'A-League':'Australia and New Zealand’s professional football competition.',
+   'FIFA World Cup':'FIFA’s global men’s national-team football championship.',
+   'MLB':'Major League Baseball is the top professional baseball league in the United States and Canada.',
+   'NPB':'Nippon Professional Baseball is Japan’s top professional baseball organization.',
+   'KBO League':'South Korea’s top professional baseball league.',
+   'CPBL':'Chinese Professional Baseball League is the top professional baseball league in Taiwan.',
+   'World Baseball Classic':'International national-team baseball tournament organized by MLB and the international baseball governing structure.',
+   'ATP Tour':'Global professional men’s tennis tour.',
+   'WTA Tour':'Global professional women’s tennis tour.',
+   'Australian Open':'Grand Slam tennis tournament held in Australia.',
+   'Roland-Garros':'Grand Slam tennis tournament held in France.',
+   'Wimbledon':'Grand Slam tennis tournament held in the United Kingdom.',
+   'US Open':'Grand Slam tennis tournament held in the United States.',
+   'Davis Cup':'International men’s team tennis competition.',
+   'Billie Jean King Cup':'International women’s team tennis competition.',
+   'NHL':'National Hockey League is the top professional ice hockey league in North America.',
+   'KHL':'Kontinental Hockey League is a professional ice hockey league based in Eurasia.',
+   'IPL':'Indian Premier League is a professional Twenty20 cricket league in India.',
+   'Big Bash League':'Australia’s professional Twenty20 cricket league.',
+   'The Hundred':'Professional 100-ball cricket competition in England and Wales.',
+   'PSL':'Pakistan Super League is Pakistan’s professional Twenty20 cricket league.',
+   'BPL':'Bangladesh Premier League is Bangladesh’s professional Twenty20 cricket league.',
+   'SA20':'South Africa’s professional Twenty20 cricket league.',
+   'CPL':'Caribbean Premier League is a professional Twenty20 cricket competition in the Caribbean.',
+   'Major League Cricket':'Professional Twenty20 cricket league in the United States.',
+   'ICC Cricket World Cup':'International cricket championship for national teams.',
+   'PVL':'Premier Volleyball League is a professional volleyball competition in the Philippines.',
+   'UFC':'Ultimate Fighting Championship is a global mixed martial arts promotion.',
+   'ONE Championship':'International martial arts promotion based in Asia.',
+   'PFL':'Professional Fighters League is a global mixed martial arts promotion.'
+  };
+  const fact=facts[name] || `${name} is a ${sport||'sports'} competition listed by IMG in ${location}. IMG will use the league organizer, federation, official website or official Facebook/social channel as the primary source for season-specific information.`;
   const fb='https://www.facebook.com/search/pages/?q='+encodeURIComponent(name);
   const q='https://www.google.com/search?q='+encodeURIComponent(name+' official league');
-  content.innerHTML=`<div class="ld-grid"><div class="ld-card"><h3>League Profile</h3><p class="ld-sub">${esc(name)} is included in IMG’s global sports directory. This page is configured to retain the current season when active and the most recent completed season when the league is between seasons.</p><div class="ld-note"><b>Accuracy rule:</b> IMG will not invent teams, records or player statistics. Season data is added only when verified from an official league/federation source, official Facebook page, or reliable competition data provider.</div></div><div class="ld-card"><h3>Data Sections</h3><p class="ld-sub">Teams · Standings · Schedule · Results · Statistics · Players</p><div class="ld-note"><b>Source priority:</b> official website → official Facebook/social page → federation/organizer → reliable sports-data source.</div></div></div><div class="ld-card" style="margin-top:16px"><h3>Source Center</h3><div class="ld-source">${source(fb,'Search official Facebook pages')}<br>${source(q,'Search official league source')}</div></div>`;
- }
- window.scrollTo(0,0);
+  content.innerHTML=`<div class="ld-grid"><div class="ld-card"><h3>League Profile</h3><p class="ld-sub">${esc(fact)}</p><div class="ld-note"><b>Important:</b> This league page is isolated to <b>${esc(name)}</b>. IMG will never use NBA, PBA, VBA or another league’s teams or records as fallback data.</div></div><div class="ld-card"><h3>Season Data</h3><p class="ld-sub">Current season when active; most recent completed season when inactive. Teams, standings, schedules, results and player statistics are displayed only when verified for this league.</p><div class="ld-note"><b>Source priority:</b> official league website → official Facebook/social page → federation/organizer → reliable sports-data source.</div></div></div><div class="ld-card" style="margin-top:16px"><h3>Source Center</h3><div class="ld-source">${source(fb,'Find the official Facebook page')}<br>${source(q,'Find the official league source')}</div></div>`;
+ } window.scrollTo(0,0);
 }
 window.closeLeagueDetail=function(){document.getElementById('img-league-detail').style.display='none';document.getElementById('img-league-browser').style.display='block';};
 window.IMGOpenLeagueDetail=openDetail;
