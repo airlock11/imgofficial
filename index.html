@@ -105,7 +105,11 @@ footer{border-top:1px solid #20242c;padding:30px 6%;color:#777f8c;text-align:cen
 <header class="nav">
 <a href="#home" class="logo" onclick="showHome();return false;" aria-label="IMG Home"><b>IMG</b></a>
 <nav class="navlinks">
-<a href="#home" class="active keep" onclick="showHome();return false;">Home</a><a href="#platform" onclick="showPlatform();return false;" class="keep">Live Scores</a><a href="#sports" class="keep">Sports</a><a href="#about" class="keep">About Us</a><a href="#contact" class="keep">Contact Us</a>
+<a href="#home" class="active keep" onclick="showHome();return false;">Home</a>
+<a href="#platform" class="keep" onclick="showPlatform();return false;">Live Scores</a>
+<a href="#sports" class="keep" onclick="showHomeSection('sports');return false;">Sports</a>
+<a href="#about" class="keep" onclick="showHomeSection('about');return false;">About Us</a>
+<a href="#contact" class="keep" onclick="showHomeSection('contact');return false;">Contact Us</a>
 </nav>
 <a href="#platform" class="btn" style="margin-left:20px" onclick="showPlatform();return false;">Live Scores</a>
 </header>
@@ -278,15 +282,28 @@ function showHome(){
   document.getElementById('platform').style.display='none';
   document.getElementById('home').style.display='block';
   window.location.hash='home';
-  window.scrollTo(0,0);
+  window.scrollTo({top:0,behavior:'smooth'});
 }
 
 function showPlatform(){
   document.getElementById('home').style.display='none';
   document.getElementById('platform').style.display='block';
   window.location.hash='platform';
-  window.scrollTo(0,0);
+  window.scrollTo({top:0,behavior:'smooth'});
   loadGames();
+}
+
+function showHomeSection(id){
+  document.getElementById('platform').style.display='none';
+  document.getElementById('home').style.display='block';
+  window.location.hash=id;
+  const target=document.getElementById(id);
+  if(target){
+    setTimeout(function(){
+      const y=target.getBoundingClientRect().top + window.pageYOffset - 78;
+      window.scrollTo({top:y,behavior:'smooth'});
+    },10);
+  }
 }
 
 async function loadGames(){
@@ -342,56 +359,4 @@ function render(){
   }).join('');
 }
 </script>
-
-<style id="img-navigation-only-fix">
-/* Navigation-only fix: no new content or NBA hub */
-</style>
-<script id="img-navigation-only-fix-script">
-(function () {
-  function fixNavigation() {
-    document.querySelectorAll('a').forEach(function (a) {
-      var text = a.textContent.trim().toLowerCase();
-      var href = a.getAttribute('href') || '';
-
-      // Make the main navigation reliable from any location.
-      if (text === 'home') {
-        a.setAttribute('href', './#home');
-      } else if (text === 'live scores') {
-        a.setAttribute('href', './#live-scores');
-      } else if (text === 'sports') {
-        // Sports has no NBA hub; it simply returns to the Sports section.
-        a.setAttribute('href', './#sports');
-      } else if (text === 'about us') {
-        a.setAttribute('href', './#about-us');
-      } else if (text === 'contact us') {
-        a.setAttribute('href', './#contact-us');
-      }
-
-      // Prevent broken relative hash links when the browser is already
-      // positioned on another section.
-      if (href.indexOf('index.html#') === 0) {
-        a.setAttribute('href', href.replace('index.html', '.'));
-      }
-    });
-  }
-
-  function ensureSectionIds() {
-    // Only assign IDs when the matching section already exists.
-    var sections = document.querySelectorAll('section, main, div');
-    sections.forEach(function (el) {
-      var t = (el.textContent || '').trim().toLowerCase();
-      if (!document.getElementById('about-us') && t.indexOf('about us') !== -1 &&
-          t.length < 1000) el.id = 'about-us';
-      if (!document.getElementById('contact-us') && t.indexOf('contact us') !== -1 &&
-          t.length < 1000) el.id = 'contact-us';
-    });
-  }
-
-  document.addEventListener('DOMContentLoaded', function () {
-    ensureSectionIds();
-    fixNavigation();
-  });
-})();
-</script>
-
 </body></html>

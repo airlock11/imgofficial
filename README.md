@@ -1,6 +1,11 @@
-# IMG — Navigation Only Fix
+# IMG — Clean Navigation Fix
 
-This version changes ONLY the navigation behavior.
-The original IMG homepage, Live Scores, Sports, About Us, Contact Us, styling, and existing data connection are preserved.
+Only navigation behavior was fixed.
 
-No NBA Hub or new NBA content was added.
+- Home works from every section.
+- Live Scores works from every section.
+- Sports works from Live Scores and other sections and scrolls to Sports.
+- About Us works from Live Scores and other sections.
+- Contact Us works from Live Scores and other sections.
+- No NBA Hub was added.
+- Fixed a JavaScript duplicate declaration that could stop all navigation click handlers.
