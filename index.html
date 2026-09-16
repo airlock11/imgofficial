@@ -63,13 +63,33 @@ footer{border-top:1px solid #20242c;padding:30px 6%;color:#777f8c;text-align:cen
   .sport{font-size:12px;padding:13px 10px}
   .game{grid-template-columns:52px 1fr 38px}
   .teamrow{font-size:12px}
-}</style>
+}
+.about-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:22px}
+.about-main,.about-points{border:1px solid #252a33;background:#0c0f14;border-radius:14px;padding:28px}
+.about-main p{color:#929aa6;line-height:1.75;font-size:16px}
+.about-main .about-lead{font-size:22px;color:#e9edf2;line-height:1.5;margin-top:0}
+.about-point{display:flex;gap:18px;padding:18px 0;border-bottom:1px solid #222731}
+.about-point:last-child{border-bottom:0}
+.about-point>strong{font-size:12px;color:#737d89;padding-top:4px}
+.about-point h3{margin:0 0 6px;font-size:17px}
+.about-point p{margin:0;color:#8e97a4;font-size:14px;line-height:1.5}
+.about-cta{margin-top:16px;border:1px solid #252a33;border-radius:14px;background:#11151c;padding:25px 28px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.about-cta h3{font-size:26px;margin:8px 0 0}
+@media(max-width:800px){
+  .about-grid{grid-template-columns:1fr}
+  .about-main,.about-points{padding:21px}
+  .about-main .about-lead{font-size:19px}
+  .about-cta{padding:21px;align-items:flex-start;flex-direction:column}
+  .about-cta h3{font-size:22px}
+  .about-cta .btn{width:100%}
+}
+</style>
 </head>
 <body>
 <header class="nav">
 <div class="logo"><b>IMG</b>OFFICIAL</div>
 <nav class="navlinks">
-<a href="#home" class="active keep" onclick="showHome();return false;">Home</a><a href="#platform" onclick="showPlatform();return false;" class="keep">Live Scores</a><a href="#platform" onclick="showPlatform();return false;">Scores</a><a href="#platform" onclick="showPlatform();return false;">Statistics</a><a href="#sports" class="keep">Sports</a>
+<a href="#home" class="active keep" onclick="showHome();return false;">Home</a><a href="#platform" onclick="showPlatform();return false;" class="keep">Live Scores</a><a href="#platform" onclick="showPlatform();return false;">Scores</a><a href="#platform" onclick="showPlatform();return false;">Statistics</a><a href="#sports" class="keep">Sports</a><a href="#about" class="keep">About Us</a>
 </nav>
 <a href="#platform" class="btn" style="margin-left:20px" onclick="showPlatform();return false;">Live Scores</a>
 </header>
@@ -89,6 +109,32 @@ footer{border-top:1px solid #20242c;padding:30px 6%;color:#777f8c;text-align:cen
 <div class="filters" id="filters"><button class="filter active" onclick="filterSport('All',this)">All</button><button class="filter" onclick="filterSport('Basketball',this)">Basketball</button><button class="filter" onclick="filterSport('Football',this)">Football</button><button class="filter" onclick="filterSport('Tennis',this)">Tennis</button><button class="filter" onclick="filterSport('Baseball',this)">Baseball</button><button class="filter" onclick="filterSport('Hockey',this)">Hockey</button></div>
 <div id="games" class="games"><div class="empty">Loading live scores…</div></div>
 </div>
+</section>
+
+
+<section id="about">
+  <div class="sectionhead">
+    <div>
+      <div class="eyebrow">ABOUT IMGOFFICIAL</div>
+      <h2>Built for the way fans follow sports.</h2>
+    </div>
+  </div>
+  <div class="about-grid">
+    <div class="about-main">
+      <p class="about-lead">IMGOFFICIAL is a sports data platform focused on making scores, schedules, results and statistics easier to discover and follow.</p>
+      <p>Our goal is to bring the sports information fans care about into one clean, fast and accessible experience — from the first whistle to the final score.</p>
+      <p>We are building IMGOFFICIAL with a game-centered approach, designed to grow across sports, leagues, teams and competitions.</p>
+    </div>
+    <div class="about-points">
+      <div class="about-point"><strong>01</strong><div><h3>Simple</h3><p>Clear information without unnecessary clutter.</p></div></div>
+      <div class="about-point"><strong>02</strong><div><h3>Fast</h3><p>Designed for quick access to the games that matter.</p></div></div>
+      <div class="about-point"><strong>03</strong><div><h3>Built to Grow</h3><p>A platform designed to expand across sports and competitions.</p></div></div>
+    </div>
+  </div>
+  <div class="about-cta">
+    <div><div class="eyebrow">THE IMGOFFICIAL VISION</div><h3>One sports world. One destination.</h3></div>
+    <button class="btn" onclick="showPlatform()">Explore Live Scores</button>
+  </div>
 </section>
 
 <footer>© 2026 IMGOFFICIAL · Sports Data Platform</footer>
