@@ -1,5 +1,4 @@
-IMG — Exact Reference Visual Update
+IMG Stable Website - Reference Images Fixed
 
-This build updates the homepage Platform, Sports Coverage, and About IMG sections to closely reproduce the supplied reference image, using image crops taken from the supplied reference screenshot for the matching visual treatment.
-
-Existing navigation, search, league popup behavior, sports browser, live scores, and league data are preserved.
+IMPORTANT: Keep index.html and the assets folder together when uploading to GitHub Pages.
+This ZIP intentionally has index.html at the root and all image assets in ./assets/.
