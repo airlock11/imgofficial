@@ -1,1 +1,1 @@
-Reverted the Team Overview box added to NBL–Pilipinas. Other existing site changes are preserved.
+IMG NBL-Pilipinas update: restored the floating league popup for leagues opened from homepage search. NBL-Pilipinas Team Overview remains removed.
