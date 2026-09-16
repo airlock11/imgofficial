@@ -1,3 +1,3 @@
-IMG — Search Floating League Popup
+IMG NBL–Pilipinas Team Overview update
 
-When a league is opened from the homepage search suggestion, its information now appears in a smaller floating modal window. Direct Sports > league pages remain full-screen.
+Added a Team Overview box to the NBL–Pilipinas league information with an IMG-attributed player spotlight for Zamboanga Valientes shooting guard #0 Kenshin Que.
