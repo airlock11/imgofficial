@@ -1005,53 +1005,65 @@ window.IMGOpenLeagueDetail=openDetail;
   const sub=document.getElementById('icm-sub');
   if(!modal||!list||!title||!sub) return;
 
-  const fallback={
-    Basketball:['NBA','WNBA','G League','EuroLeague','EuroCup','ACB / Liga Endesa','PBA','NBL–Pilipinas','MPBL','B.LEAGUE','KBL','NBL','CBA','BAL','BCLA','FIBA Basketball World Cup'],
-    Football:['Premier League','La Liga','Serie A','Bundesliga','Ligue 1','UEFA Champions League','UEFA Europa League','UEFA Conference League','MLS','Liga MX','Brasileirão Série A','Liga Portugal','Eredivisie','Saudi Pro League','J1 League','A-League','Philippine Football League','FIFA World Cup'],
-    Tennis:['ATP Tour','WTA Tour','Australian Open','Roland-Garros','Wimbledon','US Open','Davis Cup','Billie Jean King Cup'],
-    Baseball:['MLB','NPB','KBO League','KBO Futures League','CPBL','LMB','Liga de Béisbol Profesional','World Baseball Classic'],
-    Hockey:['NHL','KHL','SHL','Liiga','National League','DEL','ICE Hockey League','IIHF World Championship'],
-    Cricket:['IPL','Big Bash League','The Hundred','T20 Blast','PSL','BPL','SA20','CPL','Major League Cricket','ICC Cricket World Cup'],
-    Volleyball:['Nations League','CEV Champions League','PlusLiga','SuperLega','Superliga','V.League','PVL','Asian Volleyball Championship'],
-    Motorsport:['Formula 1','MotoGP','NASCAR Cup Series','IndyCar Series','World Rally Championship','Formula E'],
-    'Combat Sports':['UFC','ONE Championship','PFL','Bellator'],
-    'American Football':['NFL','CFL','UFL','College Football']
-  };
+  function show(){ modal.classList.add('is-open'); modal.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; }
+  function hide(){ modal.classList.remove('is-open'); modal.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
 
-  function open(){modal.classList.add('is-open');modal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden'}
-  function close(){modal.classList.remove('is-open');modal.setAttribute('aria-hidden','true');document.body.style.overflow=''}
   function leaguesFor(sport){
-    const d=window.IMGLeagueData&&window.IMGLeagueData[sport];
-    return Array.isArray(d)&&d.length ? d.map(x=>x[0]) : (fallback[sport]||[]);
+    const d=window.IMGLeagueData && window.IMGLeagueData[sport];
+    return Array.isArray(d) ? d : [];
   }
-  function directory(sport){
-    title.textContent=sport;sub.textContent='Select a league to view its profile.';list.innerHTML='';
-    leaguesFor(sport).forEach(name=>{
-      const b=document.createElement('button');b.type='button';b.className='icm-league';b.textContent=name;
-      b.onclick=function(e){e.preventDefault();e.stopPropagation();profile(name,sport)};
+
+  function openSportDirectory(sport){
+    title.textContent=sport;
+    sub.textContent='Select a league to view its profile.';
+    list.replaceChildren();
+    const leagues=leaguesFor(sport);
+    if(!leagues.length){
+      const empty=document.createElement('div'); empty.className='icm-card';
+      empty.innerHTML='<h3>No leagues available</h3><p class="icm-muted">IMG has not added a verified league entry for this sport yet.</p>';
+      list.appendChild(empty); show(); return;
+    }
+    leagues.forEach(function(row){
+      const name=row[0], location=row[1]||'';
+      const b=document.createElement('button');
+      b.type='button'; b.className='icm-league';
+      b.innerHTML='<strong>'+escapeHtml(name)+'</strong><small style="display:block;color:#8f98a5;margin-top:4px">'+escapeHtml(location)+'</small>';
+      b.addEventListener('click',function(e){
+        e.preventDefault(); e.stopPropagation();
+        hide();
+        window.homeSearchOpenedLeague=false;
+        if(typeof window.IMGOpenLeagueDetail==='function'){
+          window.IMGOpenLeagueDetail(name,sport);
+        }
+      });
       list.appendChild(b);
     });
-    open();
+    show();
   }
-  function profile(name,sport){
-    title.textContent=name;sub.textContent=sport+' · League Profile';list.innerHTML='';
-    const back=document.createElement('button');back.type='button';back.className='icm-back';back.textContent='← Back to '+sport+' Leagues';back.onclick=function(){directory(sport)};list.appendChild(back);
-    const wrap=document.createElement('div');
-    if(name==='NBA'){
-      wrap.innerHTML='<div class="icm-card"><h3>League Overview</h3><p class="icm-muted">The National Basketball Association (NBA) is a professional men’s basketball league in North America, with teams in the United States and Canada.</p></div>'+
-      '<div class="icm-card"><h3>Current Season</h3><p class="icm-muted"><b>2026–27</b><br>The current NBA season shown in IMG.</p></div>'+
-      '<div class="icm-card"><h3>30 Teams</h3><div class="icm-teams">'+['Atlanta Hawks','Boston Celtics','Brooklyn Nets','Charlotte Hornets','Chicago Bulls','Cleveland Cavaliers','Dallas Mavericks','Denver Nuggets','Detroit Pistons','Golden State Warriors','Houston Rockets','Indiana Pacers','LA Clippers','Los Angeles Lakers','Memphis Grizzlies','Miami Heat','Milwaukee Bucks','Minnesota Timberwolves','New Orleans Pelicans','New York Knicks','Oklahoma City Thunder','Orlando Magic','Philadelphia 76ers','Phoenix Suns','Portland Trail Blazers','Sacramento Kings','San Antonio Spurs','Toronto Raptors','Utah Jazz','Washington Wizards'].map(t=>'<div class="icm-team">'+t+'</div>').join('')+'</div></div>'+
-      '<div class="icm-card"><h3>Official Source</h3><p class="icm-muted"><a href="https://www.nba.com/teams" target="_blank" rel="noopener" style="color:#fff">NBA.com — Official Team Directory</a></p></div>';
-    }else{
-      wrap.innerHTML='<div class="icm-card"><h3>League Profile</h3><p class="icm-muted">'+name+' is listed under '+sport+' in the IMG sports directory.</p></div>'+
-      '<div class="icm-card"><h3>Data Policy</h3><p class="icm-muted">IMG keeps league information specific to this competition and does not substitute another league’s teams, results or standings.</p></div>';
-    }
-    list.appendChild(wrap);open();
+
+  function escapeHtml(v){
+    return String(v).replace(/[&<>'"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','\"':'&quot;'}[c]});
   }
-  window.IMG_Coverage_Click=function(sport){directory(sport)};
-  modal.querySelector('.icm-close').onclick=close;
-  modal.querySelector('.icm-backdrop').onclick=close;
-  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&modal.classList.contains('is-open'))close()});
+
+  window.IMG_Coverage_Click=openSportDirectory;
+
+  // Capture-phase handler guarantees the Sports Coverage cards reach this directory
+  // even if an older click handler exists elsewhere in the page.
+  document.addEventListener('click',function(e){
+    const card=e.target.closest && e.target.closest('[data-coverage-sport]');
+    if(!card) return;
+    const sport=card.getAttribute('data-coverage-sport');
+    if(!sport) return;
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    openSportDirectory(sport);
+  },true);
+
+  const close=modal.querySelector('.icm-close');
+  const backdrop=modal.querySelector('.icm-backdrop');
+  if(close) close.addEventListener('click',hide);
+  if(backdrop) backdrop.addEventListener('click',hide);
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape' && modal.classList.contains('is-open')) hide(); });
 })();
 </script>
 </body></html>
