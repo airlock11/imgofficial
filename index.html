@@ -549,7 +549,8 @@ list.addEventListener('click',function(e){
 <style id="img-league-detail-style">
 #img-league-detail{display:none;position:fixed;inset:0;background:#07090d;z-index:21000;overflow:auto;padding:85px 18px 50px}
 #img-league-detail.search-origin{inset:auto;left:50%;top:50%;transform:translate(-50%,-50%);width:min(760px,calc(100vw - 32px));height:min(78vh,720px);background:#0a0d12;border:1px solid #2a303a;border-radius:18px;box-shadow:0 24px 80px rgba(0,0,0,.65);padding:30px 24px 28px;overflow:auto}
-#img-league-detail.search-origin .ld-wrap{max-width:none}
+#img-league-detail.search-origin{overflow:hidden}
+#img-league-detail.search-origin .ld-wrap{max-width:none;height:100%;overflow:auto}
 #img-league-detail.search-origin .ld-search-close{display:block;position:absolute;right:14px;top:14px}
 #img-league-detail.search-origin .ld-top{padding-right:52px}
 @media(max-width:800px){#img-league-detail.search-origin{width:calc(100vw - 24px);height:min(82vh,760px);padding:26px 16px 22px;border-radius:16px}#img-league-detail.search-origin .ld-top{padding-right:48px}}
