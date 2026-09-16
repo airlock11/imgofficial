@@ -156,6 +156,7 @@ footer{border-top:1px solid #20242c;padding:30px 6%;color:#777f8c;text-align:cen
 @media(max-width:560px){.coverage-directory{padding:24px 16px;border-radius:18px;max-height:88vh}#coverage-directory-list{grid-template-columns:1fr}#coverage-directory-title{font-size:27px}}
 
 </style>
+
 </head>
 <body>
 <header class="nav">
@@ -177,7 +178,7 @@ footer{border-top:1px solid #20242c;padding:30px 6%;color:#777f8c;text-align:cen
 <div class="mock" id="heroGame"><div class="mocktop"><span>GAME CENTER</span><span class="live" id="heroStatus">● LIVE</span></div><div class="match"><div class="muted" id="heroSport" style="font-size:11px;text-transform:uppercase;letter-spacing:1px;margin-bottom:14px">LIVE SPORTS</div><div class="teams"><div><small>HOME</small><br><b id="heroHome">Loading…</b></div><div class="score" id="heroHomeScore">—</div></div><div class="teams"><div><small>AWAY</small><br><b id="heroAway">Loading…</b></div><div class="score" id="heroAwayScore">—</div></div><div class="bar"><i id="heroBar"></i></div><small class="muted" id="heroMeta">Loading live game data…</small></div></div>
 </div>
 <section id="features"><div class="sectionhead"><div><div class="eyebrow">THE PLATFORM</div><h2>Built around the game.</h2></div></div><p class="section-intro">Everything you need to follow, understand and experience sports — all in one place.</p><div class="cards feature-cards"><div class="card feature-card feature-live"><div class="feature-overlay"><span class="feature-number">01</span><h3>Live Scores</h3><p>Get real-time scores, game status, key events and competition details as they happen.</p></div></div><div class="card feature-card feature-stats"><div class="feature-overlay"><span class="feature-number">02</span><h3>Statistics</h3><p>Explore in-depth team, player and game statistics. Compare performance, track trends and discover insights.</p></div></div><div class="card feature-card feature-schedules"><div class="feature-overlay"><span class="feature-number">03</span><h3>Schedules &amp; Results</h3><p>Find upcoming games, match schedules and completed results across all sports and leagues.</p></div></div></div></section>
-<section id="sports"><div class="sectionhead"><div><div class="eyebrow">SPORTS COVERAGE</div><h2>One destination.</h2></div></div><p class="section-intro">Follow your favorite sports, all in one place. Get live scores, news and statistics from leagues around the world.</p><div class="sports sports-image-grid"><div class="sport sport-image sport-basketball" role="button" tabindex="0" data-coverage-sport="Basketball" aria-label="Open Basketball leagues"><strong>Basketball</strong><span>Leagues. Teams. Players.<br>Live scores.</span></div><div class="sport sport-image sport-football" role="button" tabindex="0" data-coverage-sport="Football" aria-label="Open Football leagues"><strong>Football</strong><span>Global leagues.<br>Real-time scores.</span></div><div class="sport sport-image sport-tennis" role="button" tabindex="0" data-coverage-sport="Tennis" aria-label="Open Tennis leagues"><strong>Tennis</strong><span>Tournaments. Rankings.<br>Live results.</span></div><div class="sport sport-image sport-baseball" role="button" tabindex="0" data-coverage-sport="Baseball" aria-label="Open Baseball leagues"><strong>Baseball</strong><span>Standings. Stats.<br>Game updates.</span></div><div class="sport sport-image sport-hockey" role="button" tabindex="0" data-coverage-sport="Hockey" aria-label="Open Hockey leagues"><strong>Hockey</strong><span>Scores. Schedules.<br>Player stats.</span></div><div class="sport sport-image sport-cricket" role="button" tabindex="0" data-coverage-sport="Cricket" aria-label="Open Cricket leagues"><strong>Cricket</strong><span>Live matches.<br>Series. Stats.</span></div><div class="sport sport-image sport-volleyball" role="button" tabindex="0" data-coverage-sport="Volleyball" aria-label="Open Volleyball leagues"><strong>Volleyball</strong><span>Matches. Teams.<br>Live scores.</span></div><div class="sport sport-image sport-motorsports" role="button" tabindex="0" data-coverage-sport="Motorsport" aria-label="Open Motorsport leagues"><strong>Motorsports</strong><span>Race results. Drivers.<br>Championships.</span></div><div class="sport sport-image sport-combat" role="button" tabindex="0" data-coverage-sport="Combat Sports" aria-label="Open Combat Sports leagues"><strong>Combat Sports</strong><span>Events. Fighters.<br>Results.</span></div><div class="sport sport-image sport-american" role="button" tabindex="0" data-coverage-sport="American Football" aria-label="Open American Football leagues"><strong>American Football</strong><span>Schedules. Stats.<br>Live updates.</span></div></div></section>
+<section id="sports"><div class="sectionhead"><div><div class="eyebrow">SPORTS COVERAGE</div><h2>One destination.</h2></div></div><p class="section-intro">Follow your favorite sports, all in one place. Get live scores, news and statistics from leagues around the world.</p><div class="sports sports-image-grid"><div class="sport sport-image sport-basketball" role="button" tabindex="0" data-coverage-sport="Basketball" onclick="IMG_Coverage_Click('Basketball');return false;" aria-label="Open Basketball leagues"><strong>Basketball</strong><span>Leagues. Teams. Players.<br>Live scores.</span></div><div class="sport sport-image sport-football" role="button" tabindex="0" data-coverage-sport="Football" onclick="IMG_Coverage_Click('Football');return false;" aria-label="Open Football leagues"><strong>Football</strong><span>Global leagues.<br>Real-time scores.</span></div><div class="sport sport-image sport-tennis" role="button" tabindex="0" data-coverage-sport="Tennis" onclick="IMG_Coverage_Click('Tennis');return false;" aria-label="Open Tennis leagues"><strong>Tennis</strong><span>Tournaments. Rankings.<br>Live results.</span></div><div class="sport sport-image sport-baseball" role="button" tabindex="0" data-coverage-sport="Baseball" onclick="IMG_Coverage_Click('Baseball');return false;" aria-label="Open Baseball leagues"><strong>Baseball</strong><span>Standings. Stats.<br>Game updates.</span></div><div class="sport sport-image sport-hockey" role="button" tabindex="0" data-coverage-sport="Hockey" onclick="IMG_Coverage_Click('Hockey');return false;" aria-label="Open Hockey leagues"><strong>Hockey</strong><span>Scores. Schedules.<br>Player stats.</span></div><div class="sport sport-image sport-cricket" role="button" tabindex="0" data-coverage-sport="Cricket" onclick="IMG_Coverage_Click('Cricket');return false;" aria-label="Open Cricket leagues"><strong>Cricket</strong><span>Live matches.<br>Series. Stats.</span></div><div class="sport sport-image sport-volleyball" role="button" tabindex="0" data-coverage-sport="Volleyball" onclick="IMG_Coverage_Click('Volleyball');return false;" aria-label="Open Volleyball leagues"><strong>Volleyball</strong><span>Matches. Teams.<br>Live scores.</span></div><div class="sport sport-image sport-motorsports" role="button" tabindex="0" data-coverage-sport="Motorsport" onclick="IMG_Coverage_Click('Motorsport');return false;" aria-label="Open Motorsport leagues"><strong>Motorsports</strong><span>Race results. Drivers.<br>Championships.</span></div><div class="sport sport-image sport-combat" role="button" tabindex="0" data-coverage-sport="Combat Sports" onclick="IMG_Coverage_Click('Combat Sports');return false;" aria-label="Open Combat Sports leagues"><strong>Combat Sports</strong><span>Events. Fighters.<br>Results.</span></div><div class="sport sport-image sport-american" role="button" tabindex="0" data-coverage-sport="American Football" onclick="IMG_Coverage_Click('American Football');return false;" aria-label="Open American Football leagues"><strong>American Football</strong><span>Schedules. Stats.<br>Live updates.</span></div></div></section>
 </main>
 
 <section id="platform">
@@ -521,80 +522,6 @@ sports.forEach(s=>{
 });
 render('Basketball');
 document.getElementById('img-league-close').onclick=()=>{root.style.display='none';document.body.classList.remove('league-browser-open')};
-const coverageDirectoryData = {"Basketball": ["NBA", "WNBA", "NCAA", "G League", "EuroLeague", "EuroCup", "ACB / Liga Endesa", "BBL", "Betclic Élite", "BBL Bundesliga", "Lega Basket Serie A", "BSL", "ABA League", "VTB United League", "Greek Basket League", "LNB Pro A", "CBA", "PBA", "PBA D-League", "B.LEAGUE", "KBL", "NBL", "NBL Canada", "LNBP", "BCLA", "BAL", "FIBA Basketball World Cup", "WBSL", "MPBL", "UAAP Basketball", "NCAA Philippines Basketball", "Pilipinas Super League", "VBA", "Vietnam National Basketball Championship", "3x3.EXE Premier Vietnam", "NBL Philippines"], "Football": ["Premier League", "La Liga", "Serie A", "Bundesliga", "Ligue 1", "UEFA Champions League", "UEFA Europa League", "UEFA Conference League", "MLS", "Liga MX", "Brasileirão Série A", "Liga Portugal", "Eredivisie", "Saudi Pro League", "J1 League", "A-League", "Philippine Football League", "FIFA World Cup"], "Tennis": ["ATP Tour", "WTA Tour", "Australian Open", "Roland-Garros", "Wimbledon", "US Open", "Davis Cup", "Billie Jean King Cup"], "Baseball": ["MLB", "NPB", "KBO League", "KBO Futures League", "CPBL", "LMB", "Liga de Béisbol Profesional", "World Baseball Classic"], "Hockey": ["NHL", "KHL", "SHL", "Liiga", "National League", "DEL", "ICE Hockey League", "IIHF World Championship"], "Cricket": ["IPL", "Big Bash League", "The Hundred", "T20 Blast", "PSL", "BPL", "SA20", "CPL", "Major League Cricket", "ICC Cricket World Cup"], "Volleyball": ["Nations League", "CEV Champions League", "PlusLiga", "SuperLega", "Superliga", "V.League", "PVL", "Asian Volleyball Championship"], "Motorsport": ["Formula 1", "MotoGP", "NASCAR Cup Series", "IndyCar Series", "World Rally Championship", "Formula E"], "Combat Sports": ["UFC", "ONE Championship", "PFL", "Bellator"], "American Football": ["NFL", "CFL", "UFL", "College Football"]};
-const coverageModal=document.getElementById('coverage-directory-modal');
-const coverageList=document.getElementById('coverage-directory-list');
-const coverageTitle=document.getElementById('coverage-directory-title');
-const coverageSubtitle=document.getElementById('coverage-directory-subtitle');
-const coverageClose=document.getElementById('coverage-directory-close');
-
-function openCoverageDirectory(sport){
-  const leagues=coverageDirectoryData[sport] || [];
-  coverageTitle.textContent=sport;
-  coverageSubtitle.textContent='Select a league to view its profile.';
-  coverageList.classList.remove('coverage-profile-view');
-  coverageList.innerHTML='';
-
-  leagues.forEach(league=>{
-    const button=document.createElement('button');
-    button.type='button';
-    button.className='coverage-league-item';
-    button.textContent=league;
-    button.addEventListener('click',function(e){
-      e.preventDefault();
-      e.stopPropagation();
-      openCoverageLeagueProfile(league,sport);
-    });
-    coverageList.appendChild(button);
-  });
-
-  coverageModal.classList.add('open');
-  coverageModal.setAttribute('aria-hidden','false');
-}
-
-function openCoverageLeagueProfile(league,sport){
-  /* The directory popup is the only popup used for Sports Coverage. */
-  const detail=document.getElementById('img-league-detail');
-  const browser=document.getElementById('img-league-browser');
-  if(detail) detail.style.display='none';
-  if(browser) browser.style.display='none';
-
-  /* Use IMG's existing league renderer only as a data/content generator,
-     then move its rendered profile into this popup. */
-  if(typeof window.IMGOpenLeagueDetail==='function'){
-    window.homeSearchOpenedLeague=false;
-    window.IMGOpenLeagueDetail(league,sport);
-  }
-
-  const detailTitle=document.getElementById('ld-title');
-  const detailSub=document.getElementById('ld-sub');
-  const detailContent=document.getElementById('ld-content');
-
-  coverageTitle.textContent=detailTitle && detailTitle.textContent ? detailTitle.textContent : league;
-  coverageSubtitle.textContent=detailSub && detailSub.textContent ? detailSub.textContent : sport+' · League profile';
-
-  const back=document.createElement('button');
-  back.type='button';
-  back.className='coverage-profile-back';
-  back.textContent='← Back to '+sport+' Leagues';
-  back.addEventListener('click',function(e){
-    e.preventDefault();
-    e.stopPropagation();
-    openCoverageDirectory(sport);
-  });
-
-  const profile=document.createElement('div');
-  profile.className='coverage-profile-content';
-  if(detailContent){
-    Array.from(detailContent.children).forEach(node=>profile.appendChild(node.cloneNode(true)));
-  }
-
-  coverageList.replaceChildren(back,profile);
-  coverageList.classList.add('coverage-profile-view');
-  coverageModal.classList.add('open');
-  coverageModal.setAttribute('aria-hidden','false');
-}
-
 window.IMGOpenSportsLeagues=(sport)=>{
   window.homeSearchOpenedLeague=false;
   root.style.display='block';
@@ -1034,6 +961,97 @@ window.IMGOpenLeagueDetail=openDetail;
     });
   }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',initSearch); else initSearch();
+})();
+</script>
+
+
+<style id="img-clean-coverage-popup-style">
+#img-coverage-modal{display:none!important;position:fixed;inset:0;z-index:99999;align-items:center;justify-content:center;padding:18px;box-sizing:border-box}
+#img-coverage-modal.is-open{display:flex!important}
+#img-coverage-modal .icm-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.82);backdrop-filter:blur(6px)}
+#img-coverage-modal .icm-panel{position:relative;z-index:2;width:min(760px,94vw);max-height:86vh;overflow:auto;background:#0b0e13;color:#fff;border:1px solid #2a303a;border-radius:18px;box-shadow:0 25px 90px rgba(0,0,0,.65);padding:26px}
+#img-coverage-modal .icm-close{position:absolute;right:14px;top:10px;width:42px;height:42px;border:1px solid #303640;background:#11151c;color:#fff;border-radius:50%;font-size:28px;cursor:pointer}
+#img-coverage-modal .icm-kicker{font-size:11px;letter-spacing:.18em;color:#8e98a5;font-weight:700;margin-bottom:7px}
+#img-coverage-modal .icm-title{font-size:32px;line-height:1.1;margin:0 48px 6px 0}
+#img-coverage-modal .icm-sub{color:#9ca3af;margin:0 0 20px}
+#img-coverage-modal .icm-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+#img-coverage-modal .icm-league{width:100%;padding:15px;text-align:left;border:1px solid #252b35;border-radius:11px;background:#11151c;color:#fff;cursor:pointer;font:inherit}
+#img-coverage-modal .icm-league:hover{background:#181e27;border-color:#4a5360}
+#img-coverage-modal .icm-back{margin-bottom:14px;padding:10px 13px;border:1px solid #303640;background:#11151c;color:#fff;border-radius:9px;cursor:pointer}
+#img-coverage-modal .icm-card{border:1px solid #252b35;background:#0f1319;border-radius:13px;padding:18px;margin-top:12px}
+#img-coverage-modal .icm-card h3{margin:0 0 10px;font-size:18px}
+#img-coverage-modal .icm-muted{color:#9ca3af;line-height:1.55}
+#img-coverage-modal .icm-teams{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:12px}
+#img-coverage-modal .icm-team{padding:10px;border:1px solid #252b35;border-radius:9px;background:#11151c}
+@media(max-width:560px){#img-coverage-modal{padding:10px}#img-coverage-modal .icm-panel{width:100%;max-height:90vh;padding:22px 15px;border-radius:16px}#img-coverage-modal .icm-list{grid-template-columns:1fr}#img-coverage-modal .icm-title{font-size:27px}.icm-teams{grid-template-columns:1fr!important}}
+</style>
+
+<div id="img-coverage-modal" aria-hidden="true">
+  <div class="icm-backdrop"></div>
+  <section class="icm-panel" role="dialog" aria-modal="true" aria-labelledby="icm-title">
+    <button class="icm-close" type="button" aria-label="Close">×</button>
+    <div class="icm-kicker">SPORTS DIRECTORY</div>
+    <h2 class="icm-title" id="icm-title">Basketball</h2>
+    <p class="icm-sub" id="icm-sub">Select a league to view its profile.</p>
+    <div class="icm-list" id="icm-list"></div>
+  </section>
+</div>
+
+<script id="img-clean-coverage-popup-script">
+(function(){
+  const modal=document.getElementById('img-coverage-modal');
+  const list=document.getElementById('icm-list');
+  const title=document.getElementById('icm-title');
+  const sub=document.getElementById('icm-sub');
+  if(!modal||!list||!title||!sub) return;
+
+  const fallback={
+    Basketball:['NBA','WNBA','G League','EuroLeague','EuroCup','ACB / Liga Endesa','PBA','NBL–Pilipinas','MPBL','B.LEAGUE','KBL','NBL','CBA','BAL','BCLA','FIBA Basketball World Cup'],
+    Football:['Premier League','La Liga','Serie A','Bundesliga','Ligue 1','UEFA Champions League','UEFA Europa League','UEFA Conference League','MLS','Liga MX','Brasileirão Série A','Liga Portugal','Eredivisie','Saudi Pro League','J1 League','A-League','Philippine Football League','FIFA World Cup'],
+    Tennis:['ATP Tour','WTA Tour','Australian Open','Roland-Garros','Wimbledon','US Open','Davis Cup','Billie Jean King Cup'],
+    Baseball:['MLB','NPB','KBO League','KBO Futures League','CPBL','LMB','Liga de Béisbol Profesional','World Baseball Classic'],
+    Hockey:['NHL','KHL','SHL','Liiga','National League','DEL','ICE Hockey League','IIHF World Championship'],
+    Cricket:['IPL','Big Bash League','The Hundred','T20 Blast','PSL','BPL','SA20','CPL','Major League Cricket','ICC Cricket World Cup'],
+    Volleyball:['Nations League','CEV Champions League','PlusLiga','SuperLega','Superliga','V.League','PVL','Asian Volleyball Championship'],
+    Motorsport:['Formula 1','MotoGP','NASCAR Cup Series','IndyCar Series','World Rally Championship','Formula E'],
+    'Combat Sports':['UFC','ONE Championship','PFL','Bellator'],
+    'American Football':['NFL','CFL','UFL','College Football']
+  };
+
+  function open(){modal.classList.add('is-open');modal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden'}
+  function close(){modal.classList.remove('is-open');modal.setAttribute('aria-hidden','true');document.body.style.overflow=''}
+  function leaguesFor(sport){
+    const d=window.IMGLeagueData&&window.IMGLeagueData[sport];
+    return Array.isArray(d)&&d.length ? d.map(x=>x[0]) : (fallback[sport]||[]);
+  }
+  function directory(sport){
+    title.textContent=sport;sub.textContent='Select a league to view its profile.';list.innerHTML='';
+    leaguesFor(sport).forEach(name=>{
+      const b=document.createElement('button');b.type='button';b.className='icm-league';b.textContent=name;
+      b.onclick=function(e){e.preventDefault();e.stopPropagation();profile(name,sport)};
+      list.appendChild(b);
+    });
+    open();
+  }
+  function profile(name,sport){
+    title.textContent=name;sub.textContent=sport+' · League Profile';list.innerHTML='';
+    const back=document.createElement('button');back.type='button';back.className='icm-back';back.textContent='← Back to '+sport+' Leagues';back.onclick=function(){directory(sport)};list.appendChild(back);
+    const wrap=document.createElement('div');
+    if(name==='NBA'){
+      wrap.innerHTML='<div class="icm-card"><h3>League Overview</h3><p class="icm-muted">The National Basketball Association (NBA) is a professional men’s basketball league in North America, with teams in the United States and Canada.</p></div>'+
+      '<div class="icm-card"><h3>Current Season</h3><p class="icm-muted"><b>2026–27</b><br>The current NBA season shown in IMG.</p></div>'+
+      '<div class="icm-card"><h3>30 Teams</h3><div class="icm-teams">'+['Atlanta Hawks','Boston Celtics','Brooklyn Nets','Charlotte Hornets','Chicago Bulls','Cleveland Cavaliers','Dallas Mavericks','Denver Nuggets','Detroit Pistons','Golden State Warriors','Houston Rockets','Indiana Pacers','LA Clippers','Los Angeles Lakers','Memphis Grizzlies','Miami Heat','Milwaukee Bucks','Minnesota Timberwolves','New Orleans Pelicans','New York Knicks','Oklahoma City Thunder','Orlando Magic','Philadelphia 76ers','Phoenix Suns','Portland Trail Blazers','Sacramento Kings','San Antonio Spurs','Toronto Raptors','Utah Jazz','Washington Wizards'].map(t=>'<div class="icm-team">'+t+'</div>').join('')+'</div></div>'+
+      '<div class="icm-card"><h3>Official Source</h3><p class="icm-muted"><a href="https://www.nba.com/teams" target="_blank" rel="noopener" style="color:#fff">NBA.com — Official Team Directory</a></p></div>';
+    }else{
+      wrap.innerHTML='<div class="icm-card"><h3>League Profile</h3><p class="icm-muted">'+name+' is listed under '+sport+' in the IMG sports directory.</p></div>'+
+      '<div class="icm-card"><h3>Data Policy</h3><p class="icm-muted">IMG keeps league information specific to this competition and does not substitute another league’s teams, results or standings.</p></div>';
+    }
+    list.appendChild(wrap);open();
+  }
+  window.IMG_Coverage_Click=function(sport){directory(sport)};
+  modal.querySelector('.icm-close').onclick=close;
+  modal.querySelector('.icm-backdrop').onclick=close;
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&modal.classList.contains('is-open'))close()});
 })();
 </script>
 </body></html>
