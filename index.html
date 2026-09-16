@@ -392,4 +392,59 @@ function render(){
   window.IMGOpenNBA=showNBA;
 })();
 </script>
+
+<style id="img-nav-fix">
+.img-sports-menu{position:relative;display:inline-block}
+.img-sports-btn{background:none;border:0;color:inherit;font:inherit;cursor:pointer;padding:0}
+.img-sports-panel{display:none;position:absolute;top:calc(100% + 10px);left:0;min-width:210px;background:#11151c;border:1px solid #2a3039;border-radius:12px;padding:8px;z-index:9999;box-shadow:0 12px 35px rgba(0,0,0,.35)}
+.img-sports-panel.open{display:block}
+.img-sports-panel button{display:block;width:100%;text-align:left;background:none;border:0;color:#fff;padding:11px 12px;border-radius:8px;cursor:pointer;font:inherit}
+.img-sports-panel button:hover{background:#1c222b}
+</style>
+<script id="img-navigation-fix">
+(function(){
+  const current = location.pathname;
+  function goHome(){ location.href = "./#home"; }
+  function openNBA(){
+    const s=document.getElementById("nba-hub");
+    if(s) s.style.display="block";
+    location.hash="nba-hub";
+    setTimeout(()=>document.getElementById("nba-hub")?.scrollIntoView({behavior:"smooth"}),20);
+  }
+  function ensureMenu(){
+    const links=[...document.querySelectorAll("a")];
+    const sports=links.find(a=>a.textContent.trim().toLowerCase()==="sports");
+    if(!sports || sports.dataset.fixed) return;
+    sports.dataset.fixed="1";
+    sports.removeAttribute("href");
+    sports.style.cursor="pointer";
+    const wrap=document.createElement("span");
+    wrap.className="img-sports-menu";
+    const btn=document.createElement("button");
+    btn.className="img-sports-btn";
+    btn.textContent="Sports ▾";
+    const panel=document.createElement("div");
+    panel.className="img-sports-panel";
+    const basketball=document.createElement("button");
+    basketball.textContent="🏀 Basketball";
+    basketball.onclick=function(){ panel.classList.remove("open"); openNBA(); };
+    panel.appendChild(basketball);
+    btn.onclick=function(e){e.stopPropagation();panel.classList.toggle("open");};
+    wrap.appendChild(btn); wrap.appendChild(panel);
+    sports.replaceWith(wrap);
+    document.addEventListener("click",()=>panel.classList.remove("open"));
+  }
+  function fixInternalLinks(){
+    document.querySelectorAll('a[href^="index.html#"],a[href^="./index.html#"]').forEach(a=>{
+      a.href=a.getAttribute("href").replace(/^\.?\/?index\.html/,".");
+    });
+  }
+  document.addEventListener("DOMContentLoaded",()=>{ensureMenu();fixInternalLinks();});
+  window.addEventListener("hashchange",()=>{
+    if(location.hash==="#nba-hub"){
+      const s=document.getElementById("nba-hub"); if(s) s.style.display="block";
+    }
+  });
+})();
+</script>
 </body></html>

@@ -1,16 +1,5 @@
-# IMG — Original Homepage + NBA Hub
+# IMG NBA Hub — Navigation Fixed
 
-The original IMG homepage remains the main landing page.
+Sports now works from any page. Clicking Sports opens a Basketball option, and clicking Basketball opens the NBA hub.
 
-NBA navigation/content:
-- Sports → Basketball → NBA
-- Official NBA.com links for teams and current rosters
-- Official NBA schedule
-- Official NBA standings
-- Official NBA players
-- Official NBA news and updates
-- 30 NBA teams directory
-
-NBA content is linked to NBA.com rather than copied into IMG, so official NBA pages remain the source of record. IMG's existing live-scores connection remains in place.
-
-Important: NBA.com controls the current roster, schedule, standings and news data. The links open the official source in a new tab.
+The NBA hub retains official NBA.com links for teams/rosters, schedule, standings, players and news. The original IMG homepage remains the main landing page.
