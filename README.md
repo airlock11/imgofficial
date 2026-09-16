@@ -1,1 +1,5 @@
-IMG all-sports league information update. Every listed league has a factual league profile, source link, and independent verified-data policy. No league falls back to another league's teams or statistics.
+IMG mobile header update
+- Mobile header is structured as: IMG logo (top) -> league search bar (full width underneath) -> navigation links.
+- Live Scores button remains on the top row.
+- Search dropdown stays directly below the mobile search field and uses the full available width.
+- Desktop layout is unchanged.
