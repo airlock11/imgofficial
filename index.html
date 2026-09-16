@@ -458,6 +458,7 @@ const data={
  ]
 };
 const sports=Object.keys(data);
+window.IMGLeagueData=data;
 const root=document.getElementById('img-league-browser');
 const tabs=document.getElementById('img-sports-tabs');
 const list=document.getElementById('img-league-list');
@@ -633,7 +634,8 @@ function openDetail(name,sport){
   content.innerHTML=`<div class="ld-grid"><div class="ld-card"><h3>League Profile</h3><p class="ld-sub">IMG lists the current Canadian competition under the corrected Basketball Super League name.</p><div class="ld-note"><b>Data rule:</b> season-specific teams and records are shown only after verification from the league or a reliable competition data provider.</div></div><div class="ld-card"><h3>Data Sections</h3><p class="ld-sub">Teams · Standings · Schedule · Results · Statistics · Players</p></div></div>`;
  }else{
   title.textContent=name;
-  const location=((data[sport]||[]).find(x=>x[0]===name)||['',''])[1];
+  const leagueData=window.IMGLeagueData||{};
+  const location=((leagueData[sport]||[]).find(x=>x[0]===name)||['',''])[1];
   sub.textContent=(sport||'Sports')+' · '+location+' · Verified League Profile';
   const facts={
    'WNBA':'The Women’s National Basketball Association is the premier professional women’s basketball league in the United States.',

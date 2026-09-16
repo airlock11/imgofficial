@@ -1,11 +1,5 @@
-# IMG — Global Sports & League Directory
+IMG — Other Sports League Information Fix
 
-Sports now opens a global league browser.
+Fixed a JavaScript scope bug that caused non-special-case league pages (football, baseball, tennis, hockey, cricket, volleyball, rugby, golf, boxing, motorsport, cycling, athletics, swimming and combat sports) to render blank.
 
-Basketball shows major basketball leagues and competitions worldwide.
-The same browser also provides league/competition lists for Football, Baseball, Tennis, Hockey, Cricket, Volleyball, Rugby, Golf, Boxing, Motorsport, Cycling, Athletics, Swimming and Combat Sports.
-
-This is a league directory/navigation layer; live data connections can be added per league/provider.
-
-
-League naming correction update (2026-09-16): corrected current basketball league display names, including NBA G League, Super League Basketball (UK), easyCredit BBL, Türkiye Sigorta Basketbol Süper Ligi, B.LEAGUE, NBL–Pilipinas, MPBL, NCAA Philippines, National Basketball League (Australia), and Basketball Super League (Canada/North America).
+The league directory data is now exposed safely to the league-detail renderer. Each league page remains isolated and uses its own league name/sport/location and source policy. No other league's teams or records are used as fallback.
