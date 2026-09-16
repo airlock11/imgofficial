@@ -1,7 +1,21 @@
-# IMGOFFICIAL Marketing Website
+# IMGOFFICIAL
 
-This is the marketing/landing-page version of IMGOFFICIAL. It intentionally contains no sports API connection, API key, or provider-status panel.
+GitHub Pages-ready sports website.
 
-The page presents IMGOFFICIAL as a sports data and digital sports platform with sections for live scores, statistics, schedules/results, and broad sports coverage.
+## Includes
+- Marketing homepage
+- Live Scores page
+- Scores page entry point
+- Statistics entry point
+- Sport filters
+- No betting odds
+- No visible API/provider branding
 
-Upload `index.html` to the root of your GitHub Pages repository.
+## GitHub Pages
+1. Upload `index.html` to your repository root.
+2. Open **Settings → Pages**.
+3. Choose **Deploy from a branch**.
+4. Select `main` and `/ (root)`.
+5. Save.
+
+The live-score section currently uses TheSportsDB's free V1 endpoint. For production-grade live data, replace the frontend endpoint with your own secure backend/provider integration.

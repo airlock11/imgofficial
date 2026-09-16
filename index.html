@@ -1,78 +1,71 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>IMGOFFICIAL — Your Sports. Your Data. Your Edge.</title>
-<meta name="description" content="IMGOFFICIAL is a modern sports data platform for scores, statistics, schedules and game intelligence.">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>IMGOFFICIAL — Sports Data Platform</title>
 <style>
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#070a10;color:#f5f7fb;font-family:Inter,Arial,Helvetica,sans-serif}button,a{font:inherit}a{text-decoration:none;color:inherit}.top{height:72px;border-bottom:1px solid #1d2632;background:rgba(7,10,16,.92);backdrop-filter:blur(14px);display:flex;align-items:center;padding:0 5%;gap:42px;position:sticky;top:0;z-index:20}.logo{font-weight:900;letter-spacing:.7px}.logo span{border:2px solid #fff;border-radius:6px;padding:2px 5px;margin-right:8px}.nav{display:flex;gap:26px;color:#8793a6;font-size:13px}.nav a:hover{color:#fff}.cta{margin-left:auto;border:1px solid #e9edf4;background:#f5f7fb;color:#080b12;padding:10px 16px;border-radius:8px;font-size:11px;font-weight:800}.hero{max-width:1200px;margin:auto;padding:105px 20px 80px;display:grid;grid-template-columns:1.25fr .75fr;gap:50px;align-items:center}.eyebrow{font-size:10px;letter-spacing:2px;color:#a5b0c0;border:1px solid #293445;background:#101620;border-radius:999px;padding:8px 12px;display:inline-block}.hero h1{font-size:clamp(52px,7vw,88px);line-height:.94;letter-spacing:-5px;margin:22px 0}.hero h1 span{color:#7c899d}.hero p{color:#8995a7;line-height:1.7;max-width:610px;font-size:15px}.hero-actions{display:flex;gap:10px;margin-top:28px}.primary,.secondary{padding:13px 18px;border-radius:9px;font-size:11px;font-weight:800}.primary{background:#f5f7fb;color:#080b12}.secondary{border:1px solid #2b3748;color:#b3bdcb;background:#111722}.hero-visual{border:1px solid #253041;background:linear-gradient(145deg,#111824,#0b1018);border-radius:18px;padding:18px;box-shadow:0 25px 70px #0008}.visual-top{display:flex;justify-content:space-between;color:#7e8b9e;font-size:9px;margin-bottom:20px}.game{padding:16px;border:1px solid #263243;background:#0e141d;border-radius:11px}.game-head{display:flex;justify-content:space-between;color:#718095;font-size:9px}.live{color:#fff}.teamrow{display:flex;justify-content:space-between;align-items:center;margin:18px 0}.teamrow b{display:block;font-size:13px}.teamrow small{color:#667488;font-size:8px}.score b{display:block;font-size:22px;text-align:right}.bars{display:grid;gap:8px;margin-top:18px}.bar{height:6px;border-radius:5px;background:#273242}.bar i{display:block;height:100%;width:70%;background:#cfd6e0;border-radius:5px}.bar:nth-child(2) i{width:48%}.bar:nth-child(3) i{width:62%}.section{max-width:1200px;margin:auto;padding:70px 20px}.center{text-align:center}.center h2{font-size:40px;letter-spacing:-2px;margin:10px 0}.center p{color:#7d899c;max-width:620px;margin:0 auto;line-height:1.6;font-size:13px}.features{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:35px}.feature{border:1px solid #202b3a;background:#0e141d;border-radius:13px;padding:23px;min-height:160px}.feature .num{font-size:10px;color:#68768a}.feature h3{font-size:15px;margin:18px 0 8px}.feature p{color:#6e7b8e;font-size:11px;line-height:1.6}.sports{display:grid;grid-template-columns:repeat(5,1fr);gap:9px;margin-top:35px}.sport{border:1px solid #222d3d;background:#0e141d;border-radius:10px;padding:17px;color:#b7c0cd;font-size:11px}.sport strong{display:block;color:#fff;margin-bottom:6px}.banner{max-width:1200px;margin:50px auto 80px;padding:45px 40px;border:1px solid #293547;background:linear-gradient(110deg,#111925,#0b1018);border-radius:18px;display:flex;justify-content:space-between;align-items:center;gap:25px}.banner h2{font-size:34px;letter-spacing:-1.5px;margin:0 0 9px}.banner p{color:#7e8b9d;font-size:12px;margin:0}.small{font-size:9px;color:#5e6b7e;margin-top:18px}.footer{border-top:1px solid #1d2632;padding:28px 5%;color:#5e6b7d;font-size:9px;display:flex;justify-content:space-between}@media(max-width:800px){.top{padding:0 16px;gap:12px}.nav{display:none}.cta{margin-left:auto}.hero{grid-template-columns:1fr;padding-top:65px}.hero h1{letter-spacing:-3px}.features{grid-template-columns:1fr}.sports{grid-template-columns:1fr 1fr}.banner{margin:25px 16px 50px;padding:30px 22px;display:block}.banner .primary{display:inline-block;margin-top:20px}.section{padding:55px 16px}.center h2{font-size:32px}.footer{margin:0 16px}}
+*{box-sizing:border-box}body{margin:0;background:#07090d;color:#f5f7fa;font-family:Arial,Helvetica,sans-serif}
+a{text-decoration:none;color:inherit}.nav{position:sticky;top:0;z-index:20;height:70px;background:rgba(7,9,13,.94);border-bottom:1px solid #20242c;display:flex;align-items:center;padding:0 5%;backdrop-filter:blur(10px)}
+.logo{font-weight:900;letter-spacing:-1px;font-size:22px;display:flex;gap:8px;align-items:center}.logo b{border:2px solid #fff;padding:3px 5px;font-size:16px}
+.navlinks{display:flex;gap:25px;margin-left:auto}.navlinks a{font-size:14px;color:#aeb5c0}.navlinks a:hover,.navlinks a.active{color:#fff}
+.btn{border:1px solid #fff;border-radius:7px;padding:11px 16px;font-weight:700;background:#fff;color:#050609;cursor:pointer}
+.hero{padding:90px 6% 70px;display:grid;grid-template-columns:1.1fr .9fr;gap:50px;align-items:center;max-width:1300px;margin:auto}
+.eyebrow{font-size:12px;letter-spacing:2px;color:#9da6b2;font-weight:800}.hero h1{font-size:clamp(48px,7vw,82px);line-height:.93;margin:18px 0}.hero p{color:#aeb5c0;max-width:590px;font-size:18px;line-height:1.6}.actions{display:flex;gap:12px;margin-top:28px}.btn.secondary{background:transparent;color:#fff;border-color:#303641}
+.mock{border:1px solid #272c35;border-radius:18px;background:#0d1016;padding:20px;box-shadow:0 25px 80px #0008}.mocktop{display:flex;justify-content:space-between;color:#87909d;font-size:12px}.live{color:#7ee787}.match{margin-top:20px;padding:18px;border-radius:12px;background:#12161e}.teams{display:flex;justify-content:space-between;align-items:center}.score{font-size:34px;font-weight:900}.bar{height:6px;background:#292f38;border-radius:8px;margin:20px 0}.bar i{display:block;width:68%;height:100%;background:#f5f7fa;border-radius:8px}
+section{padding:75px 6%;max-width:1300px;margin:auto}.sectionhead{display:flex;justify-content:space-between;align-items:end;margin-bottom:30px}.sectionhead h2{font-size:38px;margin:0}.muted{color:#8e97a4}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.card{border:1px solid #252a33;background:#0c0f14;border-radius:14px;padding:25px}.card h3{margin-top:0}.card p{color:#929aa6;line-height:1.6}
+.sports{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}.sport{padding:18px;border:1px solid #252a33;border-radius:12px;background:#0c0f14;color:#cdd2da}
+#platform{display:none;background:#080b10}.dashboard{max-width:1300px;margin:auto;padding:35px 6% 80px}.dashhead{display:flex;justify-content:space-between;align-items:center;gap:20px;margin-bottom:20px}.dashhead h1{margin:0}.filters{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0}.filter{background:#10141b;border:1px solid #2a303a;color:#bfc6d0;border-radius:20px;padding:9px 14px;cursor:pointer}.filter.active{background:#fff;color:#08090c;border-color:#fff}.games{display:grid;gap:12px}.game{background:#0d1118;border:1px solid #252b34;border-radius:12px;padding:18px;display:grid;grid-template-columns:100px 1fr 100px;align-items:center}.status{font-size:12px;color:#89929f}.status.live{color:#7ee787;font-weight:800}.teams2{display:grid;gap:9px}.teamrow{display:flex;justify-content:space-between;font-weight:700}.score2{text-align:right;font-size:20px}.empty{padding:45px;text-align:center;border:1px dashed #303640;border-radius:12px;color:#8d96a3}
+footer{border-top:1px solid #20242c;padding:30px 6%;color:#777f8c;text-align:center;font-size:13px}
+@media(max-width:800px){.navlinks{gap:10px}.navlinks a:not(.keep){display:none}.hero{grid-template-columns:1fr;padding-top:60px}.cards{grid-template-columns:1fr}.sports{grid-template-columns:repeat(2,1fr)}.game{grid-template-columns:75px 1fr 55px}.hero h1{font-size:52px}}
 </style>
 </head>
 <body>
-<header class="top">
-  <a class="logo" href="#home"><span>IMG</span>OFFICIAL</a>
-  <nav class="nav"><a href="#home">Home</a><a href="#platform">Platform</a><a href="#sports">Sports</a><a href="#features">Features</a></nav>
-  <a class="cta" href="#platform">Explore Platform</a>
+<header class="nav">
+<div class="logo"><b>IMG</b>OFFICIAL</div>
+<nav class="navlinks">
+<a href="#home" class="active keep">Home</a><a href="#platform" onclick="showPlatform();return false;" class="keep">Live Scores</a><a href="#platform" onclick="showPlatform();return false;">Scores</a><a href="#platform" onclick="showPlatform();return false;">Statistics</a><a href="#sports" class="keep">Sports</a>
+</nav>
+<a href="#platform" class="btn" style="margin-left:20px" onclick="showPlatform();return false;">Live Scores</a>
 </header>
 
 <main id="home">
-<section class="hero">
-<div>
-  <span class="eyebrow">THE NEXT GENERATION OF SPORTS DATA</span>
-  <h1>Every game.<br><span>Every moment.</span></h1>
-  <p>IMGOFFICIAL brings scores, statistics, schedules and game intelligence into one modern sports platform — built for fans, teams, media and sports businesses.</p>
-  <div class="hero-actions"><a class="primary" href="#platform">Explore IMGOFFICIAL</a><a class="secondary" href="#features">Discover Features</a></div>
+<div class="hero">
+<div><div class="eyebrow">THE NEXT GENERATION OF SPORTS DATA</div><h1>Every game.<br>Every moment.</h1><p>IMGOFFICIAL brings live scores, schedules, results and sports statistics into one fast, focused destination.</p><div class="actions"><a class="btn" href="#platform" onclick="showPlatform();return false;">Explore Live Scores</a><a class="btn secondary" href="#platform" onclick="showPlatform();return false;">View Scores</a></div></div>
+<div class="mock"><div class="mocktop"><span>GAME CENTER</span><span class="live">● LIVE</span></div><div class="match"><div class="teams"><div><small>HOME</small><br><b>HOME TEAM</b></div><div class="score">102</div></div><div class="teams"><div><small>AWAY</small><br><b>AWAY TEAM</b></div><div class="score">98</div></div><div class="bar"><i></i></div><small class="muted">Q4 · 02:14 remaining</small></div></div>
 </div>
-<div class="hero-visual">
-  <div class="visual-top"><span>IMGOFFICIAL • GAME CENTER</span><span>LIVE</span></div>
-  <div class="game">
-    <div class="game-head"><span>BASKETBALL • GAME CENTER</span><span class="live">● LIVE</span></div>
-    <div class="teamrow"><div><b>HOME TEAM</b><small>Team statistics</small></div><div class="score"><b>102</b><b>98</b></div></div>
-    <div class="game-head"><span>Q4</span><span>02:17</span></div>
-    <div class="bars"><div class="bar"><i></i></div><div class="bar"><i></i></div><div class="bar"><i></i></div></div>
-  </div>
-  <div class="small">A clean preview of the IMGOFFICIAL sports experience.</div>
-</div>
-</section>
-
-<section id="platform" class="section">
-<div class="center"><div class="eyebrow">ONE PLATFORM</div><h2>Sports data, made simple.</h2><p>Follow the games that matter, explore the numbers behind every matchup and move from the scoreboard to deeper game information in seconds.</p></div>
-<div class="features">
-<div class="feature"><div class="num">01 / LIVE</div><h3>Live Scores</h3><p>Stay close to the action with a fast, focused game-center experience designed around scores and game status.</p></div>
-<div class="feature"><div class="num">02 / INSIGHT</div><h3>Statistics</h3><p>Explore team, player and matchup information in a clean interface built for quick decisions and deeper research.</p></div>
-<div class="feature"><div class="num">03 / DISCOVERY</div><h3>Schedules & Results</h3><p>Find upcoming events and past results across the sports and competitions you follow.</p></div>
-</div>
-</section>
-
-<section id="sports" class="section">
-<div class="center"><div class="eyebrow">GLOBAL COVERAGE</div><h2>Built for every sport.</h2><p>IMGOFFICIAL is designed to grow across major leagues, competitions and sports worldwide.</p></div>
-<div class="sports">
-<div class="sport"><strong>🏀 Basketball</strong>Scores • Teams • Stats</div>
-<div class="sport"><strong>⚽ Football</strong>Matches • Results • Tables</div>
-<div class="sport"><strong>🎾 Tennis</strong>Matches • Players • Results</div>
-<div class="sport"><strong>⚾ Baseball</strong>Games • Teams • Results</div>
-<div class="sport"><strong>🏒 Hockey</strong>Games • Standings • Stats</div>
-<div class="sport"><strong>🏏 Cricket</strong>Matches • Scores • Teams</div>
-<div class="sport"><strong>🏐 Volleyball</strong>Matches • Results • Stats</div>
-<div class="sport"><strong>🏎 Motorsports</strong>Races • Results • Standings</div>
-<div class="sport"><strong>🥊 Combat Sports</strong>Events • Fighters • Results</div>
-<div class="sport"><strong>🏈 American Football</strong>Games • Scores • Stats</div>
-</div>
-</section>
-
-<section id="features" class="section">
-<div class="center"><div class="eyebrow">WHY IMGOFFICIAL</div><h2>Designed around the game.</h2><p>Fast navigation, focused information and a visual system that puts the sport first.</p></div>
-<div class="features">
-<div class="feature"><div class="num">FAST</div><h3>Focused Experience</h3><p>Less clutter. Clearer information. Get to the game, team or statistic you want without unnecessary steps.</p></div>
-<div class="feature"><div class="num">SMART</div><h3>Game-Centered</h3><p>Move naturally from scores to game details, statistics, schedules and results.</p></div>
-<div class="feature"><div class="num">GLOBAL</div><h3>Built to Scale</h3><p>A platform designed to expand across sports, leagues, competitions and markets.</p></div>
-</div>
-</section>
-
-<section class="banner">
-<div><h2>Your sports world.<br>One destination.</h2><p>Discover IMGOFFICIAL and follow the game your way.</p></div>
-<a class="primary" href="#home">Back to top</a>
-</section>
+<section id="features"><div class="sectionhead"><div><div class="eyebrow">THE PLATFORM</div><h2>Built around the game.</h2></div></div><div class="cards"><div class="card"><h3>🔴 Live Scores</h3><p>Follow games as they happen with a dedicated live-score experience.</p></div><div class="card"><h3>📊 Statistics</h3><p>Explore available team, player and game statistics in one place.</p></div><div class="card"><h3>📅 Schedules & Results</h3><p>Find upcoming games and completed results across sports.</p></div></div></section>
+<section id="sports"><div class="sectionhead"><div><div class="eyebrow">SPORTS COVERAGE</div><h2>One destination.</h2></div></div><div class="sports"><div class="sport">🏀 Basketball</div><div class="sport">⚽ Football</div><div class="sport">🎾 Tennis</div><div class="sport">⚾ Baseball</div><div class="sport">🏒 Hockey</div><div class="sport">🏏 Cricket</div><div class="sport">🏐 Volleyball</div><div class="sport">🏎 Motorsports</div><div class="sport">🥊 Combat Sports</div><div class="sport">🏈 American Football</div></div></section>
 </main>
-<footer><span>© 2026 IMGOFFICIAL</span><span>Sports Data & Digital Sports Platform</span></footer>
+
+<section id="platform">
+<div class="dashboard">
+<div class="dashhead"><div><div class="eyebrow">IMGOFFICIAL LIVE</div><h1>Live Scores</h1><div class="muted">Real-time sports data</div></div><button class="btn" onclick="loadGames()">Refresh</button></div>
+<div class="filters" id="filters"><button class="filter active" onclick="filterSport('All',this)">All</button><button class="filter" onclick="filterSport('Basketball',this)">Basketball</button><button class="filter" onclick="filterSport('Football',this)">Football</button><button class="filter" onclick="filterSport('Tennis',this)">Tennis</button><button class="filter" onclick="filterSport('Baseball',this)">Baseball</button><button class="filter" onclick="filterSport('Hockey',this)">Hockey</button></div>
+<div id="games" class="games"><div class="empty">Loading live scores…</div></div>
+</div>
+</section>
+
+<footer>© 2026 IMGOFFICIAL · Sports Data Platform</footer>
+
+<script>
+const API='https://www.thesportsdb.com/api/v1/json/123/eventsday.php?d='+new Date().toISOString().slice(0,10);
+let allGames=[], current='All';
+function showPlatform(){document.getElementById('home').style.display='none';document.getElementById('platform').style.display='block';window.scrollTo(0,0);loadGames()}
+async function loadGames(){
+const box=document.getElementById('games');box.innerHTML='<div class="empty">Loading live scores…</div>';
+try{let r=await fetch(API);let j=await r.json();allGames=(j.events||[]);render()}
+catch(e){box.innerHTML='<div class="empty">Live score data is temporarily unavailable. Please refresh.</div>'}
+}
+function filterSport(s,b){current=s;document.querySelectorAll('.filter').forEach(x=>x.classList.remove('active'));b.classList.add('active');render()}
+function render(){
+let arr=current==='All'?allGames:allGames.filter(g=>(g.strSport||'').toLowerCase()===current.toLowerCase());
+if(!arr.length){document.getElementById('games').innerHTML='<div class="empty">No games available for this sport today.</div>';return}
+document.getElementById('games').innerHTML=arr.slice(0,50).map(g=>{
+let home=g.strHomeTeam||'Home Team',away=g.strAwayTeam||'Away Team';
+let hs=g.intHomeScore??'—',as=g.intAwayScore??'—';
+let st=(g.strStatus||g.strProgress||'Scheduled');let live=/live|in progress|quarter|half|period/i.test(st);
+return `<div class="game"><div class="status ${live?'live':''}">${live?'● LIVE':st}</div><div class="teams2"><div class="teamrow"><span>${home}</span></div><div class="teamrow"><span>${away}</span></div></div><div class="score2"><div>${hs}</div><div>${as}</div></div></div>`}).join('')
+}
+</script>
 </body></html>
