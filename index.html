@@ -591,9 +591,33 @@ function openDetail(name,sport){
   const mpbl=['Abra Weavers','San Juan Knights','Batang Kankaloo','Meycauayan Marilao Gems','Ilagan Isabela Cowboys','Pasay Voyagers','Bataan Risers','Pasig City','Quezon City Capitals','Valenzuela Classics','Marikina Shoemasters','Bulacan Kuyas','Manila','Parañaque Patriots'];
   content.innerHTML=`<div class="ld-grid"><div class="ld-card"><h3>2026 Season</h3><p class="ld-sub">IMG has verified current 2026 MPBL standings data from a live competition source. The page is marked as a current-season profile.</p><div class="ld-note"><b>Current leaders in the retrieved table:</b> Abra Weavers 23–2, San Juan Knights 21–3, Batang Kankaloo 20–4.</div></div><div class="ld-card"><h3>Source policy</h3><p class="ld-sub">For MPBL, IMG can cross-check official league/team announcements with current competition data.</p></div></div><div class="ld-card" style="margin-top:16px"><h3>Teams appearing in the current verified table</h3><div class="ld-team-grid">${teamCards(mpbl,'2026 MPBL')}</div></div><div class="ld-card" style="margin-top:16px"><h3>Sources</h3><div class="ld-source">Current standings: ${source('https://www.sofascore.com/basketball/tournament/philippines/mpbl/34113','Sofascore MPBL')}<br>Team directory: ${source('https://philsports.ph/mpbl/teams/','PhilSports MPBL')}</div></div>`;
  }else if(name==='NBL–Pilipinas'){
-  title.textContent='NBL–Pilipinas'; sub.textContent='National Basketball League · Philippines · current/most recent verified season';
-  const teams=['Bacoor – Maximus Premium Feeds','CamSur Express','Zambales Constructicons'];
-  content.innerHTML=`<div class="ld-grid"><div class="ld-card"><h3>League Profile</h3><p class="ld-sub">NBL–Pilipinas is a Philippine men’s basketball league. Its official games are also distributed through the league’s Facebook and YouTube channels.</p><div class="ld-note"><b>Source rule:</b> Where a dedicated league website is unavailable or incomplete, IMG can use the league’s official social channels and cross-check published results.</div></div><div class="ld-card"><h3>Verified team examples</h3><div class="ld-team-grid">${teamCards(teams,'Current source listing')}</div></div></div><div class="ld-card" style="margin-top:16px"><h3>Sources</h3><div class="ld-source">League information and team listing: ${source('https://en.wikipedia.org/wiki/National_Basketball_League_(Philippines)','NBL–Pilipinas reference')}<br>IMG should additionally cross-check the league’s official Facebook page for the newest announcements.</div></div>`;
+  title.textContent='NBL–Pilipinas'; sub.textContent='National Basketball League · Philippines · Governors’ Cup 2026';
+  const nblTeams=[
+   ['Taguig Generals',1,9,0,'+9'],
+   ['Tikas Kapampangan',2,7,2,'-2'],
+   ['CamSur Express',3,6,3,'+5'],
+   ['Pangasinan Asinderos',4,6,3,'-1'],
+   ['Quezon Starhorse',5,5,4,'-1'],
+   ['Nueva Ecija Granary Buffaloes',6,4,5,'-1'],
+   ['Batangas Barako Venom Art',7,3,6,'+2'],
+   ['Manila MLB',8,2,7,'-2'],
+   ['Quezon City Titans',9,2,7,'-4'],
+   ['Zamboanga Valientes',10,1,8,'+1']
+  ];
+  const rows=nblTeams.map(t=>`<tr><td>${t[1]}</td><td><b>${esc(t[0])}</b></td><td>${t[2]}</td><td>${t[3]}</td><td>${t[4]}</td></tr>`).join('');
+  const cards=nblTeams.map(t=>`<div class="ld-team"><b>${esc(t[0])}</b><small>#${t[1]} · ${t[2]}-${t[3]} · Streak ${esc(t[4])}</small></div>`).join('');
+  content.innerHTML=`
+  <div class="ld-grid">
+   <div class="ld-card"><h3>League Profile</h3><p class="ld-sub">NBL–Pilipinas is a Philippine men’s basketball competition. This IMG profile is based on the NBL Pilipinas Governors’ Cup 2026 standings and playoff graphic supplied for IMG.</p><div class="ld-note"><b>Source note:</b> The supplied graphics do not show a publication date, so IMG labels the data as “Governors’ Cup 2026” rather than claiming a specific retrieval date.</div></div>
+   <div class="ld-card"><h3>Verified Teams</h3><p class="ld-sub">The supplied standings graphic identifies 10 teams. Zamboanga Valientes is listed at #10 with a 1–8 record.</p></div>
+  </div>
+  <div class="ld-card" style="margin-top:16px"><h3>Governors’ Cup 2026 — Team Standings</h3><div style="overflow:auto"><table class="ld-table"><thead><tr><th>Rank</th><th>Team</th><th>Win</th><th>Loss</th><th>Streak</th></tr></thead><tbody>${rows}</tbody></table></div></div>
+  <div class="ld-card" style="margin-top:16px"><h3>Team Directory</h3><div class="ld-team-grid">${cards}</div></div>
+  <div class="ld-card" style="margin-top:16px"><h3>2026 Playoffs</h3><p class="ld-sub">The supplied playoff graphic shows a play-in feeding the semifinals, followed by a best-of-five final.</p><div class="ld-grid">
+   <div><h4>Left Bracket</h4><p class="ld-sub"><b>#1 Taguig Generals</b> — twice-to-beat<br>vs. winner of <b>#8 Manila MLB</b> vs <b>#9 Quezon City Titans</b></p><p class="ld-sub"><b>#4 Pangasinan Asinderos</b> — twice-to-beat<br>vs. <b>#5 Quezon Starhorse</b></p></div>
+   <div><h4>Right Bracket</h4><p class="ld-sub"><b>#2 Tikas Kapampangan</b> — twice-to-beat<br>vs. winner of <b>#7 Batangas Barako Venom Art</b> vs <b>#10 Zamboanga Valientes</b></p><p class="ld-sub"><b>#3 CamSur Express</b> — twice-to-beat<br>vs. <b>#6 Nueva Ecija Granary Buffaloes</b></p></div>
+  </div><div class="ld-note"><b>Semifinals:</b> Best of 3 · <b>Finals:</b> Best of 5.</div></div>
+  <div class="ld-card" style="margin-top:16px"><h3>Source</h3><div class="ld-source">Primary source supplied to IMG: NBL Pilipinas Governors’ Cup 2026 Team Standings and Playoffs graphics.</div></div>`;
  }else if(name==='Vietnam Basketball Association (VBA)'){
   title.textContent='Vietnam Basketball Association (VBA)'; sub.textContent='Basketball · Vietnam · 2026 season';
   const vbaTeams=['Hanoi Buffaloes','Danang Dragons','Nha Trang Dolphins','Saigon Heat','Ho Chi Minh City Wings','Cantho Catfish'];
