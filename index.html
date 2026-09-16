@@ -100,15 +100,6 @@ footer{border-top:1px solid #20242c;padding:30px 6%;color:#777f8c;text-align:cen
   .contact-email{font-size:16px;word-break:break-word}
 }
 </style>
-
-<style id="img-nba-style">
-/* IMG NBA HUB */
-.nba-card{display:flex;flex-direction:column;gap:8px;padding:20px;border:1px solid #252b35;border-radius:14px;background:#11151b;color:#fff;text-decoration:none;transition:.2s}
-.nba-card:hover{transform:translateY(-2px);border-color:#4b5563;background:#151a22}
-.nba-card span{font-size:13px;color:#9ca3af;line-height:1.45}
-.nba-team{padding:14px 15px;border:1px solid #242a33;border-radius:11px;background:#0f1319;color:#fff;text-decoration:none;font-size:14px}
-.nba-team:hover{border-color:#4b5563}
-</style>
 </head>
 <body>
 <header class="nav">
@@ -187,32 +178,6 @@ footer{border-top:1px solid #20242c;padding:30px 6%;color:#777f8c;text-align:cen
   </div>
 </section>
 
-
-<section id="nba-hub" style="display:none;padding:70px 20px;background:#090c11;color:#fff;">
-  <div style="max-width:1200px;margin:0 auto;">
-    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:28px;">
-      <div>
-        <div style="font-size:12px;letter-spacing:2px;color:#9ca3af;text-transform:uppercase;">IMG Basketball</div>
-        <h2 style="font-size:42px;margin:8px 0;">NBA</h2>
-        <p style="color:#aab1bb;margin:0;max-width:720px;">NBA content sourced from the official NBA website: teams, rosters, schedule, standings, players and news.</p>
-      </div>
-      <a href="https://www.nba.com/" target="_blank" rel="noopener" style="padding:11px 17px;border:1px solid #303640;border-radius:10px;color:#fff;text-decoration:none;">NBA.com ↗</a>
-    </div>
-
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin-bottom:35px;">
-      <a href="https://www.nba.com/teams" target="_blank" rel="noopener" class="nba-card"><b>Teams & Rosters</b><span>Official NBA team pages and current rosters ↗</span></a>
-      <a href="https://www.nba.com/schedule" target="_blank" rel="noopener" class="nba-card"><b>Game Schedule</b><span>Official NBA schedule ↗</span></a>
-      <a href="https://www.nba.com/standings" target="_blank" rel="noopener" class="nba-card"><b>Standings</b><span>Official NBA standings ↗</span></a>
-      <a href="https://www.nba.com/players" target="_blank" rel="noopener" class="nba-card"><b>Players</b><span>Official NBA player directory ↗</span></a>
-      <a href="https://www.nba.com/news" target="_blank" rel="noopener" class="nba-card"><b>News & Updates</b><span>Latest stories from NBA.com ↗</span></a>
-    </div>
-
-    <div style="border-top:1px solid #202630;padding-top:28px;">
-      <h3 style="margin:0 0 14px;">NBA Teams</h3>
-      <div id="nba-team-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;"></div>
-    </div>
-  </div>
-</section>
 <footer>© IMG · Sports Data Platform</footer>
 
 <script>
@@ -378,78 +343,55 @@ function render(){
 }
 </script>
 
-<script id="img-nba-hub-script">
-(function(){
-  const teams=["Atlanta Hawks","ATL"],["Boston Celtics","BOS"],["Brooklyn Nets","BKN"],["Charlotte Hornets","CHA"],["Chicago Bulls","CHI"],["Cleveland Cavaliers","CLE"],["Dallas Mavericks","DAL"],["Denver Nuggets","DEN"],["Detroit Pistons","DET"],["Golden State Warriors","GSW"],["Houston Rockets","HOU"],["Indiana Pacers","IND"],["LA Clippers","LAC"],["Los Angeles Lakers","LAL"],["Memphis Grizzlies","MEM"],["Miami Heat","MIA"],["Milwaukee Bucks","MIL"],["Minnesota Timberwolves","MIN"],["New Orleans Pelicans","NOP"],["New York Knicks","NYK"],["Oklahoma City Thunder","OKC"],["Orlando Magic","ORL"],["Philadelphia 76ers","PHI"],["Phoenix Suns","PHX"],["Portland Trail Blazers","POR"],["Sacramento Kings","SAC"],["San Antonio Spurs","SAS"],["Toronto Raptors","TOR"],["Utah Jazz","UTA"],["Washington Wizards","WAS"];
-  const grid=document.getElementById("nba-team-grid");
-  if(grid){
-    grid.innerHTML=teams.map(t=>`<a class="nba-team" href="https://www.nba.com/team/${t[1]}" target="_blank" rel="noopener">${t[0]} ↗</a>`).join("");
-  }
-  function showNBA(){
-    const s=document.getElementById("nba-hub");
-    if(s) s.style.display="block";
-  }
-  window.IMGOpenNBA=showNBA;
-})();
-</script>
-
-<style id="img-global-sports-nav">
-.img-global-sports{position:relative;display:inline-block}
-.img-global-sports-btn{appearance:none;border:0;background:transparent;color:inherit;font:inherit;cursor:pointer;padding:8px 4px}
-.img-global-sports-menu{display:none;position:absolute;top:100%;left:0;min-width:220px;background:#11151c;border:1px solid #2a3039;border-radius:12px;padding:7px;z-index:10000;box-shadow:0 14px 40px rgba(0,0,0,.45)}
-.img-global-sports-menu.open{display:block}
-.img-global-sports-menu a{display:block!important;color:#fff!important;text-decoration:none!important;padding:12px 13px;border-radius:8px;white-space:nowrap}
-.img-global-sports-menu a:hover{background:#1d232c}
+<style id="img-navigation-only-fix">
+/* Navigation-only fix: no new content or NBA hub */
 </style>
-<script id="img-global-sports-nav-script">
-(function(){
-  function setup(){
-    const anchors=[...document.querySelectorAll('a')];
-    const old=anchors.find(a=>a.textContent.trim().toLowerCase()==='sports');
-    if(!old || document.querySelector('.img-global-sports')) return;
+<script id="img-navigation-only-fix-script">
+(function () {
+  function fixNavigation() {
+    document.querySelectorAll('a').forEach(function (a) {
+      var text = a.textContent.trim().toLowerCase();
+      var href = a.getAttribute('href') || '';
 
-    const wrap=document.createElement('span');
-    wrap.className='img-global-sports';
+      // Make the main navigation reliable from any location.
+      if (text === 'home') {
+        a.setAttribute('href', './#home');
+      } else if (text === 'live scores') {
+        a.setAttribute('href', './#live-scores');
+      } else if (text === 'sports') {
+        // Sports has no NBA hub; it simply returns to the Sports section.
+        a.setAttribute('href', './#sports');
+      } else if (text === 'about us') {
+        a.setAttribute('href', './#about-us');
+      } else if (text === 'contact us') {
+        a.setAttribute('href', './#contact-us');
+      }
 
-    const btn=document.createElement('button');
-    btn.type='button';
-    btn.className='img-global-sports-btn';
-    btn.textContent='Sports ▾';
-
-    const menu=document.createElement('div');
-    menu.className='img-global-sports-menu';
-
-    const basketball=document.createElement('a');
-    basketball.href='./#nba-hub';
-    basketball.textContent='🏀 Basketball';
-    basketball.addEventListener('click',function(e){
-      e.preventDefault();
-      menu.classList.remove('open');
-      // Always return to the current document and reveal NBA hub.
-      const hub=document.getElementById('nba-hub');
-      if(hub){
-        hub.style.display='block';
-        location.hash='nba-hub';
-        setTimeout(()=>hub.scrollIntoView({behavior:'smooth',block:'start'}),30);
-      }else{
-        location.href='./#nba-hub';
+      // Prevent broken relative hash links when the browser is already
+      // positioned on another section.
+      if (href.indexOf('index.html#') === 0) {
+        a.setAttribute('href', href.replace('index.html', '.'));
       }
     });
-
-    menu.appendChild(basketball);
-    btn.addEventListener('click',function(e){
-      e.stopPropagation();
-      menu.classList.toggle('open');
-    });
-    document.addEventListener('click',function(){menu.classList.remove('open')});
-
-    wrap.appendChild(btn);
-    wrap.appendChild(menu);
-    old.replaceWith(wrap);
   }
 
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',setup);
-  else setup();
+  function ensureSectionIds() {
+    // Only assign IDs when the matching section already exists.
+    var sections = document.querySelectorAll('section, main, div');
+    sections.forEach(function (el) {
+      var t = (el.textContent || '').trim().toLowerCase();
+      if (!document.getElementById('about-us') && t.indexOf('about us') !== -1 &&
+          t.length < 1000) el.id = 'about-us';
+      if (!document.getElementById('contact-us') && t.indexOf('contact us') !== -1 &&
+          t.length < 1000) el.id = 'contact-us';
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    ensureSectionIds();
+    fixNavigation();
+  });
 })();
 </script>
+
 </body></html>

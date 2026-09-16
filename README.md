@@ -1,9 +1,6 @@
-# IMG — Final Sports Navigation Fix
+# IMG — Navigation Only Fix
 
-Sports is now a global navigation control that works while viewing Live Scores, About Us, Contact Us, or other sections.
+This version changes ONLY the navigation behavior.
+The original IMG homepage, Live Scores, Sports, About Us, Contact Us, styling, and existing data connection are preserved.
 
-Flow:
-Sports → Basketball → NBA
-
-The NBA Hub opens without requiring the visitor to return to Home first.
-The original IMG homepage remains the main landing page.
+No NBA Hub or new NBA content was added.
