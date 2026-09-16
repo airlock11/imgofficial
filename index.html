@@ -128,6 +128,20 @@ footer{border-top:1px solid #20242c;padding:30px 6%;color:#777f8c;text-align:cen
   .contact-lead{font-size:19px}
   .contact-email{font-size:16px;word-break:break-word}
 }
+
+#coverage-directory-modal{display:none;position:fixed;inset:0;z-index:9999;align-items:center;justify-content:center;padding:20px}
+#coverage-directory-modal.open{display:flex}
+.coverage-directory-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.76);backdrop-filter:blur(7px)}
+.coverage-directory{position:relative;width:min(720px,94vw);max-height:82vh;overflow:auto;background:#0b0d10;border:1px solid rgba(255,255,255,.14);border-radius:22px;padding:28px;box-shadow:0 24px 80px rgba(0,0,0,.55);z-index:1}
+#coverage-directory-close{position:absolute;right:16px;top:12px;width:44px;height:44px;border:0;background:transparent;color:#fff;font-size:32px;line-height:1;cursor:pointer}
+.coverage-directory-kicker{font-size:11px;letter-spacing:.18em;color:#8e98a5;font-weight:700;margin-bottom:7px}
+#coverage-directory-title{font-size:32px;line-height:1.1;margin:0 45px 6px 0}
+#coverage-directory-subtitle{color:#9ca3af;margin:0 0 20px}
+#coverage-directory-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.coverage-league-item{display:block;width:100%;text-align:left;padding:15px 16px;border:1px solid rgba(255,255,255,.1);border-radius:12px;background:#12161b;color:#fff;cursor:pointer;font:inherit}
+.coverage-league-item:hover,.coverage-league-item:focus-visible{background:#1a2028;border-color:rgba(255,255,255,.24);outline:none}
+@media(max-width:560px){.coverage-directory{padding:24px 16px;border-radius:18px;max-height:88vh}#coverage-directory-list{grid-template-columns:1fr}#coverage-directory-title{font-size:27px}}
+
 </style>
 </head>
 <body>
@@ -380,6 +394,18 @@ function render(){
 .lb-league small{display:block;color:#8f98a5;margin-top:5px}
 .lb-close{position:absolute;right:18px;top:18px;border:1px solid #303640;background:#11151c;color:#fff;border-radius:10px;padding:10px 14px;cursor:pointer}
 </style>
+
+<div id="coverage-directory-modal" aria-hidden="true">
+  <div class="coverage-directory-backdrop"></div>
+  <section class="coverage-directory" role="dialog" aria-modal="true" aria-labelledby="coverage-directory-title">
+    <button type="button" id="coverage-directory-close" aria-label="Close directory">×</button>
+    <div class="coverage-directory-kicker">SPORTS DIRECTORY</div>
+    <h2 id="coverage-directory-title">Basketball</h2>
+    <p id="coverage-directory-subtitle">Explore leagues and competitions.</p>
+    <div id="coverage-directory-list"></div>
+  </section>
+</div>
+
 <div id="img-league-browser">
   <button class="lb-close" type="button" id="img-league-close">Close ✕</button>
   <div class="lb-wrap">
@@ -482,11 +508,48 @@ sports.forEach(s=>{
 });
 render('Basketball');
 document.getElementById('img-league-close').onclick=()=>{root.style.display='none';document.body.classList.remove('league-browser-open')};
+const coverageDirectoryData = {"Basketball": ["NBA", "WNBA", "NCAA", "G League", "EuroLeague", "EuroCup", "ACB / Liga Endesa", "BBL", "Betclic Élite", "BBL Bundesliga", "Lega Basket Serie A", "BSL", "ABA League", "VTB United League", "Greek Basket League", "LNB Pro A", "CBA", "PBA", "PBA D-League", "B.LEAGUE", "KBL", "NBL", "NBL Canada", "LNBP", "BCLA", "BAL", "FIBA Basketball World Cup", "WBSL", "MPBL", "UAAP Basketball", "NCAA Philippines Basketball", "Pilipinas Super League", "VBA", "Vietnam National Basketball Championship", "3x3.EXE Premier Vietnam", "NBL Philippines"], "Football": ["Premier League", "La Liga", "Serie A", "Bundesliga", "Ligue 1", "UEFA Champions League", "UEFA Europa League", "UEFA Conference League", "MLS", "Liga MX", "Brasileirão Série A", "Liga Portugal", "Eredivisie", "Saudi Pro League", "J1 League", "A-League", "Philippine Football League", "FIFA World Cup"], "Tennis": ["ATP Tour", "WTA Tour", "Australian Open", "Roland-Garros", "Wimbledon", "US Open", "Davis Cup", "Billie Jean King Cup"], "Baseball": ["MLB", "NPB", "KBO League", "KBO Futures League", "CPBL", "LMB", "Liga de Béisbol Profesional", "World Baseball Classic"], "Hockey": ["NHL", "KHL", "SHL", "Liiga", "National League", "DEL", "ICE Hockey League", "IIHF World Championship"], "Cricket": ["IPL", "Big Bash League", "The Hundred", "T20 Blast", "PSL", "BPL", "SA20", "CPL", "Major League Cricket", "ICC Cricket World Cup"], "Volleyball": ["Nations League", "CEV Champions League", "PlusLiga", "SuperLega", "Superliga", "V.League", "PVL", "Asian Volleyball Championship"], "Motorsport": ["Formula 1", "MotoGP", "NASCAR Cup Series", "IndyCar Series", "World Rally Championship", "Formula E"], "Combat Sports": ["UFC", "ONE Championship", "PFL", "Bellator"], "American Football": ["NFL", "CFL", "UFL", "College Football"]};
+const coverageModal=document.getElementById('coverage-directory-modal');
+const coverageList=document.getElementById('coverage-directory-list');
+const coverageTitle=document.getElementById('coverage-directory-title');
+const coverageClose=document.getElementById('coverage-directory-close');
+
+function openCoverageDirectory(sport){
+  const leagues=coverageDirectoryData[sport] || [];
+  coverageTitle.textContent=sport;
+  coverageList.innerHTML='';
+  leagues.forEach(league=>{
+    const button=document.createElement('button');
+    button.type='button';
+    button.className='coverage-league-item';
+    button.textContent=league;
+    button.addEventListener('click',()=>{
+      coverageModal.classList.remove('open');
+      coverageModal.setAttribute('aria-hidden','true');
+      if(typeof window.IMGOpenSportsLeagues==='function') window.IMGOpenSportsLeagues(sport);
+      const searchBox=document.querySelector('#img-league-browser input');
+      if(searchBox){
+        searchBox.value=league;
+        searchBox.dispatchEvent(new Event('input',{bubbles:true}));
+      }
+    });
+    coverageList.appendChild(button);
+  });
+  coverageModal.classList.add('open');
+  coverageModal.setAttribute('aria-hidden','false');
+  coverageClose.focus();
+}
+function closeCoverageDirectory(){
+  coverageModal.classList.remove('open');
+  coverageModal.setAttribute('aria-hidden','true');
+}
+coverageClose.addEventListener('click',closeCoverageDirectory);
+coverageModal.querySelector('.coverage-directory-backdrop').addEventListener('click',closeCoverageDirectory);
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape' && coverageModal.classList.contains('open')) closeCoverageDirectory();
+});
 document.querySelectorAll('[data-coverage-sport]').forEach(card=>{
-  const open=()=>{
-    const sport=card.getAttribute('data-coverage-sport');
-    if(typeof window.IMGOpenSportsLeagues==='function') window.IMGOpenSportsLeagues(sport);
-  };
+  const open=()=>openCoverageDirectory(card.getAttribute('data-coverage-sport'));
   card.addEventListener('click',open);
   card.addEventListener('keydown',e=>{
     if(e.key==='Enter' || e.key===' '){e.preventDefault();open();}
