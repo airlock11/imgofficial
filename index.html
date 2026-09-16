@@ -859,19 +859,18 @@ document.addEventListener('click',function(e){
 });
 
 window.closeLeagueDetail=function(){
- const fromHomeSearch=homeSearchOpenedLeague;
+ const fromHomeSearch=(homeSearchOpenedLeague || window.homeSearchOpenedLeague);
  document.getElementById('img-league-detail').style.display='none';
  document.getElementById('ld-content').replaceChildren();
  document.getElementById('img-league-browser').style.display=fromHomeSearch?'none':'block';
  window.IMGCurrentLeague=null;
- if(fromHomeSearch){
-   homeSearch.value='';
-   homeDrop.classList.remove('show');
-   homeDrop.innerHTML='';
-   homeSearchOpenedLeague=false;
-   window.homeSearchOpenedLeague=false;
-   showHome();
- }
+ // Always clear the homepage league search when the detail popup is closed.
+ homeSearch.value='';
+ homeDrop.classList.remove('show');
+ homeDrop.innerHTML='';
+ homeSearchOpenedLeague=false;
+ window.homeSearchOpenedLeague=false;
+ if(fromHomeSearch) showHome();
 };
 window.IMGOpenLeagueDetail=openDetail;
 })();

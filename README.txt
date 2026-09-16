@@ -1,5 +1,8 @@
-IMG Search League Popup — Close Only
+IMG Search League Popup — Close Clears Search
 
-When a league is opened by tapping a homepage search suggestion, the league information popup shows only the X close button. The “Back to Leagues” button is hidden for search-opened popups.
-
-Directly opened league pages retain the “Back to Leagues” button.
+Behavior:
+- Tap a league suggestion to open the league information popup.
+- Search-opened popup shows only the X close button.
+- Closing the popup always clears the homepage search field and suggestion dropdown.
+- Closing a search-opened popup returns to the homepage.
+- Direct Sports league navigation remains unchanged.
