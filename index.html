@@ -138,6 +138,19 @@ footer{border-top:1px solid #20242c;padding:30px 6%;color:#777f8c;text-align:cen
 #coverage-directory-title{font-size:32px;line-height:1.1;margin:0 45px 6px 0}
 #coverage-directory-subtitle{color:#9ca3af;margin:0 0 20px}
 #coverage-directory-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+#coverage-directory-list.coverage-profile-view{display:block}
+.coverage-profile-content{margin-top:14px}.coverage-profile-content .ld-card{margin-top:14px}.coverage-profile-content .ld-card:first-child{margin-top:0}.coverage-profile-content .ld-grid{margin-top:0}
+.coverage-profile-back{display:inline-flex;align-items:center;margin:0 0 18px;padding:9px 13px;border:1px solid #2b313b;border-radius:10px;background:#11151c;color:#fff;cursor:pointer;font-weight:600}
+.coverage-profile-content{color:#e8ebef}
+.coverage-profile-content .ld-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.coverage-profile-content .ld-card{border:1px solid #252b35;background:#10141a;border-radius:12px;padding:16px;margin:0 0 12px}
+.coverage-profile-content .ld-card h3{margin:0 0 10px;font-size:17px}
+.coverage-profile-content .ld-team-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.coverage-profile-content .ld-team{border:1px solid #252b35;background:#141820;border-radius:9px;padding:11px}
+.coverage-profile-content .ld-table{width:100%;border-collapse:collapse}
+.coverage-profile-content .ld-table th,.coverage-profile-content .ld-table td{padding:8px 6px;font-size:12px;border-bottom:1px solid #222731;text-align:left}
+.coverage-profile-content .ld-source{font-size:11px;line-height:1.5}
+@media(max-width:560px){.coverage-profile-content .ld-grid{grid-template-columns:1fr}.coverage-profile-content .ld-team-grid{grid-template-columns:1fr}.coverage-profile-content .ld-card{padding:14px}}
 .coverage-league-item{display:block;width:100%;text-align:left;padding:15px 16px;border:1px solid rgba(255,255,255,.1);border-radius:12px;background:#12161b;color:#fff;cursor:pointer;font:inherit}
 .coverage-league-item:hover,.coverage-league-item:focus-visible{background:#1a2028;border-color:rgba(255,255,255,.24);outline:none}
 @media(max-width:560px){.coverage-directory{padding:24px 16px;border-radius:18px;max-height:88vh}#coverage-directory-list{grid-template-columns:1fr}#coverage-directory-title{font-size:27px}}
@@ -512,49 +525,76 @@ const coverageDirectoryData = {"Basketball": ["NBA", "WNBA", "NCAA", "G League",
 const coverageModal=document.getElementById('coverage-directory-modal');
 const coverageList=document.getElementById('coverage-directory-list');
 const coverageTitle=document.getElementById('coverage-directory-title');
+const coverageSubtitle=document.getElementById('coverage-directory-subtitle');
 const coverageClose=document.getElementById('coverage-directory-close');
 
 function openCoverageDirectory(sport){
   const leagues=coverageDirectoryData[sport] || [];
   coverageTitle.textContent=sport;
+  coverageSubtitle.textContent='Select a league to view its profile.';
+  coverageList.classList.remove('coverage-profile-view');
   coverageList.innerHTML='';
+
   leagues.forEach(league=>{
     const button=document.createElement('button');
     button.type='button';
     button.className='coverage-league-item';
     button.textContent=league;
-    button.addEventListener('click',()=>{
-      coverageModal.classList.remove('open');
-      coverageModal.setAttribute('aria-hidden','true');
-      if(typeof window.IMGOpenSportsLeagues==='function') window.IMGOpenSportsLeagues(sport);
-      const searchBox=document.querySelector('#img-league-browser input');
-      if(searchBox){
-        searchBox.value=league;
-        searchBox.dispatchEvent(new Event('input',{bubbles:true}));
-      }
+    button.addEventListener('click',function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      openCoverageLeagueProfile(league,sport);
     });
     coverageList.appendChild(button);
   });
+
   coverageModal.classList.add('open');
   coverageModal.setAttribute('aria-hidden','false');
-  coverageClose.focus();
 }
-function closeCoverageDirectory(){
-  coverageModal.classList.remove('open');
-  coverageModal.setAttribute('aria-hidden','true');
-}
-coverageClose.addEventListener('click',closeCoverageDirectory);
-coverageModal.querySelector('.coverage-directory-backdrop').addEventListener('click',closeCoverageDirectory);
-document.addEventListener('keydown',e=>{
-  if(e.key==='Escape' && coverageModal.classList.contains('open')) closeCoverageDirectory();
-});
-document.querySelectorAll('[data-coverage-sport]').forEach(card=>{
-  const open=()=>openCoverageDirectory(card.getAttribute('data-coverage-sport'));
-  card.addEventListener('click',open);
-  card.addEventListener('keydown',e=>{
-    if(e.key==='Enter' || e.key===' '){e.preventDefault();open();}
+
+function openCoverageLeagueProfile(league,sport){
+  /* The directory popup is the only popup used for Sports Coverage. */
+  const detail=document.getElementById('img-league-detail');
+  const browser=document.getElementById('img-league-browser');
+  if(detail) detail.style.display='none';
+  if(browser) browser.style.display='none';
+
+  /* Use IMG's existing league renderer only as a data/content generator,
+     then move its rendered profile into this popup. */
+  if(typeof window.IMGOpenLeagueDetail==='function'){
+    window.homeSearchOpenedLeague=false;
+    window.IMGOpenLeagueDetail(league,sport);
+  }
+
+  const detailTitle=document.getElementById('ld-title');
+  const detailSub=document.getElementById('ld-sub');
+  const detailContent=document.getElementById('ld-content');
+
+  coverageTitle.textContent=detailTitle && detailTitle.textContent ? detailTitle.textContent : league;
+  coverageSubtitle.textContent=detailSub && detailSub.textContent ? detailSub.textContent : sport+' · League profile';
+
+  const back=document.createElement('button');
+  back.type='button';
+  back.className='coverage-profile-back';
+  back.textContent='← Back to '+sport+' Leagues';
+  back.addEventListener('click',function(e){
+    e.preventDefault();
+    e.stopPropagation();
+    openCoverageDirectory(sport);
   });
-});
+
+  const profile=document.createElement('div');
+  profile.className='coverage-profile-content';
+  if(detailContent){
+    Array.from(detailContent.children).forEach(node=>profile.appendChild(node.cloneNode(true)));
+  }
+
+  coverageList.replaceChildren(back,profile);
+  coverageList.classList.add('coverage-profile-view');
+  coverageModal.classList.add('open');
+  coverageModal.setAttribute('aria-hidden','false');
+}
+
 window.IMGOpenSportsLeagues=(sport)=>{
   window.homeSearchOpenedLeague=false;
   root.style.display='block';
