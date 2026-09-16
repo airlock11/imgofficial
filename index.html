@@ -116,7 +116,7 @@ footer{border-top:1px solid #20242c;padding:30px 6%;color:#777f8c;text-align:cen
 
 <main id="home">
 <div class="hero">
-<video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="assets/img-hero-background.mp4"><source src="assets/img-hero-background.mp4" type="video/mp4"></video><div class="hero-overlay"></div>
+<video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="assets/img-hero-poster.jpg"><source src="assets/img-hero-background.mp4" type="video/mp4"></video><div class="hero-overlay"></div>
 <div><div class="eyebrow">THE NEXT GENERATION OF SPORTS DATA</div><h1>Every game.<br>Every moment.</h1><p>IMG brings live scores, schedules, results and sports statistics into one fast, focused destination.</p><div class="actions"><a class="btn" href="#platform" onclick="showPlatform();return false;">Explore Live Scores</a><a class="btn secondary" href="#platform" onclick="showPlatform();return false;">View Scores</a></div></div>
 <div class="mock" id="heroGame"><div class="mocktop"><span>GAME CENTER</span><span class="live" id="heroStatus">● LIVE</span></div><div class="match"><div class="muted" id="heroSport" style="font-size:11px;text-transform:uppercase;letter-spacing:1px;margin-bottom:14px">LIVE SPORTS</div><div class="teams"><div><small>HOME</small><br><b id="heroHome">Loading…</b></div><div class="score" id="heroHomeScore">—</div></div><div class="teams"><div><small>AWAY</small><br><b id="heroAway">Loading…</b></div><div class="score" id="heroAwayScore">—</div></div><div class="bar"><i id="heroBar"></i></div><small class="muted" id="heroMeta">Loading live game data…</small></div></div>
 </div>
@@ -472,4 +472,14 @@ window.IMGOpenSportsLeagues=()=>{root.style.display='block';render('Basketball')
 })();
 </script>
 
+<script>
+(function(){
+  const v=document.querySelector(".hero-video");
+  if(!v) return;
+  v.muted=true; v.defaultMuted=true; v.setAttribute("muted","");
+  const start=()=>{ const p=v.play(); if(p && p.catch) p.catch(()=>{}); };
+  if(document.readyState === "loading") document.addEventListener("DOMContentLoaded",start,{once:true}); else start();
+  document.addEventListener("visibilitychange",()=>{ if(!document.hidden) start(); });
+})();
+</script>
 </body></html>
