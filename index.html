@@ -496,37 +496,8 @@ sports.forEach(s=>{
  b.onclick=()=>render(s); tabs.appendChild(b);
 });
 render('Basketball');
-document.getElementById('img-league-close').onclick=()=>root.style.display='none';
-window.IMGOpenSportsLeagues=()=>{homeSearchOpenedLeague=false;root.style.display='block';search.value='';render('Basketball')};
-let homeSearchOpenedLeague=false;
-window.homeSearchOpenedLeague=false;
-const homeSearch=document.getElementById('home-league-search');
-const homeDrop=document.getElementById('home-search-dropdown');
-function homeSuggestions(value){
- const q=(value||'').trim().toLowerCase();
- if(!q){homeDrop.classList.remove('show');homeDrop.innerHTML='';return;}
- const matches=[];
- sports.forEach(sp=>data[sp].forEach(x=>{if((x[0]+' '+x[1]).toLowerCase().includes(q)) matches.push([x[0],x[1],sp]);}));
- const shown=matches.slice(0,8);
- homeDrop.innerHTML=shown.length ? shown.map(x=>`<div class="home-search-item" data-league="${x[0].replace(/\"/g,'&quot;')}" data-sport="${x[2]}"><b>${x[0]}</b><small>${x[1]} · ${x[2]}</small></div>`).join('') : '<div class="home-search-empty">No leagues found.</div>';
- homeDrop.classList.add('show');
-}
-homeSearch.addEventListener('input',()=>homeSuggestions(homeSearch.value));
-homeSearch.addEventListener('keydown',e=>{if(e.key==='Enter'){homeSearchOpenedLeague=true;window.homeSearchOpenedLeague=true;openHomeLeagueSearch(homeSearch.value);homeDrop.classList.remove('show');}if(e.key==='Escape'){homeDrop.classList.remove('show');}});
-homeDrop.addEventListener('click',e=>{const item=e.target.closest('.home-search-item');if(!item)return;homeSearch.value=item.dataset.league;homeDrop.classList.remove('show');homeSearchOpenedLeague=true;window.homeSearchOpenedLeague=true;IMGOpenLeagueDetail(item.dataset.league,item.dataset.sport);});
-document.addEventListener('click',e=>{if(!e.target.closest('.home-league-search'))homeDrop.classList.remove('show');});
-
-window.openHomeLeagueSearch=(value)=>{
-  const q=(value||'').trim().toLowerCase();
-  root.style.display='block';
-  search.value=value||'';
-  if(!q){render('Basketball');return;}
-  title.textContent='League Search';
-  tabs.querySelectorAll('button').forEach(b=>b.classList.remove('active'));
-  const all=[];
-  sports.forEach(sp=>data[sp].forEach(x=>{if((x[0]+' '+x[1]).toLowerCase().includes(q)) all.push([x[0],x[1],sp]);}));
-  list.innerHTML=all.length ? all.map(x=>`<a class="lb-league" href="#" data-league="${x[0].replace(/"/g,'&quot;')}" data-sport="${x[2]}"><b>${x[0]}</b><small>${x[1]} · ${x[2]}</small></a>`).join('') : '<div class="empty">No leagues found.</div>';
-};
+document.getElementById('img-league-close').onclick=()=>{root.style.display='none';document.body.classList.remove('league-browser-open')};
+window.IMGOpenSportsLeagues=()=>{window.homeSearchOpenedLeague=false;root.style.display='block';document.body.classList.add('league-browser-open');search.value='';render('Basketball')};
 list.addEventListener('click',function(e){
  const card=e.target.closest('.lb-league');
  if(!card) return;
@@ -536,6 +507,7 @@ list.addEventListener('click',function(e){
  const sport=card.getAttribute('data-sport') || title.textContent;
  // Keep the Sports browser from swallowing the selection. Open the league profile explicitly.
  root.style.display='none';
+ document.body.classList.remove('league-browser-open');
  if(typeof window.IMGOpenLeagueDetail==='function'){
    window.IMGOpenLeagueDetail(name,sport);
  }else if(typeof IMGOpenLeagueDetail==='function'){
@@ -882,7 +854,7 @@ window.closeLeagueDetail=function(){
  const browser=document.getElementById('img-league-browser');
  if(detail){ detail.style.display='none'; detail.classList.remove('search-origin'); }
  if(content) content.replaceChildren();
- if(browser) browser.style.display=fromHomeSearch?'none':'block';
+ if(browser){ browser.style.display=fromHomeSearch?'none':'block'; document.body.classList.toggle('league-browser-open', !fromHomeSearch); }
  window.IMGCurrentLeague=null;
  // Clear EVERY homepage search input/dropdown so the search is visibly reset.
  document.querySelectorAll('#home-league-search, .home-league-search input').forEach(function(input){
