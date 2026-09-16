@@ -542,10 +542,36 @@ const standingsSource='https://www.gmanetwork.com/news/sports/basketball/999140/
 function esc(x){return String(x).replace(/[&<>\"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\\':'&#92;'}[c]));}
 function teamCards(arr, note){return arr.map(t=>`<div class="ld-team"><b>${esc(t)}</b>${note?`<small>${esc(note)}</small>`:''}</div>`).join('');}
 function source(url,label){return `<a href="${url}" target="_blank" rel="noopener">${label}</a>`;}
+function canonicalLeagueName(name){
+ const aliases={
+  'PBA':'PBA',
+  'NBA':'NBA',
+  'G League':'NBA G League',
+  'NBA G League':'NBA G League',
+  'B.League':'B.LEAGUE',
+  'B.LEAGUE':'B.LEAGUE',
+  'VBA':'Vietnam Basketball Association (VBA)',
+  'Vietnam Basketball Association':'Vietnam Basketball Association (VBA)',
+  'Vietnam Basketball Association (VBA)':'Vietnam Basketball Association (VBA)',
+  'MPBL':'Maharlika Pilipinas Basketball League (MPBL)',
+  'Maharlika Pilipinas Basketball League':'Maharlika Pilipinas Basketball League (MPBL)',
+  'NBL Philippines':'NBL–Pilipinas',
+  'NBL–Pilipinas':'NBL–Pilipinas'
+ };
+ return aliases[name] || name;
+}
 function openDetail(name,sport){
- document.getElementById('img-league-browser').style.display='none';
- const root=document.getElementById('img-league-detail');root.style.display='block';
+ name=canonicalLeagueName(name);
+ const browser=document.getElementById('img-league-browser');
+ const root=document.getElementById('img-league-detail');
  const title=document.getElementById('ld-title'),sub=document.getElementById('ld-sub'),content=document.getElementById('ld-content');
+ // Always clear the previous league before rendering the next one. This prevents stale PBA/NBA content.
+ content.replaceChildren();
+ title.textContent=name;
+ sub.textContent=(sport||'Sports')+' · League information';
+ browser.style.display='none';
+ root.style.display='block';
+ window.IMGCurrentLeague={name:name,sport:sport||'Sports'};
  if(name==='PBA'){
   title.textContent='PBA'; sub.textContent='Philippine Basketball Association · Philippines · 2026 Governors’ Cup';
   const rows=pbaTeams.map((t,i)=>`<tr><td>${i+1}</td><td><b>${esc(t[0])}</b></td><td>${t[1]}</td><td>${t[2]}</td></tr>`).join('');
@@ -661,7 +687,12 @@ function openDetail(name,sport){
   content.innerHTML=`<div class="ld-grid"><div class="ld-card"><h3>League Profile</h3><p class="ld-sub">${esc(fact)}</p><div class="ld-note"><b>Important:</b> This league page is isolated to <b>${esc(name)}</b>. IMG will never use NBA, PBA, VBA or another league’s teams or records as fallback data.</div></div><div class="ld-card"><h3>Season Data</h3><p class="ld-sub">Current season when active; most recent completed season when inactive. Teams, standings, schedules, results and player statistics are displayed only when verified for this league.</p><div class="ld-note"><b>Source priority:</b> official league website → official Facebook/social page → federation/organizer → reliable sports-data source.</div></div></div><div class="ld-card" style="margin-top:16px"><h3>Source Center</h3><div class="ld-source">${source(fb,'Find the official Facebook page')}<br>${source(q,'Find the official league source')}</div></div>`;
  } window.scrollTo(0,0);
 }
-window.closeLeagueDetail=function(){document.getElementById('img-league-detail').style.display='none';document.getElementById('img-league-browser').style.display='block';};
+window.closeLeagueDetail=function(){
+ document.getElementById('img-league-detail').style.display='none';
+ document.getElementById('ld-content').replaceChildren();
+ document.getElementById('img-league-browser').style.display='block';
+ window.IMGCurrentLeague=null;
+};
 window.IMGOpenLeagueDetail=openDetail;
 })();
 </script>
