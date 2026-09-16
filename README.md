@@ -1,42 +1,12 @@
-# IMGOFFICIAL — Live Sports Data
+# IMGOFFICIAL — Free API Edition
 
-A GitHub-ready React + Vite frontend for a live sports data platform.
+Upload `index.html` to the root of your GitHub Pages repository. This is a standalone static site and requires no npm/build step.
 
-## Run locally
+It calls TheSportsDB V1 free API using the documented free key `123` and requests today's events. The page refreshes every 60 seconds.
 
-```bash
-npm install
-npm run dev
-```
+Important: TheSportsDB free access does not provide the premium 2-minute live-score feed for every sport. This version displays only data the free endpoint actually returns; it does not fabricate live scores.
 
-Open the local URL shown by Vite.
+GitHub Pages:
+Settings → Pages → Deploy from a branch → `main` → `/ (root)` → Save.
 
-## Build
-
-```bash
-npm run build
-```
-
-The production files are created in `dist/`.
-
-## Deploy
-
-This project works well with Vercel, Netlify, Cloudflare Pages, or GitHub Pages (with the appropriate Vite base configuration if deploying under a repository subpath).
-
-### GitHub upload
-
-1. Create a repository named `imgofficial`.
-2. Upload all files in this folder to the repository root.
-3. Commit the files.
-4. Connect the repository to your hosting provider.
-5. Set the production domain to `imgofficial.com`.
-
-## Live data
-
-The current interface intentionally uses sample data. To make scores/odds genuinely live, connect a licensed sports-data provider through a secure backend/API layer. Do not put private API keys in frontend source code.
-
-Suggested architecture:
-
-Browser → API/backend → licensed sports-data provider
-
-For real-time streaming, the backend can push updates to browsers with WebSockets or Server-Sent Events.
+For production, keep API credentials/server-side when required and review TheSportsDB's current terms and API limits.
