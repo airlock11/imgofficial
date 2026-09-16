@@ -497,7 +497,8 @@ sports.forEach(s=>{
 });
 render('Basketball');
 document.getElementById('img-league-close').onclick=()=>root.style.display='none';
-window.IMGOpenSportsLeagues=()=>{root.style.display='block';search.value='';render('Basketball')};
+window.IMGOpenSportsLeagues=()=>{homeSearchOpenedLeague=false;root.style.display='block';search.value='';render('Basketball')};
+let homeSearchOpenedLeague=false;
 const homeSearch=document.getElementById('home-league-search');
 const homeDrop=document.getElementById('home-search-dropdown');
 function homeSuggestions(value){
@@ -510,8 +511,8 @@ function homeSuggestions(value){
  homeDrop.classList.add('show');
 }
 homeSearch.addEventListener('input',()=>homeSuggestions(homeSearch.value));
-homeSearch.addEventListener('keydown',e=>{if(e.key==='Enter'){openHomeLeagueSearch(homeSearch.value);homeDrop.classList.remove('show');}if(e.key==='Escape'){homeDrop.classList.remove('show');}});
-homeDrop.addEventListener('click',e=>{const item=e.target.closest('.home-search-item');if(!item)return;homeSearch.value=item.dataset.league;homeDrop.classList.remove('show');IMGOpenLeagueDetail(item.dataset.league,item.dataset.sport);});
+homeSearch.addEventListener('keydown',e=>{if(e.key==='Enter'){homeSearchOpenedLeague=true;openHomeLeagueSearch(homeSearch.value);homeDrop.classList.remove('show');}if(e.key==='Escape'){homeDrop.classList.remove('show');}});
+homeDrop.addEventListener('click',e=>{const item=e.target.closest('.home-search-item');if(!item)return;homeSearch.value=item.dataset.league;homeDrop.classList.remove('show');homeSearchOpenedLeague=true;IMGOpenLeagueDetail(item.dataset.league,item.dataset.sport);});
 document.addEventListener('click',e=>{if(!e.target.closest('.home-league-search'))homeDrop.classList.remove('show');});
 
 window.openHomeLeagueSearch=(value)=>{
@@ -835,11 +836,34 @@ function openDetail(name,sport){
   <div class="ld-card" style="margin-top:16px"><h3>Available competition data</h3><p class="ld-sub">IMG uses the league-specific source above as the starting point for this competition. The page is structured to show real competition data without borrowing information from another league.</p><div class="ld-grid" style="margin-top:12px"><div class="ld-note"><b>Teams / participants</b><br>Show the official participants when published by the league, federation or official social channel.</div><div class="ld-note"><b>Standings / rankings</b><br>Show official table, ranking or points data when published.</div><div class="ld-note"><b>Schedule / results</b><br>Show fixtures, completed results and scores when published.</div><div class="ld-note"><b>Players / statistics</b><br>Show rosters, leaders and statistics when the source publishes them.</div></div><div class="ld-note" style="margin-top:12px"><b>Season rule:</b> Current season first. If inactive, use the most recent completed season with verified information. If a particular statistic cannot be verified, only that statistic remains unavailable. It is never replaced with data from another league.</div></div>`;
  } window.scrollTo(0,0);
 }
+document.addEventListener('click',function(e){
+ const detail=document.getElementById('img-league-detail');
+ if(detail.style.display!=='block' || !homeSearchOpenedLeague) return;
+ const wrap=e.target.closest('.ld-wrap');
+ if(wrap) return;
+ detail.style.display='none';
+ document.getElementById('ld-content').replaceChildren();
+ document.getElementById('img-league-browser').style.display='none';
+ homeSearch.value='';
+ homeDrop.classList.remove('show');
+ homeDrop.innerHTML='';
+ homeSearchOpenedLeague=false;
+ showHome();
+});
+
 window.closeLeagueDetail=function(){
+ const fromHomeSearch=homeSearchOpenedLeague;
  document.getElementById('img-league-detail').style.display='none';
  document.getElementById('ld-content').replaceChildren();
- document.getElementById('img-league-browser').style.display='block';
+ document.getElementById('img-league-browser').style.display=fromHomeSearch?'none':'block';
  window.IMGCurrentLeague=null;
+ if(fromHomeSearch){
+   homeSearch.value='';
+   homeDrop.classList.remove('show');
+   homeDrop.innerHTML='';
+   homeSearchOpenedLeague=false;
+   showHome();
+ }
 };
 window.IMGOpenLeagueDetail=openDetail;
 })();

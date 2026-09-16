@@ -1,5 +1,9 @@
-IMG mobile header update
-- Mobile header is structured as: IMG logo (top) -> league search bar (full width underneath) -> navigation links.
-- Live Scores button remains on the top row.
-- Search dropdown stays directly below the mobile search field and uses the full available width.
-- Desktop layout is unchanged.
+IMG Mobile Search Outside Behavior Fix
+
+If a league is opened from the homepage league search:
+- Tapping/clicking outside the league detail automatically closes it.
+- The user returns directly to the homepage.
+- The homepage league search bar is cleared.
+- Search suggestions are cleared/closed.
+
+Direct navigation through Sports/league browser remains unchanged.
