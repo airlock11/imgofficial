@@ -1,3 +1,1 @@
-IMG NBL–Pilipinas Team Overview update
-
-Added a Team Overview box to the NBL–Pilipinas league information with an IMG-attributed player spotlight for Zamboanga Valientes shooting guard #0 Kenshin Que.
+Reverted the Team Overview box added to NBL–Pilipinas. Other existing site changes are preserved.
