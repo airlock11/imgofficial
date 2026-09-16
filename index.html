@@ -84,7 +84,7 @@ footer{border-top:1px solid #20242c;padding:30px 6%;color:#777f8c;text-align:cen
   .about-cta .btn{width:100%}
 }
 .logo{color:inherit}.logo:hover{color:inherit}
-.home-league-search{width:220px;margin-left:24px;position:relative}.home-league-search input{width:100%;padding:10px 13px;border:1px solid #303640;border-radius:8px;background:#11151c;color:#fff;font-size:13px;outline:none}.home-league-search input:focus{border-color:#fff}.home-league-search input::placeholder{color:#77808c}.home-search-dropdown{display:none;position:absolute;top:46px;left:0;width:320px;max-width:80vw;background:#0d1118;border:1px solid #303640;border-radius:10px;box-shadow:0 18px 45px #0009;overflow:hidden;z-index:1000}.home-search-dropdown.show{display:block}.home-search-item{display:block;padding:11px 13px;border-bottom:1px solid #222731;color:#fff;cursor:pointer}.home-search-item:last-child{border-bottom:0}.home-search-item:hover{background:#171c25}.home-search-item small{display:block;color:#8f98a5;margin-top:3px;font-size:11px}.home-search-empty{padding:12px;color:#8f98a5;font-size:12px}
+.home-league-search{width:220px;margin-left:24px;position:relative}.home-league-search input{width:100%;padding:10px 13px;border:1px solid #303640;border-radius:8px;background:#11151c;color:#fff;font-size:13px;outline:none}.home-league-search input:focus{border-color:#fff}.home-league-search input::placeholder{color:#77808c}.home-search-dropdown{display:none;position:absolute;top:46px;left:0;width:320px;max-width:80vw;background:#0d1118;border:1px solid #303640;border-radius:10px;box-shadow:0 18px 45px #0009;overflow:hidden;z-index:1000}.home-search-dropdown.show{display:block}.home-search-item{display:block;width:100%;box-sizing:border-box;padding:11px 13px;margin:0;border:0;border-bottom:1px solid #222731;border-radius:0;background:#0d1118;color:#fff;cursor:pointer;text-align:left;font:inherit;appearance:none;-webkit-appearance:none}.home-search-item:last-child{border-bottom:0}.home-search-item:hover{background:#171c25}.home-search-item small{display:block;color:#8f98a5;margin-top:3px;font-size:11px}.home-search-empty{padding:12px;color:#8f98a5;font-size:12px}
 @media(max-width:800px){
   /* Mobile header: logo first, search directly underneath, navigation below */
   .nav{display:grid;grid-template-columns:auto minmax(0,1fr) auto;grid-template-areas:"logo search action" "links links links";align-items:center;gap:8px;padding:12px 4% 10px}
@@ -544,7 +544,7 @@ list.addEventListener('click',function(e){
 <div id="img-league-detail">
   <button id="ld-search-close" class="ld-search-close" aria-label="Close league information" onclick="closeLeagueDetail()">×</button>
   <div class="ld-wrap">
-    <div class="ld-top"><div><div class="ld-kicker" id="ld-kicker">LEAGUE PROFILE</div><h1 class="ld-title" id="ld-title">League</h1><div class="ld-sub" id="ld-sub">League information</div></div><button class="ld-close" onclick="closeLeagueDetail()">← Back to Leagues</button></div>
+    <div class="ld-top"><div><div class="ld-kicker" id="ld-kicker">LEAGUE PROFILE</div><h1 class="ld-title" id="ld-title">League</h1><div class="ld-sub" id="ld-sub">League information</div></div><button id="ld-back-leagues" class="ld-close" onclick="closeLeagueDetail()">← Back to Leagues</button></div>
     <div id="ld-content"></div>
   </div>
 </div>
@@ -585,7 +585,10 @@ function canonicalLeagueName(name){
 }
 function openDetail(name,sport){
  const searchClose=document.getElementById('ld-search-close');
- if(searchClose) searchClose.style.display=(homeSearchOpenedLeague || window.homeSearchOpenedLeague)?'block':'none';
+ const fromHomeSearch=(homeSearchOpenedLeague || window.homeSearchOpenedLeague);
+ if(searchClose) searchClose.style.display=fromHomeSearch?'block':'none';
+ const backLeagues=document.getElementById('ld-back-leagues');
+ if(backLeagues) backLeagues.style.display=fromHomeSearch?'none':'inline-block';
  name=canonicalLeagueName(name);
  const browser=document.getElementById('img-league-browser');
  const root=document.getElementById('img-league-detail');

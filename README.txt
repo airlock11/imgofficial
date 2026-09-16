@@ -1,5 +1,5 @@
-IMG Search Suggestion Popup Fix
+IMG Search League Popup — Close Only
 
-Tap a league in the homepage search suggestions. The league information opens directly in the full-screen popup.
-The X closes the popup and returns to Home.
-Enter opens the first matching suggestion.
+When a league is opened by tapping a homepage search suggestion, the league information popup shows only the X close button. The “Back to Leagues” button is hidden for search-opened popups.
+
+Directly opened league pages retain the “Back to Leagues” button.
