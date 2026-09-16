@@ -365,7 +365,7 @@ function render(){
 #img-league-browser .lb-wrap{max-width:1100px;margin:auto}
 #img-league-browser h2{font-size:36px;margin:0 0 8px}
 #img-league-browser p{color:#9ca3af;margin:0 0 28px}
-.lb-sports{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:25px}
+.lb-navpanel{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:25px;padding:12px;border:1px solid #252b35;background:#0c1016;border-radius:12px}.lb-sports{display:flex;gap:8px;flex-wrap:wrap;margin:0;flex:1}.lb-navsearch{flex:0 1 280px}.lb-navsearch input{width:100%;padding:11px 13px;border-radius:9px;border:1px solid #303640;background:#11151c;color:#fff;font-size:14px;outline:none}.lb-navsearch input:focus{border-color:#fff}.lb-navsearch input::placeholder{color:#77808c}
 .lb-sport{border:1px solid #303640;background:#11151c;color:#fff;border-radius:10px;padding:11px 15px;cursor:pointer}
 .lb-sport.active{background:#fff;color:#090c11}
 .lb-search{margin:0 0 18px}.lb-search input{width:100%;padding:14px 16px;border-radius:10px;border:1px solid #303640;background:#0c1016;color:#fff;font-size:15px;outline:none}.lb-search input:focus{border-color:#fff}.lb-search input::placeholder{color:#77808c}.lb-leagues{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
@@ -379,8 +379,10 @@ function render(){
     <div style="font-size:12px;letter-spacing:2px;color:#9ca3af;text-transform:uppercase">IMG Sports Directory</div>
     <h2 id="img-league-title">Basketball</h2>
     <p>Select a sport to see major leagues and competitions around the world.</p>
-    <div class="lb-sports" id="img-sports-tabs"></div>
-    <div class="lb-search"><input id="img-league-search" type="search" placeholder="Search leagues…" aria-label="Search leagues"></div>
+    <div class="lb-navpanel">
+      <div class="lb-sports" id="img-sports-tabs"></div>
+      <div class="lb-navsearch"><input id="img-league-search" type="search" placeholder="Search leagues…" aria-label="Search leagues"></div>
+    </div>
     <div class="lb-leagues" id="img-league-list"></div>
   </div>
 </div>
