@@ -184,9 +184,25 @@ img {
 .news-feed-note{display:none !important}
 </style>
 
-<style id="pba-profile-upgrade-css">
-.pba-hero{border:1px solid rgba(255,255,255,.14);background:linear-gradient(135deg,rgba(255,255,255,.06),rgba(255,255,255,.025))}.ld-kicker{font-size:11px;letter-spacing:.16em;opacity:.62}.ld-card-head{display:flex;align-items:center;justify-content:space-between;gap:12px}.ld-badge{font-size:12px;padding:6px 9px;border:1px solid rgba(255,255,255,.14);border-radius:999px;opacity:.8;white-space:nowrap}.ld-stat-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:14px}.ld-stat-grid>div{padding:12px;border:1px solid rgba(255,255,255,.1);border-radius:12px;background:rgba(255,255,255,.03)}.ld-stat-grid b{display:block;font-size:22px}.ld-stat-grid small{opacity:.65}.ld-placeholder{margin-top:12px;padding:13px;border:1px dashed rgba(255,255,255,.18);border-radius:10px;font-size:13px;opacity:.72}@media(max-width:640px){.ld-stat-grid{gap:6px}.ld-stat-grid>div{padding:9px}.ld-stat-grid b{font-size:18px}.ld-card-head{align-items:flex-start;flex-direction:column}}
+
+<style id="img-pba-profile-fix">
+.league-detail .ld-card{margin-bottom:14px}
+.league-detail .ld-card-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.league-detail .ld-card-head h2,.league-detail .ld-card-head h3{margin:0}
+.league-detail .ld-badge{font-size:12px;padding:6px 9px;border:1px solid rgba(255,255,255,.14);border-radius:999px;opacity:.8;white-space:nowrap}
+.league-detail .ld-stat-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:14px}
+.league-detail .ld-stat-grid>div{padding:12px;border:1px solid rgba(255,255,255,.1);border-radius:12px;background:rgba(255,255,255,.03)}
+.league-detail .ld-stat-grid b{display:block;font-size:22px}
+.league-detail .ld-stat-grid small,.league-detail .team-item small{opacity:.65}
+.league-detail .ld-placeholder{margin-top:12px;padding:13px;border:1px dashed rgba(255,255,255,.18);border-radius:10px;font-size:13px;opacity:.72}
+.league-detail .ld-two-col{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.league-detail .team-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:12px}
+.league-detail .team-item{padding:11px;border:1px solid rgba(255,255,255,.1);border-radius:10px;background:rgba(255,255,255,.025)}
+.league-detail .team-item strong,.league-detail .team-item small{display:block}
+.league-detail .source-list{margin:10px 0 0;padding-left:20px}
+@media(max-width:640px){.league-detail .ld-stat-grid{gap:6px}.league-detail .ld-stat-grid>div{padding:9px}.league-detail .ld-stat-grid b{font-size:18px}.league-detail .ld-card-head{align-items:flex-start;flex-direction:column}.league-detail .ld-two-col,.league-detail .team-grid{grid-template-columns:1fr}}
 </style>
+
 </head>
 <body>
 <header class="nav">
@@ -640,33 +656,81 @@ function canonicalLeagueName(name){
  return aliases[name] || name;
 }
 function openDetail(name,sport){
+ const searchClose=document.getElementById('ld-search-close');
+ const fromHomeSearch=(homeSearchOpenedLeague || window.homeSearchOpenedLeague);
+ if(searchClose) searchClose.style.display=fromHomeSearch?'block':'none';
+ const backLeagues=document.getElementById('ld-back-leagues');
+ if(backLeagues) backLeagues.style.display=fromHomeSearch?'none':'inline-block';
+ name=canonicalLeagueName(name);
+ const browser=document.getElementById('img-league-browser');
+ const root=document.getElementById('img-league-detail');
+ root.classList.toggle('search-origin', !!fromHomeSearch);
+ const title=document.getElementById('ld-title'),sub=document.getElementById('ld-sub'),content=document.getElementById('ld-content');
+ // Always clear the previous league before rendering the next one. This prevents stale PBA/NBA content.
+ content.replaceChildren();
+ title.textContent=name;
+ sub.textContent=(sport||'Sports')+' · League information';
+ browser.style.display='none';
+ root.style.display='block';
+ window.IMGCurrentLeague={name:name,sport:sport||'Sports'};
  if(name==='PBA'){
-  title.textContent='PBA'; sub.textContent='Philippine Basketball Association · Philippines · 2026 Governors’ Cup';
-  const pbaSorted=[...pbaTeams].sort((a,b)=>{const aw=parseInt(a[2])||0,bw=parseInt(b[2])||0; if(aw!==bw)return bw-aw; const al=parseInt((a[2]||'0-0').split('-')[1])||0,bl=parseInt((b[2]||'0-0').split('-')[1])||0; return al-bl;});
-  const rows=pbaSorted.map((t,i)=>`<tr><td>${i+1}</td><td><b>${esc(t[0])}</b></td><td>${esc(t[1])}</td><td><b>${esc(t[2])}</b></td></tr>`).join('');
-  const cards=pbaTeams.map(t=>`<div class="ld-team"><b>${esc(t[0])}</b><small>${esc(t[1])} · Record ${esc(t[2])}</small></div>`).join('');
-  const groupA=pbaTeams.filter(t=>t[1]==='Group A').length, groupB=pbaTeams.filter(t=>t[1]==='Group B').length;
+  const pbaTeams=[
+   ['Converge FiberXers','Group A','5-4'],['Macau Giant Pandas','Group A','2-6'],['NLEX Road Warriors','Group A','7-2'],['San Miguel Beermen','Group A','7-2'],['Terrafirma Dyip','Group A','3-5'],['Titan Ultra Giant Risers','Group A','2-7'],['TNT Tropang 5G','Group A','4-4'],
+   ['Barangay Ginebra San Miguel','Group B','2-4'],['Blackwater Bossing','Group B','3-3'],['Magnolia Chicken Timplados Hotshots','Group B','4-3'],['Meralco Bolts','Group B','3-5'],['Phoenix Super LPG Fuel Masters','Group B','4-3'],['Rain or Shine Elasto Painters','Group B','4-2']
+  ];
+  const sorted=[...pbaTeams].sort((a,b)=>{
+    const aw=parseInt(a[2]),bw=parseInt(b[2]);
+    if(bw!==aw)return bw-aw;
+    return parseInt(a[2].split('-')[1])-parseInt(b[2].split('-')[1]);
+  });
+  const groupA=pbaTeams.filter(t=>t[1]==='Group A').length;
+  const groupB=pbaTeams.filter(t=>t[1]==='Group B').length;
   content.innerHTML=`
-   <div class="ld-card pba-hero">
-    <div class="ld-card-head"><div><span class="ld-kicker">PBA PROFILE</span><h3 style="margin:6px 0 4px">Philippine Basketball Association</h3><p class="ld-sub">Professional basketball in the Philippines · 2026 Governors’ Cup</p></div><span class="ld-badge">Reference data</span></div>
-    <div class="ld-stat-grid"><div><b>${pbaTeams.length}</b><small>Total teams</small></div><div><b>${groupA}</b><small>Group A</small></div><div><b>${groupB}</b><small>Group B</small></div></div>
-   </div>
-   <div class="ld-grid" style="margin-top:16px">
-    <div class="ld-card"><h3>League Overview</h3><p class="ld-sub">The PBA is the Philippines’ professional men’s basketball league. This profile keeps league information, competition structure, standings, team directory and source links together in one place.</p><div class="ld-note"><b>Data date:</b> standings shown here are reference data as of August 14, 2026, before the conference break. They are not presented as live standings.</div></div>
-    <div class="ld-card"><h3>2026 Governors’ Cup</h3><p class="ld-sub">The stored competition format uses two groups before the crossover playoff stage. IMG keeps this structure separate from live-game data so the profile remains usable even without a paid sports API.</p></div>
-   </div>
-   <div class="ld-card" style="margin-top:16px"><div class="ld-card-head"><h3>Standings</h3><span class="ld-badge">W-L · Reference</span></div><div style="overflow:auto"><table class="ld-table"><thead><tr><th>#</th><th>Team</th><th>Group</th><th>W-L</th></tr></thead><tbody>${rows}</tbody></table></div></div>
-   <div class="ld-card" style="margin-top:16px"><div class="ld-card-head"><h3>Team Directory</h3><span class="ld-badge">${pbaTeams.length} teams</span></div><div class="ld-team-grid">${cards}</div></div>
-   <div class="ld-grid" style="margin-top:16px">
-    <div class="ld-card"><div class="ld-card-head"><h3>Schedule</h3><span class="ld-badge">Coming soon</span></div><p class="ld-sub">A verified PBA schedule feed is not connected yet.</p><div class="ld-placeholder">No verified schedule feed connected. This section is ready for an authorized free data source.</div></div>
-    <div class="ld-card"><div class="ld-card-head"><h3>Results</h3><span class="ld-badge">Coming soon</span></div><p class="ld-sub">Recent game results will appear here once a verified source is connected.</p><div class="ld-placeholder">No verified results feed connected.</div></div>
-   </div>
-   <div class="ld-grid" style="margin-top:16px">
-    <div class="ld-card"><div class="ld-card-head"><h3>Statistics</h3><span class="ld-badge">Ready</span></div><p class="ld-sub">Player and team statistics can be added without changing the profile layout.</p><div class="ld-placeholder">Statistics feed not connected.</div></div>
-    <div class="ld-card"><div class="ld-card-head"><h3>News</h3><span class="ld-badge">IMG News</span></div><p class="ld-sub">League news can be displayed here using IMG’s existing news system and verified article sources.</p><div class="ld-placeholder">League news module ready for verified articles.</div></div>
-   </div>
-   <div class="ld-card" style="margin-top:16px"><h3>Sources</h3><div class="ld-source">Official league: ${source(officialPBA,'PBA Official Website')}<br>2026 Governors’ Cup schedule: ${source('https://sports.inquirer.net/685688/schedule-2026-pba-governors-cup','Inquirer Sports')}<br>Standings reference: ${source(standingsSource,'GMA News')}</div></div>`;
- }else if(name==='NBA'){
+   <div class="league-detail">
+    <div class="ld-card">
+     <div class="ld-card-head"><h2>PBA PROFILE</h2><span class="ld-badge">Reference data</span></div>
+     <p><strong>Philippine Basketball Association</strong><br>Philippines · 2026 Governors’ Cup</p>
+     <h3>League Overview</h3>
+     <p>The PBA is the Philippines' premier professional basketball league. This profile organizes competition information, team reference data, standings and space for future verified schedules, results, statistics and news.</p>
+     <div class="ld-stat-grid">
+      <div><b>${pbaTeams.length}</b><small>Total teams</small></div>
+      <div><b>${groupA}</b><small>Group A</small></div>
+      <div><b>${groupB}</b><small>Group B</small></div>
+     </div>
+    </div>
+    <div class="ld-card">
+     <div class="ld-card-head"><h3>2026 GOVERNORS' CUP</h3><span class="ld-badge">Competition</span></div>
+     <p>Two groups are shown in the stored reference data before the crossover playoff stage.</p>
+    </div>
+    <div class="ld-card">
+     <div class="ld-card-head"><h3>STANDINGS</h3><span class="ld-badge">Reference data</span></div>
+     <div class="table-wrap"><table><thead><tr><th>Team</th><th>Group</th><th>Record</th></tr></thead><tbody>
+      ${sorted.map(t=>`<tr><td>${t[0]}</td><td>${t[1]}</td><td><strong>${t[2]}</strong></td></tr>`).join('')}
+     </tbody></table></div>
+     <p class="ld-placeholder">Reference data only; this table is not a live standings feed.</p>
+    </div>
+    <div class="ld-card">
+     <div class="ld-card-head"><h3>TEAM DIRECTORY</h3><span class="ld-badge">${pbaTeams.length} teams</span></div>
+     <div class="team-grid">${pbaTeams.map(t=>`<div class="team-item"><strong>${t[0]}</strong><small>${t[1]} · ${t[2]}</small></div>`).join('')}</div>
+    </div>
+    <div class="ld-two-col">
+     <div class="ld-card"><div class="ld-card-head"><h3>SCHEDULE</h3></div><div class="ld-placeholder">No verified schedule feed connected.</div></div>
+     <div class="ld-card"><div class="ld-card-head"><h3>RESULTS</h3></div><div class="ld-placeholder">No verified results feed connected.</div></div>
+    </div>
+    <div class="ld-two-col">
+     <div class="ld-card"><div class="ld-card-head"><h3>STATISTICS</h3></div><div class="ld-placeholder">Statistics feed not connected.</div></div>
+     <div class="ld-card"><div class="ld-card-head"><h3>NEWS</h3></div><div class="ld-placeholder">League news module ready for verified articles.</div></div>
+    </div>
+    <div class="ld-card">
+     <div class="ld-card-head"><h3>SOURCES</h3></div>
+     <ul class="source-list">
+      <li>Official PBA resources</li>
+      <li>Inquirer Sports</li>
+      <li>GMA Sports</li>
+     </ul>
+    </div>
+   </div>`;
+}else if(name==='NBA'){
   title.textContent='NBA'; sub.textContent='National Basketball Association · USA / Canada · 2026–27 season';
   content.innerHTML=`<div class="ld-grid"><div class="ld-card"><h3>Season Status</h3><p class="ld-sub">The 2026–27 regular-season schedule has been released. IMG therefore shows the current upcoming season rather than treating the league as inactive.</p><div class="ld-note"><b>Current season:</b> 2026–27 · 30 teams.</div></div><div class="ld-card"><h3>What IMG will show</h3><p class="ld-sub">Teams, schedule, results, standings and statistics are separated by season. When a season is completed, IMG can retain it as the latest completed season instead of leaving the league page empty.</p></div></div><div class="ld-card" style="margin-top:16px"><h3>30 Teams</h3><div class="ld-team-grid">${teamCards(nbaTeams,'NBA team')}</div></div><div class="ld-card" style="margin-top:16px"><h3>Sources</h3><div class="ld-source">Official NBA team directory: ${source(officialNBA,'NBA.com')}<br>2026–27 schedule: ${source('https://www.nba.com/news/2026-27-nba-regular-season-schedule','NBA.com')}</div></div>`;
  }else if(name==='NBA G League'){
