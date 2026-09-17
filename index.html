@@ -179,6 +179,8 @@ img {
 .feature-news{min-height:250px;border:1px solid #252c36;border-radius:14px;overflow:hidden;position:relative;background:linear-gradient(135deg,#111923,#080b10);display:flex;align-items:flex-end;padding:24px}.feature-news:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(4,7,11,.05),rgba(4,7,11,.9))}.feature-news-content{position:relative;z-index:1;max-width:650px}.news-tag{display:inline-block;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#4ab0ff;margin-bottom:8px;font-weight:800}.feature-news h4{font-size:28px;margin:0 0 8px;line-height:1.12}.feature-news p{margin:0;color:#b7c0cb;line-height:1.5;font-size:14px}.news-meta{margin-top:12px;color:#7f8996;font-size:11px}
 .news-list{display:grid;gap:10px;margin-top:10px}.news-item{display:grid;grid-template-columns:92px 1fr;gap:13px;align-items:center;border:1px solid #252c36;border-radius:12px;padding:10px;background:#0d1218}.news-thumb{height:68px;border-radius:9px;background:linear-gradient(135deg,#172231,#0b1016);border:1px solid #242d38}.news-item h4{margin:3px 0 5px;font-size:14px;line-height:1.25}.news-item p{margin:0;color:#858f9c;font-size:11px}
 .event-list{display:grid;gap:10px}.event-item{display:grid;grid-template-columns:70px 1fr;gap:12px;align-items:center;border:1px solid #252c36;border-radius:12px;padding:12px;background:#0d1218}.event-date{font-weight:800;font-size:12px;color:#fff;text-align:center;border-right:1px solid #252c36;padding-right:12px}.event-date span{display:block;color:#36a3ff;font-size:10px;letter-spacing:.08em;margin-top:3px}.event-item h4{margin:0 0 4px;font-size:14px}.event-item p{margin:0;color:#858f9c;font-size:11px}.news-feed-note{padding:12px 0 2px;color:#707a87;font-size:11px}
+
+.news-item a{display:block;color:inherit;text-decoration:none}.news-item a:hover h4{text-decoration:underline}.news-thumb{overflow:hidden}.news-thumb img{width:100%;height:100%;object-fit:cover;display:block}.feature-news a{color:inherit;text-decoration:none}.feature-news a:hover h4{text-decoration:underline}.news-source{color:#7f8996;font-size:10px;margin-top:5px}
 @media(max-width:900px){.news-events-grid{grid-template-columns:1fr}}@media(max-width:560px){#news-events{padding:55px 5% 65px}.news-panel,.events-panel{padding:14px}.feature-news{min-height:220px;padding:18px}.feature-news h4{font-size:23px}.news-item{grid-template-columns:78px 1fr}.news-thumb{height:60px}}
 </style>
 
@@ -209,12 +211,8 @@ img {
 <div class="news-events-grid">
 <div class="news-panel">
 <div class="news-panel-head"><h3>Latest News</h3><span>Live feed</span></div>
-<div class="feature-news"><div class="feature-news-content"><div class="news-tag">IMG SPORTS NEWS</div><h4>Latest sports stories will appear here.</h4><p>IMG will automatically display current stories from selected sports news sources as the news feed is connected.</p><div class="news-meta">Automatic news feed</div></div></div>
-<div class="news-list">
-<div class="news-item"><div class="news-thumb"></div><div><div class="news-tag">BASKETBALL</div><h4>Latest basketball news</h4><p>Automatically updated stories</p></div></div>
-<div class="news-item"><div class="news-thumb"></div><div><div class="news-tag">FOOTBALL</div><h4>Latest football news</h4><p>Automatically updated stories</p></div></div>
-<div class="news-item"><div class="news-thumb"></div><div><div class="news-tag">TENNIS</div><h4>Latest tennis news</h4><p>Automatically updated stories</p></div></div>
-</div><div class="news-feed-note">Stories will link to their original source when the automatic feed is enabled.</div>
+<div id="img-feature-news" class="feature-news"><div class="feature-news-content"><div class="news-tag">IMG SPORTS NEWS</div><h4>Loading the latest sports news…</h4><p>IMG is connecting to its live sports news feed.</p><div class="news-meta">Updating automatically</div></div></div>
+<div id="img-news-list" class="news-list"></div><div id="img-news-status" class="news-feed-note">Loading automatic news feed…</div>
 </div>
 <div class="events-panel"><div class="events-panel-head"><h3>Upcoming Events</h3><span>View all events</span></div><div class="event-list">
 <div class="event-item"><div class="event-date">DATE<span>UPCOMING</span></div><div><h4>Upcoming sports events</h4><p>Automatically updated event calendar</p></div></div>
@@ -1121,6 +1119,43 @@ window.IMGOpenLeagueDetail=openDetail;
       e.preventDefault();
     }
   }, true);
+})();
+</script>
+
+<script>
+/* IMG automatic sports news feed. The public site calls the same Cloudflare Worker used by /games. */
+(function(){
+  const NEWS_API = 'https://img-api-proxy.magsipocarnie.workers.dev/news';
+  const feature = document.getElementById('img-feature-news');
+  const list = document.getElementById('img-news-list');
+  const status = document.getElementById('img-news-status');
+  if(!feature || !list || !status) return;
+
+  function esc(v){return String(v||'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));}
+  function timeLabel(v){
+    const d=new Date(v); if(Number.isNaN(d.getTime())) return '';
+    return d.toLocaleString(undefined,{month:'short',day:'numeric',year:'numeric'});
+  }
+  function render(items){
+    if(!items.length){
+      feature.innerHTML='<div class="feature-news-content"><div class="news-tag">IMG SPORTS NEWS</div><h4>No current stories available.</h4><p>The news source did not return new stories right now.</p></div>';
+      list.innerHTML=''; status.textContent='News feed checked automatically.'; return;
+    }
+    const first=items[0];
+    feature.innerHTML='<div class="feature-news-content"><div class="news-tag">'+esc(first.sport||'SPORTS')+'</div><a href="'+esc(first.link)+'" target="_blank" rel="noopener noreferrer"><h4>'+esc(first.title)+'</h4></a><p>'+esc(first.description||'Read the full story at the original source.')+'</p><div class="news-meta">'+esc(first.source||'Source')+' · '+esc(timeLabel(first.published))+'</div></div>';
+    list.innerHTML=items.slice(1,6).map(item=>'<div class="news-item"><div class="news-thumb"></div><div><div class="news-tag">'+esc(item.sport||'SPORTS')+'</div><a href="'+esc(item.link)+'" target="_blank" rel="noopener noreferrer"><h4>'+esc(item.title)+'</h4></a><p>'+esc(item.description||'Read the full story at the original source.')+'</p><div class="news-source">'+esc(item.source||'Source')+' · '+esc(timeLabel(item.published))+'</div></div></div>').join('');
+    status.textContent='Updated automatically · '+new Date().toLocaleTimeString([], {hour:'numeric',minute:'2-digit'});
+  }
+  async function loadNews(){
+    try{
+      const r=await fetch(NEWS_API,{cache:'no-store'}); if(!r.ok) throw new Error('News request failed');
+      const data=await r.json(); render(Array.isArray(data.items)?data.items:[]);
+    }catch(e){
+      status.textContent='News feed temporarily unavailable. IMG will try again automatically.';
+    }
+  }
+  loadNews();
+  setInterval(loadNews,15*60*1000);
 })();
 </script>
 
