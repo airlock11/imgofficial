@@ -176,11 +176,12 @@ img {
 #news-events{padding:72px 6% 86px;max-width:1300px;margin:auto}
 .news-events-head{margin-bottom:26px}.news-events-head h2{margin:0;font-size:clamp(34px,4vw,52px);line-height:1.05}.news-events-head p{margin:10px 0 0;color:#9da6b2;max-width:760px;line-height:1.6}
 .news-events-grid{display:block}.news-panel{border:1px solid #252c36;background:#0b0f14;border-radius:16px;padding:20px;align-self:start;height:max-content}.news-panel-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px}.news-panel-head h3{margin:0;font-size:16px;letter-spacing:.08em;text-transform:uppercase}.news-panel-head span{color:#36a3ff;font-size:12px}
-.feature-news{min-height:250px;border:1px solid #252c36;border-radius:14px;overflow:hidden;position:relative;background:linear-gradient(135deg,#111923,#080b10);display:flex;align-items:flex-end;padding:24px}.feature-news:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(4,7,11,.05),rgba(4,7,11,.9));z-index:1}.feature-news-image{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;z-index:0}.feature-news-content{position:relative;z-index:1;max-width:650px}.feature-news.has-image{background-size:cover;background-position:center}.news-thumb img{width:100%;height:100%;object-fit:cover;display:block}.news-tag{display:inline-block;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#4ab0ff;margin-bottom:8px;font-weight:800}.feature-news h4{font-size:28px;margin:0 0 8px;line-height:1.12}.feature-news p{margin:0;color:#b7c0cb;line-height:1.5;font-size:14px}.news-meta{margin-top:12px;color:#7f8996;font-size:11px}
+.feature-news{min-height:250px;border:1px solid #252c36;border-radius:14px;overflow:hidden;position:relative;background:linear-gradient(135deg,#111923,#080b10);display:flex;align-items:flex-end;padding:24px}.feature-news:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(4,7,11,.05),rgba(4,7,11,.9));z-index:1}.feature-news-image{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;z-index:0}.feature-news-content{position:relative;z-index:1;max-width:650px;text-shadow:0 2px 10px rgba(0,0,0,.8)}.feature-news.has-image{background-size:cover;background-position:center}.news-thumb img{width:100%;height:100%;object-fit:cover;display:block}.news-tag{display:inline-block;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#63b8ff;margin-bottom:8px;font-weight:800;text-shadow:0 2px 8px rgba(0,0,0,.85)}.feature-news h4{font-size:28px;margin:0 0 8px;line-height:1.12;color:#fff !important;text-shadow:0 2px 12px rgba(0,0,0,.95)}.feature-news p{margin:0;color:#f0f3f7;line-height:1.5;font-size:14px;text-shadow:0 2px 10px rgba(0,0,0,.95)}.news-meta{margin-top:12px;color:#d2d8df;font-size:11px;text-shadow:0 2px 8px rgba(0,0,0,.95)}
 .news-list{display:grid;gap:10px;margin-top:10px}.news-item{display:grid;grid-template-columns:92px 1fr;gap:13px;align-items:center;border:1px solid #252c36;border-radius:12px;padding:10px;background:#0d1218}.news-thumb{height:68px;border-radius:9px;background:linear-gradient(135deg,#172231,#0b1016);border:1px solid #242d38}.news-item h4{margin:3px 0 5px;font-size:14px;line-height:1.25}.news-item p{margin:0;color:#858f9c;font-size:11px}
 
 .news-item a{display:block;color:inherit;text-decoration:none}.news-item a:hover h4{text-decoration:underline}.news-thumb{overflow:hidden}.news-thumb img{width:100%;height:100%;object-fit:cover;display:block}.feature-news a{color:inherit;text-decoration:none}.feature-news a:hover h4{text-decoration:underline}.news-source{color:#7f8996;font-size:10px;margin-top:5px}
 @media(max-width:560px){#news-events{padding:55px 5% 65px}.news-panel{padding:14px}.feature-news{min-height:220px;padding:18px}.feature-news h4{font-size:23px}.news-item{grid-template-columns:78px 1fr}.news-thumb{height:60px}}
+.news-feed-note{display:none !important}
 </style>
 
 </head>
@@ -1131,7 +1132,7 @@ window.IMGOpenLeagueDetail=openDetail;
     if(!items.length){
       feature.classList.remove('has-image');
       feature.innerHTML='<div class="feature-news-content"><div class="news-tag">IMG SPORTS NEWS</div><h4>No current stories available.</h4><p>The news source did not return new stories right now.</p></div>';
-      list.innerHTML='';status.textContent='News feed checked automatically.';return;
+      list.innerHTML='';status.textContent='';return;
     }
     const first=items[0], firstImage=safeImage(first.image);
     feature.classList.toggle('has-image',!!firstImage);
@@ -1141,7 +1142,7 @@ window.IMGOpenLeagueDetail=openDetail;
       const image=safeImage(item.image);
       return '<div class="news-item"><div class="news-thumb">'+(image?'<img src="'+esc(image)+'" alt="" loading="lazy" referrerpolicy="no-referrer">':'<span aria-hidden="true"></span>')+'</div><div><div class="news-tag">'+esc(item.region==='Philippines'?'PH · '+(item.sport||'SPORTS'):(item.sport||'SPORTS'))+'</div><a href="'+esc(item.link)+'" target="_blank" rel="noopener noreferrer"><h4>'+esc(item.title)+'</h4></a><p>'+esc(item.description||'Read the full story at the original source.')+'</p><div class="news-source">'+esc(item.source||'Source')+' · '+esc(timeLabel(item.published))+'</div></div></div>';
     }).join('');
-    status.textContent='Updated automatically · '+new Date().toLocaleTimeString([],{hour:'numeric',minute:'2-digit'});
+    status.textContent='';
   }
   async function loadNews(){
     try{const r=await fetch(NEWS_API,{cache:'no-store'});if(!r.ok)throw new Error('News request failed');const data=await r.json();render(Array.isArray(data.items)?data.items:[]);}
