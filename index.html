@@ -1382,61 +1382,64 @@ window.IMGOpenLeagueDetail=openDetail;
 </script>
 
 <script>
-/* IMG automatic sports news feed with source-provided article images. */
+/* IMG automatic sports news feed. Cloudflare only proxies RSS; the browser parses it. */
 (function(){
   const NEWS_API='https://img-api-proxy.magsipocarnie.workers.dev/news';
   const feature=document.getElementById('img-feature-news');
   const list=document.getElementById('img-news-list');
   const status=document.getElementById('img-news-status');
   if(!feature||!list||!status)return;
+  const feeds=['sports','basketball','volleyball','soccer','boxing'];
   function esc(v){return String(v||'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));}
   function safeImage(v){try{const u=new URL(String(v||''));return u.protocol==='https:'?u.href:'';}catch{return '';}}
   function timeLabel(v){const d=new Date(v);if(Number.isNaN(d.getTime()))return '';return d.toLocaleString(undefined,{month:'short',day:'numeric',year:'numeric'});}
+  function parseFeed(xml,sport){
+    const doc=new DOMParser().parseFromString(xml,'application/xml');
+    if(doc.querySelector('parsererror'))return [];
+    return Array.from(doc.getElementsByTagName('item')).slice(0,8).map(item=>{
+      const text=n=>{const el=item.getElementsByTagName(n)[0];return el?el.textContent.trim():'';};
+      const title=text('title'),link=text('link'),published=text('pubDate');
+      const desc=text('description').replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').trim().slice(0,180);
+      let image='';
+      const media=item.getElementsByTagName('media:content')[0]||item.getElementsByTagName('enclosure')[0];
+      if(media)image=media.getAttribute('url')||media.getAttribute('href')||'';
+      return {title,description:desc,link,published,image,sport:sport==='sports'?'SPORTS':sport.toUpperCase(),source:'Google News'};
+    }).filter(x=>x.title&&x.link);
+  }
   function render(items){
-    if(!items.length){
+    const unique=[],seen=new Set();
+    for(const item of items){const key=item.title+'|'+item.link;if(!seen.has(key)){seen.add(key);unique.push(item);}}
+    unique.sort((a,b)=>new Date(b.published||0)-new Date(a.published||0));
+    if(!unique.length){
       feature.classList.remove('has-image');
-      feature.innerHTML='<div class="feature-news-content"><div class="news-tag">IMG SPORTS NEWS</div><h4>No current stories available.</h4><p>The news source did not return new stories right now.</p></div>';
-      list.innerHTML='';status.textContent='';return;
+      feature.innerHTML='<div class="feature-news-content"><div class="news-tag">IMG SPORTS NEWS</div><h4>Latest sports news is temporarily unavailable.</h4><p>IMG will automatically try again shortly.</p></div>';
+      list.innerHTML='';return;
     }
-    const first=items[0], firstImage=safeImage(first.image);
+    const first=unique[0],firstImage=safeImage(first.image);
     feature.classList.toggle('has-image',!!firstImage);
     feature.innerHTML=(firstImage?'<img class="feature-news-image" src="'+esc(firstImage)+'" alt="" loading="eager" referrerpolicy="no-referrer">':'')+
-      '<div class="feature-news-content"><div class="news-tag">'+esc(first.region==='Philippines'?'PH · '+(first.sport||'SPORTS'):(first.sport||'SPORTS'))+'</div><a href="'+esc(first.link)+'" target="_blank" rel="noopener noreferrer"><h4>'+esc(first.title)+'</h4></a><p>'+esc(first.description||'Read the full story at the original source.')+'</p><div class="news-meta">'+esc(first.source||'Source')+' · '+esc(timeLabel(first.published))+'</div></div>';
-    list.innerHTML=items.slice(1,6).map(item=>{
+      '<div class="feature-news-content"><div class="news-tag">'+esc(first.sport)+'</div><a href="'+esc(first.link)+'" target="_blank" rel="noopener noreferrer"><h4>'+esc(first.title)+'</h4></a><p>'+esc(first.description||'Read the full story at the original source.')+'</p><div class="news-meta">'+esc(first.source)+' · '+esc(timeLabel(first.published))+'</div></div>';
+    list.innerHTML=unique.slice(1,7).map(item=>{
       const image=safeImage(item.image);
-      return '<div class="news-item"><div class="news-thumb">'+(image?'<img src="'+esc(image)+'" alt="" loading="lazy" referrerpolicy="no-referrer">':'<span aria-hidden="true"></span>')+'</div><div><div class="news-tag">'+esc(item.region==='Philippines'?'PH · '+(item.sport||'SPORTS'):(item.sport||'SPORTS'))+'</div><a href="'+esc(item.link)+'" target="_blank" rel="noopener noreferrer"><h4>'+esc(item.title)+'</h4></a><p>'+esc(item.description||'Read the full story at the original source.')+'</p><div class="news-source">'+esc(item.source||'Source')+' · '+esc(timeLabel(item.published))+'</div></div></div>';
+      return '<div class="news-item"><div class="news-thumb">'+(image?'<img src="'+esc(image)+'" alt="" loading="lazy" referrerpolicy="no-referrer">':'<span aria-hidden="true"></span>')+'</div><div><div class="news-tag">'+esc(item.sport)+'</div><a href="'+esc(item.link)+'" target="_blank" rel="noopener noreferrer"><h4>'+esc(item.title)+'</h4></a><p>'+esc(item.description||'Read the full story at the original source.')+'</p><div class="news-source">'+esc(item.source)+' · '+esc(timeLabel(item.published))+'</div></div></div>';
     }).join('');
     status.textContent='';
   }
-  async function loadDirectNewsFallback(){
-    const feeds=[
-      ['Basketball','https://www.oursportscentral.com/feeds/Basketball.xml'],
-      ['Soccer','https://www.oursportscentral.com/feeds/Soccer.xml']
-    ];
-    const all=[];
-    for(const [sport,feed] of feeds){
-      try{
-        const u='https://api.rss2json.com/v1/api.json?rss_url='+encodeURIComponent(feed);
-        const r=await fetch(u,{cache:'no-store'});
-        if(!r.ok)continue;
-        const d=await r.json();
-        if(d&&d.status==='ok'&&Array.isArray(d.items)){
-          d.items.slice(0,4).forEach(item=>all.push({
-            title:item.title||'',description:String(item.description||item.content||'').replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').trim().slice(0,180),
-            link:item.link||'',published:item.pubDate||'',image:item.thumbnail||(item.enclosure&&item.enclosure.link)||'',sport,source:'OurSports Central'
-          }));
-        }
-      }catch(_){}
-    }
-    all.sort((a,b)=>new Date(b.published||0)-new Date(a.published||0));
-    return all.slice(0,8).filter(x=>x.title&&x.link);
-  }
   async function loadNews(){
-    try{const r=await fetch(NEWS_API,{cache:'no-store'});if(!r.ok)throw new Error('News request failed');const data=await r.json();const items=Array.isArray(data.items)?data.items:[];if(items.length){render(items);return;}throw new Error('No news items');}
-    catch(e){
-      const fallback=await loadDirectNewsFallback();
-      if(fallback.length){render(fallback);status.textContent='';}
-      else status.textContent='News feed temporarily unavailable. IMG will try again automatically.';
+    status.textContent='Updating sports news…';
+    try{
+      const results=await Promise.allSettled(feeds.map(async sport=>{
+        const r=await fetch(NEWS_API+'?sport='+encodeURIComponent(sport),{cache:'no-store'});
+        if(!r.ok)throw new Error('News '+r.status);
+        return parseFeed(await r.text(),sport);
+      }));
+      const items=results.flatMap(r=>r.status==='fulfilled'?r.value:[]);
+      if(!items.length)throw new Error('No news items');
+      render(items);
+    }catch(e){
+      render([]);
+      status.textContent='News feed temporarily unavailable. IMG will try again automatically.';
+      console.warn('IMG news unavailable:',e);
     }
   }
   loadNews();setInterval(loadNews,15*60*1000);
