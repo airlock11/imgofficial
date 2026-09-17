@@ -265,7 +265,7 @@ img {
 <section id="sports"><div class="sectionhead"><div><div class="eyebrow">SPORTS COVERAGE</div><h2>One destination.</h2></div></div><p class="section-intro">Follow your favorite sports, all in one place. Get live scores, news and statistics from leagues around the world.</p><div class="sports sports-image-grid"><div class="sport sport-image sport-basketball" data-coverage-sport="Basketball" onclick="IMG_Coverage_Click('Basketball');return false;" aria-label="Open Basketball leagues"><strong>Basketball</strong><span>Leagues. Teams. Players.<br>Live scores.</span></div><div class="sport sport-image sport-football" data-coverage-sport="Football" onclick="IMG_Coverage_Click('Football');return false;" aria-label="Open Football leagues"><strong>Football</strong><span>Global leagues.<br>Real-time scores.</span></div><div class="sport sport-image sport-tennis" data-coverage-sport="Tennis" onclick="IMG_Coverage_Click('Tennis');return false;" aria-label="Open Tennis leagues"><strong>Tennis</strong><span>Tournaments. Rankings.<br>Live results.</span></div><div class="sport sport-image sport-baseball" data-coverage-sport="Baseball" onclick="IMG_Coverage_Click('Baseball');return false;" aria-label="Open Baseball leagues"><strong>Baseball</strong><span>Standings. Stats.<br>Game updates.</span></div><div class="sport sport-image sport-hockey" data-coverage-sport="Hockey" onclick="IMG_Coverage_Click('Hockey');return false;" aria-label="Open Hockey leagues"><strong>Hockey</strong><span>Scores. Schedules.<br>Player stats.</span></div><div class="sport sport-image sport-cricket" data-coverage-sport="Cricket" onclick="IMG_Coverage_Click('Cricket');return false;" aria-label="Open Cricket leagues"><strong>Cricket</strong><span>Live matches.<br>Series. Stats.</span></div><div class="sport sport-image sport-volleyball" data-coverage-sport="Volleyball" onclick="IMG_Coverage_Click('Volleyball');return false;" aria-label="Open Volleyball leagues"><strong>Volleyball</strong><span>Matches. Teams.<br>Live scores.</span></div><div class="sport sport-image sport-motorsports" data-coverage-sport="Motorsport" onclick="IMG_Coverage_Click('Motorsport');return false;" aria-label="Open Motorsport leagues"><strong>Motorsports</strong><span>Race results. Drivers.<br>Championships.</span></div><div class="sport sport-image sport-combat" data-coverage-sport="Combat Sports" onclick="IMG_Coverage_Click('Combat Sports');return false;" aria-label="Open Combat Sports leagues"><strong>Combat Sports</strong><span>Events. Fighters.<br>Results.</span></div><div class="sport sport-image sport-american" data-coverage-sport="American Football" onclick="IMG_Coverage_Click('American Football');return false;" aria-label="Open American Football leagues"><strong>American Football</strong><span>Schedules. Stats.<br>Live updates.</span></div></div></section>
 </main>
 
-<section id="img-highlights" aria-label="Sports Highlights" hidden>
+<section id="img-highlights" aria-label="Sports Highlights">
   <div class="highlights-head">
     <div class="eyebrow">HIGHLIGHTS</div>
     <h2>Latest Highlights</h2>
@@ -448,11 +448,23 @@ async function IMG_loadHighlights(){
     if(!r.ok) throw new Error('highlights endpoint '+r.status);
     const data=await r.json();
     const items=Array.isArray(data.items)?data.items.filter(x=>x && x.title && (x.embed_url || x.watch_url)):[];
-    if(!items.length){section.hidden=true;grid.innerHTML='';return;}
+    if(!items.length){
+      const fallback=[{league:'FIBA',title:'Jordan vs Philippines — Game Highlights | FIBA Basketball World Cup 2027 Asian Qualifiers',source:'FIBA Basketball (Official)',video_id:'k4FJ6SjxFBM',watch_url:'https://www.youtube.com/watch?v=k4FJ6SjxFBM',embed_url:'https://www.youtube.com/embed/k4FJ6SjxFBM?autoplay=1&rel=0',thumbnail:'https://i.ytimg.com/vi/k4FJ6SjxFBM/hqdefault.jpg',published_at:'2026-08-29T00:00:00Z'}];
+      grid.innerHTML=fallback.map((item,i)=>`<button type="button" class="highlight-card" data-highlight-index="${i}" aria-label="Watch ${IMG_escapeHighlightText(item.title)}"><div class="highlight-thumb"><img src="${item.thumbnail}" alt="" loading="lazy"><span class="highlight-play">▶</span></div><div class="highlight-body"><div class="highlight-league">${IMG_escapeHighlightText(item.league)}</div><div class="highlight-title">${IMG_escapeHighlightText(item.title)}</div><div class="highlight-meta">${IMG_escapeHighlightText(item.source)}</div></div></button>`).join('');
+      grid.querySelectorAll('[data-highlight-index]').forEach(btn=>btn.addEventListener('click',()=>IMG_openHighlight(fallback[Number(btn.dataset.highlightIndex)])));
+      section.hidden=false;
+      return;
+    }
     grid.innerHTML=items.map((item,i)=>`<button type="button" class="highlight-card" data-highlight-index="${i}" aria-label="Watch ${IMG_escapeHighlightText(item.title)}"><div class="highlight-thumb">${item.thumbnail?`<img src="${IMG_escapeHighlightText(item.thumbnail)}" alt="" loading="lazy">`:''}<span class="highlight-play">▶</span></div><div class="highlight-body"><div class="highlight-league">${IMG_escapeHighlightText(item.league||'Sports')}</div><div class="highlight-title">${IMG_escapeHighlightText(item.title)}</div><div class="highlight-meta">${IMG_escapeHighlightText(item.source||'Official channel')}</div></div></button>`).join('');
     grid.querySelectorAll('[data-highlight-index]').forEach(btn=>btn.addEventListener('click',()=>IMG_openHighlight(items[Number(btn.dataset.highlightIndex)])));
     section.hidden=false;
-  }catch(e){section.hidden=true;grid.innerHTML='';console.warn('IMG highlights unavailable:',e);}
+  }catch(e){
+    const fallback={league:'FIBA',title:'Jordan vs Philippines — Game Highlights | FIBA Basketball World Cup 2027 Asian Qualifiers',source:'FIBA Basketball (Official)',video_id:'k4FJ6SjxFBM',watch_url:'https://www.youtube.com/watch?v=k4FJ6SjxFBM',embed_url:'https://www.youtube.com/embed/k4FJ6SjxFBM?autoplay=1&rel=0',thumbnail:'https://i.ytimg.com/vi/k4FJ6SjxFBM/hqdefault.jpg'};
+    grid.innerHTML=`<button type="button" class="highlight-card" data-highlight-fallback aria-label="Watch ${IMG_escapeHighlightText(fallback.title)}"><div class="highlight-thumb"><img src="${fallback.thumbnail}" alt="" loading="lazy"><span class="highlight-play">▶</span></div><div class="highlight-body"><div class="highlight-league">${fallback.league}</div><div class="highlight-title">${IMG_escapeHighlightText(fallback.title)}</div><div class="highlight-meta">${fallback.source}</div></div></button>`;
+    grid.querySelector('[data-highlight-fallback]').addEventListener('click',()=>IMG_openHighlight(fallback));
+    section.hidden=false;
+    console.warn('IMG highlights API unavailable; showing official fallback highlight:',e);
+  }
 }
 document.addEventListener('click',e=>{if(e.target.matches('[data-highlight-close]')) IMG_closeHighlight();});
 document.addEventListener('keydown',e=>{if(e.key==='Escape') IMG_closeHighlight();});
