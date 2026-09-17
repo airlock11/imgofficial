@@ -844,9 +844,9 @@ function IMGUniversalLeagueProfile(name,sport){
     <h3>League Overview</h3>
     <p>This IMG profile organizes the competition's key information in one place, including teams or participants, standings, schedule, results, statistics and verified news.</p>
     <div class="ld-stat-grid">
-     <div><b>${esc(location)}</b><small>Region</small></div>
-     <div><b>${esc(sport||"Sports")}</b><small>Sport</small></div>
-     <div><b>2026</b><small>Profile year</small></div>
+     <div><small>Region</small><b>${esc(location)}</b></div>
+     <div><small>Sport</small><b>${esc(sport||"Sports")}</b></div>
+     <div><small>Profile year</small><b>2026</b></div>
     </div>
    </div>
    <div class="ld-grid">
@@ -1578,9 +1578,16 @@ window.IMGOpenLeagueDetail=openDetail;
     word-break:break-word !important;
   }
   .league-detail .ld-stat-grid small{
-    font-size:10px !important;
+    font-size:11px !important;
     white-space:nowrap;
+    text-align:left;
+    align-self:center;
+    opacity:.68;
+    min-width:0;
+  }
+  .league-detail .ld-stat-grid b{
     text-align:right;
+    justify-self:end;
   }
   .league-detail .ld-grid,
   .league-detail .ld-two-col,
