@@ -1517,6 +1517,41 @@ window.IMGOpenLeagueDetail=openDetail;
 <style id="img-mobile-league-profile-final">
 /* Mobile-first league profile polish: keeps every field inside the viewport. */
 @media (max-width: 640px){
+  /* Compact mobile tables: readable without forcing horizontal overflow. */
+  .league-detail .table-wrap{
+    width:100%;
+    max-width:100%;
+    overflow-x:hidden;
+  }
+  .league-detail .table-wrap table,
+  .league-detail table.ld-table{
+    width:100%;
+    table-layout:fixed;
+    border-collapse:collapse;
+  }
+  .league-detail .table-wrap th,
+  .league-detail .table-wrap td,
+  .league-detail table.ld-table th,
+  .league-detail table.ld-table td{
+    font-size:12px !important;
+    line-height:1.25 !important;
+    padding:7px 5px !important;
+    vertical-align:middle;
+    overflow-wrap:anywhere;
+    word-break:break-word;
+  }
+  .league-detail .table-wrap th,
+  .league-detail table.ld-table th{
+    font-size:11px !important;
+    white-space:normal;
+  }
+  .league-detail .table-wrap th:nth-child(1),
+  .league-detail .table-wrap td:nth-child(1){width:auto;}
+  .league-detail .table-wrap th:nth-child(2),
+  .league-detail .table-wrap td:nth-child(2){width:64px;}
+  .league-detail .table-wrap th:nth-child(3),
+  .league-detail .table-wrap td:nth-child(3){width:58px;}
+
   #img-league-detail.search-origin{
     width:calc(100vw - 20px) !important;
     max-width:calc(100vw - 20px) !important;
