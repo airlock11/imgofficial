@@ -172,36 +172,6 @@ img {
 }
 
 
-/* IMG Live Broadcast */
-#img-live-broadcasts{padding:18px 6% 38px;max-width:1300px;margin:auto}
-#img-live-broadcasts[hidden]{display:none!important}
-.broadcast-head{margin-bottom:20px}
-.broadcast-head h2{margin:0;font-size:clamp(30px,3.8vw,46px);line-height:1.05}
-.broadcast-head p{margin:8px 0 0;color:#9da6b2;line-height:1.5}
-.broadcast-list{display:flex;flex-wrap:wrap;gap:14px;align-items:stretch}
-.broadcast-card{width:132px;min-height:142px;border:1px solid #29313d;border-radius:14px;background:#0b0f14;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:14px;cursor:pointer;transition:transform .16s ease,border-color .16s ease,background .16s ease;position:relative}
-.broadcast-card:hover,.broadcast-card:focus-visible{transform:translateY(-2px);border-color:#526071;background:#111720;outline:none}
-.broadcast-card img{width:82px;height:82px;object-fit:contain;display:block;pointer-events:none}
-.broadcast-card-name{font-weight:700;font-size:12px;text-align:center;line-height:1.25}
-.broadcast-live{font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:4px 8px;border-radius:999px;background:#e31b3f;color:#fff}
-.broadcast-modal{position:fixed;inset:0;z-index:26000;display:flex;align-items:center;justify-content:center;padding:20px}
-.broadcast-modal[hidden]{display:none!important}
-.broadcast-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.78);backdrop-filter:blur(5px)}
-.broadcast-dialog{position:relative;width:min(1000px,96vw);background:#080c11;border:1px solid #2b3440;border-radius:18px;box-shadow:0 28px 100px rgba(0,0,0,.65);overflow:hidden;z-index:1}
-.broadcast-dialog-head{padding:18px 54px 14px 20px}
-.broadcast-dialog-head h3{margin:5px 0 3px;font-size:22px}
-.broadcast-dialog-head p{margin:0;color:#9da6b2;font-size:12px}
-.broadcast-platforms{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
-.broadcast-platform-link{display:inline-flex;align-items:center;gap:6px;padding:8px 11px;border:1px solid #2b3440;border-radius:9px;background:#111720;color:#fff;text-decoration:none;font-size:11px;font-weight:700}
-.broadcast-platform-link:hover{border-color:#596779;background:#171e28}
-.broadcast-live-pill{display:inline-block;color:#fff;background:#e31b3f;border-radius:999px;padding:4px 9px;font-size:10px;font-weight:800;letter-spacing:.08em}
-.broadcast-close{position:absolute;right:12px;top:10px;width:40px;height:40px;border:0;border-radius:10px;background:#171d25;color:#fff;font-size:27px;line-height:1;cursor:pointer;z-index:2}
-.broadcast-video-wrap{position:relative;background:#000;aspect-ratio:16/9}
-.broadcast-video-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.broadcast-fallback{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:30px;text-align:center;color:#c7ced8;background:#080c11}
-@media(max-width:600px){#img-live-broadcasts{padding:10px 16px 30px}.broadcast-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.broadcast-card{width:auto;min-height:118px;padding:10px}.broadcast-card img{width:64px;height:64px}.broadcast-dialog{width:100%;border-radius:14px}.broadcast-modal{padding:10px}.broadcast-dialog-head{padding:14px 48px 10px 14px}}
-
-
 /* Highlights */
 #img-highlights{padding:18px 6% 46px;max-width:1300px;margin:auto}
 #img-highlights[hidden]{display:none!important}
@@ -295,41 +265,10 @@ img {
 <section id="sports"><div class="sectionhead"><div><div class="eyebrow">SPORTS COVERAGE</div><h2>One destination.</h2></div></div><p class="section-intro">Follow your favorite sports, all in one place. Get live scores, news and statistics from leagues around the world.</p><div class="sports sports-image-grid"><div class="sport sport-image sport-basketball" data-coverage-sport="Basketball" onclick="IMG_Coverage_Click('Basketball');return false;" aria-label="Open Basketball leagues"><strong>Basketball</strong><span>Leagues. Teams. Players.<br>Live scores.</span></div><div class="sport sport-image sport-football" data-coverage-sport="Football" onclick="IMG_Coverage_Click('Football');return false;" aria-label="Open Football leagues"><strong>Football</strong><span>Global leagues.<br>Real-time scores.</span></div><div class="sport sport-image sport-tennis" data-coverage-sport="Tennis" onclick="IMG_Coverage_Click('Tennis');return false;" aria-label="Open Tennis leagues"><strong>Tennis</strong><span>Tournaments. Rankings.<br>Live results.</span></div><div class="sport sport-image sport-baseball" data-coverage-sport="Baseball" onclick="IMG_Coverage_Click('Baseball');return false;" aria-label="Open Baseball leagues"><strong>Baseball</strong><span>Standings. Stats.<br>Game updates.</span></div><div class="sport sport-image sport-hockey" data-coverage-sport="Hockey" onclick="IMG_Coverage_Click('Hockey');return false;" aria-label="Open Hockey leagues"><strong>Hockey</strong><span>Scores. Schedules.<br>Player stats.</span></div><div class="sport sport-image sport-cricket" data-coverage-sport="Cricket" onclick="IMG_Coverage_Click('Cricket');return false;" aria-label="Open Cricket leagues"><strong>Cricket</strong><span>Live matches.<br>Series. Stats.</span></div><div class="sport sport-image sport-volleyball" data-coverage-sport="Volleyball" onclick="IMG_Coverage_Click('Volleyball');return false;" aria-label="Open Volleyball leagues"><strong>Volleyball</strong><span>Matches. Teams.<br>Live scores.</span></div><div class="sport sport-image sport-motorsports" data-coverage-sport="Motorsport" onclick="IMG_Coverage_Click('Motorsport');return false;" aria-label="Open Motorsport leagues"><strong>Motorsports</strong><span>Race results. Drivers.<br>Championships.</span></div><div class="sport sport-image sport-combat" data-coverage-sport="Combat Sports" onclick="IMG_Coverage_Click('Combat Sports');return false;" aria-label="Open Combat Sports leagues"><strong>Combat Sports</strong><span>Events. Fighters.<br>Results.</span></div><div class="sport sport-image sport-american" data-coverage-sport="American Football" onclick="IMG_Coverage_Click('American Football');return false;" aria-label="Open American Football leagues"><strong>American Football</strong><span>Schedules. Stats.<br>Live updates.</span></div></div></section>
 </main>
 
-<section id="img-live-broadcasts" aria-label="Live Broadcast" hidden>
-  <div class="broadcast-head">
-    <div>
-      <div class="eyebrow">LIVE NOW</div>
-      <h2>Live Broadcast</h2>
-      <p>Only leagues with a verified live broadcast are shown.</p>
-    </div>
-  </div>
-  <div id="img-broadcast-list" class="broadcast-list"></div>
-</section>
-
-<div id="img-broadcast-modal" class="broadcast-modal" hidden aria-hidden="true">
-  <div class="broadcast-backdrop" data-broadcast-close></div>
-  <div class="broadcast-dialog" role="dialog" aria-modal="true" aria-labelledby="img-broadcast-title">
-    <button class="broadcast-close" type="button" data-broadcast-close aria-label="Close live broadcast">×</button>
-    <div class="broadcast-dialog-head">
-      <div>
-        <div class="broadcast-live-pill">● LIVE</div>
-        <h3 id="img-broadcast-title">Live Broadcast</h3>
-        <p id="img-broadcast-meta"></p>
-        <div id="img-broadcast-platforms" class="broadcast-platforms" hidden></div>
-      </div>
-    </div>
-    <div class="broadcast-video-wrap">
-      <iframe id="img-broadcast-frame" title="Live broadcast" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>
-      <div id="img-broadcast-fallback" class="broadcast-fallback" hidden></div>
-    </div>
-  </div>
-</div>
-
-
 <section id="img-highlights" aria-label="Sports Highlights" hidden>
   <div class="highlights-head">
-    <div class="eyebrow">OFFICIAL HIGHLIGHTS</div>
-    <h2>Latest Highlights.</h2>
+    <div class="eyebrow">HIGHLIGHTS</div>
+    <h2>Latest Highlights</h2>
     <p>Watch the latest highlights from official sports league, federation and broadcaster channels.</p>
   </div>
   <div id="img-highlights-grid" class="highlights-grid"></div>
@@ -510,7 +449,7 @@ async function IMG_loadHighlights(){
     const data=await r.json();
     const items=Array.isArray(data.items)?data.items.filter(x=>x && x.title && (x.embed_url || x.watch_url)):[];
     if(!items.length){section.hidden=true;grid.innerHTML='';return;}
-    grid.innerHTML=items.map((item,i)=>`<button type="button" class="highlight-card" data-highlight-index="${i}" aria-label="Watch ${IMG_escapeBroadcastText(item.title)}"><div class="highlight-thumb">${item.thumbnail?`<img src="${IMG_escapeBroadcastText(item.thumbnail)}" alt="" loading="lazy">`:''}<span class="highlight-play">▶</span></div><div class="highlight-body"><div class="highlight-league">${IMG_escapeBroadcastText(item.league||'Sports')}</div><div class="highlight-title">${IMG_escapeBroadcastText(item.title)}</div><div class="highlight-meta">${IMG_escapeBroadcastText(item.source||'Official channel')}</div></div></button>`).join('');
+    grid.innerHTML=items.map((item,i)=>`<button type="button" class="highlight-card" data-highlight-index="${i}" aria-label="Watch ${IMG_escapeHighlightText(item.title)}"><div class="highlight-thumb">${item.thumbnail?`<img src="${IMG_escapeHighlightText(item.thumbnail)}" alt="" loading="lazy">`:''}<span class="highlight-play">▶</span></div><div class="highlight-body"><div class="highlight-league">${IMG_escapeHighlightText(item.league||'Sports')}</div><div class="highlight-title">${IMG_escapeHighlightText(item.title)}</div><div class="highlight-meta">${IMG_escapeHighlightText(item.source||'Official channel')}</div></div></button>`).join('');
     grid.querySelectorAll('[data-highlight-index]').forEach(btn=>btn.addEventListener('click',()=>IMG_openHighlight(items[Number(btn.dataset.highlightIndex)])));
     section.hidden=false;
   }catch(e){section.hidden=true;grid.innerHTML='';console.warn('IMG highlights unavailable:',e);}
@@ -520,65 +459,6 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape') IMG_closeHighlight(
 IMG_loadHighlights();
 setInterval(IMG_loadHighlights,900000);
 
-const IMG_BROADCAST_API = 'https://img-api-proxy.magsipocarnie.workers.dev/broadcasts';
-
-function IMG_escapeBroadcastText(value){
-  return String(value||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-}
-function IMG_openBroadcast(item){
-  const modal=document.getElementById('img-broadcast-modal');
-  const frame=document.getElementById('img-broadcast-frame');
-  const title=document.getElementById('img-broadcast-title');
-  const meta=document.getElementById('img-broadcast-meta');
-  const fallback=document.getElementById('img-broadcast-fallback');
-  const platforms=document.getElementById('img-broadcast-platforms');
-  title.textContent=item.title || item.league || 'Live Broadcast';
-  meta.textContent=item.source ? `Live via ${item.source}` : 'Live broadcast';
-  fallback.hidden=true;
-  fallback.innerHTML='';
-  frame.hidden=false;
-  frame.src=item.embed_url || '';
-  const links=Array.isArray(item.platforms)?item.platforms.filter(p=>p && p.url):[];
-  if(links.length){
-    platforms.innerHTML='<span style="width:100%;color:#9da6b2;font-size:11px;font-weight:700">Other official viewing options</span>'+links.map(p=>`<a class="broadcast-platform-link" href="${IMG_escapeBroadcastText(p.url)}" target="_blank" rel="noopener noreferrer">${IMG_escapeBroadcastText(p.name||'Watch Live')}</a>`).join('');
-    platforms.hidden=false;
-  }else{
-    platforms.innerHTML=''; platforms.hidden=true;
-  }
-  if(!frame.src && item.watch_url){
-    frame.hidden=true;
-    fallback.hidden=false;
-    fallback.innerHTML=`<div>Live stream available on the official broadcaster.<br><br><a class="btn" href="${IMG_escapeBroadcastText(item.watch_url)}" target="_blank" rel="noopener noreferrer">Watch Live</a></div>`;
-  }
-  modal.hidden=false; modal.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden';
-}
-function IMG_closeBroadcast(){
-  const modal=document.getElementById('img-broadcast-modal');
-  const frame=document.getElementById('img-broadcast-frame');
-  const platforms=document.getElementById('img-broadcast-platforms');
-  frame.src=''; modal.hidden=true; modal.setAttribute('aria-hidden','true'); document.body.style.overflow='';
-  if(platforms){platforms.innerHTML='';platforms.hidden=true;}
-}
-async function IMG_loadBroadcasts(){
-  const section=document.getElementById('img-live-broadcasts');
-  const list=document.getElementById('img-broadcast-list');
-  try{
-    const r=await fetch(IMG_BROADCAST_API,{cache:'no-store'});
-    if(!r.ok) throw new Error('broadcast endpoint '+r.status);
-    const data=await r.json();
-    const items=Array.isArray(data.items)?data.items.filter(x=>x && x.league && (x.embed_url || x.watch_url)):[ ];
-    if(!items.length){section.hidden=true;list.innerHTML='';return;}
-    list.innerHTML=items.map((item,i)=>`<button type="button" class="broadcast-card" data-broadcast-index="${i}" aria-label="Watch ${IMG_escapeBroadcastText(item.league)} live broadcast">${item.logo_url?`<img src="${IMG_escapeBroadcastText(item.logo_url)}" alt="${IMG_escapeBroadcastText(item.league)} logo">`:''}<span class="broadcast-card-name">${IMG_escapeBroadcastText(item.league)}</span><span class="broadcast-live">● Live</span></button>`).join('');
-    list.querySelectorAll('[data-broadcast-index]').forEach(btn=>btn.addEventListener('click',()=>IMG_openBroadcast(items[Number(btn.dataset.broadcastIndex)])));
-    section.hidden=false;
-  }catch(e){
-    section.hidden=true; list.innerHTML=''; console.warn('IMG broadcasts unavailable:',e);
-  }
-}
-document.addEventListener('click',e=>{if(e.target.matches('[data-broadcast-close]')) IMG_closeBroadcast();});
-document.addEventListener('keydown',e=>{if(e.key==='Escape') IMG_closeBroadcast();});
-IMG_loadBroadcasts();
-setInterval(IMG_loadBroadcasts,60000);
 
 loadHeroGame();
 setInterval(loadHeroGame,60000);

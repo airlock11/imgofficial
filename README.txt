@@ -1,11 +1,15 @@
-IMG NEWS-ONLY WEBSITE
+IMG Sports Website — Highlights Replacement
 
-Changes:
-- Removed the Upcoming Events panel from the homepage.
-- Removed the frontend /events calendar request.
-- Kept the automatic Latest News feed.
-- Kept the mixed Philippines + international news design.
+Changes in this version:
+- Removed the Live Broadcast / Live Streaming section and its popup player.
+- Removed all frontend polling of the /broadcasts endpoint.
+- Latest Highlights now occupies the position where Live Broadcast was shown.
+- Highlights are loaded from the Worker /highlights endpoint.
+- Highlights use official sports league, federation and broadcaster YouTube channels only.
+- Highlights section hides automatically if no verified highlight videos are returned.
+- Highlight cards open an in-site YouTube player.
+- Responsive: 4 columns desktop, 2 columns tablet/mobile.
+- Highlights refresh every 15 minutes.
 
-Deployment:
-Replace your GitHub Pages index.html with this index.html.
-Keep your existing Worker unless you separately want to update its news sources.
+Deploy this website ZIP to the GitHub Pages repository.
+The Worker ZIP should be deployed separately.
