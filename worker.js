@@ -5,153 +5,282 @@ export default {
     const cors = {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET, OPTIONS",
-      "Access-Control-Allow-Headers": "Content-Type"
+      "Access-Control-Allow-Headers": "Content-Type",
     };
 
     if (request.method === "OPTIONS") {
-      return new Response(null, { headers: cors });
+      return new Response(null, { status: 204, headers: cors });
     }
 
     if (url.pathname === "/games") {
       const upstream = new URL("https://api.balldontlie.io/v1/games");
-      const keys = ["start_date", "end_date", "dates[]", "seasons[]", "team_ids[]", "per_page", "cursor"];
-
-      for (const key of keys) {
+      for (const key of [
+        "start_date",
+        "end_date",
+        "dates[]",
+        "seasons[]",
+        "team_ids[]",
+        "per_page",
+        "cursor",
+      ]) {
         for (const value of url.searchParams.getAll(key)) {
           upstream.searchParams.append(key, value);
         }
       }
 
       const response = await fetch(upstream.toString(), {
-        headers: {
-          Authorization: env.BALLDONTLIE_API_KEY
-        }
+        headers: { Authorization: env.BALLDONTLIE_API_KEY },
       });
 
-      return new Response(await response.text(), {
+      const body = await response.text();
+      return new Response(body, {
         status: response.status,
         headers: {
           ...cors,
-          "Content-Type": "application/json",
-          "Cache-Control": "public, max-age=20"
-        }
+          "Content-Type": "application/json; charset=utf-8",
+          "Cache-Control": "public, max-age=20",
+        },
       });
     }
 
     if (url.pathname === "/news") {
       const feeds = [
-        ["Basketball", "https://www.oursportscentral.com/feeds/Basketball.xml"],
-        ["Baseball", "https://www.oursportscentral.com/feeds/Baseball.xml"],
-        ["Football", "https://www.oursportscentral.com/feeds/Football.xml"],
-        ["Hockey", "https://www.oursportscentral.com/feeds/Hockey.xml"],
-        ["Soccer", "https://www.oursportscentral.com/feeds/Soccer.xml"],
-        ["Other Sports", "https://www.oursportscentral.com/feeds/Other.xml"]
+        {
+          region: "Philippines",
+          sport: "Sports",
+          name: "Inquirer Sports",
+          url: "https://sports.inquirer.net/feed",
+        },
+        {
+          region: "Philippines",
+          sport: "Sports",
+          name: "Philstar Sports",
+          url: "https://www.philstar.com/rss/sports",
+        },
+        {
+          region: "Philippines",
+          sport: "Sports",
+          name: "GMA News Sports",
+          url: "https://data.gmanetwork.com/gno/rss/sports/feed.xml",
+        },
+        {
+          region: "Philippines",
+          sport: "Sports",
+          name: "Tiebreaker Times",
+          url: "https://tiebreakertimes.com.ph/feed",
+        },
+        {
+          region: "International",
+          sport: "Basketball",
+          name: "OurSports Central",
+          url: "https://www.oursportscentral.com/feeds/Basketball.xml",
+        },
+        {
+          region: "International",
+          sport: "Baseball",
+          name: "OurSports Central",
+          url: "https://www.oursportscentral.com/feeds/Baseball.xml",
+        },
+        {
+          region: "International",
+          sport: "Football",
+          name: "OurSports Central",
+          url: "https://www.oursportscentral.com/feeds/Football.xml",
+        },
+        {
+          region: "International",
+          sport: "Hockey",
+          name: "OurSports Central",
+          url: "https://www.oursportscentral.com/feeds/Hockey.xml",
+        },
+        {
+          region: "International",
+          sport: "Soccer",
+          name: "OurSports Central",
+          url: "https://www.oursportscentral.com/feeds/Soccer.xml",
+        },
+        {
+          region: "International",
+          sport: "Other Sports",
+          name: "OurSports Central",
+          url: "https://www.oursportscentral.com/feeds/Other.xml",
+        },
       ];
 
+      const requestedRegion = (url.searchParams.get("region") || "").toLowerCase();
       const requestedSport = (url.searchParams.get("sport") || "").toLowerCase();
-      const selected = requestedSport
-        ? feeds.filter(function (feed) {
-            return feed[0].toLowerCase() === requestedSport;
-          })
-        : feeds;
+      const limit = Math.min(Math.max(Number(url.searchParams.get("limit") || 12), 1), 30);
+
+      const selected = feeds.filter((feed) => {
+        const regionOK = !requestedRegion || feed.region.toLowerCase() === requestedRegion;
+        const sportOK = !requestedSport || feed.sport.toLowerCase() === requestedSport;
+        return regionOK && sportOK;
+      });
 
       const results = await Promise.allSettled(
-        selected.map(async function (feed) {
-          const sport = feed[0];
-          const feedUrl = feed[1];
-          const response = await fetch(feedUrl, {
-            headers: { "User-Agent": "IMG-Sports-Website/1.0" },
-            cf: { cacheTtl: 300, cacheEverything: true }
-          });
-
-          if (!response.ok) {
-            throw new Error(sport + " feed returned " + response.status);
-          }
-
-          return parseFeed(await response.text(), sport);
-        })
+        selected.map((feed) => fetchFeed(feed))
       );
 
       const items = results
-        .filter(function (result) {
-          return result.status === "fulfilled";
-        })
-        .flatMap(function (result) {
-          return result.value;
-        })
-        .sort(function (a, b) {
-          return new Date(b.published || 0) - new Date(a.published || 0);
-        })
-        .filter(function (item, index, array) {
-          return index === array.findIndex(function (other) {
-            return other.link === item.link;
-          });
-        })
-        .slice(0, 12);
+        .filter((result) => result.status === "fulfilled")
+        .flatMap((result) => result.value)
+        .filter((item) => item.title && item.link)
+        .sort((a, b) => dateValue(b.published) - dateValue(a.published))
+        .filter((item, index, all) => index === all.findIndex((x) => normalizeLink(x.link) === normalizeLink(item.link)))
+        .slice(0, limit);
 
-      return new Response(
-        JSON.stringify({
-          updated_at: new Date().toISOString(),
-          source: "OurSports Central RSS",
-          items: items
-        }),
+      // Only fetch article metadata for the stories that actually need an image.
+      // This avoids unnecessary requests to publishers.
+      const withImages = await mapWithConcurrency(items, 4, async (item) => {
+        if (item.image) return item;
+        const image = await articleImage(item.link);
+        return image ? { ...item, image } : item;
+      });
+
+      const philippinesCount = withImages.filter((item) => item.region === "Philippines").length;
+      const internationalCount = withImages.filter((item) => item.region === "International").length;
+
+      return jsonResponse(
         {
-          headers: {
-            ...cors,
-            "Content-Type": "application/json; charset=utf-8",
-            "Cache-Control": "public, max-age=300, s-maxage=300"
-          }
-        }
+          updated_at: new Date().toISOString(),
+          refresh_seconds: 900,
+          sources: selected.map(({ name, region, sport, url: feedUrl }) => ({
+            name,
+            region,
+            sport,
+            feed: feedUrl,
+          })),
+          counts: {
+            total: withImages.length,
+            philippines: philippinesCount,
+            international: internationalCount,
+          },
+          items: withImages,
+        },
+        cors,
+        300
       );
     }
 
     return new Response("IMG sports API proxy", {
       status: 200,
-      headers: cors
+      headers: cors,
     });
-  }
+  },
 };
 
-function parseFeed(xml, sport) {
+async function fetchFeed(feed) {
+  const response = await fetch(feed.url, {
+    headers: {
+      "User-Agent": "IMG-Sports-Website/1.0 (+https://imgofficial.com)",
+      Accept: "application/rss+xml, application/atom+xml, application/xml, text/xml;q=0.9, */*;q=0.1",
+    },
+    cf: { cacheTtl: 300, cacheEverything: true },
+  });
+
+  if (!response.ok) {
+    throw new Error(`${feed.name}: HTTP ${response.status}`);
+  }
+
+  const xml = await response.text();
+  return parseFeed(xml, feed);
+}
+
+function parseFeed(xml, feed) {
   const items = [];
-  const blocks = xml.match(/<item\b[\s\S]*?<\/item>/gi) || [];
+  const blocks = [
+    ...(xml.match(/<item\b[\s\S]*?<\/item>/gi) || []),
+    ...(xml.match(/<entry\b[\s\S]*?<\/entry>/gi) || []),
+  ];
 
   for (const block of blocks) {
-    const title = cleanXml(tag(block, "title"));
-    const link = cleanXml(tag(block, "link"));
-    const description = cleanXml(tag(block, "description"));
-    const published = cleanXml(tag(block, "pubDate")) || cleanXml(tag(block, "dc:date"));
+    const title = cleanXml(firstTag(block, ["title"]));
+    const link = extractLink(block);
+    const description = cleanXml(firstTag(block, ["description", "summary", "content:encoded"]));
+    const published = cleanXml(
+      firstTag(block, ["pubDate", "published", "updated", "dc:date"])
+    );
 
     if (!title || !link) continue;
 
     items.push({
       title: title.replace(/\s+/g, " ").trim(),
-      description: stripHtml(description).replace(/\s+/g, " ").trim().slice(0, 180),
-      link: link,
-      published: published,
+      description: stripHtml(description).replace(/\s+/g, " ").trim().slice(0, 220),
+      link,
+      published,
       image: extractImage(block, description),
-      sport: sport,
-      source: "OurSports Central"
+      sport: feed.sport,
+      source: feed.name,
+      region: feed.region,
     });
   }
 
   return items;
 }
 
+function extractLink(block) {
+  const atom = block.match(/<link\b[^>]*\bhref\s*=\s*["']([^"']+)["'][^>]*>/i);
+  if (atom?.[1]) return cleanXml(atom[1]);
+
+  const rss = firstTag(block, ["link"]);
+  return cleanXml(rss);
+}
+
 function extractImage(block, description) {
   const candidates = [
     tagAttr(block, "media:content", "url"),
     tagAttr(block, "media:thumbnail", "url"),
-    tagAttr(block, "enclosure", "url"),
-    tagAttr(block, "image", "url"),
     tagAttr(block, "media:content", "href"),
+    tagAttr(block, "enclosure", "url"),
     tagAttr(block, "enclosure", "href"),
-    firstImageUrl(description)
+    tagAttr(block, "image", "url"),
+    tagAttr(block, "media:group", "url"),
+    firstImageUrl(description),
   ];
 
   for (const value of candidates) {
     const cleaned = cleanXml(value);
-    if (/^https:\/\//i.test(cleaned)) return cleaned;
+    if (isHttpsUrl(cleaned)) return cleaned;
+  }
+  return "";
+}
+
+async function articleImage(link) {
+  try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 4000);
+
+    const response = await fetch(link, {
+      headers: {
+        "User-Agent": "IMG-Sports-Website/1.0 (+https://imgofficial.com)",
+        Accept: "text/html,application/xhtml+xml;q=0.9,*/*;q=0.1",
+      },
+      signal: controller.signal,
+      cf: { cacheTtl: 900, cacheEverything: true },
+    });
+
+    clearTimeout(timeout);
+    if (!response.ok) return "";
+
+    const html = (await response.text()).slice(0, 350000);
+    return extractMetaImage(html);
+  } catch (_) {
+    return "";
+  }
+}
+
+function extractMetaImage(html) {
+  const patterns = [
+    /<meta[^>]+(?:property|name)\s*=\s*["']og:image(?::secure_url)?["'][^>]+content\s*=\s*["']([^"']+)["']/i,
+    /<meta[^>]+content\s*=\s*["']([^"']+)["'][^>]+(?:property|name)\s*=\s*["']og:image(?::secure_url)?["']/i,
+    /<meta[^>]+(?:property|name)\s*=\s*["']twitter:image(?::src)?["'][^>]+content\s*=\s*["']([^"']+)["']/i,
+    /<meta[^>]+content\s*=\s*["']([^"']+)["'][^>]+(?:property|name)\s*=\s*["']twitter:image(?::src)?["']/i,
+  ];
+
+  for (const pattern of patterns) {
+    const match = html.match(pattern);
+    const value = match ? cleanXml(match[1]) : "";
+    if (isHttpsUrl(value)) return value;
   }
 
   return "";
@@ -159,20 +288,27 @@ function extractImage(block, description) {
 
 function tagAttr(block, name, attr) {
   const escapedName = name.replace(/:/g, "\\:");
-  const pattern = "<" + escapedName + "\\b[^>]*\\b" + attr + "\\s*=\\s*[\\\"']([^\\\"']+)[\\\"']";
-  const match = block.match(new RegExp(pattern, "i"));
+  const regex = new RegExp(
+    "<" + escapedName + "\\b[^>]*\\b" + attr + "\\s*=\\s*[\\\"']([^\\\"']+)[\\\"']",
+    "i"
+  );
+  const match = block.match(regex);
   return match ? match[1] : "";
 }
 
 function firstImageUrl(value) {
-  const match = String(value || "").match(/<img\b[^>]*\bsrc\s*=\s*[\"'](https:\/\/[^\"']+)[\"']/i);
+  const match = String(value || "").match(/<img\b[^>]*\bsrc\s*=\s*["'](https:\/\/[^"']+)["']/i);
   return match ? match[1] : "";
 }
 
-function tag(block, name) {
-  const pattern = "<" + name + "[^>]*>([\\s\\S]*?)<\\/" + name + ">";
-  const match = block.match(new RegExp(pattern, "i"));
-  return match ? match[1] : "";
+function firstTag(block, names) {
+  for (const name of names) {
+    const escapedName = name.replace(/:/g, "\\:");
+    const regex = new RegExp(`<${escapedName}(?:\\s[^>]*)?>([\\s\\S]*?)<\\/${escapedName}>`, "i");
+    const match = block.match(regex);
+    if (match) return match[1];
+  }
+  return "";
 }
 
 function cleanXml(value) {
@@ -184,12 +320,62 @@ function cleanXml(value) {
     .replace(/&gt;/g, ">")
     .replace(/&quot;/g, '"')
     .replace(/&#39;|&apos;/g, "'")
-    .replace(/&#(\d+);/g, function (_, n) {
-      return String.fromCodePoint(Number(n));
+    .replace(/&#(\d+);/g, (_, n) => {
+      try { return String.fromCodePoint(Number(n)); } catch (_) { return ""; }
     })
     .trim();
 }
 
 function stripHtml(value) {
   return String(value || "").replace(/<[^>]*>/g, " ");
+}
+
+function isHttpsUrl(value) {
+  return /^https:\/\//i.test(String(value || ""));
+}
+
+function normalizeLink(value) {
+  try {
+    const u = new URL(value);
+    u.hash = "";
+    return u.toString().replace(/\/$/, "");
+  } catch (_) {
+    return String(value || "").trim();
+  }
+}
+
+function dateValue(value) {
+  const time = Date.parse(value || "");
+  return Number.isFinite(time) ? time : 0;
+}
+
+async function mapWithConcurrency(items, concurrency, mapper) {
+  const output = new Array(items.length);
+  let cursor = 0;
+
+  async function worker() {
+    while (true) {
+      const index = cursor++;
+      if (index >= items.length) return;
+      output[index] = await mapper(items[index], index);
+    }
+  }
+
+  const workers = Array.from(
+    { length: Math.min(concurrency, items.length) },
+    () => worker()
+  );
+  await Promise.all(workers);
+  return output;
+}
+
+function jsonResponse(data, cors, cacheSeconds) {
+  return new Response(JSON.stringify(data), {
+    status: 200,
+    headers: {
+      ...cors,
+      "Content-Type": "application/json; charset=utf-8",
+      "Cache-Control": `public, max-age=${cacheSeconds}, s-maxage=${cacheSeconds}`,
+    },
+  });
 }
