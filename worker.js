@@ -45,6 +45,14 @@ export default {
 
     if (url.pathname === "/news") {
       const feeds = [
+        { region: "International", sport: "All Sports", name: "BBC Sport", url: "https://feeds.bbci.co.uk/sport/rss.xml" },
+        { region: "International", sport: "All Sports", name: "ESPN", url: "https://www.espn.com/espn/rss/news" },
+        { region: "International", sport: "All Sports", name: "Sky Sports", url: "https://www.skysports.com/rss/12040" },
+        { region: "International", sport: "All Sports", name: "The Guardian Sport", url: "https://www.theguardian.com/uk/sport/rss" },
+        { region: "International", sport: "Tennis", name: "The Guardian Tennis", url: "https://www.theguardian.com/sport/tennis/rss" },
+        { region: "International", sport: "Football", name: "The Guardian Football", url: "https://www.theguardian.com/football/rss" },
+        { region: "International", sport: "Rugby", name: "The Guardian Rugby", url: "https://www.theguardian.com/sport/rugby-union/rss" },
+        { region: "International", sport: "Formula 1", name: "The Guardian F1", url: "https://www.theguardian.com/sport/formulaone/rss" },
         {
           region: "Philippines",
           sport: "Sports",
@@ -126,12 +134,20 @@ export default {
         .flatMap((result) => result.value)
         .filter((item) => item.title && item.link)
         .sort((a, b) => dateValue(b.published) - dateValue(a.published))
-        .filter((item, index, all) => index === all.findIndex((x) => normalizeLink(x.link) === normalizeLink(item.link)))
-        .slice(0, limit);
+        .filter((item, index, all) => index === all.findIndex((x) => normalizeLink(x.link) === normalizeLink(item.link)));
+
+      // Use a fresh pool, then randomize the mix so the homepage is not
+      // dominated by Philippines stories or a single sport/source.
+      const pool = items.slice(0, Math.min(items.length, Math.max(limit * 4, 24)));
+      for (let i = pool.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [pool[i], pool[j]] = [pool[j], pool[i]];
+      }
+      const mixedItems = pool.slice(0, limit);
 
       // Only fetch article metadata for the stories that actually need an image.
       // This avoids unnecessary requests to publishers.
-      const withImages = await mapWithConcurrency(items, 4, async (item) => {
+      const withImages = await mapWithConcurrency(mixedItems, 4, async (item) => {
         if (item.image) return item;
         const image = await articleImage(item.link);
         return image ? { ...item, image } : item;
