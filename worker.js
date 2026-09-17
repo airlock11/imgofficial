@@ -89,16 +89,47 @@ function parseFeed(xml, sport) {
     const description = cleanXml(tag(block, "description"));
     const published = cleanXml(tag(block, "pubDate")) || cleanXml(tag(block, "dc:date"));
     if (!title || !link) continue;
+    const image = extractImage(block, description);
     items.push({
       title: title.replace(/\s+/g, " ").trim(),
       description: stripHtml(description).replace(/\s+/g, " ").trim().slice(0, 180),
       link,
       published,
+      image,
       sport,
       source: "OurSports Central"
     });
   }
   return items;
+}
+
+function extractImage(block, description) {
+  const candidates = [
+    tagAttr(block, "media:content", "url"),
+    tagAttr(block, "media:thumbnail", "url"),
+    tagAttr(block, "enclosure", "url"),
+    tagAttr(block, "image", "url"),
+    tagAttr(block, "media:content", "href"),
+    tagAttr(block, "enclosure", "href"),
+    firstImageUrl(description)
+  ];
+  for (const value of candidates) {
+    const cleaned = cleanXml(value);
+    if (/^https:\/\//i.test(cleaned)) return cleaned;
+  }
+  return "";
+}
+
+function tagAttr(block, name, attr) {
+  const escapedName = name.replace(/:/g, "\\:");
+  const re = new RegExp("<" + escapedName + "\\b[^>]*\\b" + attr + "\\s*=\\s*[\"']([^\"']+)[\"']", "i");
+  const match = block.match(re);
+  return match ? match[1] : "";
+}
+
+function firstImageUrl(value) {
+  const match = String(value || "").match(/<img\\b[^>]*\\bsrc\\s*=\\s*[\"'](https:\/\\/[^\"']+)[\"']/i);
+  return match ? match[1] : "";
 }
 
 function tag(block, name) {
