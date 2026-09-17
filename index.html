@@ -265,18 +265,13 @@ img {
 <section id="sports"><div class="sectionhead"><div><div class="eyebrow">SPORTS COVERAGE</div><h2>One destination.</h2></div></div><p class="section-intro">Follow your favorite sports, all in one place. Get live scores, news and statistics from leagues around the world.</p><div class="sports sports-image-grid"><div class="sport sport-image sport-basketball" data-coverage-sport="Basketball" onclick="IMG_Coverage_Click('Basketball');return false;" aria-label="Open Basketball leagues"><strong>Basketball</strong><span>Leagues. Teams. Players.<br>Live scores.</span></div><div class="sport sport-image sport-football" data-coverage-sport="Football" onclick="IMG_Coverage_Click('Football');return false;" aria-label="Open Football leagues"><strong>Football</strong><span>Global leagues.<br>Real-time scores.</span></div><div class="sport sport-image sport-tennis" data-coverage-sport="Tennis" onclick="IMG_Coverage_Click('Tennis');return false;" aria-label="Open Tennis leagues"><strong>Tennis</strong><span>Tournaments. Rankings.<br>Live results.</span></div><div class="sport sport-image sport-baseball" data-coverage-sport="Baseball" onclick="IMG_Coverage_Click('Baseball');return false;" aria-label="Open Baseball leagues"><strong>Baseball</strong><span>Standings. Stats.<br>Game updates.</span></div><div class="sport sport-image sport-hockey" data-coverage-sport="Hockey" onclick="IMG_Coverage_Click('Hockey');return false;" aria-label="Open Hockey leagues"><strong>Hockey</strong><span>Scores. Schedules.<br>Player stats.</span></div><div class="sport sport-image sport-cricket" data-coverage-sport="Cricket" onclick="IMG_Coverage_Click('Cricket');return false;" aria-label="Open Cricket leagues"><strong>Cricket</strong><span>Live matches.<br>Series. Stats.</span></div><div class="sport sport-image sport-volleyball" data-coverage-sport="Volleyball" onclick="IMG_Coverage_Click('Volleyball');return false;" aria-label="Open Volleyball leagues"><strong>Volleyball</strong><span>Matches. Teams.<br>Live scores.</span></div><div class="sport sport-image sport-motorsports" data-coverage-sport="Motorsport" onclick="IMG_Coverage_Click('Motorsport');return false;" aria-label="Open Motorsport leagues"><strong>Motorsports</strong><span>Race results. Drivers.<br>Championships.</span></div><div class="sport sport-image sport-combat" data-coverage-sport="Combat Sports" onclick="IMG_Coverage_Click('Combat Sports');return false;" aria-label="Open Combat Sports leagues"><strong>Combat Sports</strong><span>Events. Fighters.<br>Results.</span></div><div class="sport sport-image sport-american" data-coverage-sport="American Football" onclick="IMG_Coverage_Click('American Football');return false;" aria-label="Open American Football leagues"><strong>American Football</strong><span>Schedules. Stats.<br>Live updates.</span></div></div></section>
 </main>
 
-<section id="img-highlights" aria-label="Sports Highlights">
+<section id="img-highlights" aria-label="Sports Highlights" hidden>
   <div class="highlights-head">
     <div class="eyebrow">HIGHLIGHTS</div>
     <h2>Latest Highlights</h2>
     <p>Watch the latest highlights from official sports league, federation and broadcaster channels.</p>
   </div>
-  <div id="img-highlights-grid" class="highlights-grid">
-    <button type="button" class="highlight-card" data-static-highlight="0" aria-label="Watch volleyball highlights"><div class="highlight-thumb"><img src="https://i.ytimg.com/vi/NrUvPTTzfZ0/hqdefault.jpg" alt="Volleyball highlights" loading="eager"><span class="highlight-play">▶</span></div><div class="highlight-body"><div class="highlight-league">Volleyball</div><div class="highlight-title">BULGARIA vs. ITALY | EXTENDED HIGHLIGHTS | 2025 FIVB Men's Volleyball Championship Finals</div><div class="highlight-meta">One Sports (Official)</div></div></button>
-    <button type="button" class="highlight-card" data-static-highlight="1" aria-label="Watch Philippines vs Iran highlights"><div class="highlight-thumb"><img src="https://i.ytimg.com/vi/MNIx0Ky0wIs/hqdefault.jpg" alt="Philippines vs Iran highlights" loading="eager"><span class="highlight-play">▶</span></div><div class="highlight-body"><div class="highlight-league">FIBA</div><div class="highlight-title">Philippines 🇵🇭 v Iran 🇮🇷 | Highlights | FIBA Basketball World Cup 2027 Asian Qualifiers</div><div class="highlight-meta">FIBA Basketball (Official)</div></div></button>
-    <button type="button" class="highlight-card" data-static-highlight="2" aria-label="Watch Philippines vs Iran extended highlights"><div class="highlight-thumb"><img src="https://i.ytimg.com/vi/vIidwJlqwQk/hqdefault.jpg" alt="Philippines vs Iran extended highlights" loading="eager"><span class="highlight-play">▶</span></div><div class="highlight-body"><div class="highlight-league">FIBA</div><div class="highlight-title">Philippines 🇵🇭 v Iran 🇮🇷 | Extended Highlights | FIBA Basketball World Cup 2027 Asian Qualifiers</div><div class="highlight-meta">FIBA Basketball (Official)</div></div></button>
-    <button type="button" class="highlight-card" data-static-highlight="3" aria-label="Watch Jordan vs Philippines highlights"><div class="highlight-thumb"><img src="https://i.ytimg.com/vi/k4FJ6SjxFBM/hqdefault.jpg" alt="Jordan vs Philippines highlights" loading="eager"><span class="highlight-play">▶</span></div><div class="highlight-body"><div class="highlight-league">FIBA</div><div class="highlight-title">Jordan vs Philippines | Game Highlights | FIBA Basketball World Cup 2027 Asian Qualifiers</div><div class="highlight-meta">FIBA Basketball (Official)</div></div></button>
-  </div>
+  <div id="img-highlights-grid" class="highlights-grid"></div>
 </section>
 
 <div id="img-highlight-modal" class="highlight-modal" hidden aria-hidden="true">
@@ -445,20 +440,13 @@ function IMG_closeHighlight(){
   const modal=document.getElementById('img-highlight-modal');
   document.getElementById('img-highlight-frame').src=''; modal.hidden=true; modal.setAttribute('aria-hidden','true'); document.body.style.overflow='';
 }
-const IMG_STATIC_HIGHLIGHTS=[
-  {league:'Volleyball',title:'BULGARIA vs. ITALY | EXTENDED HIGHLIGHTS | 2025 FIVB Men\'s Volleyball Championship Finals',source:'One Sports (Official)',video_id:'NrUvPTTzfZ0',watch_url:'https://www.youtube.com/watch?v=NrUvPTTzfZ0',embed_url:'https://www.youtube.com/embed/NrUvPTTzfZ0?autoplay=1&rel=0',thumbnail:'https://i.ytimg.com/vi/NrUvPTTzfZ0/hqdefault.jpg'},
-  {league:'FIBA',title:'Philippines 🇵🇭 v Iran 🇮🇷 | Highlights | FIBA Basketball World Cup 2027 Asian Qualifiers',source:'FIBA Basketball (Official)',video_id:'MNIx0Ky0wIs',watch_url:'https://www.youtube.com/watch?v=MNIx0Ky0wIs',embed_url:'https://www.youtube.com/embed/MNIx0Ky0wIs?autoplay=1&rel=0',thumbnail:'https://i.ytimg.com/vi/MNIx0Ky0wIs/hqdefault.jpg'},
-  {league:'FIBA',title:'Philippines 🇵🇭 v Iran 🇮🇷 | Extended Highlights | FIBA Basketball World Cup 2027 Asian Qualifiers',source:'FIBA Basketball (Official)',video_id:'vIidwJlqwQk',watch_url:'https://www.youtube.com/watch?v=vIidwJlqwQk',embed_url:'https://www.youtube.com/embed/vIidwJlqwQk?autoplay=1&rel=0',thumbnail:'https://i.ytimg.com/vi/vIidwJlqwQk/hqdefault.jpg'},
-  {league:'FIBA',title:'Jordan vs Philippines | Game Highlights | FIBA Basketball World Cup 2027 Asian Qualifiers',source:'FIBA Basketball (Official)',video_id:'k4FJ6SjxFBM',watch_url:'https://www.youtube.com/watch?v=k4FJ6SjxFBM',embed_url:'https://www.youtube.com/embed/k4FJ6SjxFBM?autoplay=1&rel=0',thumbnail:'https://i.ytimg.com/vi/k4FJ6SjxFBM/hqdefault.jpg'}
-];
-function IMG_bindStaticHighlights(){
-  document.querySelectorAll('[data-static-highlight]').forEach(btn=>btn.addEventListener('click',()=>IMG_openHighlight(IMG_STATIC_HIGHLIGHTS[Number(btn.dataset.staticHighlight)])));
-}
 function IMG_renderHighlights(items){
   const grid=document.getElementById('img-highlights-grid');
-  if(!grid || !Array.isArray(items) || !items.length) return;
+  const section=document.getElementById('img-highlights');
+  if(!grid || !section || !Array.isArray(items) || !items.length) return;
   grid.innerHTML=items.slice(0,12).map((item,i)=>`<button type="button" class="highlight-card" data-highlight-index="${i}" aria-label="Watch ${IMG_escapeHighlightText(item.title||'Sports highlight')}"><div class="highlight-thumb">${item.thumbnail?`<img src="${IMG_escapeHighlightText(item.thumbnail)}" alt="" loading="lazy">`:''}<span class="highlight-play">▶</span></div><div class="highlight-body"><div class="highlight-league">${IMG_escapeHighlightText(item.league||'Sports')}</div><div class="highlight-title">${IMG_escapeHighlightText(item.title||'Sports Highlight')}</div><div class="highlight-meta">${IMG_escapeHighlightText(item.source||'Official channel')}</div></div></button>`).join('');
   grid.querySelectorAll('[data-highlight-index]').forEach(btn=>btn.addEventListener('click',()=>IMG_openHighlight(items[Number(btn.dataset.highlightIndex)])));
+  section.hidden=false;
 }
 async function IMG_loadHighlights(){
   try{
@@ -466,19 +454,15 @@ async function IMG_loadHighlights(){
     if(!r.ok) throw new Error('highlights endpoint '+r.status);
     const data=await r.json();
     const apiItems=Array.isArray(data.items)?data.items.filter(x=>x && x.title && (x.embed_url || x.watch_url)):[];
-    // Keep guaranteed official cards and merge in automatically discovered cards.
-    const merged=[...apiItems,...IMG_STATIC_HIGHLIGHTS].filter((item,i,array)=>{
+    const uniqueItems=apiItems.filter((item,i,array)=>{
       const id=item.video_id || item.watch_url || item.title;
       return i===array.findIndex(x=>(x.video_id || x.watch_url || x.title)===id);
     }).slice(0,12);
-    IMG_renderHighlights(merged.length ? merged : IMG_STATIC_HIGHLIGHTS);
+    IMG_renderHighlights(uniqueItems);
   }catch(e){
-    // Built-in official highlights remain visible even when the API is unavailable.
-    IMG_renderHighlights(IMG_STATIC_HIGHLIGHTS);
-    console.warn('IMG highlights API unavailable; keeping built-in official highlights:',e);
+    console.warn('IMG highlights API unavailable:',e);
   }
 }
-IMG_bindStaticHighlights();
 IMG_loadHighlights();
 setInterval(IMG_loadHighlights,900000);
 
