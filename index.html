@@ -93,7 +93,7 @@ footer{border-top:1px solid #20242c;padding:30px 6%;color:#777f8c;text-align:cen
   .about-cta h3{font-size:22px}
   .about-cta .btn{width:100%}
 }
-.logo{color:inherit}.logo:hover{color:inherit}
+.logo{color:inherit}.logo:hover{color:inherit}.img-logo-image{display:block;width:92px;height:auto;max-height:42px;object-fit:contain}.logo{display:flex;align-items:center}@media(max-width:800px){.img-logo-image{width:78px;max-height:36px}}@media(max-width:420px){.img-logo-image{width:70px;max-height:32px}}
 .home-league-search{width:220px;margin-left:24px;position:relative}.home-league-search input{width:100%;padding:10px 13px;border:1px solid #303640;border-radius:8px;background:#11151c;color:#fff;font-size:13px;outline:none}.home-league-search input:focus{border-color:#fff}.home-league-search input::placeholder{color:#77808c}.home-search-dropdown{display:none;position:absolute;top:46px;left:0;width:320px;max-width:80vw;background:#0d1118;border:1px solid #303640;border-radius:10px;box-shadow:0 18px 45px #0009;overflow:hidden;z-index:1000}.home-search-dropdown.show{display:block}.home-search-item{display:block;width:100%;box-sizing:border-box;padding:11px 13px;margin:0;border:0;border-bottom:1px solid #222731;border-radius:0;background:#0d1118;color:#fff;cursor:pointer;text-align:left;font:inherit;appearance:none;-webkit-appearance:none}.home-search-item:last-child{border-bottom:0}.home-search-item:hover{background:#171c25}.home-search-item small{display:block;color:#8f98a5;margin-top:3px;font-size:11px}.home-search-empty{padding:12px;color:#8f98a5;font-size:12px}
 @media(max-width:800px){
   /* Mobile header: logo first, search directly underneath, navigation below */
@@ -157,12 +157,26 @@ footer{border-top:1px solid #20242c;padding:30px 6%;color:#777f8c;text-align:cen
 .coverage-league-item:hover,.coverage-league-item:focus-visible{background:#1a2028;border-color:rgba(255,255,255,.24);outline:none}
 @media(max-width:560px){.coverage-directory{padding:24px 16px;border-radius:18px;max-height:88vh}#coverage-directory-list{grid-template-columns:1fr}#coverage-directory-title{font-size:27px}}
 
+
+/* IMG media protection: deter casual saving/copying of website photography */
+img, .sport-image, .feature-card, .about-visual, .hero {
+  -webkit-user-select: none !important;
+  user-select: none !important;
+  -webkit-user-drag: none !important;
+}
+img {
+  pointer-events: none;
+}
+.sport-image, .feature-card, .about-visual, .hero {
+  -webkit-touch-callout: none;
+}
+
 </style>
 
 </head>
 <body>
 <header class="nav">
-<a href="#home" class="logo" onclick="showHome();return false;" aria-label="IMG Home"><b>IMG</b></a>
+<a href="#home" class="logo" onclick="showHome();return false;" aria-label="IMG Home"><img src="./img-logo-hq.png" alt="IMG" class="img-logo-image"></a>
 <div class="home-league-search"><input id="home-league-search" type="search" placeholder="Search leagues…" aria-label="Search leagues" autocomplete="off"><div id="home-search-dropdown" class="home-search-dropdown"></div></div>
 <nav class="navlinks">
 <a href="#home" class="active keep" onclick="showHome();return false;">Home</a>
@@ -1059,4 +1073,27 @@ window.IMGOpenLeagueDetail=openDetail;
   document.addEventListener('keydown',function(e){ if(e.key==='Escape' && modal.classList.contains('is-open')) hide(); });
 })();
 </script>
+
+<script>
+/* IMG media protection: blocks common right-click/save/drag gestures.
+   This deters casual copying; web images can never be made completely impossible to retrieve. */
+(function(){
+  document.addEventListener('contextmenu', function(e){
+    if (e.target.closest && (e.target.closest('img') || e.target.closest('.sport-image, .feature-card, .about-visual, .hero'))) {
+      e.preventDefault();
+    }
+  }, true);
+  document.addEventListener('dragstart', function(e){
+    if (e.target.closest && e.target.closest('img, .sport-image, .feature-card, .about-visual, .hero')) {
+      e.preventDefault();
+    }
+  }, true);
+  document.addEventListener('selectstart', function(e){
+    if (e.target.closest && e.target.closest('img, .sport-image, .feature-card, .about-visual, .hero')) {
+      e.preventDefault();
+    }
+  }, true);
+})();
+</script>
+
 </body></html>
