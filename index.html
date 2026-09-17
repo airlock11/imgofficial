@@ -203,6 +203,31 @@ img {
 @media(max-width:640px){.league-detail .ld-stat-grid{gap:6px}.league-detail .ld-stat-grid>div{padding:9px}.league-detail .ld-stat-grid b{font-size:18px}.league-detail .ld-card-head{align-items:flex-start;flex-direction:column}.league-detail .ld-two-col,.league-detail .team-grid{grid-template-columns:1fr}}
 </style>
 
+<style id="img-league-popup-final-fix">
+/* Final safeguard: leagues opened from the homepage search are always floating popups. */
+#img-league-detail.search-origin{
+  position:fixed !important;
+  inset:auto !important;
+  left:50% !important;
+  top:50% !important;
+  transform:translate(-50%,-50%) !important;
+  width:min(760px,calc(100vw - 32px)) !important;
+  height:min(78vh,720px) !important;
+  max-width:calc(100vw - 24px) !important;
+  max-height:calc(100vh - 24px) !important;
+  background:#0a0d12 !important;
+  border:1px solid #2a303a !important;
+  border-radius:18px !important;
+  box-shadow:0 24px 80px rgba(0,0,0,.65) !important;
+  padding:30px 24px 28px !important;
+  overflow:hidden !important;
+  z-index:21000 !important;
+}
+#img-league-detail.search-origin .ld-wrap{max-width:none !important;height:100% !important;overflow:auto !important}
+@media(max-width:800px){
+ #img-league-detail.search-origin{width:calc(100vw - 24px) !important;height:min(82vh,760px) !important;padding:26px 16px 22px !important;border-radius:16px !important}
+}
+</style>
 </head>
 <body>
 <header class="nav">
@@ -657,6 +682,11 @@ function canonicalLeagueName(name){
 }
 
 function IMGUniversalLeagueProfile(name,sport){
+ const fromHomeSearch=(window.homeSearchOpenedLeague || homeSearchOpenedLeague);
+ const searchClose=document.getElementById("ld-search-close");
+ if(searchClose) searchClose.style.display=fromHomeSearch?"block":"none";
+ const backLeagues=document.getElementById("ld-back-leagues");
+ if(backLeagues) backLeagues.style.display=fromHomeSearch?"none":"inline-block";
  const custom={
   "PBA":1,"NBA":1,"NBA G League":1,"B.LEAGUE":1,
   "NBL–Pilipinas":1,"Vietnam Basketball Association (VBA)":1,
@@ -674,6 +704,7 @@ function IMGUniversalLeagueProfile(name,sport){
  const browser=document.getElementById("img-league-browser");
  const root=document.getElementById("img-league-detail");
  if(!content||!title||!sub||!browser||!root) return false;
+ root.classList.toggle("search-origin", !!fromHomeSearch);
  content.replaceChildren();
  title.textContent=name;
  sub.textContent=(sport||"Sports")+" · "+location+" · League Profile";
@@ -1060,6 +1091,7 @@ window.closeLeagueDetail=function(){
  if(homeDrop){ homeDrop.classList.remove('show'); homeDrop.innerHTML=''; }
  homeSearchOpenedLeague=false;
  window.homeSearchOpenedLeague=false;
+  window.IMGLeagueSearchOrigin=false;
  if(fromHomeSearch) showHome();
 };
 window.IMGOpenLeagueDetail=openDetail;
@@ -1107,6 +1139,7 @@ window.IMGOpenLeagueDetail=openDetail;
       drop.innerHTML='';
       drop.classList.remove('show');
       window.homeSearchOpenedLeague=true;
+      window.IMGLeagueSearchOrigin=true;
       if(typeof window.IMGOpenLeagueDetail==='function') window.IMGOpenLeagueDetail(name,sport);
     }
 
@@ -1338,4 +1371,21 @@ window.IMGOpenLeagueDetail=openDetail;
 .img-auto-note{margin-top:12px;font-size:11px;opacity:.55;text-align:right}
 </style>
 
+<script id="img-league-popup-origin-safeguard">
+(function(){
+  var original=window.IMGOpenLeagueDetail;
+  if(!original || original.__imgPopupSafeguard) return;
+  function wrapped(name,sport){
+    var fromSearch=!!(window.homeSearchOpenedLeague || window.IMGLeagueSearchOrigin);
+    original(name,sport);
+    var root=document.getElementById('img-league-detail');
+    if(root){
+      root.classList.toggle('search-origin',fromSearch);
+      if(fromSearch) root.style.display='block';
+    }
+  }
+  wrapped.__imgPopupSafeguard=true;
+  window.IMGOpenLeagueDetail=wrapped;
+})();
+</script>
 </body></html>
