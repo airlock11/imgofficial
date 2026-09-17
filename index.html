@@ -243,7 +243,7 @@ img {
 
 <main id="home">
 <div class="hero">
-<div><div class="eyebrow">THE NEXT GENERATION OF SPORTS DATA</div><h1>Every game.<br>Every moment.</h1><p>IMG brings live scores, schedules, results and sports statistics into one fast, focused destination.</p><div class="actions"><a class="btn" href="#platform" onclick="showPlatform();return false;">Explore Live Scores</a><a class="btn secondary" href="#platform" onclick="showPlatform();return false;">View Scores</a></div></div>
+<div><div class="eyebrow">THE NEXT GENERATION OF SPORTS DATA</div><h1>Every game.<br>Every moment.</h1><p>IMG brings live scores, schedules, results and sports statistics into one fast, focused destination.</p><div class="actions"><a class="btn" href="#platform" onclick="showPlatform();return false;">Explore Live Scores</a></div></div>
 <div class="mock" id="heroGame"><div class="mocktop"><span>GAME CENTER</span><span class="live" id="heroStatus">● LIVE</span></div><div class="match"><div class="muted" id="heroSport" style="font-size:11px;text-transform:uppercase;letter-spacing:1px;margin-bottom:14px">LIVE SPORTS</div><div class="teams"><div><small>HOME</small><br><b id="heroHome">Loading…</b></div><div class="score" id="heroHomeScore">—</div></div><div class="teams"><div><small>AWAY</small><br><b id="heroAway">Loading…</b></div><div class="score" id="heroAwayScore">—</div></div><div class="bar"><i id="heroBar"></i></div><small class="muted" id="heroMeta">Loading live game data…</small></div></div>
 </div>
 <section id="features"><div class="sectionhead"><div><div class="eyebrow">THE PLATFORM</div><h2>Built around the game.</h2></div></div><p class="section-intro">Everything you need to follow, understand and experience sports — all in one place.</p><div class="cards feature-cards"><div class="card feature-card feature-live"><div class="feature-overlay"><span class="feature-number">01</span><h3>Live Scores</h3><p>Get real-time scores, game status, key events and competition details as they happen.</p></div></div><div class="card feature-card feature-stats"><div class="feature-overlay"><span class="feature-number">02</span><h3>Statistics</h3><p>Explore in-depth team, player and game statistics. Compare performance, track trends and discover insights.</p></div></div><div class="card feature-card feature-schedules"><div class="feature-overlay"><span class="feature-number">03</span><h3>Schedules &amp; Results</h3><p>Find upcoming games, match schedules and completed results across all sports and leagues.</p></div></div></div></section>
@@ -400,10 +400,19 @@ function showHome(){
 }
 
 function showPlatform(){
-  document.getElementById('home').style.display='none';
-  document.getElementById('platform').style.display='block';
+  // Keep the homepage in the document so the Live Scores section can be reached by scrolling.
+  // This works consistently on both desktop and mobile.
+  const home=document.getElementById('home');
+  const platform=document.getElementById('platform');
+  if(home) home.style.display='block';
+  if(platform) platform.style.display='block';
   window.location.hash='platform';
-  window.scrollTo({top:0,behavior:'smooth'});
+  if(platform){
+    requestAnimationFrame(function(){
+      const y=platform.getBoundingClientRect().top + window.pageYOffset - 78;
+      window.scrollTo({top:y,behavior:'smooth'});
+    });
+  }
   loadGames();
 }
 
