@@ -271,7 +271,11 @@ img {
     <h2>Latest Highlights</h2>
     <p>Watch the latest highlights from official sports league, federation and broadcaster channels.</p>
   </div>
-  <div id="img-highlights-grid" class="highlights-grid"></div>
+  <div id="img-highlights-grid" class="highlights-grid">
+    <button type="button" class="highlight-card" data-static-highlight="0" aria-label="Watch Philippines vs Iran highlights"><div class="highlight-thumb"><img src="https://i.ytimg.com/vi/MNIx0Ky0wIs/hqdefault.jpg" alt="Philippines vs Iran highlights" loading="eager"><span class="highlight-play">▶</span></div><div class="highlight-body"><div class="highlight-league">FIBA</div><div class="highlight-title">Philippines 🇵🇭 v Iran 🇮🇷 | Highlights | FIBA Basketball World Cup 2027 Asian Qualifiers</div><div class="highlight-meta">FIBA Basketball (Official)</div></div></button>
+    <button type="button" class="highlight-card" data-static-highlight="1" aria-label="Watch Philippines vs Iran extended highlights"><div class="highlight-thumb"><img src="https://i.ytimg.com/vi/vIidwJlqwQk/hqdefault.jpg" alt="Philippines vs Iran extended highlights" loading="eager"><span class="highlight-play">▶</span></div><div class="highlight-body"><div class="highlight-league">FIBA</div><div class="highlight-title">Philippines 🇵🇭 v Iran 🇮🇷 | Extended Highlights | FIBA Basketball World Cup 2027 Asian Qualifiers</div><div class="highlight-meta">FIBA Basketball (Official)</div></div></button>
+    <button type="button" class="highlight-card" data-static-highlight="2" aria-label="Watch Jordan vs Philippines highlights"><div class="highlight-thumb"><img src="https://i.ytimg.com/vi/k4FJ6SjxFBM/hqdefault.jpg" alt="Jordan vs Philippines highlights" loading="eager"><span class="highlight-play">▶</span></div><div class="highlight-body"><div class="highlight-league">FIBA</div><div class="highlight-title">Jordan vs Philippines | Game Highlights | FIBA Basketball World Cup 2027 Asian Qualifiers</div><div class="highlight-meta">FIBA Basketball (Official)</div></div></button>
+  </div>
 </section>
 
 <div id="img-highlight-modal" class="highlight-modal" hidden aria-hidden="true">
@@ -440,32 +444,35 @@ function IMG_closeHighlight(){
   const modal=document.getElementById('img-highlight-modal');
   document.getElementById('img-highlight-frame').src=''; modal.hidden=true; modal.setAttribute('aria-hidden','true'); document.body.style.overflow='';
 }
-async function IMG_loadHighlights(){
-  const section=document.getElementById('img-highlights');
+const IMG_STATIC_HIGHLIGHTS=[
+  {league:'FIBA',title:'Philippines 🇵🇭 v Iran 🇮🇷 | Highlights | FIBA Basketball World Cup 2027 Asian Qualifiers',source:'FIBA Basketball (Official)',video_id:'MNIx0Ky0wIs',watch_url:'https://www.youtube.com/watch?v=MNIx0Ky0wIs',embed_url:'https://www.youtube.com/embed/MNIx0Ky0wIs?autoplay=1&rel=0',thumbnail:'https://i.ytimg.com/vi/MNIx0Ky0wIs/hqdefault.jpg'},
+  {league:'FIBA',title:'Philippines 🇵🇭 v Iran 🇮🇷 | Extended Highlights | FIBA Basketball World Cup 2027 Asian Qualifiers',source:'FIBA Basketball (Official)',video_id:'vIidwJlqwQk',watch_url:'https://www.youtube.com/watch?v=vIidwJlqwQk',embed_url:'https://www.youtube.com/embed/vIidwJlqwQk?autoplay=1&rel=0',thumbnail:'https://i.ytimg.com/vi/vIidwJlqwQk/hqdefault.jpg'},
+  {league:'FIBA',title:'Jordan vs Philippines | Game Highlights | FIBA Basketball World Cup 2027 Asian Qualifiers',source:'FIBA Basketball (Official)',video_id:'k4FJ6SjxFBM',watch_url:'https://www.youtube.com/watch?v=k4FJ6SjxFBM',embed_url:'https://www.youtube.com/embed/k4FJ6SjxFBM?autoplay=1&rel=0',thumbnail:'https://i.ytimg.com/vi/k4FJ6SjxFBM/hqdefault.jpg'}
+];
+function IMG_bindStaticHighlights(){
+  document.querySelectorAll('[data-static-highlight]').forEach(btn=>btn.addEventListener('click',()=>IMG_openHighlight(IMG_STATIC_HIGHLIGHTS[Number(btn.dataset.staticHighlight)])));
+}
+function IMG_renderHighlights(items){
   const grid=document.getElementById('img-highlights-grid');
+  if(!grid || !Array.isArray(items) || !items.length) return;
+  grid.innerHTML=items.slice(0,12).map((item,i)=>`<button type="button" class="highlight-card" data-highlight-index="${i}" aria-label="Watch ${IMG_escapeHighlightText(item.title||'Sports highlight')}"><div class="highlight-thumb">${item.thumbnail?`<img src="${IMG_escapeHighlightText(item.thumbnail)}" alt="" loading="lazy">`:''}<span class="highlight-play">▶</span></div><div class="highlight-body"><div class="highlight-league">${IMG_escapeHighlightText(item.league||'Sports')}</div><div class="highlight-title">${IMG_escapeHighlightText(item.title||'Sports Highlight')}</div><div class="highlight-meta">${IMG_escapeHighlightText(item.source||'Official channel')}</div></div></button>`).join('');
+  grid.querySelectorAll('[data-highlight-index]').forEach(btn=>btn.addEventListener('click',()=>IMG_openHighlight(items[Number(btn.dataset.highlightIndex)])));
+}
+async function IMG_loadHighlights(){
   try{
     const r=await fetch(IMG_HIGHLIGHTS_API,{cache:'no-store'});
     if(!r.ok) throw new Error('highlights endpoint '+r.status);
     const data=await r.json();
     const items=Array.isArray(data.items)?data.items.filter(x=>x && x.title && (x.embed_url || x.watch_url)):[];
-    if(!items.length){
-      const fallback=[{league:'FIBA',title:'Jordan vs Philippines — Game Highlights | FIBA Basketball World Cup 2027 Asian Qualifiers',source:'FIBA Basketball (Official)',video_id:'k4FJ6SjxFBM',watch_url:'https://www.youtube.com/watch?v=k4FJ6SjxFBM',embed_url:'https://www.youtube.com/embed/k4FJ6SjxFBM?autoplay=1&rel=0',thumbnail:'https://i.ytimg.com/vi/k4FJ6SjxFBM/hqdefault.jpg',published_at:'2026-08-29T00:00:00Z'}];
-      grid.innerHTML=fallback.map((item,i)=>`<button type="button" class="highlight-card" data-highlight-index="${i}" aria-label="Watch ${IMG_escapeHighlightText(item.title)}"><div class="highlight-thumb"><img src="${item.thumbnail}" alt="" loading="lazy"><span class="highlight-play">▶</span></div><div class="highlight-body"><div class="highlight-league">${IMG_escapeHighlightText(item.league)}</div><div class="highlight-title">${IMG_escapeHighlightText(item.title)}</div><div class="highlight-meta">${IMG_escapeHighlightText(item.source)}</div></div></button>`).join('');
-      grid.querySelectorAll('[data-highlight-index]').forEach(btn=>btn.addEventListener('click',()=>IMG_openHighlight(fallback[Number(btn.dataset.highlightIndex)])));
-      section.hidden=false;
-      return;
-    }
-    grid.innerHTML=items.map((item,i)=>`<button type="button" class="highlight-card" data-highlight-index="${i}" aria-label="Watch ${IMG_escapeHighlightText(item.title)}"><div class="highlight-thumb">${item.thumbnail?`<img src="${IMG_escapeHighlightText(item.thumbnail)}" alt="" loading="lazy">`:''}<span class="highlight-play">▶</span></div><div class="highlight-body"><div class="highlight-league">${IMG_escapeHighlightText(item.league||'Sports')}</div><div class="highlight-title">${IMG_escapeHighlightText(item.title)}</div><div class="highlight-meta">${IMG_escapeHighlightText(item.source||'Official channel')}</div></div></button>`).join('');
-    grid.querySelectorAll('[data-highlight-index]').forEach(btn=>btn.addEventListener('click',()=>IMG_openHighlight(items[Number(btn.dataset.highlightIndex)])));
-    section.hidden=false;
+    if(items.length) IMG_renderHighlights(items);
   }catch(e){
-    const fallback={league:'FIBA',title:'Jordan vs Philippines — Game Highlights | FIBA Basketball World Cup 2027 Asian Qualifiers',source:'FIBA Basketball (Official)',video_id:'k4FJ6SjxFBM',watch_url:'https://www.youtube.com/watch?v=k4FJ6SjxFBM',embed_url:'https://www.youtube.com/embed/k4FJ6SjxFBM?autoplay=1&rel=0',thumbnail:'https://i.ytimg.com/vi/k4FJ6SjxFBM/hqdefault.jpg'};
-    grid.innerHTML=`<button type="button" class="highlight-card" data-highlight-fallback aria-label="Watch ${IMG_escapeHighlightText(fallback.title)}"><div class="highlight-thumb"><img src="${fallback.thumbnail}" alt="" loading="lazy"><span class="highlight-play">▶</span></div><div class="highlight-body"><div class="highlight-league">${fallback.league}</div><div class="highlight-title">${IMG_escapeHighlightText(fallback.title)}</div><div class="highlight-meta">${fallback.source}</div></div></button>`;
-    grid.querySelector('[data-highlight-fallback]').addEventListener('click',()=>IMG_openHighlight(fallback));
-    section.hidden=false;
-    console.warn('IMG highlights API unavailable; showing official fallback highlight:',e);
+    console.warn('IMG highlights API unavailable; keeping built-in official highlights:',e);
   }
 }
+IMG_bindStaticHighlights();
+IMG_loadHighlights();
+setInterval(IMG_loadHighlights,900000);
+
 document.addEventListener('click',e=>{if(e.target.matches('[data-highlight-close]')) IMG_closeHighlight();});
 document.addEventListener('keydown',e=>{if(e.key==='Escape') IMG_closeHighlight();});
 IMG_loadHighlights();
