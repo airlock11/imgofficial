@@ -70,8 +70,9 @@ export default {
 
       const results = await Promise.allSettled(calendars.map(async (cal) => {
         const endpoint = `https://site.api.espn.com/apis/site/v2/sports/${cal.path}/scoreboard?dates=${startKey}-${endKey}`;
+        // ESPN can reject custom browser-style User-Agent headers. Use a plain
+        // server-side GET from the Cloudflare Worker instead.
         const response = await fetch(endpoint, {
-          headers: { "User-Agent": "IMG-Sports-Website/1.0 (+https://imgofficial.com)" },
           cf: { cacheTtl: 300, cacheEverything: true },
         });
         if (!response.ok) throw new Error(`${cal.league}: HTTP ${response.status}`);
@@ -79,6 +80,7 @@ export default {
         return (data.events || []).map((event) => normalizeEvent(event, cal));
       }));
 
+      const failed = results.filter(r => r.status === "rejected").length;
       const events = results
         .filter(r => r.status === "fulfilled")
         .flatMap(r => r.value)
@@ -93,6 +95,8 @@ export default {
         refresh_seconds: 900,
         window_days: days,
         source: "ESPN public scoreboard feeds",
+        sources_checked: calendars.length,
+        sources_failed: failed,
         items: events,
       }, cors, 300);
     }

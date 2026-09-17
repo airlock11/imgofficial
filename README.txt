@@ -1,12 +1,9 @@
-IMG Upcoming Events Fix
+IMG Upcoming Events Live Fix
 
-Files:
-- index.html: replaces the empty Upcoming Events placeholders with a live calendar.
-- worker.js: adds /events to the IMG Cloudflare Worker while preserving /games and /news.
+Replace BOTH files:
+1. index.html in GitHub
+2. worker.js in the Cloudflare Worker and GitHub
 
-Deploy:
-1. Replace the GitHub Pages index.html with index.html.
-2. Replace the Cloudflare Worker code with worker.js.
-3. Keep the existing BALLDONTLIE_API_KEY secret unchanged.
+Keep the existing BALLDONTLIE_API_KEY Cloudflare secret unchanged.
 
-The event calendar uses ESPN public scoreboard feeds for a rolling 7-day window across major sports and refreshes every 15 minutes in the browser. The Worker caches the event response for 5 minutes.
+Important fix: ESPN scoreboard requests no longer send a custom User-Agent header, which can cause ESPN's edge to reject the request. The Worker also reports how many ESPN sources failed in the /events JSON response.
