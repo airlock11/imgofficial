@@ -272,9 +272,10 @@ img {
     <p>Watch the latest highlights from official sports league, federation and broadcaster channels.</p>
   </div>
   <div id="img-highlights-grid" class="highlights-grid">
-    <button type="button" class="highlight-card" data-static-highlight="0" aria-label="Watch Philippines vs Iran highlights"><div class="highlight-thumb"><img src="https://i.ytimg.com/vi/MNIx0Ky0wIs/hqdefault.jpg" alt="Philippines vs Iran highlights" loading="eager"><span class="highlight-play">▶</span></div><div class="highlight-body"><div class="highlight-league">FIBA</div><div class="highlight-title">Philippines 🇵🇭 v Iran 🇮🇷 | Highlights | FIBA Basketball World Cup 2027 Asian Qualifiers</div><div class="highlight-meta">FIBA Basketball (Official)</div></div></button>
-    <button type="button" class="highlight-card" data-static-highlight="1" aria-label="Watch Philippines vs Iran extended highlights"><div class="highlight-thumb"><img src="https://i.ytimg.com/vi/vIidwJlqwQk/hqdefault.jpg" alt="Philippines vs Iran extended highlights" loading="eager"><span class="highlight-play">▶</span></div><div class="highlight-body"><div class="highlight-league">FIBA</div><div class="highlight-title">Philippines 🇵🇭 v Iran 🇮🇷 | Extended Highlights | FIBA Basketball World Cup 2027 Asian Qualifiers</div><div class="highlight-meta">FIBA Basketball (Official)</div></div></button>
-    <button type="button" class="highlight-card" data-static-highlight="2" aria-label="Watch Jordan vs Philippines highlights"><div class="highlight-thumb"><img src="https://i.ytimg.com/vi/k4FJ6SjxFBM/hqdefault.jpg" alt="Jordan vs Philippines highlights" loading="eager"><span class="highlight-play">▶</span></div><div class="highlight-body"><div class="highlight-league">FIBA</div><div class="highlight-title">Jordan vs Philippines | Game Highlights | FIBA Basketball World Cup 2027 Asian Qualifiers</div><div class="highlight-meta">FIBA Basketball (Official)</div></div></button>
+    <button type="button" class="highlight-card" data-static-highlight="0" aria-label="Watch volleyball highlights"><div class="highlight-thumb"><img src="https://i.ytimg.com/vi/NrUvPTTzfZ0/hqdefault.jpg" alt="Volleyball highlights" loading="eager"><span class="highlight-play">▶</span></div><div class="highlight-body"><div class="highlight-league">Volleyball</div><div class="highlight-title">BULGARIA vs. ITALY | EXTENDED HIGHLIGHTS | 2025 FIVB Men's Volleyball Championship Finals</div><div class="highlight-meta">One Sports (Official)</div></div></button>
+    <button type="button" class="highlight-card" data-static-highlight="1" aria-label="Watch Philippines vs Iran highlights"><div class="highlight-thumb"><img src="https://i.ytimg.com/vi/MNIx0Ky0wIs/hqdefault.jpg" alt="Philippines vs Iran highlights" loading="eager"><span class="highlight-play">▶</span></div><div class="highlight-body"><div class="highlight-league">FIBA</div><div class="highlight-title">Philippines 🇵🇭 v Iran 🇮🇷 | Highlights | FIBA Basketball World Cup 2027 Asian Qualifiers</div><div class="highlight-meta">FIBA Basketball (Official)</div></div></button>
+    <button type="button" class="highlight-card" data-static-highlight="2" aria-label="Watch Philippines vs Iran extended highlights"><div class="highlight-thumb"><img src="https://i.ytimg.com/vi/vIidwJlqwQk/hqdefault.jpg" alt="Philippines vs Iran extended highlights" loading="eager"><span class="highlight-play">▶</span></div><div class="highlight-body"><div class="highlight-league">FIBA</div><div class="highlight-title">Philippines 🇵🇭 v Iran 🇮🇷 | Extended Highlights | FIBA Basketball World Cup 2027 Asian Qualifiers</div><div class="highlight-meta">FIBA Basketball (Official)</div></div></button>
+    <button type="button" class="highlight-card" data-static-highlight="3" aria-label="Watch Jordan vs Philippines highlights"><div class="highlight-thumb"><img src="https://i.ytimg.com/vi/k4FJ6SjxFBM/hqdefault.jpg" alt="Jordan vs Philippines highlights" loading="eager"><span class="highlight-play">▶</span></div><div class="highlight-body"><div class="highlight-league">FIBA</div><div class="highlight-title">Jordan vs Philippines | Game Highlights | FIBA Basketball World Cup 2027 Asian Qualifiers</div><div class="highlight-meta">FIBA Basketball (Official)</div></div></button>
   </div>
 </section>
 
@@ -465,10 +466,12 @@ async function IMG_loadHighlights(){
     if(!r.ok) throw new Error('highlights endpoint '+r.status);
     const data=await r.json();
     const apiItems=Array.isArray(data.items)?data.items.filter(x=>x && x.title && (x.embed_url || x.watch_url)):[];
-    // Always keep at least one non-basketball official highlight visible.
-    const hasVolleyball=apiItems.some(x=>/volleyball|pvl|one sports/i.test(String(x.league||'')+' '+String(x.title||'')));
-    const merged=hasVolleyball ? apiItems : [IMG_STATIC_HIGHLIGHTS[0], ...apiItems];
-    IMG_renderHighlights(merged);
+    // Keep guaranteed official cards and merge in automatically discovered cards.
+    const merged=[...apiItems,...IMG_STATIC_HIGHLIGHTS].filter((item,i,array)=>{
+      const id=item.video_id || item.watch_url || item.title;
+      return i===array.findIndex(x=>(x.video_id || x.watch_url || x.title)===id);
+    }).slice(0,12);
+    IMG_renderHighlights(merged.length ? merged : IMG_STATIC_HIGHLIGHTS);
   }catch(e){
     // Built-in official highlights remain visible even when the API is unavailable.
     IMG_renderHighlights(IMG_STATIC_HIGHLIGHTS);
@@ -1405,9 +1408,36 @@ window.IMGOpenLeagueDetail=openDetail;
     }).join('');
     status.textContent='';
   }
+  async function loadDirectNewsFallback(){
+    const feeds=[
+      ['Basketball','https://www.oursportscentral.com/feeds/Basketball.xml'],
+      ['Soccer','https://www.oursportscentral.com/feeds/Soccer.xml']
+    ];
+    const all=[];
+    for(const [sport,feed] of feeds){
+      try{
+        const u='https://api.rss2json.com/v1/api.json?rss_url='+encodeURIComponent(feed);
+        const r=await fetch(u,{cache:'no-store'});
+        if(!r.ok)continue;
+        const d=await r.json();
+        if(d&&d.status==='ok'&&Array.isArray(d.items)){
+          d.items.slice(0,4).forEach(item=>all.push({
+            title:item.title||'',description:String(item.description||item.content||'').replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').trim().slice(0,180),
+            link:item.link||'',published:item.pubDate||'',image:item.thumbnail||(item.enclosure&&item.enclosure.link)||'',sport,source:'OurSports Central'
+          }));
+        }
+      }catch(_){}
+    }
+    all.sort((a,b)=>new Date(b.published||0)-new Date(a.published||0));
+    return all.slice(0,8).filter(x=>x.title&&x.link);
+  }
   async function loadNews(){
-    try{const r=await fetch(NEWS_API,{cache:'no-store'});if(!r.ok)throw new Error('News request failed');const data=await r.json();render(Array.isArray(data.items)?data.items:[]);}
-    catch(e){status.textContent='News feed temporarily unavailable. IMG will try again automatically.';}
+    try{const r=await fetch(NEWS_API,{cache:'no-store'});if(!r.ok)throw new Error('News request failed');const data=await r.json();const items=Array.isArray(data.items)?data.items:[];if(items.length){render(items);return;}throw new Error('No news items');}
+    catch(e){
+      const fallback=await loadDirectNewsFallback();
+      if(fallback.length){render(fallback);status.textContent='';}
+      else status.textContent='News feed temporarily unavailable. IMG will try again automatically.';
+    }
   }
   loadNews();setInterval(loadNews,15*60*1000);
 })();
