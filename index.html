@@ -655,6 +655,65 @@ function canonicalLeagueName(name){
  };
  return aliases[name] || name;
 }
+
+function IMGUniversalLeagueProfile(name,sport){
+ const custom={
+  "PBA":1,"NBA":1,"NBA G League":1,"B.LEAGUE":1,
+  "NBL–Pilipinas":1,"Vietnam Basketball Association (VBA)":1,
+  "Maharlika Pilipinas Basketball League (MPBL)":1,
+  "Basketball Super League (BSL)":1,"UAAP Basketball":1,
+  "Philippine Football League":1
+ };
+ if(custom[name]) return false;
+ const data=window.IMGLeagueData||{};
+ const item=((data[sport]||[]).find(x=>x[0]===name)||[name,""]);
+ const location=item[1]||"International";
+ const content=document.getElementById("ld-content");
+ const title=document.getElementById("ld-title");
+ const sub=document.getElementById("ld-sub");
+ const browser=document.getElementById("img-league-browser");
+ const root=document.getElementById("img-league-detail");
+ if(!content||!title||!sub||!browser||!root) return false;
+ content.replaceChildren();
+ title.textContent=name;
+ sub.textContent=(sport||"Sports")+" · "+location+" · League Profile";
+ browser.style.display="none";
+ root.style.display="block";
+ const esc=s=>String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
+ content.innerHTML=`
+  <div class="league-detail">
+   <div class="ld-card">
+    <div class="ld-card-head"><h2>${esc(name)} PROFILE</h2><span class="ld-badge">Reference profile</span></div>
+    <p><strong>${esc(name)}</strong><br>${esc(location)} · ${esc(sport||"Sports")}</p>
+    <h3>League Overview</h3>
+    <p>This IMG profile organizes the competition's key information in one place, including teams or participants, standings, schedule, results, statistics and verified news.</p>
+    <div class="ld-stat-grid">
+     <div><b>${esc(location)}</b><small>Region</small></div>
+     <div><b>${esc(sport||"Sports")}</b><small>Sport</small></div>
+     <div><b>2026</b><small>Profile year</small></div>
+    </div>
+   </div>
+   <div class="ld-grid">
+    <div class="ld-card"><div class="ld-card-head"><h3>TEAMS / PARTICIPANTS</h3><span class="ld-badge">Ready</span></div><p class="ld-placeholder">Team or participant data will be displayed here when verified league data is available.</p></div>
+    <div class="ld-card"><div class="ld-card-head"><h3>STANDINGS</h3><span class="ld-badge">Ready</span></div><p class="ld-placeholder">Standings will be displayed here when verified competition data is available.</p></div>
+   </div>
+   <div class="ld-two-col">
+    <div class="ld-card"><div class="ld-card-head"><h3>SCHEDULE</h3></div><div class="ld-placeholder">No verified schedule feed connected.</div></div>
+    <div class="ld-card"><div class="ld-card-head"><h3>RESULTS</h3></div><div class="ld-placeholder">No verified results feed connected.</div></div>
+   </div>
+   <div class="ld-two-col">
+    <div class="ld-card"><div class="ld-card-head"><h3>STATISTICS</h3></div><div class="ld-placeholder">Statistics feed not connected.</div></div>
+    <div class="ld-card"><div class="ld-card-head"><h3>NEWS</h3></div><div class="ld-placeholder">League news module ready for verified articles.</div></div>
+   </div>
+   <div class="ld-card">
+    <div class="ld-card-head"><h3>SOURCES</h3></div>
+    <p class="ld-placeholder">Official league or federation resources should be used to verify season, schedule, results and statistics before publication.</p>
+   </div>
+  </div>`;
+ window.IMGCurrentLeague={name:name,sport:sport||"Sports"};
+ window.scrollTo({top:0,behavior:"smooth"});
+ return true;
+}
 function openDetail(name,sport){
  const searchClose=document.getElementById('ld-search-close');
  const fromHomeSearch=(homeSearchOpenedLeague || window.homeSearchOpenedLeague);
@@ -662,6 +721,7 @@ function openDetail(name,sport){
  const backLeagues=document.getElementById('ld-back-leagues');
  if(backLeagues) backLeagues.style.display=fromHomeSearch?'none':'inline-block';
  name=canonicalLeagueName(name);
+ if(IMGUniversalLeagueProfile(name,sport))return;
  const browser=document.getElementById('img-league-browser');
  const root=document.getElementById('img-league-detail');
  root.classList.toggle('search-origin', !!fromHomeSearch);
