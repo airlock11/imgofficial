@@ -1514,3 +1514,91 @@ window.IMGOpenLeagueDetail=openDetail;
 })();
 </script>
 </body></html>
+<style id="img-mobile-league-profile-final">
+/* Mobile-first league profile polish: keeps every field inside the viewport. */
+@media (max-width: 640px){
+  #img-league-detail.search-origin{
+    width:calc(100vw - 20px) !important;
+    max-width:calc(100vw - 20px) !important;
+    height:calc(100vh - 20px) !important;
+    max-height:calc(100vh - 20px) !important;
+    padding:54px 12px 16px !important;
+    border-radius:16px !important;
+  }
+  #img-league-detail.search-origin .ld-wrap{height:100% !important;overflow:auto !important}
+  .league-detail{width:100%;min-width:0;box-sizing:border-box}
+  .league-detail .ld-card{
+    width:100%;
+    min-width:0;
+    box-sizing:border-box;
+    padding:16px !important;
+    margin-bottom:12px;
+    overflow:hidden;
+  }
+  .league-detail .ld-card-head{
+    flex-direction:row !important;
+    align-items:center !important;
+    justify-content:space-between !important;
+    gap:10px;
+    min-width:0;
+  }
+  .league-detail .ld-card-head h2,
+  .league-detail .ld-card-head h3{
+    min-width:0;
+    max-width:100%;
+    overflow-wrap:anywhere;
+    word-break:break-word;
+  }
+  .league-detail .ld-card-head h2{font-size:22px;line-height:1.15}
+  .league-detail .ld-card-head h3{font-size:16px;line-height:1.2}
+  .league-detail .ld-badge{flex:0 0 auto;font-size:10px;padding:5px 8px}
+  .league-detail p{font-size:14px;line-height:1.5}
+  .league-detail .ld-stat-grid{
+    display:grid !important;
+    grid-template-columns:1fr !important;
+    gap:8px !important;
+    width:100% !important;
+    margin-top:16px;
+  }
+  .league-detail .ld-stat-grid>div{
+    display:grid !important;
+    grid-template-columns:minmax(0,1fr) auto;
+    align-items:center;
+    gap:10px;
+    width:100%;
+    min-width:0;
+    padding:11px 12px !important;
+    overflow:hidden;
+  }
+  .league-detail .ld-stat-grid b{
+    min-width:0;
+    font-size:17px !important;
+    line-height:1.2 !important;
+    overflow-wrap:anywhere !important;
+    word-break:break-word !important;
+  }
+  .league-detail .ld-stat-grid small{
+    font-size:10px !important;
+    white-space:nowrap;
+    text-align:right;
+  }
+  .league-detail .ld-grid,
+  .league-detail .ld-two-col,
+  .league-detail .team-grid{
+    grid-template-columns:1fr !important;
+    width:100%;
+    min-width:0;
+  }
+  .league-detail .ld-placeholder{
+    font-size:13px;
+    line-height:1.45;
+    overflow-wrap:anywhere;
+    word-break:break-word;
+  }
+  .league-detail .ld-two-col{gap:0}
+}
+
+@media (min-width:641px){
+  .league-detail .ld-stat-grid>div{min-width:0}
+}
+</style>
