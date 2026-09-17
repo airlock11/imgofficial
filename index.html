@@ -445,6 +445,7 @@ function IMG_closeHighlight(){
   document.getElementById('img-highlight-frame').src=''; modal.hidden=true; modal.setAttribute('aria-hidden','true'); document.body.style.overflow='';
 }
 const IMG_STATIC_HIGHLIGHTS=[
+  {league:'Volleyball',title:'BULGARIA vs. ITALY | EXTENDED HIGHLIGHTS | 2025 FIVB Men\'s Volleyball Championship Finals',source:'One Sports (Official)',video_id:'NrUvPTTzfZ0',watch_url:'https://www.youtube.com/watch?v=NrUvPTTzfZ0',embed_url:'https://www.youtube.com/embed/NrUvPTTzfZ0?autoplay=1&rel=0',thumbnail:'https://i.ytimg.com/vi/NrUvPTTzfZ0/hqdefault.jpg'},
   {league:'FIBA',title:'Philippines 🇵🇭 v Iran 🇮🇷 | Highlights | FIBA Basketball World Cup 2027 Asian Qualifiers',source:'FIBA Basketball (Official)',video_id:'MNIx0Ky0wIs',watch_url:'https://www.youtube.com/watch?v=MNIx0Ky0wIs',embed_url:'https://www.youtube.com/embed/MNIx0Ky0wIs?autoplay=1&rel=0',thumbnail:'https://i.ytimg.com/vi/MNIx0Ky0wIs/hqdefault.jpg'},
   {league:'FIBA',title:'Philippines 🇵🇭 v Iran 🇮🇷 | Extended Highlights | FIBA Basketball World Cup 2027 Asian Qualifiers',source:'FIBA Basketball (Official)',video_id:'vIidwJlqwQk',watch_url:'https://www.youtube.com/watch?v=vIidwJlqwQk',embed_url:'https://www.youtube.com/embed/vIidwJlqwQk?autoplay=1&rel=0',thumbnail:'https://i.ytimg.com/vi/vIidwJlqwQk/hqdefault.jpg'},
   {league:'FIBA',title:'Jordan vs Philippines | Game Highlights | FIBA Basketball World Cup 2027 Asian Qualifiers',source:'FIBA Basketball (Official)',video_id:'k4FJ6SjxFBM',watch_url:'https://www.youtube.com/watch?v=k4FJ6SjxFBM',embed_url:'https://www.youtube.com/embed/k4FJ6SjxFBM?autoplay=1&rel=0',thumbnail:'https://i.ytimg.com/vi/k4FJ6SjxFBM/hqdefault.jpg'}
@@ -463,9 +464,14 @@ async function IMG_loadHighlights(){
     const r=await fetch(IMG_HIGHLIGHTS_API,{cache:'no-store'});
     if(!r.ok) throw new Error('highlights endpoint '+r.status);
     const data=await r.json();
-    const items=Array.isArray(data.items)?data.items.filter(x=>x && x.title && (x.embed_url || x.watch_url)):[];
-    if(items.length) IMG_renderHighlights(items);
+    const apiItems=Array.isArray(data.items)?data.items.filter(x=>x && x.title && (x.embed_url || x.watch_url)):[];
+    // Always keep at least one non-basketball official highlight visible.
+    const hasVolleyball=apiItems.some(x=>/volleyball|pvl|one sports/i.test(String(x.league||'')+' '+String(x.title||'')));
+    const merged=hasVolleyball ? apiItems : [IMG_STATIC_HIGHLIGHTS[0], ...apiItems];
+    IMG_renderHighlights(merged);
   }catch(e){
+    // Built-in official highlights remain visible even when the API is unavailable.
+    IMG_renderHighlights(IMG_STATIC_HIGHLIGHTS);
     console.warn('IMG highlights API unavailable; keeping built-in official highlights:',e);
   }
 }
@@ -475,8 +481,6 @@ setInterval(IMG_loadHighlights,900000);
 
 document.addEventListener('click',e=>{if(e.target.matches('[data-highlight-close]')) IMG_closeHighlight();});
 document.addEventListener('keydown',e=>{if(e.key==='Escape') IMG_closeHighlight();});
-IMG_loadHighlights();
-setInterval(IMG_loadHighlights,900000);
 
 
 loadHeroGame();
