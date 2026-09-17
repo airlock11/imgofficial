@@ -214,11 +214,7 @@ img {
 <div id="img-feature-news" class="feature-news"><div class="feature-news-content"><div class="news-tag">IMG SPORTS NEWS</div><h4>Loading the latest sports news…</h4><p>IMG is connecting to its live sports news feed.</p><div class="news-meta">Updating automatically</div></div></div>
 <div id="img-news-list" class="news-list"></div><div id="img-news-status" class="news-feed-note">Loading automatic news feed…</div>
 </div>
-<div class="events-panel"><div class="events-panel-head"><h3>Upcoming Events</h3><span>View all events</span></div><div class="event-list">
-<div class="event-item"><div class="event-date">DATE<span>UPCOMING</span></div><div><h4>Upcoming sports events</h4><p>Automatically updated event calendar</p></div></div>
-<div class="event-item"><div class="event-date">LIVE<span>SOON</span></div><div><h4>Games and competitions</h4><p>Schedules will appear here</p></div></div>
-<div class="event-item"><div class="event-date">IMG<span>SPORTS</span></div><div><h4>Global sports calendar</h4><p>Events from supported sports and leagues</p></div></div>
-</div></div>
+<div class="events-panel"><div class="events-panel-head"><h3>Upcoming Events</h3><span>Live calendar</span></div><div id="img-event-list" class="event-list"><div class="event-item"><div class="event-date">…<span>LOADING</span></div><div><h4>Loading upcoming events</h4><p>IMG is checking the sports calendar.</p></div></div></div><div id="img-event-status" class="news-feed-note">Updating automatically…</div></div>
 </div></section>
 
 <section id="platform">
@@ -1154,6 +1150,44 @@ window.IMGOpenLeagueDetail=openDetail;
     catch(e){status.textContent='News feed temporarily unavailable. IMG will try again automatically.';}
   }
   loadNews();setInterval(loadNews,15*60*1000);
+})();
+</script>
+
+<script>
+/* IMG automatic upcoming sports events calendar. */
+(function(){
+  const EVENTS_API='https://img-api-proxy.magsipocarnie.workers.dev/events?days=7&limit=6';
+  const list=document.getElementById('img-event-list');
+  const status=document.getElementById('img-event-status');
+  if(!list||!status)return;
+  function esc(v){return String(v||'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));}
+  function dateParts(v){
+    const d=new Date(v);
+    if(Number.isNaN(d.getTime())) return {day:'—',month:'',time:''};
+    return {day:String(d.getDate()),month:d.toLocaleString(undefined,{month:'short'}).toUpperCase(),time:d.toLocaleTimeString([],{hour:'numeric',minute:'2-digit'})};
+  }
+  function render(items){
+    if(!items.length){
+      list.innerHTML='<div class="event-item"><div class="event-date">—<span>NONE</span></div><div><h4>No upcoming events found</h4><p>IMG will check the calendar again automatically.</p></div></div>';
+      status.textContent='Calendar checked automatically.';
+      return;
+    }
+    list.innerHTML=items.slice(0,6).map(item=>{
+      const d=dateParts(item.date);
+      const matchup=item.title||item.league||'Sports event';
+      const meta=[item.sport,item.league,item.time].filter(Boolean).join(' · ');
+      const venue=item.venue?`<p>${esc(meta)} · ${esc(item.venue)}</p>`:`<p>${esc(meta||'Scheduled event')}</p>`;
+      const href=item.link&&/^https:\/\//i.test(item.link)?item.link:'';
+      const title=href?`<a href="${esc(href)}" target="_blank" rel="noopener noreferrer"><h4>${esc(matchup)}</h4></a>`:`<h4>${esc(matchup)}</h4>`;
+      return `<div class="event-item"><div class="event-date">${esc(d.day)}<span>${esc(d.month)}</span></div><div>${title}${venue}</div></div>`;
+    }).join('');
+    status.textContent='Updated automatically · '+new Date().toLocaleTimeString([],{hour:'numeric',minute:'2-digit'});
+  }
+  async function loadEvents(){
+    try{const r=await fetch(EVENTS_API,{cache:'no-store'});if(!r.ok)throw new Error('Events request failed');const data=await r.json();render(Array.isArray(data.items)?data.items:[]);}
+    catch(e){status.textContent='Event calendar temporarily unavailable. IMG will try again automatically.';}
+  }
+  loadEvents();setInterval(loadEvents,15*60*1000);
 })();
 </script>
 

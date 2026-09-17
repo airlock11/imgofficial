@@ -43,6 +43,60 @@ export default {
       });
     }
 
+    if (url.pathname === "/events") {
+      const limit = Math.min(Math.max(Number(url.searchParams.get("limit") || 6), 1), 12);
+      const days = Math.min(Math.max(Number(url.searchParams.get("days") || 7), 1), 14);
+      const start = new Date();
+      const end = new Date(start.getTime() + days * 86400000);
+      const startKey = espnDate(start);
+      const endKey = espnDate(end);
+
+      const calendars = [
+        { sport: "Basketball", league: "NBA", path: "basketball/nba" },
+        { sport: "Basketball", league: "WNBA", path: "basketball/wnba" },
+        { sport: "Football", league: "NFL", path: "football/nfl" },
+        { sport: "Baseball", league: "MLB", path: "baseball/mlb" },
+        { sport: "Hockey", league: "NHL", path: "hockey/nhl" },
+        { sport: "Football", league: "Premier League", path: "soccer/eng.1" },
+        { sport: "Football", league: "LaLiga", path: "soccer/esp.1" },
+        { sport: "Football", league: "UEFA Champions League", path: "soccer/uefa.champions" },
+        { sport: "Motorsport", league: "Formula 1", path: "racing/f1" },
+        { sport: "Tennis", league: "ATP", path: "tennis/atp" },
+        { sport: "Tennis", league: "WTA", path: "tennis/wta" },
+        { sport: "Golf", league: "PGA Tour", path: "golf/pga" },
+        { sport: "Golf", league: "LPGA", path: "golf/lpga" },
+        { sport: "MMA", league: "UFC", path: "mma/ufc" },
+      ];
+
+      const results = await Promise.allSettled(calendars.map(async (cal) => {
+        const endpoint = `https://site.api.espn.com/apis/site/v2/sports/${cal.path}/scoreboard?dates=${startKey}-${endKey}`;
+        const response = await fetch(endpoint, {
+          headers: { "User-Agent": "IMG-Sports-Website/1.0 (+https://imgofficial.com)" },
+          cf: { cacheTtl: 300, cacheEverything: true },
+        });
+        if (!response.ok) throw new Error(`${cal.league}: HTTP ${response.status}`);
+        const data = await response.json();
+        return (data.events || []).map((event) => normalizeEvent(event, cal));
+      }));
+
+      const events = results
+        .filter(r => r.status === "fulfilled")
+        .flatMap(r => r.value)
+        .filter(e => e.date && e.title)
+        .filter(e => Date.parse(e.date) >= Date.now() - 30 * 60000)
+        .sort((a, b) => Date.parse(a.date) - Date.parse(b.date))
+        .filter((event, index, all) => index === all.findIndex(x => x.id === event.id))
+        .slice(0, limit);
+
+      return jsonResponse({
+        updated_at: new Date().toISOString(),
+        refresh_seconds: 900,
+        window_days: days,
+        source: "ESPN public scoreboard feeds",
+        items: events,
+      }, cors, 300);
+    }
+
     if (url.pathname === "/news") {
       const feeds = [
         { region: "International", sport: "All Sports", name: "BBC Sport", url: "https://feeds.bbci.co.uk/sport/rss.xml" },
@@ -184,6 +238,31 @@ export default {
     });
   },
 };
+
+
+function espnDate(date) {
+  const y = date.getUTCFullYear();
+  const m = String(date.getUTCMonth() + 1).padStart(2, "0");
+  const d = String(date.getUTCDate()).padStart(2, "0");
+  return `${y}${m}${d}`;
+}
+
+function normalizeEvent(event, calendar) {
+  const competition = event.competitions?.[0] || {};
+  const competitors = competition.competitors || [];
+  const names = competitors.map(c => c.team?.displayName || c.team?.name || c.athlete?.displayName).filter(Boolean);
+  const title = names.length >= 2 ? `${names[0]} vs ${names[1]}` : (event.name || competition.name || calendar.league);
+  return {
+    id: String(event.id || `${calendar.league}-${event.date}-${title}`),
+    date: event.date || competition.date || "",
+    title,
+    league: calendar.league,
+    sport: calendar.sport,
+    venue: competition.venue?.fullName || "",
+    status: event.status?.type?.shortDetail || event.status?.type?.detail || "Scheduled",
+    link: event.links?.[0]?.href || "",
+  };
+}
 
 async function fetchFeed(feed) {
   const response = await fetch(feed.url, {
