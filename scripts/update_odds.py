@@ -4,7 +4,8 @@ import os
 import re
 import urllib.parse
 import urllib.request
-from datetime import datetime, timezone, timedelta
+import urllib.error
+from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -26,8 +27,17 @@ def get_json(path, params):
     query["apiKey"] = KEY
     url = API + path + "?" + urllib.parse.urlencode(query)
     req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept": "application/json"})
-    with urllib.request.urlopen(req, timeout=60) as r:
-        return json.loads(r.read().decode("utf-8", errors="replace"))
+    try:
+        with urllib.request.urlopen(req, timeout=60) as r:
+            return json.loads(r.read().decode("utf-8", errors="replace"))
+    except urllib.error.HTTPError as exc:
+        body = ""
+        try:
+            body = exc.read().decode("utf-8", errors="replace")
+        except Exception:
+            pass
+        detail = body[:500] if body else str(exc)
+        raise RuntimeError(f"HTTP {exc.code}: {detail}")
 
 def as_list(payload):
     found = []
@@ -135,35 +145,13 @@ def main_line_value(book, kind):
     value = (main or [v for _, v in candidates])[0]
     return str(int(value)) if float(value).is_integer() else str(value)
 
-def fixture_map():
-    now = datetime.now(timezone.utc)
-    end = now + timedelta(days=7)
-    mapping = {}
 
-    # One fixture request per sport. The API permits sportId + a short date range.
-    for sport_id in (10, 11, 14):
-        payload = get_json("/fixtures", {
-            "sportId": sport_id,
-            "from": now.strftime("%Y-%m-%dT%H:%M:%SZ"),
-            "to": end.strftime("%Y-%m-%dT%H:%M:%SZ"),
-            "statusId": 0,
-            "hasOdds": "true",
-            "bookmakers": "bet365",
-        })
-        for fixture in as_list(payload):
-            tid = fixture.get("tournamentId")
-            fid = fixture.get("fixtureId")
-            if not fid or tid not in {x["tournament_id"] for x in TARGETS.values()}:
-                continue
-            mapping[str(fid)] = fixture
-    return mapping
-
-def normalize(row, fixture):
+def normalize(row):
     book = (row.get("bookmakerOdds") or {}).get("bet365")
-    if not isinstance(book, dict) or book.get("suspended") is True:
+    if not isinstance(book, dict) or book.get("suspended") is True or book.get("bookmakerIsActive") is False:
         return None
 
-    sport_id = int(row.get("sportId") or fixture.get("sportId") or 0)
+    sport_id = int(row.get("sportId") or 0)
     home, away, draw = generic_moneyline(book, sport_id)
     spread = main_line_value(book, "spread")
     total = main_line_value(book, "total")
@@ -181,11 +169,18 @@ def normalize(row, fixture):
     if draw is not None:
         provider["draw"] = str(draw)
 
+    p1 = row.get("participant1Name") or row.get("participant1ShortName")
+    p2 = row.get("participant2Name") or row.get("participant2ShortName")
+    p1id = row.get("participant1Id")
+    p2id = row.get("participant2Id")
+
     return {
-        "eventId": str(row.get("fixtureId") or fixture.get("fixtureId") or ""),
-        "date": row.get("startTime") or fixture.get("startTime") or "",
-        "home": fixture.get("participant1Name") or fixture.get("participant1ShortName") or row.get("participant1Name") or row.get("participant1ShortName") or "Home",
-        "away": fixture.get("participant2Name") or fixture.get("participant2ShortName") or row.get("participant2Name") or row.get("participant2ShortName") or "Away",
+        "eventId": str(row.get("fixtureId") or ""),
+        "date": row.get("startTime") or "",
+        "home": p1 or ("Home " + str(p1id) if p1id is not None else "Home"),
+        "away": p2 or ("Away " + str(p2id) if p2id is not None else "Away"),
+        "participant1Id": p1id,
+        "participant2Id": p2id,
         "homeLogo": "",
         "awayLogo": "",
         "oddsList": [provider],
@@ -196,13 +191,19 @@ def main():
         print("ODDSPAPI_KEY is not configured; preserving current odds-data.json")
         return
 
-    errors = {}
-    leagues = {}
-
+    # /account is unmetered and remains available even when the monthly
+    # allowance is exhausted. Log only usage counts, never the key.
     try:
-        fixtures = fixture_map()
+        account = get_json("/account", {})
+        subscription = account.get("subscription") if isinstance(account, dict) else None
+        if not isinstance(subscription, dict):
+            subscription = account if isinstance(account, dict) else {}
+        print(json.dumps({
+            "quota_limit": subscription.get("request_limit"),
+            "quota_used": subscription.get("request_count"),
+        }, ensure_ascii=False))
     except Exception as exc:
-        raise RuntimeError("fixture lookup failed: " + str(exc)[:180])
+        print(json.dumps({"quota_check": "unavailable", "detail": str(exc)[:220]}, ensure_ascii=False))
 
     try:
         payload = get_json("/odds-by-tournaments", {
@@ -214,18 +215,20 @@ def main():
         })
         rows = as_list(payload)
     except Exception as exc:
-        raise RuntimeError("odds lookup failed: " + str(exc)[:180])
+        raise RuntimeError("Bet365 odds lookup failed: " + str(exc)[:500])
 
-    print(json.dumps({"fixture_rows": len(fixtures), "odds_rows": len(rows), "bookmaker": "bet365"}, ensure_ascii=False))
+    print(json.dumps({"odds_rows": len(rows), "bookmaker": "bet365"}, ensure_ascii=False))
+
+    leagues = {}
     by_tid = {v["tournament_id"]: k for k, v in TARGETS.items()}
     bet365_rows = 0
+
     for row in rows:
         tid = row.get("tournamentId")
         key = by_tid.get(tid)
         if not key:
             continue
-        fixture = fixtures.get(str(row.get("fixtureId"))) or row
-        item = normalize(row, fixture)
+        item = normalize(row)
         if item:
             bet365_rows += 1
             leagues.setdefault(key, []).append(item)
@@ -234,7 +237,12 @@ def main():
         leagues[key] = sorted(leagues[key], key=lambda x: x.get("date") or "")[:12]
 
     if not leagues:
-        print(json.dumps({"updated": False, "message": "No current Bet365 odds returned", "odds_rows": len(rows), "bet365_rows": bet365_rows}, ensure_ascii=False))
+        print(json.dumps({
+            "updated": False,
+            "message": "No current Bet365 odds returned",
+            "odds_rows": len(rows),
+            "bet365_rows": bet365_rows,
+        }, ensure_ascii=False))
         return
 
     data = {
@@ -242,7 +250,7 @@ def main():
         "provider": "OddsPapi",
         "bookmaker": "Bet365",
         "leagues": leagues,
-        "errors": errors,
+        "errors": {},
     }
     OUT.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", "utf-8")
     print(json.dumps({
