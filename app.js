@@ -220,10 +220,14 @@ function renderScoreLeagueFilters(){
 
   host.querySelectorAll('[data-score-league]').forEach(btn=>btn.addEventListener('click',async()=>{
     const key=btn.dataset.scoreLeague;
-    if(!key||key===currentScoreLeague)return;
+    if(!key)return;
     currentScoreLeague=key;
     renderScoreLeagueFilters();
     clearTimeout(scoreAutoRefreshTimer);
+    const gamesHost=document.getElementById('games');
+    const status=document.getElementById('gameStatus');
+    if(gamesHost)gamesHost.innerHTML='<div class="empty">Loading '+esc(liveNowLabels[key]?.league||key.toUpperCase())+' schedule and scores…</div>';
+    if(status)status.textContent='Updating';
     await loadGames();
     scheduleScoreAutoRefresh();
   }));
@@ -882,24 +886,15 @@ function renderGames(){
   const host=document.getElementById('games');
   if(!host)return;
 
-  const filter='all';
-  const byDate=(a,b)=>{
-    const ad=Date.parse(a.date||'')||0,bd=Date.parse(b.date||'')||0;
-    if(a.state==='final'&&b.state==='final')return bd-ad;
-    return ad-bd;
-  };
-  const live=allGames.filter(g=>g.state==='live').sort(byDate);
-  const other=allGames.filter(g=>g.state!=='live');
+  const byDateAsc=(a,b)=>(Date.parse(a.date||'')||0)-(Date.parse(b.date||'')||0);
+  const byDateDesc=(a,b)=>(Date.parse(b.date||'')||0)-(Date.parse(a.date||'')||0);
 
-  let items;
-  if(filter==='live'){
-    items=live;
-  }else{
-    const filtered=filter==='all'?other:other.filter(g=>g.state===filter);
-    items=[...live,...filtered.sort(byDate)].slice(0,20);
-  }
+  const live=allGames.filter(g=>g.state==='live').sort(byDateAsc);
+  const scheduled=allGames.filter(g=>g.state==='scheduled').sort(byDateAsc);
+  const finals=allGames.filter(g=>g.state==='final').sort(byDateDesc);
+  const other=allGames.filter(g=>!['live','scheduled','final'].includes(g.state)).sort(byDateAsc);
 
-  host.innerHTML=items.length?items.map(g=>{
+  const renderCard=g=>{
     if(g.isRacing){
       const place=[g.raceCircuit,g.raceCity].filter(Boolean).join(' · ');
       return '<article class="game race-game'+(g.state==='live'?' game-is-live':'')+'" data-game-key="'+esc(gameDomKey(g))+'">'+
@@ -911,8 +906,45 @@ function renderGames(){
         (g.streams?.length?'<button class="watch-live-btn" type="button" data-live-event="'+esc(g.eventId)+'"><span class="live-dot" aria-hidden="true"></span>Watch Live</button>':'')+
         '</div></article>';
     }
-    return '<article class="game'+(g.state==='live'?' game-is-live':'')+'" data-game-key="'+esc(gameDomKey(g))+'"><div class="time">'+esc(g.displayTime||new Date(g.date).toLocaleString([],{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}))+'</div><div class="teams"><div class="team"><span class="team-identity">'+teamLogoMarkup(g.awayLogo,g.away)+'<span>'+esc(g.away)+'</span></span><b data-score-side="away">'+esc(g.awayScore)+'</b></div><div class="team"><span class="team-identity">'+teamLogoMarkup(g.homeLogo,g.home)+'<span>'+esc(g.home)+'</span></span><b data-score-side="home">'+esc(g.homeScore)+'</b></div></div><div class="state '+(g.state==='live'?'live':'')+'">'+esc(g.status)+'</div>'+(g.streams?.length?'<button class="watch-live-btn" type="button" data-live-event="'+esc(g.eventId)+'"><span class="live-dot" aria-hidden="true"></span>Watch Live</button>':'')+(g.highlights?.length?'<button class="highlights-btn" type="button" data-highlight-event="'+esc(g.eventId)+'"><span class="highlights-btn-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>Highlights <b>'+esc(g.highlights.length)+'</b></button>':'')+(g.odds?'<div class="oddsline"><span>'+esc(g.odds.provider)+'</span><span>Line <b>'+esc(g.odds.details)+'</b></span><span>Total <b>'+esc(g.odds.total)+'</b></span></div>':'')+'</article>';
-  }).join(''):'<div class="empty">No verified games were returned for this sport right now.</div>';
+
+    return '<article class="game'+(g.state==='live'?' game-is-live':'')+'" data-game-key="'+esc(gameDomKey(g))+'">'+
+      '<div class="time">'+esc(g.displayTime||new Date(g.date).toLocaleString([],{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}))+'</div>'+
+      '<div class="teams">'+
+        '<div class="team"><span class="team-identity">'+teamLogoMarkup(g.awayLogo,g.away)+'<span>'+esc(g.away)+'</span></span><b data-score-side="away">'+esc(g.awayScore)+'</b></div>'+
+        '<div class="team"><span class="team-identity">'+teamLogoMarkup(g.homeLogo,g.home)+'<span>'+esc(g.home)+'</span></span><b data-score-side="home">'+esc(g.homeScore)+'</b></div>'+
+      '</div>'+
+      '<div class="state '+(g.state==='live'?'live':'')+'">'+esc(g.status)+'</div>'+
+      (g.streams?.length?'<button class="watch-live-btn" type="button" data-live-event="'+esc(g.eventId)+'"><span class="live-dot" aria-hidden="true"></span>Watch Live</button>':'')+
+      (g.highlights?.length?'<button class="highlights-btn" type="button" data-highlight-event="'+esc(g.eventId)+'"><span class="highlights-btn-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>Highlights <b>'+esc(g.highlights.length)+'</b></button>':'')+
+      (g.odds?'<div class="oddsline"><span>'+esc(g.odds.provider)+'</span><span>Line <b>'+esc(g.odds.details)+'</b></span><span>Total <b>'+esc(g.odds.total)+'</b></span></div>':'')+
+    '</article>';
+  };
+
+  const scheduleItems=[...live,...scheduled,...other].slice(0,30);
+  const scoreItems=finals.slice(0,30);
+  const leagueName=liveNowLabels[currentScoreLeague]?.league||'League';
+
+  const sections=[];
+  if(scheduleItems.length){
+    sections.push(
+      '<section class="league-games-group" aria-label="'+esc(leagueName)+' schedule">'+
+        '<div class="league-games-group-head"><h3>Schedule</h3><span>'+esc(leagueName)+'</span></div>'+
+        '<div class="league-games-list">'+scheduleItems.map(renderCard).join('')+'</div>'+
+      '</section>'
+    );
+  }
+  if(scoreItems.length){
+    sections.push(
+      '<section class="league-games-group" aria-label="'+esc(leagueName)+' scores">'+
+        '<div class="league-games-group-head"><h3>Scores</h3><span>'+esc(leagueName)+'</span></div>'+
+        '<div class="league-games-list">'+scoreItems.map(renderCard).join('')+'</div>'+
+      '</section>'
+    );
+  }
+
+  host.innerHTML=sections.length
+    ?sections.join('')
+    :'<div class="empty">No verified schedule or scores were returned for this league right now.</div>';
 }
 async function loadGames({silent=false}={}){
   if(!document.getElementById('games'))return;
