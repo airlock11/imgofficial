@@ -34,7 +34,7 @@ def lines(url):
     soup = BeautifulSoup(fetch(url), "html.parser")
     for tag in soup(["script", "style", "noscript"]):
         tag.decompose()
-    return [re.sub(r"\\s+", " ", x).strip() for x in soup.get_text("\\n").splitlines() if re.sub(r"\\s+", " ", x).strip()]
+    return [re.sub(r"\s+", " ", x).strip() for x in soup.get_text("\n").splitlines() if re.sub(r"\s+", " ", x).strip()]
 
 def load():
     try:
@@ -47,10 +47,10 @@ def pht_iso_from_dmy(dmy):
     return dt.isoformat()
 
 def pht_iso_from_month(text, tm=None):
-    text = re.sub(r"\\s*\\|\\s*[A-Za-z]+$", "", text).strip()
+    text = re.sub(r"\s*\|\s*[A-Za-z]+$", "", text).strip()
     dt = datetime.strptime(text, "%B %d, %Y")
     if tm:
-        m = re.search(r"(\\d{1,2}):(\\d{2})\\s*(AM|PM)", tm, re.I)
+        m = re.search(r"(\d{1,2}):(\d{2})\s*(AM|PM)", tm, re.I)
         if m:
             h, minute = int(m.group(1)), int(m.group(2))
             if m.group(3).upper() == "PM" and h < 12: h += 12
@@ -61,32 +61,36 @@ def pht_iso_from_month(text, tm=None):
     return dt.replace(tzinfo=PHT).isoformat()
 
 def clean_team(s):
-    return re.sub(r"\\s+[A-Z]{2,5}$", "", s.strip()).strip()
+    return re.sub(r"\s+[A-Z]{2,5}$", "", s.strip()).strip()
 
 def parse_pba():
     xs = lines(URLS["pba"])
     games, day = [], None
-    date_re = re.compile(r"^(January|February|March|April|May|June|July|August|September|October|November|December)\\s+\\d{1,2},\\s+2026(?:\\s*\\|\\s*[A-Za-z]+)?$")
+    date_re = re.compile(r"^(January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2},\s+2026(?:\s*\|\s*[A-Za-z]+)?$")
     i = 0
     while i < len(xs):
         if date_re.match(xs[i]):
             day = xs[i]; i += 1; continue
         if not day:
             i += 1; continue
-        if i + 3 < len(xs) and re.fullmatch(r"\\d{2,3}\\s*\\|\\s*\\d{2,3}", xs[i+1]) and xs[i+2].upper() == "FINAL":
+        if i + 3 < len(xs) and re.fullmatch(r"\d{2,3}\s*\|\s*\d{2,3}", xs[i+1]) and xs[i+2].upper() == "FINAL":
             first, second = clean_team(xs[i]), clean_team(xs[i+3])
             a, b = [v.strip() for v in xs[i+1].split("|")]
             iso = pht_iso_from_month(day)
             games.append({"eventId":"web-pba-final-"+str(len(games)+1),"date":iso,"displayTime":datetime.fromisoformat(iso).strftime("%b %d · Final").replace(" 0"," "),"away":second,"home":first,"awayScore":b,"homeScore":a,"status":"Final","state":"final","sourceName":"SkedCheck","sourceUrl":URLS["pba"]})
             i += 4; continue
-        if i + 2 < len(xs) and re.fullmatch(r"VS\\s+\\d{1,2}:\\d{2}\\s*(AM|PM)", xs[i+1], re.I):
+        if i + 2 < len(xs) and re.fullmatch(r"VS\s+\d{1,2}:\d{2}\s*(AM|PM)", xs[i+1], re.I):
             first, second = clean_team(xs[i]), clean_team(xs[i+2])
             tm = xs[i+1][2:].strip()
             iso = pht_iso_from_month(day, tm)
             games.append({"eventId":"web-pba-scheduled-"+str(len(games)+1),"date":iso,"displayTime":datetime.fromisoformat(iso).strftime("%b %d · %I:%M %p").replace(" 0"," "),"away":first,"home":second,"awayScore":"—","homeScore":"—","status":"Scheduled","state":"scheduled","sourceName":"SkedCheck","sourceUrl":URLS["pba"]})
             i += 3; continue
         i += 1
-    if not games: raise RuntimeError("No PBA games parsed")
+    if not games:
+        existing = load().get("leagues", {}).get("pba", {})
+        if existing:
+            return existing
+        raise RuntimeError("No PBA games parsed")
     return {"league":"PBA","season":"2026 Governors' Cup","coverage":"Schedule and final scores","note":"Automatically refreshed from public web schedule/results.","sources":[{"name":"SkedCheck","url":URLS["pba"]},{"name":"PBA Official","url":"https://www.pba.ph/"}],"games":games[:40]}
 
 def parse_forebet(url, state):
@@ -94,11 +98,11 @@ def parse_forebet(url, state):
     games, day = [], None
     i = 0
     while i < len(xs):
-        if re.fullmatch(r"\\d{2}/\\d{2}/2026", xs[i]):
+        if re.fullmatch(r"\d{2}/\d{2}/2026", xs[i]):
             day = xs[i]; i += 1; continue
         if not day:
             i += 1; continue
-        if state == "final" and i + 2 < len(xs) and re.fullmatch(r"\\d{1,3}\\s*:\\s*\\d{1,3}", xs[i+1]):
+        if state == "final" and i + 2 < len(xs) and re.fullmatch(r"\d{1,3}\s*:\s*\d{1,3}", xs[i+1]):
             a, b = [v.strip() for v in xs[i+1].split(":")]
             iso = pht_iso_from_dmy(day)
             games.append({"eventId":"web-mpbl-final-"+str(len(games)+1),"date":iso,"displayTime":datetime.fromisoformat(iso).strftime("%b %d · Final").replace(" 0"," "),"away":xs[i+2],"home":xs[i],"awayScore":b,"homeScore":a,"status":"Final","state":"final","sourceName":"Forebet","sourceUrl":url})
@@ -111,8 +115,15 @@ def parse_forebet(url, state):
     return games
 
 def parse_mpbl():
-    games = parse_forebet(URLS["mpbl_fixtures"], "scheduled")[:20] + parse_forebet(URLS["mpbl_results"], "final")[:20]
-    if not games: raise RuntimeError("No MPBL games parsed")
+    try:
+        games = parse_forebet(URLS["mpbl_fixtures"], "scheduled")[:20] + parse_forebet(URLS["mpbl_results"], "final")[:20]
+    except Exception:
+        games = []
+    if not games:
+        existing = load().get("leagues", {}).get("mpbl", {})
+        if existing:
+            return existing
+        raise RuntimeError("No MPBL games parsed")
     return {"league":"MPBL","season":"2026 Season","coverage":"Upcoming fixtures and recent final scores","note":"Automatically refreshed from public MPBL fixture/result pages.","sources":[{"name":"Forebet","url":"https://www.forebet.com/en/basketball/philippines/mpbl"},{"name":"MPBL Official","url":"https://mpbl.com.ph/"}],"games":games}
 
 def nbl_source_lines():
@@ -377,6 +388,11 @@ def parse_nbl():
 
     games = dedupe_games(games)
     if not games and not broadcast:
+        existing = load().get("leagues", {}).get("nbl", {})
+        if existing:
+            existing["image_scan"] = image_meta
+            existing["note"] = "The latest automated scan found no new high-confidence NBL Facebook score/schedule graphics, so the last verified NBL data was preserved."
+            return existing
         raise RuntimeError("No NBL data parsed")
 
     return {
@@ -410,7 +426,7 @@ def main():
     data["updated_at"] = datetime.now(PHT).isoformat(timespec="seconds")
     data["refresh_minutes"] = 30
     data["errors"] = errors
-    OUT.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\\n", "utf-8")
+    OUT.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", "utf-8")
     print(json.dumps({"updated_at":data["updated_at"],"errors":errors,"counts":{k:len(v.get("games",[])) for k,v in data["leagues"].items()}}, ensure_ascii=False))
 
 if __name__ == "__main__":
