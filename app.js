@@ -277,6 +277,7 @@ const oddsFeeds={
   champions:'https://site.api.espn.com/apis/site/v2/sports/soccer/uefa.champions/scoreboard',
   mls:'https://site.api.espn.com/apis/site/v2/sports/soccer/usa.1/scoreboard'
 };let allGames=[];const liveStreamCache=new Map();
+const oddsLogoSportKey={nfl:'football',ncaaf:'ncaaf',nba:'basketball',wnba:'wnba',mlb:'baseball',nhl:'hockey',epl:'soccer',laliga:'laliga',seriea:'seriea',bundesliga:'bundesliga',champions:'champions'};
 const oddsLeagueNames={nfl:'NFL',ncaaf:'NCAA Football',nba:'NBA',wnba:'WNBA',ncaam:"NCAA Men's Basketball",mlb:'MLB',nhl:'NHL',epl:'Premier League',laliga:'La Liga',seriea:'Serie A',bundesliga:'Bundesliga',ligue1:'Ligue 1',champions:'UEFA Champions League',mls:'MLS'};let availableOdds={};
 function mapOdds(o){return{provider:o.provider?.displayName||o.provider?.name||'Odds provider',details:o.details||'—',total:o.overUnder??'—',home:o.moneyline?.home?.close?.odds||'—',away:o.moneyline?.away?.close?.odds||'—',draw:o.moneyline?.draw?.close?.odds||'—'}}function teamLogoUrl(team){return team?.team?.logo||team?.team?.logos?.[0]?.href||team?.logo||team?.logos?.[0]?.href||''}
 function teamLogoMarkup(url,name,extraClass=''){return url?'<img class="team-logo '+extraClass+'" src="'+esc(url)+'" alt="'+esc(name)+' logo" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.remove()">':''}
@@ -1077,6 +1078,10 @@ async function discoverOdds(){
     }
     availableOdds[key]=merged;
   }
+
+  await Promise.allSettled(Object.entries(availableOdds).map(([key,items])=>
+    hydrateTeamLogos(oddsLogoSportKey[key]||key,items)
+  ));
 
   const keys=Object.keys(availableOdds);
   select.innerHTML=keys.map(key=>'<option value="'+esc(key)+'">'+esc(oddsLeagueNames[key]||key.toUpperCase())+'</option>').join('');
