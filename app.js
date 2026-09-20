@@ -88,11 +88,12 @@ const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 const leagues={Basketball:[['NBA','United States / Canada'],['WNBA','United States / Canada'],['PBA','Philippines'],['MPBL','Philippines'],['NBL-Pilipinas','Philippines'],['NBL Australia','Australia / New Zealand'],['VBA','Vietnam'],['B.League','Japan'],['EuroLeague','Europe'],['WBSL','International']],Football:[['Premier League','England'],['La Liga','Spain'],['Serie A','Italy'],['Bundesliga','Germany'],['UEFA Champions League','Europe'],['Philippine Football League','Philippines']],Tennis:[['ATP Tour','International'],['WTA Tour','International'],['Australian Open','Australia'],['Wimbledon','United Kingdom'],['US Open','United States']],Baseball:[['MLB','USA / Canada'],['NPB','Japan'],['KBO League','South Korea']],Hockey:[['NHL','USA / Canada'],['KHL','Eurasia'],['IIHF World Championship','International']],Cricket:[['IPL','India'],['Big Bash League','Australia'],['ICC Cricket World Cup','International']],Volleyball:[['Volleyball Nations League','International'],['PVL','Philippines'],['V.League','Japan']],Motorsport:[['Formula 1','International'],['MotoGP','International'],['Formula E','International']],Boxing:[['WBC','International'],['WBA','International'],['IBF','International'],['WBO','International'],['Professional Boxing','Worldwide']],'Combat Sports':[['UFC','International'],['ONE Championship','Asia']],'American Football':[['NFL','United States'],['NCAA Football','United States']]};
 function openSport(name){if(name==='Boxing'){location.href='boxing.html';return}const modal=document.getElementById('sportModal');if(!modal)return;modal.querySelector('h2').textContent=name;modal.querySelector('.modalbody').innerHTML=(leagues[name]||[]).map(x=>'<div class="league-row"><strong>'+esc(x[0])+'</strong><small>'+esc(x[1])+'</small></div>').join('');modal.showModal()}
 document.addEventListener('click',e=>{const sport=e.target.closest('[data-sport]');if(sport)openSport(sport.dataset.sport);if(e.target.matches('.close'))e.target.closest('dialog').close();const highlightButton=e.target.closest('[data-highlight-event]');if(highlightButton)openHighlights(highlightButton.dataset.highlightEvent);const liveButton=e.target.closest('[data-live-event]');if(liveButton)openLiveStream(liveButton.dataset.liveEvent)});
-const scoreFeeds={soccer:'https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard',basketball:'https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard',wnba:'https://site.api.espn.com/apis/site/v2/sports/basketball/wnba/scoreboard',baseball:'https://site.api.espn.com/apis/site/v2/sports/baseball/mlb/scoreboard',hockey:'https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard',football:'https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard'};
+const scoreFeeds={soccer:'https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard',basketball:'https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard',wnba:'https://site.api.espn.com/apis/site/v2/sports/basketball/wnba/scoreboard',f1:'https://site.api.espn.com/apis/site/v2/sports/racing/f1/scoreboard',baseball:'https://site.api.espn.com/apis/site/v2/sports/baseball/mlb/scoreboard',hockey:'https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard',football:'https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard'};
 const cloudflareFallbackFeeds={
   soccer:'https://img-api-proxy.magsipocarnie.workers.dev/scoreboard?league=soccer',
   basketball:'https://img-api-proxy.magsipocarnie.workers.dev/scoreboard?league=basketball',
   wnba:'https://img-api-proxy.magsipocarnie.workers.dev/scoreboard?league=wnba',
+  f1:'https://img-api-proxy.magsipocarnie.workers.dev/scoreboard?league=f1',
   pba:'https://img-api-proxy.magsipocarnie.workers.dev/regional-scores?league=pba',
   mpbl:'https://img-api-proxy.magsipocarnie.workers.dev/regional-scores?league=mpbl',
   nbl:'https://img-api-proxy.magsipocarnie.workers.dev/regional-scores?league=nbl',
@@ -127,6 +128,7 @@ const liveNowLabels={
   soccer:{sport:'Football',league:'Premier League'},
   basketball:{sport:'Basketball',league:'NBA'},
   wnba:{sport:'Basketball',league:'WNBA'},
+  f1:{sport:'Motorsport',league:'Formula 1'},
   pba:{sport:'Basketball',league:'PBA'},
   mpbl:{sport:'Basketball',league:'MPBL'},
   nbl:{sport:'Basketball',league:'NBL-Pilipinas'},
@@ -251,7 +253,57 @@ async function hydrateHighlights(sport){const snapshot=allGames,candidates=snaps
 function ensureLiveDialog(){let d=document.getElementById('liveDialog');if(d)return d;d=document.createElement('dialog');d.id='liveDialog';d.className='live-dialog';d.innerHTML='<div class="live-shell"><button class="live-close" type="button" aria-label="Close live stream"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button><div id="liveContent"></div></div>';document.body.append(d);d.addEventListener('click',e=>{if(e.target===d)d.close()});d.querySelector('.live-close').addEventListener('click',()=>d.close());d.addEventListener('close',()=>{const frame=d.querySelector('iframe');if(frame)frame.src='about:blank'});return d}
 function openLiveStream(eventId){const g=allGames.find(x=>String(x.eventId)===String(eventId));if(!g||!g.streams?.length)return;const d=ensureLiveDialog(),host=d.querySelector('#liveContent'),stream=g.streams[0];host.innerHTML='<div class="live-head"><div class="live-badge"><span></span>Live</div><h2>'+esc(g.away)+' vs '+esc(g.home)+'</h2><div class="highlight-teams"><span>'+teamLogoMarkup(g.awayLogo,g.away,'highlight-team-logo')+esc(g.away)+'</span><span>'+teamLogoMarkup(g.homeLogo,g.home,'highlight-team-logo')+esc(g.home)+'</span></div></div><div class="live-player-wrap"><iframe class="live-player" src="'+esc(stream.embedUrl)+'" title="'+esc(stream.title||'Live stream')+'" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div><div class="live-meta"><strong>'+esc(stream.title||'Live stream')+'</strong><span>'+esc([stream.provider,stream.channel].filter(Boolean).join(' · '))+'</span></div>'+(g.streams.length>1?'<div class="live-sources">'+g.streams.map((s,i)=>'<button type="button" data-live-source="'+i+'">'+esc(s.provider||'Stream')+(s.channel?' · '+esc(s.channel):'')+'</button>').join('')+'</div>':'');d.querySelectorAll('[data-live-source]').forEach(btn=>btn.addEventListener('click',()=>{const s=g.streams[Number(btn.dataset.liveSource)];const frame=d.querySelector('.live-player');if(s&&frame){frame.src=s.embedUrl;d.querySelector('.live-meta strong').textContent=s.title||'Live stream';d.querySelector('.live-meta span').textContent=[s.provider,s.channel].filter(Boolean).join(' · ')}}));d.showModal()}
 async function hydrateLiveStreams(sport){const snapshot=allGames,now=Date.now(),candidates=snapshot.filter(g=>g.eventId&&(g.state==='live'||(g.state==='scheduled'&&Math.abs(Date.parse(g.date)-now)<=90*60000))).slice(0,4);if(!candidates.length)return;await Promise.allSettled(candidates.map(async g=>{const key=sport+':'+g.eventId,hit=liveStreamCache.get(key);if(hit&&Date.now()-hit.time<120000){g.streams=hit.items;g.streamsChecked=true;return}try{const q=new URLSearchParams({sport,event:g.eventId,home:g.home,away:g.away}),r=await fetch('https://img-api-proxy.magsipocarnie.workers.dev/streams?'+q.toString(),{cache:'no-store'});if(!r.ok)throw 0;const j=await r.json(),items=Array.isArray(j.items)?j.items.filter(x=>x?.embedUrl):[];g.streams=items;g.streamsChecked=true;liveStreamCache.set(key,{time:Date.now(),items})}catch{g.streams=[];g.streamsChecked=true}}));if(allGames===snapshot&&document.getElementById('sportFilter')?.value===sport)renderGames()}
-function normalizeEvent(e){const c=e.competitions?.[0],teams=c?.competitors||[],home=teams.find(x=>x.homeAway==='home')||teams[0],away=teams.find(x=>x.homeAway==='away')||teams[1],state=e.status?.type?.state||'pre',oddsList=(c?.odds||[]).filter(o=>o?.provider?.displayName||o?.provider?.name).map(mapOdds);return{eventId:e.id||c?.id||'',date:e.date,home:home?.team?.displayName||'Home',away:away?.team?.displayName||'Away',homeLogo:teamLogoUrl(home),awayLogo:teamLogoUrl(away),homeScore:home?.score||'—',awayScore:away?.score||'—',status:e.status?.type?.shortDetail||e.status?.type?.description||'Scheduled',state:state==='in'?'live':state==='post'?'final':'scheduled',odds:oddsList[0]||null,oddsList,highlights:[],highlightsChecked:false,streams:[],streamsChecked:false}}
+function f1SessionName(comp){
+  const abbr=String(comp?.type?.abbreviation||'').toUpperCase();
+  if(abbr==='FP1')return 'Practice 1';
+  if(abbr==='FP2')return 'Practice 2';
+  if(abbr==='FP3')return 'Practice 3';
+  if(abbr==='QUAL')return 'Qualifying';
+  if(abbr==='SPRINT')return 'Sprint';
+  if(abbr==='SPRINT SHOOTOUT'||abbr==='SS')return 'Sprint Qualifying';
+  if(abbr==='RACE')return 'Race';
+  return comp?.type?.text||comp?.type?.name||comp?.type?.abbreviation||'Session';
+}
+function normalizeEvent(e){
+  const competitions=e.competitions||[];
+  const isRacing=Boolean(e.circuit)||String(e?.uid||'').includes('l:2030')||competitions.some(x=>x?.type?.abbreviation&&!(x?.competitors||[]).length);
+  if(isRacing){
+    const now=Date.now();
+    const liveComp=competitions.find(x=>x?.status?.type?.state==='in');
+    const nextComp=competitions.find(x=>x?.status?.type?.state==='pre'&&(Date.parse(x.date||x.startDate||'')||0)>=now);
+    const completed=[...competitions].reverse().find(x=>x?.status?.type?.state==='post');
+    const session=liveComp||nextComp||completed||competitions[0]||{};
+    const stateRaw=liveComp?'in':session?.status?.type?.state||e?.status?.type?.state||'pre';
+    const sessionName=f1SessionName(session);
+    const status=session?.status?.type?.shortDetail||session?.status?.type?.description||e?.status?.type?.shortDetail||'Scheduled';
+    return{
+      eventId:e.id||session.id||'',
+      date:session.date||session.startDate||e.date,
+      home:e.shortName||e.name||'Formula 1',
+      away:sessionName,
+      homeLogo:'',
+      awayLogo:'',
+      homeScore:'—',
+      awayScore:'—',
+      status,
+      state:stateRaw==='in'?'live':stateRaw==='post'?'final':'scheduled',
+      odds:null,
+      oddsList:[],
+      highlights:[],
+      highlightsChecked:false,
+      streams:[],
+      streamsChecked:false,
+      isRacing:true,
+      raceTitle:e.name||e.shortName||'Formula 1',
+      raceSession:sessionName,
+      raceCircuit:e.circuit?.fullName||'',
+      raceCity:e.circuit?.address?.city||'',
+      raceBroadcast:session.broadcast||session.broadcasts?.[0]?.names?.[0]||''
+    };
+  }
+  const c=competitions[0],teams=c?.competitors||[],home=teams.find(x=>x.homeAway==='home')||teams[0],away=teams.find(x=>x.homeAway==='away')||teams[1],state=e.status?.type?.state||'pre',oddsList=(c?.odds||[]).filter(o=>o?.provider?.displayName||o?.provider?.name).map(mapOdds);
+  return{eventId:e.id||c?.id||'',date:e.date,home:home?.team?.displayName||'Home',away:away?.team?.displayName||'Away',homeLogo:teamLogoUrl(home),awayLogo:teamLogoUrl(away),homeScore:home?.score||'—',awayScore:away?.score||'—',status:e.status?.type?.shortDetail||e.status?.type?.description||'Scheduled',state:state==='in'?'live':state==='post'?'final':'scheduled',odds:oddsList[0]||null,oddsList,highlights:[],highlightsChecked:false,streams:[],streamsChecked:false};
+}
 function gameDomKey(g){
   const raw=String(g?.eventId||[g?.date||'',g?.away||'',g?.home||''].join('|'));
   return encodeURIComponent(raw);
@@ -342,8 +394,18 @@ function renderAllLiveGames(items){
   liveNowLocked=true;
   if(status)status.textContent=live.length+' live';
 
-  host.innerHTML=live.map(g=>
-    '<article class="live-game-card" data-game-key="'+esc(gameDomKey(g))+'" data-sport-key="'+esc(g.sportKey||'')+'">'+
+  host.innerHTML=live.map(g=>{
+    if(g.isRacing){
+      const place=[g.raceCircuit,g.raceCity].filter(Boolean).join(' · ');
+      return '<article class="live-game-card race-live-card" data-game-key="'+esc(gameDomKey(g))+'" data-sport-key="'+esc(g.sportKey||'')+'">'+
+        '<div class="live-card-top"><div class="live-sport-label"><span>Motorsport</span><b>Formula 1</b></div><span class="live-badge">LIVE</span></div>'+
+        '<div class="race-live-title">'+esc(g.raceTitle||g.home)+'</div>'+
+        '<div class="race-live-session">'+esc(g.raceSession||g.away)+'</div>'+
+        (place?'<div class="live-card-time">'+esc(place)+'</div>':'')+
+        '<div class="live-card-status">'+esc(g.status||'Live')+'</div>'+
+      '</article>';
+    }
+    return '<article class="live-game-card" data-game-key="'+esc(gameDomKey(g))+'" data-sport-key="'+esc(g.sportKey||'')+'">'+
       '<div class="live-card-top"><div class="live-sport-label"><span>'+esc(g.sportLabel||'Sport')+'</span><b>'+esc(g.leagueLabel||'')+'</b></div><span class="live-badge">LIVE</span></div>'+
       '<div class="live-card-time">'+esc(g.displayTime||g.status||'Live')+'</div>'+
       '<div class="live-card-teams">'+
@@ -351,8 +413,8 @@ function renderAllLiveGames(items){
         '<div class="live-card-team"><span>'+teamLogoMarkup(g.homeLogo,g.home,'live-card-logo')+esc(g.home)+'</span><b data-score-side="home">'+esc(g.homeScore)+'</b></div>'+
       '</div>'+
       '<div class="live-card-status">'+esc(g.status||'Live')+'</div>'+
-    '</article>'
-  ).join('');
+    '</article>';
+  }).join('');
 }
 
 async function loadAllLiveGames({silent=false}={}){
@@ -371,7 +433,7 @@ async function loadAllLiveGames({silent=false}={}){
 
   const live=[];
   const webKeys=['pba','mpbl','nbl','nblaus','vba'];
-  const apiKeys=['soccer','basketball','wnba','baseball','hockey','football'];
+  const apiKeys=['soccer','basketball','wnba','f1','baseball','hockey','football'];
 
   const regionalPromise=(async()=>{
     await loadRegionalAutoData();
@@ -432,7 +494,20 @@ function renderGames(){
     items=[...live,...filtered.sort(byDate)].slice(0,20);
   }
 
-  host.innerHTML=items.length?items.map(g=>'<article class="game'+(g.state==='live'?' game-is-live':'')+'" data-game-key="'+esc(gameDomKey(g))+'"><div class="time">'+esc(g.displayTime||new Date(g.date).toLocaleString([],{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}))+'</div><div class="teams"><div class="team"><span class="team-identity">'+teamLogoMarkup(g.awayLogo,g.away)+'<span>'+esc(g.away)+'</span></span><b data-score-side="away">'+esc(g.awayScore)+'</b></div><div class="team"><span class="team-identity">'+teamLogoMarkup(g.homeLogo,g.home)+'<span>'+esc(g.home)+'</span></span><b data-score-side="home">'+esc(g.homeScore)+'</b></div></div><div class="state '+(g.state==='live'?'live':'')+'">'+esc(g.status)+'</div>'+(g.streams?.length?'<button class="watch-live-btn" type="button" data-live-event="'+esc(g.eventId)+'"><span class="live-dot" aria-hidden="true"></span>Watch Live</button>':'')+(g.highlights?.length?'<button class="highlights-btn" type="button" data-highlight-event="'+esc(g.eventId)+'"><span class="highlights-btn-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>Highlights <b>'+esc(g.highlights.length)+'</b></button>':'')+(g.odds?'<div class="oddsline"><span>'+esc(g.odds.provider)+'</span><span>Line <b>'+esc(g.odds.details)+'</b></span><span>Total <b>'+esc(g.odds.total)+'</b></span></div>':'')+'</article>').join(''):'<div class="empty">No verified games were returned for this sport right now.</div>';
+  host.innerHTML=items.length?items.map(g=>{
+    if(g.isRacing){
+      const place=[g.raceCircuit,g.raceCity].filter(Boolean).join(' · ');
+      return '<article class="game race-game'+(g.state==='live'?' game-is-live':'')+'" data-game-key="'+esc(gameDomKey(g))+'">'+
+        '<div class="time">'+esc(g.displayTime||new Date(g.date).toLocaleString([],{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}))+'</div>'+
+        '<div class="race-game-main"><div class="race-game-top"><strong>'+esc(g.raceTitle||g.home)+'</strong><span class="race-session">'+esc(g.raceSession||g.away)+'</span></div>'+
+        (place?'<small>'+esc(place)+'</small>':'')+
+        '<div class="state '+(g.state==='live'?'live':'')+'">'+esc(g.status)+'</div>'+
+        (g.raceBroadcast?'<div class="race-broadcast">Broadcast: '+esc(g.raceBroadcast)+'</div>':'')+
+        (g.streams?.length?'<button class="watch-live-btn" type="button" data-live-event="'+esc(g.eventId)+'"><span class="live-dot" aria-hidden="true"></span>Watch Live</button>':'')+
+        '</div></article>';
+    }
+    return '<article class="game'+(g.state==='live'?' game-is-live':'')+'" data-game-key="'+esc(gameDomKey(g))+'"><div class="time">'+esc(g.displayTime||new Date(g.date).toLocaleString([],{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}))+'</div><div class="teams"><div class="team"><span class="team-identity">'+teamLogoMarkup(g.awayLogo,g.away)+'<span>'+esc(g.away)+'</span></span><b data-score-side="away">'+esc(g.awayScore)+'</b></div><div class="team"><span class="team-identity">'+teamLogoMarkup(g.homeLogo,g.home)+'<span>'+esc(g.home)+'</span></span><b data-score-side="home">'+esc(g.homeScore)+'</b></div></div><div class="state '+(g.state==='live'?'live':'')+'">'+esc(g.status)+'</div>'+(g.streams?.length?'<button class="watch-live-btn" type="button" data-live-event="'+esc(g.eventId)+'"><span class="live-dot" aria-hidden="true"></span>Watch Live</button>':'')+(g.highlights?.length?'<button class="highlights-btn" type="button" data-highlight-event="'+esc(g.eventId)+'"><span class="highlights-btn-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>Highlights <b>'+esc(g.highlights.length)+'</b></button>':'')+(g.odds?'<div class="oddsline"><span>'+esc(g.odds.provider)+'</span><span>Line <b>'+esc(g.odds.details)+'</b></span><span>Total <b>'+esc(g.odds.total)+'</b></span></div>':'')+'</article>';
+  }).join(''):'<div class="empty">No verified games were returned for this sport right now.</div>';
 }
 async function loadGames({silent=false}={}){
   if(!document.getElementById('games'))return;
