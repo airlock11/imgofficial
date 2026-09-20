@@ -89,6 +89,18 @@ const leagues={Basketball:[['NBA','United States / Canada'],['PBA','Philippines'
 function openSport(name){if(name==='Boxing'){location.href='boxing.html';return}const modal=document.getElementById('sportModal');if(!modal)return;modal.querySelector('h2').textContent=name;modal.querySelector('.modalbody').innerHTML=(leagues[name]||[]).map(x=>'<div class="league-row"><strong>'+esc(x[0])+'</strong><small>'+esc(x[1])+'</small></div>').join('');modal.showModal()}
 document.addEventListener('click',e=>{const sport=e.target.closest('[data-sport]');if(sport)openSport(sport.dataset.sport);if(e.target.matches('.close'))e.target.closest('dialog').close();const highlightButton=e.target.closest('[data-highlight-event]');if(highlightButton)openHighlights(highlightButton.dataset.highlightEvent);const liveButton=e.target.closest('[data-live-event]');if(liveButton)openLiveStream(liveButton.dataset.liveEvent)});
 const scoreFeeds={soccer:'https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard',basketball:'https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard',pba:'https://img-api-proxy.magsipocarnie.workers.dev/regional-scores?league=pba',mpbl:'https://img-api-proxy.magsipocarnie.workers.dev/regional-scores?league=mpbl',nbl:'https://img-api-proxy.magsipocarnie.workers.dev/regional-scores?league=nbl',nblaus:'https://img-api-proxy.magsipocarnie.workers.dev/regional-scores?league=nblaus',vba:'https://img-api-proxy.magsipocarnie.workers.dev/regional-scores?league=vba',baseball:'https://site.api.espn.com/apis/site/v2/sports/baseball/mlb/scoreboard',hockey:'https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard',football:'https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard'};
+const liveNowLabels={
+  soccer:{sport:'Football',league:'Premier League'},
+  basketball:{sport:'Basketball',league:'NBA'},
+  pba:{sport:'Basketball',league:'PBA'},
+  mpbl:{sport:'Basketball',league:'MPBL'},
+  nbl:{sport:'Basketball',league:'NBL-Pilipinas'},
+  nblaus:{sport:'Basketball',league:'NBL Australia'},
+  vba:{sport:'Basketball',league:'VBA'},
+  baseball:{sport:'Baseball',league:'MLB'},
+  hockey:{sport:'Hockey',league:'NHL'},
+  football:{sport:'American Football',league:'NFL'}
+};
 let regionalAutoDataCache=null;
 let regionalAutoDataPromise=null;
 async function loadRegionalAutoData(){
@@ -205,6 +217,73 @@ function ensureLiveDialog(){let d=document.getElementById('liveDialog');if(d)ret
 function openLiveStream(eventId){const g=allGames.find(x=>String(x.eventId)===String(eventId));if(!g||!g.streams?.length)return;const d=ensureLiveDialog(),host=d.querySelector('#liveContent'),stream=g.streams[0];host.innerHTML='<div class="live-head"><div class="live-badge"><span></span>Live</div><h2>'+esc(g.away)+' vs '+esc(g.home)+'</h2><div class="highlight-teams"><span>'+teamLogoMarkup(g.awayLogo,g.away,'highlight-team-logo')+esc(g.away)+'</span><span>'+teamLogoMarkup(g.homeLogo,g.home,'highlight-team-logo')+esc(g.home)+'</span></div></div><div class="live-player-wrap"><iframe class="live-player" src="'+esc(stream.embedUrl)+'" title="'+esc(stream.title||'Live stream')+'" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div><div class="live-meta"><strong>'+esc(stream.title||'Live stream')+'</strong><span>'+esc([stream.provider,stream.channel].filter(Boolean).join(' · '))+'</span></div>'+(g.streams.length>1?'<div class="live-sources">'+g.streams.map((s,i)=>'<button type="button" data-live-source="'+i+'">'+esc(s.provider||'Stream')+(s.channel?' · '+esc(s.channel):'')+'</button>').join('')+'</div>':'');d.querySelectorAll('[data-live-source]').forEach(btn=>btn.addEventListener('click',()=>{const s=g.streams[Number(btn.dataset.liveSource)];const frame=d.querySelector('.live-player');if(s&&frame){frame.src=s.embedUrl;d.querySelector('.live-meta strong').textContent=s.title||'Live stream';d.querySelector('.live-meta span').textContent=[s.provider,s.channel].filter(Boolean).join(' · ')}}));d.showModal()}
 async function hydrateLiveStreams(sport){const snapshot=allGames,now=Date.now(),candidates=snapshot.filter(g=>g.eventId&&(g.state==='live'||(g.state==='scheduled'&&Math.abs(Date.parse(g.date)-now)<=90*60000))).slice(0,4);if(!candidates.length)return;await Promise.allSettled(candidates.map(async g=>{const key=sport+':'+g.eventId,hit=liveStreamCache.get(key);if(hit&&Date.now()-hit.time<120000){g.streams=hit.items;g.streamsChecked=true;return}try{const q=new URLSearchParams({sport,event:g.eventId,home:g.home,away:g.away}),r=await fetch('https://img-api-proxy.magsipocarnie.workers.dev/streams?'+q.toString(),{cache:'no-store'});if(!r.ok)throw 0;const j=await r.json(),items=Array.isArray(j.items)?j.items.filter(x=>x?.embedUrl):[];g.streams=items;g.streamsChecked=true;liveStreamCache.set(key,{time:Date.now(),items})}catch{g.streams=[];g.streamsChecked=true}}));if(allGames===snapshot&&document.getElementById('sportFilter')?.value===sport)renderGames()}
 function normalizeEvent(e){const c=e.competitions?.[0],teams=c?.competitors||[],home=teams.find(x=>x.homeAway==='home')||teams[0],away=teams.find(x=>x.homeAway==='away')||teams[1],state=e.status?.type?.state||'pre',oddsList=(c?.odds||[]).filter(o=>o?.provider?.displayName||o?.provider?.name).map(mapOdds);return{eventId:e.id||c?.id||'',date:e.date,home:home?.team?.displayName||'Home',away:away?.team?.displayName||'Away',homeLogo:teamLogoUrl(home),awayLogo:teamLogoUrl(away),homeScore:home?.score||'—',awayScore:away?.score||'—',status:e.status?.type?.shortDetail||e.status?.type?.description||'Scheduled',state:state==='in'?'live':state==='post'?'final':'scheduled',odds:oddsList[0]||null,oddsList,highlights:[],highlightsChecked:false,streams:[],streamsChecked:false}}
+function renderAllLiveGames(items){
+  const host=document.getElementById('allLiveGames');
+  const status=document.getElementById('allLiveStatus');
+  if(!host)return;
+
+  const live=[...items].sort((a,b)=>{
+    const al=(a.sportLabel||'')+' '+(a.leagueLabel||'');
+    const bl=(b.sportLabel||'')+' '+(b.leagueLabel||'');
+    return al.localeCompare(bl)||((Date.parse(a.date||'')||0)-(Date.parse(b.date||'')||0));
+  });
+
+  if(status)status.textContent=live.length?live.length+' live':'No live games';
+
+  if(!live.length){
+    host.innerHTML='<div class="all-live-empty">No verified live games are active right now. This section checks all supported sports automatically.</div>';
+    return;
+  }
+
+  host.innerHTML=live.map(g=>
+    '<article class="live-game-card">'+
+      '<div class="live-card-top"><div class="live-sport-label"><span>'+esc(g.sportLabel||'Sport')+'</span><b>'+esc(g.leagueLabel||'')+'</b></div><span class="live-badge">LIVE</span></div>'+
+      '<div class="live-card-time">'+esc(g.displayTime||g.status||'Live')+'</div>'+
+      '<div class="live-card-teams">'+
+        '<div class="live-card-team"><span>'+teamLogoMarkup(g.awayLogo,g.away,'live-card-logo')+esc(g.away)+'</span><b>'+esc(g.awayScore)+'</b></div>'+
+        '<div class="live-card-team"><span>'+teamLogoMarkup(g.homeLogo,g.home,'live-card-logo')+esc(g.home)+'</span><b>'+esc(g.homeScore)+'</b></div>'+
+      '</div>'+
+      '<div class="live-card-status">'+esc(g.status||'Live')+'</div>'+
+    '</article>'
+  ).join('');
+}
+
+async function loadAllLiveGames(){
+  const host=document.getElementById('allLiveGames');
+  const status=document.getElementById('allLiveStatus');
+  if(!host)return;
+  if(status)status.textContent='Checking live games';
+
+  const live=[];
+  const webKeys=['pba','mpbl','nbl','nblaus','vba'];
+  const apiKeys=['soccer','basketball','baseball','hockey','football'];
+
+  const regionalPromise=loadRegionalAutoData().then(()=>{
+    for(const key of webKeys){
+      const labels=liveNowLabels[key]||{};
+      for(const game of regionalSnapshotGames(key)){
+        if(game.state==='live')live.push({...game,sportKey:key,sportLabel:labels.sport,leagueLabel:labels.league});
+      }
+    }
+  }).catch(()=>{});
+
+  const apiPromise=Promise.all(apiKeys.map(async key=>{
+    try{
+      const r=await fetch(scoreFeeds[key],{cache:'no-store'});
+      if(!r.ok)return;
+      const j=await r.json();
+      const labels=liveNowLabels[key]||{};
+      for(const event of (j.events||[])){
+        const game=normalizeEvent(event);
+        if(game.state==='live')live.push({...game,sportKey:key,sportLabel:labels.sport,leagueLabel:labels.league});
+      }
+    }catch{}
+  }));
+
+  await Promise.all([regionalPromise,apiPromise]);
+  renderAllLiveGames(live);
+}
+
 function renderGames(){
   const host=document.getElementById('games');
   if(!host)return;
@@ -421,4 +500,4 @@ async function discoverOdds(){
   host.setAttribute('aria-busy','false');
 }
 
-if(document.getElementById('games')){loadGames();setInterval(loadGames,60000);document.getElementById('gameFilter').onchange=renderGames;document.getElementById('sportFilter').onchange=loadGames;document.getElementById('refreshGames').onclick=loadGames}if(document.getElementById('newsFeed')){loadNews();setInterval(loadNews,300000)}if(document.getElementById('oddsFeed')){discoverOdds();setInterval(discoverOdds,300000);document.getElementById('oddsSport').onchange=renderOdds;document.getElementById('refreshOdds').onclick=discoverOdds}
+if(document.getElementById('games')){loadGames();loadAllLiveGames();setInterval(()=>{loadGames();loadAllLiveGames()},60000);document.getElementById('gameFilter').onchange=renderGames;document.getElementById('sportFilter').onchange=loadGames;document.getElementById('refreshGames').onclick=()=>{loadGames();loadAllLiveGames()}}if(document.getElementById('newsFeed')){loadNews();setInterval(loadNews,300000)}if(document.getElementById('oddsFeed')){discoverOdds();setInterval(discoverOdds,300000);document.getElementById('oddsSport').onchange=renderOdds;document.getElementById('refreshOdds').onclick=discoverOdds}
