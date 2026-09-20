@@ -278,7 +278,9 @@ const oddsFeeds={
   mls:'https://site.api.espn.com/apis/site/v2/sports/soccer/usa.1/scoreboard'
 };let allGames=[];const liveStreamCache=new Map();
 const oddsLogoSportKey={nfl:'football',ncaaf:'ncaaf',nba:'basketball',wnba:'wnba',mlb:'baseball',nhl:'hockey',epl:'soccer',laliga:'laliga',seriea:'seriea',bundesliga:'bundesliga',champions:'champions'};
-const oddsLeagueNames={nfl:'NFL',ncaaf:'NCAA Football',nba:'NBA',wnba:'WNBA',ncaam:"NCAA Men's Basketball",mlb:'MLB',nhl:'NHL',epl:'Premier League',laliga:'La Liga',seriea:'Serie A',bundesliga:'Bundesliga',ligue1:'Ligue 1',champions:'UEFA Champions League',mls:'MLS'};let availableOdds={};
+const oddsLeagueNames={nfl:'NFL',ncaaf:'NCAA Football',nba:'NBA',wnba:'WNBA',ncaam:"NCAA Men's Basketball",mlb:'MLB',nhl:'NHL',epl:'Premier League',laliga:'La Liga',seriea:'Serie A',bundesliga:'Bundesliga',ligue1:'Ligue 1',champions:'UEFA Champions League',mls:'MLS'};
+const oddsLeagueSports={nfl:'American Football',ncaaf:'American Football',nba:'Basketball',wnba:'Basketball',ncaam:'Basketball',mlb:'Baseball',nhl:'Hockey',epl:'Football',laliga:'Football',seriea:'Football',bundesliga:'Football',ligue1:'Football',champions:'Football',mls:'Football'};
+let availableOdds={},oddsLeagueLogos={},currentOddsSport='all',currentOddsLeague='';
 function mapOdds(o){return{provider:o.provider?.displayName||o.provider?.name||'Odds provider',details:o.details||'—',total:o.overUnder??'—',home:o.moneyline?.home?.close?.odds||'—',away:o.moneyline?.away?.close?.odds||'—',draw:o.moneyline?.draw?.close?.odds||'—'}}function teamLogoUrl(team){return team?.team?.logo||team?.team?.logos?.[0]?.href||team?.logo||team?.logos?.[0]?.href||''}
 function teamLogoMarkup(url,name,extraClass=''){return url?'<img class="team-logo '+extraClass+'" src="'+esc(url)+'" alt="'+esc(name)+' logo" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.remove()">':''}
 
@@ -1037,8 +1039,70 @@ function oddsMarketRows(game,market){
   return '<div class="odds-table-head odds-table-two"><span>Bookmaker</span><span>Total</span></div>'+
     rows.map(o=>'<div class="odds-table-row odds-table-two"><strong>'+esc(o.provider)+'</strong><span class="odds-price">'+esc(o.total)+'</span></div>').join('');
 }
+function oddsSportIcon(label){
+  const icons={
+    all:'grid_view',
+    Football:'sports_soccer',
+    Basketball:'sports_basketball',
+    Baseball:'sports_baseball',
+    Hockey:'sports_hockey',
+    'American Football':'sports_football'
+  };
+  return '<span class="material-symbols-rounded odds-sport-icon" aria-hidden="true">'+esc(icons[label]||'sports')+'</span>';
+}
+
+function oddsLeagueFallback(key){
+  const name=oddsLeagueNames[key]||key.toUpperCase();
+  return '<span class="odds-league-fallback">'+esc(name.replace(/[^A-Za-z0-9]/g,'').slice(0,4).toUpperCase())+'</span>';
+}
+
+function oddsLeagueLogoMarkup(key){
+  const logo=oddsLeagueLogos[key]||'';
+  return logo?'<img src="'+esc(logo)+'" alt="'+esc(oddsLeagueNames[key]||key)+' logo" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.outerHTML=\''+oddsLeagueFallback(key).replace(/'/g,"&#39;")+'\'">':oddsLeagueFallback(key);
+}
+
+function renderOddsFilters(){
+  const sportHost=document.getElementById('oddsSportFilters');
+  const leagueHost=document.getElementById('oddsLeagueFilters');
+  if(!sportHost||!leagueHost)return;
+  const keys=Object.keys(availableOdds);
+  const sportOrder=['Football','Basketball','American Football','Baseball','Hockey'];
+  const sports=[...new Set(keys.map(k=>oddsLeagueSports[k]).filter(Boolean))].sort((a,b)=>sportOrder.indexOf(a)-sportOrder.indexOf(b));
+  if(currentOddsSport!=='all'&&!sports.includes(currentOddsSport))currentOddsSport='all';
+
+  sportHost.innerHTML=[['all','All'],...sports.map(s=>[s,s])].map(([value,label])=>
+    '<button type="button" class="odds-sport-filter'+(currentOddsSport===value?' active':'')+'" data-odds-sport="'+esc(value)+'" aria-label="'+esc(label)+'">'+
+      oddsSportIcon(value)+
+      '<span>'+esc(label)+'</span>'+
+    '</button>'
+  ).join('');
+
+  const visibleKeys=keys.filter(k=>currentOddsSport==='all'||oddsLeagueSports[k]===currentOddsSport);
+  if(!visibleKeys.includes(currentOddsLeague))currentOddsLeague=visibleKeys[0]||keys[0]||'';
+
+  leagueHost.innerHTML=visibleKeys.map(key=>
+    '<button type="button" class="odds-league-filter'+(currentOddsLeague===key?' active':'')+'" data-odds-league="'+esc(key)+'" aria-label="'+esc(oddsLeagueNames[key]||key)+'">'+
+      '<span class="odds-league-logo-wrap">'+oddsLeagueLogoMarkup(key)+'</span>'+
+      '<span class="odds-league-filter-name">'+esc(oddsLeagueNames[key]||key.toUpperCase())+'</span>'+
+    '</button>'
+  ).join('');
+
+  sportHost.querySelectorAll('[data-odds-sport]').forEach(btn=>btn.addEventListener('click',()=>{
+    currentOddsSport=btn.dataset.oddsSport||'all';
+    const first=Object.keys(availableOdds).find(k=>currentOddsSport==='all'||oddsLeagueSports[k]===currentOddsSport)||'';
+    currentOddsLeague=first;
+    renderOddsFilters();
+    renderOdds();
+  }));
+  leagueHost.querySelectorAll('[data-odds-league]').forEach(btn=>btn.addEventListener('click',()=>{
+    currentOddsLeague=btn.dataset.oddsLeague||'';
+    renderOddsFilters();
+    renderOdds();
+  }));
+}
+
 function renderOdds(){
-  const host=document.getElementById('oddsFeed'),league=document.getElementById('oddsSport')?.value,items=availableOdds[league]||[];
+  const host=document.getElementById('oddsFeed'),league=currentOddsLeague,items=availableOdds[league]||[];
   if(!host)return;
 
   const ordered=[...items].sort((a,b)=>{
@@ -1101,27 +1165,32 @@ async function loadBet365Odds(){
   }
 }
 async function discoverOdds(){
-  const host=document.getElementById('oddsFeed'),select=document.getElementById('oddsSport'),status=document.getElementById('oddsStatus');
-  if(!host||!select)return;
+  const host=document.getElementById('oddsFeed'),status=document.getElementById('oddsStatus');
+  if(!host)return;
   status.textContent='Updating';
   host.setAttribute('aria-busy','true');
-  const previous=select.value;
+  const previous=currentOddsLeague;
 
   const [bet365Data,espnResults]=await Promise.all([
     loadBet365Odds(),
     Promise.all(Object.entries(oddsFeeds).map(async([key,url])=>{
       try{
         const r=await fetch(url,{cache:'no-store'});
-        if(!r.ok)return null;
-        const j=await r.json(),items=(j.events||[]).map(normalizeEvent).filter(x=>x.oddsList.length);
-        return items.length?[key,items]:null;
+        if(!r.ok)return {key,items:[],logo:''};
+        const j=await r.json();
+        const leagueMeta=j?.leagues?.[0]||{};
+        const logo=leagueMeta?.logos?.[0]?.href||leagueMeta?.logo||'';
+        const items=(j.events||[]).map(normalizeEvent).filter(x=>x.oddsList.length);
+        return {key,items,logo};
       }catch{
-        return null;
+        return {key,items:[],logo:''};
       }
     }))
   ]);
 
-  availableOdds=Object.fromEntries(espnResults.filter(Boolean));
+  oddsLeagueLogos=Object.fromEntries(espnResults.filter(x=>x.logo).map(x=>[x.key,x.logo]));
+  availableOdds=Object.fromEntries(espnResults.filter(x=>x.items.length).map(x=>[x.key,x.items]));
+
   for(const [key,items] of Object.entries(bet365Data)){
     if(!Array.isArray(items)||!items.length)continue;
     const current=availableOdds[key]||[];
@@ -1147,14 +1216,10 @@ async function discoverOdds(){
   ));
 
   const keys=Object.keys(availableOdds);
-  select.innerHTML=keys.map(key=>'<option value="'+esc(key)+'">'+esc(oddsLeagueNames[key]||key.toUpperCase())+'</option>').join('');
-  select.hidden=!keys.length;
-  if(keys.length){
-    select.value=keys.includes(previous)?previous:keys[0];
-    renderOdds();
-  }else{
-    host.innerHTML='';
-  }
+  currentOddsLeague=keys.includes(previous)?previous:(keys[0]||'');
+  if(currentOddsLeague)currentOddsSport=oddsLeagueSports[currentOddsLeague]||'all';
+  renderOddsFilters();
+  if(keys.length)renderOdds();else host.innerHTML='';
   status.textContent='';
   host.setAttribute('aria-busy','false');
 }
@@ -1215,4 +1280,4 @@ if(document.getElementById('games')){
     clearTimeout(scoreAutoRefreshTimer);
     if(!document.hidden)refreshScoresAutomatically();
   });
-}if(document.getElementById('newsFeed')){loadNews();setInterval(loadNews,300000)}if(document.getElementById('oddsFeed')){discoverOdds();setInterval(discoverOdds,300000);document.getElementById('oddsSport').onchange=renderOdds}
+}if(document.getElementById('newsFeed')){loadNews();setInterval(loadNews,300000)}if(document.getElementById('oddsFeed')){discoverOdds();setInterval(discoverOdds,300000)}
