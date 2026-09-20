@@ -275,7 +275,42 @@ async function loadGames(){
   }
 }
 function clean(html){const d=document.createElement('div');d.innerHTML=html||'';return d.textContent.trim().replace(/Continue reading.*$/i,'').slice(0,260)}function parseXML(x){const d=new DOMParser().parseFromString(x,'application/xml');return [...d.querySelectorAll('item')].map(i=>({title:i.querySelector('title')?.textContent||'',link:i.querySelector('link')?.textContent||'',description:clean(i.querySelector('description')?.textContent),source:d.querySelector('channel>title')?.textContent||'Sports News',sport:i.querySelector('category')?.textContent||'Sports',image:i.getElementsByTagName('media:content')[0]?.getAttribute('url')||''})).filter(x=>x.title&&x.link)}
-function renderNews(items){const host=document.getElementById('newsFeed');if(!host||!items.length)return;const first=items[0];host.innerHTML='<article class="lead-story">'+(first.image?'<img src="'+esc(first.image)+'" alt="" referrerpolicy="no-referrer">':'<div></div>')+'<div><div class="tag">'+esc(first.sport)+'</div><a href="'+esc(first.link)+'" target="_blank" rel="noopener"><h2>'+esc(first.title)+'</h2></a><p>'+esc(first.description)+'</p><small>'+esc(first.source)+'</small></div></article><div class="news-list">'+items.slice(1,9).map(n=>'<article class="news-row"><img src="'+esc(n.image||'about-sports.jpg')+'" alt="" loading="lazy" referrerpolicy="no-referrer"><div><div class="tag">'+esc(n.sport)+'</div><a href="'+esc(n.link)+'" target="_blank" rel="noopener"><h3>'+esc(n.title)+'</h3></a><small>'+esc(n.source)+'</small></div><span class="arrow">↗</span></article>').join('')+'</div>';const s=document.getElementById('newsStatus');if(s){s.textContent='';s.closest('.news-livebar')?.classList.add('is-empty')}}
+function renderNews(items,videos=[]){
+  const host=document.getElementById('newsFeed');
+  if(!host)return;
+  if(!items.length&&!videos.length)return;
+
+  const videoRows=(Array.isArray(videos)?videos:[]).slice(0,2);
+  const videosHtml=videoRows.length
+    ? '<section class="news-videos" aria-label="Sports videos">'+videoRows.map(v=>
+        '<article class="news-video-card">'+
+          '<div class="news-video-frame"><iframe src="'+esc(v.embed||'')+'" title="'+esc(v.title||'Sports video')+'" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>'+
+          '<div class="news-video-copy"><div class="tag">Video</div><h3>'+esc(v.title||'Sports video')+'</h3><small>'+esc(v.source||'Sports')+'</small></div>'+
+        '</article>'
+      ).join('')+'</section>'
+    : '';
+
+  if(!items.length){
+    host.innerHTML=videosHtml;
+  }else{
+    const first=items[0];
+    host.innerHTML=videosHtml+
+      '<article class="lead-story">'+
+        (first.image?'<img src="'+esc(first.image)+'" alt="" referrerpolicy="no-referrer">':'<div></div>')+
+        '<div><div class="tag">'+esc(first.sport)+'</div><a href="'+esc(first.link)+'" target="_blank" rel="noopener"><h2>'+esc(first.title)+'</h2></a><p>'+esc(first.description)+'</p><small>'+esc(first.source)+'</small></div>'+
+      '</article>'+
+      '<div class="news-list">'+items.slice(1,9).map(n=>
+        '<article class="news-row"><img src="'+esc(n.image||'about-sports.jpg')+'" alt="" loading="lazy" referrerpolicy="no-referrer"><div><div class="tag">'+esc(n.sport)+'</div><a href="'+esc(n.link)+'" target="_blank" rel="noopener"><h3>'+esc(n.title)+'</h3></a><small>'+esc(n.source)+'</small></div><span class="arrow">↗</span></article>'
+      ).join('')+'</div>';
+  }
+
+  const s=document.getElementById('newsStatus');
+  if(s){
+    s.textContent='';
+    s.closest('.news-livebar')?.classList.add('is-empty');
+  }
+}
+
 async function loadNews(){
   const host=document.getElementById('newsFeed');
   if(!host)return;
@@ -290,23 +325,23 @@ async function loadNews(){
       const j=await r.json();
       const items=Array.isArray(j?.items)?j.items:[];
       if(!items.length)throw new Error('Empty news feed');
-      return items;
+      return {items,videos:Array.isArray(j?.videos)?j.videos:[]};
     }
     const t=await r.text();
     const items=t.trim().startsWith('{')?(JSON.parse(t).items||[]):parseXML(t);
     if(!items.length)throw new Error('Empty news feed');
-    return items;
+    return {items,videos:[]};
   };
 
   try{
-    const items=await tryItems('news-data.json?v='+Date.now(),'json');
-    renderNews(items);
+    const data=await tryItems('news-data.json?v='+Date.now(),'json');
+    renderNews(data.items,data.videos);
     return;
   }catch{}
 
   try{
-    const items=await tryItems('https://img-api-proxy.magsipocarnie.workers.dev/news','worker');
-    renderNews(items);
+    const data=await tryItems('https://img-api-proxy.magsipocarnie.workers.dev/news','worker');
+    renderNews(data.items,data.videos);
     return;
   }catch{}
 
