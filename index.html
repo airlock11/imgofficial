@@ -36,6 +36,7 @@ img{display:block;max-width:100%}
 .hero p{max-width:650px;color:#bac3cd;font-size:clamp(1rem,1.5vw,1.22rem);line-height:1.7;margin:0}
 .scroll-hint{position:absolute;left:50%;bottom:28px;z-index:4;transform:translateX(-50%);color:#a8b1bd;font-size:.64rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;white-space:nowrap;text-align:center;animation:scrollHintFade 4s ease-in-out infinite}
 .scroll-hint:after{content:"";display:block;width:1px;height:34px;background:linear-gradient(var(--accent),transparent);margin:10px auto 0}
+.scroll-hint.is-hidden{animation:none;opacity:0;pointer-events:none;transition:opacity .8s ease}
 @keyframes scrollHintFade{0%,100%{opacity:.28}50%{opacity:1}}
 .story{background:#05070a}
 .story-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(40px,8vw,110px);align-items:center}
@@ -185,6 +186,7 @@ html{scroll-behavior:auto}
 .reveal{opacity:1;transform:none;transition:none}
 .sport-slide{transition:none}
 .scroll-hint{animation:none;opacity:1}
+.scroll-hint.is-hidden{transition:none;opacity:0}
 }
 </style>
 <link rel="stylesheet" href="./mobile-nav.css?v=20260920-7">
@@ -392,6 +394,7 @@ const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const root=document.documentElement;
 const progress=document.getElementById('progressBar');
 const heroBg=document.querySelector('.hero-bg');
+const scrollHint=document.querySelector('.scroll-hint');
 const story=document.getElementById('sportsStory');
 const slides=[...document.querySelectorAll('.sport-slide')];
 const title=document.getElementById('sportTitle');
@@ -421,6 +424,7 @@ function paint(){
 ticking=false;
 const y=scrollY,max=document.documentElement.scrollHeight-innerHeight;
 progress.style.transform='scaleX('+(max>0?Math.min(1,y/max):0)+')';
+if(scrollHint)scrollHint.classList.toggle('is-hidden',y>20);
 if(!reduced&&heroBg)heroBg.style.transform='translate3d(0,'+(y*.08)+'px,0) scale(1.07)';
 const r=story.getBoundingClientRect();
 const travel=Math.max(1,story.offsetHeight-innerHeight);
