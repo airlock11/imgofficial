@@ -181,30 +181,6 @@ const liveNowLabels={
 };
 const scoreLeagueOrder=['soccer','laliga','seriea','bundesliga','champions','basketball','wnba','pba','mpbl','nbl','nblaus','vba','atp','wta','ipl','volleyball_w','volleyball_m','baseball','hockey','football','ncaaf','f1','ufc'];
 const scoreLeagueLogoCache=new Map();
-const scoreLeagueWikiTitles={
-  soccer:'Premier League',
-  laliga:'La Liga',
-  seriea:'Serie A',
-  bundesliga:'Bundesliga',
-  champions:'UEFA Champions League',
-  basketball:'National Basketball Association',
-  wnba:"Women's National Basketball Association",
-  pba:'Philippine Basketball Association',
-  mpbl:'Maharlika Pilipinas Basketball League',
-  nbl:'National Basketball League (Philippines)',
-  nblaus:'National Basketball League (Australia)',
-  vba:'Vietnam Basketball Association',
-  atp:'ATP Tour',
-  wta:'WTA Tour',
-  ipl:'Indian Premier League',
-  volleyball_w:'Fédération Internationale de Volleyball',
-  volleyball_m:'Fédération Internationale de Volleyball',
-  baseball:'Major League Baseball',
-  hockey:'National Hockey League',
-  football:'National Football League',
-  ncaaf:'National Collegiate Athletic Association',
-  ufc:'Ultimate Fighting Championship'
-};
 let currentScoreLeague='soccer';
 
 function scoreLeagueFallback(key){
@@ -263,50 +239,7 @@ async function loadScoreLeagueLogos(){
     }catch{}
   });
 
-  const regional=async()=>{
-    const entries=Object.entries(scoreLeagueWikiTitles);
-    if(!entries.length)return;
-    try{
-      const uniqueTitles=[...new Set(entries.map(([,title])=>title))];
-      const titleGroups=[];
-      for(let i=0;i<uniqueTitles.length;i+=15)titleGroups.push(uniqueTitles.slice(i,i+15));
-
-      const resolved=new Map();
-      for(const group of titleGroups){
-        const r=await fetch(
-          'https://en.wikipedia.org/w/api.php?action=query&redirects=1&prop=pageimages&piprop=thumbnail|original&pithumbsize=180&format=json&origin=*&titles='+encodeURIComponent(group.join('|')),
-          {cache:'force-cache'}
-        );
-        if(!r.ok)continue;
-        const j=await r.json();
-        const pages=Object.values(j?.query?.pages||{});
-        const redirects=j?.query?.redirects||[];
-        const normalized=j?.query?.normalized||[];
-
-        for(const page of pages){
-          const logo=page?.thumbnail?.source||page?.original?.source||'';
-          if(!logo)continue;
-          resolved.set(String(page.title||'').toLowerCase(),logo);
-        }
-        for(const item of redirects){
-          const logo=resolved.get(String(item.to||'').toLowerCase());
-          if(logo)resolved.set(String(item.from||'').toLowerCase(),logo);
-        }
-        for(const item of normalized){
-          const logo=resolved.get(String(item.to||'').toLowerCase());
-          if(logo)resolved.set(String(item.from||'').toLowerCase(),logo);
-        }
-      }
-
-      for(const [key,title] of entries){
-        if(scoreLeagueLogoCache.has(key))continue;
-        const logo=resolved.get(String(title).toLowerCase())||'';
-        if(logo)scoreLeagueLogoCache.set(key,logo);
-      }
-    }catch{}
-  };
-
-  await Promise.allSettled([...direct,regional()]);
+  await Promise.allSettled(direct);
   renderScoreLeagueFilters();
 }
 let regionalAutoDataCache=null;
