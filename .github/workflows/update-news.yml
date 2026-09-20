@@ -2,7 +2,7 @@ name: Update sports news data
 
 on:
   schedule:
-    - cron: "*/10 * * * *"
+    - cron: "*/20 * * * *"
   workflow_dispatch:
   push:
     branches:
