@@ -18,6 +18,45 @@ async function handleRequest(request) {
     return new Response("IMG sports API proxy", { status: 200, headers: cors });
   }
 
+  if (url.pathname === "/scoreboard") {
+    var leagueKey = (url.searchParams.get("league") || "").toLowerCase();
+    var paths = {
+      soccer: "soccer/eng.1",
+      basketball: "basketball/nba",
+      baseball: "baseball/mlb",
+      hockey: "hockey/nhl",
+      football: "football/nfl"
+    };
+    var path = paths[leagueKey];
+
+    if (!path) {
+      return jsonResponse({ events: [], error: "Unsupported scoreboard league" }, cors);
+    }
+
+    try {
+      var scoreboardResponse = await fetch("https://site.api.espn.com/apis/site/v2/sports/" + path + "/scoreboard", {
+        cf: {
+          cacheTtl: 5,
+          cacheEverything: true
+        }
+      });
+      var scoreboardBody = await scoreboardResponse.text();
+      var scoreboardHeaders = {
+        "Access-Control-Allow-Origin": cors["Access-Control-Allow-Origin"],
+        "Access-Control-Allow-Methods": cors["Access-Control-Allow-Methods"],
+        "Access-Control-Allow-Headers": cors["Access-Control-Allow-Headers"],
+        "Content-Type": "application/json; charset=utf-8",
+        "Cache-Control": "public, max-age=2"
+      };
+      return new Response(scoreboardBody, {
+        status: scoreboardResponse.status,
+        headers: scoreboardHeaders
+      });
+    } catch (e) {
+      return jsonResponse({ events: [], error: "Fallback scoreboard unavailable" }, cors);
+    }
+  }
+
   if (url.pathname === "/boxing/meta") {
     return jsonResponse({
       configured: typeof BOXING_DATA_API_KEY !== "undefined" && !!BOXING_DATA_API_KEY,
