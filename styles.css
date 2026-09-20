@@ -607,3 +607,19 @@ main{min-height:calc(100svh - 68px)}
   .odds-price{font-size:.88rem}
   .odds-page .responsible{padding:12px 18px 0;margin-top:14px}
 }
+
+/* Formula 1 score cards */
+.race-game{align-items:start}
+.race-game-main{display:grid;gap:8px;min-width:0}
+.race-game-top{display:flex;align-items:center;justify-content:space-between;gap:14px}
+.race-game-top strong{font:800 1.25rem/1.1 "Barlow Condensed",Arial,sans-serif;text-transform:uppercase}
+.race-session{display:inline-flex;align-items:center;padding:6px 9px;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:.66rem;font-weight:800;white-space:nowrap}
+.race-game-main small{color:var(--muted);font-size:.72rem}
+.race-broadcast{color:var(--muted);font-size:.68rem}
+.race-live-title{margin:14px 0 4px;font:800 1.4rem/1.05 "Barlow Condensed",Arial,sans-serif;text-transform:uppercase}
+.race-live-session{font-size:.78rem;font-weight:800;color:var(--text)}
+@media(max-width:760px){
+  .race-game{grid-template-columns:64px minmax(0,1fr)}
+  .race-game-top{align-items:flex-start;flex-direction:column;gap:7px}
+  .race-session{white-space:normal}
+}
