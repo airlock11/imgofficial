@@ -371,7 +371,7 @@ main{min-height:calc(100svh - 68px)}
   .odds-team .team-logo{width:30px;height:30px;flex-basis:30px}
 }
 /* ESPN game highlights */
-.highlights-btn{margin-top:12px;display:inline-flex;align-items:center;gap:7px;min-height:36px;padding:7px 12px;border:1px solid rgba(255,255,255,.12);border-radius:10px;background:rgba(255,255,255,.06);color:var(--text,#f4f6f8);font:800 .72rem Inter,Arial,sans-serif;letter-spacing:.02em;cursor:pointer;transition:transform .18s ease,border-color .18s ease,background .18s ease,box-shadow .18s ease}
+.highlights-btn{margin-top:12px;display:inline-flex;align-items:center;gap:7px;width:max-content;max-width:100%;min-width:0;box-sizing:border-box;white-space:nowrap;min-height:36px;padding:7px 12px;border:1px solid rgba(255,255,255,.12);border-radius:10px;background:rgba(255,255,255,.06);color:var(--text,#f4f6f8);font:800 .72rem Inter,Arial,sans-serif;letter-spacing:.02em;cursor:pointer;transition:transform .18s ease,border-color .18s ease,background .18s ease,box-shadow .18s ease}
 .highlights-btn:hover{transform:translateY(-1px);border-color:rgba(255,255,255,.24);background:rgba(255,255,255,.09)}
 .highlights-btn b{min-width:20px;height:20px;display:grid;place-items:center;padding:0 5px;border-radius:999px;background:var(--red,#ef3f45);color:#fff;font-size:.66rem}
 .highlights-btn-icon{width:16px;height:16px;display:grid;place-items:center}.highlights-btn-icon svg{width:15px;height:15px;fill:currentColor}
@@ -407,5 +407,12 @@ main{min-height:calc(100svh - 68px)}
   .highlights-head{padding-right:44px}
   .highlight-now{align-items:flex-start;flex-direction:column;gap:5px}
   .highlight-playlist{grid-template-columns:1fr}
-  .highlights-btn{min-height:34px;padding:6px 10px}
+  .highlights-btn{grid-column:1/-1;justify-self:start;width:max-content;max-width:100%;min-width:0;min-height:34px;padding:6px 10px;gap:6px;white-space:nowrap}
+  .highlights-btn b{min-width:19px;height:19px;padding:0 5px;font-size:.62rem}
+  .highlights-btn-icon{flex:0 0 15px;width:15px;height:15px}
+  .highlights-btn-icon svg{width:14px;height:14px}
+}
+
+@media(max-width:340px){
+  .highlights-btn{padding:6px 9px;gap:5px;font-size:.68rem}
 }
