@@ -32,6 +32,7 @@ async function handleRequest(request) {
         soccer: "soccer/eng.1",
         basketball: "basketball/nba",
         wnba: "basketball/wnba",
+        f1: "racing/f1",
         baseball: "baseball/mlb",
         hockey: "hockey/nhl",
         football: "football/nfl",
@@ -611,6 +612,7 @@ function streamLeagueForSport(sport) {
     baseball: { label: "MLB", youtube: ["UCoLrcjPV5PbUrUyXq5mjc_A"] },
     hockey: { label: "NHL", youtube: ["UCqFMzb-4AUf6WAIbl132QKA"] },
     football: { label: "NFL", youtube: ["UCDVYQ4Zhbm3S2dlz7P1GBDg"] },
+    f1: { label: "Formula 1", youtube: ["UCB_qr75-ydFVKSF9Dmo6izg"], youtubeHandles: ["Formula1"] },
   };
   return map[sport] || null;
 }
