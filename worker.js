@@ -16,12 +16,20 @@ export default {
       const leagueKey = (url.searchParams.get("league") || "").trim().toLowerCase();
       const paths = {
         soccer: "soccer/eng.1",
+        laliga: "soccer/esp.1",
+        seriea: "soccer/ita.1",
+        bundesliga: "soccer/ger.1",
+        champions: "soccer/uefa.champions",
         basketball: "basketball/nba",
         wnba: "basketball/wnba",
+        atp: "tennis/atp",
+        wta: "tennis/wta",
         f1: "racing/f1",
+        ufc: "mma/ufc",
         baseball: "baseball/mlb",
         hockey: "hockey/nhl",
         football: "football/nfl",
+        ncaaf: "football/college-football",
       };
       const path = paths[leagueKey];
       if (!path) return jsonResponse({ events: [], error: "Unsupported scoreboard league" }, cors, 30);
@@ -592,7 +600,16 @@ function normalizeRegionalGame(game, config) {
 function streamLeagueForSport(sport) {
   const map = {
     soccer: { label: "Premier League", youtube: ["UCG5qGWdu8nIRZqJ_GgDwQ-w"] },
+    laliga: { label: "La Liga", youtube: [], youtubeHandles: ["LaLiga"] },
+    seriea: { label: "Serie A", youtube: [], youtubeHandles: ["seriea"] },
+    bundesliga: { label: "Bundesliga", youtube: [], youtubeHandles: ["bundesliga"] },
+    champions: { label: "UEFA Champions League", youtube: [], youtubeHandles: ["UEFA"] },
     basketball: { label: "NBA", youtube: ["UCWJ2lWNubArHWmf3FIHbfcQ"] },
+    wnba: { label: "WNBA", youtube: [], youtubeHandles: ["WNBA"] },
+    atp: { label: "ATP Tour", youtube: [], youtubeHandles: ["ATPTour"] },
+    wta: { label: "WTA Tour", youtube: [], youtubeHandles: ["WTA"] },
+    ufc: { label: "UFC", youtube: [], youtubeHandles: ["ufc"] },
+    ncaaf: { label: "NCAA Football", youtube: [], youtubeHandles: ["espncfb"] },
     pba: { label: "PBA Philippines", youtube: [], youtubeHandles: [] },
     mpbl: { label: "MPBL Philippines", youtube: ["UCbxiLsJzOnnpDOZSwB5HWUQ"], youtubeHandles: ["MPBLOfficial"] },
     nbl: { label: "NBL Pilipinas", youtube: [], youtubeHandles: ["nblpilipinas"] },
