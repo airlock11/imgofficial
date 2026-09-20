@@ -78,8 +78,8 @@ img{display:block;max-width:100%}
 @media(max-width:760px){
 body:before{display:none}
 .site-nav{display:none}
-body{padding-bottom:calc(90px + env(safe-area-inset-bottom))}
-.bottomnav{position:fixed;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));left:10px;right:10px;bottom:10px;width:auto;height:auto;min-height:64px;z-index:95;padding:6px 4px calc(6px + env(safe-area-inset-bottom));gap:0;border:1px solid rgba(255,255,255,.12);border-radius:18px;background:rgba(6,9,13,.92);box-shadow:0 12px 34px rgba(0,0,0,.34);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+body{padding-bottom:84px}
+.bottomnav{position:fixed;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));left:10px;right:10px;bottom:10px;width:auto;height:64px;min-height:64px;z-index:95;padding:6px 4px;gap:0;border:1px solid rgba(255,255,255,.12);border-radius:18px;background:rgba(6,9,13,.92);box-shadow:0 12px 34px rgba(0,0,0,.34);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
 .bottomnav a,.bottomnav a.active{position:relative;min-width:0;min-height:52px;display:grid;place-items:center;align-content:center;gap:4px;padding:4px 0;border-radius:12px;background:transparent;color:#8f99a6;text-decoration:none;font-size:.59rem;line-height:1;font-weight:800;letter-spacing:.04em;overflow:visible}
 .bottomnav a.active{color:#fff}
 .bottomnav a b,.bottomnav a.active b{width:24px;height:24px;display:grid;place-items:center;background:transparent;color:inherit;transform:none;line-height:1}
