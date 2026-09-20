@@ -88,7 +88,40 @@ const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 const leagues={Basketball:[['NBA','United States / Canada'],['PBA','Philippines'],['MPBL','Philippines'],['NBL-Pilipinas','Philippines'],['NBL Australia','Australia / New Zealand'],['VBA','Vietnam'],['B.League','Japan'],['EuroLeague','Europe'],['WBSL','International']],Football:[['Premier League','England'],['La Liga','Spain'],['Serie A','Italy'],['Bundesliga','Germany'],['UEFA Champions League','Europe'],['Philippine Football League','Philippines']],Tennis:[['ATP Tour','International'],['WTA Tour','International'],['Australian Open','Australia'],['Wimbledon','United Kingdom'],['US Open','United States']],Baseball:[['MLB','USA / Canada'],['NPB','Japan'],['KBO League','South Korea']],Hockey:[['NHL','USA / Canada'],['KHL','Eurasia'],['IIHF World Championship','International']],Cricket:[['IPL','India'],['Big Bash League','Australia'],['ICC Cricket World Cup','International']],Volleyball:[['Volleyball Nations League','International'],['PVL','Philippines'],['V.League','Japan']],Motorsport:[['Formula 1','International'],['MotoGP','International'],['Formula E','International']],Boxing:[['WBC','International'],['WBA','International'],['IBF','International'],['WBO','International'],['Professional Boxing','Worldwide']],'Combat Sports':[['UFC','International'],['ONE Championship','Asia']],'American Football':[['NFL','United States'],['NCAA Football','United States']]};
 function openSport(name){if(name==='Boxing'){location.href='boxing.html';return}const modal=document.getElementById('sportModal');if(!modal)return;modal.querySelector('h2').textContent=name;modal.querySelector('.modalbody').innerHTML=(leagues[name]||[]).map(x=>'<div class="league-row"><strong>'+esc(x[0])+'</strong><small>'+esc(x[1])+'</small></div>').join('');modal.showModal()}
 document.addEventListener('click',e=>{const sport=e.target.closest('[data-sport]');if(sport)openSport(sport.dataset.sport);if(e.target.matches('.close'))e.target.closest('dialog').close();const highlightButton=e.target.closest('[data-highlight-event]');if(highlightButton)openHighlights(highlightButton.dataset.highlightEvent);const liveButton=e.target.closest('[data-live-event]');if(liveButton)openLiveStream(liveButton.dataset.liveEvent)});
-const scoreFeeds={soccer:'https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard',basketball:'https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard',pba:'https://img-api-proxy.magsipocarnie.workers.dev/regional-scores?league=pba',mpbl:'https://img-api-proxy.magsipocarnie.workers.dev/regional-scores?league=mpbl',nbl:'https://img-api-proxy.magsipocarnie.workers.dev/regional-scores?league=nbl',nblaus:'https://img-api-proxy.magsipocarnie.workers.dev/regional-scores?league=nblaus',vba:'https://img-api-proxy.magsipocarnie.workers.dev/regional-scores?league=vba',baseball:'https://site.api.espn.com/apis/site/v2/sports/baseball/mlb/scoreboard',hockey:'https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard',football:'https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard'};
+const scoreFeeds={soccer:'https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard',basketball:'https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard',baseball:'https://site.api.espn.com/apis/site/v2/sports/baseball/mlb/scoreboard',hockey:'https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard',football:'https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard'};
+const cloudflareFallbackFeeds={
+  soccer:'https://img-api-proxy.magsipocarnie.workers.dev/scoreboard?league=soccer',
+  basketball:'https://img-api-proxy.magsipocarnie.workers.dev/scoreboard?league=basketball',
+  pba:'https://img-api-proxy.magsipocarnie.workers.dev/regional-scores?league=pba',
+  mpbl:'https://img-api-proxy.magsipocarnie.workers.dev/regional-scores?league=mpbl',
+  nbl:'https://img-api-proxy.magsipocarnie.workers.dev/regional-scores?league=nbl',
+  nblaus:'https://img-api-proxy.magsipocarnie.workers.dev/regional-scores?league=nblaus',
+  vba:'https://img-api-proxy.magsipocarnie.workers.dev/regional-scores?league=vba',
+  baseball:'https://img-api-proxy.magsipocarnie.workers.dev/scoreboard?league=baseball',
+  hockey:'https://img-api-proxy.magsipocarnie.workers.dev/scoreboard?league=hockey',
+  football:'https://img-api-proxy.magsipocarnie.workers.dev/scoreboard?league=football'
+};
+const regionalScoreKeys=new Set(['pba','mpbl','nbl','nblaus','vba']);
+
+async function fetchScorePayload(sport,{fallbackOnly=false}={}){
+  if(!fallbackOnly&&scoreFeeds[sport]){
+    try{
+      const r=await fetch(scoreFeeds[sport],{cache:'no-store'});
+      if(r.ok){
+        const j=await r.json();
+        if(Array.isArray(j?.events))return j;
+      }
+    }catch{}
+  }
+
+  const fallback=cloudflareFallbackFeeds[sport];
+  if(!fallback)throw new Error('Score feed unavailable');
+  const r=await fetch(fallback,{cache:'no-store'});
+  if(!r.ok)throw new Error('Fallback score feed unavailable');
+  const j=await r.json();
+  if(!Array.isArray(j?.events))throw new Error('Invalid fallback score feed');
+  return j;
+}
 const liveNowLabels={
   soccer:{sport:'Football',league:'Premier League'},
   basketball:{sport:'Basketball',league:'NBA'},
@@ -269,15 +302,13 @@ async function refreshExistingAllLiveScores(excludeSport=''){
 
   const updates=[];
   await Promise.allSettled(keys.map(async key=>{
-    const feed=scoreFeeds[key];
-    if(!feed)return;
-    const r=await fetch(feed,{cache:'no-store'});
-    if(!r.ok)return;
-    const j=await r.json();
-    for(const event of (j.events||[])){
-      const game=normalizeEvent(event);
-      if(game.state==='live')updates.push(game);
-    }
+    try{
+      const j=await fetchScorePayload(key,{fallbackOnly:regionalScoreKeys.has(key)});
+      for(const event of (j.events||[])){
+        const game=normalizeEvent(event);
+        if(game.state==='live')updates.push(game);
+      }
+    }catch{}
   }));
   updateAllLiveScoreNumbers(updates);
 }
@@ -340,34 +371,32 @@ async function loadAllLiveGames({silent=false}={}){
   const webKeys=['pba','mpbl','nbl','nblaus','vba'];
   const apiKeys=['soccer','basketball','baseball','hockey','football'];
 
-  const regionalPromise=Promise.all(webKeys.map(async key=>{
-    const labels=liveNowLabels[key]||{};
-    let feedWorked=false;
-    try{
-      const r=await fetch(scoreFeeds[key],{cache:'no-store'});
-      if(r.ok){
-        feedWorked=true;
-        const j=await r.json();
+  const regionalPromise=(async()=>{
+    await loadRegionalAutoData();
+    await Promise.all(webKeys.map(async key=>{
+      const labels=liveNowLabels[key]||{};
+      const primaryLive=regionalSnapshotGames(key).filter(game=>game.state==='live');
+
+      if(primaryLive.length){
+        for(const game of primaryLive){
+          live.push({...game,sportKey:key,sportLabel:labels.sport,leagueLabel:labels.league});
+        }
+        return;
+      }
+
+      try{
+        const j=await fetchScorePayload(key,{fallbackOnly:true});
         for(const event of (j.events||[])){
           const game=normalizeEvent(event);
           if(game.state==='live')live.push({...game,sportKey:key,sportLabel:labels.sport,leagueLabel:labels.league});
         }
-      }
-    }catch{}
-
-    if(!feedWorked){
-      await loadRegionalAutoData();
-      for(const game of regionalSnapshotGames(key)){
-        if(game.state==='live')live.push({...game,sportKey:key,sportLabel:labels.sport,leagueLabel:labels.league});
-      }
-    }
-  }));
+      }catch{}
+    }));
+  })();
 
   const apiPromise=Promise.all(apiKeys.map(async key=>{
     try{
-      const r=await fetch(scoreFeeds[key],{cache:'no-store'});
-      if(!r.ok)return;
-      const j=await r.json();
+      const j=await fetchScorePayload(key);
       const labels=liveNowLabels[key]||{};
       for(const event of (j.events||[])){
         const game=normalizeEvent(event);
@@ -411,39 +440,42 @@ async function loadGames({silent=false}={}){
   if(!silent)st.textContent='Updating';
 
   if(isWebLeague){
-    let liveGames=[];
-    let liveFeedWorked=false;
-
-    try{
-      const r=await fetch(scoreFeeds[sport],{cache:'no-store'});
-      if(r.ok){
-        liveFeedWorked=true;
-        const j=await r.json();
-        liveGames=(j.events||[]).map(normalizeEvent).filter(g=>g.state==='live');
-      }
-    }catch{}
-
     await loadRegionalAutoData();
     const webGames=regionalSnapshotGames(sport);
 
-    if(liveGames.length){
-      const liveMatchups=new Set(liveGames.map(g=>(g.away+'|'+g.home).toLowerCase()));
-      allGames=[
-        ...liveGames,
-        ...webGames.filter(g=>g.state!=='live'&&!liveMatchups.has((g.away+'|'+g.home).toLowerCase()))
-      ];
-      st.textContent='';
-      renderRegionalContext(sport,'live-api');
-      if(silent)updateScoreNumbers();else renderGames();
-      if(!silent)void hydrateLiveStreams(sport);
-      return;
-    }
-
-    if(webGames.length){
+    // GitHub-hosted regional data is the stable primary layer.
+    // Never clear or replace it just because the Cloudflare fallback is unavailable.
+    if(!silent&&webGames.length){
       allGames=webGames;
       st.textContent='';
-      renderRegionalContext(sport,liveFeedWorked?'web-auto':'web');
-      if(silent)updateScoreNumbers();else renderGames();
+      renderRegionalContext(sport,'web');
+      renderGames();
+    }else if(!allGames.length&&webGames.length){
+      allGames=webGames;
+    }
+
+    try{
+      const j=await fetchScorePayload(sport,{fallbackOnly:true});
+      const liveGames=(j.events||[]).map(normalizeEvent).filter(g=>g.state==='live');
+
+      if(liveGames.length){
+        const base=webGames.length?webGames:allGames;
+        const liveMatchups=new Set(liveGames.map(g=>(g.away+'|'+g.home).toLowerCase()));
+        allGames=[
+          ...liveGames,
+          ...base.filter(g=>g.state!=='live'&&!liveMatchups.has((g.away+'|'+g.home).toLowerCase()))
+        ];
+        st.textContent='';
+        renderRegionalContext(sport,'cloudflare-fallback');
+        if(silent)updateScoreNumbers();else renderGames();
+        if(!silent)void hydrateLiveStreams(sport);
+        return;
+      }
+    }catch{}
+
+    if(webGames.length){
+      st.textContent='';
+      if(silent)updateScoreNumbers();else if(!document.querySelector('#games .game'))renderGames();
       return;
     }
   }
@@ -451,9 +483,7 @@ async function loadGames({silent=false}={}){
   const hasRegionalSnapshot=Boolean(getRegionalSnapshot(sport));
   let mode='api';
   try{
-    const r=await fetch(scoreFeeds[sport],{cache:'no-store'});
-    if(!r.ok)throw 0;
-    const j=await r.json();
+    const j=await fetchScorePayload(sport);
     allGames=(j.events||[]).map(normalizeEvent);
 
     if(hasRegionalSnapshot&&!allGames.length){
