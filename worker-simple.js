@@ -23,6 +23,7 @@ async function handleRequest(request) {
     var paths = {
       soccer: "soccer/eng.1",
       basketball: "basketball/nba",
+      wnba: "basketball/wnba",
       baseball: "baseball/mlb",
       hockey: "hockey/nhl",
       football: "football/nfl"
