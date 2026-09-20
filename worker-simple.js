@@ -24,6 +24,7 @@ async function handleRequest(request) {
       soccer: "soccer/eng.1",
       basketball: "basketball/nba",
       wnba: "basketball/wnba",
+      f1: "racing/f1",
       baseball: "baseball/mlb",
       hockey: "hockey/nhl",
       football: "football/nfl"
