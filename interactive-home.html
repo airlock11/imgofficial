@@ -13,6 +13,10 @@ body{margin:0;background:var(--bg);color:var(--fg);font-family:Inter,Arial,Helve
 body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:90;background:radial-gradient(500px circle at var(--mx,50%) var(--my,30%),rgba(255,255,255,.05),transparent 58%)}
 img{display:block;max-width:100%}
 .logo-mark{position:fixed;z-index:80;top:22px;left:clamp(18px,4vw,52px);width:86px;height:34px;object-fit:contain}
+.site-nav{position:fixed;z-index:80;top:16px;right:clamp(18px,4vw,52px);display:flex;align-items:center;gap:26px;height:46px;padding:0 16px;border:1px solid rgba(255,255,255,.1);border-radius:999px;background:rgba(4,7,10,.6);backdrop-filter:blur(14px)}
+.site-nav a{color:#aeb7c2;text-decoration:none;font-size:.76rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;transition:color .2s}
+.site-nav a:hover,.site-nav a.active{color:#fff}
+.bottomnav{display:none}
 .progress{position:fixed;z-index:85;left:0;top:0;height:2px;width:100%;background:rgba(255,255,255,.08)}
 .progress span{display:block;height:100%;width:100%;transform:scaleX(0);transform-origin:left;background:var(--accent)}
 .section{position:relative;min-height:100svh;display:grid;align-items:center;overflow:hidden}
@@ -73,6 +77,13 @@ img{display:block;max-width:100%}
 .reveal.in{opacity:1;transform:none}
 @media(max-width:760px){
 body:before{display:none}
+.site-nav{display:none}
+.bottomnav{position:fixed;display:grid;grid-template-columns:repeat(5,1fr);left:10px;right:10px;bottom:10px;z-index:95;min-height:64px;padding:6px 4px calc(6px + env(safe-area-inset-bottom));border:1px solid rgba(255,255,255,.12);border-radius:18px;background:rgba(6,9,13,.92);backdrop-filter:blur(16px)}
+.bottomnav a{display:grid;place-items:center;align-content:center;gap:4px;color:#8f99a6;text-decoration:none;font-size:.59rem;font-weight:800;letter-spacing:.04em}
+.bottomnav a.active{color:#fff}
+.bottomnav img{width:20px;height:20px;opacity:.74}
+.bottomnav a.active img{opacity:1}
+.closing{padding-bottom:120px}
 .logo-mark{top:16px;left:18px;width:76px}
 .shell,.sport-content{width:calc(100% - 32px)}
 .hero-bg{background-image:url("https://commons.wikimedia.org/wiki/Special:FilePath/Lionel%20Messi%20NE%20Revolution%20Inter%20Miami%207.9.25-143.jpg?width=1800");background-position:center 18%}
@@ -106,6 +117,13 @@ html{scroll-behavior:auto}
 <body>
 <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
 <img class="logo-mark" src="./img-logo-hq.png" alt="IMG">
+<nav class="site-nav" aria-label="Primary navigation">
+<a class="active" href="./index.html">Home</a>
+<a href="./sports.html">Sports</a>
+<a href="./scores.html">Scores</a>
+<a href="./news.html">News</a>
+<a href="./odds.html">Odds</a>
+</nav>
 <main>
 <section class="section hero">
 <div class="hero-bg" data-parallax="0.16"></div>
@@ -194,6 +212,13 @@ html{scroll-behavior:auto}
 </div>
 </section>
 </main>
+<nav class="bottomnav" aria-label="Mobile navigation">
+<a class="active" href="./index.html"><img src="./icons/home.svg" alt="">Home</a>
+<a href="./sports.html"><img src="./icons/sports.svg" alt="">Sports</a>
+<a href="./scores.html"><img src="./icons/scores.svg" alt="">Scores</a>
+<a href="./news.html"><img src="./icons/news.svg" alt="">News</a>
+<a href="./odds.html"><img src="./icons/odds.svg" alt="">Odds</a>
+</nav>
 
 <script>
 (()=>{
