@@ -89,6 +89,21 @@ const leagues={Basketball:[['NBA','United States / Canada'],['PBA','Philippines'
 function openSport(name){if(name==='Boxing'){location.href='boxing.html';return}const modal=document.getElementById('sportModal');if(!modal)return;modal.querySelector('h2').textContent=name;modal.querySelector('.modalbody').innerHTML=(leagues[name]||[]).map(x=>'<div class="league-row"><strong>'+esc(x[0])+'</strong><small>'+esc(x[1])+'</small></div>').join('');modal.showModal()}
 document.addEventListener('click',e=>{const sport=e.target.closest('[data-sport]');if(sport)openSport(sport.dataset.sport);if(e.target.matches('.close'))e.target.closest('dialog').close();const highlightButton=e.target.closest('[data-highlight-event]');if(highlightButton)openHighlights(highlightButton.dataset.highlightEvent);const liveButton=e.target.closest('[data-live-event]');if(liveButton)openLiveStream(liveButton.dataset.liveEvent)});
 const scoreFeeds={soccer:'https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard',basketball:'https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard',pba:'https://img-api-proxy.magsipocarnie.workers.dev/regional-scores?league=pba',mpbl:'https://img-api-proxy.magsipocarnie.workers.dev/regional-scores?league=mpbl',nbl:'https://img-api-proxy.magsipocarnie.workers.dev/regional-scores?league=nbl',nblaus:'https://img-api-proxy.magsipocarnie.workers.dev/regional-scores?league=nblaus',vba:'https://img-api-proxy.magsipocarnie.workers.dev/regional-scores?league=vba',baseball:'https://site.api.espn.com/apis/site/v2/sports/baseball/mlb/scoreboard',hockey:'https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard',football:'https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard'};
+let regionalAutoDataCache=null;
+let regionalAutoDataPromise=null;
+async function loadRegionalAutoData(){
+  if(regionalAutoDataCache)return regionalAutoDataCache;
+  if(regionalAutoDataPromise)return regionalAutoDataPromise;
+  regionalAutoDataPromise=fetch('regional-web.json?v='+Date.now(),{cache:'no-store'})
+    .then(r=>r.ok?r.json():null)
+    .then(j=>regionalAutoDataCache=j)
+    .catch(()=>null)
+    .finally(()=>{regionalAutoDataPromise=null});
+  return regionalAutoDataPromise;
+}
+function getRegionalSnapshot(sport){
+  return regionalAutoDataCache?.leagues?.[sport]||regionalWebSnapshots[sport]||null;
+}
 const regionalWebSnapshots={
   pba:{
     league:'PBA',
@@ -151,17 +166,21 @@ const regionalWebSnapshots={
   }
 };
 function regionalSnapshotGames(sport){
-  const snapshot=regionalWebSnapshots[sport];
-  return snapshot?(snapshot.games||[]).map(g=>({...g,homeLogo:'',awayLogo:'',odds:null,oddsList:[],highlights:[],highlightsChecked:true,streams:[],streamsChecked:true})):[];
+  const snapshot=getRegionalSnapshot(sport);
+  return snapshot?(snapshot.games||[]).map(g=>({...g,homeLogo:g.homeLogo||'',awayLogo:g.awayLogo||'',odds:null,oddsList:[],highlights:[],highlightsChecked:true,streams:[],streamsChecked:true})):[];
 }
 function renderRegionalContext(sport,mode){
   const host=document.getElementById('leagueContext');
   if(!host)return;
-  const snapshot=regionalWebSnapshots[sport];
+  const snapshot=getRegionalSnapshot(sport);
   if(!snapshot){host.innerHTML='';host.hidden=true;return}
   host.hidden=false;
   const sourceLinks=(snapshot.sources||[]).map(s=>'<a href="'+esc(s.url)+'" target="_blank" rel="noopener">'+esc(s.name)+'</a>').join('<span aria-hidden="true"> · </span>');
-  host.innerHTML='<div><span class="tag">'+esc(snapshot.league)+'</span><strong>'+esc(snapshot.season)+'</strong><p>'+esc(snapshot.note)+'</p></div><div class="league-context-meta"><span>'+esc(snapshot.coverage)+'</span><span>'+(mode==='web'?'Using web-sourced fallback':'Live/API feed active; web sources available as fallback')+'</span><span class="league-context-sources">Sources: '+sourceLinks+'</span></div>';
+  const modeText=mode==='web-auto'?'Auto-updated from public web sources every 30 minutes':mode==='web'?'Using web-sourced fallback':'Live/API feed active; web sources available as fallback';
+  const refreshed=regionalAutoDataCache?.updated_at?'<span>Last web refresh: '+esc(new Date(regionalAutoDataCache.updated_at).toLocaleString())+'</span>':'';
+  const coverage=snapshot.coverage||'Public web schedule and results';
+  const broadcast=(snapshot.broadcast||[]).length?'<span>NBL broadcast listings: '+esc(snapshot.broadcast.map(x=>(x.date||'')+' '+(x.time||((x.times||[]).join(', ')))).join(' · '))+'</span>':'';
+  host.innerHTML='<div><span class="tag">'+esc(snapshot.league)+'</span><strong>'+esc(snapshot.season||'')+'</strong><p>'+esc(snapshot.note||'')+'</p></div><div class="league-context-meta"><span>'+esc(coverage)+'</span><span>'+esc(modeText)+'</span>'+refreshed+broadcast+'<span class="league-context-sources">Sources: '+sourceLinks+'</span></div>';
 }
 
 const oddsFeeds={
@@ -199,7 +218,74 @@ function openLiveStream(eventId){const g=allGames.find(x=>String(x.eventId)===St
 async function hydrateLiveStreams(sport){const snapshot=allGames,now=Date.now(),candidates=snapshot.filter(g=>g.eventId&&(g.state==='live'||(g.state==='scheduled'&&Math.abs(Date.parse(g.date)-now)<=90*60000))).slice(0,4);if(!candidates.length)return;await Promise.allSettled(candidates.map(async g=>{const key=sport+':'+g.eventId,hit=liveStreamCache.get(key);if(hit&&Date.now()-hit.time<120000){g.streams=hit.items;g.streamsChecked=true;return}try{const q=new URLSearchParams({sport,event:g.eventId,home:g.home,away:g.away}),r=await fetch('https://img-api-proxy.magsipocarnie.workers.dev/streams?'+q.toString(),{cache:'no-store'});if(!r.ok)throw 0;const j=await r.json(),items=Array.isArray(j.items)?j.items.filter(x=>x?.embedUrl):[];g.streams=items;g.streamsChecked=true;liveStreamCache.set(key,{time:Date.now(),items})}catch{g.streams=[];g.streamsChecked=true}}));if(allGames===snapshot&&document.getElementById('sportFilter')?.value===sport)renderGames()}
 function normalizeEvent(e){const c=e.competitions?.[0],teams=c?.competitors||[],home=teams.find(x=>x.homeAway==='home')||teams[0],away=teams.find(x=>x.homeAway==='away')||teams[1],state=e.status?.type?.state||'pre',oddsList=(c?.odds||[]).filter(o=>o?.provider?.displayName||o?.provider?.name).map(mapOdds);return{eventId:e.id||c?.id||'',date:e.date,home:home?.team?.displayName||'Home',away:away?.team?.displayName||'Away',homeLogo:teamLogoUrl(home),awayLogo:teamLogoUrl(away),homeScore:home?.score||'—',awayScore:away?.score||'—',status:e.status?.type?.shortDetail||e.status?.type?.description||'Scheduled',state:state==='in'?'live':state==='post'?'final':'scheduled',odds:oddsList[0]||null,oddsList,highlights:[],highlightsChecked:false,streams:[],streamsChecked:false}}
 function renderGames(){const host=document.getElementById('games');if(!host)return;const filter=document.getElementById('gameFilter')?.value||'all',items=allGames.filter(g=>filter==='all'||g.state===filter).slice(0,20);host.innerHTML=items.length?items.map(g=>'<article class="game"><div class="time">'+esc(g.displayTime||new Date(g.date).toLocaleString([],{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}))+'</div><div class="teams"><div class="team"><span class="team-identity">'+teamLogoMarkup(g.awayLogo,g.away)+'<span>'+esc(g.away)+'</span></span><b>'+esc(g.awayScore)+'</b></div><div class="team"><span class="team-identity">'+teamLogoMarkup(g.homeLogo,g.home)+'<span>'+esc(g.home)+'</span></span><b>'+esc(g.homeScore)+'</b></div></div><div class="state '+(g.state==='live'?'live':'')+'">'+esc(g.status)+'</div>'+(g.sourceUrl?'<a class="game-source" href="'+esc(g.sourceUrl)+'" target="_blank" rel="noopener">Source: '+esc(g.sourceName||'Public web')+'</a>':'')+(g.streams?.length?'<button class="watch-live-btn" type="button" data-live-event="'+esc(g.eventId)+'"><span class="live-dot" aria-hidden="true"></span>Watch Live</button>':'')+(g.highlights?.length?'<button class="highlights-btn" type="button" data-highlight-event="'+esc(g.eventId)+'"><span class="highlights-btn-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>Highlights <b>'+esc(g.highlights.length)+'</b></button>':'')+(g.odds?'<div class="oddsline"><span>'+esc(g.odds.provider)+'</span><span>Line <b>'+esc(g.odds.details)+'</b></span><span>Total <b>'+esc(g.odds.total)+'</b></span></div>':'')+'</article>').join(''):'<div class="empty">No verified games were returned for this sport right now.</div>'}
-async function loadGames(){if(!document.getElementById('games'))return;const st=document.getElementById('gameStatus'),sport=document.getElementById('sportFilter')?.value||'soccer',hasRegionalSnapshot=Boolean(regionalWebSnapshots[sport]);st.textContent='Updating';let mode='api';try{const r=await fetch(scoreFeeds[sport],{cache:'no-store'});if(!r.ok)throw 0;const j=await r.json();allGames=(j.events||[]).map(normalizeEvent);if(hasRegionalSnapshot&&!allGames.length){allGames=regionalSnapshotGames(sport);mode='web'}if(sport==='basketball'&&!allGames.length){const now=new Date(),end=new Date(now);end.setDate(end.getDate()+14);const [backup,logoMap]=await Promise.all([fetch('https://img-api-proxy.magsipocarnie.workers.dev/games?start_date='+now.toISOString().slice(0,10)+'&end_date='+end.toISOString().slice(0,10)+'&per_page=100',{cache:'no-store'}),getNbaLogoMap()]);if(backup.ok){const b=await backup.json();allGames=(b.data||[]).map(g=>{const home=g.home_team?.full_name||'Home',away=g.visitor_team?.full_name||'Away';return{eventId:'',date:g.date,home,away,homeLogo:logoMap[String(home).toLowerCase()]||'',awayLogo:logoMap[String(away).toLowerCase()]||'',homeScore:g.home_team_score||'—',awayScore:g.visitor_team_score||'—',status:g.status||'Scheduled',state:/live|q[1-4]|half|quarter|ot|in progress/i.test(String(g.status||''))?'live':String(g.status||'').toLowerCase().includes('final')?'final':'scheduled',odds:null,highlights:[],highlightsChecked:true,streams:[],streamsChecked:true}})}}st.textContent='';renderRegionalContext(sport,mode);renderGames();if(mode!=='web'){void hydrateHighlights(sport);void hydrateLiveStreams(sport)}}catch{if(hasRegionalSnapshot){allGames=regionalSnapshotGames(sport);st.textContent='';renderRegionalContext(sport,'web');renderGames()}else{renderRegionalContext(sport,'');st.textContent='Feed unavailable';document.getElementById('games').innerHTML='<div class="empty">This public score feed is temporarily unavailable.</div>'}}}
+async function loadGames(){
+  if(!document.getElementById('games'))return;
+  const st=document.getElementById('gameStatus');
+  const sport=document.getElementById('sportFilter')?.value||'soccer';
+  const isWebLeague=['pba','mpbl','nbl'].includes(sport);
+  st.textContent='Updating';
+
+  if(isWebLeague){
+    await loadRegionalAutoData();
+    const webGames=regionalSnapshotGames(sport);
+    if(webGames.length){
+      allGames=webGames;
+      st.textContent='';
+      renderRegionalContext(sport,'web-auto');
+      renderGames();
+      return;
+    }
+  }
+
+  const hasRegionalSnapshot=Boolean(getRegionalSnapshot(sport));
+  let mode='api';
+  try{
+    const r=await fetch(scoreFeeds[sport],{cache:'no-store'});
+    if(!r.ok)throw 0;
+    const j=await r.json();
+    allGames=(j.events||[]).map(normalizeEvent);
+
+    if(hasRegionalSnapshot&&!allGames.length){
+      allGames=regionalSnapshotGames(sport);
+      mode='web';
+    }
+
+    if(sport==='basketball'&&!allGames.length){
+      const now=new Date(),end=new Date(now);
+      end.setDate(end.getDate()+14);
+      const [backup,logoMap]=await Promise.all([
+        fetch('https://img-api-proxy.magsipocarnie.workers.dev/games?start_date='+now.toISOString().slice(0,10)+'&end_date='+end.toISOString().slice(0,10)+'&per_page=100',{cache:'no-store'}),
+        getNbaLogoMap()
+      ]);
+      if(backup.ok){
+        const b=await backup.json();
+        allGames=(b.data||[]).map(g=>{
+          const home=g.home_team?.full_name||'Home',away=g.visitor_team?.full_name||'Away';
+          return{eventId:'',date:g.date,home,away,homeLogo:logoMap[String(home).toLowerCase()]||'',awayLogo:logoMap[String(away).toLowerCase()]||'',homeScore:g.home_team_score||'—',awayScore:g.visitor_team_score||'—',status:g.status||'Scheduled',state:/live|q[1-4]|half|quarter|ot|in progress/i.test(String(g.status||''))?'live':String(g.status||'').toLowerCase().includes('final')?'final':'scheduled',odds:null,highlights:[],highlightsChecked:true,streams:[],streamsChecked:true}
+        });
+      }
+    }
+
+    st.textContent='';
+    renderRegionalContext(sport,mode);
+    renderGames();
+    if(mode!=='web'){
+      void hydrateHighlights(sport);
+      void hydrateLiveStreams(sport);
+    }
+  }catch{
+    if(hasRegionalSnapshot){
+      allGames=regionalSnapshotGames(sport);
+      st.textContent='';
+      renderRegionalContext(sport,'web');
+      renderGames();
+    }else{
+      renderRegionalContext(sport,'');
+      st.textContent='Feed unavailable';
+      document.getElementById('games').innerHTML='<div class="empty">This public score feed is temporarily unavailable.</div>';
+    }
+  }
+}
 function clean(html){const d=document.createElement('div');d.innerHTML=html||'';return d.textContent.trim().replace(/Continue reading.*$/i,'').slice(0,260)}function parseXML(x){const d=new DOMParser().parseFromString(x,'application/xml');return [...d.querySelectorAll('item')].map(i=>({title:i.querySelector('title')?.textContent||'',link:i.querySelector('link')?.textContent||'',description:clean(i.querySelector('description')?.textContent),source:d.querySelector('channel>title')?.textContent||'Sports News',sport:i.querySelector('category')?.textContent||'Sports',image:i.getElementsByTagName('media:content')[0]?.getAttribute('url')||''})).filter(x=>x.title&&x.link)}
 function renderNews(items){const host=document.getElementById('newsFeed');if(!host||!items.length)return;const first=items[0];host.innerHTML='<article class="lead-story">'+(first.image?'<img src="'+esc(first.image)+'" alt="" referrerpolicy="no-referrer">':'<div></div>')+'<div><div class="tag">'+esc(first.sport)+'</div><a href="'+esc(first.link)+'" target="_blank" rel="noopener"><h2>'+esc(first.title)+'</h2></a><p>'+esc(first.description)+'</p><small>'+esc(first.source)+'</small></div></article><div class="news-list">'+items.slice(1,9).map(n=>'<article class="news-row"><img src="'+esc(n.image||'about-sports.jpg')+'" alt="" loading="lazy" referrerpolicy="no-referrer"><div><div class="tag">'+esc(n.sport)+'</div><a href="'+esc(n.link)+'" target="_blank" rel="noopener"><h3>'+esc(n.title)+'</h3></a><small>'+esc(n.source)+'</small></div><span class="arrow">↗</span></article>').join('')+'</div>';const s=document.getElementById('newsStatus');if(s){s.textContent='';s.closest('.news-livebar')?.classList.add('is-empty')}}
 async function loadNews(){if(!document.getElementById('newsFeed'))return;const ns=document.getElementById('newsStatus');ns?.closest('.news-livebar')?.classList.remove('is-empty');try{const r=await fetch('https://img-api-proxy.magsipocarnie.workers.dev/news',{cache:'no-store'});if(!r.ok)throw 0;const t=await r.text();const items=t.trim().startsWith('{')?(JSON.parse(t).items||[]):parseXML(t);renderNews(items)}catch{document.getElementById('newsFeed').innerHTML='<div class="empty">The live news feed is temporarily unavailable.</div>'}}
