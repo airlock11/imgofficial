@@ -88,3 +88,14 @@
   .bottomnav .icon-news{mask-image:url('icons/news.svg')!important;-webkit-mask-image:url('icons/news.svg')!important}
   .bottomnav .icon-odds{mask-image:url('icons/odds.svg')!important;-webkit-mask-image:url('icons/odds.svg')!important}
 }
+
+@media(max-width:760px){
+  :root[data-theme="light"] .bottomnav{
+    background:rgba(255,255,255,.96)!important;
+    border-color:rgba(17,21,27,.14)!important;
+    box-shadow:0 10px 28px rgba(17,21,27,.14)!important
+  }
+  :root[data-theme="light"] .bottomnav a,
+  :root[data-theme="light"] .bottomnav a.active{color:#5a6674!important}
+  :root[data-theme="light"] .bottomnav a.active{color:#11151b!important}
+}
