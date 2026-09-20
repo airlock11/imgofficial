@@ -78,17 +78,19 @@ img{display:block;max-width:100%}
 @media(max-width:760px){
 body:before{display:none}
 .site-nav{display:none}
-.bottomnav{position:fixed;display:grid;grid-template-columns:repeat(5,1fr);left:10px;right:10px;bottom:10px;z-index:95;min-height:64px;padding:6px 4px calc(6px + env(safe-area-inset-bottom));border:1px solid rgba(255,255,255,.12);border-radius:18px;background:rgba(6,9,13,.92);backdrop-filter:blur(16px)}
-.bottomnav a{position:relative;display:grid;place-items:center;align-content:center;gap:4px;min-width:0;min-height:52px;padding:4px 0;color:#8f99a6;text-decoration:none;font-size:.59rem;line-height:1;font-weight:800;letter-spacing:.04em}
+body{padding-bottom:calc(90px + env(safe-area-inset-bottom))}
+.bottomnav{position:fixed;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));left:10px;right:10px;bottom:10px;width:auto;height:auto;min-height:64px;z-index:95;padding:6px 4px calc(6px + env(safe-area-inset-bottom));gap:0;border:1px solid rgba(255,255,255,.12);border-radius:18px;background:rgba(6,9,13,.92);box-shadow:0 12px 34px rgba(0,0,0,.34);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.bottomnav a,.bottomnav a.active{position:relative;min-width:0;min-height:52px;display:grid;place-items:center;align-content:center;gap:4px;padding:4px 0;border-radius:12px;background:transparent;color:#8f99a6;text-decoration:none;font-size:.59rem;line-height:1;font-weight:800;letter-spacing:.04em;overflow:visible}
 .bottomnav a.active{color:#fff}
-.bottomnav a b{width:24px;height:24px;display:grid;place-items:center;line-height:1}
-.navglyph{display:block;width:20px;height:20px;background:currentColor;mask-position:center;mask-repeat:no-repeat;mask-size:contain;-webkit-mask-position:center;-webkit-mask-repeat:no-repeat;-webkit-mask-size:contain;opacity:.88}
+.bottomnav a b,.bottomnav a.active b{width:24px;height:24px;display:grid;place-items:center;background:transparent;color:inherit;transform:none;line-height:1}
+.navglyph{display:block;width:20px;height:20px;background:currentColor;mask-position:center;mask-repeat:no-repeat;mask-size:contain;-webkit-mask-position:center;-webkit-mask-repeat:no-repeat;-webkit-mask-size:contain;opacity:.74}
 .icon-home{mask-image:url('./icons/home.svg');-webkit-mask-image:url('./icons/home.svg')}
 .icon-sports{mask-image:url('./icons/sports.svg');-webkit-mask-image:url('./icons/sports.svg')}
 .icon-scores{mask-image:url('./icons/scores.svg');-webkit-mask-image:url('./icons/scores.svg')}
 .icon-news{mask-image:url('./icons/news.svg');-webkit-mask-image:url('./icons/news.svg')}
 .icon-odds{mask-image:url('./icons/odds.svg');-webkit-mask-image:url('./icons/odds.svg')}
 .bottomnav a.active .navglyph{opacity:1}
+.bottomnav a.active:after{display:none}
 .closing{padding-bottom:120px}
 .logo-mark{top:16px;left:18px;width:76px}
 .shell,.sport-content{width:calc(100% - 32px)}
