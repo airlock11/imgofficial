@@ -354,3 +354,19 @@ main{min-height:calc(100svh - 68px)}
     border-radius:10px!important;
   }
 }
+
+/* Team logos */
+.team-identity{display:flex;align-items:center;gap:10px;min-width:0}
+.team-identity>span{min-width:0}
+.team-logo{width:30px;height:30px;flex:0 0 30px;object-fit:contain;padding:3px;border-radius:8px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08)}
+.odds-matchup{display:flex;align-items:center;gap:16px;margin:10px 0 14px}
+.odds-team{display:flex;align-items:center;gap:9px;min-width:0;font:700 1.15rem "Barlow Condensed",Arial,sans-serif;text-transform:uppercase}
+.odds-team .team-logo{width:34px;height:34px;flex-basis:34px}
+.versus{color:var(--muted);font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em}
+:root[data-theme="light"] .team-logo{background:#fff;border-color:rgba(17,21,27,.12);box-shadow:0 4px 12px rgba(17,21,27,.08)}
+@media(max-width:760px){
+  .team-logo{width:28px;height:28px;flex-basis:28px}
+  .odds-matchup{gap:10px;flex-wrap:wrap}
+  .odds-team{font-size:1rem}
+  .odds-team .team-logo{width:30px;height:30px;flex-basis:30px}
+}
