@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-21T01:38:03+08:00",
+  "updated_at": "2026-09-21T01:39:57+08:00",
   "refresh_minutes": 30,
   "leagues": {
     "pba": {
@@ -171,8 +171,8 @@
     "nbl": {
       "league": "NBL-Pilipinas",
       "season": "2026 Governor's Cup",
-      "note": "Official NBL-Pilipinas Facebook is the primary source. If Facebook blocks automated access, the updater uses public mirrors of the league's Facebook posts plus official YouTube and broadcast listings.",
-      "coverage": "Official Facebook updates, public scores and broadcast schedule",
+      "coverage": "Official Facebook image scan, public scores and broadcast schedule",
+      "note": "The updater attempts to scan recent NBL-Pilipinas Facebook graphics for final scores and schedules. When Facebook blocks server access, official NBL-Pilipinas YouTube matchups and broadcast listings continue updating automatically.",
       "sources": [
         {
           "name": "NBL-Pilipinas Official Facebook",
@@ -183,7 +183,7 @@
           "url": "https://www.facebook.com/share/18tLhjYjUv/"
         },
         {
-          "name": "Facebook-post mirror",
+          "name": "Facebook-image mirror",
           "url": "https://www.findglocal.com/PH/Cabuyao/1997682720482608/NBL-Pilipinas"
         },
         {
@@ -195,60 +195,146 @@
           "url": "https://tapdmv.com/tapsports/"
         }
       ],
-      "broadcast": [
-        {
-          "date": "2026-09-20",
-          "times": [
-            "3:00 PM",
-            "5:00 PM"
-          ],
-          "source": "Tap Sports"
-        }
-      ],
+      "image_scan": {
+        "images_scanned": 0,
+        "images_matched": 0,
+        "facebook_blocked": true,
+        "error": "HTTP Error 403: Forbidden"
+      },
+      "broadcast": [],
       "games": [
         {
-          "eventId": "web-nbl-20260911",
-          "date": "2026-09-11T18:00:00+08:00",
-          "displayTime": "Sep 11 · Official replay",
-          "away": "CamSur Express",
-          "home": "Pangasinan Asinderos",
+          "eventId": "yt-nbl-20260920-1",
+          "date": "2026-09-20T18:00:00+08:00",
+          "displayTime": "Sep 20 · Official game video",
+          "away": "Batangas",
+          "home": "Pampanga",
           "awayScore": "—",
           "homeScore": "—",
-          "status": "Replay available",
+          "status": "Official game video",
           "state": "final",
-          "sourceName": "NBL Pilipinas",
-          "sourceUrl": "https://www.youtube.com/watch?v=fgViW-UbnIg"
+          "sourceName": "NBL-Pilipinas YouTube",
+          "sourceUrl": "https://www.youtube.com/watch?v=iH1D8_DXgoU"
         },
         {
-          "eventId": "web-nbl-20260908",
-          "date": "2026-09-08T18:00:00+08:00",
-          "displayTime": "Sep 8 · Official replay",
-          "away": "Zamboanga Valientes",
+          "eventId": "yt-nbl-20260920-3",
+          "date": "2026-09-20T18:00:00+08:00",
+          "displayTime": "Sep 20 · Official game video",
+          "away": "Cam Sur",
+          "home": "Nueva Ecija",
+          "awayScore": "—",
+          "homeScore": "—",
+          "status": "Official game video",
+          "state": "final",
+          "sourceName": "NBL-Pilipinas YouTube",
+          "sourceUrl": "https://www.youtube.com/watch?v=MhYNSWXPvmo"
+        },
+        {
+          "eventId": "yt-nbl-20260918-4",
+          "date": "2026-09-18T18:00:00+08:00",
+          "displayTime": "Sep 18 · Official game video",
+          "away": "Zamboanga",
+          "home": "Batangas",
+          "awayScore": "—",
+          "homeScore": "—",
+          "status": "Official game video",
+          "state": "final",
+          "sourceName": "NBL-Pilipinas YouTube",
+          "sourceUrl": "https://www.youtube.com/watch?v=hSLt8TYgqe8"
+        },
+        {
+          "eventId": "yt-nbl-20260918-7",
+          "date": "2026-09-18T18:00:00+08:00",
+          "displayTime": "Sep 18 · Official game video",
+          "away": "Manila",
           "home": "Quezon City",
           "awayScore": "—",
           "homeScore": "—",
-          "status": "Replay available",
+          "status": "Official game video",
           "state": "final",
-          "sourceName": "NBL Pilipinas",
-          "sourceUrl": "https://www.youtube.com/watch?v=slZmVgsJxDQ"
+          "sourceName": "NBL-Pilipinas YouTube",
+          "sourceUrl": "https://www.youtube.com/watch?v=IptmNFpeQqI"
         },
         {
-          "eventId": "web-nbl-20260830",
-          "date": "2026-08-30T18:00:00+08:00",
-          "displayTime": "Aug 30 · Final",
-          "away": "TIKAS Kapampangan",
-          "home": "Quezon Starhorse",
-          "awayScore": "84",
-          "homeScore": "87",
-          "status": "Final",
+          "eventId": "yt-nbl-20260913-8",
+          "date": "2026-09-13T18:00:00+08:00",
+          "displayTime": "Sep 13 · Official game video",
+          "away": "Pampanga",
+          "home": "Taguig City",
+          "awayScore": "—",
+          "homeScore": "—",
+          "status": "Official game video",
           "state": "final",
-          "sourceName": "NBL public update",
-          "sourceUrl": "https://www.findglocal.com/PH/Cabuyao/1997682720482608/NBL-Pilipinas"
+          "sourceName": "NBL-Pilipinas YouTube",
+          "sourceUrl": "https://www.youtube.com/watch?v=IBpXrYcmOjc"
+        },
+        {
+          "eventId": "yt-nbl-20260913-9",
+          "date": "2026-09-13T18:00:00+08:00",
+          "displayTime": "Sep 13 · Official game video",
+          "away": "Nueva Ecija",
+          "home": "Camsur",
+          "awayScore": "—",
+          "homeScore": "—",
+          "status": "Official game video",
+          "state": "final",
+          "sourceName": "NBL-Pilipinas YouTube",
+          "sourceUrl": "https://www.youtube.com/watch?v=NpAX2R-uC4Q"
+        },
+        {
+          "eventId": "yt-nbl-20260911-10",
+          "date": "2026-09-11T18:00:00+08:00",
+          "displayTime": "Sep 11 · Official game video",
+          "away": "Camsur",
+          "home": "Pangasinan",
+          "awayScore": "—",
+          "homeScore": "—",
+          "status": "Official game video",
+          "state": "final",
+          "sourceName": "NBL-Pilipinas YouTube",
+          "sourceUrl": "https://www.youtube.com/watch?v=RF0CfZ5EujE"
+        },
+        {
+          "eventId": "yt-nbl-20260911-12",
+          "date": "2026-09-11T18:00:00+08:00",
+          "displayTime": "Sep 11 · Official game video",
+          "away": "Quezon",
+          "home": "Nueva Ecija",
+          "awayScore": "—",
+          "homeScore": "—",
+          "status": "Official game video",
+          "state": "final",
+          "sourceName": "NBL-Pilipinas YouTube",
+          "sourceUrl": "https://www.youtube.com/watch?v=6Ge20fqTFWo"
+        },
+        {
+          "eventId": "yt-nbl-20260908-13",
+          "date": "2026-09-08T18:00:00+08:00",
+          "displayTime": "Sep 8 · Official game video",
+          "away": "Batangas",
+          "home": "Manila",
+          "awayScore": "—",
+          "homeScore": "—",
+          "status": "Official game video",
+          "state": "final",
+          "sourceName": "NBL-Pilipinas YouTube",
+          "sourceUrl": "https://www.youtube.com/watch?v=7MhQ0ryetBc"
+        },
+        {
+          "eventId": "yt-nbl-20260908-14",
+          "date": "2026-09-08T18:00:00+08:00",
+          "displayTime": "Sep 8 · Official game video",
+          "away": "Zamboanga",
+          "home": "Quezon City",
+          "awayScore": "—",
+          "homeScore": "—",
+          "status": "Official game video",
+          "state": "final",
+          "sourceName": "NBL-Pilipinas YouTube",
+          "sourceUrl": "https://www.youtube.com/watch?v=slZmVgsJxDQ"
         }
       ]
     }
   },
-  "errors": {
-    "nbl": "Couldn't find a tree builder with the features you requested: xml. Do you need to install a parser library?"
-  }
+  "errors": {}
 }
