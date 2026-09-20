@@ -98,6 +98,9 @@ const scoreFeeds={
   wnba:'https://site.api.espn.com/apis/site/v2/sports/basketball/wnba/scoreboard',
   atp:'https://site.api.espn.com/apis/site/v2/sports/tennis/atp/scoreboard',
   wta:'https://site.api.espn.com/apis/site/v2/sports/tennis/wta/scoreboard',
+  ipl:'https://site.api.espn.com/apis/site/v2/sports/cricket/ipl/scoreboard',
+  volleyball_w:'https://site.api.espn.com/apis/site/v2/sports/volleyball/fivb.w/scoreboard',
+  volleyball_m:'https://site.api.espn.com/apis/site/v2/sports/volleyball/fivb.m/scoreboard',
   f1:'https://site.api.espn.com/apis/site/v2/sports/racing/f1/scoreboard',
   ufc:'https://site.api.espn.com/apis/site/v2/sports/mma/ufc/scoreboard',
   baseball:'https://site.api.espn.com/apis/site/v2/sports/baseball/mlb/scoreboard',
@@ -115,6 +118,9 @@ const cloudflareFallbackFeeds={
   wnba:'https://img-api-proxy.magsipocarnie.workers.dev/scoreboard?league=wnba',
   atp:'https://img-api-proxy.magsipocarnie.workers.dev/scoreboard?league=atp',
   wta:'https://img-api-proxy.magsipocarnie.workers.dev/scoreboard?league=wta',
+  ipl:'https://img-api-proxy.magsipocarnie.workers.dev/scoreboard?league=ipl',
+  volleyball_w:'https://img-api-proxy.magsipocarnie.workers.dev/scoreboard?league=volleyball_w',
+  volleyball_m:'https://img-api-proxy.magsipocarnie.workers.dev/scoreboard?league=volleyball_m',
   f1:'https://img-api-proxy.magsipocarnie.workers.dev/scoreboard?league=f1',
   ufc:'https://img-api-proxy.magsipocarnie.workers.dev/scoreboard?league=ufc',
   pba:'https://img-api-proxy.magsipocarnie.workers.dev/regional-scores?league=pba',
@@ -158,6 +164,9 @@ const liveNowLabels={
   wnba:{sport:'Basketball',league:'WNBA'},
   atp:{sport:'Tennis',league:'ATP Tour'},
   wta:{sport:'Tennis',league:'WTA Tour'},
+  ipl:{sport:'Cricket',league:'IPL'},
+  volleyball_w:{sport:'Volleyball',league:'FIVB Women'},
+  volleyball_m:{sport:'Volleyball',league:'FIVB Men'},
   f1:{sport:'Motorsport',league:'Formula 1'},
   ufc:{sport:'Combat Sports',league:'UFC'},
   pba:{sport:'Basketball',league:'PBA'},
@@ -465,7 +474,7 @@ async function loadAllLiveGames({silent=false}={}){
 
   const live=[];
   const webKeys=['pba','mpbl','nbl','nblaus','vba'];
-  const apiKeys=['soccer','laliga','seriea','bundesliga','champions','basketball','wnba','atp','wta','f1','ufc','baseball','hockey','football','ncaaf'];
+  const apiKeys=['soccer','laliga','seriea','bundesliga','champions','basketball','wnba','atp','wta','ipl','volleyball_w','volleyball_m','f1','ufc','baseball','hockey','football','ncaaf'];
 
   const regionalPromise=(async()=>{
     await loadRegionalAutoData();
