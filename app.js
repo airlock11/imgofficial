@@ -218,9 +218,10 @@ function openLiveStream(eventId){const g=allGames.find(x=>String(x.eventId)===St
 async function hydrateLiveStreams(sport){const snapshot=allGames,now=Date.now(),candidates=snapshot.filter(g=>g.eventId&&(g.state==='live'||(g.state==='scheduled'&&Math.abs(Date.parse(g.date)-now)<=90*60000))).slice(0,4);if(!candidates.length)return;await Promise.allSettled(candidates.map(async g=>{const key=sport+':'+g.eventId,hit=liveStreamCache.get(key);if(hit&&Date.now()-hit.time<120000){g.streams=hit.items;g.streamsChecked=true;return}try{const q=new URLSearchParams({sport,event:g.eventId,home:g.home,away:g.away}),r=await fetch('https://img-api-proxy.magsipocarnie.workers.dev/streams?'+q.toString(),{cache:'no-store'});if(!r.ok)throw 0;const j=await r.json(),items=Array.isArray(j.items)?j.items.filter(x=>x?.embedUrl):[];g.streams=items;g.streamsChecked=true;liveStreamCache.set(key,{time:Date.now(),items})}catch{g.streams=[];g.streamsChecked=true}}));if(allGames===snapshot&&document.getElementById('sportFilter')?.value===sport)renderGames()}
 function normalizeEvent(e){const c=e.competitions?.[0],teams=c?.competitors||[],home=teams.find(x=>x.homeAway==='home')||teams[0],away=teams.find(x=>x.homeAway==='away')||teams[1],state=e.status?.type?.state||'pre',oddsList=(c?.odds||[]).filter(o=>o?.provider?.displayName||o?.provider?.name).map(mapOdds);return{eventId:e.id||c?.id||'',date:e.date,home:home?.team?.displayName||'Home',away:away?.team?.displayName||'Away',homeLogo:teamLogoUrl(home),awayLogo:teamLogoUrl(away),homeScore:home?.score||'—',awayScore:away?.score||'—',status:e.status?.type?.shortDetail||e.status?.type?.description||'Scheduled',state:state==='in'?'live':state==='post'?'final':'scheduled',odds:oddsList[0]||null,oddsList,highlights:[],highlightsChecked:false,streams:[],streamsChecked:false}}
 function renderAllLiveGames(items){
+  const section=document.getElementById('allLiveSection');
   const host=document.getElementById('allLiveGames');
   const status=document.getElementById('allLiveStatus');
-  if(!host)return;
+  if(!host||!section)return;
 
   const live=[...items].sort((a,b)=>{
     const al=(a.sportLabel||'')+' '+(a.leagueLabel||'');
@@ -228,12 +229,15 @@ function renderAllLiveGames(items){
     return al.localeCompare(bl)||((Date.parse(a.date||'')||0)-(Date.parse(b.date||'')||0));
   });
 
-  if(status)status.textContent=live.length?live.length+' live':'No live games';
-
   if(!live.length){
-    host.innerHTML='<div class="all-live-empty">No verified live games are active right now. This section checks all supported sports automatically.</div>';
+    section.hidden=true;
+    host.innerHTML='';
+    if(status)status.textContent='';
     return;
   }
+
+  section.hidden=false;
+  if(status)status.textContent=live.length+' live';
 
   host.innerHTML=live.map(g=>
     '<article class="live-game-card">'+
@@ -252,7 +256,10 @@ async function loadAllLiveGames(){
   const host=document.getElementById('allLiveGames');
   const status=document.getElementById('allLiveStatus');
   if(!host)return;
-  if(status)status.textContent='Checking live games';
+  const section=document.getElementById('allLiveSection');
+  if(section)section.hidden=true;
+  host.innerHTML='';
+  if(status)status.textContent='';
 
   const live=[];
   const webKeys=['pba','mpbl','nbl','nblaus','vba'];
