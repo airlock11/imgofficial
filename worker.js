@@ -320,10 +320,20 @@ function regionalLeagueConfig(key) {
       country: "philippines",
       aliases: ["philippine basketball association", "pba"],
     },
+    mpbl: {
+      label: "MPBL",
+      country: "philippines",
+      aliases: ["maharlika pilipinas basketball league", "mpbl"],
+    },
     nbl: {
       label: "NBL-Pilipinas",
       country: "philippines",
       aliases: ["nbl pilipinas", "nbl-pilipinas", "national basketball league philippines", "national basketball league"],
+    },
+    nblaus: {
+      label: "NBL Australia",
+      country: "australia",
+      aliases: ["nbl australia", "national basketball league", "nbl"],
     },
     vba: {
       label: "VBA",
@@ -355,7 +365,7 @@ function regionalGameMatches(game, config) {
   );
   const aliasMatch = config.aliases.some((alias) => {
     const a = lowerText(alias);
-    if (a === "pba" || a === "vba") return leagueName === a || leagueName.startsWith(a + " ") || leagueName.endsWith(" " + a);
+    if (/^[a-z0-9]{2,5}$/.test(a)) return leagueName === a || leagueName.startsWith(a + " ") || leagueName.endsWith(" " + a) || leagueName.includes(" " + a + " ");
     return leagueName.includes(a);
   });
   if (!aliasMatch) return false;
@@ -425,7 +435,9 @@ function streamLeagueForSport(sport) {
     soccer: { label: "Premier League", youtube: ["UCG5qGWdu8nIRZqJ_GgDwQ-w"] },
     basketball: { label: "NBA", youtube: ["UCWJ2lWNubArHWmf3FIHbfcQ"] },
     pba: { label: "PBA Philippines", youtube: [], youtubeHandles: [] },
+    mpbl: { label: "MPBL Philippines", youtube: ["UCbxiLsJzOnnpDOZSwB5HWUQ"], youtubeHandles: ["MPBLOfficial"] },
     nbl: { label: "NBL Pilipinas", youtube: [], youtubeHandles: ["nblpilipinas"] },
+    nblaus: { label: "NBL Australia", youtube: [], youtubeHandles: [], youtubeSeedVideos: ["iHbZ0ocIE8E"] },
     vba: { label: "VBA Vietnam", youtube: [], youtubeHandles: ["VBAofficial"] },
     baseball: { label: "MLB", youtube: ["UCoLrcjPV5PbUrUyXq5mjc_A"] },
     hockey: { label: "NHL", youtube: ["UCqFMzb-4AUf6WAIbl132QKA"] },
@@ -450,6 +462,22 @@ function matchText(value, home, away) {
   return tokens.length ? tokens.some((t) => text.includes(t)) : true;
 }
 
+async function youtubeChannelIdsForSeedVideos(env, videoIds) {
+  if (!env.YOUTUBE_API_KEY || !Array.isArray(videoIds) || !videoIds.length) return [];
+  try {
+    const api = new URL("https://www.googleapis.com/youtube/v3/videos");
+    api.searchParams.set("part", "snippet");
+    api.searchParams.set("id", videoIds.join(","));
+    api.searchParams.set("key", env.YOUTUBE_API_KEY);
+    const response = await fetch(api.toString(), { cf: { cacheTtl: 86400, cacheEverything: true } });
+    if (!response.ok) return [];
+    const data = await response.json();
+    return [...new Set((data.items || []).map((item) => item?.snippet?.channelId).filter(Boolean))];
+  } catch (_) {
+    return [];
+  }
+}
+
 async function youtubeChannelIdsForHandles(env, handles) {
   if (!env.YOUTUBE_API_KEY || !Array.isArray(handles) || !handles.length) return [];
   const results = await Promise.allSettled(handles.map(async (handle) => {
@@ -468,10 +496,14 @@ async function youtubeChannelIdsForHandles(env, handles) {
 async function findYouTubeLive(env, game) {
   if (!env.YOUTUBE_API_KEY || !game.query) return [];
   const league = streamLeagueForSport(game.sport);
-  const handleIds = await youtubeChannelIdsForHandles(env, league?.youtubeHandles || []);
+  const [handleIds, seedIds] = await Promise.all([
+    youtubeChannelIdsForHandles(env, league?.youtubeHandles || []),
+    youtubeChannelIdsForSeedVideos(env, league?.youtubeSeedVideos || []),
+  ]);
   const builtIn = [
     ...(league?.youtube || []),
     ...handleIds,
+    ...seedIds,
     "UCiWLfSweyRNmLpgEHekhoAg",
   ];
   const allowed = new Set([...builtIn, ...splitCsv(env.YOUTUBE_ALLOWED_CHANNEL_IDS)]);
@@ -515,7 +547,9 @@ async function findFacebookLive(env, game) {
   const token = env.FACEBOOK_ACCESS_TOKEN;
   const builtInPages = {
     pba: ["PBAOfficial"],
+    mpbl: [],
     nbl: ["nblpilipinas"],
+    nblaus: [],
     vba: ["VBA.vn"],
   };
   const pages = [...(builtInPages[game.sport] || []), ...splitCsv(env.FACEBOOK_PAGE_IDS)];
