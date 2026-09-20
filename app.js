@@ -182,6 +182,7 @@ const liveNowLabels={
 const scoreLeagueOrder=['soccer','laliga','seriea','bundesliga','champions','basketball','wnba','pba','mpbl','nbl','nblaus','vba','atp','wta','ipl','volleyball_w','volleyball_m','baseball','hockey','football','ncaaf','f1','ufc'];
 const scoreLeagueLogoCache=new Map();
 let currentScoreLeague='soccer';
+let scoreLoadToken=0;
 
 function scoreLeagueFallback(key){
   const label=liveNowLabels[key]?.league||key.toUpperCase();
@@ -216,13 +217,11 @@ function renderScoreLeagueFilters(){
     if(!key)return;
     currentScoreLeague=key;
     renderScoreLeagueFilters();
-    clearTimeout(scoreAutoRefreshTimer);
     const gamesHost=document.getElementById('games');
     const status=document.getElementById('gameStatus');
     if(gamesHost)gamesHost.innerHTML='<div class="empty">Loading '+esc(liveNowLabels[key]?.league||key.toUpperCase())+' schedule and scores…</div>';
     if(status)status.textContent='Updating';
-    await loadGames();
-    scheduleScoreAutoRefresh();
+    await loadGames({league:key});
   }));
 }
 
@@ -922,10 +921,12 @@ function renderGames(){
     ?sections.join('')
     :'<div class="empty">No verified schedule or scores were returned for this league right now.</div>';
 }
-async function loadGames({silent=false}={}){
+async function loadGames({silent=false,league=currentScoreLeague}={}){
+  const requestToken=++scoreLoadToken;
   if(!document.getElementById('games'))return;
   const st=document.getElementById('gameStatus');
-  const sport=currentScoreLeague||'soccer';
+  const sport=league||currentScoreLeague||'soccer';
+  const isCurrent=()=>requestToken===scoreLoadToken&&currentScoreLeague===sport;
   const isWebLeague=['pba','mpbl','nbl','nblaus','vba'].includes(sport);
   if(!silent)st.textContent='Updating';
 
@@ -936,12 +937,12 @@ async function loadGames({silent=false}={}){
 
     // GitHub-hosted regional data is the stable primary layer.
     // Never clear or replace it just because the Cloudflare fallback is unavailable.
-    if(!silent&&webGames.length){
+    if(!silent&&webGames.length&&isCurrent()){
       allGames=webGames;
       st.textContent='';
       renderRegionalContext(sport,'web');
       renderGames();
-    }else if(!allGames.length&&webGames.length){
+    }else if(!allGames.length&&webGames.length&&isCurrent()){
       allGames=webGames;
     }
 
@@ -950,7 +951,7 @@ async function loadGames({silent=false}={}){
       const liveGames=(j.events||[]).map(normalizeEvent).filter(g=>g.state==='live');
       await hydrateTeamLogos(sport,liveGames);
 
-      if(liveGames.length){
+      if(liveGames.length&&isCurrent()){
         const base=webGames.length?webGames:allGames;
         const liveMatchups=new Set(liveGames.map(g=>(g.away+'|'+g.home).toLowerCase()));
         allGames=[
@@ -965,9 +966,10 @@ async function loadGames({silent=false}={}){
       }
     }catch{}
 
-    if(webGames.length){
+    if(webGames.length&&isCurrent()){
+      if(!allGames.length)allGames=webGames;
       st.textContent='';
-      if(silent)updateScoreNumbers();else if(!document.querySelector('#games .game'))renderGames();
+      if(silent)updateScoreNumbers();else renderGames();
       return;
     }
   }
@@ -976,16 +978,16 @@ async function loadGames({silent=false}={}){
   let mode='api';
   try{
     const j=await fetchScorePayload(sport);
-    allGames=(j.events||[]).map(normalizeEvent);
-    await hydrateTeamLogos(sport,allGames);
+    let nextGames=(j.events||[]).map(normalizeEvent);
+    await hydrateTeamLogos(sport,nextGames);
 
-    if(hasRegionalSnapshot&&!allGames.length){
-      allGames=regionalSnapshotGames(sport);
-      await hydrateTeamLogos(sport,allGames);
+    if(hasRegionalSnapshot&&!nextGames.length){
+      nextGames=regionalSnapshotGames(sport);
+      await hydrateTeamLogos(sport,nextGames);
       mode='web';
     }
 
-    if(sport==='basketball'&&!allGames.length){
+    if(sport==='basketball'&&!nextGames.length){
       const now=new Date(),end=new Date(now);
       end.setDate(end.getDate()+14);
       const [backup,logoMap]=await Promise.all([
@@ -994,13 +996,15 @@ async function loadGames({silent=false}={}){
       ]);
       if(backup.ok){
         const b=await backup.json();
-        allGames=(b.data||[]).map(g=>{
+        nextGames=(b.data||[]).map(g=>{
           const home=g.home_team?.full_name||'Home',away=g.visitor_team?.full_name||'Away';
           return{eventId:'',date:g.date,home,away,homeLogo:logoMap[String(home).toLowerCase()]||'',awayLogo:logoMap[String(away).toLowerCase()]||'',homeScore:g.home_team_score||'—',awayScore:g.visitor_team_score||'—',status:g.status||'Scheduled',state:/live|q[1-4]|half|quarter|ot|in progress/i.test(String(g.status||''))?'live':String(g.status||'').toLowerCase().includes('final')?'final':'scheduled',odds:null,highlights:[],highlightsChecked:true,streams:[],streamsChecked:true}
         });
       }
     }
 
+    if(!isCurrent())return;
+    allGames=nextGames;
     st.textContent='';
     renderRegionalContext(sport,mode);
     if(silent)updateScoreNumbers();else renderGames();
@@ -1009,9 +1013,11 @@ async function loadGames({silent=false}={}){
       void hydrateLiveStreams(sport);
     }
   }catch{
+    if(!isCurrent())return;
     if(hasRegionalSnapshot){
       allGames=regionalSnapshotGames(sport);
       await hydrateTeamLogos(sport,allGames);
+      if(!isCurrent())return;
       st.textContent='';
       renderRegionalContext(sport,'web');
       if(silent)updateScoreNumbers();else renderGames();
@@ -1388,7 +1394,7 @@ if(document.getElementById('games')){
     scoreRefreshInFlight=true;
     try{
       const selectedSport=currentScoreLeague;
-      await loadGames({silent:true});
+      await loadGames({silent:true,league:selectedSport});
       await refreshExistingAllLiveScores(selectedSport);
     }finally{
       scoreRefreshInFlight=false;
