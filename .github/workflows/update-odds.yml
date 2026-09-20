@@ -4,6 +4,12 @@ on:
   schedule:
     - cron: "23 1 * * *"
   workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "scripts/update_odds.py"
+      - ".github/workflows/update-odds.yml"
 
 permissions:
   contents: write
