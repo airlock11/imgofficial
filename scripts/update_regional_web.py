@@ -22,6 +22,7 @@ URLS = {
     "nbl_facebook": "https://www.facebook.com/nblpilipinas",
     "nbl_facebook_share": "https://www.facebook.com/share/18tLhjYjUv/",
     "nbl_updates": "https://www.findglocal.com/PH/Cabuyao/1997682720482608/NBL-Pilipinas",
+    "nbl_youtube_feed": "https://www.youtube.com/feeds/videos.xml?channel_id=UCJDBLldRGVJPEvyjJdSHefw",
     "tap": "https://tapdmv.com/tapsports/"
 }
 
@@ -127,18 +128,20 @@ def parse_mpbl():
     return {"league":"MPBL","season":"2026 Season","coverage":"Upcoming fixtures and recent final scores","note":"Automatically refreshed from public MPBL fixture/result pages.","sources":[{"name":"Forebet","url":"https://www.forebet.com/en/basketball/philippines/mpbl"},{"name":"MPBL Official","url":"https://mpbl.com.ph/"}],"games":games}
 
 def nbl_source_lines():
-    # Official NBL-Pilipinas Facebook is the primary source. Facebook can
-    # return a login wall to automated requests, so fall back to a public
-    # mirror of the same public posts when readable post text is unavailable.
-    for url in (URLS["nbl_facebook"], URLS["nbl_facebook_share"]):
+    # Official Facebook first. A block/login wall must never abort NBL updates.
+    for url, name in (
+        (URLS["nbl_facebook"], "NBL-Pilipinas Official Facebook"),
+        (URLS["nbl_facebook_share"], "NBL-Pilipinas Official Facebook"),
+        (URLS["nbl_updates"], "NBL-Pilipinas Facebook mirror"),
+    ):
         try:
             xs = lines(url)
             joined = " ".join(xs).upper()
-            if len(xs) >= 20 and ("NBL" in joined or "PILIPINAS" in joined):
-                return xs, "NBL-Pilipinas Official Facebook", URLS["nbl_facebook"]
+            if len(xs) >= 10 and ("NBL" in joined or "PILIPINAS" in joined):
+                return xs, name, url
         except Exception:
-            pass
-    return lines(URLS["nbl_updates"]), "NBL-Pilipinas Facebook mirror", URLS["nbl_updates"]
+            continue
+    return [], "NBL-Pilipinas Official Facebook", URLS["nbl_facebook"]
 
 NBL_TEAM_ALIASES = {
     "Quezon Starhorse": ["QUEZON STARHORSE", "STARHORSE"],
@@ -345,6 +348,46 @@ def dedupe_games(games):
         out.append(game)
     return out
 
+def parse_nbl_youtube_feed():
+    games = []
+    try:
+        xml = fetch(URLS["nbl_youtube_feed"])
+    except Exception:
+        return games
+
+    soup = BeautifulSoup(xml, "xml")
+    for entry in soup.find_all("entry")[:20]:
+        title = entry.title.get_text(" ", strip=True) if entry.title else ""
+        published = entry.published.get_text(" ", strip=True) if entry.published else ""
+        link_tag = entry.find("link")
+        link = link_tag.get("href") if link_tag else "https://www.youtube.com/@nblpilipinas"
+        m = re.search(
+            r"NBL\s+Governor'?s\s+Cup\s+2026\s*\|\s*"
+            r"(January|February|March|April|May|June|July|August|September|October|November|December)"
+            r"\s+(\d{1,2}),\s*2026\s*\|\s*(.+?)\s+vs\.?\s+(.+)$",
+            title,
+            re.I
+        )
+        if not m:
+            continue
+        dt = datetime.strptime(f"{m.group(1)} {m.group(2)} 2026", "%B %d %Y").replace(hour=18, tzinfo=PHT)
+        home = m.group(3).strip()
+        away = m.group(4).strip()
+        games.append({
+            "eventId": "yt-nbl-" + dt.strftime("%Y%m%d") + "-" + str(len(games)+1),
+            "date": dt.isoformat(),
+            "displayTime": dt.strftime("%b %d · Official game video").replace(" 0", " "),
+            "away": away,
+            "home": home,
+            "awayScore": "—",
+            "homeScore": "—",
+            "status": "Official game video",
+            "state": "final",
+            "sourceName": "NBL-Pilipinas YouTube",
+            "sourceUrl": link
+        })
+    return games
+
 def parse_nbl():
     xs, score_source_name, score_source_url = nbl_source_lines()
     games, day, pair = [], None, []
@@ -365,12 +408,16 @@ def parse_nbl():
                     games.append({"eventId":"web-nbl-final-"+str(len(games)+1),"date":iso,"displayTime":datetime.fromisoformat(iso).strftime("%b %d · Final").replace(" 0"," "),"away":pair[1][0],"home":pair[0][0],"awayScore":pair[1][1],"homeScore":pair[0][1],"status":"Final","state":"final","sourceName":score_source_name,"sourceUrl":score_source_url})
                     pair = []
 
-    image_meta = {"images_scanned": 0, "images_matched": 0}
+    image_meta = {"images_scanned": 0, "images_matched": 0, "facebook_blocked": False}
     try:
         image_games, image_meta = image_game_records()
         games.extend(image_games)
-    except Exception:
-        pass
+    except Exception as image_error:
+        image_meta = {"images_scanned": 0, "images_matched": 0, "facebook_blocked": True, "error": str(image_error)[:160]}
+
+    # Official NBL YouTube feed remains usable without an API key and keeps
+    # current matchups available even when Facebook blocks GitHub Actions.
+    games.extend(parse_nbl_youtube_feed())
 
     broadcast = []
     try:
@@ -399,7 +446,7 @@ def parse_nbl():
         "league":"NBL-Pilipinas",
         "season":"2026 Governor's Cup",
         "coverage":"Official Facebook image scan, public scores and broadcast schedule",
-        "note":"The updater scans recent NBL-Pilipinas Facebook-uploaded graphics for final scores and schedules. It only adds image-derived games when teams plus score/date information can be read confidently.",
+        "note":"The updater attempts to scan recent NBL-Pilipinas Facebook graphics for final scores and schedules. When Facebook blocks server access, official NBL-Pilipinas YouTube matchups and broadcast listings continue updating automatically.",
         "sources":[
             {"name":"NBL-Pilipinas Official Facebook","url":URLS["nbl_facebook"]},
             {"name":"NBL-Pilipinas Facebook share link","url":URLS["nbl_facebook_share"]},
