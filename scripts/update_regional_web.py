@@ -15,6 +15,8 @@ URLS = {
     "pba": "https://skedcheck.com/pba-games-schedule-scores/",
     "mpbl_fixtures": "https://www.forebet.com/en/basketball/philippines/mpbl/fixtures",
     "mpbl_results": "https://www.forebet.com/en/basketball/philippines/mpbl/results",
+    "nbl_facebook": "https://www.facebook.com/nblpilipinas",
+    "nbl_facebook_share": "https://www.facebook.com/share/18tLhjYjUv/",
     "nbl_updates": "https://www.findglocal.com/PH/Cabuyao/1997682720482608/NBL-Pilipinas",
     "tap": "https://tapdmv.com/tapsports/"
 }
@@ -109,10 +111,24 @@ def parse_mpbl():
     if not games: raise RuntimeError("No MPBL games parsed")
     return {"league":"MPBL","season":"2026 Season","coverage":"Upcoming fixtures and recent final scores","note":"Automatically refreshed from public MPBL fixture/result pages.","sources":[{"name":"Forebet","url":"https://www.forebet.com/en/basketball/philippines/mpbl"},{"name":"MPBL Official","url":"https://mpbl.com.ph/"}],"games":games}
 
+def nbl_source_lines():
+    # Official NBL-Pilipinas Facebook is the primary source. Facebook can
+    # return a login wall to automated requests, so fall back to a public
+    # mirror of the same public posts when readable post text is unavailable.
+    for url in (URLS["nbl_facebook"], URLS["nbl_facebook_share"]):
+        try:
+            xs = lines(url)
+            joined = " ".join(xs).upper()
+            if len(xs) >= 20 and ("NBL" in joined or "PILIPINAS" in joined):
+                return xs, "NBL-Pilipinas Official Facebook", URLS["nbl_facebook"]
+        except Exception:
+            pass
+    return lines(URLS["nbl_updates"]), "NBL-Pilipinas Facebook mirror", URLS["nbl_updates"]
+
 NBL_NAMES = ["QUEZON STARHORSE","TIKAS KAPAMPANGAN","PANGASINAN ASINDEROS","NUEVA ECIJA GRANARY BUFFALOS","CAM SUR EXPRESS","CAMSUR EXPRESS","ZAMBOANGA VALIENTES","QUEZON CITY","TAGUIG CITY GENERALS","MANILA MLB","ZAMBALES CONSTRUCTICONS","MAXIMUS BACOOR CAVITE","SANTA ROSA ERIDANUS"]
 
 def parse_nbl():
-    xs = lines(URLS["nbl_updates"])
+    xs, score_source_name, score_source_url = nbl_source_lines()
     games, day, pair = [], None, []
     for x in xs:
         if re.fullmatch(r"\\d{2}/\\d{2}/2026", x):
@@ -126,7 +142,7 @@ def parse_nbl():
                 pair.append((team, m.group(2)))
                 if len(pair) == 2:
                     iso = pht_iso_from_dmy(day)
-                    games.append({"eventId":"web-nbl-final-"+str(len(games)+1),"date":iso,"displayTime":datetime.fromisoformat(iso).strftime("%b %d · Final").replace(" 0"," "),"away":pair[1][0],"home":pair[0][0],"awayScore":pair[1][1],"homeScore":pair[0][1],"status":"Final","state":"final","sourceName":"NBL public update","sourceUrl":URLS["nbl_updates"]})
+                    games.append({"eventId":"web-nbl-final-"+str(len(games)+1),"date":iso,"displayTime":datetime.fromisoformat(iso).strftime("%b %d · Final").replace(" 0"," "),"away":pair[1][0],"home":pair[0][0],"awayScore":pair[1][1],"homeScore":pair[0][1],"status":"Final","state":"final","sourceName":score_source_name,"sourceUrl":score_source_url})
                     pair = []
     broadcast = []
     try:
@@ -142,7 +158,7 @@ def parse_nbl():
     except Exception:
         pass
     if not games and not broadcast: raise RuntimeError("No NBL data parsed")
-    return {"league":"NBL-Pilipinas","season":"2026 Governor's Cup","coverage":"Public scores and broadcast schedule","note":"Automatically checks public NBL score posts and broadcast listings. Unverified matchups are not invented.","sources":[{"name":"NBL-Pilipinas public updates","url":URLS["nbl_updates"]},{"name":"NBL-Pilipinas YouTube","url":"https://www.youtube.com/channel/UCJDBLldRGVJPEvyjJdSHefw"},{"name":"Tap Sports","url":URLS["tap"]}],"broadcast":broadcast[:20],"games":games[:20]}
+    return {"league":"NBL-Pilipinas","season":"2026 Governor's Cup","coverage":"Official Facebook updates, public scores and broadcast schedule","note":"Official NBL-Pilipinas Facebook is checked first. If Facebook blocks automated access, the updater uses public mirrors of the league's Facebook posts plus official YouTube and broadcast listings. Unverified matchups are not invented.","sources":[{"name":"NBL-Pilipinas Official Facebook","url":URLS["nbl_facebook"]},{"name":"NBL-Pilipinas Facebook share link","url":URLS["nbl_facebook_share"]},{"name":"Facebook-post mirror","url":URLS["nbl_updates"]},{"name":"NBL-Pilipinas YouTube","url":"https://www.youtube.com/channel/UCJDBLldRGVJPEvyjJdSHefw"},{"name":"Tap Sports","url":URLS["tap"]}],"broadcast":broadcast[:20],"games":games[:20]}
 
 def main():
     data = load()
