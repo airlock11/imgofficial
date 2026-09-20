@@ -615,12 +615,22 @@ def parse_vba():
         except Exception:
             continue
     games.extend(parse_vba_ticket_fixtures())
+
+    # If a public results mirror blocks the runner, keep the last verified
+    # final scores while still accepting newly parsed official ticket fixtures.
+    existing = load().get("leagues", {}).get("vba", {})
+    if existing:
+        games.extend([
+            g for g in existing.get("games", [])
+            if g.get("state") == "final"
+        ])
+
     games = dedupe_games(games)
     if not games:
-        existing = load().get("leagues", {}).get("vba", {})
         if existing:
             return existing
         raise RuntimeError("No VBA games parsed")
+
     games = sorted(games, key=lambda x: x.get("date", ""), reverse=True)
     scheduled = sorted([g for g in games if g.get("state") == "scheduled"], key=lambda x: x.get("date", ""))
     finals = sorted([g for g in games if g.get("state") == "final"], key=lambda x: x.get("date", ""), reverse=True)
