@@ -350,6 +350,69 @@ function addTeamLogoAliases(map,team,logo){
   names.forEach(name=>map.set(normalizeTeamLogoKey(name),logo));
 }
 
+const teamNameLogoAliases={
+  soccer:{
+    'arsenal fc':'arsenal',
+    'brentford fc':'brentford',
+    'chelsea fc':'chelsea',
+    'everton fc':'everton',
+    'fulham fc':'fulham',
+    'liverpool fc':'liverpool',
+    'sunderland afc':'sunderland',
+    'brighton and hove albion':'brighton hove albion'
+  },
+  laliga:{
+    'real sociedad san sebastian':'real sociedad',
+    'espanyol barcelona':'espanyol',
+    'athletic bilbao':'athletic club',
+    'deportivo alaves':'alaves',
+    'getafe cf':'getafe',
+    'villarreal cf':'villarreal',
+    'rc celta de vigo':'celta vigo',
+    'ca osasuna':'osasuna',
+    'real betis seville':'real betis',
+    'valencia cf':'valencia',
+    'sevilla fc':'sevilla',
+    'levante ud':'levante',
+    'fc barcelona':'barcelona',
+    'malaga cf':'malaga'
+  }
+};
+
+function teamLogoTokens(name){
+  const noise=new Set(['fc','cf','afc','sc','ac','rc','rcd','cd','ud','club','the','de']);
+  return normalizeTeamLogoKey(name).split(' ').filter(Boolean).filter(x=>!noise.has(x));
+}
+
+function findTeamLogoInDirectory(sport,directory,name){
+  if(!directory?.size||!name)return'';
+  const normalized=normalizeTeamLogoKey(name);
+  const alias=teamNameLogoAliases[sport]?.[normalized];
+  if(alias){
+    const hit=directory.get(normalizeTeamLogoKey(alias));
+    if(hit)return hit;
+  }
+  const exact=directory.get(normalized);
+  if(exact)return exact;
+
+  const target=teamLogoTokens(name);
+  if(!target.length)return'';
+  let best='',bestScore=0;
+  for(const [key,logo] of directory){
+    const candidate=teamLogoTokens(key);
+    if(!candidate.length)continue;
+    const common=target.filter(x=>candidate.includes(x));
+    if(!common.length)continue;
+    const score=(2*common.length)/(target.length+candidate.length);
+    const firstMatch=target[0]===candidate[0];
+    if(score>bestScore&&(score>=.72||(score>=.62&&firstMatch)||(common.length>=2&&score>=.58))){
+      bestScore=score;
+      best=logo;
+    }
+  }
+  return best;
+}
+
 async function getTeamLogoDirectory(sport){
   if(teamLogoDirectoryCache.has(sport))return teamLogoDirectoryCache.get(sport);
   const path=teamDirectoryFeeds[sport];
@@ -422,8 +485,8 @@ async function hydrateTeamLogos(sport,games){
 
   const directory=await getTeamLogoDirectory(sport);
   for(const g of games){
-    if(!g.awayLogo)g.awayLogo=directory.get(normalizeTeamLogoKey(g.away))||'';
-    if(!g.homeLogo)g.homeLogo=directory.get(normalizeTeamLogoKey(g.home))||'';
+    if(!g.awayLogo)g.awayLogo=findTeamLogoInDirectory(sport,directory,g.away);
+    if(!g.homeLogo)g.homeLogo=findTeamLogoInDirectory(sport,directory,g.home);
   }
 
   const unresolved=games.flatMap(g=>[
