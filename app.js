@@ -1,4 +1,85 @@
-const root=document.documentElement,savedTheme=localStorage.getItem('img-theme')||'dark';root.dataset.theme=savedTheme;const theme=document.createElement('button');theme.className='themebtn';theme.setAttribute('aria-label','Switch color theme');document.body.append(theme);const paint=()=>theme.innerHTML=root.dataset.theme==='dark'?'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>':'<svg viewBox="0 0 24 24"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5 8.5 8.5 0 1 0 20.5 14.2Z"/></svg>';paint();let drag=false,moved=false,dx=0,dy=0;const savedPosition=JSON.parse(localStorage.getItem('img-theme-position')||'null');if(savedPosition){const x=Math.max(8,Math.min(innerWidth-theme.offsetWidth-8,Number(savedPosition.x)||8)),y=Math.max(8,Math.min(innerHeight-theme.offsetHeight-8,Number(savedPosition.y)||8));theme.style.left=x+'px';theme.style.top=y+'px';theme.style.right='auto';theme.style.bottom='auto'}theme.addEventListener('pointerdown',e=>{drag=true;moved=false;const r=theme.getBoundingClientRect();dx=e.clientX-r.left;dy=e.clientY-r.top;theme.setPointerCapture(e.pointerId)});theme.addEventListener('pointermove',e=>{if(!drag)return;moved=true;const x=Math.max(8,Math.min(innerWidth-theme.offsetWidth-8,e.clientX-dx)),y=Math.max(8,Math.min(innerHeight-theme.offsetHeight-8,e.clientY-dy));theme.style.left=x+'px';theme.style.top=y+'px';theme.style.right='auto';theme.style.bottom='auto'});theme.addEventListener('pointerup',()=>{if(!drag)return;drag=false;if(moved){const r=theme.getBoundingClientRect();localStorage.setItem('img-theme-position',JSON.stringify({x:Math.round(r.left),y:Math.round(r.top)}))}else{root.dataset.theme=root.dataset.theme==='dark'?'light':'dark';localStorage.setItem('img-theme',root.dataset.theme);paint()}});addEventListener('resize',()=>{const r=theme.getBoundingClientRect(),x=Math.max(8,Math.min(innerWidth-theme.offsetWidth-8,r.left)),y=Math.max(8,Math.min(innerHeight-theme.offsetHeight-8,r.top));theme.style.left=x+'px';theme.style.top=y+'px'});
+const root=document.documentElement,savedTheme=localStorage.getItem('img-theme')||'dark';
+root.dataset.theme=savedTheme;
+const theme=document.createElement('button');
+theme.className='themebtn';
+theme.setAttribute('aria-label','Switch color theme');
+theme.setAttribute('type','button');
+document.body.append(theme);
+
+const desktopThemeMarkup='<span class="theme-track" aria-hidden="true"><span class="theme-icon sun"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></span><span class="theme-icon moon"><svg viewBox="0 0 24 24"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5 8.5 8.5 0 1 0 20.5 14.2Z"/></svg></span><span class="theme-thumb"></span></span>';
+const mobileThemeMarkup=()=>'<span class="theme-mobile-icon" aria-hidden="true">'+(root.dataset.theme==='dark'?'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>':'<svg viewBox="0 0 24 24"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5 8.5 8.5 0 1 0 20.5 14.2Z"/></svg>')+'</span>';
+const isMobileTheme=()=>matchMedia('(max-width:760px)').matches;
+const paint=()=>{
+  theme.innerHTML=desktopThemeMarkup+mobileThemeMarkup();
+  theme.setAttribute('aria-pressed',root.dataset.theme==='light'?'true':'false');
+  theme.setAttribute('title',root.dataset.theme==='dark'?'Switch to light mode':'Switch to dark mode');
+};
+paint();
+
+let drag=false,moved=false,dx=0,dy=0;
+function resetDesktopThemePosition(){
+  if(!isMobileTheme()){
+    theme.style.left='';
+    theme.style.top='';
+    theme.style.right='';
+    theme.style.bottom='';
+  }
+}
+function restoreMobileThemePosition(){
+  if(!isMobileTheme())return;
+  const savedPosition=JSON.parse(localStorage.getItem('img-theme-position')||'null');
+  if(savedPosition){
+    const x=Math.max(8,Math.min(innerWidth-theme.offsetWidth-8,Number(savedPosition.x)||8));
+    const y=Math.max(8,Math.min(innerHeight-theme.offsetHeight-8,Number(savedPosition.y)||8));
+    theme.style.left=x+'px';
+    theme.style.top=y+'px';
+    theme.style.right='auto';
+    theme.style.bottom='auto';
+  }
+}
+resetDesktopThemePosition();
+restoreMobileThemePosition();
+
+theme.addEventListener('pointerdown',e=>{
+  if(!isMobileTheme())return;
+  drag=true;moved=false;
+  const r=theme.getBoundingClientRect();
+  dx=e.clientX-r.left;dy=e.clientY-r.top;
+  theme.setPointerCapture(e.pointerId);
+});
+theme.addEventListener('pointermove',e=>{
+  if(!drag||!isMobileTheme())return;
+  moved=true;
+  const x=Math.max(8,Math.min(innerWidth-theme.offsetWidth-8,e.clientX-dx));
+  const y=Math.max(8,Math.min(innerHeight-theme.offsetHeight-8,e.clientY-dy));
+  theme.style.left=x+'px';theme.style.top=y+'px';theme.style.right='auto';theme.style.bottom='auto';
+});
+theme.addEventListener('pointerup',()=>{
+  if(!isMobileTheme()||!drag)return;
+  drag=false;
+  if(moved){
+    const r=theme.getBoundingClientRect();
+    localStorage.setItem('img-theme-position',JSON.stringify({x:Math.round(r.left),y:Math.round(r.top)}));
+  }else{
+    root.dataset.theme=root.dataset.theme==='dark'?'light':'dark';
+    localStorage.setItem('img-theme',root.dataset.theme);
+    paint();
+  }
+});
+theme.addEventListener('click',()=>{
+  if(isMobileTheme())return;
+  root.dataset.theme=root.dataset.theme==='dark'?'light':'dark';
+  localStorage.setItem('img-theme',root.dataset.theme);
+  paint();
+});
+addEventListener('resize',()=>{
+  if(isMobileTheme()){
+    if(!theme.style.left)restoreMobileThemePosition();
+  }else{
+    resetDesktopThemePosition();
+  }
+});
+
 const navIcons={Home:'home',Sports:'sports',Scores:'scores',News:'news',Odds:'odds'};
 document.querySelectorAll('.bottomnav a').forEach(a=>{let label=a.textContent.trim();if(label==='Tools'){a.href='odds.html';a.childNodes[a.childNodes.length-1].textContent='Odds';label='Odds'}const b=a.querySelector('b');if(b&&navIcons[label])b.innerHTML='<span class="navglyph icon-'+navIcons[label]+'" aria-hidden="true"></span>';if(a.classList.contains('active'))a.setAttribute('aria-current','page')});
 document.querySelectorAll('.navlinks a').forEach(a=>{const label=a.textContent.trim();if(a.classList.contains('active'))a.setAttribute('aria-current','page')});
