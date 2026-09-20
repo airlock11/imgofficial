@@ -484,8 +484,20 @@ main{min-height:calc(100svh - 68px)}
 }
 
 .all-live-section{margin:0 0 34px;padding:0 0 34px;border-bottom:1px solid var(--line)}
-.all-live-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:18px}
-.all-live-head h1,.scores-browser-head h2{margin:5px 0 0;font:700 clamp(2rem,4vw,3.2rem)/.95 "Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:-.02em}
+.all-live-head{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:18px}
+.scores-browser-head h2{margin:5px 0 0;font:700 clamp(2rem,4vw,3.2rem)/.95 "Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:-.02em}
+.live-sport-sorter{display:flex;align-items:center;gap:8px;min-width:0;overflow-x:auto;padding:2px;scrollbar-width:none}
+.live-sport-sorter::-webkit-scrollbar{display:none}
+.live-sport-filter{display:inline-flex;align-items:center;gap:8px;flex:0 0 auto;min-height:40px;padding:8px 12px;border:1px solid var(--line);border-radius:999px;background:var(--panel);color:var(--muted);font:700 .7rem/1 Inter,Arial,sans-serif;cursor:pointer}
+.live-sport-filter:hover{color:var(--text);border-color:color-mix(in srgb,var(--text) 24%,var(--line))}
+.live-sport-filter.active{color:var(--text);background:color-mix(in srgb,var(--red) 12%,var(--panel));border-color:color-mix(in srgb,var(--red) 38%,var(--line))}
+.live-sport-icon{width:21px;height:21px;display:grid;place-items:center;flex:0 0 21px}
+.live-sport-icon svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.live-sport-icon svg rect{fill:none}
+.live-sport-name{white-space:nowrap}
+.live-count-status{display:inline-flex;align-items:center;gap:8px;flex:0 0 auto;font-weight:800;color:var(--text)}
+.live-count-dot{width:8px;height:8px;flex:0 0 8px;border-radius:50%;background:#ef3f45;box-shadow:0 0 0 0 rgba(239,63,69,.35);animation:liveCountBlink 2.2s ease-in-out infinite}
+@keyframes liveCountBlink{0%,100%{opacity:.35;box-shadow:0 0 0 0 rgba(239,63,69,.12)}50%{opacity:1;box-shadow:0 0 0 5px rgba(239,63,69,.08)}}
 .all-live-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 .live-game-card{border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:16px;min-width:0}
 .live-card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:14px}
@@ -504,10 +516,17 @@ main{min-height:calc(100svh - 68px)}
 .scores-browser-head{margin:0 0 16px}
 @media(max-width:760px){
   .all-live-section{margin-bottom:26px;padding-bottom:26px}
-  .all-live-head{align-items:flex-start}
+  .all-live-head{align-items:center;gap:10px}
+  .live-sport-sorter{gap:7px;flex:1 1 auto}
+  .live-sport-filter{width:42px;height:42px;min-height:42px;padding:0;justify-content:center}
+  .live-sport-name{display:none}
+  .live-sport-icon{width:22px;height:22px;flex-basis:22px}
+  .live-sport-icon svg{width:22px;height:22px}
+  .live-count-status{font-size:.68rem;gap:6px}
+  .live-count-dot{width:7px;height:7px;flex-basis:7px}
   .all-live-grid{grid-template-columns:1fr}
   .live-game-card{padding:14px}
-  .all-live-head h1,.scores-browser-head h2{font-size:2rem}
+  .scores-browser-head h2{font-size:2rem}
 }
 
 .all-live-section[hidden]{display:none!important}
