@@ -234,9 +234,18 @@ function updateScoreNumbers(items=allGames){
   });
 }
 
+let liveNowLocked=false;
+
 function updateAllLiveScoreNumbers(items){
+  const section=document.getElementById('allLiveSection');
+  const cards=[...document.querySelectorAll('#allLiveGames .live-game-card[data-game-key]')];
+  if(cards.length){
+    liveNowLocked=true;
+    if(section)section.hidden=false;
+  }
+
   const map=new Map((items||[]).map(g=>[gameDomKey(g),g]));
-  document.querySelectorAll('#allLiveGames .live-game-card[data-game-key]').forEach(card=>{
+  cards.forEach(card=>{
     const g=map.get(card.dataset.gameKey);
     if(!g)return;
     const away=card.querySelector('[data-score-side="away"]');
@@ -286,14 +295,18 @@ function renderAllLiveGames(items){
   });
 
   if(!live.length){
-    if(!host.childElementCount){
-      section.hidden=true;
-      if(status)status.textContent='';
+    if(liveNowLocked||host.childElementCount){
+      liveNowLocked=true;
+      section.hidden=false;
+      return;
     }
+    section.hidden=true;
+    if(status)status.textContent='';
     return;
   }
 
   section.hidden=false;
+  liveNowLocked=true;
   if(status)status.textContent=live.length+' live';
 
   host.innerHTML=live.map(g=>
@@ -314,6 +327,10 @@ async function loadAllLiveGames({silent=false}={}){
   const status=document.getElementById('allLiveStatus');
   if(!host)return;
   const section=document.getElementById('allLiveSection');
+  if(host.childElementCount){
+    liveNowLocked=true;
+    if(section)section.hidden=false;
+  }
 
   if(!silent&&host.childElementCount===0){
     if(status)status.textContent='Checking live games';
