@@ -326,7 +326,7 @@ function renderAllLiveGames(items){
   });
 
   if(!live.length){
-    if(liveNowLocked||host.childElementCount){
+    if(liveNowLocked||host.querySelector('.live-game-card')){
       liveNowLocked=true;
       section.hidden=false;
       return;
@@ -358,12 +358,12 @@ async function loadAllLiveGames({silent=false}={}){
   const status=document.getElementById('allLiveStatus');
   if(!host)return;
   const section=document.getElementById('allLiveSection');
-  if(host.childElementCount){
+  if(host.querySelector('.live-game-card')){
     liveNowLocked=true;
     if(section)section.hidden=false;
   }
 
-  if(!silent&&host.childElementCount===0){
+  if(!silent&&!host.querySelector('.live-game-card')){
     if(status)status.textContent='Checking live games';
   }
 
@@ -406,7 +406,7 @@ async function loadAllLiveGames({silent=false}={}){
   }));
 
   await Promise.all([regionalPromise,apiPromise]);
-  if(silent||host.childElementCount)updateAllLiveScoreNumbers(live);
+  if(silent||host.querySelector('.live-game-card'))updateAllLiveScoreNumbers(live);
   else renderAllLiveGames(live);
 }
 function renderGames(){
