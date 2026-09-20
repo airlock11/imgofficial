@@ -102,6 +102,43 @@ export default {
     }
 
 
+    if (url.pathname === "/regional-scores") {
+      const leagueKey = (url.searchParams.get("league") || "").trim().toLowerCase();
+      const config = regionalLeagueConfig(leagueKey);
+      if (!config) {
+        return jsonResponse({ events: [], error: "Unsupported regional league" }, cors, 60);
+      }
+      if (!env.SPORTSAPI_KEY) {
+        return jsonResponse({
+          events: [],
+          league: config.label,
+          source: "SportsAPI not configured",
+        }, cors, 30);
+      }
+
+      try {
+        const response = await fetch("https://api.sportsapi.app/v2/livescores?sport=basketball", {
+          headers: { Authorization: `Bearer ${env.SPORTSAPI_KEY}` },
+          cf: { cacheTtl: 20, cacheEverything: true },
+        });
+        if (!response.ok) {
+          return jsonResponse({ events: [], league: config.label, source: "SportsAPI", upstream_status: response.status }, cors, 20);
+        }
+        const payload = await response.json();
+        const raw = Array.isArray(payload?.data) ? payload.data : [];
+        const matched = raw.filter((game) => regionalGameMatches(game, config));
+        const events = matched.map((game) => normalizeRegionalGame(game, config));
+        return jsonResponse({
+          events,
+          league: config.label,
+          source: "SportsAPI",
+          live_only: true,
+        }, cors, 20);
+      } catch (_) {
+        return jsonResponse({ events: [], league: config.label, source: "SportsAPI" }, cors, 20);
+      }
+    }
+
     if (url.pathname === "/streams") {
       const home = (url.searchParams.get("home") || "").trim();
       const away = (url.searchParams.get("away") || "").trim();
@@ -276,10 +313,120 @@ export default {
 
 
 
+function regionalLeagueConfig(key) {
+  const configs = {
+    pba: {
+      label: "PBA",
+      country: "philippines",
+      aliases: ["philippine basketball association", "pba"],
+    },
+    nbl: {
+      label: "NBL-Pilipinas",
+      country: "philippines",
+      aliases: ["nbl pilipinas", "nbl-pilipinas", "national basketball league philippines", "national basketball league"],
+    },
+    vba: {
+      label: "VBA",
+      country: "vietnam",
+      aliases: ["vietnam basketball association", "vietnam professional basketball league", "vba"],
+    },
+  };
+  return configs[key] || null;
+}
+
+function lowerText(value) {
+  return String(value || "").trim().toLowerCase();
+}
+
+function regionalGameMatches(game, config) {
+  const leagueName = lowerText(
+    game?.league?.name ||
+    game?.tournament?.name ||
+    game?.competition?.name ||
+    game?.season?.league?.name
+  );
+  const countryName = lowerText(
+    game?.league?.country?.name ||
+    game?.league?.country ||
+    game?.tournament?.country?.name ||
+    game?.tournament?.country ||
+    game?.country?.name ||
+    game?.country
+  );
+  const aliasMatch = config.aliases.some((alias) => {
+    const a = lowerText(alias);
+    if (a === "pba" || a === "vba") return leagueName === a || leagueName.startsWith(a + " ") || leagueName.endsWith(" " + a);
+    return leagueName.includes(a);
+  });
+  if (!aliasMatch) return false;
+  if (!config.country) return true;
+  return countryName ? countryName.includes(config.country) : leagueName.includes(config.country);
+}
+
+function regionalScoreValue(value) {
+  if (value == null) return "—";
+  if (typeof value === "number" || typeof value === "string") return String(value);
+  if (value.current != null) return String(value.current);
+  if (value.display != null) return String(value.display);
+  if (value.total != null) return String(value.total);
+  return "—";
+}
+
+function normalizeRegionalState(type) {
+  const value = lowerText(type);
+  if (/live|inprogress|in_progress|running|period|quarter|half/.test(value)) return "in";
+  if (/final|finished|complete|completed|ended/.test(value)) return "post";
+  return "pre";
+}
+
+function normalizeRegionalGame(game, config) {
+  const home = game?.home || game?.homeTeam || {};
+  const away = game?.away || game?.awayTeam || {};
+  const statusType = game?.status?.type || game?.status?.name || game?.status || "";
+  const shortDetail = game?.status?.description || game?.status?.detail || game?.status?.short || statusType || "Live";
+  const start = game?.startTime || game?.date || game?.start || new Date().toISOString();
+
+  return {
+    id: String(game?.id || game?.fixtureId || `${config.label}-${start}-${home?.name || "home"}-${away?.name || "away"}`),
+    date: start,
+    status: {
+      type: {
+        state: normalizeRegionalState(statusType),
+        shortDetail: String(shortDetail),
+        description: String(shortDetail),
+      },
+    },
+    competitions: [{
+      competitors: [
+        {
+          homeAway: "home",
+          score: regionalScoreValue(game?.homeScore),
+          team: {
+            displayName: home?.name || home?.displayName || "Home",
+            logo: home?.logo || home?.image || "",
+          },
+        },
+        {
+          homeAway: "away",
+          score: regionalScoreValue(game?.awayScore),
+          team: {
+            displayName: away?.name || away?.displayName || "Away",
+            logo: away?.logo || away?.image || "",
+          },
+        },
+      ],
+      odds: [],
+    }],
+  };
+}
+
 function streamLeagueForSport(sport) {
   const map = {
     soccer: { label: "Premier League", youtube: ["UCG5qGWdu8nIRZqJ_GgDwQ-w"] },
     basketball: { label: "NBA", youtube: ["UCWJ2lWNubArHWmf3FIHbfcQ"] },
+    pba: { label: "PBA Philippines", youtube: [] },
+    nbl: { label: "NBL Pilipinas", youtube: [] },
+    vba: { label: "VBA Vietnam", youtube: [] },
     baseball: { label: "MLB", youtube: ["UCoLrcjPV5PbUrUyXq5mjc_A"] },
     hockey: { label: "NHL", youtube: ["UCqFMzb-4AUf6WAIbl132QKA"] },
     football: { label: "NFL", youtube: ["UCDVYQ4Zhbm3S2dlz7P1GBDg"] },
