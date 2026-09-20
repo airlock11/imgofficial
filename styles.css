@@ -491,9 +491,8 @@ main{min-height:calc(100svh - 68px)}
 .live-sport-filter{display:inline-flex;align-items:center;gap:8px;flex:0 0 auto;min-height:40px;padding:8px 12px;border:1px solid var(--line);border-radius:999px;background:var(--panel);color:var(--muted);font:700 .7rem/1 Inter,Arial,sans-serif;cursor:pointer}
 .live-sport-filter:hover{color:var(--text);border-color:color-mix(in srgb,var(--text) 24%,var(--line))}
 .live-sport-filter.active{color:var(--text);background:color-mix(in srgb,var(--red) 12%,var(--panel));border-color:color-mix(in srgb,var(--red) 38%,var(--line))}
-.live-sport-icon{width:21px;height:21px;display:grid;place-items:center;flex:0 0 21px}
-.live-sport-icon svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
-.live-sport-icon svg rect{fill:none}
+.live-sport-icon{width:28px;height:28px;display:grid;place-items:center;flex:0 0 28px}
+.live-sport-icon img{display:block;width:28px;height:28px;object-fit:contain}
 .live-sport-name{white-space:nowrap}
 .live-count-status{display:inline-flex;align-items:center;gap:8px;flex:0 0 auto;font-weight:800;color:var(--text)}
 .live-count-dot{width:8px;height:8px;flex:0 0 8px;border-radius:50%;background:#ef3f45;box-shadow:0 0 0 0 rgba(239,63,69,.35);animation:liveCountBlink 2.2s ease-in-out infinite}
@@ -518,10 +517,10 @@ main{min-height:calc(100svh - 68px)}
   .all-live-section{margin-bottom:26px;padding-bottom:26px}
   .all-live-head{align-items:center;gap:10px}
   .live-sport-sorter{gap:7px;flex:1 1 auto}
-  .live-sport-filter{width:42px;height:42px;min-height:42px;padding:0;justify-content:center}
+  .live-sport-filter{width:48px;height:48px;min-height:48px;padding:0;justify-content:center}
   .live-sport-name{display:none}
-  .live-sport-icon{width:22px;height:22px;flex-basis:22px}
-  .live-sport-icon svg{width:22px;height:22px}
+  .live-sport-icon{width:30px;height:30px;flex-basis:30px}
+  .live-sport-icon img{width:30px;height:30px}
   .live-count-status{font-size:.68rem;gap:6px}
   .live-count-dot{width:7px;height:7px;flex-basis:7px}
   .all-live-grid{grid-template-columns:1fr}
