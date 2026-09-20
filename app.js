@@ -280,6 +280,164 @@ const oddsFeeds={
 const oddsLeagueNames={nfl:'NFL',ncaaf:'NCAA Football',nba:'NBA',wnba:'WNBA',ncaam:"NCAA Men's Basketball",mlb:'MLB',nhl:'NHL',epl:'Premier League',laliga:'La Liga',seriea:'Serie A',bundesliga:'Bundesliga',ligue1:'Ligue 1',champions:'UEFA Champions League',mls:'MLS'};let availableOdds={};
 function mapOdds(o){return{provider:o.provider?.displayName||o.provider?.name||'Odds provider',details:o.details||'—',total:o.overUnder??'—',home:o.moneyline?.home?.close?.odds||'—',away:o.moneyline?.away?.close?.odds||'—',draw:o.moneyline?.draw?.close?.odds||'—'}}function teamLogoUrl(team){return team?.team?.logo||team?.team?.logos?.[0]?.href||team?.logo||team?.logos?.[0]?.href||''}
 function teamLogoMarkup(url,name,extraClass=''){return url?'<img class="team-logo '+extraClass+'" src="'+esc(url)+'" alt="'+esc(name)+' logo" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.remove()">':''}
+
+const teamDirectoryFeeds={
+  soccer:'soccer/eng.1',
+  laliga:'soccer/esp.1',
+  seriea:'soccer/ita.1',
+  bundesliga:'soccer/ger.1',
+  champions:'soccer/uefa.champions',
+  basketball:'basketball/nba',
+  wnba:'basketball/wnba',
+  nblaus:'basketball/nbl',
+  ipl:'cricket/ipl',
+  volleyball_w:'volleyball/fivb.w',
+  volleyball_m:'volleyball/fivb.m',
+  baseball:'baseball/mlb',
+  hockey:'hockey/nhl',
+  football:'football/nfl',
+  ncaaf:'football/college-football'
+};
+const teamLogoDirectoryCache=new Map();
+
+const verifiedTeamLogoOverrides={
+  pba:{
+    'barangay ginebra':'https://statsspace01.sgp1.digitaloceanspaces.com/basketball_organizer/images/845go3mfbdxvlmrxq4jnv93ema08',
+    'barangay ginebra san miguel':'https://statsspace01.sgp1.digitaloceanspaces.com/basketball_organizer/images/845go3mfbdxvlmrxq4jnv93ema08',
+    'converge fiberxers':'https://statsspace01.sgp1.digitaloceanspaces.com/organizer/teams/5/logo_L1.png',
+    'meralco bolts':'https://statsspace01.sgp1.digitaloceanspaces.com/basketball_organizer/images/5rg0jlac21fve9xix02wncz1t1uy',
+    'nlex road warriors':'https://statsspace01.sgp1.digitaloceanspaces.com/basketball_organizer/images/b72j58tho2ipkl065bemw71n9byl',
+    'tnt tropang 5g':'https://statsspace01.sgp1.digitaloceanspaces.com/basketball_organizer/images/6a0o355pjdq3syfi83969r81dqp6',
+    'terrafirma dyip':'https://statsspace01.sgp1.digitaloceanspaces.com/basketball_organizer/images/oscegdylau0xy1al87thv9grww4h'
+  }
+};
+
+const regionalWikiTeamTitles={
+  pba:{
+    'macau black knights':'Macau Black Knights'
+  },
+  mpbl:{
+    'batang kankaloo':'Caloocan Batang Kankaloo',
+    'batangas city':'Batangas City Tanduay Rum Masters',
+    'bulacan kuyas':'Bulacan Kuyas',
+    'gensan warriors':'General Santos Warriors',
+    'imus braderhood':'Imus Bandera',
+    'marikina shoemasters':'Marikina Shoemasters',
+    'quezon huskers':'Quezon Huskers',
+    'rizal golden coolers':'Rizal Golden Coolers',
+    'sarangani marlins':'Sarangani Marlins'
+  },
+  vba:{
+    'hanoi buffaloes':'Hanoi Buffaloes',
+    'saigon heat':'Saigon Heat',
+    'nhatrang dolphins':'Nha Trang Dolphins',
+    'ho chi minh city wings':'Ho Chi Minh City Wings'
+  }
+};
+const regionalWikiLogoCache=new Map();
+
+function normalizeTeamLogoKey(name){
+  return String(name||'').toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g,'').replace(/&/g,' and ').replace(/[^a-z0-9]+/g,' ').trim();
+}
+
+function addTeamLogoAliases(map,team,logo){
+  if(!logo)return;
+  const names=[
+    team?.displayName,team?.shortDisplayName,team?.name,team?.abbreviation,
+    [team?.location,team?.name].filter(Boolean).join(' ')
+  ].filter(Boolean);
+  names.forEach(name=>map.set(normalizeTeamLogoKey(name),logo));
+}
+
+async function getTeamLogoDirectory(sport){
+  if(teamLogoDirectoryCache.has(sport))return teamLogoDirectoryCache.get(sport);
+  const path=teamDirectoryFeeds[sport];
+  if(!path){teamLogoDirectoryCache.set(sport,new Map());return teamLogoDirectoryCache.get(sport);}
+  try{
+    const r=await fetch('https://site.api.espn.com/apis/site/v2/sports/'+path+'/teams?limit=500',{cache:'force-cache'});
+    if(!r.ok)throw 0;
+    const j=await r.json();
+    const list=j?.sports?.[0]?.leagues?.[0]?.teams||[];
+    const map=new Map();
+    list.forEach(x=>{
+      const t=x?.team||x;
+      const logo=t?.logos?.[0]?.href||t?.logo||'';
+      addTeamLogoAliases(map,t,logo);
+    });
+    teamLogoDirectoryCache.set(sport,map);
+    return map;
+  }catch{
+    const map=new Map();
+    teamLogoDirectoryCache.set(sport,map);
+    return map;
+  }
+}
+
+async function getRegionalWikiLogoMap(sport,names){
+  const titleMap=regionalWikiTeamTitles[sport]||{};
+  const pairs=[...new Set((names||[]).map(name=>normalizeTeamLogoKey(name)).filter(key=>titleMap[key]))]
+    .map(key=>[key,titleMap[key]]);
+  if(!pairs.length)return new Map();
+
+  const result=new Map();
+  const missing=[];
+  for(const [key,title] of pairs){
+    const cacheKey=sport+':'+key;
+    if(regionalWikiLogoCache.has(cacheKey)){
+      const hit=regionalWikiLogoCache.get(cacheKey);
+      if(hit)result.set(key,hit);
+    }else missing.push([key,title]);
+  }
+  if(!missing.length)return result;
+
+  try{
+    const titles=[...new Set(missing.map(([,title])=>title))];
+    const url='https://en.wikipedia.org/w/api.php?action=query&prop=pageimages&piprop=thumbnail|original&pithumbsize=160&format=json&origin=*&titles='+encodeURIComponent(titles.join('|'));
+    const r=await fetch(url,{cache:'force-cache'});
+    if(!r.ok)throw 0;
+    const j=await r.json();
+    const byTitle=new Map(Object.values(j?.query?.pages||{}).map(page=>[
+      normalizeTeamLogoKey(page?.title),
+      page?.thumbnail?.source||page?.original?.source||''
+    ]));
+    for(const [key,title] of missing){
+      const logo=byTitle.get(normalizeTeamLogoKey(title))||'';
+      regionalWikiLogoCache.set(sport+':'+key,logo);
+      if(logo)result.set(key,logo);
+    }
+  }catch{
+    missing.forEach(([key])=>regionalWikiLogoCache.set(sport+':'+key,''));
+  }
+  return result;
+}
+
+async function hydrateTeamLogos(sport,games){
+  if(!Array.isArray(games)||!games.length)return games;
+  const overrides=verifiedTeamLogoOverrides[sport]||{};
+  for(const g of games){
+    if(!g.awayLogo)g.awayLogo=overrides[normalizeTeamLogoKey(g.away)]||'';
+    if(!g.homeLogo)g.homeLogo=overrides[normalizeTeamLogoKey(g.home)]||'';
+  }
+
+  const directory=await getTeamLogoDirectory(sport);
+  for(const g of games){
+    if(!g.awayLogo)g.awayLogo=directory.get(normalizeTeamLogoKey(g.away))||'';
+    if(!g.homeLogo)g.homeLogo=directory.get(normalizeTeamLogoKey(g.home))||'';
+  }
+
+  const unresolved=games.flatMap(g=>[
+    !g.awayLogo?g.away:'',
+    !g.homeLogo?g.home:''
+  ]).filter(Boolean);
+  if(unresolved.length){
+    const wiki=await getRegionalWikiLogoMap(sport,unresolved);
+    for(const g of games){
+      if(!g.awayLogo)g.awayLogo=wiki.get(normalizeTeamLogoKey(g.away))||'';
+      if(!g.homeLogo)g.homeLogo=wiki.get(normalizeTeamLogoKey(g.home))||'';
+    }
+  }
+  return games;
+}
 async function getNbaLogoMap(){try{const r=await fetch('https://site.api.espn.com/apis/site/v2/sports/basketball/nba/teams?limit=100',{cache:'force-cache'});if(!r.ok)return{};const j=await r.json(),list=j.sports?.[0]?.leagues?.[0]?.teams||[];return Object.fromEntries(list.flatMap(x=>{const t=x.team||x,names=[t.displayName,t.name,t.shortDisplayName].filter(Boolean),logo=t.logos?.[0]?.href||t.logo||'';return names.map(n=>[String(n).toLowerCase(),logo])}))}catch{return{}}}
 function summaryUrlForGame(sport,eventId){const feed=scoreFeeds[sport];return feed&&eventId?feed.replace(/\/scoreboard(?:\?.*)?$/,'/summary?event='+encodeURIComponent(eventId)):''}
 function collectMediaUrls(node,out=[]){if(!node)return out;if(typeof node==='string'){if(/^https?:\/\//i.test(node))out.push(node);return out}if(Array.isArray(node)){node.forEach(x=>collectMediaUrls(x,out));return out}if(typeof node==='object'){for(const [k,val] of Object.entries(node)){if(['href','url','src'].includes(k)&&typeof val==='string'&&/^https?:\/\//i.test(val))out.push(val);else if(typeof val==='object')collectMediaUrls(val,out)}}return out}
@@ -565,6 +723,9 @@ async function loadAllLiveGames({silent=false}={}){
   }));
 
   await Promise.all([regionalPromise,apiPromise]);
+  await Promise.allSettled([...new Set(live.map(g=>g.sportKey).filter(Boolean))].map(key=>
+    hydrateTeamLogos(key,live.filter(g=>g.sportKey===key))
+  ));
   if(silent||host.querySelector('.live-game-card'))updateAllLiveScoreNumbers(live);
   else renderAllLiveGames(live);
 }
@@ -614,6 +775,7 @@ async function loadGames({silent=false}={}){
   if(isWebLeague){
     await loadRegionalAutoData();
     const webGames=regionalSnapshotGames(sport);
+    await hydrateTeamLogos(sport,webGames);
 
     // GitHub-hosted regional data is the stable primary layer.
     // Never clear or replace it just because the Cloudflare fallback is unavailable.
@@ -629,6 +791,7 @@ async function loadGames({silent=false}={}){
     try{
       const j=await fetchScorePayload(sport,{fallbackOnly:true});
       const liveGames=(j.events||[]).map(normalizeEvent).filter(g=>g.state==='live');
+      await hydrateTeamLogos(sport,liveGames);
 
       if(liveGames.length){
         const base=webGames.length?webGames:allGames;
@@ -657,9 +820,11 @@ async function loadGames({silent=false}={}){
   try{
     const j=await fetchScorePayload(sport);
     allGames=(j.events||[]).map(normalizeEvent);
+    await hydrateTeamLogos(sport,allGames);
 
     if(hasRegionalSnapshot&&!allGames.length){
       allGames=regionalSnapshotGames(sport);
+      await hydrateTeamLogos(sport,allGames);
       mode='web';
     }
 
@@ -689,6 +854,7 @@ async function loadGames({silent=false}={}){
   }catch{
     if(hasRegionalSnapshot){
       allGames=regionalSnapshotGames(sport);
+      await hydrateTeamLogos(sport,allGames);
       st.textContent='';
       renderRegionalContext(sport,'web');
       if(silent)updateScoreNumbers();else renderGames();
