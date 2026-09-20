@@ -408,16 +408,66 @@ async function refreshExistingAllLiveScores(excludeSport=''){
   updateAllLiveScoreNumbers(updates);
 }
 
-function renderAllLiveGames(items){
+let liveSportFilter='all';
+let liveNowItems=[];
+
+function liveSportSlug(label){
+  return String(label||'sport').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+}
+
+function liveSportIconMarkup(label){
+  const key=String(label||'').toLowerCase();
+  const common='viewBox="0 0 24 24" aria-hidden="true" focusable="false"';
+  if(key==='all')return '<svg '+common+'><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>';
+  if(key==='basketball')return '<svg '+common+'><circle cx="12" cy="12" r="9"/><path d="M3.4 10.2c4.7.2 8.7-2.2 11.4-6.1M9.2 20.2c.2-4.9-2.1-9.2-6-11.7M20.6 13.8c-4.6-.2-8.5 2.1-11.2 6M14.8 3.9c-.2 4.8 2.1 9 6 11.5"/></svg>';
+  if(key==='football')return '<svg '+common+'><circle cx="12" cy="12" r="9"/><path d="m12 7 3.4 2.5-1.3 4H9.9l-1.3-4L12 7Zm-3.4 2.5L5.4 8M9.9 13.5l-2 3.7m6.2-3.7 2 3.7m-.7-7.7L18.6 8M7.9 17.2l-.7 2.2m8.9-2.2.7 2.2"/></svg>';
+  if(key==='tennis')return '<svg '+common+'><circle cx="12" cy="12" r="9"/><path d="M5.1 6.3c4 2.5 5.8 6.3 5.2 11.2M18.9 17.7c-4-2.5-5.8-6.3-5.2-11.2"/></svg>';
+  if(key==='cricket')return '<svg '+common+'><path d="m7 19 4-14 4 1-3.5 14H8.4L7 19Z"/><circle cx="18.2" cy="17.7" r="2.1"/><path d="M6 21h7"/></svg>';
+  if(key==='volleyball')return '<svg '+common+'><circle cx="12" cy="12" r="9"/><path d="M12 3c2.2 2 3.5 4.6 3.6 7.3M15.6 10.3c-4.1-.8-7.3.2-9.8 3M5.8 13.3c1.8 3.4 4.5 5.5 8.4 6.6M14.2 19.9c1.8-3.4 2.1-6.7.9-9.8M15.1 10.1c2.8.6 4.6 2.1 5.7 4.4"/></svg>';
+  if(key==='baseball')return '<svg '+common+'><circle cx="12" cy="12" r="9"/><path d="M8 4.7c1.1 1.4 1.7 2.9 1.8 4.6M7 7.3l1.5.6M6.5 9.5l1.7.4M16 19.3c-1.1-1.4-1.7-2.9-1.8-4.6M17 16.7l-1.5-.6m2-1.6-1.7-.4"/></svg>';
+  if(key==='hockey')return '<svg '+common+'><path d="M6 3h3l4.3 13.4c.3.9 1.2 1.6 2.2 1.6H21v3h-6.1a4.7 4.7 0 0 1-4.5-3.3L6 3Z"/><ellipse cx="5.5" cy="19.5" rx="3.2" ry="1.5"/></svg>';
+  if(key==='american football')return '<svg '+common+'><path d="M4 15.7C1.8 11.5 4.4 5 9.2 3.6c4.8-1.4 9.7 2.6 10.8 6.7 1.1 4.2-1.8 9.5-6.6 10.2C8.6 21.2 5.2 18 4 15.7Z"/><path d="m9 9 6 6m-4.7-7.3 1.2 1.2m1.1.1 1.2 1.2m1.1.1 1.2 1.2"/></svg>';
+  if(key==='motorsport')return '<svg '+common+'><path d="M5 3v18M6 5h6v5H6m6-5h6v5h-6m0 0h6v5h-6m-6-5h6v5H6"/></svg>';
+  if(key==='combat sports')return '<svg '+common+'><path d="M8 5.5V3.8a1.8 1.8 0 0 1 3.6 0V6m0-.5V3.3a1.8 1.8 0 0 1 3.6 0V6m0-.2V4.2a1.8 1.8 0 0 1 3.6 0v6.3c0 5-3 9.5-8.7 9.5H9c-3.9 0-6.5-2.3-6.5-5.5V11a1.8 1.8 0 0 1 3.6 0v2.2H8V5.5Z"/></svg>';
+  return '<svg '+common+'><circle cx="12" cy="12" r="8"/><path d="M12 8v8M8 12h8"/></svg>';
+}
+
+function liveSportOrder(label){
+  const order=['Basketball','Football','Tennis','Cricket','Volleyball','Baseball','Hockey','American Football','Motorsport','Combat Sports'];
+  const i=order.indexOf(label);
+  return i<0?99:i;
+}
+
+function renderLiveSportSorter(items){
+  const sorter=document.getElementById('liveSportSorter');
+  if(!sorter)return;
+  const sports=[...new Set(items.map(g=>g.sportLabel||'Sport'))].sort((a,b)=>liveSportOrder(a)-liveSportOrder(b)||a.localeCompare(b));
+  const valid=liveSportFilter==='all'||sports.includes(liveSportFilter);
+  if(!valid)liveSportFilter='all';
+  const choices=[['all','All'],...sports.map(s=>[s,s])];
+  sorter.innerHTML=choices.map(([value,label])=>
+    '<button type="button" class="live-sport-filter'+(liveSportFilter===value?' active':'')+'" data-live-sport="'+esc(value)+'" aria-label="'+esc(label)+'">'+
+      '<span class="live-sport-icon">'+liveSportIconMarkup(value)+'</span>'+
+      '<span class="live-sport-name">'+esc(label)+'</span>'+
+    '</button>'
+  ).join('');
+  sorter.querySelectorAll('[data-live-sport]').forEach(btn=>btn.addEventListener('click',()=>{
+    liveSportFilter=btn.dataset.liveSport||'all';
+    renderAllLiveGames(liveNowItems,{preserveItems:true});
+  }));
+}
+
+function renderAllLiveGames(items,{preserveItems=false}={}){
   const section=document.getElementById('allLiveSection');
   const host=document.getElementById('allLiveGames');
   const status=document.getElementById('allLiveStatus');
   if(!host||!section)return;
 
-  const live=[...items].sort((a,b)=>{
-    const al=(a.sportLabel||'')+' '+(a.leagueLabel||'');
-    const bl=(b.sportLabel||'')+' '+(b.leagueLabel||'');
-    return al.localeCompare(bl)||((Date.parse(a.date||'')||0)-(Date.parse(b.date||'')||0));
+  if(!preserveItems)liveNowItems=[...items];
+
+  const live=[...liveNowItems].sort((a,b)=>{
+    const as=a.sportLabel||'Sport',bs=b.sportLabel||'Sport';
+    return liveSportOrder(as)-liveSportOrder(bs)||as.localeCompare(bs)||(a.leagueLabel||'').localeCompare(b.leagueLabel||'')||((Date.parse(a.date||'')||0)-(Date.parse(b.date||'')||0));
   });
 
   if(!live.length){
@@ -433,9 +483,12 @@ function renderAllLiveGames(items){
 
   section.hidden=false;
   liveNowLocked=true;
-  if(status)status.textContent=live.length+' live';
+  renderLiveSportSorter(live);
 
-  host.innerHTML=live.map(g=>{
+  const visible=liveSportFilter==='all'?live:live.filter(g=>(g.sportLabel||'Sport')===liveSportFilter);
+  if(status)status.innerHTML='<span class="live-count-dot" aria-hidden="true"></span><span>'+visible.length+' live</span>';
+
+  host.innerHTML=visible.map(g=>{
     if(g.isRacing){
       const place=[g.raceCircuit,g.raceCity].filter(Boolean).join(' · ');
       return '<article class="live-game-card race-live-card" data-game-key="'+esc(gameDomKey(g))+'" data-sport-key="'+esc(g.sportKey||'')+'">'+
