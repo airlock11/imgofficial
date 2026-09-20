@@ -469,14 +469,3 @@ main{min-height:calc(100svh - 68px)}
 @media(max-width:760px){.boxing-intro{display:block}.boxing-intro p{margin-top:14px}.boxing-controls{grid-template-columns:1fr;padding:10px}.boxer-grid,.fight-grid,.official-boxing-sources{grid-template-columns:1fr}.boxing-table th,.boxing-table td{padding:10px 9px;font-size:.7rem}.boxing-table th:nth-child(4),.boxing-table td:nth-child(4){display:none}.boxer-record-row{grid-template-columns:repeat(2,minmax(0,1fr))}.boxer-detail-grid{grid-template-columns:1fr}}
 
 
-/* Regional web-sourced score context */
-.league-context{margin:14px 0 18px;padding:16px 18px;border:1px solid var(--line);border-radius:16px;background:var(--panel);display:flex;gap:24px;justify-content:space-between;align-items:flex-start}
-.league-context[hidden]{display:none}
-.league-context>div:first-child{max-width:720px}
-.league-context strong{display:block;margin:6px 0 5px;font:700 20px/1.1 "Barlow Condensed",sans-serif}
-.league-context p{margin:0;color:var(--muted);font-size:13px;line-height:1.55}
-.league-context-meta{display:flex;flex-direction:column;gap:5px;text-align:right;color:var(--muted);font-size:11px;line-height:1.45}
-.league-context-sources a,.game-source{color:inherit;text-decoration:none;border-bottom:1px solid currentColor}
-.league-context-sources a:hover,.game-source:hover{color:var(--text)}
-.game-source{display:inline-block;margin-top:9px;font-size:10px;opacity:.72}
-@media(max-width:720px){.league-context{flex-direction:column;gap:10px;padding:14px}.league-context-meta{text-align:left}.league-context strong{font-size:18px}}
