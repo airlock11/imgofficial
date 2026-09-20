@@ -22,6 +22,10 @@ URLS = {
     "nbl_facebook": "https://www.facebook.com/nblpilipinas",
     "nbl_facebook_share": "https://www.facebook.com/share/18tLhjYjUv/",
     "nbl_updates": "https://www.findglocal.com/PH/Cabuyao/1997682720482608/NBL-Pilipinas",
+    "nblaus": "https://www.nbl.com.au/",
+    "vba_results": "https://www.forebet.com/en/basketball/vietnam/results",
+    "vba_betexplorer": "https://www.betexplorer.com/basketball/vietnam/vba/",
+    "vba_ticket": "https://ticket.vba.vn/team/5",
     "nbl_youtube_feed": "https://www.youtube.com/feeds/videos.xml?channel_id=UCJDBLldRGVJPEvyjJdSHefw",
     "tap": "https://tapdmv.com/tapsports/"
 }
@@ -459,11 +463,185 @@ def parse_nbl():
         "games":games[:30]
     }
 
+
+NBL_AUS_TEAMS = {
+    "MEL": "Melbourne United",
+    "ADL": "Adelaide 36ers",
+    "PER": "Perth Wildcats",
+    "SEM": "South East Melbourne Phoenix",
+    "NZL": "New Zealand Breakers",
+    "ILL": "Illawarra Hawks",
+    "SYD": "Sydney Kings",
+    "CNS": "Cairns Taipans",
+    "TAS": "Tasmania JackJumpers",
+    "BRI": "Brisbane Bullets",
+}
+
+def parse_nbl_australia():
+    xs = lines(URLS["nblaus"])
+    text = " ".join(xs)
+    # Official NBL homepage publishes compact rows such as:
+    # RD 1 Sat, Sep 19 7:30 pm AEST MEL 95 ADL 97
+    pattern = re.compile(
+        r"RD\s+\d+\s+(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s*"
+        r"(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+(\d{1,2})\s+"
+        r"(\d{1,2}):(\d{2})\s*(am|pm)\s+(?:AEST|AEDT)\s+"
+        r"([A-Z]{3})(?:\s+(\d{2,3}))?\s+([A-Z]{3})(?:\s+(\d{2,3}))?",
+        re.I,
+    )
+    games = []
+    for m in pattern.finditer(text):
+        mon, day, hh, mm, ap, a_code, a_score, b_code, b_score = m.groups()
+        a_code, b_code = a_code.upper(), b_code.upper()
+        if a_code not in NBL_AUS_TEAMS or b_code not in NBL_AUS_TEAMS:
+            continue
+        dt = datetime.strptime(f"{mon} {day} 2026 {hh}:{mm} {ap.upper()}", "%b %d %Y %I:%M %p")
+        # NBL's published national schedule is displayed in AEST/AEDT. September
+        # dates here are AEST (+10); the website shows the supplied displayTime.
+        dt = dt.replace(tzinfo=timezone(timedelta(hours=10)))
+        final = bool(a_score and b_score)
+        games.append({
+            "eventId": "web-nblaus-" + dt.strftime("%Y%m%d%H%M") + "-" + a_code + "-" + b_code,
+            "date": dt.isoformat(),
+            "displayTime": dt.strftime("%b %d · Final" if final else "%b %d · %I:%M %p").replace(" 0", " "),
+            "away": NBL_AUS_TEAMS[b_code],
+            "home": NBL_AUS_TEAMS[a_code],
+            "awayScore": b_score or "—",
+            "homeScore": a_score or "—",
+            "status": "Final" if final else "Scheduled",
+            "state": "final" if final else "scheduled",
+            "sourceName": "NBL Australia",
+            "sourceUrl": "https://www.nbl.com.au/schedule",
+        })
+    if not games:
+        existing = load().get("leagues", {}).get("nblaus", {})
+        if existing:
+            return existing
+        raise RuntimeError("No NBL Australia games parsed")
+    return {
+        "league": "NBL Australia",
+        "season": "2026-27 NBL27",
+        "coverage": "Official NBL schedule and results",
+        "note": "Automatically refreshed from the official NBL Australia schedule/results pages.",
+        "sources": [
+            {"name": "NBL Australia Official", "url": "https://www.nbl.com.au/"},
+            {"name": "NBL Schedule", "url": "https://schedule.nbl.com.au/nbl"},
+        ],
+        "games": dedupe_games(games)[:30],
+    }
+
+VBA_TEAMS = [
+    "Hanoi Buffaloes",
+    "Saigon Heat",
+    "Nhatrang Dolphins",
+    "Nha Trang Dolphins",
+    "Ho Chi Minh City Wings",
+    "Can Tho Catfish",
+    "Cantho Catfish",
+    "Da Nang Dragons",
+]
+
+def parse_vba_results_from(url):
+    xs = lines(url)
+    games = []
+    day = None
+    i = 0
+    while i < len(xs):
+        if re.fullmatch(r"\d{2}/\d{2}/2026", xs[i]):
+            day = xs[i]
+            i += 1
+            continue
+        if day and i + 2 < len(xs) and re.fullmatch(r"\d{1,3}\s*:\s*\d{1,3}", xs[i+1]):
+            home, away = xs[i].strip(), xs[i+2].strip()
+            if any(t.lower() in home.lower() for t in VBA_TEAMS) and any(t.lower() in away.lower() for t in VBA_TEAMS):
+                hs, as_ = [v.strip() for v in xs[i+1].split(":")]
+                dt = datetime.strptime(day, "%d/%m/%Y").replace(hour=19, tzinfo=timezone(timedelta(hours=7)))
+                games.append({
+                    "eventId": "web-vba-final-" + dt.strftime("%Y%m%d") + "-" + str(len(games)+1),
+                    "date": dt.isoformat(),
+                    "displayTime": dt.strftime("%b %d · Final").replace(" 0", " "),
+                    "away": away,
+                    "home": home,
+                    "awayScore": as_,
+                    "homeScore": hs,
+                    "status": "Final",
+                    "state": "final",
+                    "sourceName": "VBA results",
+                    "sourceUrl": url,
+                })
+                i += 3
+                continue
+        i += 1
+    return games
+
+def parse_vba_ticket_fixtures():
+    try:
+        xs = lines(URLS["vba_ticket"])
+    except Exception:
+        return []
+    text = " ".join(xs)
+    games = []
+    pattern = re.compile(
+        r"(Saigon Heat)\s+vs\s+(Hanoi Buffaloes)\s+(\d{1,2}):(\d{2})\s+(\d{2}/\d{2}/2026)",
+        re.I,
+    )
+    for m in pattern.finditer(text):
+        home, away, hh, mm, day = m.groups()
+        dt = datetime.strptime(day + f" {hh}:{mm}", "%d/%m/%Y %H:%M").replace(tzinfo=timezone(timedelta(hours=7)))
+        games.append({
+            "eventId": "web-vba-scheduled-" + dt.strftime("%Y%m%d%H%M"),
+            "date": dt.isoformat(),
+            "displayTime": dt.strftime("%b %d · %I:%M %p").replace(" 0", " "),
+            "away": away,
+            "home": home,
+            "awayScore": "—",
+            "homeScore": "—",
+            "status": "Scheduled",
+            "state": "scheduled",
+            "sourceName": "VBA Ticket",
+            "sourceUrl": URLS["vba_ticket"],
+        })
+    return games
+
+def parse_vba():
+    games = []
+    # Public result mirrors are used because vba.vn renders fixtures dynamically.
+    for url in (URLS["vba_results"], URLS["vba_betexplorer"]):
+        try:
+            parsed = parse_vba_results_from(url)
+            if parsed:
+                games.extend(parsed[:20])
+                break
+        except Exception:
+            continue
+    games.extend(parse_vba_ticket_fixtures())
+    games = dedupe_games(games)
+    if not games:
+        existing = load().get("leagues", {}).get("vba", {})
+        if existing:
+            return existing
+        raise RuntimeError("No VBA games parsed")
+    games = sorted(games, key=lambda x: x.get("date", ""), reverse=True)
+    scheduled = sorted([g for g in games if g.get("state") == "scheduled"], key=lambda x: x.get("date", ""))
+    finals = sorted([g for g in games if g.get("state") == "final"], key=lambda x: x.get("date", ""), reverse=True)
+    return {
+        "league": "VBA",
+        "season": "2026 Season",
+        "coverage": "2026 VBA Finals fixtures and recent results",
+        "note": "Automatically refreshed from public VBA schedule and results sources.",
+        "sources": [
+            {"name": "VBA Official", "url": "https://vba.vn/fixtures"},
+            {"name": "VBA Ticket", "url": URLS["vba_ticket"]},
+            {"name": "Forebet Results", "url": URLS["vba_results"]},
+        ],
+        "games": (scheduled[:10] + finals[:20]),
+    }
+
 def main():
     data = load()
     data.setdefault("leagues", {})
     errors = {}
-    for key, fn in [("pba", parse_pba), ("mpbl", parse_mpbl), ("nbl", parse_nbl)]:
+    for key, fn in [("pba", parse_pba), ("mpbl", parse_mpbl), ("nbl", parse_nbl), ("nblaus", parse_nbl_australia), ("vba", parse_vba)]:
         try:
             fresh = fn()
             if fresh.get("games") or fresh.get("broadcast"):
