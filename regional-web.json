@@ -171,11 +171,19 @@
     "nbl": {
       "league": "NBL-Pilipinas",
       "season": "2026 Governor's Cup",
-      "note": "Automatically checks public NBL score posts and broadcast listings. Matchups are shown only when the teams can be verified.",
-      "coverage": "Public scores, official replay links and broadcast schedule",
+      "note": "Official NBL-Pilipinas Facebook is the primary source. If Facebook blocks automated access, the updater uses public mirrors of the league's Facebook posts plus official YouTube and broadcast listings.",
+      "coverage": "Official Facebook updates, public scores and broadcast schedule",
       "sources": [
         {
-          "name": "NBL-Pilipinas public updates",
+          "name": "NBL-Pilipinas Official Facebook",
+          "url": "https://www.facebook.com/nblpilipinas"
+        },
+        {
+          "name": "NBL-Pilipinas Facebook share link",
+          "url": "https://www.facebook.com/share/18tLhjYjUv/"
+        },
+        {
+          "name": "Facebook-post mirror",
           "url": "https://www.findglocal.com/PH/Cabuyao/1997682720482608/NBL-Pilipinas"
         },
         {
