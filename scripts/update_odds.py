@@ -2,7 +2,6 @@
 import json
 import os
 import re
-import time
 import urllib.parse
 import urllib.request
 import urllib.error
@@ -11,6 +10,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "odds-data.json"
+META = ROOT / "odds-meta.json"
 API = "https://api.oddspapi.io/v4"
 KEY = (os.environ.get("ODDSPAPI_KEY") or "").strip()
 UA = "IMG-Sports-Odds-Updater/2.0 (+https://imgofficial.com)"
@@ -79,29 +79,42 @@ def direct_price(book, market_id, outcome_id):
     outcome = (market.get("outcomes") or {}).get(str(outcome_id)) or {}
     return current_price(outcome)
 
-def participant_maps(sport_ids):
-    maps = {}
-    for sport_id in sorted(set(sport_ids)):
-        try:
-            time.sleep(1.1)
-            payload = get_json("/participants", {"sportId": sport_id, "language": "en"})
-            if isinstance(payload, dict):
-                maps[sport_id] = {str(k): str(v) for k, v in payload.items()}
-        except Exception as exc:
-            print(json.dumps({"participants": sport_id, "error": str(exc)[:180]}, ensure_ascii=False))
-    return maps
 
-def market_catalog():
+def load_meta():
     try:
-        time.sleep(1.1)
-        payload = get_json("/markets", {"language": "en"})
-        if not isinstance(payload, list):
-            return {}
-        return {str(x.get("marketId")): x for x in payload if isinstance(x, dict) and x.get("marketId") is not None}
-    except Exception as exc:
-        print(json.dumps({"markets_catalog": "unavailable", "error": str(exc)[:180]}, ensure_ascii=False))
+        data = json.loads(META.read_text("utf-8"))
+        participants = data.get("participants") if isinstance(data, dict) else {}
+        if not isinstance(participants, dict):
+            participants = {}
+        return {int(k): v for k, v in participants.items() if isinstance(v, dict)}
+    except Exception:
         return {}
 
+def save_meta_names(meta, rows):
+    changed = False
+    for row in rows:
+        try:
+            sport_id = int(row.get("sportId") or 0)
+        except Exception:
+            continue
+        if not sport_id:
+            continue
+        names = meta.setdefault(sport_id, {})
+        p1id, p2id = row.get("participant1Id"), row.get("participant2Id")
+        p1 = row.get("participant1Name") or row.get("participant1ShortName")
+        p2 = row.get("participant2Name") or row.get("participant2ShortName")
+        if p1id is not None and p1 and names.get(str(p1id)) != p1:
+            names[str(p1id)] = p1
+            changed = True
+        if p2id is not None and p2 and names.get(str(p2id)) != p2:
+            names[str(p2id)] = p2
+            changed = True
+    if changed:
+        payload = {
+            "updated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+            "participants": {str(k): v for k, v in meta.items()},
+        }
+        META.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", "utf-8")
 
 def market_outcomes(book, market_id):
     markets = (book or {}).get("markets") or {}
@@ -159,63 +172,48 @@ def generic_moneyline(book, sport_id):
             return found.get("home"), found.get("away"), found.get("draw")
     return None, None, None
 
-def main_line_value(book, kind, catalog=None):
+def main_line_value(book, kind):
     candidates = []
-    for market_id, market in ((book or {}).get("markets") or {}).items():
-        if not isinstance(market, dict) or market.get("marketActive") is False:
+    for market in ((book or {}).get("markets") or {}).values():
+        if not isinstance(market, dict):
             continue
-
-        info = (catalog or {}).get(str(market_id)) or {}
-        name = str(info.get("marketName") or "").lower()
-        is_total = ("total" in name or "over/under" in name)
-        is_spread = ("handicap" in name or "spread" in name) and not is_total
-
-        active_players = []
         for outcome in (market.get("outcomes") or {}).values():
             if not isinstance(outcome, dict):
                 continue
             player = (outcome.get("players") or {}).get("0") or {}
-            if player.get("active") is not False and isinstance(player.get("price"), (int, float)):
-                active_players.append(player)
+            if player.get("active") is False or not isinstance(player.get("price"), (int, float)):
+                continue
+            label = str(player.get("bookmakerOutcomeId") or "").lower().strip()
 
-        if not active_players:
-            continue
+            match = None
+            if kind == "total" and ("/over" in label or "/under" in label):
+                match = re.search(r"^([-+]?\d+(?:\.\d+)?)", label)
+            elif kind == "spread" and ("/home" in label or "/away" in label):
+                match = re.search(r"^([-+]?\d+(?:\.\d+)?)", label)
 
-        if (kind == "total" and is_total) or (kind == "spread" and is_spread):
-            handicap = info.get("handicap")
-            if handicap is None:
-                nums = []
-                for player in active_players:
-                    label = str(player.get("bookmakerOutcomeId") or "")
-                    nums.extend(re.findall(r"[-+]?\d+(?:\.\d+)?", label))
-                if nums:
-                    try:
-                        handicap = float(nums[0])
-                    except Exception:
-                        handicap = None
-            if handicap is not None:
-                candidates.append((any(bool(p.get("mainLine")) for p in active_players), handicap))
+            if not match:
+                continue
+            try:
+                value = float(match.group(1))
+            except Exception:
+                continue
+            candidates.append((bool(player.get("mainLine")), value))
 
     if not candidates:
         return "—"
-
     main = [v for is_main, v in candidates if is_main]
     value = (main or [v for _, v in candidates])[0]
-    try:
-        number = float(value)
-        return str(int(number)) if number.is_integer() else str(number)
-    except Exception:
-        return str(value)
+    return str(int(value)) if float(value).is_integer() else str(value)
 
-def normalize(row, participants=None, catalog=None):
+def normalize(row, participants=None):
     book = (row.get("bookmakerOdds") or {}).get("bet365")
     if not isinstance(book, dict) or book.get("suspended") is True or book.get("bookmakerIsActive") is False:
         return None
 
     sport_id = int(row.get("sportId") or 0)
     home, away, draw = generic_moneyline(book, sport_id)
-    spread = main_line_value(book, "spread", catalog)
-    total = main_line_value(book, "total", catalog)
+    spread = main_line_value(book, "spread")
+    total = main_line_value(book, "total")
 
     if home is None and away is None and spread == total == "—":
         return None
@@ -290,9 +288,8 @@ def main():
         "returned_bookmakers": bookmaker_keys[:20],
     }, ensure_ascii=False))
 
-    sport_ids = [int(row.get("sportId")) for row in rows if row.get("sportId") is not None]
-    participants = participant_maps(sport_ids)
-    catalog = market_catalog()
+    participants = load_meta()
+    save_meta_names(participants, rows)
 
     leagues = {}
     by_tid = {v["tournament_id"]: k for k, v in TARGETS.items()}
@@ -303,7 +300,7 @@ def main():
         key = by_tid.get(tid)
         if not key:
             continue
-        item = normalize(row, participants, catalog)
+        item = normalize(row, participants)
         if item:
             bet365_rows += 1
             leagues.setdefault(key, []).append(item)
