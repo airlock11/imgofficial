@@ -210,7 +210,7 @@ async function loadGames(){
   if(!document.getElementById('games'))return;
   const st=document.getElementById('gameStatus');
   const sport=document.getElementById('sportFilter')?.value||'soccer';
-  const isWebLeague=['pba','mpbl','nbl'].includes(sport);
+  const isWebLeague=['pba','mpbl','nbl','nblaus','vba'].includes(sport);
   st.textContent='Updating';
 
   if(isWebLeague){
