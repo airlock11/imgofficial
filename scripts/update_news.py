@@ -234,7 +234,7 @@ def main():
 
     out = {
         "updated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
-        "refresh_minutes": 30,
+        "refresh_minutes": 20,
         "counts": {
             "total": len(selected),
             "philippines": sum(1 for x in selected if x["region"] == "Philippines"),
