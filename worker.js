@@ -12,6 +12,36 @@ export default {
       return new Response(null, { status: 204, headers: cors });
     }
 
+    if (url.pathname === "/scoreboard") {
+      const leagueKey = (url.searchParams.get("league") || "").trim().toLowerCase();
+      const paths = {
+        soccer: "soccer/eng.1",
+        basketball: "basketball/nba",
+        baseball: "baseball/mlb",
+        hockey: "hockey/nhl",
+        football: "football/nfl",
+      };
+      const path = paths[leagueKey];
+      if (!path) return jsonResponse({ events: [], error: "Unsupported scoreboard league" }, cors, 30);
+
+      try {
+        const response = await fetch(`https://site.api.espn.com/apis/site/v2/sports/${path}/scoreboard`, {
+          cf: { cacheTtl: 5, cacheEverything: true },
+        });
+        const body = await response.text();
+        return new Response(body, {
+          status: response.status,
+          headers: {
+            ...cors,
+            "Content-Type": "application/json; charset=utf-8",
+            "Cache-Control": "public, max-age=2",
+          },
+        });
+      } catch (_) {
+        return jsonResponse({ events: [], error: "Fallback scoreboard unavailable" }, cors, 5);
+      }
+    }
+
     if (url.pathname === "/games") {
       const upstream = new URL("https://api.balldontlie.io/v1/games");
       for (const key of [
