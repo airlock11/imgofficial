@@ -276,7 +276,43 @@ async function loadGames(){
 }
 function clean(html){const d=document.createElement('div');d.innerHTML=html||'';return d.textContent.trim().replace(/Continue reading.*$/i,'').slice(0,260)}function parseXML(x){const d=new DOMParser().parseFromString(x,'application/xml');return [...d.querySelectorAll('item')].map(i=>({title:i.querySelector('title')?.textContent||'',link:i.querySelector('link')?.textContent||'',description:clean(i.querySelector('description')?.textContent),source:d.querySelector('channel>title')?.textContent||'Sports News',sport:i.querySelector('category')?.textContent||'Sports',image:i.getElementsByTagName('media:content')[0]?.getAttribute('url')||''})).filter(x=>x.title&&x.link)}
 function renderNews(items){const host=document.getElementById('newsFeed');if(!host||!items.length)return;const first=items[0];host.innerHTML='<article class="lead-story">'+(first.image?'<img src="'+esc(first.image)+'" alt="" referrerpolicy="no-referrer">':'<div></div>')+'<div><div class="tag">'+esc(first.sport)+'</div><a href="'+esc(first.link)+'" target="_blank" rel="noopener"><h2>'+esc(first.title)+'</h2></a><p>'+esc(first.description)+'</p><small>'+esc(first.source)+'</small></div></article><div class="news-list">'+items.slice(1,9).map(n=>'<article class="news-row"><img src="'+esc(n.image||'about-sports.jpg')+'" alt="" loading="lazy" referrerpolicy="no-referrer"><div><div class="tag">'+esc(n.sport)+'</div><a href="'+esc(n.link)+'" target="_blank" rel="noopener"><h3>'+esc(n.title)+'</h3></a><small>'+esc(n.source)+'</small></div><span class="arrow">↗</span></article>').join('')+'</div>';const s=document.getElementById('newsStatus');if(s){s.textContent='';s.closest('.news-livebar')?.classList.add('is-empty')}}
-async function loadNews(){if(!document.getElementById('newsFeed'))return;const ns=document.getElementById('newsStatus');ns?.closest('.news-livebar')?.classList.remove('is-empty');try{const r=await fetch('https://img-api-proxy.magsipocarnie.workers.dev/news',{cache:'no-store'});if(!r.ok)throw 0;const t=await r.text();const items=t.trim().startsWith('{')?(JSON.parse(t).items||[]):parseXML(t);renderNews(items)}catch{document.getElementById('newsFeed').innerHTML='<div class="empty">The live news feed is temporarily unavailable.</div>'}}
+async function loadNews(){
+  const host=document.getElementById('newsFeed');
+  if(!host)return;
+  const ns=document.getElementById('newsStatus');
+  ns?.closest('.news-livebar')?.classList.remove('is-empty');
+  if(ns)ns.textContent='Updating';
+
+  const tryItems=async(url,type)=>{
+    const r=await fetch(url,{cache:'no-store'});
+    if(!r.ok)throw new Error('HTTP '+r.status);
+    if(type==='json'){
+      const j=await r.json();
+      const items=Array.isArray(j?.items)?j.items:[];
+      if(!items.length)throw new Error('Empty news feed');
+      return items;
+    }
+    const t=await r.text();
+    const items=t.trim().startsWith('{')?(JSON.parse(t).items||[]):parseXML(t);
+    if(!items.length)throw new Error('Empty news feed');
+    return items;
+  };
+
+  try{
+    const items=await tryItems('news-data.json?v='+Date.now(),'json');
+    renderNews(items);
+    return;
+  }catch{}
+
+  try{
+    const items=await tryItems('https://img-api-proxy.magsipocarnie.workers.dev/news','worker');
+    renderNews(items);
+    return;
+  }catch{}
+
+  if(ns)ns.textContent='';
+  host.innerHTML='<div class="empty">The live news feed is temporarily unavailable.</div>';
+}
 function renderOdds(){const host=document.getElementById('oddsFeed'),league=document.getElementById('oddsSport')?.value,items=availableOdds[league]||[];if(!host)return;host.innerHTML=items.map(g=>'<article class="odds-event"><div class="tag">'+esc(new Date(g.date).toLocaleString([],{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}))+'</div><div class="odds-matchup"><div class="odds-team">'+teamLogoMarkup(g.awayLogo,g.away,'odds-team-logo')+'<span>'+esc(g.away)+'</span></div><span class="versus">vs</span><div class="odds-team">'+teamLogoMarkup(g.homeLogo,g.home,'odds-team-logo')+'<span>'+esc(g.home)+'</span></div></div>'+g.oddsList.map(o=>'<div class="bookmaker"><strong>'+esc(o.provider)+'</strong><span><i class="market-label">Spread / line</i>'+esc(o.details)+'</span><span><i class="market-label">Away to win odds</i>'+esc(o.away)+'</span><span><i class="market-label">Home to win odds</i>'+esc(o.home)+'</span><span><i class="market-label">Over / under</i>'+esc(o.total)+'</span></div>').join('')+'</article>').join('')}
 async function loadBet365Odds(){
   try{
