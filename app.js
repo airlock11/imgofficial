@@ -623,7 +623,7 @@ function oddsMarketRows(game,market){
 
   if(market==='win'){
     const hasDraw=rows.some(o=>oddsHasValue(o.draw));
-    return '<div class="odds-table-head"><span>Bookmaker</span><span>'+esc(game.away)+'</span>'+(hasDraw?'<span>Draw</span>':'')+'<span>'+esc(game.home)+'</span></div>'+
+    return '<div class="odds-table-head'+(hasDraw?' has-draw':'')+'"><span>Bookmaker</span><span>'+esc(game.away)+'</span>'+(hasDraw?'<span>Draw</span>':'')+'<span>'+esc(game.home)+'</span></div>'+
       rows.map(o=>'<div class="odds-table-row'+(hasDraw?' has-draw':'')+'"><strong>'+esc(o.provider)+'</strong><span class="odds-price">'+esc(oddsHasValue(o.away)?o.away:'—')+'</span>'+(hasDraw?'<span class="odds-price">'+esc(oddsHasValue(o.draw)?o.draw:'—')+'</span>':'')+'<span class="odds-price">'+esc(oddsHasValue(o.home)?o.home:'—')+'</span></div>').join('');
   }
 
@@ -641,7 +641,8 @@ function renderOdds(){
 
   const ordered=[...items].sort((a,b)=>{
     const ar=a.state==='live'?0:1,br=b.state==='live'?0:1;
-    return ar-br+((Date.parse(a.date||'')||0)-(Date.parse(b.date||'')||0));
+    if(ar!==br)return ar-br;
+    return (Date.parse(a.date||'')||0)-(Date.parse(b.date||'')||0);
   });
 
   host.innerHTML=ordered.map((g,index)=>{
