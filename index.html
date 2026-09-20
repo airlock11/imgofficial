@@ -166,7 +166,6 @@ html{scroll-behavior:auto}
 <div class="sport-slide" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/Buccaneers%20at%20Chiefs%20(54133020752).jpg?width=1800')"></div>
 </div>
 <div class="sport-content">
-<div class="sport-index" id="sportIndex">01 / 10</div>
 <h2 class="sport-title" id="sportTitle">Basketball</h2>
 <div class="sport-athlete" id="sportAthlete">LeBron James <span>· NBA</span></div>
 <p class="sport-line" id="sportLine">One of basketball’s most recognized global athletes.</p>
@@ -207,8 +206,6 @@ html{scroll-behavior:auto}
 <img class="closing-logo reveal" src="./img-logo-hq.png" alt="IMG">
 <h2 class="reveal">Sport never stops.<span>Neither does the story.</span></h2>
 <p class="reveal">IMG — the next generation of sports data. A global destination built around the movement, information and stories of sport.</p>
-<div class="contact reveal">imgglobal@imgofficial.com</div>
-<div class="contact reveal" style="margin-top:16px;color:#747f8d;font-size:.68rem">Real athlete photography via Wikimedia Commons contributors. Full credits: /photo-credits.html</div>
 </div>
 </section>
 </main>
@@ -231,7 +228,6 @@ const slides=[...document.querySelectorAll('.sport-slide')];
 const title=document.getElementById('sportTitle');
 const line=document.getElementById('sportLine');
 const athlete=document.getElementById('sportAthlete');
-const index=document.getElementById('sportIndex');
 const rail=document.getElementById('sportRail');
 const marquee=document.getElementById('marqueeTrack');
 const words=[...document.querySelectorAll('.word')];
@@ -268,7 +264,6 @@ dots.forEach((d,i)=>d.classList.toggle('active',i===active));
 title.textContent=sports[active][0];
 athlete.innerHTML=sports[active][1].replace(' · ',' <span>· ')+ '</span>';
 line.textContent=sports[active][2];
-index.textContent=String(active+1).padStart(2,'0')+' / '+String(sports.length).padStart(2,'0');
 }
 if(!reduced){
 slides.forEach((s,i)=>{if(i===active)s.style.transform='scale('+(1.08-local*.035)+')'});
