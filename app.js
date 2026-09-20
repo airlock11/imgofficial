@@ -286,9 +286,10 @@ function renderAllLiveGames(items){
   });
 
   if(!live.length){
-    section.hidden=true;
-    host.innerHTML='';
-    if(status)status.textContent='';
+    if(!host.childElementCount){
+      section.hidden=true;
+      if(status)status.textContent='';
+    }
     return;
   }
 
@@ -314,10 +315,8 @@ async function loadAllLiveGames({silent=false}={}){
   if(!host)return;
   const section=document.getElementById('allLiveSection');
 
-  if(!silent){
-    if(section)section.hidden=true;
-    host.innerHTML='';
-    if(status)status.textContent='';
+  if(!silent&&host.childElementCount===0){
+    if(status)status.textContent='Checking live games';
   }
 
   const live=[];
@@ -361,7 +360,7 @@ async function loadAllLiveGames({silent=false}={}){
   }));
 
   await Promise.all([regionalPromise,apiPromise]);
-  if(silent)updateAllLiveScoreNumbers(live);
+  if(silent||host.childElementCount)updateAllLiveScoreNumbers(live);
   else renderAllLiveGames(live);
 }
 function renderGames(){
@@ -637,12 +636,12 @@ if(document.getElementById('games')){
 
   async function refreshScoresManually(){
     clearTimeout(scoreAutoRefreshTimer);
+    if(scoreRefreshInFlight)return;
     scoreRefreshInFlight=true;
     try{
-      await Promise.allSettled([
-        loadGames(),
-        loadAllLiveGames()
-      ]);
+      const selectedSport=document.getElementById('sportFilter')?.value||'';
+      await loadGames({silent:true});
+      await refreshExistingAllLiveScores(selectedSport);
     }finally{
       scoreRefreshInFlight=false;
       scheduleScoreAutoRefresh();
