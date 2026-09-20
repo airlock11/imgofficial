@@ -15,6 +15,12 @@ UA = "IMG-Sports-News-Updater/1.0 (+https://imgofficial.com)"
 
 VIDEO_FEEDS = [
     {"name":"BBC Sport","channel_id":"UCW6-BQWFA70Dyyc7ZpZ9Xlg"},
+    {"name":"ESPN","channel_id":"UCiWLfSweyRNmLpgEHekhoAg"},
+    {"name":"NBA","channel_id":"UCWJ2lWNubArHWmf3FIHbfcQ"},
+    {"name":"NFL","channel_id":"UCDVYQ4Zhbm3S2dlz7P1GBDg"},
+    {"name":"Formula 1","channel_id":"UCB_qr75-ydFVKSF9Dmo6izg"},
+    {"name":"UFC","channel_id":"UCvgfXK4nTYKudb0rFR6noLA"},
+    {"name":"Volleyball World","channel_id":"UCNMg6XDhRZI2QzL4pWOvP_w"},
     {"name":"NBL-Pilipinas","channel_id":"UCJDBLldRGVJPEvyjJdSHefw"},
 ]
 
