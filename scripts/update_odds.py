@@ -208,7 +208,7 @@ def main():
     try:
         payload = get_json("/odds-by-tournaments", {
             "tournamentIds": ",".join(str(TARGETS[k]["tournament_id"]) for k in TARGETS),
-            "bookmakers": "bet365",
+            "bookmaker": "bet365",
             "language": "en",
             "verbosity": 3,
             "oddsFormat": "decimal",
@@ -217,7 +217,16 @@ def main():
     except Exception as exc:
         raise RuntimeError("Bet365 odds lookup failed: " + str(exc)[:500])
 
-    print(json.dumps({"odds_rows": len(rows), "bookmaker": "bet365"}, ensure_ascii=False))
+    bookmaker_keys = sorted({
+        str(key)
+        for row in rows[:25]
+        for key in ((row.get("bookmakerOdds") or {}).keys())
+    })
+    print(json.dumps({
+        "odds_rows": len(rows),
+        "requested_bookmaker": "bet365",
+        "returned_bookmakers": bookmaker_keys[:20],
+    }, ensure_ascii=False))
 
     leagues = {}
     by_tid = {v["tournament_id"]: k for k, v in TARGETS.items()}
