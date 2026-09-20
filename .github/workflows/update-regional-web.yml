@@ -23,7 +23,7 @@ jobs:
         run: |
           sudo apt-get update -qq
           sudo apt-get install -y -qq tesseract-ocr
-          python -m pip install --disable-pip-version-check beautifulsoup4 pillow pytesseract
+          python -m pip install --disable-pip-version-check beautifulsoup4 pillow pytesseract lxml
       - name: Refresh PBA MPBL and NBL-Pilipinas web data
         run: python scripts/update_regional_web.py
       - name: Commit updated data
