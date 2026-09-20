@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import json
 import os
+import re
 import urllib.parse
 import urllib.request
 from datetime import datetime, timezone, timedelta
@@ -29,16 +30,27 @@ def get_json(path, params):
         return json.loads(r.read().decode("utf-8", errors="replace"))
 
 def as_list(payload):
-    if isinstance(payload, list):
-        return payload
-    if isinstance(payload, dict):
-        for key in ("data", "items", "fixtures", "results"):
-            value = payload.get(key)
-            if isinstance(value, list):
-                return value
-        if payload.get("fixtureId"):
-            return [payload]
-    return []
+    found = []
+    def walk(value):
+        if isinstance(value, list):
+            for item in value:
+                walk(item)
+            return
+        if not isinstance(value, dict):
+            return
+        if value.get("fixtureId") is not None:
+            found.append(value)
+            return
+        for key in ("data", "items", "fixtures", "results", "odds"):
+            child = value.get(key)
+            if isinstance(child, (list, dict)):
+                walk(child)
+        if not found:
+            for child in value.values():
+                if isinstance(child, (list, dict)):
+                    walk(child)
+    walk(payload)
+    return found
 
 def current_price(node):
     if not isinstance(node, dict):
@@ -58,82 +70,74 @@ def market_outcomes(book, market_id):
         return {}
     return market.get("outcomes") or {}
 
-def soccer_moneyline(book):
-    outcomes = market_outcomes(book, 101)
-    return (
-        current_price(outcomes.get("101")),
-        current_price(outcomes.get("102")),
-        current_price(outcomes.get("103")),
-    )
-
-def basketball_moneyline(book):
-    outcomes = market_outcomes(book, 111)
-    return current_price(outcomes.get("111")), current_price(outcomes.get("112"))
-
 def generic_moneyline(book, sport_id):
-    if sport_id == 10:
-        home, draw, away = soccer_moneyline(book)
-        return home, away, draw
-    if sport_id in (11, 14):
-        home, away = basketball_moneyline(book)
-        if home is not None or away is not None:
-            return home, away, None
-
-    # Fallback: find a two- or three-way market whose bookmaker outcome IDs
-    # clearly identify home/away/draw.
+    best = None
     for market in ((book or {}).get("markets") or {}).values():
-        outcomes = market.get("outcomes") or {}
+        if not isinstance(market, dict) or market.get("marketActive") is False:
+            continue
         found = {}
-        for outcome in outcomes.values():
-            player = (outcome.get("players") or {}).get("0") or {}
-            label = str(player.get("bookmakerOutcomeId") or "").lower()
-            price = current_price(outcome)
-            if price is None:
+        for outcome in (market.get("outcomes") or {}).values():
+            if not isinstance(outcome, dict):
                 continue
-            if label in ("home", "1"):
+            player = (outcome.get("players") or {}).get("0") or {}
+            if player.get("active") is False:
+                continue
+            price = player.get("price")
+            if not isinstance(price, (int, float)):
+                continue
+            label = str(player.get("bookmakerOutcomeId") or "").strip().lower()
+            compact = label.replace(" ", "").replace("_", "").replace("-", "")
+            if compact in ("home", "1", "team1", "participant1"):
                 found["home"] = price
-            elif label in ("away", "2"):
+            elif compact in ("away", "2", "team2", "participant2"):
                 found["away"] = price
-            elif label in ("draw", "x"):
+            elif compact in ("draw", "x", "tie"):
                 found["draw"] = price
         if "home" in found and "away" in found:
-            return found.get("home"), found.get("away"), found.get("draw")
+            score = (1 if any(
+                bool(((o.get("players") or {}).get("0") or {}).get("mainLine"))
+                for o in (market.get("outcomes") or {}).values()
+                if isinstance(o, dict)
+            ) else 0, len(found))
+            if best is None or score > best[0]:
+                best = (score, found)
+    if best:
+        found = best[1]
+        return found.get("home"), found.get("away"), found.get("draw")
     return None, None, None
 
 def main_line_value(book, kind):
     candidates = []
     for market in ((book or {}).get("markets") or {}).values():
-        if market.get("marketActive") is False:
+        if not isinstance(market, dict) or market.get("marketActive") is False:
             continue
         for outcome in (market.get("outcomes") or {}).values():
+            if not isinstance(outcome, dict):
+                continue
             player = (outcome.get("players") or {}).get("0") or {}
             if player.get("active") is False or player.get("price") is None:
                 continue
-            label = str(player.get("bookmakerOutcomeId") or "").lower()
-            if kind == "total" and ("/over" in label or "/under" in label):
-                m = label.split("/", 1)[0].strip()
-                try:
-                    value = float(m)
-                except Exception:
-                    continue
-                candidates.append((bool(player.get("mainLine")), value))
-            elif kind == "spread" and ("/home" in label or "/away" in label):
-                m = label.split("/", 1)[0].strip()
-                try:
-                    value = float(m)
-                except Exception:
-                    continue
+            label = str(player.get("bookmakerOutcomeId") or "").lower().strip()
+            nums = re.findall(r"[-+]?\d+(?:\.\d+)?", label)
+            if not nums:
+                continue
+            try:
+                value = float(nums[0])
+            except Exception:
+                continue
+            is_total = ("over" in label or "under" in label)
+            is_spread = ("home" in label or "away" in label or "handicap" in label) and not is_total
+            if (kind == "total" and is_total) or (kind == "spread" and is_spread):
                 candidates.append((bool(player.get("mainLine")), value))
     if not candidates:
         return "—"
     main = [v for is_main, v in candidates if is_main]
-    values = main or [v for _, v in candidates]
-    value = values[0]
+    value = (main or [v for _, v in candidates])[0]
     return str(int(value)) if float(value).is_integer() else str(value)
 
 def fixture_map():
     now = datetime.now(timezone.utc)
-    end = now + timedelta(days=2)
+    end = now + timedelta(days=7)
     mapping = {}
 
     # One fixture request per sport. The API permits sportId + a short date range.
@@ -180,8 +184,8 @@ def normalize(row, fixture):
     return {
         "eventId": str(row.get("fixtureId") or fixture.get("fixtureId") or ""),
         "date": row.get("startTime") or fixture.get("startTime") or "",
-        "home": fixture.get("participant1Name") or fixture.get("participant1ShortName") or "Home",
-        "away": fixture.get("participant2Name") or fixture.get("participant2ShortName") or "Away",
+        "home": fixture.get("participant1Name") or fixture.get("participant1ShortName") or row.get("participant1Name") or row.get("participant1ShortName") or "Home",
+        "away": fixture.get("participant2Name") or fixture.get("participant2ShortName") or row.get("participant2Name") or row.get("participant2ShortName") or "Away",
         "homeLogo": "",
         "awayLogo": "",
         "oddsList": [provider],
@@ -198,8 +202,7 @@ def main():
     try:
         fixtures = fixture_map()
     except Exception as exc:
-        print(json.dumps({"updated": False, "error": "fixture lookup failed: " + str(exc)[:180]}))
-        return
+        raise RuntimeError("fixture lookup failed: " + str(exc)[:180])
 
     try:
         payload = get_json("/odds-by-tournaments", {
@@ -211,10 +214,11 @@ def main():
         })
         rows = as_list(payload)
     except Exception as exc:
-        print(json.dumps({"updated": False, "error": "odds lookup failed: " + str(exc)[:180]}))
-        return
+        raise RuntimeError("odds lookup failed: " + str(exc)[:180])
 
+    print(json.dumps({"fixture_rows": len(fixtures), "odds_rows": len(rows), "bookmaker": "bet365"}, ensure_ascii=False))
     by_tid = {v["tournament_id"]: k for k, v in TARGETS.items()}
+    bet365_rows = 0
     for row in rows:
         tid = row.get("tournamentId")
         key = by_tid.get(tid)
@@ -223,13 +227,14 @@ def main():
         fixture = fixtures.get(str(row.get("fixtureId"))) or row
         item = normalize(row, fixture)
         if item:
+            bet365_rows += 1
             leagues.setdefault(key, []).append(item)
 
     for key in list(leagues):
         leagues[key] = sorted(leagues[key], key=lambda x: x.get("date") or "")[:12]
 
     if not leagues:
-        print(json.dumps({"updated": False, "message": "No current Bet365 odds returned"}))
+        print(json.dumps({"updated": False, "message": "No current Bet365 odds returned", "odds_rows": len(rows), "bet365_rows": bet365_rows}, ensure_ascii=False))
         return
 
     data = {
