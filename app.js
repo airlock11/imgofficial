@@ -278,5 +278,54 @@ function clean(html){const d=document.createElement('div');d.innerHTML=html||'';
 function renderNews(items){const host=document.getElementById('newsFeed');if(!host||!items.length)return;const first=items[0];host.innerHTML='<article class="lead-story">'+(first.image?'<img src="'+esc(first.image)+'" alt="" referrerpolicy="no-referrer">':'<div></div>')+'<div><div class="tag">'+esc(first.sport)+'</div><a href="'+esc(first.link)+'" target="_blank" rel="noopener"><h2>'+esc(first.title)+'</h2></a><p>'+esc(first.description)+'</p><small>'+esc(first.source)+'</small></div></article><div class="news-list">'+items.slice(1,9).map(n=>'<article class="news-row"><img src="'+esc(n.image||'about-sports.jpg')+'" alt="" loading="lazy" referrerpolicy="no-referrer"><div><div class="tag">'+esc(n.sport)+'</div><a href="'+esc(n.link)+'" target="_blank" rel="noopener"><h3>'+esc(n.title)+'</h3></a><small>'+esc(n.source)+'</small></div><span class="arrow">↗</span></article>').join('')+'</div>';const s=document.getElementById('newsStatus');if(s){s.textContent='';s.closest('.news-livebar')?.classList.add('is-empty')}}
 async function loadNews(){if(!document.getElementById('newsFeed'))return;const ns=document.getElementById('newsStatus');ns?.closest('.news-livebar')?.classList.remove('is-empty');try{const r=await fetch('https://img-api-proxy.magsipocarnie.workers.dev/news',{cache:'no-store'});if(!r.ok)throw 0;const t=await r.text();const items=t.trim().startsWith('{')?(JSON.parse(t).items||[]):parseXML(t);renderNews(items)}catch{document.getElementById('newsFeed').innerHTML='<div class="empty">The live news feed is temporarily unavailable.</div>'}}
 function renderOdds(){const host=document.getElementById('oddsFeed'),league=document.getElementById('oddsSport')?.value,items=availableOdds[league]||[];if(!host)return;host.innerHTML=items.map(g=>'<article class="odds-event"><div class="tag">'+esc(new Date(g.date).toLocaleString([],{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}))+'</div><div class="odds-matchup"><div class="odds-team">'+teamLogoMarkup(g.awayLogo,g.away,'odds-team-logo')+'<span>'+esc(g.away)+'</span></div><span class="versus">vs</span><div class="odds-team">'+teamLogoMarkup(g.homeLogo,g.home,'odds-team-logo')+'<span>'+esc(g.home)+'</span></div></div>'+g.oddsList.map(o=>'<div class="bookmaker"><strong>'+esc(o.provider)+'</strong><span><i class="market-label">Spread / line</i>'+esc(o.details)+'</span><span><i class="market-label">Away to win odds</i>'+esc(o.away)+'</span><span><i class="market-label">Home to win odds</i>'+esc(o.home)+'</span><span><i class="market-label">Over / under</i>'+esc(o.total)+'</span></div>').join('')+'</article>').join('')}
-async function discoverOdds(){const host=document.getElementById('oddsFeed'),select=document.getElementById('oddsSport'),status=document.getElementById('oddsStatus');if(!host||!select)return;status.textContent='Updating';host.setAttribute('aria-busy','true');const previous=select.value;const results=await Promise.all(Object.entries(oddsFeeds).map(async([key,url])=>{try{const r=await fetch(url,{cache:'no-store'});if(!r.ok)return null;const j=await r.json(),items=(j.events||[]).map(normalizeEvent).filter(x=>x.oddsList.length);return items.length?[key,items]:null}catch{return null}}));availableOdds=Object.fromEntries(results.filter(Boolean));const keys=Object.keys(availableOdds);select.innerHTML=keys.map(key=>'<option value="'+esc(key)+'">'+esc(oddsLeagueNames[key])+'</option>').join('');select.hidden=!keys.length;if(keys.length){select.value=keys.includes(previous)?previous:keys[0];renderOdds()}else host.innerHTML='';status.textContent='';host.setAttribute('aria-busy','false')}
+async function loadBet365Odds(){
+  try{
+    const r=await fetch('odds-data.json?v='+Date.now(),{cache:'no-store'});
+    if(!r.ok)return{};
+    const j=await r.json();
+    const leagues=j?.leagues||{};
+    return Object.fromEntries(Object.entries(leagues).filter(([,items])=>Array.isArray(items)&&items.length));
+  }catch{
+    return{};
+  }
+}
+async function discoverOdds(){
+  const host=document.getElementById('oddsFeed'),select=document.getElementById('oddsSport'),status=document.getElementById('oddsStatus');
+  if(!host||!select)return;
+  status.textContent='Updating';
+  host.setAttribute('aria-busy','true');
+  const previous=select.value;
+
+  const [bet365Data,espnResults]=await Promise.all([
+    loadBet365Odds(),
+    Promise.all(Object.entries(oddsFeeds).map(async([key,url])=>{
+      try{
+        const r=await fetch(url,{cache:'no-store'});
+        if(!r.ok)return null;
+        const j=await r.json(),items=(j.events||[]).map(normalizeEvent).filter(x=>x.oddsList.length);
+        return items.length?[key,items]:null;
+      }catch{
+        return null;
+      }
+    }))
+  ]);
+
+  availableOdds=Object.fromEntries(espnResults.filter(Boolean));
+  for(const [key,items] of Object.entries(bet365Data)){
+    if(Array.isArray(items)&&items.length)availableOdds[key]=items;
+  }
+
+  const keys=Object.keys(availableOdds);
+  select.innerHTML=keys.map(key=>'<option value="'+esc(key)+'">'+esc(oddsLeagueNames[key]||key.toUpperCase())+'</option>').join('');
+  select.hidden=!keys.length;
+  if(keys.length){
+    select.value=keys.includes(previous)?previous:keys[0];
+    renderOdds();
+  }else{
+    host.innerHTML='';
+  }
+  status.textContent='';
+  host.setAttribute('aria-busy','false');
+}
+
 if(document.getElementById('games')){loadGames();setInterval(loadGames,60000);document.getElementById('gameFilter').onchange=renderGames;document.getElementById('sportFilter').onchange=loadGames;document.getElementById('refreshGames').onclick=loadGames}if(document.getElementById('newsFeed')){loadNews();setInterval(loadNews,300000)}if(document.getElementById('oddsFeed')){discoverOdds();setInterval(discoverOdds,300000);document.getElementById('oddsSport').onchange=renderOdds;document.getElementById('refreshOdds').onclick=discoverOdds}
