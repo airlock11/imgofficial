@@ -101,6 +101,37 @@ export default {
       }, cors, 300);
     }
 
+
+    if (url.pathname === "/streams") {
+      const home = (url.searchParams.get("home") || "").trim();
+      const away = (url.searchParams.get("away") || "").trim();
+      const sport = (url.searchParams.get("sport") || "").trim().toLowerCase();
+      const eventId = (url.searchParams.get("event") || "").trim();
+      const league = streamLeagueForSport(sport);
+      const query = [away, home, league?.label || "", "live"].filter(Boolean).join(" ");
+
+      const tasks = [
+        findYouTubeLive(env, { query, sport, home, away }),
+        findFacebookLive(env, { home, away, sport }),
+        findConfiguredStreams(env, { home, away, sport }),
+      ];
+
+      const settled = await Promise.allSettled(tasks);
+      const items = settled
+        .filter((r) => r.status === "fulfilled")
+        .flatMap((r) => r.value || [])
+        .filter(Boolean)
+        .filter((item, index, all) => index === all.findIndex((x) => (x.embedUrl || x.watchUrl) === (item.embedUrl || item.watchUrl)))
+        .slice(0, 8);
+
+      return jsonResponse({
+        event: eventId,
+        matchup: { away, home },
+        providers_checked: ["YouTube", "Facebook", "Configured official sources"],
+        items,
+      }, cors, 120);
+    }
+
     if (url.pathname === "/news") {
       const feeds = [
         { region: "International", sport: "All Sports", name: "BBC Sport", url: "https://feeds.bbci.co.uk/sport/rss.xml" },
@@ -243,6 +274,126 @@ export default {
   },
 };
 
+
+
+function streamLeagueForSport(sport) {
+  const map = {
+    soccer: { label: "Premier League", youtube: ["UCG5qGWdu8nIRZqJ_GgDwQ-w"] },
+    basketball: { label: "NBA", youtube: ["UCWJ2lWNubArHWmf3FIHbfcQ"] },
+    baseball: { label: "MLB", youtube: ["UCoLrcjPV5PbUrUyXq5mjc_A"] },
+    hockey: { label: "NHL", youtube: ["UCqFMzb-4AUf6WAIbl132QKA"] },
+    football: { label: "NFL", youtube: ["UCDVYQ4Zhbm3S2dlz7P1GBDg"] },
+  };
+  return map[sport] || null;
+}
+
+function splitCsv(value) {
+  return String(value || "").split(",").map((x) => x.trim()).filter(Boolean);
+}
+
+function safeJson(value, fallback) {
+  try { return JSON.parse(value); } catch (_) { return fallback; }
+}
+
+function matchText(value, home, away) {
+  const text = String(value || "").toLowerCase();
+  const h = String(home || "").toLowerCase();
+  const a = String(away || "").toLowerCase();
+  const tokens = [h, a].filter(Boolean);
+  return tokens.length ? tokens.some((t) => text.includes(t)) : true;
+}
+
+async function findYouTubeLive(env, game) {
+  if (!env.YOUTUBE_API_KEY || !game.query) return [];
+  const league = streamLeagueForSport(game.sport);
+  const builtIn = [
+    ...(league?.youtube || []),
+    "UCiWLfSweyRNmLpgEHekhoAg",
+  ];
+  const allowed = new Set([...builtIn, ...splitCsv(env.YOUTUBE_ALLOWED_CHANNEL_IDS)]);
+  if (!allowed.size) return [];
+
+  const api = new URL("https://www.googleapis.com/youtube/v3/search");
+  api.searchParams.set("part", "snippet");
+  api.searchParams.set("type", "video");
+  api.searchParams.set("eventType", "live");
+  api.searchParams.set("videoEmbeddable", "true");
+  api.searchParams.set("safeSearch", "strict");
+  api.searchParams.set("maxResults", "25");
+  api.searchParams.set("q", game.query);
+  api.searchParams.set("key", env.YOUTUBE_API_KEY);
+
+  try {
+    const response = await fetch(api.toString(), { cf: { cacheTtl: 120, cacheEverything: true } });
+    if (!response.ok) return [];
+    const data = await response.json();
+    return (data.items || [])
+      .filter((item) => item?.id?.videoId && allowed.has(item?.snippet?.channelId))
+      .filter((item) => matchText(item?.snippet?.title, game.home, game.away))
+      .map((item) => {
+        const videoId = item.id.videoId;
+        return {
+          provider: "YouTube",
+          title: item.snippet?.title || "Live stream",
+          channel: item.snippet?.channelTitle || "",
+          thumbnail: item.snippet?.thumbnails?.high?.url || item.snippet?.thumbnails?.medium?.url || item.snippet?.thumbnails?.default?.url || "",
+          embedUrl: `https://www.youtube.com/embed/${encodeURIComponent(videoId)}?autoplay=1&mute=1&playsinline=1&rel=0`,
+          watchUrl: `https://www.youtube.com/watch?v=${encodeURIComponent(videoId)}`,
+          kind: "iframe",
+        };
+      });
+  } catch (_) {
+    return [];
+  }
+}
+
+async function findFacebookLive(env, game) {
+  const token = env.FACEBOOK_ACCESS_TOKEN;
+  const pages = splitCsv(env.FACEBOOK_PAGE_IDS);
+  if (!token || !pages.length) return [];
+  const version = env.FACEBOOK_GRAPH_VERSION || "v24.0";
+  const results = await Promise.allSettled(pages.map(async (pageId) => {
+    const endpoint = new URL(`https://graph.facebook.com/${version}/${encodeURIComponent(pageId)}/live_videos`);
+    endpoint.searchParams.set("broadcast_status", "LIVE_NOW");
+    endpoint.searchParams.set("fields", "id,title,status,permalink_url,from");
+    endpoint.searchParams.set("access_token", token);
+    const response = await fetch(endpoint.toString(), { cf: { cacheTtl: 120, cacheEverything: true } });
+    if (!response.ok) return [];
+    const data = await response.json();
+    return (data.data || [])
+      .filter((v) => v?.permalink_url && matchText(v.title, game.home, game.away))
+      .map((v) => ({
+        provider: "Facebook",
+        title: v.title || "Live stream",
+        channel: v.from?.name || "",
+        thumbnail: "",
+        embedUrl: `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(v.permalink_url)}&show_text=false&autoplay=true&mute=true`,
+        watchUrl: v.permalink_url,
+        kind: "iframe",
+      }));
+  }));
+  return results.filter((r) => r.status === "fulfilled").flatMap((r) => r.value || []);
+}
+
+function findConfiguredStreams(env, game) {
+  const entries = safeJson(env.STREAM_SOURCES_JSON || "[]", []);
+  if (!Array.isArray(entries)) return [];
+  const now = Date.now();
+  return entries
+    .filter((x) => !x.expiresAt || Date.parse(x.expiresAt) > now)
+    .filter((x) => !x.sport || String(x.sport).toLowerCase() === game.sport)
+    .filter((x) => matchText([x.title, x.home, x.away].filter(Boolean).join(" "), game.home, game.away))
+    .filter((x) => x.embedUrl && /^https:\/\//i.test(x.embedUrl))
+    .map((x) => ({
+      provider: x.provider || "Official stream",
+      title: x.title || `${game.away} vs ${game.home}`,
+      channel: x.channel || "",
+      thumbnail: x.thumbnail || "",
+      embedUrl: x.embedUrl,
+      watchUrl: x.watchUrl || x.embedUrl,
+      kind: x.kind || "iframe",
+    }));
+}
 
 function espnDate(date) {
   const y = date.getUTCFullYear();
