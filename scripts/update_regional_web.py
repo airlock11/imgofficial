@@ -376,12 +376,12 @@ def parse_nbl_youtube_feed():
         games.append({
             "eventId": "yt-nbl-" + dt.strftime("%Y%m%d") + "-" + str(len(games)+1),
             "date": dt.isoformat(),
-            "displayTime": dt.strftime("%b %d · Official game video").replace(" 0", " "),
+            "displayTime": dt.strftime("%b %d").replace(" 0", " "),
             "away": away,
             "home": home,
             "awayScore": "—",
             "homeScore": "—",
-            "status": "Official game video",
+            "status": "",
             "state": "final",
             "sourceName": "NBL-Pilipinas YouTube",
             "sourceUrl": link
