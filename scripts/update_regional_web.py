@@ -1,10 +1,14 @@
 #!/usr/bin/env python3
+import io
 import json
 import re
 import urllib.request
+import urllib.parse
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from bs4 import BeautifulSoup
+from PIL import Image, ImageOps
+import pytesseract
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "regional-web.json"
@@ -125,40 +129,272 @@ def nbl_source_lines():
             pass
     return lines(URLS["nbl_updates"]), "NBL-Pilipinas Facebook mirror", URLS["nbl_updates"]
 
-NBL_NAMES = ["QUEZON STARHORSE","TIKAS KAPAMPANGAN","PANGASINAN ASINDEROS","NUEVA ECIJA GRANARY BUFFALOS","CAM SUR EXPRESS","CAMSUR EXPRESS","ZAMBOANGA VALIENTES","QUEZON CITY","TAGUIG CITY GENERALS","MANILA MLB","ZAMBALES CONSTRUCTICONS","MAXIMUS BACOOR CAVITE","SANTA ROSA ERIDANUS"]
+NBL_TEAM_ALIASES = {
+    "Quezon Starhorse": ["QUEZON STARHORSE", "STARHORSE"],
+    "Tikas Kapampangan": ["TIKAS KAPAMPANGAN", "TIKAS KAPANGAN", "KAPAMPANGAN"],
+    "Pangasinan Asinderos": ["PANGASINAN ASINDEROS", "ASINDEROS"],
+    "Nueva Ecija Granary Buffalos": ["NUEVA ECIJA GRANARY BUFFALOS", "GRANARY BUFFALOS", "NUEVA ECIJA"],
+    "CamSur Express": ["CAM SUR EXPRESS", "CAMSUR EXPRESS"],
+    "Zamboanga Valientes": ["ZAMBOANGA VALIENTES", "VALIENTES"],
+    "Quezon City": ["QUEZON CITY"],
+    "Taguig City Generals": ["TAGUIG CITY GENERALS", "TAGUIG GENERALS"],
+    "Manila MLB": ["MANILA MLB"],
+    "Zambales Constructicons": ["ZAMBALES CONSTRUCTICONS", "CONSTRUCTICONS"],
+    "Maximus Bacoor Cavite": ["MAXIMUS BACOOR CAVITE", "MAXIMUS BACOOR"],
+    "Santa Rosa Eridanus": ["SANTA ROSA ERIDANUS", "ERIDANUS"]
+}
+
+def normalize_ocr_text(value):
+    value = re.sub(r"[^A-Z0-9 ]+", " ", str(value or "").upper())
+    return re.sub(r"\s+", " ", value).strip()
+
+def teams_in_ocr(text):
+    normalized = normalize_ocr_text(text)
+    found = []
+    for team, aliases in NBL_TEAM_ALIASES.items():
+        for alias in aliases:
+            if normalize_ocr_text(alias) in normalized:
+                found.append(team)
+                break
+    return found
+
+def nbl_image_candidates(limit=18):
+    html = fetch(URLS["nbl_updates"])
+    soup = BeautifulSoup(html, "html.parser")
+    urls = []
+
+    def add_url(value):
+        if not value:
+            return
+        value = value.strip()
+        if value.startswith("//"):
+            value = "https:" + value
+        elif value.startswith("/"):
+            value = urllib.parse.urljoin(URLS["nbl_updates"], value)
+        if not re.search(r"https?://img\d*\.findglocal\.com/.+\.(?:jpe?g|png|webp)(?:\?.*)?$", value, re.I):
+            return
+        if value not in urls:
+            urls.append(value)
+
+    for img in soup.find_all("img"):
+        add_url(img.get("src"))
+        add_url(img.get("data-src"))
+        srcset = img.get("srcset") or ""
+        for part in srcset.split(","):
+            add_url(part.strip().split(" ")[0] if part.strip() else "")
+    for a in soup.find_all("a", href=True):
+        add_url(a.get("href"))
+
+    return urls[:limit]
+
+def download_image(url):
+    req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept": "image/avif,image/webp,image/png,image/jpeg,*/*;q=0.8"})
+    with urllib.request.urlopen(req, timeout=25) as r:
+        data = r.read(8 * 1024 * 1024)
+    image = Image.open(io.BytesIO(data)).convert("RGB")
+    if max(image.size) < 1800:
+        scale = min(3, max(1, 1800 // max(image.size)))
+        if scale > 1:
+            image = image.resize((image.width * scale, image.height * scale))
+    gray = ImageOps.grayscale(image)
+    return ImageOps.autocontrast(gray)
+
+def ocr_image(url):
+    image = download_image(url)
+    return pytesseract.image_to_string(image, config="--psm 6")
+
+def ocr_date_time(text):
+    upper = text.upper()
+    now = datetime.now(PHT)
+    date_value = None
+
+    m = re.search(r"\b(JANUARY|FEBRUARY|MARCH|APRIL|MAY|JUNE|JULY|AUGUST|SEPTEMBER|OCTOBER|NOVEMBER|DECEMBER)\s+(\d{1,2})(?:,\s*(2026))?\b", upper)
+    if m:
+        year = int(m.group(3) or now.year)
+        date_value = datetime.strptime(f"{m.group(1)} {m.group(2)} {year}", "%B %d %Y")
+    else:
+        m = re.search(r"\b(\d{1,2})[/-](\d{1,2})[/-](2026)\b", upper)
+        if m:
+            month, day, year = int(m.group(1)), int(m.group(2)), int(m.group(3))
+            date_value = datetime(year, month, day)
+        elif "TODAY" in upper:
+            date_value = now.replace(tzinfo=None)
+
+    if not date_value:
+        return None
+
+    tm = re.search(r"\b(\d{1,2}):(\d{2})\s*(AM|PM)\b", upper)
+    if tm:
+        hour, minute = int(tm.group(1)), int(tm.group(2))
+        if tm.group(3) == "PM" and hour < 12:
+            hour += 12
+        if tm.group(3) == "AM" and hour == 12:
+            hour = 0
+        date_value = date_value.replace(hour=hour, minute=minute)
+    else:
+        date_value = date_value.replace(hour=12, minute=0)
+
+    return date_value.replace(tzinfo=PHT)
+
+def score_near_team(ocr_lines, team):
+    aliases = NBL_TEAM_ALIASES.get(team, [team])
+    normalized_aliases = [normalize_ocr_text(a) for a in aliases]
+    for index, line in enumerate(ocr_lines):
+        normalized = normalize_ocr_text(line)
+        if not any(alias in normalized for alias in normalized_aliases):
+            continue
+        for offset in (0, 1, -1, 2):
+            pos = index + offset
+            if pos < 0 or pos >= len(ocr_lines):
+                continue
+            nums = [int(x) for x in re.findall(r"\b(\d{2,3})\b", ocr_lines[pos])]
+            nums = [x for x in nums if 40 <= x <= 200]
+            if nums:
+                return str(nums[-1])
+    return None
+
+def image_game_records():
+    games = []
+    scanned = 0
+    matched = 0
+
+    for url in nbl_image_candidates():
+        try:
+            text = ocr_image(url)
+        except Exception:
+            continue
+
+        scanned += 1
+        upper = text.upper()
+        teams = teams_in_ocr(text)
+        if len(teams) < 2:
+            continue
+
+        dt = ocr_date_time(text)
+        lines_ocr = [x.strip() for x in text.splitlines() if x.strip()]
+        is_final = bool(re.search(r"\b(FINAL|FINAL SCORE|FULL TIME)\b", upper))
+        is_schedule = bool(re.search(r"\b(SCHEDULE|GAME ?DAY|GAMEDAY|UPCOMING|TIP ?OFF|MATCHUP|VS\.?)\b", upper))
+
+        if is_final:
+            home, away = teams[0], teams[1]
+            home_score = score_near_team(lines_ocr, home)
+            away_score = score_near_team(lines_ocr, away)
+            if not home_score or not away_score or home_score == away_score:
+                continue
+            if not dt:
+                dt = datetime.now(PHT).replace(hour=12, minute=0, second=0, microsecond=0)
+            games.append({
+                "eventId": "ocr-nbl-final-" + str(len(games) + 1),
+                "date": dt.isoformat(),
+                "displayTime": dt.strftime("%b %d · Final").replace(" 0", " "),
+                "away": away,
+                "home": home,
+                "awayScore": away_score,
+                "homeScore": home_score,
+                "status": "Final",
+                "state": "final",
+                "sourceName": "NBL-Pilipinas Facebook image",
+                "sourceUrl": URLS["nbl_facebook"]
+            })
+            matched += 1
+            continue
+
+        if is_schedule and dt:
+            # A schedule graphic may contain several team pairs. Pair teams in
+            # reading order; only create records when the graphic includes a date.
+            for i in range(0, len(teams) - 1, 2):
+                home, away = teams[i], teams[i + 1]
+                games.append({
+                    "eventId": "ocr-nbl-scheduled-" + str(len(games) + 1),
+                    "date": dt.isoformat(),
+                    "displayTime": dt.strftime("%b %d · %I:%M %p").replace(" 0", " "),
+                    "away": away,
+                    "home": home,
+                    "awayScore": "—",
+                    "homeScore": "—",
+                    "status": "Scheduled",
+                    "state": "scheduled",
+                    "sourceName": "NBL-Pilipinas Facebook image",
+                    "sourceUrl": URLS["nbl_facebook"]
+                })
+                matched += 1
+
+    return games, {"images_scanned": scanned, "images_matched": matched}
+
+def dedupe_games(games):
+    out = []
+    seen = set()
+    for game in games:
+        teams = tuple(sorted([normalize_ocr_text(game.get("home")), normalize_ocr_text(game.get("away"))]))
+        day = str(game.get("date") or "")[:10]
+        key = (teams, day, game.get("state"))
+        if key in seen:
+            continue
+        seen.add(key)
+        out.append(game)
+    return out
 
 def parse_nbl():
     xs, score_source_name, score_source_url = nbl_source_lines()
     games, day, pair = [], None, []
+    known_aliases = [normalize_ocr_text(a) for values in NBL_TEAM_ALIASES.values() for a in values]
+
     for x in xs:
-        if re.fullmatch(r"\\d{2}/\\d{2}/2026", x):
+        if re.fullmatch(r"\d{2}/\d{2}/2026", x):
             day, pair = x, []
             continue
-        m = re.fullmatch(r"(.{3,60}?)\\s+(\\d{2,3})", x)
+        m = re.fullmatch(r"(.{3,60}?)\s+(\d{2,3})", x)
         if day and m:
             team = m.group(1).strip()
-            upper = team.upper()
-            if any(n in upper or upper in n for n in NBL_NAMES):
+            upper = normalize_ocr_text(team)
+            if any(alias in upper or upper in alias for alias in known_aliases):
                 pair.append((team, m.group(2)))
                 if len(pair) == 2:
                     iso = pht_iso_from_dmy(day)
                     games.append({"eventId":"web-nbl-final-"+str(len(games)+1),"date":iso,"displayTime":datetime.fromisoformat(iso).strftime("%b %d · Final").replace(" 0"," "),"away":pair[1][0],"home":pair[0][0],"awayScore":pair[1][1],"homeScore":pair[0][1],"status":"Final","state":"final","sourceName":score_source_name,"sourceUrl":score_source_url})
                     pair = []
+
+    image_meta = {"images_scanned": 0, "images_matched": 0}
+    try:
+        image_games, image_meta = image_game_records()
+        games.extend(image_games)
+    except Exception:
+        pass
+
     broadcast = []
     try:
         tx = lines(URLS["tap"])
         current = None
         for x in tx:
-            if re.fullmatch(r"(September|October|November|December)\\s+\\d{1,2},\\s+2026\\s*\\|\\s*[A-Za-z]+", x):
+            if re.fullmatch(r"(September|October|November|December)\s+\d{1,2},\s+2026\s*\|\s*[A-Za-z]+", x):
                 current = x.split("|")[0].strip()
             elif current and "NBL PILIPINAS" in x.upper():
-                tm = re.match(r"(\\d{1,2}:\\d{2}\\s*(?:AM|PM))\\s*\\|", x, re.I)
+                tm = re.match(r"(\d{1,2}:\d{2}\s*(?:AM|PM))\s*\|", x, re.I)
                 if tm:
                     broadcast.append({"date":datetime.strptime(current,"%B %d, %Y").strftime("%Y-%m-%d"),"time":tm.group(1),"source":"Tap Sports"})
     except Exception:
         pass
-    if not games and not broadcast: raise RuntimeError("No NBL data parsed")
-    return {"league":"NBL-Pilipinas","season":"2026 Governor's Cup","coverage":"Official Facebook updates, public scores and broadcast schedule","note":"Official NBL-Pilipinas Facebook is checked first. If Facebook blocks automated access, the updater uses public mirrors of the league's Facebook posts plus official YouTube and broadcast listings. Unverified matchups are not invented.","sources":[{"name":"NBL-Pilipinas Official Facebook","url":URLS["nbl_facebook"]},{"name":"NBL-Pilipinas Facebook share link","url":URLS["nbl_facebook_share"]},{"name":"Facebook-post mirror","url":URLS["nbl_updates"]},{"name":"NBL-Pilipinas YouTube","url":"https://www.youtube.com/channel/UCJDBLldRGVJPEvyjJdSHefw"},{"name":"Tap Sports","url":URLS["tap"]}],"broadcast":broadcast[:20],"games":games[:20]}
+
+    games = dedupe_games(games)
+    if not games and not broadcast:
+        raise RuntimeError("No NBL data parsed")
+
+    return {
+        "league":"NBL-Pilipinas",
+        "season":"2026 Governor's Cup",
+        "coverage":"Official Facebook image scan, public scores and broadcast schedule",
+        "note":"The updater scans recent NBL-Pilipinas Facebook-uploaded graphics for final scores and schedules. It only adds image-derived games when teams plus score/date information can be read confidently.",
+        "sources":[
+            {"name":"NBL-Pilipinas Official Facebook","url":URLS["nbl_facebook"]},
+            {"name":"NBL-Pilipinas Facebook share link","url":URLS["nbl_facebook_share"]},
+            {"name":"Facebook-image mirror","url":URLS["nbl_updates"]},
+            {"name":"NBL-Pilipinas YouTube","url":"https://www.youtube.com/channel/UCJDBLldRGVJPEvyjJdSHefw"},
+            {"name":"Tap Sports","url":URLS["tap"]}
+        ],
+        "image_scan": image_meta,
+        "broadcast":broadcast[:20],
+        "games":games[:30]
+    }
 
 def main():
     data = load()
