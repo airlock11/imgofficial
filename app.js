@@ -233,7 +233,7 @@ const oddsFeeds={
   mls:'https://site.api.espn.com/apis/site/v2/sports/soccer/usa.1/scoreboard'
 };let allGames=[];const liveStreamCache=new Map();
 const oddsLeagueNames={nfl:'NFL',ncaaf:'NCAA Football',nba:'NBA',wnba:'WNBA',ncaam:"NCAA Men's Basketball",mlb:'MLB',nhl:'NHL',epl:'Premier League',laliga:'La Liga',seriea:'Serie A',bundesliga:'Bundesliga',ligue1:'Ligue 1',champions:'UEFA Champions League',mls:'MLS'};let availableOdds={};
-function mapOdds(o){return{provider:o.provider?.displayName||o.provider?.name||'Odds provider',details:o.details||'—',total:o.overUnder??'—',home:o.moneyline?.home?.close?.odds||'—',away:o.moneyline?.away?.close?.odds||'—'}}function teamLogoUrl(team){return team?.team?.logo||team?.team?.logos?.[0]?.href||team?.logo||team?.logos?.[0]?.href||''}
+function mapOdds(o){return{provider:o.provider?.displayName||o.provider?.name||'Odds provider',details:o.details||'—',total:o.overUnder??'—',home:o.moneyline?.home?.close?.odds||'—',away:o.moneyline?.away?.close?.odds||'—',draw:o.moneyline?.draw?.close?.odds||'—'}}function teamLogoUrl(team){return team?.team?.logo||team?.team?.logos?.[0]?.href||team?.logo||team?.logos?.[0]?.href||''}
 function teamLogoMarkup(url,name,extraClass=''){return url?'<img class="team-logo '+extraClass+'" src="'+esc(url)+'" alt="'+esc(name)+' logo" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.remove()">':''}
 async function getNbaLogoMap(){try{const r=await fetch('https://site.api.espn.com/apis/site/v2/sports/basketball/nba/teams?limit=100',{cache:'force-cache'});if(!r.ok)return{};const j=await r.json(),list=j.sports?.[0]?.leagues?.[0]?.teams||[];return Object.fromEntries(list.flatMap(x=>{const t=x.team||x,names=[t.displayName,t.name,t.shortDisplayName].filter(Boolean),logo=t.logos?.[0]?.href||t.logo||'';return names.map(n=>[String(n).toLowerCase(),logo])}))}catch{return{}}}
 function summaryUrlForGame(sport,eventId){const feed=scoreFeeds[sport];return feed&&eventId?feed.replace(/\/scoreboard(?:\?.*)?$/,'/summary?event='+encodeURIComponent(eventId)):''}
@@ -601,7 +601,91 @@ async function loadNews(){
   if(ns)ns.textContent='';
   host.innerHTML='<div class="empty">The live news feed is temporarily unavailable.</div>';
 }
-function renderOdds(){const host=document.getElementById('oddsFeed'),league=document.getElementById('oddsSport')?.value,items=availableOdds[league]||[];if(!host)return;host.innerHTML=items.map(g=>'<article class="odds-event"><div class="tag">'+esc(new Date(g.date).toLocaleString([],{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}))+'</div><div class="odds-matchup"><div class="odds-team">'+teamLogoMarkup(g.awayLogo,g.away,'odds-team-logo')+'<span>'+esc(g.away)+'</span></div><span class="versus">vs</span><div class="odds-team">'+teamLogoMarkup(g.homeLogo,g.home,'odds-team-logo')+'<span>'+esc(g.home)+'</span></div></div>'+g.oddsList.map(o=>'<div class="bookmaker"><strong>'+esc(o.provider)+'</strong><span><i class="market-label">Spread / line</i>'+esc(o.details)+'</span><span><i class="market-label">Away to win odds</i>'+esc(o.away)+'</span><span><i class="market-label">Home to win odds</i>'+esc(o.home)+'</span><span><i class="market-label">Over / under</i>'+esc(o.total)+'</span></div>').join('')+'</article>').join('')}
+function oddsHasValue(value){return value!==undefined&&value!==null&&String(value).trim()!==''&&String(value)!=='—'}
+function oddsMarketAvailable(game,market){
+  const list=game?.oddsList||[];
+  if(market==='win')return list.some(o=>oddsHasValue(o.away)||oddsHasValue(o.home)||oddsHasValue(o.draw));
+  if(market==='spread')return list.some(o=>oddsHasValue(o.details));
+  if(market==='total')return list.some(o=>oddsHasValue(o.total));
+  return false;
+}
+function oddsTeamInitials(name){return String(name||'').split(/\s+/).filter(Boolean).slice(0,2).map(x=>x[0]).join('').toUpperCase()||'IMG'}
+function oddsTeamVisual(url,name,side){
+  return url?'<img class="odds-hero-logo" src="'+esc(url)+'" alt="'+esc(name)+' logo" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.outerHTML=\'<span class=&quot;odds-team-fallback&quot;>'+esc(oddsTeamInitials(name))+'</span>\'">':'<span class="odds-team-fallback">'+esc(oddsTeamInitials(name))+'</span>';
+}
+function oddsMarketRows(game,market){
+  const rows=(game.oddsList||[]).filter(o=>{
+    if(market==='win')return oddsHasValue(o.away)||oddsHasValue(o.home)||oddsHasValue(o.draw);
+    if(market==='spread')return oddsHasValue(o.details);
+    return oddsHasValue(o.total);
+  });
+  if(!rows.length)return '<div class="odds-market-empty">This market is not available from the connected feed.</div>';
+
+  if(market==='win'){
+    const hasDraw=rows.some(o=>oddsHasValue(o.draw));
+    return '<div class="odds-table-head"><span>Bookmaker</span><span>'+esc(game.away)+'</span>'+(hasDraw?'<span>Draw</span>':'')+'<span>'+esc(game.home)+'</span></div>'+
+      rows.map(o=>'<div class="odds-table-row'+(hasDraw?' has-draw':'')+'"><strong>'+esc(o.provider)+'</strong><span class="odds-price">'+esc(oddsHasValue(o.away)?o.away:'—')+'</span>'+(hasDraw?'<span class="odds-price">'+esc(oddsHasValue(o.draw)?o.draw:'—')+'</span>':'')+'<span class="odds-price">'+esc(oddsHasValue(o.home)?o.home:'—')+'</span></div>').join('');
+  }
+
+  if(market==='spread'){
+    return '<div class="odds-table-head odds-table-two"><span>Bookmaker</span><span>Spread / line</span></div>'+
+      rows.map(o=>'<div class="odds-table-row odds-table-two"><strong>'+esc(o.provider)+'</strong><span class="odds-price">'+esc(o.details)+'</span></div>').join('');
+  }
+
+  return '<div class="odds-table-head odds-table-two"><span>Bookmaker</span><span>Total</span></div>'+
+    rows.map(o=>'<div class="odds-table-row odds-table-two"><strong>'+esc(o.provider)+'</strong><span class="odds-price">'+esc(o.total)+'</span></div>').join('');
+}
+function renderOdds(){
+  const host=document.getElementById('oddsFeed'),league=document.getElementById('oddsSport')?.value,items=availableOdds[league]||[];
+  if(!host)return;
+
+  const ordered=[...items].sort((a,b)=>{
+    const ar=a.state==='live'?0:1,br=b.state==='live'?0:1;
+    return ar-br+((Date.parse(a.date||'')||0)-(Date.parse(b.date||'')||0));
+  });
+
+  host.innerHTML=ordered.map((g,index)=>{
+    const win=oddsMarketAvailable(g,'win'),spread=oddsMarketAvailable(g,'spread'),total=oddsMarketAvailable(g,'total');
+    const initial=win?'win':spread?'spread':'total';
+    const isLive=g.state==='live';
+    const eventDate=g.date?new Date(g.date):null;
+    const when=isLive?'LIVE · '+esc(g.status||'In progress'):eventDate&&!Number.isNaN(eventDate.getTime())?esc(eventDate.toLocaleString([],{weekday:'short',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'})):'Scheduled';
+    const score=isLive||g.state==='final';
+    const awayScore=score&&g.awayScore!==undefined?'<b data-odds-score-side="away">'+esc(g.awayScore)+'</b>':'';
+    const homeScore=score&&g.homeScore!==undefined?'<b data-odds-score-side="home">'+esc(g.homeScore)+'</b>':'';
+    const marketLabel=isLive?'Pregame odds shown unless the provider explicitly supplies in-play prices':'Pre-match odds';
+
+    return '<article class="odds-match-card'+(isLive?' odds-match-live':'')+'" data-odds-event="'+esc(g.eventId||String(index))+'">'+
+      '<div class="odds-game-hero">'+
+        '<div class="odds-game-meta"><span class="odds-league-name">'+esc(oddsLeagueNames[league]||league.toUpperCase())+'</span><span class="odds-game-time">'+when+'</span></div>'+
+        '<div class="odds-hero-matchup">'+
+          '<div class="odds-hero-team">'+oddsTeamVisual(g.awayLogo,g.away,'away')+'<span>'+esc(g.away)+'</span>'+awayScore+'</div>'+
+          '<div class="odds-hero-center"><span>'+(isLive?'LIVE':'VS')+'</span></div>'+
+          '<div class="odds-hero-team">'+oddsTeamVisual(g.homeLogo,g.home,'home')+'<span>'+esc(g.home)+'</span>'+homeScore+'</div>'+
+        '</div>'+
+      '</div>'+
+      '<div class="odds-market-card">'+
+        '<div class="odds-market-tabs" role="tablist" aria-label="Odds markets">'+
+          '<button type="button" data-market="win" class="'+(initial==='win'?'active':'')+'" '+(win?'':'disabled')+'>To Win</button>'+
+          '<button type="button" data-market="spread" class="'+(initial==='spread'?'active':'')+'" '+(spread?'':'disabled')+'>Spread</button>'+
+          '<button type="button" data-market="total" class="'+(initial==='total'?'active':'')+'" '+(total?'':'disabled')+'>Total Points</button>'+
+        '</div>'+
+        '<div class="odds-market-note"><span class="'+(isLive?'odds-note-live':'')+'">'+esc(marketLabel)+'</span></div>'+
+        '<div class="odds-market-pane '+(initial==='win'?'active':'')+'" data-pane="win">'+oddsMarketRows(g,'win')+'</div>'+
+        '<div class="odds-market-pane '+(initial==='spread'?'active':'')+'" data-pane="spread">'+oddsMarketRows(g,'spread')+'</div>'+
+        '<div class="odds-market-pane '+(initial==='total'?'active':'')+'" data-pane="total">'+oddsMarketRows(g,'total')+'</div>'+
+      '</div>'+
+    '</article>';
+  }).join('');
+
+  host.querySelectorAll('.odds-market-tabs button:not(:disabled)').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const card=btn.closest('.odds-match-card'),market=btn.dataset.market;
+      card.querySelectorAll('.odds-market-tabs button').forEach(x=>x.classList.toggle('active',x===btn));
+      card.querySelectorAll('.odds-market-pane').forEach(x=>x.classList.toggle('active',x.dataset.pane===market));
+    });
+  });
+}
 async function loadBet365Odds(){
   try{
     const r=await fetch('odds-data.json?v='+Date.now(),{cache:'no-store'});
@@ -636,7 +720,23 @@ async function discoverOdds(){
 
   availableOdds=Object.fromEntries(espnResults.filter(Boolean));
   for(const [key,items] of Object.entries(bet365Data)){
-    if(Array.isArray(items)&&items.length)availableOdds[key]=items;
+    if(!Array.isArray(items)||!items.length)continue;
+    const current=availableOdds[key]||[];
+    const merged=[...current];
+    for(const saved of items){
+      const match=merged.find(g=>String(g.eventId||'')===String(saved.eventId||'')||(
+        String(g.home||'').toLowerCase()===String(saved.home||'').toLowerCase()&&
+        String(g.away||'').toLowerCase()===String(saved.away||'').toLowerCase()&&
+        String(g.date||'').slice(0,10)===String(saved.date||'').slice(0,10)
+      ));
+      if(match){
+        const providers=new Set((match.oddsList||[]).map(o=>String(o.provider||'').toLowerCase()));
+        match.oddsList=[...(match.oddsList||[]),...(saved.oddsList||[]).filter(o=>!providers.has(String(o.provider||'').toLowerCase()))];
+      }else{
+        merged.push({...saved,state:saved.state||'scheduled',status:saved.status||'Scheduled'});
+      }
+    }
+    availableOdds[key]=merged;
   }
 
   const keys=Object.keys(availableOdds);
