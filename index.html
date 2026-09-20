@@ -34,8 +34,9 @@ img{display:block;max-width:100%}
 .hero h1{font-size:clamp(4.7rem,11vw,10rem);line-height:.76;letter-spacing:-.06em;text-transform:uppercase;margin:22px 0 26px;font-weight:900}
 .hero h1 .outline{color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,.75)}
 .hero p{max-width:650px;color:#bac3cd;font-size:clamp(1rem,1.5vw,1.22rem);line-height:1.7;margin:0}
-.scroll-hint{position:absolute;left:clamp(24px,4vw,52px);bottom:34px;z-index:4;color:#808a97;font-size:.64rem;letter-spacing:.22em;text-transform:uppercase;writing-mode:vertical-rl}
-.scroll-hint:after{content:"";display:block;width:1px;height:58px;background:linear-gradient(var(--accent),transparent);margin:12px auto 0}
+.scroll-hint{position:absolute;left:50%;bottom:28px;z-index:4;transform:translateX(-50%);color:#a8b1bd;font-size:.64rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;white-space:nowrap;text-align:center;animation:scrollHintFade 4s ease-in-out infinite}
+.scroll-hint:after{content:"";display:block;width:1px;height:34px;background:linear-gradient(var(--accent),transparent);margin:10px auto 0}
+@keyframes scrollHintFade{0%,100%{opacity:.28}50%{opacity:1}}
 .story{background:#05070a}
 .story-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(40px,8vw,110px);align-items:center}
 .story-copy h2,.data-copy h2,.world-copy h2{font-size:clamp(3.4rem,8vw,7rem);line-height:.83;letter-spacing:-.05em;text-transform:uppercase;margin:18px 0 28px}
@@ -161,7 +162,8 @@ body{padding-bottom:84px}
 .hero-copy{align-self:end;padding:0 0 100px}
 .hero h1{font-size:clamp(4rem,20vw,6rem)}
 .hero p{font-size:.98rem;line-height:1.6}
-.scroll-hint{display:none}
+.scroll-hint{display:block;bottom:92px;font-size:.58rem;letter-spacing:.18em}
+.scroll-hint:after{height:24px;margin-top:8px}
 .story{padding:90px 0}
 .story-grid,.data-grid{grid-template-columns:1fr}
 .photo-stack{height:520px;min-height:0}
@@ -182,6 +184,7 @@ body{padding-bottom:84px}
 html{scroll-behavior:auto}
 .reveal{opacity:1;transform:none;transition:none}
 .sport-slide{transition:none}
+.scroll-hint{animation:none;opacity:1}
 }
 </style>
 <link rel="stylesheet" href="./mobile-nav.css?v=20260920-7">
