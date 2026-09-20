@@ -22,12 +22,20 @@ async function handleRequest(request) {
     var leagueKey = (url.searchParams.get("league") || "").toLowerCase();
     var paths = {
       soccer: "soccer/eng.1",
+      laliga: "soccer/esp.1",
+      seriea: "soccer/ita.1",
+      bundesliga: "soccer/ger.1",
+      champions: "soccer/uefa.champions",
       basketball: "basketball/nba",
       wnba: "basketball/wnba",
+      atp: "tennis/atp",
+      wta: "tennis/wta",
       f1: "racing/f1",
+      ufc: "mma/ufc",
       baseball: "baseball/mlb",
       hockey: "hockey/nhl",
-      football: "football/nfl"
+      football: "football/nfl",
+      ncaaf: "football/college-football"
     };
     var path = paths[leagueKey];
 
