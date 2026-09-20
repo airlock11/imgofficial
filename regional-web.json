@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-21T01:35:39+08:00",
+  "updated_at": "2026-09-21T01:38:03+08:00",
   "refresh_minutes": 30,
   "leagues": {
     "pba": {
@@ -249,6 +249,6 @@
     }
   },
   "errors": {
-    "nbl": "HTTP Error 403: Forbidden"
+    "nbl": "Couldn't find a tree builder with the features you requested: xml. Do you need to install a parser library?"
   }
 }
