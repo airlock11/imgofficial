@@ -511,3 +511,99 @@ main{min-height:calc(100svh - 68px)}
 }
 
 .all-live-section[hidden]{display:none!important}
+
+
+/* IMG match odds interface */
+.odds-page{background:#080b0f}
+.odds-page section.content{padding-top:28px}
+.odds-toolbar{margin-bottom:18px;padding:12px 0 18px;border-bottom:1px solid var(--line)}
+.odds-toolbar select,.odds-toolbar button{background:#11161d;border:1px solid #28303a;color:#f5f7fa}
+#oddsFeed{display:grid;gap:22px}
+.odds-match-card{overflow:hidden;border:1px solid #202832;border-radius:22px;background:#0f141a;box-shadow:0 18px 54px rgba(0,0,0,.28)}
+.odds-game-hero{position:relative;padding:22px 24px 24px;background:
+  radial-gradient(circle at 12% 28%,rgba(192,42,52,.27),transparent 34%),
+  radial-gradient(circle at 88% 24%,rgba(42,100,155,.23),transparent 36%),
+  linear-gradient(135deg,#171b21,#10151b 58%,#18212a)}
+.odds-match-live .odds-game-hero{box-shadow:inset 0 -2px 0 rgba(239,63,69,.5)}
+.odds-game-meta{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:24px}
+.odds-league-name{font:800 1.02rem/1.2 "Inter",Arial,sans-serif;color:#f6f8fa;text-align:left}
+.odds-game-time{font-size:.74rem;font-weight:800;color:#a7b0bb;text-align:right}
+.odds-match-live .odds-game-time{color:#ff7075}
+.odds-hero-matchup{display:grid;grid-template-columns:minmax(0,1fr) 72px minmax(0,1fr);align-items:center;gap:14px}
+.odds-hero-team{display:grid;justify-items:center;gap:10px;text-align:center;color:#f5f7fa;min-width:0}
+.odds-hero-team>span:not(.odds-team-fallback){font-size:.9rem;font-weight:700;line-height:1.25;overflow-wrap:anywhere}
+.odds-hero-team>b{font:800 2.5rem/1 "Barlow Condensed",Arial,sans-serif}
+.odds-hero-logo{width:58px;height:58px;object-fit:contain}
+.odds-team-fallback{width:56px;height:56px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.16);border-radius:18px;background:rgba(255,255,255,.07);font:800 1rem "Inter",Arial,sans-serif;color:#dce4ec}
+.odds-hero-center{display:grid;place-items:center}
+.odds-hero-center span{min-width:50px;padding:8px 10px;border-radius:999px;background:rgba(255,255,255,.07);color:#99a4b0;font-size:.65rem;font-weight:900;letter-spacing:.11em;text-align:center}
+.odds-match-live .odds-hero-center span{background:rgba(239,63,69,.14);color:#ff757a}
+.odds-market-card{padding:20px;background:#10151a}
+.odds-market-tabs{display:flex;gap:10px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
+.odds-market-tabs::-webkit-scrollbar{display:none}
+.odds-market-tabs button{flex:0 0 auto;min-width:112px;min-height:46px;padding:0 18px;border:1px solid #252d36;border-radius:999px;background:#050709;color:#d9dfe6;font-weight:800;cursor:pointer;transition:.18s ease}
+.odds-market-tabs button.active{border-color:#1e66ff;background:#0d54e8;color:#fff;box-shadow:0 8px 24px rgba(13,84,232,.22)}
+.odds-market-tabs button:disabled{opacity:.28;cursor:not-allowed}
+.odds-market-note{display:flex;justify-content:flex-end;margin:14px 0 8px}
+.odds-market-note span{padding:6px 9px;border:1px solid #28303a;border-radius:8px;color:#8d98a5;font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em}
+.odds-market-note .odds-note-live{border-color:rgba(239,63,69,.22);color:#ff777c;background:rgba(239,63,69,.07)}
+.odds-market-pane{display:none;overflow:hidden;border:1px solid #2a323b;border-radius:14px;background:#14191e}
+.odds-market-pane.active{display:block}
+.odds-table-head,.odds-table-row{display:grid;grid-template-columns:minmax(120px,1.3fr) repeat(2,minmax(86px,.8fr));align-items:stretch}
+.odds-table-head:has(span:nth-child(4)),.odds-table-row.has-draw{grid-template-columns:minmax(120px,1.3fr) repeat(3,minmax(76px,.8fr))}
+.odds-table-head.odds-table-two,.odds-table-row.odds-table-two{grid-template-columns:minmax(120px,1.3fr) minmax(120px,1fr)}
+.odds-table-head{background:#0d1115;color:#8f99a5;font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em}
+.odds-table-head span{padding:12px 14px;border-right:1px solid #2a323b}
+.odds-table-head span:last-child{border-right:0}
+.odds-table-row{border-top:1px solid #2a323b;color:#f3f5f7}
+.odds-table-row strong,.odds-table-row>span{display:flex;align-items:center;min-height:58px;padding:12px 14px;border-right:1px solid #2a323b}
+.odds-table-row strong{font-size:.77rem;line-height:1.25;background:#11161b}
+.odds-table-row>span:last-child{border-right:0}
+.odds-price{justify-content:center;font-size:1rem;font-weight:800;font-variant-numeric:tabular-nums}
+.odds-market-empty{padding:22px 16px;color:#8d98a5;font-size:.78rem;text-align:center}
+.odds-page .responsible{max-width:820px;margin:24px auto 0;color:#7e8995;text-align:center;border-top:0}
+:root[data-theme="light"] .odds-page{background:#eef2f6}
+:root[data-theme="light"] .odds-match-card{background:#fff;border-color:#dce2e8;box-shadow:0 14px 38px rgba(27,34,43,.09)}
+:root[data-theme="light"] .odds-game-hero{background:
+  radial-gradient(circle at 12% 28%,rgba(192,42,52,.12),transparent 34%),
+  radial-gradient(circle at 88% 24%,rgba(42,100,155,.12),transparent 36%),
+  linear-gradient(135deg,#f7f9fb,#eef2f6)}
+:root[data-theme="light"] .odds-league-name,:root[data-theme="light"] .odds-hero-team{color:#11161d}
+:root[data-theme="light"] .odds-game-time{color:#64707c}
+:root[data-theme="light"] .odds-market-card{background:#fff}
+:root[data-theme="light"] .odds-market-tabs button{background:#eef2f6;color:#313a44;border-color:#d9e0e7}
+:root[data-theme="light"] .odds-market-tabs button.active{background:#0d54e8;color:#fff;border-color:#0d54e8}
+:root[data-theme="light"] .odds-market-pane{background:#fff;border-color:#dce2e8}
+:root[data-theme="light"] .odds-table-head{background:#f2f5f8;color:#64707c}
+:root[data-theme="light"] .odds-table-head span,:root[data-theme="light"] .odds-table-row strong,:root[data-theme="light"] .odds-table-row>span{border-color:#dce2e8}
+:root[data-theme="light"] .odds-table-row{border-color:#dce2e8;color:#11161d}
+:root[data-theme="light"] .odds-table-row strong{background:#fafbfc}
+@media(max-width:760px){
+  .odds-page section.content{padding:12px 0 30px}
+  .odds-page .shell{width:100%}
+  .odds-toolbar{padding:10px 14px 14px;margin:0}
+  #oddsFeed{gap:10px}
+  .odds-match-card{border-radius:0;border-left:0;border-right:0}
+  .odds-game-hero{padding:18px 14px 22px}
+  .odds-game-meta{margin-bottom:20px}
+  .odds-league-name{font-size:.9rem}
+  .odds-game-time{font-size:.66rem}
+  .odds-hero-matchup{grid-template-columns:minmax(0,1fr) 58px minmax(0,1fr);gap:8px}
+  .odds-hero-logo{width:52px;height:52px}
+  .odds-team-fallback{width:52px;height:52px;border-radius:15px}
+  .odds-hero-team>span:not(.odds-team-fallback){font-size:.8rem}
+  .odds-hero-team>b{font-size:2.15rem}
+  .odds-hero-center span{min-width:44px;padding:7px 8px;font-size:.59rem}
+  .odds-market-card{padding:16px 14px 20px}
+  .odds-market-tabs{gap:8px}
+  .odds-market-tabs button{min-width:auto;min-height:42px;padding:0 15px;font-size:.75rem}
+  .odds-market-note{justify-content:flex-start;margin:12px 0 8px}
+  .odds-table-head,.odds-table-row{grid-template-columns:minmax(92px,1.1fr) repeat(2,minmax(68px,.75fr))}
+  .odds-table-head:has(span:nth-child(4)),.odds-table-row.has-draw{grid-template-columns:minmax(82px,1fr) repeat(3,minmax(58px,.67fr))}
+  .odds-table-head.odds-table-two,.odds-table-row.odds-table-two{grid-template-columns:minmax(100px,1fr) minmax(100px,1fr)}
+  .odds-table-head span{padding:10px 8px;font-size:.55rem;overflow-wrap:anywhere}
+  .odds-table-row strong,.odds-table-row>span{min-height:54px;padding:10px 8px}
+  .odds-table-row strong{font-size:.68rem}
+  .odds-price{font-size:.88rem}
+  .odds-page .responsible{padding:12px 18px 0;margin-top:14px}
+}
