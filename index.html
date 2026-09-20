@@ -81,8 +81,8 @@ body:before{display:none}
 .bottomnav{position:fixed;display:grid;grid-template-columns:repeat(5,1fr);left:10px;right:10px;bottom:10px;z-index:95;min-height:64px;padding:6px 4px calc(6px + env(safe-area-inset-bottom));border:1px solid rgba(255,255,255,.12);border-radius:18px;background:rgba(6,9,13,.92);backdrop-filter:blur(16px)}
 .bottomnav a{display:grid;place-items:center;align-content:center;gap:4px;color:#8f99a6;text-decoration:none;font-size:.59rem;font-weight:800;letter-spacing:.04em}
 .bottomnav a.active{color:#fff}
-.bottomnav img{width:20px;height:20px;opacity:.74}
-.bottomnav a.active img{opacity:1}
+.bottomnav img{width:20px;height:20px;opacity:.92;filter:brightness(0) invert(1)}
+.bottomnav a.active img{opacity:1;filter:brightness(0) invert(1)}
 .closing{padding-bottom:120px}
 .logo-mark{top:16px;left:18px;width:76px}
 .shell,.sport-content{width:calc(100% - 32px)}
