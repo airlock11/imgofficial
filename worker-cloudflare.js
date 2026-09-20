@@ -440,26 +440,31 @@ function regionalLeagueConfig(key) {
       label: "PBA",
       country: "philippines",
       aliases: ["philippine basketball association", "pba"],
+      teamAliases: ["barangay ginebra", "ginebra", "blackwater", "converge fiberxers", "magnolia hotshots", "meralco bolts", "nlex road warriors", "phoenix fuel masters", "rain or shine", "san miguel beermen", "tnt tropang", "terrafirma dyip", "titan ultra", "macau black"],
     },
     mpbl: {
       label: "MPBL",
       country: "philippines",
       aliases: ["maharlika pilipinas basketball league", "mpbl"],
+      teamAliases: ["imus", "sarangani marlins", "quezon huskers", "rizal golden coolers", "gensan warriors", "general santos", "bulacan kuyas", "zamboanga sikat", "batang kankaloo", "batangas city", "marikina shoemasters", "san juan knights", "pasay voyagers", "pasig city"],
     },
     nbl: {
       label: "NBL-Pilipinas",
       country: "philippines",
-      aliases: ["nbl pilipinas", "nbl-pilipinas", "national basketball league philippines", "national basketball league"],
+      aliases: ["nbl pilipinas", "nbl-pilipinas", "national basketball league philippines"],
+      teamAliases: ["pampanga", "batangas", "nueva ecija", "cam sur", "camsur", "zamboanga", "quezon city", "manila", "taguig city", "pangasinan"],
     },
     nblaus: {
       label: "NBL Australia",
       country: "australia",
       aliases: ["nbl australia", "national basketball league", "nbl"],
+      teamAliases: ["melbourne united", "adelaide 36ers", "perth wildcats", "south east melbourne phoenix", "new zealand breakers", "illawarra hawks", "sydney kings", "cairns taipans", "tasmania jackjumpers", "brisbane bullets"],
     },
     vba: {
       label: "VBA",
       country: "vietnam",
       aliases: ["vietnam basketball association", "vietnam professional basketball league", "vba"],
+      teamAliases: ["saigon heat", "hanoi buffaloes", "nha trang dolphins", "nhatrang dolphins", "ho chi minh city wings", "danang dragons", "da nang dragons", "cantho catfish", "can tho catfish"],
     },
   };
   return configs[key] || null;
@@ -489,7 +494,19 @@ function regionalGameMatches(game, config) {
     if (/^[a-z0-9]{2,5}$/.test(a)) return leagueName === a || leagueName.startsWith(a + " ") || leagueName.endsWith(" " + a) || leagueName.includes(" " + a + " ");
     return leagueName.includes(a);
   });
-  if (!aliasMatch) return false;
+
+  // SportsAPI /v2/livescores can omit league metadata. Fall back to current
+  // league team names so live games are not discarded just because league
+  // details are absent from the lightweight livescore payload.
+  const homeName = lowerText(game?.home?.name || game?.homeTeam?.name || game?.home?.displayName || game?.homeTeam?.displayName);
+  const awayName = lowerText(game?.away?.name || game?.awayTeam?.name || game?.away?.displayName || game?.awayTeam?.displayName);
+  const teamMatch = (config.teamAliases || []).some((alias) => {
+    const a = lowerText(alias);
+    return homeName.includes(a) || awayName.includes(a);
+  });
+
+  if (!aliasMatch && !teamMatch) return false;
+  if (teamMatch) return true;
   if (!config.country) return true;
   return countryName ? countryName.includes(config.country) : leagueName.includes(config.country);
 }
