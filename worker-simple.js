@@ -134,6 +134,10 @@ async function handleRequest(request) {
       var sportsResponse = await fetch("https://api.sportsapi.app/v2/livescores?sport=basketball", {
         headers: {
           "Authorization": "Bearer " + SPORTSAPI_KEY
+        },
+        cf: {
+          cacheTtl: 20,
+          cacheEverything: true
         }
       });
 
@@ -247,27 +251,32 @@ function regionalLeagueConfig(key) {
     pba: {
       label: "PBA",
       country: "philippines",
-      aliases: ["philippine basketball association", "pba"]
+      aliases: ["philippine basketball association", "pba"],
+      teamAliases: ["barangay ginebra", "ginebra", "blackwater", "converge fiberxers", "magnolia hotshots", "meralco bolts", "nlex road warriors", "phoenix fuel masters", "rain or shine", "san miguel beermen", "tnt tropang", "terrafirma dyip", "titan ultra", "macau black"]
     },
     mpbl: {
       label: "MPBL",
       country: "philippines",
-      aliases: ["maharlika pilipinas basketball league", "mpbl"]
+      aliases: ["maharlika pilipinas basketball league", "mpbl"],
+      teamAliases: ["imus", "sarangani marlins", "quezon huskers", "rizal golden coolers", "gensan warriors", "general santos", "bulacan kuyas", "zamboanga sikat", "batang kankaloo", "batangas city", "marikina shoemasters", "san juan knights", "pasay voyagers", "pasig city"]
     },
     nbl: {
       label: "NBL-Pilipinas",
       country: "philippines",
-      aliases: ["nbl pilipinas", "nbl-pilipinas", "national basketball league philippines"]
+      aliases: ["nbl pilipinas", "nbl-pilipinas", "national basketball league philippines"],
+      teamAliases: ["pampanga", "batangas", "nueva ecija", "cam sur", "camsur", "zamboanga", "quezon city", "manila", "taguig city", "pangasinan"]
     },
     nblaus: {
       label: "NBL Australia",
       country: "australia",
-      aliases: ["nbl australia", "national basketball league", "nbl"]
+      aliases: ["nbl australia", "national basketball league", "nbl"],
+      teamAliases: ["melbourne united", "adelaide 36ers", "perth wildcats", "south east melbourne phoenix", "new zealand breakers", "illawarra hawks", "sydney kings", "cairns taipans", "tasmania jackjumpers", "brisbane bullets"]
     },
     vba: {
       label: "VBA",
       country: "vietnam",
-      aliases: ["vietnam basketball association", "vietnam professional basketball league", "vba"]
+      aliases: ["vietnam basketball association", "vietnam professional basketball league", "vba"],
+      teamAliases: ["saigon heat", "hanoi buffaloes", "nha trang dolphins", "nhatrang dolphins", "ho chi minh city wings", "danang dragons", "da nang dragons", "cantho catfish", "can tho catfish"]
     }
   };
 
@@ -312,7 +321,17 @@ function regionalGameMatches(game, config) {
     return leagueName.indexOf(a) !== -1;
   });
 
-  if (!aliasMatch) return false;
+  var home = getTeam(game, "home");
+  var away = getTeam(game, "away");
+  var homeName = textLower(home.name || home.displayName);
+  var awayName = textLower(away.name || away.displayName);
+  var teamMatch = (config.teamAliases || []).some(function(alias) {
+    var a = textLower(alias);
+    return homeName.indexOf(a) !== -1 || awayName.indexOf(a) !== -1;
+  });
+
+  if (!aliasMatch && !teamMatch) return false;
+  if (teamMatch) return true;
   if (!config.country) return true;
   if (countryName) return countryName.indexOf(config.country) !== -1;
   return leagueName.indexOf(config.country) !== -1;
