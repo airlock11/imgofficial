@@ -657,7 +657,7 @@ if(document.getElementById('games')){
   let scoreRefreshInFlight=false;
 
   const hasLiveScores=()=>allGames.some(g=>g.state==='live')||!document.getElementById('allLiveSection')?.hidden;
-  const nextScoreRefreshDelay=()=>2000;
+  const nextScoreRefreshDelay=()=>30000;
 
   const scheduleScoreAutoRefresh=(delay=nextScoreRefreshDelay())=>{
     clearTimeout(scoreAutoRefreshTimer);
@@ -667,7 +667,7 @@ if(document.getElementById('games')){
 
   async function refreshScoresAutomatically(){
     if(scoreRefreshInFlight){
-      scheduleScoreAutoRefresh(2000);
+      scheduleScoreAutoRefresh(30000);
       return;
     }
     scoreRefreshInFlight=true;
