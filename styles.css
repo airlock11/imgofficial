@@ -550,7 +550,7 @@ main{min-height:calc(100svh - 68px)}
 .odds-market-pane{display:none;overflow:hidden;border:1px solid #2a323b;border-radius:14px;background:#14191e}
 .odds-market-pane.active{display:block}
 .odds-table-head,.odds-table-row{display:grid;grid-template-columns:minmax(120px,1.3fr) repeat(2,minmax(86px,.8fr));align-items:stretch}
-.odds-table-head:has(span:nth-child(4)),.odds-table-row.has-draw{grid-template-columns:minmax(120px,1.3fr) repeat(3,minmax(76px,.8fr))}
+.odds-table-head.has-draw,.odds-table-row.has-draw{grid-template-columns:minmax(120px,1.3fr) repeat(3,minmax(76px,.8fr))}
 .odds-table-head.odds-table-two,.odds-table-row.odds-table-two{grid-template-columns:minmax(120px,1.3fr) minmax(120px,1fr)}
 .odds-table-head{background:#0d1115;color:#8f99a5;font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em}
 .odds-table-head span{padding:12px 14px;border-right:1px solid #2a323b}
@@ -599,7 +599,7 @@ main{min-height:calc(100svh - 68px)}
   .odds-market-tabs button{min-width:auto;min-height:42px;padding:0 15px;font-size:.75rem}
   .odds-market-note{justify-content:flex-start;margin:12px 0 8px}
   .odds-table-head,.odds-table-row{grid-template-columns:minmax(92px,1.1fr) repeat(2,minmax(68px,.75fr))}
-  .odds-table-head:has(span:nth-child(4)),.odds-table-row.has-draw{grid-template-columns:minmax(82px,1fr) repeat(3,minmax(58px,.67fr))}
+  .odds-table-head.has-draw,.odds-table-row.has-draw{grid-template-columns:minmax(82px,1fr) repeat(3,minmax(58px,.67fr))}
   .odds-table-head.odds-table-two,.odds-table-row.odds-table-two{grid-template-columns:minmax(100px,1fr) minmax(100px,1fr)}
   .odds-table-head span{padding:10px 8px;font-size:.55rem;overflow-wrap:anywhere}
   .odds-table-row strong,.odds-table-row>span{min-height:54px;padding:10px 8px}
