@@ -509,3 +509,5 @@ main{min-height:calc(100svh - 68px)}
   .live-game-card{padding:14px}
   .all-live-head h1,.scores-browser-head h2{font-size:2rem}
 }
+
+.all-live-section[hidden]{display:none!important}
