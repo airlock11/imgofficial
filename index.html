@@ -79,10 +79,16 @@ img{display:block;max-width:100%}
 body:before{display:none}
 .site-nav{display:none}
 .bottomnav{position:fixed;display:grid;grid-template-columns:repeat(5,1fr);left:10px;right:10px;bottom:10px;z-index:95;min-height:64px;padding:6px 4px calc(6px + env(safe-area-inset-bottom));border:1px solid rgba(255,255,255,.12);border-radius:18px;background:rgba(6,9,13,.92);backdrop-filter:blur(16px)}
-.bottomnav a{display:grid;place-items:center;align-content:center;gap:4px;color:#8f99a6;text-decoration:none;font-size:.59rem;font-weight:800;letter-spacing:.04em}
+.bottomnav a{position:relative;display:grid;place-items:center;align-content:center;gap:4px;min-width:0;min-height:52px;padding:4px 0;color:#8f99a6;text-decoration:none;font-size:.59rem;line-height:1;font-weight:800;letter-spacing:.04em}
 .bottomnav a.active{color:#fff}
-.bottomnav img{width:20px;height:20px;opacity:.92;filter:brightness(0) invert(1)}
-.bottomnav a.active img{opacity:1;filter:brightness(0) invert(1)}
+.bottomnav a b{width:24px;height:24px;display:grid;place-items:center;line-height:1}
+.navglyph{display:block;width:20px;height:20px;background:currentColor;mask-position:center;mask-repeat:no-repeat;mask-size:contain;-webkit-mask-position:center;-webkit-mask-repeat:no-repeat;-webkit-mask-size:contain;opacity:.88}
+.icon-home{mask-image:url('./icons/home.svg');-webkit-mask-image:url('./icons/home.svg')}
+.icon-sports{mask-image:url('./icons/sports.svg');-webkit-mask-image:url('./icons/sports.svg')}
+.icon-scores{mask-image:url('./icons/scores.svg');-webkit-mask-image:url('./icons/scores.svg')}
+.icon-news{mask-image:url('./icons/news.svg');-webkit-mask-image:url('./icons/news.svg')}
+.icon-odds{mask-image:url('./icons/odds.svg');-webkit-mask-image:url('./icons/odds.svg')}
+.bottomnav a.active .navglyph{opacity:1}
 .closing{padding-bottom:120px}
 .logo-mark{top:16px;left:18px;width:76px}
 .shell,.sport-content{width:calc(100% - 32px)}
@@ -211,11 +217,11 @@ html{scroll-behavior:auto}
 </section>
 </main>
 <nav class="bottomnav" aria-label="Mobile navigation">
-<a class="active" href="./index.html?v=20260920-2"><img src="./icons/home.svg" alt="">Home</a>
-<a href="./sports.html"><img src="./icons/sports.svg" alt="">Sports</a>
-<a href="./scores.html"><img src="./icons/scores.svg" alt="">Scores</a>
-<a href="./news.html"><img src="./icons/news.svg" alt="">News</a>
-<a href="./odds.html"><img src="./icons/odds.svg" alt="">Odds</a>
+<a class="active" href="./index.html?v=20260920-2"><b><span class="navglyph icon-home" aria-hidden="true"></span></b>Home</a>
+<a href="./sports.html"><b><span class="navglyph icon-sports" aria-hidden="true"></span></b>Sports</a>
+<a href="./scores.html"><b><span class="navglyph icon-scores" aria-hidden="true"></span></b>Scores</a>
+<a href="./news.html"><b><span class="navglyph icon-news" aria-hidden="true"></span></b>News</a>
+<a href="./odds.html"><b><span class="navglyph icon-odds" aria-hidden="true"></span></b>Odds</a>
 </nav>
 
 <script>
