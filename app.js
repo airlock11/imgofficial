@@ -417,21 +417,20 @@ function liveSportSlug(label){
 
 function liveSportIconMarkup(label){
   const key=String(label||'').toLowerCase();
-  const files={
-    all:'all.svg',
-    basketball:'basketball.svg',
-    football:'football.svg',
-    tennis:'tennis.svg',
-    cricket:'cricket.svg',
-    volleyball:'volleyball.svg',
-    baseball:'baseball.svg',
-    hockey:'hockey.svg',
-    'american football':'american-football.svg',
-    motorsport:'motorsport.svg',
-    'combat sports':'combat-sports.svg'
+  const icons={
+    all:'grid_view',
+    basketball:'sports_basketball',
+    football:'sports_soccer',
+    tennis:'sports_tennis',
+    cricket:'sports_cricket',
+    volleyball:'sports_volleyball',
+    baseball:'sports_baseball',
+    hockey:'sports_hockey',
+    'american football':'sports_football',
+    motorsport:'sports_motorsports',
+    'combat sports':'sports_mma'
   };
-  const file=files[key]||'all.svg';
-  return '<img src="icons/sports/'+file+'?v=20260921-1" alt="" loading="eager" decoding="async">';
+  return '<span class="material-symbols-rounded sport-material-icon" aria-hidden="true">'+esc(icons[key]||'sports')+'</span>';
 }
 
 function liveSportOrder(label){
