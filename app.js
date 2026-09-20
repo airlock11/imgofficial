@@ -1058,7 +1058,10 @@ function oddsLeagueFallback(key){
 
 function oddsLeagueLogoMarkup(key){
   const logo=oddsLeagueLogos[key]||'';
-  return logo?'<img src="'+esc(logo)+'" alt="'+esc(oddsLeagueNames[key]||key)+' logo" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.outerHTML=\''+oddsLeagueFallback(key).replace(/'/g,"&#39;")+'\'">':oddsLeagueFallback(key);
+  const fallback=oddsLeagueFallback(key);
+  if(!logo)return fallback;
+  return '<img class="odds-league-logo-img" src="'+esc(logo)+'" alt="'+esc(oddsLeagueNames[key]||key)+' logo" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'grid\'">'+
+    '<span class="odds-league-fallback odds-league-fallback-hidden">'+esc((oddsLeagueNames[key]||key).replace(/[^A-Za-z0-9]/g,'').slice(0,4).toUpperCase())+'</span>';
 }
 
 function renderOddsFilters(){
