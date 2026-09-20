@@ -652,7 +652,7 @@ function renderAllLiveGames(items,{preserveItems=false}={}){
     if(g.isRacing){
       const place=[g.raceCircuit,g.raceCity].filter(Boolean).join(' · ');
       return '<article class="live-game-card race-live-card" data-game-key="'+esc(gameDomKey(g))+'" data-sport-key="'+esc(g.sportKey||'')+'">'+
-        '<div class="live-card-top"><div class="live-sport-label"><span>Motorsport</span><b>Formula 1</b></div><span class="live-badge">LIVE</span></div>'+
+        '<div class="live-card-top"><div class="live-sport-label"><span>Motorsport</span><b>Formula 1</b></div></div>'+
         '<div class="race-live-title">'+esc(g.raceTitle||g.home)+'</div>'+
         '<div class="race-live-session">'+esc(g.raceSession||g.away)+'</div>'+
         (place?'<div class="live-card-time">'+esc(place)+'</div>':'')+
@@ -660,7 +660,7 @@ function renderAllLiveGames(items,{preserveItems=false}={}){
       '</article>';
     }
     return '<article class="live-game-card" data-game-key="'+esc(gameDomKey(g))+'" data-sport-key="'+esc(g.sportKey||'')+'">'+
-      '<div class="live-card-top"><div class="live-sport-label"><span>'+esc(g.sportLabel||'Sport')+'</span><b>'+esc(g.leagueLabel||'')+'</b></div><span class="live-badge">LIVE</span></div>'+
+      '<div class="live-card-top"><div class="live-sport-label"><span>'+esc(g.sportLabel||'Sport')+'</span><b>'+esc(g.leagueLabel||'')+'</b></div></div>'+
       '<div class="live-card-time">'+esc(g.displayTime||g.status||'Live')+'</div>'+
       '<div class="live-card-teams">'+
         '<div class="live-card-team"><span>'+teamLogoMarkup(g.awayLogo,g.away,'live-card-logo')+esc(g.away)+'</span><b data-score-side="away">'+esc(g.awayScore)+'</b></div>'+
