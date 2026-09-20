@@ -1,0 +1,59 @@
+name: Update boxing fighter data
+
+on:
+  schedule:
+    - cron: "17 */12 * * *"
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "scripts/update_boxing_data.py"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: boxing-data-update
+  cancel-in-progress: true
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      RAPIDAPI_KEY: ${{ secrets.RAPIDAPI_KEY }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Verify API secret
+        shell: bash
+        run: |
+          if [ -z "$RAPIDAPI_KEY" ]; then
+            echo "RAPIDAPI_KEY repository secret is missing."
+            exit 1
+          fi
+
+      - name: Refresh boxer directory
+        run: python scripts/update_boxing_data.py
+
+      - name: Commit updated boxing data
+        shell: bash
+        run: |
+          if git diff --quiet -- boxing-data.json; then
+            echo "No boxing data changes."
+            exit 0
+          fi
+          git config user.name "IMG Boxing Data Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add boxing-data.json
+          git commit -m "Update boxing fighter data"
+          git fetch origin main
+          git rebase origin/main
+          git push
