@@ -424,9 +424,9 @@ function streamLeagueForSport(sport) {
   const map = {
     soccer: { label: "Premier League", youtube: ["UCG5qGWdu8nIRZqJ_GgDwQ-w"] },
     basketball: { label: "NBA", youtube: ["UCWJ2lWNubArHWmf3FIHbfcQ"] },
-    pba: { label: "PBA Philippines", youtube: [] },
-    nbl: { label: "NBL Pilipinas", youtube: [] },
-    vba: { label: "VBA Vietnam", youtube: [] },
+    pba: { label: "PBA Philippines", youtube: [], youtubeHandles: [] },
+    nbl: { label: "NBL Pilipinas", youtube: [], youtubeHandles: ["nblpilipinas"] },
+    vba: { label: "VBA Vietnam", youtube: [], youtubeHandles: ["VBAofficial"] },
     baseball: { label: "MLB", youtube: ["UCoLrcjPV5PbUrUyXq5mjc_A"] },
     hockey: { label: "NHL", youtube: ["UCqFMzb-4AUf6WAIbl132QKA"] },
     football: { label: "NFL", youtube: ["UCDVYQ4Zhbm3S2dlz7P1GBDg"] },
@@ -450,11 +450,28 @@ function matchText(value, home, away) {
   return tokens.length ? tokens.some((t) => text.includes(t)) : true;
 }
 
+async function youtubeChannelIdsForHandles(env, handles) {
+  if (!env.YOUTUBE_API_KEY || !Array.isArray(handles) || !handles.length) return [];
+  const results = await Promise.allSettled(handles.map(async (handle) => {
+    const api = new URL("https://www.googleapis.com/youtube/v3/channels");
+    api.searchParams.set("part", "id");
+    api.searchParams.set("forHandle", handle.startsWith("@") ? handle : "@" + handle);
+    api.searchParams.set("key", env.YOUTUBE_API_KEY);
+    const response = await fetch(api.toString(), { cf: { cacheTtl: 86400, cacheEverything: true } });
+    if (!response.ok) return "";
+    const data = await response.json();
+    return data?.items?.[0]?.id || "";
+  }));
+  return results.filter((r) => r.status === "fulfilled" && r.value).map((r) => r.value);
+}
+
 async function findYouTubeLive(env, game) {
   if (!env.YOUTUBE_API_KEY || !game.query) return [];
   const league = streamLeagueForSport(game.sport);
+  const handleIds = await youtubeChannelIdsForHandles(env, league?.youtubeHandles || []);
   const builtIn = [
     ...(league?.youtube || []),
+    ...handleIds,
     "UCiWLfSweyRNmLpgEHekhoAg",
   ];
   const allowed = new Set([...builtIn, ...splitCsv(env.YOUTUBE_ALLOWED_CHANNEL_IDS)]);
@@ -496,7 +513,12 @@ async function findYouTubeLive(env, game) {
 
 async function findFacebookLive(env, game) {
   const token = env.FACEBOOK_ACCESS_TOKEN;
-  const pages = splitCsv(env.FACEBOOK_PAGE_IDS);
+  const builtInPages = {
+    pba: ["PBAOfficial"],
+    nbl: ["nblpilipinas"],
+    vba: ["VBA.vn"],
+  };
+  const pages = [...(builtInPages[game.sport] || []), ...splitCsv(env.FACEBOOK_PAGE_IDS)];
   if (!token || !pages.length) return [];
   const version = env.FACEBOOK_GRAPH_VERSION || "v24.0";
   const results = await Promise.allSettled(pages.map(async (pageId) => {
