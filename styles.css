@@ -482,3 +482,30 @@ main{min-height:calc(100svh - 68px)}
   .news-video-card{border-radius:15px}
   .news-video-copy{padding:12px 14px 14px}
 }
+
+.all-live-section{margin:0 0 34px;padding:0 0 34px;border-bottom:1px solid var(--line)}
+.all-live-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:18px}
+.all-live-head h1,.scores-browser-head h2{margin:5px 0 0;font:700 clamp(2rem,4vw,3.2rem)/.95 "Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:-.02em}
+.all-live-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.live-game-card{border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:16px;min-width:0}
+.live-card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:14px}
+.live-sport-label{display:flex;flex-direction:column;gap:3px;min-width:0;text-transform:uppercase}
+.live-sport-label span{font-size:.64rem;letter-spacing:.12em;color:var(--muted);font-weight:700}
+.live-sport-label b{font:700 1.05rem/1 "Barlow Condensed",sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.live-badge{flex:0 0 auto;border:1px solid rgba(255,83,91,.45);border-radius:999px;padding:4px 8px;font-size:.62rem;font-weight:800;letter-spacing:.12em;color:#ff676c;background:rgba(255,83,91,.08)}
+.live-card-time{font-size:.7rem;color:var(--muted);margin-bottom:12px}
+.live-card-teams{display:grid;gap:9px}
+.live-card-team{display:flex;align-items:center;justify-content:space-between;gap:14px;font-weight:650}
+.live-card-team>span{display:flex;align-items:center;gap:9px;min-width:0}
+.live-card-team b{font:700 1.35rem "Barlow Condensed",sans-serif}
+.live-card-logo{width:24px!important;height:24px!important;object-fit:contain;flex:0 0 auto}
+.live-card-status{margin-top:12px;padding-top:10px;border-top:1px solid var(--line);font-size:.7rem;color:#ff676c;font-weight:700}
+.all-live-empty{grid-column:1/-1;border:1px solid var(--line);border-radius:14px;padding:24px;color:var(--muted);text-align:center}
+.scores-browser-head{margin:0 0 16px}
+@media(max-width:760px){
+  .all-live-section{margin-bottom:26px;padding-bottom:26px}
+  .all-live-head{align-items:flex-start}
+  .all-live-grid{grid-template-columns:1fr}
+  .live-game-card{padding:14px}
+  .all-live-head h1,.scores-browser-head h2{font-size:2rem}
+}
