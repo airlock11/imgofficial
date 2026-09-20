@@ -19,8 +19,11 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Install scraper dependency
-        run: python -m pip install --disable-pip-version-check beautifulsoup4
+      - name: Install image OCR
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq tesseract-ocr
+          python -m pip install --disable-pip-version-check beautifulsoup4 pillow pytesseract
       - name: Refresh PBA MPBL and NBL-Pilipinas web data
         run: python scripts/update_regional_web.py
       - name: Commit updated data
