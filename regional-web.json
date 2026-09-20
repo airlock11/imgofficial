@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-21T01:39:57+08:00",
+  "updated_at": "2026-09-20T18:28:12.907Z",
   "refresh_minutes": 30,
   "leagues": {
     "pba": {
@@ -332,6 +332,267 @@
           "state": "final",
           "sourceName": "NBL-Pilipinas YouTube",
           "sourceUrl": "https://www.youtube.com/watch?v=slZmVgsJxDQ"
+        }
+      ]
+    },
+    "nblaus": {
+      "league": "NBL Australia",
+      "season": "2026-27 NBL27",
+      "coverage": "Official NBL schedule and results",
+      "note": "Automatically refreshed from the official NBL Australia schedule/results pages.",
+      "sources": [
+        {
+          "name": "NBL Australia Official",
+          "url": "https://www.nbl.com.au/"
+        },
+        {
+          "name": "NBL Schedule",
+          "url": "https://schedule.nbl.com.au/nbl"
+        }
+      ],
+      "games": [
+        {
+          "eventId": "seed-nblaus-20260919-mel-adl",
+          "date": "2026-09-19T19:30:00+10:00",
+          "displayTime": "Sep 19 · Final",
+          "away": "Adelaide 36ers",
+          "home": "Melbourne United",
+          "awayScore": "97",
+          "homeScore": "95",
+          "status": "Final",
+          "state": "final",
+          "sourceName": "NBL Australia",
+          "sourceUrl": "https://www.nbl.com.au/"
+        },
+        {
+          "eventId": "seed-nblaus-20260919-per-sem",
+          "date": "2026-09-19T21:30:00+10:00",
+          "displayTime": "Sep 19 · Final",
+          "away": "South East Melbourne Phoenix",
+          "home": "Perth Wildcats",
+          "awayScore": "100",
+          "homeScore": "79",
+          "status": "Final",
+          "state": "final",
+          "sourceName": "NBL Australia",
+          "sourceUrl": "https://www.nbl.com.au/"
+        },
+        {
+          "eventId": "seed-nblaus-20260920-nzl-ill",
+          "date": "2026-09-20T15:00:00+10:00",
+          "displayTime": "Sep 20 · Final",
+          "away": "Illawarra Hawks",
+          "home": "New Zealand Breakers",
+          "awayScore": "81",
+          "homeScore": "95",
+          "status": "Final",
+          "state": "final",
+          "sourceName": "NBL Australia",
+          "sourceUrl": "https://www.nbl.com.au/"
+        },
+        {
+          "eventId": "seed-nblaus-20260920-syd-cns",
+          "date": "2026-09-20T17:00:00+10:00",
+          "displayTime": "Sep 20 · Final",
+          "away": "Cairns Taipans",
+          "home": "Sydney Kings",
+          "awayScore": "90",
+          "homeScore": "111",
+          "status": "Final",
+          "state": "final",
+          "sourceName": "NBL Australia",
+          "sourceUrl": "https://www.nbl.com.au/"
+        },
+        {
+          "eventId": "seed-nblaus-20260921-tas-sem",
+          "date": "2026-09-21T19:30:00+10:00",
+          "displayTime": "Sep 21 · 7:30 PM",
+          "away": "South East Melbourne Phoenix",
+          "home": "Tasmania JackJumpers",
+          "awayScore": "—",
+          "homeScore": "—",
+          "status": "Scheduled",
+          "state": "scheduled",
+          "sourceName": "NBL Australia",
+          "sourceUrl": "https://www.nbl.com.au/"
+        },
+        {
+          "eventId": "seed-nblaus-20260922-bri-nzl",
+          "date": "2026-09-22T19:30:00+10:00",
+          "displayTime": "Sep 22 · 7:30 PM",
+          "away": "New Zealand Breakers",
+          "home": "Brisbane Bullets",
+          "awayScore": "—",
+          "homeScore": "—",
+          "status": "Scheduled",
+          "state": "scheduled",
+          "sourceName": "NBL Australia",
+          "sourceUrl": "https://www.nbl.com.au/"
+        },
+        {
+          "eventId": "seed-nblaus-20260923-cns-tas",
+          "date": "2026-09-23T19:30:00+10:00",
+          "displayTime": "Sep 23 · 7:30 PM",
+          "away": "Tasmania JackJumpers",
+          "home": "Cairns Taipans",
+          "awayScore": "—",
+          "homeScore": "—",
+          "status": "Scheduled",
+          "state": "scheduled",
+          "sourceName": "NBL Australia",
+          "sourceUrl": "https://www.nbl.com.au/"
+        },
+        {
+          "eventId": "seed-nblaus-20260924-sem-mel",
+          "date": "2026-09-24T19:30:00+10:00",
+          "displayTime": "Sep 24 · 7:30 PM",
+          "away": "Melbourne United",
+          "home": "South East Melbourne Phoenix",
+          "awayScore": "—",
+          "homeScore": "—",
+          "status": "Scheduled",
+          "state": "scheduled",
+          "sourceName": "NBL Australia",
+          "sourceUrl": "https://www.nbl.com.au/"
+        },
+        {
+          "eventId": "seed-nblaus-20260924-per-adl",
+          "date": "2026-09-24T21:30:00+10:00",
+          "displayTime": "Sep 24 · 9:30 PM",
+          "away": "Adelaide 36ers",
+          "home": "Perth Wildcats",
+          "awayScore": "—",
+          "homeScore": "—",
+          "status": "Scheduled",
+          "state": "scheduled",
+          "sourceName": "NBL Australia",
+          "sourceUrl": "https://www.nbl.com.au/"
+        },
+        {
+          "eventId": "seed-nblaus-20260925-bri-ill",
+          "date": "2026-09-25T19:30:00+10:00",
+          "displayTime": "Sep 25 · 7:30 PM",
+          "away": "Illawarra Hawks",
+          "home": "Brisbane Bullets",
+          "awayScore": "—",
+          "homeScore": "—",
+          "status": "Scheduled",
+          "state": "scheduled",
+          "sourceName": "NBL Australia",
+          "sourceUrl": "https://www.nbl.com.au/"
+        }
+      ]
+    },
+    "vba": {
+      "league": "VBA",
+      "season": "2026 Season",
+      "coverage": "2026 VBA Finals fixtures and recent results",
+      "note": "Automatically refreshed from public VBA schedule and results sources.",
+      "sources": [
+        {
+          "name": "VBA Official",
+          "url": "https://vba.vn/fixtures"
+        },
+        {
+          "name": "VBA Ticket",
+          "url": "https://ticket.vba.vn/team/5"
+        },
+        {
+          "name": "Forebet Results",
+          "url": "https://www.forebet.com/en/basketball/vietnam/results"
+        }
+      ],
+      "games": [
+        {
+          "eventId": "seed-vba-20260922",
+          "date": "2026-09-22T19:00:00+07:00",
+          "displayTime": "Sep 22 · 7:00 PM",
+          "away": "Hanoi Buffaloes",
+          "home": "Saigon Heat",
+          "awayScore": "—",
+          "homeScore": "—",
+          "status": "Scheduled",
+          "state": "scheduled",
+          "sourceName": "VBA Ticket",
+          "sourceUrl": "https://ticket.vba.vn/team/5"
+        },
+        {
+          "eventId": "seed-vba-20260924",
+          "date": "2026-09-24T19:00:00+07:00",
+          "displayTime": "Sep 24 · 7:00 PM",
+          "away": "Hanoi Buffaloes",
+          "home": "Saigon Heat",
+          "awayScore": "—",
+          "homeScore": "—",
+          "status": "Scheduled",
+          "state": "scheduled",
+          "sourceName": "VBA Ticket",
+          "sourceUrl": "https://ticket.vba.vn/team/5"
+        },
+        {
+          "eventId": "seed-vba-20260919",
+          "date": "2026-09-19T19:00:00+07:00",
+          "displayTime": "Sep 19 · Final",
+          "away": "Saigon Heat",
+          "home": "Hanoi Buffaloes",
+          "awayScore": "88",
+          "homeScore": "82",
+          "status": "Final",
+          "state": "final",
+          "sourceName": "VBA Results",
+          "sourceUrl": "https://www.forebet.com/en/basketball/vietnam/results"
+        },
+        {
+          "eventId": "seed-vba-20260910",
+          "date": "2026-09-10T19:00:00+07:00",
+          "displayTime": "Sep 10 · Final",
+          "away": "Saigon Heat",
+          "home": "Nhatrang Dolphins",
+          "awayScore": "77",
+          "homeScore": "75",
+          "status": "Final",
+          "state": "final",
+          "sourceName": "VBA Results",
+          "sourceUrl": "https://www.forebet.com/en/basketball/vietnam/results"
+        },
+        {
+          "eventId": "seed-vba-20260909",
+          "date": "2026-09-09T19:00:00+07:00",
+          "displayTime": "Sep 9 · Final",
+          "away": "Hanoi Buffaloes",
+          "home": "Ho Chi Minh City Wings",
+          "awayScore": "105",
+          "homeScore": "96",
+          "status": "Final",
+          "state": "final",
+          "sourceName": "VBA Results",
+          "sourceUrl": "https://www.forebet.com/en/basketball/vietnam/results"
+        },
+        {
+          "eventId": "seed-vba-20260906",
+          "date": "2026-09-06T19:00:00+07:00",
+          "displayTime": "Sep 6 · Final",
+          "away": "Nhatrang Dolphins",
+          "home": "Saigon Heat",
+          "awayScore": "85",
+          "homeScore": "88",
+          "status": "Final",
+          "state": "final",
+          "sourceName": "VBA Results",
+          "sourceUrl": "https://www.forebet.com/en/basketball/vietnam/results"
+        },
+        {
+          "eventId": "seed-vba-20260905",
+          "date": "2026-09-05T19:00:00+07:00",
+          "displayTime": "Sep 5 · Final",
+          "away": "Ho Chi Minh City Wings",
+          "home": "Hanoi Buffaloes",
+          "awayScore": "76",
+          "homeScore": "93",
+          "status": "Final",
+          "state": "final",
+          "sourceName": "VBA Results",
+          "sourceUrl": "https://www.forebet.com/en/basketball/vietnam/results"
         }
       ]
     }
