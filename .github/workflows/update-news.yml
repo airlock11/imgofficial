@@ -1,0 +1,52 @@
+name: Update sports news data
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "scripts/update_news.py"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sports-news-update
+  cancel-in-progress: true
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install feed parser
+        run: python -m pip install --disable-pip-version-check feedparser beautifulsoup4
+
+      - name: Refresh sports news
+        run: python scripts/update_news.py
+
+      - name: Commit updated news
+        shell: bash
+        run: |
+          if git diff --quiet -- news-data.json; then
+            echo "No news changes."
+            exit 0
+          fi
+          git config user.name "IMG News Data Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add news-data.json
+          git commit -m "Update sports news data"
+          git fetch origin main
+          git rebase origin/main
+          git push
