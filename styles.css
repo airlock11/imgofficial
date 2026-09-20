@@ -272,3 +272,85 @@ main{min-height:calc(100svh - 68px)}
 }
 :root[data-theme="light"] .bottomnav a{color:#697480}
 :root[data-theme="light"] .bottomnav a.active{color:#101318}
+
+/* Light mode form and filter controls */
+:root[data-theme="light"] select,
+:root[data-theme="light"] input[type="search"],
+:root[data-theme="light"] input[type="text"],
+:root[data-theme="light"] input[type="email"],
+:root[data-theme="light"] textarea,
+:root[data-theme="light"] .searchbox input,
+:root[data-theme="light"] .livebar select,
+:root[data-theme="light"] .livebar button,
+:root[data-theme="light"] .searchbox button,
+:root[data-theme="light"] .form input,
+:root[data-theme="light"] .form textarea,
+:root[data-theme="light"] .form button,
+:root[data-theme="light"] .searchlink,
+:root[data-theme="light"] .menubtn{
+  background:#fff!important;
+  color:#11151b!important;
+  border-color:rgba(17,21,27,.14)!important;
+  box-shadow:0 8px 24px rgba(17,21,27,.10)!important;
+}
+
+:root[data-theme="light"] select,
+:root[data-theme="light"] .livebar select{
+  color-scheme:light;
+}
+
+:root[data-theme="light"] select option,
+:root[data-theme="light"] .livebar select option{
+  background:#fff;
+  color:#11151b;
+}
+
+:root[data-theme="light"] input::placeholder,
+:root[data-theme="light"] textarea::placeholder,
+:root[data-theme="light"] .searchbox input::placeholder{
+  color:#6b7683!important;
+  opacity:1;
+}
+
+:root[data-theme="light"] select:hover,
+:root[data-theme="light"] input[type="search"]:hover,
+:root[data-theme="light"] input[type="text"]:hover,
+:root[data-theme="light"] input[type="email"]:hover,
+:root[data-theme="light"] textarea:hover,
+:root[data-theme="light"] .searchbox input:hover,
+:root[data-theme="light"] .livebar select:hover,
+:root[data-theme="light"] .livebar button:hover,
+:root[data-theme="light"] .searchbox button:hover,
+:root[data-theme="light"] .form button:hover,
+:root[data-theme="light"] .searchlink:hover,
+:root[data-theme="light"] .menubtn:hover{
+  border-color:rgba(17,21,27,.22)!important;
+  box-shadow:0 10px 28px rgba(17,21,27,.14)!important;
+}
+
+:root[data-theme="light"] select:focus,
+:root[data-theme="light"] input[type="search"]:focus,
+:root[data-theme="light"] input[type="text"]:focus,
+:root[data-theme="light"] input[type="email"]:focus,
+:root[data-theme="light"] textarea:focus,
+:root[data-theme="light"] .searchbox input:focus,
+:root[data-theme="light"] .livebar select:focus,
+:root[data-theme="light"] .livebar button:focus-visible,
+:root[data-theme="light"] .searchbox button:focus-visible,
+:root[data-theme="light"] .form button:focus-visible,
+:root[data-theme="light"] .searchlink:focus-visible,
+:root[data-theme="light"] .menubtn:focus-visible{
+  outline:none!important;
+  border-color:rgba(17,21,27,.26)!important;
+  box-shadow:0 0 0 3px rgba(17,21,27,.07),0 10px 28px rgba(17,21,27,.14)!important;
+}
+
+@media(max-width:760px){
+  :root[data-theme="light"] .livebar select,
+  :root[data-theme="light"] .livebar button,
+  :root[data-theme="light"] .searchbox input,
+  :root[data-theme="light"] .searchbox button{
+    min-height:46px;
+    border-radius:10px!important;
+  }
+}
