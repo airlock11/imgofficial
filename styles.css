@@ -540,7 +540,26 @@ main{min-height:calc(100svh - 68px)}
 .odds-sport-filter{display:inline-flex;align-items:center;gap:8px;flex:0 0 auto;min-height:42px;padding:8px 13px;border:1px solid #28303a;border-radius:999px;background:#11161d;color:#9fa9b5;font-size:.72rem;font-weight:800;cursor:pointer}
 .odds-sport-filter.active{background:#0d54e8;border-color:#1e66ff;color:#fff}
 .odds-sport-icon{font-size:25px!important;line-height:1;font-variation-settings:'FILL' 1,'wght' 600,'GRAD' 0,'opsz' 24}
-.odds-league-row{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.odds-league-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  max-height:0;
+  opacity:0;
+  overflow:hidden;
+  transform:translateY(-10px);
+  pointer-events:none;
+  margin-top:0;
+  transition:max-height .42s ease,opacity .32s ease,transform .42s ease,margin-top .42s ease;
+}
+.odds-league-row.is-open{
+  max-height:92px;
+  opacity:1;
+  transform:translateY(0);
+  pointer-events:auto;
+  margin-top:2px;
+}
 .odds-league-filters{display:flex;align-items:stretch;gap:10px;overflow-x:auto;min-width:0;padding:2px 0;scrollbar-width:none}
 .odds-league-filter{display:grid;grid-template-columns:48px auto;align-items:center;gap:10px;flex:0 0 auto;min-height:58px;padding:7px 12px 7px 8px;border:1px solid #28303a;border-radius:14px;background:#11161d;color:#d9dfe6;cursor:pointer;text-align:left}
 .odds-league-filter.active{border-color:#1e66ff;box-shadow:inset 0 0 0 1px #1e66ff;background:#111a27}
@@ -660,6 +679,10 @@ main{min-height:calc(100svh - 68px)}
   .odds-table-row strong{font-size:.68rem}
   .odds-price{font-size:.88rem}
   .odds-page .responsible{padding:12px 18px 0;margin-top:14px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .odds-league-row{transition:none}
 }
 
 /* Formula 1 score cards */
