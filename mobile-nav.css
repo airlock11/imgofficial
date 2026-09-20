@@ -1,0 +1,89 @@
+/* Shared mobile bottom navigation: single source of truth for every IMG page */
+.bottomnav{display:none!important}
+@media(max-width:760px){
+  body{padding-bottom:calc(94px + env(safe-area-inset-bottom))!important}
+  .bottomnav{
+    position:fixed!important;
+    display:grid!important;
+    grid-template-columns:repeat(5,minmax(0,1fr))!important;
+    left:10px!important;
+    right:10px!important;
+    bottom:calc(10px + env(safe-area-inset-bottom))!important;
+    width:auto!important;
+    height:64px!important;
+    min-height:64px!important;
+    margin:0!important;
+    padding:6px 4px!important;
+    gap:0!important;
+    z-index:200!important;
+    border:1px solid rgba(255,255,255,.12)!important;
+    border-radius:18px!important;
+    background:rgba(6,9,13,.94)!important;
+    box-shadow:0 12px 34px rgba(0,0,0,.34)!important;
+    backdrop-filter:blur(16px)!important;
+    -webkit-backdrop-filter:blur(16px)!important;
+    overflow:hidden!important;
+  }
+  .bottomnav a,
+  .bottomnav a.active{
+    position:relative!important;
+    display:grid!important;
+    grid-template-rows:24px 12px!important;
+    place-items:center!important;
+    align-content:center!important;
+    min-width:0!important;
+    min-height:52px!important;
+    height:52px!important;
+    margin:0!important;
+    padding:2px 0!important;
+    gap:4px!important;
+    border:0!important;
+    border-radius:12px!important;
+    background:transparent!important;
+    box-shadow:none!important;
+    color:#a7b0bc!important;
+    text-decoration:none!important;
+    font-family:Inter,Arial,Helvetica,sans-serif!important;
+    font-size:10px!important;
+    line-height:12px!important;
+    font-weight:800!important;
+    letter-spacing:.02em!important;
+    overflow:hidden!important;
+  }
+  .bottomnav a.active{color:#fff!important}
+  .bottomnav a:after,
+  .bottomnav a.active:after{display:none!important;content:none!important}
+  .bottomnav a b,
+  .bottomnav a.active b{
+    display:grid!important;
+    place-items:center!important;
+    width:24px!important;
+    height:24px!important;
+    margin:0!important;
+    padding:0!important;
+    background:transparent!important;
+    color:inherit!important;
+    transform:none!important;
+    line-height:1!important;
+  }
+  .bottomnav .navglyph{
+    display:block!important;
+    width:20px!important;
+    height:20px!important;
+    margin:0!important;
+    background:currentColor!important;
+    opacity:.86!important;
+    mask-position:center!important;
+    mask-repeat:no-repeat!important;
+    mask-size:contain!important;
+    -webkit-mask-position:center!important;
+    -webkit-mask-repeat:no-repeat!important;
+    -webkit-mask-size:contain!important;
+  }
+  .bottomnav a.active .navglyph{opacity:1!important}
+  .bottomnav .icon-home{mask-image:url('icons/home.svg')!important;-webkit-mask-image:url('icons/home.svg')!important}
+  .bottomnav .icon-sports{mask-image:url('icons/sports.svg')!important;-webkit-mask-image:url('icons/sports.svg')!important}
+  .bottomnav .icon-scores{mask-image:url('icons/scores.svg')!important;-webkit-mask-image:url('icons/scores.svg')!important}
+  .bottomnav .icon-news{mask-image:url('icons/news.svg')!important;-webkit-mask-image:url('icons/news.svg')!important}
+  .bottomnav .icon-odds{mask-image:url('icons/odds.svg')!important;-webkit-mask-image:url('icons/odds.svg')!important}
+}
