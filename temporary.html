@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IMG — Coming Soon</title>
+<meta name="description" content="IMG — The next generation of sports data. Our new website is coming soon.">
+<style>
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:#06080c;color:#fff;font-family:Arial,Helvetica,sans-serif;overflow:hidden}
+.page{min-height:100%;position:relative;display:grid;place-items:center;padding:32px 22px;text-align:center;isolation:isolate}
+.page:before{content:"";position:absolute;inset:0;z-index:-3;background:url("./hero-sports-bg.png") center/cover no-repeat;filter:saturate(.8)}
+.page:after{content:"";position:absolute;inset:0;z-index:-2;background:linear-gradient(180deg,rgba(3,5,8,.66),rgba(3,5,8,.88))}
+.glow{position:absolute;inset:0;z-index:-1;background:radial-gradient(circle at 50% 42%,rgba(255,255,255,.08),transparent 34%)}
+.wrap{width:min(760px,100%)}
+.logo{width:min(150px,34vw);height:auto;max-height:72px;object-fit:contain;margin:0 auto 38px;display:block}
+.kicker{font-size:11px;letter-spacing:.34em;font-weight:800;color:#aeb6c2;margin-bottom:18px}
+h1{font-size:clamp(42px,8vw,78px);line-height:.98;letter-spacing:-.045em;margin:0 0 22px}
+.lead{max-width:620px;margin:0 auto;color:#c1c7d0;font-size:clamp(16px,2vw,19px);line-height:1.7}
+.status{display:inline-flex;align-items:center;gap:10px;margin-top:34px;padding:11px 17px;border:1px solid rgba(255,255,255,.18);border-radius:999px;background:rgba(8,11,16,.55);font-size:12px;font-weight:800;letter-spacing:.12em}
+.dot{width:7px;height:7px;border-radius:50%;background:#fff;box-shadow:0 0 12px rgba(255,255,255,.7)}
+.contact{margin-top:30px;color:#8f98a5;font-size:13px}.contact a{color:#fff;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.45);padding-bottom:2px}
+footer{position:absolute;bottom:20px;left:20px;right:20px;color:#69727e;font-size:11px;letter-spacing:.08em}
+@media(max-width:600px){.page{padding:28px 20px 70px}.page:before{background-image:url("./hero-sports-bg-mobile.jpg")}.logo{margin-bottom:30px}.lead{line-height:1.6}.status{margin-top:28px}.contact{margin-top:25px}}
+</style>
+<meta http-equiv="refresh" content="2.5;url=https://www.img.com/">
+<script>setTimeout(function(){window.location.href="https://www.img.com/";},2500);</script>
+</head>
+<body>
+<main class="page">
+<div class="glow"></div>
+<div class="wrap">
+<img class="logo" src="./img-logo-hq.png" alt="IMG" onerror="this.style.display='none';document.getElementById('fallback').style.display='block'">
+<div id="fallback" style="display:none;font-size:48px;font-weight:900;letter-spacing:-3px;margin-bottom:32px">IMG</div>
+<div class="kicker">SPORTS DATA · REIMAGINED</div>
+<h1>The next generation<br>of sports data.</h1>
+<p class="lead">Our new website is currently under development. We're building a better destination for sports data, statistics, leagues, and the latest sports news.</p>
+<div class="status"><span class="dot"></span> COMING SOON</div>
+<div class="contact">Contact us at <a href="mailto:imgglobal@imgofficial.com">imgglobal@imgofficial.com</a></div>
+</div>
+<footer>IMG</footer>
+</main>
+</body>
+</html>
