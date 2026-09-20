@@ -13,6 +13,11 @@ ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "news-data.json"
 UA = "IMG-Sports-News-Updater/1.0 (+https://imgofficial.com)"
 
+VIDEO_FEEDS = [
+    {"name":"BBC Sport","channel_id":"UCW6-BQWFA70Dyyc7ZpZ9Xlg"},
+    {"name":"NBL-Pilipinas","channel_id":"UCJDBLldRGVJPEvyjJdSHefw"},
+]
+
 FEEDS = [
     {"region":"International","sport":"Sports","name":"BBC Sport","url":"https://feeds.bbci.co.uk/sport/rss.xml"},
     {"region":"International","sport":"Sports","name":"ESPN","url":"https://www.espn.com/espn/rss/news"},
@@ -99,9 +104,66 @@ def fetch_feed(cfg):
         })
     return items
 
+
+def fetch_videos():
+    videos = []
+    errors = {}
+    for cfg in VIDEO_FEEDS:
+        url = "https://www.youtube.com/feeds/videos.xml?channel_id=" + cfg["channel_id"]
+        try:
+            parsed = feedparser.parse(
+                url,
+                agent=UA,
+                request_headers={"Accept":"application/atom+xml, application/xml, text/xml, */*"},
+            )
+            added = 0
+            for entry in parsed.entries[:6]:
+                video_id = (
+                    entry.get("yt_videoid")
+                    or entry.get("videoid")
+                    or ""
+                )
+                if not video_id:
+                    link = entry.get("link") or ""
+                    m = re.search(r"(?:v=|youtu\.be/)([A-Za-z0-9_-]{6,})", link)
+                    video_id = m.group(1) if m else ""
+                if not video_id:
+                    continue
+                title = clean_html(entry.get("title"), 180)
+                if not title:
+                    continue
+                videos.append({
+                    "id": video_id,
+                    "title": title,
+                    "source": cfg["name"],
+                    "link": "https://www.youtube.com/watch?v=" + video_id,
+                    "embed": "https://www.youtube.com/embed/" + video_id,
+                    "thumbnail": "https://i.ytimg.com/vi/" + video_id + "/hqdefault.jpg",
+                    "published": published_iso(entry),
+                })
+                added += 1
+                if added >= 3:
+                    break
+            if not added:
+                errors[cfg["name"]] = "No videos returned"
+        except Exception as exc:
+            errors[cfg["name"]] = str(exc)[:180]
+
+    videos.sort(key=lambda x: timestamp(x.get("published","")), reverse=True)
+    unique = []
+    seen = set()
+    for video in videos:
+        if video["id"] in seen:
+            continue
+        seen.add(video["id"])
+        unique.append(video)
+    return unique[:6], errors
+
 def main():
     collected = []
     errors = {}
+    videos, video_errors = fetch_videos()
+    errors.update({"video:" + k: v for k, v in video_errors.items()})
     for cfg in FEEDS:
         try:
             rows = fetch_feed(cfg)
@@ -152,12 +214,14 @@ def main():
             "international": sum(1 for x in selected if x["region"] == "International"),
         },
         "errors": errors,
+        "videos": videos,
         "items": selected,
     }
     OUT.write_text(json.dumps(out, ensure_ascii=False, indent=2) + "\n", "utf-8")
     print(json.dumps({
         "updated_at": out["updated_at"],
         "counts": out["counts"],
+        "videos": len(videos),
         "errors": errors,
     }, ensure_ascii=False))
 
