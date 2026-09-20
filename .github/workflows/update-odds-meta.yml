@@ -1,0 +1,37 @@
+name: Refresh OddsPapi team metadata
+
+on:
+  schedule:
+    - cron: "47 0 1 * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      ODDSPAPI_KEY: ${{ secrets.ODDSPAPI_KEY }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Refresh team-name cache
+        run: python scripts/update_odds_meta.py
+      - name: Commit metadata
+        shell: bash
+        run: |
+          if git diff --quiet -- odds-meta.json; then
+            echo "No metadata changes."
+            exit 0
+          fi
+          git config user.name "IMG Odds Data Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add odds-meta.json
+          git commit -m "Refresh OddsPapi team metadata"
+          git push
