@@ -416,3 +416,7 @@ main{min-height:calc(100svh - 68px)}
 @media(max-width:340px){
   .highlights-btn{padding:6px 9px;gap:5px;font-size:.68rem}
 }
+
+/* Hide successful update timestamps */
+.status:empty{display:none}
+.news-livebar.is-empty{display:none}
