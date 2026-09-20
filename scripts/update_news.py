@@ -151,13 +151,34 @@ def fetch_videos():
 
     videos.sort(key=lambda x: timestamp(x.get("published","")), reverse=True)
     unique = []
-    seen = set()
+    seen_ids = set()
+    seen_titles = set()
     for video in videos:
-        if video["id"] in seen:
+        title_key = re.sub(r"[^a-z0-9]+", " ", video.get("title","").lower()).strip()
+        if video["id"] in seen_ids or (title_key and title_key in seen_titles):
             continue
-        seen.add(video["id"])
+        seen_ids.add(video["id"])
+        if title_key:
+            seen_titles.add(title_key)
         unique.append(video)
-    return unique[:6], errors
+
+    # Put different sources first so the two visible video cards are varied.
+    selected = []
+    used_sources = set()
+    for video in unique:
+        if video["source"] in used_sources:
+            continue
+        selected.append(video)
+        used_sources.add(video["source"])
+        if len(selected) >= 2:
+            break
+    for video in unique:
+        if video not in selected:
+            selected.append(video)
+        if len(selected) >= 6:
+            break
+
+    return selected[:6], errors
 
 def main():
     collected = []
