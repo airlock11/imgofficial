@@ -217,6 +217,35 @@ function ensureLiveDialog(){let d=document.getElementById('liveDialog');if(d)ret
 function openLiveStream(eventId){const g=allGames.find(x=>String(x.eventId)===String(eventId));if(!g||!g.streams?.length)return;const d=ensureLiveDialog(),host=d.querySelector('#liveContent'),stream=g.streams[0];host.innerHTML='<div class="live-head"><div class="live-badge"><span></span>Live</div><h2>'+esc(g.away)+' vs '+esc(g.home)+'</h2><div class="highlight-teams"><span>'+teamLogoMarkup(g.awayLogo,g.away,'highlight-team-logo')+esc(g.away)+'</span><span>'+teamLogoMarkup(g.homeLogo,g.home,'highlight-team-logo')+esc(g.home)+'</span></div></div><div class="live-player-wrap"><iframe class="live-player" src="'+esc(stream.embedUrl)+'" title="'+esc(stream.title||'Live stream')+'" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div><div class="live-meta"><strong>'+esc(stream.title||'Live stream')+'</strong><span>'+esc([stream.provider,stream.channel].filter(Boolean).join(' · '))+'</span></div>'+(g.streams.length>1?'<div class="live-sources">'+g.streams.map((s,i)=>'<button type="button" data-live-source="'+i+'">'+esc(s.provider||'Stream')+(s.channel?' · '+esc(s.channel):'')+'</button>').join('')+'</div>':'');d.querySelectorAll('[data-live-source]').forEach(btn=>btn.addEventListener('click',()=>{const s=g.streams[Number(btn.dataset.liveSource)];const frame=d.querySelector('.live-player');if(s&&frame){frame.src=s.embedUrl;d.querySelector('.live-meta strong').textContent=s.title||'Live stream';d.querySelector('.live-meta span').textContent=[s.provider,s.channel].filter(Boolean).join(' · ')}}));d.showModal()}
 async function hydrateLiveStreams(sport){const snapshot=allGames,now=Date.now(),candidates=snapshot.filter(g=>g.eventId&&(g.state==='live'||(g.state==='scheduled'&&Math.abs(Date.parse(g.date)-now)<=90*60000))).slice(0,4);if(!candidates.length)return;await Promise.allSettled(candidates.map(async g=>{const key=sport+':'+g.eventId,hit=liveStreamCache.get(key);if(hit&&Date.now()-hit.time<120000){g.streams=hit.items;g.streamsChecked=true;return}try{const q=new URLSearchParams({sport,event:g.eventId,home:g.home,away:g.away}),r=await fetch('https://img-api-proxy.magsipocarnie.workers.dev/streams?'+q.toString(),{cache:'no-store'});if(!r.ok)throw 0;const j=await r.json(),items=Array.isArray(j.items)?j.items.filter(x=>x?.embedUrl):[];g.streams=items;g.streamsChecked=true;liveStreamCache.set(key,{time:Date.now(),items})}catch{g.streams=[];g.streamsChecked=true}}));if(allGames===snapshot&&document.getElementById('sportFilter')?.value===sport)renderGames()}
 function normalizeEvent(e){const c=e.competitions?.[0],teams=c?.competitors||[],home=teams.find(x=>x.homeAway==='home')||teams[0],away=teams.find(x=>x.homeAway==='away')||teams[1],state=e.status?.type?.state||'pre',oddsList=(c?.odds||[]).filter(o=>o?.provider?.displayName||o?.provider?.name).map(mapOdds);return{eventId:e.id||c?.id||'',date:e.date,home:home?.team?.displayName||'Home',away:away?.team?.displayName||'Away',homeLogo:teamLogoUrl(home),awayLogo:teamLogoUrl(away),homeScore:home?.score||'—',awayScore:away?.score||'—',status:e.status?.type?.shortDetail||e.status?.type?.description||'Scheduled',state:state==='in'?'live':state==='post'?'final':'scheduled',odds:oddsList[0]||null,oddsList,highlights:[],highlightsChecked:false,streams:[],streamsChecked:false}}
+function gameDomKey(g){
+  const raw=String(g?.eventId||[g?.date||'',g?.away||'',g?.home||''].join('|'));
+  return encodeURIComponent(raw);
+}
+
+function updateScoreNumbers(items=allGames){
+  const map=new Map((items||[]).map(g=>[gameDomKey(g),g]));
+  document.querySelectorAll('#games .game[data-game-key]').forEach(card=>{
+    const g=map.get(card.dataset.gameKey);
+    if(!g)return;
+    const away=card.querySelector('[data-score-side="away"]');
+    const home=card.querySelector('[data-score-side="home"]');
+    if(away&&away.textContent!==String(g.awayScore??'—'))away.textContent=String(g.awayScore??'—');
+    if(home&&home.textContent!==String(g.homeScore??'—'))home.textContent=String(g.homeScore??'—');
+  });
+}
+
+function updateAllLiveScoreNumbers(items){
+  const map=new Map((items||[]).map(g=>[gameDomKey(g),g]));
+  document.querySelectorAll('#allLiveGames .live-game-card[data-game-key]').forEach(card=>{
+    const g=map.get(card.dataset.gameKey);
+    if(!g)return;
+    const away=card.querySelector('[data-score-side="away"]');
+    const home=card.querySelector('[data-score-side="home"]');
+    if(away&&away.textContent!==String(g.awayScore??'—'))away.textContent=String(g.awayScore??'—');
+    if(home&&home.textContent!==String(g.homeScore??'—'))home.textContent=String(g.homeScore??'—');
+  });
+}
+
 function renderAllLiveGames(items){
   const section=document.getElementById('allLiveSection');
   const host=document.getElementById('allLiveGames');
@@ -240,12 +269,12 @@ function renderAllLiveGames(items){
   if(status)status.textContent=live.length+' live';
 
   host.innerHTML=live.map(g=>
-    '<article class="live-game-card">'+
+    '<article class="live-game-card" data-game-key="'+esc(gameDomKey(g))+'">'+
       '<div class="live-card-top"><div class="live-sport-label"><span>'+esc(g.sportLabel||'Sport')+'</span><b>'+esc(g.leagueLabel||'')+'</b></div><span class="live-badge">LIVE</span></div>'+
       '<div class="live-card-time">'+esc(g.displayTime||g.status||'Live')+'</div>'+
       '<div class="live-card-teams">'+
-        '<div class="live-card-team"><span>'+teamLogoMarkup(g.awayLogo,g.away,'live-card-logo')+esc(g.away)+'</span><b>'+esc(g.awayScore)+'</b></div>'+
-        '<div class="live-card-team"><span>'+teamLogoMarkup(g.homeLogo,g.home,'live-card-logo')+esc(g.home)+'</span><b>'+esc(g.homeScore)+'</b></div>'+
+        '<div class="live-card-team"><span>'+teamLogoMarkup(g.awayLogo,g.away,'live-card-logo')+esc(g.away)+'</span><b data-score-side="away">'+esc(g.awayScore)+'</b></div>'+
+        '<div class="live-card-team"><span>'+teamLogoMarkup(g.homeLogo,g.home,'live-card-logo')+esc(g.home)+'</span><b data-score-side="home">'+esc(g.homeScore)+'</b></div>'+
       '</div>'+
       '<div class="live-card-status">'+esc(g.status||'Live')+'</div>'+
     '</article>'
@@ -305,7 +334,8 @@ async function loadAllLiveGames({silent=false}={}){
   }));
 
   await Promise.all([regionalPromise,apiPromise]);
-  renderAllLiveGames(live);
+  if(silent)updateAllLiveScoreNumbers(live);
+  else renderAllLiveGames(live);
 }
 function renderGames(){
   const host=document.getElementById('games');
@@ -328,7 +358,7 @@ function renderGames(){
     items=[...live,...filtered.sort(byDate)].slice(0,20);
   }
 
-  host.innerHTML=items.length?items.map(g=>'<article class="game'+(g.state==='live'?' game-is-live':'')+'"><div class="time">'+esc(g.displayTime||new Date(g.date).toLocaleString([],{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}))+'</div><div class="teams"><div class="team"><span class="team-identity">'+teamLogoMarkup(g.awayLogo,g.away)+'<span>'+esc(g.away)+'</span></span><b>'+esc(g.awayScore)+'</b></div><div class="team"><span class="team-identity">'+teamLogoMarkup(g.homeLogo,g.home)+'<span>'+esc(g.home)+'</span></span><b>'+esc(g.homeScore)+'</b></div></div><div class="state '+(g.state==='live'?'live':'')+'">'+esc(g.status)+'</div>'+(g.streams?.length?'<button class="watch-live-btn" type="button" data-live-event="'+esc(g.eventId)+'"><span class="live-dot" aria-hidden="true"></span>Watch Live</button>':'')+(g.highlights?.length?'<button class="highlights-btn" type="button" data-highlight-event="'+esc(g.eventId)+'"><span class="highlights-btn-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>Highlights <b>'+esc(g.highlights.length)+'</b></button>':'')+(g.odds?'<div class="oddsline"><span>'+esc(g.odds.provider)+'</span><span>Line <b>'+esc(g.odds.details)+'</b></span><span>Total <b>'+esc(g.odds.total)+'</b></span></div>':'')+'</article>').join(''):'<div class="empty">No verified games were returned for this sport right now.</div>';
+  host.innerHTML=items.length?items.map(g=>'<article class="game'+(g.state==='live'?' game-is-live':'')+'" data-game-key="'+esc(gameDomKey(g))+'"><div class="time">'+esc(g.displayTime||new Date(g.date).toLocaleString([],{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}))+'</div><div class="teams"><div class="team"><span class="team-identity">'+teamLogoMarkup(g.awayLogo,g.away)+'<span>'+esc(g.away)+'</span></span><b data-score-side="away">'+esc(g.awayScore)+'</b></div><div class="team"><span class="team-identity">'+teamLogoMarkup(g.homeLogo,g.home)+'<span>'+esc(g.home)+'</span></span><b data-score-side="home">'+esc(g.homeScore)+'</b></div></div><div class="state '+(g.state==='live'?'live':'')+'">'+esc(g.status)+'</div>'+(g.streams?.length?'<button class="watch-live-btn" type="button" data-live-event="'+esc(g.eventId)+'"><span class="live-dot" aria-hidden="true"></span>Watch Live</button>':'')+(g.highlights?.length?'<button class="highlights-btn" type="button" data-highlight-event="'+esc(g.eventId)+'"><span class="highlights-btn-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>Highlights <b>'+esc(g.highlights.length)+'</b></button>':'')+(g.odds?'<div class="oddsline"><span>'+esc(g.odds.provider)+'</span><span>Line <b>'+esc(g.odds.details)+'</b></span><span>Total <b>'+esc(g.odds.total)+'</b></span></div>':'')+'</article>').join(''):'<div class="empty">No verified games were returned for this sport right now.</div>';
 }
 async function loadGames({silent=false}={}){
   if(!document.getElementById('games'))return;
@@ -361,7 +391,7 @@ async function loadGames({silent=false}={}){
       ];
       st.textContent='';
       renderRegionalContext(sport,'live-api');
-      renderGames();
+      if(silent)updateScoreNumbers();else renderGames();
       void hydrateLiveStreams(sport);
       return;
     }
@@ -370,7 +400,7 @@ async function loadGames({silent=false}={}){
       allGames=webGames;
       st.textContent='';
       renderRegionalContext(sport,liveFeedWorked?'web-auto':'web');
-      renderGames();
+      if(silent)updateScoreNumbers();else renderGames();
       return;
     }
   }
@@ -406,7 +436,7 @@ async function loadGames({silent=false}={}){
 
     st.textContent='';
     renderRegionalContext(sport,mode);
-    renderGames();
+    if(silent)updateScoreNumbers();else renderGames();
     if(mode!=='web'){
       void hydrateHighlights(sport);
       void hydrateLiveStreams(sport);
@@ -416,7 +446,7 @@ async function loadGames({silent=false}={}){
       allGames=regionalSnapshotGames(sport);
       st.textContent='';
       renderRegionalContext(sport,'web');
-      renderGames();
+      if(silent)updateScoreNumbers();else renderGames();
     }else{
       renderRegionalContext(sport,'');
       st.textContent='Feed unavailable';
