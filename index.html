@@ -100,7 +100,7 @@ body:before{display:none}
 .photo-stack .p3{width:40%;height:26%}
 .sport-content{margin-bottom:12vh}
 .sport-title{font-size:clamp(3.1rem,16vw,5.7rem);max-width:calc(100vw - 54px);overflow-wrap:normal;word-break:normal}
-.sport-title.long-title{font-size:clamp(2.35rem,11.5vw,4rem);line-height:.88;max-width:82vw}
+.sport-title.long-title{font-size:clamp(2.15rem,10.5vw,3.7rem);line-height:.88;max-width:78vw}
 .sport-line{font-size:.96rem}
 .sport-rail{right:10px}
 .data{padding:100px 0}
@@ -263,7 +263,7 @@ active=next;
 slides.forEach((s,i)=>s.classList.toggle('active',i===active));
 dots.forEach((d,i)=>d.classList.toggle('active',i===active));
 title.textContent=sports[active][0];
-title.classList.toggle('long-title',sports[active][0].length>11);
+title.classList.toggle('long-title',sports[active][0].length>=10);
 athlete.innerHTML=sports[active][1].replace(' · ',' <span>· ')+ '</span>';
 line.textContent=sports[active][2];
 }
