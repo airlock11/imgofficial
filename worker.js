@@ -102,6 +102,77 @@ export default {
     }
 
 
+    if (url.pathname === "/boxing/meta") {
+      const base = { configured: Boolean(env.BOXING_DATA_API_KEY), divisions: boxingDivisions(), sources: boxingOfficialSources() };
+      if (!env.BOXING_DATA_API_KEY) return jsonResponse(base, cors, 3600);
+      const [divisionsResult, organizationsResult] = await Promise.allSettled([
+        boxingApiFetch(env, "/v2/divisions/"),
+        boxingApiFetch(env, "/v2/organizations/"),
+      ]);
+      return jsonResponse({
+        ...base,
+        api_divisions: divisionsResult.status === "fulfilled" ? (divisionsResult.value?.data || []) : [],
+        organizations: organizationsResult.status === "fulfilled" ? (organizationsResult.value?.data || []) : [],
+      }, cors, 3600);
+    }
+
+    if (url.pathname === "/boxing/rankings") {
+      const page = Math.min(Math.max(Number(url.searchParams.get("page_num") || 1), 1), 17);
+      if (!env.BOXING_DATA_API_KEY) return jsonResponse({ configured: false, data: [], page_num: page, sources: boxingOfficialSources() }, cors, 300);
+      try {
+        const data = await boxingApiFetch(env, "/v2/rankings/", { page_num: String(page) });
+        return jsonResponse({ configured: true, ...data, sources: boxingOfficialSources() }, cors, 1800);
+      } catch (_) {
+        return jsonResponse({ configured: true, data: [], error: "Boxing rankings feed unavailable", sources: boxingOfficialSources() }, cors, 120);
+      }
+    }
+
+    if (url.pathname === "/boxing/fighters") {
+      if (!env.BOXING_DATA_API_KEY) return jsonResponse({ configured: false, data: [], sources: boxingOfficialSources() }, cors, 300);
+      const params = {};
+      for (const key of ["name", "division_id", "title_id", "page_num", "page_size"]) {
+        const value = url.searchParams.get(key);
+        if (value) params[key] = value;
+      }
+      params.page_size = String(Math.min(Math.max(Number(params.page_size || 24), 1), 50));
+      params.page_num = String(Math.max(Number(params.page_num || 1), 1));
+      try {
+        const data = await boxingApiFetch(env, "/v2/fighters/", params);
+        return jsonResponse({ configured: true, ...data }, cors, 900);
+      } catch (_) {
+        return jsonResponse({ configured: true, data: [], error: "Boxer directory unavailable" }, cors, 120);
+      }
+    }
+
+    if (url.pathname === "/boxing/fighter") {
+      const id = (url.searchParams.get("id") || "").replace(/[^a-zA-Z0-9_-]/g, "");
+      if (!id || !env.BOXING_DATA_API_KEY) return jsonResponse({ configured: Boolean(env.BOXING_DATA_API_KEY), data: null }, cors, 300);
+      try {
+        const data = await boxingApiFetch(env, `/v2/fighters/${id}`);
+        return jsonResponse({ configured: true, ...data }, cors, 1800);
+      } catch (_) {
+        return jsonResponse({ configured: true, data: null, error: "Boxer profile unavailable" }, cors, 120);
+      }
+    }
+
+    if (url.pathname === "/boxing/fights") {
+      if (!env.BOXING_DATA_API_KEY) return jsonResponse({ configured: false, data: [], sources: boxingOfficialSources() }, cors, 300);
+      const params = {};
+      for (const key of ["date", "data_from", "date_to", "date_sort", "division_id", "event_id", "fighter_id", "page_num", "page_size"]) {
+        const value = url.searchParams.get(key);
+        if (value) params[key] = value;
+      }
+      params.page_size = String(Math.min(Math.max(Number(params.page_size || 24), 1), 50));
+      params.page_num = String(Math.max(Number(params.page_num || 1), 1));
+      if (!params.date_sort) params.date_sort = "DESC";
+      try {
+        const data = await boxingApiFetch(env, "/v2/fights/", params);
+        return jsonResponse({ configured: true, ...data }, cors, 600);
+      } catch (_) {
+        return jsonResponse({ configured: true, data: [], error: "Boxing fight feed unavailable" }, cors, 120);
+      }
+    }
+
     if (url.pathname === "/regional-scores") {
       const leagueKey = (url.searchParams.get("league") || "").trim().toLowerCase();
       const config = regionalLeagueConfig(leagueKey);
@@ -312,6 +383,45 @@ export default {
 };
 
 
+
+function boxingDivisions() {
+  return [
+    { page: 1, name: "Heavyweight" }, { page: 2, name: "Cruiserweight" },
+    { page: 3, name: "Light Heavyweight" }, { page: 4, name: "Super Middleweight" },
+    { page: 5, name: "Middleweight" }, { page: 6, name: "Super Welterweight" },
+    { page: 7, name: "Welterweight" }, { page: 8, name: "Super Lightweight" },
+    { page: 9, name: "Lightweight" }, { page: 10, name: "Super Featherweight" },
+    { page: 11, name: "Featherweight" }, { page: 12, name: "Super Bantamweight" },
+    { page: 13, name: "Bantamweight" }, { page: 14, name: "Super Flyweight" },
+    { page: 15, name: "Flyweight" }, { page: 16, name: "Light Flyweight" },
+    { page: 17, name: "Minimumweight" },
+  ];
+}
+
+function boxingOfficialSources() {
+  return [
+    { body: "WBC", label: "World Boxing Council", url: "https://wbcboxing.com/en/champion-ratings/" },
+    { body: "WBA", label: "World Boxing Association", url: "https://www.wbaboxing.com/wba-ranking" },
+    { body: "IBF", label: "International Boxing Federation", url: "https://www.ibf-usba-boxing.com/ratings/" },
+    { body: "WBO", label: "World Boxing Organization", url: "https://wboboxing.com/rankings/" },
+  ];
+}
+
+async function boxingApiFetch(env, path, params = {}) {
+  if (!env.BOXING_DATA_API_KEY) throw new Error("Boxing API not configured");
+  const endpoint = new URL("https://boxing-data-api.p.rapidapi.com" + path);
+  for (const [key, value] of Object.entries(params)) if (value != null && value !== "") endpoint.searchParams.set(key, String(value));
+  const response = await fetch(endpoint.toString(), {
+    headers: {
+      "X-RapidAPI-Key": env.BOXING_DATA_API_KEY,
+      "X-RapidAPI-Host": "boxing-data-api.p.rapidapi.com",
+      Accept: "application/json",
+    },
+    cf: { cacheTtl: 300, cacheEverything: true },
+  });
+  if (!response.ok) throw new Error(`Boxing API HTTP ${response.status}`);
+  return response.json();
+}
 
 function regionalLeagueConfig(key) {
   const configs = {
