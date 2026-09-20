@@ -246,6 +246,33 @@ function updateAllLiveScoreNumbers(items){
   });
 }
 
+async function refreshExistingAllLiveScores(excludeSport=''){
+  const cards=[...document.querySelectorAll('#allLiveGames .live-game-card[data-sport-key]')];
+  if(!cards.length)return;
+
+  // Reuse the selected league's freshly loaded values instead of fetching it twice.
+  if(excludeSport)updateAllLiveScoreNumbers(allGames);
+
+  const keys=[...new Set(cards.map(card=>card.dataset.sportKey).filter(Boolean))]
+    .filter(key=>key!==excludeSport);
+
+  if(!keys.length)return;
+
+  const updates=[];
+  await Promise.allSettled(keys.map(async key=>{
+    const feed=scoreFeeds[key];
+    if(!feed)return;
+    const r=await fetch(feed,{cache:'no-store'});
+    if(!r.ok)return;
+    const j=await r.json();
+    for(const event of (j.events||[])){
+      const game=normalizeEvent(event);
+      if(game.state==='live')updates.push(game);
+    }
+  }));
+  updateAllLiveScoreNumbers(updates);
+}
+
 function renderAllLiveGames(items){
   const section=document.getElementById('allLiveSection');
   const host=document.getElementById('allLiveGames');
@@ -269,7 +296,7 @@ function renderAllLiveGames(items){
   if(status)status.textContent=live.length+' live';
 
   host.innerHTML=live.map(g=>
-    '<article class="live-game-card" data-game-key="'+esc(gameDomKey(g))+'">'+
+    '<article class="live-game-card" data-game-key="'+esc(gameDomKey(g))+'" data-sport-key="'+esc(g.sportKey||'')+'">'+
       '<div class="live-card-top"><div class="live-sport-label"><span>'+esc(g.sportLabel||'Sport')+'</span><b>'+esc(g.leagueLabel||'')+'</b></div><span class="live-badge">LIVE</span></div>'+
       '<div class="live-card-time">'+esc(g.displayTime||g.status||'Live')+'</div>'+
       '<div class="live-card-teams">'+
@@ -392,7 +419,7 @@ async function loadGames({silent=false}={}){
       st.textContent='';
       renderRegionalContext(sport,'live-api');
       if(silent)updateScoreNumbers();else renderGames();
-      void hydrateLiveStreams(sport);
+      if(!silent)void hydrateLiveStreams(sport);
       return;
     }
 
@@ -437,7 +464,7 @@ async function loadGames({silent=false}={}){
     st.textContent='';
     renderRegionalContext(sport,mode);
     if(silent)updateScoreNumbers();else renderGames();
-    if(mode!=='web'){
+    if(mode!=='web'&&!silent){
       void hydrateHighlights(sport);
       void hydrateLiveStreams(sport);
     }
@@ -584,7 +611,7 @@ if(document.getElementById('games')){
   let scoreRefreshInFlight=false;
 
   const hasLiveScores=()=>allGames.some(g=>g.state==='live')||!document.getElementById('allLiveSection')?.hidden;
-  const nextScoreRefreshDelay=()=>hasLiveScores()?10000:60000;
+  const nextScoreRefreshDelay=()=>2000;
 
   const scheduleScoreAutoRefresh=(delay=nextScoreRefreshDelay())=>{
     clearTimeout(scoreAutoRefreshTimer);
@@ -594,15 +621,14 @@ if(document.getElementById('games')){
 
   async function refreshScoresAutomatically(){
     if(scoreRefreshInFlight){
-      scheduleScoreAutoRefresh(3000);
+      scheduleScoreAutoRefresh(2000);
       return;
     }
     scoreRefreshInFlight=true;
     try{
-      await Promise.allSettled([
-        loadGames({silent:true}),
-        loadAllLiveGames({silent:true})
-      ]);
+      const selectedSport=document.getElementById('sportFilter')?.value||'';
+      await loadGames({silent:true});
+      await refreshExistingAllLiveScores(selectedSport);
     }finally{
       scoreRefreshInFlight=false;
       scheduleScoreAutoRefresh();
