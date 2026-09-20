@@ -2,44 +2,260 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>IMG — Coming Soon</title>
-<meta name="description" content="IMG — The next generation of sports data. Our new website is coming soon.">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>IMG — Global Sports Platform</title>
+<meta name="description" content="IMG is a global sports platform bringing scores, league information, sports data, market information and current reporting together in one digital destination.">
 <style>
+:root{--bg:#05070a;--fg:#f4f6f8;--muted:#9ca6b4;--line:rgba(255,255,255,.13);--accent:#ef3f45}
 *{box-sizing:border-box}
-html,body{height:100%}
-body{margin:0;background:#06080c;color:#fff;font-family:Arial,Helvetica,sans-serif;overflow:hidden}
-.page{min-height:100%;position:relative;display:grid;place-items:center;padding:32px 22px;text-align:center;isolation:isolate}
-.page:before{content:"";position:absolute;inset:0;z-index:-3;background:url("./hero-sports-bg.png") center/cover no-repeat;filter:saturate(.8)}
-.page:after{content:"";position:absolute;inset:0;z-index:-2;background:linear-gradient(180deg,rgba(3,5,8,.66),rgba(3,5,8,.88))}
-.glow{position:absolute;inset:0;z-index:-1;background:radial-gradient(circle at 50% 42%,rgba(255,255,255,.08),transparent 34%)}
-.wrap{width:min(760px,100%)}
-.logo{width:min(150px,34vw);height:auto;max-height:72px;object-fit:contain;margin:0 auto 38px;display:block}
-.kicker{font-size:11px;letter-spacing:.34em;font-weight:800;color:#aeb6c2;margin-bottom:18px}
-h1{font-size:clamp(42px,8vw,78px);line-height:.98;letter-spacing:-.045em;margin:0 0 22px}
-.lead{max-width:620px;margin:0 auto;color:#c1c7d0;font-size:clamp(16px,2vw,19px);line-height:1.7}
-.status{display:inline-flex;align-items:center;gap:10px;margin-top:34px;padding:11px 17px;border:1px solid rgba(255,255,255,.18);border-radius:999px;background:rgba(8,11,16,.55);font-size:12px;font-weight:800;letter-spacing:.12em}
-.dot{width:7px;height:7px;border-radius:50%;background:#fff;box-shadow:0 0 12px rgba(255,255,255,.7)}
-.contact{margin-top:30px;color:#8f98a5;font-size:13px}.contact a{color:#fff;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.45);padding-bottom:2px}
-footer{position:absolute;bottom:20px;left:20px;right:20px;color:#69727e;font-size:11px;letter-spacing:.08em}
-@media(max-width:600px){.page{padding:28px 20px 70px}.page:before{background-image:url("./hero-sports-bg-mobile.jpg")}.logo{margin-bottom:30px}.lead{line-height:1.6}.status{margin-top:28px}.contact{margin-top:25px}}
+html{background:var(--bg);scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:Inter,Arial,Helvetica,sans-serif;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:90;background:radial-gradient(500px circle at var(--mx,50%) var(--my,30%),rgba(255,255,255,.05),transparent 58%)}
+img{display:block;max-width:100%}
+.logo-mark{position:fixed;z-index:80;top:22px;left:clamp(18px,4vw,52px);width:86px;height:34px;object-fit:contain}
+.progress{position:fixed;z-index:85;left:0;top:0;height:2px;width:100%;background:rgba(255,255,255,.08)}
+.progress span{display:block;height:100%;width:100%;transform:scaleX(0);transform-origin:left;background:var(--accent)}
+.section{position:relative;min-height:100svh;display:grid;align-items:center;overflow:hidden}
+.shell{width:min(1180px,calc(100% - 48px));margin:auto;position:relative;z-index:3}
+.eyebrow{font-size:.7rem;letter-spacing:.28em;text-transform:uppercase;font-weight:800;color:#b3bcc8}
+.eyebrow:before{content:"";display:inline-block;width:28px;height:2px;background:var(--accent);margin:0 12px 3px 0}
+.hero{min-height:100svh;isolation:isolate}
+.hero-bg{position:absolute;inset:-6%;z-index:-3;background:url("./hero-sports-bg.png") center 38%/cover no-repeat;transform:scale(1.06)}
+.hero:after{content:"";position:absolute;inset:0;z-index:-2;background:linear-gradient(90deg,rgba(2,4,7,.94) 4%,rgba(2,4,7,.72) 45%,rgba(2,4,7,.22) 75%),linear-gradient(0deg,#05070a 0%,transparent 34%)}
+.hero-copy{max-width:840px;padding-top:10vh}
+.hero h1{font-size:clamp(4.7rem,11vw,10rem);line-height:.76;letter-spacing:-.06em;text-transform:uppercase;margin:22px 0 26px;font-weight:900}
+.hero h1 .outline{color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,.75)}
+.hero p{max-width:650px;color:#bac3cd;font-size:clamp(1rem,1.5vw,1.22rem);line-height:1.7;margin:0}
+.scroll-hint{position:absolute;left:clamp(24px,4vw,52px);bottom:34px;z-index:4;color:#808a97;font-size:.64rem;letter-spacing:.22em;text-transform:uppercase;writing-mode:vertical-rl}
+.scroll-hint:after{content:"";display:block;width:1px;height:58px;background:linear-gradient(var(--accent),transparent);margin:12px auto 0}
+.story{background:#05070a}
+.story-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(40px,8vw,110px);align-items:center}
+.story-copy h2,.data-copy h2,.world-copy h2{font-size:clamp(3.4rem,8vw,7rem);line-height:.83;letter-spacing:-.05em;text-transform:uppercase;margin:18px 0 28px}
+.story-copy p,.data-copy p,.world-copy p{color:#aab3bf;font-size:clamp(1rem,1.4vw,1.16rem);line-height:1.8;max-width:620px}
+.photo-stack{position:relative;height:min(70svh,700px);min-height:480px}
+.photo-stack img{position:absolute;object-fit:cover;border-radius:4px;filter:saturate(.8) contrast(1.05)}
+.photo-stack .p1{width:76%;height:72%;right:0;top:0}
+.photo-stack .p2{width:46%;height:46%;left:0;bottom:0;border:10px solid #05070a}
+.photo-stack .p3{width:34%;height:29%;right:8%;bottom:0;border:8px solid #05070a}
+.sports-story{min-height:500svh;background:#030507}
+.sports-sticky{position:sticky;top:0;height:100svh;overflow:hidden;display:grid;align-items:end}
+.sport-bg{position:absolute;inset:0}
+.sport-bg:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(3,5,7,.97),rgba(3,5,7,.2) 62%,rgba(3,5,7,.52))}
+.sport-slide{position:absolute;inset:-3%;background-position:center;background-size:cover;opacity:0;transform:scale(1.08);transition:opacity .7s ease}
+.sport-slide.active{opacity:1}
+.sport-content{position:relative;z-index:2;width:min(1180px,calc(100% - 48px));margin:0 auto 8vh}
+.sport-index{font-size:.7rem;letter-spacing:.24em;color:#9da7b4;margin-bottom:12px}
+.sport-title{font-size:clamp(5rem,14vw,12rem);line-height:.75;letter-spacing:-.055em;text-transform:uppercase;margin:0;font-weight:900}
+.sport-line{margin-top:22px;color:#c4cbd3;font-size:clamp(1rem,1.4vw,1.2rem);max-width:540px;line-height:1.6}
+.sport-rail{position:absolute;z-index:3;right:clamp(18px,4vw,52px);top:50%;transform:translateY(-50%);display:grid;gap:10px}
+.sport-dot{width:3px;height:26px;background:rgba(255,255,255,.18);transition:height .3s,background .3s}
+.sport-dot.active{height:48px;background:var(--accent)}
+.data{min-height:120svh;background:#080b10}
+.data-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(50px,8vw,120px);align-items:center}
+.word-field{display:grid;border-top:1px solid var(--line)}
+.word{font-size:clamp(2.8rem,6.5vw,6rem);font-weight:900;letter-spacing:-.045em;text-transform:uppercase;padding:18px 0;border-bottom:1px solid var(--line);color:#5e6671;transform:translateX(0);transition:color .35s}
+.word.hot{color:#fff}
+.world{min-height:120svh;isolation:isolate}
+.world:before{content:"";position:absolute;inset:-8%;z-index:-3;background:url("./football.jpg") center/cover no-repeat;filter:saturate(.45) brightness(.55);transform:scale(1.08)}
+.world:after{content:"";position:absolute;inset:0;z-index:-2;background:linear-gradient(90deg,#05070af0,#05070a83 62%,#05070a40),linear-gradient(0deg,#05070a,transparent 30%,transparent 70%,#05070a)}
+.world-copy{max-width:860px}
+.world-copy h2 span{display:block;color:transparent;-webkit-text-stroke:1.2px rgba(255,255,255,.72)}
+.marquee{position:absolute;left:0;right:0;bottom:10vh;overflow:hidden;white-space:nowrap;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px 0}
+.marquee-track{display:inline-block;font-size:clamp(1.3rem,3vw,2.5rem);font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:#7f8894;will-change:transform}
+.closing{min-height:110svh;text-align:center;background:#030507}
+.closing .shell{display:grid;justify-items:center}
+.closing-logo{width:min(250px,46vw);margin-bottom:42px}
+.closing h2{font-size:clamp(4rem,10vw,8rem);line-height:.8;letter-spacing:-.055em;text-transform:uppercase;margin:0 0 28px}
+.closing h2 span{display:block;color:transparent;-webkit-text-stroke:1.2px rgba(255,255,255,.7)}
+.closing p{color:#9da7b4;font-size:clamp(.95rem,1.3vw,1.08rem);line-height:1.75;max-width:640px}
+.contact{margin-top:40px;color:#d8dde3;font-size:.8rem;letter-spacing:.08em}
+.reveal{opacity:0;transform:translateY(38px);transition:opacity .85s ease,transform .85s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media(max-width:760px){
+body:before{display:none}
+.logo-mark{top:16px;left:18px;width:76px}
+.shell,.sport-content{width:calc(100% - 32px)}
+.hero-bg{background-image:url("./hero-sports-bg-mobile.jpg");background-position:center top}
+.hero:after{background:linear-gradient(0deg,#05070a 2%,rgba(5,7,10,.78) 46%,rgba(5,7,10,.22) 78%)}
+.hero-copy{align-self:end;padding:0 0 100px}
+.hero h1{font-size:clamp(4rem,20vw,6rem)}
+.hero p{font-size:.98rem;line-height:1.6}
+.scroll-hint{display:none}
+.story{padding:90px 0}
+.story-grid,.data-grid{grid-template-columns:1fr}
+.photo-stack{height:520px;min-height:0}
+.photo-stack .p1{width:86%;height:65%}
+.photo-stack .p2{width:55%;height:42%}
+.photo-stack .p3{width:40%;height:26%}
+.sport-content{margin-bottom:12vh}
+.sport-title{font-size:clamp(4rem,21vw,7rem)}
+.sport-line{font-size:.96rem}
+.sport-rail{right:10px}
+.data{padding:100px 0}
+.world{min-height:110svh}
+.marquee{bottom:7vh}
+.closing{padding:120px 0}
+}
+@media(prefers-reduced-motion:reduce){
+html{scroll-behavior:auto}
+.reveal{opacity:1;transform:none;transition:none}
+.sport-slide{transition:none}
+}
 </style>
-<meta http-equiv="refresh" content="2.5;url=https://www.img.com/">
-<script>setTimeout(function(){window.location.href="https://www.img.com/";},2500);</script>
 </head>
 <body>
-<main class="page">
-<div class="glow"></div>
-<div class="wrap">
-<img class="logo" src="./img-logo-hq.png" alt="IMG" onerror="this.style.display='none';document.getElementById('fallback').style.display='block'">
-<div id="fallback" style="display:none;font-size:48px;font-weight:900;letter-spacing:-3px;margin-bottom:32px">IMG</div>
-<div class="kicker">SPORTS DATA · REIMAGINED</div>
-<h1>The next generation<br>of sports data.</h1>
-<p class="lead">Our new website is currently under development. We're building a better destination for sports data, statistics, leagues, and the latest sports news.</p>
-<div class="status"><span class="dot"></span> COMING SOON</div>
-<div class="contact">Contact us at <a href="mailto:imgglobal@imgofficial.com">imgglobal@imgofficial.com</a></div>
+<div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+<img class="logo-mark" src="./img-logo-hq.png" alt="IMG">
+<main>
+<section class="section hero">
+<div class="hero-bg" data-parallax="0.16"></div>
+<div class="shell hero-copy">
+<div class="eyebrow reveal">Global sports platform</div>
+<h1 class="reveal">Sport.<br><span class="outline">In focus.</span></h1>
+<p class="reveal">Connecting people to the games, competitions and stories shaping sport around the world.</p>
 </div>
-<footer>IMG</footer>
+<div class="scroll-hint">Scroll to explore</div>
+</section>
+
+<section class="section story">
+<div class="shell story-grid">
+<div class="story-copy">
+<div class="eyebrow reveal">Who we are</div>
+<h2 class="reveal">We see the whole game.</h2>
+<p class="reveal">IMG is a global sports platform bringing scores, league information, sports data, market information and current reporting together in one digital destination.</p>
+<p class="reveal">Built around the global sporting landscape, IMG gives audiences a clearer way to follow the competitions that matter.</p>
+</div>
+<div class="photo-stack" data-depth>
+<img class="p1" src="./basketball.jpg" alt="Basketball competition">
+<img class="p2" src="./motorsports.jpg" alt="Motorsport competition">
+<img class="p3" src="./tennis.jpg" alt="Tennis competition">
+</div>
+</div>
+</section>
+
+<section class="sports-story" id="sportsStory">
+<div class="sports-sticky">
+<div class="sport-bg" aria-hidden="true">
+<div class="sport-slide active" style="background-image:url('./basketball.jpg')"></div>
+<div class="sport-slide" style="background-image:url('./football.jpg')"></div>
+<div class="sport-slide" style="background-image:url('./tennis.jpg')"></div>
+<div class="sport-slide" style="background-image:url('./baseball.jpg')"></div>
+<div class="sport-slide" style="background-image:url('./motorsports.jpg')"></div>
+<div class="sport-slide" style="background-image:url('./combat.jpg')"></div>
+<div class="sport-slide" style="background-image:url('./hockey.jpg')"></div>
+<div class="sport-slide" style="background-image:url('./volleyball.jpg')"></div>
+<div class="sport-slide" style="background-image:url('./cricket.jpg')"></div>
+<div class="sport-slide" style="background-image:url('./american.jpg')"></div>
+</div>
+<div class="sport-content">
+<div class="sport-index" id="sportIndex">01 / 10</div>
+<h2 class="sport-title" id="sportTitle">Basketball</h2>
+<p class="sport-line" id="sportLine">From major professional leagues to international competition.</p>
+</div>
+<div class="sport-rail" id="sportRail" aria-hidden="true"></div>
+</div>
+</section>
+
+<section class="section data">
+<div class="shell data-grid">
+<div class="data-copy">
+<div class="eyebrow reveal">The platform</div>
+<h2 class="reveal">More than the score.</h2>
+<p class="reveal">Every competition creates information. IMG brings the essential parts of the sports experience together so audiences can understand what is happening, where it is happening and what comes next.</p>
+</div>
+<div class="word-field" id="wordField">
+<div class="word">Scores.</div>
+<div class="word">Schedules.</div>
+<div class="word">Statistics.</div>
+<div class="word">League data.</div>
+<div class="word">Markets.</div>
+<div class="word">Stories.</div>
+</div>
+</div>
+</section>
+
+<section class="section world">
+<div class="shell world-copy">
+<div class="eyebrow reveal">Worldwide</div>
+<h2 class="reveal">Built for a <span>world of sport.</span></h2>
+<p class="reveal">Different countries. Different leagues. Different games. One global platform. IMG follows sport wherever it happens.</p>
+</div>
+<div class="marquee" aria-hidden="true"><div class="marquee-track" id="marqueeTrack">BASKETBALL · FOOTBALL · TENNIS · BASEBALL · MOTORSPORT · COMBAT SPORTS · HOCKEY · VOLLEYBALL · CRICKET · AMERICAN FOOTBALL · BASKETBALL · FOOTBALL · TENNIS · BASEBALL · MOTORSPORT ·</div></div>
+</section>
+
+<section class="section closing">
+<div class="shell">
+<img class="closing-logo reveal" src="./img-logo-hq.png" alt="IMG">
+<h2 class="reveal">Sport never stops.<span>Neither does the story.</span></h2>
+<p class="reveal">IMG — the next generation of sports data. A global destination built around the movement, information and stories of sport.</p>
+<div class="contact reveal">imgglobal@imgofficial.com</div>
+</div>
+</section>
 </main>
+
+<script>
+(()=>{
+const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const root=document.documentElement;
+const progress=document.getElementById('progressBar');
+const heroBg=document.querySelector('.hero-bg');
+const story=document.getElementById('sportsStory');
+const slides=[...document.querySelectorAll('.sport-slide')];
+const title=document.getElementById('sportTitle');
+const line=document.getElementById('sportLine');
+const index=document.getElementById('sportIndex');
+const rail=document.getElementById('sportRail');
+const marquee=document.getElementById('marqueeTrack');
+const words=[...document.querySelectorAll('.word')];
+const sports=[
+['Basketball','From major professional leagues to international competition.'],
+['Football','The world’s game, followed across borders and continents.'],
+['Tennis','Tours, tournaments and defining moments across the global calendar.'],
+['Baseball','Tradition, statistics and competition across major baseball markets.'],
+['Motorsport','Speed, engineering and racing across the world’s leading series.'],
+['Combat Sports','Fights, athletes and promotions on the international stage.'],
+['Hockey','Fast-moving competition across professional and international ice hockey.'],
+['Volleyball','Club and international volleyball across growing global audiences.'],
+['Cricket','One of the world’s biggest sports, followed across formats and nations.'],
+['American Football','Professional and collegiate competition with a global audience.']
+];
+sports.forEach((_,i)=>{const d=document.createElement('span');d.className='sport-dot'+(i===0?' active':'');rail.appendChild(d)});
+const dots=[...rail.children];
+const revealObs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.16});
+document.querySelectorAll('.reveal').forEach(el=>revealObs.observe(el));
+let active=-1,ticking=false;
+function paint(){
+ticking=false;
+const y=scrollY,max=document.documentElement.scrollHeight-innerHeight;
+progress.style.transform='scaleX('+(max>0?Math.min(1,y/max):0)+')';
+if(!reduced&&heroBg)heroBg.style.transform='translate3d(0,'+(y*.08)+'px,0) scale(1.07)';
+const r=story.getBoundingClientRect();
+const travel=Math.max(1,story.offsetHeight-innerHeight);
+const local=Math.max(0,Math.min(1,-r.top/travel));
+const next=Math.min(sports.length-1,Math.floor(local*sports.length));
+if(next!==active){
+active=next;
+slides.forEach((s,i)=>s.classList.toggle('active',i===active));
+dots.forEach((d,i)=>d.classList.toggle('active',i===active));
+title.textContent=sports[active][0];
+line.textContent=sports[active][1];
+index.textContent=String(active+1).padStart(2,'0')+' / '+String(sports.length).padStart(2,'0');
+}
+if(!reduced){
+slides.forEach((s,i)=>{if(i===active)s.style.transform='scale('+(1.08-local*.035)+')'});
+marquee.style.transform='translate3d('+(-y*.08)+'px,0,0)';
+const mid=innerHeight*.58;
+words.forEach(w=>{const b=w.getBoundingClientRect();w.classList.toggle('hot',Math.abs((b.top+b.height/2)-mid)<innerHeight*.18)});
+}
+}
+function requestPaint(){if(!ticking){ticking=true;requestAnimationFrame(paint)}}
+addEventListener('scroll',requestPaint,{passive:true});
+addEventListener('resize',requestPaint,{passive:true});
+if(!reduced&&matchMedia('(pointer:fine)').matches){
+addEventListener('pointermove',e=>{root.style.setProperty('--mx',e.clientX+'px');root.style.setProperty('--my',e.clientY+'px')},{passive:true});
+}
+requestPaint();
+})();
+</script>
 </body>
 </html>
