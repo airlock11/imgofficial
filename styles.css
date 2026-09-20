@@ -588,6 +588,12 @@ main{min-height:calc(100svh - 68px)}
   linear-gradient(135deg,#f7f9fb,#eef2f6)}
 :root[data-theme="light"] .odds-league-name,:root[data-theme="light"] .odds-hero-team{color:#11161d}
 :root[data-theme="light"] .odds-game-time{color:#64707c}
+:root[data-theme="light"] .odds-team-fallback{
+  color:#11161d;
+  background:#ffffff;
+  border-color:#cbd3dc;
+  box-shadow:0 2px 8px rgba(17,24,39,.08);
+}
 :root[data-theme="light"] .odds-market-card{background:#fff}
 :root[data-theme="light"] .odds-market-tabs button{background:#eef2f6;color:#313a44;border-color:#d9e0e7}
 :root[data-theme="light"] .odds-market-tabs button.active{background:#0d54e8;color:#fff;border-color:#0d54e8}
