@@ -569,9 +569,11 @@ def nbl_youtube_public_metadata(video_id):
         return {}
     url = "https://www.youtube.com/watch?v=" + urllib.parse.quote(video_id)
     try:
-        page = fetch(url)
+        req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept-Language": "en-US,en;q=0.9"})
+        with urllib.request.urlopen(req, timeout=8) as response:
+            page = response.read(2 * 1024 * 1024).decode("utf-8", errors="replace")
     except Exception:
-        return {}
+        return {"watchUrl": url}
     title = ""
     m = re.search(r'<meta\s+name="title"\s+content="([^"]*)"', page, re.I)
     if not m:
@@ -615,7 +617,7 @@ def parse_nbl_youtube_feed():
         return games
 
     soup = BeautifulSoup(xml, "xml")
-    for entry in soup.find_all("entry")[:20]:
+    for entry in soup.find_all("entry")[:15]:
         feed_title = entry.title.get_text(" ", strip=True) if entry.title else ""
         video_tag = entry.find("videoId")
         video_id = video_tag.get_text(strip=True) if video_tag else ""
