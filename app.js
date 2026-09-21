@@ -1533,94 +1533,13 @@ function liveNowItemIsCurrent(g){
 }
 
 function renderAllLiveGames(items,{preserveItems=false}={}){
-  const section=document.getElementById('allLiveSection');
-  const host=document.getElementById('allLiveGames');
-  const status=document.getElementById('allLiveStatus');
-  if(!host||!section)return;
-
   if(!preserveItems)liveNowItems=[...items];
   liveNowItems=liveNowItems.filter(liveNowItemIsCurrent);
-
-  const live=[...liveNowItems].sort((a,b)=>{
-    const as=a.sportLabel||'Sport',bs=b.sportLabel||'Sport';
-    return liveSportOrder(as)-liveSportOrder(bs)||as.localeCompare(bs)||(a.leagueLabel||'').localeCompare(b.leagueLabel||'')||((Date.parse(a.date||'')||0)-(Date.parse(b.date||'')||0));
-  });
-
-  if(!live.length){
-    // Live Now must mirror the latest feed. When every event has ended,
-    // remove stale cards immediately and hide the section.
-    liveNowItems=[];
-    liveNowLocked=false;
-    host.innerHTML='';
-    section.hidden=true;
-    setMobileLiveExpanded(false);
-    const mobileCount=document.getElementById('mobileLiveCount');
-    if(mobileCount)mobileCount.textContent='';
-    if(status)status.textContent='';
-    renderScoreLeagueFilters();
-    if(document.getElementById('games'))renderGames();
-    return;
-  }
-
-  section.hidden=false;
-  liveNowLocked=true;
-  ensureMobileLiveToggle();
-  renderLiveSportSorter(live);
-
-  const visible=liveSportFilter==='all'?live:live.filter(g=>(g.sportLabel||'Sport')===liveSportFilter);
-  // Exact livestream links are data-driven. Keep them attached during rendering so
-  // WATCH NOW is never lost when Live Now refreshes/re-renders.
-  for(const g of visible){
-    if(g.sportKey==='asian_games'&&(!Array.isArray(g.streams)||!g.streams.length)){
-      const exactAsianGames=liveNowItems.find(x=>String(x.eventId)===String(g.eventId)&&Array.isArray(x.streams)&&x.streams.length);
-      if(exactAsianGames)g.streams=exactAsianGames.streams;
-    }
-  }
-  if(status)status.innerHTML='<span class="live-count-dot" aria-hidden="true"></span><span>'+visible.length+' live</span>';
-  const mobileCount=document.getElementById('mobileLiveCount');
-  if(mobileCount)mobileCount.textContent=visible.length+' live';
-
-  host.innerHTML=visible.map(g=>{
-    if(g.isRacing){
-      const place=[g.raceCircuit,g.raceCity].filter(Boolean).join(' · ');
-      return '<article class="live-game-card race-live-card" data-game-key="'+esc(gameDomKey(g))+'" data-sport-key="'+esc(g.sportKey||'')+'">'+
-        '<div class="live-card-top"><div class="live-sport-label"><span>Motorsport</span><b>Formula 1</b></div></div>'+
-        '<div class="race-live-title">'+esc(g.raceTitle||g.home)+'</div>'+
-        '<div class="race-live-session">'+esc(g.raceSession||g.away)+'</div>'+
-        (place?'<div class="live-card-time">'+esc(place)+'</div>':'')+
-        '<div class="live-card-status">'+esc(g.status||'Live')+'</div>'+
-      '</article>';
-    }
-    return '<article class="live-game-card" data-game-key="'+esc(gameDomKey(g))+'" data-sport-key="'+esc(g.sportKey||'')+'">'+
-      '<div class="live-card-top"><div class="live-sport-label"><span>'+esc(g.sportLabel||'Sport')+'</span><b>'+esc(g.leagueLabel||'')+'</b></div></div>'+
-      '<div class="live-card-time">'+esc(g.displayTime||g.status||'Live')+'</div>'+
-      (g.sportKey==='asian_games'&&g.title?'<div class="live-card-event">'+esc(asianGamesEventLabel(g))+'</div>':'')+
-      '<div class="live-card-teams">'+
-        '<div class="live-card-team"><span>'+teamLogoMarkup(g.awayLogo,g.away,'live-card-logo')+esc(g.away)+'</span><b data-score-side="away">'+esc(g.awayScore)+'</b></div>'+
-        '<div class="live-card-team"><span>'+teamLogoMarkup(g.homeLogo,g.home,'live-card-logo')+esc(g.home)+'</span><b data-score-side="home">'+esc(g.homeScore)+'</b></div>'+
-      '</div>'+
-      '<div class="live-card-status">'+esc(g.status||'Live')+'</div>'+
-      (liveStreamsForGame(g).length?'<button type="button" class="live-watch-btn" data-live-event="'+esc(g.eventId)+'" aria-label="Watch '+esc(g.leagueLabel||g.sportLabel||'live event')+' now"><span class="live-watch-pulse" aria-hidden="true"></span><span class="live-watch-copy"><strong>WATCH NOW</strong><small>'+esc(g.streams[0]?.channel||g.streams[0]?.provider||'Live stream')+'</small></span><span class="live-watch-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 6v12l9-6z"/></svg></span></button>':'')+
-    '</article>';
-  }).join('');
+  liveNowLocked=liveNowItems.length>0;
   renderScoreLeagueFilters();
   if(document.getElementById('games'))renderGames();
 }
-
 async function loadAllLiveGames({silent=false}={}){
-  const host=document.getElementById('allLiveGames');
-  const status=document.getElementById('allLiveStatus');
-  if(!host)return;
-  const section=document.getElementById('allLiveSection');
-  if(host.querySelector('.live-game-card')){
-    liveNowLocked=true;
-    if(section)section.hidden=false;
-  }
-
-  if(!silent&&!host.querySelector('.live-game-card')){
-    if(status)status.textContent='Checking live games';
-  }
-
   const live=[];
   const webKeys=['pba','mpbl','nbl','nblaus','vba'];
   const apiKeys=['soccer','laliga','seriea','bundesliga','champions','mls','pfl','basketball','wnba','atp','wta','australian_open','wimbledon','us_open','ipl','bigbash','cricket_world_cup','volleyball_w','volleyball_m','pvl','vleague_jp','f1','motogp','formulae','ufc','one','wbc','wba','ibf','wbo','ring','baseball','npb','kbo','hockey','khl','iihf','football','ncaaf','bleague','euroleague'];
@@ -2463,7 +2382,7 @@ if(document.getElementById('games')){
   let scoreAutoRefreshTimer=0;
   let scoreRefreshInFlight=false;
 
-  const hasLiveScores=()=>allGames.some(g=>g.state==='live')||!document.getElementById('allLiveSection')?.hidden;
+  const hasLiveScores=()=>allGames.some(g=>g.state==='live')||liveNowItems.some(liveNowItemIsCurrent);
   const nextScoreRefreshDelay=()=>hasLiveScores()?15000:30000;
 
   const scheduleScoreAutoRefresh=(delay=nextScoreRefreshDelay())=>{
