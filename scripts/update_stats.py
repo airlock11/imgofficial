@@ -360,7 +360,11 @@ def espn_leader_group(sport,league,title,suffix,sort_field,stat_aliases,season=N
     if category:params["category"]=category
     url=base+"?"+urllib.parse.urlencode(params)
     data=fetch_json(url)
+    aliases={str(x).lower() for x in stat_aliases}
+    aliases.add(str(sort_field).split(".")[-1].lower())
     rows=[]
+
+    category_defs=data.get("categories",[]) or []
     for item in data.get("athletes",[]) or []:
         athlete=item.get("athlete") or {}
         player=clean(athlete.get("displayName") or athlete.get("fullName") or athlete.get("shortName"))
@@ -371,25 +375,65 @@ def espn_leader_group(sport,league,title,suffix,sort_field,stat_aliases,season=N
         else:
             team=""
         team=team or clean(athlete.get("teamShortName") or athlete.get("teamAbbreviation"))
-        chosen=None
+
+        chosen_value=None
+        chosen_display=""
+
+        # Newer common/v3 response shape.
         stats=item.get("statistics",[]) or []
         for stat in stats:
-            if clean(stat.get("name")).lower() in {str(x).lower() for x in stat_aliases}:
-                chosen=stat;break
-        if chosen is None and len(stats)==1:
-            chosen=stats[0]
-        if chosen is None:continue
-        value=chosen.get("value")
-        if value is None:value=chosen.get("displayValue")
-        parsed=num(value)
+            if clean(stat.get("name")).lower() in aliases:
+                chosen_value=stat.get("value")
+                if chosen_value is None:chosen_value=stat.get("displayValue")
+                chosen_display=clean(stat.get("displayValue"))
+                break
+        if chosen_value is None and len(stats)==1:
+            stat=stats[0]
+            chosen_value=stat.get("value")
+            if chosen_value is None:chosen_value=stat.get("displayValue")
+            chosen_display=clean(stat.get("displayValue"))
+
+        # Older/common alternate response shape: top-level category definitions
+        # plus athlete.categories[].totals.
+        if chosen_value is None:
+            item_categories=item.get("categories",[]) or []
+            for idx,cat in enumerate(item_categories):
+                meta=category_defs[idx] if idx<len(category_defs) else {}
+                names=meta.get("names") or cat.get("names") or []
+                labels=meta.get("labels") or cat.get("labels") or []
+                displays=meta.get("displayNames") or cat.get("displayNames") or []
+                totals=cat.get("totals") or []
+                normalized=[clean(x).lower() for x in names]
+                match_idx=None
+                for alias in aliases:
+                    if alias in normalized:
+                        match_idx=normalized.index(alias);break
+                if match_idx is None:
+                    # Some feeds omit canonical names but expose short labels/display names.
+                    combined=[clean(x).lower() for x in displays]
+                    for alias in aliases:
+                        if alias in combined:
+                            match_idx=combined.index(alias);break
+                if match_idx is None:
+                    alias_tokens={re.sub(r"[^a-z0-9]","",x) for x in aliases}
+                    compact=[re.sub(r"[^a-z0-9]","",clean(x).lower()) for x in labels]
+                    for token in alias_tokens:
+                        if token in compact:
+                            match_idx=compact.index(token);break
+                if match_idx is not None and match_idx<len(totals):
+                    chosen_value=totals[match_idx]
+                    chosen_display=clean(totals[match_idx])
+                    break
+
+        parsed=num(chosen_value)
         if parsed is None:continue
         rows.append({
             "player":player,"team":team,"gp":None,
-            "value":parsed,"displayValue":clean(chosen.get("displayValue")) or display_number(parsed)
+            "value":parsed,"displayValue":chosen_display or display_number(parsed)
         })
+
     if not rows:
-        sample=(data.get("athletes") or [None])[0]
-        raise ValueError(f"No ESPN {league} {title} leaders returned keys={list(data.keys())} athletes={len(data.get('athletes',[]) or [])} sample={json.dumps(sample,ensure_ascii=False)[:700]}")
+        raise ValueError(f"No ESPN {league} {title} leaders returned")
     return {"title":title,"suffix":suffix,"rows":rows[:8],"sourceUrl":url}
 
 def espn_multi_group_stats(sport,league,label,season_label,season,definitions):
