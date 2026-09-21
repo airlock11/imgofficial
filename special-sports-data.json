@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-21T08:00:00Z",
+  "updated_at": "2026-09-21T07:58:38.593Z",
   "source": "Official sports websites",
   "leagues": {
     "atp": {
@@ -186,7 +186,8 @@
             {
               "provider": "YouTube",
               "channel": "One Sports",
-              "title": "Asian Games live",
+              "title": "Asian Games - One Sports",
+              "embedUrl": "https://www.youtube.com/embed/live_stream?channel=UCXDG9ue-emCN8Ad3h7lERqQ&autoplay=1&playsinline=1&rel=0",
               "watchUrl": "https://www.youtube.com/@OneSportsPHL/streams"
             }
           ],
@@ -228,7 +229,8 @@
             {
               "provider": "YouTube",
               "channel": "One Sports",
-              "title": "Modern Pentathlon — Live Coverage | 2026 Asian Games",
+              "title": "Modern Pentathlon — Live Coverage",
+              "embedUrl": "https://www.youtube.com/embed/live_stream?channel=UCXDG9ue-emCN8Ad3h7lERqQ&autoplay=1&playsinline=1&rel=0",
               "watchUrl": "https://www.youtube.com/@OneSportsPHL/streams"
             }
           ],
@@ -268,7 +270,17 @@
           "awayScore": "—",
           "homeScore": "—",
           "status": "Live coverage on One Sports",
-          "state": "live"
+          "state": "live",
+          "streams": [
+            {
+              "provider": "YouTube",
+              "channel": "One Sports",
+              "title": "Wushu — Women's Taijiquan & Taijijian",
+              "embedUrl": "https://www.youtube.com/embed/live_stream?channel=UCXDG9ue-emCN8Ad3h7lERqQ&autoplay=1&playsinline=1&rel=0",
+              "watchUrl": "https://www.youtube.com/@OneSportsPHL/streams"
+            }
+          ],
+          "streamsChecked": true
         },
         {
           "eventId": "ag26-hockey-ind-indonesia-20260921",
