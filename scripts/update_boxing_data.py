@@ -23,7 +23,7 @@ HEADERS = {
     "X-RapidAPI-Key": API_KEY,
     "X-RapidAPI-Host": API_HOST,
     "Accept": "application/json",
-    "User-Agent": "IMG-Boxing-Data-Updater/1.1",
+    "User-Agent": "IMG-Boxing-Data-Updater/1.2",
 }
 
 def normalized_api_url(value):
@@ -187,19 +187,16 @@ def compact_fight(f):
     }
 
 def fetch_boxing_fights():
-    now = datetime.now(timezone.utc)
-    today = now.date()
-    recent_from = today - timedelta(days=60)
-
+    # Keep requests inside the subscription's supported date window.
+    # The schedule endpoint defaults to the next 30 days.
     upcoming_url = f"{BASE}/fights/schedule?" + urlencode({
-        "days": 90,
         "date_sort": "ASC",
         "page_size": 100,
         "page_num": 1,
     })
+    # Pull the latest fight records without forcing a historical date range
+    # that may be restricted by the current RapidAPI subscription.
     recent_url = f"{BASE}/fights/?" + urlencode({
-        "data_from": recent_from.isoformat(),
-        "date_to": today.isoformat(),
         "date_sort": "DESC",
         "page_size": 100,
         "page_num": 1,
