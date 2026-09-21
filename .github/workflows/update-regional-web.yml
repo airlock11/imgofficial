@@ -9,6 +9,7 @@ on:
       - main
     paths:
       - "scripts/update_regional_web.py"
+      - ".github/workflows/update-regional-web.yml"
 
 permissions:
   contents: write
