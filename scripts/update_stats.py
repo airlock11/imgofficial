@@ -388,7 +388,8 @@ def espn_leader_group(sport,league,title,suffix,sort_field,stat_aliases,season=N
             "value":parsed,"displayValue":clean(chosen.get("displayValue")) or display_number(parsed)
         })
     if not rows:
-        raise ValueError(f"No ESPN {league} {title} leaders returned")
+        sample=(data.get("athletes") or [None])[0]
+        raise ValueError(f"No ESPN {league} {title} leaders returned keys={list(data.keys())} athletes={len(data.get('athletes',[]) or [])} sample={json.dumps(sample,ensure_ascii=False)[:700]}")
     return {"title":title,"suffix":suffix,"rows":rows[:8],"sourceUrl":url}
 
 def espn_multi_group_stats(sport,league,label,season_label,season,definitions):
@@ -496,8 +497,12 @@ def espn_basketball_stats(key,league,season,season_label):
             ("Blocks","BPG","defensive.avgBlocks",["avgBlocks"])
         ])
     except Exception as ex:
-        print("ESPN sorted",key,type(ex).__name__,str(ex)[:180])
-        return espn_basketball_html(key,season_label)
+        primary=type(ex).__name__+": "+str(ex)[:900]
+        print("ESPN sorted",key,primary)
+        try:
+            return espn_basketball_html(key,season_label)
+        except Exception as fallback:
+            raise ValueError(primary+" | HTML "+type(fallback).__name__+": "+str(fallback)[:300])
 
 def espn_hockey_stats():
     return espn_multi_group_stats("hockey","nhl","NHL","2025–26 Regular Season",2026,[
