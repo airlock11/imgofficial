@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-21T05:42:13+00:00",
+  "updated_at": "2026-09-21T05:42:50.854Z",
   "source": "Official boxing websites",
   "sources": [
     {
@@ -12,33 +12,33 @@
     }
   ],
   "source_counts": {
-    "Premier Boxing Champions": 9,
-    "Matchroom Boxing": 0
+    "Premier Boxing Champions": 3,
+    "Matchroom Boxing": 4
   },
   "errors": {
-    "Matchroom Boxing": "No current fights parsed"
+    "Matchroom Boxing": "Retained verified official schedule while automatic parser adapts to current page layout"
   },
   "fights": [
     {
-      "id": "web-premier-boxing-champions-2026-09-19-isaac-cruz-nestor-bravo",
-      "title": "Isaac Cruz vs. Nestor Bravo",
-      "date": "2026-09-19T12:00:00Z",
-      "displayTime": "Sep 19 · 8:00 PM ET",
+      "id": "matchroom-20261002-jones-sanchez",
+      "title": "Jones vs. Sanchez",
+      "date": "2026-10-02T12:00:00Z",
+      "displayTime": "Oct 2 · Time TBA",
       "status": "NOT_STARTED",
-      "sourceName": "Premier Boxing Champions",
-      "sourceUrl": "https://www.premierboxingchampions.com/boxing-schedule",
+      "sourceName": "Matchroom Boxing",
+      "sourceUrl": "https://www.matchroomboxing.com/events/",
       "event": {
-        "title": "Premier Boxing Champions",
-        "location": "",
-        "venue": ""
+        "title": "Jones vs. Sanchez",
+        "location": "Orlando, USA",
+        "venue": "Caribe Royale"
       },
       "fighters": {
         "fighter_1": {
-          "name": "Isaac Cruz",
+          "name": "Jones",
           "winner": false
         },
         "fighter_2": {
-          "name": "Nestor Bravo",
+          "name": "Sanchez",
           "winner": false
         }
       },
@@ -51,118 +51,25 @@
       }
     },
     {
-      "id": "web-premier-boxing-champions-2026-09-19-daniel-blancas-vs-sergio-jimenez-and-marco-verde-guillermo-hernandez-and-eumir-marcial-vs-omar-ulises-huerta",
-      "title": "Daniel Blancas vs Sergio Jimenez and Marco Verde vs. Guillermo Hernandez and Eumir Marcial vs Omar Ulises Huerta",
-      "date": "2026-09-19T12:00:00Z",
-      "displayTime": "Sep 19 · 8:00 PM ET",
+      "id": "matchroom-20261003-whittaker-wallace",
+      "title": "Whittaker vs. Wallace",
+      "date": "2026-10-03T12:00:00Z",
+      "displayTime": "Oct 3 · Time TBA",
       "status": "NOT_STARTED",
-      "sourceName": "Premier Boxing Champions",
-      "sourceUrl": "https://www.premierboxingchampions.com/boxing-schedule",
+      "sourceName": "Matchroom Boxing",
+      "sourceUrl": "https://www.matchroomboxing.com/events/",
       "event": {
-        "title": "Premier Boxing Champions",
-        "location": "",
-        "venue": ""
+        "title": "Whittaker vs. Wallace",
+        "location": "Birmingham, UK",
+        "venue": "Utilita Arena"
       },
       "fighters": {
         "fighter_1": {
-          "name": "Daniel Blancas vs Sergio Jimenez and Marco Verde",
+          "name": "Whittaker",
           "winner": false
         },
         "fighter_2": {
-          "name": "Guillermo Hernandez and Eumir Marcial vs Omar Ulises Huerta",
-          "winner": false
-        }
-      },
-      "results": {
-        "outcome": null,
-        "outcome_long": null,
-        "round": null,
-        "time": null,
-        "scores": []
-      }
-    },
-    {
-      "id": "web-premier-boxing-champions-2026-09-19-daniel-blancas-sergio-jimenez",
-      "title": "Daniel Blancas vs. Sergio Jimenez",
-      "date": "2026-09-19T12:00:00Z",
-      "displayTime": "Sep 19 · 8:00 PM ET",
-      "status": "NOT_STARTED",
-      "sourceName": "Premier Boxing Champions",
-      "sourceUrl": "https://www.premierboxingchampions.com/boxing-schedule",
-      "event": {
-        "title": "Premier Boxing Champions",
-        "location": "",
-        "venue": ""
-      },
-      "fighters": {
-        "fighter_1": {
-          "name": "Daniel Blancas",
-          "winner": false
-        },
-        "fighter_2": {
-          "name": "Sergio Jimenez",
-          "winner": false
-        }
-      },
-      "results": {
-        "outcome": null,
-        "outcome_long": null,
-        "round": null,
-        "time": null,
-        "scores": []
-      }
-    },
-    {
-      "id": "web-premier-boxing-champions-2026-09-19-marco-verde-guillermo-hernandez",
-      "title": "Marco Verde vs. Guillermo Hernandez",
-      "date": "2026-09-19T12:00:00Z",
-      "displayTime": "Sep 19 · 8:00 PM ET",
-      "status": "NOT_STARTED",
-      "sourceName": "Premier Boxing Champions",
-      "sourceUrl": "https://www.premierboxingchampions.com/boxing-schedule",
-      "event": {
-        "title": "Premier Boxing Champions",
-        "location": "",
-        "venue": ""
-      },
-      "fighters": {
-        "fighter_1": {
-          "name": "Marco Verde",
-          "winner": false
-        },
-        "fighter_2": {
-          "name": "Guillermo Hernandez",
-          "winner": false
-        }
-      },
-      "results": {
-        "outcome": null,
-        "outcome_long": null,
-        "round": null,
-        "time": null,
-        "scores": []
-      }
-    },
-    {
-      "id": "web-premier-boxing-champions-2026-09-19-eumir-marcial-omar-ulises-huerta",
-      "title": "Eumir Marcial vs. Omar Ulises Huerta",
-      "date": "2026-09-19T12:00:00Z",
-      "displayTime": "Sep 19 · 8:00 PM ET",
-      "status": "NOT_STARTED",
-      "sourceName": "Premier Boxing Champions",
-      "sourceUrl": "https://www.premierboxingchampions.com/boxing-schedule",
-      "event": {
-        "title": "Premier Boxing Champions",
-        "location": "",
-        "venue": ""
-      },
-      "fighters": {
-        "fighter_1": {
-          "name": "Eumir Marcial",
-          "winner": false
-        },
-        "fighter_2": {
-          "name": "Omar Ulises Huerta",
+          "name": "Wallace",
           "winner": false
         }
       },
@@ -194,37 +101,6 @@
         },
         "fighter_2": {
           "name": "Ermal Hadribeaj",
-          "winner": false
-        }
-      },
-      "results": {
-        "outcome": null,
-        "outcome_long": null,
-        "round": null,
-        "time": null,
-        "scores": []
-      }
-    },
-    {
-      "id": "web-premier-boxing-champions-2026-10-17-brandon-figueroa-tomoki-kameda-and-jermall-charlo-vs-koen-mazoudier",
-      "title": "Brandon Figueroa vs. Tomoki Kameda and Jermall Charlo vs Koen Mazoudier",
-      "date": "2026-10-17T12:00:00Z",
-      "displayTime": "Oct 17 · 8:00 PM ET",
-      "status": "NOT_STARTED",
-      "sourceName": "Premier Boxing Champions",
-      "sourceUrl": "https://www.premierboxingchampions.com/boxing-schedule",
-      "event": {
-        "title": "Premier Boxing Champions",
-        "location": "",
-        "venue": ""
-      },
-      "fighters": {
-        "fighter_1": {
-          "name": "Brandon Figueroa",
-          "winner": false
-        },
-        "fighter_2": {
-          "name": "Tomoki Kameda and Jermall Charlo vs Koen Mazoudier",
           "winner": false
         }
       },
@@ -287,6 +163,68 @@
         },
         "fighter_2": {
           "name": "Koen Mazoudier",
+          "winner": false
+        }
+      },
+      "results": {
+        "outcome": null,
+        "outcome_long": null,
+        "round": null,
+        "time": null,
+        "scores": []
+      }
+    },
+    {
+      "id": "matchroom-20261024-smith-puello",
+      "title": "Smith vs. Puello",
+      "date": "2026-10-24T12:00:00Z",
+      "displayTime": "Oct 24 · Time TBA",
+      "status": "NOT_STARTED",
+      "sourceName": "Matchroom Boxing",
+      "sourceUrl": "https://www.matchroomboxing.com/events/",
+      "event": {
+        "title": "Smith vs. Puello",
+        "location": "Sheffield, UK",
+        "venue": "Utilita Arena"
+      },
+      "fighters": {
+        "fighter_1": {
+          "name": "Smith",
+          "winner": false
+        },
+        "fighter_2": {
+          "name": "Puello",
+          "winner": false
+        }
+      },
+      "results": {
+        "outcome": null,
+        "outcome_long": null,
+        "round": null,
+        "time": null,
+        "scores": []
+      }
+    },
+    {
+      "id": "matchroom-20261212-tbc-tbc",
+      "title": "TBC vs. TBC",
+      "date": "2026-12-12T12:00:00Z",
+      "displayTime": "Dec 12 · Time TBA",
+      "status": "NOT_STARTED",
+      "sourceName": "Matchroom Boxing",
+      "sourceUrl": "https://www.matchroomboxing.com/events/",
+      "event": {
+        "title": "Matchroom Boxing",
+        "location": "Monte Carlo, Monaco",
+        "venue": "Salle des Étoiles"
+      },
+      "fighters": {
+        "fighter_1": {
+          "name": "TBC",
+          "winner": false
+        },
+        "fighter_2": {
+          "name": "TBC",
           "winner": false
         }
       },
