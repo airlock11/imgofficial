@@ -1159,12 +1159,6 @@ async function loadAllLiveGames({silent=false}={}){
   }
   const deduped=[];
   const seenLive=new Set();
-  // Live Now is stream-only: do not show a card unless we have a specific
-  // playable/watchable stream URL for that exact event.
-  for(let i=live.length-1;i>=0;i--){
-    const streams=Array.isArray(live[i].streams)?live[i].streams:[];
-    if(!streams.some(s=>s&&(s.watchUrl||s.embedUrl)))live.splice(i,1);
-  }
   for(const game of live){
     const key=String(game.eventId||[game.sportKey,game.away,game.home,game.title].join('|'));
     if(seenLive.has(key))continue;
