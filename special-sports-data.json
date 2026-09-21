@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-21T07:30:00Z",
+  "updated_at": "2026-09-21T07:39:21.930Z",
   "source": "Official sports websites",
   "leagues": {
     "atp": {
@@ -246,9 +246,176 @@
       ]
     },
     "ncaa_ph": {
-      "sourceName": "NCAA Philippines",
-      "sourceUrl": "https://www.ncaa.org.ph/",
-      "games": []
+      "sourceName": "NCAA Philippines Season 102",
+      "sourceUrl": "https://www.gmanetwork.com/news/sports/basketball/",
+      "games": [
+        {
+          "eventId": "ncaa102-lpu-mapua-20260921",
+          "date": "2026-09-21T15:00:00+08:00",
+          "displayTime": "Sep 21 · 3:00 PM",
+          "away": "Lyceum Pirates",
+          "home": "Mapua Cardinals",
+          "awayScore": "—",
+          "homeScore": "—",
+          "status": "Scheduled · Playtime FilOil Centre",
+          "state": "scheduled"
+        },
+        {
+          "eventId": "ncaa102-uphsd-sscr-20260921",
+          "date": "2026-09-21T17:00:00+08:00",
+          "displayTime": "Sep 21 · 5:00 PM",
+          "away": "Perpetual Altas",
+          "home": "San Sebastian Stags",
+          "awayScore": "—",
+          "homeScore": "—",
+          "status": "Scheduled · Playtime FilOil Centre",
+          "state": "scheduled"
+        },
+        {
+          "eventId": "ncaa102-csb-jru-20260922",
+          "date": "2026-09-22T15:00:00+08:00",
+          "displayTime": "Sep 22 · 3:00 PM",
+          "away": "Benilde Blazers",
+          "home": "JRU Heavy Bombers",
+          "awayScore": "—",
+          "homeScore": "—",
+          "status": "Scheduled · Philsports",
+          "state": "scheduled"
+        },
+        {
+          "eventId": "ncaa102-au-eac-20260922",
+          "date": "2026-09-22T17:00:00+08:00",
+          "displayTime": "Sep 22 · 5:00 PM",
+          "away": "Arellano Chiefs",
+          "home": "EAC Generals",
+          "awayScore": "—",
+          "homeScore": "—",
+          "status": "Scheduled · Philsports",
+          "state": "scheduled"
+        },
+        {
+          "eventId": "ncaa102-letran-sscr-20260918",
+          "date": "2026-09-18T17:00:00+08:00",
+          "displayTime": "Sep 18 · Final",
+          "away": "San Sebastian Stags",
+          "home": "Letran Knights",
+          "awayScore": "62",
+          "homeScore": "99",
+          "status": "Final",
+          "state": "final"
+        },
+        {
+          "eventId": "ncaa102-uphsd-eac-20260917",
+          "date": "2026-09-17T15:00:00+08:00",
+          "displayTime": "Sep 17 · Final",
+          "away": "EAC Generals",
+          "home": "Perpetual Altas",
+          "awayScore": "72",
+          "homeScore": "83",
+          "status": "Final",
+          "state": "final"
+        },
+        {
+          "eventId": "ncaa102-lpu-csb-20260917",
+          "date": "2026-09-17T17:00:00+08:00",
+          "displayTime": "Sep 17 · Final",
+          "away": "Lyceum Pirates",
+          "home": "Benilde Blazers",
+          "awayScore": "82",
+          "homeScore": "98",
+          "status": "Final",
+          "state": "final"
+        },
+        {
+          "eventId": "ncaa102-sscr-au-20260914",
+          "date": "2026-09-14T17:00:00+08:00",
+          "displayTime": "Sep 14 · Final",
+          "away": "San Sebastian Stags",
+          "home": "Arellano Chiefs",
+          "awayScore": "72",
+          "homeScore": "98",
+          "status": "Final",
+          "state": "final"
+        },
+        {
+          "eventId": "ncaa102-uphsd-letran-20260913",
+          "date": "2026-09-13T18:00:00+08:00",
+          "displayTime": "Sep 13 · Final",
+          "away": "Perpetual Altas",
+          "home": "Letran Knights",
+          "awayScore": "77",
+          "homeScore": "84",
+          "status": "Final",
+          "state": "final"
+        },
+        {
+          "eventId": "ncaa102-sbu-csb-20260913",
+          "date": "2026-09-13T16:00:00+08:00",
+          "displayTime": "Sep 13 · Final",
+          "away": "San Beda Red Lions",
+          "home": "Benilde Blazers",
+          "awayScore": "68",
+          "homeScore": "77",
+          "status": "Final",
+          "state": "final"
+        }
+      ],
+      "standings": {
+        "groupA": [
+          {
+            "team": "Benilde Blazers",
+            "wins": 2,
+            "losses": 0
+          },
+          {
+            "team": "JRU Heavy Bombers",
+            "wins": 1,
+            "losses": 0
+          },
+          {
+            "team": "Mapua Cardinals",
+            "wins": 0,
+            "losses": 1
+          },
+          {
+            "team": "San Beda Red Lions",
+            "wins": 0,
+            "losses": 1
+          },
+          {
+            "team": "Lyceum Pirates",
+            "wins": 0,
+            "losses": 1
+          }
+        ],
+        "groupB": [
+          {
+            "team": "Letran Knights",
+            "wins": 2,
+            "losses": 0
+          },
+          {
+            "team": "Arellano Chiefs",
+            "wins": 1,
+            "losses": 0
+          },
+          {
+            "team": "Perpetual Altas",
+            "wins": 1,
+            "losses": 1
+          },
+          {
+            "team": "EAC Generals",
+            "wins": 0,
+            "losses": 1
+          },
+          {
+            "team": "San Sebastian Stags",
+            "wins": 0,
+            "losses": 2
+          }
+        ]
+      }
     }
   }
 }
