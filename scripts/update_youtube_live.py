@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import json, os, re, urllib.parse, urllib.request
 import xml.etree.ElementTree as ET
+import html as html_lib
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -59,6 +60,18 @@ def channel_stream_page_ids(channel_id):
   html=r.read().decode("utf-8","ignore")
  return list(dict.fromkeys(re.findall(r'"videoId":"([A-Za-z0-9_-]{11})"',html)))
 
+def public_watch_info(video_id):
+ url="https://www.youtube.com/watch?v="+urllib.parse.quote(video_id)
+ req=urllib.request.Request(url,headers={"User-Agent":"Mozilla/5.0","Accept-Language":"en-US,en;q=0.9"})
+ with urllib.request.urlopen(req,timeout=20) as r:
+  page=r.read().decode("utf-8","ignore")
+ live=('"isLiveNow":true' in page) and ('"isLive":true' in page or '"liveBroadcastDetails"' in page or '"isLiveNow":true' in page)
+ mt=re.search(r'<meta\s+name="title"\s+content="([^"]*)"',page,re.I) or re.search(r'<title>(.*?)</title>',page,re.I|re.S)
+ title=html_lib.unescape((mt.group(1) if mt else "").replace(" - YouTube","").strip())
+ mc=re.search(r'"ownerChannelName":"([^"]+)"',page)
+ channel=html_lib.unescape(mc.group(1)) if mc else ""
+ return {"title":title,"channel":channel,"live":live}
+
 def search(event):
  wanted=tokens(" ".join(event["teams"]))
  best=None
@@ -87,18 +100,29 @@ def asian_games_live():
  ids=list(dict.fromkeys(x for x in ids if x))
  details=video_details(ids[:50])
  out=[]
- for vid,d in details.items():
-  dsn=d.get("snippet",{}); status=d.get("status",{}); live=d.get("liveStreamingDetails",{})
-  title=dsn.get("title",""); channel=(dsn.get("channelTitle") or "").strip()
+ for vid in ids[:50]:
+  d=details.get(vid)
+  if d:
+   dsn=d.get("snippet",{}); status=d.get("status",{}); live=d.get("liveStreamingDetails",{})
+   title=dsn.get("title",""); channel=(dsn.get("channelTitle") or "").strip()
+   is_live=dsn.get("liveBroadcastContent")=="live" or (live.get("actualStartTime") and not live.get("actualEndTime"))
+   ended=bool(live.get("actualEndTime"))
+   embeddable=status.get("embeddable",True)
+  else:
+   try:
+    info=public_watch_info(vid)
+   except Exception as ex:
+    if vid in PINNED_ASIAN_GAMES_VIDEO_IDS: print("Pinned public page",vid,ex)
+    continue
+   title=info["title"]; channel=info["channel"]; is_live=info["live"]; ended=False; embeddable=True
   if vid in PINNED_ASIAN_GAMES_VIDEO_IDS:
-   print("Pinned stream diagnostic",vid,repr(title),repr(channel),"broadcast=",dsn.get("liveBroadcastContent"),"start=",live.get("actualStartTime"),"end=",live.get("actualEndTime"),"embeddable=",status.get("embeddable"))
+   print("Pinned stream diagnostic",vid,repr(title),repr(channel),"live=",bool(is_live),"ended=",bool(ended),"api=",bool(d))
   if "2026 ASIAN GAMES" not in title.upper():continue
   if "one sports" not in channel.lower():continue
-  is_live=dsn.get("liveBroadcastContent")=="live" or (live.get("actualStartTime") and not live.get("actualEndTime"))
-  if not is_live or live.get("actualEndTime"):continue
+  if not is_live or ended:continue
   watch="https://www.youtube.com/watch?v="+vid
   stream={"videoId":vid,"watchUrl":watch,"provider":"YouTube","channel":channel,"title":title}
-  if status.get("embeddable",True):stream["embedUrl"]="https://www.youtube.com/embed/"+vid
+  if embeddable:stream["embedUrl"]="https://www.youtube.com/embed/"+vid
   out.append({"eventId":"ag26-youtube-"+vid,"sport":"Asian Games","teams":[],"title":title,"stream":stream})
  return out
 
