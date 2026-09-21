@@ -9,7 +9,7 @@ from bs4 import BeautifulSoup
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "boxing-web-data.json"
-UA = "Mozilla/5.0 (compatible; IMG-Boxing-Web-Updater/1.0; +https://imgofficial.com)"
+UA = "Mozilla/5.0 (compatible; IMG-Boxing-Web-Updater/1.1; +https://imgofficial.com)"
 
 SOURCES = [
     {
