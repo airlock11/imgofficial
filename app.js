@@ -1076,6 +1076,24 @@ async function refreshExistingAllLiveScores(excludeSport=''){
 
 let liveSportFilter='all';
 let liveNowItems=[];
+let mobileLiveToggleBound=false;
+function setMobileLiveExpanded(expanded){
+  const section=document.getElementById('allLiveSection');
+  const toggle=document.getElementById('mobileLiveToggle');
+  if(!section||!toggle)return;
+  section.classList.toggle('mobile-live-expanded',Boolean(expanded));
+  toggle.setAttribute('aria-expanded',expanded?'true':'false');
+}
+function ensureMobileLiveToggle(){
+  if(mobileLiveToggleBound)return;
+  const toggle=document.getElementById('mobileLiveToggle');
+  if(!toggle)return;
+  mobileLiveToggleBound=true;
+  toggle.addEventListener('click',()=>{
+    const expanded=toggle.getAttribute('aria-expanded')==='true';
+    setMobileLiveExpanded(!expanded);
+  });
+}
 let externalLiveCache={time:0,streams:[]};
 async function loadExternalLiveData(){
   if(Date.now()-externalLiveCache.time<60000)return externalLiveCache.streams;
@@ -1198,12 +1216,16 @@ function renderAllLiveGames(items,{preserveItems=false}={}){
     liveNowLocked=false;
     host.innerHTML='';
     section.hidden=true;
+    setMobileLiveExpanded(false);
+    const mobileCount=document.getElementById('mobileLiveCount');
+    if(mobileCount)mobileCount.textContent='';
     if(status)status.textContent='';
     return;
   }
 
   section.hidden=false;
   liveNowLocked=true;
+  ensureMobileLiveToggle();
   renderLiveSportSorter(live);
 
   const visible=liveSportFilter==='all'?live:live.filter(g=>(g.sportLabel||'Sport')===liveSportFilter);
@@ -1216,6 +1238,8 @@ function renderAllLiveGames(items,{preserveItems=false}={}){
     }
   }
   if(status)status.innerHTML='<span class="live-count-dot" aria-hidden="true"></span><span>'+visible.length+' live</span>';
+  const mobileCount=document.getElementById('mobileLiveCount');
+  if(mobileCount)mobileCount.textContent=visible.length+' live';
 
   host.innerHTML=visible.map(g=>{
     if(g.isRacing){
