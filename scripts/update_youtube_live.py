@@ -125,6 +125,8 @@ def one_sports_live():
    league_key="asian_games"; sport="Asian Games"; league="2026 ASIAN GAMES"; prefix="ag26"
   elif re.search(r"\bPBA\b",upper):
    league_key="pba"; sport="Basketball"; league="PBA"; prefix="pba"
+  elif re.search(r"\bNCAA\b",upper):
+   league_key="ncaa_ph"; sport="Basketball"; league="NCAA Philippines"; prefix="ncaaph"
   else:
    continue
   watch="https://www.youtube.com/watch?v="+vid
