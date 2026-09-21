@@ -1701,9 +1701,9 @@ async function loadAllLiveGames({silent=false}={}){
       // Verified channel broadcasts can exist even when the score provider has no
       // matching event ID. Preserve the actual source channel for each league.
       for(const x of ys){
-        if(!x?.stream?.watchUrl||!['asian_games','fiba','pba','nbl','ncaa_ph','uaap','wta'].includes(x?.leagueKey))continue;
+        if(!x?.stream?.watchUrl||!['asian_games','fiba','pba','mpbl','nbl','ncaa_ph','uaap','wta'].includes(x?.leagueKey))continue;
         if(live.some(g=>String(g.eventId)===String(x.eventId)))continue;
-        const label=x.league||({asian_games:'2026 ASIAN GAMES',pba:'PBA',nbl:'NBL Pilipinas',ncaa_ph:'NCAA Philippines',uaap:'UAAP',wta:'WTA Tour',fiba:'FIBA'}[x.leagueKey]);
+        const label=x.league||({asian_games:'2026 ASIAN GAMES',pba:'PBA',mpbl:'MPBL',nbl:'NBL Pilipinas',ncaa_ph:'NCAA Philippines',uaap:'UAAP',wta:'WTA Tour',fiba:'FIBA'}[x.leagueKey]);
         const source=x.stream.channel||x.stream.provider||label;
         live.push({eventId:x.eventId,firstLiveAt:x.firstLiveAt,expiresAt:x.expiresAt,sportKey:x.leagueKey,sportLabel:x.sport||'Sport',leagueLabel:label,date:x.firstLiveAt||y.updatedAt||new Date().toISOString(),displayTime:'LIVE',away:label,home:x.title||(label+' Live'),awayScore:'',homeScore:'',status:'LIVE · '+source,state:'live',streams:[x.stream],streamsChecked:true});
       }
@@ -1874,6 +1874,22 @@ function renderGames(){
       rows:standings
     });
     if(standingsHtml)sections.push(standingsHtml);
+  }
+
+  if(currentScoreLeague==='mpbl'){
+    const standings=getRegionalSnapshot('mpbl')?.standings||{};
+    for(const [groupKey,rows] of Object.entries(standings)){
+      if(!Array.isArray(rows)||!rows.length)continue;
+      const groupName=groupKey==='northDivision'?'North Division':groupKey==='southDivision'?'South Division':groupKey.replace(/([a-z])([A-Z])/g,'$1 $2').replace(/^./,x=>x.toUpperCase());
+      const standingsHtml=leagueStandingsMarkup({
+        id:'mpbl-'+groupKey,
+        title:groupName+' Standings',
+        subtitle:'MPBL 2026',
+        ariaLabel:'MPBL '+groupName+' standings',
+        rows
+      });
+      if(standingsHtml)sections.push(standingsHtml);
+    }
   }
 
   if(currentScoreLeague==='ncaa_ph'){
