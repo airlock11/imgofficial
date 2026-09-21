@@ -50,7 +50,7 @@ jobs:
           for p in pathlib.Path('.').rglob('*'):
               if not p.is_file() or p.suffix not in exts or '.git' in p.parts: continue
               s=p.read_text(encoding='utf-8',errors='replace')
-              if '<<<<<<< HEAD' in s or '>>>>>>> ' in s:
+              if ('<'*7 + ' HEAD') in s or ('>'*7 + ' ') in s:
                   bad.append(f'{p}: unresolved merge marker')
               if p.suffix=='.js' and ('{\\n  if(' in s or ';\\n  if(' in s):
                   bad.append(f'{p}: suspicious literal escaped newline')
