@@ -96,7 +96,7 @@ def asian_games_live():
   ids += channel_stream_page_ids(ONE_SPORTS_CHANNEL_ID)
  except Exception as ex:
   print("One Sports streams page",ex)
- ids += PINNED_ASIAN_GAMES_VIDEO_IDS
+ ids=PINNED_ASIAN_GAMES_VIDEO_IDS + ids
  ids=list(dict.fromkeys(x for x in ids if x))
  details=video_details(ids[:50])
  out=[]
