@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><base href="/"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="canonical" href="https://www.imgofficial.com/sports/"><title>Sports — IMG</title><link rel="icon" type="image/png" href="./img-logo-hq.png?v=20260920-11"><link rel="shortcut icon" type="image/png" href="./img-logo-hq.png?v=20260920-11"><link rel="apple-touch-icon" href="./img-logo-hq.png?v=20260920-11"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="styles.css?v=20260922-102"><link rel="stylesheet" href="mobile-nav.css?v=20260920-6"><link rel="stylesheet" href="theme-toggle.css?v=20260920-10"></head><body class="sports-page">
+<!doctype html><html lang="en"><head><base href="/"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="canonical" href="https://www.imgofficial.com/sports/"><title>Sports — IMG</title><link rel="icon" type="image/png" href="./img-logo-hq.png?v=20260920-11"><link rel="shortcut icon" type="image/png" href="./img-logo-hq.png?v=20260920-11"><link rel="apple-touch-icon" href="./img-logo-hq.png?v=20260920-11"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="styles.css?v=20260922-103"><link rel="stylesheet" href="mobile-nav.css?v=20260920-6"><link rel="stylesheet" href="theme-toggle.css?v=20260920-10"></head><body class="sports-page">
 <header><nav class="shell"><a class="logo" href="/"><img src="img-logo-hq.png" alt="IMG"></a><div class="navlinks"><a href="/">Home</a><a class="active" href="/sports/">Sports</a><a href="/scores/">Scores</a><a href="/news/">News</a><a href="/odds/">Odds</a></div></nav></header>
 <main><section class="content sports-directory"><div class="shell">
   <div class="sports-directory-head"><h1>Sports</h1><span id="sportsCount"></span></div>
@@ -7,24 +7,109 @@
 <div class="bottomnav"><a href="/"><b><span class="navglyph icon-home" aria-hidden="true"></span></b>Home</a><a class="active" href="/sports/"><b><span class="navglyph icon-sports" aria-hidden="true"></span></b>Sports</a><a href="/scores/"><b><span class="navglyph icon-scores" aria-hidden="true"></span></b>Scores</a><a href="/news/"><b><span class="navglyph icon-news" aria-hidden="true"></span></b>News</a><a href="/odds/"><b><span class="navglyph icon-odds" aria-hidden="true"></span></b>Odds</a></div>
 <script src="score-league-user-logos.js?v=20260921-94"></script>
 <script>
+// Sports page theme control — mirrors the shared IMG theme behavior without loading the full app bundle.
+function sportsThemeRead(key){try{return localStorage.getItem(key)}catch{return null}}
+function sportsThemeWrite(key,value){try{localStorage.setItem(key,value)}catch{}}
+const sportsThemeRoot=document.documentElement;
+sportsThemeRoot.dataset.theme=sportsThemeRead('img-theme')||'dark';
+const sportsThemeButton=document.createElement('button');
+sportsThemeButton.className='themebtn';
+sportsThemeButton.type='button';
+sportsThemeButton.setAttribute('aria-label','Switch color theme');
+document.body.append(sportsThemeButton);
+const sportsDesktopThemeMarkup='<span class="theme-track" aria-hidden="true"><span class="theme-icon sun"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></span><span class="theme-icon moon"><svg viewBox="0 0 24 24"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5 8.5 8.5 0 1 0 20.5 14.2Z"/></svg></span><span class="theme-thumb"></span></span>';
+const sportsMobileThemeMarkup=()=>'<span class="theme-mobile-icon" aria-hidden="true">'+(sportsThemeRoot.dataset.theme==='dark'?'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>':'<svg viewBox="0 0 24 24"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5 8.5 8.5 0 1 0 20.5 14.2Z"/></svg>')+'</span>';
+const sportsThemeIsMobile=()=>matchMedia('(max-width:760px)').matches;
+function sportsThemePaint(){
+  sportsThemeButton.innerHTML=sportsDesktopThemeMarkup+sportsMobileThemeMarkup();
+  sportsThemeButton.setAttribute('aria-pressed',sportsThemeRoot.dataset.theme==='light'?'true':'false');
+  sportsThemeButton.title=sportsThemeRoot.dataset.theme==='dark'?'Switch to light mode':'Switch to dark mode';
+}
+sportsThemePaint();
+let sportsThemeDrag=false,sportsThemeMoved=false,sportsThemeDx=0,sportsThemeDy=0;
+function sportsThemeRestoreMobile(){
+  if(!sportsThemeIsMobile())return;
+  let pos=null;
+  try{pos=JSON.parse(sportsThemeRead('img-theme-position')||'null')}catch{}
+  if(!pos)return;
+  const x=Math.max(8,Math.min(innerWidth-sportsThemeButton.offsetWidth-8,Number(pos.x)||8));
+  const y=Math.max(8,Math.min(innerHeight-sportsThemeButton.offsetHeight-8,Number(pos.y)||8));
+  sportsThemeButton.style.left=x+'px';sportsThemeButton.style.top=y+'px';sportsThemeButton.style.right='auto';sportsThemeButton.style.bottom='auto';
+}
+sportsThemeRestoreMobile();
+sportsThemeButton.addEventListener('pointerdown',e=>{
+  if(!sportsThemeIsMobile())return;
+  sportsThemeDrag=true;sportsThemeMoved=false;
+  const r=sportsThemeButton.getBoundingClientRect();
+  sportsThemeDx=e.clientX-r.left;sportsThemeDy=e.clientY-r.top;
+  sportsThemeButton.setPointerCapture(e.pointerId);
+});
+sportsThemeButton.addEventListener('pointermove',e=>{
+  if(!sportsThemeDrag||!sportsThemeIsMobile())return;
+  sportsThemeMoved=true;
+  const x=Math.max(8,Math.min(innerWidth-sportsThemeButton.offsetWidth-8,e.clientX-sportsThemeDx));
+  const y=Math.max(8,Math.min(innerHeight-sportsThemeButton.offsetHeight-8,e.clientY-sportsThemeDy));
+  sportsThemeButton.style.left=x+'px';sportsThemeButton.style.top=y+'px';sportsThemeButton.style.right='auto';sportsThemeButton.style.bottom='auto';
+});
+sportsThemeButton.addEventListener('pointerup',()=>{
+  if(!sportsThemeIsMobile()||!sportsThemeDrag)return;
+  sportsThemeDrag=false;
+  if(sportsThemeMoved){
+    const r=sportsThemeButton.getBoundingClientRect();
+    sportsThemeWrite('img-theme-position',JSON.stringify({x:Math.round(r.left),y:Math.round(r.top)}));
+  }else{
+    sportsThemeRoot.dataset.theme=sportsThemeRoot.dataset.theme==='dark'?'light':'dark';
+    sportsThemeWrite('img-theme',sportsThemeRoot.dataset.theme);sportsThemePaint();
+  }
+});
+sportsThemeButton.addEventListener('click',()=>{
+  if(sportsThemeIsMobile())return;
+  sportsThemeRoot.dataset.theme=sportsThemeRoot.dataset.theme==='dark'?'light':'dark';
+  sportsThemeWrite('img-theme',sportsThemeRoot.dataset.theme);sportsThemePaint();
+});
+
 const sportsDirectory={
   Basketball:[
-    ['NBA','United States / Canada','basketball'],['WNBA','United States / Canada','wnba'],['PBA','Philippines','pba'],['NCAA PH','Philippines','ncaa_ph'],['UAAP','Philippines','uaap'],['MPBL','Philippines','mpbl'],['NBL-Pilipinas','Philippines','nbl'],['NBL AUS','Australia / New Zealand','nblaus'],['VBA','Vietnam','vba'],['B.League','Japan',''],['EuroLeague','Europe',''],['WBSL','International','']
+    ['NBA','United States / Canada','basketball'],['WNBA','United States / Canada','wnba'],['PBA','Philippines','pba'],['NCAA PH','Philippines','ncaa_ph'],['UAAP','Philippines','uaap'],['MPBL','Philippines','mpbl'],['NBL-Pilipinas','Philippines','nbl'],['NBL AUS','Australia / New Zealand','nblaus'],['VBA','Vietnam','vba'],['B.League','Japan','bleague'],['EuroLeague','Europe','euroleague'],['WBSL','International','wbsl']
   ],
   Football:[
-    ['Premier League','England','soccer'],['La Liga','Spain','laliga'],['Serie A','Italy','seriea'],['Bundesliga','Germany','bundesliga'],['UEFA Champions League','Europe','champions'],['MLS','United States / Canada','mls'],['Philippine Football League','Philippines','']
+    ['Premier League','England','soccer'],['La Liga','Spain','laliga'],['Serie A','Italy','seriea'],['Bundesliga','Germany','bundesliga'],['UEFA Champions League','Europe','champions'],['MLS','United States / Canada','mls'],['Philippine Football League','Philippines','pfl']
   ],
   Tennis:[
-    ['ATP Tour','International','atp'],['WTA Tour','International','wta'],['Australian Open','Australia',''],['Wimbledon','United Kingdom',''],['US Open','United States','']
+    ['ATP Tour','International','atp'],['WTA Tour','International','wta'],['Australian Open','Australia','australian_open'],['Wimbledon','United Kingdom','wimbledon'],['US Open','United States','us_open']
   ],
-  Baseball:[['MLB','USA / Canada','baseball'],['NPB','Japan',''],['KBO League','South Korea','']],
-  Hockey:[['NHL','USA / Canada','hockey'],['KHL','Eurasia',''],['IIHF World Championship','International','']],
-  Cricket:[['IPL','India','ipl'],['Big Bash League','Australia',''],['ICC Cricket World Cup','International','']],
-  Volleyball:[['FIVB Women','International','volleyball_w'],['FIVB Men','International','volleyball_m'],['PVL','Philippines',''],['V.League','Japan','']],
-  Motorsport:[['Formula 1','International','f1'],['MotoGP','International',''],['Formula E','International','']],
-  Boxing:[['Boxing','Worldwide','boxing'],['WBC','International',''],['WBA','International',''],['IBF','International',''],['WBO','International','']],
-  'Combat Sports':[['UFC','International','ufc'],['ONE Championship','Asia','']],
+  Baseball:[['MLB','USA / Canada','baseball'],['NPB','Japan','npb'],['KBO League','South Korea','kbo']],
+  Hockey:[['NHL','USA / Canada','hockey'],['KHL','Eurasia','khl'],['IIHF World Championship','International','iihf']],
+  Cricket:[['IPL','India','ipl'],['Big Bash League','Australia','bigbash'],['ICC Cricket World Cup','International','cricket_world_cup']],
+  Volleyball:[['FIVB Women','International','volleyball_w'],['FIVB Men','International','volleyball_m'],['PVL','Philippines','pvl'],['V.League','Japan','vleague_jp']],
+  Motorsport:[['Formula 1','International','f1'],['MotoGP','International','motogp'],['Formula E','International','formulae']],
+  Boxing:[['Boxing','Worldwide','boxing'],['WBC','International','wbc'],['WBA','International','wba'],['IBF','International','ibf'],['WBO','International','wbo']],
+  'Combat Sports':[['UFC','International','ufc'],['ONE Championship','Asia','one']],
   'American Football':[['NFL','United States','football'],['NCAA Football','United States','ncaaf']]
+};
+
+const staticLeagueLogos={
+  bleague:'https://commons.wikimedia.org/wiki/Special:Redirect/file/B.League_logo.svg',
+  euroleague:'https://commons.wikimedia.org/wiki/Special:Redirect/file/EuroLeague_logo.svg',
+  australian_open:'https://commons.wikimedia.org/wiki/Special:Redirect/file/AO26_logo.svg',
+  wimbledon:'https://commons.wikimedia.org/wiki/Special:Redirect/file/WB-Logo.png',
+  us_open:'https://commons.wikimedia.org/wiki/Special:Redirect/file/Usopen-header-logo.svg',
+  npb:'https://commons.wikimedia.org/wiki/Special:Redirect/file/NPB_logo.svg',
+  kbo:'https://www.google.com/s2/favicons?domain=koreabaseball.com&sz=128',
+  khl:'https://www.google.com/s2/favicons?domain=khl.ru&sz=128',
+  iihf:'https://commons.wikimedia.org/wiki/Special:Redirect/file/IIHF_text_logo.svg',
+  bigbash:'https://commons.wikimedia.org/wiki/Special:Redirect/file/BBL.svg',
+  cricket_world_cup:'https://commons.wikimedia.org/wiki/Special:Redirect/file/ICC_Men%E2%80%99s_Cricket_World_Cup_logo.svg',
+  pvl:'https://www.google.com/s2/favicons?domain=pvl.ph&sz=128',
+  vleague_jp:'https://commons.wikimedia.org/wiki/Special:Redirect/file/V.League_Japan_logo.png',
+  motogp:'https://commons.wikimedia.org/wiki/Special:Redirect/file/MotoGP_Logo_2026.png',
+  formulae:'https://commons.wikimedia.org/wiki/Special:Redirect/file/FIA_Formula_E_World_Championship_Logo.svg',
+  wbc:'https://www.google.com/s2/favicons?domain=wbcboxing.com&sz=128',
+  wba:'https://www.google.com/s2/favicons?domain=wbaboxing.com&sz=128',
+  ibf:'https://www.google.com/s2/favicons?domain=ibf-usba-boxing.com&sz=128',
+  wbo:'https://www.google.com/s2/favicons?domain=wboboxing.com&sz=128',
+  one:'https://commons.wikimedia.org/wiki/Special:Redirect/file/ONE_Championship.png',
+  pfl:'https://www.google.com/s2/favicons?domain=pfl.org.ph&sz=128'
 };
 
 const logoFeeds={
@@ -58,9 +143,9 @@ function fallbackLogo(name){
   return '<span class="sports-league-fallback">'+esc(short||name.slice(0,3).toUpperCase())+'</span>';
 }
 function leagueLogo(name,key){
-  const supplied=key&&window.IMG_SCORE_LEAGUE_LOGOS?.[key];
+  const supplied=key&&(window.IMG_SCORE_LEAGUE_LOGOS?.[key]||staticLeagueLogos[key]);
   if(!supplied)return fallbackLogo(name);
-  return '<img class="sports-league-logo" src="'+esc(supplied)+'" alt="'+esc(name)+' logo" loading="lazy" decoding="async" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'grid\'">'+fallbackLogo(name);
+  return '<img class="sports-league-logo" src="'+esc(supplied)+'" alt="'+esc(name)+' logo" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'grid\'">'+fallbackLogo(name);
 }
 function capabilityBadges(key){
   if(!key)return '';
@@ -101,7 +186,7 @@ async function loadStatsAvailability(){
   }catch{}
 }
 async function hydrateLogo(key,url){
-  if(!key||!url||window.IMG_SCORE_LEAGUE_LOGOS?.[key])return;
+  if(!key||!url||window.IMG_SCORE_LEAGUE_LOGOS?.[key]||staticLeagueLogos[key])return;
   try{
     const r=await fetch(url,{cache:'no-store'});
     if(!r.ok)return;
