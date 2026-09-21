@@ -1278,6 +1278,29 @@ function renderGames(){
       '</section>');
     }
   }
+
+  if(currentScoreLeague==='uaap'){
+    const standings=Array.isArray(getRegionalSnapshot('uaap')?.standings)?getRegionalSnapshot('uaap').standings:[];
+    if(standings.length){
+      sections.push('<section class="league-games-group league-standings" aria-label="UAAP standings">'+
+        '<div class="league-games-group-head"><h3>Standings</h3><span>UAAP Season 89</span></div>'+
+        '<div class="league-standings-head"><span>Team</span><b>W</b><b>L</b></div>'+
+        '<div class="league-standings-body">'+standings.map(s=>'<div class="league-standings-row"><strong>'+esc(s.team)+'</strong><b>'+esc(s.wins)+'</b><b>'+esc(s.losses)+'</b></div>').join('')+'</div>'+
+      '</section>');
+    }
+  }
+  if(currentScoreLeague==='ncaa_ph'){
+    const standings=specialSportsDataCache?.leagues?.ncaa_ph?.standings||{};
+    for(const [groupKey,rows] of Object.entries(standings)){
+      if(!Array.isArray(rows)||!rows.length)continue;
+      const groupName=groupKey.replace(/([a-z])([A-Z])/g,'$1 $2').replace(/^./,x=>x.toUpperCase());
+      sections.push('<section class="league-games-group league-standings" aria-label="NCAA Philippines '+esc(groupName)+' standings">'+
+        '<div class="league-games-group-head"><h3>'+esc(groupName)+' Standings</h3><span>NCAA Season 102</span></div>'+
+        '<div class="league-standings-head"><span>Team</span><b>W</b><b>L</b></div>'+
+        '<div class="league-standings-body">'+rows.map(s=>'<div class="league-standings-row"><strong>'+esc(s.team)+'</strong><b>'+esc(s.wins)+'</b><b>'+esc(s.losses)+'</b></div>').join('')+'</div>'+
+      '</section>');
+    }
+  }
   if(scheduleItems.length){
     sections.push(
       '<section class="league-games-group" aria-label="'+esc(leagueName)+' schedule">'+
