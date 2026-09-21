@@ -137,10 +137,33 @@ const regionalScoreKeys=new Set(['pba','mpbl','nbl','nblaus','vba']);
 
 async function fetchScorePayload(sport,{fallbackOnly=false}={}){
   if(sport==='boxing'){
-    const r=await fetch('boxing-fights-data.json?v='+Date.now(),{cache:'no-store'});
-    if(!r.ok)throw new Error('Boxing score cache unavailable');
-    const j=await r.json();
-    return {boxing:true,fights:Array.isArray(j?.fights)?j.fights:[],updated_at:j?.updated_at||null};
+    const [apiResult,webResult]=await Promise.allSettled([
+      fetch('boxing-fights-data.json?v='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null),
+      fetch('boxing-web-data.json?v='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null)
+    ]);
+    const api=apiResult.status==='fulfilled'&&apiResult.value?apiResult.value:{};
+    const web=webResult.status==='fulfilled'&&webResult.value?webResult.value:{};
+    const merged=[];
+    const seen=new Set();
+    const keyFor=f=>{
+      const a=String(f?.fighters?.fighter_1?.name||'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
+      const b=String(f?.fighters?.fighter_2?.name||'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
+      const day=String(f?.date||'').slice(0,10);
+      return [a,b].sort().join('|')+'|'+day;
+    };
+    for(const f of [...(api?.fights||[]),...(web?.fights||[])]){
+      const key=keyFor(f);
+      if(!key||seen.has(key))continue;
+      seen.add(key);
+      merged.push(f);
+    }
+    if(!merged.length)throw new Error('Boxing score sources unavailable');
+    return {
+      boxing:true,
+      fights:merged,
+      updated_at:api?.updated_at||web?.updated_at||null,
+      sources:['Boxing Data API',...(web?.sources||[]).map(x=>x.name)].filter(Boolean)
+    };
   }
 
   if(!fallbackOnly&&scoreFeeds[sport]){
@@ -694,6 +717,9 @@ function normalizeBoxingFight(f,index=0){
   return{
     eventId:String(f?.id||'boxing-'+index),
     date:f?.date,
+    displayTime:f?.displayTime||'',
+    sourceName:f?.sourceName||'Boxing Data API',
+    sourceUrl:f?.sourceUrl||'',
     home:two?.name||'TBD',
     away:one?.name||'TBD',
     homeLogo:'',
