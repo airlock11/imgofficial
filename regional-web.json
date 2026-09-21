@@ -75,16 +75,20 @@
     "mpbl": {
       "league": "MPBL",
       "season": "2026 Season",
-      "note": "Automatically refreshed from public MPBL fixture and result pages.",
-      "coverage": "Upcoming fixtures and recent final scores",
+      "note": "Automatically refreshed from public MPBL fixture/result and standings pages.",
+      "coverage": "Upcoming fixtures, recent final scores, and North/South standings",
       "sources": [
+        {
+          "name": "MPBL Official",
+          "url": "https://mpbl.com.ph/"
+        },
         {
           "name": "Forebet",
           "url": "https://www.forebet.com/en/basketball/philippines/mpbl"
         },
         {
-          "name": "MPBL Official",
-          "url": "https://mpbl.com.ph/"
+          "name": "Live2Sport",
+          "url": "https://live2sport.com/Basketball.php/Philippines_MBPL/1/2026/"
         }
       ],
       "games": [
@@ -166,7 +170,209 @@
           "sourceName": "Forebet",
           "sourceUrl": "https://www.forebet.com/en/basketball/philippines/mpbl/results"
         }
-      ]
+      ],
+      "standings": {
+        "northDivision": [
+          {
+            "rank": 1,
+            "team": "Abra Weavers",
+            "played": 26,
+            "wins": 24,
+            "losses": 2
+          },
+          {
+            "rank": 2,
+            "team": "San Juan Knights",
+            "played": 26,
+            "wins": 23,
+            "losses": 3
+          },
+          {
+            "rank": 3,
+            "team": "Batang Kankaloo",
+            "played": 24,
+            "wins": 20,
+            "losses": 4
+          },
+          {
+            "rank": 4,
+            "team": "Meycauayan",
+            "played": 24,
+            "wins": 14,
+            "losses": 10
+          },
+          {
+            "rank": 5,
+            "team": "Pasay Voyagers",
+            "played": 25,
+            "wins": 14,
+            "losses": 11
+          },
+          {
+            "rank": 6,
+            "team": "Ilagan Isabela Cowboys",
+            "played": 26,
+            "wins": 14,
+            "losses": 12
+          },
+          {
+            "rank": 7,
+            "team": "Pasig City",
+            "played": 24,
+            "wins": 12,
+            "losses": 12
+          },
+          {
+            "rank": 8,
+            "team": "Bataan Risers",
+            "played": 27,
+            "wins": 13,
+            "losses": 14
+          },
+          {
+            "rank": 9,
+            "team": "Quezon City",
+            "played": 26,
+            "wins": 12,
+            "losses": 14
+          },
+          {
+            "rank": 10,
+            "team": "Valenzuela City Darkhorse",
+            "played": 26,
+            "wins": 11,
+            "losses": 15
+          },
+          {
+            "rank": 11,
+            "team": "Marikina Shoemasters",
+            "played": 26,
+            "wins": 8,
+            "losses": 18
+          },
+          {
+            "rank": 12,
+            "team": "Bulacan Kuyas",
+            "played": 23,
+            "wins": 6,
+            "losses": 17
+          },
+          {
+            "rank": 13,
+            "team": "Manila Batang Quiapo",
+            "played": 26,
+            "wins": 2,
+            "losses": 24
+          },
+          {
+            "rank": 14,
+            "team": "Paranaque Patriots",
+            "played": 27,
+            "wins": 2,
+            "losses": 25
+          }
+        ],
+        "southDivision": [
+          {
+            "rank": 1,
+            "team": "Quezon Huskers",
+            "played": 25,
+            "wins": 21,
+            "losses": 4
+          },
+          {
+            "rank": 2,
+            "team": "Binan Tatak Gel",
+            "played": 25,
+            "wins": 21,
+            "losses": 4
+          },
+          {
+            "rank": 3,
+            "team": "Batangas City",
+            "played": 25,
+            "wins": 20,
+            "losses": 5
+          },
+          {
+            "rank": 4,
+            "team": "GenSan Warriors",
+            "played": 24,
+            "wins": 19,
+            "losses": 5
+          },
+          {
+            "rank": 5,
+            "team": "Cebu Greats",
+            "played": 26,
+            "wins": 20,
+            "losses": 6
+          },
+          {
+            "rank": 6,
+            "team": "Rizal Golden Coolers",
+            "played": 25,
+            "wins": 17,
+            "losses": 8
+          },
+          {
+            "rank": 7,
+            "team": "Mindoro Tamaraws",
+            "played": 25,
+            "wins": 13,
+            "losses": 12
+          },
+          {
+            "rank": 8,
+            "team": "Zamboanga Sikat",
+            "played": 24,
+            "wins": 12,
+            "losses": 12
+          },
+          {
+            "rank": 9,
+            "team": "Basilan Steel",
+            "played": 24,
+            "wins": 12,
+            "losses": 12
+          },
+          {
+            "rank": 10,
+            "team": "Sarangani Marlins",
+            "played": 24,
+            "wins": 4,
+            "losses": 20
+          },
+          {
+            "rank": 11,
+            "team": "Imus Braderhood",
+            "played": 26,
+            "wins": 4,
+            "losses": 22
+          },
+          {
+            "rank": 12,
+            "team": "Iloilo United Royals",
+            "played": 14,
+            "wins": 2,
+            "losses": 12
+          },
+          {
+            "rank": 13,
+            "team": "Bacolod Masskara",
+            "played": 22,
+            "wins": 3,
+            "losses": 19
+          },
+          {
+            "rank": 14,
+            "team": "Negros Hacienderos",
+            "played": 27,
+            "wins": 3,
+            "losses": 24
+          }
+        ]
+      }
     },
     "nbl": {
       "league": "NBL-Pilipinas",
