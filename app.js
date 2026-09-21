@@ -300,7 +300,7 @@ const liveNowLabels={
   f1:{sport:'Motorsport',league:'Formula 1'},
   ufc:{sport:'Combat Sports',league:'UFC'},
   boxing:{sport:'Boxing',league:'Boxing'},
-  asian_games:{sport:'Multi-sport',league:'Asian Games'},
+  asian_games:{sport:'Special',league:'Asian Games'},
   pba:{sport:'Basketball',league:'PBA'},
   ncaa_ph:{sport:'Basketball',league:'NCAA Philippines'},
   uaap:{sport:'Basketball',league:'UAAP'},
@@ -349,6 +349,7 @@ function asianGamesEventLabel(game){
   return index>0?title.slice(index+divider.length).trim():(title||'Asian Games event');
 }
 const scoreLeagueOrder=['asian_games','soccer','laliga','seriea','bundesliga','champions','mls','pfl','basketball','wnba','pba','ncaa_ph','uaap','mpbl','nbl','nblaus','vba','bleague','euroleague','atp','wta','australian_open','wimbledon','us_open','ipl','bigbash','cricket_world_cup','volleyball_w','volleyball_m','pvl','vleague_jp','baseball','npb','kbo','hockey','khl','iihf','football','ncaaf','f1','motogp','formulae','ufc','one','wbc','wba','ibf','wbo','ring'];
+const specialScoreLeagueKeys=new Set(['asian_games']);
 const scoreSportDefaultLeague={
   basketball:'basketball',
   football:'soccer',
@@ -447,6 +448,9 @@ function renderScoreLeagueFilters(){
   const activity=scoreLeagueActivityMap();
   const baseIndex=new Map(scoreLeagueOrder.map((key,index)=>[key,index]));
   const ordered=[...scoreLeagueOrder].sort((a,b)=>{
+    const aSpecial=specialScoreLeagueKeys.has(a);
+    const bSpecial=specialScoreLeagueKeys.has(b);
+    if(aSpecial!==bSpecial)return aSpecial?-1:1;
     const aa=activity.get(a)||{live:false,stream:false};
     const bb=activity.get(b)||{live:false,stream:false};
     const aRank=aa.stream?0:aa.live?1:2;
@@ -460,8 +464,10 @@ function renderScoreLeagueFilters(){
     const liveClass=state.live?' has-live-activity':'';
     const streamClass=state.stream?' has-live-stream':'';
     const liveLabel=state.stream?' — live stream':state.live?' — live score':'';
-    return '<div class="score-league-item'+(key==='champions'?' score-league-item-champions':'')+liveClass+streamClass+'">'+
-      '<button type="button" class="score-league-filter'+(currentScoreLeague===key?' active':'')+liveClass+streamClass+'" data-score-league="'+esc(key)+'" aria-label="'+esc(label+liveLabel)+'" title="'+esc(label+liveLabel)+'">'+
+    const specialClass=specialScoreLeagueKeys.has(key)?' is-special-league':'';
+    const scoreKind=specialScoreLeagueKeys.has(key)?'special':'league';
+    return '<div class="score-league-item'+(key==='champions'?' score-league-item-champions':'')+specialClass+liveClass+streamClass+'" data-score-kind="'+scoreKind+'">'+
+      '<button type="button" class="score-league-filter'+(currentScoreLeague===key?' active':'')+specialClass+liveClass+streamClass+'" data-score-league="'+esc(key)+'" aria-label="'+esc(label+liveLabel)+'" title="'+esc(label+liveLabel)+'">'+
         '<span class="score-league-logo-wrap">'+scoreLeagueLogoMarkup(key)+'</span>'+
       '</button>'+
       '<span class="score-league-name">'+esc(displayLabel)+'</span>'+
