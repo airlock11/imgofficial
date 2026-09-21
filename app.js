@@ -1181,14 +1181,14 @@ async function loadAllLiveGames({silent=false}={}){
         const s=byId.get(String(g.eventId));
         if(s?.watchUrl)g.streams=[s];
       }
-      // One Sports broadcasts can exist even when the score provider has no matching
-      // event ID, so publish verified live Asian Games, PBA and NBL Pilipinas streams
-      // as standalone Live Now cards.
+      // Verified channel broadcasts can exist even when the score provider has no
+      // matching event ID. Preserve the actual source channel for each league.
       for(const x of ys){
         if(!x?.stream?.watchUrl||!['asian_games','pba','nbl'].includes(x?.leagueKey))continue;
         if(live.some(g=>String(g.eventId)===String(x.eventId)))continue;
         const label=x.league||({asian_games:'2026 ASIAN GAMES',pba:'PBA',nbl:'NBL Pilipinas'}[x.leagueKey]);
-        live.push({eventId:x.eventId,sportKey:x.leagueKey,sportLabel:x.sport||'Sport',leagueLabel:label,date:y.updatedAt||new Date().toISOString(),displayTime:'LIVE',away:label,home:x.title||'One Sports Live',awayScore:'',homeScore:'',status:'LIVE · One Sports',state:'live',streams:[x.stream],streamsChecked:true});
+        const source=x.stream.channel||x.stream.provider||label;
+        live.push({eventId:x.eventId,sportKey:x.leagueKey,sportLabel:x.sport||'Sport',leagueLabel:label,date:y.updatedAt||new Date().toISOString(),displayTime:'LIVE',away:label,home:x.title||(label+' Live'),awayScore:'',homeScore:'',status:'LIVE · '+source,state:'live',streams:[x.stream],streamsChecked:true});
       }
     }
   }catch{}
