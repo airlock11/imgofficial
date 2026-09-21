@@ -83,11 +83,10 @@ def search(event):
   if not best or cand["matchScore"]>best["matchScore"]:best=cand
  return best
 
-def asian_games_live():
- # Dedicated rule requested for IMG: every CURRENTLY LIVE One Sports YouTube
- # broadcast whose title contains the exact phrase "2026 ASIAN GAMES".
- items=youtube_search(max_results=50, channel_id=ONE_SPORTS_CHANNEL_ID)
- ids=[x.get("id",{}).get("videoId") for x in items if x.get("id",{}).get("videoId")]
+def one_sports_live():
+ # Discover current One Sports broadcasts directly from its public channel surfaces.
+ # Classify only the leagues IMG is explicitly tracking here.
+ ids=[]
  try:
   ids += channel_feed_ids(ONE_SPORTS_CHANNEL_ID)
  except Exception as ex:
@@ -117,13 +116,21 @@ def asian_games_live():
    title=info["title"]; channel=info["channel"]; is_live=info["live"]; ended=False; embeddable=True
   if vid in PINNED_ASIAN_GAMES_VIDEO_IDS:
    print("Pinned stream diagnostic",vid,repr(title),repr(channel),"live=",bool(is_live),"ended=",bool(ended),"api=",bool(d))
-  if "2026 ASIAN GAMES" not in title.upper():continue
   if "one sports" not in channel.lower():continue
   if not is_live or ended:continue
+  upper=title.upper()
+  if "2026 ASIAN GAMES" in upper:
+   league_key="asian_games"; sport="Asian Games"; league="2026 ASIAN GAMES"; prefix="ag26"
+  elif re.search(r"\bPBA\b",upper):
+   league_key="pba"; sport="Basketball"; league="PBA"; prefix="pba"
+  elif "NBL PILIPINAS" in upper or "NBL-PILIPINAS" in upper:
+   league_key="nbl"; sport="Basketball"; league="NBL Pilipinas"; prefix="nblph"
+  else:
+   continue
   watch="https://www.youtube.com/watch?v="+vid
   stream={"videoId":vid,"watchUrl":watch,"provider":"YouTube","channel":channel,"title":title}
   if embeddable:stream["embedUrl"]="https://www.youtube.com/embed/"+vid
-  out.append({"eventId":"ag26-youtube-"+vid,"sport":"Asian Games","teams":[],"title":title,"stream":stream})
+  out.append({"eventId":prefix+"-youtube-"+vid,"sport":sport,"leagueKey":league_key,"league":league,"teams":[],"title":title,"stream":stream})
  return out
 
 events=live_events(); streams=[]
@@ -133,9 +140,9 @@ for e in events:
   if s: streams.append({**e,"stream":s})
  except Exception as ex: print("youtube",e["title"],ex)
 try:
- streams.extend(asian_games_live())
+ streams.extend(one_sports_live())
 except Exception as ex:
- print("youtube Asian Games",ex)
+ print("youtube One Sports",ex)
 seen=set(); dedup=[]
 for x in streams:
  vid=x.get("stream",{}).get("videoId")
