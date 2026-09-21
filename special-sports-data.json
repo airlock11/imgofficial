@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-21T07:43:01.735Z",
+  "updated_at": "2026-09-21T07:47:46.371Z",
   "source": "Official sports websites",
   "leagues": {
     "atp": {
@@ -172,6 +172,48 @@
       "sourceUrl": "https://www.aichi-nagoya2026.org/",
       "games": [
         {
+          "eventId": "ag26-live-wushu-wong-20260921",
+          "date": "2026-09-21T14:00:00+09:00",
+          "displayTime": "Live / replay available",
+          "title": "Wushu Finals — Agatha Wong",
+          "away": "Agatha Wong (Philippines)",
+          "home": "Women’s Taijiquan & Taijijian",
+          "awayScore": "—",
+          "homeScore": "—",
+          "status": "One Sports coverage",
+          "state": "final",
+          "streams": [
+            {
+              "provider": "YouTube",
+              "channel": "One Sports",
+              "title": "Wushu Finals — Agatha Wong | 2026 Asian Games",
+              "watchUrl": "https://www.youtube.com/@OneSportsPHL/streams"
+            }
+          ],
+          "streamsChecked": true
+        },
+        {
+          "eventId": "ag26-live-modern-pentathlon-20260921",
+          "date": "2026-09-21T14:30:00+09:00",
+          "displayTime": "LIVE",
+          "title": "Modern Pentathlon — Live Coverage",
+          "away": "Asian Games",
+          "home": "Modern Pentathlon",
+          "awayScore": "LIVE",
+          "homeScore": "LIVE",
+          "status": "Live on One Sports",
+          "state": "live",
+          "streams": [
+            {
+              "provider": "YouTube",
+              "channel": "One Sports",
+              "title": "Modern Pentathlon — Live Coverage | 2026 Asian Games",
+              "watchUrl": "https://www.youtube.com/@OneSportsPHL/streams"
+            }
+          ],
+          "streamsChecked": true
+        },
+        {
           "eventId": "ag26-shoot-m10ar-team-20260921",
           "date": "2026-09-21T10:00:00+09:00",
           "displayTime": "Sep 21 · Final",
@@ -314,6 +356,12 @@
         "sports": 43,
         "venues": 54,
         "host": "Aichi-Nagoya, Japan"
+      },
+      "liveCoverage": {
+        "provider": "One Sports",
+        "channelUrl": "https://www.youtube.com/@OneSportsPHL/streams",
+        "verifiedAt": "2026-09-21T07:47:46.366Z",
+        "note": "Only verified One Sports coverage is exposed; no unofficial restreams."
       }
     },
     "ncaa_ph": {
