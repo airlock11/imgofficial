@@ -1,97 +1,320 @@
 #!/usr/bin/env python3
-import json, re
+import hashlib
+import json
+import re
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
 from playwright.sync_api import sync_playwright
 
-ROOT=Path(__file__).resolve().parents[1]
-OUT=ROOT/"special-sports-data.json"
-JST=timezone(timedelta(hours=9))
-TODAY=datetime.now(JST).strftime("%Y-%m-%d")
-BASE="https://results.asiangames2026.org"
-SCHEDULE=f"{BASE}/#/schedule/daily/{TODAY}"
+ROOT = Path(__file__).resolve().parents[1]
+OUT = ROOT / "special-sports-data.json"
+BASE = "https://results.asiangames2026.org"
+JST = timezone(timedelta(hours=9))
 
-def summarize_json(value, depth=0):
-    if depth>2:
-        return type(value).__name__
-    if isinstance(value,dict):
-        return {str(k):summarize_json(v,depth+1) for k,v in list(value.items())[:24]}
-    if isinstance(value,list):
-        return [summarize_json(x,depth+1) for x in value[:3]]
-    return value if isinstance(value,(str,int,float,bool)) or value is None else type(value).__name__
+TIME_RE = re.compile(r"^\d{1,2}:\d{2}$")
+NOC_RE = re.compile(r"^[A-Z]{3}$")
+SCORE_RE = re.compile(r"^[+-]?(?:\d+(?:\.\d+)?|\d+:\d+|—|-)$")
+FINAL_STATES = {"Official", "Finished", "Final", "Completed"}
+LIVE_STATES = {"Running", "Live", "In Progress"}
+SCHEDULED_STATES = {"Scheduled", "Start List", "Upcoming", "Not Started"}
+
+
+def clean_lines(text):
+    return [re.sub(r"\s+", " ", x).strip() for x in (text or "").splitlines() if re.sub(r"\s+", " ", x).strip()]
+
+
+def iso_for(day, tm):
+    dt = datetime.strptime(day + " " + tm, "%Y-%m-%d %H:%M").replace(tzinfo=JST)
+    return dt.isoformat()
+
+
+def display_time(day, tm):
+    dt = datetime.strptime(day + " " + tm, "%Y-%m-%d %H:%M")
+    return dt.strftime("%b %d · %I:%M %p").replace(" 0", " ")
+
+
+def safe_id(value):
+    digest = hashlib.sha1(value.encode("utf-8")).hexdigest()[:12]
+    return "ag26-web-" + digest
+
+
+def score_value(value):
+    if value is None:
+        return "—"
+    value = str(value).strip()
+    return value if value and value != "-" else "—"
+
+
+def parse_card_text(discipline, day, text):
+    lines = clean_lines(text)
+    if lines and lines[0].lower() == discipline.lower():
+        lines = lines[1:]
+    if lines and lines[0] == "Live":
+        lines = lines[1:]
+
+    starts = [i for i, x in enumerate(lines) if TIME_RE.fullmatch(x)]
+    games = []
+    for n, start in enumerate(starts):
+        end = starts[n + 1] if n + 1 < len(starts) else len(lines)
+        seg = lines[start:end]
+        if len(seg) < 2:
+            continue
+        tm = seg[0]
+        body = seg[1:]
+
+        status = ""
+        if body and body[-1] in FINAL_STATES | LIVE_STATES | SCHEDULED_STATES:
+            status = body.pop()
+        if status in LIVE_STATES:
+            state = "live"
+            status_text = "Live"
+        elif status in FINAL_STATES:
+            state = "final"
+            status_text = "Final"
+        else:
+            state = "scheduled"
+            status_text = status or "Scheduled"
+
+        noc_positions = [i for i, x in enumerate(body) if NOC_RE.fullmatch(x)]
+        pairs = []
+        used_positions = []
+        for pos in noc_positions:
+            if pos + 1 >= len(body):
+                continue
+            country = body[pos + 1]
+            if NOC_RE.fullmatch(country) or TIME_RE.fullmatch(country):
+                continue
+            score = "—"
+            if pos + 2 < len(body) and SCORE_RE.fullmatch(body[pos + 2]):
+                score = score_value(body[pos + 2])
+            pairs.append({"code": body[pos], "name": country, "score": score})
+            used_positions.append(pos)
+            if len(pairs) >= 2:
+                break
+
+        first_noc = used_positions[0] if used_positions else len(body)
+        meta = body[:first_noc]
+        # Keep concise competition detail; venue/table information remains in status.
+        event_name = meta[0] if meta else discipline
+        round_name = meta[1] if len(meta) > 1 else ""
+        match_name = meta[2] if len(meta) > 2 and re.search(r"\b(Game|Match|Heat|Round|Final|Pool|Group)\b", meta[2], re.I) else ""
+        venue_start = 3 if match_name else 2
+        venue = " · ".join(meta[venue_start:]) if len(meta) > venue_start else ""
+        title_parts = [discipline, event_name]
+        if round_name and round_name != event_name:
+            title_parts.append(round_name)
+        if match_name:
+            title_parts.append(match_name)
+        title = " — ".join(title_parts[:2]) + ((" · " + " · ".join(title_parts[2:])) if len(title_parts) > 2 else "")
+
+        if len(pairs) >= 2:
+            away, home = pairs[0], pairs[1]
+            key = "|".join([day, discipline, tm, away["code"], home["code"], event_name, round_name])
+            rec = {
+                "eventId": safe_id(key),
+                "date": iso_for(day, tm),
+                "displayTime": display_time(day, tm),
+                "title": title,
+                "away": away["name"],
+                "home": home["name"],
+                "awayScore": away["score"],
+                "homeScore": home["score"],
+                "status": status_text + ((" · " + venue) if venue else ""),
+                "state": state,
+                "sourceName": "Aichi-Nagoya 2026 Official Results",
+                "sourceUrl": f"{BASE}/#/schedule/daily/{day}",
+            }
+        else:
+            key = "|".join([day, discipline, tm, title, venue])
+            rec = {
+                "eventId": safe_id(key),
+                "date": iso_for(day, tm),
+                "displayTime": display_time(day, tm),
+                "title": title,
+                "away": event_name or discipline,
+                "home": round_name or discipline,
+                "awayScore": "—",
+                "homeScore": "—",
+                "status": status_text + ((" · " + venue) if venue else ""),
+                "state": state,
+                "eventOnly": True,
+                "sourceName": "Aichi-Nagoya 2026 Official Results",
+                "sourceUrl": f"{BASE}/#/schedule/daily/{day}",
+            }
+        games.append(rec)
+    return games
+
+
+def scrape_day(page, day):
+    url = f"{BASE}/#/schedule/daily/{day}"
+    page.goto(url, wait_until="domcontentloaded", timeout=60000)
+    page.wait_for_timeout(5000)
+
+    cards = page.locator(".sch-one-day")
+    count = cards.count()
+    games = []
+    for i in range(count):
+        try:
+            card = cards.nth(i)
+            disc = card.locator(".disc-desc").first.inner_text(timeout=3000).strip()
+            if not disc:
+                continue
+            header = card.locator(".b-collapse-header").first
+            collapsed = card.locator('[data-collapse="collapsed"]').count() > 0
+            if collapsed:
+                header.click(timeout=4000)
+                page.wait_for_timeout(250)
+            txt = card.inner_text(timeout=5000)
+            games.extend(parse_card_text(disc, day, txt))
+        except Exception as ex:
+            print("Asian Games discipline scrape warning", day, i, repr(ex))
+    print("Asian Games day", day, "cards", count, "events", len(games))
+    return games
+
+
+def scrape_live(page, day):
+    url = f"{BASE}/#/schedule/live"
+    page.goto(url, wait_until="domcontentloaded", timeout=60000)
+    page.wait_for_timeout(4000)
+    cards = page.locator(".sch-one-day")
+    games = []
+    for i in range(cards.count()):
+        try:
+            card = cards.nth(i)
+            disc = card.locator(".disc-desc").first.inner_text(timeout=3000).strip()
+            txt = card.inner_text(timeout=5000)
+            for g in parse_card_text(disc, day, txt):
+                g["state"] = "live"
+                g["status"] = re.sub(r"^Final|^Scheduled", "Live", g.get("status", "")) or "Live"
+                games.append(g)
+        except Exception:
+            continue
+    print("Asian Games live events", len(games))
+    return games
+
+
+def parse_medals(text):
+    lines = clean_lines(text)
+    try:
+        start = lines.index("B") + 1
+    except ValueError:
+        return []
+
+    medals = []
+    i = start
+    while i + 6 < len(lines):
+        rank_token = lines[i]
+        rank_match = re.fullmatch(r"=?\s*(\d+)", rank_token)
+        if not rank_match:
+            i += 1
+            continue
+        if not NOC_RE.fullmatch(lines[i + 1]):
+            i += 1
+            continue
+        country = lines[i + 2]
+        nums = lines[i + 3:i + 7]
+        if not all(re.fullmatch(r"\d+", x) for x in nums):
+            i += 1
+            continue
+        medals.append({
+            "rank": int(rank_match.group(1)),
+            "code": lines[i + 1],
+            "country": country,
+            "gold": int(nums[0]),
+            "silver": int(nums[1]),
+            "bronze": int(nums[2]),
+            "total": int(nums[3]),
+        })
+        i += 7
+    return medals
+
+
+def scrape_medals(page):
+    page.goto(f"{BASE}/#/medals", wait_until="domcontentloaded", timeout=60000)
+    page.wait_for_timeout(4000)
+    medals = parse_medals(page.locator("body").inner_text(timeout=10000))
+    print("Asian Games medal rows", len(medals))
+    return medals
+
+
+def merge_games(*groups):
+    by_id = {}
+    priority = {"scheduled": 1, "final": 2, "live": 3}
+    for group in groups:
+        for g in group:
+            old = by_id.get(g["eventId"])
+            if not old or priority.get(g.get("state"), 0) >= priority.get(old.get("state"), 0):
+                by_id[g["eventId"]] = g
+    return sorted(by_id.values(), key=lambda x: x.get("date", ""))
+
 
 def main():
-    captured=[]
+    if OUT.exists():
+        data = json.loads(OUT.read_text("utf-8"))
+    else:
+        data = {"leagues": {}}
+    leagues = data.setdefault("leagues", {})
+    previous = leagues.get("asian_games", {})
+
+    today_dt = datetime.now(JST)
+    day_strings = [(today_dt + timedelta(days=d)).strftime("%Y-%m-%d") for d in (-1, 0, 1)]
+
+    all_games = []
+    live_games = []
+    medals = []
+
     with sync_playwright() as p:
-        browser=p.chromium.launch(headless=True)
-        page=browser.new_page(viewport={"width":1440,"height":1200},locale="en-US")
-
-        def on_response(resp):
+        try:
+            browser = p.chromium.launch(channel="chrome", headless=True)
+        except Exception:
+            browser = p.chromium.launch(headless=True)
+        page = browser.new_page(viewport={"width": 1440, "height": 1200}, locale="en-US")
+        for day in day_strings:
             try:
-                ct=(resp.headers.get("content-type") or "").lower()
-                if "json" not in ct:
-                    return
-                if "asiangames2026.org" not in resp.url:
-                    return
-                data=resp.json()
-                captured.append((resp.url,data))
-            except Exception:
-                pass
-
-        page.on("response",on_response)
-        page.goto(SCHEDULE,wait_until="domcontentloaded",timeout=60000)
-        page.wait_for_timeout(10000)
-
-        body=page.locator("body").inner_text(timeout=10000)
-        print("ASIAN_GAMES_PAGE",page.url)
-        print("ASIAN_GAMES_BODY_BEGIN")
-        print(body[:30000])
-        print("ASIAN_GAMES_BODY_END")
-
-        links=page.locator("a").evaluate_all("""els => els.slice(0,500).map(a => ({text:(a.innerText||'').trim(),href:a.href}))""")
-        print("ASIAN_GAMES_LINKS",json.dumps(links,ensure_ascii=False)[:30000])
-        for name in ("Volleyball","Baseball","Swimming"):
-            try:
-                loc=page.get_by_text(name,exact=True).last
-                html=loc.evaluate("""el => {let x=el; for(let i=0;i<4&&x;i++) x=x.parentElement; return x?x.outerHTML:''}""")
-                print("ASIAN_GAMES_DISCIPLINE_HTML",name,html[:10000])
+                all_games.extend(scrape_day(page, day))
             except Exception as ex:
-                print("ASIAN_GAMES_DISCIPLINE_HTML_ERROR",name,repr(ex))
-
-        for probe_url,label in [
-            (f"{BASE}/#/schedule/live","LIVE"),
-            (f"{BASE}/#/medals","MEDALS"),
-            (f"{BASE}/#/discipline/BKB/schedule/daily/{TODAY}","BASKETBALL"),
-            (f"{BASE}/#/discipline/VVO/schedule/daily/{TODAY}","VOLLEYBALL"),
-        ]:
-            try:
-                page.goto(probe_url,wait_until="domcontentloaded",timeout=60000)
-                page.wait_for_timeout(7000)
-                txt=page.locator("body").inner_text(timeout=10000)
-                print(f"ASIAN_GAMES_{label}_URL",page.url)
-                print(f"ASIAN_GAMES_{label}_BEGIN")
-                print(txt[:30000])
-                print(f"ASIAN_GAMES_{label}_END")
-            except Exception as ex:
-                print(f"ASIAN_GAMES_{label}_ERROR",repr(ex))
-
-        print("ASIAN_GAMES_JSON_COUNT",len(captured))
-        for url,data in captured[-40:]:
-            try:
-                print("ASIAN_GAMES_JSON",url,json.dumps(summarize_json(data),ensure_ascii=False)[:6000])
-            except Exception:
-                print("ASIAN_GAMES_JSON",url,type(data).__name__)
-
+                print("Asian Games day scrape failed", day, repr(ex))
+        try:
+            live_games = scrape_live(page, day_strings[1])
+        except Exception as ex:
+            print("Asian Games live scrape failed", repr(ex))
+        try:
+            medals = scrape_medals(page)
+        except Exception as ex:
+            print("Asian Games medals scrape failed", repr(ex))
         browser.close()
 
-    # Probe-only safety for the first run: preserve published data until the
-    # official page schema is identified from the captured responses.
-    if OUT.exists():
-        data=json.loads(OUT.read_text("utf-8"))
-        data.setdefault("leagues",{}).setdefault("asian_games",{})["autoUpdateSource"]=SCHEDULE
-        data["leagues"]["asian_games"]["autoUpdateProbeAt"]=datetime.now(timezone.utc).isoformat()
-        OUT.write_text(json.dumps(data,ensure_ascii=False,indent=2)+"\n","utf-8")
+    games = merge_games(all_games, live_games)
+    if len(games) < 3:
+        games = previous.get("games", [])
+        print("Asian Games scrape guard: preserving previous games")
+    if len(medals) < 3:
+        medals = previous.get("medals", [])
+        print("Asian Games scrape guard: preserving previous medals")
 
-if __name__=="__main__":
+    now = datetime.now(timezone.utc).isoformat()
+    leagues["asian_games"] = {
+        **previous,
+        "sourceName": "Aichi-Nagoya 2026 Official Results",
+        "sourceUrl": BASE + "/#/schedule/daily",
+        "games": games,
+        "medals": medals,
+        "medalsUpdated": today_dt.strftime("%Y-%m-%d"),
+        "medalSourceUrl": BASE + "/#/medals/standings",
+        "officialLinks": {
+            "schedule": BASE + "/#/schedule/daily",
+            "liveResults": BASE + "/#/schedule/live",
+            "medalTable": BASE + "/#/medals/standings",
+        },
+        "autoUpdateSource": BASE,
+        "autoUpdatedAt": now,
+        "autoUpdateMethod": "Official results website browser scrape",
+    }
+    data["updated_at"] = now
+    OUT.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", "utf-8")
+    print("Asian Games published", len(games), "events", len(medals), "medal rows")
+
+
+if __name__ == "__main__":
     main()
