@@ -21,6 +21,7 @@ URLS = {
     "uaap": "https://skedcheck.com/uaap-mens-basketball-schedule-scores/",
     "mpbl_fixtures": "https://www.forebet.com/en/basketball/philippines/mpbl/fixtures",
     "mpbl_results": "https://www.forebet.com/en/basketball/philippines/mpbl/results",
+    "mpbl_standings": "https://live2sport.com/Basketball.php/Philippines_MBPL/1/2026/",
     "nbl_official": "http://nblp.web.geniussports.com/",
     "nbl_facebook": "https://www.facebook.com/nblpilipinas",
     "nbl_facebook_share": "https://www.facebook.com/share/18tLhjYjUv/",
@@ -211,17 +212,85 @@ def parse_forebet(url, state):
         i += 1
     return games
 
+def parse_mpbl_standings():
+    previous = load().get("leagues", {}).get("mpbl", {}).get("standings", {})
+    try:
+        html = fetch(URLS["mpbl_standings"])
+        soup = BeautifulSoup(html, "html.parser")
+        groups = {"northDivision": [], "southDivision": []}
+        current = None
+        for tr in soup.find_all("tr"):
+            cells = [re.sub(r"\s+", " ", x.get_text(" ", strip=True)).strip() for x in tr.find_all(["th","td"])]
+            if not cells:
+                continue
+            joined = " ".join(cells).lower()
+            if "north division" in joined:
+                current = "northDivision"
+                continue
+            if "south division" in joined:
+                current = "southDivision"
+                continue
+            if current is None:
+                prev = tr.find_previous(string=re.compile(r"(North|South) Division", re.I))
+                if prev:
+                    current = "northDivision" if "north" in str(prev).lower() else "southDivision"
+            # Expected row: rank, team, played, wins, losses, points for:against, pct.
+            if current and len(cells) >= 6 and re.fullmatch(r"\d{1,2}", cells[0]):
+                nums = [x for x in cells[2:] if re.fullmatch(r"\d+", x)]
+                if len(nums) >= 3:
+                    groups[current].append({
+                        "rank": int(cells[0]),
+                        "team": cells[1],
+                        "played": int(nums[0]),
+                        "wins": int(nums[1]),
+                        "losses": int(nums[2]),
+                    })
+        if not groups["northDivision"] or not groups["southDivision"]:
+            # Text fallback for layouts that flatten the tables.
+            text = re.sub(r"\s+", " ", soup.get_text(" ", strip=True))
+            for key, start_label, end_label in (
+                ("northDivision", "North Division", "South Division"),
+                ("southDivision", "South Division", "Promotion"),
+            ):
+                a = text.find(start_label)
+                b = text.find(end_label, a + len(start_label)) if a >= 0 else -1
+                segment = text[a:b if b > a else len(text)] if a >= 0 else ""
+                rows = []
+                pat = re.compile(r"(\d{1,2})\s+([A-Za-z][A-Za-z0-9 .'-]+?)\s+(\d{1,2})\s+(\d{1,2})\s+(\d{1,2})\s+\d{3,4}:\d{3,4}\s+0\.\d{3}")
+                for m in pat.finditer(segment):
+                    rows.append({"rank":int(m.group(1)),"team":m.group(2).strip(),"played":int(m.group(3)),"wins":int(m.group(4)),"losses":int(m.group(5))})
+                if rows:
+                    groups[key] = rows
+        if groups["northDivision"] and groups["southDivision"]:
+            return groups
+    except Exception as ex:
+        print("MPBL standings", type(ex).__name__, str(ex)[:160])
+    return previous if isinstance(previous, dict) else {}
+
 def parse_mpbl():
     try:
-        games = parse_forebet(URLS["mpbl_fixtures"], "scheduled")[:20] + parse_forebet(URLS["mpbl_results"], "final")[:20]
+        games = parse_forebet(URLS["mpbl_fixtures"], "scheduled")[:24] + parse_forebet(URLS["mpbl_results"], "final")[:32]
     except Exception:
         games = []
+    existing = load().get("leagues", {}).get("mpbl", {})
+    standings = parse_mpbl_standings()
     if not games:
-        existing = load().get("leagues", {}).get("mpbl", {})
-        if existing:
-            return existing
-        raise RuntimeError("No MPBL games parsed")
-    return {"league":"MPBL","season":"2026 Season","coverage":"Upcoming fixtures and recent final scores","note":"Automatically refreshed from public MPBL fixture/result pages.","sources":[{"name":"Forebet","url":"https://www.forebet.com/en/basketball/philippines/mpbl"},{"name":"MPBL Official","url":"https://mpbl.com.ph/"}],"games":games}
+        games = existing.get("games", []) if existing else []
+    if not games and not standings:
+        raise RuntimeError("No MPBL games or standings parsed")
+    return {
+        "league":"MPBL",
+        "season":"2026 Season",
+        "coverage":"Upcoming fixtures, recent final scores, and North/South standings",
+        "note":"Automatically refreshed from public MPBL fixture/result and standings pages.",
+        "sources":[
+            {"name":"MPBL Official","url":"https://mpbl.com.ph/"},
+            {"name":"Forebet","url":"https://www.forebet.com/en/basketball/philippines/mpbl"},
+            {"name":"Live2Sport","url":URLS["mpbl_standings"]}
+        ],
+        "standings":standings,
+        "games":games
+    }
 
 def nbl_source_lines():
     # Official Facebook first. A block/login wall must never abort NBL updates.
