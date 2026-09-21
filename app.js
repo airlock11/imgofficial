@@ -1425,6 +1425,38 @@ function renderGames(){
     :'<div class="empty">No verified schedule or scores were returned for this league right now.</div>';
 }
 
+function nblBroadcastScheduleGames(){
+  const rows=Array.isArray(getRegionalSnapshot('nbl')?.broadcast)?getRegionalSnapshot('nbl').broadcast:[];
+  const now=Date.now();
+  return rows.map((b,i)=>{
+    const tm=String(b?.time||'').match(/^(\d{1,2}):(\d{2})\s*(AM|PM)$/i);
+    if(!b?.date||!tm)return null;
+    let h=Number(tm[1]),m=Number(tm[2]);
+    if(tm[3].toUpperCase()==='PM'&&h<12)h+=12;
+    if(tm[3].toUpperCase()==='AM'&&h===12)h=0;
+    const iso=String(b.date)+'T'+String(h).padStart(2,'0')+':'+String(m).padStart(2,'0')+':00+08:00';
+    const start=Date.parse(iso);
+    if(!Number.isFinite(start)||start<now-60*60000||start>now+14*24*60*60000)return null;
+    return{
+      eventId:'nbl-broadcast-'+b.date+'-'+String(h).padStart(2,'0')+String(m).padStart(2,'0')+'-'+i,
+      date:iso,
+      displayTime:new Date(iso).toLocaleString([],{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'}),
+      title:b.title||"NBL Pilipinas Governor's Cup 2026",
+      home:'NBL-Pilipinas',
+      away:'Broadcast',
+      homeScore:'—',awayScore:'—',
+      status:'Scheduled · '+(b.source||'Official broadcaster'),
+      state:'scheduled',
+      eventOnly:true,
+      sourceName:b.source||'Tap Sports',
+      sourceUrl:'https://tapdmv.com/tapsports/',
+      highlights:[],highlightsChecked:true,
+      streams:[],streamsChecked:true,
+      odds:null,oddsList:[]
+    };
+  }).filter(Boolean);
+}
+
 async function nblYoutubeScheduledGames(){
   try{
     const r=await fetch('/youtube-live.json?ts='+Date.now(),{cache:'no-store'});
@@ -1465,8 +1497,15 @@ async function loadGames({silent=false,league=currentScoreLeague}={}){
     let webGames=regionalSnapshotGames(sport);
     if(sport==='nbl'){
       const upcoming=await nblYoutubeScheduledGames();
+      const broadcasts=nblBroadcastScheduleGames();
       const seen=new Set(webGames.map(g=>String(g.eventId)));
-      webGames=[...upcoming.filter(g=>!seen.has(String(g.eventId))),...webGames];
+      const exactScheduled=[...upcoming,...webGames].some(g=>g?.state==='scheduled'&&!g?.eventOnly);
+      const broadcastFallback=exactScheduled?[]:broadcasts;
+      webGames=[
+        ...upcoming.filter(g=>!seen.has(String(g.eventId))),
+        ...broadcastFallback.filter(g=>!seen.has(String(g.eventId))),
+        ...webGames
+      ];
     }
     await hydrateTeamLogos(sport,webGames);
 
