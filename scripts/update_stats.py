@@ -349,6 +349,70 @@ def espn_athlete_rows(sport,league,season=None,seasontype=None):
     season_info=data.get("currentSeason") or {}
     return rows,season_info,url
 
+def espn_leader_group(sport,league,title,suffix,sort_field,stat_aliases,season=None,seasontype=2,category=None):
+    base=f"https://site.web.api.espn.com/apis/common/v3/sports/{sport}/{league}/statistics/byathlete"
+    params={
+        "region":"us","lang":"en","contentorigin":"espn","isqualified":"true",
+        "page":"1","limit":"50","sort":sort_field+":desc"
+    }
+    if season is not None:params["season"]=str(season)
+    if seasontype is not None:params["seasontype"]=str(seasontype)
+    if category:params["category"]=category
+    url=base+"?"+urllib.parse.urlencode(params)
+    data=fetch_json(url)
+    rows=[]
+    for item in data.get("athletes",[]) or []:
+        athlete=item.get("athlete") or {}
+        player=clean(athlete.get("displayName") or athlete.get("fullName") or athlete.get("shortName"))
+        if not player:continue
+        team_obj=athlete.get("team") or {}
+        if isinstance(team_obj,dict):
+            team=clean(team_obj.get("abbreviation") or team_obj.get("shortDisplayName") or team_obj.get("displayName"))
+        else:
+            team=""
+        team=team or clean(athlete.get("teamShortName") or athlete.get("teamAbbreviation"))
+        chosen=None
+        stats=item.get("statistics",[]) or []
+        for stat in stats:
+            if clean(stat.get("name")).lower() in {str(x).lower() for x in stat_aliases}:
+                chosen=stat;break
+        if chosen is None and len(stats)==1:
+            chosen=stats[0]
+        if chosen is None:continue
+        value=chosen.get("value")
+        if value is None:value=chosen.get("displayValue")
+        parsed=num(value)
+        if parsed is None:continue
+        rows.append({
+            "player":player,"team":team,"gp":None,
+            "value":parsed,"displayValue":clean(chosen.get("displayValue")) or display_number(parsed)
+        })
+    if not rows:
+        raise ValueError(f"No ESPN {league} {title} leaders returned")
+    return {"title":title,"suffix":suffix,"rows":rows[:8],"sourceUrl":url}
+
+def espn_multi_group_stats(sport,league,label,season_label,season,definitions):
+    groups=[]
+    source_urls=[]
+    errors=[]
+    for definition in definitions:
+        title,suffix,sort_field,aliases,*rest=definition
+        category=rest[0] if rest else None
+        try:
+            group=espn_leader_group(sport,league,title,suffix,sort_field,aliases,season,2,category)
+            source_urls.append(group.pop("sourceUrl",""))
+            groups.append(group)
+        except Exception as ex:
+            errors.append(title+": "+type(ex).__name__+" "+str(ex))
+    if not groups:
+        raise ValueError("; ".join(errors) or f"No {label} leader groups")
+    return {
+        "league":label,"season":season_label,
+        "sourceName":"ESPN public statistics feed",
+        "sourceUrl":next((x for x in source_urls if x),""),
+        "groups":groups
+    }
+
 def espn_basketball_html(key,season_label):
     url="https://www.espn.com/nba/stats/player" if key=="basketball" else "https://www.espn.com/wnba/stats/player"
     soup=BeautifulSoup(fetch(url),"html.parser")
@@ -422,41 +486,41 @@ def espn_basketball_html(key,season_label):
     }
 
 def espn_basketball_stats(key,league,season,season_label):
+    label="NBA" if key=="basketball" else "WNBA"
     try:
-        rows,season_info,url=espn_athlete_rows("basketball",league,season,2)
-        groups=generic_groups(rows,[
-            ("Points","ppg","PPG"),("Rebounds","rpg","RPG"),("Assists","apg","APG"),
-            ("Steals","spg","SPG"),("Blocks","bpg","BPG")
+        return espn_multi_group_stats("basketball",league,label,season_label,season,[
+            ("Points","PPG","offensive.avgPoints",["avgPoints"]),
+            ("Rebounds","RPG","general.avgRebounds",["avgRebounds"]),
+            ("Assists","APG","offensive.avgAssists",["avgAssists"]),
+            ("Steals","SPG","defensive.avgSteals",["avgSteals"]),
+            ("Blocks","BPG","defensive.avgBlocks",["avgBlocks"])
         ])
-        if groups:
-            return {
-                "league":"NBA" if key=="basketball" else "WNBA",
-                "season":season_label,
-                "sourceName":"ESPN public statistics feed",
-                "sourceUrl":url,
-                "groups":groups
-            }
     except Exception as ex:
-        print("ESPN API",key,type(ex).__name__,str(ex)[:120])
-    return espn_basketball_html(key,season_label)
+        print("ESPN sorted",key,type(ex).__name__,str(ex)[:180])
+        return espn_basketball_html(key,season_label)
 
 def espn_hockey_stats():
-    rows,season_info,url=espn_athlete_rows("hockey","nhl",2026,2)
-    groups=generic_groups(rows,[("Points","points","PTS"),("Goals","goals","G"),("Assists","assists","A")])
-    if not groups:raise ValueError("No NHL athlete statistics returned")
-    return {"league":"NHL","season":"2025–26 Regular Season","sourceName":"ESPN public statistics feed","sourceUrl":url,"groups":groups}
+    return espn_multi_group_stats("hockey","nhl","NHL","2025–26 Regular Season",2026,[
+        ("Points","PTS","skating.points",["points"],"skating"),
+        ("Goals","G","skating.goals",["goals"],"skating"),
+        ("Assists","A","skating.assists",["assists"],"skating")
+    ])
 
 def espn_baseball_stats():
-    rows,season_info,url=espn_athlete_rows("baseball","mlb",2026,2)
-    groups=generic_groups(rows,[("Home Runs","homeRuns","HR"),("Runs Batted In","rbi","RBI"),("Batting Average","battingAverage","AVG")])
-    if not groups:raise ValueError("No MLB athlete statistics returned")
-    return {"league":"MLB","season":"2026 Regular Season","sourceName":"ESPN public statistics feed","sourceUrl":url,"groups":groups}
+    return espn_multi_group_stats("baseball","mlb","MLB","2026 Regular Season",2026,[
+        ("Home Runs","HR","batting.homeRuns",["homeRuns"],"batting"),
+        ("Runs Batted In","RBI","batting.RBIs",["RBIs","rbi","runsBattedIn"],"batting"),
+        ("Batting Average","AVG","batting.battingAverage",["battingAverage","avg"],"batting"),
+        ("Stolen Bases","SB","batting.stolenBases",["stolenBases"],"batting")
+    ])
 
 def espn_football_stats(key,league,label):
-    rows,season_info,url=espn_athlete_rows("football",league,2026,2)
-    groups=generic_groups(rows,[("Passing Yards","passingYards","YDS"),("Passing TDs","passingTDs","TD"),("Rushing Yards","rushingYards","YDS"),("Receiving Yards","receivingYards","YDS")])
-    if not groups:raise ValueError(f"No {label} athlete statistics returned")
-    return {"league":label,"season":"2026 Regular Season","sourceName":"ESPN public statistics feed","sourceUrl":url,"groups":groups}
+    return espn_multi_group_stats("football",league,label,"2026 Regular Season",2026,[
+        ("Passing Yards","YDS","passing.passingYards",["passingYards"],"passing"),
+        ("Passing TDs","TD","passing.passingTouchdowns",["passingTouchdowns","passingTDs"],"passing"),
+        ("Rushing Yards","YDS","rushing.rushingYards",["rushingYards"],"rushing"),
+        ("Receiving Yards","YDS","receiving.receivingYards",["receivingYards"],"receiving")
+    ])
 
 def parse_pba_stats():
     url="https://www.pba.ph/stats"
