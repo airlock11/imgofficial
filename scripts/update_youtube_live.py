@@ -278,6 +278,6 @@ except Exception as ex:
  print("youtube NBL Pilipinas upcoming",ex)
  upcoming=previous.get("upcoming",[])
  upcoming_checked=previous.get("upcomingCheckedAt")
-payload={"updatedAt":datetime.now(timezone.utc).isoformat(),"streams":streams,"upcoming":upcoming,"upcomingCheckedAt":upcoming_checked,"nblSchedule":nbl_regional_schedule()}
+payload={"updatedAt":datetime.now(timezone.utc).isoformat(),"freshForMinutes":8,"streams":streams,"upcoming":upcoming,"upcomingCheckedAt":upcoming_checked,"nblSchedule":nbl_regional_schedule()}
 OUT.write_text(json.dumps(payload,indent=2)+"\n",encoding="utf-8")
 print("live events",len(events),"matched streams",len(streams),"NBL upcoming",len(upcoming),"NBL scheduled",len(payload["nblSchedule"]))
