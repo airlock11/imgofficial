@@ -1151,6 +1151,19 @@ async function loadAllLiveGames({silent=false}={}){
   }));
 
   await Promise.all([regionalPromise,apiPromise,asianGamesPromise]);
+  // Merge GitHub-discovered YouTube streams into the exact live score event.
+  // The API key never reaches the browser; only public video IDs/URLs are published.
+  try{
+    const r=await fetch('/youtube-live.json?ts='+Date.now(),{cache:'no-store'});
+    if(r.ok){
+      const y=await r.json();
+      const byId=new Map((Array.isArray(y.streams)?y.streams:[]).map(x=>[String(x.eventId),x.stream]));
+      for(const g of live){
+        const s=byId.get(String(g.eventId));
+        if(s?.watchUrl)g.streams=[s];
+      }
+    }
+  }catch{}
   // Never trust stale local "live" flags indefinitely. Special/local live entries
   // expire after a conservative event window unless a fresh upstream feed supplies them.
   const nowMs=Date.now();
