@@ -404,16 +404,42 @@ function scoreLeagueLogoMarkup(key){
     '<span class="score-league-fallback score-league-fallback-hidden">'+esc((liveNowLabels[key]?.league||key).replace(/[^A-Za-z0-9]/g,'').slice(0,5).toUpperCase())+'</span>';
 }
 
+function scoreLeagueActivityMap(){
+  const map=new Map();
+  for(const game of liveNowItems){
+    if(!liveNowItemIsCurrent(game))continue;
+    const key=String(game.sportKey||'');
+    if(!key)continue;
+    const current=map.get(key)||{live:false,stream:false};
+    current.live=true;
+    if(liveStreamsForGame(game).length)current.stream=true;
+    map.set(key,current);
+  }
+  return map;
+}
 function renderScoreLeagueFilters(){
   const host=document.getElementById('scoreLeagueFilters');
   if(!host)return;
   const scoreCategory=String(liveNowLabels[currentScoreLeague]?.sport||'Sports').toLowerCase().replace(/[^a-z0-9]+/g,'-');
   document.body.dataset.scoreCategory=scoreCategory;
-  host.innerHTML=scoreLeagueOrder.map(key=>{
+  const activity=scoreLeagueActivityMap();
+  const baseIndex=new Map(scoreLeagueOrder.map((key,index)=>[key,index]));
+  const ordered=[...scoreLeagueOrder].sort((a,b)=>{
+    const aa=activity.get(a)||{live:false,stream:false};
+    const bb=activity.get(b)||{live:false,stream:false};
+    const aRank=aa.stream?0:aa.live?1:2;
+    const bRank=bb.stream?0:bb.live?1:2;
+    return aRank-bRank-(0)||((baseIndex.get(a)||0)-(baseIndex.get(b)||0));
+  });
+  host.innerHTML=ordered.map(key=>{
     const label=liveNowLabels[key]?.league||key.toUpperCase();
     const displayLabel=label.replace(/Philippines/gi,'PH').replace(/Australia/gi,'AUS');
-    return '<div class="score-league-item'+(key==='champions'?' score-league-item-champions':'')+'">'+
-      '<button type="button" class="score-league-filter'+(currentScoreLeague===key?' active':'')+'" data-score-league="'+esc(key)+'" aria-label="'+esc(label)+'" title="'+esc(label)+'">'+
+    const state=activity.get(key)||{live:false,stream:false};
+    const liveClass=state.live?' has-live-activity':'';
+    const streamClass=state.stream?' has-live-stream':'';
+    const liveLabel=state.stream?' — live stream':state.live?' — live score':'';
+    return '<div class="score-league-item'+(key==='champions'?' score-league-item-champions':'')+liveClass+streamClass+'">'+
+      '<button type="button" class="score-league-filter'+(currentScoreLeague===key?' active':'')+liveClass+streamClass+'" data-score-league="'+esc(key)+'" aria-label="'+esc(label+liveLabel)+'" title="'+esc(label+liveLabel)+'">'+
         '<span class="score-league-logo-wrap">'+scoreLeagueLogoMarkup(key)+'</span>'+
       '</button>'+
       '<span class="score-league-name">'+esc(displayLabel)+'</span>'+
@@ -430,7 +456,6 @@ function renderScoreLeagueFilters(){
     await loadGames({league:key});
   }));
 }
-
 async function loadScoreLeagueLogos(){
   const direct=Object.entries(scoreFeeds).map(async([key,url])=>{
     try{
@@ -979,6 +1004,48 @@ function liveStreamsForGame(game){
     }catch{return false}
   });
 }
+function inlineStreamUrl(stream){
+  const raw=stream?.embedUrl||stream?.watchUrl||'';
+  if(!raw)return'';
+  try{
+    const u=new URL(raw,location.href);
+    if(!['http:','https:'].includes(u.protocol))return'';
+    const host=u.hostname.toLowerCase();
+    let videoId='';
+    if(host==='youtu.be')videoId=u.pathname.split('/').filter(Boolean)[0]||'';
+    else if(host==='youtube.com'||host.endsWith('.youtube.com')||host==='youtube-nocookie.com'||host.endsWith('.youtube-nocookie.com')){
+      videoId=u.searchParams.get('v')||((u.pathname.match(/\/(?:live|embed)\/([^/?]+)/)||[])[1]||'');
+    }
+    if(/^[A-Za-z0-9_-]{11}$/.test(videoId))return 'https://www.youtube-nocookie.com/embed/'+encodeURIComponent(videoId)+'?playsinline=1&rel=0';
+    if(stream?.embedUrl)return u.href;
+  }catch{}
+  return'';
+}
+function selectedLeagueLiveStreamMarkup(key){
+  const candidates=[
+    ...liveNowItems.filter(g=>g.sportKey===key&&liveNowItemIsCurrent(g)),
+    ...allGames.filter(g=>g.state==='live')
+  ];
+  const seen=new Set();
+  for(const game of candidates){
+    const eventKey=String(game.eventId||[game.date,game.away,game.home].join('|'));
+    if(seen.has(eventKey))continue;
+    seen.add(eventKey);
+    const streams=liveStreamsForGame(game);
+    if(!streams.length)continue;
+    const stream=streams[0];
+    const embed=inlineStreamUrl(stream);
+    const league=liveNowLabels[key]?.league||game.leagueLabel||'Live';
+    const matchup=game.title||[game.away,game.home].filter(Boolean).join(' vs ')||league+' Live';
+    const source=stream.channel||stream.provider||'Official live stream';
+    return '<section class="league-live-stream" aria-label="'+esc(league)+' live stream">'+
+      '<div class="league-live-stream-head"><span><i aria-hidden="true"></i>LIVE STREAM</span><strong>'+esc(matchup)+'</strong><small>'+esc(source)+'</small></div>'+
+      (embed?'<div class="league-live-stream-player"><iframe src="'+esc(embed)+'" title="'+esc(matchup)+' live stream" loading="lazy" allow="autoplay; encrypted-media; picture-in-picture; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>':'')+
+      '<button type="button" class="league-live-stream-action" data-live-event="'+esc(game.eventId)+'"><span class="live-dot" aria-hidden="true"></span>Watch Live</button>'+
+    '</section>';
+  }
+  return'';
+}
 function openLiveStream(eventId){
   const g=[...allGames,...liveNowItems].find(x=>String(x.eventId)===String(eventId)&&liveStreamsForGame(x).length);
   if(!g)return;
@@ -1490,6 +1557,8 @@ function renderAllLiveGames(items,{preserveItems=false}={}){
     const mobileCount=document.getElementById('mobileLiveCount');
     if(mobileCount)mobileCount.textContent='';
     if(status)status.textContent='';
+    renderScoreLeagueFilters();
+    if(document.getElementById('games'))renderGames();
     return;
   }
 
@@ -1534,6 +1603,8 @@ function renderAllLiveGames(items,{preserveItems=false}={}){
       (liveStreamsForGame(g).length?'<button type="button" class="live-watch-btn" data-live-event="'+esc(g.eventId)+'" aria-label="Watch '+esc(g.leagueLabel||g.sportLabel||'live event')+' now"><span class="live-watch-pulse" aria-hidden="true"></span><span class="live-watch-copy"><strong>WATCH NOW</strong><small>'+esc(g.streams[0]?.channel||g.streams[0]?.provider||'Live stream')+'</small></span><span class="live-watch-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 6v12l9-6z"/></svg></span></button>':'')+
     '</article>';
   }).join('');
+  renderScoreLeagueFilters();
+  if(document.getElementById('games'))renderGames();
 }
 
 async function loadAllLiveGames({silent=false}={}){
@@ -1713,12 +1784,12 @@ function renderGames(){
 
   const asianNow=Date.now();
   const asianSchedule=currentScoreLeague==='asian_games'
-    ?[...live,...scheduled].filter(g=>{
+    ?scheduled.filter(g=>{
         const t=Date.parse(g.date||'');
-        return g.state==='live'||!Number.isFinite(t)||t>=asianNow-6*60*60*1000;
+        return !Number.isFinite(t)||t>=asianNow-6*60*60*1000;
       }).sort(byDateAsc)
     :null;
-  const scheduleItems=(asianSchedule||[...live,...scheduled,...other]).slice(0,30);
+  const scheduleItems=(asianSchedule||[...scheduled,...other]).slice(0,30);
   const nblHasScore=g=>/^\d{1,3}$/.test(String(g?.awayScore||''))&&/^\d{1,3}$/.test(String(g?.homeScore||''));
   const nblVerifiedScores=currentScoreLeague==='nbl'?finals.filter(nblHasScore).slice(0,30):[];
   const nblRecentReplays=currentScoreLeague==='nbl'?finals.filter(g=>!nblHasScore(g)).slice(0,20):[];
@@ -1746,8 +1817,20 @@ function renderGames(){
     }
   }
 
+  const liveStreamHtml=selectedLeagueLiveStreamMarkup(currentScoreLeague);
+  if(liveStreamHtml)sections.push(liveStreamHtml);
+
   const leagueStatsHtml=leagueStatsMarkup(currentScoreLeague);
   if(leagueStatsHtml)sections.push(leagueStatsHtml);
+
+  if(live.length){
+    sections.push(
+      '<section class="league-games-group selected-live-scores" aria-label="'+esc(leagueName)+' live scores">'+
+        '<div class="league-games-group-head"><h3>Live Scores</h3><span>'+esc(leagueName)+'</span></div>'+
+        '<div class="league-games-list">'+live.map(renderCard).join('')+'</div>'+
+      '</section>'
+    );
+  }
 
   if(currentScoreLeague==='uaap'){
     const uaapData=getRegionalSnapshot('uaap')||specialSportsDataCache?.leagues?.uaap||{};
