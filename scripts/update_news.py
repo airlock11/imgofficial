@@ -2,6 +2,8 @@
 import calendar
 import json
 import re
+import subprocess
+import sys
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from urllib.parse import urlparse
@@ -174,6 +176,64 @@ def _walk_video_renderers(node, found):
             _walk_video_renderers(value, found)
 
 
+def fetch_ytdlp_channel_videos(cfg):
+    url = "https://www.youtube.com/channel/" + cfg["channel_id"] + "/videos"
+    cmd = [
+        sys.executable, "-m", "yt_dlp",
+        "--flat-playlist",
+        "--playlist-end", "3",
+        "--dump-json",
+        "--no-warnings",
+        "--quiet",
+        url,
+    ]
+    proc = subprocess.run(
+        cmd,
+        capture_output=True,
+        text=True,
+        timeout=60,
+        check=False,
+    )
+    if proc.returncode != 0 and not proc.stdout.strip():
+        raise RuntimeError((proc.stderr or "yt-dlp failed")[:180])
+
+    rows = []
+    seen = set()
+    now = datetime.now(timezone.utc)
+    for idx, line in enumerate(proc.stdout.splitlines()):
+        line = line.strip()
+        if not line:
+            continue
+        try:
+            item = json.loads(line)
+        except Exception:
+            continue
+        video_id = str(item.get("id") or "")
+        title = clean_html(item.get("title"), 180)
+        if not re.fullmatch(r"[A-Za-z0-9_-]{6,}", video_id) or not title or video_id in seen:
+            continue
+        seen.add(video_id)
+        ts = item.get("timestamp") or item.get("release_timestamp")
+        if ts:
+            try:
+                published = datetime.fromtimestamp(float(ts), timezone.utc).isoformat()
+            except Exception:
+                published = (now - timedelta(seconds=idx)).isoformat()
+        else:
+            published = (now - timedelta(seconds=idx)).isoformat()
+        rows.append({
+            "id": video_id,
+            "title": title,
+            "source": cfg["name"],
+            "link": "https://www.youtube.com/watch?v=" + video_id,
+            "thumbnail": "https://i.ytimg.com/vi/" + video_id + "/hqdefault.jpg",
+            "published": published,
+        })
+        if len(rows) >= 3:
+            break
+    return rows
+
+
 def fetch_youtube_channel_page(cfg):
     url = "https://www.youtube.com/channel/" + cfg["channel_id"] + "/videos?hl=en&gl=US"
     req = Request(
@@ -279,21 +339,31 @@ def fetch_videos():
                 if added >= 3:
                     break
             if not added:
-                fallback = fetch_youtube_channel_page(cfg)
+                fallback = fetch_ytdlp_channel_videos(cfg)
+                if not fallback:
+                    fallback = fetch_youtube_channel_page(cfg)
                 if fallback:
                     videos.extend(fallback)
                     added = len(fallback)
                 else:
-                    errors[cfg["name"]] = "No videos returned from RSS or channel page"
+                    errors[cfg["name"]] = "No videos returned from RSS, yt-dlp, or channel page"
         except Exception as exc:
+            fallback_errors = []
+            fallback = []
             try:
-                fallback = fetch_youtube_channel_page(cfg)
-                if fallback:
-                    videos.extend(fallback)
-                else:
-                    errors[cfg["name"]] = str(exc)[:180]
-            except Exception as fallback_exc:
-                errors[cfg["name"]] = (str(exc) + " | channel page: " + str(fallback_exc))[:180]
+                fallback = fetch_ytdlp_channel_videos(cfg)
+            except Exception as ytdlp_exc:
+                fallback_errors.append("yt-dlp: " + str(ytdlp_exc))
+            if not fallback:
+                try:
+                    fallback = fetch_youtube_channel_page(cfg)
+                except Exception as page_exc:
+                    fallback_errors.append("channel page: " + str(page_exc))
+            if fallback:
+                videos.extend(fallback)
+            else:
+                detail = " | ".join([str(exc)] + fallback_errors)
+                errors[cfg["name"]] = detail[:180]
 
     videos.sort(key=lambda x: timestamp(x.get("published","")), reverse=True)
     unique = []
