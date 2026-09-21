@@ -139,7 +139,7 @@ def fetch_videos():
                 title = clean_html(entry.get("title"), 180)
                 if not title:
                     continue
-                 videos.append({
+                videos.append({
                     "id": video_id,
                     "title": title,
                     "source": cfg["name"],
