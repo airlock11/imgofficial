@@ -18,6 +18,7 @@ SCORE_RE = re.compile(r"^[+-]?(?:\d+(?:\.\d+)?|\d+:\d+|—|-)$")
 FINAL_STATES = {"Official", "Finished", "Final", "Completed"}
 LIVE_STATES = {"Running", "Live", "In Progress"}
 SCHEDULED_STATES = {"Scheduled", "Start List", "Upcoming", "Not Started"}
+LIVE_EXPIRY = timedelta(hours=2)
 
 
 def clean_lines(text):
@@ -249,6 +250,43 @@ def merge_games(*groups):
     return sorted(by_id.values(), key=lambda x: x.get("date", ""))
 
 
+def apply_live_expiry(games, previous_games, now):
+    """Keep the first live timestamp stable and suppress live state after two hours."""
+    previous_by_id = {str(g.get("eventId")): g for g in previous_games if g.get("eventId")}
+    for game in games:
+        if game.get("state") != "live":
+            continue
+
+        old = previous_by_id.get(str(game.get("eventId")), {})
+        first_live_raw = old.get("firstLiveAt") or old.get("liveFirstSeenAt")
+        try:
+            first_live = datetime.fromisoformat(first_live_raw.replace("Z", "+00:00")) if first_live_raw else now
+            if first_live.tzinfo is None:
+                first_live = first_live.replace(tzinfo=timezone.utc)
+        except (TypeError, ValueError):
+            first_live = now
+
+        expiry_raw = old.get("expiresAt") or old.get("liveExpiresAt")
+        try:
+            expiry = datetime.fromisoformat(expiry_raw.replace("Z", "+00:00")) if expiry_raw else first_live + LIVE_EXPIRY
+            if expiry.tzinfo is None:
+                expiry = expiry.replace(tzinfo=timezone.utc)
+        except (TypeError, ValueError):
+            expiry = first_live + LIVE_EXPIRY
+
+        game["firstLiveAt"] = first_live.astimezone(timezone.utc).isoformat()
+        game["expiresAt"] = expiry.astimezone(timezone.utc).isoformat()
+        if now >= expiry:
+            # The official result may not be available yet. Remove only the live
+            # assertion and stream controls; never invent a final result.
+            game["state"] = "expired"
+            game["status"] = "Awaiting official result"
+            game["streams"] = []
+            game["streamsChecked"] = True
+            game["liveExpired"] = True
+    return games
+
+
 def main():
     if OUT.exists():
         data = json.loads(OUT.read_text("utf-8"))
@@ -286,6 +324,8 @@ def main():
         browser.close()
 
     games = merge_games(all_games, live_games)
+    now_dt = datetime.now(timezone.utc)
+    games = apply_live_expiry(games, previous.get("games", []), now_dt)
     if len(games) < 3:
         games = previous.get("games", [])
         print("Asian Games scrape guard: preserving previous games")
@@ -293,7 +333,7 @@ def main():
         medals = previous.get("medals", [])
         print("Asian Games scrape guard: preserving previous medals")
 
-    now = datetime.now(timezone.utc).isoformat()
+    now = now_dt.isoformat()
     leagues["asian_games"] = {
         **previous,
         "sourceName": "Aichi-Nagoya 2026 Official Results",

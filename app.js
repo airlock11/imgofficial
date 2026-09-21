@@ -991,28 +991,49 @@ function normalizeBoxingFight(f,index=0){
     streamsChecked:true
   };
 }
+function normalizeAsianGamesExpiry(game){
+  if(!game||game.state!=='live')return game;
+  const now=Date.now();
+  const suppliedExpiry=Date.parse(game.expiresAt||game.liveExpiresAt||'');
+  const start=Date.parse(game.firstLiveAt||game.liveFirstSeenAt||game.date||'');
+  const expires=Number.isFinite(suppliedExpiry)?suppliedExpiry:(Number.isFinite(start)?start+2*60*60*1000:NaN);
+  if(!Number.isFinite(expires)||now<expires)return game;
+  return{
+    ...game,
+    state:'expired',
+    status:'Awaiting official result',
+    streams:[],
+    streamsChecked:true,
+    liveExpired:true
+  };
+}
 function normalizeScorePayload(sport,payload){
   if(payload?.special){
-    return (payload.games||[]).map((g,i)=>({
-      eventId:g.eventId||('special-'+sport+'-'+i),
-      date:g.date,
-      displayTime:g.displayTime||'',
-      home:g.home||'',
-      away:g.away||'',
-      homeLogo:g.homeLogo||'',
-      awayLogo:g.awayLogo||'',
-      homeScore:g.homeScore??'—',
-      awayScore:g.awayScore??'—',
-      title:g.title||'',
-      location:g.location||'',
-      status:g.status||'Scheduled',
-      state:g.state||'scheduled',
-      eventOnly:Boolean(g.eventOnly),
-      sourceName:g.sourceName||payload.sourceName||'',
-      sourceUrl:g.sourceUrl||payload.sourceUrl||'',
-      odds:null,oddsList:[],highlights:Array.isArray(g.highlights)?g.highlights:[],highlightsChecked:true,
-      streams:Array.isArray(g.streams)?g.streams.filter(s=>s&&(s.watchUrl||s.embedUrl)):[],streamsChecked:Boolean(g.streamsChecked||Array.isArray(g.streams))
-    }));
+    return (payload.games||[]).map((g,i)=>{
+      const game={
+        eventId:g.eventId||('special-'+sport+'-'+i),
+        date:g.date,
+        firstLiveAt:g.firstLiveAt||g.liveFirstSeenAt||'',
+        expiresAt:g.expiresAt||g.liveExpiresAt||'',
+        displayTime:g.displayTime||'',
+        home:g.home||'',
+        away:g.away||'',
+        homeLogo:g.homeLogo||'',
+        awayLogo:g.awayLogo||'',
+        homeScore:g.homeScore??'—',
+        awayScore:g.awayScore??'—',
+        title:g.title||'',
+        location:g.location||'',
+        status:g.status||'Scheduled',
+        state:g.state||'scheduled',
+        eventOnly:Boolean(g.eventOnly),
+        sourceName:g.sourceName||payload.sourceName||'',
+        sourceUrl:g.sourceUrl||payload.sourceUrl||'',
+        odds:null,oddsList:[],highlights:Array.isArray(g.highlights)?g.highlights:[],highlightsChecked:true,
+        streams:Array.isArray(g.streams)?g.streams.filter(s=>s&&(s.watchUrl||s.embedUrl)):[],streamsChecked:Boolean(g.streamsChecked||Array.isArray(g.streams))
+      };
+      return sport==='asian_games'?normalizeAsianGamesExpiry(game):game;
+    });
   }
   if(sport==='boxing'){
     return (payload?.fights||[]).map((f,i)=>normalizeBoxingFight(f,i))
@@ -1272,7 +1293,7 @@ function liveNowItemIsCurrent(g){
   const now=Date.now();
   const start=Date.parse(g.date||'');
   const maxHours={
-    asian_games:4,
+    asian_games:2,
     soccer:4,laliga:4,seriea:4,bundesliga:4,champions:4,
     basketball:5,wnba:5,pba:5,ncaa_ph:5,uaap:5,mpbl:5,nbl:5,nblaus:5,vba:5,
     atp:7,wta:7,ipl:7,volleyball_w:5,volleyball_m:5,
@@ -1282,6 +1303,8 @@ function liveNowItemIsCurrent(g){
   if(Number.isFinite(start)&&limit&&now-start>limit*60*60*1000)return false;
 
   if(g.sportKey==='asian_games'){
+    const expires=Date.parse(g.expiresAt||g.liveExpiresAt||'');
+    if(Number.isFinite(expires)&&now>=expires)return false;
     const updated=Date.parse(specialSportsDataCache?.updatedAt||specialSportsDataCache?.updated_at||'');
     if(!Number.isFinite(updated)||now-updated>30*60*1000)return false;
   }
