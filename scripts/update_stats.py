@@ -503,6 +503,7 @@ def main():
         ("ncaaf",lambda:espn_football_stats("ncaaf","college-football","NCAA Football")),
     ]
     updated=[]
+    errors={}
     for key,builder in jobs:
         try:
             value=builder()
@@ -513,10 +514,11 @@ def main():
             else:
                 print("No usable statistics",key)
         except Exception as ex:
+            errors[key]=type(ex).__name__+": "+str(ex)[:300]
             print("Statistics",key,type(ex).__name__,str(ex)[:180])
             if key not in previous:
                 leagues.pop(key,None)
-    payload={"updatedAt":datetime.now(timezone.utc).isoformat(),"leagues":leagues}
+    payload={"updatedAt":datetime.now(timezone.utc).isoformat(),"leagues":leagues,"diagnostics":errors}
     OUT.write_text(json.dumps(payload,indent=2,ensure_ascii=False)+"\n",encoding="utf-8")
     print("Statistics leagues",",".join(sorted(leagues.keys())),"updated",",".join(updated))
 
