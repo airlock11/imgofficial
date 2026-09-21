@@ -548,6 +548,118 @@ def espn_basketball_stats(key,league,season,season_label):
         except Exception as fallback:
             raise ValueError(primary+" | HTML "+type(fallback).__name__+": "+str(fallback)[:300])
 
+def espn_soccer_html_stats():
+    url="https://www.espn.com/soccer/stats/_/league/usa.1"
+    soup=BeautifulSoup(fetch(url),"html.parser")
+    tables=soup.find_all("table")
+    groups=[]
+    pending_names=[]
+
+    def headers_and_row(table):
+        for tr in table.find_all("tr"):
+            vals=[clean(x.get_text(" ",strip=True)) for x in tr.find_all(["th","td"])]
+            upper=[v.upper() for v in vals]
+            if "NAME" in upper or ("P" in upper and ("G" in upper or "A" in upper)):
+                return vals,tr
+        return [],None
+
+    def identities(table,header,row):
+        index={clean(h).upper():i for i,h in enumerate(header)}
+        ni=index.get("NAME");ti=index.get("TEAM")
+        if ni is None:return []
+        out=[];active=False
+        for tr in table.find_all("tr"):
+            if tr is row:active=True;continue
+            if not active:continue
+            cells=tr.find_all(["th","td"])
+            vals=[clean(x.get_text(" ",strip=True)) for x in cells]
+            if ni>=len(vals):continue
+            name_cell=cells[ni]
+            links=[clean(a.get_text(" ",strip=True)) for a in name_cell.find_all("a") if clean(a.get_text(" ",strip=True))]
+            player=links[0] if links else vals[ni]
+            team=vals[ti] if ti is not None and ti<len(vals) else ""
+            if player and player.upper()!="NAME":out.append({"player":player,"team":team})
+        return out
+
+    def metrics(table,header,row,metric):
+        index={clean(h).upper():i for i,h in enumerate(header)}
+        pi=index.get("P");mi=index.get(metric)
+        if mi is None:return []
+        out=[];active=False
+        for tr in table.find_all("tr"):
+            if tr is row:active=True;continue
+            if not active:continue
+            vals=[clean(x.get_text(" ",strip=True)) for x in tr.find_all(["th","td"])]
+            if mi>=len(vals):continue
+            value=num(vals[mi])
+            if value is None:continue
+            gp=intnum(vals[pi]) if pi is not None and pi<len(vals) else None
+            out.append({"gp":gp,"value":value,"displayValue":display_number(value)})
+        return out
+
+    for table in tables:
+        header,row=headers_and_row(table)
+        if not header or row is None:continue
+        upper=[x.upper() for x in header]
+        has_names="NAME" in upper
+        metric="G" if "G" in upper else ("A" if "A" in upper else "")
+
+        if has_names:
+            ids=identities(table,header,row)
+            if ids:pending_names=ids
+            if metric and ids:
+                vals=metrics(table,header,row,metric)
+                rows=[]
+                for identity,value in zip(ids,vals):
+                    rows.append({**identity,**value})
+                if rows:
+                    title="Goals" if metric=="G" else "Assists"
+                    groups.append({"title":title,"suffix":metric,"rows":rows[:8]})
+                    pending_names=[]
+            continue
+
+        if metric and pending_names:
+            vals=metrics(table,header,row,metric)
+            rows=[]
+            for identity,value in zip(pending_names,vals):
+                rows.append({**identity,**value})
+            if rows:
+                title="Goals" if metric=="G" else "Assists"
+                groups.append({"title":title,"suffix":metric,"rows":rows[:8]})
+                pending_names=[]
+
+    dedup=[]
+    seen=set()
+    for group in groups:
+        if group["title"] in seen:continue
+        seen.add(group["title"]);dedup.append(group)
+    if not dedup:
+        raise ValueError("ESPN MLS statistics tables not parsed")
+    return {
+        "league":"MLS","season":"2026 Regular Season",
+        "sourceName":"ESPN","sourceUrl":url,"groups":dedup
+    }
+
+def espn_mls_stats():
+    errors=[]
+    definitions=[
+        ("Goals","G","offensive.totalGoals",["goals","totalGoals"],"scoring"),
+        ("Assists","A","offensive.assists",["assists","totalAssists"],"scoring")
+    ]
+    try:
+        data=espn_multi_group_stats("soccer","usa.1","MLS","2026 Regular Season",2026,definitions)
+        titles={g.get("title") for g in data.get("groups",[])}
+        if "Goals" in titles and "Assists" in titles:
+            return data
+        errors.append("ESPN feed missing one or more MLS groups")
+    except Exception as ex:
+        errors.append(type(ex).__name__+": "+str(ex)[:500])
+    try:
+        return espn_soccer_html_stats()
+    except Exception as ex:
+        errors.append("HTML "+type(ex).__name__+": "+str(ex)[:500])
+    raise ValueError(" | ".join(errors))
+
 def espn_hockey_stats():
     return espn_multi_group_stats("hockey","nhl","NHL","2025–26 Regular Season",2026,[
         ("Points","PTS","offensive.points",["points"],"skaters"),
@@ -706,6 +818,7 @@ def main():
         ("nblaus",parse_nbl_australia_stats),
         ("basketball",lambda:espn_basketball_stats("basketball","nba",2026,"2025–26 Regular Season")),
         ("wnba",lambda:espn_basketball_stats("wnba","wnba",2026,"2026 Regular Season")),
+        ("mls",espn_mls_stats),
         ("baseball",espn_baseball_stats),
         ("hockey",espn_hockey_stats),
         ("football",lambda:espn_football_stats("football","nfl","NFL")),

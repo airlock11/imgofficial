@@ -130,6 +130,7 @@ const scoreFeeds={
   seriea:'https://site.api.espn.com/apis/site/v2/sports/soccer/ita.1/scoreboard',
   bundesliga:'https://site.api.espn.com/apis/site/v2/sports/soccer/ger.1/scoreboard',
   champions:'https://site.api.espn.com/apis/site/v2/sports/soccer/uefa.champions/scoreboard',
+  mls:'https://site.api.espn.com/apis/site/v2/sports/soccer/usa.1/scoreboard',
   basketball:'https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard',
   wnba:'https://site.api.espn.com/apis/site/v2/sports/basketball/wnba/scoreboard',
   atp:'https://site.api.espn.com/apis/site/v2/sports/tennis/atp/scoreboard',
@@ -286,6 +287,7 @@ const liveNowLabels={
   seriea:{sport:'Football',league:'Serie A'},
   bundesliga:{sport:'Football',league:'Bundesliga'},
   champions:{sport:'Football',league:'UEFA Champions League'},
+  mls:{sport:'Football',league:'MLS'},
   basketball:{sport:'Basketball',league:'NBA'},
   wnba:{sport:'Basketball',league:'WNBA'},
   atp:{sport:'Tennis',league:'ATP Tour'},
@@ -321,7 +323,7 @@ function asianGamesEventLabel(game){
   const index=title.indexOf(divider);
   return index>0?title.slice(index+divider.length).trim():(title||'Asian Games event');
 }
-const scoreLeagueOrder=['asian_games','soccer','laliga','seriea','bundesliga','champions','basketball','wnba','pba','ncaa_ph','uaap','mpbl','nbl','nblaus','vba','atp','wta','ipl','volleyball_w','volleyball_m','baseball','hockey','football','ncaaf','f1','ufc','boxing'];
+const scoreLeagueOrder=['asian_games','soccer','laliga','seriea','bundesliga','champions','mls','basketball','wnba','pba','ncaa_ph','uaap','mpbl','nbl','nblaus','vba','atp','wta','ipl','volleyball_w','volleyball_m','baseball','hockey','football','ncaaf','f1','ufc','boxing'];
 const scoreLeagueLogoCache=new Map();
 let currentScoreLeague='soccer';
 let scoreLoadToken=0;
@@ -329,7 +331,7 @@ let scoreLoadToken=0;
 function scoreLeagueFallback(key){
   const label=liveNowLabels[key]?.league||key.toUpperCase();
   const short={
-    soccer:'EPL',laliga:'LAL',seriea:'SA',bundesliga:'BUN',champions:'UCL',
+    soccer:'EPL',laliga:'LAL',seriea:'SA',bundesliga:'BUN',champions:'UCL',mls:'MLS',
     basketball:'NBA',wnba:'WNBA',pba:'PBA',ncaa_ph:'NCAA-PH',uaap:'UAAP',mpbl:'MPBL',nbl:'NBL-PH',nblaus:'NBL',
     vba:'VBA',atp:'ATP',wta:'WTA',ipl:'IPL',volleyball_w:'FIVB',volleyball_m:'FIVB',
     baseball:'MLB',hockey:'NHL',football:'NFL',ncaaf:'NCAA',f1:'F1',ufc:'UFC',boxing:'BOX',asian_games:'AG26'
@@ -611,6 +613,7 @@ const teamDirectoryFeeds={
   seriea:'soccer/ita.1',
   bundesliga:'soccer/ger.1',
   champions:'soccer/uefa.champions',
+  mls:'soccer/usa.1',
   basketball:'basketball/nba',
   wnba:'basketball/wnba',
   nblaus:'basketball/nbl',
@@ -1298,7 +1301,7 @@ function liveNowItemIsCurrent(g){
   const start=Date.parse(g.date||'');
   const maxHours={
     asian_games:2,
-    soccer:4,laliga:4,seriea:4,bundesliga:4,champions:4,
+    soccer:4,laliga:4,seriea:4,bundesliga:4,champions:4,mls:4,
     basketball:5,wnba:5,pba:5,ncaa_ph:5,uaap:5,mpbl:5,nbl:5,nblaus:5,vba:5,
     atp:7,wta:7,ipl:7,volleyball_w:5,volleyball_m:5,
     baseball:8,hockey:5,football:7,ncaaf:7,f1:5,ufc:10,boxing:10
