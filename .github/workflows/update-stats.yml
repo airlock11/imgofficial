@@ -1,0 +1,49 @@
+name: Update sports statistics
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/update_stats.py"
+      - ".github/workflows/update-stats.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sports-stats-update
+  cancel-in-progress: true
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install parser
+        run: python -m pip install --disable-pip-version-check beautifulsoup4 lxml
+      - name: Refresh sports statistics
+        run: python scripts/update_stats.py
+      - name: Publish statistics
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -z "$(git status --porcelain -- stats-data.json)" ]; then
+            echo "No statistics changes."
+            exit 0
+          fi
+          git config user.name "IMG Stats Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add stats-data.json
+          git commit -m "Update sports statistics"
+          git fetch origin main
+          git rebase origin/main
+          git push
