@@ -1726,7 +1726,9 @@ if(document.getElementById('games')){
     try{
       const selectedSport=currentScoreLeague;
       await loadGames({silent:true,league:selectedSport});
-      await refreshExistingAllLiveScores(selectedSport);
+      // Rebuild the complete Live Now feed on every refresh so newly live,
+      // finished, removed and newly discovered stream events update automatically.
+      await loadAllLiveGames({silent:true});
     }finally{
       scoreRefreshInFlight=false;
       scheduleScoreAutoRefresh();
