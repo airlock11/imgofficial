@@ -1062,31 +1062,6 @@ function attachExternalAsianGamesStreams(games,entries){
     target.streamsChecked=true;
   }
 }
-function appendGenericExternalLiveCoverage(games,entries){
-  const list=Array.isArray(games)?games:[];
-  for(const entry of (Array.isArray(entries)?entries:[])){
-    if(!entry?.genericCoverage||!entry?.stream?.watchUrl)continue;
-    const id=String(entry.eventId||entry.stream.watchUrl);
-    if(list.some(g=>String(g?.eventId||'')===id))continue;
-    const source=entry.stream.channel||entry.stream.provider||'Official broadcaster';
-    list.push({
-      eventId:id,
-      sportKey:'asian_games_external',
-      sportLabel:'Asian Games',
-      leagueLabel:source,
-      date:new Date().toISOString(),
-      displayTime:'LIVE',
-      away:'Official broadcaster',
-      home:entry.title||'Asian Games live coverage',
-      awayScore:'',
-      homeScore:'',
-      status:'LIVE · '+source,
-      state:'live',
-      streams:[entry.stream],
-      streamsChecked:true
-    });
-  }
-}
 
 
 function liveSportSlug(label){
@@ -1265,7 +1240,6 @@ async function loadAllLiveGames({silent=false}={}){
   try{
     const external=await loadExternalLiveData();
     attachExternalAsianGamesStreams(live,external);
-    appendGenericExternalLiveCoverage(live,external);
   }catch{}
   // Merge GitHub-discovered YouTube streams into exact live events when possible.
   // The API key never reaches the browser; only public video IDs/URLs are published.
