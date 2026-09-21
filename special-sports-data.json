@@ -246,7 +246,7 @@
       ]
     },
     "ncaa_ph": {
-      "sourceName": "NCAA Philippines Season 102",
+      "sourceName": "NCAA Philippines Season 102 · One Sports",
       "sourceUrl": "https://www.gmanetwork.com/news/sports/basketball/",
       "games": [
         {
@@ -258,7 +258,16 @@
           "awayScore": "—",
           "homeScore": "—",
           "status": "Scheduled · Playtime FilOil Centre",
-          "state": "scheduled"
+          "state": "scheduled",
+          "streams": [
+            {
+              "provider": "YouTube",
+              "channel": "One Sports",
+              "title": "NCAA Season 102 — Live on One Sports",
+              "watchUrl": "https://www.youtube.com/@OneSportsPHL/streams"
+            }
+          ],
+          "streamsChecked": true
         },
         {
           "eventId": "ncaa102-uphsd-sscr-20260921",
@@ -269,7 +278,16 @@
           "awayScore": "—",
           "homeScore": "—",
           "status": "Scheduled · Playtime FilOil Centre",
-          "state": "scheduled"
+          "state": "scheduled",
+          "streams": [
+            {
+              "provider": "YouTube",
+              "channel": "One Sports",
+              "title": "NCAA Season 102 — Live on One Sports",
+              "watchUrl": "https://www.youtube.com/@OneSportsPHL/streams"
+            }
+          ],
+          "streamsChecked": true
         },
         {
           "eventId": "ncaa102-csb-jru-20260922",
