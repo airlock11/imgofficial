@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-21T05:42:50.854Z",
+  "updated_at": "2026-09-21T05:43:27+00:00",
   "source": "Official boxing websites",
   "sources": [
     {
@@ -16,71 +16,9 @@
     "Matchroom Boxing": 4
   },
   "errors": {
-    "Matchroom Boxing": "Retained verified official schedule while automatic parser adapts to current page layout"
+    "Matchroom Boxing": "Parser returned no current rows; retained last verified official schedule"
   },
   "fights": [
-    {
-      "id": "matchroom-20261002-jones-sanchez",
-      "title": "Jones vs. Sanchez",
-      "date": "2026-10-02T12:00:00Z",
-      "displayTime": "Oct 2 · Time TBA",
-      "status": "NOT_STARTED",
-      "sourceName": "Matchroom Boxing",
-      "sourceUrl": "https://www.matchroomboxing.com/events/",
-      "event": {
-        "title": "Jones vs. Sanchez",
-        "location": "Orlando, USA",
-        "venue": "Caribe Royale"
-      },
-      "fighters": {
-        "fighter_1": {
-          "name": "Jones",
-          "winner": false
-        },
-        "fighter_2": {
-          "name": "Sanchez",
-          "winner": false
-        }
-      },
-      "results": {
-        "outcome": null,
-        "outcome_long": null,
-        "round": null,
-        "time": null,
-        "scores": []
-      }
-    },
-    {
-      "id": "matchroom-20261003-whittaker-wallace",
-      "title": "Whittaker vs. Wallace",
-      "date": "2026-10-03T12:00:00Z",
-      "displayTime": "Oct 3 · Time TBA",
-      "status": "NOT_STARTED",
-      "sourceName": "Matchroom Boxing",
-      "sourceUrl": "https://www.matchroomboxing.com/events/",
-      "event": {
-        "title": "Whittaker vs. Wallace",
-        "location": "Birmingham, UK",
-        "venue": "Utilita Arena"
-      },
-      "fighters": {
-        "fighter_1": {
-          "name": "Whittaker",
-          "winner": false
-        },
-        "fighter_2": {
-          "name": "Wallace",
-          "winner": false
-        }
-      },
-      "results": {
-        "outcome": null,
-        "outcome_long": null,
-        "round": null,
-        "time": null,
-        "scores": []
-      }
-    },
     {
       "id": "web-premier-boxing-champions-2026-10-17-sebastian-fundora-ermal-hadribeaj",
       "title": "Sebastian Fundora vs. Ermal Hadribeaj",
@@ -163,6 +101,68 @@
         },
         "fighter_2": {
           "name": "Koen Mazoudier",
+          "winner": false
+        }
+      },
+      "results": {
+        "outcome": null,
+        "outcome_long": null,
+        "round": null,
+        "time": null,
+        "scores": []
+      }
+    },
+    {
+      "id": "matchroom-20261002-jones-sanchez",
+      "title": "Jones vs. Sanchez",
+      "date": "2026-10-02T12:00:00Z",
+      "displayTime": "Oct 2 · Time TBA",
+      "status": "NOT_STARTED",
+      "sourceName": "Matchroom Boxing",
+      "sourceUrl": "https://www.matchroomboxing.com/events/",
+      "event": {
+        "title": "Jones vs. Sanchez",
+        "location": "Orlando, USA",
+        "venue": "Caribe Royale"
+      },
+      "fighters": {
+        "fighter_1": {
+          "name": "Jones",
+          "winner": false
+        },
+        "fighter_2": {
+          "name": "Sanchez",
+          "winner": false
+        }
+      },
+      "results": {
+        "outcome": null,
+        "outcome_long": null,
+        "round": null,
+        "time": null,
+        "scores": []
+      }
+    },
+    {
+      "id": "matchroom-20261003-whittaker-wallace",
+      "title": "Whittaker vs. Wallace",
+      "date": "2026-10-03T12:00:00Z",
+      "displayTime": "Oct 3 · Time TBA",
+      "status": "NOT_STARTED",
+      "sourceName": "Matchroom Boxing",
+      "sourceUrl": "https://www.matchroomboxing.com/events/",
+      "event": {
+        "title": "Whittaker vs. Wallace",
+        "location": "Birmingham, UK",
+        "venue": "Utilita Arena"
+      },
+      "fighters": {
+        "fighter_1": {
+          "name": "Whittaker",
+          "winner": false
+        },
+        "fighter_2": {
+          "name": "Wallace",
           "winner": false
         }
       },
