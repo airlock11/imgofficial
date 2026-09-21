@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import json, os, re, urllib.parse, urllib.request
+import xml.etree.ElementTree as ET
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -42,6 +43,14 @@ def video_details(ids):
  data=get_json("https://www.googleapis.com/youtube/v3/videos?"+params)
  return {x["id"]:x for x in data.get("items",[])}
 
+def channel_feed_ids(channel_id):
+ url="https://www.youtube.com/feeds/videos.xml?channel_id="+urllib.parse.quote(channel_id)
+ req=urllib.request.Request(url,headers={"User-Agent":UA})
+ with urllib.request.urlopen(req,timeout=20) as r:
+  root=ET.fromstring(r.read())
+ ns={"yt":"http://www.youtube.com/xml/schemas/2015","atom":"http://www.w3.org/2005/Atom"}
+ return [e.text for e in root.findall(".//yt:videoId",ns) if e.text]
+
 def search(event):
  wanted=tokens(" ".join(event["teams"]))
  best=None
@@ -58,17 +67,20 @@ def asian_games_live():
  # broadcast whose title contains the exact phrase "2026 ASIAN GAMES".
  items=youtube_search(max_results=50, channel_id=ONE_SPORTS_CHANNEL_ID)
  ids=[x.get("id",{}).get("videoId") for x in items if x.get("id",{}).get("videoId")]
- details=video_details(ids)
+ try:
+  ids += channel_feed_ids(ONE_SPORTS_CHANNEL_ID)
+ except Exception as ex:
+  print("One Sports feed",ex)
+ ids=list(dict.fromkeys(x for x in ids if x))
+ details=video_details(ids[:50])
  out=[]
- for item in items:
-  vid=item.get("id",{}).get("videoId"); sn=item.get("snippet",{}); title=sn.get("title","")
-  d=details.get(vid,{})
+ for vid,d in details.items():
   dsn=d.get("snippet",{}); status=d.get("status",{}); live=d.get("liveStreamingDetails",{})
-  channel=(dsn.get("channelTitle") or sn.get("channelTitle") or "").strip()
+  title=dsn.get("title",""); channel=(dsn.get("channelTitle") or "").strip()
   if "2026 ASIAN GAMES" not in title.upper():continue
-  if channel.lower()!="one sports":continue
-  if dsn.get("liveBroadcastContent")!="live":continue
-  if live.get("actualEndTime"):continue
+  if "one sports" not in channel.lower():continue
+  is_live=dsn.get("liveBroadcastContent")=="live" or (live.get("actualStartTime") and not live.get("actualEndTime"))
+  if not is_live or live.get("actualEndTime"):continue
   watch="https://www.youtube.com/watch?v="+vid
   stream={"videoId":vid,"watchUrl":watch,"provider":"YouTube","channel":channel,"title":title}
   if status.get("embeddable",True):stream["embedUrl"]="https://www.youtube.com/embed/"+vid
