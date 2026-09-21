@@ -1509,7 +1509,7 @@ function renderNews(items,videos=[]){
     ? '<section class="news-videos" aria-label="Sports videos">'+videoRows.map(v=>
         '<article class="news-video-card" data-news-video="'+esc(v.id)+'">'+
           '<button class="news-video-frame news-video-link" type="button" data-play-news-video="'+esc(v.id)+'" aria-label="Play '+esc(v.title||'sports video')+'">'+
-            '<img src="'+esc(v.thumbnail)+'" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer">'+
+            '<img src="'+esc(v.thumbnail)+'" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src=\'about-sports.jpg\'">'+
             '<span class="news-video-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>'+
           '</button>'+
           '<div class="news-video-copy"><div class="tag">Video</div><h3>'+esc(v.title||'Sports video')+'</h3><small>'+esc(v.source||'Sports')+'</small></div>'+
