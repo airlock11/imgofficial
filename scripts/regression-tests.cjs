@@ -27,12 +27,12 @@ for (const mode of ['normal', 'malformed', 'blocked']) {
   vm.runInContext("writePreference('img-theme','light')", homeContext);
 }
 
-let shown = 0, closed = 0, closeHandler;
-const host = {innerHTML:'',querySelector(){return {addEventListener(name,fn){assert.equal(name,'click');closeHandler=fn}}}};
+let shown = 0;
+const host = {innerHTML:'',querySelector(){return null}};
 const streamContext = vm.createContext({
   URL,location:{href:'https://www.imgofficial.com/scores/'},
   allGames:[],liveNowItems:[],esc:String,
-  ensureLiveDialog:()=>({querySelector:()=>host,showModal(){shown++},close(){closed++}}),
+  ensureLiveDialog:()=>({querySelector:()=>host,showModal(){shown++}}),
   window:{open(){throw new Error('Unexpected external navigation')}}
 });
 vm.runInContext(app.slice(app.indexOf('function liveStreamsForGame('),app.indexOf('async function hydrateLiveStreams(')),streamContext);
@@ -53,7 +53,8 @@ streamContext.liveNowItems=[{eventId:'test',state:'live',streams:[specific]}];
 vm.runInContext("openLiveStream('test')",streamContext);
 assert.equal(shown,1,'A streamless league copy must not mask the Live Now stream');
 assert.match(host.innerHTML,/youtube.com\/embed\/abcdefghijk/);
-closeHandler();
-assert.equal(closed,1,'The header close button must close the dialog');
+assert.doesNotMatch(host.innerHTML,/data-close-live|live-dialog-close/,'The redundant inline close button must not be rendered');
+assert.doesNotMatch(host.innerHTML,/Watch on YouTube|<h2>|One Sports/,'The simplified player must not show redundant stream labels or external-link text');
+assert.match(app,/class="live-close"/,'The main dialog close button must remain available');
 assert.equal((app.match(/\(g\.streams\?\.length\?/g)||[]).length,0,'All live buttons must use the eligibility check');
-console.log('PASS: mobile preferences, live stream eligibility, stream lookup, and close control');
+console.log('PASS: mobile preferences, live stream eligibility, stream lookup, and simplified live dialog');
