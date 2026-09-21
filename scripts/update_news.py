@@ -322,18 +322,17 @@ def youtube_video_embeddable(video_id):
     try:
         proc = subprocess.run(cmd, capture_output=True, text=True, timeout=30, check=False)
         if proc.returncode != 0 or not proc.stdout.strip():
-            # GitHub-hosted runners can be blocked by YouTube metadata checks.
-            # Do not discard a fresh official-channel video just because validation failed.
-            return True
+            # A failed check is not permission to embed a video.
+            return False
         info = json.loads(proc.stdout)
-        if info.get("playable_in_embed") is False:
+        if info.get("playable_in_embed") is not True:
             return False
         availability = str(info.get("availability") or "").lower()
         if availability and availability not in ("public", "unlisted"):
             return False
         return True
     except Exception:
-        return True
+        return False
 
 def fetch_videos():
     videos = []

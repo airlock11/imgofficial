@@ -24,6 +24,8 @@ jobs:
           done
       - name: Check startup and player regressions
         run: node scripts/regression-tests.cjs
+      - name: Check news embedding permissions
+        run: python scripts/test_news_embed.py
       - name: Check Python syntax
         run: |
           python - <<'PY'
