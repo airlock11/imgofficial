@@ -103,6 +103,20 @@ def parse_uaap():
     xs = lines(URLS["uaap"])
     games, day = [], None
     date_re = re.compile(r"^(January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2},\s+2026(?:\s*\|\s*.*)?$")
+    teams = {
+        "ADMU":"Ateneo Blue Eagles",
+        "ADU":"Adamson Soaring Falcons",
+        "DLSU":"De La Salle Green Archers",
+        "FEU":"FEU Tamaraws",
+        "NU":"NU Bulldogs",
+        "UE":"UE Red Warriors",
+        "UP":"UP Fighting Maroons",
+        "UST":"UST Growling Tigers",
+    }
+    def team_name(value):
+        value = value.strip()
+        return teams.get(value.upper(), clean_team(value))
+
     for i, x in enumerate(xs):
         if date_re.match(x):
             day = x
@@ -110,58 +124,56 @@ def parse_uaap():
         if not day:
             continue
 
-        if x.upper() == "FINAL":
-            score_i = i - 1
-            if score_i >= 1 and re.fullmatch(r"\d{2,3}\s*\|\s*\d{2,3}", xs[score_i]):
-                home_i = score_i - 1
-                away_i = i + 1
-                if home_i >= 0 and away_i < len(xs):
-                    home, away = clean_team(xs[home_i]), clean_team(xs[away_i])
-                    if home and away and not re.search(r"COLISEUM|ARENA|CENTRE|CENTER", home+" "+away, re.I):
-                        hs, as_ = [v.strip() for v in xs[score_i].split("|")]
-                        iso = pht_iso_from_month(day)
-                        games.append({
-                            "eventId":"web-uaap-final-"+str(len(games)+1),
-                            "date":iso,
-                            "displayTime":datetime.fromisoformat(iso).strftime("%b %d · Final").replace(" 0"," "),
-                            "away":away,"home":home,"awayScore":as_,"homeScore":hs,
-                            "status":"Final","state":"final",
-                            "sourceName":"SkedCheck","sourceUrl":URLS["uaap"]
-                        })
+        # SkedCheck renders final scores as:
+        # TEAM, SCORE, |, SCORE, FINAL, TEAM
+        if x.upper() == "FINAL" and i >= 4 and i + 1 < len(xs):
+            if xs[i-2] == "|" and re.fullmatch(r"\d{2,3}", xs[i-3]) and re.fullmatch(r"\d{2,3}", xs[i-1]):
+                home, away = team_name(xs[i-4]), team_name(xs[i+1])
+                hs, as_ = xs[i-3], xs[i-1]
+                iso = pht_iso_from_month(day)
+                games.append({
+                    "eventId":"web-uaap-final-"+str(len(games)+1),
+                    "date":iso,
+                    "displayTime":datetime.fromisoformat(iso).strftime("%b %d · Final").replace(" 0"," "),
+                    "away":away,"home":home,"awayScore":as_,"homeScore":hs,
+                    "status":"Final","state":"final",
+                    "sourceName":"SkedCheck","sourceUrl":URLS["uaap"]
+                })
             continue
 
-        if re.fullmatch(r"VS\s+\d{1,2}:\d{2}\s*(AM|PM)", x, re.I):
-            home_i = i - 1
-            away_i = i + 1
-            if home_i >= 0 and away_i < len(xs):
-                home, away = clean_team(xs[home_i]), clean_team(xs[away_i])
-                if home and away and not re.search(r"COLISEUM|ARENA|CENTRE|CENTER", home+" "+away, re.I):
-                    tm = x[2:].strip()
-                    iso = pht_iso_from_month(day, tm)
-                    games.append({
-                        "eventId":"web-uaap-scheduled-"+str(len(games)+1),
-                        "date":iso,
-                        "displayTime":datetime.fromisoformat(iso).strftime("%b %d · %I:%M %p").replace(" 0"," "),
-                        "away":away,"home":home,"awayScore":"—","homeScore":"—",
-                        "status":"Scheduled","state":"scheduled",
-                        "sourceName":"SkedCheck","sourceUrl":URLS["uaap"]
-                    })
+        # Upcoming rows render as: TEAM, VS, TIME, TEAM.
+        if x.upper() == "VS" and i >= 1 and i + 2 < len(xs):
+            tm = xs[i+1]
+            if re.fullmatch(r"\d{1,2}:\d{2}\s*(AM|PM)", tm, re.I):
+                home, away = team_name(xs[i-1]), team_name(xs[i+2])
+                iso = pht_iso_from_month(day, tm)
+                games.append({
+                    "eventId":"web-uaap-scheduled-"+str(len(games)+1),
+                    "date":iso,
+                    "displayTime":datetime.fromisoformat(iso).strftime("%b %d · %I:%M %p").replace(" 0"," "),
+                    "away":away,"home":home,"awayScore":"—","homeScore":"—",
+                    "status":"Scheduled","state":"scheduled",
+                    "sourceName":"SkedCheck","sourceUrl":URLS["uaap"]
+                })
 
     games = dedupe_games(games)
     if not games:
-        sample=[(idx,x) for idx,x in enumerate(xs) if ("2026" in x or x.upper()=="FINAL" or re.match(r"^VS\s+",x,re.I))][:40]
-        print("UAAP parse sample", sample)
-        print("UAAP parse window", list(enumerate(xs[110:205], start=110)))
         existing = load().get("leagues", {}).get("uaap", {})
         if existing:
             return existing
         raise RuntimeError("No UAAP games parsed")
     scheduled = sorted([g for g in games if g.get("state")=="scheduled"], key=lambda x:x.get("date",""))
     finals = sorted([g for g in games if g.get("state")=="final"], key=lambda x:x.get("date",""), reverse=True)
+
+    # Preserve the last verified standings snapshot until a reliable machine-readable
+    # standings source is available in the updater.
+    existing = load().get("leagues", {}).get("uaap", {})
+    standings = existing.get("standings", []) if isinstance(existing, dict) else []
+
     return {
         "league":"UAAP",
         "season":"Season 89 Men's Basketball",
-        "coverage":"Schedule and final scores",
+        "coverage":"Schedule, final scores and standings",
         "note":"Automatically refreshed from the current UAAP Season 89 public schedule/results page. Live One Sports broadcasts are handled separately by the YouTube live scanner.",
         "sources":[
             {"name":"UAAP Official","url":"https://uaap.org/"},
@@ -169,6 +181,7 @@ def parse_uaap():
             {"name":"SkedCheck","url":URLS["uaap"]},
             {"name":"One Sports","url":"https://www.youtube.com/@OneSportsPHL"}
         ],
+        "standings": standings,
         "games": scheduled[:20] + finals[:30]
     }
 
