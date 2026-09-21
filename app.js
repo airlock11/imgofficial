@@ -691,13 +691,18 @@ function openLiveStream(eventId){
   const g=allGames.find(x=>String(x.eventId)===String(eventId))||liveNowItems.find(x=>String(x.eventId)===String(eventId));
   if(!g||!g.streams?.length)return;
   const stream=g.streams.find(s=>s?.watchUrl)||g.streams[0];
-  if(stream?.watchUrl){
-    window.open(stream.watchUrl,'_blank','noopener,noreferrer');
-    return;
-  }
-  if(stream?.embedUrl){
-    window.open(stream.embedUrl,'_blank','noopener,noreferrer');
-  }
+  const raw=stream?.watchUrl||stream?.embedUrl;
+  if(!raw)return;
+  let videoId='';
+  try{
+    const u=new URL(raw,location.href);
+    if(u.hostname==='youtu.be')videoId=u.pathname.split('/').filter(Boolean)[0]||'';
+    else if(u.hostname.includes('youtube.com'))videoId=u.searchParams.get('v')||((u.pathname.match(/\/(?:live|embed)\/([^/?]+)/)||[])[1]||'');
+  }catch{}
+  if(!videoId){ window.open(raw,'_blank','noopener,noreferrer'); return; }
+  const d=ensureLiveDialog(),host=d.querySelector('#liveContent');
+  host.innerHTML='<div class="live-dialog-head"><div><span class="live-badge">LIVE</span><h2>'+esc(g.title||g.leagueLabel||'Live stream')+'</h2><p>'+esc(stream.channel||stream.provider||'YouTube')+'</p></div><button type="button" class="live-dialog-close" data-close-live aria-label="Close">×</button></div><div class="live-player-wrap"><iframe class="live-player" src="https://www.youtube.com/embed/'+esc(videoId)+'?autoplay=1&playsinline=1&rel=0" title="'+esc(g.title||'Live stream')+'" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div><a class="live-external-link" href="'+esc(raw)+'" target="_blank" rel="noopener noreferrer">Watch on YouTube</a>';
+  d.showModal();
 }
 
 async function hydrateLiveStreams(sport){const snapshot=allGames,now=Date.now(),candidates=snapshot.filter(g=>g.eventId&&(g.state==='live'||(g.state==='scheduled'&&Math.abs(Date.parse(g.date)-now)<=90*60000))).slice(0,4);if(!candidates.length)return;await Promise.allSettled(candidates.map(async g=>{const key=sport+':'+g.eventId,hit=liveStreamCache.get(key);if(hit&&Date.now()-hit.time<120000){g.streams=hit.items;g.streamsChecked=true;return}try{const q=new URLSearchParams({sport,event:g.eventId,home:g.home,away:g.away}),r=await fetch('https://img-api-proxy.magsipocarnie.workers.dev/streams?'+q.toString(),{cache:'no-store'});if(!r.ok)throw 0;const j=await r.json(),items=Array.isArray(j.items)?j.items.filter(x=>x?.embedUrl):[];g.streams=items;g.streamsChecked=true;liveStreamCache.set(key,{time:Date.now(),items})}catch{g.streams=[];g.streamsChecked=true}}));if(allGames===snapshot&&currentScoreLeague===sport)renderGames()}
