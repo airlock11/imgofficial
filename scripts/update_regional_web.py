@@ -17,6 +17,7 @@ PHT = timezone(timedelta(hours=8))
 
 URLS = {
     "pba": "https://skedcheck.com/pba-games-schedule-scores/",
+    "uaap": "https://skedcheck.com/uaap-mens-basketball-schedule-scores/",
     "mpbl_fixtures": "https://www.forebet.com/en/basketball/philippines/mpbl/fixtures",
     "mpbl_results": "https://www.forebet.com/en/basketball/philippines/mpbl/results",
     "nbl_facebook": "https://www.facebook.com/nblpilipinas",
@@ -97,6 +98,69 @@ def parse_pba():
             return existing
         raise RuntimeError("No PBA games parsed")
     return {"league":"PBA","season":"2026 Governors' Cup","coverage":"Schedule and final scores","note":"Automatically refreshed from public web schedule/results.","sources":[{"name":"SkedCheck","url":URLS["pba"]},{"name":"PBA Official","url":"https://www.pba.ph/"}],"games":games[:40]}
+
+def parse_uaap():
+    xs = lines(URLS["uaap"])
+    games, day = [], None
+    date_re = re.compile(r"^(January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2},\s+2026(?:\s*\|\s*[A-Za-z]+)?$")
+    i = 0
+    while i < len(xs):
+        if date_re.match(xs[i]):
+            day = xs[i]
+            i += 1
+            continue
+        if not day:
+            i += 1
+            continue
+        if i + 3 < len(xs) and re.fullmatch(r"\d{2,3}\s*\|\s*\d{2,3}", xs[i+1]) and xs[i+2].upper() == "FINAL":
+            first, second = clean_team(xs[i]), clean_team(xs[i+3])
+            a, b = [v.strip() for v in xs[i+1].split("|")]
+            iso = pht_iso_from_month(day)
+            games.append({
+                "eventId":"web-uaap-final-"+str(len(games)+1),
+                "date":iso,
+                "displayTime":datetime.fromisoformat(iso).strftime("%b %d · Final").replace(" 0"," "),
+                "away":second,"home":first,"awayScore":b,"homeScore":a,
+                "status":"Final","state":"final",
+                "sourceName":"SkedCheck","sourceUrl":URLS["uaap"]
+            })
+            i += 4
+            continue
+        if i + 2 < len(xs) and re.fullmatch(r"VS\s+\d{1,2}:\d{2}\s*(AM|PM)", xs[i+1], re.I):
+            first, second = clean_team(xs[i]), clean_team(xs[i+2])
+            tm = xs[i+1][2:].strip()
+            iso = pht_iso_from_month(day, tm)
+            games.append({
+                "eventId":"web-uaap-scheduled-"+str(len(games)+1),
+                "date":iso,
+                "displayTime":datetime.fromisoformat(iso).strftime("%b %d · %I:%M %p").replace(" 0"," "),
+                "away":first,"home":second,"awayScore":"—","homeScore":"—",
+                "status":"Scheduled","state":"scheduled",
+                "sourceName":"SkedCheck","sourceUrl":URLS["uaap"]
+            })
+            i += 3
+            continue
+        i += 1
+    if not games:
+        existing = load().get("leagues", {}).get("uaap", {})
+        if existing:
+            return existing
+        raise RuntimeError("No UAAP games parsed")
+    scheduled = sorted([g for g in games if g.get("state")=="scheduled"], key=lambda x:x.get("date",""))
+    finals = sorted([g for g in games if g.get("state")=="final"], key=lambda x:x.get("date",""), reverse=True)
+    return {
+        "league":"UAAP",
+        "season":"Season 89 Men's Basketball",
+        "coverage":"Schedule and final scores",
+        "note":"Automatically refreshed from the current UAAP Season 89 public schedule/results page. Live One Sports broadcasts are handled separately by the YouTube live scanner.",
+        "sources":[
+            {"name":"UAAP Official","url":"https://uaap.org/"},
+            {"name":"UAAP Live Stats","url":"https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball"},
+            {"name":"SkedCheck","url":URLS["uaap"]},
+            {"name":"One Sports","url":"https://www.youtube.com/@OneSportsPHL"}
+        ],
+        "games": scheduled[:20] + finals[:30]
+    }
 
 def parse_forebet(url, state):
     xs = lines(url)
@@ -651,7 +715,7 @@ def main():
     data = load()
     data.setdefault("leagues", {})
     errors = {}
-    for key, fn in [("pba", parse_pba), ("mpbl", parse_mpbl), ("nbl", parse_nbl), ("nblaus", parse_nbl_australia), ("vba", parse_vba)]:
+    for key, fn in [("pba", parse_pba), ("uaap", parse_uaap), ("mpbl", parse_mpbl), ("nbl", parse_nbl), ("nblaus", parse_nbl_australia), ("vba", parse_vba)]:
         try:
             fresh = fn()
             if fresh.get("games") or fresh.get("broadcast"):
