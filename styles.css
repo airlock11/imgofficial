@@ -530,7 +530,8 @@ main{min-height:calc(100svh - 68px)}
 .score-league-toolbar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:18px;padding-bottom:18px;border-bottom:1px solid var(--line)}
 .score-league-filters{display:flex;align-items:center;gap:9px;min-width:0;overflow-x:auto;padding:2px;scrollbar-width:none}
 .score-league-filters::-webkit-scrollbar{display:none}
-.score-league-filter{display:grid;grid-template-rows:42px auto;place-items:center;gap:5px;flex:0 0 auto;width:64px;min-height:78px;padding:6px 7px 7px;border:1px solid var(--line);border-radius:14px;background:var(--panel);color:var(--text);cursor:pointer;transition:border-color .18s ease,background .18s ease,transform .18s ease}
+.score-league-item{display:flex;flex:0 0 auto;width:64px;flex-direction:column;align-items:center;gap:6px}
+.score-league-filter{display:grid;place-items:center;width:56px;height:56px;padding:4px;border:1px solid var(--line);border-radius:14px;background:var(--panel);color:var(--text);cursor:pointer;transition:border-color .18s ease,background .18s ease,transform .18s ease}
 .score-league-filter:hover{border-color:color-mix(in srgb,var(--text) 28%,var(--line))}
 .score-league-filter.active{border-color:color-mix(in srgb,var(--red) 60%,var(--line));background:color-mix(in srgb,var(--red) 9%,var(--panel));box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--red) 28%,transparent)}
 .score-league-logo-wrap{width:48px;height:42px;display:grid;place-items:center;overflow:visible;padding:2px}
@@ -539,9 +540,9 @@ main{min-height:calc(100svh - 68px)}
 .score-league-fivb-crop img{position:absolute;display:block;width:162px;max-width:none;height:auto;left:-19px;top:-16px}
 .score-league-fallback{width:36px;height:36px;display:grid;place-items:center;border-radius:10px;background:color-mix(in srgb,var(--text) 7%,var(--panel));font:900 .56rem/1 Inter,Arial,sans-serif;letter-spacing:.01em;color:var(--text);text-align:center}
 .score-league-fallback-hidden{display:none}
-.score-league-name{display:-webkit-box;width:48px;max-width:48px;min-height:20px;overflow:hidden;-webkit-box-orient:vertical;-webkit-line-clamp:2;text-align:center;font:800 .57rem/1.05 Inter,Arial,sans-serif;letter-spacing:.005em;color:var(--text);text-wrap:balance;word-break:normal;overflow-wrap:anywhere;padding:3px 2px;border-radius:7px;background:color-mix(in srgb,var(--text) 7%,var(--panel));box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--text) 7%,transparent);-webkit-font-smoothing:antialiased}
-.score-league-filter.active .score-league-name{background:color-mix(in srgb,var(--red) 16%,var(--panel));color:var(--text)}
-@media (prefers-contrast:more){.score-league-name{background:var(--panel);box-shadow:inset 0 0 0 1px var(--text);font-weight:900}.score-league-filter{border-color:var(--text)}}
+.score-league-name{display:-webkit-box;width:64px;max-width:64px;min-height:20px;overflow:hidden;-webkit-box-orient:vertical;-webkit-line-clamp:2;text-align:center;font:800 .59rem/1.08 Inter,Arial,sans-serif;letter-spacing:.005em;color:var(--text);text-wrap:balance;word-break:normal;overflow-wrap:anywhere;padding:0 2px;-webkit-font-smoothing:antialiased}
+.score-league-item:has(.score-league-filter.active) .score-league-name{color:var(--text);font-weight:900}
+@media (prefers-contrast:more){.score-league-name{font-weight:900}.score-league-filter{border-color:var(--text)}}
 .score-league-toolbar>.status{flex:0 0 auto}
 .league-games-group{margin:0 0 30px}
 .league-games-group-head{display:flex;align-items:end;justify-content:space-between;gap:16px;padding:10px 4px 12px;border-bottom:1px solid var(--line)}
@@ -576,13 +577,14 @@ main{min-height:calc(100svh - 68px)}
   .scores-browser-head h2{font-size:2rem}
   .score-league-toolbar{gap:10px;margin-bottom:14px;padding-bottom:14px}
   .score-league-filters{gap:7px;flex:1 1 auto}
-  .score-league-filter{grid-template-rows:40px auto;gap:4px;width:60px;min-height:74px;border-radius:12px;padding:5px 6px 6px}
-  .score-league-logo-wrap{width:46px;height:40px;padding:2px}
+  .score-league-item{width:60px;gap:5px}
+  .score-league-filter{width:52px;height:52px;border-radius:12px;padding:4px}
+  .score-league-logo-wrap{width:40px;height:40px;padding:2px}
   .score-league-logo{max-width:34px;max-height:34px}
   .score-league-fivb-crop{width:40px;height:27px}
   .score-league-fivb-crop img{width:155px;left:-18px;top:-15px}
   .score-league-fallback{width:34px;height:34px;font-size:.52rem}
-  .score-league-name{width:46px;max-width:46px;min-height:19px;padding:3px 1px;font-size:.54rem;line-height:1.04}
+  .score-league-name{width:60px;max-width:60px;min-height:18px;padding:0 1px;font-size:.55rem;line-height:1.06}
   .score-league-toolbar>.status{font-size:.62rem}
 }
 
