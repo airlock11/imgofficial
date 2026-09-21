@@ -549,7 +549,7 @@ def espn_basketball_stats(key,league,season,season_label):
             raise ValueError(primary+" | HTML "+type(fallback).__name__+": "+str(fallback)[:300])
 
 def espn_soccer_html_stats():
-    url="https://www.espn.com/soccer/stats/_/league/usa.1"
+    url="https://www.espn.com/soccer/stats?league=USA.1"
     soup=BeautifulSoup(fetch(url),"html.parser")
     tables=soup.find_all("table")
     groups=[]
