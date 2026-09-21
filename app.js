@@ -360,10 +360,12 @@ function renderScoreLeagueFilters(){
   host.innerHTML=scoreLeagueOrder.map(key=>{
     const label=liveNowLabels[key]?.league||key.toUpperCase();
     const displayLabel=label.replace(/Philippines/gi,'PH').replace(/Australia/gi,'AUS');
-    return '<button type="button" class="score-league-filter'+(currentScoreLeague===key?' active':'')+'" data-score-league="'+esc(key)+'" aria-label="'+esc(label)+'" title="'+esc(label)+'">'+
-      '<span class="score-league-logo-wrap">'+scoreLeagueLogoMarkup(key)+'</span>'+
+    return '<div class="score-league-item">'+
+      '<button type="button" class="score-league-filter'+(currentScoreLeague===key?' active':'')+'" data-score-league="'+esc(key)+'" aria-label="'+esc(label)+'" title="'+esc(label)+'">'+
+        '<span class="score-league-logo-wrap">'+scoreLeagueLogoMarkup(key)+'</span>'+
+      '</button>'+
       '<span class="score-league-name">'+esc(displayLabel)+'</span>'+
-    '</button>';
+    '</div>';
   }).join('');
 
   host.querySelectorAll('[data-score-league]').forEach(btn=>btn.addEventListener('click',async()=>{
