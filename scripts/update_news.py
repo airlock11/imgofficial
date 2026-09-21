@@ -2,9 +2,10 @@
 import calendar
 import json
 import re
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from urllib.parse import urlparse
+from urllib.request import Request, urlopen
 
 import feedparser
 from bs4 import BeautifulSoup
@@ -112,6 +113,133 @@ def fetch_feed(cfg):
     return items
 
 
+def _extract_json_object(text, marker):
+    start = text.find(marker)
+    if start < 0:
+        return None
+    start = text.find("{", start + len(marker))
+    if start < 0:
+        return None
+
+    depth = 0
+    in_string = False
+    escaped = False
+    for i in range(start, len(text)):
+        ch = text[i]
+        if in_string:
+            if escaped:
+                escaped = False
+            elif ch == "\\":
+                escaped = True
+            elif ch == '"':
+                in_string = False
+            continue
+        if ch == '"':
+            in_string = True
+        elif ch == "{":
+            depth += 1
+        elif ch == "}":
+            depth -= 1
+            if depth == 0:
+                try:
+                    return json.loads(text[start:i + 1])
+                except Exception:
+                    return None
+    return None
+
+
+def _video_title(renderer):
+    title = renderer.get("title") or {}
+    if isinstance(title, dict):
+        simple = title.get("simpleText")
+        if simple:
+            return clean_html(simple, 180)
+        runs = title.get("runs") or []
+        value = " ".join(str(x.get("text") or "") for x in runs if isinstance(x, dict)).strip()
+        if value:
+            return clean_html(value, 180)
+    return ""
+
+
+def _walk_video_renderers(node, found):
+    if isinstance(node, dict):
+        if "videoRenderer" in node and isinstance(node["videoRenderer"], dict):
+            found.append(node["videoRenderer"])
+        if "gridVideoRenderer" in node and isinstance(node["gridVideoRenderer"], dict):
+            found.append(node["gridVideoRenderer"])
+        for value in node.values():
+            _walk_video_renderers(value, found)
+    elif isinstance(node, list):
+        for value in node:
+            _walk_video_renderers(value, found)
+
+
+def fetch_youtube_channel_page(cfg):
+    url = "https://www.youtube.com/channel/" + cfg["channel_id"] + "/videos?hl=en&gl=US"
+    req = Request(
+        url,
+        headers={
+            "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
+                          "(KHTML, like Gecko) Chrome/140.0 Safari/537.36",
+            "Accept-Language": "en-US,en;q=0.9",
+        },
+    )
+    with urlopen(req, timeout=25) as response:
+        html = response.read().decode("utf-8", "replace")
+
+    data = (
+        _extract_json_object(html, "var ytInitialData =")
+        or _extract_json_object(html, "window[\"ytInitialData\"] =")
+        or _extract_json_object(html, "ytInitialData =")
+    )
+
+    rows = []
+    seen = set()
+    if data:
+        renderers = []
+        _walk_video_renderers(data, renderers)
+        for idx, renderer in enumerate(renderers):
+            video_id = str(renderer.get("videoId") or "")
+            title = _video_title(renderer)
+            if not re.fullmatch(r"[A-Za-z0-9_-]{6,}", video_id) or not title or video_id in seen:
+                continue
+            seen.add(video_id)
+            rows.append({
+                "id": video_id,
+                "title": title,
+                "source": cfg["name"],
+                "link": "https://www.youtube.com/watch?v=" + video_id,
+                "thumbnail": "https://i.ytimg.com/vi/" + video_id + "/hqdefault.jpg",
+                "published": (datetime.now(timezone.utc) - timedelta(seconds=idx)).isoformat(),
+            })
+            if len(rows) >= 3:
+                return rows
+
+    # Last-resort extraction for channel pages where ytInitialData is embedded differently.
+    for idx, match in enumerate(re.finditer(r'\\?"videoId\\?"\s*:\s*\\?"([A-Za-z0-9_-]{6,})', html)):
+        video_id = match.group(1)
+        if video_id in seen:
+            continue
+        window = html[match.start():match.start() + 2500]
+        title_match = re.search(r'\\?"title\\?"\s*:\s*\{.*?\\?"text\\?"\s*:\s*\\?"([^"\\]{3,180})', window)
+        title = clean_html(title_match.group(1), 180) if title_match else ""
+        if not title:
+            continue
+        seen.add(video_id)
+        rows.append({
+            "id": video_id,
+            "title": title,
+            "source": cfg["name"],
+            "link": "https://www.youtube.com/watch?v=" + video_id,
+            "thumbnail": "https://i.ytimg.com/vi/" + video_id + "/hqdefault.jpg",
+            "published": (datetime.now(timezone.utc) - timedelta(seconds=idx)).isoformat(),
+        })
+        if len(rows) >= 3:
+            break
+
+    return rows
+
+
 def fetch_videos():
     videos = []
     errors = {}
@@ -151,9 +279,21 @@ def fetch_videos():
                 if added >= 3:
                     break
             if not added:
-                errors[cfg["name"]] = "No videos returned"
+                fallback = fetch_youtube_channel_page(cfg)
+                if fallback:
+                    videos.extend(fallback)
+                    added = len(fallback)
+                else:
+                    errors[cfg["name"]] = "No videos returned from RSS or channel page"
         except Exception as exc:
-            errors[cfg["name"]] = str(exc)[:180]
+            try:
+                fallback = fetch_youtube_channel_page(cfg)
+                if fallback:
+                    videos.extend(fallback)
+                else:
+                    errors[cfg["name"]] = str(exc)[:180]
+            except Exception as fallback_exc:
+                errors[cfg["name"]] = (str(exc) + " | channel page: " + str(fallback_exc))[:180]
 
     videos.sort(key=lambda x: timestamp(x.get("published","")), reverse=True)
     unique = []
