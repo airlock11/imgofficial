@@ -149,7 +149,7 @@ const cloudflareFallbackFeeds={
   football:'https://img-api-proxy.magsipocarnie.workers.dev/scoreboard?league=football',
   ncaaf:'https://img-api-proxy.magsipocarnie.workers.dev/scoreboard?league=ncaaf'
 };
-const regionalScoreKeys=new Set(['pba','uaap','mpbl','nbl','nblaus','vba']);
+const regionalScoreKeys=new Set(['pba','mpbl','nbl','nblaus','vba']);
 
 let specialSportsDataCache=null;
 let specialSportsDataPromise=null;
