@@ -1,8 +1,9 @@
-<!doctype html><html lang="en"><head><base href="/"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="canonical" href="https://www.imgofficial.com/sports/"><title>Sports — IMG</title><link rel="icon" type="image/png" href="./img-logo-hq.png?v=20260920-11"><link rel="shortcut icon" type="image/png" href="./img-logo-hq.png?v=20260920-11"><link rel="apple-touch-icon" href="./img-logo-hq.png?v=20260920-11"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="styles.css?v=20260922-103"><link rel="stylesheet" href="mobile-nav.css?v=20260920-6"><link rel="stylesheet" href="theme-toggle.css?v=20260920-10"></head><body class="sports-page">
+<!doctype html><html lang="en"><head><base href="/"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="canonical" href="https://www.imgofficial.com/sports/"><title>Sports — IMG</title><link rel="icon" type="image/png" href="./img-logo-hq.png?v=20260920-11"><link rel="shortcut icon" type="image/png" href="./img-logo-hq.png?v=20260920-11"><link rel="apple-touch-icon" href="./img-logo-hq.png?v=20260920-11"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="styles.css?v=20260922-104"><link rel="stylesheet" href="mobile-nav.css?v=20260920-6"><link rel="stylesheet" href="theme-toggle.css?v=20260920-10"></head><body class="sports-page">
 <header><nav class="shell"><a class="logo" href="/"><img src="img-logo-hq.png" alt="IMG"></a><div class="navlinks"><a href="/">Home</a><a class="active" href="/sports/">Sports</a><a href="/scores/">Scores</a><a href="/news/">News</a><a href="/odds/">Odds</a></div></nav></header>
 <main><section class="content sports-directory"><div class="shell">
   <div class="sports-directory-head"><h1>Sports</h1><span id="sportsCount"></span></div>
-  <div id="sportList" class="sports-compact-list" aria-label="Sports directory"></div>
+  <div id="sportTabs" class="sports-tabbar" role="tablist" aria-label="Choose a sport"></div>
+  <section id="sportPanel" class="sports-stage" aria-live="polite"></section>
 </div></section></main>
 <div class="bottomnav"><a href="/"><b><span class="navglyph icon-home" aria-hidden="true"></span></b>Home</a><a class="active" href="/sports/"><b><span class="navglyph icon-sports" aria-hidden="true"></span></b>Sports</a><a href="/scores/"><b><span class="navglyph icon-scores" aria-hidden="true"></span></b>Scores</a><a href="/news/"><b><span class="navglyph icon-news" aria-hidden="true"></span></b>News</a><a href="/odds/"><b><span class="navglyph icon-odds" aria-hidden="true"></span></b>Odds</a></div>
 <script src="score-league-user-logos.js?v=20260921-94"></script>
@@ -88,6 +89,21 @@ const sportsDirectory={
   'American Football':[['NFL','United States','football'],['NCAA Football','United States','ncaaf']]
 };
 
+const sportAccents={
+  Basketball:'#ff6b35',
+  Football:'#19b86a',
+  Tennis:'#d7ff3f',
+  Baseball:'#3f8cff',
+  Hockey:'#68d8ff',
+  Cricket:'#a777ff',
+  Volleyball:'#ff4d8d',
+  Motorsport:'#ff3b30',
+  Boxing:'#f0b429',
+  'Combat Sports':'#e4572e',
+  'American Football':'#7b8cff'
+};
+let activeSport='Basketball';
+
 const staticLeagueLogos={
   bleague:'https://commons.wikimedia.org/wiki/Special:Redirect/file/B.League_logo.svg',
   euroleague:'https://commons.wikimedia.org/wiki/Special:Redirect/file/EuroLeague_logo.svg',
@@ -150,30 +166,38 @@ function leagueLogo(name,key){
 function capabilityBadges(key){
   if(!key)return '';
   const items=[];
-  if(scoreKeys.has(key))items.push('<span>Scores</span>');
-  if(statsKeys.has(key))items.push('<span>Stats</span>');
-  if(oddsKeys.has(key))items.push('<span>Odds</span>');
+  if(scoreKeys.has(key))items.push('<span class="cap-scores">Scores</span>');
+  if(statsKeys.has(key))items.push('<span class="cap-stats">Stats</span>');
+  if(oddsKeys.has(key))items.push('<span class="cap-odds">Odds</span>');
   return items.length?'<div class="sports-capabilities">'+items.join('')+'</div>':'';
 }
 function renderSports(){
-  const entries=Object.entries(sportsDirectory);
-  document.getElementById('sportsCount').textContent=entries.length+' sports';
-  document.getElementById('sportList').innerHTML=entries.map(([sport,leagues],sportIndex)=>(
-    '<section class="sports-compact-section" style="--sport-index:'+sportIndex+'">'+
-      '<button class="sports-compact-toggle" type="button" aria-expanded="false" data-sports-toggle="'+esc(sport)+'">'+
-        '<span class="sports-compact-title"><strong>'+esc(sport)+'</strong><small>'+leagues.length+' competitions</small></span>'+
-        '<span class="sports-compact-chevron" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span>'+
-      '</button>'+
-      '<div class="sports-compact-panel"><div class="sports-compact-panel-inner">'+
-        '<div class="sports-logo-grid">'+leagues.map((league,i)=>{const [name,region,key]=league;return (
-          '<article class="sports-logo-tile" style="--league-index:'+i+'" data-league-key="'+esc(key||'')+'">'+
-            '<div class="sports-logo-mark" data-logo-host="'+esc(key||'')+'">'+leagueLogo(name,key)+'</div>'+
-            '<div class="sports-logo-copy"><strong>'+esc(name)+'</strong><small>'+esc(region)+'</small>'+capabilityBadges(key)+'</div>'+
-          '</article>'
-        )}).join('')+'</div>'+
-      '</div></div>'+
-    '</section>'
-  )).join('');
+  const names=Object.keys(sportsDirectory);
+  document.getElementById('sportsCount').textContent=names.length+' sports';
+  if(!sportsDirectory[activeSport])activeSport=names[0];
+
+  document.getElementById('sportTabs').innerHTML=names.map((sport,index)=>{
+    const selected=sport===activeSport;
+    const accent=sportAccents[sport]||'#ef3f45';
+    return '<button class="sports-tab'+(selected?' is-active':'')+'" type="button" role="tab" aria-selected="'+String(selected)+'" data-sport-tab="'+esc(sport)+'" style="--sport-accent:'+accent+';--tab-index:'+index+'">'+
+      '<span>'+esc(sport)+'</span><small>'+sportsDirectory[sport].length+'</small>'+
+    '</button>';
+  }).join('');
+
+  const leagues=sportsDirectory[activeSport]||[];
+  const accent=sportAccents[activeSport]||'#ef3f45';
+  document.getElementById('sportPanel').style.setProperty('--sport-accent',accent);
+  document.getElementById('sportPanel').innerHTML=
+    '<div class="sports-stage-head">'+
+      '<div><span class="sports-stage-kicker">Selected sport</span><h2>'+esc(activeSport)+'</h2></div>'+
+      '<strong>'+leagues.length+' competitions</strong>'+
+    '</div>'+
+    '<div class="sports-logo-grid">'+leagues.map((league,i)=>{const [name,region,key]=league;return (
+      '<article class="sports-logo-tile" style="--league-index:'+i+';--sport-accent:'+accent+'" data-league-key="'+esc(key||'')+'">'+
+        '<div class="sports-logo-mark" data-logo-host="'+esc(key||'')+'">'+leagueLogo(name,key)+'</div>'+
+        '<div class="sports-logo-copy"><strong>'+esc(name)+'</strong><small>'+esc(region)+'</small>'+capabilityBadges(key)+'</div>'+
+      '</article>'
+    )}).join('')+'</div>';
 }
 async function loadStatsAvailability(){
   try{
@@ -212,12 +236,17 @@ async function hydrateLogo(key,url){
 }
 function hydrateLogos(){Object.entries(logoFeeds).forEach(([key,url])=>void hydrateLogo(key,url))}
 document.addEventListener('click',e=>{
-  const btn=e.target.closest('[data-sports-toggle]');
+  const btn=e.target.closest('[data-sport-tab]');
   if(!btn)return;
-  const section=btn.closest('.sports-compact-section');
-  const open=section.classList.contains('is-open');
-  section.classList.toggle('is-open',!open);
-  btn.setAttribute('aria-expanded',String(!open));
+  const next=btn.dataset.sportTab;
+  if(!next||next===activeSport)return;
+  activeSport=next;
+  renderSports();
+  hydrateLogos();
+  requestAnimationFrame(()=>{
+    const selected=document.querySelector('.sports-tab.is-active');
+    selected?.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
+  });
 });
 renderSports();
 hydrateLogos();

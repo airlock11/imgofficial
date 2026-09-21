@@ -886,79 +886,91 @@ main{min-height:calc(100svh - 68px)}
 @media(prefers-reduced-motion:reduce){.stats-dropdown-content,.stats-dropdown-chevron,.stats-dropdown-toggle:before,.standings-dropdown-content,.standings-dropdown-chevron,.standings-dropdown-toggle:before{transition:none!important}}
 
 
-/* Sports compact logo directory */
-.sports-page .sports-directory{padding:30px 0 46px}
-.sports-directory-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin:0 0 16px;padding:0 2px 14px;border-bottom:1px solid var(--line)}
+/* Sports tabs + colorful league directory */
+.sports-page .sports-directory{padding:30px 0 48px}
+.sports-directory-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin:0 0 14px;padding:0 2px 13px;border-bottom:1px solid var(--line)}
 .sports-directory-head h1{margin:0;font:800 clamp(2.4rem,5vw,3.8rem)/.9 "Barlow Condensed",Arial,sans-serif;text-transform:uppercase;letter-spacing:-.02em}
 .sports-directory-head span{padding-bottom:4px;color:var(--muted);font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em}
-.sports-compact-list{display:grid;gap:10px}
-.sports-compact-section{border:1px solid var(--line);border-radius:16px;background:var(--surface);overflow:hidden;opacity:0;transform:translateY(8px);animation:sportsCompactEnter .34s ease forwards;animation-delay:calc(var(--sport-index,0)*35ms);transition:border-color .2s ease,box-shadow .2s ease}
-.sports-compact-section:hover,.sports-compact-section.is-open{border-color:color-mix(in srgb,var(--text) 17%,var(--line))}
-.sports-compact-section.is-open{box-shadow:0 12px 30px rgba(0,0,0,.12)}
-.sports-compact-toggle{width:100%;min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:14px 16px;border:0;background:transparent;color:var(--text);text-align:left;cursor:pointer}
-.sports-compact-title{display:grid;gap:3px;min-width:0}
-.sports-compact-title strong{font:800 1.32rem/1 "Barlow Condensed",Arial,sans-serif;text-transform:uppercase;letter-spacing:.01em}
-.sports-compact-title small{color:var(--muted);font-size:.66rem;font-weight:700}
-.sports-compact-chevron{width:34px;height:34px;display:grid;place-items:center;flex:0 0 auto;border:1px solid var(--line);border-radius:50%;color:var(--muted);transition:transform .25s ease,border-color .2s ease,color .2s ease,background .2s ease}
-.sports-compact-chevron svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.sports-compact-section.is-open .sports-compact-chevron{transform:rotate(180deg);color:var(--text);border-color:color-mix(in srgb,var(--red) 42%,var(--line));background:color-mix(in srgb,var(--red) 7%,transparent)}
-.sports-compact-panel{display:grid;grid-template-rows:0fr;opacity:0;transition:grid-template-rows .32s cubic-bezier(.2,.8,.2,1),opacity .22s ease}
-.sports-compact-panel-inner{min-height:0;overflow:hidden}
-.sports-compact-section.is-open .sports-compact-panel{grid-template-rows:1fr;opacity:1}
-.sports-logo-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;padding:0 12px 12px}
-.sports-logo-tile{min-width:0;min-height:78px;display:grid;grid-template-columns:46px minmax(0,1fr);align-items:center;gap:10px;padding:10px;border:1px solid color-mix(in srgb,var(--text) 8%,var(--line));border-radius:12px;background:color-mix(in srgb,var(--text) 2%,var(--surface));opacity:0;transform:translateY(5px);transition:border-color .18s ease,background .18s ease,transform .18s ease,box-shadow .18s ease}
-.sports-compact-section.is-open .sports-logo-tile{animation:sportsLogoEnter .26s ease forwards;animation-delay:calc(var(--league-index,0)*24ms)}
-.sports-logo-tile:hover{transform:translateY(-1px);border-color:color-mix(in srgb,var(--red) 30%,var(--line));background:color-mix(in srgb,var(--red) 3%,var(--surface));box-shadow:0 8px 18px rgba(0,0,0,.08)}
-.sports-logo-mark{width:46px;height:46px;display:grid;place-items:center;border-radius:10px;background:color-mix(in srgb,var(--text) 5%,var(--surface));overflow:hidden}
+
+.sports-tabbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.sports-tab{position:relative;min-height:44px;display:inline-flex;align-items:center;gap:8px;padding:9px 12px;border:1px solid var(--line);border-radius:999px;background:color-mix(in srgb,var(--text) 2%,var(--surface));color:var(--muted);cursor:pointer;overflow:hidden;opacity:0;transform:translateY(5px);animation:sportsTabEnter .28s ease forwards;animation-delay:calc(var(--tab-index,0)*22ms);transition:transform .18s ease,border-color .18s ease,color .18s ease,background .18s ease,box-shadow .18s ease}
+.sports-tab:before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,color-mix(in srgb,var(--sport-accent) 18%,transparent),transparent 72%);opacity:.55;transition:opacity .18s ease}
+.sports-tab>span,.sports-tab>small{position:relative;z-index:1}
+.sports-tab>span{font-size:.69rem;font-weight:850;white-space:nowrap}
+.sports-tab>small{min-width:21px;height:21px;display:grid;place-items:center;padding:0 5px;border-radius:999px;background:color-mix(in srgb,var(--text) 7%,transparent);color:var(--text);font-size:.52rem;font-weight:900}
+.sports-tab:hover{transform:translateY(-1px);border-color:color-mix(in srgb,var(--sport-accent) 46%,var(--line));color:var(--text)}
+.sports-tab.is-active{color:#fff;border-color:color-mix(in srgb,var(--sport-accent) 70%,#fff 6%);background:linear-gradient(135deg,color-mix(in srgb,var(--sport-accent) 78%,#151922),color-mix(in srgb,var(--sport-accent) 34%,#11151b));box-shadow:0 9px 22px color-mix(in srgb,var(--sport-accent) 20%,transparent),inset 0 0 0 1px color-mix(in srgb,#fff 9%,transparent)}
+.sports-tab.is-active:before{opacity:1}
+.sports-tab.is-active>small{background:rgba(255,255,255,.17);color:#fff}
+
+.sports-stage{position:relative;overflow:hidden;border:1px solid color-mix(in srgb,var(--sport-accent) 26%,var(--line));border-radius:18px;background:linear-gradient(180deg,color-mix(in srgb,var(--sport-accent) 5%,var(--surface)),var(--surface) 150px);box-shadow:0 14px 34px rgba(0,0,0,.1)}
+.sports-stage:before{content:"";position:absolute;width:340px;height:340px;right:-160px;top:-210px;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--sport-accent) 23%,transparent),transparent 68%);pointer-events:none}
+.sports-stage-head{position:relative;z-index:1;display:flex;align-items:end;justify-content:space-between;gap:18px;padding:18px 18px 13px;border-bottom:1px solid color-mix(in srgb,var(--sport-accent) 18%,var(--line))}
+.sports-stage-head>div{display:grid;gap:2px}
+.sports-stage-kicker{color:color-mix(in srgb,var(--sport-accent) 78%,var(--text));font-size:.55rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+.sports-stage-head h2{margin:0;font:800 1.65rem/1 "Barlow Condensed",Arial,sans-serif;text-transform:uppercase;letter-spacing:.01em}
+.sports-stage-head>strong{padding:5px 8px;border-radius:999px;background:color-mix(in srgb,var(--sport-accent) 11%,transparent);color:color-mix(in srgb,var(--sport-accent) 74%,var(--text));font-size:.55rem;font-weight:850}
+
+.sports-logo-grid{position:relative;z-index:1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;padding:12px}
+.sports-logo-tile{position:relative;min-width:0;min-height:82px;display:grid;grid-template-columns:46px minmax(0,1fr);align-items:center;gap:10px;padding:10px;border:1px solid color-mix(in srgb,var(--sport-accent) 12%,var(--line));border-radius:13px;background:color-mix(in srgb,var(--sport-accent) 2.5%,var(--surface));overflow:hidden;opacity:0;transform:translateY(7px);animation:sportsLogoEnter .3s ease forwards;animation-delay:calc(var(--league-index,0)*28ms);transition:transform .18s ease,border-color .18s ease,background .18s ease,box-shadow .18s ease}
+.sports-logo-tile:before{content:"";position:absolute;left:0;top:12px;bottom:12px;width:3px;border-radius:0 3px 3px 0;background:var(--sport-accent);opacity:.65;transform:scaleY(.55);transition:transform .18s ease,opacity .18s ease}
+.sports-logo-tile:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--sport-accent) 42%,var(--line));background:color-mix(in srgb,var(--sport-accent) 6%,var(--surface));box-shadow:0 10px 22px color-mix(in srgb,var(--sport-accent) 9%,rgba(0,0,0,.12))}
+.sports-logo-tile:hover:before{transform:scaleY(1);opacity:1}
+.sports-logo-mark{width:46px;height:46px;display:grid;place-items:center;border-radius:11px;background:color-mix(in srgb,var(--text) 5%,var(--surface));overflow:hidden;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--text) 5%,transparent)}
 .sports-league-logo{display:block;max-width:38px;max-height:38px;width:auto;height:auto;object-fit:contain}
-.sports-league-fallback{width:36px;height:36px;display:grid;place-items:center;border-radius:9px;background:color-mix(in srgb,var(--text) 7%,var(--surface));color:var(--text);font:900 .56rem/1 Inter,Arial,sans-serif;letter-spacing:.02em}
+.sports-league-fallback{width:36px;height:36px;display:grid;place-items:center;border-radius:9px;background:linear-gradient(145deg,color-mix(in srgb,var(--sport-accent) 23%,var(--surface)),color-mix(in srgb,var(--text) 5%,var(--surface)));color:var(--text);font:900 .56rem/1 Inter,Arial,sans-serif;letter-spacing:.02em}
 .sports-logo-mark img+.sports-league-fallback{display:none}
 .sports-logo-copy{min-width:0;display:grid;gap:3px}
 .sports-logo-copy>strong{min-width:0;color:var(--text);font-size:.75rem;line-height:1.15;overflow-wrap:anywhere}
 .sports-logo-copy>small{color:var(--muted);font-size:.58rem;line-height:1.2}
-.sports-capabilities{display:flex;flex-wrap:wrap;gap:4px;margin-top:2px}
-.sports-capabilities span{padding:2px 5px;border:1px solid color-mix(in srgb,var(--text) 7%,var(--line));border-radius:999px;color:var(--muted);font-size:.44rem;font-weight:850;letter-spacing:.04em;text-transform:uppercase}
-:root[data-theme="light"] .sports-compact-section{background:#fff}
-:root[data-theme="light"] .sports-logo-tile{background:#fbfcfd}
+.sports-capabilities{display:flex;flex-wrap:wrap;gap:4px;margin-top:3px}
+.sports-capabilities span{padding:2px 5px;border-radius:999px;font-size:.43rem;font-weight:900;letter-spacing:.04em;text-transform:uppercase}
+.sports-capabilities .cap-scores{background:color-mix(in srgb,#ff5d5d 13%,transparent);color:color-mix(in srgb,#ff7777 82%,var(--text));border:1px solid color-mix(in srgb,#ff5d5d 21%,var(--line))}
+.sports-capabilities .cap-stats{background:color-mix(in srgb,#4f8cff 13%,transparent);color:color-mix(in srgb,#78a7ff 84%,var(--text));border:1px solid color-mix(in srgb,#4f8cff 22%,var(--line))}
+.sports-capabilities .cap-odds{background:color-mix(in srgb,#20c997 13%,transparent);color:color-mix(in srgb,#46d8ae 84%,var(--text));border:1px solid color-mix(in srgb,#20c997 22%,var(--line))}
+
+:root[data-theme="light"] .sports-tab{background:#fff}
+:root[data-theme="light"] .sports-tab.is-active{color:#fff}
+:root[data-theme="light"] .sports-stage{background:linear-gradient(180deg,color-mix(in srgb,var(--sport-accent) 6%,#fff),#fff 160px)}
+:root[data-theme="light"] .sports-logo-tile{background:color-mix(in srgb,var(--sport-accent) 2.5%,#fff)}
 :root[data-theme="light"] .sports-logo-mark{background:#f1f4f7}
-@keyframes sportsCompactEnter{to{opacity:1;transform:translateY(0)}}
+
+:root[data-theme="dark"] .sports-logo-mark[data-logo-host="soccer"],
+:root[data-theme="dark"] .sports-logo-mark[data-logo-host="champions"]{background:#f8fafc;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
+:root[data-theme="dark"] .sports-logo-mark[data-logo-host="soccer"] .sports-league-logo,
+:root[data-theme="dark"] .sports-logo-mark[data-logo-host="champions"] .sports-league-logo{filter:none}
+
+@keyframes sportsTabEnter{to{opacity:1;transform:translateY(0)}}
 @keyframes sportsLogoEnter{to{opacity:1;transform:translateY(0)}}
-@media(max-width:900px){.sports-logo-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+@media(max-width:1050px){.sports-logo-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:820px){.sports-logo-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:760px){
-  .sports-page .sports-directory{padding:16px 0 30px}
+  .sports-page .sports-directory{padding:15px 0 30px}
   .sports-page .sports-directory .shell{width:calc(100% - 24px)}
-  .sports-directory-head{margin-bottom:10px;padding-bottom:11px}
-  .sports-directory-head h1{font-size:2.5rem}
-  .sports-compact-list{gap:8px}
-  .sports-compact-section{border-radius:14px}
-  .sports-compact-toggle{min-height:64px;padding:12px 13px}
-  .sports-compact-title strong{font-size:1.18rem}
-  .sports-compact-chevron{width:32px;height:32px}
-  .sports-logo-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;padding:0 8px 8px}
-  .sports-logo-tile{grid-template-columns:40px minmax(0,1fr);min-height:70px;gap:8px;padding:8px;border-radius:11px}
+  .sports-directory-head{margin-bottom:10px;padding-bottom:10px}
+  .sports-directory-head h1{font-size:2.45rem}
+  .sports-tabbar{position:sticky;top:74px;z-index:22;flex-wrap:nowrap;gap:7px;overflow-x:auto;margin:0 -12px 10px;padding:8px 12px 9px;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);scrollbar-width:none;scroll-snap-type:x proximity}
+  .sports-tabbar::-webkit-scrollbar{display:none}
+  .sports-tab{flex:0 0 auto;min-height:40px;padding:8px 10px;scroll-snap-align:center}
+  .sports-tab>span{font-size:.64rem}
+  .sports-stage{border-radius:15px}
+  .sports-stage-head{padding:14px 12px 11px}
+  .sports-stage-head h2{font-size:1.4rem}
+  .sports-stage-head>strong{font-size:.5rem}
+  .sports-logo-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;padding:8px}
+  .sports-logo-tile{grid-template-columns:40px minmax(0,1fr);min-height:72px;gap:8px;padding:8px;border-radius:11px}
   .sports-logo-mark{width:40px;height:40px;border-radius:9px}
   .sports-league-logo{max-width:34px;max-height:34px}
   .sports-league-fallback{width:32px;height:32px;font-size:.51rem}
   .sports-logo-copy>strong{font-size:.68rem}
-  .sports-logo-copy>small{font-size:.53rem}
-  .sports-capabilities span{font-size:.41rem;padding:2px 4px}
+  .sports-logo-copy>small{font-size:.52rem}
+  .sports-capabilities span{font-size:.4rem;padding:2px 4px}
 }
 @media(max-width:390px){
   .sports-logo-grid{grid-template-columns:1fr}
   .sports-logo-tile{min-height:66px}
 }
 @media(prefers-reduced-motion:reduce){
-  .sports-compact-section,.sports-compact-panel,.sports-compact-chevron,.sports-logo-tile{animation:none!important;transition:none!important}
-  .sports-compact-section,.sports-compact-section.is-open .sports-logo-tile{opacity:1;transform:none}
-}
-
-
-:root[data-theme="dark"] .sports-logo-mark[data-logo-host="soccer"],
-:root[data-theme="dark"] .sports-logo-mark[data-logo-host="champions"]{
-  background:#f8fafc;
-  box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)
-}
-:root[data-theme="dark"] .sports-logo-mark[data-logo-host="soccer"] .sports-league-logo,
-:root[data-theme="dark"] .sports-logo-mark[data-logo-host="champions"] .sports-league-logo{
-  filter:none
+  .sports-tab,.sports-logo-tile{animation:none!important;transition:none!important;opacity:1;transform:none}
 }
