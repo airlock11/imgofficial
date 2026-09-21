@@ -284,10 +284,17 @@ function scoreLeagueFallback(key){
 function scoreLeagueLogoMarkup(key){
   const supplied=window.IMG_SCORE_LEAGUE_LOGOS?.[key]||'';
   const feedLogo=scoreLeagueLogoCache.get(key)||'';
-  const suppliedFirst=['atp','wta','ipl','volleyball_w','volleyball_m'].includes(key);
+
+  if((key==='volleyball_w'||key==='volleyball_m')&&window.IMG_SCORE_LEAGUE_LOGOS?.fivb){
+    const fivb=window.IMG_SCORE_LEAGUE_LOGOS.fivb;
+    return '<span class="score-league-fivb-crop"><img src="'+esc(fivb)+'" alt="FIVB logo" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.parentElement.style.display=\'none\';this.parentElement.nextElementSibling.style.display=\'grid\'"></span>'+
+      '<span class="score-league-fallback score-league-fallback-hidden">FIVB</span>';
+  }
+
+  const suppliedFirst=['atp','wta','ipl'].includes(key);
   const logo=suppliedFirst?(supplied||feedLogo):(feedLogo||supplied);
   if(!logo)return scoreLeagueFallback(key);
-  return '<img class="score-league-logo" src="'+esc(logo)+'" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'grid\'">'+
+  return '<img class="score-league-logo" src="'+esc(logo)+'" alt="'+esc(liveNowLabels[key]?.league||key)+' logo" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'grid\'">'+
     '<span class="score-league-fallback score-league-fallback-hidden">'+esc((liveNowLabels[key]?.league||key).replace(/[^A-Za-z0-9]/g,'').slice(0,5).toUpperCase())+'</span>';
 }
 
