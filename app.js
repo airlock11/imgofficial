@@ -1182,6 +1182,13 @@ async function loadAllLiveGames({silent=false}={}){
         const s=byId.get(String(g.eventId));
         if(s?.watchUrl)g.streams=[s];
       }
+      // One Sports Asian Games broadcasts are standalone live cards because many
+      // individual Asian Games events are not present in the score providers.
+      for(const x of (Array.isArray(y.streams)?y.streams:[])){
+        if(x?.sport!=='Asian Games'||!x?.stream?.watchUrl)continue;
+        if(live.some(g=>String(g.eventId)===String(x.eventId)))continue;
+        live.push({eventId:x.eventId,sportKey:'asian_games',date:y.updatedAt||new Date().toISOString(),displayTime:'LIVE',away:'2026 ASIAN GAMES',home:x.title||'One Sports Live',awayScore:'',homeScore:'',status:'LIVE · One Sports',state:'live',streams:[x.stream],streamsChecked:true});
+      }
       for(const x of ys.filter(x=>x.sport==='Asian Games'&&x.stream?.watchUrl)){
         if(live.some(g=>String(g.eventId)===String(x.eventId)))continue;
         live.push({eventId:x.eventId,sportKey:'asian_games',date:y.updatedAt||new Date().toISOString(),displayTime:'LIVE',away:'2026 Asian Games',home:x.title||'One Sports',awayScore:'',homeScore:'',status:'LIVE · One Sports',state:'live',streams:[x.stream],streamsChecked:true});
