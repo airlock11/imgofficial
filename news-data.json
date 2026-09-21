@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-21T01:36:59+00:00",
+  "updated_at": "2026-09-21T05:19:11+00:00",
   "refresh_minutes": 20,
   "counts": {
     "total": 30,
@@ -7,65 +7,48 @@
     "international": 22
   },
   "errors": {
+    "video:BBC Sport": "No videos returned",
+    "video:ESPN": "No videos returned",
+    "video:NBA": "No videos returned",
+    "video:NFL": "No videos returned",
+    "video:Formula 1": "No videos returned",
+    "video:UFC": "No videos returned",
+    "video:Volleyball World": "No videos returned",
+    "video:NBL-Pilipinas": "No videos returned",
     "ESPN": "No articles returned"
   },
-  "videos": [
-    {
-      "id": "QleCy-WlVME",
-      "title": "Taylor Swift is a proud wife after Travis Kelce’s td ❤️",
-      "source": "NFL",
-      "link": "https://www.youtube.com/watch?v=QleCy-WlVME",
-      "embed": "https://www.youtube.com/embed/QleCy-WlVME",
-      "thumbnail": "https://i.ytimg.com/vi/QleCy-WlVME/hqdefault.jpg",
-      "published": "2026-09-21T01:07:57+00:00"
-    },
-    {
-      "id": "EV671pw8dCM",
-      "title": "NFL Week 2 🏈 Dak breaks Romo’s TD record, injuries to Williams & Daniels | SportsCenter",
-      "source": "ESPN",
-      "link": "https://www.youtube.com/watch?v=EV671pw8dCM",
-      "embed": "https://www.youtube.com/embed/EV671pw8dCM",
-      "thumbnail": "https://i.ytimg.com/vi/EV671pw8dCM/hqdefault.jpg",
-      "published": "2026-09-21T00:46:33+00:00"
-    },
-    {
-      "id": "2_-jcja6980",
-      "title": "Patrick Mahomes To Travis Kelce Is AUTOMATIC",
-      "source": "NFL",
-      "link": "https://www.youtube.com/watch?v=2_-jcja6980",
-      "embed": "https://www.youtube.com/embed/2_-jcja6980",
-      "thumbnail": "https://i.ytimg.com/vi/2_-jcja6980/hqdefault.jpg",
-      "published": "2026-09-21T00:56:40+00:00"
-    },
-    {
-      "id": "wD80jwfQxrI",
-      "title": "THAT'S OUR BALL AIN'T IT???!?!",
-      "source": "NFL",
-      "link": "https://www.youtube.com/watch?v=wD80jwfQxrI",
-      "embed": "https://www.youtube.com/embed/wD80jwfQxrI",
-      "thumbnail": "https://i.ytimg.com/vi/wD80jwfQxrI/hqdefault.jpg",
-      "published": "2026-09-21T00:56:12+00:00"
-    },
-    {
-      "id": "oLRDVAyIi4E",
-      "title": "Legend 🔥🔥",
-      "source": "ESPN",
-      "link": "https://www.youtube.com/watch?v=oLRDVAyIi4E",
-      "embed": "https://www.youtube.com/embed/oLRDVAyIi4E",
-      "thumbnail": "https://i.ytimg.com/vi/oLRDVAyIi4E/hqdefault.jpg",
-      "published": "2026-09-21T00:44:23+00:00"
-    },
-    {
-      "id": "R6Tovjmj30A",
-      "title": "Lisa Leslie's statue ceremony 💜 Hear from the Sparks' legend on her special night | WNBA on ESPN",
-      "source": "ESPN",
-      "link": "https://www.youtube.com/watch?v=R6Tovjmj30A",
-      "embed": "https://www.youtube.com/embed/R6Tovjmj30A",
-      "thumbnail": "https://i.ytimg.com/vi/R6Tovjmj30A/hqdefault.jpg",
-      "published": "2026-09-21T00:29:38+00:00"
-    }
-  ],
+  "videos": [],
   "items": [
+    {
+      "title": "Rosberg: Antonelli vs his mind will decide F1 title race",
+      "link": "https://www.skysports.com/f1/news/12040/13589366/kimi-antonelli-versus-his-mind-will-decide-2026-formula-1-title-race-says-nico-rosberg-ahead-of-azerbaijan-grand-prix",
+      "description": "Former Formula 1 world champion Nico Rosberg believes Kimi Antonelli's biggest obstacle will be himself in this season's title race run-in.",
+      "source": "Sky Sports",
+      "sport": "Sports",
+      "region": "International",
+      "image": "https://e0.365dm.com/26/09/1920x1080/skysports-f1-kimi-antonelli_7355013.jpg?20260917230134",
+      "published": "2026-09-21T06:00:00+00:00"
+    },
+    {
+      "title": "Fisher vs Pirotton: What you need to know for 'golden ticket' fight",
+      "link": "https://www.skysports.com/boxing/news/12040/13589385/johnny-fisher-vs-michael-pirotton-fight-time-ringwalks-undercard-and-how-to-watch-or-stream-live-on-sky-sports",
+      "description": "All you need to know ahead of Johnny Fisher’s heavyweight clash with Michael Pirotton in London live on Sky Sports .",
+      "source": "Sky Sports",
+      "sport": "Sports",
+      "region": "International",
+      "image": "https://e2.365dm.com/26/07/1920x1080/skysports-boxing-zuffa-announcement_7292905.jpg?20260708124645",
+      "published": "2026-09-21T06:00:00+00:00"
+    },
+    {
+      "title": "Asian Games: Kayla Sanchez shatters own PH record to reach 50m backstroke finals",
+      "link": "https://www.gmanetwork.com/news/sports/othersports/1003109/asian-games-kayla-sanchez-shatters-own-ph-record-to-reach-50m-backstroke-finals/story/",
+      "description": "Kayla Sanchez turned in an impressive performance in the women\"s 50m backstroke at the 2026 Asian Games, breaking the Philippine national record in the heats on Monday at the Tokyo Aquatics Centre in Japan.",
+      "source": "GMA News Sports",
+      "sport": "Sports",
+      "region": "Philippines",
+      "image": "https://images.gmanews.tv/webpics/2025/12/2025-12-11T030722Z_477853355_UP1ELCB08O9PW_RTRMADP_3_GAMES-SEA_2025_12_17_13_39_57.jpg",
+      "published": "2026-09-21T04:40:22+00:00"
+    },
     {
       "title": "Gilas Women advance at Asian Games, pick up where men fell short",
       "link": "https://sports.inquirer.net/696450/gilas-women-advance-at-asian-games-pick-up-where-men-fell-short",
@@ -85,6 +68,16 @@
       "region": "Philippines",
       "image": "https://sports.inquirer.net/files/2026/09/RM5_8866-scaled.jpeg",
       "published": "2026-09-21T04:20:16+00:00"
+    },
+    {
+      "title": "Verbruggen edges Federiso to rule Sunrise Sprint",
+      "link": "https://www.philstar.com/sports/2026/09/21/2557849/verbruggen-edges-federiso-rule-sunrise-sprint",
+      "description": "Yuen Verbruggen saved his biggest burst of speed for last, surging past Jerald Federiso in a frenetic closing run to capture the overall Sunrise Sprint crown in the Damosa Land 5150 Triathlon.",
+      "source": "Philstar Sports",
+      "sport": "Sports",
+      "region": "Philippines",
+      "image": "",
+      "published": "2026-09-21T04:20:00+00:00"
     },
     {
       "title": "After smashing debut, ‘SiPons’ battles Kazakhs for group play sweep",
@@ -117,44 +110,24 @@
       "published": "2026-09-21T04:05:16+00:00"
     },
     {
-      "title": "LIVE UPDATES: Team Philippines at the 2026 Asian Games -- Sept. 21 | Gymnastics, Swimming, Filipinas",
-      "link": "https://www.gmanetwork.com/news/sports/othersports/1003090/live-updates-team-philippines-at-the-2026-asian-games-sept-21-gymnastics-swimming-filipinas/story/",
-      "description": "After bagging its first bronze medal at the 2026 Asian Games, the Philippines continues its campaign in Japan on Monday.",
-      "source": "GMA News Sports",
+      "title": "Franklin Sports brings top pickleball player Anna Leigh Waters to Manila",
+      "link": "https://tiebreakertimes.com.ph/tbt/franklin-sports-brings-top-pickleball-player-anna-leigh-waters-to-manila/384330",
+      "description": "Global pickleball giant Franklin Sports has officially named the Philippines as the first stop of its highly anticipated Franklin Asia Pickleball Showcase this October 2026. The multi-nation showcase will kick off in Manila before continuing to Malaysia, Hong ",
+      "source": "Tiebreaker Times",
       "sport": "Sports",
       "region": "Philippines",
-      "image": "https://images.gmanews.tv/webpics/2026/09/CARLOS_YULO_AND_PH_GYMNASTICS_TEAM_2026_09_21_01_14_49.jpg",
-      "published": "2026-09-21T01:27:22+00:00"
+      "image": "https://cdn.tiebreakertimes.com.ph/wp-content/uploads/2026/09/FILE-PHOTO-Anna-Leigh-Waters-2.jpg",
+      "published": "2026-09-21T04:04:18+00:00"
     },
     {
-      "title": "PCU-D reigns supreme in UCAL Season 9 cheerdance tilt",
-      "link": "https://www.philstar.com/sports/2026/09/21/2557811/pcu-d-reigns-supreme-ucal-season-9-cheerdance-tilt",
-      "description": "Philippine Christian University-Dasmariñas captured the PG Flex-Universities and Colleges Athletic League (UCAL) streetdance competition, providing an energetic start to the league’s ninth season.",
-      "source": "Philstar Sports",
-      "sport": "Sports",
-      "region": "Philippines",
-      "image": "",
-      "published": "2026-09-21T01:11:00+00:00"
-    },
-    {
-      "title": "Asian Games: China’s Yu Zidi sets record in gold-medal swim",
-      "link": "https://sports.inquirer.net/696492/asian-games-chinas-yu-zidi-sets-record-in-gold-medal-swim",
-      "description": "NAGOYA–The 13-year-old Chinese swimmer Yu Zidi set an Asian Games record as she scorched to gold on Sunday’s first full day of competition. Yu, the schoolgirl who turns 14 next month, took the women’s 200m butterfly crown in a Games-record of 2 minutes and 05.",
-      "source": "Inquirer Sports",
-      "sport": "Sports",
-      "region": "Philippines",
-      "image": "https://sports.inquirer.net/files/2026/09/AP26263323259670-scaled.jpg",
-      "published": "2026-09-21T00:06:33+00:00"
-    },
-    {
-      "title": "‘A terrible, terrible accident’: Cubs’ Bregman undergoing CT scans after taking foul ball to face",
-      "link": "https://www.theguardian.com/sport/2026/sep/20/a-terrible-terrible-accident-cubs-bregman-undergoing-ct-scans-after-being-hit-in-face-by-foul-ball",
-      "description": "Third baseman was standing near on-deck circle Player taken to hospital for X-rays and CT scan Chicago Cubs third baseman Alex Bregman was taken to the hospital for tests after being struck in the face by a foul ball while standing in front of the on-deck circ",
+      "title": "NRL open investigation into fans after top referee pelted with rubbish at Eden Park",
+      "link": "https://www.theguardian.com/sport/2026/sep/21/nrl-investigation-fans-throw-bottles-referee-warriors-knights-eden-park",
+      "description": "Ashley Klein targeted after Warriors’ season ended by Knights Official had to be protected by security on way off pitch in Auckland The NRL has threatened to ban fans who peppered referee Ashley Klein with projectiles, with the integrity unit investigating the",
       "source": "The Guardian Sport",
       "sport": "Sports",
       "region": "International",
-      "image": "https://i.guim.co.uk/img/media/276a99853880f2370c4bf8e103612d9743a06fe0/308_22_3594_2876/master/3594.jpg?width=140&quality=85&auto=format&fit=max&s=cbf1f7beca6b32a40bc36c9238237162",
-      "published": "2026-09-20T22:20:46+00:00"
+      "image": "https://i.guim.co.uk/img/media/a00f539aa7f63a35dd13e9ca37530775e76af2e2/65_0_3750_3000/master/3750.jpg?width=140&quality=85&auto=format&fit=max&s=439fe842c23008ab6c9eb295a8c0b12b",
+      "published": "2026-09-21T02:37:18+00:00"
     },
     {
       "title": "NFL results: Williams injured in Bears loss as Saints shock Ravens",
@@ -235,26 +208,6 @@
       "region": "International",
       "image": "https://i.guim.co.uk/img/media/4e7988f07b68171c5aad6539bfda54794399a614/435_0_3930_3144/master/3930.jpg?width=140&quality=85&auto=format&fit=max&s=45d353f3c863ed83d76686bd51bb6a42",
       "published": "2026-09-20T20:28:21+00:00"
-    },
-    {
-      "title": "Hits and misses: Maresca's Man City serve up pure chaos as Gakpo shines",
-      "link": "https://www.skysports.com/football/news/12040/13590166/man-city-serve-up-pure-chaos-under-enzo-maresca-as-cody-gakpo-shines-for-liverpool-premier-league-hits-and-misses",
-      "description": "",
-      "source": "Sky Sports",
-      "sport": "Sports",
-      "region": "International",
-      "image": "https://e0.365dm.com/26/09/1920x1080/skysports-premier-league-pl-hits-and-misses_7357347.jpg?20260920184427",
-      "published": "2026-09-20T20:15:00+00:00"
-    },
-    {
-      "title": "'I deserve to be in!' - Spaun uses Team USA snub as fuel for Wentworth win",
-      "link": "https://www.skysports.com/golf/news/12040/13590009/bmw-pga-championship-how-jj-spaun-used-team-usa-snub-for-presidents-cup-as-motivation-for-dramatic-wentworth-victory",
-      "description": "JJ Spaun said he played with a \"huge chip on his shoulder\" during his BMW PGA Championship win and used being snubbed by Team USA's Presidents Cup side as motivation for his Wentworth victory.",
-      "source": "Sky Sports",
-      "sport": "Sports",
-      "region": "International",
-      "image": "https://e1.365dm.com/26/09/1920x1080/skysports-jj-spaun-golf-bmw-pga-championship_7357229.jpg?20260920165933",
-      "published": "2026-09-20T20:00:00+00:00"
     },
     {
       "title": "Carrick disputes Cunha’s claim that Manchester United lacked energy in Fulham draw",
