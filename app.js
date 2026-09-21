@@ -381,6 +381,72 @@ async function loadRegionalAutoData(){
 function getRegionalSnapshot(sport){
   return regionalAutoDataCache?.leagues?.[sport]||regionalWebSnapshots[sport]||null;
 }
+let sportsStatsDataCache=null;
+let sportsStatsDataTime=0;
+let sportsStatsDataPromise=null;
+async function loadSportsStatsData(){
+  if(sportsStatsDataCache&&Date.now()-sportsStatsDataTime<120000)return sportsStatsDataCache;
+  if(sportsStatsDataPromise)return sportsStatsDataPromise;
+  sportsStatsDataPromise=fetch('stats-data.json?v='+Date.now(),{cache:'no-store'})
+    .then(r=>r.ok?r.json():null)
+    .then(j=>{sportsStatsDataCache=j;sportsStatsDataTime=Date.now();return j})
+    .catch(()=>null)
+    .finally(()=>{sportsStatsDataPromise=null});
+  return sportsStatsDataPromise;
+}
+function statValue(row,key){
+  const v=row?.[key];
+  return Number.isFinite(Number(v))?Number(v).toFixed(1):'—';
+}
+function uaapStatsMarkup(){
+  const data=sportsStatsDataCache?.leagues?.uaap;
+  if(!data)return'';
+  const leaders=data.leaders||{};
+  const groups=[
+    ['Points','points','ppg','PPG'],
+    ['Rebounds','rebounds','rpg','RPG'],
+    ['Assists','assists','apg','APG'],
+    ['Steals','steals','spg','SPG'],
+    ['Blocks','blocks','bpg','BPG']
+  ];
+  const leaderHtml=groups.map(([title,key,valueKey,suffix])=>{
+    const rows=(leaders[key]||[]).slice(0,5);
+    if(!rows.length)return'';
+    return '<article class="stats-leader-card"><div class="stats-leader-title">'+esc(title)+'</div>'+
+      '<div class="stats-leader-list">'+rows.map((r,i)=>
+        '<div class="stats-leader-row"><span class="stats-rank">'+(i+1)+'</span><span class="stats-player"><strong>'+esc(r.player)+'</strong><small>'+esc(r.team)+' · '+esc(r.gp)+' GP</small></span><b>'+esc(statValue(r,valueKey))+' <small>'+esc(suffix)+'</small></b></div>'
+      ).join('')+'</div></article>';
+  }).join('');
+
+  const g=data.latestGame||{};
+  const teams=Array.isArray(g.teams)?g.teams:[];
+  const totals=g.teamTotals||{};
+  const compareKeys=[
+    ['PTS','pts'],['FG%','fgPct'],['3P%','threePtPct'],['FT%','ftPct'],
+    ['REB','reb'],['AST','ast'],['STL','stl'],['BLK','blk'],['TO','to']
+  ];
+  let compare='';
+  if(teams.length>=2){
+    const a=teams[0],b=teams[1];
+    compare='<div class="stats-game-head"><div><strong>'+esc(a)+'</strong><b>'+esc(g.scores?.[a]??totals[a]?.pts??'—')+'</b></div><span>'+esc(g.dateText||'Latest final')+'</span><div><b>'+esc(g.scores?.[b]??totals[b]?.pts??'—')+'</b><strong>'+esc(b)+'</strong></div></div>'+
+      '<div class="stats-compare">'+compareKeys.map(([label,key])=>
+        '<div class="stats-compare-row"><b>'+esc(totals[a]?.[key]??'—')+'</b><span>'+esc(label)+'</span><b>'+esc(totals[b]?.[key]??'—')+'</b></div>'
+      ).join('')+'</div>';
+  }
+
+  const topPlayers=teams.flatMap(team=>(g.players?.[team]||[]).map(p=>({...p,team})))
+    .sort((a,b)=>(b.pts||0)-(a.pts||0)).slice(0,8);
+  const box=topPlayers.length?
+    '<div class="stats-box-table"><div class="stats-box-row stats-box-head"><span>Player</span><b>PTS</b><b>REB</b><b>AST</b><b>STL</b><b>BLK</b></div>'+
+      topPlayers.map(p=>'<div class="stats-box-row"><span><strong>'+esc(p.player)+'</strong><small>'+esc(p.team)+'</small></span><b>'+esc(p.pts)+'</b><b>'+esc(p.reb)+'</b><b>'+esc(p.ast)+'</b><b>'+esc(p.stl)+'</b><b>'+esc(p.blk)+'</b></div>').join('')+
+    '</div>':'';
+
+  return '<section class="league-games-group sports-statistics" aria-label="UAAP statistics">'+
+    '<div class="league-games-group-head"><h3>Statistics</h3><span>'+esc(data.season||'UAAP')+' · '+esc(data.gameCount||0)+' games tracked</span></div>'+
+    '<div class="stats-leader-grid">'+leaderHtml+'</div>'+
+    (compare?'<div class="stats-subhead"><h4>Latest Box Score</h4><span>'+esc(g.venue||'')+'</span></div>'+compare+box:'')+
+  '</section>';
+}
 const regionalWebSnapshots={
   pba:{
     league:'PBA',
@@ -1378,6 +1444,8 @@ function renderGames(){
         '<div class="league-standings-body">'+standings.map(s=>'<div class="league-standings-row"><strong>'+esc(s.team)+'</strong><b>'+esc(s.wins)+'</b><b>'+esc(s.losses)+'</b></div>').join('')+'</div>'+
       '</section>');
     }
+    const statsHtml=uaapStatsMarkup();
+    if(statsHtml)sections.push(statsHtml);
   }
 
   if(currentScoreLeague==='ncaa_ph'){
@@ -1515,6 +1583,7 @@ async function loadGames({silent=false,league=currentScoreLeague}={}){
 
   if(isWebLeague){
     await loadRegionalAutoData();
+    if(sport==='uaap')await loadSportsStatsData();
     let webGames=regionalSnapshotGames(sport);
     if(sport==='nbl'){
       const upcoming=await nblYoutubeScheduledGames();
