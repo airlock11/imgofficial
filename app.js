@@ -398,24 +398,35 @@ function statValue(row,key){
   const v=row?.[key];
   return Number.isFinite(Number(v))?Number(v).toFixed(1):'—';
 }
-function uaapStatsMarkup(){
-  const data=sportsStatsDataCache?.leagues?.uaap;
-  if(!data)return'';
-  const leaders=data.leaders||{};
-  const groups=[
+function statsGroupsForLeague(data){
+  if(Array.isArray(data?.groups))return data.groups;
+  const leaders=data?.leaders||{};
+  return [
     ['Points','points','ppg','PPG'],
     ['Rebounds','rebounds','rpg','RPG'],
     ['Assists','assists','apg','APG'],
     ['Steals','steals','spg','SPG'],
     ['Blocks','blocks','bpg','BPG']
-  ];
-  const leaderHtml=groups.map(([title,key,valueKey,suffix])=>{
-    const rows=(leaders[key]||[]).slice(0,5);
+  ].map(([title,key,valueKey,suffix])=>({
+    title,suffix,
+    rows:(leaders[key]||[]).map(r=>({...r,value:r?.[valueKey],displayValue:statValue(r,valueKey)}))
+  })).filter(group=>group.rows.length);
+}
+function leagueStatsMarkup(key){
+  const data=sportsStatsDataCache?.leagues?.[key];
+  if(!data)return'';
+  const groups=statsGroupsForLeague(data);
+  if(!groups.length)return'';
+
+  const leaderHtml=groups.map(group=>{
+    const rows=(group.rows||[]).slice(0,5);
     if(!rows.length)return'';
-    return '<article class="stats-leader-card"><div class="stats-leader-title">'+esc(title)+'</div>'+
-      '<div class="stats-leader-list">'+rows.map((r,i)=>
-        '<div class="stats-leader-row"><span class="stats-rank">'+(i+1)+'</span><span class="stats-player"><strong>'+esc(r.player)+'</strong><small>'+esc(r.team)+' · '+esc(r.gp)+' GP</small></span><b>'+esc(statValue(r,valueKey))+' <small>'+esc(suffix)+'</small></b></div>'
-      ).join('')+'</div></article>';
+    return '<article class="stats-leader-card"><div class="stats-leader-title">'+esc(group.title||'Leaders')+'</div>'+
+      '<div class="stats-leader-list">'+rows.map((r,i)=>{
+        const meta=[r.team,r.gp!==null&&r.gp!==undefined&&r.gp!==''?(r.gp+' GP'):''].filter(Boolean).join(' · ');
+        const value=r.displayValue!==undefined&&r.displayValue!==null&&r.displayValue!==''?r.displayValue:(r.value!==undefined&&r.value!==null?r.value:'—');
+        return '<div class="stats-leader-row"><span class="stats-rank">'+(i+1)+'</span><span class="stats-player"><strong>'+esc(r.player||'')+'</strong>'+(meta?'<small>'+esc(meta)+'</small>':'')+'</span><b>'+esc(value)+' <small>'+esc(group.suffix||'')+'</small></b></div>';
+      }).join('')+'</div></article>';
   }).join('');
 
   const g=data.latestGame||{};
@@ -429,8 +440,8 @@ function uaapStatsMarkup(){
   if(teams.length>=2){
     const a=teams[0],b=teams[1];
     compare='<div class="stats-game-head"><div><strong>'+esc(a)+'</strong><b>'+esc(g.scores?.[a]??totals[a]?.pts??'—')+'</b></div><span>'+esc(g.dateText||'Latest final')+'</span><div><b>'+esc(g.scores?.[b]??totals[b]?.pts??'—')+'</b><strong>'+esc(b)+'</strong></div></div>'+
-      '<div class="stats-compare">'+compareKeys.map(([label,key])=>
-        '<div class="stats-compare-row"><b>'+esc(totals[a]?.[key]??'—')+'</b><span>'+esc(label)+'</span><b>'+esc(totals[b]?.[key]??'—')+'</b></div>'
+      '<div class="stats-compare">'+compareKeys.map(([label,statKey])=>
+        '<div class="stats-compare-row"><b>'+esc(totals[a]?.[statKey]??'—')+'</b><span>'+esc(label)+'</span><b>'+esc(totals[b]?.[statKey]??'—')+'</b></div>'
       ).join('')+'</div>';
   }
 
@@ -441,8 +452,10 @@ function uaapStatsMarkup(){
       topPlayers.map(p=>'<div class="stats-box-row"><span><strong>'+esc(p.player)+'</strong><small>'+esc(p.team)+'</small></span><b>'+esc(p.pts)+'</b><b>'+esc(p.reb)+'</b><b>'+esc(p.ast)+'</b><b>'+esc(p.stl)+'</b><b>'+esc(p.blk)+'</b></div>').join('')+
     '</div>':'';
 
-  return '<section class="league-games-group sports-statistics" aria-label="UAAP statistics">'+
-    '<div class="league-games-group-head"><h3>Statistics</h3><span>'+esc(data.season||'UAAP')+' · '+esc(data.gameCount||0)+' games tracked</span></div>'+
+  const league=data.league||liveNowLabels[key]?.league||key.toUpperCase();
+  const source=data.sourceName?(' · '+data.sourceName):'';
+  return '<section class="league-games-group sports-statistics" aria-label="'+esc(league)+' statistics">'+
+    '<div class="league-games-group-head"><h3>Statistics</h3><span>'+esc(data.season||league)+esc(source)+'</span></div>'+
     '<div class="stats-leader-grid">'+leaderHtml+'</div>'+
     (compare?'<div class="stats-subhead"><h4>Latest Box Score</h4><span>'+esc(g.venue||'')+'</span></div>'+compare+box:'')+
   '</section>';
@@ -1473,8 +1486,6 @@ function renderGames(){
         '<div class="league-standings-body">'+standings.map(s=>'<div class="league-standings-row"><strong>'+esc(s.team)+'</strong><b>'+esc(s.wins)+'</b><b>'+esc(s.losses)+'</b></div>').join('')+'</div>'+
       '</section>');
     }
-    const statsHtml=uaapStatsMarkup();
-    if(statsHtml)sections.push(statsHtml);
   }
 
   if(currentScoreLeague==='ncaa_ph'){
@@ -1489,6 +1500,9 @@ function renderGames(){
       '</section>');
     }
   }
+
+  const leagueStatsHtml=leagueStatsMarkup(currentScoreLeague);
+  if(leagueStatsHtml)sections.push(leagueStatsHtml);
 
   if(currentScoreLeague==='nbl'&&scoreItems.length){
     sections.push(
@@ -1606,13 +1620,13 @@ async function loadGames({silent=false,league=currentScoreLeague}={}){
   if(!document.getElementById('games'))return;
   const st=document.getElementById('gameStatus');
   const sport=league||currentScoreLeague||'soccer';
+  await loadSportsStatsData();
   const isCurrent=()=>requestToken===scoreLoadToken&&currentScoreLeague===sport;
   const isWebLeague=['pba','uaap','mpbl','nbl','nblaus','vba'].includes(sport);
   if(!silent)st.textContent='';
 
   if(isWebLeague){
     await loadRegionalAutoData();
-    if(sport==='uaap')await loadSportsStatsData();
     let webGames=regionalSnapshotGames(sport);
     if(sport==='nbl'){
       const upcoming=await nblYoutubeScheduledGames();
