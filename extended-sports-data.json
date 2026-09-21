@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-21T19:07:21.606406+00:00",
+  "updated_at": "2026-09-21T22:30:34.593284+00:00",
   "source": "Official and verified public sports sources",
   "leagues": {
     "bleague": {
@@ -55,6 +55,32 @@
       "sourceUrl": "https://api-live.euroleague.net/v2/competitions/E/seasons/E2026/games",
       "note": "Automatically refreshed from the official EuroLeague competition feed.",
       "games": [
+        {
+          "eventId": "euroleague-96",
+          "date": "2026-11-05T20:30:00",
+          "displayTime": "Nov 05 · 20:30",
+          "away": "Valencia Basket",
+          "home": "Armani Olimpia Milan",
+          "awayScore": "0",
+          "homeScore": "0",
+          "status": "Scheduled",
+          "state": "scheduled",
+          "sourceName": "EuroLeague Official API",
+          "sourceUrl": "https://api-live.euroleague.net/v2/competitions/E/seasons/E2026/games"
+        },
+        {
+          "eventId": "euroleague-94",
+          "date": "2026-11-05T20:00:00",
+          "displayTime": "Nov 05 · 20:00",
+          "away": "FC Bayern Munich",
+          "home": "LDLC ASVEL Villeurbanne",
+          "awayScore": "0",
+          "homeScore": "0",
+          "status": "Scheduled",
+          "state": "scheduled",
+          "sourceName": "EuroLeague Official API",
+          "sourceUrl": "https://api-live.euroleague.net/v2/competitions/E/seasons/E2026/games"
+        },
         {
           "eventId": "euroleague-93",
           "date": "2026-11-05T19:00:00",
