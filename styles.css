@@ -494,6 +494,9 @@ main{min-height:calc(100svh - 68px)}
   .news-video-copy{padding:12px 14px 14px}
 }
 
+.mobile-live-toggle{display:none}
+.mobile-live-body{display:block}
+.mobile-live-inner{min-height:0}
 .all-live-section{margin:0 0 34px;padding:0 0 34px;border-bottom:1px solid var(--line)}
 .all-live-head{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:18px}
 .scores-browser-head h2{margin:5px 0 0;font:700 clamp(2rem,4vw,3.2rem)/.95 "Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:-.02em}
@@ -545,7 +548,18 @@ main{min-height:calc(100svh - 68px)}
 
 
 @media(max-width:760px){
-  .all-live-section{margin-bottom:26px;padding-bottom:26px}
+  .all-live-section{margin-bottom:22px;padding-bottom:16px}
+  .mobile-live-toggle{width:100%;min-height:54px;display:grid;grid-template-columns:10px auto 1fr 22px;align-items:center;gap:10px;padding:0 14px;border:1px solid var(--line);border-radius:14px;background:var(--panel);color:var(--text);font:inherit;text-align:left;cursor:pointer}
+  .mobile-live-toggle strong{font:800 1rem/1 "Barlow Condensed",Arial,sans-serif;text-transform:uppercase;letter-spacing:.05em}
+  .mobile-live-dot{width:8px;height:8px;border-radius:50%;background:#ef3f45;box-shadow:0 0 0 0 rgba(239,63,69,.3);animation:liveCountBlink 2.2s ease-in-out infinite}
+  .mobile-live-count{justify-self:end;color:var(--muted);font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em}
+  .mobile-live-chevron{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .22s ease}
+  .mobile-live-body{display:grid;grid-template-rows:0fr;opacity:0;transition:grid-template-rows .24s ease,opacity .2s ease}
+  .mobile-live-inner{overflow:hidden}
+  .mobile-live-expanded .mobile-live-body{grid-template-rows:1fr;opacity:1}
+  .mobile-live-expanded .mobile-live-chevron{transform:rotate(180deg)}
+  .mobile-live-expanded .all-live-head{margin-top:14px}
+
   .all-live-head{align-items:center;gap:10px}
   .live-sport-sorter{gap:7px;flex:1 1 auto}
   .live-sport-filter{width:48px;height:48px;min-height:48px;padding:0;justify-content:center}
