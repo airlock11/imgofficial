@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-21T14:50:27.907246+00:00",
+  "updatedAt": "2026-09-21T14:53:10.175279+00:00",
   "leagues": {
     "uaap": {
       "league": "UAAP",
@@ -6343,9 +6343,9 @@
     "pba": "HTTPError: HTTP Error 403: Forbidden",
     "basketball": "ValueError: ESPN player statistics tables not found",
     "wnba": "ValueError: ESPN player statistics tables not found",
-    "baseball": "ValueError: No MLB athlete statistics returned",
-    "hockey": "ValueError: No NHL athlete statistics returned",
-    "football": "ValueError: No NFL athlete statistics returned",
-    "ncaaf": "ValueError: No NCAA Football athlete statistics returned"
+    "baseball": "ValueError: Home Runs: ValueError No ESPN mlb Home Runs leaders returned; Runs Batted In: ValueError No ESPN mlb Runs Batted In leaders returned; Batting Average: HTTPError HTTP Error 400: Bad Request; Stolen Bases: ValueError No ESPN mlb Stolen Bases leaders returned",
+    "hockey": "ValueError: Points: HTTPError HTTP Error 400: Bad Request; Goals: HTTPError HTTP Error 400: Bad Request; Assists: HTTPError HTTP Error 400: Bad Request",
+    "football": "ValueError: Passing Yards: HTTPError HTTP Error 400: Bad Request; Passing TDs: HTTPError HTTP Error 400: Bad Request; Rushing Yards: HTTPError HTTP Error 400: Bad Request; Receiving Yards: HTTPError HTTP Error 400: Bad Request",
+    "ncaaf": "ValueError: Passing Yards: HTTPError HTTP Error 400: Bad Request; Passing TDs: HTTPError HTTP Error 400: Bad Request; Rushing Yards: HTTPError HTTP Error 400: Bad Request; Receiving Yards: HTTPError HTTP Error 400: Bad Request"
   }
 }
