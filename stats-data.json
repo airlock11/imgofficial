@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-21T17:43:18.695661+00:00",
+  "updatedAt": "2026-09-21T17:44:18.198933+00:00",
   "leagues": {
     "uaap": {
       "league": "UAAP",
@@ -8074,6 +8074,138 @@
               "gp": null,
               "value": 335.0,
               "displayValue": "335"
+            }
+          ]
+        }
+      ]
+    },
+    "mls": {
+      "league": "MLS",
+      "season": "2026 Regular Season",
+      "sourceName": "The MLS Pulse · ESPN-sourced player data",
+      "sourceUrl": "https://www.themlspulse.com/stats/goal-contributions",
+      "groups": [
+        {
+          "title": "Goals",
+          "suffix": "G",
+          "rows": [
+            {
+              "player": "Lionel Messi",
+              "team": "Inter Miami CF",
+              "gp": 22,
+              "value": 19.0,
+              "displayValue": "19"
+            },
+            {
+              "player": "Petar Musa",
+              "team": "FC Dallas",
+              "gp": 23,
+              "value": 18.0,
+              "displayValue": "18"
+            },
+            {
+              "player": "Brian White",
+              "team": "Vancouver Whitecaps FC",
+              "gp": 23,
+              "value": 16.0,
+              "displayValue": "16"
+            },
+            {
+              "player": "Sam Surridge",
+              "team": "Nashville SC",
+              "gp": 20,
+              "value": 16.0,
+              "displayValue": "16"
+            },
+            {
+              "player": "Nicolás Fernández",
+              "team": "New York City FC",
+              "gp": 25,
+              "value": 15.0,
+              "displayValue": "15"
+            },
+            {
+              "player": "Denis Bouanga",
+              "team": "LAFC",
+              "gp": 26,
+              "value": 14.0,
+              "displayValue": "14"
+            },
+            {
+              "player": "Guilherme Augusto",
+              "team": "Houston Dynamo FC",
+              "gp": 25,
+              "value": 14.0,
+              "displayValue": "14"
+            },
+            {
+              "player": "Kévin Denkey",
+              "team": "FC Cincinnati",
+              "gp": 25,
+              "value": 14.0,
+              "displayValue": "14"
+            }
+          ]
+        },
+        {
+          "title": "Assists",
+          "suffix": "A",
+          "rows": [
+            {
+              "player": "Joaquín Pereyra",
+              "team": "Minnesota United FC",
+              "gp": 26,
+              "value": 13.0,
+              "displayValue": "13"
+            },
+            {
+              "player": "Lionel Messi",
+              "team": "Inter Miami CF",
+              "gp": 22,
+              "value": 13.0,
+              "displayValue": "13"
+            },
+            {
+              "player": "Son Heung-Min",
+              "team": "LAFC",
+              "gp": 25,
+              "value": 12.0,
+              "displayValue": "12"
+            },
+            {
+              "player": "Anders Dreyer",
+              "team": "San Diego FC",
+              "gp": 24,
+              "value": 12.0,
+              "displayValue": "12"
+            },
+            {
+              "player": "Cristian Espinoza",
+              "team": "Nashville SC",
+              "gp": 22,
+              "value": 12.0,
+              "displayValue": "12"
+            },
+            {
+              "player": "Evander",
+              "team": "FC Cincinnati",
+              "gp": 24,
+              "value": 11.0,
+              "displayValue": "11"
+            },
+            {
+              "player": "Joaquín Valiente",
+              "team": "FC Dallas",
+              "gp": 24,
+              "value": 11.0,
+              "displayValue": "11"
+            },
+            {
+              "player": "Rodrigo De Paul",
+              "team": "Inter Miami CF",
+              "gp": 20,
+              "value": 11.0,
+              "displayValue": "11"
             }
           ]
         }
