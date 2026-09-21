@@ -2,11 +2,12 @@
 import json, os, re, urllib.parse, urllib.request
 import xml.etree.ElementTree as ET
 import html as html_lib
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
 KEY=os.environ["YOUTUBE_API_KEY"]
 OUT=Path(__file__).resolve().parents[1]/"youtube-live.json"
+REGIONAL=Path(__file__).resolve().parents[1]/"regional-web.json"
 UA="IMG-Sports-Live/1.0"
 ONE_SPORTS_CHANNEL_ID="UCXDG9ue-emCN8Ad3h7lERqQ"
 NBL_PILIPINAS_CHANNEL_ID="UCJDBLldRGVJPEvyjJdSHefw"
@@ -34,8 +35,8 @@ def live_events():
     if len(teams)>=2:out.append({"eventId":str(e.get("id","")),"sport":sport,"teams":teams[:2],"title":e.get("name","")})
   except Exception as ex: print("scoreboard",sport,ex)
  return out[:10]
-def youtube_search(q="", max_results=25, channel_id=None):
- params={"part":"snippet","type":"video","eventType":"live","maxResults":max_results,"key":KEY}
+def youtube_search(q="", max_results=25, channel_id=None, event_type="live"):
+ params={"part":"snippet","type":"video","eventType":event_type,"maxResults":max_results,"key":KEY}
  if q: params["q"]=q
  if channel_id: params["channelId"]=channel_id
  return get_json("https://www.googleapis.com/youtube/v3/search?"+urllib.parse.urlencode(params)).get("items",[])
@@ -132,6 +133,70 @@ def one_sports_live():
   out.append({"eventId":prefix+"-youtube-"+vid,"sport":sport,"leagueKey":league_key,"league":league,"teams":[],"title":title,"stream":stream})
  return out
 
+def load_previous():
+ try:
+  return json.loads(OUT.read_text("utf-8"))
+ except Exception:
+  return {}
+
+def nbl_regional_schedule():
+ try:
+  data=json.loads(REGIONAL.read_text("utf-8"))
+ except Exception:
+  return []
+ now=datetime.now(timezone.utc)
+ out=[]
+ for g in data.get("leagues",{}).get("nbl",{}).get("games",[]):
+  if g.get("state")!="scheduled":continue
+  try:
+   dt=datetime.fromisoformat(str(g.get("date","")).replace("Z","+00:00")).astimezone(timezone.utc)
+  except Exception:
+   continue
+  if now-timedelta(hours=6) <= dt <= now+timedelta(days=14):
+   out.append(g)
+ return sorted(out,key=lambda x:x.get("date",""))
+
+def matchup_from_title(title):
+ text=str(title or "")
+ part=text.split("|")[-1].strip()
+ m=re.search(r"(.+?)\s+vs\.?\s+(.+)$",part,re.I)
+ if not m:return ("NBL Pilipinas",text or "Scheduled game")
+ return (m.group(1).strip(),m.group(2).strip())
+
+def nbl_pilipinas_upcoming(previous):
+ now=datetime.now(timezone.utc)
+ prev_checked=previous.get("upcomingCheckedAt")
+ should_check=True
+ if prev_checked:
+  try:
+   checked=datetime.fromisoformat(str(prev_checked).replace("Z","+00:00")).astimezone(timezone.utc)
+   should_check=(now-checked)>=timedelta(hours=4)
+  except Exception:
+   pass
+ if not should_check:
+  kept=[]
+  for x in previous.get("upcoming",[]):
+   try:
+    start=datetime.fromisoformat(str(x.get("scheduledStartTime","")).replace("Z","+00:00")).astimezone(timezone.utc)
+    if start>=now-timedelta(hours=3):kept.append(x)
+   except Exception:
+    pass
+  return kept,prev_checked
+ items=youtube_search(max_results=25,channel_id=NBL_PILIPINAS_CHANNEL_ID,event_type="upcoming")
+ ids=[x.get("id",{}).get("videoId") for x in items if x.get("id",{}).get("videoId")]
+ details=video_details(ids)
+ out=[]
+ for vid,d in details.items():
+  sn=d.get("snippet",{}); live=d.get("liveStreamingDetails",{}); status=d.get("status",{})
+  if sn.get("channelId")!=NBL_PILIPINAS_CHANNEL_ID:continue
+  start=live.get("scheduledStartTime")
+  if not start:continue
+  title=sn.get("title",""); a,b=matchup_from_title(title)
+  stream={"videoId":vid,"watchUrl":"https://www.youtube.com/watch?v="+vid,"provider":"YouTube","channel":sn.get("channelTitle") or "NBL Pilipinas","title":title,"status":"upcoming","scheduledStartTime":start}
+  if status.get("embeddable",True):stream["embedUrl"]="https://www.youtube.com/embed/"+vid
+  out.append({"eventId":"nblph-upcoming-"+vid,"sport":"Basketball","leagueKey":"nbl","league":"NBL Pilipinas","away":a,"home":b,"title":title,"scheduledStartTime":start,"stream":stream})
+ return out,now.isoformat()
+
 def nbl_pilipinas_live():
  # NBL Pilipinas uses its own official YouTube page, not the One Sports rule.
  ids=[]
@@ -168,9 +233,12 @@ def nbl_pilipinas_live():
   out.append({"eventId":"nblph-youtube-"+vid,"sport":"Basketball","leagueKey":"nbl","league":"NBL Pilipinas","teams":[],"title":title,"stream":stream})
  return out
 
-events=live_events(); streams=[]
-run_generic_search=(datetime.now(timezone.utc).hour % 4 == 0)
-for e in (events if run_generic_search else []):
+previous=load_previous()
+now=datetime.now(timezone.utc)
+run_generic_search=(now.hour % 4 == 0 and now.minute < 20)
+events=live_events() if run_generic_search else []
+streams=[]
+for e in events:
  try:
   s=search(e)
   if s: streams.append({**e,"stream":s})
@@ -190,5 +258,12 @@ for x in streams:
  if vid: seen.add(vid)
  dedup.append(x)
 streams=dedup
-OUT.write_text(json.dumps({"updatedAt":datetime.now(timezone.utc).isoformat(),"streams":streams},indent=2)+"\n",encoding="utf-8")
-print("live events",len(events),"matched streams",len(streams))
+try:
+ upcoming,upcoming_checked=nbl_pilipinas_upcoming(previous)
+except Exception as ex:
+ print("youtube NBL Pilipinas upcoming",ex)
+ upcoming=previous.get("upcoming",[])
+ upcoming_checked=previous.get("upcomingCheckedAt")
+payload={"updatedAt":datetime.now(timezone.utc).isoformat(),"streams":streams,"upcoming":upcoming,"upcomingCheckedAt":upcoming_checked,"nblSchedule":nbl_regional_schedule()}
+OUT.write_text(json.dumps(payload,indent=2)+"\n",encoding="utf-8")
+print("live events",len(events),"matched streams",len(streams),"NBL upcoming",len(upcoming),"NBL scheduled",len(payload["nblSchedule"]))
