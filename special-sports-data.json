@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-21T10:54:06.451Z",
+  "updated_at": "2026-09-21T10:59:25.297Z",
   "source": "Official sports websites",
   "leagues": {
     "atp": {
@@ -174,23 +174,14 @@
         {
           "eventId": "ag26-live-wushu-wong-20260921",
           "date": "2026-09-21T14:00:00+09:00",
-          "displayTime": "Live / replay available",
+          "displayTime": "Sep 21 · Final",
           "title": "Wushu Finals — Agatha Wong",
           "away": "Agatha Wong (Philippines)",
           "home": "Women’s Taijiquan & Taijijian",
           "awayScore": "—",
           "homeScore": "—",
-          "status": "One Sports coverage",
-          "state": "final",
-          "streams": [
-            {
-              "provider": "YouTube",
-              "channel": "One Sports",
-              "title": "Wushu Finals — Agatha Wong | 2026 Asian Games",
-              "watchUrl": "https://www.youtube.com/@OneSportsPHL/streams"
-            }
-          ],
-          "streamsChecked": true
+          "status": "Final",
+          "state": "final"
         },
         {
           "eventId": "ag26-shoot-m10ar-team-20260921",
@@ -229,88 +220,69 @@
           "state": "final"
         },
         {
-          "eventId": "ag26-boxing-20260921",
-          "date": "2026-09-21T12:00:00+09:00",
-          "displayTime": "Sep 21 · From 12:00 JST",
-          "title": "Boxing — Men's 70kg preliminary",
-          "away": "Men's 70kg",
-          "home": "Preliminary",
-          "awayScore": "—",
-          "homeScore": "—",
-          "status": "Scheduled",
-          "state": "scheduled"
-        },
-        {
-          "eventId": "ag26-basketball-20260921",
-          "date": "2026-09-21T13:00:00+09:00",
-          "displayTime": "Sep 21 · 13:00–21:15 JST",
-          "title": "Basketball — Competition session BKB11",
-          "away": "Asian Games",
-          "home": "Basketball",
-          "awayScore": "—",
-          "homeScore": "—",
-          "status": "Today's session",
-          "state": "scheduled"
-        },
-        {
           "eventId": "ag26-official-boxing-20260921-1",
           "date": "2026-09-21T12:00:00+09:00",
           "displayTime": "Sep 21 · 12:00 JST",
           "title": "Boxing — BOX01",
-          "away": "Men’s 90kg / +90kg",
-          "home": "Preliminary",
+          "away": "",
+          "home": "",
           "awayScore": "—",
           "homeScore": "—",
           "status": "Official schedule",
-          "state": "scheduled"
+          "state": "scheduled",
+          "eventOnly": true
         },
         {
           "eventId": "ag26-official-boxing-20260921-2",
           "date": "2026-09-21T17:00:00+09:00",
           "displayTime": "Sep 21 · 17:00 JST",
           "title": "Boxing — BOX02",
-          "away": "Men’s 70kg",
-          "home": "Preliminary",
+          "away": "",
+          "home": "",
           "awayScore": "—",
           "homeScore": "—",
           "status": "Official schedule",
-          "state": "scheduled"
+          "state": "scheduled",
+          "eventOnly": true
         },
         {
           "eventId": "ag26-official-bkb11-20260921",
           "date": "2026-09-21T13:00:00+09:00",
           "displayTime": "Sep 21 · 13:00–21:15 JST",
           "title": "Basketball — BKB11",
-          "away": "Asian Games",
-          "home": "Basketball session",
+          "away": "",
+          "home": "",
           "awayScore": "—",
           "homeScore": "—",
           "status": "Aichi International Arena · Official schedule",
-          "state": "scheduled"
+          "state": "scheduled",
+          "eventOnly": true
         },
         {
           "eventId": "ag26-official-vbv02-20260921",
           "date": "2026-09-21T09:00:00+09:00",
           "displayTime": "Sep 21 · 09:00–16:00 JST",
           "title": "Beach Volleyball — VBV02",
-          "away": "Asian Games",
-          "home": "Beach Volleyball",
+          "away": "",
+          "home": "",
           "awayScore": "—",
           "homeScore": "—",
           "status": "Hekinan Ryokuchi Beach Court · Official schedule",
-          "state": "scheduled"
+          "state": "scheduled",
+          "eventOnly": true
         },
         {
           "eventId": "ag26-official-hbl03-20260921",
           "date": "2026-09-21T12:00:00+09:00",
           "displayTime": "Sep 21 · 12:00–21:00 JST",
           "title": "Handball — HBL03",
-          "away": "Asian Games",
-          "home": "Handball",
+          "away": "",
+          "home": "",
           "awayScore": "—",
           "homeScore": "—",
           "status": "ENTRIO · Official schedule",
-          "state": "scheduled"
+          "state": "scheduled",
+          "eventOnly": true
         }
       ],
       "officialLinks": {
