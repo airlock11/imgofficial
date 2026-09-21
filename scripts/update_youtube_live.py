@@ -119,7 +119,7 @@ def one_sports_live():
   if vid in PINNED_ASIAN_GAMES_VIDEO_IDS:
    print("Pinned stream diagnostic",vid,repr(title),repr(channel),"live=",bool(is_live),"ended=",bool(ended),"api=",bool(d))
   if "one sports" not in channel.lower():continue
-  if is_live and not ended:
+  if is_live and not ended and not d:
    try:
     public=public_watch_info(vid)
     if public.get("channel") and "one sports" not in public.get("channel","").lower():
