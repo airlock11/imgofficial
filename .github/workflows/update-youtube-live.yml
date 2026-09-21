@@ -28,7 +28,7 @@ jobs:
         run: python scripts/update_youtube_live.py
       - name: Commit live stream data
         run: |
-          if git diff --quiet -- youtube-live.json; then
+          if [ -f youtube-live.json ] && git diff --quiet -- youtube-live.json && git ls-files --error-unmatch youtube-live.json >/dev/null 2>&1; then
             echo "No stream changes."
             exit 0
           fi
