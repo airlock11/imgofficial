@@ -284,6 +284,16 @@ const liveNowLabels={
   football:{sport:'American Football',league:'NFL'},
   ncaaf:{sport:'American Football',league:'NCAA Football'}
 };
+function asianGamesSportLabel(game){
+  const title=String(game?.title||'').trim();
+  const match=title.match(/^(.+?)\s+—\s+/);
+  return match?.[1]?.trim()||'Asian Games';
+}
+function asianGamesEventLabel(game){
+  const title=String(game?.title||'').trim();
+  const sport=asianGamesSportLabel(game);
+  return title.replace(new RegExp('^'+sport.replace(/[.*+?^$\{\}()|[\]\\]/g,'\\const scoreLeagueOrder=['asian_games','soccer','laliga','seriea','bundesliga','champions','basketball','wnba','pba','ncaa_ph','uaap','mpbl','nbl','nblaus','vba','atp','wta','ipl','volleyball_w','volleyball_m','baseball','hockey','football','ncaaf','f1','ufc','boxing'];')+'\\s+—\\s+'),'').trim()||title||'Asian Games event';
+}
 const scoreLeagueOrder=['asian_games','soccer','laliga','seriea','bundesliga','champions','basketball','wnba','pba','ncaa_ph','uaap','mpbl','nbl','nblaus','vba','atp','wta','ipl','volleyball_w','volleyball_m','baseball','hockey','football','ncaaf','f1','ufc','boxing'];
 const scoreLeagueLogoCache=new Map();
 let currentScoreLeague='soccer';
@@ -1155,7 +1165,7 @@ async function loadAllLiveGames({silent=false}={}){
       const j=await fetchScorePayload('asian_games');
       const labels=liveNowLabels.asian_games||{sport:'Multi-sport',league:'Asian Games'};
       for(const game of normalizeScorePayload('asian_games',j)){
-        if(game.state==='live')live.push({...game,sportKey:'asian_games',sportLabel:labels.sport,leagueLabel:labels.league});
+        if(game.state==='live')live.push({...game,sportKey:'asian_games',sportLabel:asianGamesSportLabel(game),leagueLabel:labels.league});
       }
     }catch{}
   })();
@@ -1235,7 +1245,8 @@ function renderGames(){
       return '<article class="game asian-games-card'+(g.state==='live'?' game-is-live':'')+'" data-game-key="'+esc(gameDomKey(g))+'">'+
         '<div class="time">'+esc(g.displayTime||new Date(g.date).toLocaleString([],{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}))+'</div>'+
         '<div class="teams asian-games-event-copy">'+
-          '<div class="asian-games-event-title">'+esc(g.title||'Asian Games event')+'</div>'+
+          '<div class="asian-games-sport-name">'+esc(asianGamesSportLabel(g))+'</div>'+
+          '<div class="asian-games-event-title">'+esc(asianGamesEventLabel(g))+'</div>'+
           (hasAway?'<div class="team"><span>'+esc(g.away)+'</span>'+(score(g.awayScore)!=='—'?'<b data-score-side="away">'+esc(g.awayScore)+'</b>':'')+'</div>':'')+
           (hasHome?'<div class="team"><span>'+esc(g.home)+'</span>'+(score(g.homeScore)!=='—'?'<b data-score-side="home">'+esc(g.homeScore)+'</b>':'')+'</div>':'')+
         '</div>'+
