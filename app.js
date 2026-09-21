@@ -167,6 +167,22 @@ async function specialSportsPayload(sport){
   if(!league||!Array.isArray(league.games)||!league.games.length)return null;
   return {special:true,games:league.games,sourceName:league.sourceName||'',sourceUrl:league.sourceUrl||''};
 }
+const specialScoreKeys=new Set(['atp','wta','ipl','volleyball_w','volleyball_m']);
+function scoreGameLooksGeneric(g){
+  const names=[g?.away,g?.home].map(x=>String(x||'').trim().toLowerCase());
+  const generic=new Set(['','away','home','tbd','team 1','team 2','player 1','player 2']);
+  return !g?.eventOnly&&names.every(x=>generic.has(x));
+}
+function mergeScoreGames(primary,fallback){
+  const out=[],seen=new Set();
+  for(const g of [...(primary||[]),...(fallback||[])]){
+    const key=String(g?.eventId||[g?.date||'',g?.away||'',g?.home||'',g?.title||''].join('|'));
+    if(seen.has(key))continue;
+    seen.add(key);
+    out.push(g);
+  }
+  return out;
+}
 async function fetchScorePayload(sport,{fallbackOnly=false}={}){
   if(sport==='boxing'){
     const [apiResult,webResult]=await Promise.allSettled([
@@ -1214,6 +1230,15 @@ async function loadGames({silent=false,league=currentScoreLeague}={}){
   try{
     const j=await fetchScorePayload(sport);
     let nextGames=normalizeScorePayload(sport,j);
+
+    if(specialScoreKeys.has(sport)){
+      const specialPayload=await specialSportsPayload(sport);
+      const specialGames=specialPayload?normalizeScorePayload(sport,specialPayload):[];
+      const usablePrimary=nextGames.filter(g=>!scoreGameLooksGeneric(g));
+      nextGames=usablePrimary.length?mergeScoreGames(usablePrimary,specialGames):specialGames;
+      if(specialGames.length)mode='official-web-fallback';
+    }
+
     await hydrateTeamLogos(sport,nextGames);
 
     if(hasRegionalSnapshot&&!nextGames.length){
@@ -1243,7 +1268,7 @@ async function loadGames({silent=false,league=currentScoreLeague}={}){
     st.textContent='';
     renderRegionalContext(sport,mode);
     if(silent)updateScoreNumbers();else renderGames();
-    if(mode!=='web'&&!silent){
+    if(mode!=='web'&&mode!=='official-web-fallback'&&!silent){
       void hydrateHighlights(sport);
       void hydrateLiveStreams(sport);
     }
