@@ -1183,3 +1183,23 @@ main{min-height:calc(100svh - 68px)}
 @media(max-width:520px){
   .wta-ranking-head,.wta-ranking-row{grid-template-columns:38px minmax(110px,1fr) 48px 68px;gap:6px;padding:9px 8px}
 }
+
+/* Full ONE Championship selector label */
+.score-league-item-one{width:104px}
+.score-league-item-one .score-league-name{display:block;width:104px;max-width:104px;min-height:20px;overflow:visible;-webkit-line-clamp:unset;line-clamp:unset;white-space:normal;text-overflow:clip;overflow-wrap:normal;word-break:normal}
+@media(max-width:760px){
+  .score-league-item-one{width:96px}
+  .score-league-item-one .score-league-name{width:96px;max-width:96px;font-size:.55rem;line-height:1.06}
+}
+
+/* UFC and ONE Championship titleholders */
+.combat-titleholder-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:14px}
+.combat-titleholder-row{display:grid;gap:5px;padding:12px 13px;border:1px solid rgba(255,255,255,.075);border-radius:12px;background:rgba(255,255,255,.025)}
+.combat-titleholder-row>div{display:flex;align-items:center;gap:7px;min-width:0}
+.combat-titleholder-row strong{font-size:13px;line-height:1.15}
+.combat-titleholder-row small{color:var(--muted);font-size:10px;line-height:1.35}
+.combat-titleholder-interim{flex:0 0 auto;padding:2px 5px;border-radius:999px;background:rgba(239,63,69,.13);color:#ff777c;font-size:8px;font-weight:900;letter-spacing:.06em;text-transform:uppercase}
+@media(max-width:640px){
+  .combat-titleholder-list{grid-template-columns:1fr;padding:10px}
+  .combat-titleholder-row{padding:11px 12px}
+}
