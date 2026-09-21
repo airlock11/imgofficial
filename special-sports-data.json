@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-21T05:50:15.886Z",
+  "updated_at": "2026-09-21T07:30:00Z",
   "source": "Official sports websites",
   "leagues": {
     "atp": {
@@ -164,6 +164,84 @@
           "homeScore": "3",
           "status": "Final",
           "state": "final"
+        }
+      ]
+    },
+    "asian_games": {
+      "sourceName": "Aichi-Nagoya 2026 Official / verified results",
+      "sourceUrl": "https://www.aichi-nagoya2026.org/",
+      "games": [
+        {
+          "eventId": "ag26-shoot-m10ar-team-20260921",
+          "date": "2026-09-21T10:00:00+09:00",
+          "displayTime": "Sep 21 · Final",
+          "title": "Shooting — Men's 10m Air Rifle Team",
+          "away": "China",
+          "home": "India",
+          "awayScore": "1899.0",
+          "homeScore": "1890.1",
+          "status": "Final · China gold (world record), India silver, South Korea bronze",
+          "state": "final"
+        },
+        {
+          "eventId": "ag26-gym-yulo-floor-20260921",
+          "date": "2026-09-21T10:00:00+09:00",
+          "displayTime": "Sep 21 · Qualification",
+          "title": "Artistic Gymnastics — Men's Floor Exercise",
+          "away": "Carlos Yulo (Philippines)",
+          "home": "Qualification",
+          "awayScore": "14.600",
+          "homeScore": "—",
+          "status": "Qualification score",
+          "state": "final"
+        },
+        {
+          "eventId": "ag26-wushu-wong-20260921",
+          "date": "2026-09-21T12:00:00+09:00",
+          "displayTime": "Sep 21 · Live coverage",
+          "title": "Wushu — Women's Taijiquan & Taijijian",
+          "away": "Agatha Wong (Philippines)",
+          "home": "Final session",
+          "awayScore": "—",
+          "homeScore": "—",
+          "status": "Live coverage on One Sports",
+          "state": "live"
+        },
+        {
+          "eventId": "ag26-hockey-ind-indonesia-20260921",
+          "date": "2026-09-21T12:00:00+09:00",
+          "displayTime": "Sep 21 · Final",
+          "title": "Women's Hockey",
+          "away": "India",
+          "home": "Indonesia",
+          "awayScore": "17",
+          "homeScore": "1",
+          "status": "Final",
+          "state": "final"
+        },
+        {
+          "eventId": "ag26-boxing-20260921",
+          "date": "2026-09-21T12:00:00+09:00",
+          "displayTime": "Sep 21 · From 12:00 JST",
+          "title": "Boxing — Men's 70kg preliminary",
+          "away": "Men's 70kg",
+          "home": "Preliminary",
+          "awayScore": "—",
+          "homeScore": "—",
+          "status": "Scheduled",
+          "state": "scheduled"
+        },
+        {
+          "eventId": "ag26-basketball-20260921",
+          "date": "2026-09-21T13:00:00+09:00",
+          "displayTime": "Sep 21 · 13:00–21:15 JST",
+          "title": "Basketball — Competition session BKB11",
+          "away": "Asian Games",
+          "home": "Basketball",
+          "awayScore": "—",
+          "homeScore": "—",
+          "status": "Today's session",
+          "state": "scheduled"
         }
       ]
     }
