@@ -134,7 +134,8 @@ def one_sports_live():
  return out
 
 events=live_events(); streams=[]
-for e in events:
+run_generic_search=(datetime.now(timezone.utc).hour % 4 == 0)
+for e in (events if run_generic_search else []):
  try:
   s=search(e)
   if s: streams.append({**e,"stream":s})
