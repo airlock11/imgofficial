@@ -5,7 +5,7 @@ from pathlib import Path
 
 KEY=os.environ["YOUTUBE_API_KEY"]
 OUT=Path(__file__).resolve().parents[1]/"youtube-live.json"
-UA="IMG-Sports-Live/1.0"
+UA="IMG-Sports-Live/1.0"\nONE_SPORTS_CHANNEL_ID="UCXDG9ue-emCN8Ad3h7lERqQ"
 SCOREBOARDS={
  "Basketball":"https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard",
  "Football":"https://site.api.espn.com/apis/site/v2/sports/soccer/all/scoreboard",
@@ -29,9 +29,11 @@ def live_events():
     if len(teams)>=2:out.append({"eventId":str(e.get("id","")),"sport":sport,"teams":teams[:2],"title":e.get("name","")})
   except Exception as ex: print("scoreboard",sport,ex)
  return out[:10]
-def youtube_search(q, max_results=25):
- params=urllib.parse.urlencode({"part":"snippet","type":"video","eventType":"live","maxResults":max_results,"q":q,"key":KEY})
- return get_json("https://www.googleapis.com/youtube/v3/search?"+params).get("items",[])
+def youtube_search(q="", max_results=25, channel_id=None):
+ params={"part":"snippet","type":"video","eventType":"live","maxResults":max_results,"key":KEY}
+ if q: params["q"]=q
+ if channel_id: params["channelId"]=channel_id
+ return get_json("https://www.googleapis.com/youtube/v3/search?"+urllib.parse.urlencode(params)).get("items",[])
 
 def video_details(ids):
  if not ids:return {}
@@ -53,7 +55,7 @@ def search(event):
 def asian_games_live():
  # Dedicated rule requested for IMG: every CURRENTLY LIVE One Sports YouTube
  # broadcast whose title contains the exact phrase "2026 ASIAN GAMES".
- items=youtube_search("2026 ASIAN GAMES",50)
+ items=youtube_search(max_results=50, channel_id=ONE_SPORTS_CHANNEL_ID)
  ids=[x.get("id",{}).get("videoId") for x in items if x.get("id",{}).get("videoId")]
  details=video_details(ids)
  out=[]
