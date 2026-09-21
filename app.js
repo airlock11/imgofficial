@@ -196,7 +196,8 @@ function scoreLeagueFallback(key){
 }
 
 function scoreLeagueLogoMarkup(key){
-  const logo=scoreLeagueLogoCache.get(key)||'';
+  const supplied=window.IMG_SCORE_LEAGUE_LOGOS?.[key]||'';
+  const logo=scoreLeagueLogoCache.get(key)||supplied||'';
   if(!logo)return scoreLeagueFallback(key);
   return '<img class="score-league-logo" src="'+esc(logo)+'" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'grid\'">'+
     '<span class="score-league-fallback score-league-fallback-hidden">'+esc((liveNowLabels[key]?.league||key).replace(/[^A-Za-z0-9]/g,'').slice(0,5).toUpperCase())+'</span>';
