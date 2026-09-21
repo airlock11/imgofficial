@@ -532,6 +532,8 @@ main{min-height:calc(100svh - 68px)}
 .score-league-filter.active{border-color:color-mix(in srgb,var(--red) 60%,var(--line));background:color-mix(in srgb,var(--red) 9%,var(--panel));box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--red) 28%,transparent)}
 .score-league-logo-wrap{width:42px;height:42px;display:grid;place-items:center;overflow:visible;padding:2px}
 .score-league-logo{display:block;width:auto;height:auto;max-width:36px;max-height:36px;object-fit:contain;object-position:center}
+.score-league-fivb-crop{position:relative;display:block;width:42px;height:28px;overflow:hidden;background:#fff}
+.score-league-fivb-crop img{position:absolute;display:block;width:162px;max-width:none;height:auto;left:-19px;top:-16px}
 .score-league-fallback{width:36px;height:36px;display:grid;place-items:center;border-radius:10px;background:color-mix(in srgb,var(--text) 7%,var(--panel));font:900 .56rem/1 Inter,Arial,sans-serif;letter-spacing:.01em;color:var(--text);text-align:center}
 .score-league-fallback-hidden{display:none}
 .score-league-toolbar>.status{flex:0 0 auto}
@@ -560,6 +562,8 @@ main{min-height:calc(100svh - 68px)}
   .score-league-filter{width:52px;height:52px;border-radius:12px;padding:4px}
   .score-league-logo-wrap{width:40px;height:40px;padding:2px}
   .score-league-logo{max-width:34px;max-height:34px}
+  .score-league-fivb-crop{width:40px;height:27px}
+  .score-league-fivb-crop img{width:155px;left:-18px;top:-15px}
   .score-league-fallback{width:34px;height:34px;font-size:.52rem}
   .score-league-toolbar>.status{font-size:.62rem}
 }
