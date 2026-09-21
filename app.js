@@ -691,8 +691,9 @@ async function hydrateHighlights(sport){const snapshot=allGames,candidates=snaps
 
 function ensureLiveDialog(){let d=document.getElementById('liveDialog');if(d)return d;d=document.createElement('dialog');d.id='liveDialog';d.className='live-dialog';d.innerHTML='<div class="live-shell"><button class="live-close" type="button" aria-label="Close live stream"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button><div id="liveContent"></div></div>';document.body.append(d);d.addEventListener('click',e=>{if(e.target===d)d.close()});d.querySelector('.live-close').addEventListener('click',()=>d.close());d.addEventListener('close',()=>{const frame=d.querySelector('iframe');if(frame)frame.src='about:blank'});return d}
 function liveStreamsForGame(game){
-  if(game?.state!=='live')return [];
+  if(!game||!['live','scheduled'].includes(game.state))return [];
   return (Array.isArray(game.streams)?game.streams:[]).filter(stream=>{
+    if(game.state==='scheduled'&&stream?.status!=='upcoming'&&!stream?.scheduledStartTime)return false;
     try{
       const url=new URL(stream?.watchUrl||stream?.embedUrl||'');
       if(!['https:','http:'].includes(url.protocol))return false;
@@ -1297,6 +1298,32 @@ function renderGames(){
     ?sections.join('')
     :'<div class="empty">No verified schedule or scores were returned for this league right now.</div>';
 }
+async function nblYoutubeScheduledGames(){
+  try{
+    const r=await fetch('/youtube-live.json?ts='+Date.now(),{cache:'no-store'});
+    if(!r.ok)return [];
+    const y=await r.json();
+    return (Array.isArray(y.upcoming)?y.upcoming:[])
+      .filter(x=>x?.leagueKey==='nbl'&&x?.stream?.watchUrl&&x?.scheduledStartTime)
+      .map(x=>({
+        eventId:x.eventId,
+        date:x.scheduledStartTime,
+        displayTime:new Date(x.scheduledStartTime).toLocaleString([],{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'}),
+        away:x.away||'NBL Pilipinas',
+        home:x.home||x.title||'Scheduled game',
+        awayScore:'—',homeScore:'—',
+        status:'Scheduled stream',
+        state:'scheduled',
+        sourceName:'NBL Pilipinas Official YouTube',
+        sourceUrl:x.stream.watchUrl,
+        streams:[x.stream],
+        streamsChecked:true,
+        highlights:[],highlightsChecked:true,
+        odds:null,oddsList:[]
+      }));
+  }catch{return []}
+}
+
 async function loadGames({silent=false,league=currentScoreLeague}={}){
   const requestToken=++scoreLoadToken;
   if(!document.getElementById('games'))return;
@@ -1308,7 +1335,12 @@ async function loadGames({silent=false,league=currentScoreLeague}={}){
 
   if(isWebLeague){
     await loadRegionalAutoData();
-    const webGames=regionalSnapshotGames(sport);
+    let webGames=regionalSnapshotGames(sport);
+    if(sport==='nbl'){
+      const upcoming=await nblYoutubeScheduledGames();
+      const seen=new Set(webGames.map(g=>String(g.eventId)));
+      webGames=[...upcoming.filter(g=>!seen.has(String(g.eventId))),...webGames];
+    }
     await hydrateTeamLogos(sport,webGames);
 
     // GitHub-hosted regional data is the stable primary layer.
