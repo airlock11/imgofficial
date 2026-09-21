@@ -1139,8 +1139,8 @@ async function loadAllLiveGames({silent=false}={}){
   await Promise.allSettled([...new Set(live.map(g=>g.sportKey).filter(Boolean))].map(key=>
     hydrateTeamLogos(key,live.filter(g=>g.sportKey===key))
   ));
-  if(silent||host.querySelector('.live-game-card'))updateAllLiveScoreNumbers(live);
-  else renderAllLiveGames(live);
+  // Re-render Live Now so newly discovered stream links/buttons are reflected in the DOM.
+  renderAllLiveGames(live);
 }
 function renderGames(){
   const host=document.getElementById('games');
