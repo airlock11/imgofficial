@@ -151,6 +151,7 @@ def parse_uaap():
     if not games:
         sample=[(idx,x) for idx,x in enumerate(xs) if ("2026" in x or x.upper()=="FINAL" or re.match(r"^VS\s+",x,re.I))][:40]
         print("UAAP parse sample", sample)
+        print("UAAP parse window", list(enumerate(xs[110:205], start=110)))
         existing = load().get("leagues", {}).get("uaap", {})
         if existing:
             return existing
