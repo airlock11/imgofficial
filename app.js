@@ -1273,7 +1273,10 @@ async function loadAllLiveGames({silent=false}={}){
     const r=await fetch('/youtube-live.json?ts='+Date.now(),{cache:'no-store'});
     if(r.ok){
       const y=await r.json();
-      const ys=Array.isArray(y.streams)?y.streams:[];
+      const ytUpdated=Date.parse(y?.updatedAt||'');
+      const ytFreshMinutes=Math.max(5,Number(y?.freshForMinutes)||8);
+      const ytFresh=Number.isFinite(ytUpdated)&&Date.now()-ytUpdated<=ytFreshMinutes*60000;
+      const ys=ytFresh&&Array.isArray(y.streams)?y.streams:[];
       const byId=new Map(ys.map(x=>[String(x.eventId),x.stream]));
       for(const g of live){
         const s=byId.get(String(g.eventId));
