@@ -348,8 +348,32 @@ function asianGamesEventLabel(game){
   return index>0?title.slice(index+divider.length).trim():(title||'Asian Games event');
 }
 const scoreLeagueOrder=['asian_games','soccer','laliga','seriea','bundesliga','champions','mls','pfl','basketball','wnba','pba','ncaa_ph','uaap','mpbl','nbl','nblaus','vba','bleague','euroleague','atp','wta','australian_open','wimbledon','us_open','ipl','bigbash','cricket_world_cup','volleyball_w','volleyball_m','pvl','vleague_jp','baseball','npb','kbo','hockey','khl','iihf','football','ncaaf','f1','motogp','formulae','ufc','one','wbc','wba','ibf','wbo','ring'];
+const scoreSportDefaultLeague={
+  basketball:'basketball',
+  football:'soccer',
+  tennis:'atp',
+  baseball:'baseball',
+  hockey:'hockey',
+  cricket:'ipl',
+  volleyball:'volleyball_w',
+  motorsport:'f1',
+  boxing:'wbc',
+  'combat-sports':'ufc',
+  'american-football':'football'
+};
+function initialScoreLeagueFromUrl(){
+  try{
+    const params=new URLSearchParams(location.search);
+    const league=String(params.get('league')||'').trim();
+    if(league&&scoreLeagueOrder.includes(league))return league;
+    const sport=String(params.get('sport')||'').trim().toLowerCase();
+    return scoreSportDefaultLeague[sport]||'soccer';
+  }catch{
+    return 'soccer';
+  }
+}
 const scoreLeagueLogoCache=new Map();
-let currentScoreLeague='soccer';
+let currentScoreLeague=initialScoreLeagueFromUrl();
 let scoreLoadToken=0;
 
 function scoreLeagueFallback(key){
