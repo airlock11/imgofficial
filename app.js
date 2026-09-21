@@ -1045,7 +1045,7 @@ function renderAllLiveGames(items,{preserveItems=false}={}){
         '<div class="live-card-team"><span>'+teamLogoMarkup(g.homeLogo,g.home,'live-card-logo')+esc(g.home)+'</span><b data-score-side="home">'+esc(g.homeScore)+'</b></div>'+
       '</div>'+
       '<div class="live-card-status">'+esc(g.status||'Live')+'</div>'+
-      (g.streams?.length?'<button type="button" class="live-watch-btn" data-live-event="'+esc(g.eventId)+'">Watch on One Sports</button>':'')+
+      (g.streams?.length?'<button type="button" class="live-watch-btn" data-live-event="'+esc(g.eventId)+'">Watch live</button>':'')+
     '</article>';
   }).join('');
 }
@@ -1081,7 +1081,8 @@ async function loadAllLiveGames({silent=false}={}){
       provider:'YouTube',
       channel:'One Sports',
       title:'2026 Asian Games — One Sports Live',
-      watchUrl:'https://www.youtube.com/@OneSportsPHL/streams'
+      embedUrl:'https://www.youtube-nocookie.com/embed/vzTY2AK3mok?autoplay=1&playsinline=1&rel=0',
+      watchUrl:'https://www.youtube.com/watch?v=vzTY2AK3mok'
     }],
     streamsChecked:true
   }];
