@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><base href="/"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="canonical" href="https://www.imgofficial.com/sports/"><title>Sports — IMG</title><link rel="icon" type="image/png" href="./img-logo-hq.png?v=20260920-11"><link rel="shortcut icon" type="image/png" href="./img-logo-hq.png?v=20260920-11"><link rel="apple-touch-icon" href="./img-logo-hq.png?v=20260920-11"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="styles.css?v=20260922-108"><link rel="stylesheet" href="mobile-nav.css?v=20260920-6"><link rel="stylesheet" href="theme-toggle.css?v=20260920-10"></head><body class="sports-page">
+<!doctype html><html lang="en"><head><base href="/"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="canonical" href="https://www.imgofficial.com/sports/"><title>Sports — IMG</title><link rel="icon" type="image/png" href="./img-logo-hq.png?v=20260920-11"><link rel="shortcut icon" type="image/png" href="./img-logo-hq.png?v=20260920-11"><link rel="apple-touch-icon" href="./img-logo-hq.png?v=20260920-11"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="styles.css?v=20260922-sports-exact-score-link"><link rel="stylesheet" href="mobile-nav.css?v=20260920-6"><link rel="stylesheet" href="theme-toggle.css?v=20260920-10"></head><body class="sports-page">
 <header><nav class="shell"><a class="logo" href="/"><img src="img-logo-hq.png" alt="IMG"></a><div class="navlinks"><a href="/">Home</a><a class="active" href="/sports/">Sports</a><a href="/scores/">Scores</a><a href="/news/">News</a><a href="/odds/">Odds</a></div></nav></header>
 <main><section class="content sports-directory"><div class="shell">
   <div id="sportTabs" class="sports-tabbar" role="tablist" aria-label="Choose a sport"></div>
@@ -192,10 +192,10 @@ function renderSports(){
       '<strong>'+leagues.length+' competitions</strong>'+
     '</div>'+
     '<div class="sports-logo-grid">'+leagues.map((league,i)=>{const [name,region,key]=league;return (
-      '<article class="sports-logo-tile" style="--league-index:'+i+';--sport-accent:'+accent+'" data-league-key="'+esc(key||'')+'">'+
+      '<a class="sports-logo-tile" href="/scores/?league='+encodeURIComponent(key||'')+'" style="--league-index:'+i+';--sport-accent:'+accent+'" data-league-key="'+esc(key||'')+'" aria-label="Open '+esc(name)+' in Scores">'+
         '<div class="sports-logo-mark" data-logo-host="'+esc(key||'')+'">'+leagueLogo(name,key)+'</div>'+
         '<div class="sports-logo-copy"><strong>'+esc(name)+'</strong><small>'+esc(region)+'</small>'+capabilityBadges(key)+'</div>'+
-      '</article>'
+      '</a>'
     )}).join('')+'</div>';
 }
 async function loadStatsAvailability(){
@@ -234,26 +234,18 @@ async function hydrateLogo(key,url){
   }catch{}
 }
 function hydrateLogos(){Object.entries(logoFeeds).forEach(([key,url])=>void hydrateLogo(key,url))}
-const scoreSportRoutes={
-  Basketball:'basketball',
-  Football:'football',
-  Tennis:'tennis',
-  Baseball:'baseball',
-  Hockey:'hockey',
-  Cricket:'cricket',
-  Volleyball:'volleyball',
-  Motorsport:'motorsport',
-  Boxing:'boxing',
-  'Combat Sports':'combat-sports',
-  'American Football':'american-football'
-};
 document.addEventListener('click',e=>{
   const btn=e.target.closest('[data-sport-tab]');
   if(!btn)return;
   const next=btn.dataset.sportTab;
-  const sport=scoreSportRoutes[next];
-  if(!sport)return;
-  location.href='/scores/?sport='+encodeURIComponent(sport);
+  if(!next||next===activeSport)return;
+  activeSport=next;
+  renderSports();
+  hydrateLogos();
+  requestAnimationFrame(()=>{
+    const selected=document.querySelector('.sports-tab.is-active');
+    selected?.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
+  });
 });
 renderSports();
 hydrateLogos();
