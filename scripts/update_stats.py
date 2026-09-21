@@ -640,8 +640,132 @@ def espn_soccer_html_stats():
         "sourceName":"ESPN","sourceUrl":url,"groups":dedup
     }
 
+def _deep_find_exact(obj,names):
+    wanted={re.sub(r"[^a-z0-9]","",str(x).lower()) for x in names}
+    if isinstance(obj,dict):
+        for key,value in obj.items():
+            nk=re.sub(r"[^a-z0-9]","",str(key).lower())
+            if nk in wanted and not isinstance(value,(dict,list)):
+                return value
+        for value in obj.values():
+            found=_deep_find_exact(value,names)
+            if found is not None:return found
+    elif isinstance(obj,list):
+        for value in obj:
+            found=_deep_find_exact(value,names)
+            if found is not None:return found
+    return None
+
+def _deep_find_dict(obj,names):
+    wanted={re.sub(r"[^a-z0-9]","",str(x).lower()) for x in names}
+    if isinstance(obj,dict):
+        for key,value in obj.items():
+            nk=re.sub(r"[^a-z0-9]","",str(key).lower())
+            if nk in wanted and isinstance(value,dict):
+                return value
+        for value in obj.values():
+            found=_deep_find_dict(value,names)
+            if found is not None:return found
+    elif isinstance(obj,list):
+        for value in obj:
+            found=_deep_find_dict(value,names)
+            if found is not None:return found
+    return None
+
+def _candidate_dict_lists(obj):
+    found=[]
+    if isinstance(obj,list):
+        if obj and all(isinstance(x,dict) for x in obj):
+            found.append(obj)
+        for value in obj:
+            found.extend(_candidate_dict_lists(value))
+    elif isinstance(obj,dict):
+        for value in obj.values():
+            found.extend(_candidate_dict_lists(value))
+    return found
+
+def _mls_player_name(row):
+    player=_deep_find_dict(row,["player","athlete"])
+    target=player or row
+    name=_deep_find_exact(target,[
+        "displayName","fullName","playerName","playerFullName","commonName","name"
+    ])
+    if name and not str(name).isdigit():return clean(name)
+    first=_deep_find_exact(target,["firstName","playerFirstName","first_name"])
+    last=_deep_find_exact(target,["lastName","playerLastName","last_name"])
+    return clean(" ".join(str(x) for x in [first,last] if x))
+
+def _mls_club_name(row):
+    club=_deep_find_dict(row,["club","team"])
+    target=club or row
+    value=_deep_find_exact(target,[
+        "clubName","teamName","displayName","shortDisplayName","shortName","name","abbreviation"
+    ])
+    return clean(value)
+
+def mls_official_stats():
+    urls=[
+        "https://stats-api.mlssoccer.com/players/competitions/MLS-COM-000001/seasons/MLS-SEA-0001KA?per_page=1000",
+        "https://stats-api.mlssoccer.com/v1/players/seasons?season_opta_id=2026&competition_opta_id=98&page=0&page_size=1000&include=player&include=club"
+    ]
+    errors=[]
+    for url in urls:
+        try:
+            data=fetch_json(url)
+            lists=_candidate_dict_lists(data)
+            lists.sort(key=len,reverse=True)
+            parsed=[]
+            for items in lists[:8]:
+                rows=[]
+                for item in items:
+                    player=_mls_player_name(item)
+                    if not player:continue
+                    goals=num(_deep_find_exact(item,[
+                        "goals","totalGoals","goalsScored","playerSeasonStatGoals","player_season_stat_goals"
+                    ]))
+                    assists=num(_deep_find_exact(item,[
+                        "assists","totalAssists","playerSeasonStatAssists","player_season_stat_assists"
+                    ]))
+                    gp=intnum(_deep_find_exact(item,[
+                        "appearances","gamesPlayed","matchesPlayed","playerSeasonStatAppearances",
+                        "player_season_stat_appearances","gp"
+                    ]))
+                    if goals is None and assists is None:continue
+                    rows.append({
+                        "player":player,"team":_mls_club_name(item),"gp":gp,
+                        "goals":goals if goals is not None else 0,
+                        "assists":assists if assists is not None else 0
+                    })
+                if len(rows)>len(parsed):parsed=rows
+            if not parsed:
+                raise ValueError("No player season rows found")
+            unique={}
+            for row in parsed:
+                key=(row["player"].lower(),row["team"].lower())
+                old=unique.get(key)
+                if old is None or (row["goals"]+row["assists"])>(old["goals"]+old["assists"]):
+                    unique[key]=row
+            rows=list(unique.values())
+            groups=generic_groups(rows,[
+                ("Goals","goals","G"),
+                ("Assists","assists","A")
+            ])
+            if not groups:raise ValueError("MLS Official groups empty")
+            return {
+                "league":"MLS","season":"2026 Regular Season",
+                "sourceName":"MLS Official","sourceUrl":"https://www.mlssoccer.com/competitions/mls-regular-season/2026/stats/",
+                "groups":groups
+            }
+        except Exception as ex:
+            errors.append(type(ex).__name__+": "+str(ex)[:400])
+    raise ValueError(" | ".join(errors))
+
 def espn_mls_stats():
     errors=[]
+    try:
+        return mls_official_stats()
+    except Exception as ex:
+        errors.append("MLS Official "+type(ex).__name__+": "+str(ex)[:600])
     definitions=[
         ("Goals","G","offensive.totalGoals",["goals","totalGoals"],"scoring"),
         ("Assists","A","offensive.assists",["assists","totalAssists"],"scoring")
@@ -653,11 +777,11 @@ def espn_mls_stats():
             return data
         errors.append("ESPN feed missing one or more MLS groups")
     except Exception as ex:
-        errors.append(type(ex).__name__+": "+str(ex)[:500])
+        errors.append("ESPN "+type(ex).__name__+": "+str(ex)[:500])
     try:
         return espn_soccer_html_stats()
     except Exception as ex:
-        errors.append("HTML "+type(ex).__name__+": "+str(ex)[:500])
+        errors.append("ESPN HTML "+type(ex).__name__+": "+str(ex)[:500])
     raise ValueError(" | ".join(errors))
 
 def espn_hockey_stats():
