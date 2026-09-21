@@ -760,12 +760,77 @@ def mls_official_stats():
             errors.append(type(ex).__name__+": "+str(ex)[:400])
     raise ValueError(" | ".join(errors))
 
+def mls_pulse_stats():
+    url="https://www.themlspulse.com/stats/goal-contributions"
+    soup=BeautifulSoup(fetch(url),"html.parser")
+    rows=[]
+
+    for table in soup.find_all("table"):
+        header=[]
+        header_row=None
+        for tr in table.find_all("tr"):
+            vals=[clean(x.get_text(" ",strip=True)) for x in tr.find_all(["th","td"])]
+            upper=[v.upper() for v in vals]
+            if "PLAYER" in upper and "TEAM" in upper and "GOALS" in upper and "ASSISTS" in upper:
+                header=vals;header_row=tr;break
+        if not header or header_row is None:continue
+
+        index={clean(h).upper():i for i,h in enumerate(header)}
+        pi=index.get("PLAYER");ti=index.get("TEAM");gi=index.get("GOALS");ai=index.get("ASSISTS");appi=index.get("APPS")
+        active=False
+        for tr in table.find_all("tr"):
+            if tr is header_row:
+                active=True
+                continue
+            if not active:continue
+            cells=[clean(x.get_text(" ",strip=True)) for x in tr.find_all(["th","td"])]
+            need=[x for x in [pi,ti,gi,ai] if x is not None]
+            if not cells or not need or max(need)>=len(cells):continue
+            player=cells[pi] if pi is not None else ""
+            team=cells[ti] if ti is not None else ""
+            goals=num(cells[gi]) if gi is not None else None
+            assists=num(cells[ai]) if ai is not None else None
+            gp=intnum(cells[appi]) if appi is not None and appi<len(cells) else None
+            if not player or goals is None or assists is None:continue
+            rows.append({"player":player,"team":team,"gp":gp,"goals":goals,"assists":assists})
+        if rows:break
+
+    if not rows:
+        # Some deployments render the leaderboard as repeated text blocks rather than a table.
+        text=clean(soup.get_text("\n",strip=True))
+        pattern=re.compile(
+            r"(?:^|\n)\s*\d+\s*\n\s*([^\n]+)\s*\n\s*([^\n]+)\s*\n\s*(?:GK|DF|MF|FW)\s*\n\s*\d+\s*\n\s*(\d+)\s*\n\s*(\d+)\s*\n\s*(\d+)",
+            re.M
+        )
+        for player,team,goals,assists,apps in pattern.findall(text):
+            rows.append({
+                "player":clean(player),"team":clean(team),"gp":intnum(apps),
+                "goals":num(goals),"assists":num(assists)
+            })
+
+    if not rows:raise ValueError("MLS Pulse leaderboard not parsed")
+
+    groups=generic_groups(rows,[
+        ("Goals","goals","G"),
+        ("Assists","assists","A")
+    ])
+    if not groups:raise ValueError("MLS Pulse groups empty")
+    return {
+        "league":"MLS","season":"2026 Regular Season",
+        "sourceName":"The MLS Pulse · ESPN-sourced player data",
+        "sourceUrl":url,"groups":groups
+    }
+
 def espn_mls_stats():
     errors=[]
     try:
         return mls_official_stats()
     except Exception as ex:
         errors.append("MLS Official "+type(ex).__name__+": "+str(ex)[:600])
+    try:
+        return mls_pulse_stats()
+    except Exception as ex:
+        errors.append("MLS Pulse "+type(ex).__name__+": "+str(ex)[:600])
     definitions=[
         ("Goals","G","offensive.totalGoals",["goals","totalGoals"],"scoring"),
         ("Assists","A","offensive.assists",["assists","totalAssists"],"scoring")
