@@ -45,5 +45,11 @@ jobs:
           git add stats-data.json
           git commit -m "Update sports statistics"
           git fetch origin main
-          git rebase origin/main
+          if ! git rebase origin/main; then
+            git rebase --abort || true
+            git reset --hard origin/main
+            python scripts/update_stats.py
+            git add stats-data.json
+            git commit -m "Update sports statistics"
+          fi
           git push
