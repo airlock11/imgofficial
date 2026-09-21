@@ -184,7 +184,14 @@ async function loadSpecialSportsData(){
   ]).then(results=>{
     const base=results[0]?.status==='fulfilled'&&results[0].value?results[0].value:{};
     const extended=results[1]?.status==='fulfilled'&&results[1].value?results[1].value:{};
-    const merged={...base,leagues:{...(base.leagues||{}),...(extended.leagues||{})}};
+    const baseLeagues=base.leagues||{};
+    const extendedLeagues=extended.leagues||{};
+    const leagueKeys=new Set([...Object.keys(baseLeagues),...Object.keys(extendedLeagues)]);
+    const mergedLeagues={};
+    for(const key of leagueKeys){
+      mergedLeagues[key]={...(baseLeagues[key]||{}),...(extendedLeagues[key]||{})};
+    }
+    const merged={...base,...extended,leagues:mergedLeagues};
     specialSportsDataCache=merged;
     specialSportsDataTime=Date.now();
     if(document.getElementById('scoreLeagueFilters'))renderScoreLeagueFilters();
