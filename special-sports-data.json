@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-21T07:39:21.930Z",
+  "updated_at": "2026-09-21T07:43:01.735Z",
   "source": "Official sports websites",
   "leagues": {
     "atp": {
@@ -168,7 +168,7 @@
       ]
     },
     "asian_games": {
-      "sourceName": "Aichi-Nagoya 2026 Official / verified results",
+      "sourceName": "20th Asian Games Aichi-Nagoya 2026 — Official",
       "sourceUrl": "https://www.aichi-nagoya2026.org/",
       "games": [
         {
@@ -242,8 +242,79 @@
           "homeScore": "—",
           "status": "Today's session",
           "state": "scheduled"
+        },
+        {
+          "eventId": "ag26-official-boxing-20260921-1",
+          "date": "2026-09-21T12:00:00+09:00",
+          "displayTime": "Sep 21 · 12:00 JST",
+          "title": "Boxing — BOX01",
+          "away": "Men’s 90kg / +90kg",
+          "home": "Preliminary",
+          "awayScore": "—",
+          "homeScore": "—",
+          "status": "Official schedule",
+          "state": "scheduled"
+        },
+        {
+          "eventId": "ag26-official-boxing-20260921-2",
+          "date": "2026-09-21T17:00:00+09:00",
+          "displayTime": "Sep 21 · 17:00 JST",
+          "title": "Boxing — BOX02",
+          "away": "Men’s 70kg",
+          "home": "Preliminary",
+          "awayScore": "—",
+          "homeScore": "—",
+          "status": "Official schedule",
+          "state": "scheduled"
+        },
+        {
+          "eventId": "ag26-official-bkb11-20260921",
+          "date": "2026-09-21T13:00:00+09:00",
+          "displayTime": "Sep 21 · 13:00–21:15 JST",
+          "title": "Basketball — BKB11",
+          "away": "Asian Games",
+          "home": "Basketball session",
+          "awayScore": "—",
+          "homeScore": "—",
+          "status": "Aichi International Arena · Official schedule",
+          "state": "scheduled"
+        },
+        {
+          "eventId": "ag26-official-vbv02-20260921",
+          "date": "2026-09-21T09:00:00+09:00",
+          "displayTime": "Sep 21 · 09:00–16:00 JST",
+          "title": "Beach Volleyball — VBV02",
+          "away": "Asian Games",
+          "home": "Beach Volleyball",
+          "awayScore": "—",
+          "homeScore": "—",
+          "status": "Hekinan Ryokuchi Beach Court · Official schedule",
+          "state": "scheduled"
+        },
+        {
+          "eventId": "ag26-official-hbl03-20260921",
+          "date": "2026-09-21T12:00:00+09:00",
+          "displayTime": "Sep 21 · 12:00–21:00 JST",
+          "title": "Handball — HBL03",
+          "away": "Asian Games",
+          "home": "Handball",
+          "awayScore": "—",
+          "homeScore": "—",
+          "status": "ENTRIO · Official schedule",
+          "state": "scheduled"
         }
-      ]
+      ],
+      "officialLinks": {
+        "schedule": "https://www.aichi-nagoya2026.org/",
+        "liveResults": "https://www.aichi-nagoya2026.org/links/",
+        "medalTable": "https://www.aichi-nagoya2026.org/links/"
+      },
+      "eventInfo": {
+        "dates": "September 19 – October 4, 2026",
+        "sports": 43,
+        "venues": 54,
+        "host": "Aichi-Nagoya, Japan"
+      }
     },
     "ncaa_ph": {
       "sourceName": "NCAA Philippines Season 102 · One Sports",
