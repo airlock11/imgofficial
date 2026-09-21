@@ -51,6 +51,13 @@ def main():
 
         links=page.locator("a").evaluate_all("""els => els.slice(0,500).map(a => ({text:(a.innerText||'').trim(),href:a.href}))""")
         print("ASIAN_GAMES_LINKS",json.dumps(links,ensure_ascii=False)[:30000])
+        for name in ("Volleyball","Baseball","Swimming"):
+            try:
+                loc=page.get_by_text(name,exact=True).last
+                html=loc.evaluate("""el => {let x=el; for(let i=0;i<4&&x;i++) x=x.parentElement; return x?x.outerHTML:''}""")
+                print("ASIAN_GAMES_DISCIPLINE_HTML",name,html[:10000])
+            except Exception as ex:
+                print("ASIAN_GAMES_DISCIPLINE_HTML_ERROR",name,repr(ex))
 
         for probe_url,label in [
             (f"{BASE}/#/schedule/live","LIVE"),
