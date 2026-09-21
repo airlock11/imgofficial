@@ -375,7 +375,28 @@ function initialScoreLeagueFromUrl(){
 }
 const scoreLeagueLogoCache=new Map();
 let currentScoreLeague=initialScoreLeagueFromUrl();
+let scoreLeagueAutoCenterPending=(()=>{
+  try{
+    const params=new URLSearchParams(location.search);
+    return params.get('from')==='sports'&&scoreLeagueOrder.includes(String(params.get('league')||'').trim());
+  }catch{return false}
+})();
 let scoreLoadToken=0;
+
+function centerSelectedScoreLeagueFromSports(){
+  if(!scoreLeagueAutoCenterPending)return;
+  const host=document.getElementById('scoreLeagueFilters');
+  if(!host)return;
+  const selected=host.querySelector('[data-score-league="'+CSS.escape(currentScoreLeague)+'"]');
+  const item=selected?.closest('.score-league-item')||selected;
+  if(!item)return;
+  scoreLeagueAutoCenterPending=false;
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    const maxLeft=Math.max(0,host.scrollWidth-host.clientWidth);
+    const target=Math.max(0,Math.min(maxLeft,item.offsetLeft-(host.clientWidth-item.offsetWidth)/2));
+    host.scrollTo({left:target,behavior:'smooth'});
+  }));
+}
 
 function scoreLeagueFallback(key){
   const label=liveNowLabels[key]?.league||key.toUpperCase();
@@ -446,6 +467,8 @@ function renderScoreLeagueFilters(){
       '<span class="score-league-name">'+esc(displayLabel)+'</span>'+
     '</div>';
   }).join('');
+
+  centerSelectedScoreLeagueFromSports();
 
   host.querySelectorAll('[data-score-league]').forEach(btn=>btn.addEventListener('click',async()=>{
     const key=btn.dataset.scoreLeague;
