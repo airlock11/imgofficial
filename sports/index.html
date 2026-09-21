@@ -234,18 +234,26 @@ async function hydrateLogo(key,url){
   }catch{}
 }
 function hydrateLogos(){Object.entries(logoFeeds).forEach(([key,url])=>void hydrateLogo(key,url))}
+const scoreSportRoutes={
+  Basketball:'basketball',
+  Football:'football',
+  Tennis:'tennis',
+  Baseball:'baseball',
+  Hockey:'hockey',
+  Cricket:'cricket',
+  Volleyball:'volleyball',
+  Motorsport:'motorsport',
+  Boxing:'boxing',
+  'Combat Sports':'combat-sports',
+  'American Football':'american-football'
+};
 document.addEventListener('click',e=>{
   const btn=e.target.closest('[data-sport-tab]');
   if(!btn)return;
   const next=btn.dataset.sportTab;
-  if(!next||next===activeSport)return;
-  activeSport=next;
-  renderSports();
-  hydrateLogos();
-  requestAnimationFrame(()=>{
-    const selected=document.querySelector('.sports-tab.is-active');
-    selected?.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
-  });
+  const sport=scoreSportRoutes[next];
+  if(!sport)return;
+  location.href='/scores/?sport='+encodeURIComponent(sport);
 });
 renderSports();
 hydrateLogos();
