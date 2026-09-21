@@ -773,6 +773,33 @@ main{min-height:calc(100svh - 68px)}
 /* NCAA / UAAP standings */
 .league-standings{overflow:hidden}.league-standings-head,.league-standings-row{display:grid;grid-template-columns:minmax(180px,1fr) 54px 54px;align-items:center;gap:8px;padding:11px 14px}.league-standings-head{font-size:11px;text-transform:uppercase;letter-spacing:.06em;opacity:.68;border-bottom:1px solid rgba(255,255,255,.1)}.league-standings-row{border-bottom:1px solid rgba(255,255,255,.07)}.league-standings-row:last-child{border-bottom:0}.league-standings-row b,.league-standings-head b{text-align:center}.league-standings-row strong{font-size:14px}@media(max-width:640px){.league-standings-head,.league-standings-row{grid-template-columns:minmax(150px,1fr) 44px 44px;padding:10px 12px}.league-standings-row strong{font-size:13px}}
 
+.league-standings-dropdown{border:1px solid rgba(255,255,255,.1);border-radius:18px;background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.015));box-shadow:0 14px 40px rgba(0,0,0,.14)}
+.standings-dropdown-toggle{width:100%;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:17px 18px;border:0;background:transparent;color:inherit;text-align:left;cursor:pointer;position:relative;isolation:isolate}
+.standings-dropdown-toggle:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(239,63,69,.1),transparent 42%);opacity:0;transition:opacity .25s ease;z-index:-1}
+.standings-dropdown-toggle:hover:before,.standings-dropdown-toggle[aria-expanded="true"]:before{opacity:1}
+.standings-dropdown-toggle:focus-visible{outline:2px solid var(--red);outline-offset:-3px;border-radius:17px}
+.standings-dropdown-copy{display:grid;gap:3px;min-width:0}
+.standings-dropdown-kicker{font-size:9px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--red)}
+.standings-dropdown-copy strong{font:800 clamp(22px,3vw,28px)/1 "Barlow Condensed",Arial,sans-serif;letter-spacing:.01em}
+.standings-dropdown-copy small{font-size:10px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:min(66vw,720px)}
+.standings-dropdown-side{display:flex;align-items:center;gap:10px;flex:0 0 auto}
+.standings-dropdown-count{font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:7px 10px;border:1px solid rgba(255,255,255,.1);border-radius:999px;background:rgba(255,255,255,.035)}
+.standings-dropdown-chevron{width:38px;height:38px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.1);border-radius:50%;background:rgba(255,255,255,.04);transition:transform .3s cubic-bezier(.2,.8,.2,1),background .2s ease,border-color .2s ease}
+.standings-dropdown-chevron svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.standings-dropdown-toggle[aria-expanded="true"] .standings-dropdown-chevron{transform:rotate(180deg);background:var(--red);border-color:var(--red);color:#fff}
+.standings-dropdown-content{display:grid;grid-template-rows:0fr;opacity:0;border-top:1px solid transparent;transition:grid-template-rows .38s cubic-bezier(.2,.8,.2,1),opacity .24s ease,border-color .24s ease}
+.standings-dropdown-inner{min-height:0;overflow:hidden}
+.league-standings-dropdown.standings-open .standings-dropdown-content{grid-template-rows:1fr;opacity:1;border-top-color:rgba(255,255,255,.08)}
+.league-standings-dropdown.standings-open{box-shadow:0 18px 48px rgba(0,0,0,.2)}
+@media(max-width:640px){
+  .standings-dropdown-toggle{padding:15px 14px;gap:12px}
+  .standings-dropdown-copy strong{font-size:24px}
+  .standings-dropdown-copy small{max-width:58vw;font-size:9px}
+  .standings-dropdown-count{display:none}
+  .standings-dropdown-chevron{width:36px;height:36px}
+}
+
+
 .asian-games-event-copy{gap:8px}.asian-games-sport-name{font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--red)}.asian-games-event-title{font-weight:800;line-height:1.25;margin-bottom:4px}.asian-games-card .team{padding:2px 0}.asian-games-card .state{align-self:center}
 
 
@@ -845,4 +872,4 @@ main{min-height:calc(100svh - 68px)}
   .stats-box-row{min-width:520px;grid-template-columns:minmax(150px,1fr) repeat(5,48px)}
 }
 
-@media(prefers-reduced-motion:reduce){.stats-dropdown-content,.stats-dropdown-chevron,.stats-dropdown-toggle:before{transition:none!important}}
+@media(prefers-reduced-motion:reduce){.stats-dropdown-content,.stats-dropdown-chevron,.stats-dropdown-toggle:before,.standings-dropdown-content,.standings-dropdown-chevron,.standings-dropdown-toggle:before{transition:none!important}}
