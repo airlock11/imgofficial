@@ -19,23 +19,40 @@ jobs:
     timeout-minutes: 8
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Discover current YouTube live streams
+      - name: Refresh and publish YouTube live data
         env:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
-        run: python scripts/update_youtube_live.py
-      - name: Commit live stream data
+        shell: bash
         run: |
-          if [ -f youtube-live.json ] && git diff --quiet -- youtube-live.json && git ls-files --error-unmatch youtube-live.json >/dev/null 2>&1; then
-            echo "No stream changes."
-            exit 0
-          fi
+          set -euo pipefail
           git config user.name "IMG Live Stream Bot"
           git config user.email "actions@users.noreply.github.com"
-          git add youtube-live.json
-          git commit -m "Update verified YouTube live streams"
-          git fetch origin main
-          git rebase origin/main
-          git push
+
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git reset --hard origin/main
+
+            python scripts/update_youtube_live.py
+
+            if git diff --quiet -- youtube-live.json; then
+              echo "No stream changes."
+              exit 0
+            fi
+
+            git add youtube-live.json
+            git commit -m "Update verified YouTube live streams"
+
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+
+            echo "Push raced with another main update; regenerating from latest main (attempt $attempt)."
+          done
+
+          echo "Unable to publish YouTube live data after retries."
+          exit 1
