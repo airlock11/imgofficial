@@ -91,6 +91,16 @@ const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 const leagues={Basketball:[['NBA','United States / Canada'],['WNBA','United States / Canada'],['PBA','Philippines'],['MPBL','Philippines'],['NBL-Pilipinas','Philippines'],['NBL Australia','Australia / New Zealand'],['VBA','Vietnam'],['B.League','Japan'],['EuroLeague','Europe'],['WBSL','International']],Football:[['Premier League','England'],['La Liga','Spain'],['Serie A','Italy'],['Bundesliga','Germany'],['UEFA Champions League','Europe'],['Philippine Football League','Philippines']],Tennis:[['ATP Tour','International'],['WTA Tour','International'],['Australian Open','Australia'],['Wimbledon','United Kingdom'],['US Open','United States']],Baseball:[['MLB','USA / Canada'],['NPB','Japan'],['KBO League','South Korea']],Hockey:[['NHL','USA / Canada'],['KHL','Eurasia'],['IIHF World Championship','International']],Cricket:[['IPL','India'],['Big Bash League','Australia'],['ICC Cricket World Cup','International']],Volleyball:[['Volleyball Nations League','International'],['PVL','Philippines'],['V.League','Japan']],Motorsport:[['Formula 1','International'],['MotoGP','International'],['Formula E','International']],Boxing:[['WBC','International'],['WBA','International'],['IBF','International'],['WBO','International'],['Professional Boxing','Worldwide']],'Combat Sports':[['UFC','International'],['ONE Championship','Asia']],'American Football':[['NFL','United States'],['NCAA Football','United States']]};
 function openSport(name){if(name==='Boxing'){location.href='/boxing/';return}const modal=document.getElementById('sportModal');if(!modal)return;modal.querySelector('h2').textContent=name;modal.querySelector('.modalbody').innerHTML=(leagues[name]||[]).map(x=>'<div class="league-row"><strong>'+esc(x[0])+'</strong><small>'+esc(x[1])+'</small></div>').join('');modal.showModal()}
 document.addEventListener('click',e=>{
+  const statsToggle=e.target.closest('[data-stats-toggle]');
+  if(statsToggle){
+    const section=statsToggle.closest('.sports-statistics');
+    if(section){
+      const expanded=statsToggle.getAttribute('aria-expanded')==='true';
+      statsToggle.setAttribute('aria-expanded',expanded?'false':'true');
+      section.classList.toggle('stats-open',!expanded);
+    }
+    return;
+  }
   const newsVideo=e.target.closest('[data-play-news-video]');
   if(newsVideo){
     const id=newsVideo.dataset.playNewsVideo;
@@ -454,10 +464,19 @@ function leagueStatsMarkup(key){
 
   const league=data.league||liveNowLabels[key]?.league||key.toUpperCase();
   const source=data.sourceName?(' · '+data.sourceName):'';
+  const statsPanelId='stats-panel-'+String(key).replace(/[^a-z0-9_-]/gi,'-');
+  const groupCount=groups.length;
   return '<section class="league-games-group sports-statistics" aria-label="'+esc(league)+' statistics">'+
-    '<div class="league-games-group-head"><h3>Statistics</h3><span>'+esc(data.season||league)+esc(source)+'</span></div>'+
-    '<div class="stats-leader-grid">'+leaderHtml+'</div>'+
-    (compare?'<div class="stats-subhead"><h4>Latest Box Score</h4><span>'+esc(g.venue||'')+'</span></div>'+compare+box:'')+
+    '<button type="button" class="stats-dropdown-toggle" data-stats-toggle aria-expanded="false" aria-controls="'+esc(statsPanelId)+'">'+
+      '<span class="stats-dropdown-copy"><span class="stats-dropdown-kicker">Player leaders</span><strong>Statistics</strong><small>'+esc(data.season||league)+esc(source)+'</small></span>'+
+      '<span class="stats-dropdown-side"><span class="stats-dropdown-count">'+esc(groupCount)+' '+(groupCount===1?'category':'categories')+'</span><span class="stats-dropdown-chevron" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span></span>'+
+    '</button>'+
+    '<div id="'+esc(statsPanelId)+'" class="stats-dropdown-content">'+
+      '<div class="stats-dropdown-inner">'+
+        '<div class="stats-leader-grid">'+leaderHtml+'</div>'+
+        (compare?'<div class="stats-subhead"><h4>Latest Box Score</h4><span>'+esc(g.venue||'')+'</span></div>'+compare+box:'')+
+      '</div>'+
+    '</div>'+
   '</section>';
 }
 const regionalWebSnapshots={
