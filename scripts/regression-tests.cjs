@@ -61,3 +61,14 @@ assert.equal((app.match(/\(g\.streams\?\.length\?/g)||[]).length,0,'All live but
 assert.match(app,/sportLabel:x\.sport\|\|'Sport'/,'Standalone broadcasts must show their sport');
 assert.match(app,/leagueLabel:label/,'Standalone broadcasts must show their league');
 console.log('PASS: mobile preferences, live stream eligibility, labels, stream lookup, and simplified live dialog');
+
+// Scores page renderer must define its section accumulator before using it.
+{
+  const start=app.indexOf('function renderGames(){');
+  const end=app.indexOf('async function nblYoutubeScheduledGames()',start);
+  const block=app.slice(start,end);
+  assert.ok(start>=0&&end>start,'renderGames must exist');
+  assert.ok(block.includes('const sections=[]'),'renderGames must declare its sections accumulator');
+  assert.ok(block.indexOf('const sections=[]')<block.indexOf('sections.push'),'renderGames must build sections after card renderer');
+  assert.ok(block.includes('host.innerHTML=sections.length'),'renderGames must render schedule/score sections');
+}
