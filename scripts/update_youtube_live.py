@@ -8,6 +8,7 @@ KEY=os.environ["YOUTUBE_API_KEY"]
 OUT=Path(__file__).resolve().parents[1]/"youtube-live.json"
 UA="IMG-Sports-Live/1.0"
 ONE_SPORTS_CHANNEL_ID="UCXDG9ue-emCN8Ad3h7lERqQ"
+PINNED_ASIAN_GAMES_VIDEO_IDS=["5mZlZtTk83E"]
 SCOREBOARDS={
  "Basketball":"https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard",
  "Football":"https://site.api.espn.com/apis/site/v2/sports/soccer/all/scoreboard",
@@ -51,6 +52,13 @@ def channel_feed_ids(channel_id):
  ns={"yt":"http://www.youtube.com/xml/schemas/2015","atom":"http://www.w3.org/2005/Atom"}
  return [e.text for e in root.findall(".//yt:videoId",ns) if e.text]
 
+def channel_stream_page_ids(channel_id):
+ url="https://www.youtube.com/channel/"+urllib.parse.quote(channel_id)+"/streams"
+ req=urllib.request.Request(url,headers={"User-Agent":"Mozilla/5.0"})
+ with urllib.request.urlopen(req,timeout=20) as r:
+  html=r.read().decode("utf-8","ignore")
+ return list(dict.fromkeys(re.findall(r'"videoId":"([A-Za-z0-9_-]{11})"',html)))
+
 def search(event):
  wanted=tokens(" ".join(event["teams"]))
  best=None
@@ -71,6 +79,11 @@ def asian_games_live():
   ids += channel_feed_ids(ONE_SPORTS_CHANNEL_ID)
  except Exception as ex:
   print("One Sports feed",ex)
+ try:
+  ids += channel_stream_page_ids(ONE_SPORTS_CHANNEL_ID)
+ except Exception as ex:
+  print("One Sports streams page",ex)
+ ids += PINNED_ASIAN_GAMES_VIDEO_IDS
  ids=list(dict.fromkeys(x for x in ids if x))
  details=video_details(ids[:50])
  out=[]
