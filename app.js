@@ -1040,6 +1040,9 @@ function renderAllLiveGames(items,{preserveItems=false}={}){
   const visible=liveSportFilter==='all'?live:live.filter(g=>(g.sportLabel||'Sport')===liveSportFilter);
   if(status)status.innerHTML='<span class="live-count-dot" aria-hidden="true"></span><span>'+visible.length+' live</span>';
 
+  const asianGamesStream={provider:'YouTube',channel:'One Sports',title:'Asian Games — One Sports Live',embedUrl:'https://www.youtube.com/embed/live_stream?channel=UCXDG9ue-emCN8Ad3h7lERqQ&autoplay=1&playsinline=1&rel=0',watchUrl:'https://www.youtube.com/@OneSportsPHL/streams'};
+  visible.forEach(g=>{if(g.sportKey==='asian_games'&&(!Array.isArray(g.streams)||!g.streams.length)){g.streams=[asianGamesStream];g.streamsChecked=true;}});
+
   host.innerHTML=visible.map(g=>{
     if(g.isRacing){
       const place=[g.raceCircuit,g.raceCity].filter(Boolean).join(' · ');
