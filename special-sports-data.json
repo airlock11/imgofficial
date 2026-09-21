@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-21T07:58:38.593Z",
+  "updated_at": "2026-09-21T10:54:06.451Z",
   "source": "Official sports websites",
   "leagues": {
     "atp": {
@@ -667,6 +667,191 @@
             "losses": 2
           }
         ]
+      }
+    },
+    "uaap": {
+      "sourceName": "UAAP Season 89",
+      "sourceUrl": "https://www.onesports.ph/",
+      "games": [
+        {
+          "eventId": "uaap89-feu-adamson-20260913",
+          "date": "2026-09-13T12:00:00+08:00",
+          "displayTime": "Sep 13 · Final",
+          "away": "FEU Tamaraws",
+          "home": "Adamson Soaring Falcons",
+          "awayScore": "53",
+          "homeScore": "56",
+          "status": "Final",
+          "state": "final"
+        },
+        {
+          "eventId": "uaap89-dlsu-nu-20260913",
+          "date": "2026-09-13T14:30:00+08:00",
+          "displayTime": "Sep 13 · Final",
+          "away": "De La Salle Green Archers",
+          "home": "NU Bulldogs",
+          "awayScore": "89",
+          "homeScore": "87",
+          "status": "Final",
+          "state": "final"
+        },
+        {
+          "eventId": "uaap89-up-ust-20260913",
+          "date": "2026-09-13T18:00:00+08:00",
+          "displayTime": "Sep 13 · Final",
+          "away": "UP Fighting Maroons",
+          "home": "UST Growling Tigers",
+          "awayScore": "92",
+          "homeScore": "85",
+          "status": "Final",
+          "state": "final"
+        },
+        {
+          "eventId": "uaap89-ateneo-ue-20260916",
+          "date": "2026-09-16T15:00:00+08:00",
+          "displayTime": "Sep 16 · Final",
+          "away": "Ateneo Blue Eagles",
+          "home": "UE Red Warriors",
+          "awayScore": "101",
+          "homeScore": "74",
+          "status": "Final",
+          "state": "final"
+        },
+        {
+          "eventId": "uaap89-dlsu-ust-20260916",
+          "date": "2026-09-16T17:30:00+08:00",
+          "displayTime": "Sep 16 · Final",
+          "away": "De La Salle Green Archers",
+          "home": "UST Growling Tigers",
+          "awayScore": "75",
+          "homeScore": "80",
+          "status": "Final",
+          "state": "final"
+        },
+        {
+          "eventId": "uaap89-nu-ue-20260919",
+          "date": "2026-09-19T15:00:00+08:00",
+          "displayTime": "Sep 19 · Final",
+          "away": "NU Bulldogs",
+          "home": "UE Red Warriors",
+          "awayScore": "76",
+          "homeScore": "56",
+          "status": "Final",
+          "state": "final"
+        },
+        {
+          "eventId": "uaap89-ateneo-up-20260919",
+          "date": "2026-09-19T17:30:00+08:00",
+          "displayTime": "Sep 19 · Final",
+          "away": "Ateneo Blue Eagles",
+          "home": "UP Fighting Maroons",
+          "awayScore": "75",
+          "homeScore": "94",
+          "status": "Final",
+          "state": "final"
+        },
+        {
+          "eventId": "uaap89-ateneo-adamson-20260926",
+          "date": "2026-09-26T12:00:00+08:00",
+          "displayTime": "Sep 26 · 12:00 PM",
+          "away": "Ateneo Blue Eagles",
+          "home": "Adamson Soaring Falcons",
+          "awayScore": "—",
+          "homeScore": "—",
+          "status": "Scheduled · SM Mall of Asia Arena",
+          "state": "scheduled"
+        },
+        {
+          "eventId": "uaap89-ue-feu-20260926",
+          "date": "2026-09-26T14:30:00+08:00",
+          "displayTime": "Sep 26 · 2:30 PM",
+          "away": "UE Red Warriors",
+          "home": "FEU Tamaraws",
+          "awayScore": "—",
+          "homeScore": "—",
+          "status": "Scheduled · SM Mall of Asia Arena",
+          "state": "scheduled"
+        },
+        {
+          "eventId": "uaap89-nu-up-20260926",
+          "date": "2026-09-26T18:00:00+08:00",
+          "displayTime": "Sep 26 · 6:00 PM",
+          "away": "NU Bulldogs",
+          "home": "UP Fighting Maroons",
+          "awayScore": "—",
+          "homeScore": "—",
+          "status": "Scheduled · SM Mall of Asia Arena",
+          "state": "scheduled"
+        },
+        {
+          "eventId": "uaap89-adamson-ust-20260930",
+          "date": "2026-09-30T15:00:00+08:00",
+          "displayTime": "Sep 30 · 3:00 PM",
+          "away": "Adamson Soaring Falcons",
+          "home": "UST Growling Tigers",
+          "awayScore": "—",
+          "homeScore": "—",
+          "status": "Scheduled · SM Mall of Asia Arena",
+          "state": "scheduled"
+        },
+        {
+          "eventId": "uaap89-feu-dlsu-20260930",
+          "date": "2026-09-30T17:30:00+08:00",
+          "displayTime": "Sep 30 · 5:30 PM",
+          "away": "FEU Tamaraws",
+          "home": "De La Salle Green Archers",
+          "awayScore": "—",
+          "homeScore": "—",
+          "status": "Scheduled · SM Mall of Asia Arena",
+          "state": "scheduled"
+        }
+      ],
+      "standings": [
+        {
+          "team": "UP",
+          "wins": 2,
+          "losses": 0
+        },
+        {
+          "team": "Adamson",
+          "wins": 1,
+          "losses": 0
+        },
+        {
+          "team": "NU",
+          "wins": 1,
+          "losses": 1
+        },
+        {
+          "team": "Ateneo",
+          "wins": 1,
+          "losses": 1
+        },
+        {
+          "team": "UST",
+          "wins": 1,
+          "losses": 1
+        },
+        {
+          "team": "De La Salle",
+          "wins": 1,
+          "losses": 1
+        },
+        {
+          "team": "FEU",
+          "wins": 0,
+          "losses": 1
+        },
+        {
+          "team": "UE",
+          "wins": 0,
+          "losses": 2
+        }
+      ],
+      "liveCoverage": {
+        "provider": "One Sports",
+        "channelUrl": "https://www.youtube.com/@OneSportsPHL/streams",
+        "note": "Verified current One Sports YouTube broadcasts are attached automatically."
       }
     }
   }
