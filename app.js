@@ -848,7 +848,8 @@ function normalizeScorePayload(sport,payload){
       eventOnly:Boolean(g.eventOnly),
       sourceName:g.sourceName||payload.sourceName||'',
       sourceUrl:g.sourceUrl||payload.sourceUrl||'',
-      odds:null,oddsList:[],highlights:[],highlightsChecked:true,streams:[],streamsChecked:true
+      odds:null,oddsList:[],highlights:Array.isArray(g.highlights)?g.highlights:[],highlightsChecked:true,
+      streams:Array.isArray(g.streams)?g.streams.filter(s=>s&&(s.watchUrl||s.embedUrl)):[],streamsChecked:Boolean(g.streamsChecked||Array.isArray(g.streams))
     }));
   }
   if(sport==='boxing'){
