@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import html
+import hashlib
 import json
 import re
 import urllib.parse
@@ -61,13 +62,13 @@ def extract_urls(page,base):
     page=normalise_embedded(page)
     found=[]
     patterns=[
-        r'https?://www\.sonyliv\.com/live-sport/20th-asian-games-aichi-nagoya-2026-1790007854/[^"'<>\\\s]+',
-        r'(?:"|\')(/live-sport/20th-asian-games-aichi-nagoya-2026-1790007854/[^"\'<>\\\s]+)',
+        r"https?://www\.sonyliv\.com/live-sport/20th-asian-games-aichi-nagoya-2026-1790007854/[^\"'<>\\\s]+",
+        r"(?:\"|')(/live-sport/20th-asian-games-aichi-nagoya-2026-1790007854/[^\"'<>\\\s]+)",
     ]
     for pat in patterns:
         for m in re.finditer(pat,page,re.I):
             raw=m.group(1) if m.lastindex else m.group(0)
-            raw=raw.rstrip('\\,]}')
+            raw=raw.rstrip("\\,]}")
             url=urllib.parse.urljoin(base,raw)
             p=urllib.parse.urlsplit(url)
             if p.hostname and p.hostname.lower()==SONY_HOST and p.path.startswith(SERIES_PATH):
@@ -77,8 +78,8 @@ def extract_urls(page,base):
 
 def meta_value(page,prop):
     tests=[
-        rf'<meta[^>]+(?:property|name)=["\']{re.escape(prop)}["\'][^>]+content=["\']([^"\']+)["\']',
-        rf'<meta[^>]+content=["\']([^"\']+)["\'][^>]+(?:property|name)=["\']{re.escape(prop)}["\']',
+        rf'''<meta[^>]+(?:property|name)=["']{re.escape(prop)}["'][^>]+content=["']([^"']+)["']''',
+        rf'''<meta[^>]+content=["']([^"']+)["'][^>]+(?:property|name)=["']{re.escape(prop)}["']''',
     ]
     for pat in tests:
         m=re.search(pat,page,re.I|re.S)
@@ -187,7 +188,7 @@ def main():
             sport=sport_from_title(event)
             teams=teams_from_title(event)
             streams.append({
-                "eventId":"ag26-sonyliv-"+str(abs(hash(urllib.parse.urlsplit(url).path))),
+                "eventId":"ag26-sonyliv-"+hashlib.sha1(urllib.parse.urlsplit(url).path.encode("utf-8")).hexdigest()[:12],
                 "sport":sport,
                 "leagueKey":"asian_games",
                 "league":"Asian Games",
