@@ -30,8 +30,8 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Install feed parser
-        run: python -m pip install --disable-pip-version-check feedparser beautifulsoup4
+      - name: Install news dependencies
+        run: python -m pip install --disable-pip-version-check feedparser beautifulsoup4 yt-dlp
 
       - name: Refresh sports news
         run: python scripts/update_news.py
