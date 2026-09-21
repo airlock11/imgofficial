@@ -90,6 +90,8 @@ def asian_games_live():
  for vid,d in details.items():
   dsn=d.get("snippet",{}); status=d.get("status",{}); live=d.get("liveStreamingDetails",{})
   title=dsn.get("title",""); channel=(dsn.get("channelTitle") or "").strip()
+  if vid in PINNED_ASIAN_GAMES_VIDEO_IDS:
+   print("Pinned stream diagnostic",vid,repr(title),repr(channel),"broadcast=",dsn.get("liveBroadcastContent"),"start=",live.get("actualStartTime"),"end=",live.get("actualEndTime"),"embeddable=",status.get("embeddable"))
   if "2026 ASIAN GAMES" not in title.upper():continue
   if "one sports" not in channel.lower():continue
   is_live=dsn.get("liveBroadcastContent")=="live" or (live.get("actualStartTime") and not live.get("actualEndTime"))
