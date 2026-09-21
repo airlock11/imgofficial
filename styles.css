@@ -713,11 +713,12 @@ main{min-height:calc(100svh - 68px)}
   .odds-sport-filter>span:last-child{display:none}
   .odds-sport-icon{font-size:30px!important}
   .odds-league-row{align-items:flex-start}
-  .odds-league-filters{gap:8px}
-  .odds-league-filter{grid-template-columns:52px;justify-items:center;min-width:64px;min-height:64px;padding:6px}
+  .odds-league-row.is-open{max-height:118px}
+  .odds-league-filters{gap:8px;padding-bottom:26px}
+  .odds-league-filter{position:relative;grid-template-columns:52px;justify-items:center;min-width:64px;min-height:64px;padding:6px;overflow:visible}
   .odds-league-logo-wrap{width:52px;height:52px;padding:3px}
   .odds-league-logo-img{max-width:46px;max-height:46px}
-  .odds-league-filter-name{display:none}
+  .odds-league-filter-name{display:block;position:absolute;top:calc(100% + 5px);left:50%;transform:translateX(-50%);width:max-content;max-width:96px;text-align:center;white-space:normal;font-size:.56rem;line-height:1.08;font-weight:800;color:inherit}
   .odds-league-row .status{padding-top:20px}
   #oddsFeed{gap:10px}
   .odds-match-card{border-radius:0;border-left:0;border-right:0}
