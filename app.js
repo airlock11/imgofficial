@@ -1260,6 +1260,29 @@ function renderLiveSportSorter(items){
   }));
 }
 
+function liveNowItemIsCurrent(g){
+  if(!g||g.state!=='live')return false;
+  if((g.sportKey==='atp'||g.sportKey==='wta')&&g.eventOnly)return false;
+
+  const now=Date.now();
+  const start=Date.parse(g.date||'');
+  const maxHours={
+    asian_games:4,
+    soccer:4,laliga:4,seriea:4,bundesliga:4,champions:4,
+    basketball:5,wnba:5,pba:5,ncaa_ph:5,uaap:5,mpbl:5,nbl:5,nblaus:5,vba:5,
+    atp:7,wta:7,ipl:7,volleyball_w:5,volleyball_m:5,
+    baseball:8,hockey:5,football:7,ncaaf:7,f1:5,ufc:10,boxing:10
+  };
+  const limit=maxHours[g.sportKey];
+  if(Number.isFinite(start)&&limit&&now-start>limit*60*60*1000)return false;
+
+  if(g.sportKey==='asian_games'){
+    const updated=Date.parse(specialSportsDataCache?.updatedAt||specialSportsDataCache?.updated_at||'');
+    if(!Number.isFinite(updated)||now-updated>30*60*1000)return false;
+  }
+  return true;
+}
+
 function renderAllLiveGames(items,{preserveItems=false}={}){
   const section=document.getElementById('allLiveSection');
   const host=document.getElementById('allLiveGames');
@@ -1267,6 +1290,7 @@ function renderAllLiveGames(items,{preserveItems=false}={}){
   if(!host||!section)return;
 
   if(!preserveItems)liveNowItems=[...items];
+  liveNowItems=liveNowItems.filter(liveNowItemIsCurrent);
 
   const live=[...liveNowItems].sort((a,b)=>{
     const as=a.sportLabel||'Sport',bs=b.sportLabel||'Sport';
@@ -1421,25 +1445,9 @@ async function loadAllLiveGames({silent=false}={}){
       }
     }
   }catch{}
-  // Live Now must contain only currently verified games/matches.
-  // Tournament-level "in progress" records are not live matches, and local Asian
-  // Games live flags are discarded when their source file is no longer fresh.
-  const nowMs=Date.now();
-  const specialUpdatedMs=Date.parse(specialSportsDataCache?.updatedAt||specialSportsDataCache?.updated_at||'');
-  const specialLiveFresh=Number.isFinite(specialUpdatedMs)&&nowMs-specialUpdatedMs<=30*60*1000;
+  // Validate every candidate again immediately before rendering.
   for(let i=live.length-1;i>=0;i--){
-    const g=live[i], start=Date.parse(g.date||'');
-    if((g.sportKey==='atp'||g.sportKey==='wta')&&g.eventOnly){
-      live.splice(i,1);
-      continue;
-    }
-    if(g.sportKey==='asian_games'&&!specialLiveFresh){
-      live.splice(i,1);
-      continue;
-    }
-    if(g.sportKey==='asian_games'&&Number.isFinite(start)&&nowMs-start>4*60*60*1000){
-      live.splice(i,1);
-    }
+    if(!liveNowItemIsCurrent(live[i]))live.splice(i,1);
   }
   const deduped=[];
   const seenLive=new Set();
