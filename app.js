@@ -1185,7 +1185,7 @@ async function loadGames({silent=false,league=currentScoreLeague}={}){
   const sport=league||currentScoreLeague||'soccer';
   const isCurrent=()=>requestToken===scoreLoadToken&&currentScoreLeague===sport;
   const isWebLeague=['pba','mpbl','nbl','nblaus','vba'].includes(sport);
-  if(!silent)st.textContent='Updating';
+  if(!silent)st.textContent='';
 
   if(isWebLeague){
     await loadRegionalAutoData();
