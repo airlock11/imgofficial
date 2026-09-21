@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-21T05:25:42+00:00",
+  "updated_at": "2026-09-21T05:27:30+00:00",
   "refresh_minutes": 20,
   "counts": {
     "total": 30,
@@ -7,18 +7,28 @@
     "international": 22
   },
   "errors": {
-    "video:BBC Sport": "No videos returned",
-    "video:ESPN": "No videos returned",
-    "video:NBA": "No videos returned",
-    "video:NFL": "No videos returned",
-    "video:Formula 1": "No videos returned",
-    "video:UFC": "No videos returned",
-    "video:Volleyball World": "No videos returned",
-    "video:NBL-Pilipinas": "No videos returned",
+    "video:BBC Sport": "No videos returned from RSS or channel page",
+    "video:ESPN": "No videos returned from RSS or channel page",
+    "video:NBA": "No videos returned from RSS or channel page",
+    "video:NFL": "No videos returned from RSS or channel page",
+    "video:Formula 1": "No videos returned from RSS or channel page",
+    "video:UFC": "No videos returned from RSS or channel page",
+    "video:Volleyball World": "No videos returned from RSS or channel page",
+    "video:NBL-Pilipinas": "No videos returned from RSS or channel page",
     "ESPN": "No articles returned"
   },
   "videos": [],
   "items": [
+    {
+      "title": "Asian Games: PH’s Jean Claude Saclag books shot at MMA gold",
+      "link": "https://sports.inquirer.net/696502/asian-games-phs-jean-claude-saclag-books-shot-at-mma-gold",
+      "description": "READ: Follow Inquirer Sports’ special coverage of the Aichi-Nagoya Asian Games 2026 MANILA, Philippines — Jean Claude Saclag earned a shot at an Asian Games gold medal after advancing to the mixed martial arts men’s traditional -65kg final in Aichi-Nagoya 2026",
+      "source": "Inquirer Sports",
+      "sport": "Sports",
+      "region": "Philippines",
+      "image": "https://sports.inquirer.net/files/2026/09/279874694_514756617013128_9055453629927799086_n.jpg",
+      "published": "2026-09-21T13:26:48+00:00"
+    },
     {
       "title": "Rosberg: Antonelli vs his mind will decide F1 title race",
       "link": "https://www.skysports.com/f1/news/12040/13589366/kimi-antonelli-versus-his-mind-will-decide-2026-formula-1-title-race-says-nico-rosberg-ahead-of-azerbaijan-grand-prix",
@@ -108,16 +118,6 @@
       "region": "Philippines",
       "image": "",
       "published": "2026-09-21T04:05:16+00:00"
-    },
-    {
-      "title": "Franklin Sports brings top pickleball player Anna Leigh Waters to Manila",
-      "link": "https://tiebreakertimes.com.ph/tbt/franklin-sports-brings-top-pickleball-player-anna-leigh-waters-to-manila/384330",
-      "description": "Global pickleball giant Franklin Sports has officially named the Philippines as the first stop of its highly anticipated Franklin Asia Pickleball Showcase this October 2026. The multi-nation showcase will kick off in Manila before continuing to Malaysia, Hong ",
-      "source": "Tiebreaker Times",
-      "sport": "Sports",
-      "region": "Philippines",
-      "image": "https://cdn.tiebreakertimes.com.ph/wp-content/uploads/2026/09/FILE-PHOTO-Anna-Leigh-Waters-2.jpg",
-      "published": "2026-09-21T04:04:18+00:00"
     },
     {
       "title": "NRL open investigation into fans after top referee pelted with rubbish at Eden Park",
