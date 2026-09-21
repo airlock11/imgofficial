@@ -1,0 +1,61 @@
+name: Update external live streams
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/update_external_live.py"
+      - ".github/workflows/update-external-live.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: external-live-update
+  cancel-in-progress: true
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Refresh verified external live streams
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "IMG External Live Bot"
+          git config user.email "actions@users.noreply.github.com"
+
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git reset --hard origin/main
+
+            python scripts/update_external_live.py
+
+            if git diff --quiet -- external-live.json; then
+              echo "No external live stream changes."
+              exit 0
+            fi
+
+            git add external-live.json
+            git commit -m "Update verified external live streams"
+
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+
+            echo "Push raced with another main update; regenerating from latest main (attempt $attempt)."
+          done
+
+          echo "Unable to publish external live stream data after retries."
+          exit 1
