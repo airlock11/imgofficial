@@ -1,4 +1,6 @@
-const root=document.documentElement,savedTheme=localStorage.getItem('img-theme')||'dark';
+function readPreference(key){try{return localStorage.getItem(key)}catch{return null}}
+function writePreference(key,value){try{localStorage.setItem(key,value)}catch{}}
+const root=document.documentElement,savedTheme=readPreference('img-theme')||'dark';
 root.dataset.theme=savedTheme;
 const theme=document.createElement('button');
 theme.className='themebtn';
@@ -27,7 +29,8 @@ function resetDesktopThemePosition(){
 }
 function restoreMobileThemePosition(){
   if(!isMobileTheme())return;
-  const savedPosition=JSON.parse(localStorage.getItem('img-theme-position')||'null');
+  let savedPosition;
+  try{savedPosition=JSON.parse(readPreference('img-theme-position')||'null')}catch{return}
   if(savedPosition){
     const x=Math.max(8,Math.min(innerWidth-theme.offsetWidth-8,Number(savedPosition.x)||8));
     const y=Math.max(8,Math.min(innerHeight-theme.offsetHeight-8,Number(savedPosition.y)||8));
@@ -59,17 +62,17 @@ theme.addEventListener('pointerup',()=>{
   drag=false;
   if(moved){
     const r=theme.getBoundingClientRect();
-    localStorage.setItem('img-theme-position',JSON.stringify({x:Math.round(r.left),y:Math.round(r.top)}));
+    writePreference('img-theme-position',JSON.stringify({x:Math.round(r.left),y:Math.round(r.top)}));
   }else{
     root.dataset.theme=root.dataset.theme==='dark'?'light':'dark';
-    localStorage.setItem('img-theme',root.dataset.theme);
+    writePreference('img-theme',root.dataset.theme);
     paint();
   }
 });
 theme.addEventListener('click',()=>{
   if(isMobileTheme())return;
   root.dataset.theme=root.dataset.theme==='dark'?'light':'dark';
-  localStorage.setItem('img-theme',root.dataset.theme);
+  writePreference('img-theme',root.dataset.theme);
   paint();
 });
 addEventListener('resize',()=>{
@@ -687,21 +690,37 @@ function openHighlights(eventId){const g=allGames.find(x=>String(x.eventId)===St
 async function hydrateHighlights(sport){const snapshot=allGames,candidates=snapshot.filter(g=>g.eventId&&g.state!=='scheduled').slice(0,20);if(!candidates.length)return;await Promise.allSettled(candidates.map(async g=>{const url=summaryUrlForGame(sport,g.eventId);if(!url)return;try{const r=await fetch(url,{cache:'no-store'});if(!r.ok)return;const j=await r.json(),raw=[...(Array.isArray(j.videos)?j.videos:[]),...(Array.isArray(j.highlights)?j.highlights:[])];g.highlights=uniqueHighlights(raw.map(normalizeHighlightVideo));g.highlightsChecked=true}catch{g.highlights=[];g.highlightsChecked=true}}));if(allGames===snapshot&&currentScoreLeague===sport)renderGames()}
 
 function ensureLiveDialog(){let d=document.getElementById('liveDialog');if(d)return d;d=document.createElement('dialog');d.id='liveDialog';d.className='live-dialog';d.innerHTML='<div class="live-shell"><button class="live-close" type="button" aria-label="Close live stream"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button><div id="liveContent"></div></div>';document.body.append(d);d.addEventListener('click',e=>{if(e.target===d)d.close()});d.querySelector('.live-close').addEventListener('click',()=>d.close());d.addEventListener('close',()=>{const frame=d.querySelector('iframe');if(frame)frame.src='about:blank'});return d}
+function liveStreamsForGame(game){
+  if(game?.state!=='live')return [];
+  return (Array.isArray(game.streams)?game.streams:[]).filter(stream=>{
+    try{
+      const url=new URL(stream?.watchUrl||stream?.embedUrl||'');
+      if(!['https:','http:'].includes(url.protocol))return false;
+      const host=url.hostname.toLowerCase();
+      if(host==='youtu.be')return /^\/[A-Za-z0-9_-]{11}\/?$/.test(url.pathname);
+      if(host==='youtube.com'||host.endsWith('.youtube.com')||host==='youtube-nocookie.com'||host.endsWith('.youtube-nocookie.com')){
+        return (url.pathname==='/watch'&&/^[A-Za-z0-9_-]{11}$/.test(url.searchParams.get('v')||''))||/^\/(live|embed)\/[A-Za-z0-9_-]{11}\/?$/.test(url.pathname);
+      }
+      return true;
+    }catch{return false}
+  });
+}
 function openLiveStream(eventId){
-  const g=allGames.find(x=>String(x.eventId)===String(eventId))||liveNowItems.find(x=>String(x.eventId)===String(eventId));
-  if(!g||!g.streams?.length)return;
-  const stream=g.streams.find(s=>s?.watchUrl)||g.streams[0];
+  const g=[...allGames,...liveNowItems].find(x=>String(x.eventId)===String(eventId)&&liveStreamsForGame(x).length);
+  if(!g)return;
+  const stream=liveStreamsForGame(g)[0];
   const raw=stream?.watchUrl||stream?.embedUrl;
   if(!raw)return;
   let videoId='';
   try{
     const u=new URL(raw,location.href);
     if(u.hostname==='youtu.be')videoId=u.pathname.split('/').filter(Boolean)[0]||'';
-    else if(u.hostname.includes('youtube.com'))videoId=u.searchParams.get('v')||((u.pathname.match(/\/(?:live|embed)\/([^/?]+)/)||[])[1]||'');
+    else if(u.hostname==='youtube.com'||u.hostname.endsWith('.youtube.com')||u.hostname==='youtube-nocookie.com'||u.hostname.endsWith('.youtube-nocookie.com'))videoId=u.searchParams.get('v')||((u.pathname.match(/\/(?:live|embed)\/([^/?]+)/)||[])[1]||'');
   }catch{}
   if(!videoId){ window.open(raw,'_blank','noopener,noreferrer'); return; }
   const d=ensureLiveDialog(),host=d.querySelector('#liveContent');
   host.innerHTML='<div class="live-dialog-head"><div><span class="live-badge">LIVE</span><h2>'+esc(g.title||g.leagueLabel||'Live stream')+'</h2><p>'+esc(stream.channel||stream.provider||'YouTube')+'</p></div><button type="button" class="live-dialog-close" data-close-live aria-label="Close">×</button></div><div class="live-player-wrap"><iframe class="live-player" src="https://www.youtube.com/embed/'+esc(videoId)+'?autoplay=1&playsinline=1&rel=0" title="'+esc(g.title||'Live stream')+'" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div><a class="live-external-link" href="'+esc(raw)+'" target="_blank" rel="noopener noreferrer">Watch on YouTube</a>';
+  host.querySelector('[data-close-live]').addEventListener('click',()=>d.close());
   d.showModal();
 }
 
@@ -1085,7 +1104,7 @@ function renderAllLiveGames(items,{preserveItems=false}={}){
         '<div class="live-card-team"><span>'+teamLogoMarkup(g.homeLogo,g.home,'live-card-logo')+esc(g.home)+'</span><b data-score-side="home">'+esc(g.homeScore)+'</b></div>'+
       '</div>'+
       '<div class="live-card-status">'+esc(g.status||'Live')+'</div>'+
-      (g.streams?.length?'<button type="button" class="live-watch-btn" data-live-event="'+esc(g.eventId)+'" aria-label="Watch '+esc(g.leagueLabel||g.sportLabel||'live event')+' now"><span class="live-watch-pulse" aria-hidden="true"></span><span class="live-watch-copy"><strong>WATCH NOW</strong><small>'+esc(g.streams[0]?.channel||g.streams[0]?.provider||'Live stream')+'</small></span><span class="live-watch-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 6v12l9-6z"/></svg></span></button>':'')+
+      (liveStreamsForGame(g).length?'<button type="button" class="live-watch-btn" data-live-event="'+esc(g.eventId)+'" aria-label="Watch '+esc(g.leagueLabel||g.sportLabel||'live event')+' now"><span class="live-watch-pulse" aria-hidden="true"></span><span class="live-watch-copy"><strong>WATCH NOW</strong><small>'+esc(g.streams[0]?.channel||g.streams[0]?.provider||'Live stream')+'</small></span><span class="live-watch-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 6v12l9-6z"/></svg></span></button>':'')+
     '</article>';
   }).join('');
 }
@@ -1215,7 +1234,7 @@ function renderGames(){
         (place?'<small>'+esc(place)+'</small>':'')+
         '<div class="state '+(g.state==='live'?'live':'')+'">'+esc(g.status)+'</div>'+
         (g.raceBroadcast?'<div class="race-broadcast">Broadcast: '+esc(g.raceBroadcast)+'</div>':'')+
-        (g.streams?.length?'<button class="watch-live-btn" type="button" data-live-event="'+esc(g.eventId)+'"><span class="live-dot" aria-hidden="true"></span>Watch Live</button>':'')+
+        (liveStreamsForGame(g).length?'<button class="watch-live-btn" type="button" data-live-event="'+esc(g.eventId)+'"><span class="live-dot" aria-hidden="true"></span>Watch Live</button>':'')+
         '</div></article>';
     }
 
@@ -1226,7 +1245,7 @@ function renderGames(){
         '<div class="team"><span class="team-identity">'+teamLogoMarkup(g.homeLogo,g.home)+'<span>'+esc(g.home)+'</span></span><b data-score-side="home">'+esc(g.homeScore)+'</b></div>'+
       '</div>'+
       '<div class="state '+(g.state==='live'?'live':'')+'">'+esc(g.status)+'</div>'+
-      (g.streams?.length?'<button class="watch-live-btn" type="button" data-live-event="'+esc(g.eventId)+'"><span class="live-dot" aria-hidden="true"></span>Watch Live</button>':'')+
+      (liveStreamsForGame(g).length?'<button class="watch-live-btn" type="button" data-live-event="'+esc(g.eventId)+'"><span class="live-dot" aria-hidden="true"></span>Watch Live</button>':'')+
       (g.highlights?.length?'<button class="highlights-btn" type="button" data-highlight-event="'+esc(g.eventId)+'"><span class="highlights-btn-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>Highlights <b>'+esc(g.highlights.length)+'</b></button>':'')+
       (g.odds?'<div class="oddsline"><span>'+esc(g.odds.provider)+'</span><span>Line <b>'+esc(g.odds.details)+'</b></span><span>Total <b>'+esc(g.odds.total)+'</b></span></div>':'')+
     '</article>';

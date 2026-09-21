@@ -6,7 +6,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<script>document.documentElement.dataset.theme=localStorage.getItem('img-theme')||'dark';</script>
+<script>function readPreference(key){try{return localStorage.getItem(key)}catch{return null}}function writePreference(key,value){try{localStorage.setItem(key,value)}catch{}}document.documentElement.dataset.theme=readPreference('img-theme')||'dark';</script>
 <link rel="canonical" href="https://www.imgofficial.com/"><title>IMG — Global Sports Platform</title><link rel="icon" type="image/png" href="./img-logo-hq.png?v=20260920-11"><link rel="shortcut icon" type="image/png" href="./img-logo-hq.png?v=20260920-11"><link rel="apple-touch-icon" href="./img-logo-hq.png?v=20260920-11">
 <meta name="description" content="IMG is a global sports platform bringing scores, league information, sports data, market information and current reporting together in one digital destination.">
 <style>
@@ -336,7 +336,8 @@ function resetDesktopThemePosition(){
 }
 function restoreMobileThemePosition(){
   if(!isMobileTheme())return;
-  const saved=JSON.parse(localStorage.getItem('img-theme-position')||'null');
+  let saved;
+  try{saved=JSON.parse(readPreference('img-theme-position')||'null')}catch{return}
   if(saved){
     const x=Math.max(8,Math.min(innerWidth-themeButton.offsetWidth-8,Number(saved.x)||8));
     const y=Math.max(8,Math.min(innerHeight-themeButton.offsetHeight-8,Number(saved.y)||8));
@@ -369,17 +370,17 @@ themeButton.addEventListener('pointerup',()=>{
   themeDrag=false;
   if(themeMoved){
     const r=themeButton.getBoundingClientRect();
-    localStorage.setItem('img-theme-position',JSON.stringify({x:Math.round(r.left),y:Math.round(r.top)}));
+    writePreference('img-theme-position',JSON.stringify({x:Math.round(r.left),y:Math.round(r.top)}));
   }else{
     themeRoot.dataset.theme=themeRoot.dataset.theme==='dark'?'light':'dark';
-    localStorage.setItem('img-theme',themeRoot.dataset.theme);
+    writePreference('img-theme',themeRoot.dataset.theme);
     paintTheme();
   }
 });
 themeButton.addEventListener('click',()=>{
   if(isMobileTheme())return;
   themeRoot.dataset.theme=themeRoot.dataset.theme==='dark'?'light':'dark';
-  localStorage.setItem('img-theme',themeRoot.dataset.theme);
+  writePreference('img-theme',themeRoot.dataset.theme);
   paintTheme();
 });
 addEventListener('resize',()=>{

@@ -22,6 +22,8 @@ jobs:
             echo "Checking $f"
             node --check "$f"
           done
+      - name: Check startup and player regressions
+        run: node scripts/regression-tests.cjs
       - name: Check Python syntax
         run: |
           python - <<'PY'
