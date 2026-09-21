@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import html
 import io
 import json
 import re
@@ -563,6 +564,49 @@ def dedupe_games(games):
         out.append(game)
     return out
 
+def nbl_youtube_public_metadata(video_id):
+    if not video_id:
+        return {}
+    url = "https://www.youtube.com/watch?v=" + urllib.parse.quote(video_id)
+    try:
+        page = fetch(url)
+    except Exception:
+        return {}
+    title = ""
+    m = re.search(r'<meta\s+name="title"\s+content="([^"]*)"', page, re.I)
+    if not m:
+        m = re.search(r'<meta\s+property="og:title"\s+content="([^"]*)"', page, re.I)
+    if m:
+        title = html.unescape(m.group(1)).strip()
+    description = ""
+    dm = re.search(r'"shortDescription":"((?:\\.|[^"\\])*)"', page)
+    if dm:
+        try:
+            description = json.loads('"' + dm.group(1) + '"')
+        except Exception:
+            description = ""
+    if not description:
+        dm = re.search(r'<meta\s+name="description"\s+content="([^"]*)"', page, re.I)
+        if dm:
+            description = html.unescape(dm.group(1)).strip()
+    return {"title": title, "description": description, "watchUrl": url}
+
+def nbl_youtube_venue(description, matchup=""):
+    lines_ = [re.sub(r"\s+", " ", x).strip() for x in str(description or "").splitlines() if re.sub(r"\s+", " ", x).strip()]
+    skip = ("NBL GOVERNOR", "NBL-PILIPINAS", "#NBL", "HTTP")
+    matchup_norm = normalize_ocr_text(matchup)
+    for line in lines_:
+        upper = line.upper()
+        if any(token in upper for token in skip):
+            continue
+        if re.search(r"\b2026\b", line) and re.search(r"\b(JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)", upper):
+            continue
+        if matchup_norm and normalize_ocr_text(line) == matchup_norm:
+            continue
+        if re.search(r"\b(?:GYM|ARENA|STADIUM|CONVENTION|SPORTS COMPLEX|COLISEUM|MEMORIAL)\b", upper):
+            return line
+    return ""
+
 def parse_nbl_youtube_feed():
     games = []
     try:
@@ -572,34 +616,52 @@ def parse_nbl_youtube_feed():
 
     soup = BeautifulSoup(xml, "xml")
     for entry in soup.find_all("entry")[:20]:
-        title = entry.title.get_text(" ", strip=True) if entry.title else ""
-        published = entry.published.get_text(" ", strip=True) if entry.published else ""
-        link_tag = entry.find("link")
-        link = link_tag.get("href") if link_tag else "https://www.youtube.com/@nblpilipinas"
+        feed_title = entry.title.get_text(" ", strip=True) if entry.title else ""
+        video_tag = entry.find("videoId")
+        video_id = video_tag.get_text(strip=True) if video_tag else ""
+        link_tag = entry.find("link", href=True)
+        fallback_link = link_tag.get("href") if link_tag else ""
+        if not video_id:
+            vm = re.search(r"(?:v=|youtu\.be/)([A-Za-z0-9_-]{11})", fallback_link or "")
+            video_id = vm.group(1) if vm else ""
+        metadata = nbl_youtube_public_metadata(video_id)
+        title = metadata.get("title") or feed_title
+        link = metadata.get("watchUrl") or fallback_link or "https://www.youtube.com/@nblpilipinas"
+
         m = re.search(
             r"NBL\s+Governor'?s\s+Cup\s+2026\s*\|\s*"
             r"(January|February|March|April|May|June|July|August|September|October|November|December)"
-            r"\s+(\d{1,2}),\s*2026\s*\|\s*(.+?)\s+vs\.?\s+(.+)$",
+            r"\s+(\d{1,2}),*\s*2026\s*\|\s*(.+?)\s+vs\.?\s+(.+)$",
             title,
             re.I
         )
         if not m:
             continue
+
         dt = datetime.strptime(f"{m.group(1)} {m.group(2)} 2026", "%B %d %Y").replace(hour=18, tzinfo=PHT)
-        home = canonical_nbl_team(m.group(3).strip())
-        away = canonical_nbl_team(m.group(4).strip())
+        home_raw = m.group(3).strip()
+        away_raw = m.group(4).strip()
+        home = canonical_nbl_team(home_raw)
+        away = canonical_nbl_team(away_raw)
+        matchup = home_raw + " vs " + away_raw
+        venue = nbl_youtube_venue(metadata.get("description"), matchup)
         now = datetime.now(PHT)
         is_past = dt <= now
+        status = "Replay available" if is_past else "Scheduled"
+        if venue:
+            status += " · " + venue
+
         games.append({
-            "eventId": "yt-nbl-" + dt.strftime("%Y%m%d") + "-" + str(len(games)+1),
+            "eventId": "yt-nbl-" + (video_id or dt.strftime("%Y%m%d") + "-" + str(len(games)+1)),
             "date": dt.isoformat(),
             "displayTime": dt.strftime("%b %d").replace(" 0", " "),
             "away": away,
             "home": home,
             "awayScore": "—",
             "homeScore": "—",
-            "status": "Replay available" if is_past else "Scheduled",
+            "status": status,
             "state": "final" if is_past else "scheduled",
+            "location": venue,
             "sourceName": "NBL-Pilipinas YouTube",
             "sourceUrl": link
         })
