@@ -929,16 +929,38 @@ main{min-height:calc(100svh - 68px)}
 .sports-capabilities .cap-stats{background:color-mix(in srgb,#4f8cff 13%,transparent);color:color-mix(in srgb,#78a7ff 84%,var(--text));border:1px solid color-mix(in srgb,#4f8cff 22%,var(--line))}
 .sports-capabilities .cap-odds{background:color-mix(in srgb,#20c997 13%,transparent);color:color-mix(in srgb,#46d8ae 84%,var(--text));border:1px solid color-mix(in srgb,#20c997 22%,var(--line))}
 
-:root[data-theme="light"] .sports-tab{background:#fff}
+:root[data-theme="light"] .sports-tab{background:#fff;color:#364152;border-color:#d9e0e8}
+:root[data-theme="light"] .sports-tab>small{background:#edf1f5;color:#26313d}
+:root[data-theme="light"] .sports-tab:hover{color:#111820}
 :root[data-theme="light"] .sports-tab.is-active{color:#fff}
+:root[data-theme="light"] .sports-tab.is-active>span,
+:root[data-theme="light"] .sports-tab.is-active>small{color:#fff}
+:root[data-theme="light"] .sports-stage-head h2,
+:root[data-theme="light"] .sports-logo-copy>strong{color:#111820}
+:root[data-theme="light"] .sports-logo-copy>small{color:#5d6875}
 :root[data-theme="light"] .sports-stage{background:linear-gradient(180deg,color-mix(in srgb,var(--sport-accent) 6%,#fff),#fff 160px)}
 :root[data-theme="light"] .sports-logo-tile{background:color-mix(in srgb,var(--sport-accent) 2.5%,#fff)}
 :root[data-theme="light"] .sports-logo-mark{background:#f1f4f7}
 
 :root[data-theme="dark"] .sports-logo-mark[data-logo-host="soccer"],
-:root[data-theme="dark"] .sports-logo-mark[data-logo-host="champions"]{background:#f8fafc;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
+:root[data-theme="dark"] .sports-logo-mark[data-logo-host="champions"],
+:root[data-theme="dark"] .sports-logo-mark[data-logo-host="bleague"],
+:root[data-theme="dark"] .sports-logo-mark[data-logo-host="euroleague"],
+:root[data-theme="dark"] .sports-logo-mark[data-logo-host="us_open"],
+:root[data-theme="dark"] .sports-logo-mark[data-logo-host="kbo"],
+:root[data-theme="dark"] .sports-logo-mark[data-logo-host="cricket_world_cup"],
+:root[data-theme="dark"] .sports-logo-mark[data-logo-host="vleague_jp"]{
+  background:#f8fafc;
+  box-shadow:inset 0 0 0 1px rgba(17,24,39,.08)
+}
 :root[data-theme="dark"] .sports-logo-mark[data-logo-host="soccer"] .sports-league-logo,
-:root[data-theme="dark"] .sports-logo-mark[data-logo-host="champions"] .sports-league-logo{filter:none}
+:root[data-theme="dark"] .sports-logo-mark[data-logo-host="champions"] .sports-league-logo,
+:root[data-theme="dark"] .sports-logo-mark[data-logo-host="bleague"] .sports-league-logo,
+:root[data-theme="dark"] .sports-logo-mark[data-logo-host="euroleague"] .sports-league-logo,
+:root[data-theme="dark"] .sports-logo-mark[data-logo-host="us_open"] .sports-league-logo,
+:root[data-theme="dark"] .sports-logo-mark[data-logo-host="kbo"] .sports-league-logo,
+:root[data-theme="dark"] .sports-logo-mark[data-logo-host="cricket_world_cup"] .sports-league-logo,
+:root[data-theme="dark"] .sports-logo-mark[data-logo-host="vleague_jp"] .sports-league-logo{filter:none}
 
 @keyframes sportsTabEnter{to{opacity:1;transform:translateY(0)}}
 @keyframes sportsLogoEnter{to{opacity:1;transform:translateY(0)}}
