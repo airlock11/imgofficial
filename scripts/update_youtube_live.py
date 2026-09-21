@@ -9,6 +9,7 @@ KEY=os.environ["YOUTUBE_API_KEY"]
 OUT=Path(__file__).resolve().parents[1]/"youtube-live.json"
 UA="IMG-Sports-Live/1.0"
 ONE_SPORTS_CHANNEL_ID="UCXDG9ue-emCN8Ad3h7lERqQ"
+NBL_PILIPINAS_CHANNEL_ID="UCJDBLldRGVJPEvyjJdSHefw"
 PINNED_ASIAN_GAMES_VIDEO_IDS=["5mZlZtTk83E"]
 SCOREBOARDS={
  "Basketball":"https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard",
@@ -123,14 +124,48 @@ def one_sports_live():
    league_key="asian_games"; sport="Asian Games"; league="2026 ASIAN GAMES"; prefix="ag26"
   elif re.search(r"\bPBA\b",upper):
    league_key="pba"; sport="Basketball"; league="PBA"; prefix="pba"
-  elif "NBL PILIPINAS" in upper or "NBL-PILIPINAS" in upper:
-   league_key="nbl"; sport="Basketball"; league="NBL Pilipinas"; prefix="nblph"
   else:
    continue
   watch="https://www.youtube.com/watch?v="+vid
   stream={"videoId":vid,"watchUrl":watch,"provider":"YouTube","channel":channel,"title":title}
   if embeddable:stream["embedUrl"]="https://www.youtube.com/embed/"+vid
   out.append({"eventId":prefix+"-youtube-"+vid,"sport":sport,"leagueKey":league_key,"league":league,"teams":[],"title":title,"stream":stream})
+ return out
+
+def nbl_pilipinas_live():
+ # NBL Pilipinas uses its own official YouTube page, not the One Sports rule.
+ ids=[]
+ try:
+  ids += channel_feed_ids(NBL_PILIPINAS_CHANNEL_ID)
+ except Exception as ex:
+  print("NBL Pilipinas feed",ex)
+ try:
+  ids += channel_stream_page_ids(NBL_PILIPINAS_CHANNEL_ID)
+ except Exception as ex:
+  print("NBL Pilipinas streams page",ex)
+ ids=list(dict.fromkeys(x for x in ids if x))
+ details=video_details(ids[:50])
+ out=[]
+ for vid in ids[:50]:
+  d=details.get(vid)
+  if d:
+   dsn=d.get("snippet",{}); status=d.get("status",{}); live=d.get("liveStreamingDetails",{})
+   if dsn.get("channelId")!=NBL_PILIPINAS_CHANNEL_ID:continue
+   title=dsn.get("title",""); channel=(dsn.get("channelTitle") or "NBL Pilipinas").strip()
+   is_live=dsn.get("liveBroadcastContent")=="live" or (live.get("actualStartTime") and not live.get("actualEndTime"))
+   ended=bool(live.get("actualEndTime")); embeddable=status.get("embeddable",True)
+  else:
+   try:
+    info=public_watch_info(vid)
+   except Exception:
+    continue
+   title=info["title"]; channel=info["channel"] or "NBL Pilipinas"
+   is_live=info["live"]; ended=False; embeddable=True
+  if not is_live or ended:continue
+  watch="https://www.youtube.com/watch?v="+vid
+  stream={"videoId":vid,"watchUrl":watch,"provider":"YouTube","channel":channel,"title":title}
+  if embeddable:stream["embedUrl"]="https://www.youtube.com/embed/"+vid
+  out.append({"eventId":"nblph-youtube-"+vid,"sport":"Basketball","leagueKey":"nbl","league":"NBL Pilipinas","teams":[],"title":title,"stream":stream})
  return out
 
 events=live_events(); streams=[]
@@ -144,6 +179,10 @@ try:
  streams.extend(one_sports_live())
 except Exception as ex:
  print("youtube One Sports",ex)
+try:
+ streams.extend(nbl_pilipinas_live())
+except Exception as ex:
+ print("youtube NBL Pilipinas",ex)
 seen=set(); dedup=[]
 for x in streams:
  vid=x.get("stream",{}).get("videoId")
