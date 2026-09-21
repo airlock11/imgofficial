@@ -13,7 +13,15 @@ OUT = ROOT / "odds-data.json"
 META = ROOT / "odds-meta.json"
 API = "https://api.oddspapi.io/v4"
 KEY = (os.environ.get("ODDSPAPI_KEY") or "").strip()
-UA = "IMG-Sports-Odds-Updater/2.0 (+https://imgofficial.com)"
+UA = "IMG-Sports-Odds-Updater/3.0 (+https://imgofficial.com)"
+THE_ODDS_KEY = (os.environ.get("ODDS_API_KEY") or "").strip()
+THE_ODDS_API = "https://api.the-odds-api.com/v4"
+THE_ODDS_SPORTS = {
+    "nba": "basketball_nba",
+    "nfl": "americanfootball_nfl",
+    "epl": "soccer_epl",
+    "laliga": "soccer_spain_la_liga",
+}
 
 # Stable tournament IDs published by OddsPapi.
 TARGETS = {
@@ -246,6 +254,106 @@ def normalize(row, participants=None):
         "oddsList": [provider],
     }
 
+def the_odds_json(sport_key):
+    params = {
+        "apiKey": THE_ODDS_KEY,
+        "regions": "us",
+        "markets": "h2h",
+        "oddsFormat": "decimal",
+        "dateFormat": "iso",
+    }
+    url = THE_ODDS_API + "/sports/" + urllib.parse.quote(sport_key) + "/odds/?" + urllib.parse.urlencode(params)
+    req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept": "application/json"})
+    try:
+        with urllib.request.urlopen(req, timeout=60) as r:
+            return json.loads(r.read().decode("utf-8", errors="replace"))
+    except urllib.error.HTTPError as exc:
+        body = ""
+        try:
+            body = exc.read().decode("utf-8", errors="replace")
+        except Exception:
+            pass
+        raise RuntimeError("The Odds API HTTP %s: %s" % (exc.code, (body or str(exc))[:400]))
+
+def normalize_the_odds_event(row):
+    books = []
+    for book in row.get("bookmakers") or []:
+        title = str(book.get("title") or book.get("key") or "Bookmaker").strip()
+        h2h = None
+        for market in book.get("markets") or []:
+            if market.get("key") == "h2h":
+                h2h = market
+                break
+        if not h2h:
+            continue
+        prices = {}
+        for outcome in h2h.get("outcomes") or []:
+            name = str(outcome.get("name") or "")
+            price = outcome.get("price")
+            if name and isinstance(price, (int, float)):
+                prices[name] = price
+        home_name = str(row.get("home_team") or "Home")
+        away_name = str(row.get("away_team") or "Away")
+        home = prices.get(home_name)
+        away = prices.get(away_name)
+        if home is None and away is None:
+            continue
+        provider = {
+            "provider": title,
+            "details": "—",
+            "total": "—",
+            "home": "—" if home is None else str(home),
+            "away": "—" if away is None else str(away),
+        }
+        draw = next((v for k, v in prices.items() if k not in (home_name, away_name)), None)
+        if draw is not None:
+            provider["draw"] = str(draw)
+        books.append(provider)
+    if not books:
+        return None
+    return {
+        "eventId": str(row.get("id") or ""),
+        "date": row.get("commence_time") or "",
+        "home": row.get("home_team") or "Home",
+        "away": row.get("away_team") or "Away",
+        "participant1Id": None,
+        "participant2Id": None,
+        "homeLogo": "",
+        "awayLogo": "",
+        "oddsList": books,
+    }
+
+def merge_the_odds(leagues):
+    if not THE_ODDS_KEY:
+        print("ODDS_API_KEY is not configured; keeping OddsPapi-only data")
+        return
+    for league, sport_key in THE_ODDS_SPORTS.items():
+        try:
+            rows = the_odds_json(sport_key)
+        except Exception as exc:
+            print(json.dumps({"the_odds_api": league, "error": str(exc)[:300]}, ensure_ascii=False))
+            continue
+        additions = [x for x in (normalize_the_odds_event(r) for r in rows if isinstance(r, dict)) if x]
+        current = leagues.setdefault(league, [])
+        for incoming in additions:
+            match = next((e for e in current if
+                str(e.get("home","")).casefold() == str(incoming.get("home","")).casefold() and
+                str(e.get("away","")).casefold() == str(incoming.get("away","")).casefold()), None)
+            if match:
+                existing = {str(x.get("provider","")).casefold() for x in match.get("oddsList", [])}
+                match.setdefault("oddsList", []).extend(
+                    x for x in incoming["oddsList"]
+                    if str(x.get("provider","")).casefold() not in existing
+                )
+            else:
+                current.append(incoming)
+        leagues[league] = sorted(current, key=lambda x: x.get("date") or "")[:20]
+        print(json.dumps({
+            "the_odds_api": league,
+            "events": len(additions),
+            "bookmakers": sorted({b["provider"] for e in additions for b in e["oddsList"]}),
+        }, ensure_ascii=False))
+
 def main():
     if not KEY:
         print("ODDSPAPI_KEY is not configured; preserving current odds-data.json")
@@ -308,6 +416,8 @@ def main():
     for key in list(leagues):
         leagues[key] = sorted(leagues[key], key=lambda x: x.get("date") or "")[:12]
 
+    merge_the_odds(leagues)
+
     if not leagues:
         print(json.dumps({
             "updated": False,
@@ -319,15 +429,15 @@ def main():
 
     data = {
         "updated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
-        "provider": "OddsPapi",
-        "bookmaker": "Bet365",
+        "provider": "OddsPapi + The Odds API",
+        "bookmaker": "Multiple",
         "leagues": leagues,
         "errors": {},
     }
     OUT.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", "utf-8")
     print(json.dumps({
         "updated": True,
-        "provider": "OddsPapi",
+        "provider": "OddsPapi + The Odds API",
         "leagues": {k: len(v) for k, v in leagues.items()},
     }, ensure_ascii=False))
 
