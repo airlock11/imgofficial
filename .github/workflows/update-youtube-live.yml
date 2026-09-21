@@ -3,6 +3,11 @@ on:
   schedule:
     - cron: "17 */4 * * *"
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/update_youtube_live.py"
+      - ".github/workflows/update-youtube-live.yml"
 permissions:
   contents: write
 concurrency:
