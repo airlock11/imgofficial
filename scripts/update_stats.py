@@ -349,21 +349,96 @@ def espn_athlete_rows(sport,league,season=None,seasontype=None):
     season_info=data.get("currentSeason") or {}
     return rows,season_info,url
 
-def espn_basketball_stats(key,league,season,season_label):
-    rows,season_info,url=espn_athlete_rows("basketball",league,season,2)
+def espn_basketball_html(key,season_label):
+    url="https://www.espn.com/nba/stats/player" if key=="basketball" else "https://www.espn.com/wnba/stats/player"
+    soup=BeautifulSoup(fetch(url),"html.parser")
+    name_table=None
+    stat_table=None
+    for table in soup.find_all("table"):
+        headers=[]
+        for tr in table.find_all("tr")[:4]:
+            vals=[clean(x.get_text(" ",strip=True)).upper() for x in tr.find_all(["th","td"])]
+            if len(vals)>len(headers):headers=vals
+        joined=" ".join(headers)
+        if "RK" in headers and "NAME" in headers:name_table=table
+        if "PTS" in headers and "REB" in headers and "AST" in headers and "STL" in headers and "BLK" in headers:
+            stat_table=table
+    if not name_table or not stat_table:
+        raise ValueError("ESPN player statistics tables not found")
+
+    names=[]
+    for tr in name_table.find_all("tr"):
+        cells=tr.find_all(["th","td"])
+        vals=[clean(x.get_text(" ",strip=True)) for x in cells]
+        if not vals or any(v.upper()=="NAME" for v in vals):continue
+        if len(cells)<2:continue
+        name_cell=cells[-1]
+        links=[clean(a.get_text(" ",strip=True)) for a in name_cell.find_all("a") if clean(a.get_text(" ",strip=True))]
+        player=links[0] if links else ""
+        raw=clean(name_cell.get_text(" ",strip=True))
+        if not player:
+            m=re.match(r"(.+?)\s+([A-Z]{2,5}(?:/[A-Z]{2,5})?)$",raw)
+            if m:player,team=clean(m.group(1)),m.group(2)
+            else:continue
+        else:
+            team=clean(raw.replace(player,"",1))
+        names.append({"player":player,"team":team})
+
+    header=[]
+    data_rows=[]
+    started=False
+    for tr in stat_table.find_all("tr"):
+        cells=[clean(x.get_text(" ",strip=True)) for x in tr.find_all(["th","td"])]
+        upper=[x.upper() for x in cells]
+        if "PTS" in upper and "REB" in upper and "AST" in upper:
+            header=cells;started=True;continue
+        if started and cells:data_rows.append(cells)
+    if not header or not data_rows:raise ValueError("ESPN statistic rows not found")
+    index={h.upper():i for i,h in enumerate(header)}
+    def at(row,name):
+        i=index.get(name.upper())
+        return row[i] if i is not None and i<len(row) else ""
+    rows=[]
+    for identity,values in zip(names,data_rows):
+        pts=num(at(values,"PTS"))
+        if pts is None:continue
+        rows.append({
+            "player":identity["player"],"team":identity["team"],
+            "gp":intnum(at(values,"GP")),
+            "ppg":pts,"rpg":num(at(values,"REB")),"apg":num(at(values,"AST")),
+            "spg":num(at(values,"STL")),"bpg":num(at(values,"BLK"))
+        })
     groups=generic_groups(rows,[
         ("Points","ppg","PPG"),("Rebounds","rpg","RPG"),("Assists","apg","APG"),
         ("Steals","spg","SPG"),("Blocks","bpg","BPG")
     ])
-    if not groups:
-        raise ValueError(f"No {league.upper()} athlete statistics returned")
+    if not groups:raise ValueError("ESPN basketball groups empty")
     return {
         "league":"NBA" if key=="basketball" else "WNBA",
         "season":season_label,
-        "sourceName":"ESPN public statistics feed",
+        "sourceName":"ESPN",
         "sourceUrl":url,
         "groups":groups
     }
+
+def espn_basketball_stats(key,league,season,season_label):
+    try:
+        rows,season_info,url=espn_athlete_rows("basketball",league,season,2)
+        groups=generic_groups(rows,[
+            ("Points","ppg","PPG"),("Rebounds","rpg","RPG"),("Assists","apg","APG"),
+            ("Steals","spg","SPG"),("Blocks","bpg","BPG")
+        ])
+        if groups:
+            return {
+                "league":"NBA" if key=="basketball" else "WNBA",
+                "season":season_label,
+                "sourceName":"ESPN public statistics feed",
+                "sourceUrl":url,
+                "groups":groups
+            }
+    except Exception as ex:
+        print("ESPN API",key,type(ex).__name__,str(ex)[:120])
+    return espn_basketball_html(key,season_label)
 
 def espn_hockey_stats():
     rows,season_info,url=espn_athlete_rows("hockey","nhl",2026,2)
@@ -386,43 +461,64 @@ def espn_football_stats(key,league,label):
 def parse_pba_stats():
     url="https://www.pba.ph/stats"
     soup=BeautifulSoup(fetch(url),"html.parser")
+    rows=[]
+
     target=None
     headers=[]
     for table in soup.find_all("table"):
-        rows=table.find_all("tr")
-        for row in rows[:5]:
+        for row in table.find_all("tr")[:5]:
             vals=[clean(x.get_text(" ",strip=True)) for x in row.find_all(["th","td"])]
             upper=[v.upper() for v in vals]
             if "PLAYERS" in upper and "PTS" in upper and "APG" in upper and "REB" in upper:
                 target=table;headers=vals;break
         if target:break
-    if not target:
-        raise ValueError("PBA player statistics table not found")
-    index={}
-    for i,h in enumerate(headers):
-        if h:index[h.upper()]=i
-    def cell(cells,name):
-        i=index.get(name.upper())
-        return cells[i] if i is not None and i<len(cells) else ""
-    rows=[]
-    started=False
-    for tr in target.find_all("tr"):
-        cells=[clean(x.get_text(" ",strip=True)) for x in tr.find_all(["th","td"])]
-        upper=[x.upper() for x in cells]
-        if "PLAYERS" in upper and "PTS" in upper:
-            started=True
-            continue
-        if not started or not cells:continue
-        player=cell(cells,"PLAYERS") or cells[0]
-        gp=intnum(cell(cells,"GP"))
-        pts=num(cell(cells,"PTS"))
-        if not player or gp is None or pts is None:continue
-        rows.append({
-            "player":player,"team":"","gp":gp,
-            "ppg":pts,"rpg":num(cell(cells,"REB")),
-            "apg":num(cell(cells,"APG")),"spg":num(cell(cells,"STL")),
-            "bpg":num(cell(cells,"BLK"))
-        })
+    if target:
+        index={h.upper():i for i,h in enumerate(headers) if h}
+        def cell(cells,name):
+            i=index.get(name.upper())
+            return cells[i] if i is not None and i<len(cells) else ""
+        started=False
+        for tr in target.find_all("tr"):
+            cells=[clean(x.get_text(" ",strip=True)) for x in tr.find_all(["th","td"])]
+            upper=[x.upper() for x in cells]
+            if "PLAYERS" in upper and "PTS" in upper:
+                started=True;continue
+            if not started or not cells:continue
+            player=cell(cells,"PLAYERS") or cells[0]
+            gp=intnum(cell(cells,"GP"));pts=num(cell(cells,"PTS"))
+            if not player or gp is None or pts is None:continue
+            rows.append({"player":player,"team":"","gp":gp,"ppg":pts,
+                "rpg":num(cell(cells,"REB")),"apg":num(cell(cells,"APG")),
+                "spg":num(cell(cells,"STL")),"bpg":num(cell(cells,"BLK"))})
+
+    if not rows:
+        seen=set()
+        for a in soup.find_all("a",href=True):
+            href=str(a.get("href") or "")
+            if "/players/" not in href:continue
+            player=clean(a.get_text(" ",strip=True))
+            if not player or player.lower() in {"players","player"} or player in seen:continue
+            node=a
+            candidate=None
+            for _ in range(7):
+                node=node.parent
+                if node is None:break
+                links=[x for x in node.find_all("a",href=True) if "/players/" in str(x.get("href") or "")]
+                nums=re.findall(r"(?<![A-Za-z])[-+]?\d+(?:\.\d+)?%?",clean(node.get_text(" ",strip=True)))
+                if len(links)==1 and 21<=len(nums)<=28:
+                    candidate=nums;break
+            if not candidate:continue
+            vals=[num(x) for x in candidate]
+            if len(vals)<21:continue
+            gp=int(vals[0]) if vals[0] is not None else None
+            if gp is None or vals[20] is None:continue
+            rows.append({
+                "player":player,"team":"","gp":gp,
+                "ppg":vals[20],"apg":vals[11],"spg":vals[12],
+                "bpg":vals[13],"rpg":vals[16]
+            })
+            seen.add(player)
+
     if not rows:raise ValueError("PBA statistics rows not parsed")
     return {
         "league":"PBA",
