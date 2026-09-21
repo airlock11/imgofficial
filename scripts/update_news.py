@@ -214,13 +214,20 @@ def fetch_ytdlp_channel_videos(cfg):
             continue
         seen.add(video_id)
         ts = item.get("timestamp") or item.get("release_timestamp")
+        upload_date = str(item.get("upload_date") or "")
         if ts:
             try:
                 published = datetime.fromtimestamp(float(ts), timezone.utc).isoformat()
             except Exception:
-                published = (now - timedelta(seconds=idx)).isoformat()
+                published = "1970-01-01T00:00:00+00:00"
+        elif re.fullmatch(r"\d{8}", upload_date):
+            try:
+                published = datetime.strptime(upload_date, "%Y%m%d").replace(tzinfo=timezone.utc).isoformat()
+            except Exception:
+                published = "1970-01-01T00:00:00+00:00"
         else:
-            published = (now - timedelta(seconds=idx)).isoformat()
+            # Keep unknown dates neutral; never pretend an old upload was published now.
+            published = "1970-01-01T00:00:00+00:00"
         rows.append({
             "id": video_id,
             "title": title,
@@ -270,7 +277,7 @@ def fetch_youtube_channel_page(cfg):
                 "source": cfg["name"],
                 "link": "https://www.youtube.com/watch?v=" + video_id,
                 "thumbnail": "https://i.ytimg.com/vi/" + video_id + "/hqdefault.jpg",
-                "published": (datetime.now(timezone.utc) - timedelta(seconds=idx)).isoformat(),
+                "published": "1970-01-01T00:00:00+00:00",
             })
             if len(rows) >= 3:
                 return rows
@@ -292,7 +299,7 @@ def fetch_youtube_channel_page(cfg):
             "source": cfg["name"],
             "link": "https://www.youtube.com/watch?v=" + video_id,
             "thumbnail": "https://i.ytimg.com/vi/" + video_id + "/hqdefault.jpg",
-            "published": (datetime.now(timezone.utc) - timedelta(seconds=idx)).isoformat(),
+            "published": "1970-01-01T00:00:00+00:00",
         })
         if len(rows) >= 3:
             break
