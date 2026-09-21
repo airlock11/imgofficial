@@ -182,7 +182,14 @@
           "homeScore": "LIVE",
           "status": "Official coverage",
           "state": "live",
-          "streams": [],
+          "streams": [
+            {
+              "provider": "YouTube",
+              "channel": "One Sports",
+              "title": "Asian Games - One Sports",
+              "watchUrl": "https://www.youtube.com/watch?v=vzTY2AK3mok"
+            }
+          ],
           "streamsChecked": true
         },
         {
@@ -221,8 +228,8 @@
             {
               "provider": "YouTube",
               "channel": "One Sports",
-              "title": "LIVE: MODERN PENTATHLON | 2026 ASIAN GAMES",
-              "watchUrl": "https://www.youtube.com/results?search_query=LIVE%3A+MODERN+PENTATHLON+%7C+2026+ASIAN+GAMES+One+Sports"
+              "title": "Modern Pentathlon — Live Coverage",
+              "watchUrl": "https://www.youtube.com/watch?v=vzTY2AK3mok"
             }
           ],
           "streamsChecked": true
@@ -262,7 +269,14 @@
           "homeScore": "—",
           "status": "Live coverage on One Sports",
           "state": "live",
-          "streams": [],
+          "streams": [
+            {
+              "provider": "YouTube",
+              "channel": "One Sports",
+              "title": "Wushu — Women's Taijiquan & Taijijian",
+              "watchUrl": "https://www.youtube.com/watch?v=vzTY2AK3mok"
+            }
+          ],
           "streamsChecked": true
         },
         {
