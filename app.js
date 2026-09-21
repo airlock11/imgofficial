@@ -1045,7 +1045,7 @@ function renderAllLiveGames(items,{preserveItems=false}={}){
         '<div class="live-card-team"><span>'+teamLogoMarkup(g.homeLogo,g.home,'live-card-logo')+esc(g.home)+'</span><b data-score-side="home">'+esc(g.homeScore)+'</b></div>'+
       '</div>'+
       '<div class="live-card-status">'+esc(g.status||'Live')+'</div>'+
-      (g.streams?.length?'<button type="button" class="live-watch-btn" data-live-event="'+esc(g.eventId)+'">Watch live</button>':'')+
+      (g.streams?.length?'<button type="button" class="live-watch-btn" data-live-event="'+esc(g.eventId)+'"><span class="live-watch-pulse" aria-hidden="true"></span><span class="live-watch-copy"><strong>LIVE</strong><small>One Sports</small></span><span class="live-watch-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 6v12l9-6z"/></svg></span></button>':'')+
     '</article>';
   }).join('');
 }
