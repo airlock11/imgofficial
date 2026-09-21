@@ -2,14 +2,15 @@
 import json
 import os
 import time
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from urllib.error import HTTPError, URLError
-from urllib.parse import urlsplit, urlunsplit
+from urllib.parse import urlencode, urlsplit, urlunsplit
 from urllib.request import Request, urlopen
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "boxing-data.json"
+FIGHTS_OUT = ROOT / "boxing-fights-data.json"
 API_HOST = "boxing-data-api.p.rapidapi.com"
 BASE = f"https://{API_HOST}/v2"
 API_KEY = os.environ.get("RAPIDAPI_KEY", "").strip()
@@ -139,6 +140,92 @@ def fetch_all_fighters():
     fighters.sort(key=lambda x: (str(x.get("name") or "").casefold(), str(x.get("id") or "")))
     return fighters, pages
 
+def compact_fight(f):
+    fighters = f.get("fighters") or {}
+    fighter_1 = fighters.get("fighter_1") or {}
+    fighter_2 = fighters.get("fighter_2") or {}
+    division = f.get("division") or {}
+    results = f.get("results") or {}
+    event = f.get("event") or {}
+    scores = f.get("scores") or results.get("scores") or []
+    return {
+        "id": f.get("id"),
+        "title": f.get("title"),
+        "date": f.get("date"),
+        "status": f.get("status"),
+        "division": {
+            "id": division.get("id"),
+            "name": division.get("name"),
+            "weight_lb": division.get("weight_lb"),
+            "weight_kg": division.get("weight_kg"),
+        } if isinstance(division, dict) and division else None,
+        "event": {
+            "id": event.get("id") or f.get("event_id"),
+            "title": event.get("title") or f.get("event_title"),
+            "location": event.get("location") or f.get("location"),
+            "venue": event.get("venue") or f.get("venue"),
+        },
+        "fighters": {
+            "fighter_1": {
+                "id": fighter_1.get("fighter_id") or fighter_1.get("id"),
+                "name": fighter_1.get("full_name") or fighter_1.get("name"),
+                "winner": fighter_1.get("winner"),
+            },
+            "fighter_2": {
+                "id": fighter_2.get("fighter_id") or fighter_2.get("id"),
+                "name": fighter_2.get("full_name") or fighter_2.get("name"),
+                "winner": fighter_2.get("winner"),
+            },
+        },
+        "results": {
+            "outcome": results.get("outcome"),
+            "outcome_long": results.get("outcome_long"),
+            "round": results.get("round"),
+            "time": results.get("time"),
+            "scores": scores if isinstance(scores, list) else [],
+        },
+    }
+
+def fetch_boxing_fights():
+    now = datetime.now(timezone.utc)
+    today = now.date()
+    recent_from = today - timedelta(days=60)
+
+    upcoming_url = f"{BASE}/fights/schedule?" + urlencode({
+        "days": 90,
+        "date_sort": "ASC",
+        "page_size": 100,
+        "page_num": 1,
+    })
+    recent_url = f"{BASE}/fights/?" + urlencode({
+        "data_from": recent_from.isoformat(),
+        "date_to": today.isoformat(),
+        "date_sort": "DESC",
+        "page_size": 100,
+        "page_num": 1,
+    })
+
+    upcoming_payload = api_get(upcoming_url)
+    recent_payload = api_get(recent_url)
+
+    upcoming = [compact_fight(x) for x in (upcoming_payload.get("data") or []) if isinstance(x, dict)]
+    recent = [compact_fight(x) for x in (recent_payload.get("data") or []) if isinstance(x, dict)]
+
+    seen = set()
+    def unique(rows):
+        out = []
+        for row in rows:
+            key = row.get("id") or (str(row.get("date")) + "|" + str(row.get("title")))
+            if not key or key in seen:
+                continue
+            seen.add(key)
+            out.append(row)
+        return out
+
+    upcoming = unique(upcoming)
+    recent = unique(recent)
+    return upcoming, recent
+
 def build_divisions(fighters):
     divisions = {}
     for fighter in fighters:
@@ -160,6 +247,17 @@ def main():
         raise RuntimeError("Boxing API returned no fighters; refusing to overwrite the existing cache")
 
     divisions = build_divisions(fighters)
+    upcoming_fights, recent_fights = fetch_boxing_fights()
+    fights_out = {
+        "updated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        "source": "Boxing Data API",
+        "refresh_hours": 12,
+        "upcoming": upcoming_fights,
+        "recent": recent_fights,
+        "fights": upcoming_fights + recent_fights,
+    }
+    FIGHTS_OUT.write_text(json.dumps(fights_out, ensure_ascii=False, separators=(",", ":")) + "\n", encoding="utf-8")
+
     out = {
         "updated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "source": "Boxing Data API",
@@ -176,6 +274,8 @@ def main():
         "fighters": out["total_fighters"],
         "divisions": len(divisions),
         "pages_fetched": pages,
+        "upcoming_fights": len(upcoming_fights),
+        "recent_fights": len(recent_fights),
     }))
 
 if __name__ == "__main__":
