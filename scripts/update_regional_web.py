@@ -626,9 +626,11 @@ def parse_nbl_youtube_feed():
         if not video_id:
             vm = re.search(r"(?:v=|youtu\.be/)([A-Za-z0-9_-]{11})", fallback_link or "")
             video_id = vm.group(1) if vm else ""
-        metadata = nbl_youtube_public_metadata(video_id)
-        title = metadata.get("title") or feed_title
-        link = metadata.get("watchUrl") or fallback_link or "https://www.youtube.com/@nblpilipinas"
+        desc_tag = entry.find("description")
+        feed_description = desc_tag.get_text("\n", strip=True) if desc_tag else ""
+        metadata = {} if feed_title else nbl_youtube_public_metadata(video_id)
+        title = feed_title or metadata.get("title") or ""
+        link = ("https://www.youtube.com/watch?v=" + video_id) if video_id else (fallback_link or "https://www.youtube.com/@nblpilipinas")
 
         m = re.search(
             r"NBL\s+Governor'?s\s+Cup\s+2026\s*\|\s*"
@@ -646,7 +648,7 @@ def parse_nbl_youtube_feed():
         home = canonical_nbl_team(home_raw)
         away = canonical_nbl_team(away_raw)
         matchup = home_raw + " vs " + away_raw
-        venue = nbl_youtube_venue(metadata.get("description"), matchup)
+        venue = nbl_youtube_venue(feed_description or metadata.get("description"), matchup)
         now = datetime.now(PHT)
         is_past = dt <= now
         status = "Replay available" if is_past else "Scheduled"
@@ -718,15 +720,48 @@ def parse_nbl():
     try:
         tx = lines(URLS["tap"])
         current = None
+        pending_time = None
+        date_re = re.compile(
+            r"^(September|October|November|December)\s+\d{1,2},\s+2026(?:\s*\|\s*[A-Za-z]+)?$",
+            re.I
+        )
+        time_re = re.compile(r"^(\d{1,2}:\d{2}\s*(?:AM|PM))(?:\s*\|.*)?$", re.I)
         for x in tx:
-            if re.fullmatch(r"(September|October|November|December)\s+\d{1,2},\s+2026\s*\|\s*[A-Za-z]+", x):
-                current = x.split("|")[0].strip()
-            elif current and "NBL PILIPINAS" in x.upper():
-                tm = re.match(r"(\d{1,2}:\d{2}\s*(?:AM|PM))\s*\|", x, re.I)
-                if tm:
-                    broadcast.append({"date":datetime.strptime(current,"%B %d, %Y").strftime("%Y-%m-%d"),"time":tm.group(1),"source":"Tap Sports"})
-    except Exception:
-        pass
+            if date_re.fullmatch(x):
+                current = re.sub(r"\s*\|\s*[A-Za-z]+$", "", x).strip()
+                pending_time = None
+                continue
+            tm = time_re.match(x)
+            if tm:
+                pending_time = tm.group(1).upper()
+                # Some layouts keep the program on the same rendered text line.
+                if current and "NBL PILIPINAS" in x.upper():
+                    broadcast.append({
+                        "date": datetime.strptime(current, "%B %d, %Y").strftime("%Y-%m-%d"),
+                        "time": pending_time,
+                        "title": "NBL Pilipinas Governor's Cup 2026",
+                        "source": "Tap Sports"
+                    })
+                    pending_time = None
+                continue
+            if current and pending_time and "NBL PILIPINAS" in x.upper():
+                broadcast.append({
+                    "date": datetime.strptime(current, "%B %d, %Y").strftime("%Y-%m-%d"),
+                    "time": pending_time,
+                    "title": re.sub(r"\s+", " ", x).strip(),
+                    "source": "Tap Sports"
+                })
+                pending_time = None
+        # Deduplicate repeated page fragments while preserving order.
+        seen_broadcast = set()
+        broadcast = [
+            b for b in broadcast
+            if not ((b["date"], b["time"], b.get("title", "")) in seen_broadcast)
+            and not seen_broadcast.add((b["date"], b["time"], b.get("title", "")))
+        ]
+    except Exception as ex:
+        print("Tap Sports NBL schedule", type(ex).__name__, str(ex)[:120])
+
 
     games = dedupe_nbl_games(games)
     scheduled = sorted([g for g in games if g.get("state") == "scheduled"], key=lambda x: x.get("date", ""))
