@@ -566,10 +566,13 @@ const boxingTitleWeightOrder=[
 function boxingWeightClass(game){
   if(game?.weightClass)return String(game.weightClass);
   const text=String(game?.title||'').toLowerCase();
-  for(const [label,aliases] of boxingTitleWeightOrder){
-    if(aliases.some(alias=>text.includes(alias)))return label;
-  }
-  return 'Other';
+  let best={label:'Other',index:999,length:-1};
+  boxingTitleWeightOrder.forEach(([label,aliases],index)=>{
+    aliases.forEach(alias=>{
+      if(text.includes(alias)&&alias.length>best.length)best={label,index,length:alias.length};
+    });
+  });
+  return best.label;
 }
 function boxingWeightIndex(game){
   if(Number.isFinite(Number(game?.weightOrder))&&Number(game.weightOrder)!==999)return Number(game.weightOrder);

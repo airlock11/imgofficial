@@ -207,10 +207,12 @@ def boxing_weight_class(title):
         ("Junior Flyweight", ["junior flyweight", "light flyweight", "jr flyweight"]),
         ("Minimumweight", ["minimumweight", "strawweight"])
     ]
+    best = ("Other", 999, -1)
     for index, (label, aliases) in enumerate(order):
-        if any(alias in text for alias in aliases):
-            return label, index
-    return "Other", 999
+        for alias in aliases:
+            if alias in text and len(alias) > best[2]:
+                best = (label, index, len(alias))
+    return best[0], best[1]
 
 def boxing_org(org):
     data = json.loads((ROOT / "boxing-data.json").read_text("utf-8"))
