@@ -101,6 +101,16 @@ document.addEventListener('click',e=>{
     }
     return;
   }
+  const standingsToggle=e.target.closest('[data-standings-toggle]');
+  if(standingsToggle){
+    const section=standingsToggle.closest('.league-standings-dropdown');
+    if(section){
+      const expanded=standingsToggle.getAttribute('aria-expanded')==='true';
+      standingsToggle.setAttribute('aria-expanded',expanded?'false':'true');
+      section.classList.toggle('standings-open',!expanded);
+    }
+    return;
+  }
   const newsVideo=e.target.closest('[data-play-news-video]');
   if(newsVideo){
     const id=newsVideo.dataset.playNewsVideo;
@@ -479,6 +489,23 @@ function leagueStatsMarkup(key){
     '</div>'+
   '</section>';
 }
+function leagueStandingsMarkup({id,title='Standings',subtitle='',ariaLabel='League standings',rows=[]}={}){
+  if(!Array.isArray(rows)||!rows.length)return'';
+  const panelId='standings-panel-'+String(id||title).replace(/[^a-z0-9_-]/gi,'-');
+  return '<section class="league-games-group league-standings league-standings-dropdown" aria-label="'+esc(ariaLabel)+'">'+
+    '<button type="button" class="standings-dropdown-toggle" data-standings-toggle aria-expanded="false" aria-controls="'+esc(panelId)+'">'+
+      '<span class="standings-dropdown-copy"><span class="standings-dropdown-kicker">League table</span><strong>'+esc(title)+'</strong><small>'+esc(subtitle)+'</small></span>'+
+      '<span class="standings-dropdown-side"><span class="standings-dropdown-count">'+esc(rows.length)+' '+(rows.length===1?'team':'teams')+'</span><span class="standings-dropdown-chevron" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span></span>'+
+    '</button>'+
+    '<div id="'+esc(panelId)+'" class="standings-dropdown-content">'+
+      '<div class="standings-dropdown-inner">'+
+        '<div class="league-standings-head"><span>Team</span><b>W</b><b>L</b></div>'+
+        '<div class="league-standings-body">'+rows.map(s=>'<div class="league-standings-row"><strong>'+esc(s.team)+'</strong><b>'+esc(s.wins)+'</b><b>'+esc(s.losses)+'</b></div>').join('')+'</div>'+
+      '</div>'+
+    '</div>'+
+  '</section>';
+}
+
 const regionalWebSnapshots={
   pba:{
     league:'PBA',
@@ -1495,16 +1522,20 @@ function renderGames(){
   const leagueName=liveNowLabels[currentScoreLeague]?.league||'League';
   const sections=[];
 
+  const leagueStatsHtml=leagueStatsMarkup(currentScoreLeague);
+  if(leagueStatsHtml)sections.push(leagueStatsHtml);
+
   if(currentScoreLeague==='uaap'){
     const uaapData=getRegionalSnapshot('uaap')||specialSportsDataCache?.leagues?.uaap||{};
     const standings=Array.isArray(uaapData?.standings)?uaapData.standings:[];
-    if(standings.length){
-      sections.push('<section class="league-games-group league-standings" aria-label="UAAP standings">'+
-        '<div class="league-games-group-head"><h3>Standings</h3><span>UAAP Season 89</span></div>'+
-        '<div class="league-standings-head"><span>Team</span><b>W</b><b>L</b></div>'+
-        '<div class="league-standings-body">'+standings.map(s=>'<div class="league-standings-row"><strong>'+esc(s.team)+'</strong><b>'+esc(s.wins)+'</b><b>'+esc(s.losses)+'</b></div>').join('')+'</div>'+
-      '</section>');
-    }
+    const standingsHtml=leagueStandingsMarkup({
+      id:'uaap',
+      title:'Standings',
+      subtitle:'UAAP Season 89',
+      ariaLabel:'UAAP standings',
+      rows:standings
+    });
+    if(standingsHtml)sections.push(standingsHtml);
   }
 
   if(currentScoreLeague==='ncaa_ph'){
@@ -1512,16 +1543,16 @@ function renderGames(){
     for(const [groupKey,rows] of Object.entries(standings)){
       if(!Array.isArray(rows)||!rows.length)continue;
       const groupName=groupKey.replace(/([a-z])([A-Z])/g,'$1 $2').replace(/^./,x=>x.toUpperCase());
-      sections.push('<section class="league-games-group league-standings" aria-label="NCAA Philippines '+esc(groupName)+' standings">'+
-        '<div class="league-games-group-head"><h3>'+esc(groupName)+' Standings</h3><span>NCAA Season 102</span></div>'+
-        '<div class="league-standings-head"><span>Team</span><b>W</b><b>L</b></div>'+
-        '<div class="league-standings-body">'+rows.map(s=>'<div class="league-standings-row"><strong>'+esc(s.team)+'</strong><b>'+esc(s.wins)+'</b><b>'+esc(s.losses)+'</b></div>').join('')+'</div>'+
-      '</section>');
+      const standingsHtml=leagueStandingsMarkup({
+        id:'ncaa-ph-'+groupKey,
+        title:groupName+' Standings',
+        subtitle:'NCAA Season 102',
+        ariaLabel:'NCAA Philippines '+groupName+' standings',
+        rows
+      });
+      if(standingsHtml)sections.push(standingsHtml);
     }
   }
-
-  const leagueStatsHtml=leagueStatsMarkup(currentScoreLeague);
-  if(leagueStatsHtml)sections.push(leagueStatsHtml);
 
   if(currentScoreLeague==='nbl'&&scoreItems.length){
     sections.push(
