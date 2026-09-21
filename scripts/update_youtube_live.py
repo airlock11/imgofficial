@@ -42,6 +42,17 @@ def search(event):
   cand={"videoId":vid,"watchUrl":"https://www.youtube.com/watch?v="+vid,"embedUrl":"https://www.youtube.com/embed/"+vid,"provider":"YouTube","channel":sn.get("channelTitle",""),"title":title,"matchScore":overlap}
   if not best or cand["matchScore"]>best["matchScore"]:best=cand
  return best
+
+def asian_games_streams():
+ params=urllib.parse.urlencode({"part":"snippet","type":"video","eventType":"live","maxResults":25,"q":"2026 ASIAN GAMES One Sports","key":KEY})
+ data=get_json("https://www.googleapis.com/youtube/v3/search?"+params)
+ found=[]
+ for item in data.get("items",[]):
+  vid=item.get("id",{}).get("videoId"); sn=item.get("snippet",{}); title=sn.get("title",""); channel=sn.get("channelTitle","")
+  if not vid or "2026 ASIAN GAMES" not in title.upper() or channel.strip().lower()!="one sports": continue
+  found.append({"eventId":"ag26-youtube-"+vid,"sport":"Asian Games","teams":[],"title":title,"stream":{"videoId":vid,"watchUrl":"https://www.youtube.com/watch?v="+vid,"embedUrl":"https://www.youtube.com/embed/"+vid,"provider":"YouTube","channel":channel,"title":title,"matchScore":99}})
+ return found
+
 events=live_events(); streams=[]
 for e in events:
  try:
