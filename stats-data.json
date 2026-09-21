@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-21T14:47:07.893306+00:00",
+  "updatedAt": "2026-09-21T14:48:46.731287+00:00",
   "leagues": {
     "uaap": {
       "league": "UAAP",
@@ -6338,5 +6338,14 @@
         }
       ]
     }
+  },
+  "diagnostics": {
+    "pba": "HTTPError: HTTP Error 403: Forbidden",
+    "basketball": "ValueError: No NBA athlete statistics returned",
+    "wnba": "ValueError: No WNBA athlete statistics returned",
+    "baseball": "ValueError: No MLB athlete statistics returned",
+    "hockey": "ValueError: No NHL athlete statistics returned",
+    "football": "ValueError: No NFL athlete statistics returned",
+    "ncaaf": "ValueError: No NCAA Football athlete statistics returned"
   }
 }
