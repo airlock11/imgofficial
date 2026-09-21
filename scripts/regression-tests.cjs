@@ -39,6 +39,7 @@ vm.runInContext(app.slice(app.indexOf('function liveStreamsForGame('),app.indexO
 const specific = {watchUrl:'https://www.youtube.com/watch?v=abcdefghijk'};
 for (const [state,stream,expected] of [
   ['live',specific,1],['final',specific,0],['scheduled',specific,0],
+  ['scheduled',{...specific,status:'upcoming',scheduledStartTime:'2026-09-22T10:00:00Z'},1],
   ['live',{watchUrl:'https://www.youtube.com/@OneSportsPHL/streams'},0],
   ['live',{watchUrl:'javascript:alert(1)'},0],
   ['live',{embedUrl:'https://www.youtube-nocookie.com/embed/abcdefghijk'},1],
