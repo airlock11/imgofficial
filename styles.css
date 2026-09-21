@@ -542,6 +542,8 @@ main{min-height:calc(100svh - 68px)}
 .score-league-fallback-hidden{display:none}
 .score-league-name{display:-webkit-box;width:64px;max-width:64px;min-height:20px;overflow:hidden;-webkit-box-orient:vertical;-webkit-line-clamp:2;text-align:center;font:800 .59rem/1.08 Inter,Arial,sans-serif;letter-spacing:.005em;color:var(--text);text-wrap:balance;word-break:normal;overflow-wrap:anywhere;padding:0 2px;-webkit-font-smoothing:antialiased}
 .score-league-item:has(.score-league-filter.active) .score-league-name{color:var(--text);font-weight:900}
+.score-league-item-champions{width:92px}
+.score-league-item-champions .score-league-name{display:block;width:92px;max-width:92px;min-height:0;overflow:visible;-webkit-line-clamp:unset;line-clamp:unset;white-space:normal;text-overflow:clip;overflow-wrap:normal;word-break:normal}
 @media (prefers-contrast:more){.score-league-name{font-weight:900}.score-league-filter{border-color:var(--text)}}
 .score-league-toolbar>.status{flex:0 0 auto}
 .league-games-group{margin:0 0 30px}
@@ -585,6 +587,8 @@ main{min-height:calc(100svh - 68px)}
   .score-league-fivb-crop img{width:155px;left:-18px;top:-15px}
   .score-league-fallback{width:34px;height:34px;font-size:.52rem}
   .score-league-name{width:60px;max-width:60px;min-height:18px;padding:0 1px;font-size:.55rem;line-height:1.06}
+  .score-league-item-champions{width:88px}
+  .score-league-item-champions .score-league-name{width:88px;max-width:88px;overflow:visible;-webkit-line-clamp:unset;line-clamp:unset}
   .score-league-toolbar>.status{font-size:.62rem}
 }
 

@@ -360,7 +360,7 @@ function renderScoreLeagueFilters(){
   host.innerHTML=scoreLeagueOrder.map(key=>{
     const label=liveNowLabels[key]?.league||key.toUpperCase();
     const displayLabel=label.replace(/Philippines/gi,'PH').replace(/Australia/gi,'AUS');
-    return '<div class="score-league-item">'+
+    return '<div class="score-league-item'+(key==='champions'?' score-league-item-champions':'')+'">'+
       '<button type="button" class="score-league-filter'+(currentScoreLeague===key?' active':'')+'" data-score-league="'+esc(key)+'" aria-label="'+esc(label)+'" title="'+esc(label)+'">'+
         '<span class="score-league-logo-wrap">'+scoreLeagueLogoMarkup(key)+'</span>'+
       '</button>'+
