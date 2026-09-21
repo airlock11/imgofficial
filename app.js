@@ -1361,7 +1361,10 @@ function renderGames(){
       }).sort(byDateAsc)
     :null;
   const scheduleItems=(asianSchedule||[...live,...scheduled,...other]).slice(0,30);
-  const scoreItems=finals.slice(0,30);
+  const nblHasScore=g=>/^\d{1,3}$/.test(String(g?.awayScore||''))&&/^\d{1,3}$/.test(String(g?.homeScore||''));
+  const nblVerifiedScores=currentScoreLeague==='nbl'?finals.filter(nblHasScore).slice(0,30):[];
+  const nblRecentReplays=currentScoreLeague==='nbl'?finals.filter(g=>!nblHasScore(g)).slice(0,20):[];
+  const scoreItems=currentScoreLeague==='nbl'?nblVerifiedScores:finals.slice(0,30);
   const leagueName=liveNowLabels[currentScoreLeague]?.league||'League';
   const sections=[];
 
@@ -1390,6 +1393,15 @@ function renderGames(){
     }
   }
 
+  if(currentScoreLeague==='nbl'&&scoreItems.length){
+    sections.push(
+      '<section class="league-games-group" aria-label="'+esc(leagueName)+' verified scores">'+
+        '<div class="league-games-group-head"><h3>Verified Scores</h3><span>'+esc(leagueName)+'</span></div>'+
+        '<div class="league-games-list">'+scoreItems.map(renderCard).join('')+'</div>'+
+      '</section>'
+    );
+  }
+
   if(scheduleItems.length){
     sections.push(
       '<section class="league-games-group" aria-label="'+esc(leagueName)+' schedule">'+
@@ -1399,11 +1411,20 @@ function renderGames(){
     );
   }
 
-  if(scoreItems.length){
+  if(currentScoreLeague!=='nbl'&&scoreItems.length){
     sections.push(
       '<section class="league-games-group" aria-label="'+esc(leagueName)+' results">'+
         '<div class="league-games-group-head"><h3>'+(currentScoreLeague==='asian_games'?'Results':'Scores')+'</h3><span>'+esc(leagueName)+'</span></div>'+
         '<div class="league-games-list">'+scoreItems.map(renderCard).join('')+'</div>'+
+      '</section>'
+    );
+  }
+
+  if(currentScoreLeague==='nbl'&&nblRecentReplays.length){
+    sections.push(
+      '<section class="league-games-group" aria-label="'+esc(leagueName)+' recent games">'+
+        '<div class="league-games-group-head"><h3>Recent Games</h3><span>Official replays · score not yet verified</span></div>'+
+        '<div class="league-games-list">'+nblRecentReplays.map(renderCard).join('')+'</div>'+
       '</section>'
     );
   }
