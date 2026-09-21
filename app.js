@@ -1176,10 +1176,15 @@ async function loadAllLiveGames({silent=false}={}){
     const r=await fetch('/youtube-live.json?ts='+Date.now(),{cache:'no-store'});
     if(r.ok){
       const y=await r.json();
-      const byId=new Map((Array.isArray(y.streams)?y.streams:[]).map(x=>[String(x.eventId),x.stream]));
+      const ys=Array.isArray(y.streams)?y.streams:[];
+      const byId=new Map(ys.map(x=>[String(x.eventId),x.stream]));
       for(const g of live){
         const s=byId.get(String(g.eventId));
         if(s?.watchUrl)g.streams=[s];
+      }
+      for(const x of ys.filter(x=>x.sport==='Asian Games'&&x.stream?.watchUrl)){
+        if(live.some(g=>String(g.eventId)===String(x.eventId)))continue;
+        live.push({eventId:x.eventId,sportKey:'asian_games',date:y.updatedAt||new Date().toISOString(),displayTime:'LIVE',away:'2026 Asian Games',home:x.title||'One Sports',awayScore:'',homeScore:'',status:'LIVE · One Sports',state:'live',streams:[x.stream],streamsChecked:true});
       }
     }
   }catch{}
