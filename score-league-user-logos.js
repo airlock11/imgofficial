@@ -14,5 +14,5 @@ volleyball_m:"data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAQDAwMDAgQ
 ,
 fivb:"https://www.fivb.org/Vis2009/Images/GetImage.asmx?No=202231632&maxSize=1400"
 ,
-boxing:"assets/leagues/boxing-glove.svg?v=20260921-2"
+boxing:"assets/leagues/boxing-user-logo.jpg?v=20260921-1"
 };
