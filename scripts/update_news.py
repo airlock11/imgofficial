@@ -4,7 +4,9 @@ import json
 import re
 from datetime import datetime, timezone
 from pathlib import Path
-from urllib.parse import urlparse
+from urllib.parse import urlparse, urlencode
+from urllib.request import Request, urlopen
+from urllib.error import HTTPError, URLError
 
 import feedparser
 from bs4 import BeautifulSoup
@@ -86,6 +88,28 @@ def normalize_link(value):
     p = urlparse(value)
     return (p.netloc.lower() + p.path.rstrip("/")).lower()
 
+
+def youtube_video_available(video_id):
+    """Reject videos YouTube no longer exposes through its public oEmbed endpoint."""
+    if not re.fullmatch(r"[A-Za-z0-9_-]{6,}", video_id or ""):
+        return False
+    query = urlencode({
+        "url": "https://www.youtube.com/watch?v=" + video_id,
+        "format": "json",
+    })
+    req = Request(
+        "https://www.youtube.com/oembed?" + query,
+        headers={"User-Agent": UA, "Accept": "application/json"},
+    )
+    try:
+        with urlopen(req, timeout=12) as response:
+            if response.status != 200:
+                return False
+            payload = json.loads(response.read().decode("utf-8"))
+            return bool(payload.get("title") and payload.get("html"))
+    except (HTTPError, URLError, TimeoutError, ValueError, json.JSONDecodeError):
+        return False
+
 def fetch_feed(cfg):
     parsed = feedparser.parse(
         cfg["url"],
@@ -138,12 +162,13 @@ def fetch_videos():
                 title = clean_html(entry.get("title"), 180)
                 if not title:
                     continue
+                if not youtube_video_available(video_id):
+                    continue
                 videos.append({
                     "id": video_id,
                     "title": title,
                     "source": cfg["name"],
                     "link": "https://www.youtube.com/watch?v=" + video_id,
-                    "embed": "https://www.youtube.com/embed/" + video_id,
                     "thumbnail": "https://i.ytimg.com/vi/" + video_id + "/hqdefault.jpg",
                     "published": published_iso(entry),
                 })
