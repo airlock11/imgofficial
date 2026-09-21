@@ -118,6 +118,8 @@ def parse_uaap():
         return teams.get(value.upper(), clean_team(value))
 
     for i, x in enumerate(xs):
+        if x == "Discover More":
+            break
         if date_re.match(x):
             day = x
             continue
@@ -130,7 +132,8 @@ def parse_uaap():
             if xs[i-2] == "|" and re.fullmatch(r"\d{2,3}", xs[i-3]) and re.fullmatch(r"\d{2,3}", xs[i-1]):
                 home, away = team_name(xs[i-4]), team_name(xs[i+1])
                 hs, as_ = xs[i-3], xs[i-1]
-                iso = pht_iso_from_month(day)
+                tm = xs[i+3] if i+3 < len(xs) and re.fullmatch(r"\d{1,2}:\d{2}\s*(AM|PM)", xs[i+3], re.I) else None
+                iso = pht_iso_from_month(day, tm)
                 games.append({
                     "eventId":"web-uaap-final-"+str(len(games)+1),
                     "date":iso,
