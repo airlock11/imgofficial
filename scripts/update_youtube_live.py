@@ -53,7 +53,7 @@ def search(event):
 def asian_games_live():
  # Dedicated rule requested for IMG: every CURRENTLY LIVE One Sports YouTube
  # broadcast whose title contains the exact phrase "2026 ASIAN GAMES".
- items=youtube_search('"2026 ASIAN GAMES"',50)
+ items=youtube_search("2026 ASIAN GAMES",50)
  ids=[x.get("id",{}).get("videoId") for x in items if x.get("id",{}).get("videoId")]
  details=video_details(ids)
  out=[]
