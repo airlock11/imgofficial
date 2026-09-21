@@ -5,7 +5,8 @@ from pathlib import Path
 
 KEY=os.environ["YOUTUBE_API_KEY"]
 OUT=Path(__file__).resolve().parents[1]/"youtube-live.json"
-UA="IMG-Sports-Live/1.0"\nONE_SPORTS_CHANNEL_ID="UCXDG9ue-emCN8Ad3h7lERqQ"
+UA="IMG-Sports-Live/1.0"
+ONE_SPORTS_CHANNEL_ID="UCXDG9ue-emCN8Ad3h7lERqQ"
 SCOREBOARDS={
  "Basketball":"https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard",
  "Football":"https://site.api.espn.com/apis/site/v2/sports/soccer/all/scoreboard",
