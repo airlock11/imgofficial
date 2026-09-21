@@ -428,7 +428,7 @@ const regionalWebSnapshots={
 };
 function regionalSnapshotGames(sport){
   const snapshot=getRegionalSnapshot(sport);
-  return snapshot?(snapshot.games||[]).map(g=>({...g,homeLogo:g.homeLogo||'',awayLogo:g.awayLogo||'',odds:null,oddsList:[],highlights:[],highlightsChecked:true,streams:[],streamsChecked:true})):[];
+  return snapshot?(snapshot.games||[]).map(g=>({...g,homeLogo:g.homeLogo||'',awayLogo:g.awayLogo||'',odds:null,oddsList:[],highlights:Array.isArray(g.highlights)?g.highlights:[],highlightsChecked:true,streams:Array.isArray(g.streams)?g.streams:[],streamsChecked:Boolean(g.streamsChecked||Array.isArray(g.streams))})):[];
 }
 function renderRegionalContext(){const host=document.getElementById('leagueContext');if(host){host.innerHTML='';host.hidden=true;}}
 
