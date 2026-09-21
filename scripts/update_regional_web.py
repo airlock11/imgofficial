@@ -20,6 +20,7 @@ URLS = {
     "uaap": "https://skedcheck.com/uaap-mens-basketball-schedule-scores/",
     "mpbl_fixtures": "https://www.forebet.com/en/basketball/philippines/mpbl/fixtures",
     "mpbl_results": "https://www.forebet.com/en/basketball/philippines/mpbl/results",
+    "nbl_official": "http://nblp.web.geniussports.com/",
     "nbl_facebook": "https://www.facebook.com/nblpilipinas",
     "nbl_facebook_share": "https://www.facebook.com/share/18tLhjYjUv/",
     "nbl_updates": "https://www.findglocal.com/PH/Cabuyao/1997682720482608/NBL-Pilipinas",
@@ -238,19 +239,139 @@ def nbl_source_lines():
     return [], "NBL-Pilipinas Official Facebook", URLS["nbl_facebook"]
 
 NBL_TEAM_ALIASES = {
-    "Quezon Starhorse": ["QUEZON STARHORSE", "STARHORSE"],
-    "Tikas Kapampangan": ["TIKAS KAPAMPANGAN", "TIKAS KAPANGAN", "KAPAMPANGAN"],
-    "Pangasinan Asinderos": ["PANGASINAN ASINDEROS", "ASINDEROS"],
+    "Batangas Barako - Venom Art": ["BATANGAS BARAKO VENOM ART", "BATANGAS BARAKO", "VENOM ART", "BATANGAS"],
+    "CamSur Express": ["CAM SUR EXPRESS", "CAMSUR EXPRESS", "CAM SUR", "CAMSUR"],
+    "Manila MLB": ["MANILA MLB", "MANILA"],
     "Nueva Ecija Granary Buffalos": ["NUEVA ECIJA GRANARY BUFFALOS", "GRANARY BUFFALOS", "NUEVA ECIJA"],
-    "CamSur Express": ["CAM SUR EXPRESS", "CAMSUR EXPRESS"],
-    "Zamboanga Valientes": ["ZAMBOANGA VALIENTES", "VALIENTES"],
-    "Quezon City": ["QUEZON CITY"],
-    "Taguig City Generals": ["TAGUIG CITY GENERALS", "TAGUIG GENERALS"],
-    "Manila MLB": ["MANILA MLB"],
-    "Zambales Constructicons": ["ZAMBALES CONSTRUCTICONS", "CONSTRUCTICONS"],
-    "Maximus Bacoor Cavite": ["MAXIMUS BACOOR CAVITE", "MAXIMUS BACOOR"],
-    "Santa Rosa Eridanus": ["SANTA ROSA ERIDANUS", "ERIDANUS"]
+    "Pangasinan Asinderos": ["PANGASINAN ASINDEROS", "ASINDEROS", "PANGASINAN"],
+    "Quezon City Titans": ["QUEZON CITY TITANS", "QUEZON CITY", "QC TITANS"],
+    "Quezon Starhorse": ["QUEZON STARHORSE", "QUEZON STAR HORSE", "STARHORSE", "STAR HORSE"],
+    "Taguig City Generals": ["TAGUIG CITY GENERALS", "TAGUIG GENERALS", "TAGUIG"],
+    "Tikas Kapampangan": ["TIKAS KAPAMPANGAN", "TIKAS KAPANGAN", "KAPAMPANGAN", "PAMPANGA"],
+    "Zamboanga Valientes": ["ZAMBOANGA VALIENTES", "VALIENTES", "ZAMBOANGA"]
 }
+
+def canonical_nbl_team(value):
+    normalized = normalize_ocr_text(value)
+    best = None
+    best_len = 0
+    for team, aliases in NBL_TEAM_ALIASES.items():
+        for alias in [team] + aliases:
+            a = normalize_ocr_text(alias)
+            if not a:
+                continue
+            if normalized == a or a in normalized or normalized in a:
+                if len(a) > best_len:
+                    best = team
+                    best_len = len(a)
+    return best or str(value or "").strip()
+
+def nbl_verified_seed_games():
+    # High-confidence 2026 results from public/official sources. These are
+    # retained until a newer verified source for the same matchup/date exists.
+    return [
+        {
+            "eventId": "verified-nbl-20260830-starhorse-tikas",
+            "date": "2026-08-30T18:00:00+08:00",
+            "displayTime": "Aug 30 · Final",
+            "away": "Tikas Kapampangan",
+            "home": "Quezon Starhorse",
+            "awayScore": "84",
+            "homeScore": "87",
+            "status": "Final",
+            "state": "final",
+            "sourceName": "NBL-Pilipinas public update",
+            "sourceUrl": URLS["nbl_updates"],
+        },
+        {
+            "eventId": "verified-nbl-20260817-pangasinan-nueva-ecija",
+            "date": "2026-08-17T18:00:00+08:00",
+            "displayTime": "Aug 17 · Final",
+            "away": "Nueva Ecija Granary Buffalos",
+            "home": "Pangasinan Asinderos",
+            "awayScore": "110",
+            "homeScore": "129",
+            "status": "Final",
+            "state": "final",
+            "sourceName": "Province of Pangasinan",
+            "sourceUrl": "https://www.pangasinan.gov.ph/asinderos-crush-granary-buffalos-129-110-in-nbl-pilipinas-governors-cup/",
+        },
+    ]
+
+def score_is_known(value):
+    return bool(re.fullmatch(r"\d{1,3}", str(value or "").strip()))
+
+def nbl_game_quality(game):
+    score = int(score_is_known(game.get("homeScore"))) + int(score_is_known(game.get("awayScore")))
+    source = str(game.get("sourceName") or "").lower()
+    verified = 2 if ("province of pangasinan" in source or "public update" in source or "facebook image" in source) else 0
+    status = 1 if str(game.get("status") or "").strip() else 0
+    return score * 10 + verified + status
+
+def dedupe_nbl_games(games):
+    # Keep the most informative record for a matchup/day. In particular, a
+    # blank-score YouTube replay must never replace a verified scored final.
+    chosen = {}
+    order = []
+    for game in games:
+        game = dict(game)
+        game["home"] = canonical_nbl_team(game.get("home"))
+        game["away"] = canonical_nbl_team(game.get("away"))
+        teams = tuple(sorted([normalize_ocr_text(game.get("home")), normalize_ocr_text(game.get("away"))]))
+        day = str(game.get("date") or "")[:10]
+        key = (teams, day)
+        if key not in chosen:
+            chosen[key] = game
+            order.append(key)
+        elif nbl_game_quality(game) > nbl_game_quality(chosen[key]):
+            chosen[key] = game
+    return [chosen[key] for key in order]
+
+def parse_nbl_official_site():
+    # Genius Sports is the league's published official website. Some deployments
+    # render data client-side; if usable game rows are present in HTML, collect
+    # them. Otherwise log a compact diagnostic and fall back to verified sources.
+    try:
+        html = fetch(URLS["nbl_official"])
+    except Exception as ex:
+        print("NBL official site unavailable", type(ex).__name__, str(ex)[:120])
+        return []
+    soup = BeautifulSoup(html, "html.parser")
+    text = re.sub(r"\s+", " ", soup.get_text(" ", strip=True))
+    print("NBL official site fetched", len(html), "bytes", "text", text[:180])
+    games = []
+    # Conservative parser for explicit date + team + score rows only.
+    date_pat = r"(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{1,2}),?\s+2026"
+    for dm in re.finditer(date_pat, text, re.I):
+        window = text[dm.start():dm.start()+700]
+        found = []
+        for team, aliases in NBL_TEAM_ALIASES.items():
+            pos = min([window.upper().find(a) for a in aliases if window.upper().find(a) >= 0] or [99999])
+            if pos < 99999:
+                found.append((pos, team))
+        found.sort()
+        if len(found) < 2:
+            continue
+        score_match = re.search(r"\b(\d{2,3})\s*[-–:]\s*(\d{2,3})\b", window)
+        if not score_match:
+            continue
+        dt = datetime.strptime(f"{dm.group(1)} {dm.group(2)} 2026", "%B %d %Y").replace(hour=18, tzinfo=PHT)
+        home, away = found[0][1], found[1][1]
+        a, b = score_match.groups()
+        games.append({
+            "eventId": "official-nbl-" + dt.strftime("%Y%m%d") + "-" + str(len(games)+1),
+            "date": dt.isoformat(),
+            "displayTime": dt.strftime("%b %d · Final").replace(" 0", " "),
+            "away": away,
+            "home": home,
+            "awayScore": b,
+            "homeScore": a,
+            "status": "Final",
+            "state": "final",
+            "sourceName": "NBL-Pilipinas Official",
+            "sourceUrl": URLS["nbl_official"],
+        })
+    return games
 
 def normalize_ocr_text(value):
     value = re.sub(r"[^A-Z0-9 ]+", " ", str(value or "").upper())
@@ -465,8 +586,10 @@ def parse_nbl_youtube_feed():
         if not m:
             continue
         dt = datetime.strptime(f"{m.group(1)} {m.group(2)} 2026", "%B %d %Y").replace(hour=18, tzinfo=PHT)
-        home = m.group(3).strip()
-        away = m.group(4).strip()
+        home = canonical_nbl_team(m.group(3).strip())
+        away = canonical_nbl_team(m.group(4).strip())
+        now = datetime.now(PHT)
+        is_past = dt <= now
         games.append({
             "eventId": "yt-nbl-" + dt.strftime("%Y%m%d") + "-" + str(len(games)+1),
             "date": dt.isoformat(),
@@ -475,8 +598,8 @@ def parse_nbl_youtube_feed():
             "home": home,
             "awayScore": "—",
             "homeScore": "—",
-            "status": "",
-            "state": "final",
+            "status": "Replay available" if is_past else "Scheduled",
+            "state": "final" if is_past else "scheduled",
             "sourceName": "NBL-Pilipinas YouTube",
             "sourceUrl": link
         })
@@ -509,6 +632,20 @@ def parse_nbl():
     except Exception as image_error:
         image_meta = {"images_scanned": 0, "images_matched": 0, "facebook_blocked": True, "error": str(image_error)[:160]}
 
+    # Prefer the league's official Genius Sports site when it exposes usable rows.
+    games.extend(parse_nbl_official_site())
+
+    # Always retain high-confidence scored results; this also protects against
+    # a temporary source outage replacing scores with blank replay metadata.
+    games.extend(nbl_verified_seed_games())
+    existing_nbl = load().get("leagues", {}).get("nbl", {})
+    games.extend([
+        g for g in existing_nbl.get("games", [])
+        if g.get("state") == "final"
+        and score_is_known(g.get("homeScore"))
+        and score_is_known(g.get("awayScore"))
+    ])
+
     # Official NBL YouTube feed remains usable without an API key and keeps
     # current matchups available even when Facebook blocks GitHub Actions.
     games.extend(parse_nbl_youtube_feed())
@@ -527,7 +664,10 @@ def parse_nbl():
     except Exception:
         pass
 
-    games = dedupe_games(games)
+    games = dedupe_nbl_games(games)
+    scheduled = sorted([g for g in games if g.get("state") == "scheduled"], key=lambda x: x.get("date", ""))
+    finals = sorted([g for g in games if g.get("state") == "final"], key=lambda x: x.get("date", ""), reverse=True)
+    games = scheduled[:12] + finals[:30]
     if not games and not broadcast:
         existing = load().get("leagues", {}).get("nbl", {})
         if existing:
@@ -539,9 +679,10 @@ def parse_nbl():
     return {
         "league":"NBL-Pilipinas",
         "season":"2026 Governor's Cup",
-        "coverage":"Official Facebook image scan, public scores and broadcast schedule",
-        "note":"The updater attempts to scan recent NBL-Pilipinas Facebook graphics for final scores and schedules. When Facebook blocks server access, official NBL-Pilipinas YouTube matchups and broadcast listings continue updating automatically.",
+        "coverage":"Official site, verified public scores, YouTube matchups and broadcast schedule",
+        "note":"IMG prioritizes the official NBL-Pilipinas site and verified scored results, preserves confirmed scores through source outages, and uses the official YouTube feed for current matchups when Facebook blocks automated access.",
         "sources":[
+            {"name":"NBL-Pilipinas Official","url":URLS["nbl_official"]},
             {"name":"NBL-Pilipinas Official Facebook","url":URLS["nbl_facebook"]},
             {"name":"NBL-Pilipinas Facebook share link","url":URLS["nbl_facebook_share"]},
             {"name":"Facebook-image mirror","url":URLS["nbl_updates"]},
@@ -550,7 +691,7 @@ def parse_nbl():
         ],
         "image_scan": image_meta,
         "broadcast":broadcast[:20],
-        "games":games[:30]
+        "games":games
     }
 
 
