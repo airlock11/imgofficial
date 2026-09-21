@@ -172,13 +172,18 @@ const cloudflareFallbackFeeds={
 const regionalScoreKeys=new Set(['pba','mpbl','nbl','nblaus','vba']);
 
 let specialSportsDataCache=null;
+let specialSportsDataTime=0;
 let specialSportsDataPromise=null;
 async function loadSpecialSportsData(){
-  if(specialSportsDataCache)return specialSportsDataCache;
+  if(specialSportsDataCache&&Date.now()-specialSportsDataTime<30000)return specialSportsDataCache;
   if(specialSportsDataPromise)return specialSportsDataPromise;
   specialSportsDataPromise=fetch('special-sports-data.json?v='+Date.now(),{cache:'no-store'})
     .then(r=>r.ok?r.json():null)
-    .then(j=>specialSportsDataCache=j)
+    .then(j=>{
+      specialSportsDataCache=j;
+      specialSportsDataTime=Date.now();
+      return j;
+    })
     .catch(()=>null)
     .finally(()=>{specialSportsDataPromise=null});
   return specialSportsDataPromise;
