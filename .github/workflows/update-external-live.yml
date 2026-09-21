@@ -42,7 +42,7 @@ jobs:
 
             python scripts/update_external_live.py
 
-            if git diff --quiet -- external-live.json; then
+            if [ -z "$(git status --porcelain -- external-live.json)" ]; then
               echo "No external live stream changes."
               exit 0
             fi
