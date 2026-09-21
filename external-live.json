@@ -1,59 +1,13 @@
 {
-  "updatedAt": "2026-09-21T12:38:25.714390+00:00",
+  "updatedAt": "2026-09-21T12:58:50.693095+00:00",
   "freshForMinutes": 20,
-  "streams": [
-    {
-      "eventId": "ag26-unext-20260921",
-      "sport": "Asian Games",
-      "leagueKey": "asian_games",
-      "league": "Asian Games",
-      "teams": [],
-      "title": "Asian Games multi-channel live coverage",
-      "genericCoverage": true,
-      "stream": {
-        "watchUrl": "https://www.video.unext.jp/po2/asiangames2026",
-        "provider": "U-NEXT",
-        "channel": "U-NEXT",
-        "title": "Asian Games multi-channel live coverage",
-        "external": true,
-        "geoRestricted": true,
-        "region": "Japan"
-      }
-    },
-    {
-      "eventId": "ag26-vtvgo-202609211938",
-      "sport": "Asian Games",
-      "leagueKey": "asian_games",
-      "league": "Asian Games",
-      "teams": [],
-      "title": "Các môn thi đấu ASIAD 20 - 2026",
-      "genericCoverage": true,
-      "stream": {
-        "watchUrl": "https://vtvgo.vn/",
-        "provider": "VTVgo",
-        "channel": "VTVgo",
-        "title": "Các môn thi đấu ASIAD 20 - 2026",
-        "external": true,
-        "geoRestricted": true,
-        "region": "Vietnam"
-      }
-    }
-  ],
+  "streams": [],
   "sources": [
     {
       "name": "Sony LIV",
       "region": "India",
-      "official": true
-    },
-    {
-      "name": "U-NEXT",
-      "region": "Japan",
-      "official": true
-    },
-    {
-      "name": "VTVgo",
-      "region": "Vietnam",
-      "official": true
+      "official": true,
+      "directEventLinksOnly": true
     }
   ]
 }
