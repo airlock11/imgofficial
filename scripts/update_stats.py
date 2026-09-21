@@ -352,7 +352,7 @@ def espn_athlete_rows(sport,league,season=None,seasontype=None):
 def espn_leader_group(sport,league,title,suffix,sort_field,stat_aliases,season=None,seasontype=2,category=None):
     base=f"https://site.web.api.espn.com/apis/common/v3/sports/{sport}/{league}/statistics/byathlete"
     params={
-        "region":"us","lang":"en","contentorigin":"espn","isqualified":"true",
+        "region":"us","lang":"en","contentorigin":"espn","isqualified":"false",
         "page":"1","limit":"50","sort":sort_field+":desc"
     }
     if season is not None:params["season"]=str(season)
@@ -506,25 +506,25 @@ def espn_basketball_stats(key,league,season,season_label):
 
 def espn_hockey_stats():
     return espn_multi_group_stats("hockey","nhl","NHL","2025–26 Regular Season",2026,[
-        ("Points","PTS","skating.points",["points"],"skating"),
-        ("Goals","G","skating.goals",["goals"],"skating"),
-        ("Assists","A","skating.assists",["assists"],"skating")
+        ("Points","PTS","offensive.points",["points"],"skaters"),
+        ("Goals","G","offensive.goals",["goals"],"skaters"),
+        ("Assists","A","offensive.assists",["assists"],"skaters")
     ])
 
 def espn_baseball_stats():
     return espn_multi_group_stats("baseball","mlb","MLB","2026 Regular Season",2026,[
         ("Home Runs","HR","batting.homeRuns",["homeRuns"],"batting"),
         ("Runs Batted In","RBI","batting.RBIs",["RBIs","rbi","runsBattedIn"],"batting"),
-        ("Batting Average","AVG","batting.battingAverage",["battingAverage","avg"],"batting"),
+        ("Batting Average","AVG","batting.avg",["battingAverage","avg"],"batting"),
         ("Stolen Bases","SB","batting.stolenBases",["stolenBases"],"batting")
     ])
 
 def espn_football_stats(key,league,label):
     return espn_multi_group_stats("football",league,label,"2026 Regular Season",2026,[
-        ("Passing Yards","YDS","passing.passingYards",["passingYards"],"passing"),
-        ("Passing TDs","TD","passing.passingTouchdowns",["passingTouchdowns","passingTDs"],"passing"),
-        ("Rushing Yards","YDS","rushing.rushingYards",["rushingYards"],"rushing"),
-        ("Receiving Yards","YDS","receiving.receivingYards",["receivingYards"],"receiving")
+        ("Passing Yards","YDS","passing.passingYards",["passingYards"],"offense:passing"),
+        ("Passing TDs","TD","passing.passingTouchdowns",["passingTouchdowns","passingTDs"],"offense:passing"),
+        ("Rushing Yards","YDS","rushing.rushingYards",["rushingYards"],"offense:rushing"),
+        ("Receiving Yards","YDS","receiving.receivingYards",["receivingYards"],"offense:receiving")
     ])
 
 def parse_pba_stats():
