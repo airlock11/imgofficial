@@ -60,6 +60,7 @@ assert.match(app,/class="live-close"/,'The main dialog close button must remain 
 assert.equal((app.match(/\(g\.streams\?\.length\?/g)||[]).length,0,'All live buttons must use the eligibility check');
 assert.match(app,/sportLabel:x\.sport\|\|'Sport'/,'Standalone broadcasts must show their sport');
 assert.match(app,/leagueLabel:label/,'Standalone broadcasts must show their league');
+assert.match(app,/news-video-frame[\\s\\S]*?onerror="this\\.onerror=null;this\\.src=\\\\'about-sports\\.jpg\\\\'"/,'News video thumbnails must fall back when YouTube has no image');
 console.log('PASS: mobile preferences, live stream eligibility, labels, stream lookup, and simplified live dialog');
 
 // Scores page renderer must define its section accumulator before using it.
