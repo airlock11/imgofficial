@@ -1228,6 +1228,61 @@ function renderGames(){
   const other=allGames.filter(g=>!['live','scheduled','final'].includes(g.state)).sort(byDateAsc);
 
   const renderCard=g=>{
+  
+
+  if(currentScoreLeague==='uaap'){
+    const standings=Array.isArray(getRegionalSnapshot('uaap')?.standings)?getRegionalSnapshot('uaap').standings:[];
+    if(standings.length){
+      sections.push('<section class="league-games-group league-standings" aria-label="UAAP standings">'+
+        '<div class="league-games-group-head"><h3>Standings</h3><span>UAAP Season 89</span></div>'+
+        '<div class="league-standings-head"><span>Team</span><b>W</b><b>L</b></div>'+
+        '<div class="league-standings-body">'+standings.map(s=>'<div class="league-standings-row"><strong>'+esc(s.team)+'</strong><b>'+esc(s.wins)+'</b><b>'+esc(s.losses)+'</b></div>').join('')+'</div>'+
+      '</section>');
+    }
+  }
+  if(currentScoreLeague==='ncaa_ph'){
+    const standings=specialSportsDataCache?.leagues?.ncaa_ph?.standings||{};
+    for(const [groupKey,rows] of Object.entries(standings)){
+      if(!Array.isArray(rows)||!rows.length)continue;
+      const groupName=groupKey.replace(/([a-z])([A-Z])/g,'$1 $2').replace(/^./,x=>x.toUpperCase());
+      sections.push('<section class="league-games-group league-standings" aria-label="NCAA Philippines '+esc(groupName)+' standings">'+
+        '<div class="league-games-group-head"><h3>'+esc(groupName)+' Standings</h3><span>NCAA Season 102</span></div>'+
+        '<div class="league-standings-head"><span>Team</span><b>W</b><b>L</b></div>'+
+        '<div class="league-standings-body">'+rows.map(s=>'<div class="league-standings-row"><strong>'+esc(s.team)+'</strong><b>'+esc(s.wins)+'</b><b>'+esc(s.losses)+'</b></div>').join('')+'</div>'+
+      '</section>');
+    }
+  }
+  if(scheduleItems.length){
+    sections.push(
+      '<section class="league-games-group" aria-label="'+esc(leagueName)+' schedule">'+
+        '<div class="league-games-group-head"><h3>Schedule</h3><span>'+esc(leagueName)+'</span></div>'+
+        '<div class="league-games-list">'+scheduleItems.map(renderCard).join('')+'</div>'+
+      '</section>'
+    );
+  }
+  if(scoreItems.length){
+    sections.push(
+      '<section class="league-games-group" aria-label="'+esc(leagueName)+' results">'+
+        '<div class="league-games-group-head"><h3>'+(currentScoreLeague==='asian_games'?'Results':'Scores')+'</h3><span>'+esc(leagueName)+'</span></div>'+
+        '<div class="league-games-list">'+scoreItems.map(renderCard).join('')+'</div>'+
+      '</section>'
+    );
+  }
+  if(currentScoreLeague==='asian_games'){
+      const score=value=>String(value??'—');
+      const hasAway=g.away&&g.away!=='Asian Games';
+      const hasHome=g.home&&g.home!=='Asian Games';
+      return '<article class="game asian-games-card'+(g.state==='live'?' game-is-live':'')+'" data-game-key="'+esc(gameDomKey(g))+'">'+
+        '<div class="time">'+esc(g.displayTime||new Date(g.date).toLocaleString([],{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}))+'</div>'+
+        '<div class="teams asian-games-event-copy">'+
+          '<div class="asian-games-event-title">'+esc(g.title||'Asian Games event')+'</div>'+
+          (hasAway?'<div class="team"><span>'+esc(g.away)+'</span>'+(score(g.awayScore)!=='—'?'<b data-score-side="away">'+esc(g.awayScore)+'</b>':'')+'</div>':'')+
+          (hasHome?'<div class="team"><span>'+esc(g.home)+'</span>'+(score(g.homeScore)!=='—'?'<b data-score-side="home">'+esc(g.homeScore)+'</b>':'')+'</div>':'')+
+        '</div>'+
+        '<div class="state '+(g.state==='live'?'live':'')+'">'+esc(g.status||'Scheduled')+'</div>'+
+        (liveStreamsForGame(g).length?'<button class="watch-live-btn" type="button" data-live-event="'+esc(g.eventId)+'"><span class="live-dot" aria-hidden="true"></span>'+(g.state==='live'?'Watch Live':'View Stream')+'</button>':'')+
+      '</article>';
+    }
     if(g.eventOnly){
       return '<article class="game special-score-event" data-game-key="'+esc(gameDomKey(g))+'">'+
         '<div class="time">'+esc(g.displayTime||'')+'</div>'+
@@ -1262,7 +1317,14 @@ function renderGames(){
     '</article>';
   };
 
-  const scheduleItems=[...live,...scheduled,...other].slice(0,30);
+  const asianNow=Date.now();
+  const asianSchedule=currentScoreLeague==='asian_games'
+    ?[...live,...scheduled].filter(g=>{
+        const t=Date.parse(g.date||'');
+        return g.state==='live'||!Number.isFinite(t)||t>=asianNow-6*60*60*1000;
+      }).sort(byDateAsc)
+    :null;
+  const scheduleItems=(asianSchedule||[...live,...scheduled,...other]).slice(0,30);
   const scoreItems=finals.slice(0,30);
   const leagueName=liveNowLabels[currentScoreLeague]?.league||'League';
 
@@ -1277,45 +1339,6 @@ function renderGames(){
         '<div class="medal-table-body">'+medals.map(m=>'<div class="medal-table-row"><span>'+esc(m.rank)+'</span><strong>'+esc(m.country)+'</strong><b>'+esc(m.gold)+'</b><b>'+esc(m.silver)+'</b><b>'+esc(m.bronze)+'</b><b>'+esc(m.total)+'</b></div>').join('')+'</div>'+
       '</section>');
     }
-  }
-
-  if(currentScoreLeague==='uaap'){
-    const standings=Array.isArray(getRegionalSnapshot('uaap')?.standings)?getRegionalSnapshot('uaap').standings:[];
-    if(standings.length){
-      sections.push('<section class="league-games-group league-standings" aria-label="UAAP standings">'+
-        '<div class="league-games-group-head"><h3>Standings</h3><span>UAAP Season 89</span></div>'+
-        '<div class="league-standings-head"><span>Team</span><b>W</b><b>L</b></div>'+
-        '<div class="league-standings-body">'+standings.map(s=>'<div class="league-standings-row"><strong>'+esc(s.team)+'</strong><b>'+esc(s.wins)+'</b><b>'+esc(s.losses)+'</b></div>').join('')+'</div>'+
-      '</section>');
-    }
-  }
-  if(currentScoreLeague==='ncaa_ph'){
-    const standings=specialSportsDataCache?.leagues?.ncaa_ph?.standings||{};
-    for(const [groupKey,rows] of Object.entries(standings)){
-      if(!Array.isArray(rows)||!rows.length)continue;
-      const groupName=groupKey.replace(/([a-z])([A-Z])/g,'$1 $2').replace(/^./,x=>x.toUpperCase());
-      sections.push('<section class="league-games-group league-standings" aria-label="NCAA Philippines '+esc(groupName)+' standings">'+
-        '<div class="league-games-group-head"><h3>'+esc(groupName)+' Standings</h3><span>NCAA Season 102</span></div>'+
-        '<div class="league-standings-head"><span>Team</span><b>W</b><b>L</b></div>'+
-        '<div class="league-standings-body">'+rows.map(s=>'<div class="league-standings-row"><strong>'+esc(s.team)+'</strong><b>'+esc(s.wins)+'</b><b>'+esc(s.losses)+'</b></div>').join('')+'</div>'+
-      '</section>');
-    }
-  }
-  if(scheduleItems.length){
-    sections.push(
-      '<section class="league-games-group" aria-label="'+esc(leagueName)+' schedule">'+
-        '<div class="league-games-group-head"><h3>Schedule</h3><span>'+esc(leagueName)+'</span></div>'+
-        '<div class="league-games-list">'+scheduleItems.map(renderCard).join('')+'</div>'+
-      '</section>'
-    );
-  }
-  if(scoreItems.length){
-    sections.push(
-      '<section class="league-games-group" aria-label="'+esc(leagueName)+' scores">'+
-        '<div class="league-games-group-head"><h3>Scores</h3><span>'+esc(leagueName)+'</span></div>'+
-        '<div class="league-games-list">'+scoreItems.map(renderCard).join('')+'</div>'+
-      '</section>'
-    );
   }
 
   host.innerHTML=sections.length
