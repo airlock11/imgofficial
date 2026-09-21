@@ -13,6 +13,7 @@ OUT=Path(__file__).resolve().parents[1]/"external-live.json"
 UA="Mozilla/5.0 (compatible; IMG-Sports-Live/1.0; +https://www.imgofficial.com)"
 SERIES_PATH="/live-sport/20th-asian-games-aichi-nagoya-2026-1790007854/"
 SONY_HOST="www.sonyliv.com"
+UNEXT_URL="https://www.video.unext.jp/po2/asiangames2026"
 SEEDS=[
     "https://www.sonyliv.com/sports/cricket-20th-asian-games-aichi-nagoya-2026-1590016519",
     "https://www.sonyliv.com/live-sport/20th-asian-games-aichi-nagoya-2026-1790007854/sports-stream-3-21-sep-2026-1090541385",
@@ -161,6 +162,44 @@ def page_is_live(page,title,url,now_local):
             return True
     return False
 
+def unext_live(now_utc):
+    japan=ZoneInfo("Asia/Tokyo")
+    local=now_utc.astimezone(japan)
+    try:
+        page=fetch_text(UNEXT_URL)
+    except Exception as ex:
+        print("U-NEXT seed",ex)
+        return []
+    text=visible_text(normalise_embedded(page))
+    md=f"{local.month}月{local.day}日"
+    m=re.search(re.escape(md)+r"\s+(\d{1,2}):(\d{2})\s*配信開始",text)
+    if not m:
+        print("U-NEXT today start not found",md)
+        return []
+    start=local.replace(hour=int(m.group(1)),minute=int(m.group(2)),second=0,microsecond=0)
+    end=local.replace(hour=23,minute=59,second=59,microsecond=0)
+    active=start<=local<=end
+    print("U-NEXT",md,"start",start.isoformat(),"active",active)
+    if not active:return []
+    return [{
+        "eventId":"ag26-unext-"+local.strftime("%Y%m%d"),
+        "sport":"Asian Games",
+        "leagueKey":"asian_games",
+        "league":"Asian Games",
+        "teams":[],
+        "title":"Asian Games multi-channel live coverage",
+        "genericCoverage":True,
+        "stream":{
+            "watchUrl":UNEXT_URL,
+            "provider":"U-NEXT",
+            "channel":"U-NEXT",
+            "title":"Asian Games multi-channel live coverage",
+            "external":True,
+            "geoRestricted":True,
+            "region":"Japan"
+        }
+    }]
+
 def main():
     india=ZoneInfo("Asia/Kolkata")
     now=datetime.now(timezone.utc)
@@ -207,6 +246,11 @@ def main():
         except Exception as ex:
             print("candidate",url,ex)
 
+    try:
+        streams.extend(unext_live(now))
+    except Exception as ex:
+        print("U-NEXT",ex)
+
     seen=set();dedup=[]
     for x in streams:
         key=x["stream"]["watchUrl"]
@@ -217,7 +261,10 @@ def main():
         "updatedAt":now.isoformat(),
         "freshForMinutes":20,
         "streams":dedup,
-        "sources":[{"name":"Sony LIV","region":"India","official":True}]
+        "sources":[
+            {"name":"Sony LIV","region":"India","official":True},
+            {"name":"U-NEXT","region":"Japan","official":True}
+        ]
     }
     OUT.write_text(json.dumps(payload,indent=2,ensure_ascii=False)+"\n",encoding="utf-8")
     print("verified external live streams",len(dedup))
