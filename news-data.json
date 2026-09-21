@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-21T05:27:30+00:00",
+  "updated_at": "2026-09-21T05:28:40+00:00",
   "refresh_minutes": 20,
   "counts": {
     "total": 30,
@@ -7,17 +7,58 @@
     "international": 22
   },
   "errors": {
-    "video:BBC Sport": "No videos returned from RSS or channel page",
-    "video:ESPN": "No videos returned from RSS or channel page",
-    "video:NBA": "No videos returned from RSS or channel page",
-    "video:NFL": "No videos returned from RSS or channel page",
-    "video:Formula 1": "No videos returned from RSS or channel page",
-    "video:UFC": "No videos returned from RSS or channel page",
-    "video:Volleyball World": "No videos returned from RSS or channel page",
-    "video:NBL-Pilipinas": "No videos returned from RSS or channel page",
     "ESPN": "No articles returned"
   },
-  "videos": [],
+  "videos": [
+    {
+      "id": "dLKIzCi4cLo",
+      "title": "LIVE: NBL Governors Cup Season 2025 | May 2, 2025 | Taguig vs Cam Sur",
+      "source": "NBL-Pilipinas",
+      "link": "https://www.youtube.com/watch?v=dLKIzCi4cLo",
+      "thumbnail": "https://i.ytimg.com/vi/dLKIzCi4cLo/hqdefault.jpg",
+      "published": "2026-09-21T05:28:35.687375+00:00"
+    },
+    {
+      "id": "hUgn8XAdyJc",
+      "title": "Thailand 🇹🇭 vs. Netherlands 🇳🇱 | Full Match | World Championships 2025 - Women",
+      "source": "Volleyball World",
+      "link": "https://www.youtube.com/watch?v=hUgn8XAdyJc",
+      "thumbnail": "https://i.ytimg.com/vi/hUgn8XAdyJc/hqdefault.jpg",
+      "published": "2026-09-21T05:28:34.961322+00:00"
+    },
+    {
+      "id": "ZNh_7UCtXyw",
+      "title": "Taguig Generals vs Cam Sur Express - Finals Game 4",
+      "source": "NBL-Pilipinas",
+      "link": "https://www.youtube.com/watch?v=ZNh_7UCtXyw",
+      "thumbnail": "https://i.ytimg.com/vi/ZNh_7UCtXyw/hqdefault.jpg",
+      "published": "2026-09-21T05:28:34.687375+00:00"
+    },
+    {
+      "id": "ZejN0UzIfKE",
+      "title": "Natalia Silva vs Rose Namajunas | FULL FIGHT | UFC 332",
+      "source": "UFC",
+      "link": "https://www.youtube.com/watch?v=ZejN0UzIfKE",
+      "thumbnail": "https://i.ytimg.com/vi/ZejN0UzIfKE/hqdefault.jpg",
+      "published": "2026-09-21T05:28:34.049720+00:00"
+    },
+    {
+      "id": "4wAcgTV3uno",
+      "title": "Germany 🇩🇪 vs. Bulgaria 🇧🇬 | Full Match | World Championship 2025 - Men",
+      "source": "Volleyball World",
+      "link": "https://www.youtube.com/watch?v=4wAcgTV3uno",
+      "thumbnail": "https://i.ytimg.com/vi/4wAcgTV3uno/hqdefault.jpg",
+      "published": "2026-09-21T05:28:33.961322+00:00"
+    },
+    {
+      "id": "kgURMLXbk3Q",
+      "title": "NBL President's Cup Season 2024 | August 25, 2024 | Sunday | Game 1 Parañaque vs Cam Sur Express",
+      "source": "NBL-Pilipinas",
+      "link": "https://www.youtube.com/watch?v=kgURMLXbk3Q",
+      "thumbnail": "https://i.ytimg.com/vi/kgURMLXbk3Q/hqdefault.jpg",
+      "published": "2026-09-21T05:28:33.687375+00:00"
+    }
+  ],
   "items": [
     {
       "title": "Asian Games: PH’s Jean Claude Saclag books shot at MMA gold",
