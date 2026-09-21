@@ -57,4 +57,6 @@ assert.doesNotMatch(host.innerHTML,/data-close-live|live-dialog-close/,'The redu
 assert.doesNotMatch(host.innerHTML,/Watch on YouTube|<h2>|One Sports/,'The simplified player must not show redundant stream labels or external-link text');
 assert.match(app,/class="live-close"/,'The main dialog close button must remain available');
 assert.equal((app.match(/\(g\.streams\?\.length\?/g)||[]).length,0,'All live buttons must use the eligibility check');
-console.log('PASS: mobile preferences, live stream eligibility, stream lookup, and simplified live dialog');
+assert.match(app,/sportLabel:x\.sport\|\|'Sport'/,'Standalone broadcasts must show their sport');
+assert.match(app,/leagueLabel:label/,'Standalone broadcasts must show their league');
+console.log('PASS: mobile preferences, live stream eligibility, labels, stream lookup, and simplified live dialog');
