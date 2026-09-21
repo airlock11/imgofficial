@@ -148,7 +148,7 @@ const logoFeeds={
   football:'https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard',
   ncaaf:'https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard'
 };
-const scoreKeys=new Set(['soccer','laliga','seriea','bundesliga','champions','mls','basketball','wnba','pba','ncaa_ph','uaap','mpbl','nbl','nblaus','vba','atp','wta','ipl','volleyball_w','volleyball_m','baseball','hockey','football','ncaaf','f1','ufc','boxing']);
+const scoreKeys=new Set(['soccer','laliga','seriea','bundesliga','champions','mls','pfl','basketball','wnba','pba','ncaa_ph','uaap','mpbl','nbl','nblaus','vba','bleague','euroleague','atp','wta','australian_open','wimbledon','us_open','ipl','bigbash','cricket_world_cup','volleyball_w','volleyball_m','pvl','vleague_jp','baseball','npb','kbo','hockey','khl','iihf','football','ncaaf','f1','motogp','formulae','ufc','one','boxing','wbc','wba','ibf','wbo']);
 const oddsKeys=new Set(['soccer','laliga','seriea','bundesliga','champions','mls','basketball','wnba','baseball','hockey','football','ncaaf']);
 let statsKeys=new Set();
 const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));

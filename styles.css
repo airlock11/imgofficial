@@ -996,3 +996,13 @@ main{min-height:calc(100svh - 68px)}
 @media(prefers-reduced-motion:reduce){
   .sports-tab,.sports-logo-tile{animation:none!important;transition:none!important;opacity:1;transform:none}
 }
+
+/* Extended score logo contrast */
+:root[data-theme="dark"] .score-league-filter[data-score-league="champions"] .score-league-logo-wrap,
+:root[data-theme="dark"] .score-league-filter[data-score-league="bleague"] .score-league-logo-wrap,
+:root[data-theme="dark"] .score-league-filter[data-score-league="euroleague"] .score-league-logo-wrap,
+:root[data-theme="dark"] .score-league-filter[data-score-league="us_open"] .score-league-logo-wrap,
+:root[data-theme="dark"] .score-league-filter[data-score-league="kbo"] .score-league-logo-wrap,
+:root[data-theme="dark"] .score-league-filter[data-score-league="cricket_world_cup"] .score-league-logo-wrap,
+:root[data-theme="dark"] .score-league-filter[data-score-league="vleague_jp"] .score-league-logo-wrap,
+:root[data-theme="dark"] .score-league-filter[data-score-league="iihf"] .score-league-logo-wrap{background:#f8fafc;border-radius:10px;box-shadow:inset 0 0 0 1px rgba(17,24,39,.08)}

@@ -178,15 +178,17 @@ let specialSportsDataPromise=null;
 async function loadSpecialSportsData(){
   if(specialSportsDataCache&&Date.now()-specialSportsDataTime<30000)return specialSportsDataCache;
   if(specialSportsDataPromise)return specialSportsDataPromise;
-  specialSportsDataPromise=fetch('special-sports-data.json?v='+Date.now(),{cache:'no-store'})
-    .then(r=>r.ok?r.json():null)
-    .then(j=>{
-      specialSportsDataCache=j;
-      specialSportsDataTime=Date.now();
-      return j;
-    })
-    .catch(()=>null)
-    .finally(()=>{specialSportsDataPromise=null});
+  specialSportsDataPromise=Promise.allSettled([
+    fetch('special-sports-data.json?v='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null),
+    fetch('extended-sports-data.json?v='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null)
+  ]).then(results=>{
+    const base=results[0]?.status==='fulfilled'&&results[0].value?results[0].value:{};
+    const extended=results[1]?.status==='fulfilled'&&results[1].value?results[1].value:{};
+    const merged={...base,leagues:{...(base.leagues||{}),...(extended.leagues||{})}};
+    specialSportsDataCache=merged;
+    specialSportsDataTime=Date.now();
+    return merged;
+  }).catch(()=>null).finally(()=>{specialSportsDataPromise=null});
   return specialSportsDataPromise;
 }
 
@@ -196,7 +198,7 @@ async function specialSportsPayload(sport){
   if(!league||!Array.isArray(league.games)||!league.games.length)return null;
   return {special:true,games:league.games,sourceName:league.sourceName||'',sourceUrl:league.sourceUrl||''};
 }
-const specialScoreKeys=new Set(['atp','wta','ipl','volleyball_w','volleyball_m','asian_games','ncaa_ph']);
+const specialScoreKeys=new Set(['atp','wta','ipl','volleyball_w','volleyball_m','asian_games','ncaa_ph','bleague','euroleague','pfl','australian_open','wimbledon','us_open','npb','kbo','khl','iihf','bigbash','cricket_world_cup','pvl','vleague_jp','motogp','formulae','one','wbc','wba','ibf','wbo']);
 function scoreGameLooksGeneric(g){
   const names=[g?.away,g?.home].map(x=>String(x||'').trim().toLowerCase());
   const generic=new Set(['','away','home','tbd','team 1','team 2','player 1','player 2']);
@@ -309,7 +311,28 @@ const liveNowLabels={
   baseball:{sport:'Baseball',league:'MLB'},
   hockey:{sport:'Hockey',league:'NHL'},
   football:{sport:'American Football',league:'NFL'},
-  ncaaf:{sport:'American Football',league:'NCAA Football'}
+  ncaaf:{sport:'American Football',league:'NCAA Football'},
+  bleague:{sport:'Basketball',league:'B.League'},
+  euroleague:{sport:'Basketball',league:'EuroLeague'},
+  pfl:{sport:'Football',league:'Philippine Football League'},
+  australian_open:{sport:'Tennis',league:'Australian Open'},
+  wimbledon:{sport:'Tennis',league:'Wimbledon'},
+  us_open:{sport:'Tennis',league:'US Open'},
+  npb:{sport:'Baseball',league:'NPB'},
+  kbo:{sport:'Baseball',league:'KBO League'},
+  khl:{sport:'Hockey',league:'KHL'},
+  iihf:{sport:'Hockey',league:'IIHF World Championship'},
+  bigbash:{sport:'Cricket',league:'Big Bash League'},
+  cricket_world_cup:{sport:'Cricket',league:'ICC T20 World Cup'},
+  pvl:{sport:'Volleyball',league:'PVL'},
+  vleague_jp:{sport:'Volleyball',league:'V.League Japan'},
+  motogp:{sport:'Motorsport',league:'MotoGP'},
+  formulae:{sport:'Motorsport',league:'Formula E'},
+  one:{sport:'Combat Sports',league:'ONE Championship'},
+  wbc:{sport:'Boxing',league:'WBC'},
+  wba:{sport:'Boxing',league:'WBA'},
+  ibf:{sport:'Boxing',league:'IBF'},
+  wbo:{sport:'Boxing',league:'WBO'}
 };
 function asianGamesSportLabel(game){
   const title=String(game?.title||'').trim();
@@ -323,7 +346,7 @@ function asianGamesEventLabel(game){
   const index=title.indexOf(divider);
   return index>0?title.slice(index+divider.length).trim():(title||'Asian Games event');
 }
-const scoreLeagueOrder=['asian_games','soccer','laliga','seriea','bundesliga','champions','mls','basketball','wnba','pba','ncaa_ph','uaap','mpbl','nbl','nblaus','vba','atp','wta','ipl','volleyball_w','volleyball_m','baseball','hockey','football','ncaaf','f1','ufc','boxing'];
+const scoreLeagueOrder=['asian_games','soccer','laliga','seriea','bundesliga','champions','mls','pfl','basketball','wnba','pba','ncaa_ph','uaap','mpbl','nbl','nblaus','vba','bleague','euroleague','atp','wta','australian_open','wimbledon','us_open','ipl','bigbash','cricket_world_cup','volleyball_w','volleyball_m','pvl','vleague_jp','baseball','npb','kbo','hockey','khl','iihf','football','ncaaf','f1','motogp','formulae','ufc','one','boxing','wbc','wba','ibf','wbo'];
 const scoreLeagueLogoCache=new Map();
 let currentScoreLeague='soccer';
 let scoreLoadToken=0;
@@ -334,7 +357,7 @@ function scoreLeagueFallback(key){
     soccer:'EPL',laliga:'LAL',seriea:'SA',bundesliga:'BUN',champions:'UCL',mls:'MLS',
     basketball:'NBA',wnba:'WNBA',pba:'PBA',ncaa_ph:'NCAA-PH',uaap:'UAAP',mpbl:'MPBL',nbl:'NBL-PH',nblaus:'NBL',
     vba:'VBA',atp:'ATP',wta:'WTA',ipl:'IPL',volleyball_w:'FIVB',volleyball_m:'FIVB',
-    baseball:'MLB',hockey:'NHL',football:'NFL',ncaaf:'NCAA',f1:'F1',ufc:'UFC',boxing:'BOX',asian_games:'AG26'
+    baseball:'MLB',npb:'NPB',kbo:'KBO',hockey:'NHL',khl:'KHL',iihf:'IIHF',football:'NFL',ncaaf:'NCAA',f1:'F1',motogp:'MGP',formulae:'FE',ufc:'UFC',one:'ONE',boxing:'BOX',wbc:'WBC',wba:'WBA',ibf:'IBF',wbo:'WBO',pfl:'PFL',bleague:'B.LEAGUE',euroleague:'EL',australian_open:'AO',wimbledon:'WIM',us_open:'USO',bigbash:'BBL',cricket_world_cup:'ICC',pvl:'PVL',vleague_jp:'V.LEAGUE',asian_games:'AG26'
   };
   return '<span class="score-league-fallback">'+esc(short[key]||label.slice(0,5).toUpperCase())+'</span>';
 }
@@ -1034,6 +1057,7 @@ function normalizeScorePayload(sport,payload){
         status:g.status||'Scheduled',
         state:g.state||'scheduled',
         eventOnly:Boolean(g.eventOnly),
+        dataType:g.dataType||'',
         sourceName:g.sourceName||payload.sourceName||'',
         sourceUrl:g.sourceUrl||payload.sourceUrl||'',
         odds:null,oddsList:[],highlights:Array.isArray(g.highlights)?g.highlights:[],highlightsChecked:true,
@@ -1405,7 +1429,7 @@ async function loadAllLiveGames({silent=false}={}){
 
   const live=[];
   const webKeys=['pba','mpbl','nbl','nblaus','vba'];
-  const apiKeys=['soccer','laliga','seriea','bundesliga','champions','basketball','wnba','atp','wta','ipl','volleyball_w','volleyball_m','f1','ufc','boxing','baseball','hockey','football','ncaaf'];
+  const apiKeys=['soccer','laliga','seriea','bundesliga','champions','mls','pfl','basketball','wnba','atp','wta','australian_open','wimbledon','us_open','ipl','bigbash','cricket_world_cup','volleyball_w','volleyball_m','pvl','vleague_jp','f1','motogp','formulae','ufc','one','boxing','wbc','wba','ibf','wbo','baseball','npb','kbo','hockey','khl','iihf','football','ncaaf','bleague','euroleague'];
 
   const regionalPromise=(async()=>{
     await loadRegionalAutoData();
@@ -1508,7 +1532,8 @@ function renderGames(){
   const live=allGames.filter(g=>g.state==='live').sort(byDateAsc);
   const scheduled=allGames.filter(g=>g.state==='scheduled').sort(byDateAsc);
   const finals=allGames.filter(g=>g.state==='final').sort(byDateDesc);
-  const other=allGames.filter(g=>!['live','scheduled','final'].includes(g.state)).sort(byDateAsc);
+  const info=allGames.filter(g=>g.state==='info'||g.dataType==='titleholder').sort((a,b)=>String(a.title||'').localeCompare(String(b.title||'')));
+  const other=allGames.filter(g=>!['live','scheduled','final','info'].includes(g.state)&&g.dataType!=='titleholder').sort(byDateAsc);
 
   const renderCard=g=>{
     if(currentScoreLeague==='asian_games'){
@@ -1635,6 +1660,15 @@ function renderGames(){
       '<section class="league-games-group" aria-label="'+esc(leagueName)+' verified scores">'+
         '<div class="league-games-group-head"><h3>Verified Scores</h3><span>'+esc(leagueName)+'</span></div>'+
         '<div class="league-games-list">'+scoreItems.map(renderCard).join('')+'</div>'+
+      '</section>'
+    );
+  }
+
+  if(info.length){
+    sections.push(
+      '<section class="league-games-group" aria-label="'+esc(leagueName)+' titleholders">'+
+        '<div class="league-games-group-head"><h3>Titleholders</h3><span>'+esc(leagueName)+'</span></div>'+
+        '<div class="league-games-list">'+info.map(renderCard).join('')+'</div>'+
       '</section>'
     );
   }
