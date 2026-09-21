@@ -38,5 +38,6 @@ one:"https://commons.wikimedia.org/wiki/Special:Redirect/file/ONE_Championship.p
 wbc:"https://www.google.com/s2/favicons?domain=wbcboxing.com&sz=128",
 wba:"https://www.google.com/s2/favicons?domain=wbaboxing.com&sz=128",
 ibf:"https://www.google.com/s2/favicons?domain=ibf-usba-boxing.com&sz=128",
-wbo:"https://www.google.com/s2/favicons?domain=wboboxing.com&sz=128"
+wbo:"https://www.google.com/s2/favicons?domain=wboboxing.com&sz=128",
+ring:"https://www.google.com/s2/favicons?domain=ringmagazine.com&sz=128"
 };

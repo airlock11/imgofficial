@@ -83,7 +83,7 @@ const sportsDirectory={
   Cricket:[['IPL','India','ipl'],['Big Bash League','Australia','bigbash'],['ICC Cricket World Cup','International','cricket_world_cup']],
   Volleyball:[['FIVB Women','International','volleyball_w'],['FIVB Men','International','volleyball_m'],['PVL','Philippines','pvl'],['V.League','Japan','vleague_jp']],
   Motorsport:[['Formula 1','International','f1'],['MotoGP','International','motogp'],['Formula E','International','formulae']],
-  Boxing:[['Boxing','Worldwide','boxing'],['WBC','International','wbc'],['WBA','International','wba'],['IBF','International','ibf'],['WBO','International','wbo']],
+  Boxing:[['WBC','International','wbc'],['WBA','International','wba'],['IBF','International','ibf'],['WBO','International','wbo'],['THE RING','Worldwide','ring']],
   'Combat Sports':[['UFC','International','ufc'],['ONE Championship','Asia','one']],
   'American Football':[['NFL','United States','football'],['NCAA Football','United States','ncaaf']]
 };
@@ -123,6 +123,7 @@ const staticLeagueLogos={
   wba:'https://www.google.com/s2/favicons?domain=wbaboxing.com&sz=128',
   ibf:'https://www.google.com/s2/favicons?domain=ibf-usba-boxing.com&sz=128',
   wbo:'https://www.google.com/s2/favicons?domain=wboboxing.com&sz=128',
+  ring:'https://www.google.com/s2/favicons?domain=ringmagazine.com&sz=128',
   one:'https://commons.wikimedia.org/wiki/Special:Redirect/file/ONE_Championship.png',
   pfl:'https://www.google.com/s2/favicons?domain=pfl.org.ph&sz=128'
 };
@@ -148,7 +149,7 @@ const logoFeeds={
   football:'https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard',
   ncaaf:'https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard'
 };
-const scoreKeys=new Set(['soccer','laliga','seriea','bundesliga','champions','mls','pfl','basketball','wnba','pba','ncaa_ph','uaap','mpbl','nbl','nblaus','vba','bleague','euroleague','atp','wta','australian_open','wimbledon','us_open','ipl','bigbash','cricket_world_cup','volleyball_w','volleyball_m','pvl','vleague_jp','baseball','npb','kbo','hockey','khl','iihf','football','ncaaf','f1','motogp','formulae','ufc','one','boxing','wbc','wba','ibf','wbo']);
+const scoreKeys=new Set(['soccer','laliga','seriea','bundesliga','champions','mls','pfl','basketball','wnba','pba','ncaa_ph','uaap','mpbl','nbl','nblaus','vba','bleague','euroleague','atp','wta','australian_open','wimbledon','us_open','ipl','bigbash','cricket_world_cup','volleyball_w','volleyball_m','pvl','vleague_jp','baseball','npb','kbo','hockey','khl','iihf','football','ncaaf','f1','motogp','formulae','ufc','one','wbc','wba','ibf','wbo','ring']);
 const oddsKeys=new Set(['soccer','laliga','seriea','bundesliga','champions','mls','basketball','wnba','baseball','hockey','football','ncaaf']);
 let statsKeys=new Set();
 const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));

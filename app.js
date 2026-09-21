@@ -332,7 +332,8 @@ const liveNowLabels={
   wbc:{sport:'Boxing',league:'WBC'},
   wba:{sport:'Boxing',league:'WBA'},
   ibf:{sport:'Boxing',league:'IBF'},
-  wbo:{sport:'Boxing',league:'WBO'}
+  wbo:{sport:'Boxing',league:'WBO'},
+  ring:{sport:'Boxing',league:'THE RING'}
 };
 function asianGamesSportLabel(game){
   const title=String(game?.title||'').trim();
@@ -346,7 +347,7 @@ function asianGamesEventLabel(game){
   const index=title.indexOf(divider);
   return index>0?title.slice(index+divider.length).trim():(title||'Asian Games event');
 }
-const scoreLeagueOrder=['asian_games','soccer','laliga','seriea','bundesliga','champions','mls','pfl','basketball','wnba','pba','ncaa_ph','uaap','mpbl','nbl','nblaus','vba','bleague','euroleague','atp','wta','australian_open','wimbledon','us_open','ipl','bigbash','cricket_world_cup','volleyball_w','volleyball_m','pvl','vleague_jp','baseball','npb','kbo','hockey','khl','iihf','football','ncaaf','f1','motogp','formulae','ufc','one','boxing','wbc','wba','ibf','wbo'];
+const scoreLeagueOrder=['asian_games','soccer','laliga','seriea','bundesliga','champions','mls','pfl','basketball','wnba','pba','ncaa_ph','uaap','mpbl','nbl','nblaus','vba','bleague','euroleague','atp','wta','australian_open','wimbledon','us_open','ipl','bigbash','cricket_world_cup','volleyball_w','volleyball_m','pvl','vleague_jp','baseball','npb','kbo','hockey','khl','iihf','football','ncaaf','f1','motogp','formulae','ufc','one','wbc','wba','ibf','wbo','ring'];
 const scoreLeagueLogoCache=new Map();
 let currentScoreLeague='soccer';
 let scoreLoadToken=0;
@@ -357,7 +358,7 @@ function scoreLeagueFallback(key){
     soccer:'EPL',laliga:'LAL',seriea:'SA',bundesliga:'BUN',champions:'UCL',mls:'MLS',
     basketball:'NBA',wnba:'WNBA',pba:'PBA',ncaa_ph:'NCAA-PH',uaap:'UAAP',mpbl:'MPBL',nbl:'NBL-PH',nblaus:'NBL',
     vba:'VBA',atp:'ATP',wta:'WTA',ipl:'IPL',volleyball_w:'FIVB',volleyball_m:'FIVB',
-    baseball:'MLB',npb:'NPB',kbo:'KBO',hockey:'NHL',khl:'KHL',iihf:'IIHF',football:'NFL',ncaaf:'NCAA',f1:'F1',motogp:'MGP',formulae:'FE',ufc:'UFC',one:'ONE',boxing:'BOX',wbc:'WBC',wba:'WBA',ibf:'IBF',wbo:'WBO',pfl:'PFL',bleague:'B.LEAGUE',euroleague:'EL',australian_open:'AO',wimbledon:'WIM',us_open:'USO',bigbash:'BBL',cricket_world_cup:'ICC',pvl:'PVL',vleague_jp:'V.LEAGUE',asian_games:'AG26'
+    baseball:'MLB',npb:'NPB',kbo:'KBO',hockey:'NHL',khl:'KHL',iihf:'IIHF',football:'NFL',ncaaf:'NCAA',f1:'F1',motogp:'MGP',formulae:'FE',ufc:'UFC',one:'ONE',wbc:'WBC',wba:'WBA',ibf:'IBF',wbo:'WBO',ring:'RING',pfl:'PFL',bleague:'B.LEAGUE',euroleague:'EL',australian_open:'AO',wimbledon:'WIM',us_open:'USO',bigbash:'BBL',cricket_world_cup:'ICC',pvl:'PVL',vleague_jp:'V.LEAGUE',asian_games:'AG26'
   };
   return '<span class="score-league-fallback">'+esc(short[key]||label.slice(0,5).toUpperCase())+'</span>';
 }
@@ -382,6 +383,8 @@ function scoreLeagueLogoMarkup(key){
 function renderScoreLeagueFilters(){
   const host=document.getElementById('scoreLeagueFilters');
   if(!host)return;
+  const scoreCategory=String(liveNowLabels[currentScoreLeague]?.sport||'Sports').toLowerCase().replace(/[^a-z0-9]+/g,'-');
+  document.body.dataset.scoreCategory=scoreCategory;
   host.innerHTML=scoreLeagueOrder.map(key=>{
     const label=liveNowLabels[key]?.league||key.toUpperCase();
     const displayLabel=label.replace(/Philippines/gi,'PH').replace(/Australia/gi,'AUS');
@@ -535,6 +538,74 @@ function leagueStandingsMarkup({id,title='Standings',subtitle='',ariaLabel='Leag
       '<div class="standings-dropdown-inner">'+
         '<div class="league-standings-head"><span>Team</span><b>W</b><b>L</b></div>'+
         '<div class="league-standings-body">'+rows.map(s=>'<div class="league-standings-row"><strong>'+esc(s.team)+'</strong><b>'+esc(s.wins)+'</b><b>'+esc(s.losses)+'</b></div>').join('')+'</div>'+
+      '</div>'+
+    '</div>'+
+  '</section>';
+}
+
+const boxingTitleWeightOrder=[
+  ['Heavyweight',['heavyweight']],
+  ['Bridgerweight',['bridgerweight']],
+  ['Cruiserweight',['cruiserweight']],
+  ['Light Heavyweight',['light heavyweight','light-heavyweight']],
+  ['Super Middleweight',['super middleweight','super-middleweight']],
+  ['Middleweight',['middleweight']],
+  ['Super Welterweight',['super welterweight','junior middleweight','jr middleweight']],
+  ['Welterweight',['welterweight']],
+  ['Super Lightweight',['super lightweight','junior welterweight','jr welterweight']],
+  ['Lightweight',['lightweight']],
+  ['Super Featherweight',['super featherweight','junior lightweight','jr lightweight']],
+  ['Featherweight',['featherweight']],
+  ['Super Bantamweight',['super bantamweight','junior featherweight','jr featherweight']],
+  ['Bantamweight',['bantamweight']],
+  ['Super Flyweight',['super flyweight','junior bantamweight','jr bantamweight']],
+  ['Flyweight',['flyweight']],
+  ['Junior Flyweight',['junior flyweight','light flyweight','jr flyweight']],
+  ['Minimumweight',['minimumweight','strawweight']]
+];
+function boxingWeightClass(game){
+  if(game?.weightClass)return String(game.weightClass);
+  const text=String(game?.title||'').toLowerCase();
+  for(const [label,aliases] of boxingTitleWeightOrder){
+    if(aliases.some(alias=>text.includes(alias)))return label;
+  }
+  return 'Other';
+}
+function boxingWeightIndex(game){
+  if(Number.isFinite(Number(game?.weightOrder))&&Number(game.weightOrder)!==999)return Number(game.weightOrder);
+  const label=boxingWeightClass(game);
+  const i=boxingTitleWeightOrder.findIndex(([name])=>name===label);
+  return i>=0?i:999;
+}
+function boxingTitleholderName(game){
+  return String(game?.title||'').split(' — ')[0].trim()||'Titleholder';
+}
+function boxingTitleholdersMarkup(items,leagueName,key){
+  if(!Array.isArray(items)||!items.length)return'';
+  const sorted=[...items].sort((a,b)=>boxingWeightIndex(a)-boxingWeightIndex(b)||String(a.title||'').localeCompare(String(b.title||'')));
+  const groups=[];
+  for(const item of sorted){
+    const weight=boxingWeightClass(item);
+    let group=groups.find(g=>g.weight===weight);
+    if(!group){group={weight,items:[]};groups.push(group)}
+    group.items.push(item);
+  }
+  const panelId='boxing-titleholders-'+String(key||leagueName).replace(/[^a-z0-9_-]/gi,'-');
+  return '<section class="league-games-group league-standings-dropdown boxing-titleholders-dropdown" aria-label="'+esc(leagueName)+' titleholders">'+
+    '<button type="button" class="standings-dropdown-toggle boxing-titleholders-toggle" data-standings-toggle aria-expanded="false" aria-controls="'+esc(panelId)+'">'+
+      '<span class="standings-dropdown-copy"><span class="standings-dropdown-kicker">Champions by weight</span><strong>Titleholders</strong><small>Heavyweight to minimumweight</small></span>'+
+      '<span class="standings-dropdown-side"><span class="standings-dropdown-count">'+esc(sorted.length)+' '+(sorted.length===1?'champion':'champions')+'</span><span class="standings-dropdown-chevron" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span></span>'+
+    '</button>'+
+    '<div id="'+esc(panelId)+'" class="standings-dropdown-content">'+
+      '<div class="standings-dropdown-inner boxing-titleholders-inner">'+
+        groups.map(group=>'<section class="boxing-weight-group"><div class="boxing-weight-heading"><strong>'+esc(group.weight)+'</strong><span>'+esc(group.items.length)+'</span></div><div class="boxing-weight-list">'+
+          group.items.map(item=>{
+            const champion=boxingTitleholderName(item);
+            const full=String(item.title||'');
+            const belt=full.includes(' — ')?full.split(' — ').slice(1).join(' — '):leagueName+' champion';
+            return '<article class="boxing-titleholder-row"><div><strong>'+esc(champion)+'</strong><small>'+esc(belt)+'</small></div><span>'+esc(item.location||'Current champion')+'</span></article>';
+          }).join('')+
+        '</div></section>').join('')+
       '</div>'+
     '</div>'+
   '</section>';
@@ -1058,6 +1129,8 @@ function normalizeScorePayload(sport,payload){
         state:g.state||'scheduled',
         eventOnly:Boolean(g.eventOnly),
         dataType:g.dataType||'',
+        weightClass:g.weightClass||'',
+        weightOrder:Number.isFinite(Number(g.weightOrder))?Number(g.weightOrder):999,
         sourceName:g.sourceName||payload.sourceName||'',
         sourceUrl:g.sourceUrl||payload.sourceUrl||'',
         odds:null,oddsList:[],highlights:Array.isArray(g.highlights)?g.highlights:[],highlightsChecked:true,
@@ -1429,7 +1502,7 @@ async function loadAllLiveGames({silent=false}={}){
 
   const live=[];
   const webKeys=['pba','mpbl','nbl','nblaus','vba'];
-  const apiKeys=['soccer','laliga','seriea','bundesliga','champions','mls','pfl','basketball','wnba','atp','wta','australian_open','wimbledon','us_open','ipl','bigbash','cricket_world_cup','volleyball_w','volleyball_m','pvl','vleague_jp','f1','motogp','formulae','ufc','one','boxing','wbc','wba','ibf','wbo','baseball','npb','kbo','hockey','khl','iihf','football','ncaaf','bleague','euroleague'];
+  const apiKeys=['soccer','laliga','seriea','bundesliga','champions','mls','pfl','basketball','wnba','atp','wta','australian_open','wimbledon','us_open','ipl','bigbash','cricket_world_cup','volleyball_w','volleyball_m','pvl','vleague_jp','f1','motogp','formulae','ufc','one','wbc','wba','ibf','wbo','ring','baseball','npb','kbo','hockey','khl','iihf','football','ncaaf','bleague','euroleague'];
 
   const regionalPromise=(async()=>{
     await loadRegionalAutoData();
@@ -1665,7 +1738,9 @@ function renderGames(){
   }
 
   if(info.length){
-    sections.push(
+    const boxingTitleKeys=new Set(['wbc','wba','ibf','wbo','ring']);
+    if(boxingTitleKeys.has(currentScoreLeague))sections.push(boxingTitleholdersMarkup(info,leagueName,currentScoreLeague));
+    else sections.push(
       '<section class="league-games-group" aria-label="'+esc(leagueName)+' titleholders">'+
         '<div class="league-games-group-head"><h3>Titleholders</h3><span>'+esc(leagueName)+'</span></div>'+
         '<div class="league-games-list">'+info.map(renderCard).join('')+'</div>'+

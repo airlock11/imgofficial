@@ -1006,3 +1006,129 @@ main{min-height:calc(100svh - 68px)}
 :root[data-theme="dark"] .score-league-filter[data-score-league="cricket_world_cup"] .score-league-logo-wrap,
 :root[data-theme="dark"] .score-league-filter[data-score-league="vleague_jp"] .score-league-logo-wrap,
 :root[data-theme="dark"] .score-league-filter[data-score-league="iihf"] .score-league-logo-wrap{background:#f8fafc;border-radius:10px;box-shadow:inset 0 0 0 1px rgba(17,24,39,.08)}
+
+
+/* Compact, color-accented Scores page */
+.scores-page{
+  --score-accent:#4f9cff;
+  --score-accent-2:#7c5cff;
+}
+.scores-page[data-score-category="basketball"]{--score-accent:#ff7a18;--score-accent-2:#ffb347}
+.scores-page[data-score-category="football"]{--score-accent:#24c875;--score-accent-2:#67e8a0}
+.scores-page[data-score-category="tennis"]{--score-accent:#c7e83a;--score-accent-2:#7ed957}
+.scores-page[data-score-category="baseball"]{--score-accent:#3b82f6;--score-accent-2:#60a5fa}
+.scores-page[data-score-category="hockey"]{--score-accent:#38bdf8;--score-accent-2:#67e8f9}
+.scores-page[data-score-category="cricket"]{--score-accent:#9b6cff;--score-accent-2:#c084fc}
+.scores-page[data-score-category="volleyball"]{--score-accent:#ec4899;--score-accent-2:#fb7185}
+.scores-page[data-score-category="motorsport"]{--score-accent:#ff3b30;--score-accent-2:#ff7a59}
+.scores-page[data-score-category="combat-sports"],
+.scores-page[data-score-category="boxing"]{--score-accent:#e7b52c;--score-accent-2:#f7d66d}
+.scores-page[data-score-category="american-football"]{--score-accent:#6478ff;--score-accent-2:#8ea0ff}
+.scores-page[data-score-category="multi-sport"]{--score-accent:#ff4d67;--score-accent-2:#7c5cff}
+
+.scores-page section.content{
+  background:
+    radial-gradient(circle at 88% 0,color-mix(in srgb,var(--score-accent) 10%,transparent),transparent 30%),
+    radial-gradient(circle at 10% 28%,color-mix(in srgb,var(--score-accent-2) 6%,transparent),transparent 32%);
+}
+.scores-page .score-league-filter.active{
+  border-color:color-mix(in srgb,var(--score-accent) 72%,var(--line));
+  background:color-mix(in srgb,var(--score-accent) 13%,var(--panel));
+  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--score-accent) 32%,transparent),0 8px 20px color-mix(in srgb,var(--score-accent) 9%,transparent);
+}
+.scores-page .score-league-item:has(.score-league-filter.active) .score-league-name{color:var(--score-accent)}
+.scores-page .league-games-group-head{
+  align-items:center;
+  min-height:44px;
+  padding:8px 10px;
+  border-left:3px solid var(--score-accent);
+  border-bottom-color:color-mix(in srgb,var(--score-accent) 22%,var(--line));
+  background:linear-gradient(90deg,color-mix(in srgb,var(--score-accent) 8%,transparent),transparent 70%);
+}
+.scores-page .league-games-group-head h3{font-size:1.3rem}
+.scores-page .league-games-group-head span{font-size:.62rem}
+.scores-page .game{
+  grid-template-columns:76px minmax(0,1fr) auto;
+  gap:14px;
+  min-height:0;
+  padding:12px 8px;
+  transition:background .16s ease,border-color .16s ease;
+}
+.scores-page .game:hover{background:color-mix(in srgb,var(--score-accent) 5%,transparent)}
+.scores-page .time{font-size:.66rem;line-height:1.3}
+.scores-page .teams{gap:6px}
+.scores-page .team{gap:10px;align-items:center;font-size:.84rem;line-height:1.25}
+.scores-page .team b{
+  flex:0 0 auto;
+  min-width:24px;
+  font:800 .95rem/1 "Barlow Condensed",Arial,sans-serif;
+  text-align:right;
+}
+.scores-page .team-identity{gap:7px}
+.scores-page .team-identity img{width:22px!important;height:22px!important}
+.scores-page .state{font-size:.64rem;line-height:1.3}
+.scores-page .state.live{color:#ff5360}
+.scores-page .special-event-copy strong{font-size:.88rem}
+.scores-page .special-event-location{font-size:.68rem;margin-top:4px}
+
+/* Boxing titleholders: one collapsed dropdown, ordered by weight class */
+.boxing-titleholders-dropdown{
+  border:1px solid color-mix(in srgb,var(--score-accent) 25%,var(--line));
+  border-radius:16px;
+  overflow:hidden;
+  background:color-mix(in srgb,var(--score-accent) 4%,var(--panel));
+}
+.boxing-titleholders-dropdown .standings-dropdown-toggle{border-radius:0;background:transparent}
+.boxing-titleholders-dropdown .standings-dropdown-kicker{color:var(--score-accent)}
+.boxing-titleholders-inner{padding:0 14px 14px}
+.boxing-weight-group{border-top:1px solid var(--line)}
+.boxing-weight-group:first-child{border-top:0}
+.boxing-weight-heading{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  padding:12px 2px 8px;
+  color:var(--score-accent);
+  text-transform:uppercase;
+}
+.boxing-weight-heading strong{font:800 .86rem/1 "Barlow Condensed",Arial,sans-serif;letter-spacing:.05em}
+.boxing-weight-heading span{
+  display:grid;
+  place-items:center;
+  min-width:22px;
+  height:22px;
+  padding:0 6px;
+  border-radius:999px;
+  background:color-mix(in srgb,var(--score-accent) 14%,var(--panel));
+  font-size:.62rem;
+  font-weight:800;
+}
+.boxing-weight-list{display:grid}
+.boxing-titleholder-row{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(150px,.7fr);
+  gap:14px;
+  align-items:center;
+  padding:10px 2px;
+  border-top:1px solid color-mix(in srgb,var(--line) 80%,transparent);
+}
+.boxing-titleholder-row:first-child{border-top:0}
+.boxing-titleholder-row>div{display:grid;gap:3px;min-width:0}
+.boxing-titleholder-row strong{font-size:.84rem}
+.boxing-titleholder-row small{color:var(--muted);font-size:.65rem;line-height:1.3}
+.boxing-titleholder-row>span{color:var(--muted);font-size:.66rem;line-height:1.3;text-align:right}
+
+@media(max-width:760px){
+  .scores-page .game{grid-template-columns:52px minmax(0,1fr);gap:9px;padding:10px 5px}
+  .scores-page .team{font-size:.8rem;gap:8px}
+  .scores-page .team b{font-size:.88rem;min-width:20px}
+  .scores-page .team-identity img{width:20px!important;height:20px!important}
+  .scores-page .time{font-size:.61rem}
+  .scores-page .state{grid-column:2;font-size:.61rem}
+  .scores-page .league-games-group-head{padding:8px 8px}
+  .scores-page .league-games-group-head h3{font-size:1.15rem}
+  .boxing-titleholders-inner{padding:0 10px 10px}
+  .boxing-titleholder-row{grid-template-columns:1fr;gap:5px;padding:9px 2px}
+  .boxing-titleholder-row>span{text-align:left;font-size:.62rem}
+}

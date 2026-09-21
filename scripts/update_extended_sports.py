@@ -185,10 +185,40 @@ def kbo():
         "games": games
     }
 
+def boxing_weight_class(title):
+    text = str(title or "").lower()
+    order = [
+        ("Heavyweight", ["heavyweight"]),
+        ("Bridgerweight", ["bridgerweight"]),
+        ("Cruiserweight", ["cruiserweight"]),
+        ("Light Heavyweight", ["light heavyweight", "light-heavyweight"]),
+        ("Super Middleweight", ["super middleweight", "super-middleweight"]),
+        ("Middleweight", ["middleweight"]),
+        ("Super Welterweight", ["super welterweight", "junior middleweight", "jr middleweight"]),
+        ("Welterweight", ["welterweight"]),
+        ("Super Lightweight", ["super lightweight", "junior welterweight", "jr welterweight"]),
+        ("Lightweight", ["lightweight"]),
+        ("Super Featherweight", ["super featherweight", "junior lightweight", "jr lightweight"]),
+        ("Featherweight", ["featherweight"]),
+        ("Super Bantamweight", ["super bantamweight", "junior featherweight", "jr featherweight"]),
+        ("Bantamweight", ["bantamweight"]),
+        ("Super Flyweight", ["super flyweight", "junior bantamweight", "jr bantamweight"]),
+        ("Flyweight", ["flyweight"]),
+        ("Junior Flyweight", ["junior flyweight", "light flyweight", "jr flyweight"]),
+        ("Minimumweight", ["minimumweight", "strawweight"])
+    ]
+    for index, (label, aliases) in enumerate(order):
+        if any(alias in text for alias in aliases):
+            return label, index
+    return "Other", 999
+
 def boxing_org(org):
     data = json.loads((ROOT / "boxing-data.json").read_text("utf-8"))
     fights = json.loads((ROOT / "boxing-fights-data.json").read_text("utf-8"))
-    rx = re.compile(r"^" + re.escape(org) + r"\b", re.I)
+    ring_mode = org == "RING"
+    display_org = "THE RING" if ring_mode else org
+    key_org = "ring" if ring_mode else org.lower()
+    rx = re.compile(r"^The Ring\b", re.I) if ring_mode else re.compile(r"^" + re.escape(org) + r"\b", re.I)
     stamp = data.get("updated_at") or datetime.now(timezone.utc).isoformat()
     titled = set()
     holders = []
@@ -200,13 +230,15 @@ def boxing_org(org):
         stats = fighter.get("stats") or {}
         division = (fighter.get("division") or {}).get("name", "")
         for title in titles:
+            weight_class, weight_order = boxing_weight_class(title)
             holders.append({
-                "eventId": org.lower() + "-holder-" + re.sub(r"[^a-z0-9]+", "-", str(fighter.get("id") or fighter.get("name", "")).lower()).strip("-"),
+                "eventId": key_org + "-holder-" + re.sub(r"[^a-z0-9]+", "-", str(fighter.get("id") or fighter.get("name", "")).lower()).strip("-"),
                 "date": stamp, "displayTime": "Current",
                 "title": str(fighter.get("name", "")) + " — " + title,
                 "location": ((division + " · ") if division else "") + "Record " + str(stats.get("wins", "—")) + "-" + str(stats.get("losses", "—")) + "-" + str(stats.get("draws", "—")),
                 "status": "Current titleholder", "state": "info",
                 "eventOnly": True, "dataType": "titleholder",
+                "weightClass": weight_class, "weightOrder": weight_order,
                 "sourceName": "IMG Boxing Data", "sourceUrl": "/boxing/"
             })
     bouts = []
@@ -219,7 +251,7 @@ def boxing_org(org):
         state = "final" if raw == "FINISHED" else ("live" if raw == "LIVE" else "scheduled")
         event = fight.get("event") or {}
         bouts.append({
-            "eventId": org.lower() + "-bout-" + str(fight.get("id") or index),
+            "eventId": key_org + "-bout-" + str(fight.get("id") or index),
             "date": fight.get("date"), "displayTime": fight.get("displayTime") or "",
             "title": "Related bout — " + str(fight.get("title", "")),
             "location": " · ".join(x for x in [event.get("venue"), event.get("location")] if x),
@@ -228,8 +260,9 @@ def boxing_org(org):
             "sourceName": "IMG Boxing Data", "sourceUrl": "/boxing/"
         })
     return {
-        "league": org, "sourceName": "IMG Boxing Data", "sourceUrl": "/boxing/",
-        "note": org + " titleholders come from verified title fields in the IMG boxing database; related bouts require a currently titled fighter.",
+        "league": display_org, "sourceName": "The Ring" if ring_mode else "IMG Boxing Data",
+        "sourceUrl": "https://www.ringmagazine.com/en/champions/ring/Men" if ring_mode else "/boxing/",
+        "note": display_org + " titleholders come from verified title fields in the IMG boxing database; related bouts require a currently titled fighter.",
         "games": bouts[:20] + holders
     }
 
@@ -245,14 +278,14 @@ def main():
             print("updated", key, len(result.get("games", [])))
         except Exception as ex:
             print("preserved", key, type(ex).__name__, str(ex)[:160])
-    for org in ("WBC", "WBA", "IBF", "WBO"):
+    for org in ("WBC", "WBA", "IBF", "WBO", "RING"):
         try:
             result = boxing_org(org)
             if result.get("games"):
-                leagues[org.lower()] = result
-            print("updated", org.lower(), len(result.get("games", [])))
+                leagues["ring" if org == "RING" else org.lower()] = result
+            print("updated", "ring" if org == "RING" else org.lower(), len(result.get("games", [])))
         except Exception as ex:
-            print("preserved", org.lower(), type(ex).__name__, str(ex)[:160])
+            print("preserved", "ring" if org == "RING" else org.lower(), type(ex).__name__, str(ex)[:160])
     data["updated_at"] = datetime.now(timezone.utc).isoformat()
     data["source"] = "Official and verified public sports sources"
     OUT.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", "utf-8")
