@@ -1035,12 +1035,15 @@ function renderNews(items,videos=[]){
   if(!host)return;
   if(!items.length&&!videos.length)return;
 
-  const videoRows=(Array.isArray(videos)?videos:[]).slice(0,2);
+  const videoRows=(Array.isArray(videos)?videos:[]).filter(v=>v?.link&&v?.thumbnail).slice(0,2);
   const videosHtml=videoRows.length
     ? '<section class="news-videos" aria-label="Sports videos">'+videoRows.map(v=>
         '<article class="news-video-card">'+
-          '<div class="news-video-frame"><iframe src="'+esc(v.embed||'')+'" title="'+esc(v.title||'Sports video')+'" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>'+
-          '<div class="news-video-copy"><div class="tag">Video</div><h3>'+esc(v.title||'Sports video')+'</h3><small>'+esc(v.source||'Sports')+'</small></div>'+
+          '<a class="news-video-frame news-video-link" href="'+esc(v.link)+'" target="_blank" rel="noopener noreferrer" aria-label="Watch '+esc(v.title||'sports video')+' on YouTube">'+
+            '<img src="'+esc(v.thumbnail)+'" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer">'+
+            '<span class="news-video-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>'+
+          '</a>'+
+          '<div class="news-video-copy"><div class="tag">Video</div><a class="news-video-title-link" href="'+esc(v.link)+'" target="_blank" rel="noopener noreferrer"><h3>'+esc(v.title||'Sports video')+'</h3></a><small>'+esc(v.source||'Sports')+'</small></div>'+
         '</article>'
       ).join('')+'</section>'
     : '';
