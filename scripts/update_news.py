@@ -4,9 +4,7 @@ import json
 import re
 from datetime import datetime, timezone
 from pathlib import Path
-from urllib.parse import urlparse, urlencode
-from urllib.request import Request, urlopen
-from urllib.error import HTTPError, URLError
+from urllib.parse import urlparse
 
 import feedparser
 from bs4 import BeautifulSoup
@@ -89,31 +87,6 @@ def normalize_link(value):
     return (p.netloc.lower() + p.path.rstrip("/")).lower()
 
 
-def youtube_video_available(video_id):
-    """Best-effort public availability check; fail open if YouTube blocks the checker."""
-    if not re.fullmatch(r"[A-Za-z0-9_-]{6,}", video_id or ""):
-        return False
-    query = urlencode({
-        "url": "https://www.youtube.com/watch?v=" + video_id,
-        "format": "json",
-    })
-    req = Request(
-        "https://www.youtube.com/oembed?" + query,
-        headers={"User-Agent": UA, "Accept": "application/json"},
-    )
-    try:
-        with urlopen(req, timeout=12) as response:
-            if response.status != 200:
-                return True
-            payload = json.loads(response.read().decode("utf-8"))
-            return bool(payload.get("title"))
-    except HTTPError as exc:
-        # A definite 404 means the video is gone. Other responses can be
-        # rate limits / bot protection, so keep the fresh feed item.
-        return exc.code != 404
-    except (URLError, TimeoutError, ValueError, json.JSONDecodeError):
-        return True
-
 def fetch_feed(cfg):
     parsed = feedparser.parse(
         cfg["url"],
@@ -166,9 +139,7 @@ def fetch_videos():
                 title = clean_html(entry.get("title"), 180)
                 if not title:
                     continue
-                if not youtube_video_available(video_id):
-                    continue
-                videos.append({
+                 videos.append({
                     "id": video_id,
                     "title": title,
                     "source": cfg["name"],
