@@ -515,7 +515,7 @@ main{min-height:calc(100svh - 68px)}
 .live-sport-label span{font-size:.64rem;letter-spacing:.12em;color:var(--muted);font-weight:700}
 .live-sport-label b{font:700 1.05rem/1 "Barlow Condensed",sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .live-badge{flex:0 0 auto;border:1px solid rgba(255,83,91,.45);border-radius:999px;padding:4px 8px;font-size:.62rem;font-weight:800;letter-spacing:.12em;color:#ff676c;background:rgba(255,83,91,.08)}
-.live-card-time{font-size:.7rem;color:var(--muted);margin-bottom:12px}
+.live-card-time{font-size:.7rem;color:var(--muted);margin-bottom:12px}.live-card-event{margin:-4px 0 12px;font-size:.82rem;font-weight:750;line-height:1.3;color:var(--text)}
 .live-card-teams{display:grid;gap:9px}
 .live-card-team{display:flex;align-items:center;justify-content:space-between;gap:14px;font-weight:650}
 .live-card-team>span{display:flex;align-items:center;gap:9px;min-width:0}
@@ -759,4 +759,4 @@ main{min-height:calc(100svh - 68px)}
 /* NCAA / UAAP standings */
 .league-standings{overflow:hidden}.league-standings-head,.league-standings-row{display:grid;grid-template-columns:minmax(180px,1fr) 54px 54px;align-items:center;gap:8px;padding:11px 14px}.league-standings-head{font-size:11px;text-transform:uppercase;letter-spacing:.06em;opacity:.68;border-bottom:1px solid rgba(255,255,255,.1)}.league-standings-row{border-bottom:1px solid rgba(255,255,255,.07)}.league-standings-row:last-child{border-bottom:0}.league-standings-row b,.league-standings-head b{text-align:center}.league-standings-row strong{font-size:14px}@media(max-width:640px){.league-standings-head,.league-standings-row{grid-template-columns:minmax(150px,1fr) 44px 44px;padding:10px 12px}.league-standings-row strong{font-size:13px}}
 
-.asian-games-event-copy{gap:8px}.asian-games-event-title{font-weight:800;line-height:1.25;margin-bottom:4px}.asian-games-card .team{padding:2px 0}.asian-games-card .state{align-self:center}
+.asian-games-event-copy{gap:8px}.asian-games-sport-name{font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--red)}.asian-games-event-title{font-weight:800;line-height:1.25;margin-bottom:4px}.asian-games-card .team{padding:2px 0}.asian-games-card .state{align-self:center}
