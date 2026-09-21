@@ -87,7 +87,20 @@ document.querySelector('header nav')?.setAttribute('aria-label','Primary navigat
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const leagues={Basketball:[['NBA','United States / Canada'],['WNBA','United States / Canada'],['PBA','Philippines'],['MPBL','Philippines'],['NBL-Pilipinas','Philippines'],['NBL Australia','Australia / New Zealand'],['VBA','Vietnam'],['B.League','Japan'],['EuroLeague','Europe'],['WBSL','International']],Football:[['Premier League','England'],['La Liga','Spain'],['Serie A','Italy'],['Bundesliga','Germany'],['UEFA Champions League','Europe'],['Philippine Football League','Philippines']],Tennis:[['ATP Tour','International'],['WTA Tour','International'],['Australian Open','Australia'],['Wimbledon','United Kingdom'],['US Open','United States']],Baseball:[['MLB','USA / Canada'],['NPB','Japan'],['KBO League','South Korea']],Hockey:[['NHL','USA / Canada'],['KHL','Eurasia'],['IIHF World Championship','International']],Cricket:[['IPL','India'],['Big Bash League','Australia'],['ICC Cricket World Cup','International']],Volleyball:[['Volleyball Nations League','International'],['PVL','Philippines'],['V.League','Japan']],Motorsport:[['Formula 1','International'],['MotoGP','International'],['Formula E','International']],Boxing:[['WBC','International'],['WBA','International'],['IBF','International'],['WBO','International'],['Professional Boxing','Worldwide']],'Combat Sports':[['UFC','International'],['ONE Championship','Asia']],'American Football':[['NFL','United States'],['NCAA Football','United States']]};
 function openSport(name){if(name==='Boxing'){location.href='boxing.html';return}const modal=document.getElementById('sportModal');if(!modal)return;modal.querySelector('h2').textContent=name;modal.querySelector('.modalbody').innerHTML=(leagues[name]||[]).map(x=>'<div class="league-row"><strong>'+esc(x[0])+'</strong><small>'+esc(x[1])+'</small></div>').join('');modal.showModal()}
-document.addEventListener('click',e=>{const sport=e.target.closest('[data-sport]');if(sport)openSport(sport.dataset.sport);if(e.target.matches('.close'))e.target.closest('dialog').close();const highlightButton=e.target.closest('[data-highlight-event]');if(highlightButton)openHighlights(highlightButton.dataset.highlightEvent);const liveButton=e.target.closest('[data-live-event]');if(liveButton)openLiveStream(liveButton.dataset.liveEvent)});
+document.addEventListener('click',e=>{
+  const newsVideo=e.target.closest('[data-play-news-video]');
+  if(newsVideo){
+    const id=newsVideo.dataset.playNewsVideo;
+    const card=newsVideo.closest('[data-news-video]');
+    if(id&&card){
+      const frame=card.querySelector('.news-video-frame');
+      if(frame){
+        frame.outerHTML='<div class="news-video-frame news-video-playing"><iframe src="https://www.youtube-nocookie.com/embed/'+encodeURIComponent(id)+'?autoplay=1&playsinline=1&rel=0" title="Sports video" allow="autoplay; encrypted-media; picture-in-picture; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>';
+      }
+    }
+    return;
+  }
+  const sport=e.target.closest('[data-sport]');if(sport)openSport(sport.dataset.sport);if(e.target.matches('.close'))e.target.closest('dialog').close();const highlightButton=e.target.closest('[data-highlight-event]');if(highlightButton)openHighlights(highlightButton.dataset.highlightEvent);const liveButton=e.target.closest('[data-live-event]');if(liveButton)openLiveStream(liveButton.dataset.liveEvent)});
 const scoreFeeds={
   soccer:'https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard',
   laliga:'https://site.api.espn.com/apis/site/v2/sports/soccer/esp.1/scoreboard',
@@ -135,6 +148,25 @@ const cloudflareFallbackFeeds={
 };
 const regionalScoreKeys=new Set(['pba','mpbl','nbl','nblaus','vba']);
 
+let specialSportsDataCache=null;
+let specialSportsDataPromise=null;
+async function loadSpecialSportsData(){
+  if(specialSportsDataCache)return specialSportsDataCache;
+  if(specialSportsDataPromise)return specialSportsDataPromise;
+  specialSportsDataPromise=fetch('special-sports-data.json?v='+Date.now(),{cache:'no-store'})
+    .then(r=>r.ok?r.json():null)
+    .then(j=>specialSportsDataCache=j)
+    .catch(()=>null)
+    .finally(()=>{specialSportsDataPromise=null});
+  return specialSportsDataPromise;
+}
+
+async function specialSportsPayload(sport){
+  const data=await loadSpecialSportsData();
+  const league=data?.leagues?.[sport];
+  if(!league||!Array.isArray(league.games)||!league.games.length)return null;
+  return {special:true,games:league.games,sourceName:league.sourceName||'',sourceUrl:league.sourceUrl||''};
+}
 async function fetchScorePayload(sport,{fallbackOnly=false}={}){
   if(sport==='boxing'){
     const [apiResult,webResult]=await Promise.allSettled([
@@ -171,18 +203,25 @@ async function fetchScorePayload(sport,{fallbackOnly=false}={}){
       const r=await fetch(scoreFeeds[sport],{cache:'no-store'});
       if(r.ok){
         const j=await r.json();
-        if(Array.isArray(j?.events))return j;
+        if(Array.isArray(j?.events)&&j.events.length)return j;
       }
     }catch{}
   }
 
   const fallback=cloudflareFallbackFeeds[sport];
-  if(!fallback)throw new Error('Score feed unavailable');
-  const r=await fetch(fallback,{cache:'no-store'});
-  if(!r.ok)throw new Error('Fallback score feed unavailable');
-  const j=await r.json();
-  if(!Array.isArray(j?.events))throw new Error('Invalid fallback score feed');
-  return j;
+  if(fallback){
+    try{
+      const r=await fetch(fallback,{cache:'no-store'});
+      if(r.ok){
+        const j=await r.json();
+        if(Array.isArray(j?.events)&&j.events.length)return j;
+      }
+    }catch{}
+  }
+
+  const special=await specialSportsPayload(sport);
+  if(special)return special;
+  throw new Error('Score feed unavailable');
 }
 const liveNowLabels={
   soccer:{sport:'Football',league:'Premier League'},
@@ -737,6 +776,27 @@ function normalizeBoxingFight(f,index=0){
   };
 }
 function normalizeScorePayload(sport,payload){
+  if(payload?.special){
+    return (payload.games||[]).map((g,i)=>({
+      eventId:g.eventId||('special-'+sport+'-'+i),
+      date:g.date,
+      displayTime:g.displayTime||'',
+      home:g.home||'',
+      away:g.away||'',
+      homeLogo:g.homeLogo||'',
+      awayLogo:g.awayLogo||'',
+      homeScore:g.homeScore??'—',
+      awayScore:g.awayScore??'—',
+      title:g.title||'',
+      location:g.location||'',
+      status:g.status||'Scheduled',
+      state:g.state||'scheduled',
+      eventOnly:Boolean(g.eventOnly),
+      sourceName:g.sourceName||payload.sourceName||'',
+      sourceUrl:g.sourceUrl||payload.sourceUrl||'',
+      odds:null,oddsList:[],highlights:[],highlightsChecked:true,streams:[],streamsChecked:true
+    }));
+  }
   if(sport==='boxing'){
     return (payload?.fights||[]).map((f,i)=>normalizeBoxingFight(f,i))
       .filter(g=>g.away!=='TBD'||g.home!=='TBD');
@@ -1036,6 +1096,15 @@ function renderGames(){
   const other=allGames.filter(g=>!['live','scheduled','final'].includes(g.state)).sort(byDateAsc);
 
   const renderCard=g=>{
+    if(g.eventOnly){
+      return '<article class="game special-score-event" data-game-key="'+esc(gameDomKey(g))+'">'+
+        '<div class="time">'+esc(g.displayTime||'')+'</div>'+
+        '<div class="teams"><div class="team special-event-copy"><span><strong>'+esc(g.title||'Event')+'</strong></span></div>'+
+        (g.location?'<div class="special-event-location">'+esc(g.location)+'</div>':'')+
+        '</div>'+
+        '<div class="state '+(g.state==='live'?'live':'')+'">'+esc(g.status||'Scheduled')+'</div>'+
+      '</article>';
+    }
     if(g.isRacing){
       const place=[g.raceCircuit,g.raceCity].filter(Boolean).join(' · ');
       return '<article class="game race-game'+(g.state==='live'?' game-is-live':'')+'" data-game-key="'+esc(gameDomKey(g))+'">'+
@@ -1200,15 +1269,15 @@ function renderNews(items,videos=[]){
   if(!host)return;
   if(!items.length&&!videos.length)return;
 
-  const videoRows=(Array.isArray(videos)?videos:[]).filter(v=>v?.link&&v?.thumbnail).slice(0,2);
+  const videoRows=(Array.isArray(videos)?videos:[]).filter(v=>v?.id&&v?.thumbnail).slice(0,2);
   const videosHtml=videoRows.length
     ? '<section class="news-videos" aria-label="Sports videos">'+videoRows.map(v=>
-        '<article class="news-video-card">'+
-          '<a class="news-video-frame news-video-link" href="'+esc(v.link)+'" target="_blank" rel="noopener noreferrer" aria-label="Watch '+esc(v.title||'sports video')+' on YouTube">'+
+        '<article class="news-video-card" data-news-video="'+esc(v.id)+'">'+
+          '<button class="news-video-frame news-video-link" type="button" data-play-news-video="'+esc(v.id)+'" aria-label="Play '+esc(v.title||'sports video')+'">'+
             '<img src="'+esc(v.thumbnail)+'" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer">'+
             '<span class="news-video-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>'+
-          '</a>'+
-          '<div class="news-video-copy"><div class="tag">Video</div><a class="news-video-title-link" href="'+esc(v.link)+'" target="_blank" rel="noopener noreferrer"><h3>'+esc(v.title||'Sports video')+'</h3></a><small>'+esc(v.source||'Sports')+'</small></div>'+
+          '</button>'+
+          '<div class="news-video-copy"><div class="tag">Video</div><h3>'+esc(v.title||'Sports video')+'</h3><small>'+esc(v.source||'Sports')+'</small></div>'+
         '</article>'
       ).join('')+'</section>'
     : '';
