@@ -1150,6 +1150,13 @@ async function loadAllLiveGames({silent=false}={}){
   }));
 
   await Promise.all([regionalPromise,apiPromise,asianGamesPromise]);
+  // Never trust stale local "live" flags indefinitely. Special/local live entries
+  // expire after a conservative event window unless a fresh upstream feed supplies them.
+  const nowMs=Date.now();
+  for(let i=live.length-1;i>=0;i--){
+    const g=live[i], start=Date.parse(g.date||'');
+    if(g.sportKey==='asian_games'&&Number.isFinite(start)&&nowMs-start>6*60*60*1000)live.splice(i,1);
+  }
   const deduped=[];
   const seenLive=new Set();
   for(const game of live){
