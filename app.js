@@ -1040,11 +1040,11 @@ function renderAllLiveGames(items,{preserveItems=false}={}){
   });
 
   if(!live.length){
-    if(liveNowLocked||host.querySelector('.live-game-card')){
-      liveNowLocked=true;
-      section.hidden=false;
-      return;
-    }
+    // Live Now must mirror the latest feed. When every event has ended,
+    // remove stale cards immediately and hide the section.
+    liveNowItems=[];
+    liveNowLocked=false;
+    host.innerHTML='';
     section.hidden=true;
     if(status)status.textContent='';
     return;
