@@ -1421,12 +1421,25 @@ async function loadAllLiveGames({silent=false}={}){
       }
     }
   }catch{}
-  // Never trust stale local "live" flags indefinitely. Special/local live entries
-  // expire after a conservative event window unless a fresh upstream feed supplies them.
+  // Live Now must contain only currently verified games/matches.
+  // Tournament-level "in progress" records are not live matches, and local Asian
+  // Games live flags are discarded when their source file is no longer fresh.
   const nowMs=Date.now();
+  const specialUpdatedMs=Date.parse(specialSportsDataCache?.updatedAt||specialSportsDataCache?.updated_at||'');
+  const specialLiveFresh=Number.isFinite(specialUpdatedMs)&&nowMs-specialUpdatedMs<=30*60*1000;
   for(let i=live.length-1;i>=0;i--){
     const g=live[i], start=Date.parse(g.date||'');
-    if(g.sportKey==='asian_games'&&Number.isFinite(start)&&nowMs-start>6*60*60*1000)live.splice(i,1);
+    if((g.sportKey==='atp'||g.sportKey==='wta')&&g.eventOnly){
+      live.splice(i,1);
+      continue;
+    }
+    if(g.sportKey==='asian_games'&&!specialLiveFresh){
+      live.splice(i,1);
+      continue;
+    }
+    if(g.sportKey==='asian_games'&&Number.isFinite(start)&&nowMs-start>4*60*60*1000){
+      live.splice(i,1);
+    }
   }
   const deduped=[];
   const seenLive=new Set();
