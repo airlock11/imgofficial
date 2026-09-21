@@ -13,8 +13,6 @@ OUT=Path(__file__).resolve().parents[1]/"external-live.json"
 UA="Mozilla/5.0 (compatible; IMG-Sports-Live/1.0; +https://www.imgofficial.com)"
 SERIES_PATH="/live-sport/20th-asian-games-aichi-nagoya-2026-1790007854/"
 SONY_HOST="www.sonyliv.com"
-UNEXT_URL="https://www.video.unext.jp/po2/asiangames2026"
-VTVGO_URL="https://vtvgo.vn/"
 SEEDS=[
     "https://www.sonyliv.com/sports/cricket-20th-asian-games-aichi-nagoya-2026-1590016519",
     "https://www.sonyliv.com/live-sport/20th-asian-games-aichi-nagoya-2026-1790007854/sports-stream-3-21-sep-2026-1090541385",
@@ -163,88 +161,6 @@ def page_is_live(page,title,url,now_local):
             return True
     return False
 
-def unext_live(now_utc):
-    japan=ZoneInfo("Asia/Tokyo")
-    local=now_utc.astimezone(japan)
-    try:
-        page=fetch_text(UNEXT_URL)
-    except Exception as ex:
-        print("U-NEXT seed",ex)
-        return []
-    text=visible_text(normalise_embedded(page))
-    md=f"{local.month}月{local.day}日"
-    m=re.search(re.escape(md)+r"\s+(\d{1,2}):(\d{2})\s*配信開始",text)
-    if not m:
-        print("U-NEXT today start not found",md)
-        return []
-    start=local.replace(hour=int(m.group(1)),minute=int(m.group(2)),second=0,microsecond=0)
-    end=local.replace(hour=23,minute=59,second=59,microsecond=0)
-    active=start<=local<=end
-    print("U-NEXT",md,"start",start.isoformat(),"active",active)
-    if not active:return []
-    return [{
-        "eventId":"ag26-unext-"+local.strftime("%Y%m%d"),
-        "sport":"Asian Games",
-        "leagueKey":"asian_games",
-        "league":"Asian Games",
-        "teams":[],
-        "title":"Asian Games multi-channel live coverage",
-        "genericCoverage":True,
-        "stream":{
-            "watchUrl":UNEXT_URL,
-            "provider":"U-NEXT",
-            "channel":"U-NEXT",
-            "title":"Asian Games multi-channel live coverage",
-            "external":True,
-            "geoRestricted":True,
-            "region":"Japan"
-        }
-    }]
-
-def vtvgo_live(now_utc):
-    vietnam=ZoneInfo("Asia/Ho_Chi_Minh")
-    local=now_utc.astimezone(vietnam)
-    schedule_url=f"https://vtv.vn/lich-phat-song-ngay-{local.day}-thang-{local.month}-nam-{local.year}.htm"
-    try:
-        page=fetch_text(schedule_url)
-    except Exception as ex:
-        print("VTV schedule",ex)
-        return []
-    text=visible_text(normalise_embedded(page))
-    matches=list(re.finditer(r"\b(\d{1,2}):(\d{2})\s+Truyền hình trực tiếp\s+(.{0,220}?(?:ASIAD|ASIAN GAMES).{0,180}?)(?=\s+\d{1,2}:\d{2}\b)",text,re.I))
-    for m in matches:
-        start=local.replace(hour=int(m.group(1)),minute=int(m.group(2)),second=0,microsecond=0)
-        after=text[m.end():]
-        nm=re.search(r"\b(\d{1,2}):(\d{2})\b",after)
-        if nm:
-            end=local.replace(hour=int(nm.group(1)),minute=int(nm.group(2)),second=0,microsecond=0)
-            if end<=start:end+=timedelta(days=1)
-        else:
-            end=start+timedelta(hours=4)
-        if start<=local<end:
-            program=re.sub(r"\s+"," ",m.group(3)).strip(" -")
-            print("VTVgo live block",start.isoformat(),"to",end.isoformat(),program)
-            return [{
-                "eventId":"ag26-vtvgo-"+local.strftime("%Y%m%d%H%M"),
-                "sport":"Asian Games",
-                "leagueKey":"asian_games",
-                "league":"Asian Games",
-                "teams":[],
-                "title":program or "Asian Games live coverage",
-                "genericCoverage":True,
-                "stream":{
-                    "watchUrl":VTVGO_URL,
-                    "provider":"VTVgo",
-                    "channel":"VTVgo",
-                    "title":program or "Asian Games live coverage",
-                    "external":True,
-                    "geoRestricted":True,
-                    "region":"Vietnam"
-                }
-            }]
-    print("VTVgo no current ASIAD live block")
-    return []
-
 def main():
     india=ZoneInfo("Asia/Kolkata")
     now=datetime.now(timezone.utc)
@@ -291,14 +207,6 @@ def main():
         except Exception as ex:
             print("candidate",url,ex)
 
-    try:
-        streams.extend(unext_live(now))
-    except Exception as ex:
-        print("U-NEXT",ex)
-    try:
-        streams.extend(vtvgo_live(now))
-    except Exception as ex:
-        print("VTVgo",ex)
 
     seen=set();dedup=[]
     for x in streams:
@@ -311,9 +219,7 @@ def main():
         "freshForMinutes":20,
         "streams":dedup,
         "sources":[
-            {"name":"Sony LIV","region":"India","official":True},
-            {"name":"U-NEXT","region":"Japan","official":True},
-            {"name":"VTVgo","region":"Vietnam","official":True}
+            {"name":"Sony LIV","region":"India","official":True,"directEventLinksOnly":True}
         ]
     }
     OUT.write_text(json.dumps(payload,indent=2,ensure_ascii=False)+"\n",encoding="utf-8")
