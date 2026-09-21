@@ -8,6 +8,7 @@ on:
     branches: [main]
     paths:
       - "scripts/update_asian_games_web.py"
+      - "scripts/asian_live_expiry.py"
       - ".github/workflows/update-asian-games-web.yml"
 
 permissions:

@@ -4,6 +4,7 @@ import xml.etree.ElementTree as ET
 import html as html_lib
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
+from asian_live_expiry import expire_entries
 
 KEY=os.environ["YOUTUBE_API_KEY"]
 OUT=Path(__file__).resolve().parents[1]/"youtube-live.json"
@@ -271,13 +272,13 @@ for x in streams:
  if vid and vid in seen: continue
  if vid: seen.add(vid)
  dedup.append(x)
-streams=dedup
+streams, expiry_ledger=expire_entries(dedup, previous, now, streams=True)
 try:
  upcoming,upcoming_checked=nbl_pilipinas_upcoming(previous)
 except Exception as ex:
  print("youtube NBL Pilipinas upcoming",ex)
  upcoming=previous.get("upcoming",[])
  upcoming_checked=previous.get("upcomingCheckedAt")
-payload={"updatedAt":datetime.now(timezone.utc).isoformat(),"freshForMinutes":8,"streams":streams,"upcoming":upcoming,"upcomingCheckedAt":upcoming_checked,"nblSchedule":nbl_regional_schedule()}
+payload={"updatedAt":datetime.now(timezone.utc).isoformat(),"freshForMinutes":8,"streams":streams,"liveExpiryLedger":expiry_ledger,"upcoming":upcoming,"upcomingCheckedAt":upcoming_checked,"nblSchedule":nbl_regional_schedule()}
 OUT.write_text(json.dumps(payload,indent=2)+"\n",encoding="utf-8")
 print("live events",len(events),"matched streams",len(streams),"NBL upcoming",len(upcoming),"NBL scheduled",len(payload["nblSchedule"]))

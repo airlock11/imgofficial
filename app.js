@@ -940,6 +940,8 @@ function ensureLiveDialog(){let d=document.getElementById('liveDialog');if(d)ret
 function liveStreamsForGame(game){
   if(!game||!['live','scheduled'].includes(game.state))return [];
   return (Array.isArray(game.streams)?game.streams:[]).filter(stream=>{
+    const deadline=Date.parse(stream?.expiresAt||'');
+    if(Number.isFinite(deadline)&&Date.now()>=deadline)return false;
     if(game.state==='scheduled'&&stream?.status!=='upcoming'&&!stream?.scheduledStartTime)return false;
     try{
       const url=new URL(stream?.watchUrl||stream?.embedUrl||'');
@@ -1110,6 +1112,26 @@ function normalizeAsianGamesExpiry(game){
     streamsChecked:true,
     liveExpired:true
   };
+}
+function expireVisibleAsianGames(){
+  let changed=false;
+  if(currentScoreLeague==='asian_games'){
+    allGames=allGames.map(g=>{
+      const next=normalizeAsianGamesExpiry(g);
+      if(next!==g)changed=true;
+      const streams=(next.streams||[]).filter(s=>!s.expiresAt||Date.now()<Date.parse(s.expiresAt));
+      if(streams.length!==(next.streams||[]).length){changed=true;return {...next,streams};}
+      return next;
+    });
+    if(changed)renderGames();
+  }
+  const remaining=liveNowItems.filter(liveNowItemIsCurrent).map(g=>{
+    if(g.sportKey!=='asian_games')return g;
+    const streams=(g.streams||[]).filter(s=>!s.expiresAt||Date.now()<Date.parse(s.expiresAt));
+    if(streams.length!==(g.streams||[]).length){changed=true;return {...g,streams};}
+    return g;
+  });
+  if(changed||remaining.length!==liveNowItems.length)renderAllLiveGames(remaining);
 }
 function normalizeScorePayload(sport,payload){
   if(payload?.special){
@@ -1327,6 +1349,7 @@ function attachExternalAsianGamesStreams(games,entries){
   const list=Array.isArray(games)?games:[];
   const sources=Array.isArray(entries)?entries:[];
   for(const entry of sources){
+    if(!Number.isFinite(Date.parse(entry.expiresAt||''))||Date.now()>=Date.parse(entry.expiresAt))continue;
     const sport=String(entry?.sport||'').trim().toLowerCase();
     const candidates=list.filter(g=>g?.sportKey==='asian_games'&&g?.state==='live'&&String(g?.sportLabel||asianGamesSportLabel(g)).trim().toLowerCase()===sport);
     if(!candidates.length)continue;
@@ -1398,7 +1421,7 @@ function liveNowItemIsCurrent(g){
   if((g.sportKey==='atp'||g.sportKey==='wta')&&g.eventOnly)return false;
 
   const now=Date.now();
-  const start=Date.parse(g.date||'');
+  const start=Date.parse((g.sportKey==='asian_games'&&(g.firstLiveAt||g.liveFirstSeenAt))||g.date||'');
   const maxHours={
     asian_games:2,
     soccer:4,laliga:4,seriea:4,bundesliga:4,champions:4,mls:4,
@@ -1563,7 +1586,7 @@ async function loadAllLiveGames({silent=false}={}){
       const ytUpdated=Date.parse(y?.updatedAt||'');
       const ytFreshMinutes=Math.max(5,Number(y?.freshForMinutes)||8);
       const ytFresh=Number.isFinite(ytUpdated)&&Date.now()-ytUpdated<=ytFreshMinutes*60000;
-      const ys=ytFresh&&Array.isArray(y.streams)?y.streams:[];
+      const ys=(ytFresh&&Array.isArray(y.streams)?y.streams:[]).filter(x=>x.leagueKey!=='asian_games'||(Number.isFinite(Date.parse(x.expiresAt||''))&&Date.now()<Date.parse(x.expiresAt)));
       const byId=new Map(ys.map(x=>[String(x.eventId),x.stream]));
       for(const g of live){
         const s=byId.get(String(g.eventId));
@@ -1576,7 +1599,7 @@ async function loadAllLiveGames({silent=false}={}){
         if(live.some(g=>String(g.eventId)===String(x.eventId)))continue;
         const label=x.league||({asian_games:'2026 ASIAN GAMES',pba:'PBA',nbl:'NBL Pilipinas',ncaa_ph:'NCAA Philippines',uaap:'UAAP'}[x.leagueKey]);
         const source=x.stream.channel||x.stream.provider||label;
-        live.push({eventId:x.eventId,sportKey:x.leagueKey,sportLabel:x.sport||'Sport',leagueLabel:label,date:y.updatedAt||new Date().toISOString(),displayTime:'LIVE',away:label,home:x.title||(label+' Live'),awayScore:'',homeScore:'',status:'LIVE · '+source,state:'live',streams:[x.stream],streamsChecked:true});
+        live.push({eventId:x.eventId,firstLiveAt:x.firstLiveAt,expiresAt:x.expiresAt,sportKey:x.leagueKey,sportLabel:x.sport||'Sport',leagueLabel:label,date:x.firstLiveAt||y.updatedAt||new Date().toISOString(),displayTime:'LIVE',away:label,home:x.title||(label+' Live'),awayScore:'',homeScore:'',status:'LIVE · '+source,state:'live',streams:[x.stream],streamsChecked:true});
       }
     }
   }catch{}
@@ -2328,6 +2351,8 @@ async function discoverOdds(){
 }
 
 if(document.getElementById('games')){
+  // Expiry cannot depend on an upstream request completing successfully.
+  setInterval(expireVisibleAsianGames,1000);
   let scoreAutoRefreshTimer=0;
   let scoreRefreshInFlight=false;
 
@@ -2363,6 +2388,7 @@ if(document.getElementById('games')){
   Promise.allSettled([loadGames(),loadAllLiveGames()]).finally(()=>scheduleScoreAutoRefresh());
 
   document.addEventListener('visibilitychange',()=>{
+    expireVisibleAsianGames();
     clearTimeout(scoreAutoRefreshTimer);
     if(!document.hidden)refreshScoresAutomatically();
   });

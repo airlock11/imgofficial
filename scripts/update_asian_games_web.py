@@ -4,6 +4,7 @@ import json
 import re
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
+from asian_live_expiry import expire_entries
 
 from playwright.sync_api import sync_playwright
 
@@ -325,10 +326,10 @@ def main():
 
     games = merge_games(all_games, live_games)
     now_dt = datetime.now(timezone.utc)
-    games = apply_live_expiry(games, previous.get("games", []), now_dt)
     if len(games) < 3:
         games = previous.get("games", [])
         print("Asian Games scrape guard: preserving previous games")
+    games, expiry_ledger = expire_entries(games, previous, now_dt)
     if len(medals) < 3:
         medals = previous.get("medals", [])
         print("Asian Games scrape guard: preserving previous medals")
@@ -336,6 +337,7 @@ def main():
     now = now_dt.isoformat()
     leagues["asian_games"] = {
         **previous,
+        "liveExpiryLedger": expiry_ledger,
         "sourceName": "Aichi-Nagoya 2026 Official Results",
         "sourceUrl": BASE + "/#/schedule/daily",
         "games": games,

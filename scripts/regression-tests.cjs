@@ -63,6 +63,26 @@ assert.match(app,/leagueLabel:label/,'Standalone broadcasts must show their leag
 assert.match(app,/news-video-frame[\s\S]*?onerror="this\.onerror=null;this\.src=\\'about-sports\.jpg\\'"/,'News video thumbnails must fall back when YouTube has no image');
 console.log('PASS: mobile preferences, live stream eligibility, labels, stream lookup, and simplified live dialog');
 
+// An open page must expire independently of network refreshes, at the boundary.
+{
+  const first=Date.parse('2026-09-22T00:00:00Z');
+  let clock=first+2*60*60*1000-1, scoreRenders=0, liveRenders=0;
+  const game={eventId:'ag',state:'live',firstLiveAt:new Date(first).toISOString(),expiresAt:new Date(first+2*60*60*1000).toISOString(),streams:[specific]};
+  const c=vm.createContext({Date:class extends Date {static now(){return clock}},currentScoreLeague:'asian_games',allGames:[game],liveNowItems:[{...game,sportKey:'asian_games'}],specialSportsDataCache:{updatedAt:new Date(clock).toISOString()},renderGames(){scoreRenders++},renderAllLiveGames(items){c.liveNowItems=items;liveRenders++}});
+  vm.runInContext(app.slice(app.indexOf('function normalizeAsianGamesExpiry('),app.indexOf('function normalizeScorePayload(')),c);
+  vm.runInContext(app.slice(app.indexOf('function liveNowItemIsCurrent('),app.indexOf('function renderAllLiveGames(')),c);
+  vm.runInContext('expireVisibleAsianGames()',c);
+  assert.equal(scoreRenders,0);
+  clock++;
+  vm.runInContext('expireVisibleAsianGames()',c);
+  assert.equal(c.allGames[0].state,'expired');
+  assert.equal(c.allGames[0].streams.length,0);
+  assert.equal(c.liveNowItems.length,0);
+  assert.equal(scoreRenders,1);
+  assert.equal(liveRenders,1);
+  assert.match(app,/setInterval\(expireVisibleAsianGames,1000\)/);
+}
+
 // Scores page renderer must define its section accumulator before using it.
 {
   const start=app.indexOf('function renderGames(){');

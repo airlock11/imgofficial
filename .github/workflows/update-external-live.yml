@@ -7,6 +7,7 @@ on:
     branches: [main]
     paths:
       - "scripts/update_external_live.py"
+      - "scripts/asian_live_expiry.py"
       - ".github/workflows/update-external-live.yml"
 
 permissions:

@@ -162,6 +162,8 @@ def page_is_live(page,title,url,now_local):
     return False
 
 def main():
+    from asian_live_expiry import expire_entries
+    previous=json.loads(OUT.read_text("utf-8")) if OUT.exists() else {}
     india=ZoneInfo("Asia/Kolkata")
     now=datetime.now(timezone.utc)
     local=now.astimezone(india)
@@ -214,7 +216,9 @@ def main():
         if key in seen:continue
         seen.add(key);dedup.append(x)
 
+    dedup, expiry_ledger=expire_entries(dedup, previous, now, streams=True)
     payload={
+        "liveExpiryLedger":expiry_ledger,
         "updatedAt":now.isoformat(),
         "freshForMinutes":20,
         "streams":dedup,
