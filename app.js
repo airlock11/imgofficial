@@ -291,7 +291,7 @@ function scoreLeagueLogoMarkup(key){
       '<span class="score-league-fallback score-league-fallback-hidden">FIVB</span>';
   }
 
-  const suppliedFirst=['atp','wta','ipl'].includes(key);
+  const suppliedFirst=['atp','wta','ipl','boxing'].includes(key);
   const logo=suppliedFirst?(supplied||feedLogo):(feedLogo||supplied);
   if(!logo)return scoreLeagueFallback(key);
   return '<img class="score-league-logo" src="'+esc(logo)+'" alt="'+esc(liveNowLabels[key]?.league||key)+' logo" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'grid\'">'+
