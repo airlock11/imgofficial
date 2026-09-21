@@ -23,7 +23,7 @@ HEADERS = {
     "X-RapidAPI-Key": API_KEY,
     "X-RapidAPI-Host": API_HOST,
     "Accept": "application/json",
-    "User-Agent": "IMG-Boxing-Data-Updater/1.0",
+    "User-Agent": "IMG-Boxing-Data-Updater/1.1",
 }
 
 def normalized_api_url(value):
