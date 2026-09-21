@@ -191,11 +191,13 @@ function renderSports(){
       '<div><span class="sports-stage-kicker">Selected sport</span><h2>'+esc(activeSport)+'</h2></div>'+
       '<strong>'+leagues.length+' competitions</strong>'+
     '</div>'+
-    '<div class="sports-logo-grid">'+leagues.map((league,i)=>{const [name,region,key]=league;return (
-      '<a class="sports-logo-tile" href="/scores/?from=sports&league='+encodeURIComponent(key||'')+'" style="--league-index:'+i+';--sport-accent:'+accent+'" data-league-key="'+esc(key||'')+'" aria-label="Open '+esc(name)+' in Scores">'+
+    '<div class="sports-logo-grid">'+leagues.map((league,i)=>{const [name,region,key]=league;const linked=key!=='wbsl';return (
+      (linked
+        ?'<a class="sports-logo-tile" href="/scores/?from=sports&league='+encodeURIComponent(key||'')+'" style="--league-index:'+i+';--sport-accent:'+accent+'" data-league-key="'+esc(key||'')+'" aria-label="Open '+esc(name)+' in Scores">'
+        :'<div class="sports-logo-tile sports-logo-tile-static" style="--league-index:'+i+';--sport-accent:'+accent+'" data-league-key="'+esc(key||'')+'" aria-label="'+esc(name)+'">')+
         '<div class="sports-logo-mark" data-logo-host="'+esc(key||'')+'">'+leagueLogo(name,key)+'</div>'+
         '<div class="sports-logo-copy"><strong>'+esc(name)+'</strong><small>'+esc(region)+'</small>'+capabilityBadges(key)+'</div>'+
-      '</a>'
+      (linked?'</a>':'</div>')
     )}).join('')+'</div>';
 }
 async function loadStatsAvailability(){
