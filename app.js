@@ -286,13 +286,15 @@ const liveNowLabels={
 };
 function asianGamesSportLabel(game){
   const title=String(game?.title||'').trim();
-  const match=title.match(/^(.+?)\s+—\s+/);
-  return match?.[1]?.trim()||'Asian Games';
+  const divider=' — ';
+  const index=title.indexOf(divider);
+  return index>0?title.slice(0,index).trim():'Asian Games';
 }
 function asianGamesEventLabel(game){
   const title=String(game?.title||'').trim();
-  const sport=asianGamesSportLabel(game);
-  return title.replace(new RegExp('^'+sport.replace(/[.*+?^$\{\}()|[\]\\]/g,'\\const scoreLeagueOrder=['asian_games','soccer','laliga','seriea','bundesliga','champions','basketball','wnba','pba','ncaa_ph','uaap','mpbl','nbl','nblaus','vba','atp','wta','ipl','volleyball_w','volleyball_m','baseball','hockey','football','ncaaf','f1','ufc','boxing'];')+'\\s+—\\s+'),'').trim()||title||'Asian Games event';
+  const divider=' — ';
+  const index=title.indexOf(divider);
+  return index>0?title.slice(index+divider.length).trim():(title||'Asian Games event');
 }
 const scoreLeagueOrder=['asian_games','soccer','laliga','seriea','bundesliga','champions','basketball','wnba','pba','ncaa_ph','uaap','mpbl','nbl','nblaus','vba','atp','wta','ipl','volleyball_w','volleyball_m','baseball','hockey','football','ncaaf','f1','ufc','boxing'];
 const scoreLeagueLogoCache=new Map();
@@ -1110,6 +1112,7 @@ function renderAllLiveGames(items,{preserveItems=false}={}){
     return '<article class="live-game-card" data-game-key="'+esc(gameDomKey(g))+'" data-sport-key="'+esc(g.sportKey||'')+'">'+
       '<div class="live-card-top"><div class="live-sport-label"><span>'+esc(g.sportLabel||'Sport')+'</span><b>'+esc(g.leagueLabel||'')+'</b></div></div>'+
       '<div class="live-card-time">'+esc(g.displayTime||g.status||'Live')+'</div>'+
+      (g.sportKey==='asian_games'&&g.title?'<div class="live-card-event">'+esc(asianGamesEventLabel(g))+'</div>':'')+
       '<div class="live-card-teams">'+
         '<div class="live-card-team"><span>'+teamLogoMarkup(g.awayLogo,g.away,'live-card-logo')+esc(g.away)+'</span><b data-score-side="away">'+esc(g.awayScore)+'</b></div>'+
         '<div class="live-card-team"><span>'+teamLogoMarkup(g.homeLogo,g.home,'live-card-logo')+esc(g.home)+'</span><b data-score-side="home">'+esc(g.homeScore)+'</b></div>'+
