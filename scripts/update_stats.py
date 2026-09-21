@@ -250,12 +250,217 @@ def aggregate(games):
         "steals":leaders("spg"),"blocks":leaders("bpg")
     }
 
-def main():
+
+def fetch_json(url):
+    req=urllib.request.Request(url,headers={
+        "User-Agent":UA,
+        "Accept":"application/json,text/plain,*/*",
+        "Accept-Language":"en-US,en;q=0.9",
+        "Cache-Control":"no-cache"
+    })
+    with urllib.request.urlopen(req,timeout=25) as r:
+        return json.loads(r.read().decode("utf-8","replace"))
+
+def display_number(value):
+    if value is None:return "—"
+    try:
+        n=float(value)
+        if math.isfinite(n):
+            return str(int(n)) if n.is_integer() else f"{n:.1f}"
+    except:pass
+    return clean(value) or "—"
+
+def generic_groups(rows, definitions):
+    groups=[]
+    for title,key,suffix in definitions:
+        ranked=[r for r in rows if r.get(key) is not None]
+        ranked.sort(key=lambda r:(float(r.get(key) or 0),int(r.get("gp") or 0)),reverse=True)
+        if not ranked:continue
+        out=[]
+        for r in ranked[:8]:
+            out.append({
+                "player":r.get("player",""),
+                "team":r.get("team",""),
+                "gp":r.get("gp"),
+                "value":r.get(key),
+                "displayValue":display_number(r.get(key))
+            })
+        groups.append({"title":title,"suffix":suffix,"rows":out})
+    return groups
+
+def stat_from_map(stats,*aliases):
+    for alias in aliases:
+        if alias in stats:
+            item=stats[alias]
+            value=item.get("value") if isinstance(item,dict) else item
+            if value is None and isinstance(item,dict):value=item.get("displayValue")
+            parsed=num(value)
+            if parsed is not None:return parsed
+    low={str(k).lower():v for k,v in stats.items()}
+    for alias in aliases:
+        item=low.get(str(alias).lower())
+        if item is None:continue
+        value=item.get("value") if isinstance(item,dict) else item
+        if value is None and isinstance(item,dict):value=item.get("displayValue")
+        parsed=num(value)
+        if parsed is not None:return parsed
+    return None
+
+def espn_athlete_rows(sport,league,season=None,seasontype=None):
+    base=f"https://site.web.api.espn.com/apis/common/v3/sports/{sport}/{league}/statistics/byathlete"
+    params={"limit":"250"}
+    if season is not None:params["season"]=str(season)
+    if seasontype is not None:params["seasontype"]=str(seasontype)
+    url=base+"?"+urllib.parse.urlencode(params)
+    data=fetch_json(url)
+    rows=[]
+    for item in data.get("athletes",[]) or []:
+        athlete=item.get("athlete") or {}
+        player=clean(athlete.get("displayName") or athlete.get("fullName") or athlete.get("shortName"))
+        if not player:continue
+        team=athlete.get("team") or {}
+        team_name=clean(team.get("abbreviation") or team.get("shortDisplayName") or team.get("displayName"))
+        stats={}
+        for s in item.get("statistics",[]) or []:
+            name=clean(s.get("name"))
+            if name:stats[name]=s
+        gp=stat_from_map(stats,"gamesPlayed","games","appearances")
+        row={
+            "player":player,
+            "team":team_name,
+            "gp":int(gp) if gp is not None else None,
+            "ppg":stat_from_map(stats,"avgPoints","pointsPerGame","pointsAverage"),
+            "rpg":stat_from_map(stats,"avgRebounds","reboundsPerGame","reboundsAverage","avgTotalRebounds"),
+            "apg":stat_from_map(stats,"avgAssists","assistsPerGame","assistsAverage"),
+            "spg":stat_from_map(stats,"avgSteals","stealsPerGame","stealsAverage"),
+            "bpg":stat_from_map(stats,"avgBlocks","blocksPerGame","blocksAverage"),
+            "goals":stat_from_map(stats,"goals","totalGoals"),
+            "points":stat_from_map(stats,"points","totalPoints"),
+            "assists":stat_from_map(stats,"assists","totalAssists"),
+            "homeRuns":stat_from_map(stats,"homeRuns"),
+            "rbi":stat_from_map(stats,"RBIs","rbi","runsBattedIn"),
+            "battingAverage":stat_from_map(stats,"battingAverage","avg"),
+            "passingYards":stat_from_map(stats,"passingYards","passYards"),
+            "passingTDs":stat_from_map(stats,"passingTouchdowns","passingTDs","passTouchdowns"),
+            "rushingYards":stat_from_map(stats,"rushingYards","rushYards"),
+            "receivingYards":stat_from_map(stats,"receivingYards","recYards"),
+        }
+        rows.append(row)
+    season_info=data.get("currentSeason") or {}
+    return rows,season_info,url
+
+def espn_basketball_stats(key,league,season,season_label):
+    rows,season_info,url=espn_athlete_rows("basketball",league,season,2)
+    groups=generic_groups(rows,[
+        ("Points","ppg","PPG"),("Rebounds","rpg","RPG"),("Assists","apg","APG"),
+        ("Steals","spg","SPG"),("Blocks","bpg","BPG")
+    ])
+    if not groups:
+        raise ValueError(f"No {league.upper()} athlete statistics returned")
+    return {
+        "league":"NBA" if key=="basketball" else "WNBA",
+        "season":season_label,
+        "sourceName":"ESPN public statistics feed",
+        "sourceUrl":url,
+        "groups":groups
+    }
+
+def espn_hockey_stats():
+    rows,season_info,url=espn_athlete_rows("hockey","nhl",2026,2)
+    groups=generic_groups(rows,[("Points","points","PTS"),("Goals","goals","G"),("Assists","assists","A")])
+    if not groups:raise ValueError("No NHL athlete statistics returned")
+    return {"league":"NHL","season":"2025–26 Regular Season","sourceName":"ESPN public statistics feed","sourceUrl":url,"groups":groups}
+
+def espn_baseball_stats():
+    rows,season_info,url=espn_athlete_rows("baseball","mlb",2026,2)
+    groups=generic_groups(rows,[("Home Runs","homeRuns","HR"),("Runs Batted In","rbi","RBI"),("Batting Average","battingAverage","AVG")])
+    if not groups:raise ValueError("No MLB athlete statistics returned")
+    return {"league":"MLB","season":"2026 Regular Season","sourceName":"ESPN public statistics feed","sourceUrl":url,"groups":groups}
+
+def espn_football_stats(key,league,label):
+    rows,season_info,url=espn_athlete_rows("football",league,2026,2)
+    groups=generic_groups(rows,[("Passing Yards","passingYards","YDS"),("Passing TDs","passingTDs","TD"),("Rushing Yards","rushingYards","YDS"),("Receiving Yards","receivingYards","YDS")])
+    if not groups:raise ValueError(f"No {label} athlete statistics returned")
+    return {"league":label,"season":"2026 Regular Season","sourceName":"ESPN public statistics feed","sourceUrl":url,"groups":groups}
+
+def parse_pba_stats():
+    url="https://www.pba.ph/stats"
+    soup=BeautifulSoup(fetch(url),"html.parser")
+    target=None
+    headers=[]
+    for table in soup.find_all("table"):
+        rows=table.find_all("tr")
+        for row in rows[:5]:
+            vals=[clean(x.get_text(" ",strip=True)) for x in row.find_all(["th","td"])]
+            upper=[v.upper() for v in vals]
+            if "PLAYERS" in upper and "PTS" in upper and "APG" in upper and "REB" in upper:
+                target=table;headers=vals;break
+        if target:break
+    if not target:
+        raise ValueError("PBA player statistics table not found")
+    index={}
+    for i,h in enumerate(headers):
+        if h:index[h.upper()]=i
+    def cell(cells,name):
+        i=index.get(name.upper())
+        return cells[i] if i is not None and i<len(cells) else ""
+    rows=[]
+    started=False
+    for tr in target.find_all("tr"):
+        cells=[clean(x.get_text(" ",strip=True)) for x in tr.find_all(["th","td"])]
+        upper=[x.upper() for x in cells]
+        if "PLAYERS" in upper and "PTS" in upper:
+            started=True
+            continue
+        if not started or not cells:continue
+        player=cell(cells,"PLAYERS") or cells[0]
+        gp=intnum(cell(cells,"GP"))
+        pts=num(cell(cells,"PTS"))
+        if not player or gp is None or pts is None:continue
+        rows.append({
+            "player":player,"team":"","gp":gp,
+            "ppg":pts,"rpg":num(cell(cells,"REB")),
+            "apg":num(cell(cells,"APG")),"spg":num(cell(cells,"STL")),
+            "bpg":num(cell(cells,"BLK"))
+        })
+    if not rows:raise ValueError("PBA statistics rows not parsed")
+    return {
+        "league":"PBA",
+        "season":"Current PBA player statistics",
+        "sourceName":"PBA Official",
+        "sourceUrl":url,
+        "groups":generic_groups(rows,[
+            ("Points","ppg","PPG"),("Rebounds","rpg","RPG"),("Assists","apg","APG"),
+            ("Steals","spg","SPG"),("Blocks","bpg","BPG")
+        ])
+    }
+
+def parse_nbl_australia_stats():
+    url="https://www.nbl.com.au/"
+    soup=BeautifulSoup(fetch(url),"html.parser")
+    text=clean(soup.get_text(" ",strip=True))
+    start=text.lower().find("player leaderboard")
+    if start>=0:text=text[start:start+2500]
+    found=[]
+    pattern=re.compile(r"([A-Z][A-Za-zÀ-ÖØ-öø-ÿ'’.-]+(?:\s+[A-Z][A-Za-zÀ-ÖØ-öø-ÿ'’.-]+){1,4})\s+(\d+(?:\.\d+)?)\s+PPG\b")
+    for name,value in pattern.findall(text):
+        name=clean(re.sub(r"^Player Leaderboard\s+","",name,flags=re.I))
+        if not name or any(x["player"]==name for x in found):continue
+        found.append({"player":name,"team":"","gp":None,"value":float(value),"displayValue":display_number(value)})
+        if len(found)>=8:break
+    if not found:raise ValueError("NBL Australia player leaderboard not parsed")
+    return {
+        "league":"NBL Australia",
+        "season":"NBL27 · 2026–27",
+        "sourceName":"NBL Official",
+        "sourceUrl":url,
+        "groups":[{"title":"Points","suffix":"PPG","rows":found}]
+    }
+
+def build_uaap_stats():
     landing=fetch(UAAP_BASE)
     ids=discover_game_ids(landing)
-    if not ids:
-        ids=[str(i) for i in range(1,25)]
-    # Keep a practical current-season sample and avoid hammering the source.
+    if not ids:ids=[str(i) for i in range(1,25)]
     ids=ids[-20:]
     games=[]
     for gid in ids:
@@ -264,26 +469,56 @@ def main():
             if game:games.append(game)
         except Exception as ex:
             print("UAAP game",gid,type(ex).__name__,str(ex)[:120])
-    if not games:
-        raise SystemExit("No UAAP statistics parsed")
+    if not games:raise ValueError("No UAAP statistics parsed")
     games.sort(key=lambda g:g.get("date") or "",reverse=True)
-    payload={
-        "updatedAt":datetime.now(timezone.utc).isoformat(),
-        "leagues":{
-            "uaap":{
-                "league":"UAAP",
-                "season":"Season 89 Men's Basketball",
-                "sourceName":"UAAP Basketball Live Stats",
-                "sourceUrl":UAAP_BASE,
-                "gameCount":len(games),
-                "leaders":aggregate(games),
-                "latestGame":games[0],
-                "games":games[:12]
-            }
-        }
+    return {
+        "league":"UAAP",
+        "season":"Season 89 Men's Basketball",
+        "sourceName":"UAAP Basketball Live Stats",
+        "sourceUrl":UAAP_BASE,
+        "gameCount":len(games),
+        "leaders":aggregate(games),
+        "latestGame":games[0],
+        "games":games[:12]
     }
+
+def load_previous_leagues():
+    try:
+        data=json.loads(OUT.read_text(encoding="utf-8"))
+        return data.get("leagues",{}) if isinstance(data,dict) else {}
+    except:return {}
+
+def main():
+    previous=load_previous_leagues()
+    leagues=dict(previous)
+    jobs=[
+        ("uaap",build_uaap_stats),
+        ("pba",parse_pba_stats),
+        ("nblaus",parse_nbl_australia_stats),
+        ("basketball",lambda:espn_basketball_stats("basketball","nba",2026,"2025–26 Regular Season")),
+        ("wnba",lambda:espn_basketball_stats("wnba","wnba",2026,"2026 Regular Season")),
+        ("baseball",espn_baseball_stats),
+        ("hockey",espn_hockey_stats),
+        ("football",lambda:espn_football_stats("football","nfl","NFL")),
+        ("ncaaf",lambda:espn_football_stats("ncaaf","college-football","NCAA Football")),
+    ]
+    updated=[]
+    for key,builder in jobs:
+        try:
+            value=builder()
+            if value and (value.get("groups") or value.get("leaders")):
+                leagues[key]=value
+                updated.append(key)
+                print("Updated",key)
+            else:
+                print("No usable statistics",key)
+        except Exception as ex:
+            print("Statistics",key,type(ex).__name__,str(ex)[:180])
+            if key not in previous:
+                leagues.pop(key,None)
+    payload={"updatedAt":datetime.now(timezone.utc).isoformat(),"leagues":leagues}
     OUT.write_text(json.dumps(payload,indent=2,ensure_ascii=False)+"\n",encoding="utf-8")
-    print("UAAP games",len(games),"latest",games[0]["gameId"],games[0]["teams"])
+    print("Statistics leagues",",".join(sorted(leagues.keys())),"updated",",".join(updated))
 
 if __name__=="__main__":
     main()
