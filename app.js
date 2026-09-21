@@ -167,7 +167,7 @@ async function specialSportsPayload(sport){
   if(!league||!Array.isArray(league.games)||!league.games.length)return null;
   return {special:true,games:league.games,sourceName:league.sourceName||'',sourceUrl:league.sourceUrl||''};
 }
-const specialScoreKeys=new Set(['atp','wta','ipl','volleyball_w','volleyball_m']);
+const specialScoreKeys=new Set(['atp','wta','ipl','volleyball_w','volleyball_m','asian_games']);
 function scoreGameLooksGeneric(g){
   const names=[g?.away,g?.home].map(x=>String(x||'').trim().toLowerCase());
   const generic=new Set(['','away','home','tbd','team 1','team 2','player 1','player 2']);
@@ -255,6 +255,7 @@ const liveNowLabels={
   f1:{sport:'Motorsport',league:'Formula 1'},
   ufc:{sport:'Combat Sports',league:'UFC'},
   boxing:{sport:'Boxing',league:'Boxing'},
+  asian_games:{sport:'Multi-sport',league:'Asian Games'},
   pba:{sport:'Basketball',league:'PBA'},
   mpbl:{sport:'Basketball',league:'MPBL'},
   nbl:{sport:'Basketball',league:'NBL-Pilipinas'},
@@ -265,7 +266,7 @@ const liveNowLabels={
   football:{sport:'American Football',league:'NFL'},
   ncaaf:{sport:'American Football',league:'NCAA Football'}
 };
-const scoreLeagueOrder=['soccer','laliga','seriea','bundesliga','champions','basketball','wnba','pba','mpbl','nbl','nblaus','vba','atp','wta','ipl','volleyball_w','volleyball_m','baseball','hockey','football','ncaaf','f1','ufc','boxing'];
+const scoreLeagueOrder=['asian_games','soccer','laliga','seriea','bundesliga','champions','basketball','wnba','pba','mpbl','nbl','nblaus','vba','atp','wta','ipl','volleyball_w','volleyball_m','baseball','hockey','football','ncaaf','f1','ufc','boxing'];
 const scoreLeagueLogoCache=new Map();
 let currentScoreLeague='soccer';
 let scoreLoadToken=0;
@@ -276,7 +277,7 @@ function scoreLeagueFallback(key){
     soccer:'EPL',laliga:'LAL',seriea:'SA',bundesliga:'BUN',champions:'UCL',
     basketball:'NBA',wnba:'WNBA',pba:'PBA',mpbl:'MPBL',nbl:'NBL-PH',nblaus:'NBL',
     vba:'VBA',atp:'ATP',wta:'WTA',ipl:'IPL',volleyball_w:'FIVB',volleyball_m:'FIVB',
-    baseball:'MLB',hockey:'NHL',football:'NFL',ncaaf:'NCAA',f1:'F1',ufc:'UFC',boxing:'BOX'
+    baseball:'MLB',hockey:'NHL',football:'NFL',ncaaf:'NCAA',f1:'F1',ufc:'UFC',boxing:'BOX',asian_games:'AG26'
   };
   return '<span class="score-league-fallback">'+esc(short[key]||label.slice(0,5).toUpperCase())+'</span>';
 }
