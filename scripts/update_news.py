@@ -90,7 +90,7 @@ def normalize_link(value):
 
 
 def youtube_video_available(video_id):
-    """Reject videos YouTube no longer exposes through its public oEmbed endpoint."""
+    """Best-effort public availability check; fail open if YouTube blocks the checker."""
     if not re.fullmatch(r"[A-Za-z0-9_-]{6,}", video_id or ""):
         return False
     query = urlencode({
@@ -104,11 +104,15 @@ def youtube_video_available(video_id):
     try:
         with urlopen(req, timeout=12) as response:
             if response.status != 200:
-                return False
+                return True
             payload = json.loads(response.read().decode("utf-8"))
-            return bool(payload.get("title") and payload.get("html"))
-    except (HTTPError, URLError, TimeoutError, ValueError, json.JSONDecodeError):
-        return False
+            return bool(payload.get("title"))
+    except HTTPError as exc:
+        # A definite 404 means the video is gone. Other responses can be
+        # rate limits / bot protection, so keep the fresh feed item.
+        return exc.code != 404
+    except (URLError, TimeoutError, ValueError, json.JSONDecodeError):
+        return True
 
 def fetch_feed(cfg):
     parsed = feedparser.parse(
