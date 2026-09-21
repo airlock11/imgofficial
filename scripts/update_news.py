@@ -14,7 +14,7 @@ from bs4 import BeautifulSoup
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "news-data.json"
-UA = "IMG-Sports-News-Updater/1.0 (+https://imgofficial.com)"
+UA = "IMG-Sports-News-Updater/1.1 (+https://imgofficial.com)"
 
 VIDEO_FEEDS = [
     {"name":"BBC Sport","channel_id":"UCW6-BQWFA70Dyyc7ZpZ9Xlg"},
