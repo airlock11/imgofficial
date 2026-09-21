@@ -111,7 +111,10 @@ def slug(value):
     return value[:80]
 
 def split_fighters(title):
-    m = VS_RE.match(clean(title).replace("versus", "vs"))
+    title = clean(title).replace("versus", "vs")
+    if len(re.findall(r"\bvs\.?\b", title, flags=re.I)) != 1:
+        return None
+    m = VS_RE.match(title)
     if not m:
         return None
     left = clean(m.group(1)).strip("-–— ")
@@ -143,7 +146,7 @@ def extract_fights(source):
             continue
         # Official web cache is for current/upcoming cards. Results remain covered
         # by the API cache and can be added from web pages separately later.
-        if dt.timestamp() < now.timestamp() - 2 * 86400:
+        if dt.timestamp() < now.timestamp() - 12 * 3600:
             continue
 
         key = (slug(one), slug(two), dt.date().isoformat())
@@ -198,15 +201,34 @@ def main():
     all_fights = []
     errors = {}
     source_counts = {}
+    existing_rows = existing.get("fights") or []
     for source in SOURCES:
         try:
             rows = extract_fights(source)
+            if not rows:
+                rows = [
+                    row for row in existing_rows
+                    if row.get("sourceName") == source["name"]
+                    and str(row.get("date") or "")[:10] >= datetime.now(timezone.utc).date().isoformat()
+                ]
+                if rows:
+                    errors[source["name"]] = "Parser returned no current rows; retained last verified official schedule"
+                else:
+                    errors[source["name"]] = "No current fights parsed"
             source_counts[source["name"]] = len(rows)
             all_fights.extend(rows)
-            if not rows:
-                errors[source["name"]] = "No current fights parsed"
         except Exception as exc:
-            errors[source["name"]] = str(exc)[:240]
+            rows = [
+                row for row in existing_rows
+                if row.get("sourceName") == source["name"]
+                and str(row.get("date") or "")[:10] >= datetime.now(timezone.utc).date().isoformat()
+            ]
+            if rows:
+                source_counts[source["name"]] = len(rows)
+                all_fights.extend(rows)
+                errors[source["name"]] = "Fetch failed; retained last verified official schedule"
+            else:
+                errors[source["name"]] = str(exc)[:240]
 
     deduped = []
     seen = set()
