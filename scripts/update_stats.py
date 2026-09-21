@@ -821,8 +821,63 @@ def mls_pulse_stats():
         "sourceUrl":url,"groups":groups
     }
 
+def espn_mls_core_stats():
+    url="https://sports.core.api.espn.com/v2/sports/soccer/leagues/usa.1/seasons/2026/leaders"
+    data=fetch_json(url)
+    categories=data.get("categories",[]) or []
+    groups=[]
+    wanted=[
+        ("Goals","G",{"goals","totalgoals","goalsleader"}),
+        ("Assists","A",{"assists","totalassists","assistsleader"})
+    ]
+    for title,suffix,names in wanted:
+        category=None
+        for item in categories:
+            tokens={
+                clean(item.get("name")).lower().replace(" ",""),
+                clean(item.get("displayName")).lower().replace(" ",""),
+                clean(item.get("shortDisplayName")).lower().replace(" ",""),
+                clean(item.get("abbreviation")).lower().replace(" ","")
+            }
+            if tokens & names or any(name in token for token in tokens for name in names):
+                category=item;break
+        if not category:continue
+        rows=[]
+        for leader in (category.get("leaders",[]) or [])[:8]:
+            athlete=leader.get("athlete") or {}
+            if athlete.get("$ref"):
+                try:athlete=fetch_json(str(athlete["$ref"]).replace("http://","https://"))
+                except:athlete={}
+            player=clean(athlete.get("displayName") or athlete.get("fullName") or athlete.get("shortName"))
+            if not player:continue
+            team_obj=leader.get("team") or athlete.get("team") or {}
+            if isinstance(team_obj,dict) and team_obj.get("$ref"):
+                try:team_obj=fetch_json(str(team_obj["$ref"]).replace("http://","https://"))
+                except:team_obj={}
+            team=clean(team_obj.get("displayName") or team_obj.get("shortDisplayName") or team_obj.get("abbreviation")) if isinstance(team_obj,dict) else ""
+            value=leader.get("value")
+            if value is None:value=num(leader.get("displayValue"))
+            if value is None:continue
+            rows.append({
+                "player":player,"team":team,"gp":None,
+                "value":value,"displayValue":display_number(value)
+            })
+        if rows:groups.append({"title":title,"suffix":suffix,"rows":rows})
+    titles={g.get("title") for g in groups}
+    if "Goals" not in titles or "Assists" not in titles:
+        raise ValueError("MLS core leaders missing goals or assists")
+    return {
+        "league":"MLS","season":"2026 Regular Season",
+        "sourceName":"ESPN public statistics feed","sourceUrl":url,
+        "groups":groups
+    }
+
 def espn_mls_stats():
     errors=[]
+    try:
+        return espn_mls_core_stats()
+    except Exception as ex:
+        errors.append("ESPN Core "+type(ex).__name__+": "+str(ex)[:600])
     try:
         return mls_official_stats()
     except Exception as ex:
