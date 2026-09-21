@@ -14,7 +14,7 @@ from bs4 import BeautifulSoup
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "news-data.json"
-UA = "IMG-Sports-News-Updater/1.1 (+https://imgofficial.com)"
+UA = "IMG-Sports-News-Updater/1.2 (+https://imgofficial.com)"
 
 VIDEO_FEEDS = [
     {"name":"BBC Sport","channel_id":"UCW6-BQWFA70Dyyc7ZpZ9Xlg"},
@@ -307,6 +307,32 @@ def fetch_youtube_channel_page(cfg):
     return rows
 
 
+
+def youtube_video_embeddable(video_id):
+    if not re.fullmatch(r"[A-Za-z0-9_-]{6,}", video_id or ""):
+        return False
+    cmd = [
+        sys.executable, "-m", "yt_dlp",
+        "--dump-single-json",
+        "--skip-download",
+        "--no-warnings",
+        "--quiet",
+        "https://www.youtube.com/watch?v=" + video_id,
+    ]
+    try:
+        proc = subprocess.run(cmd, capture_output=True, text=True, timeout=45, check=False)
+        if proc.returncode != 0 or not proc.stdout.strip():
+            return False
+        info = json.loads(proc.stdout)
+        if info.get("playable_in_embed") is False:
+            return False
+        availability = str(info.get("availability") or "").lower()
+        if availability and availability not in ("public", "unlisted"):
+            return False
+        return True
+    except Exception:
+        return False
+
 def fetch_videos():
     videos = []
     errors = {}
@@ -385,17 +411,25 @@ def fetch_videos():
             seen_titles.add(title_key)
         unique.append(video)
 
+    # Publish only videos verified as playable inside an embedded YouTube player.
+    verified = []
+    for video in unique[:16]:
+        if youtube_video_embeddable(video.get("id", "")):
+            verified.append(video)
+        if len(verified) >= 8:
+            break
+
     # Put different sources first so the two visible video cards are varied.
     selected = []
     used_sources = set()
-    for video in unique:
+    for video in verified:
         if video["source"] in used_sources:
             continue
         selected.append(video)
         used_sources.add(video["source"])
         if len(selected) >= 2:
             break
-    for video in unique:
+    for video in verified:
         if video not in selected:
             selected.append(video)
         if len(selected) >= 6:
