@@ -46,11 +46,28 @@ def main():
         body=page.locator("body").inner_text(timeout=10000)
         print("ASIAN_GAMES_PAGE",page.url)
         print("ASIAN_GAMES_BODY_BEGIN")
-        print(body[:12000])
+        print(body[:30000])
         print("ASIAN_GAMES_BODY_END")
 
-        links=page.locator("a").evaluate_all("""els => els.slice(0,250).map(a => ({text:(a.innerText||'').trim(),href:a.href}))""")
-        print("ASIAN_GAMES_LINKS",json.dumps(links,ensure_ascii=False)[:12000])
+        links=page.locator("a").evaluate_all("""els => els.slice(0,500).map(a => ({text:(a.innerText||'').trim(),href:a.href}))""")
+        print("ASIAN_GAMES_LINKS",json.dumps(links,ensure_ascii=False)[:30000])
+
+        for probe_url,label in [
+            (f"{BASE}/#/schedule/live","LIVE"),
+            (f"{BASE}/#/medals","MEDALS"),
+            (f"{BASE}/#/discipline/BKB/schedule/daily/{TODAY}","BASKETBALL"),
+            (f"{BASE}/#/discipline/VVO/schedule/daily/{TODAY}","VOLLEYBALL"),
+        ]:
+            try:
+                page.goto(probe_url,wait_until="domcontentloaded",timeout=60000)
+                page.wait_for_timeout(7000)
+                txt=page.locator("body").inner_text(timeout=10000)
+                print(f"ASIAN_GAMES_{label}_URL",page.url)
+                print(f"ASIAN_GAMES_{label}_BEGIN")
+                print(txt[:30000])
+                print(f"ASIAN_GAMES_{label}_END")
+            except Exception as ex:
+                print(f"ASIAN_GAMES_{label}_ERROR",repr(ex))
 
         print("ASIAN_GAMES_JSON_COUNT",len(captured))
         for url,data in captured[-40:]:
