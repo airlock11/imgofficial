@@ -479,6 +479,8 @@ main{min-height:calc(100svh - 68px)}
 .special-score-event .special-event-copy{display:block}
 .special-event-copy strong{font-size:1rem}
 .special-event-location{margin-top:6px;color:var(--muted);font-size:.78rem}
+.special-event-meta{margin-top:6px;color:var(--text);font-size:.68rem;font-weight:750;letter-spacing:.015em}
+.special-event-prize{margin-top:4px;color:var(--muted);font-size:.66rem}
 
 .news-video-link:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.28))}
 .news-video-play{position:absolute;left:50%;top:50%;z-index:2;width:58px;height:58px;display:grid;place-items:center;transform:translate(-50%,-50%);border-radius:50%;background:rgba(0,0,0,.78);border:1px solid rgba(255,255,255,.28);box-shadow:0 10px 30px rgba(0,0,0,.35)}
@@ -1160,4 +1162,24 @@ main{min-height:calc(100svh - 68px)}
 }
 @media(prefers-reduced-motion:reduce){
   .score-league-filter.has-live-activity .score-league-logo-wrap{animation:none;filter:drop-shadow(0 0 7px rgba(239,63,69,.75));box-shadow:0 0 0 1px rgba(239,63,69,.52),0 0 14px rgba(239,63,69,.32)}
+}
+
+/* WTA rankings */
+.wta-ranking-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;padding:14px}
+.wta-ranking-table{min-width:0;border:1px solid rgba(255,255,255,.08);border-radius:14px;overflow:hidden;background:rgba(255,255,255,.02)}
+.wta-ranking-table-title{padding:11px 12px;border-bottom:1px solid rgba(255,255,255,.08);font:800 14px/1 Inter,Arial,sans-serif}
+.wta-ranking-head,.wta-ranking-row{display:grid;grid-template-columns:48px minmax(130px,1fr) 70px 84px;align-items:center;gap:8px;padding:9px 11px}
+.wta-ranking-head{font-size:9px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);background:rgba(255,255,255,.025);border-bottom:1px solid rgba(255,255,255,.08)}
+.wta-ranking-row{border-bottom:1px solid rgba(255,255,255,.055);font-size:11px}
+.wta-ranking-row:last-child{border-bottom:0}
+.wta-ranking-row strong{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wta-ranking-row>span:nth-child(3){color:var(--muted);font-size:10px}
+.wta-ranking-row>b{text-align:right;font-size:11px}
+.wta-rank{font-weight:850;color:var(--muted)}
+.wta-ranking-row em{display:inline-grid;place-items:center;min-width:18px;height:18px;margin-left:5px;padding:0 4px;border-radius:999px;background:rgba(239,63,69,.12);color:#ff7479;font-size:9px;font-style:normal}
+@media(max-width:820px){
+  .wta-ranking-grid{grid-template-columns:1fr;padding:12px}
+}
+@media(max-width:520px){
+  .wta-ranking-head,.wta-ranking-row{grid-template-columns:38px minmax(110px,1fr) 48px 68px;gap:6px;padding:9px 8px}
 }
