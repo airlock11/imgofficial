@@ -473,7 +473,7 @@ function renderScoreLeagueFilters(){
     const liveLabel=state.stream?' — live stream':state.live?' — live score':'';
     const specialClass=specialScoreLeagueKeys.has(key)?' is-special-league':'';
     const scoreKind=specialScoreLeagueKeys.has(key)?'special':'league';
-    return '<div class="score-league-item'+(key==='champions'?' score-league-item-champions':'')+specialClass+liveClass+streamClass+'" data-score-kind="'+scoreKind+'">'+
+    return '<div class="score-league-item'+(key==='champions'?' score-league-item-champions':'')+(key==='one'?' score-league-item-one':'')+specialClass+liveClass+streamClass+'" data-score-kind="'+scoreKind+'">'+
       '<button type="button" class="score-league-filter'+(currentScoreLeague===key?' active':'')+specialClass+liveClass+streamClass+'" data-score-league="'+esc(key)+'" aria-label="'+esc(label+liveLabel)+'" title="'+esc(label+liveLabel)+'">'+
         '<span class="score-league-logo-wrap">'+scoreLeagueLogoMarkup(key)+'</span>'+
       '</button>'+
@@ -653,6 +653,28 @@ function wtaRankingsMarkup(data){
     '</button>'+
     '<div id="'+panelId+'" class="standings-dropdown-content"><div class="standings-dropdown-inner">'+
       '<div class="wta-ranking-grid">'+table(rankings,'World Singles')+table(race,'Race to Finals')+'</div>'+
+    '</div></div>'+
+  '</section>';
+}
+
+function combatTitleholdersMarkup(key){
+  const data=specialSportsDataCache?.leagues?.[key]||{};
+  const rows=Array.isArray(data.titleholders)?data.titleholders:[];
+  if(!rows.length)return'';
+  const label=key==='one'?'ONE Championship':'UFC';
+  const panelId='combat-titleholders-'+key;
+  return '<section class="league-games-group league-standings-dropdown combat-titleholders-dropdown" aria-label="'+esc(label)+' titleholders">'+
+    '<button type="button" class="standings-dropdown-toggle" data-standings-toggle aria-expanded="false" aria-controls="'+panelId+'">'+
+      '<span class="standings-dropdown-copy"><span class="standings-dropdown-kicker">World champions</span><strong>Titleholders</strong><small>'+esc(label)+' · '+esc(data.titleholdersUpdated||'Current')+'</small></span>'+
+      '<span class="standings-dropdown-side"><span class="standings-dropdown-count">'+esc(rows.length)+' '+(rows.length===1?'champion':'champions')+'</span><span class="standings-dropdown-chevron" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span></span>'+
+    '</button>'+
+    '<div id="'+panelId+'" class="standings-dropdown-content"><div class="standings-dropdown-inner">'+
+      '<div class="combat-titleholder-list">'+rows.map(r=>
+        '<article class="combat-titleholder-row">'+
+          '<div><strong>'+esc(r.champion)+'</strong>'+(r.interim?'<span class="combat-titleholder-interim">Interim</span>':'')+'</div>'+
+          '<small>'+esc(r.division)+'</small>'+
+        '</article>'
+      ).join('')+'</div>'+
     '</div></div>'+
   '</section>';
 }
@@ -1821,6 +1843,11 @@ function renderGames(){
   const leagueStatsHtml=leagueStatsMarkup(currentScoreLeague);
   if(leagueStatsHtml)sections.push(leagueStatsHtml);
 
+  if(currentScoreLeague==='ufc'||currentScoreLeague==='one'){
+    const titleholdersHtml=combatTitleholdersMarkup(currentScoreLeague);
+    if(titleholdersHtml)sections.push(titleholdersHtml);
+  }
+
   if(currentScoreLeague==='wta'){
     const wtaData=specialSportsDataCache?.leagues?.wta||{};
     const rankingsHtml=wtaRankingsMarkup(wtaData);
@@ -1991,6 +2018,7 @@ async function loadGames({silent=false,league=currentScoreLeague}={}){
   const st=document.getElementById('gameStatus');
   const sport=league||currentScoreLeague||'soccer';
   await loadSportsStatsData();
+  if(sport==='ufc'||sport==='one')await loadSpecialSportsData();
   const isCurrent=()=>requestToken===scoreLoadToken&&currentScoreLeague===sport;
   const isWebLeague=['pba','uaap','mpbl','nbl','nblaus','vba'].includes(sport);
   if(!silent)st.textContent='';
