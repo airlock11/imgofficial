@@ -192,7 +192,7 @@ function renderSports(){
       '<strong>'+leagues.length+' competitions</strong>'+
     '</div>'+
     '<div class="sports-logo-grid">'+leagues.map((league,i)=>{const [name,region,key]=league;return (
-      '<a class="sports-logo-tile" href="/scores/?league='+encodeURIComponent(key||'')+'&from=sports'" style="--league-index:'+i+';--sport-accent:'+accent+'" data-league-key="'+esc(key||'')+'" aria-label="Open '+esc(name)+' in Scores">'+
+      '<a class="sports-logo-tile" href="/scores/?from=sports&league='+encodeURIComponent(key||'')+'" style="--league-index:'+i+';--sport-accent:'+accent+'" data-league-key="'+esc(key||'')+'" aria-label="Open '+esc(name)+' in Scores">'+
         '<div class="sports-logo-mark" data-logo-host="'+esc(key||'')+'">'+leagueLogo(name,key)+'</div>'+
         '<div class="sports-logo-copy"><strong>'+esc(name)+'</strong><small>'+esc(region)+'</small>'+capabilityBadges(key)+'</div>'+
       '</a>'
