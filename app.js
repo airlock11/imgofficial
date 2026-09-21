@@ -1055,6 +1055,14 @@ function renderAllLiveGames(items,{preserveItems=false}={}){
   renderLiveSportSorter(live);
 
   const visible=liveSportFilter==='all'?live:live.filter(g=>(g.sportLabel||'Sport')===liveSportFilter);
+  // Exact livestream links are data-driven. Keep them attached during rendering so
+  // WATCH NOW is never lost when Live Now refreshes/re-renders.
+  for(const g of visible){
+    if(g.sportKey==='asian_games'&&(!Array.isArray(g.streams)||!g.streams.length)){
+      const exactAsianGames=liveNowItems.find(x=>String(x.eventId)===String(g.eventId)&&Array.isArray(x.streams)&&x.streams.length);
+      if(exactAsianGames)g.streams=exactAsianGames.streams;
+    }
+  }
   if(status)status.innerHTML='<span class="live-count-dot" aria-hidden="true"></span><span>'+visible.length+' live</span>';
 
   host.innerHTML=visible.map(g=>{
