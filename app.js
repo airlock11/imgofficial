@@ -593,6 +593,34 @@ function leagueStandingsMarkup({id,title='Standings',subtitle='',ariaLabel='Leag
   '</section>';
 }
 
+function wtaRankingsMarkup(data){
+  const rankings=Array.isArray(data?.rankings)?data.rankings:[];
+  const race=Array.isArray(data?.race)?data.race:[];
+  if(!rankings.length&&!race.length)return'';
+  const panelId='wta-rankings-panel';
+  const table=(rows,label)=>'<div class="wta-ranking-table">'+
+    '<div class="wta-ranking-table-title">'+esc(label)+'</div>'+
+    '<div class="wta-ranking-head"><span>Rank</span><span>Player</span><span>Country</span><b>Points</b></div>'+
+    '<div class="wta-ranking-body">'+rows.slice(0,20).map(r=>
+      '<div class="wta-ranking-row">'+
+        '<span class="wta-rank">'+esc(r.rank)+'</span>'+
+        '<strong>'+esc(r.player)+(r.qualified?' <em>Q</em>':'')+'</strong>'+
+        '<span>'+esc(r.country||'')+'</span>'+
+        '<b>'+esc(Number(r.points||0).toLocaleString())+'</b>'+
+      '</div>'
+    ).join('')+'</div>'+
+  '</div>';
+  return '<section class="league-games-group league-standings-dropdown wta-rankings-dropdown" aria-label="WTA rankings">'+
+    '<button type="button" class="standings-dropdown-toggle" data-standings-toggle aria-expanded="false" aria-controls="'+panelId+'">'+
+      '<span class="standings-dropdown-copy"><span class="standings-dropdown-kicker">Official WTA data</span><strong>Rankings</strong><small>PIF Singles Rankings · Race to the WTA Finals · '+esc(data?.rankingsUpdated||'Current')+'</small></span>'+
+      '<span class="standings-dropdown-side"><span class="standings-dropdown-count">'+esc(rankings.length)+' players</span><span class="standings-dropdown-chevron" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span></span>'+
+    '</button>'+
+    '<div id="'+panelId+'" class="standings-dropdown-content"><div class="standings-dropdown-inner">'+
+      '<div class="wta-ranking-grid">'+table(rankings,'World Singles')+table(race,'Race to Finals')+'</div>'+
+    '</div></div>'+
+  '</section>';
+}
+
 const boxingTitleWeightOrder=[
   ['Heavyweight',['heavyweight']],
   ['Bridgerweight',['bridgerweight']],
@@ -1668,10 +1696,13 @@ function renderGames(){
     }
 
     if(g.eventOnly){
+      const meta=[g.level,g.surface,g.singlesDraw?String(g.singlesDraw)+' singles':'',g.doublesDraw?String(g.doublesDraw)+' doubles':''].filter(Boolean).join(' · ');
       return '<article class="game special-score-event" data-game-key="'+esc(gameDomKey(g))+'">'+
         '<div class="time">'+esc(g.displayTime||'')+'</div>'+
         '<div class="teams"><div class="team special-event-copy"><span><strong>'+esc(g.title||'Event')+'</strong></span></div>'+
         (g.location?'<div class="special-event-location">'+esc(g.location)+'</div>':'')+
+        (meta?'<div class="special-event-meta">'+esc(meta)+'</div>':'')+
+        (g.totalCommitment?'<div class="special-event-prize">Total commitment '+esc(g.totalCommitment)+'</div>':'')+
         '</div>'+
         '<div class="state '+(g.state==='live'?'live':'')+'">'+esc(g.status||'Scheduled')+'</div>'+
       '</article>';
@@ -1742,6 +1773,12 @@ function renderGames(){
 
   const leagueStatsHtml=leagueStatsMarkup(currentScoreLeague);
   if(leagueStatsHtml)sections.push(leagueStatsHtml);
+
+  if(currentScoreLeague==='wta'){
+    const wtaData=specialSportsDataCache?.leagues?.wta||{};
+    const rankingsHtml=wtaRankingsMarkup(wtaData);
+    if(rankingsHtml)sections.push(rankingsHtml);
+  }
 
   if(live.length){
     sections.push(
