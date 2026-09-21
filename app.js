@@ -149,7 +149,7 @@ const cloudflareFallbackFeeds={
   football:'https://img-api-proxy.magsipocarnie.workers.dev/scoreboard?league=football',
   ncaaf:'https://img-api-proxy.magsipocarnie.workers.dev/scoreboard?league=ncaaf'
 };
-const regionalScoreKeys=new Set(['pba','mpbl','nbl','nblaus','vba']);
+const regionalScoreKeys=new Set(['pba','uaap','mpbl','nbl','nblaus','vba']);
 
 let specialSportsDataCache=null;
 let specialSportsDataPromise=null;
@@ -274,6 +274,7 @@ const liveNowLabels={
   asian_games:{sport:'Multi-sport',league:'Asian Games'},
   pba:{sport:'Basketball',league:'PBA'},
   ncaa_ph:{sport:'Basketball',league:'NCAA Philippines'},
+  uaap:{sport:'Basketball',league:'UAAP'},
   mpbl:{sport:'Basketball',league:'MPBL'},
   nbl:{sport:'Basketball',league:'NBL-Pilipinas'},
   nblaus:{sport:'Basketball',league:'NBL Australia'},
@@ -283,7 +284,7 @@ const liveNowLabels={
   football:{sport:'American Football',league:'NFL'},
   ncaaf:{sport:'American Football',league:'NCAA Football'}
 };
-const scoreLeagueOrder=['asian_games','soccer','laliga','seriea','bundesliga','champions','basketball','wnba','pba','ncaa_ph','mpbl','nbl','nblaus','vba','atp','wta','ipl','volleyball_w','volleyball_m','baseball','hockey','football','ncaaf','f1','ufc','boxing'];
+const scoreLeagueOrder=['asian_games','soccer','laliga','seriea','bundesliga','champions','basketball','wnba','pba','ncaa_ph','uaap','mpbl','nbl','nblaus','vba','atp','wta','ipl','volleyball_w','volleyball_m','baseball','hockey','football','ncaaf','f1','ufc','boxing'];
 const scoreLeagueLogoCache=new Map();
 let currentScoreLeague='soccer';
 let scoreLoadToken=0;
@@ -292,7 +293,7 @@ function scoreLeagueFallback(key){
   const label=liveNowLabels[key]?.league||key.toUpperCase();
   const short={
     soccer:'EPL',laliga:'LAL',seriea:'SA',bundesliga:'BUN',champions:'UCL',
-    basketball:'NBA',wnba:'WNBA',pba:'PBA',ncaa_ph:'NCAA-PH',mpbl:'MPBL',nbl:'NBL-PH',nblaus:'NBL',
+    basketball:'NBA',wnba:'WNBA',pba:'PBA',ncaa_ph:'NCAA-PH',uaap:'UAAP',mpbl:'MPBL',nbl:'NBL-PH',nblaus:'NBL',
     vba:'VBA',atp:'ATP',wta:'WTA',ipl:'IPL',volleyball_w:'FIVB',volleyball_m:'FIVB',
     baseball:'MLB',hockey:'NHL',football:'NFL',ncaaf:'NCAA',f1:'F1',ufc:'UFC',boxing:'BOX',asian_games:'AG26'
   };
@@ -1185,9 +1186,9 @@ async function loadAllLiveGames({silent=false}={}){
       // Verified channel broadcasts can exist even when the score provider has no
       // matching event ID. Preserve the actual source channel for each league.
       for(const x of ys){
-        if(!x?.stream?.watchUrl||!['asian_games','pba','nbl','ncaa_ph'].includes(x?.leagueKey))continue;
+        if(!x?.stream?.watchUrl||!['asian_games','pba','nbl','ncaa_ph','uaap'].includes(x?.leagueKey))continue;
         if(live.some(g=>String(g.eventId)===String(x.eventId)))continue;
-        const label=x.league||({asian_games:'2026 ASIAN GAMES',pba:'PBA',nbl:'NBL Pilipinas',ncaa_ph:'NCAA Philippines'}[x.leagueKey]);
+        const label=x.league||({asian_games:'2026 ASIAN GAMES',pba:'PBA',nbl:'NBL Pilipinas',ncaa_ph:'NCAA Philippines',uaap:'UAAP'}[x.leagueKey]);
         const source=x.stream.channel||x.stream.provider||label;
         live.push({eventId:x.eventId,sportKey:x.leagueKey,sportLabel:x.sport||'Sport',leagueLabel:label,date:y.updatedAt||new Date().toISOString(),displayTime:'LIVE',away:label,home:x.title||(label+' Live'),awayScore:'',homeScore:'',status:'LIVE · '+source,state:'live',streams:[x.stream],streamsChecked:true});
       }
@@ -1330,7 +1331,7 @@ async function loadGames({silent=false,league=currentScoreLeague}={}){
   const st=document.getElementById('gameStatus');
   const sport=league||currentScoreLeague||'soccer';
   const isCurrent=()=>requestToken===scoreLoadToken&&currentScoreLeague===sport;
-  const isWebLeague=['pba','mpbl','nbl','nblaus','vba'].includes(sport);
+  const isWebLeague=['pba','uaap','mpbl','nbl','nblaus','vba'].includes(sport);
   if(!silent)st.textContent='';
 
   if(isWebLeague){
