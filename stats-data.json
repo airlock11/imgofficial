@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-21T14:58:53.518593+00:00",
+  "updatedAt": "2026-09-21T15:00:08.756695+00:00",
   "leagues": {
     "uaap": {
       "league": "UAAP",
@@ -6484,8 +6484,8 @@
     "basketball": {
       "league": "NBA",
       "season": "2025–26 Regular Season",
-      "sourceName": "ESPN",
-      "sourceUrl": "https://www.espn.com/nba/stats/player",
+      "sourceName": "ESPN public statistics feed",
+      "sourceUrl": "https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba/statistics/byathlete?region=us&lang=en&contentorigin=espn&isqualified=false&page=1&limit=50&sort=offensive.avgPoints%3Adesc&season=2026&seasontype=2",
       "groups": [
         {
           "title": "Points",
@@ -6494,37 +6494,58 @@
             {
               "player": "Luka Doncic",
               "team": "LAL",
-              "gp": 64,
+              "gp": null,
               "value": 33.5,
               "displayValue": "33.5"
             },
             {
               "player": "Shai Gilgeous-Alexander",
               "team": "OKC",
-              "gp": 68,
+              "gp": null,
               "value": 31.1,
               "displayValue": "31.1"
             },
             {
               "player": "Anthony Edwards",
               "team": "MIN",
-              "gp": 61,
+              "gp": null,
               "value": 28.8,
               "displayValue": "28.8"
             },
             {
               "player": "Jaylen Brown",
-              "team": "BOS",
-              "gp": 71,
+              "team": "PHI",
+              "gp": null,
               "value": 28.7,
               "displayValue": "28.7"
             },
             {
               "player": "Tyrese Maxey",
               "team": "PHI",
-              "gp": 70,
+              "gp": null,
               "value": 28.3,
               "displayValue": "28.3"
+            },
+            {
+              "player": "Kawhi Leonard",
+              "team": "TOR",
+              "gp": null,
+              "value": 27.9,
+              "displayValue": "27.9"
+            },
+            {
+              "player": "Donovan Mitchell",
+              "team": "CLE",
+              "gp": null,
+              "value": 27.9,
+              "displayValue": "27.9"
+            },
+            {
+              "player": "Nikola Jokic",
+              "team": "DEN",
+              "gp": null,
+              "value": 27.7,
+              "displayValue": "27.7"
             }
           ]
         },
@@ -6535,37 +6556,58 @@
             {
               "player": "Nikola Jokic",
               "team": "DEN",
-              "gp": 65,
+              "gp": null,
               "value": 12.9,
               "displayValue": "12.9"
             },
             {
               "player": "Karl-Anthony Towns",
               "team": "NY",
-              "gp": 75,
+              "gp": null,
               "value": 11.9,
               "displayValue": "11.9"
             },
             {
               "player": "Donovan Clingan",
               "team": "POR",
-              "gp": 77,
+              "gp": null,
               "value": 11.6,
               "displayValue": "11.6"
             },
             {
               "player": "Victor Wembanyama",
               "team": "SA",
-              "gp": 64,
+              "gp": null,
               "value": 11.5,
               "displayValue": "11.5"
             },
             {
               "player": "Rudy Gobert",
               "team": "MIN",
-              "gp": 76,
+              "gp": null,
               "value": 11.5,
               "displayValue": "11.5"
+            },
+            {
+              "player": "Jalen Duren",
+              "team": "DET",
+              "gp": null,
+              "value": 10.5,
+              "displayValue": "10.5"
+            },
+            {
+              "player": "Jalen Johnson",
+              "team": "ATL",
+              "gp": null,
+              "value": 10.3,
+              "displayValue": "10.3"
+            },
+            {
+              "player": "Bam Adebayo",
+              "team": "MIA",
+              "gp": null,
+              "value": 10.0,
+              "displayValue": "10.0"
             }
           ]
         },
@@ -6576,37 +6618,120 @@
             {
               "player": "Nikola Jokic",
               "team": "DEN",
-              "gp": 65,
+              "gp": null,
               "value": 10.7,
               "displayValue": "10.7"
             },
             {
               "player": "Cade Cunningham",
               "team": "DET",
-              "gp": 64,
+              "gp": null,
               "value": 9.9,
               "displayValue": "9.9"
             },
             {
               "player": "Luka Doncic",
               "team": "LAL",
-              "gp": 64,
+              "gp": null,
               "value": 8.3,
               "displayValue": "8.3"
             },
             {
               "player": "James Harden",
-              "team": "LAC/CLE",
-              "gp": 70,
-              "value": 8,
-              "displayValue": "8"
+              "team": "CLE",
+              "gp": null,
+              "value": 8.0,
+              "displayValue": "8.0"
             },
             {
               "player": "Jalen Johnson",
               "team": "ATL",
-              "gp": 72,
+              "gp": null,
               "value": 7.9,
               "displayValue": "7.9"
+            },
+            {
+              "player": "Stephon Castle",
+              "team": "SA",
+              "gp": null,
+              "value": 7.4,
+              "displayValue": "7.4"
+            },
+            {
+              "player": "LeBron James",
+              "team": "PHI",
+              "gp": null,
+              "value": 7.2,
+              "displayValue": "7.2"
+            },
+            {
+              "player": "Isaiah Collier",
+              "team": "UTAH",
+              "gp": null,
+              "value": 7.2,
+              "displayValue": "7.2"
+            }
+          ]
+        },
+        {
+          "title": "Steals",
+          "suffix": "SPG",
+          "rows": [
+            {
+              "player": "Ausar Thompson",
+              "team": "DET",
+              "gp": null,
+              "value": 2.0,
+              "displayValue": "2.0"
+            },
+            {
+              "player": "Dyson Daniels",
+              "team": "ATL",
+              "gp": null,
+              "value": 2.0,
+              "displayValue": "2.0"
+            },
+            {
+              "player": "Cason Wallace",
+              "team": "OKC",
+              "gp": null,
+              "value": 1.9,
+              "displayValue": "1.9"
+            },
+            {
+              "player": "Kawhi Leonard",
+              "team": "TOR",
+              "gp": null,
+              "value": 1.9,
+              "displayValue": "1.9"
+            },
+            {
+              "player": "Tyrese Maxey",
+              "team": "PHI",
+              "gp": null,
+              "value": 1.9,
+              "displayValue": "1.9"
+            },
+            {
+              "player": "Luka Doncic",
+              "team": "LAL",
+              "gp": null,
+              "value": 1.6,
+              "displayValue": "1.6"
+            },
+            {
+              "player": "Kris Dunn",
+              "team": "LAC",
+              "gp": null,
+              "value": 1.6,
+              "displayValue": "1.6"
+            },
+            {
+              "player": "OG Anunoby",
+              "team": "NY",
+              "gp": null,
+              "value": 1.6,
+              "displayValue": "1.6"
             }
           ]
         },
@@ -6617,37 +6742,58 @@
             {
               "player": "Victor Wembanyama",
               "team": "SA",
-              "gp": 64,
+              "gp": null,
               "value": 3.1,
               "displayValue": "3.1"
             },
             {
               "player": "Chet Holmgren",
               "team": "OKC",
-              "gp": 69,
+              "gp": null,
               "value": 1.9,
               "displayValue": "1.9"
             },
             {
               "player": "Jay Huff",
               "team": "IND",
-              "gp": 82,
+              "gp": null,
               "value": 1.9,
               "displayValue": "1.9"
             },
             {
               "player": "Evan Mobley",
               "team": "CLE",
-              "gp": 65,
+              "gp": null,
               "value": 1.7,
               "displayValue": "1.7"
             },
             {
               "player": "Donovan Clingan",
               "team": "POR",
-              "gp": 77,
+              "gp": null,
               "value": 1.7,
               "displayValue": "1.7"
+            },
+            {
+              "player": "Rudy Gobert",
+              "team": "MIN",
+              "gp": null,
+              "value": 1.6,
+              "displayValue": "1.6"
+            },
+            {
+              "player": "Myles Turner",
+              "team": "MIL",
+              "gp": null,
+              "value": 1.6,
+              "displayValue": "1.6"
+            },
+            {
+              "player": "Isaiah Stewart",
+              "team": "MEM",
+              "gp": null,
+              "value": 1.6,
+              "displayValue": "1.6"
             }
           ]
         }
@@ -6656,8 +6802,8 @@
     "wnba": {
       "league": "WNBA",
       "season": "2026 Regular Season",
-      "sourceName": "Basketball-Reference",
-      "sourceUrl": "https://www.basketball-reference.com/wnba/years/2026_leaders.html",
+      "sourceName": "ESPN public statistics feed",
+      "sourceUrl": "https://site.web.api.espn.com/apis/common/v3/sports/basketball/wnba/statistics/byathlete?region=us&lang=en&contentorigin=espn&isqualified=false&page=1&limit=50&sort=offensive.avgPoints%3Adesc&season=2026&seasontype=2",
       "groups": [
         {
           "title": "Points",
@@ -6665,28 +6811,35 @@
           "rows": [
             {
               "player": "A'ja Wilson",
-              "team": "LVA",
+              "team": "LV",
               "gp": null,
-              "value": 26,
-              "displayValue": "26"
+              "value": 26.2,
+              "displayValue": "26.2"
             },
             {
               "player": "Kelsey Mitchell",
               "team": "IND",
               "gp": null,
-              "value": 25,
-              "displayValue": "25"
+              "value": 25.1,
+              "displayValue": "25.1"
             },
             {
               "player": "Caitlin Clark",
               "team": "IND",
               "gp": null,
-              "value": 22.5,
-              "displayValue": "22.5"
+              "value": 22.7,
+              "displayValue": "22.7"
+            },
+            {
+              "player": "Kelsey Plum",
+              "team": "PHX",
+              "gp": null,
+              "value": 21.5,
+              "displayValue": "21.5"
             },
             {
               "player": "Kahleah Copper",
-              "team": "PHO",
+              "team": "PHX",
               "gp": null,
               "value": 21.3,
               "displayValue": "21.3"
@@ -6697,6 +6850,20 @@
               "gp": null,
               "value": 20.8,
               "displayValue": "20.8"
+            },
+            {
+              "player": "Breanna Stewart",
+              "team": "NY",
+              "gp": null,
+              "value": 20.7,
+              "displayValue": "20.7"
+            },
+            {
+              "player": "Paige Bueckers",
+              "team": "DAL",
+              "gp": null,
+              "value": 20.6,
+              "displayValue": "20.6"
             }
           ]
         },
@@ -6708,36 +6875,57 @@
               "player": "Angel Reese",
               "team": "ATL",
               "gp": null,
-              "value": 12.44,
-              "displayValue": "12.4"
+              "value": 12.3,
+              "displayValue": "12.3"
             },
             {
               "player": "Jessica Shepard",
               "team": "DAL",
               "gp": null,
-              "value": 11.05,
-              "displayValue": "11.1"
+              "value": 10.9,
+              "displayValue": "10.9"
             },
             {
               "player": "Kiki Iriafen",
-              "team": "WAS",
+              "team": "WSH",
               "gp": null,
-              "value": 9.43,
+              "value": 9.6,
+              "displayValue": "9.6"
+            },
+            {
+              "player": "Shakira Austin",
+              "team": "WSH",
+              "gp": null,
+              "value": 9.4,
               "displayValue": "9.4"
             },
             {
               "player": "A'ja Wilson",
-              "team": "LVA",
+              "team": "LV",
               "gp": null,
-              "value": 9.43,
-              "displayValue": "9.4"
+              "value": 9.3,
+              "displayValue": "9.3"
             },
             {
-              "player": "Shakira Austin",
-              "team": "WAS",
+              "player": "Nneka Ogwumike",
+              "team": "LA",
               "gp": null,
-              "value": 9.41,
-              "displayValue": "9.4"
+              "value": 8.9,
+              "displayValue": "8.9"
+            },
+            {
+              "player": "Jonquel Jones",
+              "team": "NY",
+              "gp": null,
+              "value": 8.9,
+              "displayValue": "8.9"
+            },
+            {
+              "player": "Dominique Malonga",
+              "team": "SEA",
+              "gp": null,
+              "value": 8.8,
+              "displayValue": "8.8"
             }
           ]
         },
@@ -6746,39 +6934,60 @@
           "suffix": "APG",
           "rows": [
             {
-              "player": "Alyssa Thomas",
-              "team": "PHO",
-              "gp": null,
-              "value": 8.42,
-              "displayValue": "8.4"
-            },
-            {
               "player": "Caitlin Clark",
               "team": "IND",
               "gp": null,
-              "value": 8.39,
+              "value": 8.4,
+              "displayValue": "8.4"
+            },
+            {
+              "player": "Alyssa Thomas",
+              "team": "PHX",
+              "gp": null,
+              "value": 8.4,
               "displayValue": "8.4"
             },
             {
               "player": "Jordin Canada",
               "team": "ATL",
               "gp": null,
-              "value": 7.38,
-              "displayValue": "7.4"
+              "value": 7.3,
+              "displayValue": "7.3"
             },
             {
               "player": "Chelsea Gray",
-              "team": "LVA",
+              "team": "LV",
               "gp": null,
-              "value": 6.77,
-              "displayValue": "6.8"
+              "value": 6.7,
+              "displayValue": "6.7"
             },
             {
               "player": "Jackie Young",
-              "team": "LVA",
+              "team": "LV",
               "gp": null,
-              "value": 6.62,
+              "value": 6.6,
               "displayValue": "6.6"
+            },
+            {
+              "player": "Carla Leite",
+              "team": "POR",
+              "gp": null,
+              "value": 6.3,
+              "displayValue": "6.3"
+            },
+            {
+              "player": "Olivia Miles",
+              "team": "MIN",
+              "gp": null,
+              "value": 6.0,
+              "displayValue": "6.0"
+            },
+            {
+              "player": "Paige Bueckers",
+              "team": "DAL",
+              "gp": null,
+              "value": 5.8,
+              "displayValue": "5.8"
             }
           ]
         },
@@ -6790,7 +6999,7 @@
               "player": "Rhyne Howard",
               "team": "ATL",
               "gp": null,
-              "value": 2.33,
+              "value": 2.3,
               "displayValue": "2.3"
             },
             {
@@ -6804,21 +7013,42 @@
               "player": "Angel Reese",
               "team": "ATL",
               "gp": null,
-              "value": 1.85,
-              "displayValue": "1.9"
+              "value": 1.8,
+              "displayValue": "1.8"
             },
             {
               "player": "Azzi Fudd",
               "team": "DAL",
               "gp": null,
-              "value": 1.73,
+              "value": 1.7,
+              "displayValue": "1.7"
+            },
+            {
+              "player": "Kayla McBride",
+              "team": "MIN",
+              "gp": null,
+              "value": 1.7,
+              "displayValue": "1.7"
+            },
+            {
+              "player": "Leila Lacan",
+              "team": "CON",
+              "gp": null,
+              "value": 1.7,
               "displayValue": "1.7"
             },
             {
               "player": "Natasha Howard",
               "team": "MIN",
               "gp": null,
-              "value": 1.73,
+              "value": 1.7,
+              "displayValue": "1.7"
+            },
+            {
+              "player": "Ariel Atkins",
+              "team": "LA",
+              "gp": null,
+              "value": 1.7,
               "displayValue": "1.7"
             }
           ]
@@ -6828,39 +7058,1022 @@
           "suffix": "BPG",
           "rows": [
             {
-              "player": "A'ja Wilson",
-              "team": "",
+              "player": "Joyner Holmes",
+              "team": "SEA",
               "gp": null,
-              "value": 2,
-              "displayValue": "2"
+              "value": 3.0,
+              "displayValue": "3.0"
+            },
+            {
+              "player": "A'ja Wilson",
+              "team": "LV",
+              "gp": null,
+              "value": 2.0,
+              "displayValue": "2.0"
             },
             {
               "player": "Brittney Griner",
-              "team": "",
+              "team": "CON",
               "gp": null,
-              "value": 1.78,
+              "value": 1.8,
               "displayValue": "1.8"
             },
             {
               "player": "Cameron Brink",
-              "team": "",
+              "team": "LA",
               "gp": null,
-              "value": 1.7,
-              "displayValue": "1.7"
+              "value": 1.8,
+              "displayValue": "1.8"
             },
             {
               "player": "Kiah Stokes",
-              "team": "",
+              "team": "GS",
               "gp": null,
-              "value": 1.69,
-              "displayValue": "1.7"
+              "value": 1.8,
+              "displayValue": "1.8"
+            },
+            {
+              "player": "Rickea Jackson",
+              "team": "CHI",
+              "gp": null,
+              "value": 1.8,
+              "displayValue": "1.8"
             },
             {
               "player": "Awak Kuier",
-              "team": "",
+              "team": "DAL",
               "gp": null,
-              "value": 1.54,
+              "value": 1.6,
+              "displayValue": "1.6"
+            },
+            {
+              "player": "Kamilla Cardoso",
+              "team": "CHI",
+              "gp": null,
+              "value": 1.5,
               "displayValue": "1.5"
+            }
+          ]
+        }
+      ]
+    },
+    "baseball": {
+      "league": "MLB",
+      "season": "2026 Regular Season",
+      "sourceName": "ESPN public statistics feed",
+      "sourceUrl": "https://site.web.api.espn.com/apis/common/v3/sports/baseball/mlb/statistics/byathlete?region=us&lang=en&contentorigin=espn&isqualified=false&page=1&limit=50&sort=batting.homeRuns%3Adesc&season=2026&seasontype=2&category=batting",
+      "groups": [
+        {
+          "title": "Home Runs",
+          "suffix": "HR",
+          "rows": [
+            {
+              "player": "Kyle Schwarber",
+              "team": "PHI",
+              "gp": null,
+              "value": 45.0,
+              "displayValue": "45"
+            },
+            {
+              "player": "Pete Crow-Armstrong",
+              "team": "CHC",
+              "gp": null,
+              "value": 45.0,
+              "displayValue": "45"
+            },
+            {
+              "player": "Junior Caminero",
+              "team": "TB",
+              "gp": null,
+              "value": 41.0,
+              "displayValue": "41"
+            },
+            {
+              "player": "Matt Olson",
+              "team": "ATL",
+              "gp": null,
+              "value": 40.0,
+              "displayValue": "40"
+            },
+            {
+              "player": "Yordan Alvarez",
+              "team": "HOU",
+              "gp": null,
+              "value": 40.0,
+              "displayValue": "40"
+            },
+            {
+              "player": "Hunter Goodman",
+              "team": "COL",
+              "gp": null,
+              "value": 39.0,
+              "displayValue": "39"
+            },
+            {
+              "player": "Ben Rice",
+              "team": "NYY",
+              "gp": null,
+              "value": 39.0,
+              "displayValue": "39"
+            },
+            {
+              "player": "Pete Alonso",
+              "team": "BAL",
+              "gp": null,
+              "value": 38.0,
+              "displayValue": "38"
+            }
+          ]
+        },
+        {
+          "title": "Runs Batted In",
+          "suffix": "RBI",
+          "rows": [
+            {
+              "player": "Alec Burleson",
+              "team": "STL",
+              "gp": null,
+              "value": 111.0,
+              "displayValue": "111"
+            },
+            {
+              "player": "Sal Stewart",
+              "team": "CIN",
+              "gp": null,
+              "value": 110.0,
+              "displayValue": "110"
+            },
+            {
+              "player": "Pete Crow-Armstrong",
+              "team": "CHC",
+              "gp": null,
+              "value": 107.0,
+              "displayValue": "107"
+            },
+            {
+              "player": "Pete Alonso",
+              "team": "BAL",
+              "gp": null,
+              "value": 105.0,
+              "displayValue": "105"
+            },
+            {
+              "player": "Jordan Walker",
+              "team": "STL",
+              "gp": null,
+              "value": 100.0,
+              "displayValue": "100"
+            },
+            {
+              "player": "Yordan Alvarez",
+              "team": "HOU",
+              "gp": null,
+              "value": 99.0,
+              "displayValue": "99"
+            },
+            {
+              "player": "CJ Abrams",
+              "team": "WSH",
+              "gp": null,
+              "value": 99.0,
+              "displayValue": "99"
+            },
+            {
+              "player": "Rafael Devers",
+              "team": "SF",
+              "gp": null,
+              "value": 98.0,
+              "displayValue": "98"
+            }
+          ]
+        },
+        {
+          "title": "Batting Average",
+          "suffix": "AVG",
+          "rows": [
+            {
+              "player": "DaShawn Keirsey Jr.",
+              "team": "ATL",
+              "gp": null,
+              "value": 1.0,
+              "displayValue": "1.000"
+            },
+            {
+              "player": "Victor Mederos",
+              "team": "ATL",
+              "gp": null,
+              "value": 1.0,
+              "displayValue": "1.000"
+            },
+            {
+              "player": "Vimael Machin",
+              "team": "COL",
+              "gp": null,
+              "value": 0.5,
+              "displayValue": ".500"
+            },
+            {
+              "player": "Jihwan Bae",
+              "team": "MIL",
+              "gp": null,
+              "value": 0.5,
+              "displayValue": ".500"
+            },
+            {
+              "player": "Jair Camargo",
+              "team": "ATL",
+              "gp": null,
+              "value": 0.5,
+              "displayValue": ".500"
+            },
+            {
+              "player": "Joshua Kuroda-Grauer",
+              "team": "ATH",
+              "gp": null,
+              "value": 0.417,
+              "displayValue": ".417"
+            },
+            {
+              "player": "Justin Dean",
+              "team": "CHC",
+              "gp": null,
+              "value": 0.375,
+              "displayValue": ".375"
+            },
+            {
+              "player": "Gustavo Campero",
+              "team": "LAA",
+              "gp": null,
+              "value": 0.364,
+              "displayValue": ".364"
+            }
+          ]
+        },
+        {
+          "title": "Stolen Bases",
+          "suffix": "SB",
+          "rows": [
+            {
+              "player": "Chandler Simpson",
+              "team": "TB",
+              "gp": null,
+              "value": 46.0,
+              "displayValue": "46"
+            },
+            {
+              "player": "Nasim Nunez",
+              "team": "WSH",
+              "gp": null,
+              "value": 46.0,
+              "displayValue": "46"
+            },
+            {
+              "player": "Bobby Witt Jr.",
+              "team": "KC",
+              "gp": null,
+              "value": 43.0,
+              "displayValue": "43"
+            },
+            {
+              "player": "Jazz Chisholm Jr.",
+              "team": "NYY",
+              "gp": null,
+              "value": 40.0,
+              "displayValue": "40"
+            },
+            {
+              "player": "Pete Crow-Armstrong",
+              "team": "CHC",
+              "gp": null,
+              "value": 38.0,
+              "displayValue": "38"
+            },
+            {
+              "player": "Fernando Tatis Jr.",
+              "team": "SD",
+              "gp": null,
+              "value": 36.0,
+              "displayValue": "36"
+            },
+            {
+              "player": "Jose Ramirez",
+              "team": "CLE",
+              "gp": null,
+              "value": 35.0,
+              "displayValue": "35"
+            },
+            {
+              "player": "Esteury Ruiz",
+              "team": "MIA",
+              "gp": null,
+              "value": 33.0,
+              "displayValue": "33"
+            }
+          ]
+        }
+      ]
+    },
+    "hockey": {
+      "league": "NHL",
+      "season": "2025–26 Regular Season",
+      "sourceName": "ESPN public statistics feed",
+      "sourceUrl": "https://site.web.api.espn.com/apis/common/v3/sports/hockey/nhl/statistics/byathlete?region=us&lang=en&contentorigin=espn&isqualified=false&page=1&limit=50&sort=offensive.points%3Adesc&season=2026&seasontype=2&category=skaters",
+      "groups": [
+        {
+          "title": "Points",
+          "suffix": "PTS",
+          "rows": [
+            {
+              "player": "Connor McDavid",
+              "team": "EDM",
+              "gp": null,
+              "value": 138.0,
+              "displayValue": "138"
+            },
+            {
+              "player": "Nikita Kucherov",
+              "team": "TB",
+              "gp": null,
+              "value": 130.0,
+              "displayValue": "130"
+            },
+            {
+              "player": "Nathan MacKinnon",
+              "team": "COL",
+              "gp": null,
+              "value": 127.0,
+              "displayValue": "127"
+            },
+            {
+              "player": "Macklin Celebrini",
+              "team": "SJ",
+              "gp": null,
+              "value": 115.0,
+              "displayValue": "115"
+            },
+            {
+              "player": "Mark Scheifele",
+              "team": "WPG",
+              "gp": null,
+              "value": 103.0,
+              "displayValue": "103"
+            },
+            {
+              "player": "Nick Suzuki",
+              "team": "MTL",
+              "gp": null,
+              "value": 101.0,
+              "displayValue": "101"
+            },
+            {
+              "player": "David Pastrnak",
+              "team": "BOS",
+              "gp": null,
+              "value": 100.0,
+              "displayValue": "100"
+            },
+            {
+              "player": "Martin Necas",
+              "team": "COL",
+              "gp": null,
+              "value": 100.0,
+              "displayValue": "100"
+            }
+          ]
+        },
+        {
+          "title": "Goals",
+          "suffix": "G",
+          "rows": [
+            {
+              "player": "Nathan MacKinnon",
+              "team": "COL",
+              "gp": null,
+              "value": 53.0,
+              "displayValue": "53"
+            },
+            {
+              "player": "Cole Caufield",
+              "team": "MTL",
+              "gp": null,
+              "value": 51.0,
+              "displayValue": "51"
+            },
+            {
+              "player": "Connor McDavid",
+              "team": "EDM",
+              "gp": null,
+              "value": 48.0,
+              "displayValue": "48"
+            },
+            {
+              "player": "Macklin Celebrini",
+              "team": "SJ",
+              "gp": null,
+              "value": 45.0,
+              "displayValue": "45"
+            },
+            {
+              "player": "Jason Robertson",
+              "team": "DAL",
+              "gp": null,
+              "value": 45.0,
+              "displayValue": "45"
+            },
+            {
+              "player": "Kirill Kaprizov",
+              "team": "MIN",
+              "gp": null,
+              "value": 45.0,
+              "displayValue": "45"
+            },
+            {
+              "player": "Wyatt Johnston",
+              "team": "DAL",
+              "gp": null,
+              "value": 45.0,
+              "displayValue": "45"
+            },
+            {
+              "player": "Nikita Kucherov",
+              "team": "TB",
+              "gp": null,
+              "value": 44.0,
+              "displayValue": "44"
+            }
+          ]
+        },
+        {
+          "title": "Assists",
+          "suffix": "A",
+          "rows": [
+            {
+              "player": "Connor McDavid",
+              "team": "EDM",
+              "gp": null,
+              "value": 90.0,
+              "displayValue": "90"
+            },
+            {
+              "player": "Nikita Kucherov",
+              "team": "TB",
+              "gp": null,
+              "value": 86.0,
+              "displayValue": "86"
+            },
+            {
+              "player": "Nathan MacKinnon",
+              "team": "COL",
+              "gp": null,
+              "value": 74.0,
+              "displayValue": "74"
+            },
+            {
+              "player": "Evan Bouchard",
+              "team": "EDM",
+              "gp": null,
+              "value": 74.0,
+              "displayValue": "74"
+            },
+            {
+              "player": "Nick Suzuki",
+              "team": "MTL",
+              "gp": null,
+              "value": 72.0,
+              "displayValue": "72"
+            },
+            {
+              "player": "David Pastrnak",
+              "team": "BOS",
+              "gp": null,
+              "value": 71.0,
+              "displayValue": "71"
+            },
+            {
+              "player": "Macklin Celebrini",
+              "team": "SJ",
+              "gp": null,
+              "value": 70.0,
+              "displayValue": "70"
+            },
+            {
+              "player": "Quinn Hughes",
+              "team": "MIN",
+              "gp": null,
+              "value": 69.0,
+              "displayValue": "69"
+            }
+          ]
+        }
+      ]
+    },
+    "football": {
+      "league": "NFL",
+      "season": "2026 Regular Season",
+      "sourceName": "ESPN public statistics feed",
+      "sourceUrl": "https://site.web.api.espn.com/apis/common/v3/sports/football/nfl/statistics/byathlete?region=us&lang=en&contentorigin=espn&isqualified=false&page=1&limit=50&sort=passing.passingYards%3Adesc&season=2026&seasontype=2&category=offense%3Apassing",
+      "groups": [
+        {
+          "title": "Passing Yards",
+          "suffix": "YDS",
+          "rows": [
+            {
+              "player": "Tyler Shough",
+              "team": "NO",
+              "gp": null,
+              "value": 662.0,
+              "displayValue": "662"
+            },
+            {
+              "player": "Bryce Young",
+              "team": "CAR",
+              "gp": null,
+              "value": 648.0,
+              "displayValue": "648"
+            },
+            {
+              "player": "C.J. Stroud",
+              "team": "HOU",
+              "gp": null,
+              "value": 627.0,
+              "displayValue": "627"
+            },
+            {
+              "player": "Josh Allen",
+              "team": "BUF",
+              "gp": null,
+              "value": 582.0,
+              "displayValue": "582"
+            },
+            {
+              "player": "Patrick Mahomes",
+              "team": "KC",
+              "gp": null,
+              "value": 566.0,
+              "displayValue": "566"
+            },
+            {
+              "player": "Lamar Jackson",
+              "team": "BAL",
+              "gp": null,
+              "value": 559.0,
+              "displayValue": "559"
+            },
+            {
+              "player": "Jared Goff",
+              "team": "DET",
+              "gp": null,
+              "value": 533.0,
+              "displayValue": "533"
+            },
+            {
+              "player": "Jordan Love",
+              "team": "GB",
+              "gp": null,
+              "value": 532.0,
+              "displayValue": "532"
+            }
+          ]
+        },
+        {
+          "title": "Passing TDs",
+          "suffix": "TD",
+          "rows": [
+            {
+              "player": "Kirk Cousins",
+              "team": "LV",
+              "gp": null,
+              "value": 6.0,
+              "displayValue": "6"
+            },
+            {
+              "player": "Dak Prescott",
+              "team": "DAL",
+              "gp": null,
+              "value": 6.0,
+              "displayValue": "6"
+            },
+            {
+              "player": "Jared Goff",
+              "team": "DET",
+              "gp": null,
+              "value": 6.0,
+              "displayValue": "6"
+            },
+            {
+              "player": "Bryce Young",
+              "team": "CAR",
+              "gp": null,
+              "value": 6.0,
+              "displayValue": "6"
+            },
+            {
+              "player": "Patrick Mahomes",
+              "team": "KC",
+              "gp": null,
+              "value": 5.0,
+              "displayValue": "5"
+            },
+            {
+              "player": "Josh Allen",
+              "team": "BUF",
+              "gp": null,
+              "value": 5.0,
+              "displayValue": "5"
+            },
+            {
+              "player": "Jalen Hurts",
+              "team": "PHI",
+              "gp": null,
+              "value": 5.0,
+              "displayValue": "5"
+            },
+            {
+              "player": "Brock Purdy",
+              "team": "SF",
+              "gp": null,
+              "value": 5.0,
+              "displayValue": "5"
+            }
+          ]
+        },
+        {
+          "title": "Rushing Yards",
+          "suffix": "YDS",
+          "rows": [
+            {
+              "player": "Kenneth Walker III",
+              "team": "KC",
+              "gp": null,
+              "value": 290.0,
+              "displayValue": "290"
+            },
+            {
+              "player": "Derrick Henry",
+              "team": "BAL",
+              "gp": null,
+              "value": 212.0,
+              "displayValue": "212"
+            },
+            {
+              "player": "Jahmyr Gibbs",
+              "team": "DET",
+              "gp": null,
+              "value": 208.0,
+              "displayValue": "208"
+            },
+            {
+              "player": "James Cook III",
+              "team": "BUF",
+              "gp": null,
+              "value": 192.0,
+              "displayValue": "192"
+            },
+            {
+              "player": "Jonathan Taylor",
+              "team": "IND",
+              "gp": null,
+              "value": 190.0,
+              "displayValue": "190"
+            },
+            {
+              "player": "D'Andre Swift",
+              "team": "CHI",
+              "gp": null,
+              "value": 169.0,
+              "displayValue": "169"
+            },
+            {
+              "player": "Bijan Robinson",
+              "team": "ATL",
+              "gp": null,
+              "value": 155.0,
+              "displayValue": "155"
+            },
+            {
+              "player": "Ashton Jeanty",
+              "team": "LV",
+              "gp": null,
+              "value": 150.0,
+              "displayValue": "150"
+            }
+          ]
+        },
+        {
+          "title": "Receiving Yards",
+          "suffix": "YDS",
+          "rows": [
+            {
+              "player": "Jaxon Smith-Njigba",
+              "team": "SEA",
+              "gp": null,
+              "value": 277.0,
+              "displayValue": "277"
+            },
+            {
+              "player": "Chris Olave",
+              "team": "NO",
+              "gp": null,
+              "value": 268.0,
+              "displayValue": "268"
+            },
+            {
+              "player": "Dalton Kincaid",
+              "team": "BUF",
+              "gp": null,
+              "value": 225.0,
+              "displayValue": "225"
+            },
+            {
+              "player": "Amon-Ra St. Brown",
+              "team": "DET",
+              "gp": null,
+              "value": 209.0,
+              "displayValue": "209"
+            },
+            {
+              "player": "Jalen Coker",
+              "team": "CAR",
+              "gp": null,
+              "value": 204.0,
+              "displayValue": "204"
+            },
+            {
+              "player": "CeeDee Lamb",
+              "team": "DAL",
+              "gp": null,
+              "value": 197.0,
+              "displayValue": "197"
+            },
+            {
+              "player": "Christian Watson",
+              "team": "GB",
+              "gp": null,
+              "value": 188.0,
+              "displayValue": "188"
+            },
+            {
+              "player": "Parker Washington",
+              "team": "JAX",
+              "gp": null,
+              "value": 181.0,
+              "displayValue": "181"
+            }
+          ]
+        }
+      ]
+    },
+    "ncaaf": {
+      "league": "NCAA Football",
+      "season": "2026 Regular Season",
+      "sourceName": "ESPN public statistics feed",
+      "sourceUrl": "https://site.web.api.espn.com/apis/common/v3/sports/football/college-football/statistics/byathlete?region=us&lang=en&contentorigin=espn&isqualified=false&page=1&limit=50&sort=passing.passingYards%3Adesc&season=2026&seasontype=2&category=offense%3Apassing",
+      "groups": [
+        {
+          "title": "Passing Yards",
+          "suffix": "YDS",
+          "rows": [
+            {
+              "player": "Kevin Jennings",
+              "team": "SMU",
+              "gp": null,
+              "value": 989.0,
+              "displayValue": "989"
+            },
+            {
+              "player": "Landyn Locke",
+              "team": "SHSU",
+              "gp": null,
+              "value": 973.0,
+              "displayValue": "973"
+            },
+            {
+              "player": "JJ Kohl",
+              "team": "FIU",
+              "gp": null,
+              "value": 930.0,
+              "displayValue": "930"
+            },
+            {
+              "player": "Trinidad Chambliss",
+              "team": "MISS",
+              "gp": null,
+              "value": 924.0,
+              "displayValue": "924"
+            },
+            {
+              "player": "Tayven Jackson",
+              "team": "UNT",
+              "gp": null,
+              "value": 917.0,
+              "displayValue": "917"
+            },
+            {
+              "player": "Jaden Craig",
+              "team": "TCU",
+              "gp": null,
+              "value": 903.0,
+              "displayValue": "903"
+            },
+            {
+              "player": "Malik Washington",
+              "team": "MD",
+              "gp": null,
+              "value": 892.0,
+              "displayValue": "892"
+            },
+            {
+              "player": "Demond Williams Jr.",
+              "team": "WASH",
+              "gp": null,
+              "value": 890.0,
+              "displayValue": "890"
+            }
+          ]
+        },
+        {
+          "title": "Passing TDs",
+          "suffix": "TD",
+          "rows": [
+            {
+              "player": "Jayden Maiava",
+              "team": "USC",
+              "gp": null,
+              "value": 12.0,
+              "displayValue": "12"
+            },
+            {
+              "player": "Darian Mensah",
+              "team": "MIA",
+              "gp": null,
+              "value": 11.0,
+              "displayValue": "11"
+            },
+            {
+              "player": "Kamario Taylor",
+              "team": "MSST",
+              "gp": null,
+              "value": 11.0,
+              "displayValue": "11"
+            },
+            {
+              "player": "Josh Hoover",
+              "team": "IU",
+              "gp": null,
+              "value": 10.0,
+              "displayValue": "10"
+            },
+            {
+              "player": "Hauss Hejny",
+              "team": "CSU",
+              "gp": null,
+              "value": 10.0,
+              "displayValue": "10"
+            },
+            {
+              "player": "Gunner Stockton",
+              "team": "UGA",
+              "gp": null,
+              "value": 9.0,
+              "displayValue": "9"
+            },
+            {
+              "player": "Rocco Becht",
+              "team": "PSU",
+              "gp": null,
+              "value": 9.0,
+              "displayValue": "9"
+            },
+            {
+              "player": "Dante Moore",
+              "team": "ORE",
+              "gp": null,
+              "value": 9.0,
+              "displayValue": "9"
+            }
+          ]
+        },
+        {
+          "title": "Rushing Yards",
+          "suffix": "YDS",
+          "rows": [
+            {
+              "player": "Nate Sheppard",
+              "team": "DUKE",
+              "gp": null,
+              "value": 528.0,
+              "displayValue": "528"
+            },
+            {
+              "player": "Jadan Baugh",
+              "team": "FLA",
+              "gp": null,
+              "value": 458.0,
+              "displayValue": "458"
+            },
+            {
+              "player": "Dylan Riley",
+              "team": "BOIS",
+              "gp": null,
+              "value": 454.0,
+              "displayValue": "454"
+            },
+            {
+              "player": "Jaylin Carter",
+              "team": "MEM",
+              "gp": null,
+              "value": 437.0,
+              "displayValue": "437"
+            },
+            {
+              "player": "Jabari Bates",
+              "team": "SJSU",
+              "gp": null,
+              "value": 413.0,
+              "displayValue": "413"
+            },
+            {
+              "player": "Torrance Burgess Jr.",
+              "team": "TXST",
+              "gp": null,
+              "value": 397.0,
+              "displayValue": "397"
+            },
+            {
+              "player": "Wayne Knight",
+              "team": "UCLA",
+              "gp": null,
+              "value": 345.0,
+              "displayValue": "345"
+            },
+            {
+              "player": "King Miller",
+              "team": "USC",
+              "gp": null,
+              "value": 338.0,
+              "displayValue": "338"
+            }
+          ]
+        },
+        {
+          "title": "Receiving Yards",
+          "suffix": "YDS",
+          "rows": [
+            {
+              "player": "Jesse Legree",
+              "team": "ORST",
+              "gp": null,
+              "value": 476.0,
+              "displayValue": "476"
+            },
+            {
+              "player": "Malachi Toney",
+              "team": "MIA",
+              "gp": null,
+              "value": 444.0,
+              "displayValue": "444"
+            },
+            {
+              "player": "KJ Duff",
+              "team": "RUTG",
+              "gp": null,
+              "value": 419.0,
+              "displayValue": "419"
+            },
+            {
+              "player": "Jeremiah Smith",
+              "team": "OSU",
+              "gp": null,
+              "value": 400.0,
+              "displayValue": "400"
+            },
+            {
+              "player": "Reed Harris",
+              "team": "ASU",
+              "gp": null,
+              "value": 374.0,
+              "displayValue": "374"
+            },
+            {
+              "player": "Collin Dixon",
+              "team": "ILL",
+              "gp": null,
+              "value": 367.0,
+              "displayValue": "367"
+            },
+            {
+              "player": "Koby Howard",
+              "team": "PSU",
+              "gp": null,
+              "value": 344.0,
+              "displayValue": "344"
+            },
+            {
+              "player": "Easton Messer",
+              "team": "FAU",
+              "gp": null,
+              "value": 335.0,
+              "displayValue": "335"
             }
           ]
         }
