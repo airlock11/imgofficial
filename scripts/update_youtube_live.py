@@ -132,5 +132,16 @@ for e in events:
   s=search(e)
   if s: streams.append({**e,"stream":s})
  except Exception as ex: print("youtube",e["title"],ex)
+try:
+ streams.extend(asian_games_live())
+except Exception as ex:
+ print("youtube Asian Games",ex)
+seen=set(); dedup=[]
+for x in streams:
+ vid=x.get("stream",{}).get("videoId")
+ if vid and vid in seen: continue
+ if vid: seen.add(vid)
+ dedup.append(x)
+streams=dedup
 OUT.write_text(json.dumps({"updatedAt":datetime.now(timezone.utc).isoformat(),"streams":streams},indent=2)+"\n",encoding="utf-8")
 print("live events",len(events),"matched streams",len(streams))
