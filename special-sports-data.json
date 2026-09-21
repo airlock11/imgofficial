@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-21T07:47:46.371Z",
+  "updated_at": "2026-09-21T08:00:00Z",
   "source": "Official sports websites",
   "leagues": {
     "atp": {
@@ -171,6 +171,27 @@
       "sourceName": "20th Asian Games Aichi-Nagoya 2026 — Official",
       "sourceUrl": "https://www.aichi-nagoya2026.org/",
       "games": [
+        {
+          "eventId": "ag26-onesports-live-20260921",
+          "date": "2026-09-21T00:00:00+08:00",
+          "displayTime": "LIVE",
+          "title": "Asian Games - One Sports",
+          "away": "Team Philippines",
+          "home": "Aichi-Nagoya 2026",
+          "awayScore": "LIVE",
+          "homeScore": "LIVE",
+          "status": "Official coverage",
+          "state": "live",
+          "streams": [
+            {
+              "provider": "YouTube",
+              "channel": "One Sports",
+              "title": "Asian Games live",
+              "watchUrl": "https://www.youtube.com/@OneSportsPHL/streams"
+            }
+          ],
+          "streamsChecked": true
+        },
         {
           "eventId": "ag26-live-wushu-wong-20260921",
           "date": "2026-09-21T14:00:00+09:00",
