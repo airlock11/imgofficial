@@ -429,7 +429,7 @@ function renderScoreLeagueFilters(){
     const bb=activity.get(b)||{live:false,stream:false};
     const aRank=aa.stream?0:aa.live?1:2;
     const bRank=bb.stream?0:bb.live?1:2;
-    return aRank-bRank-(0)||((baseIndex.get(a)||0)-(baseIndex.get(b)||0));
+    return (aRank-bRank)||((baseIndex.get(a)||0)-(baseIndex.get(b)||0));
   });
   host.innerHTML=ordered.map(key=>{
     const label=liveNowLabels[key]?.league||key.toUpperCase();
@@ -2464,7 +2464,7 @@ if(document.getElementById('games')){
   let scoreRefreshInFlight=false;
 
   const hasLiveScores=()=>allGames.some(g=>g.state==='live')||!document.getElementById('allLiveSection')?.hidden;
-  const nextScoreRefreshDelay=()=>30000;
+  const nextScoreRefreshDelay=()=>hasLiveScores()?15000:30000;
 
   const scheduleScoreAutoRefresh=(delay=nextScoreRefreshDelay())=>{
     clearTimeout(scoreAutoRefreshTimer);
