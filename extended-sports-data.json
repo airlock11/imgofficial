@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-21T19:05:41.663550+00:00",
+  "updated_at": "2026-09-21T19:07:21.606406+00:00",
   "source": "Official and verified public sports sources",
   "leagues": {
     "bleague": {
@@ -2160,7 +2160,7 @@
       "league": "WBC",
       "sourceName": "IMG Boxing Data",
       "sourceUrl": "/boxing/",
-      "note": "WBC titleholders are arranged by weight class and generated from verified title fields in IMG’s boxing database.",
+      "note": "WBC titleholders come from verified title fields in the IMG boxing database; related bouts require a currently titled fighter.",
       "games": [
         {
           "eventId": "wbc-bout-6a6354458fa2ff16230029d4",
@@ -2268,7 +2268,7 @@
           "date": "2026-09-21T18:12:33+00:00",
           "displayTime": "Current",
           "title": "David Benavidez — WBC World Light heavyweight",
-          "location": "Light Heavyweight · Record 31-0-0",
+          "location": "Super Middleweight · Record 31-0-0",
           "status": "Current titleholder",
           "state": "info",
           "eventOnly": true,
@@ -2313,7 +2313,7 @@
           "date": "2026-09-21T18:12:33+00:00",
           "displayTime": "Current",
           "title": "Jadier Herrera — WBC Interim World Lightweight",
-          "location": "Lightweight · Record 17-0-0",
+          "location": "Super Featherweight · Record 17-0-0",
           "status": "Current titleholder",
           "state": "info",
           "eventOnly": true,
@@ -2328,7 +2328,7 @@
           "date": "2026-09-21T18:12:33+00:00",
           "displayTime": "Current",
           "title": "Jesus Ramos — WBC Interim World Middleweight",
-          "location": "Middleweight · Record 24-1-0",
+          "location": "Super Welterweight · Record 24-1-0",
           "status": "Current titleholder",
           "state": "info",
           "eventOnly": true,
@@ -2418,7 +2418,7 @@
           "date": "2026-09-21T18:12:33+00:00",
           "displayTime": "Current",
           "title": "Ryan Garcia — WBC World Welterweight",
-          "location": "Welterweight · Record 26-2-0",
+          "location": "Super Lightweight · Record 26-2-0",
           "status": "Current titleholder",
           "state": "info",
           "eventOnly": true,
@@ -2539,7 +2539,7 @@
       "league": "WBA",
       "sourceName": "IMG Boxing Data",
       "sourceUrl": "/boxing/",
-      "note": "WBA titleholders are arranged by weight class and generated from verified title fields in IMG’s boxing database.",
+      "note": "WBA titleholders come from verified title fields in the IMG boxing database; related bouts require a currently titled fighter.",
       "games": [
         {
           "eventId": "wba-holder-6715fc1faf69bb50508b79d3",
@@ -2576,7 +2576,7 @@
           "date": "2026-09-21T18:12:33+00:00",
           "displayTime": "Current",
           "title": "Daiya Kira — WBA World Light Flyweight",
-          "location": "Junior Flyweight · Record 4-0-0",
+          "location": "Super Flyweight · Record 4-0-0",
           "status": "Current titleholder",
           "state": "info",
           "eventOnly": true,
@@ -2591,7 +2591,7 @@
           "date": "2026-09-21T18:12:33+00:00",
           "displayTime": "Current",
           "title": "David Benavidez — WBA Super World Cruiserweight",
-          "location": "Cruiserweight · Record 31-0-0",
+          "location": "Super Middleweight · Record 31-0-0",
           "status": "Current titleholder",
           "state": "info",
           "eventOnly": true,
@@ -2606,7 +2606,7 @@
           "date": "2026-09-21T18:12:33+00:00",
           "displayTime": "Current",
           "title": "David Benavidez — WBA World Light Heavyweight",
-          "location": "Light Heavyweight · Record 31-0-0",
+          "location": "Super Middleweight · Record 31-0-0",
           "status": "Current titleholder",
           "state": "info",
           "eventOnly": true,
@@ -2621,7 +2621,7 @@
           "date": "2026-09-21T18:12:33+00:00",
           "displayTime": "Current",
           "title": "David Jimenez — WBA World Super Flyweight",
-          "location": "Super Flyweight · Record 18-1-0",
+          "location": "Flyweight · Record 18-1-0",
           "status": "Current titleholder",
           "state": "info",
           "eventOnly": true,
@@ -2681,7 +2681,7 @@
           "date": "2026-09-21T18:12:33+00:00",
           "displayTime": "Current",
           "title": "Jack Catterall — WBA World Welterweight",
-          "location": "Welterweight · Record 33-2-0",
+          "location": "Super Lightweight · Record 33-2-0",
           "status": "Current titleholder",
           "state": "info",
           "eventOnly": true,
@@ -2726,7 +2726,7 @@
           "date": "2026-09-21T18:12:33+00:00",
           "displayTime": "Current",
           "title": "Jaron Ennis — WBA World Super Welterweight",
-          "location": "Super Welterweight · Record 35-0-0",
+          "location": "Welterweight · Record 35-0-0",
           "status": "Current titleholder",
           "state": "info",
           "eventOnly": true,
@@ -2741,7 +2741,7 @@
           "date": "2026-09-21T18:12:33+00:00",
           "displayTime": "Current",
           "title": "Jesse Rodriguez — WBA Super World Bantamweight",
-          "location": "Bantamweight · Record 23-0-0",
+          "location": "Flyweight · Record 23-0-0",
           "status": "Current titleholder",
           "state": "info",
           "eventOnly": true,
@@ -2846,7 +2846,7 @@
           "date": "2026-09-21T18:12:33+00:00",
           "displayTime": "Current",
           "title": "Teofimo Lopez — WBA Super World Welterweight",
-          "location": "Welterweight · Record 22-2-0",
+          "location": "Super Lightweight · Record 22-2-0",
           "status": "Current titleholder",
           "state": "info",
           "eventOnly": true,
@@ -2862,7 +2862,7 @@
       "league": "IBF",
       "sourceName": "IMG Boxing Data",
       "sourceUrl": "/boxing/",
-      "note": "IBF titleholders are arranged by weight class and generated from verified title fields in IMG’s boxing database.",
+      "note": "IBF titleholders come from verified title fields in the IMG boxing database; related bouts require a currently titled fighter.",
       "games": [
         {
           "eventId": "ibf-bout-6a52690f6d8f1db996c3f79f",
@@ -2972,7 +2972,7 @@
           "date": "2026-09-21T18:12:33+00:00",
           "displayTime": "Current",
           "title": "Jose Salas Reyes — IBF World Bantamweight",
-          "location": "Bantamweight · Record 15-0-0",
+          "location": "Super Bantamweight · Record 15-0-0",
           "status": "Current titleholder",
           "state": "info",
           "eventOnly": true,
@@ -3002,7 +3002,7 @@
           "date": "2026-09-21T18:12:33+00:00",
           "displayTime": "Current",
           "title": "Liam Paro — IBF World Welterweight",
-          "location": "Welterweight · Record 27-1-0",
+          "location": "Super Lightweight · Record 27-1-0",
           "status": "Current titleholder",
           "state": "info",
           "eventOnly": true,
@@ -3017,7 +3017,7 @@
           "date": "2026-09-21T18:12:33+00:00",
           "displayTime": "Current",
           "title": "Masamichi Yabuki — IBF World Flyweight",
-          "location": "Flyweight · Record 19-4-0",
+          "location": "Junior Flyweight · Record 19-4-0",
           "status": "Current titleholder",
           "state": "info",
           "eventOnly": true,
@@ -3093,7 +3093,7 @@
       "league": "WBO",
       "sourceName": "IMG Boxing Data",
       "sourceUrl": "/boxing/",
-      "note": "WBO titleholders are arranged by weight class and generated from verified title fields in IMG’s boxing database.",
+      "note": "WBO titleholders come from verified title fields in the IMG boxing database; related bouts require a currently titled fighter.",
       "games": [
         {
           "eventId": "wbo-holder-6715fc1faf69bb50508b7b4d",
@@ -3145,7 +3145,7 @@
           "date": "2026-09-21T18:12:33+00:00",
           "displayTime": "Current",
           "title": "Christian Medina — WBO World Bantamweight",
-          "location": "Bantamweight · Record 26-4-0",
+          "location": "Record 26-4-0",
           "status": "Current titleholder",
           "state": "info",
           "eventOnly": true,
@@ -3175,7 +3175,7 @@
           "date": "2026-09-21T18:12:33+00:00",
           "displayTime": "Current",
           "title": "David Benavidez — WBO World Cruiserweight",
-          "location": "Cruiserweight · Record 31-0-0",
+          "location": "Super Middleweight · Record 31-0-0",
           "status": "Current titleholder",
           "state": "info",
           "eventOnly": true,
@@ -3205,7 +3205,7 @@
           "date": "2026-09-21T18:12:33+00:00",
           "displayTime": "Current",
           "title": "Devin Haney — WBO World Welterweight",
-          "location": "Welterweight · Record 33-0-0",
+          "location": "Super Lightweight · Record 33-0-0",
           "status": "Current titleholder",
           "state": "info",
           "eventOnly": true,
@@ -3250,7 +3250,7 @@
           "date": "2026-09-21T18:12:33+00:00",
           "displayTime": "Current",
           "title": "Hamzah Sheeraz — WBO World Super Middleweight",
-          "location": "Super Middleweight · Record 22-0-1",
+          "location": "Middleweight · Record 22-0-1",
           "status": "Current titleholder",
           "state": "info",
           "eventOnly": true,
@@ -3265,7 +3265,7 @@
           "date": "2026-09-21T18:12:33+00:00",
           "displayTime": "Current",
           "title": "Jaron Ennis — WBO World Junior Middleweight",
-          "location": "Super Welterweight · Record 35-0-0",
+          "location": "Welterweight · Record 35-0-0",
           "status": "Current titleholder",
           "state": "info",
           "eventOnly": true,
@@ -3280,7 +3280,7 @@
           "date": "2026-09-21T18:12:33+00:00",
           "displayTime": "Current",
           "title": "Kenshiro Teraji — WBO World Junior Bantamweight",
-          "location": "Super Flyweight · Record 25-2-0",
+          "location": "Junior Flyweight · Record 25-2-0",
           "status": "Current titleholder",
           "state": "info",
           "eventOnly": true,
@@ -3355,7 +3355,7 @@
           "date": "2026-09-21T18:12:33+00:00",
           "displayTime": "Current",
           "title": "Shakur Stevenson — WBO World Junior Welterweight",
-          "location": "Super Lightweight · Record 25-0-0",
+          "location": "Lightweight · Record 25-0-0",
           "status": "Current titleholder",
           "state": "info",
           "eventOnly": true,
@@ -3371,7 +3371,7 @@
       "league": "THE RING",
       "sourceName": "The Ring",
       "sourceUrl": "https://www.ringmagazine.com/en/champions/ring/Men",
-      "note": "THE RING titleholders are arranged by weight class and generated from verified title fields in IMG’s boxing database.",
+      "note": "THE RING titleholders come from verified title fields in the IMG boxing database; related bouts require a currently titled fighter.",
       "games": [
         {
           "eventId": "ring-holder-6715fc1eaf69bb50508b79b2",
@@ -3385,8 +3385,8 @@
           "dataType": "titleholder",
           "weightClass": "Light Heavyweight",
           "weightOrder": 3,
-          "sourceName": "The Ring",
-          "sourceUrl": "https://www.ringmagazine.com/en/champions/ring/Men"
+          "sourceName": "IMG Boxing Data",
+          "sourceUrl": "/boxing/"
         },
         {
           "eventId": "ring-holder-6715fc1faf69bb50508b7baa",
@@ -3400,8 +3400,8 @@
           "dataType": "titleholder",
           "weightClass": "Cruiserweight",
           "weightOrder": 2,
-          "sourceName": "The Ring",
-          "sourceUrl": "https://www.ringmagazine.com/en/champions/ring/Men"
+          "sourceName": "IMG Boxing Data",
+          "sourceUrl": "/boxing/"
         },
         {
           "eventId": "ring-holder-6715fc1faf69bb50508b7ada",
@@ -3415,8 +3415,8 @@
           "dataType": "titleholder",
           "weightClass": "Super Bantamweight",
           "weightOrder": 12,
-          "sourceName": "The Ring",
-          "sourceUrl": "https://www.ringmagazine.com/en/champions/ring/Men"
+          "sourceName": "IMG Boxing Data",
+          "sourceUrl": "/boxing/"
         },
         {
           "eventId": "ring-holder-6715fc1faf69bb50508b7c72",
@@ -3430,8 +3430,8 @@
           "dataType": "titleholder",
           "weightClass": "Heavyweight",
           "weightOrder": 0,
-          "sourceName": "The Ring",
-          "sourceUrl": "https://www.ringmagazine.com/en/champions/ring/Men"
+          "sourceName": "IMG Boxing Data",
+          "sourceUrl": "/boxing/"
         },
         {
           "eventId": "ring-holder-6715fc1faf69bb50508b7a03",
@@ -3445,23 +3445,23 @@
           "dataType": "titleholder",
           "weightClass": "Minimumweight",
           "weightOrder": 17,
-          "sourceName": "The Ring",
-          "sourceUrl": "https://www.ringmagazine.com/en/champions/ring/Men"
+          "sourceName": "IMG Boxing Data",
+          "sourceUrl": "/boxing/"
         },
         {
           "eventId": "ring-holder-6715fc1faf69bb50508b7c47",
           "date": "2026-09-21T18:12:33+00:00",
           "displayTime": "Current",
           "title": "Shakur Stevenson — The Ring Junior Welterweight",
-          "location": "Super Lightweight · Record 25-0-0",
+          "location": "Lightweight · Record 25-0-0",
           "status": "Current titleholder",
           "state": "info",
           "eventOnly": true,
           "dataType": "titleholder",
           "weightClass": "Super Lightweight",
           "weightOrder": 8,
-          "sourceName": "The Ring",
-          "sourceUrl": "https://www.ringmagazine.com/en/champions/ring/Men"
+          "sourceName": "IMG Boxing Data",
+          "sourceUrl": "/boxing/"
         }
       ]
     }
