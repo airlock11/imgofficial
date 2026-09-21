@@ -127,6 +127,8 @@ def one_sports_live():
    league_key="pba"; sport="Basketball"; league="PBA"; prefix="pba"
   elif re.search(r"\bNCAA\b",upper):
    league_key="ncaa_ph"; sport="Basketball"; league="NCAA Philippines"; prefix="ncaaph"
+  elif re.search(r"\bUAAP\b",upper):
+   league_key="uaap"; sport="Basketball"; league="UAAP"; prefix="uaap"
   else:
    continue
   watch="https://www.youtube.com/watch?v="+vid
