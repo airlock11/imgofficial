@@ -1620,10 +1620,18 @@ function renderGames(){
     const agData=specialSportsDataCache?.leagues?.asian_games;
     const medals=Array.isArray(agData?.medals)?agData.medals:[];
     if(medals.length){
-      sections.push('<section class="league-games-group asian-medal-table" aria-label="Asian Games medal standings">'+
-        '<div class="league-games-group-head"><h3>Medal Standings</h3><span>Gold · Silver · Bronze · Total</span></div>'+
-        '<div class="medal-table-head"><span>Rank</span><span>Country</span><b>Gold</b><b>Silver</b><b>Bronze</b><b>Total</b></div>'+
-        '<div class="medal-table-body">'+medals.map(m=>'<div class="medal-table-row"><span>'+esc(m.rank)+'</span><strong>'+esc(m.country)+'</strong><b>'+esc(m.gold)+'</b><b>'+esc(m.silver)+'</b><b>'+esc(m.bronze)+'</b><b>'+esc(m.total)+'</b></div>').join('')+'</div>'+
+      const medalPanelId='asian-games-medal-standings';
+      sections.push('<section class="league-games-group asian-medal-table league-standings-dropdown" aria-label="Asian Games medal standings">'+
+        '<button type="button" class="standings-dropdown-toggle" data-standings-toggle aria-expanded="false" aria-controls="'+medalPanelId+'">'+
+          '<span class="standings-dropdown-copy"><span class="standings-dropdown-kicker">Medal table</span><strong>Medal Standings</strong><small>Gold · Silver · Bronze · Total</small></span>'+
+          '<span class="standings-dropdown-side"><span class="standings-dropdown-count">'+esc(medals.length)+' '+(medals.length===1?'country':'countries')+'</span><span class="standings-dropdown-chevron" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span></span>'+
+        '</button>'+
+        '<div id="'+medalPanelId+'" class="standings-dropdown-content">'+
+          '<div class="standings-dropdown-inner"><div class="medal-table-scroll">'+
+            '<div class="medal-table-head"><span>Rank</span><span>Country</span><b>Gold</b><b>Silver</b><b>Bronze</b><b>Total</b></div>'+
+            '<div class="medal-table-body">'+medals.map(m=>'<div class="medal-table-row"><span>'+esc(m.rank)+'</span><strong>'+esc(m.country)+'</strong><b>'+esc(m.gold)+'</b><b>'+esc(m.silver)+'</b><b>'+esc(m.bronze)+'</b><b>'+esc(m.total)+'</b></div>').join('')+'</div>'+
+          '</div></div>'+
+        '</div>'+
       '</section>');
     }
   }
