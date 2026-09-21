@@ -268,9 +268,75 @@ def canonical_nbl_team(value):
     return best or str(value or "").strip()
 
 def nbl_verified_seed_games():
-    # High-confidence 2026 results from public/official sources. These are
-    # retained until a newer verified source for the same matchup/date exists.
+    # High-confidence 2026 results verified from NBL-Pilipinas Facebook
+    # score graphics/posts or official team/local-government Facebook posts.
+    # These persist until a newer equally verified source supersedes them.
     return [
+        {
+            "eventId": "verified-nbl-20260920-tikas-batangas",
+            "date": "2026-09-20T18:00:00+08:00",
+            "displayTime": "Sep 20 · Final",
+            "away": "Batangas Barako - Venom Art",
+            "home": "Tikas Kapampangan",
+            "awayScore": "92",
+            "homeScore": "110",
+            "status": "Final",
+            "state": "final",
+            "sourceName": "NBL-Pilipinas Official Facebook",
+            "sourceUrl": "https://www.facebook.com/nblpilipinas/posts/glutamax-men-best-player-of-the-game-renzo-victoria-made-a-huge-impact-off-the-b/1499767768850060/",
+        },
+        {
+            "eventId": "verified-nbl-20260920-camsur-nueva-ecija",
+            "date": "2026-09-20T18:00:00+08:00",
+            "displayTime": "Sep 20 · Final",
+            "away": "CamSur Express",
+            "home": "Nueva Ecija Granary Buffalos",
+            "awayScore": "154",
+            "homeScore": "121",
+            "status": "Final",
+            "state": "final",
+            "sourceName": "NBL-Pilipinas Official Facebook",
+            "sourceUrl": "https://www.facebook.com/nblpilipinas/posts/glutamax-men-best-player-of-the-game-medwin-ariate-was-as-efficient-as-he-can-be/1499661952193975/",
+        },
+        {
+            "eventId": "verified-nbl-20260918-batangas-zamboanga",
+            "date": "2026-09-18T18:00:00+08:00",
+            "displayTime": "Sep 18 · Final",
+            "away": "Zamboanga Valientes",
+            "home": "Batangas Barako - Venom Art",
+            "awayScore": "90",
+            "homeScore": "92",
+            "status": "Final",
+            "state": "final",
+            "sourceName": "NBL-Pilipinas Official Facebook",
+            "sourceUrl": "https://www.facebook.com/nblpilipinas/posts/wow-what-an-ending-glutamax-men-best-player-of-the-game-jem-carlos-de-ocampos-of/1498111535682350/",
+        },
+        {
+            "eventId": "verified-nbl-20260918-qc-manila",
+            "date": "2026-09-18T18:00:00+08:00",
+            "displayTime": "Sep 18 · Final",
+            "away": "Manila MLB",
+            "home": "Quezon City Titans",
+            "awayScore": "103",
+            "homeScore": "113",
+            "status": "Final",
+            "state": "final",
+            "sourceName": "NBL-Pilipinas Official Facebook",
+            "sourceUrl": "https://www.facebook.com/nblpilipinas/posts/glutamax-men-best-player-of-the-game-angelo-canetes-versatility-on-both-ends-of-/1497915645701939/",
+        },
+        {
+            "eventId": "verified-nbl-20260913-taguig-tikas",
+            "date": "2026-09-13T18:00:00+08:00",
+            "displayTime": "Sep 13 · Final",
+            "away": "Tikas Kapampangan",
+            "home": "Taguig City Generals",
+            "awayScore": "84",
+            "homeScore": "86",
+            "status": "Final",
+            "state": "final",
+            "sourceName": "Taguig City Official Facebook",
+            "sourceUrl": "https://www.facebook.com/taguigcity/posts/1531288389037526/",
+        },
         {
             "eventId": "verified-nbl-20260830-starhorse-tikas",
             "date": "2026-08-30T18:00:00+08:00",
