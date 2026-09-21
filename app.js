@@ -1078,28 +1078,7 @@ async function loadAllLiveGames({silent=false}={}){
     if(status)status.textContent='Checking live games';
   }
 
-  const live=[{
-    eventId:'onesports-asian-games-live',
-    date:new Date().toISOString(),
-    displayTime:'Watch live',
-    away:'Team Philippines',
-    home:'Asian Games 2026',
-    awayScore:'LIVE',
-    homeScore:'LIVE',
-    status:'Live on One Sports',
-    state:'live',
-    sportKey:'asian-games',
-    sportLabel:'Multi-sport',
-    leagueLabel:'2026 Asian Games',
-    streams:[{
-      provider:'YouTube',
-      channel:'One Sports',
-      title:'2026 Asian Games — One Sports Live',
-      embedUrl:'https://www.youtube-nocookie.com/embed/vzTY2AK3mok?autoplay=1&playsinline=1&rel=0',
-      watchUrl:'https://www.youtube.com/watch?v=vzTY2AK3mok'
-    }],
-    streamsChecked:true
-  }];
+  const live=[];
   const webKeys=['pba','mpbl','nbl','nblaus','vba'];
   const apiKeys=['soccer','laliga','seriea','bundesliga','champions','basketball','wnba','atp','wta','ipl','volleyball_w','volleyball_m','f1','ufc','boxing','baseball','hockey','football','ncaaf'];
 
@@ -1125,6 +1104,16 @@ async function loadAllLiveGames({silent=false}={}){
     }));
   })();
 
+  const asianGamesPromise=(async()=>{
+    try{
+      const j=await fetchScorePayload('asian_games');
+      const labels=liveNowLabels.asian_games||{sport:'Multi-sport',league:'Asian Games'};
+      for(const game of normalizeScorePayload('asian_games',j)){
+        if(game.state==='live')live.push({...game,sportKey:'asian_games',sportLabel:labels.sport,leagueLabel:labels.league});
+      }
+    }catch{}
+  })();
+
   const apiPromise=Promise.all(apiKeys.map(async key=>{
     try{
       const j=await fetchScorePayload(key);
@@ -1135,7 +1124,15 @@ async function loadAllLiveGames({silent=false}={}){
     }catch{}
   }));
 
-  await Promise.all([regionalPromise,apiPromise]);
+  await Promise.all([regionalPromise,apiPromise,asianGamesPromise]);
+  const deduped=[];
+  const seenLive=new Set();
+  for(const game of live){
+    const key=String(game.eventId||[game.sportKey,game.away,game.home,game.title].join('|'));
+    if(seenLive.has(key))continue;
+    seenLive.add(key);deduped.push(game);
+  }
+  live.length=0;live.push(...deduped);
   await Promise.allSettled([...new Set(live.map(g=>g.sportKey).filter(Boolean))].map(key=>
     hydrateTeamLogos(key,live.filter(g=>g.sportKey===key))
   ));
