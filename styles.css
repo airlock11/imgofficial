@@ -752,3 +752,6 @@ main{min-height:calc(100svh - 68px)}
 .live-watch-play{width:36px;height:36px;flex:0 0 36px;border-radius:50%;display:grid;place-items:center;background:#fff;color:#080b10}
 .live-watch-play svg{width:19px;height:19px;fill:currentColor}
 @media(max-width:600px){.live-watch-btn{min-height:54px;border-radius:14px;margin-top:12px}.live-watch-play{width:34px;height:34px;flex-basis:34px}}
+
+/* Asian Games medal standings */
+.medal-table-head,.medal-table-row{display:grid;grid-template-columns:52px minmax(150px,1fr) repeat(4,minmax(58px,72px));align-items:center;gap:8px;padding:11px 14px}.medal-table-head{font-size:11px;text-transform:uppercase;letter-spacing:.06em;opacity:.68;border-bottom:1px solid rgba(255,255,255,.1)}.medal-table-row{border-bottom:1px solid rgba(255,255,255,.07)}.medal-table-row:last-child{border-bottom:0}.medal-table-row b,.medal-table-head b{text-align:center}.medal-table-row strong{font-size:14px}.asian-medal-table{overflow-x:auto}.medal-table-head,.medal-table-body{min-width:560px}@media(max-width:640px){.medal-table-head,.medal-table-row{grid-template-columns:42px minmax(130px,1fr) repeat(4,54px);padding:10px 12px;gap:5px}.medal-table-row strong{font-size:13px}}
