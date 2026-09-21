@@ -183,7 +183,11 @@ function mergeScoreGames(primary,fallback){
   }
   return out;
 }
-async function fetchScorePayload(sport,{fallbackOnly=false}={}){
+async function fetchAsianGamesOfficial(){
+  const url='https://results.asiangames2026.org/#/schedule';
+  return {officialLive:true,sourceName:'Aichi-Nagoya 2026 Official Live Results',sourceUrl:url,games:[]};
+}
+async function fetchScorePayload(sport,{fallbackOnly=false}={}){\n  if(sport==='asian_games'){\n    const local=await specialSportsPayload(sport);\n    if(local){local.officialLive=true;local.sourceName='Aichi-Nagoya 2026 Official Live Results';local.sourceUrl='https://results.asiangames2026.org/#/schedule';}\n    return local||fetchAsianGamesOfficial();\n  }
   if(sport==='boxing'){
     const [apiResult,webResult]=await Promise.allSettled([
       fetch('boxing-fights-data.json?v='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null),
