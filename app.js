@@ -1672,6 +1672,12 @@ async function loadAllLiveGames({silent=false}={}){
 function renderGames(){
   const host=document.getElementById('games');
   if(!host)return;
+  // Preserve dropdown state across automatic score/live-data re-renders.
+  const openPanels=new Set(
+    [...host.querySelectorAll('[aria-expanded="true"][aria-controls]')]
+      .map(el=>el.getAttribute('aria-controls'))
+      .filter(Boolean)
+  );
 
   const byDateAsc=(a,b)=>(Date.parse(a.date||'')||0)-(Date.parse(b.date||'')||0);
   const byDateDesc=(a,b)=>(Date.parse(b.date||'')||0)-(Date.parse(a.date||'')||0);
@@ -1873,6 +1879,16 @@ function renderGames(){
   host.innerHTML=sections.length
     ?sections.join('')
     :'<div class="empty">No verified schedule or scores were returned for this league right now.</div>';
+
+  for(const panelId of openPanels){
+    const toggle=[...host.querySelectorAll('[aria-controls]')].find(el=>el.getAttribute('aria-controls')===panelId);
+    if(!toggle)continue;
+    toggle.setAttribute('aria-expanded','true');
+    const statsSection=toggle.closest('.sports-statistics');
+    if(statsSection)statsSection.classList.add('stats-open');
+    const standingsSection=toggle.closest('.league-standings-dropdown');
+    if(standingsSection)standingsSection.classList.add('standings-open');
+  }
 }
 
 function nblBroadcastScheduleGames(){
