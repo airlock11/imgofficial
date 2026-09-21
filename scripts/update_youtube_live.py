@@ -119,6 +119,16 @@ def one_sports_live():
   if vid in PINNED_ASIAN_GAMES_VIDEO_IDS:
    print("Pinned stream diagnostic",vid,repr(title),repr(channel),"live=",bool(is_live),"ended=",bool(ended),"api=",bool(d))
   if "one sports" not in channel.lower():continue
+  if is_live and not ended:
+   try:
+    public=public_watch_info(vid)
+    if public.get("channel") and "one sports" not in public.get("channel","").lower():
+     is_live=False
+    elif not public.get("live"):
+     print("Public watch page says ended",vid,repr(title))
+     is_live=False
+   except Exception as ex:
+    print("One Sports public live check",vid,ex)
   if not is_live or ended:continue
   upper=title.upper()
   if "2026 ASIAN GAMES" in upper:
