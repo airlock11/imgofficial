@@ -13,6 +13,7 @@ UA="IMG-Sports-Live/1.0"
 ONE_SPORTS_CHANNEL_ID="UCXDG9ue-emCN8Ad3h7lERqQ"
 NBL_PILIPINAS_CHANNEL_ID="UCJDBLldRGVJPEvyjJdSHefw"
 WTA_YOUTUBE_USERNAME="WTA"
+MPBL_YOUTUBE_HANDLE="mpblofficial"
 PINNED_ASIAN_GAMES_VIDEO_IDS=["5mZlZtTk83E"]
 SCOREBOARDS={
  "Basketball":"https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard",
@@ -45,6 +46,13 @@ def youtube_search(q="", max_results=25, channel_id=None, event_type="live"):
 
 def resolve_legacy_channel_id(username):
  params={"part":"snippet","forUsername":username,"key":KEY}
+ items=get_json("https://www.googleapis.com/youtube/v3/channels?"+urllib.parse.urlencode(params)).get("items",[])
+ return str(items[0].get("id","")) if items else ""
+
+def resolve_handle_channel_id(handle):
+ value=str(handle or "").strip().lstrip("@")
+ if not value:return ""
+ params={"part":"snippet","forHandle":value,"key":KEY}
  items=get_json("https://www.googleapis.com/youtube/v3/channels?"+urllib.parse.urlencode(params)).get("items",[])
  return str(items[0].get("id","")) if items else ""
 
@@ -203,6 +211,52 @@ def wta_official_live():
   out.append({"eventId":"wta-youtube-"+vid,"sport":"Tennis","leagueKey":"wta","league":"WTA Tour","teams":[],"title":title,"stream":stream})
  return out
 
+def mpbl_official_live():
+ # Official MPBL channel supplied by IMG: https://youtube.com/@mpblofficial
+ # Only publish a stream while YouTube confirms that exact channel is live.
+ try:
+  channel_id=resolve_handle_channel_id(MPBL_YOUTUBE_HANDLE)
+ except Exception as ex:
+  print("MPBL channel resolve",ex)
+  return []
+ if not channel_id:
+  print("MPBL official YouTube handle could not be resolved")
+  return []
+
+ ids=[]
+ try:
+  ids += channel_feed_ids(channel_id)
+ except Exception as ex:
+  print("MPBL feed",ex)
+ try:
+  ids += channel_stream_page_ids(channel_id)
+ except Exception as ex:
+  print("MPBL streams page",ex)
+ try:
+  ids += [x.get("id",{}).get("videoId") for x in youtube_search(max_results=25,channel_id=channel_id,event_type="live")]
+ except Exception as ex:
+  print("MPBL live search",ex)
+
+ ids=list(dict.fromkeys(x for x in ids if x))
+ details=video_details(ids[:50])
+ out=[]
+ for vid in ids[:50]:
+  d=details.get(vid)
+  if not d:continue
+  sn=d.get("snippet",{}); status=d.get("status",{}); live=d.get("liveStreamingDetails",{})
+  if sn.get("channelId")!=channel_id:continue
+  title=sn.get("title",""); channel=(sn.get("channelTitle") or "MPBL Official").strip()
+  is_live=sn.get("liveBroadcastContent")=="live" or (live.get("actualStartTime") and not live.get("actualEndTime"))
+  ended=bool(live.get("actualEndTime"))
+  if not is_live or ended:continue
+  upper=title.upper()
+  if not any(token in upper for token in ["MPBL","MAHARLIKA","BASKETBALL","LIVE"]):continue
+  watch="https://www.youtube.com/watch?v="+vid
+  stream={"videoId":vid,"watchUrl":watch,"provider":"YouTube","channel":channel,"title":title}
+  if status.get("embeddable",True):stream["embedUrl"]="https://www.youtube.com/embed/"+vid
+  out.append({"eventId":"mpbl-youtube-"+vid,"sport":"Basketball","leagueKey":"mpbl","league":"MPBL","teams":[],"title":title,"stream":stream})
+ return out
+
 def load_previous():
  try:
   return json.loads(OUT.read_text("utf-8"))
@@ -325,6 +379,10 @@ try:
  streams.extend(wta_official_live())
 except Exception as ex:
  print("youtube WTA",ex)
+try:
+ streams.extend(mpbl_official_live())
+except Exception as ex:
+ print("youtube MPBL",ex)
 seen=set(); dedup=[]
 for x in streams:
  vid=x.get("stream",{}).get("videoId")
