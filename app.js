@@ -1080,9 +1080,11 @@ let mobileLiveToggleBound=false;
 function setMobileLiveExpanded(expanded){
   const section=document.getElementById('allLiveSection');
   const toggle=document.getElementById('mobileLiveToggle');
-  if(!section||!toggle)return;
+  const body=document.getElementById('mobileLiveBody');
+  if(!section||!toggle||!body)return;
   section.classList.toggle('mobile-live-expanded',Boolean(expanded));
   toggle.setAttribute('aria-expanded',expanded?'true':'false');
+  body.inert=matchMedia('(max-width:760px)').matches&&!expanded;
 }
 function ensureMobileLiveToggle(){
   if(mobileLiveToggleBound)return;
@@ -1093,6 +1095,9 @@ function ensureMobileLiveToggle(){
     const expanded=toggle.getAttribute('aria-expanded')==='true';
     setMobileLiveExpanded(!expanded);
   });
+  const mobileQuery=matchMedia('(max-width:760px)');
+  mobileQuery.addEventListener?.('change',()=>setMobileLiveExpanded(toggle.getAttribute('aria-expanded')==='true'));
+  setMobileLiveExpanded(toggle.getAttribute('aria-expanded')==='true');
 }
 let externalLiveCache={time:0,streams:[]};
 async function loadExternalLiveData(){
