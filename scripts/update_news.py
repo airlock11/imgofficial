@@ -14,7 +14,7 @@ from bs4 import BeautifulSoup
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "news-data.json"
-UA = "IMG-Sports-News-Updater/1.2 (+https://imgofficial.com)"
+UA = "IMG-Sports-News-Updater/1.3 (+https://imgofficial.com)"
 
 VIDEO_FEEDS = [
     {"name":"BBC Sport","channel_id":"UCW6-BQWFA70Dyyc7ZpZ9Xlg"},
@@ -320,9 +320,11 @@ def youtube_video_embeddable(video_id):
         "https://www.youtube.com/watch?v=" + video_id,
     ]
     try:
-        proc = subprocess.run(cmd, capture_output=True, text=True, timeout=45, check=False)
+        proc = subprocess.run(cmd, capture_output=True, text=True, timeout=30, check=False)
         if proc.returncode != 0 or not proc.stdout.strip():
-            return False
+            # GitHub-hosted runners can be blocked by YouTube metadata checks.
+            # Do not discard a fresh official-channel video just because validation failed.
+            return True
         info = json.loads(proc.stdout)
         if info.get("playable_in_embed") is False:
             return False
@@ -331,7 +333,7 @@ def youtube_video_embeddable(video_id):
             return False
         return True
     except Exception:
-        return False
+        return True
 
 def fetch_videos():
     videos = []
