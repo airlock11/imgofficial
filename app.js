@@ -1,6 +1,3 @@
-Warning: truncated output (original token count: 25213)
-Total output lines: 1819
-
 function readPreference(key){try{return localStorage.getItem(key)}catch{return null}}
 function writePreference(key,value){try{localStorage.setItem(key,value)}catch{}}
 const root=document.documentElement,savedTheme=readPreference('img-theme')||'dark';
@@ -728,7 +725,28 @@ function openLiveStream(eventId){
 
 async function hydrateLiveStreams(sport){const snapshot=allGames,now=Date.now(),candidates=snapshot.filter(g=>g.eventId&&(g.state==='live'||(g.state==='scheduled'&&Math.abs(Date.parse(g.date)-now)<=90*60000))).slice(0,4);if(!candidates.length)return;await Promise.allSettled(candidates.map(async g=>{const key=sport+':'+g.eventId,hit=liveStreamCache.get(key);if(hit&&Date.now()-hit.time<120000){g.streams=hit.items;g.streamsChecked=true;return}try{const q=new URLSearchParams({sport,event:g.eventId,home:g.home,away:g.away}),r=await fetch('https://img-api-proxy.magsipocarnie.workers.dev/streams?'+q.toString(),{cache:'no-store'});if(!r.ok)throw 0;const j=await r.json(),items=Array.isArray(j.items)?j.items.filter(x=>x?.embedUrl):[];g.streams=items;g.streamsChecked=true;liveStreamCache.set(key,{time:Date.now(),items})}catch{g.streams=[];g.streamsChecked=true}}));if(allGames===snapshot&&currentScoreLeague===sport)renderGames()}
 function f1SessionName(comp){
-  const abbr=String(comp?.type?.abbreviation|…213 tokens truncated…mpetitorLogoUrl(x){
+  const abbr=String(comp?.type?.abbreviation||'').toUpperCase();
+  if(abbr==='FP1')return 'Practice 1';
+  if(abbr==='FP2')return 'Practice 2';
+  if(abbr==='FP3')return 'Practice 3';
+  if(abbr==='QUAL')return 'Qualifying';
+  if(abbr==='SPRINT')return 'Sprint';
+  if(abbr==='SPRINT SHOOTOUT'||abbr==='SS')return 'Sprint Qualifying';
+  if(abbr==='RACE')return 'Race';
+  return comp?.type?.text||comp?.type?.name||comp?.type?.abbreviation||'Session';
+}
+function competitorName(x){
+  if(!x)return 'TBD';
+  const athlete=x.athlete||{};
+  const team=x.team||{};
+  const athletes=Array.isArray(x.athletes)?x.athletes:[];
+  return team.displayName||team.shortDisplayName||
+    athlete.displayName||athlete.shortDisplayName||
+    x.displayName||x.shortDisplayName||x.name||
+    (athletes.length?athletes.map(a=>a?.displayName||a?.shortDisplayName).filter(Boolean).join(' / '):'')||
+    'TBD';
+}
+function competitorLogoUrl(x){
   return x?.team?.logo||
     x?.team?.logos?.[0]?.href||
     x?.athlete?.headshot?.href||
