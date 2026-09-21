@@ -314,9 +314,7 @@ function renderScoreLeagueFilters(){
     currentScoreLeague=key;
     renderScoreLeagueFilters();
     const gamesHost=document.getElementById('games');
-    const status=document.getElementById('gameStatus');
     if(gamesHost)gamesHost.innerHTML='<div class="empty">Loading '+esc(liveNowLabels[key]?.league||key.toUpperCase())+' schedule and scores…</div>';
-    if(status)status.textContent='Updating';
     await loadGames({league:key});
   }));
 }
