@@ -2,17 +2,17 @@
   "special": true,
   "league": "WTA Tour",
   "live": true,
-  "updatedAt": "2026-09-22T09:12:22.472478+00:00",
+  "updatedAt": "2026-09-22T09:13:26.865633+00:00",
   "sourceName": "WTA Official Scores scrape",
   "sourceUrl": "https://www.wtatennis.com/scores/",
   "verificationSource": "WTA Official Scores",
   "verificationUrl": "https://www.wtatennis.com/scores/",
-  "pageLiveCount": 10,
+  "pageLiveCount": 8,
   "note": "GitHub scrape of the rendered WTA Scores page. Game points, current set number, current-set games and per-set scores are stored separately.",
   "games": [
     {
-      "eventId": "wta-scrape-3-a-charaeva-s-kenin",
-      "date": "2026-09-22T09:12:22.469190+00:00",
+      "eventId": "wta-scrape-1-a-charaeva-s-kenin",
+      "date": "2026-09-22T09:13:26.861043+00:00",
       "displayTime": "WTA Live",
       "away": "A. Charaeva",
       "home": "S. Kenin",
@@ -39,12 +39,12 @@
       "verificationUrl": "https://www.wtatennis.com/scores/"
     },
     {
-      "eventId": "wta-scrape-4-a-tubello-d-spiteri",
-      "date": "2026-09-22T09:12:22.469382+00:00",
+      "eventId": "wta-scrape-2-a-tubello-d-spiteri",
+      "date": "2026-09-22T09:13:26.861326+00:00",
       "displayTime": "WTA Live",
       "away": "A. Tubello",
       "home": "D. Spiteri",
-      "awayScore": "5 · 30",
+      "awayScore": "5 · AD",
       "homeScore": "2 · 40",
       "awaySets": [
         "5"
@@ -52,7 +52,7 @@
       "homeSets": [
         "2"
       ],
-      "awayPoint": "30",
+      "awayPoint": "AD",
       "homePoint": "40",
       "currentSet": 1,
       "awayCurrentSetGames": 5,
@@ -61,7 +61,7 @@
       "homeSetsWon": 0,
       "round": "Round of 32",
       "court": "Court 2",
-      "status": "Live Match: 0:34 · Round of 32 · Court 2",
+      "status": "Live Match: 0:35 · Round of 32 · Court 2",
       "state": "live",
       "eventOnly": false,
       "title": "WTA",
@@ -71,24 +71,24 @@
       "verificationUrl": "https://www.wtatennis.com/scores/"
     },
     {
-      "eventId": "wta-scrape-6-l-zaar-r-masarova",
-      "date": "2026-09-22T09:12:22.469620+00:00",
+      "eventId": "wta-scrape-4-l-zaar-r-masarova",
+      "date": "2026-09-22T09:13:26.861645+00:00",
       "displayTime": "WTA Live",
       "away": "L. Zaar",
       "home": "R. Masarova",
-      "awayScore": "4 · 15",
-      "homeScore": "3 · 40",
+      "awayScore": "4 · 0",
+      "homeScore": "4 · 0",
       "awaySets": [
         "4"
       ],
       "homeSets": [
-        "3"
+        "4"
       ],
-      "awayPoint": "15",
-      "homePoint": "40",
+      "awayPoint": "0",
+      "homePoint": "0",
       "currentSet": 1,
       "awayCurrentSetGames": 4,
-      "homeCurrentSetGames": 3,
+      "homeCurrentSetGames": 4,
       "awaySetsWon": 0,
       "homeSetsWon": 0,
       "round": "Round of 32",
@@ -103,8 +103,8 @@
       "verificationUrl": "https://www.wtatennis.com/scores/"
     },
     {
-      "eventId": "wta-scrape-7-e-pridankina-d-egorova",
-      "date": "2026-09-22T09:12:22.469737+00:00",
+      "eventId": "wta-scrape-5-e-pridankina-d-egorova",
+      "date": "2026-09-22T09:13:26.861815+00:00",
       "displayTime": "WTA Live",
       "away": "E. Pridankina",
       "home": "D. Egorova",
@@ -135,8 +135,8 @@
       "verificationUrl": "https://www.wtatennis.com/scores/"
     },
     {
-      "eventId": "wta-scrape-8-w-falkowska-i-yoruk",
-      "date": "2026-09-22T09:12:22.469848+00:00",
+      "eventId": "wta-scrape-6-w-falkowska-i-yoruk",
+      "date": "2026-09-22T09:13:26.861974+00:00",
       "displayTime": "WTA Live",
       "away": "W. Falkowska",
       "home": "I. Yoruk",
@@ -169,8 +169,8 @@
       "verificationUrl": "https://www.wtatennis.com/scores/"
     },
     {
-      "eventId": "wta-scrape-9-a-tikhonova-a-gasanova",
-      "date": "2026-09-22T09:12:22.469972+00:00",
+      "eventId": "wta-scrape-7-a-tikhonova-a-gasanova",
+      "date": "2026-09-22T09:13:26.862149+00:00",
       "displayTime": "WTA Live",
       "away": "A. Tikhonova",
       "home": "A. Gasanova",
