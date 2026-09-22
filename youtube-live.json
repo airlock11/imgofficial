@@ -1,83 +1,35 @@
 {
-  "updatedAt": "2026-09-22T11:07:14.545734+00:00",
+  "updatedAt": "2026-09-22T12:08:37.036071+00:00",
   "freshForMinutes": 8,
   "streams": [
     {
-      "eventId": "ag26-youtube-kTTaNF1vHiM",
-      "sport": "Asian Games",
-      "leagueKey": "asian_games",
-      "league": "2026 ASIAN GAMES",
+      "eventId": "fiba-youtube-vP1XJtfk6lc",
+      "sport": "Basketball",
+      "leagueKey": "fiba",
+      "league": "FIBA",
       "teams": [],
-      "title": "LIVE: ALAS PILIPINAS VS HONG KONG | WOMEN\u2019S VOLLEYBALL CLASSIFICATIONS | 2026 ASIAN GAMES",
+      "title": "LIVE - Beijing Royal Fighters v Club Atletico Boca Juniors | FIBA Intercontinental Cup Beijing 2026",
+      "officialSourceId": "fiba",
       "stream": {
-        "videoId": "kTTaNF1vHiM",
-        "watchUrl": "https://www.youtube.com/watch?v=kTTaNF1vHiM",
+        "videoId": "vP1XJtfk6lc",
+        "watchUrl": "https://www.youtube.com/watch?v=vP1XJtfk6lc",
         "provider": "YouTube",
-        "channel": "One Sports",
-        "title": "LIVE: ALAS PILIPINAS VS HONG KONG | WOMEN\u2019S VOLLEYBALL CLASSIFICATIONS | 2026 ASIAN GAMES",
-        "embedUrl": "https://www.youtube.com/embed/kTTaNF1vHiM",
-        "verificationStatus": "verified",
-        "lastVerifiedLiveAt": "2026-09-22T11:07:14.545734+00:00",
-        "deliveryLeagueKey": "asian_games",
+        "channel": "FIBA Basketball",
+        "title": "LIVE - Beijing Royal Fighters v Club Atletico Boca Juniors | FIBA Intercontinental Cup Beijing 2026",
+        "officialSourceId": "fiba",
+        "embedUrl": "https://www.youtube.com/embed/vP1XJtfk6lc",
+        "deliveryLeagueKey": "fiba",
         "deliveryPlacement": "above_statistics",
-        "firstLiveAt": "2026-09-22T10:03:00.683215+00:00"
+        "verificationStatus": "verified",
+        "lastVerifiedLiveAt": "2026-09-22T12:08:37.036071+00:00"
+      },
+      "delivery": {
+        "leagueKey": "fiba",
+        "url": "/scores/?league=fiba",
+        "placement": "above_statistics"
       },
       "verificationStatus": "verified",
-      "lastVerifiedLiveAt": "2026-09-22T11:07:14.545734+00:00",
-      "delivery": {
-        "leagueKey": "asian_games",
-        "url": "/scores/?league=asian_games",
-        "placement": "above_statistics"
-      },
-      "firstLiveAt": "2026-09-22T10:03:00.683215+00:00"
-    },
-    {
-      "eventId": "ncaaph-youtube-MzRZPtHRrsU",
-      "sport": "Basketball",
-      "leagueKey": "ncaa_ph",
-      "league": "NCAA Philippines",
-      "teams": [],
-      "title": "LIVE: ARELLANO vs EAC | NCAA SEASON 102 MEN\u2019S BASKETBALL | SEP 22, 2026",
-      "stream": {
-        "videoId": "MzRZPtHRrsU",
-        "watchUrl": "https://www.youtube.com/watch?v=MzRZPtHRrsU",
-        "provider": "YouTube",
-        "channel": "One Sports",
-        "title": "LIVE: ARELLANO vs EAC | NCAA SEASON 102 MEN\u2019S BASKETBALL | SEP 22, 2026",
-        "embedUrl": "https://www.youtube.com/embed/MzRZPtHRrsU",
-        "deliveryLeagueKey": "ncaa_ph",
-        "deliveryPlacement": "above_statistics"
-      },
-      "delivery": {
-        "leagueKey": "ncaa_ph",
-        "url": "/scores/?league=ncaa_ph",
-        "placement": "above_statistics"
-      }
-    },
-    {
-      "eventId": "mpbl-youtube-UP_EgMLP7B8",
-      "sport": "Basketball",
-      "leagueKey": "mpbl",
-      "league": "MPBL",
-      "teams": [],
-      "title": "Pasig city vs Pasay | September 22, 2026 | MPBL REGULAR SEASON 2026",
-      "officialSourceId": "mpbl",
-      "stream": {
-        "videoId": "UP_EgMLP7B8",
-        "watchUrl": "https://www.youtube.com/watch?v=UP_EgMLP7B8",
-        "provider": "YouTube",
-        "channel": "MPBL",
-        "title": "Pasig city vs Pasay | September 22, 2026 | MPBL REGULAR SEASON 2026",
-        "officialSourceId": "mpbl",
-        "embedUrl": "https://www.youtube.com/embed/UP_EgMLP7B8",
-        "deliveryLeagueKey": "mpbl",
-        "deliveryPlacement": "above_statistics"
-      },
-      "delivery": {
-        "leagueKey": "mpbl",
-        "url": "/scores/?league=mpbl",
-        "placement": "above_statistics"
-      }
+      "lastVerifiedLiveAt": "2026-09-22T12:08:37.036071+00:00"
     }
   ],
   "liveExpiryLedger": {
@@ -118,7 +70,7 @@
   "scanner": {
     "version": 3,
     "mode": "official-auto-discovery",
-    "checkedAt": "2026-09-22T11:07:14.321187+00:00",
+    "checkedAt": "2026-09-22T12:08:36.802280+00:00",
     "sourcesChecked": [
       "nbl-pilipinas",
       "mpbl",
@@ -156,10 +108,11 @@
       "volleyball-world-men": "UCNMg6XDhRZI2QzL4pWOvP_w"
     }
   },
-  "asianGamesVerification": {
-    "checkedAt": "2026-09-22T11:07:14.545734+00:00",
+  "liveVerification": {
+    "checkedAt": "2026-09-22T12:08:37.036071+00:00",
     "method": "YouTube videos API exact-video verification",
     "verifiedLiveCount": 1,
-    "removedCount": 0
+    "removedCount": 0,
+    "removed": []
   }
 }
