@@ -2136,3 +2136,18 @@ html[data-theme="light"] body.scores-page .score-league-toolbar:after{
 .logo{min-width:104px}
 html[data-theme="light"] .logo img{filter:brightness(0)}
 /* IMG_APPROVED_SOCCER_LOGO_END */
+
+
+/* Sportradar soccer standings */
+.soccer-standings-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.soccer-standings-head,.soccer-standings-row{display:grid;grid-template-columns:34px minmax(150px,1fr) repeat(6,44px);gap:8px;align-items:center;min-width:520px}
+.soccer-standings-head{padding:8px 6px;color:var(--muted);font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid var(--line)}
+.soccer-standings-row{padding:9px 6px;border-bottom:1px solid var(--line);font-size:.72rem}
+.soccer-standings-row:last-child{border-bottom:0}
+.soccer-standings-row strong{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.soccer-standings-row>b,.soccer-standings-head>b{text-align:center;font-variant-numeric:tabular-nums}
+.soccer-standings-row>span:first-child,.soccer-standings-head>span:first-child{text-align:center;color:var(--muted)}
+@media(max-width:760px){
+  .soccer-standings-head,.soccer-standings-row{grid-template-columns:30px minmax(130px,1fr) repeat(6,40px);min-width:470px;gap:6px}
+  .soccer-standings-row{font-size:.68rem}
+}
