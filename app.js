@@ -1955,6 +1955,56 @@ async function loadVerifiedChannelLive(){
     return {ok:false,updatedAt:'',entries:[]};
   }
 }
+function asianGamesVerifiedStreamSport(entry){
+  const text=[entry?.sport,entry?.title,entry?.stream?.title].filter(Boolean).join(' ').toLowerCase();
+  const aliases=[
+    ['swimming',['swimming']],
+    ['gymnastics',['gymnastics','artistic gymnastics']],
+    ['basketball',['basketball','3x3']],
+    ['baseball',['baseball']],
+    ['volleyball',['volleyball']],
+    ['football',['football','soccer']],
+    ['tennis',['tennis']],
+    ['badminton',['badminton']],
+    ['boxing',['boxing']],
+    ['wrestling',['wrestling']],
+    ['athletics',['athletics','track and field']],
+    ['judo',['judo']],
+    ['karate',['karate']],
+    ['taekwondo',['taekwondo']],
+    ['table tennis',['table tennis']],
+    ['cycling',['cycling']],
+    ['rowing',['rowing']]
+  ];
+  for(const [sport,words] of aliases){
+    if(words.some(word=>text.includes(word)))return sport;
+  }
+  return '';
+}
+function attachVerifiedAsianGamesStreams(games,entries){
+  const asianLive=(Array.isArray(games)?games:[]).filter(g=>g?.sportKey==='asian_games'&&g?.state==='live');
+  for(const entry of Array.isArray(entries)?entries:[]){
+    const targetKey=entry?.delivery?.leagueKey||entry?.stream?.deliveryLeagueKey||entry?.leagueKey;
+    if(targetKey!=='asian_games'||!entry?.stream?.watchUrl)continue;
+
+    const wanted=asianGamesVerifiedStreamSport(entry);
+    if(!wanted)continue;
+
+    const candidates=asianLive.filter(g=>{
+      const sport=String(g?.sportLabel||asianGamesSportLabel(g)||'').toLowerCase();
+      return sport.includes(wanted)||wanted.includes(sport);
+    });
+    if(candidates.length!==1)continue;
+
+    const target=candidates[0];
+    const current=Array.isArray(target.streams)?target.streams:[];
+    if(!current.some(s=>String(s?.watchUrl||'')===String(entry.stream.watchUrl))){
+      target.streams=[...current,entry.stream];
+    }
+    target.streamsChecked=true;
+  }
+}
+
 function verifiedChannelLiveGame(x,updatedAt=''){
   const allowed=new Set(['asian_games','fiba','pba','mpbl','nbl','ncaa_ph','uaap','wta','atp','one','ufc','basketball','wnba','bleague','euroleague','volleyball_w','volleyball_m']);
   const targetKey=x?.delivery?.leagueKey||x?.stream?.deliveryLeagueKey||x?.leagueKey;
@@ -2029,7 +2079,10 @@ async function loadAllLiveGames({silent=false}={}){
 
   // Fetch the verified channel file once per refresh.
   const verified=await loadVerifiedChannelLive();
-  const verifiedGames=verified.entries.map(x=>verifiedChannelLiveGame(x,verified.updatedAt)).filter(Boolean);
+  const verifiedGames=verified.entries
+    .filter(x=>(x?.delivery?.leagueKey||x?.stream?.deliveryLeagueKey||x?.leagueKey)!=='asian_games')
+    .map(x=>verifiedChannelLiveGame(x,verified.updatedAt))
+    .filter(Boolean);
 
   if(verifiedGames.length){
     // Preserve already-visible live items while publishing newly verified streams.
@@ -2045,7 +2098,8 @@ async function loadAllLiveGames({silent=false}={}){
   }catch{}
 
   if(verified.ok){
-    const byId=new Map(verified.entries.map(x=>[String(x.eventId),x.stream]));
+    const nonAsianEntries=verified.entries.filter(x=>(x?.delivery?.leagueKey||x?.stream?.deliveryLeagueKey||x?.leagueKey)!=='asian_games');
+    const byId=new Map(nonAsianEntries.map(x=>[String(x.eventId),x.stream]));
     for(const game of live){
       const stream=byId.get(String(game.eventId));
       if(stream?.watchUrl){
@@ -2053,6 +2107,11 @@ async function loadAllLiveGames({silent=false}={}){
         if(!current.some(x=>String(x?.watchUrl||'')===String(stream.watchUrl)))game.streams=[...current,stream];
       }
     }
+
+    // Asian Games streams must match one specific, currently-live official
+    // event before they can make the league show "Live Stream".
+    attachVerifiedAsianGamesStreams(live,verified.entries);
+
     for(const game of verifiedGames){
       if(!live.some(g=>String(g.eventId)===String(game.eventId)))live.push(game);
     }
