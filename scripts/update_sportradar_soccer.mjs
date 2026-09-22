@@ -9,6 +9,8 @@ if(!API_KEY){
 const MODE=(process.argv[2]||"live").toLowerCase();
 const OUT="sportradar-soccer-data.json";
 const BASE="https://api.sportradar.com/soccer/trial/v4/en";
+const EXT_BASE="https://api.sportradar.com/soccer-extended/trial/v4/en";
+const REQUEST_BUDGET=Number(process.env.SPORTRADAR_REQUEST_BUDGET||900);
 const now=new Date();
 const iso=now.toISOString();
 
@@ -30,7 +32,11 @@ const TARGETS=[
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 let requests=0;
 let lastRequestAt=0;
-async function sr(path,{optional=false}={}){
+async function requestJson(base,path,{optional=false}={}){
+  if(requests>=REQUEST_BUDGET){
+    console.warn(`Request budget reached (${requests}/${REQUEST_BUDGET}); skipping ${path}`);
+    return null;
+  }
   const minGap=2300;
   const wait=Math.max(0,minGap-(Date.now()-lastRequestAt));
   if(wait)await sleep(wait);
@@ -41,7 +47,7 @@ async function sr(path,{optional=false}={}){
     requests++;
     lastRequestAt=Date.now();
 
-    const res=await fetch(BASE+path,{headers:{"x-api-key":API_KEY,"accept":"application/json"}});
+    const res=await fetch(base+path,{headers:{"x-api-key":API_KEY,"accept":"application/json"}});
     if(res.ok)return res.json();
 
     const body=await res.text().catch(()=>"");
@@ -67,6 +73,8 @@ async function sr(path,{optional=false}={}){
   if(optional)return null;
   throw new Error(`Sportradar request failed after retries for ${path}`);
 }
+async function sr(path,opts){return requestJson(BASE,path,opts)}
+async function sx(path,opts){return requestJson(EXT_BASE,path,opts)}
 
 function readExisting(){
   try{return JSON.parse(fs.readFileSync(OUT,"utf8"))}catch{return {}}
@@ -131,6 +139,33 @@ function normalizeGame(item){
     sourceUrl:"https://developer.sportradar.com/soccer"
   };
 }
+function coverageFromSeasonInfo(payload){
+  const info=payload?.season_info||payload?.season||payload||{};
+  const coverage=info?.coverage||payload?.coverage||{};
+  return coverage&&typeof coverage==="object"?coverage:{};
+}
+function competitorsFromSeasonInfo(payload){
+  const info=payload?.season_info||payload?.season||payload||{};
+  const list=info?.competitors||payload?.competitors||[];
+  return Array.isArray(list)?list.map(x=>({
+    id:x.id||"",
+    name:x.name||"",
+    abbreviation:x.abbreviation||"",
+    country:x.country||"",
+    countryCode:x.country_code||"",
+    gender:x.gender||""
+  })).filter(x=>x.id||x.name):[];
+}
+function safeArray(v){return Array.isArray(v)?v:[]}
+function statsSummary(payload){
+  if(!payload||typeof payload!=="object")return null;
+  const out={};
+  for(const key of ["statistics","competitor","players","player_statistics","team_statistics"]){
+    if(payload[key]!==undefined)out[key]=payload[key];
+  }
+  return Object.keys(out).length?out:payload;
+}
+
 function standingsRows(payload){
   const groups=Array.isArray(payload?.standings)?payload.standings:[];
   const rows=[];
@@ -225,44 +260,81 @@ for(const t of TARGETS){
 if(MODE==="deep"){
   const competitions=await sr("/competitions.json",{optional:true});
   const seasons=await sr("/seasons.json",{optional:true});
+  const extendedSeasons=await sx("/seasons.json",{optional:true});
   if(!competitions||!seasons){
     console.warn("Deep catalog refresh is partial because competition or season metadata was unavailable.");
   }
   data.catalog.competitions=competitions?.competitions||data.catalog.competitions||[];
   data.catalog.seasons=seasons?.seasons||data.catalog.seasons||[];
+  data.catalog.extendedSeasons=extendedSeasons?.seasons||data.catalog.extendedSeasons||[];
   data.catalog.updatedAt=iso;
 
   const comps=data.catalog.competitions;
   const seasonList=data.catalog.seasons;
-  const start=Math.floor((Date.now()/86400000)%TARGETS.length);
-  const selected=[0,1,2].map(i=>TARGETS[(start+i)%TARGETS.length]);
+  const existingKeys=Object.keys(data.leagues||{});
+  const priority=[...TARGETS.map(t=>t.key),...existingKeys.filter(k=>!TARGETS.some(t=>t.key===k))];
+  const start=Math.floor((Date.now()/86400000)%Math.max(1,priority.length));
+  const selected=Array.from({length:Math.min(4,priority.length)},(_,i)=>priority[(start+i)%priority.length]);
 
-  for(const t of selected){
-    const comp=comps.find(c=>t.names.some(n=>norm(c?.name).includes(n)));
+  for(const key of selected){
+    const t=TARGETS.find(x=>x.key===key)||{key,label:data.leagues?.[key]?.league||key,names:[data.leagues?.[key]?.league||key]};
+    const comp=comps.find(c=>{
+      const cname=norm(c?.name);
+      const cat=norm(c?.category?.name||c?.category_name||"");
+      const mapped=targetKey(c?.name||"",cat);
+      return mapped===key||t.names.some(n=>cname===norm(n));
+    });
     if(!comp?.id)continue;
-    const candidates=seasonList.filter(s=>s?.competition_id===comp.id&&!s?.disabled);
+
+    let candidates=seasonList.filter(s=>s?.competition_id===comp.id&&!s?.disabled);
+    if(!candidates.length){
+      const compSeasons=await sx(`/competitions/${encodeURIComponent(comp.id)}/seasons.json`,{optional:true});
+      candidates=safeArray(compSeasons?.seasons).filter(s=>!s?.disabled);
+    }
     const current=candidates
       .filter(s=>(Date.parse(s.start_date)||0)<=Date.now()+30*86400000&&(Date.parse(s.end_date)||Infinity)>=Date.now()-30*86400000)
       .sort((a,b)=>(Date.parse(b.start_date)||0)-(Date.parse(a.start_date)||0))[0]
       || candidates.sort((a,b)=>(Date.parse(b.start_date)||0)-(Date.parse(a.start_date)||0))[0];
     if(!current?.id)continue;
 
-    let schedule=null, standings=null;
-    schedule=await sr(`/seasons/${encodeURIComponent(current.id)}/schedules.json`,{optional:true});
-    standings=await sr(`/seasons/${encodeURIComponent(current.id)}/standings.json`,{optional:true});
+    const seasonPath=`/seasons/${encodeURIComponent(current.id)}`;
+    const [schedule,standings,info,extInfo]=await Promise.all([
+      sr(seasonPath+"/schedules.json",{optional:true}),
+      sr(seasonPath+"/standings.json",{optional:true}),
+      sr(seasonPath+"/info.json",{optional:true}),
+      sx(seasonPath+"/info.json",{optional:true})
+    ]);
 
     const normalizedSchedule=eventItems(schedule).map(normalizeGame).filter(g=>g.eventId);
-    data.leagues[t.key]={
-      ...(data.leagues[t.key]||{}),
+    const competitors=[...competitorsFromSeasonInfo(info),...competitorsFromSeasonInfo(extInfo)];
+    const uniqueCompetitors=[...new Map(competitors.map(x=>[x.id||x.name,x])).values()];
+    const coverage={...coverageFromSeasonInfo(info),...coverageFromSeasonInfo(extInfo)};
+
+    const enrichedCompetitors=[];
+    for(const competitor of uniqueCompetitors.slice(0,6)){
+      if(requests>=REQUEST_BUDGET-20)break;
+      const stats=await sr(`${seasonPath}/competitors/${encodeURIComponent(competitor.id)}/statistics.json`,{optional:true});
+      const extStats=await sx(`${seasonPath}/competitors/${encodeURIComponent(competitor.id)}/extended_statistics.json`,{optional:true});
+      enrichedCompetitors.push({...competitor,statistics:statsSummary(stats),extendedStatistics:statsSummary(extStats)});
+    }
+
+    data.leagues[key]={
+      ...(data.leagues[key]||{}),
       league:t.label,
       competitionId:comp.id,
+      competition:comp,
       seasonId:current.id,
       season:current.name||"",
       seasonStart:current.start_date||"",
       seasonEnd:current.end_date||"",
+      coverage,
+      competitors:uniqueCompetitors,
+      competitorStats:enrichedCompetitors,
       standings:standingsRows(standings),
-      games:mergeGames(data.leagues[t.key]?.games||[],normalizedSchedule),
+      games:mergeGames(data.leagues[key]?.games||[],normalizedSchedule),
       raw:{
+        seasonInfo:info||null,
+        extendedSeasonInfo:extInfo||null,
         schedule:schedule||null,
         standings:standings||null
       },
@@ -272,5 +344,8 @@ if(MODE==="deep"){
 }
 
 data.requestsLastRun=requests;
+data.requestBudget=REQUEST_BUDGET;
+data.requestBudgetRemaining=Math.max(0,REQUEST_BUDGET-requests);
+data.harvestMode=MODE;
 fs.writeFileSync(OUT,JSON.stringify(data,null,2)+"\n");
 console.log(`Wrote ${OUT} using ${requests} Sportradar requests (${MODE}).`);
