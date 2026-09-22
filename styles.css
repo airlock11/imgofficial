@@ -2002,3 +2002,37 @@ html[data-theme="light"] body.scores-page .score-league-toolbar:after{
       linear-gradient(270deg,rgba(239,63,69,.32) 0%,rgba(239,63,69,.14) 38%,rgba(239,63,69,0) 100%);
   }
 }
+
+
+/* Keep Highlights controls fully contained inside their rounded button */
+.highlights-btn{
+  display:inline-grid!important;
+  grid-template-columns:16px minmax(0,auto) 20px;
+  align-items:center;
+  justify-content:start;
+  column-gap:7px;
+  width:auto;
+  min-width:118px;
+  max-width:100%;
+  padding:7px 10px!important;
+  overflow:hidden;
+  vertical-align:middle;
+}
+.highlights-btn-icon{grid-column:1}
+.highlights-btn-label{
+  grid-column:2;
+  min-width:0;
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+}
+.highlights-btn>b{
+  grid-column:3;
+  width:20px;
+  min-width:20px!important;
+  height:20px;
+  padding:0!important;
+  margin:0;
+  justify-self:end;
+  box-sizing:border-box;
+}
