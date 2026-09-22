@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-22T07:02:28.988304+00:00",
+  "updatedAt": "2026-09-22T07:21:35.384486+00:00",
   "freshForMinutes": 8,
   "streams": [
     {
@@ -26,35 +26,6 @@
       }
     },
     {
-      "eventId": "ag26-youtube-5i_p-Z0239E",
-      "sport": "Asian Games",
-      "leagueKey": "asian_games",
-      "league": "2026 ASIAN GAMES",
-      "teams": [],
-      "title": "LIVE: PHILIPPINES VS KUWAIT | MEN\u2019S FOOTBALL GROUP C | 2026 ASIAN GAMES",
-      "stream": {
-        "videoId": "5i_p-Z0239E",
-        "watchUrl": "https://www.youtube.com/watch?v=5i_p-Z0239E",
-        "provider": "YouTube",
-        "channel": "One Sports",
-        "title": "LIVE: PHILIPPINES VS KUWAIT | MEN\u2019S FOOTBALL GROUP C | 2026 ASIAN GAMES",
-        "embedUrl": "https://www.youtube.com/embed/5i_p-Z0239E",
-        "verificationStatus": "verified",
-        "lastVerifiedLiveAt": "2026-09-22T07:02:06.013325+00:00",
-        "deliveryLeagueKey": "asian_games",
-        "deliveryPlacement": "above_statistics",
-        "firstLiveAt": "2026-09-22T04:44:38.877857+00:00"
-      },
-      "verificationStatus": "verified",
-      "lastVerifiedLiveAt": "2026-09-22T07:02:06.013325+00:00",
-      "delivery": {
-        "leagueKey": "asian_games",
-        "url": "/scores/?league=asian_games",
-        "placement": "above_statistics"
-      },
-      "firstLiveAt": "2026-09-22T04:44:38.877857+00:00"
-    },
-    {
       "eventId": "mpbl-youtube-mrDO0K9o320",
       "sport": "Basketball",
       "leagueKey": "mpbl",
@@ -78,6 +49,31 @@
         "url": "/scores/?league=mpbl",
         "placement": "above_statistics"
       }
+    },
+    {
+      "eventId": "fiba-youtube-ofIa9Qwz0zc",
+      "sport": "Basketball",
+      "leagueKey": "fiba",
+      "league": "FIBA",
+      "teams": [],
+      "title": "LIVE - Rytas Vilnius v RSSB Tigers | FIBA Intercontinental Cup Beijing 2026",
+      "officialSourceId": "fiba",
+      "stream": {
+        "videoId": "ofIa9Qwz0zc",
+        "watchUrl": "https://www.youtube.com/watch?v=ofIa9Qwz0zc",
+        "provider": "YouTube",
+        "channel": "FIBA Basketball",
+        "title": "LIVE - Rytas Vilnius v RSSB Tigers | FIBA Intercontinental Cup Beijing 2026",
+        "officialSourceId": "fiba",
+        "embedUrl": "https://www.youtube.com/embed/ofIa9Qwz0zc",
+        "deliveryLeagueKey": "fiba",
+        "deliveryPlacement": "above_statistics"
+      },
+      "delivery": {
+        "leagueKey": "fiba",
+        "url": "/scores/?league=fiba",
+        "placement": "above_statistics"
+      }
     }
   ],
   "liveExpiryLedger": {
@@ -86,12 +82,10 @@
       "lastVerifiedLiveAt": "2026-09-22T06:12:19.469429+00:00"
     },
     "ag26-youtube-s7u_YNw6-0Q": {
-      "firstLiveAt": "2026-09-22T04:00:00+00:00",
-      "expiresAt": "2026-09-22T06:00:00+00:00"
+      "firstLiveAt": "2026-09-22T04:00:00+00:00"
     },
     "ag26-youtube-BBnQHvugAhU": {
-      "firstLiveAt": "2026-09-22T04:00:00+00:00",
-      "expiresAt": "2026-09-22T06:00:00+00:00"
+      "firstLiveAt": "2026-09-22T04:00:00+00:00"
     },
     "ag26-youtube-5i_p-Z0239E": {
       "firstLiveAt": "2026-09-22T04:44:38.877857+00:00",
@@ -113,7 +107,7 @@
   "scanner": {
     "version": 3,
     "mode": "official-auto-discovery",
-    "checkedAt": "2026-09-22T07:02:28.923676+00:00",
+    "checkedAt": "2026-09-22T07:21:35.316549+00:00",
     "sourcesChecked": [
       "nbl-pilipinas",
       "mpbl",
