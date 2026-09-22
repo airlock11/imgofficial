@@ -2916,7 +2916,7 @@ if(document.getElementById('games')){
 
   const hasLiveScores=()=>allGames.some(g=>g.state==='live')||liveNowItems.some(liveNowItemIsCurrent);
   const hasLiveWta=()=>currentScoreLeague==='wta'&&allGames.some(g=>g.state==='live'&&!g.eventOnly)||liveNowItems.some(g=>g?.sportKey==='wta'&&liveNowItemIsCurrent(g));
-  const nextScoreRefreshDelay=()=>hasLiveWta()?10000:hasLiveScores()?15000:(currentScoreLeague==='wta'?30000:30000);
+  const nextScoreRefreshDelay=()=>hasLiveWta()?5000:hasLiveScores()?15000:(currentScoreLeague==='wta'?15000:30000);
 
   const scheduleScoreAutoRefresh=(delay=nextScoreRefreshDelay())=>{
     clearTimeout(scoreAutoRefreshTimer);
