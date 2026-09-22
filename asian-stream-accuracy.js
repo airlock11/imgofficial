@@ -1,10 +1,10 @@
 (function(){
-  const MAX_VERIFIED_AGE_MS=8*60*1000;
+  const MAX_VERIFIED_AGE_MS=10*60*1000;
   const blocked=["HIGHLIGHTS","REPLAY","FULL MATCH","FULL GAME","OPENING CEREMONY","CLOSING CEREMONY","DRAW CEREMONY","PRESS CONFERENCE","INTERVIEW","PODCAST"];
 
   function asianTitleAllowed(value){
     const upper=String(value||"").toUpperCase();
-    const tagged=upper.includes("2026 ASIAN GAMES")||upper.includes("AICHI-NAGOYA")||upper.includes("AICHI NAGOYA");
+    const tagged=upper.includes("ASIAN GAMES")||upper.includes("AICHI-NAGOYA")||upper.includes("AICHI NAGOYA")||upper.includes("AICHI 2026");
     return tagged&&!blocked.some(x=>upper.includes(x));
   }
 
