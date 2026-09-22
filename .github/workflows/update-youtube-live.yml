@@ -17,7 +17,7 @@ permissions:
   contents: write
 concurrency:
   group: youtube-live-update
-  cancel-in-progress: false
+  cancel-in-progress: true
 jobs:
   update:
     runs-on: ubuntu-latest
@@ -29,7 +29,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Refresh and verify YouTube live data every minute
+      - name: Refresh and verify YouTube live data
         env:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
         shell: bash
@@ -38,38 +38,40 @@ jobs:
           git config user.name "IMG Live Stream Bot"
           git config user.email "actions@users.noreply.github.com"
 
-          for cycle in 1 2 3 4 5; do
-            echo "YouTube verification cycle $cycle/5"
+          published=0
+          for attempt in 1 2 3; do
+            echo "YouTube refresh attempt $attempt/3"
+            git fetch origin main
+            git reset --hard origin/main
 
-            published=0
-            for attempt in 1 2 3; do
-              git fetch origin main
-              git reset --hard origin/main
-
-              python scripts/update_youtube_live.py
-              python scripts/verify_youtube_live.py
-
-              if git diff --quiet -- youtube-live.json; then
-                echo "No stream-state change."
-                published=1
-                break
-              fi
-
-              git add youtube-live.json
-              git commit -m "Update verified YouTube live streams"
-              if git push origin HEAD:main; then
-                published=1
-                break
-              fi
-              echo "Push raced; retrying."
-            done
-
-            if [ "$published" -ne 1 ]; then
-              echo "Unable to publish YouTube verification."
-              exit 1
+            if ! python scripts/update_youtube_live.py; then
+              echo "Scanner failed; retrying."
+              sleep $((attempt * 5))
+              continue
+            fi
+            if ! python scripts/verify_youtube_live.py; then
+              echo "Verifier failed; retrying."
+              sleep $((attempt * 5))
+              continue
             fi
 
-            if [ "$cycle" -lt 5 ]; then
-              sleep 60
+            if git diff --quiet -- youtube-live.json; then
+              echo "No stream-state change."
+              published=1
+              break
             fi
+
+            git add youtube-live.json
+            git commit -m "Update verified YouTube live streams"
+            if git push origin HEAD:main; then
+              published=1
+              break
+            fi
+            echo "Push raced with another automation; retrying."
+            sleep $((attempt * 5))
           done
+
+          if [ "$published" -ne 1 ]; then
+            echo "Unable to publish YouTube verification after retries."
+            exit 1
+          fi
