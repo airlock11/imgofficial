@@ -260,7 +260,7 @@ async function specialSportsPayload(sport){
   return {special:true,games:league.games,sourceName:league.sourceName||'',sourceUrl:league.sourceUrl||''};
 }
 const specialScoreKeys=new Set(['atp','wta','ipl','volleyball_w','volleyball_m','asian_games','fiba','ncaa_ph','bleague','euroleague','pfl','australian_open','wimbledon','us_open','npb','kbo','khl','iihf','bigbash','cricket_world_cup','pvl','vleague_jp','motogp','formulae','one','wbc','wba','ibf','wbo']);
-const sportradarSoccerKeys=new Set(['soccer','laliga','seriea','bundesliga','champions','mls','pfl']);
+const sportradarSoccerKeys=new Set(['soccer','jamaica_pl','mizoram_pl','laliga','el_salvador_reserves','seriea','bundesliga','champions','ucl_women','mls','pfl']);
 function scoreGameLooksGeneric(g){
   const names=[g?.away,g?.home].map(x=>String(x||'').trim().toLowerCase());
   const generic=new Set(['','away','home','tbd','team 1','team 2','player 1','player 2']);
@@ -396,6 +396,10 @@ const liveNowLabels={
   seriea:{sport:'Football',league:'Serie A'},
   bundesliga:{sport:'Football',league:'Bundesliga'},
   champions:{sport:'Football',league:'UEFA Champions League'},
+  ucl_women:{sport:'Football',league:'UEFA Champions League Women'},
+  jamaica_pl:{sport:'Football',league:'Jamaica Premier League'},
+  mizoram_pl:{sport:'Football',league:'Mizoram Premier League'},
+  el_salvador_reserves:{sport:'Football',league:'Primera Division, Reserves'},
   mls:{sport:'Football',league:'MLS'},
   basketball:{sport:'Basketball',league:'NBA'},
   wnba:{sport:'Basketball',league:'WNBA'},
@@ -456,7 +460,7 @@ function asianGamesEventLabel(game){
   const index=title.indexOf(divider);
   return index>0?title.slice(index+divider.length).trim():(title||'Asian Games event');
 }
-const scoreLeagueOrder=['asian_games','fiba','soccer','laliga','seriea','bundesliga','champions','mls','pfl','basketball','wnba','pba','ncaa_ph','uaap','mpbl','nbl','nblaus','vba','bleague','euroleague','atp','wta','australian_open','wimbledon','us_open','ipl','bigbash','cricket_world_cup','volleyball_w','volleyball_m','pvl','vleague_jp','baseball','npb','kbo','hockey','khl','iihf','football','ncaaf','f1','motogp','formulae','ufc','one','wbc','wba','ibf','wbo','ring'];
+const scoreLeagueOrder=['asian_games','fiba','soccer','jamaica_pl','mizoram_pl','laliga','el_salvador_reserves','seriea','bundesliga','champions','ucl_women','mls','pfl','basketball','wnba','pba','ncaa_ph','uaap','mpbl','nbl','nblaus','vba','bleague','euroleague','atp','wta','australian_open','wimbledon','us_open','ipl','bigbash','cricket_world_cup','volleyball_w','volleyball_m','pvl','vleague_jp','baseball','npb','kbo','hockey','khl','iihf','football','ncaaf','f1','motogp','formulae','ufc','one','wbc','wba','ibf','wbo','ring'];
 const specialScoreLeagueKeys=new Set(['asian_games','fiba']);
 const scoreSportDefaultLeague={
   basketball:'basketball',
@@ -510,7 +514,7 @@ function centerSelectedScoreLeagueFromSports(){
 function scoreLeagueFallback(key){
   const label=liveNowLabels[key]?.league||key.toUpperCase();
   const short={
-    soccer:'EPL',laliga:'LAL',seriea:'SA',bundesliga:'BUN',champions:'UCL',mls:'MLS',
+    soccer:'EPL',jamaica_pl:'JPL',mizoram_pl:'MPL',laliga:'LAL',el_salvador_reserves:'ES-R',seriea:'SA',bundesliga:'BUN',champions:'UCL',ucl_women:'UWCL',mls:'MLS',
     basketball:'NBA',wnba:'WNBA',pba:'PBA',ncaa_ph:'NCAA-PH',uaap:'UAAP',mpbl:'MPBL',nbl:'NBL-PH',nblaus:'NBL',
     vba:'VBA',wbsl:'WBSL',fiba:'FIBA',atp:'ATP',wta:'WTA',ipl:'IPL',volleyball_w:'FIVB',volleyball_m:'FIVB',
     baseball:'MLB',npb:'NPB',kbo:'KBO',hockey:'NHL',khl:'KHL',iihf:'IIHF',football:'NFL',ncaaf:'NCAA',f1:'F1',motogp:'MGP',formulae:'FE',ufc:'UFC',one:'ONE',wbc:'WBC',wba:'WBA',ibf:'IBF',wbo:'WBO',ring:'RING',pfl:'PFL',bleague:'B.LEAGUE',euroleague:'EL',australian_open:'AO',wimbledon:'WIM',us_open:'USO',bigbash:'BBL',cricket_world_cup:'ICC',pvl:'PVL',vleague_jp:'V.LEAGUE',asian_games:'AG26'
