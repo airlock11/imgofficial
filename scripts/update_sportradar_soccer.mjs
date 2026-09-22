@@ -33,6 +33,8 @@ const TARGETS=[
 ];
 
 const data=readExisting();
+data.leagues=data.leagues||{};
+delete data.leagues.j1;
 data.usage=data.usage||{requests:[]};
 const cutoff30=Date.now()-30*24*60*60*1000;
 data.usage.requests=safeArray(data.usage.requests).filter(x=>(Date.parse(x?.at)||0)>=cutoff30);
