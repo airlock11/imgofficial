@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import json, os, urllib.parse, urllib.request
+import json, os, time, urllib.parse, urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -8,10 +8,18 @@ OUT=ROOT/"youtube-live.json"
 KEY=os.environ["YOUTUBE_API_KEY"]
 UA="IMG-Sports-Live-Verify/2.0"
 
-def get_json(url):
-    req=urllib.request.Request(url,headers={"User-Agent":UA})
-    with urllib.request.urlopen(req,timeout=20) as r:
-        return json.load(r)
+def get_json(url, attempts=3):
+    last=None
+    for attempt in range(attempts):
+        try:
+            req=urllib.request.Request(url,headers={"User-Agent":UA})
+            with urllib.request.urlopen(req,timeout=20) as r:
+                return json.load(r)
+        except Exception as ex:
+            last=ex
+            if attempt+1<attempts:
+                time.sleep(1.5*(attempt+1))
+    raise last
 
 def details(ids):
     if not ids:return {}
