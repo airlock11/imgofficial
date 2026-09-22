@@ -1,0 +1,1003 @@
+{
+  "version": 1,
+  "policy": {
+    "publishVerifiedOnly": true,
+    "preserveLastValidOnFailure": true,
+    "neverMixLeagues": true,
+    "liveStatusMustBeVerified": true,
+    "highlightsOnlyWhenLegitimateSourceExists": true
+  },
+  "dimensions": [
+    "scores",
+    "schedule",
+    "statistics",
+    "rankings",
+    "standings",
+    "liveStreams",
+    "highlights"
+  ],
+  "pipelines": {
+    "direct_espn": {
+      "description": "Browser/API score feed with in-place auto refresh",
+      "freshMinutes": 1
+    },
+    "extended": {
+      "description": "Official/verified web and API collector",
+      "freshMinutes": 10
+    },
+    "regional": {
+      "description": "Regional league official web collector",
+      "freshMinutes": 20
+    },
+    "stats": {
+      "description": "Statistics/leader collector",
+      "freshMinutes": 20
+    },
+    "sportradar": {
+      "description": "Quota-limited soccer enrichment collector",
+      "freshMinutes": 300
+    },
+    "youtube": {
+      "description": "Verified official live-stream scanner",
+      "freshMinutes": 10
+    },
+    "boxing": {
+      "description": "Boxing API/web/rankings/highlights collectors",
+      "freshMinutes": 180
+    }
+  },
+  "leagues": {
+    "asian_games": {
+      "label": "Asian Games",
+      "sport": "Special",
+      "pipeline": "extended",
+      "automatic": true,
+      "required": [
+        "scores",
+        "schedule"
+      ],
+      "optional": [
+        "statistics",
+        "rankings",
+        "standings",
+        "liveStreams",
+        "highlights"
+      ]
+    },
+    "fiba": {
+      "label": "FIBA",
+      "sport": "Special",
+      "pipeline": "extended",
+      "automatic": true,
+      "required": [
+        "scores",
+        "schedule"
+      ],
+      "optional": [
+        "statistics",
+        "rankings",
+        "standings",
+        "liveStreams",
+        "highlights"
+      ]
+    },
+    "soccer": {
+      "label": "EPL",
+      "sport": "Football",
+      "pipeline": "extended",
+      "automatic": true,
+      "required": [
+        "scores",
+        "schedule"
+      ],
+      "optional": [
+        "statistics",
+        "rankings",
+        "standings",
+        "liveStreams",
+        "highlights"
+      ]
+    },
+    "jamaica_pl": {
+      "label": "Jamaica Premier League",
+      "sport": "Football",
+      "pipeline": "sportradar",
+      "automatic": true,
+      "required": [
+        "scores",
+        "schedule"
+      ],
+      "optional": [
+        "statistics",
+        "rankings",
+        "standings",
+        "liveStreams",
+        "highlights"
+      ]
+    },
+    "mizoram_pl": {
+      "label": "Mizoram Premier League",
+      "sport": "Football",
+      "pipeline": "sportradar",
+      "automatic": true,
+      "required": [
+        "scores",
+        "schedule"
+      ],
+      "optional": [
+        "statistics",
+        "rankings",
+        "standings",
+        "liveStreams",
+        "highlights"
+      ]
+    },
+    "laliga": {
+      "label": "La Liga",
+      "sport": "Football",
+      "pipeline": "direct_espn",
+      "automatic": true,
+      "required": [
+        "scores",
+        "schedule"
+      ],
+      "optional": [
+        "statistics",
+        "rankings",
+        "standings",
+        "liveStreams",
+        "highlights"
+      ]
+    },
+    "el_salvador_reserves": {
+      "label": "Primera Division, Reserves",
+      "sport": "Football",
+      "pipeline": "sportradar",
+      "automatic": true,
+      "required": [
+        "scores",
+        "schedule"
+      ],
+      "optional": [
+        "statistics",
+        "rankings",
+        "standings",
+        "liveStreams",
+        "highlights"
+      ]
+    },
+    "seriea": {
+      "label": "Serie A",
+      "sport": "Football",
+      "pipeline": "sportradar",
+      "automatic": true,
+      "required": [
+        "scores",
+        "schedule"
+      ],
+      "optional": [
+        "statistics",
+        "rankings",
+        "standings",
+        "liveStreams",
+        "highlights"
+      ]
+    },
+    "bundesliga": {
+      "label": "Bundesliga",
+      "sport": "Football",
+      "pipeline": "sportradar",
+      "automatic": true,
+      "required": [
+        "scores",
+        "schedule"
+      ],
+      "optional": [
+        "statistics",
+        "rankings",
+        "standings",
+        "liveStreams",
+        "highlights"
+      ]
+    },
+    "champions": {
+      "label": "UEFA Champions League",
+      "sport": "Football",
+      "pipeline": "sportradar",
+      "automatic": true,
+      "required": [
+        "scores",
+        "schedule"
+      ],
+      "optional": [
+        "statistics",
+        "rankings",
+        "standings",
+        "liveStreams",
+        "highlights"
+      ]
+    },
+    "ucl_women": {
+      "label": "UEFA Champions League Women",
+      "sport": "Football",
+      "pipeline": "sportradar",
+      "automatic": true,
+      "required": [
+        "scores",
+        "schedule"
+      ],
+      "optional": [
+        "statistics",
+        "rankings",
+        "standings",
+        "liveStreams",
+        "highlights"
+      ]
+    },
+    "mls": {
+      "label": "MLS",
+      "sport": "Football",
+      "pipeline": "sportradar",
+      "automatic": true,
+      "required": [
+        "scores",
+        "schedule"
+      ],
+      "optional": [
+        "statistics",
+        "rankings",
+        "standings",
+        "liveStreams",
+        "highlights"
+      ]
+    },
+    "pfl": {
+      "label": "PFL",
+      "sport": "Football",
+      "pipeline": "sportradar",
+      "automatic": true,
+      "required": [
+        "scores",
+        "schedule"
+      ],
+      "optional": [
+        "statistics",
+        "rankings",
+        "standings",
+        "liveStreams",
+        "highlights"
+      ]
+    },
+    "basketball": {
+      "label": "NBA",
+      "sport": "Basketball",
+      "pipeline": "direct_espn",
+      "automatic": true,
+      "required": [
+        "scores",
+        "schedule"
+      ],
+      "optional": [
+        "statistics",
+        "rankings",
+        "standings",
+        "liveStreams",
+        "highlights"
+      ]
+    },
+    "wnba": {
+      "label": "WNBA",
+      "sport": "Basketball",
+      "pipeline": "direct_espn",
+      "automatic": true,
+      "required": [
+        "scores",
+        "schedule"
+      ],
+      "optional": [
+        "statistics",
+        "rankings",
+        "standings",
+        "liveStreams",
+        "highlights"
+      ]
+    },
+    "pba": {
+      "label": "PBA",
+      "sport": "Basketball",
+      "pipeline": "regional",
+      "automatic": true,
+      "required": [
+        "scores",
+        "schedule"
+      ],
+      "optional": [
+        "statistics",
+        "rankings",
+        "standings",
+        "liveStreams",
+        "highlights"
+      ]
+    },
+    "ncaa_ph": {
+      "label": "NCAA Philippines",
+      "sport": "Basketball",
+      "pipeline": "regional",
+      "automatic": true,
+      "required": [
+        "scores",
+        "schedule"
+      ],
+      "optional": [
+        "statistics",
+        "rankings",
+        "standings",
+        "liveStreams",
+        "highlights"
+      ]
+    },
+    "uaap": {
+      "label": "UAAP",
+      "sport": "Basketball",
+      "pipeline": "regional",
+      "automatic": true,
+      "required": [
+        "scores",
+        "schedule"
+      ],
+      "optional": [
+        "statistics",
+        "rankings",
+        "standings",
+        "liveStreams",
+        "highlights"
+      ]
+    },
+    "mpbl": {
+      "label": "MPBL",
+      "sport": "Basketball",
+      "pipeline": "regional",
+      "automatic": true,
+      "required": [
+        "scores",
+        "schedule"
+      ],
+      "optional": [
+        "statistics",
+        "rankings",
+        "standings",
+        "liveStreams",
+        "highlights"
+      ]
+    },
+    "nbl": {
+      "label": "NBL-Pilipinas",
+      "sport": "Basketball",
+      "pipeline": "regional",
+      "automatic": true,
+      "required": [
+        "scores",
+        "schedule"
+      ],
+      "optional": [
+        "statistics",
+        "rankings",
+        "standings",
+        "liveStreams",
+        "highlights"
+      ]
+    },
+    "nblaus": {
+      "label": "NBL Australia",
+      "sport": "Basketball",
+      "pipeline": "regional",
+      "automatic": true,
+      "required": [
+        "scores",
+        "schedule"
+      ],
+      "optional": [
+        "statistics",
+        "rankings",
+        "standings",
+        "liveStreams",
+        "highlights"
+      ]
+    },
+    "vba": {
+      "label": "VBA",
+      "sport": "Basketball",
+      "pipeline": "regional",
+      "automatic": true,
+      "required": [
+        "scores",
+        "schedule"
+      ],
+      "optional": [
+        "statistics",
+        "rankings",
+        "standings",
+        "liveStreams",
+        "highlights"
+      ]
+    },
+    "bleague": {
+      "label": "B.League",
+      "sport": "Basketball",
+      "pipeline": "extended",
+      "automatic": true,
+      "required": [
+        "scores",
+        "schedule"
+      ],
+      "optional": [
+        "statistics",
+        "rankings",
+        "standings",
+        "liveStreams",
+        "highlights"
+      ]
+    },
+    "euroleague": {
+      "label": "EuroLeague",
+      "sport": "Basketball",
+      "pipeline": "extended",
+      "automatic": true,
+      "required": [
+        "scores",
+        "schedule"
+      ],
+      "optional": [
+        "statistics",
+        "rankings",
+        "standings",
+        "liveStreams",
+        "highlights"
+      ]
+    },
+    "cba": {
+      "label": "CBA",
+      "sport": "Basketball",
+      "pipeline": "extended",
+      "automatic": true,
+      "required": [
+        "scores",
+        "schedule"
+      ],
+      "optional": [
+        "statistics",
+        "rankings",
+        "standings",
+        "liveStreams",
+        "highlights"
+      ]
+    },
+    "wcba": {
+      "label": "WCBA",
+      "sport": "Basketball",
+      "pipeline": "extended",
+      "automatic": true,
+      "required": [
+        "scores",
+        "schedule"
+      ],
+      "optional": [
+        "statistics",
+        "rankings",
+        "standings",
+        "liveStreams",
+        "highlights"
+      ]
+    },
+    "atp": {
+      "label": "ATP Tour",
+      "sport": "Tennis",
+      "pipeline": "direct_espn",
+      "automatic": true,
+      "required": [
+        "scores",
+        "schedule"
+      ],
+      "optional": [
+        "statistics",
+        "rankings",
+        "standings",
+        "liveStreams",
+        "highlights"
+      ]
+    },
+    "wta": {
+      "label": "WTA Tour",
+      "sport": "Tennis",
+      "pipeline": "extended",
+      "automatic": true,
+      "required": [
+        "scores",
+        "schedule"
+      ],
+      "optional": [
+        "statistics",
+        "rankings",
+        "standings",
+        "liveStreams",
+        "highlights"
+      ]
+    },
+    "australian_open": {
+      "label": "Australian Open",
+      "sport": "Tennis",
+      "pipeline": "extended",
+      "automatic": true,
+      "required": [
+        "scores",
+        "schedule"
+      ],
+      "optional": [
+        "statistics",
+        "rankings",
+        "standings",
+        "liveStreams",
+        "highlights"
+      ]
+    },
+    "wimbledon": {
+      "label": "Wimbledon",
+      "sport": "Tennis",
+      "pipeline": "extended",
+      "automatic": true,
+      "required": [
+        "scores",
+        "schedule"
+      ],
+      "optional": [
+        "statistics",
+        "rankings",
+        "standings",
+        "liveStreams",
+        "highlights"
+      ]
+    },
+    "us_open": {
+      "label": "US Open",
+      "sport": "Tennis",
+      "pipeline": "extended",
+      "automatic": true,
+      "required": [
+        "scores",
+        "schedule"
+      ],
+      "optional": [
+        "statistics",
+        "rankings",
+        "standings",
+        "liveStreams",
+        "highlights"
+      ]
+    },
+    "ipl": {
+      "label": "IPL",
+      "sport": "Cricket",
+      "pipeline": "direct_espn",
+      "automatic": true,
+      "required": [
+        "scores",
+        "schedule"
+      ],
+      "optional": [
+        "statistics",
+        "rankings",
+        "standings",
+        "liveStreams",
+        "highlights"
+      ]
+    },
+    "bigbash": {
+      "label": "Big Bash League",
+      "sport": "Cricket",
+      "pipeline": "extended",
+      "automatic": true,
+      "required": [
+        "scores",
+        "schedule"
+      ],
+      "optional": [
+        "statistics",
+        "rankings",
+        "standings",
+        "liveStreams",
+        "highlights"
+      ]
+    },
+    "cricket_world_cup": {
+      "label": "ICC T20 World Cup",
+      "sport": "Cricket",
+      "pipeline": "extended",
+      "automatic": true,
+      "required": [
+        "scores",
+        "schedule"
+      ],
+      "optional": [
+        "statistics",
+        "rankings",
+        "standings",
+        "liveStreams",
+        "highlights"
+      ]
+    },
+    "volleyball_w": {
+      "label": "FIVB Women",
+      "sport": "Volleyball",
+      "pipeline": "direct_espn",
+      "automatic": true,
+      "required": [
+        "scores",
+        "schedule"
+      ],
+      "optional": [
+        "statistics",
+        "rankings",
+        "standings",
+        "liveStreams",
+        "highlights"
+      ]
+    },
+    "volleyball_m": {
+      "label": "FIVB Men",
+      "sport": "Volleyball",
+      "pipeline": "direct_espn",
+      "automatic": true,
+      "required": [
+        "scores",
+        "schedule"
+      ],
+      "optional": [
+        "statistics",
+        "rankings",
+        "standings",
+        "liveStreams",
+        "highlights"
+      ]
+    },
+    "pvl": {
+      "label": "PVL",
+      "sport": "Volleyball",
+      "pipeline": "extended",
+      "automatic": true,
+      "required": [
+        "scores",
+        "schedule"
+      ],
+      "optional": [
+        "statistics",
+        "rankings",
+        "standings",
+        "liveStreams",
+        "highlights"
+      ]
+    },
+    "vleague_jp": {
+      "label": "V.League Japan",
+      "sport": "Volleyball",
+      "pipeline": "extended",
+      "automatic": true,
+      "required": [
+        "scores",
+        "schedule"
+      ],
+      "optional": [
+        "statistics",
+        "rankings",
+        "standings",
+        "liveStreams",
+        "highlights"
+      ]
+    },
+    "baseball": {
+      "label": "MLB",
+      "sport": "Baseball",
+      "pipeline": "direct_espn",
+      "automatic": true,
+      "required": [
+        "scores",
+        "schedule"
+      ],
+      "optional": [
+        "statistics",
+        "rankings",
+        "standings",
+        "liveStreams",
+        "highlights"
+      ]
+    },
+    "npb": {
+      "label": "NPB",
+      "sport": "Baseball",
+      "pipeline": "extended",
+      "automatic": true,
+      "required": [
+        "scores",
+        "schedule"
+      ],
+      "optional": [
+        "statistics",
+        "rankings",
+        "standings",
+        "liveStreams",
+        "highlights"
+      ]
+    },
+    "kbo": {
+      "label": "KBO League",
+      "sport": "Baseball",
+      "pipeline": "extended",
+      "automatic": true,
+      "required": [
+        "scores",
+        "schedule"
+      ],
+      "optional": [
+        "statistics",
+        "rankings",
+        "standings",
+        "liveStreams",
+        "highlights"
+      ]
+    },
+    "hockey": {
+      "label": "NHL",
+      "sport": "Hockey",
+      "pipeline": "direct_espn",
+      "automatic": true,
+      "required": [
+        "scores",
+        "schedule"
+      ],
+      "optional": [
+        "statistics",
+        "rankings",
+        "standings",
+        "liveStreams",
+        "highlights"
+      ]
+    },
+    "khl": {
+      "label": "KHL",
+      "sport": "Hockey",
+      "pipeline": "extended",
+      "automatic": true,
+      "required": [
+        "scores",
+        "schedule"
+      ],
+      "optional": [
+        "statistics",
+        "rankings",
+        "standings",
+        "liveStreams",
+        "highlights"
+      ]
+    },
+    "iihf": {
+      "label": "IIHF World Championship",
+      "sport": "Hockey",
+      "pipeline": "extended",
+      "automatic": true,
+      "required": [
+        "scores",
+        "schedule"
+      ],
+      "optional": [
+        "statistics",
+        "rankings",
+        "standings",
+        "liveStreams",
+        "highlights"
+      ]
+    },
+    "football": {
+      "label": "NFL",
+      "sport": "American Football",
+      "pipeline": "direct_espn",
+      "automatic": true,
+      "required": [
+        "scores",
+        "schedule"
+      ],
+      "optional": [
+        "statistics",
+        "rankings",
+        "standings",
+        "liveStreams",
+        "highlights"
+      ]
+    },
+    "ncaaf": {
+      "label": "NCAA Football",
+      "sport": "American Football",
+      "pipeline": "direct_espn",
+      "automatic": true,
+      "required": [
+        "scores",
+        "schedule"
+      ],
+      "optional": [
+        "statistics",
+        "rankings",
+        "standings",
+        "liveStreams",
+        "highlights"
+      ]
+    },
+    "f1": {
+      "label": "Formula 1",
+      "sport": "Motorsport",
+      "pipeline": "direct_espn",
+      "automatic": true,
+      "required": [
+        "scores",
+        "schedule"
+      ],
+      "optional": [
+        "statistics",
+        "rankings",
+        "standings",
+        "liveStreams",
+        "highlights"
+      ]
+    },
+    "motogp": {
+      "label": "MotoGP",
+      "sport": "Motorsport",
+      "pipeline": "extended",
+      "automatic": true,
+      "required": [
+        "scores",
+        "schedule"
+      ],
+      "optional": [
+        "statistics",
+        "rankings",
+        "standings",
+        "liveStreams",
+        "highlights"
+      ]
+    },
+    "formulae": {
+      "label": "Formula E",
+      "sport": "Motorsport",
+      "pipeline": "extended",
+      "automatic": true,
+      "required": [
+        "scores",
+        "schedule"
+      ],
+      "optional": [
+        "statistics",
+        "rankings",
+        "standings",
+        "liveStreams",
+        "highlights"
+      ]
+    },
+    "ufc": {
+      "label": "UFC",
+      "sport": "Combat Sports",
+      "pipeline": "direct_espn",
+      "automatic": true,
+      "required": [
+        "scores",
+        "schedule"
+      ],
+      "optional": [
+        "statistics",
+        "rankings",
+        "standings",
+        "liveStreams",
+        "highlights"
+      ]
+    },
+    "one": {
+      "label": "ONE Championship",
+      "sport": "Combat Sports",
+      "pipeline": "extended",
+      "automatic": true,
+      "required": [
+        "scores",
+        "schedule"
+      ],
+      "optional": [
+        "statistics",
+        "rankings",
+        "standings",
+        "liveStreams",
+        "highlights"
+      ]
+    },
+    "wbc": {
+      "label": "WBC",
+      "sport": "Boxing",
+      "pipeline": "boxing",
+      "automatic": true,
+      "required": [
+        "scores",
+        "schedule"
+      ],
+      "optional": [
+        "statistics",
+        "rankings",
+        "standings",
+        "liveStreams",
+        "highlights"
+      ]
+    },
+    "wba": {
+      "label": "WBA",
+      "sport": "Boxing",
+      "pipeline": "boxing",
+      "automatic": true,
+      "required": [
+        "scores",
+        "schedule"
+      ],
+      "optional": [
+        "statistics",
+        "rankings",
+        "standings",
+        "liveStreams",
+        "highlights"
+      ]
+    },
+    "ibf": {
+      "label": "IBF",
+      "sport": "Boxing",
+      "pipeline": "boxing",
+      "automatic": true,
+      "required": [
+        "scores",
+        "schedule"
+      ],
+      "optional": [
+        "statistics",
+        "rankings",
+        "standings",
+        "liveStreams",
+        "highlights"
+      ]
+    },
+    "wbo": {
+      "label": "WBO",
+      "sport": "Boxing",
+      "pipeline": "boxing",
+      "automatic": true,
+      "required": [
+        "scores",
+        "schedule"
+      ],
+      "optional": [
+        "statistics",
+        "rankings",
+        "standings",
+        "liveStreams",
+        "highlights"
+      ]
+    },
+    "ring": {
+      "label": "THE RING",
+      "sport": "Boxing",
+      "pipeline": "boxing",
+      "automatic": true,
+      "required": [
+        "scores",
+        "schedule"
+      ],
+      "optional": [
+        "statistics",
+        "rankings",
+        "standings",
+        "liveStreams",
+        "highlights"
+      ]
+    }
+  }
+}
