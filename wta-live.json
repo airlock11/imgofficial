@@ -2,7 +2,7 @@
   "special": true,
   "league": "WTA Tour",
   "live": true,
-  "updatedAt": "2026-09-22T10:25:22.857210+00:00",
+  "updatedAt": "2026-09-22T10:25:26.509621+00:00",
   "sourceName": "API-Tennis",
   "sourceUrl": "https://api-tennis.com/",
   "verificationSource": "API-Tennis",
@@ -57,11 +57,11 @@
       "home": "Ninomiya/ Radisic",
       "awayLogo": "",
       "homeLogo": "",
-      "awayScore": "7.7 1 · 15",
+      "awayScore": "7.7 0 · 15",
       "homeScore": "6.3 2 · 40",
       "awaySets": [
         "7.7",
-        "1"
+        "0"
       ],
       "homeSets": [
         "6.3",
@@ -70,7 +70,7 @@
       "awayPoint": "15",
       "homePoint": "40",
       "currentSet": 2,
-      "awayCurrentSetGames": 1,
+      "awayCurrentSetGames": 0,
       "homeCurrentSetGames": 2,
       "awaySetsWon": 1,
       "homeSetsWon": 0,
@@ -136,7 +136,7 @@
       "awayLogo": "https://api.api-tennis.com/logo-tennis/13421_a-charaeva.jpg",
       "homeLogo": "https://api.api-tennis.com/logo-tennis/2904_s-kenin.jpg",
       "awayScore": "3 1 · 40",
-      "homeScore": "6 2 · 40",
+      "homeScore": "6 2 · A",
       "awaySets": [
         "3",
         "1"
@@ -146,7 +146,7 @@
         "2"
       ],
       "awayPoint": "40",
-      "homePoint": "40",
+      "homePoint": "A",
       "currentSet": 2,
       "awayCurrentSetGames": 1,
       "homeCurrentSetGames": 2,
@@ -159,7 +159,7 @@
       "eventOnly": false,
       "title": "Seoul",
       "eventType": "Wta Singles",
-      "serve": "Second Player",
+      "serve": "First Player",
       "sourceName": "API-Tennis",
       "sourceUrl": "https://api-tennis.com/",
       "verificationSource": "API-Tennis",
