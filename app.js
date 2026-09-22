@@ -2079,11 +2079,14 @@ function renderGames(){
   const byDateAsc=(a,b)=>(Date.parse(a.date||'')||0)-(Date.parse(b.date||'')||0);
   const byDateDesc=(a,b)=>(Date.parse(b.date||'')||0)-(Date.parse(a.date||'')||0);
 
-  const live=allGames.filter(g=>g.state==='live'||(currentScoreLeague==='wta'&&['suspended','warmup'].includes(g.state))).sort(byDateAsc);
+  const live=allGames.filter(g=>g.state==='live'||(currentScoreLeague==='wta'&&g.state==='warmup')).sort(byDateAsc);
   const scheduled=allGames.filter(g=>g.state==='scheduled').sort(byDateAsc);
   const finals=allGames.filter(g=>g.state==='final').sort(byDateDesc);
   const info=allGames.filter(g=>g.state==='info'||g.dataType==='titleholder').sort((a,b)=>String(a.title||'').localeCompare(String(b.title||'')));
   const other=allGames.filter(g=>!['live','scheduled','final','info'].includes(g.state)&&!(currentScoreLeague==='wta'&&['suspended','warmup'].includes(g.state))&&g.dataType!=='titleholder').sort(byDateAsc);
+  const wtaRecentGames=currentScoreLeague==='wta'
+    ?[...finals,...allGames.filter(g=>g.state==='suspended')].sort(byDateDesc).slice(0,30)
+    :[];
 
   const renderCard=g=>{
     if(currentScoreLeague==='asian_games'){
@@ -2290,6 +2293,15 @@ function renderGames(){
     );
   }
 
+  if(currentScoreLeague==='wta'&&wtaRecentGames.length){
+    sections.push(
+      '<section class="league-games-group wta-recent-games" aria-label="WTA recent games">'+
+        '<div class="league-games-group-head"><h3>Recent Games</h3><span>Final & suspended matches</span></div>'+
+        '<div class="league-games-list">'+wtaRecentGames.map(renderCard).join('')+'</div>'+
+      '</section>'
+    );
+  }
+
   if(scheduleItems.length){
     sections.push(
       '<section class="league-games-group" aria-label="'+esc(leagueName)+' schedule">'+
@@ -2299,7 +2311,7 @@ function renderGames(){
     );
   }
 
-  if(currentScoreLeague!=='nbl'&&scoreItems.length){
+  if(currentScoreLeague!=='nbl'&&currentScoreLeague!=='wta'&&scoreItems.length){
     sections.push(
       '<section class="league-games-group" aria-label="'+esc(leagueName)+' results">'+
         '<div class="league-games-group-head"><h3>'+(currentScoreLeague==='asian_games'?'Results':'Scores')+'</h3><span>'+esc(leagueName)+'</span></div>'+
