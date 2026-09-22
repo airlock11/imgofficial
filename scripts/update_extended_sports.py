@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
 import json
+import io
 import html as html_module
 import re
 import urllib.request
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from bs4 import BeautifulSoup
+from pypdf import PdfReader
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "extended-sports-data.json"
@@ -108,121 +110,140 @@ NPB_TEAMS = [
 
 
 def wta_calendar_schedule():
-    """Scrape official WTA tournament pages for current and upcoming schedule."""
-    official_calendar = "https://www.wtatennis.com/tournaments"
-    pages = [
-        "https://www.wtatennis.com/tournaments/1152/singapore/2026",
-        "https://www.wtatennis.com/tournaments/1024/seoul/2026",
-        "https://www.wtatennis.com/tournaments/china-open",
-        "https://www.wtatennis.com/tournaments/1075/wuhan/2026/",
-        "https://www.wtatennis.com/tournaments/wta-finals",
-    ]
-    headers = {
-        "User-Agent": "Mozilla/5.0 (compatible; IMG-Sports-Website/1.0; +https://imgofficial.com)",
-        "Accept": "text/html,application/xhtml+xml;q=0.9,*/*;q=0.8",
-        "Accept-Language": "en-US,en;q=0.9",
-    }
+    """Scrape the official WTA 2026 calendar PDF for current/upcoming Tour events."""
+    calendar_url = "https://wtafiles.wtatennis.com/pdf/calendar/calendar.pdf"
+    req = urllib.request.Request(
+        calendar_url,
+        headers={"User-Agent": UA, "Accept": "application/pdf,*/*"},
+    )
+    with urllib.request.urlopen(req, timeout=30) as r:
+        pdf_bytes = r.read()
 
-    def fetch_text(url):
-        req = urllib.request.Request(url, headers=headers)
-        with urllib.request.urlopen(req, timeout=30) as r:
-            return r.read().decode("utf-8", errors="replace")
+    reader = PdfReader(io.BytesIO(pdf_bytes))
+    if not reader.pages:
+        raise RuntimeError("WTA calendar PDF has no pages")
 
-    def clean_text(value):
-        return re.sub(r"\\s+", " ", html_module.unescape(re.sub(r"<[^>]+>", " ", value or ""))).strip()
+    # Page 1 is the main WTA Tour calendar. Page 2 is WTA 125.
+    text = reader.pages[0].extract_text() or ""
+    lines = [re.sub(r"\\s+", " ", line).strip() for line in text.splitlines() if line.strip()]
 
-    def first(pattern, text, flags=re.I|re.S):
-        m = re.search(pattern, text, flags)
-        return clean_text(m.group(1)) if m else ""
-
-    def parse_date_range(date_text):
-        m = re.search(
-            r"([A-Z][a-z]{2,8})\\s+(\\d{1,2})\\s*-\\s*(?:([A-Z][a-z]{2,8})\\s+)?(\\d{1,2}),\\s*(2026)",
-            date_text or "",
-        )
-        if not m:
-            return "", ""
-        sm, sd, em, ed, year = m.groups()
-        em = em or sm
-        for fmt in ("%b %d %Y", "%B %d %Y"):
-            try:
-                start = datetime.strptime(f"{sm} {sd} {year}", fmt).replace(tzinfo=timezone.utc)
-                end = datetime.strptime(f"{em} {ed} {year}", fmt).replace(tzinfo=timezone.utc)
-                return start.isoformat(), end.isoformat()
-            except Exception:
-                pass
-        return "", ""
-
-    def first_int(pattern, text):
-        value = first(pattern, text)
-        m = re.search(r"\\d+", value or "")
-        return int(m.group(0)) if m else ""
+    blocks = []
+    current = None
+    week_re = re.compile(r"^(\\d+(?:\\s*&\\s*\\d+)?)\\s+(\\d{1,2}-[A-Z]{3})\\s*(.*)$")
+    for line in lines:
+        m = week_re.match(line)
+        if m:
+            if current:
+                blocks.append(current)
+            current = {"week": m.group(1), "date": m.group(2), "text": m.group(3).strip()}
+        elif current:
+            current["text"] += " " + line
+    if current:
+        blocks.append(current)
 
     now = datetime.now(timezone.utc)
     games = []
     seen = set()
+    event_re = re.compile(r"([^|]+?)\\s*\\|\\s*([^|]+?)\\s*-\\s*((?:I\\s*)?[HCG])(?=\\s|$)")
 
-    for url in pages:
+    # Exact dates currently published on WTA's tournament pages.
+    exact_dates = {
+        "Singapore Tennis Open": ("2026-09-21", "2026-09-27"),
+        "Korea Open": ("2026-09-21", "2026-09-27"),
+        "China Open": ("2026-09-30", "2026-10-11"),
+        "Wuhan Open": ("2026-10-12", "2026-10-18"),
+        "WTA Finals Indian Wells": ("2026-11-08", "2026-11-15"),
+    }
+    levels = {
+        "Singapore Tennis Open": "WTA 500",
+        "Korea Open": "WTA 250",
+        "China Open": "WTA 1000",
+        "Wuhan Open": "WTA 1000",
+        "WTA Finals Indian Wells": "WTA Finals",
+    }
+
+    for block in blocks:
         try:
-            html = fetch_text(url)
-        except Exception as ex:
-            print("wta-calendar fetch-error", url, type(ex).__name__, str(ex)[:100])
+            week_start = datetime.strptime(block["date"] + "-2026", "%d-%b-%Y").replace(tzinfo=timezone.utc)
+        except Exception:
+            continue
+        if week_start < now - timedelta(days=8):
             continue
 
-        page_text = clean_text(html)
-        title = first(r"<h1[^>]*>(.*?)</h1>", html) or first(r"<title[^>]*>(.*?)</title>", html)
-        location = first(r"([A-Z][A-Z .'-]+\\s*•\\s*[A-Z]{3})", page_text)
-        level = first(r"(WTA\\s*(?:125|250|500|1000|Finals))", page_text)
-        surface = first(r"\\b(Hard|Clay|Grass)\\b", page_text)
-        date_text = first(
-            r"((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\\s+\\d{1,2}\\s*-\\s*(?:(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\\s+)?\\d{1,2},\\s*2026)",
-            page_text,
-        )
-        start_iso, end_iso = parse_date_range(date_text)
+        blob = block["text"]
+        blob = re.sub(r"\\bBJK Cup Finals\\b", " ", blob, flags=re.I)
+        blob = re.sub(r"\\bBJK Cup Playoffs\\b", " ", blob, flags=re.I)
 
-        if not title or not start_iso:
-            print("wta-calendar parse-miss", url, bool(title), bool(start_iso))
-            continue
+        for match in event_re.finditer(blob):
+            name = re.sub(r"\\s+", " ", match.group(1)).strip(" -")
+            location = re.sub(r"\\s+", " ", match.group(2)).strip(" -")
+            surface_code = re.sub(r"\\s+", " ", match.group(3)).strip().upper()
+            if not name or not location:
+                continue
 
-        start_dt = datetime.fromisoformat(start_iso)
-        end_dt = datetime.fromisoformat(end_iso) if end_iso else start_dt
-        if end_dt < now - timedelta(days=1):
-            continue
+            # Remove week/date residue if the PDF extractor attached it to a name.
+            name = re.sub(r"^\\d+(?:\\s*&\\s*\\d+)?\\s+\\d{1,2}-[A-Z]{3}\\s+", "", name).strip()
+            if not name:
+                continue
 
-        event_id = "wta-calendar-" + re.sub(r"[^a-z0-9]+", "-", title.lower()).strip("-")
-        if event_id in seen:
-            continue
-        seen.add(event_id)
+            key = name.lower()
+            if key in seen:
+                continue
+            seen.add(key)
 
-        games.append({
-            "eventId": event_id,
-            "date": start_iso,
-            "endDate": end_iso,
-            "displayTime": date_text,
-            "title": title,
-            "location": location.replace(" • ", ", ") if location else "",
-            "status": "Tournament in progress" if start_dt <= now <= end_dt + timedelta(days=1) else "Scheduled",
-            "state": "scheduled",
-            "eventOnly": True,
-            "level": level,
-            "surface": surface,
-            "singlesDraw": first_int(r"Singles Draw\\s*(\\d+)", page_text),
-            "doublesDraw": first_int(r"Doubles Draw\\s*(\\d+)", page_text),
-            "totalCommitment": first(r"Total \\$ Commitment\\s*(\\$[\\d,]+)", page_text),
-            "sourceName": "WTA Official",
-            "sourceUrl": url,
-        })
+            start_date = week_start.date().isoformat()
+            end_date = (week_start + timedelta(days=6)).date().isoformat()
+            for official_name, pair in exact_dates.items():
+                if official_name.lower() == key:
+                    start_date, end_date = pair
+                    break
+
+            start_dt = datetime.fromisoformat(start_date).replace(tzinfo=timezone.utc)
+            end_dt = datetime.fromisoformat(end_date).replace(tzinfo=timezone.utc)
+            if end_dt < now - timedelta(days=1):
+                continue
+
+            surface = {
+                "H": "Hard",
+                "I H": "Indoor Hard",
+                "C": "Clay",
+                "I C": "Indoor Clay",
+                "G": "Grass",
+            }.get(surface_code, surface_code)
+
+            if start_date != week_start.date().isoformat() or end_date != (week_start + timedelta(days=6)).date().isoformat():
+                start_label = start_dt.strftime("%b %-d")
+                end_label = end_dt.strftime("%b %-d")
+                display = f"{start_label}–{end_label}"
+            else:
+                display = "Week of " + week_start.strftime("%b %-d")
+
+            games.append({
+                "eventId": "wta-calendar-" + re.sub(r"[^a-z0-9]+", "-", key).strip("-"),
+                "date": start_dt.isoformat(),
+                "endDate": end_dt.isoformat(),
+                "displayTime": display,
+                "title": name,
+                "location": location,
+                "status": "Tournament in progress" if start_dt <= now <= end_dt + timedelta(days=1) else "Scheduled",
+                "state": "scheduled",
+                "eventOnly": True,
+                "level": levels.get(name, ""),
+                "surface": surface,
+                "sourceName": "WTA Official Calendar",
+                "sourceUrl": calendar_url,
+            })
 
     if not games:
-        raise RuntimeError("WTA calendar scrape found no current/upcoming tournaments")
+        raise RuntimeError("WTA official calendar PDF produced no current/upcoming Tour events")
 
     games.sort(key=lambda g: g.get("date") or "")
     return {
         "league": "WTA Tour",
         "sourceName": "WTA Official Calendar",
-        "sourceUrl": official_calendar,
+        "sourceUrl": calendar_url,
         "updatedAt": datetime.now(timezone.utc).isoformat(),
-        "note": "Current and upcoming WTA tournaments scraped from official WTA tournament pages.",
+        "note": "Current and upcoming WTA Tour tournaments scraped automatically from the official WTA calendar PDF.",
         "games": games,
     }
 
