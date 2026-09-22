@@ -104,13 +104,18 @@ function targetKey(name,category=""){
   const n=norm(name);
   const cat=norm(category);
 
-  if(n==="premier league"&&cat.includes("jamaica"))return "jamaica_pl";
-  if(n==="premier league"&&(cat.includes("england")||cat.includes("england amateur")))return "soccer";
-  if(n==="mizoram premier league")return "mizoram_pl";
-  if((n==="primera division reserves"||n==="primera division reserve")&&cat.includes("el salvador"))return "el_salvador_reserves";
-  if(n==="uefa champions league women")return "ucl_women";
-  if(n==="uefa champions league")return "champions";
-  if((n==="la liga"||n==="laliga"||n==="primera division")&&cat.includes("spain"))return "laliga";
+  if((n==="premier league"||n.includes("jamaica premier"))&&cat.includes("jamaica"))return "jamaica_pl";
+  if((n==="premier league"||n==="english premier league"||n.includes("premier league"))&&cat.includes("england"))return "soccer";
+  if(n.includes("mizoram premier league"))return "mizoram_pl";
+  if((n.includes("primera division reserves")||n.includes("primera division reserve"))&&cat.includes("el salvador"))return "el_salvador_reserves";
+  if((n.includes("uefa champions league women")||n.includes("women champions league"))&&!n.includes("youth"))return "ucl_women";
+  if((n==="uefa champions league"||n==="champions league"||n.includes("uefa champions league"))&&!n.includes("women")&&!n.includes("youth"))return "champions";
+  if((n==="la liga"||n==="laliga"||n==="primera division"||n.includes("laliga"))&&cat.includes("spain"))return "laliga";
+  if((n==="serie a"||n.includes("serie a"))&&cat.includes("italy"))return "seriea";
+  if((n==="bundesliga"||n.includes("bundesliga"))&&cat.includes("germany"))return "bundesliga";
+  if((n==="major league soccer"||n==="mls")&&(cat.includes("usa")||cat.includes("united states")))return "mls";
+  if((n.includes("philippine football league")||n.includes("philippines football league"))&&cat.includes("philippines"))return "pfl";
+  if((n==="j1 league"||n.includes("j league")||n.includes("j1 league"))&&cat.includes("japan"))return "j1";
 
   const exact=TARGETS.find(t=>t.names.some(x=>n===norm(x)));
   return exact?.key||null;
@@ -329,7 +334,7 @@ if(MODE==="deep"){
       const cname=norm(c?.name);
       const cat=norm(c?.category?.name||c?.category_name||"");
       const mapped=targetKey(c?.name||"",cat);
-      return mapped===t.key||t.names.some(n=>cname===norm(n));
+      return mapped===t.key;
     });
     if(!comp?.id)continue;
 
