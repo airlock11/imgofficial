@@ -1617,7 +1617,7 @@ function liveNowItemIsCurrent(g){
     soccer:4,laliga:4,seriea:4,bundesliga:4,champions:4,mls:4,
     basketball:5,wnba:5,pba:5,ncaa_ph:5,uaap:5,mpbl:5,nbl:5,nblaus:5,vba:5,
     atp:7,wta:7,ipl:7,volleyball_w:5,volleyball_m:5,
-    baseball:8,hockey:5,football:7,ncaaf:7,f1:5,ufc:10,boxing:10
+    baseball:8,hockey:5,football:7,ncaaf:7,f1:5,ufc:10,one:10,boxing:10
   };
   const limit=maxHours[g.sportKey];
   if(Number.isFinite(start)&&limit&&now-start>limit*60*60*1000)return false;
@@ -1697,9 +1697,9 @@ async function loadVerifiedChannelLive(){
   }
 }
 function verifiedChannelLiveGame(x,updatedAt=''){
-  const allowed=new Set(['asian_games','fiba','pba','mpbl','nbl','ncaa_ph','uaap','wta']);
+  const allowed=new Set(['asian_games','fiba','pba','mpbl','nbl','ncaa_ph','uaap','wta','one','ufc']);
   if(!x?.stream?.watchUrl||!allowed.has(x?.leagueKey))return null;
-  const label=x.league||({asian_games:'2026 ASIAN GAMES',pba:'PBA',mpbl:'MPBL',nbl:'NBL Pilipinas',ncaa_ph:'NCAA Philippines',uaap:'UAAP',wta:'WTA Tour',fiba:'FIBA'}[x.leagueKey]);
+  const label=x.league||({asian_games:'2026 ASIAN GAMES',pba:'PBA',mpbl:'MPBL',nbl:'NBL Pilipinas',ncaa_ph:'NCAA Philippines',uaap:'UAAP',wta:'WTA Tour',fiba:'FIBA',one:'ONE Championship',ufc:'UFC'}[x.leagueKey]);
   const source=x.stream.channel||x.stream.provider||label;
   return {
     eventId:x.eventId,
