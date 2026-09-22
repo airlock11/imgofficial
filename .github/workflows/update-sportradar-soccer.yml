@@ -1,0 +1,91 @@
+name: Update Sportradar soccer data
+
+on:
+  schedule:
+    - cron: "17 */3 * * *"
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "Refresh mode"
+        required: false
+        default: "live"
+        type: choice
+        options:
+          - live
+          - deep
+  push:
+    branches:
+      - main
+    paths:
+      - "scripts/update_sportradar_soccer.mjs"
+      - ".github/workflows/update-sportradar-soccer.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sportradar-soccer-update
+  cancel-in-progress: true
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      SPORTRADAR_API_KEY: ${{ secrets.SPORTRADAR_API_KEY }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify secret
+        shell: bash
+        run: |
+          if [ -z "$SPORTRADAR_API_KEY" ]; then
+            echo "Repository secret SPORTRADAR_API_KEY is not configured."
+            exit 1
+          fi
+
+      - name: Choose refresh mode
+        id: mode
+        shell: bash
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "value=${{ inputs.mode }}" >> "$GITHUB_OUTPUT"
+          elif [ "$(date -u +%H)" = "03" ]; then
+            echo "value=deep" >> "$GITHUB_OUTPUT"
+          else
+            echo "value=live" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Refresh Sportradar soccer
+        run: node scripts/update_sportradar_soccer.mjs "${{ steps.mode.outputs.value }}"
+
+      - name: Commit updated data
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "IMG Sports Data Bot"
+          git config user.email "actions@users.noreply.github.com"
+
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git reset --hard origin/main
+            node scripts/update_sportradar_soccer.mjs "${{ steps.mode.outputs.value }}"
+
+            if git diff --quiet -- sportradar-soccer-data.json; then
+              echo "No Sportradar data changes."
+              exit 0
+            fi
+
+            git add sportradar-soccer-data.json
+            git commit -m "Update Sportradar soccer data"
+
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            echo "Push raced with another automation; retrying."
+          done
+
+          exit 1
