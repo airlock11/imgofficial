@@ -1,3 +1,4 @@
+# automation-audit: 2026-09-22
 name: Update sports news data
 
 on:
@@ -9,6 +10,7 @@ on:
       - main
     paths:
       - "scripts/update_news.py"
+      - ".github/workflows/update-news.yml"
 
 permissions:
   contents: write
