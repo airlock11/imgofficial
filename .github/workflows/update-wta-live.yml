@@ -15,7 +15,7 @@ permissions:
 
 concurrency:
   group: wta-live-minute
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   update:
@@ -41,32 +41,23 @@ jobs:
           for cycle in 1 2 3 4 5; do
             echo "WTA live cycle $cycle/5"
 
-            published=0
-            for attempt in 1 2 3; do
-              git fetch origin main
-              git reset --hard origin/main
+            git checkout main
+            git fetch origin main
+            git reset --hard origin/main
 
-              python scripts/update_wta_live.py
+            python scripts/update_wta_live.py
+            cp wta-live.json /tmp/wta-live.json
 
-              if git diff --quiet -- wta-live.json; then
-                echo "No WTA live-score changes."
-                published=1
-                break
-              fi
+            git fetch origin wta-live-data
+            git checkout -B wta-live-data origin/wta-live-data
+            cp /tmp/wta-live.json wta-live.json
 
+            if ! git diff --quiet -- wta-live.json; then
               git add wta-live.json
               git commit -m "Update WTA live scores"
-              if git push origin HEAD:main; then
-                published=1
-                break
-              fi
-
-              echo "Push raced; retrying."
-            done
-
-            if [ "$published" -ne 1 ]; then
-              echo "Unable to publish WTA live cycle."
-              exit 1
+              git push origin HEAD:wta-live-data
+            else
+              echo "No WTA live-score changes."
             fi
 
             if [ "$cycle" -lt 5 ]; then
