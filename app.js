@@ -287,7 +287,7 @@ async function specialSportsPayload(sport){
   return {special:true,games:league.games,sourceName:league.sourceName||'',sourceUrl:league.sourceUrl||'',note:league.note||''};
 }
 const specialScoreKeys=new Set(['atp','wta','ipl','volleyball_w','volleyball_m','asian_games','fiba','ncaa_ph','bleague','euroleague','cba','wcba','pfl','australian_open','wimbledon','us_open','npb','kbo','khl','iihf','bigbash','cricket_world_cup','pvl','vleague_jp','motogp','formulae','one','wbc','wba','ibf','wbo']);
-const sportradarSoccerKeys=new Set(['soccer','jamaica_pl','mizoram_pl','laliga','el_salvador_reserves','seriea','bundesliga','champions','ucl_women','mls','pfl']);
+const sportradarSoccerKeys=new Set(['jamaica_pl','mizoram_pl','laliga','el_salvador_reserves','seriea','bundesliga','champions','ucl_women','mls','pfl']);
 function scoreGameLooksGeneric(g){
   const names=[g?.away,g?.home].map(x=>String(x||'').trim().toLowerCase());
   const generic=new Set(['','away','home','tbd','team 1','team 2','player 1','player 2']);
@@ -370,6 +370,10 @@ async function fetchMlbScoreboard(){
 async function fetchScorePayload(sport,{fallbackOnly=false}={}){
   if(sport==='soccer'&&!fallbackOnly){
     try{return await fetchPremierLeagueScoreboard()}catch{}
+    try{
+      const verified=await specialSportsPayload('soccer');
+      if(verified?.games?.length)return verified;
+    }catch{}
   }
   if(sport==='baseball'&&!fallbackOnly){
     try{return await fetchMlbScoreboard()}catch{}
