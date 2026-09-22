@@ -3,7 +3,7 @@ name: Update extended sports data
 
 on:
   schedule:
-    - cron: "*/30 * * * *"
+    - cron: "*/5 * * * *"
   workflow_dispatch:
   push:
     branches:
