@@ -2,7 +2,7 @@
   "special": true,
   "league": "WTA Tour",
   "live": true,
-  "updatedAt": "2026-09-22T09:35:36.212058+00:00",
+  "updatedAt": "2026-09-22T09:36:50.560543+00:00",
   "sourceName": "WTA Official Scores scrape",
   "sourceUrl": "https://www.wtatennis.com/scores/",
   "verificationSource": "WTA Official Scores",
@@ -13,20 +13,20 @@
   "games": [
     {
       "eventId": "wta-scrape-2-a-charaeva-s-kenin",
-      "date": "2026-09-22T09:35:36.206913+00:00",
+      "date": "2026-09-22T09:36:50.555820+00:00",
       "displayTime": "Korea Open",
       "away": "A. Charaeva",
       "home": "S. Kenin",
-      "awayScore": "1 · 0",
-      "homeScore": "2 · 30",
+      "awayScore": "1 · 15",
+      "homeScore": "2 · 40",
       "awaySets": [
         "1"
       ],
       "homeSets": [
         "2"
       ],
-      "awayPoint": "0",
-      "homePoint": "30",
+      "awayPoint": "15",
+      "homePoint": "40",
       "currentSet": 1,
       "awayCurrentSetGames": 1,
       "homeCurrentSetGames": 2,
@@ -34,7 +34,7 @@
       "homeSetsWon": 0,
       "round": "Round of 32",
       "court": "Center Court",
-      "status": "Live Match: 0:13 · Round of 32 · Center Court",
+      "status": "Live Match: 0:15 · Round of 32 · Center Court",
       "state": "live",
       "eventOnly": false,
       "title": "Korea Open",
@@ -45,12 +45,12 @@
     },
     {
       "eventId": "wta-scrape-3-a-tubello-d-spiteri",
-      "date": "2026-09-22T09:35:36.207184+00:00",
+      "date": "2026-09-22T09:36:50.556115+00:00",
       "displayTime": "Delta Motors Tolentino Open",
       "away": "A. Tubello",
       "home": "D. Spiteri",
       "awayScore": "6 4 · 40",
-      "homeScore": "2 0 · 30",
+      "homeScore": "2 0 · AD",
       "awaySets": [
         "6",
         "4"
@@ -60,7 +60,7 @@
         "0"
       ],
       "awayPoint": "40",
-      "homePoint": "30",
+      "homePoint": "AD",
       "currentSet": 2,
       "awayCurrentSetGames": 4,
       "homeCurrentSetGames": 0,
@@ -68,7 +68,7 @@
       "homeSetsWon": 0,
       "round": "Round of 32",
       "court": "Court 2",
-      "status": "Live Match: 0:58 · Round of 32 · Court 2",
+      "status": "Live Match: 0:59 · Round of 32 · Court 2",
       "state": "live",
       "eventOnly": false,
       "title": "Delta Motors Tolentino Open",
@@ -79,24 +79,26 @@
     },
     {
       "eventId": "wta-scrape-5-l-zaar-r-masarova",
-      "date": "2026-09-22T09:35:36.207534+00:00",
+      "date": "2026-09-22T09:36:50.556452+00:00",
       "displayTime": "Delta Motors Tolentino Open",
       "away": "L. Zaar",
       "home": "R. Masarova",
-      "awayScore": "6 · AD",
-      "homeScore": "5 · 40",
+      "awayScore": "7 0 · 0",
+      "homeScore": "5 0 · 0",
       "awaySets": [
-        "6"
+        "7",
+        "0"
       ],
       "homeSets": [
-        "5"
+        "5",
+        "0"
       ],
-      "awayPoint": "AD",
-      "homePoint": "40",
-      "currentSet": 1,
-      "awayCurrentSetGames": 6,
-      "homeCurrentSetGames": 5,
-      "awaySetsWon": 0,
+      "awayPoint": "0",
+      "homePoint": "0",
+      "currentSet": 2,
+      "awayCurrentSetGames": 0,
+      "homeCurrentSetGames": 0,
+      "awaySetsWon": 1,
       "homeSetsWon": 0,
       "round": "Round of 32",
       "court": "Court 1",
@@ -111,7 +113,7 @@
     },
     {
       "eventId": "wta-scrape-6-e-pridankina-d-egorova",
-      "date": "2026-09-22T09:35:36.207698+00:00",
+      "date": "2026-09-22T09:36:50.556620+00:00",
       "displayTime": "Turk Telekom Ankara Open",
       "away": "E. Pridankina",
       "home": "D. Egorova",
@@ -143,7 +145,7 @@
     },
     {
       "eventId": "wta-scrape-7-w-falkowska-i-yoruk",
-      "date": "2026-09-22T09:35:36.207846+00:00",
+      "date": "2026-09-22T09:36:50.556768+00:00",
       "displayTime": "Turk Telekom Ankara Open",
       "away": "W. Falkowska",
       "home": "I. Yoruk",
@@ -177,7 +179,7 @@
     },
     {
       "eventId": "wta-scrape-8-a-tikhonova-a-gasanova",
-      "date": "2026-09-22T09:35:36.208011+00:00",
+      "date": "2026-09-22T09:36:50.556930+00:00",
       "displayTime": "Turk Telekom Ankara Open",
       "away": "A. Tikhonova",
       "home": "A. Gasanova",
