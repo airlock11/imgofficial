@@ -3,70 +3,70 @@
   "provider": "Sportradar",
   "product": "Soccer API",
   "access": "trial",
-  "updatedAt": "2026-09-22T16:40:04.527Z",
+  "updatedAt": "2026-09-22T16:47:48.571Z",
   "requestsLastRun": 2,
   "leagues": {
     "soccer": {
       "league": "Premier League",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-09-22T16:40:04.527Z",
+      "updatedAt": "2026-09-22T16:47:48.571Z",
       "games": []
     },
     "laliga": {
       "league": "La Liga",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-09-22T16:40:04.527Z",
+      "updatedAt": "2026-09-22T16:47:48.571Z",
       "games": []
     },
     "seriea": {
       "league": "Serie A",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-09-22T16:40:04.527Z",
+      "updatedAt": "2026-09-22T16:47:48.571Z",
       "games": []
     },
     "bundesliga": {
       "league": "Bundesliga",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-09-22T16:40:04.527Z",
+      "updatedAt": "2026-09-22T16:47:48.571Z",
       "games": []
     },
     "champions": {
       "league": "UEFA Champions League",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-09-22T16:40:04.527Z",
+      "updatedAt": "2026-09-22T16:47:48.571Z",
       "games": []
     },
     "mls": {
       "league": "MLS",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-09-22T16:40:04.527Z",
+      "updatedAt": "2026-09-22T16:47:48.571Z",
       "games": []
     },
     "pfl": {
       "league": "Philippine Football League",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-09-22T16:40:04.527Z",
+      "updatedAt": "2026-09-22T16:47:48.571Z",
       "games": []
     },
     "j1": {
       "league": "J1 League",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-09-22T16:40:04.527Z",
+      "updatedAt": "2026-09-22T16:47:48.571Z",
       "games": []
     },
     "jamaica_pl": {
       "league": "Jamaica Premier League",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-09-22T16:40:04.527Z",
+      "updatedAt": "2026-09-22T16:47:48.571Z",
       "games": [
         {
           "eventId": "sr:sport_event:74695422",
@@ -97,7 +97,7 @@
       "league": "Mizoram Premier League",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-09-22T16:40:04.527Z",
+      "updatedAt": "2026-09-22T16:47:48.571Z",
       "games": [
         {
           "eventId": "sr:sport_event:74463120",
@@ -151,7 +151,7 @@
       "league": "Primera Division, Reserves",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-09-22T16:40:04.527Z",
+      "updatedAt": "2026-09-22T16:47:48.571Z",
       "games": [
         {
           "eventId": "sr:sport_event:74824798",
@@ -182,7 +182,7 @@
       "league": "UEFA Champions League Women",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-09-22T16:40:04.527Z",
+      "updatedAt": "2026-09-22T16:47:48.571Z",
       "games": [
         {
           "eventId": "sr:sport_event:74371782",
@@ -193,10 +193,10 @@
           "away": "Hacken Gothenburg",
           "homeLogo": "",
           "awayLogo": "",
-          "homeScore": "—",
-          "awayScore": "—",
-          "status": "not_started",
-          "state": "scheduled",
+          "homeScore": 0,
+          "awayScore": 0,
+          "status": "1st_half",
+          "state": "live",
           "venue": "Felice Chinetti Stadium",
           "round": 1,
           "seasonId": "sr:season:142850",
@@ -216,10 +216,10 @@
           "away": "Manchester City WFC",
           "homeLogo": "",
           "awayLogo": "",
-          "homeScore": "—",
-          "awayScore": "—",
-          "status": "not_started",
-          "state": "scheduled",
+          "homeScore": 0,
+          "awayScore": 0,
+          "status": "1st_half",
+          "state": "live",
           "venue": "FC Bayern Campus",
           "round": 1,
           "seasonId": "sr:season:142850",
@@ -302,5 +302,8 @@
       ]
     }
   },
-  "catalog": {}
+  "catalog": {},
+  "requestBudget": 900,
+  "requestBudgetRemaining": 898,
+  "harvestMode": "live"
 }
