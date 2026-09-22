@@ -1462,3 +1462,114 @@ main{min-height:calc(100svh - 68px)}
   .wta-score-table tbody .wta-player-name{font-size:15px}
   .wta-score-table .wta-point-score,.wta-score-table .wta-set-score{font-size:16px}
 }
+
+
+/* WTA official-style live score card */
+.wta-game-card .wta-event-name{
+  font-size:.9rem;
+  font-weight:800;
+  color:var(--muted);
+  margin-bottom:12px!important;
+}
+.wta-table-wrap{
+  overflow:visible;
+}
+.wta-match-topline{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+  padding:0 8px 11px;
+  margin-bottom:6px;
+  border-bottom:1px solid rgba(255,255,255,.10);
+  color:var(--text);
+  font-size:.82rem;
+  font-weight:700;
+  letter-spacing:.02em;
+}
+.wta-court{text-align:right}
+.wta-official-score{display:grid;gap:2px}
+.wta-official-row{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 52px minmax(112px,auto);
+  align-items:center;
+  min-height:48px;
+  column-gap:8px;
+  padding:3px 8px;
+}
+.wta-official-player{
+  min-width:0;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  font-size:1rem;
+  line-height:1.2;
+  font-weight:850;
+  color:var(--text);
+}
+.wta-official-point{
+  text-align:center;
+  font-size:1rem;
+  font-weight:950;
+  font-variant-numeric:tabular-nums;
+  color:var(--muted);
+}
+.wta-game-card.game-is-live .wta-official-point{
+  color:#dfff00;
+}
+.wta-official-sets{
+  display:grid;
+  grid-template-columns:repeat(5,minmax(22px,30px)) 12px;
+  justify-content:end;
+  align-items:center;
+  gap:2px;
+}
+.wta-official-set{
+  text-align:center;
+  color:color-mix(in srgb,var(--text) 56%,transparent);
+  font-size:1rem;
+  font-weight:800;
+  font-variant-numeric:tabular-nums;
+  white-space:nowrap;
+}
+.wta-official-set.is-current{
+  color:var(--text);
+}
+.wta-set-main{display:inline-block}
+.wta-tiebreak{
+  position:relative;
+  top:-.25em;
+  margin-left:1px;
+  font-size:.58em;
+  line-height:1;
+  color:inherit;
+}
+.wta-score-dot{
+  color:color-mix(in srgb,var(--text) 32%,transparent);
+  font-size:1.05rem;
+  line-height:1;
+}
+.wta-game-card .wta-match-meta{
+  margin-top:10px!important;
+  padding:10px 8px 0!important;
+}
+.wta-game-card .wta-match-meta .state{
+  color:var(--red);
+}
+@media(max-width:760px){
+  .game.wta-game-card{padding:16px 8px!important}
+  .wta-game-card .wta-event-name{padding:0 8px}
+  .wta-match-topline{font-size:.78rem}
+  .wta-official-row{
+    grid-template-columns:minmax(0,1fr) 42px minmax(104px,auto);
+    min-height:46px;
+    column-gap:5px;
+  }
+  .wta-official-player{font-size:.98rem}
+  .wta-official-point{font-size:1rem}
+  .wta-official-sets{
+    grid-template-columns:repeat(3,minmax(22px,28px)) 10px;
+  }
+  .wta-official-set:nth-child(n+4):not(:last-child){display:none}
+  .wta-score-dot{font-size:.95rem}
+}
