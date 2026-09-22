@@ -76,7 +76,7 @@ const sportsDirectory={
     ['EPL','England','soccer'],['Jamaica Premier League','Jamaica','jamaica_pl'],['Mizoram Premier League','India','mizoram_pl'],['La Liga','Spain','laliga'],['Primera Division, Reserves','El Salvador','el_salvador_reserves'],['Serie A','Italy','seriea'],['Bundesliga','Germany','bundesliga'],['UEFA Champions League','Europe','champions'],['UEFA Champions League Women','Europe','ucl_women'],['MLS','United States / Canada','mls'],['PFL','Philippines','pfl']
   ],
   Basketball:[
-    ['NBA','United States / Canada','basketball'],['WNBA','United States / Canada','wnba'],['PBA','Philippines','pba'],['NCAA Philippines','Philippines','ncaa_ph'],['UAAP','Philippines','uaap'],['MPBL','Philippines','mpbl'],['NBL-Pilipinas','Philippines','nbl'],['NBL Australia','Australia / New Zealand','nblaus'],['VBA','Vietnam','vba'],['B.League','Japan','bleague'],['EuroLeague','Europe','euroleague'],['CBA','China','cba'],['WCBA','China','wcba'],['WBSL','International','wbsl']
+    ['NBA','United States / Canada','basketball'],['WNBA','United States / Canada','wnba'],['PBA','Philippines','pba'],['NCAA Philippines','Philippines','ncaa_ph'],['UAAP','Philippines','uaap'],['MPBL','Philippines','mpbl'],['NBL-Pilipinas','Philippines','nbl'],['NBL Australia','Australia / New Zealand','nblaus'],['VBA','Vietnam','vba'],['B.League','Japan','bleague'],['EuroLeague','Europe','euroleague'],['WBSL','International','wbsl']
   ],
   Tennis:[
     ['ATP Tour','International','atp'],['WTA Tour','International','wta'],['Australian Open','Australia','australian_open'],['Wimbledon','United Kingdom','wimbledon'],['US Open','United States','us_open']
@@ -110,8 +110,7 @@ let activeSport='Special';
 const staticLeagueLogos={
   bleague:'https://commons.wikimedia.org/wiki/Special:Redirect/file/B.League_logo.svg',
   euroleague:'https://commons.wikimedia.org/wiki/Special:Redirect/file/EuroLeague_logo.svg',
-  cba:'https://www.google.com/s2/favicons?domain=cbaleague.com&sz=128',
-  wcba:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Women%27s_Chinese_Basketball_Association.svg",
+  w
   australian_open:'https://commons.wikimedia.org/wiki/Special:Redirect/file/AO26_logo.svg',
   wimbledon:'https://commons.wikimedia.org/wiki/Special:Redirect/file/WB-Logo.png',
   us_open:'https://commons.wikimedia.org/wiki/Special:Redirect/file/Usopen-header-logo.svg',
@@ -155,7 +154,7 @@ const logoFeeds={
   football:'https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard',
   ncaaf:'https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard'
 };
-const scoreKeys=new Set(['asian_games','fiba','soccer','jamaica_pl','mizoram_pl','laliga','el_salvador_reserves','seriea','bundesliga','champions','ucl_women','mls','pfl','basketball','wnba','pba','ncaa_ph','uaap','mpbl','nbl','nblaus','vba','bleague','euroleague','cba','wcba','atp','wta','australian_open','wimbledon','us_open','ipl','bigbash','cricket_world_cup','volleyball_w','volleyball_m','pvl','vleague_jp','baseball','npb','kbo','hockey','khl','iihf','football','ncaaf','f1','motogp','formulae','ufc','one','wbc','wba','ibf','wbo','ring']);
+const scoreKeys=new Set(['asian_games','fiba','soccer','jamaica_pl','mizoram_pl','laliga','el_salvador_reserves','seriea','bundesliga','champions','ucl_women','mls','pfl','basketball','wnba','pba','ncaa_ph','uaap','mpbl','nbl','nblaus','vba','bleague','euroleague','atp','wta','australian_open','wimbledon','us_open','ipl','bigbash','cricket_world_cup','volleyball_w','volleyball_m','pvl','vleague_jp','baseball','npb','kbo','hockey','khl','iihf','football','ncaaf','f1','motogp','formulae','ufc','one','wbc','wba','ibf','wbo','ring']);
 const oddsKeys=new Set(['soccer','laliga','seriea','bundesliga','champions','mls','basketball','wnba','baseball','hockey','football','ncaaf']);
 let statsKeys=new Set();
 const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
