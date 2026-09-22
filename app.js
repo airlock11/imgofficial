@@ -1325,8 +1325,30 @@ function verifySelectedLeagueLiveDelivery(){
   }
   return false;
 }
+let selectedAsianGamesVerifiedStreams=[];
+
+async function loadSelectedAsianGamesVerifiedStreams(){
+  try{
+    const verified=await loadVerifiedChannelLive();
+    if(!verified?.ok){
+      selectedAsianGamesVerifiedStreams=[];
+      return [];
+    }
+    selectedAsianGamesVerifiedStreams=verified.entries
+      .filter(x=>(x?.delivery?.leagueKey||x?.stream?.deliveryLeagueKey||x?.leagueKey)==='asian_games')
+      .map(x=>verifiedChannelLiveGame(x,verified.updatedAt))
+      .filter(Boolean)
+      .filter(liveNowItemIsCurrent);
+    return selectedAsianGamesVerifiedStreams;
+  }catch{
+    selectedAsianGamesVerifiedStreams=[];
+    return [];
+  }
+}
+
 function selectedLeagueLiveStreamMarkup(key){
   const candidates=[
+    ...(key==='asian_games'?selectedAsianGamesVerifiedStreams:[]),
     ...liveNowItems.filter(g=>g.sportKey===key&&liveNowItemIsCurrent(g)),
     ...allGames.filter(g=>g.state==='live')
   ];
@@ -1352,7 +1374,7 @@ function selectedLeagueLiveStreamMarkup(key){
   return cards.join('');
 }
 function openLiveStream(eventId){
-  const g=[...allGames,...liveNowItems].find(x=>String(x.eventId)===String(eventId)&&liveStreamsForGame(x).length);
+  const g=[...allGames,...selectedAsianGamesVerifiedStreams,...liveNowItems].find(x=>String(x.eventId)===String(eventId)&&liveStreamsForGame(x).length);
   if(!g)return;
   const stream=liveStreamsForGame(g)[0];
   const raw=stream?.watchUrl||stream?.embedUrl;
@@ -2485,6 +2507,7 @@ async function loadGames({silent=false,league=currentScoreLeague}={}){
   const st=document.getElementById('gameStatus');
   const sport=league||currentScoreLeague||'soccer';
   await loadSportsStatsData();
+  if(sport==='asian_games')await loadSelectedAsianGamesVerifiedStreams();
   if(boxingHighlightKeys.has(sport)){
     await Promise.all([loadBoxingHighlightsData(),loadBoxingRankingsData(),loadSpecialSportsData()]);
   }
