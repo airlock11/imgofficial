@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-22T17:23:58.885969+00:00",
+  "updated_at": "2026-09-22T17:57:58.881023+00:00",
   "source": "Official and verified public sports sources",
   "leagues": {
     "bleague": {
@@ -3649,7 +3649,7 @@
       "league": "WTA Tour",
       "sourceName": "WTA Official Calendar",
       "sourceUrl": "https://wtafiles.wtatennis.com/pdf/calendar/calendar.pdf",
-      "updatedAt": "2026-09-22T17:23:51.814305+00:00",
+      "updatedAt": "2026-09-22T17:57:47.985828+00:00",
       "note": "Current and upcoming WTA Tour tournaments scraped automatically from the official WTA calendar PDF.",
       "games": [
         {
@@ -3823,12 +3823,12 @@
       "league": "FIBA",
       "sourceName": "FIBA Official",
       "sourceUrl": "https://www.fiba.basketball/en/games",
-      "updatedAt": "2026-09-22T17:23:53.169537+00:00",
+      "updatedAt": "2026-09-22T17:57:50.372043+00:00",
       "note": "Automatically refreshed from official FIBA competition game cards.",
       "games": [
         {
           "eventId": "fiba-fiba-intercontinental-cup-2026-2026-09-22-viln-rssb",
-          "date": "2026-09-22T17:23:51.814344+00:00",
+          "date": "2026-09-22T17:57:47.985855+00:00",
           "displayTime": "Final · Final",
           "away": "VILN",
           "home": "RSSB",
@@ -3844,7 +3844,7 @@
         },
         {
           "eventId": "fiba-fiba-intercontinental-cup-2026-2026-09-22-bjbg-boc",
-          "date": "2026-09-22T17:23:51.814344+00:00",
+          "date": "2026-09-22T17:57:47.985855+00:00",
           "displayTime": "Final · Final",
           "away": "BJBG",
           "home": "BOC",
@@ -3923,6 +3923,14 @@
           "verificationUrl": "https://www.fiba.basketball/en/events/fiba-intercontinental-cup-2026"
         }
       ]
+    },
+    "wcba": {
+      "league": "WCBA",
+      "sourceName": "China Basketball Association / WCBA",
+      "sourceUrl": "https://www.cba.net.cn/wcbasy/index.jhtml",
+      "updatedAt": "2026-09-22T17:57:53.593440+00:00",
+      "note": "2026-27 WCBA is configured. Detailed fixtures will populate from the official source when published.",
+      "games": []
     }
   }
 }
