@@ -1933,3 +1933,33 @@ html[data-theme="light"] body.scores-page .score-league-toolbar:after{
   .score-league-scroll-shell{display:contents}
   .score-league-edge-zone{display:none!important}
 }
+
+
+/* Visual indicator for desktop league edge auto-scroll */
+@media (hover:hover) and (pointer:fine) and (min-width:761px){
+  .score-league-edge-zone{
+    opacity:0;
+    transition:opacity .28s ease,filter .28s ease;
+  }
+  .score-league-edge-zone-left{
+    background:linear-gradient(90deg,rgba(239,63,69,.28) 0%,rgba(239,63,69,.12) 42%,rgba(239,63,69,0) 100%);
+  }
+  .score-league-edge-zone-right{
+    background:linear-gradient(270deg,rgba(239,63,69,.28) 0%,rgba(239,63,69,.12) 42%,rgba(239,63,69,0) 100%);
+  }
+  .score-league-edge-zone:hover{
+    opacity:1;
+    filter:drop-shadow(0 0 12px rgba(239,63,69,.3));
+  }
+  .score-league-filters.edge-scroll-left~.score-league-edge-zone-left,
+  .score-league-filters.edge-scroll-right~.score-league-edge-zone-right{
+    opacity:1;
+    filter:drop-shadow(0 0 16px rgba(239,63,69,.42));
+  }
+  html[data-theme="light"] .score-league-edge-zone-left{
+    background:linear-gradient(90deg,rgba(239,63,69,.2) 0%,rgba(239,63,69,.08) 45%,rgba(239,63,69,0) 100%);
+  }
+  html[data-theme="light"] .score-league-edge-zone-right{
+    background:linear-gradient(270deg,rgba(239,63,69,.2) 0%,rgba(239,63,69,.08) 45%,rgba(239,63,69,0) 100%);
+  }
+}
