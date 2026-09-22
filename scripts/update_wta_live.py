@@ -65,21 +65,35 @@ def tournament_from_element(element):
 def smallest_live_blocks(soup):
     blocks = []
     seen = set()
-    for node in soup.find_all(string=LIVE_RE):
+
+    seeds = []
+    seeds.extend(soup.find_all(string=LIVE_RE))
+    seeds.extend(soup.find_all(string=lambda s: bool(s and ROUND_RE.match(clean_line(s)))))
+
+    for node in seeds:
         element = node.parent
         best = None
-        for _ in range(9):
+        for _ in range(10):
             if not element or not getattr(element, "stripped_strings", None):
                 break
             lines = [clean_line(x) for x in element.stripped_strings if clean_line(x)]
             text = "\n".join(lines)
-            if 5 <= len(lines) <= 45 and any(ROUND_RE.match(x) for x in lines):
+            has_round = any(ROUND_RE.match(x) for x in lines)
+            has_live_marker = any(LIVE_RE.search(x) for x in lines)
+            slash_team = any("/" in x and re.search(r"[A-Za-zÀ-ÖØ-öø-ÿ]", x) for x in lines)
+            singles_name_count = sum(1 for x in lines if PLAYER_RE.match(x))
+            doubles_name_count = sum(1 for x in lines if DOUBLES_RE.match(x))
+            has_two_competitors = singles_name_count >= 2 or doubles_name_count >= 2 or (slash_team and singles_name_count + doubles_name_count >= 2)
+
+            if 5 <= len(lines) <= 55 and has_round and has_live_marker and has_two_competitors:
                 best = element
-                if len(text) < 1100:
+                if len(text) < 1500:
                     break
             element = element.parent
+
         if best is None:
             continue
+
         text = "\n".join(clean_line(x) for x in best.stripped_strings if clean_line(x))
         tournament = tournament_from_element(best)
         key = tournament + "|" + re.sub(r"\s+", " ", text)
@@ -87,6 +101,7 @@ def smallest_live_blocks(soup):
             continue
         seen.add(key)
         blocks.append({"text": text, "tournament": tournament})
+
     return blocks
 
 def player_candidates(lines):
@@ -107,8 +122,19 @@ def player_candidates(lines):
             continue
         if re.fullmatch(r"[\d\s•·()—-]+", s):
             continue
-        if PLAYER_RE.match(s) or DOUBLES_RE.match(s):
+        if PLAYER_RE.match(s):
             out.append(s)
+            continue
+        if "/" in s:
+            cleaned = re.sub(r"\s*\(\d+\)\s*$", "", s).strip()
+            parts = [p.strip() for p in cleaned.split("/") if p.strip()]
+            if len(parts) == 2 and all(
+                re.search(r"[A-Za-zÀ-ÖØ-öø-ÿ]", p)
+                and not UI_RE.match(p)
+                and len(p) <= 40
+                for p in parts
+            ):
+                out.append(s)
     deduped = []
     for name in out:
         if name not in deduped:
@@ -298,7 +324,9 @@ def main():
     }
     OUT.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", "utf-8")
 
+    doubles_count = sum(1 for g in games if "/" in g.get("away","") or "/" in g.get("home",""))
     print("WTA live blocks:", len(blocks), "matches:", len(games), "page-live-count:", page_live_count)
+    print("WTA doubles parsed:", doubles_count)
     for game in games:
         print(
             "LIVE", game["away"], "game", game["awayPoint"], "sets", game["awaySets"],
