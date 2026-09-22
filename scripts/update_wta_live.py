@@ -14,7 +14,9 @@ URL = "https://www.wtatennis.com/scores/"
 NAME_RE = re.compile(r"^(?:[A-ZÀ-ÖØ-Ý][A-Za-zÀ-ÖØ-öø-ÿ'’-]*\.?\s+){0,3}[A-ZÀ-ÖØ-Ý][A-Za-zÀ-ÖØ-öø-ÿ'’.-]+(?:\s*\(\d+\))?$")
 ROUND_RE = re.compile(r"^(?:ROUND OF \d+|QUARTERFINALS?|SEMIFINALS?|FINAL|QUALIFYING.*)$", re.I)
 COURT_RE = re.compile(r"^(?:COURT\s*\w+|CENTER COURT|CENTRE COURT|GRANDSTAND|STADIUM.*)$", re.I)
-LIVE_RE = re.compile(r"(?:MEDICAL TIMEOUT|\b\d+(?:ST|ND|RD|TH) SET:\s*\d+:\d+|\bSET\s*\d+|LIVE MATCH|LIVE|SUSPENDED)", re.I)
+LIVE_RE = re.compile(r"(?:MEDICAL TIMEOUT|\b\d+(?:ST|ND|RD|TH) SET:\s*\d+:\d+|\bSET\s*\d+|LIVE MATCH|SUSPENDED)", re.I)
+UI_RE = re.compile(r"^(?:SIGN\s*UP|LOG\s*IN|WATCH\b.*|LIVE\s*WITH\b.*|125LIVE\b.*|STREAM\b.*|SUBSCRIBE\b.*|LEARN\s*MORE|BUY\s*TICKETS?)$", re.I)
+PLAYER_RE = re.compile(r"^[A-ZÀ-ÖØ-Ý]\.[ ]+[A-ZÀ-ÖØ-Ý][A-Za-zÀ-ÖØ-öø-ÿ'’.-]+(?:[ -][A-Za-zÀ-ÖØ-öø-ÿ'’.-]+)*(?:\s*\(\d+\))?$")
 POINT_RE = re.compile(r"^(?:0|15|30|40|AD|AV|A)$", re.I)
 SET_RE = re.compile(r"^\d{1,2}(?:\(\d+\)|\^\d+)?$")
 SCORE_TOKEN_RE = re.compile(r"^(?:AD|AV|A|\d{1,2}|\d{1,2}\(\d+\)|\d{1,2}\^\d+|[•·—-])$", re.I)
@@ -76,7 +78,7 @@ def player_candidates(lines):
     for line in lines:
         s = clean_line(line)
         up = s.upper()
-        if not s or any(word in up for word in banned):
+        if not s or any(word in up for word in banned) or UI_RE.match(s):
             continue
         if re.fullmatch(r"[A-Z]{2,3}", s):
             continue
@@ -84,9 +86,8 @@ def player_candidates(lines):
             continue
         if re.fullmatch(r"[\d\s•·()—-]+", s):
             continue
-        if NAME_RE.match(s) and any(ch.islower() for ch in s):
-            if "." in s or " " in s or out:
-                out.append(s)
+        if PLAYER_RE.match(s):
+            out.append(s)
     deduped = []
     for name in out:
         if name not in deduped:
@@ -164,7 +165,7 @@ def parse_blocks(blocks):
 
         round_name = next((x for x in lines if ROUND_RE.match(x)), "")
         court = next((x for x in lines if COURT_RE.match(x)), "")
-        live_status = next((x for x in lines if LIVE_RE.search(x) and not ROUND_RE.match(x)), "Live")
+        live_status = next((x for x in lines if LIVE_RE.search(x) and not ROUND_RE.match(x) and not UI_RE.match(x)), "Live")
 
         tournament = ""
         for x in lines[:10]:
@@ -208,15 +209,37 @@ def parse_blocks(blocks):
             "verificationUrl": URL,
         })
 
+    # Keep one match per exact pairing, then reject suspicious duplicate blocks
+    # that reuse a player already present in a stronger real two-player card.
     unique = []
-    seen = set()
+    seen_pairs = set()
     for game in games:
         key = "|".join(sorted([game["away"].lower(), game["home"].lower()]))
-        if key in seen:
+        if key in seen_pairs:
             continue
-        seen.add(key)
+        seen_pairs.add(key)
         unique.append(game)
-    return unique
+
+    player_counts = {}
+    for game in unique:
+        for player in (game["away"].lower(), game["home"].lower()):
+            player_counts[player] = player_counts.get(player, 0) + 1
+
+    cleaned = []
+    used_players = set()
+    # Prefer cards with a proper Live Match/Suspended status, court, and round.
+    unique.sort(key=lambda g: (
+        1 if re.search(r"^(?:Live Match|Suspended|Medical Timeout|\d+(?:st|nd|rd|th) Set)", g.get("status",""), re.I) else 0,
+        1 if g.get("court") else 0,
+        1 if g.get("round") else 0,
+    ), reverse=True)
+    for game in unique:
+        players={game["away"].lower(), game["home"].lower()}
+        if players & used_players:
+            continue
+        used_players.update(players)
+        cleaned.append(game)
+    return cleaned
 
 def main():
     html = chrome_dump()
