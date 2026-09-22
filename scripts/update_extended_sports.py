@@ -418,6 +418,172 @@ def wta_live_scores():
         "games":games,
     }
 
+
+def fiba_games():
+    """Refresh FIBA games from the official FIBA Games & Results page."""
+    url = "https://www.fiba.basketball/en/games"
+    html = fetch(url)
+    soup = BeautifulSoup(html, "html.parser")
+
+    payloads = []
+    for tag in soup.find_all("script"):
+        typ = str(tag.get("type") or "").lower()
+        sid = str(tag.get("id") or "")
+        if typ == "application/json" or sid == "__NEXT_DATA__":
+            raw = tag.string or tag.get_text() or ""
+            raw = html_module.unescape(raw).strip()
+            if not raw:
+                continue
+            try:
+                payloads.append(json.loads(raw))
+            except Exception:
+                pass
+
+    def walk(value):
+        if isinstance(value, dict):
+            yield value
+            for child in value.values():
+                yield from walk(child)
+        elif isinstance(value, list):
+            for child in value:
+                yield from walk(child)
+
+    def scalar(obj, names):
+        if not isinstance(obj, dict):
+            return ""
+        lower = {str(k).lower(): v for k, v in obj.items()}
+        for name in names:
+            v = lower.get(name.lower())
+            if isinstance(v, (str, int, float)) and str(v).strip():
+                return str(v).strip()
+        return ""
+
+    def team_name(value):
+        if isinstance(value, str):
+            return value.strip()
+        if isinstance(value, dict):
+            direct = scalar(value, ["name", "displayName", "shortName", "teamName", "officialName", "code"])
+            if direct:
+                return direct
+            for key in ("team", "competitor", "participant"):
+                if key in value:
+                    found = team_name(value.get(key))
+                    if found:
+                        return found
+        return ""
+
+    def score_value(value):
+        if isinstance(value, (str, int, float)):
+            return str(value)
+        if isinstance(value, dict):
+            return scalar(value, ["score", "points", "value", "displayValue", "total"]) or "—"
+        return "—"
+
+    now = datetime.now(timezone.utc)
+    games = []
+    seen = set()
+
+    for payload in payloads:
+        for d in walk(payload):
+            if not isinstance(d, dict):
+                continue
+
+            home_raw = (
+                d.get("homeTeam") or d.get("teamHome") or d.get("home") or
+                d.get("teamB") or d.get("competitor2")
+            )
+            away_raw = (
+                d.get("awayTeam") or d.get("teamAway") or d.get("away") or
+                d.get("teamA") or d.get("competitor1")
+            )
+
+            if (not home_raw or not away_raw) and isinstance(d.get("teams"), list) and len(d["teams"]) >= 2:
+                away_raw, home_raw = d["teams"][0], d["teams"][1]
+            if (not home_raw or not away_raw) and isinstance(d.get("competitors"), list) and len(d["competitors"]) >= 2:
+                away_raw, home_raw = d["competitors"][0], d["competitors"][1]
+            if (not home_raw or not away_raw) and isinstance(d.get("participants"), list) and len(d["participants"]) >= 2:
+                away_raw, home_raw = d["participants"][0], d["participants"][1]
+
+            home = team_name(home_raw)
+            away = team_name(away_raw)
+            if not home or not away or home == away:
+                continue
+
+            raw_date = scalar(d, [
+                "gameDateTime", "startDateTime", "startTime", "scheduledAt",
+                "dateTime", "utcDate", "date"
+            ])
+            dt = parse_iso(raw_date)
+            if dt:
+                dt_utc = dt.astimezone(timezone.utc) if dt.tzinfo else dt.replace(tzinfo=timezone.utc)
+                if not (now - timedelta(days=14) <= dt_utc <= now + timedelta(days=45)):
+                    continue
+                date_value = dt_utc.isoformat()
+            else:
+                date_value = raw_date or now.isoformat()
+
+            status_text = scalar(d, [
+                "status", "gameStatus", "statusText", "gameStatusText",
+                "phase", "state"
+            ])
+            low = status_text.lower()
+            if re.search(r"final|finished|ended|complete", low):
+                state, status = "final", "Final"
+            elif re.search(r"live|playing|in progress|quarter|q[1-4]|overtime|ot", low):
+                state, status = "live", status_text or "Live"
+            else:
+                state, status = "scheduled", status_text or "Scheduled"
+
+            home_score = score_value(
+                d.get("homeScore") or d.get("scoreHome") or
+                (home_raw.get("score") if isinstance(home_raw, dict) else None)
+            )
+            away_score = score_value(
+                d.get("awayScore") or d.get("scoreAway") or
+                (away_raw.get("score") if isinstance(away_raw, dict) else None)
+            )
+
+            event_id = scalar(d, ["id", "gameId", "eventId", "gameCode", "code"])
+            if not event_id:
+                event_id = re.sub(r"[^a-z0-9]+", "-", f"{date_value}-{away}-{home}".lower()).strip("-")
+
+            title = scalar(d, ["competitionName", "eventName", "tournamentName", "competition", "event"])
+            key = (str(event_id), away.lower(), home.lower())
+            if key in seen:
+                continue
+            seen.add(key)
+
+            games.append({
+                "eventId": "fiba-" + str(event_id),
+                "date": date_value,
+                "displayTime": (dt.strftime("%b %d · %H:%M") if dt and state != "final" else ("Final" if state == "final" else status)),
+                "away": away,
+                "home": home,
+                "awayScore": away_score,
+                "homeScore": home_score,
+                "status": status,
+                "state": state,
+                "title": title,
+                "sourceName": "FIBA Official Games",
+                "sourceUrl": url,
+                "verificationSource": "FIBA Official Games",
+                "verificationUrl": url,
+            })
+
+    games.sort(key=lambda g: g.get("date") or "")
+    if not payloads:
+        raise RuntimeError("FIBA page returned no structured JSON payloads")
+
+    return {
+        "league": "FIBA",
+        "sourceName": "FIBA Official Games",
+        "sourceUrl": url,
+        "updatedAt": datetime.now(timezone.utc).isoformat(),
+        "note": "Automatically refreshed from FIBA's official Games & Results page.",
+        "games": games,
+    }
+
+
 def npb():
     jst = timezone(timedelta(hours=9))
     now = datetime.now(jst)
@@ -584,7 +750,7 @@ def boxing_org(org):
 def main():
     data = load()
     leagues = data.setdefault("leagues", {})
-    jobs = [("wta", wta_calendar_schedule), ("euroleague", euroleague), ("npb", npb), ("kbo", kbo)]
+    jobs = [("wta", wta_calendar_schedule), ("fiba", fiba_games), ("euroleague", euroleague), ("npb", npb), ("kbo", kbo)]
     for key, builder in jobs:
         try:
             result = builder()
