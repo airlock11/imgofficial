@@ -1648,9 +1648,8 @@ function liveNowItemIsCurrent(g){
   if((g.sportKey==='atp'||g.sportKey==='wta')&&g.eventOnly)return false;
 
   const now=Date.now();
-  const start=Date.parse((g.sportKey==='asian_games'&&(g.firstLiveAt||g.liveFirstSeenAt))||g.date||'');
+  const start=Date.parse(g.date||'');
   const maxHours={
-    asian_games:2,
     soccer:4,laliga:4,seriea:4,bundesliga:4,champions:4,mls:4,
     basketball:5,wnba:5,pba:5,ncaa_ph:5,uaap:5,mpbl:5,nbl:5,nblaus:5,vba:5,fiba:5,bleague:5,euroleague:5,
     atp:7,wta:7,ipl:7,volleyball_w:5,volleyball_m:5,
@@ -1660,16 +1659,19 @@ function liveNowItemIsCurrent(g){
   if(Number.isFinite(start)&&limit&&now-start>limit*60*60*1000)return false;
 
   if(g.sportKey==='asian_games'){
-    const expires=Date.parse(g.expiresAt||g.liveExpiresAt||'');
-    if(!Number.isFinite(expires)||now>=expires)return false;
-    const verifiedTimedStream=String(g.eventId||'').startsWith('ag26-youtube-')
-      &&Number.isFinite(Date.parse(g.firstLiveAt||''))
-      &&Array.isArray(g.streams)
-      &&g.streams.some(s=>s?.watchUrl&&s?.embedUrl);
-    if(!verifiedTimedStream){
-      const updated=Date.parse(specialSportsDataCache?.updatedAt||specialSportsDataCache?.updated_at||'');
-      if(!Number.isFinite(updated)||now-updated>30*60*1000)return false;
+    const streamList=Array.isArray(g.streams)?g.streams:[];
+    const directStream=String(g.eventId||'').startsWith('ag26-youtube-')
+      &&streamList.some(s=>s?.watchUrl&&s?.embedUrl);
+    if(directStream){
+      const fallback=String(g.verificationStatus||streamList[0]?.verificationStatus||'verified').toLowerCase()==='fallback';
+      if(fallback){
+        const deadline=Date.parse(g.fallbackExpiresAt||streamList[0]?.fallbackExpiresAt||'');
+        if(!Number.isFinite(deadline)||now>=deadline)return false;
+      }
+      return true;
     }
+    const updated=Date.parse(specialSportsDataCache?.updatedAt||specialSportsDataCache?.updated_at||'');
+    if(!Number.isFinite(updated)||now-updated>30*60*1000)return false;
   }
   return true;
 }
@@ -1720,12 +1722,12 @@ async function loadVerifiedChannelLive(){
     const entries=(Array.isArray(y?.streams)?y.streams:[]).filter(x=>{
       if(!x?.stream?.watchUrl)return false;
       if(x?.leagueKey==='asian_games'){
-        const expires=Date.parse(x.expiresAt||'');
-        return Number.isFinite(expires)&&Date.now()<expires;
+        const fallback=String(x?.verificationStatus||x?.stream?.verificationStatus||'verified').toLowerCase()==='fallback';
+        if(!fallback)return true;
+        const deadline=Date.parse(x?.fallbackExpiresAt||x?.stream?.fallbackExpiresAt||'');
+        return Number.isFinite(deadline)&&Date.now()<deadline;
       }
-      // The scanner removes ended streams on its next successful 5-minute run.
-      // Do not hide a still-published verified stream merely because the data file
-      // itself has not needed a semantic commit recently.
+      // The scanner removes ended streams on its next successful monitoring run.
       return true;
     });
     return {ok:true,updatedAt:y?.updatedAt||'',entries};
@@ -1742,7 +1744,9 @@ function verifiedChannelLiveGame(x,updatedAt=''){
   return {
     eventId:x.eventId,
     firstLiveAt:x.firstLiveAt,
-    expiresAt:x.expiresAt,
+    lastVerifiedLiveAt:x.lastVerifiedLiveAt,
+    fallbackExpiresAt:x.fallbackExpiresAt,
+    verificationStatus:x.verificationStatus||x.stream?.verificationStatus||'verified',
     sportKey:targetKey,
     sportLabel:x.sport||'Sport',
     leagueLabel:label,
