@@ -1909,10 +1909,10 @@ function liveNowItemIsCurrent(g){
       if(fallback){
         const deadline=Date.parse(g.fallbackExpiresAt||streamList[0]?.fallbackExpiresAt||'');
         if(!Number.isFinite(deadline)||now>=deadline)return false;
-      }else{
-        const verifiedAt=Date.parse(g.lastVerifiedLiveAt||streamList[0]?.lastVerifiedLiveAt||g.date||'');
-        if(Number.isFinite(verifiedAt)&&now-verifiedAt>10*60*1000)return false;
       }
+      // Verified Asian Games streams remain current until the automatic
+      // YouTube verifier removes them from youtube-live.json after the
+      // broadcast actually ends. Do not expire them locally by elapsed time.
       return true;
     }
     const updated=Date.parse(specialSportsDataCache?.updatedAt||specialSportsDataCache?.updated_at||'');
