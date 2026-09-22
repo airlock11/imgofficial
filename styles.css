@@ -1684,3 +1684,26 @@ main{min-height:calc(100svh - 68px)}
     mask-image:linear-gradient(to right,transparent 0,#000 16px,#000 calc(100% - 16px),transparent 100%);
   }
 }
+
+
+/* Scores sticky league selector: transparent, no visible rectangle */
+.scores-page .score-league-toolbar{
+  background:transparent!important;
+  box-shadow:none!important;
+  border-bottom:0!important;
+  padding-bottom:12px;
+}
+:root[data-theme="light"] .scores-page .score-league-toolbar{
+  background:transparent!important;
+  box-shadow:none!important;
+}
+.scores-page .score-league-toolbar:before{
+  left:-18px;
+  right:-18px;
+  bottom:-20px;
+  height:28px;
+  background:linear-gradient(to bottom,color-mix(in srgb,var(--bg) 34%,transparent),transparent)!important;
+}
+:root[data-theme="light"] .scores-page .score-league-toolbar:before{
+  background:linear-gradient(to bottom,rgba(245,247,250,.32),rgba(245,247,250,0))!important;
+}
