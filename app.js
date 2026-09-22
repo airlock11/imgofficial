@@ -512,11 +512,9 @@ function renderScoreLeagueFilters(){
   const visibleLeagueOrder=scoreLeagueOrder.filter(key=>key!=='fiba'||fibaAvailable||currentScoreLeague==='fiba');
   const baseIndex=new Map(scoreLeagueOrder.map((key,index)=>[key,index]));
   const ordered=[...visibleLeagueOrder].sort((a,b)=>{
-    const aSpecial=specialScoreLeagueKeys.has(a);
-    const bSpecial=specialScoreLeagueKeys.has(b);
-    if(aSpecial!==bSpecial)return aSpecial?-1:1;
     const aa=activity.get(a)||{live:false,stream:false};
     const bb=activity.get(b)||{live:false,stream:false};
+    // Left-to-right priority: verified live stream, then live score only, then inactive.
     const aRank=aa.stream?0:aa.live?1:2;
     const bRank=bb.stream?0:bb.live?1:2;
     return (aRank-bRank)||((baseIndex.get(a)||0)-(baseIndex.get(b)||0));
