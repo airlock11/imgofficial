@@ -1588,6 +1588,51 @@ function normalizeEvent(e,sport=''){
   const c=competitions[0]||{};
   return normalizeCompetitionEvent(e,c,0,sport);
 }
+
+function parseWtaScoreParts(value){
+  const raw=String(value??'—').trim();
+  if(!raw||raw==='—')return {sets:[],point:'—'};
+  const pieces=raw.split('·').map(x=>x.trim()).filter(Boolean);
+  const setTokens=(pieces[0]||'').split(/\s+/).filter(x=>/^\d+(?:\^\d+)?$/.test(x));
+  const point=pieces.length>1?pieces[pieces.length-1]:(setTokens.length? '—' : pieces[0]||'—');
+  return {sets:setTokens.slice(0,5),point:point||'—'};
+}
+function wtaScoreGridMarkup(g){
+  const away=parseWtaScoreParts(g.awayScore);
+  const home=parseWtaScoreParts(g.homeScore);
+  const setCount=Math.max(away.sets.length,home.sets.length,2);
+  const headers=Array.from({length:setCount},(_,i)=>'<span class="wta-score-head">S'+(i+1)+'</span>').join('');
+  const row=(name,score,side)=>'<div class="wta-score-player"><span class="wta-player-name">'+esc(name)+'</span>'+
+    Array.from({length:setCount},(_,i)=>'<b class="wta-set-score" data-wta-set="'+side+'-'+i+'">'+esc(score.sets[i]??'—')+'</b>').join('')+
+    '<b class="wta-point-score" data-wta-point="'+side+'">'+esc(score.point)+'</b></div>';
+  return '<div class="wta-scoreboard" data-wta-scoreboard>'+
+    '<div class="wta-score-header"><span>Player</span>'+headers+'<span class="wta-score-head">Pts</span></div>'+
+    row(g.away,away,'away')+row(g.home,home,'home')+
+  '</div>';
+}
+function updateWtaScoreboard(card,g){
+  const board=card?.querySelector?.('[data-wta-scoreboard]');
+  if(!board)return false;
+  const away=parseWtaScoreParts(g.awayScore),home=parseWtaScoreParts(g.homeScore);
+  const max=Math.max(away.sets.length,home.sets.length,2);
+  const headerCount=board.querySelectorAll('.wta-score-head').length-1;
+  if(headerCount!==max){
+    board.outerHTML=wtaScoreGridMarkup(g);
+    return true;
+  }
+  [['away',away],['home',home]].forEach(([side,score])=>{
+    for(let i=0;i<max;i++){
+      const el=card.querySelector('[data-wta-set="'+side+'-'+i+'"]');
+      const next=String(score.sets[i]??'—');
+      if(el&&el.textContent!==next)el.textContent=next;
+    }
+    const point=card.querySelector('[data-wta-point="'+side+'"]');
+    const nextPoint=String(score.point??'—');
+    if(point&&point.textContent!==nextPoint)point.textContent=nextPoint;
+  });
+  return true;
+}
+
 function gameDomKey(g){
   const raw=String(g?.eventId||[g?.date||'',g?.away||'',g?.home||''].join('|'));
   return encodeURIComponent(raw);
@@ -1598,6 +1643,10 @@ function updateScoreNumbers(items=allGames){
   document.querySelectorAll('#games .game[data-game-key]').forEach(card=>{
     const g=map.get(card.dataset.gameKey);
     if(!g)return;
+    if(card.classList.contains('wta-game-card')){
+      updateWtaScoreboard(card,g);
+      return;
+    }
     const away=card.querySelector('[data-score-side="away"]');
     const home=card.querySelector('[data-score-side="home"]');
     if(away&&away.textContent!==String(g.awayScore??'—'))away.textContent=String(g.awayScore??'—');
@@ -2018,6 +2067,15 @@ function renderGames(){
           (hasHome?'<div class="team"><span>'+esc(g.home)+'</span>'+(score(g.homeScore)!=='—'?'<b data-score-side="home">'+esc(g.homeScore)+'</b>':'')+'</div>':'')+
         '</div>'+
         '<div class="state '+(g.state==='live'?'live':'')+'">'+esc(g.status||'Scheduled')+'</div>'+
+        (liveStreamsForGame(g).length?'<button class="watch-live-btn" type="button" data-live-event="'+esc(g.eventId)+'"><span class="live-dot" aria-hidden="true"></span>'+(g.state==='live'?'Watch Live':'View Stream')+'</button>':'')+
+      '</article>';
+    }
+
+    if(currentScoreLeague==='wta'){
+      return '<article class="game wta-game-card'+(g.state==='live'?' game-is-live':'')+'" data-game-key="'+esc(gameDomKey(g))+'">'+
+        '<div class="time wta-event-name">'+esc(g.displayTime||g.title||'WTA')+'</div>'+
+        '<div class="wta-game-main">'+wtaScoreGridMarkup(g)+
+        '<div class="state '+(g.state==='live'?'live':'')+'">'+esc(g.status||'Scheduled')+'</div></div>'+
         (liveStreamsForGame(g).length?'<button class="watch-live-btn" type="button" data-live-event="'+esc(g.eventId)+'"><span class="live-dot" aria-hidden="true"></span>'+(g.state==='live'?'Watch Live':'View Stream')+'</button>':'')+
       '</article>';
     }
