@@ -503,9 +503,9 @@ function scoreLeagueActivityMap(){
   // the league receives the green indicator and follows stream-enabled leagues.
   for(const [key,league] of Object.entries(specialSportsDataCache?.leagues||{})){
     const games=Array.isArray(league?.games)?league.games:[];
-    const hasCurrentLiveScore=games.some(game=>
-      game?.state==='live'&&liveNowItemIsCurrent({...game,sportKey:key})
-    );
+    // Official score feeds control the score-only indicator. A separate
+    // livestream verification path decides whether the league is red/streaming.
+    const hasCurrentLiveScore=games.some(game=>game?.state==='live');
     if(!hasCurrentLiveScore)continue;
     const current=map.get(key)||{live:false,stream:false};
     current.live=true;
