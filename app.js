@@ -1624,9 +1624,15 @@ function liveNowItemIsCurrent(g){
 
   if(g.sportKey==='asian_games'){
     const expires=Date.parse(g.expiresAt||g.liveExpiresAt||'');
-    if(Number.isFinite(expires)&&now>=expires)return false;
-    const updated=Date.parse(specialSportsDataCache?.updatedAt||specialSportsDataCache?.updated_at||'');
-    if(!Number.isFinite(updated)||now-updated>30*60*1000)return false;
+    if(!Number.isFinite(expires)||now>=expires)return false;
+    const verifiedTimedStream=String(g.eventId||'').startsWith('ag26-youtube-')
+      &&Number.isFinite(Date.parse(g.firstLiveAt||''))
+      &&Array.isArray(g.streams)
+      &&g.streams.some(s=>s?.watchUrl&&s?.embedUrl);
+    if(!verifiedTimedStream){
+      const updated=Date.parse(specialSportsDataCache?.updatedAt||specialSportsDataCache?.updated_at||'');
+      if(!Number.isFinite(updated)||now-updated>30*60*1000)return false;
+    }
   }
   return true;
 }
