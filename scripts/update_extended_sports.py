@@ -649,172 +649,6 @@ def fiba_games():
         "games": filtered,
     }
 
-def cba_games():
-    """Refresh CBA schedule from the official CBA league website."""
-    official_url = "https://www.cbaleague.com/"
-    source_urls = [
-        official_url,
-        "https://r.jina.ai/http://www.cbaleague.com/",
-    ]
-    teams = [
-        "上海久事","浙江浙商证券","深圳马可波罗","北京首钢","广东东阳光","浙江稠州金租",
-        "山东高速","山西汾酒","青岛崂山啤酒","辽宁本钢","宁波町渥","广州智都","北京控股",
-        "福建晋江文旅","长白山恩都里","新疆广汇能源","南京同曦宙光","天津先行者","江苏肯帝亚","四川锦城"
-    ]
-    now_cn = datetime.now(timezone(timedelta(hours=8)))
-
-    def parse_text(text):
-        lines = [re.sub(r"\\s+", " ", x).strip() for x in str(text).splitlines() if str(x).strip()]
-        games, seen = [], set()
-        current_date = None
-        current_time = None
-
-        def add_game(date_value, time_value, away, home, round_label=""):
-            if not date_value or not away or not home or away == home:
-                return
-            key = (date_value, time_value or "", away, home)
-            if key in seen:
-                return
-            seen.add(key)
-            hh, mm = 12, 0
-            if time_value and re.fullmatch(r"[0-2]?\\d:[0-5]\\d", time_value):
-                hh, mm = map(int, time_value.split(":"))
-            dt = datetime.strptime(date_value, "%Y-%m-%d").replace(hour=hh, minute=mm, tzinfo=timezone(timedelta(hours=8)))
-            if dt < now_cn - timedelta(days=7) or dt > now_cn + timedelta(days=240):
-                return
-            games.append({
-                "eventId": "cba-" + date_value.replace("-", "") + "-" + str(len(games)+1),
-                "date": dt.isoformat(),
-                "displayTime": dt.strftime("%b %d · %H:%M"),
-                "away": away,
-                "home": home,
-                "awayScore": "—",
-                "homeScore": "—",
-                "status": "Scheduled",
-                "state": "scheduled",
-                "round": round_label,
-                "sourceName": "CBA Official",
-                "sourceUrl": official_url
-            })
-
-        # Pattern 1: round/date/time on one line, followed by the two teams.
-        for i, line in enumerate(lines):
-            m = re.search(r"(第\\d+轮)?\\s*(20\\d{2}-\\d{2}-\\d{2})\\s+([0-2]?\\d:[0-5]\\d)", line)
-            if not m:
-                continue
-            found = []
-            for nxt in lines[i+1:i+10]:
-                clean = re.sub(r"^(?:Image|图片)\\s*", "", nxt).strip()
-                if clean in teams and clean not in found:
-                    found.append(clean)
-                if len(found) >= 2:
-                    break
-            if len(found) >= 2:
-                add_game(m.group(2), m.group(3), found[0], found[1], m.group(1) or "")
-
-        # Pattern 2: homepage schedule cards with date and time on separate lines.
-        for i, line in enumerate(lines):
-            dm = re.fullmatch(r"(20\\d{2}-\\d{2}-\\d{2})", line)
-            if dm:
-                current_date = dm.group(1)
-                current_time = None
-                continue
-            tm = re.fullmatch(r"([0-2]?\\d:[0-5]\\d)", line)
-            if tm:
-                current_time = tm.group(1)
-                continue
-            if line.lower() != "vs" or not current_date:
-                continue
-            before = []
-            after = []
-            for prev in reversed(lines[max(0, i-10):i]):
-                clean = re.sub(r"^(?:Image|图片)\\s*", "", prev).strip()
-                if clean in teams:
-                    before.append(clean)
-                    break
-            for nxt in lines[i+1:i+11]:
-                clean = re.sub(r"^(?:Image|图片)\\s*", "", nxt).strip()
-                if clean in teams:
-                    after.append(clean)
-                    break
-            if before and after:
-                add_game(current_date, current_time, before[0], after[0])
-
-        games.sort(key=lambda g: g["date"])
-        return games
-
-    games = []
-    used_url = official_url
-    last_error = None
-    for url in source_urls:
-        try:
-            raw = fetch(url)
-            parsed = parse_text(BeautifulSoup(raw, "html.parser").get_text("\n") if "<html" in raw.lower() else raw)
-            if parsed:
-                games = parsed
-                used_url = url
-                break
-        except Exception as ex:
-            last_error = ex
-
-    if not games:
-        raise RuntimeError("No current CBA fixtures parsed from official site" + (": " + str(last_error)[:120] if last_error else ""))
-
-    return {
-        "league": "CBA",
-        "season": "2026–27",
-        "sourceName": "CBA Official",
-        "sourceUrl": official_url,
-        "retrievalUrl": used_url,
-        "updatedAt": datetime.now(timezone.utc).isoformat(),
-        "note": "Automatically refreshed from the official CBA league schedule.",
-        "games": games
-    }
-
-
-def wcba_games():
-    """Publish verified WCBA season calendar and later replace/extend it with fixtures."""
-    url = "https://www.cba.net.cn/wcbasy/index.jhtml"
-    try:
-        fetch(url)
-    except Exception:
-        pass
-
-    tz_cn = timezone(timedelta(hours=8))
-    milestones = [
-        ("wcba-2026-regular-season", "2026-11-14T12:00:00+08:00", "WCBA Regular Season begins", "Nov 14 · Regular season"),
-        ("wcba-2027-all-star", "2027-02-27T12:00:00+08:00", "WCBA All-Star Weekend", "Feb 27–28 · All-Star"),
-        ("wcba-2027-playoffs", "2027-03-04T12:00:00+08:00", "WCBA Playoffs begin", "Mar 4 · Playoffs"),
-    ]
-    games = []
-    for event_id, date_value, title, display in milestones:
-        games.append({
-            "eventId": event_id,
-            "date": date_value,
-            "displayTime": display,
-            "title": title,
-            "away": "",
-            "home": "",
-            "awayScore": "—",
-            "homeScore": "—",
-            "status": "Scheduled",
-            "state": "scheduled",
-            "eventOnly": True,
-            "sourceName": "China Basketball Association / WCBA",
-            "sourceUrl": url
-        })
-
-    return {
-        "league": "WCBA",
-        "season": "2026–27",
-        "sourceName": "China Basketball Association / WCBA",
-        "sourceUrl": url,
-        "updatedAt": datetime.now(timezone.utc).isoformat(),
-        "note": "2026–27 WCBA calendar is published: 32-round regular season Nov 14, 2026–Feb 23, 2027; All-Star Feb 27–28; playoffs Mar 4–Apr 9 at the latest. Individual fixtures will populate when officially published.",
-        "games": games
-    }
-
-
 def npb():
     jst = timezone(timedelta(hours=9))
     now = datetime.now(jst)
@@ -981,11 +815,11 @@ def boxing_org(org):
 def main():
     data = load()
     leagues = data.setdefault("leagues", {})
-    jobs = [("soccer", premier_league_games), ("wta", wta_calendar_schedule), ("fiba", fiba_games), ("euroleague", euroleague), ("cba", cba_games), ("wcba", wcba_games), ("npb", npb), ("kbo", kbo)]
+    jobs = [("soccer", premier_league_games), ("wta", wta_calendar_schedule), ("fiba", fiba_games), ("euroleague", euroleague), ("npb", npb), ("kbo", kbo)]
     for key, builder in jobs:
         try:
             result = builder()
-            if key in ("cba", "wcba") or result.get("games"):
+            if result.get("games"):
                 leagues[key] = result
             print("updated", key, len(result.get("games", [])))
         except Exception as ex:
