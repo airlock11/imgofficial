@@ -88,7 +88,10 @@ async function handleRequest(request) {
       if (!path) return jsonResponse({ events: [], error: "Unsupported scoreboard league" }, cors, 30);
 
       try {
-        const response = await fetch(`https://site.api.espn.com/apis/site/v2/sports/${path}/scoreboard`, {
+        const upstream = new URL(`https://site.api.espn.com/apis/site/v2/sports/${path}/scoreboard`);
+        const dates = (url.searchParams.get("dates") || "").trim();
+        if (/^\d{8}(?:-\d{8})?$/.test(dates)) upstream.searchParams.set("dates", dates);
+        const response = await fetch(upstream.toString(), {
           cf: { cacheTtl: 5, cacheEverything: true },
         });
         const body = await response.text();
