@@ -2,7 +2,7 @@
   "special": true,
   "league": "WTA Tour",
   "live": true,
-  "updatedAt": "2026-09-22T10:25:30.790534+00:00",
+  "updatedAt": "2026-09-22T10:25:34.494115+00:00",
   "sourceName": "API-Tennis",
   "sourceUrl": "https://api-tennis.com/",
   "verificationSource": "API-Tennis",
@@ -20,15 +20,15 @@
       "home": "S. Kartal",
       "awayLogo": "https://api.api-tennis.com/logo-tennis/2820_m-bouzkova.jpg",
       "homeLogo": "https://api.api-tennis.com/logo-tennis/1961_s-kartal.jpg",
-      "awayScore": "6 · 5",
-      "homeScore": "6 · 1",
+      "awayScore": "6.4 · 4",
+      "homeScore": "6.1 · 1",
       "awaySets": [
-        "6"
+        "6.4"
       ],
       "homeSets": [
-        "6"
+        "6.1"
       ],
-      "awayPoint": "5",
+      "awayPoint": "4",
       "homePoint": "1",
       "currentSet": 1,
       "awayCurrentSetGames": 6,
@@ -57,20 +57,20 @@
       "home": "Ninomiya/ Radisic",
       "awayLogo": "",
       "homeLogo": "",
-      "awayScore": "7 1 · 15",
-      "homeScore": "6 2 · 40",
+      "awayScore": "7.7 0 · 15",
+      "homeScore": "6.3 2 · 40",
       "awaySets": [
-        "7",
-        "1"
+        "7.7",
+        "0"
       ],
       "homeSets": [
-        "6",
+        "6.3",
         "2"
       ],
       "awayPoint": "15",
       "homePoint": "40",
       "currentSet": 2,
-      "awayCurrentSetGames": 1,
+      "awayCurrentSetGames": 0,
       "homeCurrentSetGames": 2,
       "awaySetsWon": 1,
       "homeSetsWon": 0,
@@ -96,11 +96,11 @@
       "home": "Hon/ Osborne",
       "awayLogo": "",
       "homeLogo": "",
-      "awayScore": "6 4 · 40",
+      "awayScore": "6 3 · 40",
       "homeScore": "4 4 · 0",
       "awaySets": [
         "6",
-        "4"
+        "3"
       ],
       "homeSets": [
         "4",
@@ -109,7 +109,7 @@
       "awayPoint": "40",
       "homePoint": "0",
       "currentSet": 2,
-      "awayCurrentSetGames": 4,
+      "awayCurrentSetGames": 3,
       "homeCurrentSetGames": 4,
       "awaySetsWon": 1,
       "homeSetsWon": 0,
@@ -120,7 +120,7 @@
       "eventOnly": false,
       "title": "Seoul",
       "eventType": "Wta Doubles",
-      "serve": "First Player",
+      "serve": "Second Player",
       "sourceName": "API-Tennis",
       "sourceUrl": "https://api-tennis.com/",
       "verificationSource": "API-Tennis",
@@ -159,7 +159,7 @@
       "eventOnly": false,
       "title": "Seoul",
       "eventType": "Wta Singles",
-      "serve": "Second Player",
+      "serve": "First Player",
       "sourceName": "API-Tennis",
       "sourceUrl": "https://api-tennis.com/",
       "verificationSource": "API-Tennis",
