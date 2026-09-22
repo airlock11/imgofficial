@@ -1707,3 +1707,16 @@ main{min-height:calc(100svh - 68px)}
 :root[data-theme="light"] .scores-page .score-league-toolbar:before{
   background:linear-gradient(to bottom,rgba(245,247,250,.32),rgba(245,247,250,0))!important;
 }
+
+
+/* Scores sticky league selector: remove remaining divider line */
+.scores-page .score-league-toolbar{
+  border-bottom:none!important;
+  box-shadow:none!important;
+}
+.scores-page .score-league-toolbar:before,
+.scores-page .score-league-toolbar:after{
+  content:none!important;
+  display:none!important;
+  background:none!important;
+}
