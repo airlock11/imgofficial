@@ -1,94 +1,64 @@
 (()=>{
   const filters=document.getElementById('scoreLeagueFilters');
-  if(!filters||!window.matchMedia('(hover:hover) and (pointer:fine)').matches)return;
+  const leftZone=document.querySelector('.score-league-edge-zone-left');
+  const rightZone=document.querySelector('.score-league-edge-zone-right');
+  if(!filters||!leftZone||!rightZone||!window.matchMedia('(hover:hover) and (pointer:fine)').matches)return;
 
-  const EDGE=96;
   const DELAY=1000;
-  const MAX_SPEED=520; // px/second at the outermost edge
-  let direction=0;
-  let edgeStrength=0;
-  let hoverTimer=0;
-  let scrolling=false;
+  const SPEED=420;
+  let dir=0;
+  let timer=0;
   let frame=0;
-  let lastTime=0;
-  let rampStarted=0;
+  let active=false;
+  let last=0;
+  let rampStart=0;
 
-  const canScroll=dir=>{
+  const canScroll=d=>{
     const max=Math.max(0,filters.scrollWidth-filters.clientWidth);
-    return dir<0?filters.scrollLeft>1:filters.scrollLeft<max-1;
+    return d<0?filters.scrollLeft>1:filters.scrollLeft<max-1;
   };
 
-  const stop=()=>{
-    if(hoverTimer){clearTimeout(hoverTimer);hoverTimer=0}
-    direction=0;
-    edgeStrength=0;
-    scrolling=false;
-    rampStarted=0;
-    lastTime=0;
+  const clear=()=>{
+    if(timer){clearTimeout(timer);timer=0}
     if(frame){cancelAnimationFrame(frame);frame=0}
+    active=false;
+    dir=0;
+    last=0;
+    rampStart=0;
     filters.classList.remove('edge-scroll-left','edge-scroll-right');
   };
 
-  const tick=now=>{
-    if(!scrolling||!direction||!canScroll(direction)){stop();return}
-    if(!lastTime)lastTime=now;
-    const dt=Math.min(32,now-lastTime)/1000;
-    lastTime=now;
-
-    // Ease in over ~350ms so movement starts gently after the one-second hold.
-    const ramp=Math.min(1,(now-rampStarted)/350);
-    const easedRamp=1-Math.pow(1-ramp,3);
-    const easedEdge=edgeStrength*edgeStrength;
-    filters.scrollLeft+=direction*MAX_SPEED*easedEdge*easedRamp*dt;
-    frame=requestAnimationFrame(tick);
+  const step=now=>{
+    if(!active||!dir||!canScroll(dir)){clear();return}
+    if(!last)last=now;
+    const dt=Math.min(32,now-last)/1000;
+    last=now;
+    const ramp=Math.min(1,(now-rampStart)/400);
+    const eased=1-Math.pow(1-ramp,3);
+    filters.scrollLeft+=dir*SPEED*eased*dt;
+    frame=requestAnimationFrame(step);
   };
 
-  const begin=dir=>{
-    if(scrolling||hoverTimer||!canScroll(dir))return;
-    hoverTimer=setTimeout(()=>{
-      hoverTimer=0;
-      if(direction!==dir||!canScroll(dir))return;
-      scrolling=true;
-      rampStarted=performance.now();
-      lastTime=0;
-      frame=requestAnimationFrame(tick);
+  const arm=d=>{
+    clear();
+    if(!canScroll(d))return;
+    dir=d;
+    filters.classList.add(d<0?'edge-scroll-left':'edge-scroll-right');
+    timer=setTimeout(()=>{
+      timer=0;
+      if(!dir||!canScroll(dir))return;
+      active=true;
+      rampStart=performance.now();
+      frame=requestAnimationFrame(step);
     },DELAY);
   };
 
-  const setEdge=(dir,strength)=>{
-    strength=Math.max(0,Math.min(1,strength));
-    if(dir===direction){
-      edgeStrength=strength;
-      if(dir&&!scrolling)begin(dir);
-      return;
-    }
-    if(hoverTimer){clearTimeout(hoverTimer);hoverTimer=0}
-    if(frame){cancelAnimationFrame(frame);frame=0}
-    scrolling=false;
-    rampStarted=0;
-    lastTime=0;
-    direction=dir;
-    edgeStrength=strength;
-    filters.classList.toggle('edge-scroll-left',dir<0);
-    filters.classList.toggle('edge-scroll-right',dir>0);
-    if(dir)begin(dir);
-  };
-
-  filters.addEventListener('pointermove',event=>{
-    const rect=filters.getBoundingClientRect();
-    if(rect.width<=EDGE*2||filters.scrollWidth<=filters.clientWidth+1){stop();return}
-    const x=event.clientX-rect.left;
-    if(x<EDGE){
-      setEdge(-1,(EDGE-x)/EDGE);
-    }else if(x>rect.width-EDGE){
-      setEdge(1,(x-(rect.width-EDGE))/EDGE);
-    }else{
-      setEdge(0,0);
-    }
-  },{passive:true});
-
-  filters.addEventListener('pointerleave',stop,{passive:true});
-  filters.addEventListener('pointerdown',stop,{passive:true});
-  window.addEventListener('blur',stop);
-  window.addEventListener('resize',stop,{passive:true});
+  leftZone.addEventListener('pointerenter',()=>arm(-1));
+  rightZone.addEventListener('pointerenter',()=>arm(1));
+  leftZone.addEventListener('pointerleave',clear);
+  rightZone.addEventListener('pointerleave',clear);
+  leftZone.addEventListener('pointerdown',clear);
+  rightZone.addEventListener('pointerdown',clear);
+  window.addEventListener('blur',clear);
+  window.addEventListener('resize',clear,{passive:true});
 })();
