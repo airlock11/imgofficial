@@ -1,6 +1,6 @@
 {
-  "version": 1,
-  "mode": "official-only",
+  "version": 2,
+  "mode": "official-auto-discovery",
   "sources": [
     {
       "id": "nbl-pilipinas",
@@ -164,6 +164,164 @@
         "INTERVIEW",
         "PODCAST",
         "MEDIA DAY",
+        "HIGHLIGHTS"
+      ]
+    },
+    {
+      "id": "pba-official",
+      "channelId": "UC9WkScCyThtumtf9XVO4eWQ",
+      "leagueKey": "pba",
+      "league": "PBA",
+      "sport": "Basketball",
+      "prefix": "pbaofficial",
+      "includeAny": [
+        "PBA",
+        "BASKETBALL"
+      ],
+      "excludeAny": [
+        "PRESS CONFERENCE",
+        "INTERVIEW",
+        "PODCAST",
+        "HIGHLIGHTS"
+      ]
+    },
+    {
+      "id": "nba",
+      "handle": "NBA",
+      "leagueKey": "basketball",
+      "league": "NBA",
+      "sport": "Basketball",
+      "prefix": "nba",
+      "includeAny": [
+        "NBA",
+        "BASKETBALL"
+      ],
+      "excludeAny": [
+        "PRESS CONFERENCE",
+        "INTERVIEW",
+        "PODCAST",
+        "HIGHLIGHTS"
+      ]
+    },
+    {
+      "id": "wnba",
+      "handle": "WNBA",
+      "leagueKey": "wnba",
+      "league": "WNBA",
+      "sport": "Basketball",
+      "prefix": "wnba",
+      "includeAny": [
+        "WNBA",
+        "BASKETBALL"
+      ],
+      "excludeAny": [
+        "PRESS CONFERENCE",
+        "INTERVIEW",
+        "PODCAST",
+        "HIGHLIGHTS"
+      ]
+    },
+    {
+      "id": "atp",
+      "channelId": "UCY_5h5zaSwN7Or4kIJDYNXA",
+      "leagueKey": "atp",
+      "league": "ATP Tour",
+      "sport": "Tennis",
+      "prefix": "atp",
+      "includeAny": [
+        "ATP",
+        "TENNIS",
+        "OPEN",
+        "FINAL",
+        "SEMIFINAL",
+        "QUARTERFINAL",
+        "ROUND"
+      ],
+      "excludeAny": [
+        "PRESS CONFERENCE",
+        "INTERVIEW",
+        "PODCAST",
+        "HIGHLIGHTS"
+      ]
+    },
+    {
+      "id": "euroleague",
+      "handle": "euroleague",
+      "leagueKey": "euroleague",
+      "league": "EuroLeague",
+      "sport": "Basketball",
+      "prefix": "euroleague",
+      "includeAny": [
+        "EUROLEAGUE",
+        "BASKETBALL"
+      ],
+      "excludeAny": [
+        "PRESS CONFERENCE",
+        "INTERVIEW",
+        "PODCAST",
+        "HIGHLIGHTS"
+      ]
+    },
+    {
+      "id": "bleague-international",
+      "channelId": "UCx4M7pOU3Yhq9VAxmEbe1Vg",
+      "leagueKey": "bleague",
+      "league": "B.League",
+      "sport": "Basketball",
+      "prefix": "bleague",
+      "includeAny": [
+        "B.LEAGUE",
+        "BLEAGUE",
+        "BASKETBALL"
+      ],
+      "excludeAny": [
+        "PRESS CONFERENCE",
+        "INTERVIEW",
+        "PODCAST",
+        "HIGHLIGHTS"
+      ]
+    },
+    {
+      "id": "volleyball-world-women",
+      "channelId": "UCNMg6XDhRZI2QzL4pWOvP_w",
+      "leagueKey": "volleyball_w",
+      "league": "FIVB Women",
+      "sport": "Volleyball",
+      "prefix": "fivbw",
+      "includeAny": [
+        "WOMEN",
+        "WOMEN'S",
+        "VNL",
+        "VOLLEYBALL"
+      ],
+      "excludeAny": [
+        "MEN",
+        "MEN'S",
+        "PRESS CONFERENCE",
+        "INTERVIEW",
+        "PODCAST",
+        "HIGHLIGHTS"
+      ]
+    },
+    {
+      "id": "volleyball-world-men",
+      "channelId": "UCNMg6XDhRZI2QzL4pWOvP_w",
+      "leagueKey": "volleyball_m",
+      "league": "FIVB Men",
+      "sport": "Volleyball",
+      "prefix": "fivbm",
+      "includeAny": [
+        "MEN",
+        "MEN'S",
+        "VNL",
+        "VOLLEYBALL"
+      ],
+      "excludeAny": [
+        "WOMEN",
+        "WOMEN'S",
+        "PRESS CONFERENCE",
+        "INTERVIEW",
+        "PODCAST",
         "HIGHLIGHTS"
       ]
     }
