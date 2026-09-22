@@ -1647,3 +1647,40 @@ main{min-height:calc(100svh - 68px)}
     z-index:45;
   }
 }
+
+
+/* Scores sticky league selector edge fades */
+.scores-page .score-league-toolbar{
+  isolation:isolate;
+}
+.scores-page .score-league-toolbar:before,
+.scores-page .score-league-toolbar:after{
+  content:"";
+  position:absolute;
+  z-index:3;
+  pointer-events:none;
+}
+.scores-page .score-league-toolbar:before{
+  left:0;
+  right:0;
+  bottom:-18px;
+  height:22px;
+  background:linear-gradient(to bottom,color-mix(in srgb,var(--bg) 88%,transparent),transparent);
+}
+.scores-page .score-league-filters{
+  -webkit-mask-image:linear-gradient(to right,transparent 0,#000 22px,#000 calc(100% - 22px),transparent 100%);
+  mask-image:linear-gradient(to right,transparent 0,#000 22px,#000 calc(100% - 22px),transparent 100%);
+}
+:root[data-theme="light"] .scores-page .score-league-toolbar:before{
+  background:linear-gradient(to bottom,rgba(245,247,250,.9),rgba(245,247,250,0));
+}
+@media(max-width:760px){
+  .scores-page .score-league-toolbar:before{
+    bottom:-16px;
+    height:20px;
+  }
+  .scores-page .score-league-filters{
+    -webkit-mask-image:linear-gradient(to right,transparent 0,#000 16px,#000 calc(100% - 16px),transparent 100%);
+    mask-image:linear-gradient(to right,transparent 0,#000 16px,#000 calc(100% - 16px),transparent 100%);
+  }
+}
