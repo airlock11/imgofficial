@@ -99,9 +99,11 @@ def main():
             # lastVerifiedLiveAt here; otherwise repeated API omissions could
             # keep a stale/ended stream alive indefinitely.
             last=item.get("lastVerifiedLiveAt") or stream.get("lastVerifiedLiveAt")
-            if age_seconds(last)>180:
+            if age_seconds(last)>600:
                 removed.append({"videoId":vid,"leagueKey":item.get("leagueKey"),"reason":"api_missing_stale"})
                 continue
+            item["verificationStatus"]="grace"
+            stream["verificationStatus"]="grace"
             item["stream"]=stream
             kept.append(item)
             continue
