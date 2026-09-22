@@ -2,18 +2,18 @@
   "special": true,
   "league": "WTA Tour",
   "live": true,
-  "updatedAt": "2026-09-22T09:46:04.685614+00:00",
+  "updatedAt": "2026-09-22T09:46:48.657644+00:00",
   "sourceName": "WTA Official Scores scrape",
   "sourceUrl": "https://www.wtatennis.com/scores/",
   "verificationSource": "WTA Official Scores",
   "verificationUrl": "https://www.wtatennis.com/scores/",
-  "pageLiveCount": 9,
-  "parsedMatchCount": 9,
+  "pageLiveCount": 8,
+  "parsedMatchCount": 8,
   "note": "GitHub scrape of the rendered WTA Scores page. Game points, current set number, current-set games and per-set scores are stored separately.",
   "games": [
     {
       "eventId": "wta-scrape-0-upcoming-hunter-krawczyk-ninomiya",
-      "date": "2026-09-22T09:46:04.679962+00:00",
+      "date": "2026-09-22T09:46:48.652684+00:00",
       "displayTime": "Singapore Tennis Open",
       "away": "Upcoming / Hunter",
       "home": "Krawczyk / Ninomiya",
@@ -34,7 +34,7 @@
       "homeSetsWon": 0,
       "round": "Round of 16",
       "court": "Court 1",
-      "status": "Live Match: 0:33 · Round of 16 · Court 1",
+      "status": "Live Match: 0:34 · Round of 16 · Court 1",
       "state": "live",
       "eventOnly": false,
       "title": "Singapore Tennis Open",
@@ -45,28 +45,30 @@
     },
     {
       "eventId": "wta-scrape-1-upcoming-martins-zarazua-hon",
-      "date": "2026-09-22T09:46:04.680336+00:00",
+      "date": "2026-09-22T09:46:48.653047+00:00",
       "displayTime": "Korea Open",
       "away": "Upcoming / Martins",
       "home": "Zarazua / Hon",
-      "awayScore": "5 · 15",
-      "homeScore": "4 · 0",
+      "awayScore": "6 0 · 0",
+      "homeScore": "4 0 · 0",
       "awaySets": [
-        "5"
+        "6",
+        "0"
       ],
       "homeSets": [
-        "4"
+        "4",
+        "0"
       ],
-      "awayPoint": "15",
+      "awayPoint": "0",
       "homePoint": "0",
-      "currentSet": 1,
-      "awayCurrentSetGames": 5,
-      "homeCurrentSetGames": 4,
-      "awaySetsWon": 0,
+      "currentSet": 2,
+      "awayCurrentSetGames": 0,
+      "homeCurrentSetGames": 0,
+      "awaySetsWon": 1,
       "homeSetsWon": 0,
       "round": "Round of 16",
       "court": "Grandstand",
-      "status": "Live Match: 0:42 · Round of 16 · Grandstand",
+      "status": "Live Match: 0:44 · Round of 16 · Grandstand",
       "state": "live",
       "eventOnly": false,
       "title": "Korea Open",
@@ -77,20 +79,20 @@
     },
     {
       "eventId": "wta-scrape-2-a-charaeva-s-kenin",
-      "date": "2026-09-22T09:46:04.680528+00:00",
+      "date": "2026-09-22T09:46:48.653230+00:00",
       "displayTime": "Korea Open",
       "away": "A. Charaeva",
       "home": "S. Kenin",
-      "awayScore": "1 · 0",
-      "homeScore": "4 · 0",
+      "awayScore": "1 · 40",
+      "homeScore": "4 · 15",
       "awaySets": [
         "1"
       ],
       "homeSets": [
         "4"
       ],
-      "awayPoint": "0",
-      "homePoint": "0",
+      "awayPoint": "40",
+      "homePoint": "15",
       "currentSet": 1,
       "awayCurrentSetGames": 1,
       "homeCurrentSetGames": 4,
@@ -98,7 +100,7 @@
       "homeSetsWon": 0,
       "round": "Round of 32",
       "court": "Center Court",
-      "status": "Live Match: 0:23 · Round of 32 · Center Court",
+      "status": "Live Match: 0:25 · Round of 32 · Center Court",
       "state": "live",
       "eventOnly": false,
       "title": "Korea Open",
@@ -108,47 +110,13 @@
       "verificationUrl": "https://www.wtatennis.com/scores/"
     },
     {
-      "eventId": "wta-scrape-3-a-tubello-d-spiteri",
-      "date": "2026-09-22T09:46:04.680694+00:00",
-      "displayTime": "Delta Motors Tolentino Open",
-      "away": "A. Tubello",
-      "home": "D. Spiteri",
-      "awayScore": "6 6",
-      "homeScore": "2 2",
-      "awaySets": [
-        "6",
-        "6"
-      ],
-      "homeSets": [
-        "2",
-        "2"
-      ],
-      "awayPoint": "—",
-      "homePoint": "—",
-      "currentSet": 2,
-      "awayCurrentSetGames": 6,
-      "homeCurrentSetGames": 2,
-      "awaySetsWon": 1,
-      "homeSetsWon": 0,
-      "round": "Round of 32",
-      "court": "Court 2",
-      "status": "Live Match: 1:08 · Round of 32 · Court 2",
-      "state": "live",
-      "eventOnly": false,
-      "title": "Delta Motors Tolentino Open",
-      "sourceName": "WTA Official Scores scrape",
-      "sourceUrl": "https://www.wtatennis.com/scores/",
-      "verificationSource": "WTA Official Scores",
-      "verificationUrl": "https://www.wtatennis.com/scores/"
-    },
-    {
-      "eventId": "wta-scrape-4-upcoming-senica-toma-morderger",
-      "date": "2026-09-22T09:46:04.680970+00:00",
+      "eventId": "wta-scrape-3-upcoming-senica-toma-morderger",
+      "date": "2026-09-22T09:46:48.653514+00:00",
       "displayTime": "Delta Motors Tolentino Open",
       "away": "Upcoming / Senica",
       "home": "Toma / Morderger",
       "awayScore": "4 0 · 30",
-      "homeScore": "6 3 · 15",
+      "homeScore": "6 3 · 40",
       "awaySets": [
         "4",
         "0"
@@ -158,7 +126,7 @@
         "3"
       ],
       "awayPoint": "30",
-      "homePoint": "15",
+      "homePoint": "40",
       "currentSet": 2,
       "awayCurrentSetGames": 0,
       "homeCurrentSetGames": 3,
@@ -166,7 +134,7 @@
       "homeSetsWon": 1,
       "round": "Round of 16",
       "court": "Center Court",
-      "status": "Live Match: 1:08 · Round of 16 · Center Court",
+      "status": "Live Match: 1:09 · Round of 16 · Center Court",
       "state": "live",
       "eventOnly": false,
       "title": "Delta Motors Tolentino Open",
@@ -176,13 +144,13 @@
       "verificationUrl": "https://www.wtatennis.com/scores/"
     },
     {
-      "eventId": "wta-scrape-5-l-zaar-r-masarova",
-      "date": "2026-09-22T09:46:04.681148+00:00",
+      "eventId": "wta-scrape-4-l-zaar-r-masarova",
+      "date": "2026-09-22T09:46:48.653694+00:00",
       "displayTime": "Delta Motors Tolentino Open",
       "away": "L. Zaar",
       "home": "R. Masarova",
       "awayScore": "7 0 · 0",
-      "homeScore": "5 1 · 0",
+      "homeScore": "5 1 · 15",
       "awaySets": [
         "7",
         "0"
@@ -192,7 +160,7 @@
         "1"
       ],
       "awayPoint": "0",
-      "homePoint": "0",
+      "homePoint": "15",
       "currentSet": 2,
       "awayCurrentSetGames": 0,
       "homeCurrentSetGames": 1,
@@ -200,7 +168,7 @@
       "homeSetsWon": 0,
       "round": "Round of 32",
       "court": "Court 1",
-      "status": "Live Match: 1:04 · Round of 32 · Court 1",
+      "status": "Live Match: 1:06 · Round of 32 · Court 1",
       "state": "live",
       "eventOnly": false,
       "title": "Delta Motors Tolentino Open",
@@ -210,8 +178,8 @@
       "verificationUrl": "https://www.wtatennis.com/scores/"
     },
     {
-      "eventId": "wta-scrape-6-w-falkowska-i-yoruk",
-      "date": "2026-09-22T09:46:04.681306+00:00",
+      "eventId": "wta-scrape-5-w-falkowska-i-yoruk",
+      "date": "2026-09-22T09:46:48.653850+00:00",
       "displayTime": "Turk Telekom Ankara Open",
       "away": "W. Falkowska",
       "home": "I. Yoruk",
@@ -244,8 +212,8 @@
       "verificationUrl": "https://www.wtatennis.com/scores/"
     },
     {
-      "eventId": "wta-scrape-7-a-tikhonova-a-gasanova",
-      "date": "2026-09-22T09:46:04.681470+00:00",
+      "eventId": "wta-scrape-6-a-tikhonova-a-gasanova",
+      "date": "2026-09-22T09:46:48.654010+00:00",
       "displayTime": "Turk Telekom Ankara Open",
       "away": "A. Tikhonova",
       "home": "A. Gasanova",
@@ -276,8 +244,8 @@
       "verificationUrl": "https://www.wtatennis.com/scores/"
     },
     {
-      "eventId": "wta-scrape-8-e-pridankina-d-egorova",
-      "date": "2026-09-22T09:46:04.681669+00:00",
+      "eventId": "wta-scrape-7-e-pridankina-d-egorova",
+      "date": "2026-09-22T09:46:48.654184+00:00",
       "displayTime": "Turk Telekom Ankara Open",
       "away": "E. Pridankina",
       "home": "D. Egorova",
