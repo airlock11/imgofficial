@@ -272,66 +272,11 @@ function mergeScoreGames(primary,fallback){
   }
   return out;
 }
-async function fetchWtaLiveScores(){
-  const url='https://www.sofascore.com/api/v1/sport/tennis/events/live';
-  const r=await fetch(url,{cache:'no-store'});
-  if(!r.ok)throw new Error('WTA live score feed unavailable');
-  const payload=await r.json();
-  const events=Array.isArray(payload?.events)?payload.events:[];
-  const wtaEvents=events.filter(e=>{
-    const category=String(e?.tournament?.category?.slug||e?.tournament?.category?.name||'').toLowerCase();
-    const gender=String(e?.homeTeam?.gender||e?.awayTeam?.gender||'').toUpperCase();
-    return (category==='wta'||category.includes('wta'))&&(gender==='F'||!gender);
-  });
-  const scoreText=score=>{
-    if(!score||typeof score!=='object')return '—';
-    const sets=[];
-    for(let i=1;i<=5;i++){
-      const v=score['period'+i];
-      if(v!==undefined&&v!==null&&String(v)!=='')sets.push(String(v));
-    }
-    const point=score.point;
-    if(point!==undefined&&point!==null&&String(point)!==''){
-      return (sets.length?sets.join(' ')+' · ':'')+String(point);
-    }
-    if(sets.length)return sets.join(' ');
-    return score.display!==undefined?String(score.display):score.current!==undefined?String(score.current):'—';
-  };
-  const games=wtaEvents.map(e=>{
-    const round=e?.roundInfo?.name||'';
-    const tournament=e?.tournament?.uniqueTournament?.name||e?.tournament?.name||'WTA';
-    const statusText=e?.status?.description||'Live';
-    const status=[statusText,round].filter(Boolean).join(' · ');
-    return {
-      eventId:'wta-sofa-'+String(e?.id||e?.customId||''),
-      date:e?.startTimestamp?new Date(e.startTimestamp*1000).toISOString():'',
-      displayTime:tournament,
-      away:e?.awayTeam?.name||'TBD',
-      home:e?.homeTeam?.name||'TBD',
-      awayScore:scoreText(e?.awayScore),
-      homeScore:scoreText(e?.homeScore),
-      status,
-      state:String(e?.status?.type||'').toLowerCase()==='inprogress'?'live':'scheduled',
-      eventOnly:false,
-      title:tournament,
-      location:'',
-      sourceName:'Live tennis score feed',
-      sourceUrl:'https://www.wtatennis.com/scores/',
-      odds:null,oddsList:[],highlights:[],highlightsChecked:true,streams:[],streamsChecked:true
-    };
-  }).filter(g=>g.state==='live'&&g.away!=='TBD'&&g.home!=='TBD');
-  if(!games.length)throw new Error('No live WTA matches');
-  return {special:true,games,sourceName:'WTA live scores',sourceUrl:'https://www.wtatennis.com/scores/'};
-}
-
 async function fetchAsianGamesOfficial(){
   const url='https://results.asiangames2026.org/#/schedule';
   return {officialLive:true,sourceName:'Aichi-Nagoya 2026 Official Live Results',sourceUrl:url,games:[]};
 }
 async function fetchScorePayload(sport,{fallbackOnly=false}={}){
-  if(sport==='wta'&&!fallbackOnly){
-    try{return await fetchWtaLiveScores()}catch{}
-  }
   if(sport==='asian_games'){
     const local=await specialSportsPayload(sport);
     if(local){
