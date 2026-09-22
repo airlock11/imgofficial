@@ -2,7 +2,7 @@
   const filters=document.getElementById('scoreLeagueFilters');
   const leftZone=document.querySelector('.score-league-edge-zone-left');
   const rightZone=document.querySelector('.score-league-edge-zone-right');
-  if(!filters||!leftZone||!rightZone||!window.matchMedia('(hover:hover) and (pointer:fine)').matches)return;
+  if(!filters||!leftZone||!rightZone||window.innerWidth<=760)return;
 
   const DELAY=1000;
   const SPEED=420;
