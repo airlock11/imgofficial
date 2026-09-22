@@ -1637,31 +1637,105 @@ function liveNowItemIsCurrent(g){
   return true;
 }
 
-function renderAllLiveGames(items,{preserveItems=false}={}){
-  if(!preserveItems)liveNowItems=[...items];
-  liveNowItems=liveNowItems.filter(liveNowItemIsCurrent);
+function liveNowStableSignature(items,leagueKey=''){
+  return (Array.isArray(items)?items:[])
+    .filter(g=>(!leagueKey||g?.sportKey===leagueKey)&&liveNowItemIsCurrent(g))
+    .map(g=>{
+      const eventKey=String(g?.eventId||[g?.sportKey,g?.date,g?.away,g?.home,g?.title].join('|'));
+      const streams=liveStreamsForGame(g).map(x=>String(x?.watchUrl||x?.embedUrl||'')).filter(Boolean).sort().join(',');
+      return [String(g?.sportKey||''),eventKey,String(g?.state||''),streams].join('~');
+    })
+    .sort()
+    .join('||');
+}
+function dedupeCurrentLiveItems(items){
+  const out=[],seen=new Set();
+  for(const game of Array.isArray(items)?items:[]){
+    if(!liveNowItemIsCurrent(game))continue;
+    const key=String(game?.eventId||[game?.sportKey,game?.away,game?.home,game?.title].join('|'));
+    if(seen.has(key))continue;
+    seen.add(key);
+    out.push(game);
+  }
+  return out;
+}
+function renderAllLiveGames(items,{preserveItems=false,force=false}={}){
+  const previousAll=liveNowStableSignature(liveNowItems);
+  const previousSelected=liveNowStableSignature(liveNowItems,currentScoreLeague);
+
+  if(!preserveItems)liveNowItems=dedupeCurrentLiveItems(items);
+  else liveNowItems=dedupeCurrentLiveItems(liveNowItems);
+
   liveNowLocked=liveNowItems.length>0;
-  renderScoreLeagueFilters();
-  if(document.getElementById('games'))renderGames();
+  const nextAll=liveNowStableSignature(liveNowItems);
+  const nextSelected=liveNowStableSignature(liveNowItems,currentScoreLeague);
+
+  if(force||previousAll!==nextAll)renderScoreLeagueFilters();
+  // Do not rebuild the selected league page when only another league changed.
+  // This keeps an active embedded stream playing and prevents refresh flicker.
+  if(document.getElementById('games')&&(force||previousSelected!==nextSelected))renderGames();
+}
+async function loadVerifiedChannelLive(){
+  try{
+    const r=await fetch('/youtube-live.json?ts='+Date.now(),{cache:'no-store'});
+    if(!r.ok)throw new Error('youtube live unavailable');
+    const y=await r.json();
+    const ytUpdated=Date.parse(y?.updatedAt||'');
+    const ytFreshMinutes=Math.max(5,Number(y?.freshForMinutes)||8);
+    const ytFresh=Number.isFinite(ytUpdated)&&Date.now()-ytUpdated<=ytFreshMinutes*60000;
+    const entries=(Array.isArray(y?.streams)?y.streams:[]).filter(x=>{
+      if(!x?.stream?.watchUrl)return false;
+      if(x?.leagueKey==='asian_games'){
+        const expires=Date.parse(x.expiresAt||'');
+        return Number.isFinite(expires)&&Date.now()<expires;
+      }
+      return ytFresh;
+    });
+    return {ok:true,updatedAt:y?.updatedAt||'',entries};
+  }catch{
+    return {ok:false,updatedAt:'',entries:[]};
+  }
+}
+function verifiedChannelLiveGame(x,updatedAt=''){
+  const allowed=new Set(['asian_games','fiba','pba','mpbl','nbl','ncaa_ph','uaap','wta']);
+  if(!x?.stream?.watchUrl||!allowed.has(x?.leagueKey))return null;
+  const label=x.league||({asian_games:'2026 ASIAN GAMES',pba:'PBA',mpbl:'MPBL',nbl:'NBL Pilipinas',ncaa_ph:'NCAA Philippines',uaap:'UAAP',wta:'WTA Tour',fiba:'FIBA'}[x.leagueKey]);
+  const source=x.stream.channel||x.stream.provider||label;
+  return {
+    eventId:x.eventId,
+    firstLiveAt:x.firstLiveAt,
+    expiresAt:x.expiresAt,
+    sportKey:x.leagueKey,
+    sportLabel:x.sport||'Sport',
+    leagueLabel:label,
+    date:x.firstLiveAt||updatedAt||new Date().toISOString(),
+    displayTime:'LIVE',
+    title:x.title||label+' Live',
+    away:label,
+    home:x.title||(label+' Live'),
+    awayScore:'',
+    homeScore:'',
+    status:'LIVE · '+source,
+    state:'live',
+    streams:[x.stream],
+    streamsChecked:true
+  };
 }
 async function loadAllLiveGames({silent=false}={}){
   const live=[];
   const webKeys=['pba','mpbl','nbl','nblaus','vba'];
   const apiKeys=['soccer','laliga','seriea','bundesliga','champions','mls','pfl','basketball','wnba','atp','wta','australian_open','wimbledon','us_open','ipl','bigbash','cricket_world_cup','volleyball_w','volleyball_m','pvl','vleague_jp','f1','motogp','formulae','ufc','one','wbc','wba','ibf','wbo','ring','baseball','npb','kbo','hockey','khl','iihf','football','ncaaf','bleague','euroleague','fiba'];
 
+  // Start score requests in parallel, but never make verified streams wait for them.
   const regionalPromise=(async()=>{
     await loadRegionalAutoData();
     await Promise.all(webKeys.map(async key=>{
       const labels=liveNowLabels[key]||{};
       const primaryLive=regionalSnapshotGames(key).filter(game=>game.state==='live');
-
       if(primaryLive.length){
-        for(const game of primaryLive){
-          live.push({...game,sportKey:key,sportLabel:labels.sport,leagueLabel:labels.league});
-        }
+        for(const game of primaryLive)live.push({...game,sportKey:key,sportLabel:labels.sport,leagueLabel:labels.league});
         return;
       }
-
       try{
         const j=await fetchScorePayload(key,{fallbackOnly:true});
         for(const game of normalizeScorePayload(key,j)){
@@ -1674,7 +1748,7 @@ async function loadAllLiveGames({silent=false}={}){
   const asianGamesPromise=(async()=>{
     try{
       const j=await fetchScorePayload('asian_games');
-      const labels=liveNowLabels.asian_games||{sport:'Multi-sport',league:'Asian Games'};
+      const labels=liveNowLabels.asian_games||{sport:'Special',league:'Asian Games'};
       for(const game of normalizeScorePayload('asian_games',j)){
         if(game.state==='live')live.push({...game,sportKey:'asian_games',sportLabel:asianGamesSportLabel(game),leagueLabel:labels.league});
       }
@@ -1691,117 +1765,48 @@ async function loadAllLiveGames({silent=false}={}){
     }catch{}
   }));
 
-  // Load verified channel livestreams first so a slow score/API feed
-  // can never block an already-confirmed live broadcast from appearing in IMG.
-  try{
-    const r=await fetch('/youtube-live.json?ts='+Date.now(),{cache:'no-store'});
-    if(r.ok){
-      const y=await r.json();
-      const ytUpdated=Date.parse(y?.updatedAt||'');
-      const ytFreshMinutes=Math.max(5,Number(y?.freshForMinutes)||8);
-      const ytFresh=Number.isFinite(ytUpdated)&&Date.now()-ytUpdated<=ytFreshMinutes*60000;
-      const rawStreams=Array.isArray(y.streams)?y.streams:[];
-      const ys=rawStreams.filter(x=>{
-        if(x?.leagueKey==='asian_games'){
-          const expires=Date.parse(x.expiresAt||'');
-          return Number.isFinite(expires)&&Date.now()<expires;
-        }
-        return ytFresh;
-      });
-      for(const x of ys){
-        if(!x?.stream?.watchUrl||!['asian_games','fiba','pba','mpbl','nbl','ncaa_ph','uaap','wta'].includes(x?.leagueKey))continue;
-        const label=x.league||({asian_games:'2026 ASIAN GAMES',pba:'PBA',mpbl:'MPBL',nbl:'NBL Pilipinas',ncaa_ph:'NCAA Philippines',uaap:'UAAP',wta:'WTA Tour',fiba:'FIBA'}[x.leagueKey]);
-        const source=x.stream.channel||x.stream.provider||label;
-        live.push({
-          eventId:x.eventId,
-          firstLiveAt:x.firstLiveAt,
-          expiresAt:x.expiresAt,
-          sportKey:x.leagueKey,
-          sportLabel:x.sport||'Sport',
-          leagueLabel:label,
-          date:x.firstLiveAt||y.updatedAt||new Date().toISOString(),
-          displayTime:'LIVE',
-          title:x.title||label+' Live',
-          away:label,
-          home:x.title||(label+' Live'),
-          awayScore:'',
-          homeScore:'',
-          status:'LIVE · '+source,
-          state:'live',
-          streams:[x.stream],
-          streamsChecked:true
-        });
-      }
-      if(live.length){
-        const early=[];
-        const seenEarly=new Set();
-        for(const game of live){
-          if(!liveNowItemIsCurrent(game))continue;
-          const key=String(game.eventId||[game.sportKey,game.away,game.home,game.title].join('|'));
-          if(seenEarly.has(key))continue;
-          seenEarly.add(key);
-          early.push(game);
-        }
-        if(early.length)renderAllLiveGames(early);
-      }
-    }
-  }catch{}
+  // Fetch the verified channel file once per refresh.
+  const verified=await loadVerifiedChannelLive();
+  const verifiedGames=verified.entries.map(x=>verifiedChannelLiveGame(x,verified.updatedAt)).filter(Boolean);
+
+  if(verifiedGames.length){
+    // Preserve already-visible live items while publishing newly verified streams.
+    // This avoids temporary disappearance while slower score feeds are still loading.
+    renderAllLiveGames(dedupeCurrentLiveItems([...liveNowItems,...verifiedGames]));
+  }
 
   await Promise.all([regionalPromise,apiPromise,asianGamesPromise]);
+
   try{
     const external=await loadExternalLiveData();
     attachExternalAsianGamesStreams(live,external);
   }catch{}
-  // Merge GitHub-discovered YouTube streams into exact live events when possible.
-  // The API key never reaches the browser; only public video IDs/URLs are published.
-  try{
-    const r=await fetch('/youtube-live.json?ts='+Date.now(),{cache:'no-store'});
-    if(r.ok){
-      const y=await r.json();
-      const ytUpdated=Date.parse(y?.updatedAt||'');
-      const ytFreshMinutes=Math.max(5,Number(y?.freshForMinutes)||8);
-      const ytFresh=Number.isFinite(ytUpdated)&&Date.now()-ytUpdated<=ytFreshMinutes*60000;
-      const rawStreams=Array.isArray(y.streams)?y.streams:[];
-      const ys=rawStreams.filter(x=>{
-        if(x?.leagueKey==='asian_games'){
-          const expires=Date.parse(x.expiresAt||'');
-          return Number.isFinite(expires)&&Date.now()<expires;
-        }
-        return ytFresh;
-      });
-      const byId=new Map(ys.map(x=>[String(x.eventId),x.stream]));
-      for(const g of live){
-        const s=byId.get(String(g.eventId));
-        if(s?.watchUrl)g.streams=[s];
-      }
-      // Verified channel broadcasts can exist even when the score provider has no
-      // matching event ID. Preserve the actual source channel for each league.
-      for(const x of ys){
-        if(!x?.stream?.watchUrl||!['asian_games','fiba','pba','mpbl','nbl','ncaa_ph','uaap','wta'].includes(x?.leagueKey))continue;
-        if(live.some(g=>String(g.eventId)===String(x.eventId)))continue;
-        const label=x.league||({asian_games:'2026 ASIAN GAMES',pba:'PBA',mpbl:'MPBL',nbl:'NBL Pilipinas',ncaa_ph:'NCAA Philippines',uaap:'UAAP',wta:'WTA Tour',fiba:'FIBA'}[x.leagueKey]);
-        const source=x.stream.channel||x.stream.provider||label;
-        live.push({eventId:x.eventId,firstLiveAt:x.firstLiveAt,expiresAt:x.expiresAt,sportKey:x.leagueKey,sportLabel:x.sport||'Sport',leagueLabel:label,date:x.firstLiveAt||y.updatedAt||new Date().toISOString(),displayTime:'LIVE',title:x.title||label+' Live',away:label,home:x.title||(label+' Live'),awayScore:'',homeScore:'',status:'LIVE · '+source,state:'live',streams:[x.stream],streamsChecked:true});
+
+  if(verified.ok){
+    const byId=new Map(verified.entries.map(x=>[String(x.eventId),x.stream]));
+    for(const game of live){
+      const stream=byId.get(String(game.eventId));
+      if(stream?.watchUrl){
+        const current=Array.isArray(game.streams)?game.streams:[];
+        if(!current.some(x=>String(x?.watchUrl||'')===String(stream.watchUrl)))game.streams=[...current,stream];
       }
     }
-  }catch{}
-  // Validate every candidate again immediately before rendering.
-  for(let i=live.length-1;i>=0;i--){
-    if(!liveNowItemIsCurrent(live[i]))live.splice(i,1);
+    for(const game of verifiedGames){
+      if(!live.some(g=>String(g.eventId)===String(game.eventId)))live.push(game);
+    }
+  }else{
+    // A temporary GitHub/network failure must not make a verified live stream vanish.
+    // Keep the last known stream only while its own current/expiry rules still pass.
+    for(const game of liveNowItems){
+      if(liveStreamsForGame(game).length&&liveNowItemIsCurrent(game))live.push(game);
+    }
   }
-  const deduped=[];
-  const seenLive=new Set();
-  for(const game of live){
-    const key=String(game.eventId||[game.sportKey,game.away,game.home,game.title].join('|'));
-    if(seenLive.has(key))continue;
-    seenLive.add(key);deduped.push(game);
-  }
-  live.length=0;live.push(...deduped);
-  await Promise.allSettled([...new Set(live.map(g=>g.sportKey).filter(Boolean))].map(key=>
-    hydrateTeamLogos(key,live.filter(g=>g.sportKey===key))
+
+  const deduped=dedupeCurrentLiveItems(live);
+  await Promise.allSettled([...new Set(deduped.map(g=>g.sportKey).filter(Boolean))].map(key=>
+    hydrateTeamLogos(key,deduped.filter(g=>g.sportKey===key))
   ));
-  // Re-render Live Now so newly discovered stream links/buttons are reflected in the DOM.
-  renderAllLiveGames(live);
+  renderAllLiveGames(deduped);
 }
 function renderGames(){
   const host=document.getElementById('games');
