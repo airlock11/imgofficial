@@ -29,8 +29,7 @@ const TARGETS=[
   {key:"champions",names:["uefa champions league","champions league"],label:"UEFA Champions League"},
   {key:"ucl_women",names:["uefa champions league women"],label:"UEFA Champions League Women"},
   {key:"mls",names:["major league soccer","mls"],label:"MLS"},
-  {key:"pfl",names:["philippines football league","philippine football league"],label:"PFL"},
-  {key:"j1",names:["j1 league","j.league","j league"],label:"J1 League"}
+  {key:"pfl",names:["philippines football league","philippine football league"],label:"PFL"}
 ];
 
 const data=readExisting();
@@ -113,7 +112,6 @@ function targetKey(name,category=""){
   if((n==="bundesliga"||n.includes("bundesliga"))&&cat.includes("germany"))return "bundesliga";
   if((n==="major league soccer"||n==="mls")&&(cat.includes("usa")||cat.includes("united states")))return "mls";
   if((n.includes("philippine football league")||n.includes("philippines football league"))&&cat.includes("philippines"))return "pfl";
-  if((n==="j1 league"||n.includes("j league")||n.includes("j1 league"))&&cat.includes("japan"))return "j1";
 
   const exact=TARGETS.find(t=>t.names.some(x=>n===norm(x)));
   return exact?.key||null;
