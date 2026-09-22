@@ -503,7 +503,7 @@ def premier_league_games():
         print("epl-standings", type(ex).__name__, str(ex)[:120])
 
     return {
-        "league": "EPL",
+        "league": "Premier League",
         "season": "2026–27",
         "sourceName": "ESPN EPL feed",
         "sourceUrl": url,
