@@ -1691,6 +1691,62 @@ async function loadAllLiveGames({silent=false}={}){
     }catch{}
   }));
 
+  // Load verified channel livestreams first so a slow score/API feed
+  // can never block an already-confirmed live broadcast from appearing in IMG.
+  try{
+    const r=await fetch('/youtube-live.json?ts='+Date.now(),{cache:'no-store'});
+    if(r.ok){
+      const y=await r.json();
+      const ytUpdated=Date.parse(y?.updatedAt||'');
+      const ytFreshMinutes=Math.max(5,Number(y?.freshForMinutes)||8);
+      const ytFresh=Number.isFinite(ytUpdated)&&Date.now()-ytUpdated<=ytFreshMinutes*60000;
+      const rawStreams=Array.isArray(y.streams)?y.streams:[];
+      const ys=rawStreams.filter(x=>{
+        if(x?.leagueKey==='asian_games'){
+          const expires=Date.parse(x.expiresAt||'');
+          return Number.isFinite(expires)&&Date.now()<expires;
+        }
+        return ytFresh;
+      });
+      for(const x of ys){
+        if(!x?.stream?.watchUrl||!['asian_games','fiba','pba','mpbl','nbl','ncaa_ph','uaap','wta'].includes(x?.leagueKey))continue;
+        const label=x.league||({asian_games:'2026 ASIAN GAMES',pba:'PBA',mpbl:'MPBL',nbl:'NBL Pilipinas',ncaa_ph:'NCAA Philippines',uaap:'UAAP',wta:'WTA Tour',fiba:'FIBA'}[x.leagueKey]);
+        const source=x.stream.channel||x.stream.provider||label;
+        live.push({
+          eventId:x.eventId,
+          firstLiveAt:x.firstLiveAt,
+          expiresAt:x.expiresAt,
+          sportKey:x.leagueKey,
+          sportLabel:x.sport||'Sport',
+          leagueLabel:label,
+          date:x.firstLiveAt||y.updatedAt||new Date().toISOString(),
+          displayTime:'LIVE',
+          title:x.title||label+' Live',
+          away:label,
+          home:x.title||(label+' Live'),
+          awayScore:'',
+          homeScore:'',
+          status:'LIVE · '+source,
+          state:'live',
+          streams:[x.stream],
+          streamsChecked:true
+        });
+      }
+      if(live.length){
+        const early=[];
+        const seenEarly=new Set();
+        for(const game of live){
+          if(!liveNowItemIsCurrent(game))continue;
+          const key=String(game.eventId||[game.sportKey,game.away,game.home,game.title].join('|'));
+          if(seenEarly.has(key))continue;
+          seenEarly.add(key);
+          early.push(game);
+        }
+        if(early.length)renderAllLiveGames(early);
+      }
+    }
+  }catch{}
+
   await Promise.all([regionalPromise,apiPromise,asianGamesPromise]);
   try{
     const external=await loadExternalLiveData();
