@@ -1907,7 +1907,7 @@ html[data-theme="light"] body.scores-page .score-league-toolbar:after{
 
 
 /* Desktop league edge-hover auto-scroll affordance */
-@media (hover:hover) and (pointer:fine) and (min-width:761px){
+@media (min-width:761px){
   .score-league-filters{position:relative;scroll-behavior:auto}
   .score-league-filters.edge-scroll-left,
   .score-league-filters.edge-scroll-right{cursor:default}
@@ -1915,7 +1915,7 @@ html[data-theme="light"] body.scores-page .score-league-toolbar:after{
 
 
 /* Reliable desktop hover zones for league auto-scroll */
-@media (hover:hover) and (pointer:fine) and (min-width:761px){
+@media (min-width:761px){
   .score-league-scroll-shell{position:relative;min-width:0;flex:1 1 auto}
   .score-league-scroll-shell .score-league-filters{width:100%;min-width:0}
   .score-league-edge-zone{
@@ -1936,7 +1936,7 @@ html[data-theme="light"] body.scores-page .score-league-toolbar:after{
 
 
 /* Visual indicator for desktop league edge auto-scroll */
-@media (hover:hover) and (pointer:fine) and (min-width:761px){
+@media (min-width:761px){
   .score-league-edge-zone{
     opacity:0;
     transition:opacity .28s ease,filter .28s ease;
@@ -1966,7 +1966,7 @@ html[data-theme="light"] body.scores-page .score-league-toolbar:after{
 
 
 /* Stronger desktop edge cue: visible only while hovering/scrolling */
-@media (hover:hover) and (pointer:fine) and (min-width:761px){
+@media (min-width:761px){
   .score-league-edge-zone{
     width:96px;
     opacity:0;
