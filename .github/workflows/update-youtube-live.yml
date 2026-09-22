@@ -19,7 +19,7 @@ concurrency:
 jobs:
   update:
     runs-on: ubuntu-latest
-    timeout-minutes: 4
+    timeout-minutes: 8
     steps:
       - uses: actions/checkout@v4
         with:
@@ -27,7 +27,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Refresh and publish YouTube live data
+      - name: Refresh and verify YouTube live data every minute
         env:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
         shell: bash
@@ -36,28 +36,37 @@ jobs:
           git config user.name "IMG Live Stream Bot"
           git config user.email "actions@users.noreply.github.com"
 
-          # Keep each scheduled run short and independent. Long-running loops can
-          # overlap GitHub's scheduler and leave ended streams stale.
-          for attempt in 1 2 3; do
-            git fetch origin main
-            git reset --hard origin/main
+          for cycle in 1 2 3 4 5; do
+            echo "YouTube verification cycle $cycle/5"
 
-            python scripts/update_youtube_live.py
+            published=0
+            for attempt in 1 2 3; do
+              git fetch origin main
+              git reset --hard origin/main
 
-            if git diff --quiet -- youtube-live.json; then
-              echo "No semantic stream changes."
-              exit 0
+              python scripts/update_youtube_live.py
+
+              if git diff --quiet -- youtube-live.json; then
+                echo "No stream-state change."
+                published=1
+                break
+              fi
+
+              git add youtube-live.json
+              git commit -m "Update verified YouTube live streams"
+              if git push origin HEAD:main; then
+                published=1
+                break
+              fi
+              echo "Push raced; retrying."
+            done
+
+            if [ "$published" -ne 1 ]; then
+              echo "Unable to publish YouTube verification."
+              exit 1
             fi
 
-            git add youtube-live.json
-            git commit -m "Update verified YouTube live streams"
-
-            if git push origin HEAD:main; then
-              exit 0
+            if [ "$cycle" -lt 5 ]; then
+              sleep 60
             fi
-
-            echo "Push raced with another main update; regenerating from latest main (attempt $attempt)."
           done
-
-          echo "Unable to publish YouTube live data after retries."
-          exit 1
