@@ -107,98 +107,161 @@ NPB_TEAMS = [
 
 
 def wta_live_scores():
-    """Refresh individual WTA matches instead of only tournament-level activity."""
-    now = datetime.now(timezone.utc)
-    start = (now - timedelta(days=1)).strftime("%Y%m%d")
-    end = (now + timedelta(days=2)).strftime("%Y%m%d")
-    api_url = f"https://site.api.espn.com/apis/site/v2/sports/tennis/wta/scoreboard?dates={start}-{end}"
-    payload = fetch_json(api_url)
-    events = payload.get("events", []) if isinstance(payload, dict) else []
+    """Refresh individual WTA matches from the official WTA tournament API."""
+    official_scores = "https://www.wtatennis.com/scores/"
+    active = [
+        (1024, 2026, "Korea Open", "Seoul, South Korea"),
+        (1152, 2026, "Singapore Tennis Open", "Singapore"),
+    ]
+
+    def first_value(row, names):
+        if not isinstance(row, dict):
+            return None
+        lower = {str(k).lower(): v for k, v in row.items()}
+        for name in names:
+            if name.lower() in lower and lower[name.lower()] not in (None, ""):
+                return lower[name.lower()]
+        return None
+
+    def display_name(value):
+        if value in (None, ""):
+            return ""
+        if isinstance(value, str):
+            return value.strip()
+        if isinstance(value, dict):
+            for key in ("fullName", "displayName", "name", "playerName", "shortName"):
+                v = value.get(key)
+                if v:
+                    return str(v).strip()
+            player = value.get("player")
+            if isinstance(player, dict):
+                return display_name(player)
+            players = value.get("players")
+            if isinstance(players, list):
+                names = [display_name(x) for x in players]
+                names = [x for x in names if x]
+                if names:
+                    return " / ".join(names)
+        return ""
+
+    def side_name(row, side):
+        suffix = side.lower()
+        candidates = [
+            f"player{suffix}", f"entrant{suffix}", f"entry{suffix}",
+            f"competitor{suffix}", f"participant{suffix}", f"team{suffix}",
+            f"name{suffix}", f"{suffix}player", f"{suffix}entrant",
+        ]
+        value = first_value(row, candidates)
+        name = display_name(value)
+        if name:
+            return name
+
+        # WTA payloads occasionally expose side objects under keys ending in A/B.
+        for key, value in row.items():
+            lk = str(key).lower()
+            if lk.endswith(suffix) and isinstance(value, dict):
+                name = display_name(value)
+                if name:
+                    return name
+        return ""
+
+    def score_text(row, side):
+        suffix = side.lower()
+        direct = first_value(row, [
+            f"score{suffix}", f"matchscore{suffix}", f"totalscore{suffix}",
+            f"gamescore{suffix}", f"setswon{suffix}"
+        ])
+        if direct not in (None, ""):
+            if isinstance(direct, (list, tuple)):
+                return " ".join(str(x) for x in direct)
+            if isinstance(direct, dict):
+                vals = []
+                for k in sorted(direct):
+                    v = direct[k]
+                    if v not in (None, ""):
+                        vals.append(str(v))
+                if vals:
+                    return " ".join(vals)
+            return str(direct)
+
+        sets = []
+        for n in range(1, 6):
+            v = first_value(row, [
+                f"set{n}{suffix}", f"set{n}score{suffix}",
+                f"score{n}{suffix}", f"{suffix}set{n}"
+            ])
+            if v not in (None, ""):
+                sets.append(str(v))
+        return " ".join(sets) if sets else "—"
+
+    def match_state(row):
+        raw = str(first_value(row, ["MatchState", "matchState", "state", "status", "matchStatus"]) or "").strip()
+        low = raw.lower()
+        if re.search(r"live|progress|playing|started|in play|in-play", low):
+            return "live", raw or "Live"
+        if re.search(r"final|finished|complete|completed|ended|retired|walkover", low):
+            return "final", raw or "Final"
+        if re.search(r"scheduled|upcoming|not started|pending|suspended", low):
+            return "scheduled", raw or "Scheduled"
+        # Known compact provider codes.
+        if low in {"l", "i", "ip"}:
+            return "live", "Live"
+        if low in {"f", "c", "p"}:
+            return "final", "Final"
+        return "scheduled", raw or "Scheduled"
+
     games = []
-
-    def competitor_name(row):
-        if not isinstance(row, dict):
-            return "TBD"
-        athlete = row.get("athlete") or {}
-        team = row.get("team") or {}
-        return str(
-            athlete.get("displayName")
-            or athlete.get("shortDisplayName")
-            or team.get("displayName")
-            or team.get("shortDisplayName")
-            or row.get("displayName")
-            or row.get("name")
-            or "TBD"
-        )
-
-    def competitor_score(row):
-        if not isinstance(row, dict):
-            return "—"
-        lines = row.get("linescores") or []
-        parts = []
-        for line in lines:
-            if isinstance(line, dict):
-                value = line.get("displayValue", line.get("value", line.get("score")))
-            else:
-                value = line
-            if value not in (None, ""):
-                parts.append(str(value))
-        if parts:
-            return " ".join(parts)
-        score = row.get("score")
-        if isinstance(score, dict):
-            score = score.get("displayValue", score.get("value", score.get("score")))
-        return str(score) if score not in (None, "") else "—"
-
-    for event in events:
-        comps = event.get("competitions") or [event]
-        for index, comp in enumerate(comps):
-            competitors = comp.get("competitors") or []
-            if len(competitors) < 2:
+    for group_id, year, tournament_name, location in active:
+        api_url = f"https://api.wtatennis.com/tennis/tournaments/{group_id}/{year}/matches"
+        payload = fetch_json(api_url)
+        rows = payload.get("matches", []) if isinstance(payload, dict) else []
+        for index, row in enumerate(rows):
+            if not isinstance(row, dict):
                 continue
-            home = next((x for x in competitors if x.get("homeAway") == "home"), competitors[0])
-            away = next((x for x in competitors if x.get("homeAway") == "away"), competitors[1])
-            status_obj = (comp.get("status") or event.get("status") or {})
-            status_type = status_obj.get("type") or {}
-            raw_state = str(status_type.get("state") or "pre").lower()
-            state = "live" if raw_state == "in" else ("final" if raw_state == "post" else "scheduled")
-            status = str(
-                status_type.get("shortDetail")
-                or status_type.get("detail")
-                or status_type.get("description")
-                or ("Live" if state == "live" else "Final" if state == "final" else "Scheduled")
-            )
-            date = comp.get("date") or event.get("date")
-            dt = parse_iso(date)
-            event_id = str(comp.get("id") or event.get("id") or f"{len(games)+1}")
-            if index:
-                event_id += f"-{index}"
+            away = side_name(row, "A")
+            home = side_name(row, "B")
+            if not away or not home:
+                continue
+
+            state, status = match_state(row)
+            raw_date = first_value(row, ["StartDate", "startDate", "Date", "date", "LastUpdated", "lastUpdated"])
+            dt = parse_iso(raw_date)
+            match_id = first_value(row, ["MatchID", "matchId", "id"]) or f"{group_id}-{index+1}"
+            round_name = first_value(row, ["Round", "round", "DrawLevelType", "drawLevelType", "roundName"])
+            court = first_value(row, ["Court", "court", "CourtID", "courtId"])
+
+            details = [str(x) for x in (round_name, court) if x not in (None, "")]
             games.append({
-                "eventId": "wta-" + event_id,
-                "date": str(date or ""),
-                "displayTime": dt.strftime("%b %d · %H:%M") if dt else "",
-                "away": competitor_name(away),
-                "home": competitor_name(home),
-                "awayScore": competitor_score(away),
-                "homeScore": competitor_score(home),
-                "status": status,
+                "eventId": "wta-" + str(match_id),
+                "date": dt.isoformat() if dt else "",
+                "displayTime": (dt.strftime("%b %d · %H:%M") if dt else tournament_name),
+                "away": away,
+                "home": home,
+                "awayScore": score_text(row, "A"),
+                "homeScore": score_text(row, "B"),
+                "status": ("Live" if state == "live" else "Final" if state == "final" else status) + ((" · " + " · ".join(details)) if details else ""),
                 "state": state,
                 "eventOnly": False,
-                "sourceName": "ESPN WTA scoreboard",
-                "sourceUrl": "https://www.wtatennis.com/scores/",
-                "verificationSource": "WTA Official Scores",
-                "verificationUrl": "https://www.wtatennis.com/scores/"
+                "tournament": tournament_name,
+                "location": location,
+                "sourceName": "WTA Official",
+                "sourceUrl": official_scores,
+                "verificationUrl": official_scores
             })
 
-    # Do not replace a working WTA snapshot with an empty provider response.
     if not games:
-        raise RuntimeError("No individual WTA matches returned")
-    games.sort(key=lambda g: (0 if g["state"] == "live" else 1 if g["state"] == "scheduled" else 2, g.get("date") or ""))
+        raise RuntimeError("Official WTA API returned no usable individual matches")
+
+    # Put live matches first, then today's/upcoming matches, then completed results.
+    games.sort(key=lambda g: (
+        0 if g["state"] == "live" else 1 if g["state"] == "scheduled" else 2,
+        g.get("date") or ""
+    ))
     return {
         "league": "WTA Tour",
-        "sourceName": "WTA Official Scores",
-        "sourceUrl": "https://www.wtatennis.com/scores/",
-        "note": "Individual match scores are refreshed automatically and cross-referenced with the official WTA Scores page.",
+        "sourceName": "WTA Official",
+        "sourceUrl": official_scores,
+        "note": "Individual WTA match scores are refreshed from the official WTA tournament backend.",
         "games": games
     }
 
