@@ -14,9 +14,10 @@ URL = "https://www.wtatennis.com/scores/"
 NAME_RE = re.compile(r"^(?:[A-ZÀ-ÖØ-Ý][A-Za-zÀ-ÖØ-öø-ÿ'’-]*\.?\s+){0,3}[A-ZÀ-ÖØ-Ý][A-Za-zÀ-ÖØ-öø-ÿ'’.-]+(?:\s*\(\d+\))?$")
 ROUND_RE = re.compile(r"^(?:ROUND OF \d+|QUARTERFINALS?|SEMIFINALS?|FINAL|QUALIFYING.*)$", re.I)
 COURT_RE = re.compile(r"^(?:COURT\s*\w+|CENTER COURT|CENTRE COURT|GRANDSTAND|STADIUM.*)$", re.I)
-LIVE_RE = re.compile(r"(?:MEDICAL TIMEOUT|\b\d+(?:ST|ND|RD|TH) SET:\s*\d+:\d+|\bSET\s*\d+|LIVE MATCH|SUSPENDED)", re.I)
+LIVE_RE = re.compile(r"(?:MEDICAL TIMEOUT|\b\d+(?:ST|ND|RD|TH) SET:\s*\d+:\d+|\bSET\s*\d+|LIVE MATCH|SUSPENDED|WARMUP)", re.I)
 UI_RE = re.compile(r"^(?:SIGN\s*UP|LOG\s*IN|WATCH\b.*|LIVE\s*WITH\b.*|125LIVE\b.*|STREAM\b.*|SUBSCRIBE\b.*|LEARN\s*MORE|BUY\s*TICKETS?)$", re.I)
 PLAYER_RE = re.compile(r"^[A-ZÀ-ÖØ-Ý]\.[ ]+[A-ZÀ-ÖØ-Ý][A-Za-zÀ-ÖØ-öø-ÿ'’.-]+(?:[ -][A-Za-zÀ-ÖØ-öø-ÿ'’.-]+)*(?:\s*\(\d+\))?$")
+DOUBLES_RE = re.compile(r"^[A-ZÀ-ÖØ-Ý][A-Za-zÀ-ÖØ-öø-ÿ'’.-]+(?:\s+[A-ZÀ-ÖØ-Ý][A-Za-zÀ-ÖØ-öø-ÿ'’.-]+)?\s*/\s*[A-ZÀ-ÖØ-Ý][A-Za-zÀ-ÖØ-öø-ÿ'’.-]+(?:\s+[A-ZÀ-ÖØ-Ý][A-Za-zÀ-ÖØ-öø-ÿ'’.-]+)?(?:\s*\(\d+\))?$")
 POINT_RE = re.compile(r"^(?:0|15|30|40|AD|AV|A)$", re.I)
 SET_RE = re.compile(r"^\d{1,2}(?:\(\d+\)|\^\d+)?$")
 SCORE_TOKEN_RE = re.compile(r"^(?:AD|AV|A|\d{1,2}|\d{1,2}\(\d+\)|\d{1,2}\^\d+|[•·—-])$", re.I)
@@ -42,6 +43,25 @@ def chrome_dump():
             last = (chrome, type(ex).__name__, str(ex))
     raise RuntimeError(f"Chrome render failed: {last}")
 
+def tournament_from_element(element):
+    current = element
+    for _ in range(8):
+        if not current or not getattr(current, "stripped_strings", None):
+            break
+        lines = [clean_line(x) for x in current.stripped_strings if clean_line(x)]
+        for line in lines[:30]:
+            if ROUND_RE.match(line) or COURT_RE.match(line) or UI_RE.match(line):
+                continue
+            low = line.lower()
+            if "singapore tennis open" in low:
+                return "Singapore Tennis Open"
+            if "korea open" in low:
+                return "Korea Open"
+            if re.search(r"\b(open|masters|classic|championships|trophy)\b", line, re.I) and len(line) <= 90:
+                return re.sub(r"\s+presented.*$", "", line, flags=re.I).strip()
+        current = current.parent
+    return ""
+
 def smallest_live_blocks(soup):
     blocks = []
     seen = set()
@@ -61,11 +81,12 @@ def smallest_live_blocks(soup):
         if best is None:
             continue
         text = "\n".join(clean_line(x) for x in best.stripped_strings if clean_line(x))
-        key = re.sub(r"\s+", " ", text)
+        tournament = tournament_from_element(best)
+        key = tournament + "|" + re.sub(r"\s+", " ", text)
         if key in seen:
             continue
         seen.add(key)
-        blocks.append(text)
+        blocks.append({"text": text, "tournament": tournament})
     return blocks
 
 def player_candidates(lines):
@@ -86,7 +107,7 @@ def player_candidates(lines):
             continue
         if re.fullmatch(r"[\d\s•·()—-]+", s):
             continue
-        if PLAYER_RE.match(s):
+        if PLAYER_RE.match(s) or DOUBLES_RE.match(s):
             out.append(s)
     deduped = []
     for name in out:
@@ -157,7 +178,9 @@ def sets_won(own, opp, current_set):
 
 def parse_blocks(blocks):
     games = []
-    for index, text in enumerate(blocks):
+    for index, block in enumerate(blocks):
+        text = block["text"] if isinstance(block, dict) else str(block)
+        inherited_tournament = block.get("tournament", "") if isinstance(block, dict) else ""
         lines = [clean_line(x) for x in text.splitlines() if clean_line(x)]
         names = player_candidates(lines)
         if len(names) < 2:
@@ -167,11 +190,12 @@ def parse_blocks(blocks):
         court = next((x for x in lines if COURT_RE.match(x)), "")
         live_status = next((x for x in lines if LIVE_RE.search(x) and not ROUND_RE.match(x) and not UI_RE.match(x)), "Live")
 
-        tournament = ""
-        for x in lines[:10]:
-            if re.search(r"(OPEN|MASTERS|CLASSIC|CHAMPIONSHIPS|TROPHY)", x, re.I) and not ROUND_RE.match(x):
-                tournament = x
-                break
+        tournament = inherited_tournament
+        if not tournament:
+            for x in lines[:10]:
+                if re.search(r"(OPEN|MASTERS|CLASSIC|CHAMPIONSHIPS|TROPHY)", x, re.I) and not ROUND_RE.match(x):
+                    tournament = re.sub(r"\s+presented.*$", "", x, flags=re.I).strip()
+                    break
 
         away_parts = parse_score_tokens(tokens_after_name(lines, names[0]))
         home_parts = parse_score_tokens(tokens_after_name(lines, names[1]))
@@ -200,7 +224,7 @@ def parse_blocks(blocks):
             "round": round_name,
             "court": court,
             "status": " · ".join(x for x in [live_status, round_name, court] if x),
-            "state": "suspended" if re.search(r"\bsuspended\b", live_status, re.I) else "live",
+            "state": "suspended" if re.search(r"\bsuspended\b", live_status, re.I) else ("warmup" if re.search(r"\bwarmup\b", live_status, re.I) else "live"),
             "eventOnly": False,
             "title": tournament or "WTA",
             "sourceName": "WTA Official Scores scrape",
@@ -266,6 +290,7 @@ def main():
         "verificationSource": "WTA Official Scores",
         "verificationUrl": URL,
         "pageLiveCount": page_live_count,
+        "parsedMatchCount": len(games),
         "note": "GitHub scrape of the rendered WTA Scores page. Game points, current set number, current-set games and per-set scores are stored separately.",
         "games": games,
     }
