@@ -18,6 +18,7 @@ LIVE_RE = re.compile(r"(?:MEDICAL TIMEOUT|\b\d+(?:ST|ND|RD|TH) SET:\s*\d+:\d+|\b
 UI_RE = re.compile(r"^(?:SIGN\s*UP|LOG\s*IN|WATCH\b.*|LIVE\s*WITH\b.*|125LIVE\b.*|STREAM\b.*|SUBSCRIBE\b.*|LEARN\s*MORE|BUY\s*TICKETS?)$", re.I)
 PLAYER_RE = re.compile(r"^[A-ZÀ-ÖØ-Ý]\.[ ]+[A-ZÀ-ÖØ-Ý][A-Za-zÀ-ÖØ-öø-ÿ'’.-]+(?:[ -][A-Za-zÀ-ÖØ-öø-ÿ'’.-]+)*(?:\s*\(\d+\))?$")
 DOUBLES_RE = re.compile(r"^[A-ZÀ-ÖØ-Ý][A-Za-zÀ-ÖØ-öø-ÿ'’.-]+(?:\s+[A-ZÀ-ÖØ-Ý][A-Za-zÀ-ÖØ-öø-ÿ'’.-]+)?\s*/\s*[A-ZÀ-ÖØ-Ý][A-Za-zÀ-ÖØ-öø-ÿ'’.-]+(?:\s+[A-ZÀ-ÖØ-Ý][A-Za-zÀ-ÖØ-öø-ÿ'’.-]+)?(?:\s*\(\d+\))?$")
+SURNAME_ONLY_RE = re.compile(r"^[A-ZÀ-ÖØ-Ý][A-Za-zÀ-ÖØ-öø-ÿ'’.-]{1,30}(?:\s+[A-ZÀ-ÖØ-Ý][A-Za-zÀ-ÖØ-öø-ÿ'’.-]{1,30})?$")
 POINT_RE = re.compile(r"^(?:0|15|30|40|AD|AV|A)$", re.I)
 SET_RE = re.compile(r"^\d{1,2}(?:\(\d+\)|\^\d+)?$")
 SCORE_TOKEN_RE = re.compile(r"^(?:AD|AV|A|\d{1,2}|\d{1,2}\(\d+\)|\d{1,2}\^\d+|[•·—-])$", re.I)
@@ -83,7 +84,21 @@ def smallest_live_blocks(soup):
             slash_team = any("/" in x and re.search(r"[A-Za-zÀ-ÖØ-öø-ÿ]", x) for x in lines)
             singles_name_count = sum(1 for x in lines if PLAYER_RE.match(x))
             doubles_name_count = sum(1 for x in lines if DOUBLES_RE.match(x))
-            has_two_competitors = singles_name_count >= 2 or doubles_name_count >= 2 or (slash_team and singles_name_count + doubles_name_count >= 2)
+            surname_only_count = sum(
+                1 for x in lines
+                if SURNAME_ONLY_RE.match(x)
+                and not PLAYER_RE.match(x)
+                and not UI_RE.match(x)
+                and not ROUND_RE.match(x)
+                and not COURT_RE.match(x)
+                and not re.search(r"\b(?:OPEN|WTA|LIVE|MATCH|SET|COURT|ROUND|SINGAPORE|KOREA|SEOUL|HARD|GRANDSTAND|CENTER|CENTRE|STADIUM)\b", x, re.I)
+            )
+            has_two_competitors = (
+                singles_name_count >= 2
+                or doubles_name_count >= 2
+                or surname_only_count >= 4
+                or (slash_team and singles_name_count + doubles_name_count >= 2)
+            )
 
             if 5 <= len(lines) <= 55 and has_round and has_live_marker and has_two_competitors:
                 best = element
@@ -139,13 +154,44 @@ def player_candidates(lines):
     for name in out:
         if name not in deduped:
             deduped.append(name)
+    if len(deduped) >= 2:
+        return deduped[:2]
+
+    # Some WTA doubles cards render four player surnames on separate lines.
+    # Convert those into two team labels: "Player A / Player B".
+    surnames = []
+    for line in lines:
+        s = clean_line(line)
+        if (
+            SURNAME_ONLY_RE.match(s)
+            and not PLAYER_RE.match(s)
+            and not UI_RE.match(s)
+            and not ROUND_RE.match(s)
+            and not COURT_RE.match(s)
+            and not SCORE_TOKEN_RE.match(s)
+            and not re.search(r"\b(?:OPEN|WTA|LIVE|MATCH|SET|COURT|ROUND|SINGAPORE|KOREA|SEOUL|HARD|GRANDSTAND|CENTER|CENTRE|STADIUM|WARMUP|SUSPENDED)\b", s, re.I)
+        ):
+            if s not in surnames:
+                surnames.append(s)
+    if len(surnames) >= 4:
+        return [surnames[0] + " / " + surnames[1], surnames[2] + " / " + surnames[3]]
     return deduped[:2]
 
 def tokens_after_name(lines, name):
     try:
         index = lines.index(name)
     except ValueError:
-        return []
+        index = -1
+        # Synthetic doubles labels are built from two surname rows. Anchor score
+        # parsing after the second surname in the team.
+        if " / " in name:
+            second = name.split(" / ", 1)[1].strip()
+            try:
+                index = lines.index(second)
+            except ValueError:
+                index = -1
+        if index < 0:
+            return []
     values = []
     for raw in lines[index + 1:index + 10]:
         s = clean_line(raw)
