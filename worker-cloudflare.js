@@ -1067,23 +1067,31 @@ async function scrapeWtaOfficialLive() {
     if (!value || typeof value !== "object") return "";
     return scalar(value, ["displayName","fullName","playerName","name","shortName"]);
   };
-  const scoreText = value => {
-    if (value == null) return "—";
-    if (["string","number"].includes(typeof value)) return String(value);
+  const scoreParts = value => {
+    const result = { sets: [], point: "" };
+    if (value == null) return result;
     if (Array.isArray(value)) {
-      const out = value.map(scoreText).filter(x => x && x !== "—");
-      return out.length ? out.join(" ") : "—";
+      result.sets = value.map(v => {
+        if (v && typeof v === "object") return scalar(v, ["displayValue","value","score","games"]);
+        return ["string","number"].includes(typeof v) ? String(v) : "";
+      }).filter(Boolean).slice(0,5);
+      return result;
     }
     if (typeof value === "object") {
-      const vals = [];
       for (const key of ["set1","set2","set3","set4","set5","period1","period2","period3","period4","period5"]) {
-        if (value[key] != null && value[key] !== "") vals.push(String(value[key]));
+        if (value[key] != null && value[key] !== "") result.sets.push(String(value[key]));
       }
-      const point = value.point ?? value.current;
-      if (point != null && point !== "") return (vals.length ? vals.join(" ") + " · " : "") + String(point);
-      if (vals.length) return vals.join(" ");
-      return scalar(value, ["displayValue","value","score"]) || "—";
+      const point = value.point ?? value.gamePoint ?? value.gameScore ?? value.currentPoint;
+      if (point != null && point !== "") result.point = String(point);
+      return result;
     }
+    return result;
+  };
+  const scoreText = value => {
+    const p = scoreParts(value);
+    if (p.sets.length || p.point) return (p.sets.join(" ") + (p.point ? " · " + p.point : "")).trim();
+    if (["string","number"].includes(typeof value)) return String(value);
+    if (value && typeof value === "object") return scalar(value, ["displayValue","value","score"]) || "—";
     return "—";
   };
   const walk = (value, visit) => {
@@ -1111,14 +1119,22 @@ async function scrapeWtaOfficialLive() {
     const round = scalar(d, ["round","roundName","drawLevelType"]);
     const court = scalar(d, ["court","courtName"]);
     const id = scalar(d, ["matchId","id","eventId"]) || [tournament,a,b].join("-").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+    const awayRaw = d.scoreA || d.playerAScore || d.homeScore || d.score1;
+    const homeRaw = d.scoreB || d.playerBScore || d.awayScore || d.score2;
+    const awayParts = scoreParts(awayRaw);
+    const homeParts = scoreParts(homeRaw);
     return {
       eventId: "wta-scrape-" + id,
       date: new Date().toISOString(),
       displayTime: tournament,
       away: a,
       home: b,
-      awayScore: scoreText(d.scoreA || d.playerAScore || d.homeScore || d.score1),
-      homeScore: scoreText(d.scoreB || d.playerBScore || d.awayScore || d.score2),
+      awayScore: scoreText(awayRaw),
+      homeScore: scoreText(homeRaw),
+      awaySets: awayParts.sets,
+      homeSets: homeParts.sets,
+      awayPoint: awayParts.point,
+      homePoint: homeParts.point,
       status: [status || "Live", round, court].filter(Boolean).join(" · "),
       state: "live",
       eventOnly: false,
