@@ -35,26 +35,41 @@ jobs:
           git config user.name "IMG Live Stream Bot"
           git config user.email "actions@users.noreply.github.com"
 
-          for attempt in 1 2 3; do
-            git fetch origin main
-            git reset --hard origin/main
+          # GitHub schedules this workflow every five minutes. Keep the job alive
+          # and rescan once per minute so newly-ended streams disappear quickly.
+          for scan in 1 2 3 4 5; do
+            published=0
+            echo "IMG livestream scan $scan/5"
 
-            python scripts/update_youtube_live.py
+            for attempt in 1 2 3; do
+              git fetch origin main
+              git reset --hard origin/main
 
-            if git diff --quiet -- youtube-live.json; then
-              echo "No stream changes."
-              exit 0
+              python scripts/update_youtube_live.py
+
+              if git diff --quiet -- youtube-live.json; then
+                echo "No semantic stream changes."
+                published=1
+                break
+              fi
+
+              git add youtube-live.json
+              git commit -m "Update verified YouTube live streams"
+
+              if git push origin HEAD:main; then
+                published=1
+                break
+              fi
+
+              echo "Push raced with another main update; regenerating from latest main (attempt $attempt)."
+            done
+
+            if [ "$published" -ne 1 ]; then
+              echo "Unable to publish YouTube live data after retries."
+              exit 1
             fi
 
-            git add youtube-live.json
-            git commit -m "Update verified YouTube live streams"
-
-            if git push origin HEAD:main; then
-              exit 0
+            if [ "$scan" -lt 5 ]; then
+              sleep 55
             fi
-
-            echo "Push raced with another main update; regenerating from latest main (attempt $attempt)."
           done
-
-          echo "Unable to publish YouTube live data after retries."
-          exit 1
