@@ -8,6 +8,7 @@ if(!API_KEY){
 
 const MODE=(process.argv[2]||"live").toLowerCase();
 const OUT="sportradar-soccer-data.json";
+const ARCHIVE_OUT="sportradar-soccer-archive.json";
 const BASE="https://api.sportradar.com/soccer/trial/v4/en";
 const EXT_BASE="https://api.sportradar.com/soccer-extended/trial/v4/en";
 const REQUEST_BUDGET=Number(process.env.SPORTRADAR_REQUEST_BUDGET||900);
@@ -95,6 +96,7 @@ async function sr(path,opts){return requestJson(BASE,path,opts)}
 async function sx(path,opts){return requestJson(EXT_BASE,path,opts)}
 
 function readExisting(){
+  try{return JSON.parse(fs.readFileSync(ARCHIVE_OUT,"utf8"))}catch{}
   try{return JSON.parse(fs.readFileSync(OUT,"utf8"))}catch{return {}}
 }
 function norm(s){return String(s||"").toLowerCase().replace(/[^a-z0-9]+/g," ").trim()}
@@ -502,5 +504,42 @@ data.requestBudget=REQUEST_BUDGET;
 data.requestBudgetRemaining=Math.max(0,REQUEST_BUDGET-data.usage.rolling30Day);
 data.runRequestCap=runCap;
 data.harvestMode=MODE;
-fs.writeFileSync(OUT,JSON.stringify(data,null,2)+"\n");
-console.log(`Wrote ${OUT} using ${requests} Sportradar requests (${MODE}).`);
+const slimLeagues={};
+for(const [key,league] of Object.entries(data.leagues||{})){
+  slimLeagues[key]={
+    league:league.league||key,
+    sourceName:league.sourceName||"Sportradar Soccer API",
+    sourceUrl:league.sourceUrl||"https://developer.sportradar.com/soccer",
+    updatedAt:league.updatedAt||iso,
+    competitionId:league.competitionId||"",
+    seasonId:league.seasonId||"",
+    season:league.season||"",
+    seasonStart:league.seasonStart||"",
+    seasonEnd:league.seasonEnd||"",
+    coverage:league.coverage||null,
+    standings:safeArray(league.standings),
+    games:safeArray(league.games)
+  };
+}
+const slim={
+  version:data.version,
+  provider:data.provider,
+  product:data.product,
+  access:data.access,
+  updatedAt:data.updatedAt,
+  requestsLastRun:data.requestsLastRun,
+  requestBudget:data.requestBudget,
+  requestBudgetRemaining:data.requestBudgetRemaining,
+  usage:data.usage,
+  catalogSummary:{
+    competitions:safeArray(data.catalog?.competitions).length,
+    seasons:safeArray(data.catalog?.seasons).length,
+    extendedSeasons:safeArray(data.catalog?.extendedSeasons).length,
+    updatedAt:data.catalog?.updatedAt||null
+  },
+  leagues:slimLeagues
+};
+
+fs.writeFileSync(ARCHIVE_OUT,JSON.stringify(data,null,2)+"\n");
+fs.writeFileSync(OUT,JSON.stringify(slim,null,2)+"\n");
+console.log(`Wrote ${OUT} and ${ARCHIVE_OUT} using ${requests} Sportradar requests (${MODE}).`);
