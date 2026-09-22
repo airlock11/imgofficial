@@ -199,7 +199,7 @@ def parse_blocks(blocks):
             "round": round_name,
             "court": court,
             "status": " · ".join(x for x in [live_status, round_name, court] if x),
-            "state": "live",
+            "state": "suspended" if re.search(r"\bsuspended\b", live_status, re.I) else "live",
             "eventOnly": False,
             "title": tournament or "WTA",
             "sourceName": "WTA Official Scores scrape",
