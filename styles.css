@@ -1963,3 +1963,42 @@ html[data-theme="light"] body.scores-page .score-league-toolbar:after{
     background:linear-gradient(270deg,rgba(239,63,69,.2) 0%,rgba(239,63,69,.08) 45%,rgba(239,63,69,0) 100%);
   }
 }
+
+
+/* Stronger desktop edge cue: visible only while hovering/scrolling */
+@media (hover:hover) and (pointer:fine) and (min-width:761px){
+  .score-league-edge-zone{
+    width:96px;
+    opacity:0;
+    transition:opacity .22s ease,filter .22s ease;
+  }
+  .score-league-edge-zone-left{
+    background:
+      radial-gradient(circle at 10% 50%,rgba(255,255,255,.18),rgba(255,255,255,0) 52%),
+      linear-gradient(90deg,rgba(239,63,69,.48) 0%,rgba(239,63,69,.22) 38%,rgba(239,63,69,0) 100%);
+  }
+  .score-league-edge-zone-right{
+    background:
+      radial-gradient(circle at 90% 50%,rgba(255,255,255,.18),rgba(255,255,255,0) 52%),
+      linear-gradient(270deg,rgba(239,63,69,.48) 0%,rgba(239,63,69,.22) 38%,rgba(239,63,69,0) 100%);
+  }
+  .score-league-edge-zone:hover{
+    opacity:.9;
+    filter:drop-shadow(0 0 18px rgba(239,63,69,.48));
+  }
+  .score-league-filters.edge-scroll-left~.score-league-edge-zone-left,
+  .score-league-filters.edge-scroll-right~.score-league-edge-zone-right{
+    opacity:1;
+    filter:drop-shadow(0 0 24px rgba(239,63,69,.62));
+  }
+  html[data-theme="light"] .score-league-edge-zone-left{
+    background:
+      radial-gradient(circle at 10% 50%,rgba(255,255,255,.7),rgba(255,255,255,0) 52%),
+      linear-gradient(90deg,rgba(239,63,69,.32) 0%,rgba(239,63,69,.14) 38%,rgba(239,63,69,0) 100%);
+  }
+  html[data-theme="light"] .score-league-edge-zone-right{
+    background:
+      radial-gradient(circle at 90% 50%,rgba(255,255,255,.7),rgba(255,255,255,0) 52%),
+      linear-gradient(270deg,rgba(239,63,69,.32) 0%,rgba(239,63,69,.14) 38%,rgba(239,63,69,0) 100%);
+  }
+}
