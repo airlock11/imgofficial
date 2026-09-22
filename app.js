@@ -497,6 +497,21 @@ function scoreLeagueActivityMap(){
     if(liveStreamsForGame(game).length)current.stream=true;
     map.set(key,current);
   }
+
+  // Some official score feeds (especially Asian Games) can have verified live
+  // scores without any livestream. Treat those as live-score-only activity so
+  // the league receives the green indicator and follows stream-enabled leagues.
+  for(const [key,league] of Object.entries(specialSportsDataCache?.leagues||{})){
+    const games=Array.isArray(league?.games)?league.games:[];
+    const hasCurrentLiveScore=games.some(game=>
+      game?.state==='live'&&liveNowItemIsCurrent({...game,sportKey:key})
+    );
+    if(!hasCurrentLiveScore)continue;
+    const current=map.get(key)||{live:false,stream:false};
+    current.live=true;
+    map.set(key,current);
+  }
+
   return map;
 }
 function renderScoreLeagueFilters(){
