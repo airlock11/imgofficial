@@ -124,6 +124,16 @@ document.addEventListener('click',e=>{
     return;
   }
   const sport=e.target.closest('[data-sport]');if(sport)openSport(sport.dataset.sport);if(e.target.matches('.close'))e.target.closest('dialog').close();const highlightButton=e.target.closest('[data-highlight-event]');if(highlightButton)openHighlights(highlightButton.dataset.highlightEvent);const boxingHighlight=e.target.closest('[data-boxing-highlight]');if(boxingHighlight)openBoxingHighlight(boxingHighlight.dataset.boxingHighlight);const liveButton=e.target.closest('[data-live-event]');if(liveButton)openLiveStream(liveButton.dataset.liveEvent)});
+document.addEventListener('change',e=>{
+  const select=e.target.closest?.('[data-boxing-rank-weight]');
+  if(!select)return;
+  const key=select.dataset.boxingRankWeight||'';
+  const weight=select.value;
+  const rows=boxingRankingsDataCache?.rankings?.[key]?.[weight]||[];
+  const host=document.querySelector('[data-boxing-ranking-list="'+CSS.escape(key)+'"]');
+  if(host)host.innerHTML=boxingRankingRowsMarkup(rows,weight);
+});
+
 const scoreFeeds={
   soccer:'https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard',
   laliga:'https://site.api.espn.com/apis/site/v2/sports/soccer/esp.1/scoreboard',
@@ -218,6 +228,26 @@ async function loadBoxingHighlightsData(){
     .catch(()=>boxingHighlightsDataCache)
     .finally(()=>{boxingHighlightsDataPromise=null});
   return boxingHighlightsDataPromise;
+}
+
+let boxingRankingsDataCache=null;
+let boxingRankingsDataTime=0;
+let boxingRankingsDataPromise=null;
+async function loadBoxingRankingsData(){
+  if(boxingRankingsDataCache&&Date.now()-boxingRankingsDataTime<10*60*1000)return boxingRankingsDataCache;
+  if(boxingRankingsDataPromise)return boxingRankingsDataPromise;
+  boxingRankingsDataPromise=fetch('/boxing-rankings.json?ts='+Date.now(),{cache:'no-store'})
+    .then(r=>r.ok?r.json():null)
+    .then(j=>{
+      if(j&&j.rankings){
+        boxingRankingsDataCache=j;
+        boxingRankingsDataTime=Date.now();
+      }
+      return boxingRankingsDataCache;
+    })
+    .catch(()=>boxingRankingsDataCache)
+    .finally(()=>{boxingRankingsDataPromise=null});
+  return boxingRankingsDataPromise;
 }
 
 async function specialSportsPayload(sport){
@@ -756,25 +786,41 @@ function boxingTitleholdersMarkup(items,leagueName,key){
     if(!group){group={weight,items:[]};groups.push(group)}
     group.items.push(item);
   }
-  const panelId='boxing-titleholders-'+String(key||leagueName).replace(/[^a-z0-9_-]/gi,'-');
-  return '<section class="league-games-group league-standings-dropdown boxing-titleholders-dropdown" aria-label="'+esc(leagueName)+' titleholders">'+
-    '<button type="button" class="standings-dropdown-toggle boxing-titleholders-toggle" data-standings-toggle aria-expanded="false" aria-controls="'+esc(panelId)+'">'+
-      '<span class="standings-dropdown-copy"><span class="standings-dropdown-kicker">Champions by weight</span><strong>Titleholders</strong><small>Heavyweight to minimumweight</small></span>'+
-      '<span class="standings-dropdown-side"><span class="standings-dropdown-count">'+esc(sorted.length)+' '+(sorted.length===1?'champion':'champions')+'</span><span class="standings-dropdown-chevron" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span></span>'+
-    '</button>'+
-    '<div id="'+esc(panelId)+'" class="standings-dropdown-content">'+
-      '<div class="standings-dropdown-inner boxing-titleholders-inner">'+
-        groups.map(group=>'<section class="boxing-weight-group"><div class="boxing-weight-heading"><strong>'+esc(group.weight)+'</strong><span>'+esc(group.items.length)+'</span></div><div class="boxing-weight-list">'+
-          group.items.map(item=>{
-            const champion=boxingTitleholderName(item);
-            const full=String(item.title||'');
-            const belt=full.includes(' — ')?full.split(' — ').slice(1).join(' — '):leagueName+' champion';
-            return '<article class="boxing-titleholder-row"><div><strong>'+esc(champion)+'</strong><small>'+esc(belt)+'</small></div><span>'+esc(item.location||'Current champion')+'</span></article>';
-          }).join('')+
-        '</div></section>').join('')+
-      '</div>'+
+  return '<section class="league-games-group boxing-titleholders-section" aria-label="'+esc(leagueName)+' titleholders">'+
+    '<div class="league-games-group-head boxing-section-head"><div><h3>Titleholders</h3><span>'+esc(leagueName)+'</span></div><small>'+esc(sorted.length)+' '+(sorted.length===1?'champion':'champions')+'</small></div>'+
+    '<div class="boxing-titleholders-inner">'+
+      groups.map(group=>'<section class="boxing-weight-group"><div class="boxing-weight-heading"><strong>'+esc(group.weight)+'</strong><span>'+esc(group.items.length)+'</span></div><div class="boxing-weight-list">'+
+        group.items.map(item=>{
+          const champion=boxingTitleholderName(item);
+          const full=String(item.title||'');
+          const belt=full.includes(' — ')?full.split(' — ').slice(1).join(' — '):leagueName+' champion';
+          return '<article class="boxing-titleholder-row"><div><strong>'+esc(champion)+'</strong><small>'+esc(belt)+'</small></div><span>'+esc(item.location||'Current champion')+'</span></article>';
+        }).join('')+
+      '</div></section>').join('')+
     '</div>'+
   '</section>';
+}
+function boxingRankingsMarkup(key,leagueName){
+  const source=boxingRankingsDataCache?.rankings?.[key]||{};
+  const weights=boxingTitleWeightOrder.map(([label])=>label);
+  const available=weights.filter(weight=>Array.isArray(source?.[weight])&&source[weight].length);
+  const selected=available[0]||weights[0];
+  const rows=Array.isArray(source?.[selected])?source[selected]:[];
+  return '<section class="league-games-group boxing-rankings-section" aria-label="'+esc(leagueName)+' rankings">'+
+    '<div class="league-games-group-head boxing-section-head">'+
+      '<div><h3>Rankings</h3><span>'+esc(leagueName)+'</span></div>'+
+      '<label class="boxing-ranking-filter"><span class="sr-only">Weight class</span><select data-boxing-rank-weight="'+esc(key)+'">'+
+        weights.map(weight=>'<option value="'+esc(weight)+'"'+(weight===selected?' selected':'')+'>'+esc(weight)+'</option>').join('')+
+      '</select></label>'+
+    '</div>'+
+    '<div class="boxing-ranking-list" data-boxing-ranking-list="'+esc(key)+'">'+boxingRankingRowsMarkup(rows,selected)+'</div>'+
+  '</section>';
+}
+function boxingRankingRowsMarkup(rows,weight){
+  if(!Array.isArray(rows)||!rows.length){
+    return '<div class="empty boxing-ranking-empty">No verified '+esc(weight)+' rankings are loaded yet.</div>';
+  }
+  return rows.map((row,index)=>'<article class="boxing-ranking-row"><b>#'+esc(row.rank??index+1)+'</b><div><strong>'+esc(row.name||row.fighter||'')+'</strong>'+(row.record?'<small>'+esc(row.record)+'</small>':'')+'</div></article>').join('');
 }
 
 const boxingHighlightKeys=new Set(['wbc','wba','wbo','ibf','ring']);
@@ -2117,8 +2163,10 @@ function renderGames(){
 
   if(info.length){
     const boxingTitleKeys=new Set(['wbc','wba','ibf','wbo','ring']);
-    if(boxingTitleKeys.has(currentScoreLeague))sections.push(boxingTitleholdersMarkup(info,leagueName,currentScoreLeague));
-    else sections.push(
+    if(boxingTitleKeys.has(currentScoreLeague)){
+      sections.push(boxingTitleholdersMarkup(info,leagueName,currentScoreLeague));
+      sections.push(boxingRankingsMarkup(currentScoreLeague,leagueName));
+    }else sections.push(
       '<section class="league-games-group" aria-label="'+esc(leagueName)+' titleholders">'+
         '<div class="league-games-group-head"><h3>Titleholders</h3><span>'+esc(leagueName)+'</span></div>'+
         '<div class="league-games-list">'+info.map(renderCard).join('')+'</div>'+
@@ -2233,7 +2281,9 @@ async function loadGames({silent=false,league=currentScoreLeague}={}){
   const st=document.getElementById('gameStatus');
   const sport=league||currentScoreLeague||'soccer';
   await loadSportsStatsData();
-  if(boxingHighlightKeys.has(sport))await loadBoxingHighlightsData();
+  if(boxingHighlightKeys.has(sport)){
+    await Promise.all([loadBoxingHighlightsData(),loadBoxingRankingsData(),loadSpecialSportsData()]);
+  }
   if(sport==='ufc'||sport==='one')await loadSpecialSportsData();
   const isCurrent=()=>requestToken===scoreLoadToken&&currentScoreLeague===sport;
   const isWebLeague=['pba','uaap','mpbl','nbl','nblaus','vba'].includes(sport);
