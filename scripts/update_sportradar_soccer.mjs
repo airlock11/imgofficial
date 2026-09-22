@@ -206,7 +206,11 @@ for(const t of TARGETS){
   const old=data.leagues[t.key]?.games||[];
   const keepOld=old.filter(g=>{
     const age=Math.abs(Date.now()-(Date.parse(g.date)||0));
-    return age<8*24*60*60*1000;
+    if(age>=8*24*60*60*1000)return false;
+    const mapped=targetKey(g.competition,g.category||"");
+    if(mapped!==t.key)return false;
+    if(t.key==="soccer"&&norm(g.competition)==="premier league"&&!g.category)return false;
+    return true;
   });
   data.leagues[t.key]={
     ...(data.leagues[t.key]||{}),
