@@ -328,7 +328,28 @@ async function fetchAsianGamesOfficial(){
   const url='https://results.asiangames2026.org/#/schedule';
   return {officialLive:true,sourceName:'Aichi-Nagoya 2026 Official Live Results',sourceUrl:url,games:[]};
 }
+function espnScoreDateKey(value){
+  const d=new Date(value);
+  const y=d.getUTCFullYear();
+  const m=String(d.getUTCMonth()+1).padStart(2,'0');
+  const day=String(d.getUTCDate()).padStart(2,'0');
+  return ''+y+m+day;
+}
+async function fetchMlbScoreboard(){
+  const now=new Date();
+  const start=new Date(now.getTime()-2*86400000);
+  const end=new Date(now.getTime()+2*86400000);
+  const url='https://site.api.espn.com/apis/site/v2/sports/baseball/mlb/scoreboard?dates='+espnScoreDateKey(start)+'-'+espnScoreDateKey(end);
+  const r=await fetch(url,{cache:'no-store'});
+  if(!r.ok)throw new Error('MLB scoreboard unavailable');
+  const j=await r.json();
+  if(!Array.isArray(j?.events)||!j.events.length)throw new Error('No MLB games in rolling window');
+  return j;
+}
 async function fetchScorePayload(sport,{fallbackOnly=false}={}){
+  if(sport==='baseball'&&!fallbackOnly){
+    try{return await fetchMlbScoreboard()}catch{}
+  }
   if(sport==='wta'&&!fallbackOnly){
     try{return await fetchWtaLiveScores()}catch{}
   }
