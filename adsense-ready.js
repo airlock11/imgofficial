@@ -2,7 +2,7 @@
   const cfg=window.IMG_ADSENSE_CONFIG||{};
   const id=String(cfg.publisherId||"").trim();
   if(!cfg.enabled||!/^ca-pub-\d+$/.test(id)) return;
-  if(document.querySelector('script[data-img-adsense]')) return;
+  if(document.querySelector('script[data-img-adsense],script[src*="pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"]')) return;
 
   const script=document.createElement('script');
   script.async=true;
