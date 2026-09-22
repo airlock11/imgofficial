@@ -26,6 +26,24 @@ async function handleRequest(request) {
       return new Response(null, { status: 204, headers: cors });
     }
 
+    if (request.method !== "GET") {
+      return jsonResponse({ ok: false, error: "Method not allowed" }, cors, 0, 405);
+    }
+
+    if (url.pathname === "/health") {
+      return jsonResponse({
+        ok: true,
+        service: "img-sports-api",
+        time: new Date().toISOString(),
+        configured: {
+          balldontlie: Boolean(env.BALLDONTLIE_API_KEY),
+          sportsapi: Boolean(env.SPORTSAPI_KEY),
+          boxing: Boolean(env.BOXING_DATA_API_KEY),
+          youtube: Boolean(env.YOUTUBE_API_KEY)
+        }
+      }, cors, 0, 200);
+    }
+
 
     if (url.pathname === "/wta-live") {
       try {
@@ -88,6 +106,9 @@ async function handleRequest(request) {
     }
 
     if (url.pathname === "/games") {
+      if (!env.BALLDONTLIE_API_KEY) {
+        return jsonResponse({ data: [], error: "Basketball API not configured" }, cors, 0, 503);
+      }
       const upstream = new URL("https://api.balldontlie.io/v1/games");
       for (const key of [
         "start_date",
@@ -103,19 +124,23 @@ async function handleRequest(request) {
         }
       }
 
-      const response = await fetch(upstream.toString(), {
-        headers: { Authorization: env.BALLDONTLIE_API_KEY },
-      });
+      try {
+        const response = await fetch(upstream.toString(), {
+          headers: { Authorization: env.BALLDONTLIE_API_KEY },
+        });
 
-      const body = await response.text();
-      return new Response(body, {
-        status: response.status,
-        headers: {
-          ...cors,
-          "Content-Type": "application/json; charset=utf-8",
-          "Cache-Control": "public, max-age=20",
-        },
-      });
+        const body = await response.text();
+        return new Response(body, {
+          status: response.status,
+          headers: {
+            ...cors,
+            "Content-Type": "application/json; charset=utf-8",
+            "Cache-Control": "public, max-age=20",
+          },
+        });
+      } catch (error) {
+        return jsonResponse({ data: [], error: "Basketball API unavailable" }, cors, 5, 502);
+      }
     }
 
     if (url.pathname === "/events") {
@@ -1186,9 +1211,9 @@ async function scrapeWtaOfficialLive() {
   };
 }
 
-function jsonResponse(data, cors, cacheSeconds) {
+function jsonResponse(data, cors, cacheSeconds = 0, status = 200) {
   return new Response(JSON.stringify(data), {
-    status: 200,
+    status,
     headers: {
       ...cors,
       "Content-Type": "application/json; charset=utf-8",
