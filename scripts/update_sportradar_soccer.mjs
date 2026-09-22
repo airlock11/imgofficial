@@ -145,16 +145,28 @@ function coverageFromSeasonInfo(payload){
   return coverage&&typeof coverage==="object"?coverage:{};
 }
 function competitorsFromSeasonInfo(payload){
-  const info=payload?.season_info||payload?.season||payload||{};
-  const list=info?.competitors||payload?.competitors||[];
-  return Array.isArray(list)?list.map(x=>({
-    id:x.id||"",
-    name:x.name||"",
-    abbreviation:x.abbreviation||"",
-    country:x.country||"",
-    countryCode:x.country_code||"",
-    gender:x.gender||""
-  })).filter(x=>x.id||x.name):[];
+  const found=[];
+  const push=x=>{
+    if(!x||typeof x!=="object")return;
+    found.push({
+      id:x.id||"",
+      name:x.name||"",
+      abbreviation:x.abbreviation||"",
+      country:x.country||"",
+      countryCode:x.country_code||"",
+      gender:x.gender||""
+    });
+  };
+
+  for(const x of safeArray(payload?.competitors))push(x);
+  for(const x of safeArray(payload?.season?.competitors))push(x);
+  for(const stage of safeArray(payload?.stages)){
+    for(const group of safeArray(stage?.groups)){
+      for(const x of safeArray(group?.competitors))push(x);
+    }
+  }
+
+  return [...new Map(found.filter(x=>x.id||x.name).map(x=>[x.id||x.name,x])).values()];
 }
 function safeArray(v){return Array.isArray(v)?v:[]}
 function statsSummary(payload){
@@ -167,13 +179,17 @@ function statsSummary(payload){
 }
 
 function standingsRows(payload){
-  const groups=Array.isArray(payload?.standings)?payload.standings:[];
+  const all=Array.isArray(payload?.standings)?payload.standings:[];
+  const preferred=all.filter(s=>String(s?.type||"").toLowerCase()==="total");
+  const sources=preferred.length?preferred:all.slice(0,1);
   const rows=[];
-  for(const group of groups){
-    for(const g of (group?.groups||[])){
-      for(const s of (g?.standings||[])){
+
+  for(const table of sources){
+    for(const group of safeArray(table?.groups)){
+      for(const s of safeArray(group?.standings)){
         const c=s.competitor||{};
         rows.push({
+          competitorId:c.id||"",
           rank:s.rank??s.position??"",
           team:c.name||"",
           played:s.played??s.games_played??"",
@@ -187,9 +203,10 @@ function standingsRows(payload){
         });
       }
     }
-    for(const s of (group?.standings||[])){
+    for(const s of safeArray(table?.standings)){
       const c=s.competitor||{};
       rows.push({
+        competitorId:c.id||"",
         rank:s.rank??s.position??"",
         team:c.name||"",
         played:s.played??s.games_played??"",
@@ -203,7 +220,9 @@ function standingsRows(payload){
       });
     }
   }
-  return rows.filter(x=>x.team);
+
+  return [...new Map(rows.filter(x=>x.team).map(x=>[x.competitorId||x.team,x])).values()]
+    .sort((a,b)=>(Number(a.rank)||999)-(Number(b.rank)||999));
 }
 function mergeGames(existing,incoming){
   const map=new Map();
