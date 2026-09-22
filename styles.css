@@ -1328,7 +1328,7 @@ main{min-height:calc(100svh - 68px)}
 .wta-event-name{min-width:130px;font-weight:700}
 .wta-game-main{min-width:0;flex:1;display:grid;gap:8px}
 .wta-scoreboard{min-width:0;display:grid;gap:4px}
-.wta-score-header,.wta-score-player{display:grid;grid-template-columns:minmax(140px,1fr) repeat(var(--wta-set-count,3),minmax(30px,42px)) minmax(38px,48px);align-items:center;column-gap:6px}
+.wta-score-header,.wta-score-player{display:grid;grid-template-columns:minmax(140px,1fr) repeat(var(--wta-set-count,1),minmax(30px,42px)) minmax(42px,50px);align-items:center;column-gap:6px}
 .wta-score-header{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
 .wta-score-player{min-height:34px}
 .wta-player-name{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:700}
@@ -1338,7 +1338,6 @@ main{min-height:calc(100svh - 68px)}
 @media(max-width:760px){
   .wta-game-card{display:block}
   .wta-event-name{margin-bottom:8px}
-  .wta-score-header,.wta-score-player{grid-template-columns:minmax(108px,1fr) repeat(3,minmax(26px,34px)) minmax(32px,40px);column-gap:4px}
-  .wta-score-header .wta-score-head:nth-of-type(n+4),.wta-score-player .wta-set-score:nth-of-type(n+4){display:none}
+  .wta-score-header,.wta-score-player{grid-template-columns:minmax(108px,1fr) repeat(var(--wta-set-count,1),minmax(26px,34px)) minmax(36px,42px);column-gap:4px}
   .wta-player-name{font-size:13px}
 }
