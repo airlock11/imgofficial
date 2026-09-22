@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-22T18:21:16.366175+00:00",
+  "updated_at": "2026-09-22T18:31:44.965555+00:00",
   "source": "Official and verified public sports sources",
   "leagues": {
     "bleague": {
@@ -3662,7 +3662,7 @@
       "league": "WTA Tour",
       "sourceName": "WTA Official Calendar",
       "sourceUrl": "https://wtafiles.wtatennis.com/pdf/calendar/calendar.pdf",
-      "updatedAt": "2026-09-22T18:21:08.619063+00:00",
+      "updatedAt": "2026-09-22T18:31:36.401274+00:00",
       "note": "Current and upcoming WTA Tour tournaments scraped automatically from the official WTA calendar PDF.",
       "games": [
         {
@@ -3836,12 +3836,12 @@
       "league": "FIBA",
       "sourceName": "FIBA Official",
       "sourceUrl": "https://www.fiba.basketball/en/games",
-      "updatedAt": "2026-09-22T18:21:08.896252+00:00",
+      "updatedAt": "2026-09-22T18:31:37.229868+00:00",
       "note": "Automatically refreshed from official FIBA competition game cards.",
       "games": [
         {
           "eventId": "fiba-fiba-intercontinental-cup-2026-2026-09-22-viln-rssb",
-          "date": "2026-09-22T18:21:08.619093+00:00",
+          "date": "2026-09-22T18:31:36.401308+00:00",
           "displayTime": "Final · Final",
           "away": "VILN",
           "home": "RSSB",
@@ -3857,7 +3857,7 @@
         },
         {
           "eventId": "fiba-fiba-intercontinental-cup-2026-2026-09-22-bjbg-boc",
-          "date": "2026-09-22T18:21:08.619093+00:00",
+          "date": "2026-09-22T18:31:36.401308+00:00",
           "displayTime": "Final · Final",
           "away": "BJBG",
           "home": "BOC",
@@ -3939,11 +3939,58 @@
     },
     "wcba": {
       "league": "WCBA",
+      "season": "2026–27",
       "sourceName": "China Basketball Association / WCBA",
       "sourceUrl": "https://www.cba.net.cn/wcbasy/index.jhtml",
-      "updatedAt": "2026-09-22T18:21:12.213023+00:00",
-      "note": "2026-27 WCBA is configured. Detailed fixtures will populate from the official source when published.",
-      "games": []
+      "updatedAt": "2026-09-22T18:31:40.752701+00:00",
+      "note": "2026–27 WCBA calendar is published: 32-round regular season Nov 14, 2026–Feb 23, 2027; All-Star Feb 27–28; playoffs Mar 4–Apr 9 at the latest. Individual fixtures will populate when officially published.",
+      "games": [
+        {
+          "eventId": "wcba-2026-regular-season",
+          "date": "2026-11-14T12:00:00+08:00",
+          "displayTime": "Nov 14 · Regular season",
+          "title": "WCBA Regular Season begins",
+          "away": "",
+          "home": "",
+          "awayScore": "—",
+          "homeScore": "—",
+          "status": "Scheduled",
+          "state": "scheduled",
+          "eventOnly": true,
+          "sourceName": "China Basketball Association / WCBA",
+          "sourceUrl": "https://www.cba.net.cn/wcbasy/index.jhtml"
+        },
+        {
+          "eventId": "wcba-2027-all-star",
+          "date": "2027-02-27T12:00:00+08:00",
+          "displayTime": "Feb 27–28 · All-Star",
+          "title": "WCBA All-Star Weekend",
+          "away": "",
+          "home": "",
+          "awayScore": "—",
+          "homeScore": "—",
+          "status": "Scheduled",
+          "state": "scheduled",
+          "eventOnly": true,
+          "sourceName": "China Basketball Association / WCBA",
+          "sourceUrl": "https://www.cba.net.cn/wcbasy/index.jhtml"
+        },
+        {
+          "eventId": "wcba-2027-playoffs",
+          "date": "2027-03-04T12:00:00+08:00",
+          "displayTime": "Mar 4 · Playoffs",
+          "title": "WCBA Playoffs begin",
+          "away": "",
+          "home": "",
+          "awayScore": "—",
+          "homeScore": "—",
+          "status": "Scheduled",
+          "state": "scheduled",
+          "eventOnly": true,
+          "sourceName": "China Basketball Association / WCBA",
+          "sourceUrl": "https://www.cba.net.cn/wcbasy/index.jhtml"
+        }
+      ]
     }
   }
 }
