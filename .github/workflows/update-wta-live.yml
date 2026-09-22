@@ -48,6 +48,8 @@ jobs:
             python scripts/update_wta_live.py
             cp wta-live.json /tmp/wta-live.json
 
+            # Discard the generated copy on main before switching branches.
+            git reset --hard origin/main
             git fetch origin wta-live-data
             git checkout -B wta-live-data origin/wta-live-data
             cp /tmp/wta-live.json wta-live.json
