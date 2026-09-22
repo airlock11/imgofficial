@@ -2,7 +2,8 @@ name: Update Sportradar soccer data
 
 on:
   schedule:
-    - cron: "17 */3 * * *"
+    - cron: "17 */4 * * *"
+    - cron: "17 3 * * *"
   push:
     branches:
       - main
@@ -34,6 +35,8 @@ jobs:
     env:
       SPORTRADAR_API_KEY: ${{ secrets.SPORTRADAR_API_KEY }}
       SPORTRADAR_REQUEST_BUDGET: "900"
+      SPORTRADAR_LIVE_RUN_CAP: "6"
+      SPORTRADAR_DEEP_RUN_CAP: "16"
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -55,7 +58,7 @@ jobs:
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             echo "value=${{ inputs.mode }}" >> "$GITHUB_OUTPUT"
           elif [ "${{ github.event_name }}" = "push" ]; then
-            echo "value=deep" >> "$GITHUB_OUTPUT"
+            echo "value=live" >> "$GITHUB_OUTPUT"
           elif [ "$(date -u +%H)" = "03" ]; then
             echo "value=deep" >> "$GITHUB_OUTPUT"
           else
