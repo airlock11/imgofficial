@@ -33,6 +33,7 @@ jobs:
     timeout-minutes: 10
     env:
       SPORTRADAR_API_KEY: ${{ secrets.SPORTRADAR_API_KEY }}
+      SPORTRADAR_REQUEST_BUDGET: "900"
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
