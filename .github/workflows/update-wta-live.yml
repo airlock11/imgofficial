@@ -28,8 +28,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Install parser
+        run: python -m pip install --disable-pip-version-check beautifulsoup4 lxml
 
-      - name: Refresh and publish WTA live data every minute
+      - name: Scrape and publish WTA every minute
         shell: bash
         run: |
           set -euo pipefail
@@ -39,7 +41,7 @@ jobs:
           for cycle in 1 2 3 4 5; do
             echo "WTA live cycle $cycle/5"
 
-            pushed=0
+            published=0
             for attempt in 1 2 3; do
               git fetch origin main
               git reset --hard origin/main
@@ -48,21 +50,21 @@ jobs:
 
               if git diff --quiet -- wta-live.json; then
                 echo "No WTA live-score changes."
-                pushed=1
+                published=1
                 break
               fi
 
               git add wta-live.json
               git commit -m "Update WTA live scores"
               if git push origin HEAD:main; then
-                pushed=1
+                published=1
                 break
               fi
 
               echo "Push raced; retrying."
             done
 
-            if [ "$pushed" -ne 1 ]; then
+            if [ "$published" -ne 1 ]; then
               echo "Unable to publish WTA live cycle."
               exit 1
             fi
