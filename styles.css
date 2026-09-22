@@ -1904,3 +1904,11 @@ html[data-theme="light"] body.scores-page .score-league-toolbar:after{
 .img-legal-links a{color:inherit;text-decoration:none}
 .img-legal-links a:hover,.img-legal-links a:focus-visible{text-decoration:underline}
 @media(max-width:760px){.img-legal-links{margin:24px auto 96px}}
+
+
+/* Desktop league edge-hover auto-scroll affordance */
+@media (hover:hover) and (pointer:fine) and (min-width:761px){
+  .score-league-filters{position:relative;scroll-behavior:auto}
+  .score-league-filters.edge-scroll-left,
+  .score-league-filters.edge-scroll-right{cursor:default}
+}
