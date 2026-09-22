@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-22T19:19:51.424016+00:00",
+  "updated_at": "2026-09-22T20:18:41.307095+00:00",
   "source": "Official and verified public sports sources",
   "leagues": {
     "bleague": {
@@ -55,6 +55,19 @@
       "sourceUrl": "https://api-live.euroleague.net/v2/competitions/E/seasons/E2026/games",
       "note": "Automatically refreshed from the official EuroLeague competition feed.",
       "games": [
+        {
+          "eventId": "euroleague-100",
+          "date": "2026-11-06T20:15:00",
+          "displayTime": "Nov 06 · 20:15",
+          "away": "Crvena Zvezda Meridianbet Belgrade",
+          "home": "Olympiacos Piraeus",
+          "awayScore": "0",
+          "homeScore": "0",
+          "status": "Scheduled",
+          "state": "scheduled",
+          "sourceName": "EuroLeague Official API",
+          "sourceUrl": "https://api-live.euroleague.net/v2/competitions/E/seasons/E2026/games"
+        },
         {
           "eventId": "euroleague-97",
           "date": "2026-11-06T18:00:00",
@@ -3662,7 +3675,7 @@
       "league": "WTA Tour",
       "sourceName": "WTA Official Calendar",
       "sourceUrl": "https://wtafiles.wtatennis.com/pdf/calendar/calendar.pdf",
-      "updatedAt": "2026-09-22T19:19:46.387083+00:00",
+      "updatedAt": "2026-09-22T20:18:36.874165+00:00",
       "note": "Current and upcoming WTA Tour tournaments scraped automatically from the official WTA calendar PDF.",
       "games": [
         {
@@ -3836,12 +3849,12 @@
       "league": "FIBA",
       "sourceName": "FIBA Official",
       "sourceUrl": "https://www.fiba.basketball/en/games",
-      "updatedAt": "2026-09-22T19:19:46.780671+00:00",
+      "updatedAt": "2026-09-22T20:18:37.452742+00:00",
       "note": "Automatically refreshed from official FIBA competition game cards.",
       "games": [
         {
           "eventId": "fiba-fiba-intercontinental-cup-2026-2026-09-22-viln-rssb",
-          "date": "2026-09-22T19:19:46.387107+00:00",
+          "date": "2026-09-22T20:18:36.874200+00:00",
           "displayTime": "Final · Final",
           "away": "VILN",
           "home": "RSSB",
@@ -3857,7 +3870,7 @@
         },
         {
           "eventId": "fiba-fiba-intercontinental-cup-2026-2026-09-22-bjbg-boc",
-          "date": "2026-09-22T19:19:46.387107+00:00",
+          "date": "2026-09-22T20:18:36.874200+00:00",
           "displayTime": "Final · Final",
           "away": "BJBG",
           "home": "BOC",
