@@ -958,7 +958,7 @@ def espn_epl_stats():
     if not groups:
         raise ValueError("EPL statistics leaders not returned")
     return {
-        "league":"EPL",
+        "league":"Premier League",
         "season":"2026–27",
         "sourceName":"ESPN public statistics feed",
         "sourceUrl":url,
