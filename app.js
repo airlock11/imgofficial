@@ -1436,40 +1436,12 @@ function normalizeBoxingFight(f,index=0){
   };
 }
 function normalizeAsianGamesExpiry(game){
-  if(!game||game.state!=='live')return game;
-  const now=Date.now();
-  const suppliedExpiry=Date.parse(game.expiresAt||game.liveExpiresAt||'');
-  const start=Date.parse(game.firstLiveAt||game.liveFirstSeenAt||game.date||'');
-  const expires=Number.isFinite(suppliedExpiry)?suppliedExpiry:(Number.isFinite(start)?start+2*60*60*1000:NaN);
-  if(!Number.isFinite(expires)||now<expires)return game;
-  return{
-    ...game,
-    state:'expired',
-    status:'Awaiting official result',
-    streams:[],
-    streamsChecked:true,
-    liveExpired:true
-  };
+  // Asian Games live state is source-driven. Never expire a game by elapsed time.
+  return game;
 }
 function expireVisibleAsianGames(){
-  let changed=false;
-  if(currentScoreLeague==='asian_games'){
-    allGames=allGames.map(g=>{
-      const next=normalizeAsianGamesExpiry(g);
-      if(next!==g)changed=true;
-      const streams=(next.streams||[]).filter(s=>!s.expiresAt||Date.now()<Date.parse(s.expiresAt));
-      if(streams.length!==(next.streams||[]).length){changed=true;return {...next,streams};}
-      return next;
-    });
-    if(changed)renderGames();
-  }
-  const remaining=liveNowItems.filter(liveNowItemIsCurrent).map(g=>{
-    if(g.sportKey!=='asian_games')return g;
-    const streams=(g.streams||[]).filter(s=>!s.expiresAt||Date.now()<Date.parse(s.expiresAt));
-    if(streams.length!==(g.streams||[]).length){changed=true;return {...g,streams};}
-    return g;
-  });
-  if(changed||remaining.length!==liveNowItems.length)renderAllLiveGames(remaining);
+  // Intentionally no fixed time-based expiry. The live feed removes ended streams
+  // after upstream verification says they are no longer live.
 }
 function normalizeScorePayload(sport,payload){
   if(payload?.special){
