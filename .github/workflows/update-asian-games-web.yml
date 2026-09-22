@@ -44,26 +44,34 @@ jobs:
           git config user.name "IMG Asian Games Data Bot"
           git config user.email "actions@users.noreply.github.com"
 
-          for attempt in 1 2 3; do
+          # Collect once. Publishing retries must not rerun the slow scraper.
+          git fetch origin main
+          git reset --hard origin/main
+          python scripts/update_asian_games_web.py
+
+          if git diff --quiet -- special-sports-data.json; then
+            echo "No Asian Games data changes."
+            exit 0
+          fi
+
+          git add special-sports-data.json
+          git commit -m "Update Asian Games official web data"
+
+          for attempt in 1 2 3 4 5; do
             git fetch origin main
-            git reset --hard origin/main
-
-            python scripts/update_asian_games_web.py
-
-            if git diff --quiet -- special-sports-data.json; then
-              echo "No Asian Games data changes."
-              exit 0
+            if ! git rebase origin/main; then
+              git rebase --abort || true
+              echo "Rebase conflict while publishing special-sports-data.json."
+              exit 1
             fi
-
-            git add special-sports-data.json
-            git commit -m "Update Asian Games official web data"
 
             if git push origin HEAD:main; then
               exit 0
             fi
 
-            echo "Push raced with another main update; regenerating from latest main (attempt $attempt)."
+            echo "Push raced with another automation; retrying publish only (attempt $attempt)."
+            sleep 2
           done
 
-          echo "Unable to publish Asian Games data after retries."
+          echo "Unable to publish after retries."
           exit 1
