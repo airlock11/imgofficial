@@ -14,10 +14,14 @@ const iso=now.toISOString();
 
 const TARGETS=[
   {key:"soccer",names:["premier league","english premier league"],label:"Premier League"},
+  {key:"jamaica_pl",names:["premier league"],label:"Jamaica Premier League"},
+  {key:"mizoram_pl",names:["mizoram premier league"],label:"Mizoram Premier League"},
   {key:"laliga",names:["laliga","la liga","primera division"],label:"La Liga"},
+  {key:"el_salvador_reserves",names:["primera division, reserves","primera division reserves"],label:"Primera Division, Reserves"},
   {key:"seriea",names:["serie a"],label:"Serie A"},
   {key:"bundesliga",names:["bundesliga"],label:"Bundesliga"},
   {key:"champions",names:["uefa champions league","champions league"],label:"UEFA Champions League"},
+  {key:"ucl_women",names:["uefa champions league women"],label:"UEFA Champions League Women"},
   {key:"mls",names:["major league soccer","mls"],label:"MLS"},
   {key:"pfl",names:["philippines football league","philippine football league"],label:"Philippine Football League"},
   {key:"j1",names:["j1 league","j.league","j league"],label:"J1 League"}
@@ -68,9 +72,19 @@ function readExisting(){
   try{return JSON.parse(fs.readFileSync(OUT,"utf8"))}catch{return {}}
 }
 function norm(s){return String(s||"").toLowerCase().replace(/[^a-z0-9]+/g," ").trim()}
-function targetKey(name){
+function targetKey(name,category=""){
   const n=norm(name);
-  const exact=TARGETS.find(t=>t.names.some(x=>n===x||n.includes(x)));
+  const cat=norm(category);
+
+  if(n==="premier league"&&cat.includes("jamaica"))return "jamaica_pl";
+  if(n==="premier league"&&(cat.includes("england")||cat.includes("england amateur")))return "soccer";
+  if(n==="mizoram premier league")return "mizoram_pl";
+  if((n==="primera division reserves"||n==="primera division reserve")&&cat.includes("el salvador"))return "el_salvador_reserves";
+  if(n==="uefa champions league women")return "ucl_women";
+  if(n==="uefa champions league")return "champions";
+  if((n==="la liga"||n==="laliga"||n==="primera division")&&cat.includes("spain"))return "laliga";
+
+  const exact=TARGETS.find(t=>t.names.some(x=>n===norm(x)));
   return exact?.key||null;
 }
 function eventItems(payload){
@@ -111,6 +125,8 @@ function normalizeGame(item){
     seasonId:context?.season?.id||"",
     competitionId:comp?.id||"",
     competition:comp?.name||"",
+    category:context?.category?.name||"",
+    categoryId:context?.category?.id||"",
     sourceName:"Sportradar Soccer API",
     sourceUrl:"https://developer.sportradar.com/soccer"
   };
@@ -181,7 +197,7 @@ if(!live&&!daily){
 const combined=[...eventItems(live),...eventItems(daily)].map(normalizeGame).filter(g=>g.eventId);
 const grouped={};
 for(const g of combined){
-  const key=targetKey(g.competition);
+  const key=targetKey(g.competition,g.category);
   if(!key)continue;
   (grouped[key]??=[]).push(g);
 }
