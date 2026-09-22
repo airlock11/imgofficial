@@ -245,7 +245,7 @@ def wta_live_scores():
         return games
 
     attempts = [
-        ("sofascore", "https://www.sofascore.com/api/v1/sport/tennis/events/live", "sofa"),
+        ("sofascore", "https://api.sofascore.com/api/v1/sport/tennis/events/live", "sofa"),
         ("espn-site", "https://site.api.espn.com/apis/site/v2/sports/tennis/wta/scoreboard", "espn"),
         ("espn-cdn", "https://cdn.espn.com/core/tennis/wta/scoreboard?xhr=1", "espn"),
     ]
