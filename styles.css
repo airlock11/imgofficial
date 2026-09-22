@@ -2048,6 +2048,13 @@ html[data-theme="light"] body.scores-page .score-league-toolbar:after{
     align-items:center;
     justify-content:center;
     overflow:visible;
+    transition:opacity .22s ease,visibility .22s ease;
+  }
+
+  body.scores-page .score-league-edge-zone.is-edge-hidden{
+    opacity:0!important;
+    visibility:hidden;
+    pointer-events:none!important;
   }
 
   body.scores-page .score-league-edge-zone::before,
