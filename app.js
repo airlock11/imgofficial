@@ -2473,7 +2473,7 @@ function renderGames(){
     );
   }
 
-  if(sportradarSoccerKeys.has(currentScoreLeague)){
+  if(sportradarSoccerKeys.has(currentScoreLeague)||currentScoreLeague==='soccer'){
     const soccerStandings=soccerStandingsMarkup(currentScoreLeague);
     if(soccerStandings)sections.push(soccerStandings);
   }
