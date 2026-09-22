@@ -39,7 +39,7 @@ jobs:
           git config user.name "IMG Sports Data Bot"
           git config user.email "actions@users.noreply.github.com"
           git fetch origin main
-          git rebase origin/main
+          git reset --hard origin/main
           python scripts/update_wta_live.py
           if git diff --quiet -- wta-live-data.json; then
             echo "No WTA live-score changes."
