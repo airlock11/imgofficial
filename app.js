@@ -1380,8 +1380,8 @@ function selectedLeagueLiveStreamMarkup(key){
     const videoId=streamVideoId(stream);
     cards.push('<section class="league-live-stream" data-live-league="'+esc(key)+'" data-live-video="'+esc(videoId)+'" data-live-event="'+esc(game.eventId)+'" aria-label="'+esc(league)+' live stream">'+
       '<div class="league-live-stream-head"><span><i aria-hidden="true"></i>LIVE STREAM</span><strong>'+esc(matchup)+'</strong><small>'+esc(source)+'</small></div>'+
-      (embed?'<div class="league-live-stream-player"><iframe src="'+esc(embed)+'" title="'+esc(matchup)+' live stream" loading="lazy" allow="autoplay; encrypted-media; picture-in-picture; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>':'')+
-      '<button type="button" class="league-live-stream-action" data-live-event="'+esc(game.eventId)+'"><span class="live-dot" aria-hidden="true"></span>Watch Live</button>'+
+      (embed?'<div class="league-live-stream-player"><iframe src="'+esc(embed)+'" title="'+esc(matchup)+' live stream" loading="lazy" allow="autoplay; encrypted-media; picture-in-picture; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>':
+        '<button type="button" class="league-live-stream-action" data-live-event="'+esc(game.eventId)+'"><span class="live-dot" aria-hidden="true"></span>Open Live Stream</button>')+
     '</section>');
   }
   return cards.join('');
