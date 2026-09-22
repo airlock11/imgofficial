@@ -3,6 +3,12 @@ name: Update Sportradar soccer data
 on:
   schedule:
     - cron: "17 */3 * * *"
+  push:
+    branches:
+      - main
+    paths:
+      - "scripts/update_sportradar_soccer.mjs"
+      - ".github/workflows/update-sportradar-soccer.yml"
   workflow_dispatch:
     inputs:
       mode:
