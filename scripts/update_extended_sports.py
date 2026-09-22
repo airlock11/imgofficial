@@ -419,6 +419,67 @@ def wta_live_scores():
     }
 
 
+def premier_league_games():
+    """Refresh verified Premier League recent/upcoming fixtures from ESPN's EPL feed."""
+    now = datetime.now(timezone.utc)
+    start = (now - timedelta(days=10)).strftime("%Y%m%d")
+    end = (now + timedelta(days=21)).strftime("%Y%m%d")
+    url = f"https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard?dates={start}-{end}"
+    payload = fetch_json(url)
+    events = payload.get("events", []) if isinstance(payload, dict) else []
+    games = []
+    for event in events:
+        comps = event.get("competitions") or []
+        comp = comps[0] if comps else {}
+        competitors = comp.get("competitors") or []
+        home = next((x for x in competitors if x.get("homeAway") == "home"), competitors[0] if competitors else {})
+        away = next((x for x in competitors if x.get("homeAway") == "away"), competitors[1] if len(competitors) > 1 else {})
+        home_team = home.get("team") or {}
+        away_team = away.get("team") or {}
+        home_name = home_team.get("displayName") or home_team.get("shortDisplayName") or "TBD"
+        away_name = away_team.get("displayName") or away_team.get("shortDisplayName") or "TBD"
+        if home_name == "TBD" and away_name == "TBD":
+            continue
+
+        status_type = ((comp.get("status") or {}).get("type") or {})
+        raw_state = status_type.get("state") or "pre"
+        state = "live" if raw_state == "in" else ("final" if raw_state == "post" else "scheduled")
+        status = status_type.get("shortDetail") or status_type.get("detail") or status_type.get("description") or ("Final" if state == "final" else "Scheduled")
+        date = comp.get("date") or event.get("date")
+        home_score = home.get("score")
+        away_score = away.get("score")
+        if state == "scheduled":
+            home_score = "—"
+            away_score = "—"
+
+        games.append({
+            "eventId": str(event.get("id") or comp.get("id") or ""),
+            "date": date,
+            "displayTime": status,
+            "away": away_name,
+            "home": home_name,
+            "awayLogo": ((away_team.get("logos") or [{}])[0] or {}).get("href", ""),
+            "homeLogo": ((home_team.get("logos") or [{}])[0] or {}).get("href", ""),
+            "awayScore": str(away_score if away_score not in (None, "") else "—"),
+            "homeScore": str(home_score if home_score not in (None, "") else "—"),
+            "status": status,
+            "state": state,
+            "sourceName": "ESPN Premier League feed",
+            "sourceUrl": url
+        })
+    if not games:
+        raise RuntimeError("No verified Premier League games returned")
+    games.sort(key=lambda g: g.get("date") or "")
+    return {
+        "league": "Premier League",
+        "sourceName": "ESPN Premier League feed",
+        "sourceUrl": url,
+        "updatedAt": datetime.now(timezone.utc).isoformat(),
+        "note": "Verified EPL-only rolling window: recent results plus upcoming fixtures.",
+        "games": games
+    }
+
+
 def fiba_games():
     """Refresh FIBA games from official FIBA competition pages."""
     hub_url = "https://www.fiba.basketball/en/games"
@@ -805,7 +866,7 @@ def boxing_org(org):
 def main():
     data = load()
     leagues = data.setdefault("leagues", {})
-    jobs = [("wta", wta_calendar_schedule), ("fiba", fiba_games), ("euroleague", euroleague), ("cba", cba_games), ("wcba", wcba_games), ("npb", npb), ("kbo", kbo)]
+    jobs = [("soccer", premier_league_games), ("wta", wta_calendar_schedule), ("fiba", fiba_games), ("euroleague", euroleague), ("cba", cba_games), ("wcba", wcba_games), ("npb", npb), ("kbo", kbo)]
     for key, builder in jobs:
         try:
             result = builder()
