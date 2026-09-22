@@ -1,3 +1,4 @@
+# automation-audit: 2026-09-22
 name: Update boxing fighter data
 
 on:
@@ -9,6 +10,7 @@ on:
       - main
     paths:
       - "scripts/update_boxing_data.py"
+      - ".github/workflows/update-boxing-data.yml"
 
 permissions:
   contents: write
