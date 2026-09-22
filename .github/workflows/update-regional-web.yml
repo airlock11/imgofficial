@@ -3,7 +3,7 @@ name: Update regional basketball web data
 
 on:
   schedule:
-    - cron: "*/30 * * * *"
+    - cron: "*/15 * * * *"
   workflow_dispatch:
   push:
     branches:
