@@ -2233,7 +2233,7 @@ function verifiedChannelLiveGame(x,updatedAt=''){
 async function loadAllLiveGames({silent=false}={}){
   const live=[];
   const webKeys=['pba','mpbl','nbl','nblaus','vba'];
-  const apiKeys=['soccer','laliga','seriea','bundesliga','champions','mls','pfl','basketball','wnba','atp','wta','australian_open','wimbledon','us_open','ipl','bigbash','cricket_world_cup','volleyball_w','volleyball_m','pvl','vleague_jp','f1','motogp','formulae','ufc','one','wbc','wba','ibf','wbo','ring','baseball','npb','kbo','hockey','khl','iihf','football','ncaaf','bleague','euroleague','fiba'];
+  const apiKeys=['soccer','jamaica_pl','mizoram_pl','laliga','el_salvador_reserves','seriea','bundesliga','champions','ucl_women','mls','pfl','basketball','wnba','ncaa_ph','uaap','bleague','euroleague','cba','wcba','fiba','atp','wta','australian_open','wimbledon','us_open','ipl','bigbash','cricket_world_cup','volleyball_w','volleyball_m','pvl','vleague_jp','f1','motogp','formulae','ufc','one','wbc','wba','ibf','wbo','ring','baseball','npb','kbo','hockey','khl','iihf','football','ncaaf'];
 
   // Start score requests in parallel, but never make verified streams wait for them.
   const regionalPromise=(async()=>{
