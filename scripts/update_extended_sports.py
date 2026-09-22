@@ -125,11 +125,11 @@ def wta_calendar_schedule():
 
     # Page 1 is the main WTA Tour calendar. Page 2 is WTA 125.
     text = reader.pages[0].extract_text() or ""
-    lines = [re.sub(r"\\s+", " ", line).strip() for line in text.splitlines() if line.strip()]
+    lines = [re.sub(r"\s+", " ", line).strip() for line in text.splitlines() if line.strip()]
 
     blocks = []
     current = None
-    week_re = re.compile(r"^(\\d+(?:\\s*&\\s*\\d+)?)\\s+(\\d{1,2}-[A-Z]{3})\\s*(.*)$")
+    week_re = re.compile(r"^(\d+(?:\s*&\s*\d+)?)\s+(\d{1,2}-[A-Z]{3})\s*(.*)$")
     for line in lines:
         m = week_re.match(line)
         if m:
@@ -144,7 +144,7 @@ def wta_calendar_schedule():
     now = datetime.now(timezone.utc)
     games = []
     seen = set()
-    event_re = re.compile(r"([^|]+?)\\s*\\|\\s*([^|]+?)\\s*-\\s*((?:I\\s*)?[HCG])(?=\\s|$)")
+    event_re = re.compile(r"([^|]+?)\s*\|\s*([^|]+?)\s*-\s*((?:I\s*)?[HCG])(?=\s|$)")
 
     # Exact dates currently published on WTA's tournament pages.
     exact_dates = {
@@ -171,18 +171,18 @@ def wta_calendar_schedule():
             continue
 
         blob = block["text"]
-        blob = re.sub(r"\\bBJK Cup Finals\\b", " ", blob, flags=re.I)
-        blob = re.sub(r"\\bBJK Cup Playoffs\\b", " ", blob, flags=re.I)
+        blob = re.sub(r"\bBJK Cup Finals\b", " ", blob, flags=re.I)
+        blob = re.sub(r"\bBJK Cup Playoffs\b", " ", blob, flags=re.I)
 
         for match in event_re.finditer(blob):
-            name = re.sub(r"\\s+", " ", match.group(1)).strip(" -")
-            location = re.sub(r"\\s+", " ", match.group(2)).strip(" -")
-            surface_code = re.sub(r"\\s+", " ", match.group(3)).strip().upper()
+            name = re.sub(r"\s+", " ", match.group(1)).strip(" -")
+            location = re.sub(r"\s+", " ", match.group(2)).strip(" -")
+            surface_code = re.sub(r"\s+", " ", match.group(3)).strip().upper()
             if not name or not location:
                 continue
 
             # Remove week/date residue if the PDF extractor attached it to a name.
-            name = re.sub(r"^\\d+(?:\\s*&\\s*\\d+)?\\s+\\d{1,2}-[A-Z]{3}\\s+", "", name).strip()
+            name = re.sub(r"^\d+(?:\s*&\s*\d+)?\s+\d{1,2}-[A-Z]{3}\s+", "", name).strip()
             if not name:
                 continue
 
@@ -235,10 +235,6 @@ def wta_calendar_schedule():
             })
 
     if not games:
-        print("wta-calendar-pdf-lines-begin")
-        for debug_line in lines[:90]:
-            print("WTA-CAL-LINE", repr(debug_line))
-        print("wta-calendar-pdf-lines-end")
         raise RuntimeError("WTA official calendar PDF produced no current/upcoming Tour events")
 
     games.sort(key=lambda g: g.get("date") or "")
