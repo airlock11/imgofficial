@@ -1239,3 +1239,23 @@ main{min-height:calc(100svh - 68px)}
 @media(max-width:430px){
   .boxing-highlight-card{grid-template-columns:112px minmax(0,1fr)}
 }
+
+
+/* Boxing titleholders + rankings */
+.boxing-section-head{display:flex;align-items:center;justify-content:space-between;gap:14px}
+.boxing-section-head>div{min-width:0}
+.boxing-section-head small{font-size:.78rem;opacity:.68;white-space:nowrap}
+.boxing-titleholders-section .boxing-titleholders-inner{display:grid;gap:12px}
+.boxing-ranking-filter{display:inline-flex;align-items:center}
+.boxing-ranking-filter select{min-width:170px;max-width:220px;height:36px;padding:0 34px 0 12px;border-radius:10px;border:1px solid rgba(127,127,127,.3);background:var(--card,#111);color:inherit;font:inherit;font-size:.82rem;cursor:pointer}
+.boxing-ranking-list{display:grid;gap:8px}
+.boxing-ranking-row{display:grid;grid-template-columns:44px minmax(0,1fr);gap:10px;align-items:center;padding:11px 12px;border:1px solid rgba(127,127,127,.2);border-radius:12px;background:rgba(127,127,127,.05)}
+.boxing-ranking-row>b{font-size:.9rem}
+.boxing-ranking-row>div{display:grid;gap:3px}
+.boxing-ranking-row strong{font-size:.9rem}
+.boxing-ranking-row small{font-size:.76rem;opacity:.68}
+.boxing-ranking-empty{margin:0}
+@media(max-width:600px){
+  .boxing-section-head{align-items:flex-start}
+  .boxing-ranking-filter select{min-width:140px;max-width:160px;height:34px;font-size:.78rem}
+}
