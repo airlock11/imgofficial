@@ -2036,3 +2036,84 @@ html[data-theme="light"] body.scores-page .score-league-toolbar:after{
   justify-self:end;
   box-sizing:border-box;
 }
+
+/* IMG_DESKTOP_LEAGUE_POINTERS_START */
+@media (min-width:761px){
+  body.scores-page .score-league-edge-zone{
+    width:72px;
+    opacity:1;
+    background:transparent!important;
+    filter:none!important;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:visible;
+  }
+
+  body.scores-page .score-league-edge-zone::before,
+  body.scores-page .score-league-edge-zone::after{
+    content:"";
+    position:absolute;
+    top:50%;
+    width:18px;
+    height:18px;
+    border-top:3px solid rgba(255,255,255,.62);
+    border-right:3px solid rgba(255,255,255,.62);
+    border-radius:2px;
+    transform-origin:center;
+    pointer-events:none;
+    opacity:.28;
+    animation:imgLeaguePointerPulse 1.75s ease-in-out infinite;
+    filter:drop-shadow(0 0 7px rgba(255,255,255,.16));
+  }
+
+  body.scores-page .score-league-edge-zone::after{
+    opacity:.12;
+    animation-delay:.22s;
+    filter:drop-shadow(0 0 10px rgba(255,255,255,.10));
+  }
+
+  body.scores-page .score-league-edge-zone-left::before,
+  body.scores-page .score-league-edge-zone-left::after{
+    left:14px;
+    transform:translateY(-50%) rotate(-135deg);
+  }
+
+  body.scores-page .score-league-edge-zone-left::after{left:25px}
+
+  body.scores-page .score-league-edge-zone-right::before,
+  body.scores-page .score-league-edge-zone-right::after{
+    right:14px;
+    transform:translateY(-50%) rotate(45deg);
+  }
+
+  body.scores-page .score-league-edge-zone-right::after{right:25px}
+
+  body.scores-page .score-league-edge-zone:hover::before,
+  body.scores-page .score-league-edge-zone:hover::after{
+    border-color:rgba(255,255,255,.78);
+  }
+
+  html[data-theme="light"] body.scores-page .score-league-edge-zone::before,
+  html[data-theme="light"] body.scores-page .score-league-edge-zone::after{
+    border-color:rgba(20,27,36,.48);
+    filter:drop-shadow(0 0 6px rgba(20,27,36,.10));
+  }
+
+  @keyframes imgLeaguePointerPulse{
+    0%,100%{opacity:.10}
+    50%{opacity:.62}
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    body.scores-page .score-league-edge-zone::before,
+    body.scores-page .score-league-edge-zone::after{
+      animation:none;
+      opacity:.34;
+    }
+  }
+}
+@media (max-width:760px){
+  body.scores-page .score-league-edge-zone{display:none!important}
+}
+/* IMG_DESKTOP_LEAGUE_POINTERS_END */
