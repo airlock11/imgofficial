@@ -25,6 +25,8 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -37,12 +39,30 @@ jobs:
       - name: Commit updated odds
         shell: bash
         run: |
-          if git diff --quiet -- odds-data.json odds-meta.json; then
-            echo "No odds changes."
-            exit 0
-          fi
+          set -euo pipefail
           git config user.name "IMG Odds Data Bot"
           git config user.email "actions@users.noreply.github.com"
-          git add odds-data.json odds-meta.json
-          git commit -m "Update multi-bookmaker odds data"
-          git push
+
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git reset --hard origin/main
+
+            python scripts/update_odds.py
+
+            if git diff --quiet -- odds-data.json odds-meta.json; then
+              echo "No data changes."
+              exit 0
+            fi
+
+            git add odds-data.json odds-meta.json
+            git commit -m "Update multi-bookmaker odds data"
+
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+
+            echo "Push raced with another automation; regenerating from latest main (attempt $attempt)."
+          done
+
+          echo "Unable to publish after retries."
+          exit 1
