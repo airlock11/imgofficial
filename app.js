@@ -1841,6 +1841,18 @@ function gameDomKey(g){
   return encodeURIComponent(raw);
 }
 
+function scoreStructureSignature(items=allGames){
+  return (items||[])
+    .map(g=>[
+      gameDomKey(g),
+      String(g?.state||''),
+      Boolean(liveStreamsForGame(g).length)?'stream':'',
+      Array.isArray(g?.highlights)&&g.highlights.length?'highlights':''
+    ].join(':'))
+    .sort()
+    .join('|');
+}
+
 function updateScoreNumbers(items=allGames){
   const map=new Map((items||[]).map(g=>[gameDomKey(g),g]));
   document.querySelectorAll('#games .game[data-game-key]').forEach(card=>{
@@ -1854,6 +1866,16 @@ function updateScoreNumbers(items=allGames){
     const home=card.querySelector('[data-score-side="home"]');
     if(away&&away.textContent!==String(g.awayScore??'—'))away.textContent=String(g.awayScore??'—');
     if(home&&home.textContent!==String(g.homeScore??'—'))home.textContent=String(g.homeScore??'—');
+
+    const state=card.querySelector('.state');
+    const nextStatus=String(g.status||'');
+    if(state&&state.textContent!==nextStatus)state.textContent=nextStatus;
+    if(state)state.classList.toggle('live',g.state==='live');
+    card.classList.toggle('game-is-live',g.state==='live');
+
+    const time=card.querySelector('.time');
+    const nextTime=String(g.displayTime||'');
+    if(time&&nextTime&&time.textContent!==nextTime)time.textContent=nextTime;
   });
 }
 
@@ -2660,6 +2682,7 @@ async function loadGames({silent=false,league=currentScoreLeague}={}){
   if(!document.getElementById('games'))return;
   const st=document.getElementById('gameStatus');
   const sport=league||currentScoreLeague||'soccer';
+  const previousStructure=scoreStructureSignature(allGames);
   await loadSportsStatsData();
   if(sport==='asian_games')await loadSelectedAsianGamesVerifiedStreams();
   if(boxingHighlightKeys.has(sport)){
@@ -2712,7 +2735,9 @@ async function loadGames({silent=false,league=currentScoreLeague}={}){
         ];
         st.textContent='';
         renderRegionalContext(sport,'cloudflare-fallback');
-        if(silent)updateScoreNumbers();else renderGames();
+        if(silent&&previousStructure!==scoreStructureSignature(allGames))renderGames();
+        else if(silent)updateScoreNumbers();
+        else renderGames();
         if(!silent)void hydrateLiveStreams(sport);
         return;
       }
@@ -2721,7 +2746,9 @@ async function loadGames({silent=false,league=currentScoreLeague}={}){
     if(webGames.length&&isCurrent()){
       if(!allGames.length)allGames=webGames;
       st.textContent='';
-      if(silent)updateScoreNumbers();else renderGames();
+      if(silent&&previousStructure!==scoreStructureSignature(allGames))renderGames();
+      else if(silent)updateScoreNumbers();
+      else renderGames();
       return;
     }
   }
@@ -2786,6 +2813,7 @@ async function loadGames({silent=false,league=currentScoreLeague}={}){
     // labels change, and matches move between Live and Recent Games.
     // Re-render WTA from the fresh GitHub payload on every automatic refresh.
     if(silent&&sport==='wta')renderGames();
+    else if(silent&&previousStructure!==scoreStructureSignature(allGames))renderGames();
     else if(silent)updateScoreNumbers();
     else renderGames();
 
@@ -2801,7 +2829,9 @@ async function loadGames({silent=false,league=currentScoreLeague}={}){
       if(!isCurrent())return;
       st.textContent='';
       renderRegionalContext(sport,'web');
-      if(silent)updateScoreNumbers();else renderGames();
+      if(silent&&previousStructure!==scoreStructureSignature(allGames))renderGames();
+      else if(silent)updateScoreNumbers();
+      else renderGames();
     }else{
       renderRegionalContext(sport,'');
       st.textContent='Feed unavailable';
