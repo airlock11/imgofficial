@@ -18,20 +18,36 @@ SPORT_IDS = (10, 11, 14)
 def get_json(path, params):
     query = dict(params)
     query["apiKey"] = KEY
-    req = urllib.request.Request(
-        API + path + "?" + urllib.parse.urlencode(query),
-        headers={"User-Agent": UA, "Accept": "application/json"},
-    )
-    try:
-        with urllib.request.urlopen(req, timeout=60) as r:
-            return json.loads(r.read().decode("utf-8", errors="replace"))
-    except urllib.error.HTTPError as exc:
-        body = ""
+    url = API + path + "?" + urllib.parse.urlencode(query)
+    last_error = None
+    for attempt in range(5):
+        req = urllib.request.Request(
+            url,
+            headers={"User-Agent": UA, "Accept": "application/json"},
+        )
         try:
-            body = exc.read().decode("utf-8", errors="replace")
-        except Exception:
-            pass
-        raise RuntimeError(f"HTTP {exc.code}: {(body or str(exc))[:400]}")
+            with urllib.request.urlopen(req, timeout=60) as r:
+                return json.loads(r.read().decode("utf-8", errors="replace"))
+        except urllib.error.HTTPError as exc:
+            body = ""
+            try:
+                body = exc.read().decode("utf-8", errors="replace")
+            except Exception:
+                pass
+            last_error = RuntimeError(f"HTTP {exc.code}: {(body or str(exc))[:400]}")
+            if exc.code != 429 or attempt == 4:
+                raise last_error
+            wait = 1.0 + attempt * 1.5
+            try:
+                payload = json.loads(body or "{}")
+                retry_ms = payload.get("error", {}).get("retryMs")
+                if retry_ms is not None:
+                    wait = max(wait, float(retry_ms) / 1000.0 + 0.5)
+            except Exception:
+                pass
+            print(json.dumps({"rate_limited": True, "retry_in_seconds": round(wait, 2), "attempt": attempt + 1}))
+            time.sleep(wait)
+    raise last_error or RuntimeError("OddsPapi request failed")
 
 def main():
     if not KEY:
