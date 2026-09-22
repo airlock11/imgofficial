@@ -408,7 +408,7 @@ def load_previous():
 def previous_still_live(previous):
  # Recheck every published exact video ID before removing it. Channel discovery
  # surfaces can omit simultaneous broadcasts even while their players are live.
- # Asian Games gets a two-hour fallback only when verification itself is unavailable.
+ # Streams are retained only while YouTube or the public watch page confirms they are live.
  candidates=[x for x in previous.get("streams",[]) if x.get("stream",{}).get("videoId")]
  ids=list(dict.fromkeys(x.get("stream",{}).get("videoId") for x in candidates))
  if not ids:return []
@@ -451,21 +451,8 @@ def previous_still_live(previous):
    out.append(item)
    continue
 
-  if verification_failed and item.get("leagueKey")=="asian_games":
-   raw_last=item.get("lastVerifiedLiveAt") or stream.get("lastVerifiedLiveAt") or item.get("firstLiveAt")
-   try:
-    last=datetime.fromisoformat(str(raw_last).replace("Z","+00:00")).astimezone(timezone.utc)
-   except Exception:
-    last=now
-   fallback_deadline=last+timedelta(hours=2)
-   if now<fallback_deadline:
-    item["verificationStatus"]="fallback"
-    item["lastVerifiedLiveAt"]=last.isoformat()
-    item["fallbackExpiresAt"]=fallback_deadline.isoformat()
-    stream["verificationStatus"]="fallback"
-    stream["lastVerifiedLiveAt"]=last.isoformat()
-    stream["fallbackExpiresAt"]=fallback_deadline.isoformat()
-    out.append(item)
+  # If verification fails, do not keep a stale stream visible as live.
+  # The next successful scan can publish it again if YouTube confirms it is live.
  return out
 
 def nbl_regional_schedule():
