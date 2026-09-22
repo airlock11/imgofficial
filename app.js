@@ -272,13 +272,18 @@ function mergeScoreGames(primary,fallback){
   }
   return out;
 }
+let wtaApiLiveActivity=false;
 async function fetchWtaLiveScores(){
   const official='https://www.wtatennis.com/scores/';
   const r=await fetch('https://raw.githubusercontent.com/airlock11/imgofficial/wta-live-data/wta-live.json?ts='+Date.now(),{cache:'no-store'});
   if(!r.ok)throw new Error('GitHub WTA live data unavailable');
   const payload=await r.json();
   const games=Array.isArray(payload?.games)?payload.games.filter(g=>['live','suspended','warmup'].includes(g?.state)&&!g?.eventOnly):[];
-  if(!games.length)throw new Error('No live WTA matches');
+  wtaApiLiveActivity=games.some(g=>g?.state==='live');
+  if(!games.length){
+    wtaApiLiveActivity=false;
+    throw new Error('No live WTA matches');
+  }
   return {
     special:true,
     games,
@@ -529,6 +534,14 @@ function scoreLeagueActivityMap(){
     current.live=true;
     if(liveStreamsForGame(game).length)current.stream=true;
     map.set(key,current);
+  }
+
+  // API-Tennis WTA is separate from the legacy special-sports cache.
+  // Promote WTA in the league strip whenever the API feed has a real live match.
+  if(wtaApiLiveActivity || (currentScoreLeague==='wta'&&allGames.some(g=>g?.state==='live'))){
+    const current=map.get('wta')||{live:false,stream:false};
+    current.live=true;
+    map.set('wta',current);
   }
 
   // Some official score feeds (especially Asian Games) can have verified live
