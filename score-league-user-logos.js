@@ -25,8 +25,7 @@ uaap:"data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAoHBwgHBgoICAgLCgo
 boxing:"/assets/leagues/boxing-user-logo-transparent.svg?v=20260921-3",
 bleague:"https://commons.wikimedia.org/wiki/Special:Redirect/file/B.League_logo.svg",
 euroleague:"https://commons.wikimedia.org/wiki/Special:Redirect/file/EuroLeague_logo.svg",
-cba:"https://www.google.com/s2/favicons?domain=cbaleague.com&sz=128",
-wcba:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Women%27s_Chinese_Basketball_Association.svg",
+w
 pfl:"https://webcdn.ticketmax.ph/uploads/20241008/1728401723_895c0017ad979c1b70f1.jpg",
 australian_open:"https://commons.wikimedia.org/wiki/Special:Redirect/file/AO26_logo.svg",
 wimbledon:"https://commons.wikimedia.org/wiki/Special:Redirect/file/WB-Logo.png",
