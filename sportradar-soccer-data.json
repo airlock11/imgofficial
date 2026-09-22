@@ -3,35 +3,35 @@
   "provider": "Sportradar",
   "product": "Soccer API",
   "access": "trial",
-  "updatedAt": "2026-09-22T16:55:22.266Z",
+  "updatedAt": "2026-09-22T16:55:35.949Z",
   "requestsLastRun": 2,
   "leagues": {
     "soccer": {
       "league": "Premier League",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-09-22T16:55:22.266Z",
+      "updatedAt": "2026-09-22T16:55:35.949Z",
       "games": []
     },
     "laliga": {
       "league": "La Liga",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-09-22T16:55:22.266Z",
+      "updatedAt": "2026-09-22T16:55:35.949Z",
       "games": []
     },
     "seriea": {
       "league": "Serie A",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-09-22T16:55:22.266Z",
+      "updatedAt": "2026-09-22T16:55:35.949Z",
       "games": []
     },
     "bundesliga": {
       "league": "Bundesliga",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-09-22T16:55:22.266Z",
+      "updatedAt": "2026-09-22T16:55:35.949Z",
       "games": [
         {
           "eventId": "sr:sport_event:72513202",
@@ -65716,7 +65716,7 @@
       "league": "UEFA Champions League",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-09-22T16:55:22.266Z",
+      "updatedAt": "2026-09-22T16:55:35.949Z",
       "games": [],
       "competitionId": "sr:competition:7",
       "competition": {
@@ -129218,7 +129218,7 @@
       "league": "MLS",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-09-22T16:55:22.266Z",
+      "updatedAt": "2026-09-22T16:55:35.949Z",
       "games": [
         {
           "eventId": "sr:sport_event:66299550",
@@ -247962,21 +247962,21 @@
       "league": "Philippine Football League",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-09-22T16:55:22.266Z",
+      "updatedAt": "2026-09-22T16:55:35.949Z",
       "games": []
     },
     "j1": {
       "league": "J1 League",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-09-22T16:55:22.266Z",
+      "updatedAt": "2026-09-22T16:55:35.949Z",
       "games": []
     },
     "jamaica_pl": {
       "league": "Jamaica Premier League",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-09-22T16:55:22.266Z",
+      "updatedAt": "2026-09-22T16:55:35.949Z",
       "games": [
         {
           "eventId": "sr:sport_event:74695422",
@@ -248007,7 +248007,7 @@
       "league": "Mizoram Premier League",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-09-22T16:55:22.266Z",
+      "updatedAt": "2026-09-22T16:55:35.949Z",
       "games": [
         {
           "eventId": "sr:sport_event:74463120",
@@ -248061,7 +248061,7 @@
       "league": "Primera Division, Reserves",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-09-22T16:55:22.266Z",
+      "updatedAt": "2026-09-22T16:55:35.949Z",
       "games": [
         {
           "eventId": "sr:sport_event:74824798",
@@ -248092,7 +248092,7 @@
       "league": "UEFA Champions League Women",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-09-22T16:55:22.266Z",
+      "updatedAt": "2026-09-22T16:55:35.949Z",
       "games": [
         {
           "eventId": "sr:sport_event:74371782",
@@ -335861,7 +335861,7 @@
     "updatedAt": "2026-09-22T16:50:47.840Z"
   },
   "requestBudget": 900,
-  "requestBudgetRemaining": 894,
+  "requestBudgetRemaining": 780,
   "harvestMode": "live",
   "usage": {
     "requests": [
@@ -335876,14 +335876,14 @@
         "mode": "live"
       },
       {
-        "at": "2026-09-22T16:55:22.266Z",
+        "at": "2026-09-22T16:55:35.949Z",
         "count": 2,
         "mode": "live"
       }
     ],
-    "rolling30Day": 6,
+    "rolling30Day": 120,
     "trackedRolling30Day": 6,
-    "preTrackingRolling30Day": 0
+    "preTrackingRolling30Day": 114
   },
   "runRequestCap": 6
 }
