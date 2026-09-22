@@ -1,10 +1,210 @@
 {
-  "league": "WTA Tour",
-  "sourceName": "WTA Official Scores",
-  "sourceUrl": "https://www.wtatennis.com/scores/",
-  "updatedAt": "2026-09-22T08:52:33.476132+00:00",
-  "note": "Live WTA scores scraped from official WTA score pages.",
-  "games": [],
   "special": true,
-  "live": false
+  "league": "WTA Tour",
+  "live": true,
+  "updatedAt": "2026-09-22T08:58:36.273393+00:00",
+  "sourceName": "WTA Official Scores scrape",
+  "sourceUrl": "https://www.wtatennis.com/scores/",
+  "verificationSource": "WTA Official Scores",
+  "verificationUrl": "https://www.wtatennis.com/scores/",
+  "pageLiveCount": 10,
+  "note": "GitHub scrape of the rendered WTA Scores page. Game points, current set number, current-set games and per-set scores are stored separately.",
+  "games": [
+    {
+      "eventId": "wta-scrape-1-j-ostapenko-a-zakharova",
+      "date": "2026-09-22T08:58:36.270733+00:00",
+      "displayTime": "WTA Live",
+      "away": "J. Ostapenko",
+      "home": "A. Zakharova",
+      "awayScore": "6 4 · 30",
+      "homeScore": "4 1 · 40",
+      "awaySets": [
+        "6",
+        "4"
+      ],
+      "homeSets": [
+        "4",
+        "1"
+      ],
+      "awayPoint": "30",
+      "homePoint": "40",
+      "currentSet": 2,
+      "awayCurrentSetGames": 4,
+      "homeCurrentSetGames": 1,
+      "awaySetsWon": 1,
+      "homeSetsWon": 0,
+      "round": "Round of 32",
+      "court": "Center Court",
+      "status": "Live Match: 1:36 · Round of 32 · Center Court",
+      "state": "live",
+      "eventOnly": false,
+      "title": "WTA",
+      "sourceName": "WTA Official Scores scrape",
+      "sourceUrl": "https://www.wtatennis.com/scores/",
+      "verificationSource": "WTA Official Scores",
+      "verificationUrl": "https://www.wtatennis.com/scores/"
+    },
+    {
+      "eventId": "wta-scrape-4-a-tubello-d-spiteri",
+      "date": "2026-09-22T08:58:36.271044+00:00",
+      "displayTime": "WTA Live",
+      "away": "A. Tubello",
+      "home": "D. Spiteri",
+      "awayScore": "3 · 40",
+      "homeScore": "1 · AD",
+      "awaySets": [
+        "3"
+      ],
+      "homeSets": [
+        "1"
+      ],
+      "awayPoint": "40",
+      "homePoint": "AD",
+      "currentSet": 1,
+      "awayCurrentSetGames": 3,
+      "homeCurrentSetGames": 1,
+      "awaySetsWon": 0,
+      "homeSetsWon": 0,
+      "round": "Round of 32",
+      "court": "Court 2",
+      "status": "Live Match: 0:20 · Round of 32 · Court 2",
+      "state": "live",
+      "eventOnly": false,
+      "title": "WTA",
+      "sourceName": "WTA Official Scores scrape",
+      "sourceUrl": "https://www.wtatennis.com/scores/",
+      "verificationSource": "WTA Official Scores",
+      "verificationUrl": "https://www.wtatennis.com/scores/"
+    },
+    {
+      "eventId": "wta-scrape-6-l-zaar-r-masarova",
+      "date": "2026-09-22T08:58:36.271215+00:00",
+      "displayTime": "WTA Live",
+      "away": "L. Zaar",
+      "home": "R. Masarova",
+      "awayScore": "3 · 15",
+      "homeScore": "1 · 30",
+      "awaySets": [
+        "3"
+      ],
+      "homeSets": [
+        "1"
+      ],
+      "awayPoint": "15",
+      "homePoint": "30",
+      "currentSet": 1,
+      "awayCurrentSetGames": 3,
+      "homeCurrentSetGames": 1,
+      "awaySetsWon": 0,
+      "homeSetsWon": 0,
+      "round": "Round of 32",
+      "court": "Court 1",
+      "status": "Live Match: 0:17 · Round of 32 · Court 1",
+      "state": "live",
+      "eventOnly": false,
+      "title": "WTA",
+      "sourceName": "WTA Official Scores scrape",
+      "sourceUrl": "https://www.wtatennis.com/scores/",
+      "verificationSource": "WTA Official Scores",
+      "verificationUrl": "https://www.wtatennis.com/scores/"
+    },
+    {
+      "eventId": "wta-scrape-7-e-pridankina-d-egorova",
+      "date": "2026-09-22T08:58:36.271304+00:00",
+      "displayTime": "WTA Live",
+      "away": "E. Pridankina",
+      "home": "D. Egorova",
+      "awayScore": "5 · 0",
+      "homeScore": "4 · 0",
+      "awaySets": [
+        "5"
+      ],
+      "homeSets": [
+        "4"
+      ],
+      "awayPoint": "0",
+      "homePoint": "0",
+      "currentSet": 1,
+      "awayCurrentSetGames": 5,
+      "homeCurrentSetGames": 4,
+      "awaySetsWon": 0,
+      "homeSetsWon": 0,
+      "round": "Round of 32",
+      "court": "",
+      "status": "Suspended · Round of 32",
+      "state": "live",
+      "eventOnly": false,
+      "title": "WTA",
+      "sourceName": "WTA Official Scores scrape",
+      "sourceUrl": "https://www.wtatennis.com/scores/",
+      "verificationSource": "WTA Official Scores",
+      "verificationUrl": "https://www.wtatennis.com/scores/"
+    },
+    {
+      "eventId": "wta-scrape-8-w-falkowska-i-yoruk",
+      "date": "2026-09-22T08:58:36.271388+00:00",
+      "displayTime": "WTA Live",
+      "away": "W. Falkowska",
+      "home": "I. Yoruk",
+      "awayScore": "6 0 · 0",
+      "homeScore": "2 0 · 0",
+      "awaySets": [
+        "6",
+        "0"
+      ],
+      "homeSets": [
+        "2",
+        "0"
+      ],
+      "awayPoint": "0",
+      "homePoint": "0",
+      "currentSet": 2,
+      "awayCurrentSetGames": 0,
+      "homeCurrentSetGames": 0,
+      "awaySetsWon": 1,
+      "homeSetsWon": 0,
+      "round": "Round of 32",
+      "court": "",
+      "status": "Suspended · Round of 32",
+      "state": "live",
+      "eventOnly": false,
+      "title": "WTA",
+      "sourceName": "WTA Official Scores scrape",
+      "sourceUrl": "https://www.wtatennis.com/scores/",
+      "verificationSource": "WTA Official Scores",
+      "verificationUrl": "https://www.wtatennis.com/scores/"
+    },
+    {
+      "eventId": "wta-scrape-9-a-tikhonova-a-gasanova",
+      "date": "2026-09-22T08:58:36.271480+00:00",
+      "displayTime": "WTA Live",
+      "away": "A. Tikhonova",
+      "home": "A. Gasanova",
+      "awayScore": "2 · 40",
+      "homeScore": "4 · 0",
+      "awaySets": [
+        "2"
+      ],
+      "homeSets": [
+        "4"
+      ],
+      "awayPoint": "40",
+      "homePoint": "0",
+      "currentSet": 1,
+      "awayCurrentSetGames": 2,
+      "homeCurrentSetGames": 4,
+      "awaySetsWon": 0,
+      "homeSetsWon": 0,
+      "round": "Round of 32",
+      "court": "",
+      "status": "Suspended · Round of 32",
+      "state": "live",
+      "eventOnly": false,
+      "title": "WTA",
+      "sourceName": "WTA Official Scores scrape",
+      "sourceUrl": "https://www.wtatennis.com/scores/",
+      "verificationSource": "WTA Official Scores",
+      "verificationUrl": "https://www.wtatennis.com/scores/"
+    }
+  ]
 }
