@@ -1120,7 +1120,7 @@ function selectedLeagueLiveStreamMarkup(key){
     ...liveNowItems.filter(g=>g.sportKey===key&&liveNowItemIsCurrent(g)),
     ...allGames.filter(g=>g.state==='live')
   ];
-  const seen=new Set();
+  const seen=new Set(),cards=[];
   for(const game of candidates){
     const eventKey=String(game.eventId||[game.date,game.away,game.home].join('|'));
     if(seen.has(eventKey))continue;
@@ -1132,13 +1132,13 @@ function selectedLeagueLiveStreamMarkup(key){
     const league=liveNowLabels[key]?.league||game.leagueLabel||'Live';
     const matchup=game.title||[game.away,game.home].filter(Boolean).join(' vs ')||league+' Live';
     const source=stream.channel||stream.provider||'Official live stream';
-    return '<section class="league-live-stream" aria-label="'+esc(league)+' live stream">'+
+    cards.push('<section class="league-live-stream" aria-label="'+esc(league)+' live stream">'+
       '<div class="league-live-stream-head"><span><i aria-hidden="true"></i>LIVE STREAM</span><strong>'+esc(matchup)+'</strong><small>'+esc(source)+'</small></div>'+
       (embed?'<div class="league-live-stream-player"><iframe src="'+esc(embed)+'" title="'+esc(matchup)+' live stream" loading="lazy" allow="autoplay; encrypted-media; picture-in-picture; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>':'')+
       '<button type="button" class="league-live-stream-action" data-live-event="'+esc(game.eventId)+'"><span class="live-dot" aria-hidden="true"></span>Watch Live</button>'+
-    '</section>';
+    '</section>');
   }
-  return'';
+  return cards.join('');
 }
 function openLiveStream(eventId){
   const g=[...allGames,...liveNowItems].find(x=>String(x.eventId)===String(eventId)&&liveStreamsForGame(x).length);
@@ -1718,7 +1718,7 @@ async function loadAllLiveGames({silent=false}={}){
         if(live.some(g=>String(g.eventId)===String(x.eventId)))continue;
         const label=x.league||({asian_games:'2026 ASIAN GAMES',pba:'PBA',mpbl:'MPBL',nbl:'NBL Pilipinas',ncaa_ph:'NCAA Philippines',uaap:'UAAP',wta:'WTA Tour',fiba:'FIBA'}[x.leagueKey]);
         const source=x.stream.channel||x.stream.provider||label;
-        live.push({eventId:x.eventId,firstLiveAt:x.firstLiveAt,expiresAt:x.expiresAt,sportKey:x.leagueKey,sportLabel:x.sport||'Sport',leagueLabel:label,date:x.firstLiveAt||y.updatedAt||new Date().toISOString(),displayTime:'LIVE',away:label,home:x.title||(label+' Live'),awayScore:'',homeScore:'',status:'LIVE · '+source,state:'live',streams:[x.stream],streamsChecked:true});
+        live.push({eventId:x.eventId,firstLiveAt:x.firstLiveAt,expiresAt:x.expiresAt,sportKey:x.leagueKey,sportLabel:x.sport||'Sport',leagueLabel:label,date:x.firstLiveAt||y.updatedAt||new Date().toISOString(),displayTime:'LIVE',title:x.title||label+' Live',away:label,home:x.title||(label+' Live'),awayScore:'',homeScore:'',status:'LIVE · '+source,state:'live',streams:[x.stream],streamsChecked:true});
       }
     }
   }catch{}
