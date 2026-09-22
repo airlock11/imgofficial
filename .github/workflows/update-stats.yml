@@ -37,20 +37,29 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          if [ -z "$(git status --porcelain -- stats-data.json)" ]; then
-            echo "No statistics changes."
-            exit 0
-          fi
           git config user.name "IMG Stats Bot"
           git config user.email "actions@users.noreply.github.com"
-          git add stats-data.json
-          git commit -m "Update sports statistics"
-          git fetch origin main
-          if ! git rebase origin/main; then
-            git rebase --abort || true
+
+          for attempt in 1 2 3; do
+            git fetch origin main
             git reset --hard origin/main
+
             python scripts/update_stats.py
+
+            if git diff --quiet -- stats-data.json; then
+              echo "No data changes."
+              exit 0
+            fi
+
             git add stats-data.json
             git commit -m "Update sports statistics"
-          fi
-          git push
+
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+
+            echo "Push raced with another automation; regenerating from latest main (attempt $attempt)."
+          done
+
+          echo "Unable to publish after retries."
+          exit 1
