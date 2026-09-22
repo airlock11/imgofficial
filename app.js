@@ -1705,7 +1705,14 @@ async function loadAllLiveGames({silent=false}={}){
       const ytUpdated=Date.parse(y?.updatedAt||'');
       const ytFreshMinutes=Math.max(5,Number(y?.freshForMinutes)||8);
       const ytFresh=Number.isFinite(ytUpdated)&&Date.now()-ytUpdated<=ytFreshMinutes*60000;
-      const ys=(ytFresh&&Array.isArray(y.streams)?y.streams:[]).filter(x=>x.leagueKey!=='asian_games'||(Number.isFinite(Date.parse(x.expiresAt||''))&&Date.now()<Date.parse(x.expiresAt)));
+      const rawStreams=Array.isArray(y.streams)?y.streams:[];
+      const ys=rawStreams.filter(x=>{
+        if(x?.leagueKey==='asian_games'){
+          const expires=Date.parse(x.expiresAt||'');
+          return Number.isFinite(expires)&&Date.now()<expires;
+        }
+        return ytFresh;
+      });
       const byId=new Map(ys.map(x=>[String(x.eventId),x.stream]));
       for(const g of live){
         const s=byId.get(String(g.eventId));
