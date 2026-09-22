@@ -1720,3 +1720,16 @@ main{min-height:calc(100svh - 68px)}
   display:none!important;
   background:none!important;
 }
+
+
+/* Scores sticky league selector: remove compositing seam */
+.scores-page .score-league-toolbar{
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+  filter:none!important;
+  outline:0!important;
+  border:0!important;
+  box-shadow:none!important;
+  isolation:auto!important;
+  background:none!important;
+}
