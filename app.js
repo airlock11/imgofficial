@@ -190,18 +190,21 @@ async function loadSpecialSportsData(){
   if(specialSportsDataPromise)return specialSportsDataPromise;
   specialSportsDataPromise=Promise.allSettled([
     fetch('special-sports-data.json?v='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null),
-    fetch('extended-sports-data.json?v='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null)
+    fetch('extended-sports-data.json?v='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null),
+    fetch('sportradar-soccer-data.json?v='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null)
   ]).then(results=>{
     const base=results[0]?.status==='fulfilled'&&results[0].value?results[0].value:{};
     const extended=results[1]?.status==='fulfilled'&&results[1].value?results[1].value:{};
+    const sportradar=results[2]?.status==='fulfilled'&&results[2].value?results[2].value:{};
     const baseLeagues=base.leagues||{};
     const extendedLeagues=extended.leagues||{};
-    const leagueKeys=new Set([...Object.keys(baseLeagues),...Object.keys(extendedLeagues)]);
+    const sportradarLeagues=sportradar.leagues||{};
+    const leagueKeys=new Set([...Object.keys(baseLeagues),...Object.keys(extendedLeagues),...Object.keys(sportradarLeagues)]);
     const mergedLeagues={};
     for(const key of leagueKeys){
-      mergedLeagues[key]={...(baseLeagues[key]||{}),...(extendedLeagues[key]||{})};
+      mergedLeagues[key]={...(baseLeagues[key]||{}),...(extendedLeagues[key]||{}),...(sportradarLeagues[key]||{})};
     }
-    const merged={...base,...extended,leagues:mergedLeagues};
+    const merged={...base,...extended,sportradar,leagues:mergedLeagues};
     specialSportsDataCache=merged;
     specialSportsDataTime=Date.now();
     if(document.getElementById('scoreLeagueFilters'))renderScoreLeagueFilters();
@@ -257,6 +260,7 @@ async function specialSportsPayload(sport){
   return {special:true,games:league.games,sourceName:league.sourceName||'',sourceUrl:league.sourceUrl||''};
 }
 const specialScoreKeys=new Set(['atp','wta','ipl','volleyball_w','volleyball_m','asian_games','fiba','ncaa_ph','bleague','euroleague','pfl','australian_open','wimbledon','us_open','npb','kbo','khl','iihf','bigbash','cricket_world_cup','pvl','vleague_jp','motogp','formulae','one','wbc','wba','ibf','wbo']);
+const sportradarSoccerKeys=new Set(['soccer','laliga','seriea','bundesliga','champions','mls','pfl']);
 function scoreGameLooksGeneric(g){
   const names=[g?.away,g?.home].map(x=>String(x||'').trim().toLowerCase());
   const generic=new Set(['','away','home','tbd','team 1','team 2','player 1','player 2']);
@@ -352,6 +356,13 @@ async function fetchScorePayload(sport,{fallbackOnly=false}={}){
       updated_at:api?.updated_at||web?.updated_at||null,
       sources:['Boxing Data API',...(web?.sources||[]).map(x=>x.name)].filter(Boolean)
     };
+  }
+
+  if(!fallbackOnly&&sportradarSoccerKeys.has(sport)){
+    try{
+      const sportradar=await specialSportsPayload(sport);
+      if(sportradar?.games?.length)return sportradar;
+    }catch{}
   }
 
   if(!fallbackOnly&&scoreFeeds[sport]){
@@ -754,6 +765,28 @@ function leagueStandingsMarkup({id,title='Standings',subtitle='',ariaLabel='Leag
         '<div class="league-standings-body">'+rows.map(s=>'<div class="league-standings-row"><strong>'+esc(s.team)+'</strong><b>'+esc(s.wins)+'</b><b>'+esc(s.losses)+'</b></div>').join('')+'</div>'+
       '</div>'+
     '</div>'+
+  '</section>';
+}
+
+function soccerStandingsMarkup(key){
+  const data=specialSportsDataCache?.leagues?.[key]||{};
+  const rows=Array.isArray(data.standings)?data.standings:[];
+  if(!rows.length)return'';
+  const panelId='soccer-standings-'+String(key).replace(/[^a-z0-9_-]/gi,'-');
+  const label=liveNowLabels[key]?.league||data.league||'League';
+  return '<section class="league-games-group league-standings-dropdown soccer-standings-dropdown" aria-label="'+esc(label)+' standings">'+
+    '<button type="button" class="standings-dropdown-toggle" data-standings-toggle aria-expanded="false" aria-controls="'+panelId+'">'+
+      '<span class="standings-dropdown-copy"><span class="standings-dropdown-kicker">League table</span><strong>Standings</strong><small>'+esc(data.season||label)+'</small></span>'+
+      '<span class="standings-dropdown-side"><span class="standings-dropdown-count">'+esc(rows.length)+' '+(rows.length===1?'team':'teams')+'</span><span class="standings-dropdown-chevron" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span></span>'+
+    '</button>'+
+    '<div id="'+panelId+'" class="standings-dropdown-content"><div class="standings-dropdown-inner">'+
+      '<div class="soccer-standings-scroll">'+
+        '<div class="soccer-standings-head"><span>#</span><span>Team</span><b>P</b><b>W</b><b>D</b><b>L</b><b>GD</b><b>Pts</b></div>'+
+        '<div class="soccer-standings-body">'+rows.map(r=>
+          '<div class="soccer-standings-row"><span>'+esc(r.rank||'')+'</span><strong>'+esc(r.team||'')+'</strong><b>'+esc(r.played||'')+'</b><b>'+esc(r.wins||'')+'</b><b>'+esc(r.draws||'')+'</b><b>'+esc(r.losses||'')+'</b><b>'+esc(r.goalDiff||'')+'</b><b>'+esc(r.points||'')+'</b></div>'
+        ).join('')+'</div>'+
+      '</div>'+
+    '</div></div>'+
   '</section>';
 }
 
@@ -2357,6 +2390,11 @@ function renderGames(){
         (liveStreamHtml?'<aside class="selected-live-stream-column" aria-label="'+esc(leagueName)+' live stream">'+liveStreamHtml+'</aside>':'')+
       '</section>'
     );
+  }
+
+  if(sportradarSoccerKeys.has(currentScoreLeague)){
+    const soccerStandings=soccerStandingsMarkup(currentScoreLeague);
+    if(soccerStandings)sections.push(soccerStandings);
   }
 
   if(currentScoreLeague==='uaap'){
