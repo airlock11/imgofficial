@@ -169,13 +169,14 @@ def wta_calendar_schedule():
             print("wta-calendar fetch-error", url, type(ex).__name__, str(ex)[:100])
             continue
 
+        page_text = clean_text(html)
         title = first(r"<h1[^>]*>(.*?)</h1>", html) or first(r"<title[^>]*>(.*?)</title>", html)
-        location = first(r"([A-Z][A-Z .'-]+\\s*•\\s*[A-Z]{3})", html)
-        level = first(r"(WTA\\s*(?:125|250|500|1000|Finals))", html)
-        surface = first(r"<h3[^>]*>\\s*(Hard|Clay|Grass)\\s*</h3>", html)
+        location = first(r"([A-Z][A-Z .'-]+\\s*•\\s*[A-Z]{3})", page_text)
+        level = first(r"(WTA\\s*(?:125|250|500|1000|Finals))", page_text)
+        surface = first(r"\\b(Hard|Clay|Grass)\\b", page_text)
         date_text = first(
             r"((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\\s+\\d{1,2}\\s*-\\s*(?:(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\\s+)?\\d{1,2},\\s*2026)",
-            html,
+            page_text,
         )
         start_iso, end_iso = parse_date_range(date_text)
 
@@ -205,9 +206,9 @@ def wta_calendar_schedule():
             "eventOnly": True,
             "level": level,
             "surface": surface,
-            "singlesDraw": first_int(r"Singles Draw\\s*(\\d+)", html),
-            "doublesDraw": first_int(r"Doubles Draw\\s*(\\d+)", html),
-            "totalCommitment": first(r"Total \\$ Commitment\\s*(\\$[\\d,]+)", html),
+            "singlesDraw": first_int(r"Singles Draw\\s*(\\d+)", page_text),
+            "doublesDraw": first_int(r"Doubles Draw\\s*(\\d+)", page_text),
+            "totalCommitment": first(r"Total \\$ Commitment\\s*(\\$[\\d,]+)", page_text),
             "sourceName": "WTA Official",
             "sourceUrl": url,
         })
