@@ -1646,6 +1646,10 @@ function wtaScoreGridMarkup(g){
 function updateWtaScoreboard(card,g){
   const board=card?.querySelector?.('[data-wta-scoreboard]');
   if(!board)return false;
+  const statusEl=card.querySelector('.wta-match-meta .state');
+  if(statusEl&&statusEl.textContent!==String(g.status||''))statusEl.textContent=String(g.status||'');
+  const eventEl=card.querySelector('.wta-event-name');
+  if(eventEl&&eventEl.textContent!==String(g.displayTime||g.title||'WTA'))eventEl.textContent=String(g.displayTime||g.title||'WTA');
   const away=wtaScorePartsForGame(g,'away'),home=wtaScorePartsForGame(g,'home');
   const expected=Math.max(away.sets.length,home.sets.length,1);
   const actual=board.querySelectorAll('thead th').length-2;
@@ -2527,7 +2531,15 @@ async function loadGames({silent=false,league=currentScoreLeague}={}){
     allGames=nextGames;
     st.textContent='';
     renderRegionalContext(sport,mode);
-    if(silent)updateScoreNumbers();else renderGames();
+
+    // WTA cards can change structure while a match is live: new sets appear,
+    // warmup becomes live, suspended resumes, doubles cards arrive, tournament
+    // labels change, and matches move between Live and Recent Games.
+    // Re-render WTA from the fresh GitHub payload on every automatic refresh.
+    if(silent&&sport==='wta')renderGames();
+    else if(silent)updateScoreNumbers();
+    else renderGames();
+
     if(mode!=='web'&&mode!=='official-web-fallback'&&!silent){
       void hydrateHighlights(sport);
       void hydrateLiveStreams(sport);
