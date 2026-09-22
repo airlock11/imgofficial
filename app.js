@@ -1615,7 +1615,7 @@ function liveNowItemIsCurrent(g){
   const maxHours={
     asian_games:2,
     soccer:4,laliga:4,seriea:4,bundesliga:4,champions:4,mls:4,
-    basketball:5,wnba:5,pba:5,ncaa_ph:5,uaap:5,mpbl:5,nbl:5,nblaus:5,vba:5,
+    basketball:5,wnba:5,pba:5,ncaa_ph:5,uaap:5,mpbl:5,nbl:5,nblaus:5,vba:5,fiba:5,bleague:5,euroleague:5,
     atp:7,wta:7,ipl:7,volleyball_w:5,volleyball_m:5,
     baseball:8,hockey:5,football:7,ncaaf:7,f1:5,ufc:10,one:10,boxing:10
   };
@@ -1680,16 +1680,16 @@ async function loadVerifiedChannelLive(){
     const r=await fetch('/youtube-live.json?ts='+Date.now(),{cache:'no-store'});
     if(!r.ok)throw new Error('youtube live unavailable');
     const y=await r.json();
-    const ytUpdated=Date.parse(y?.updatedAt||'');
-    const ytFreshMinutes=Math.max(5,Number(y?.freshForMinutes)||8);
-    const ytFresh=Number.isFinite(ytUpdated)&&Date.now()-ytUpdated<=ytFreshMinutes*60000;
     const entries=(Array.isArray(y?.streams)?y.streams:[]).filter(x=>{
       if(!x?.stream?.watchUrl)return false;
       if(x?.leagueKey==='asian_games'){
         const expires=Date.parse(x.expiresAt||'');
         return Number.isFinite(expires)&&Date.now()<expires;
       }
-      return ytFresh;
+      // The scanner removes ended streams on its next successful 5-minute run.
+      // Do not hide a still-published verified stream merely because the data file
+      // itself has not needed a semantic commit recently.
+      return true;
     });
     return {ok:true,updatedAt:y?.updatedAt||'',entries};
   }catch{
