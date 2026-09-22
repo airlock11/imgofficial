@@ -11,6 +11,8 @@ const OUT="sportradar-soccer-data.json";
 const BASE="https://api.sportradar.com/soccer/trial/v4/en";
 const EXT_BASE="https://api.sportradar.com/soccer-extended/trial/v4/en";
 const REQUEST_BUDGET=Number(process.env.SPORTRADAR_REQUEST_BUDGET||900);
+const LIVE_RUN_CAP=Number(process.env.SPORTRADAR_LIVE_RUN_CAP||6);
+const DEEP_RUN_CAP=Number(process.env.SPORTRADAR_DEEP_RUN_CAP||16);
 const now=new Date();
 const iso=now.toISOString();
 
@@ -29,12 +31,23 @@ const TARGETS=[
   {key:"j1",names:["j1 league","j.league","j league"],label:"J1 League"}
 ];
 
+const data=readExisting();
+data.usage=data.usage||{requests:[]};
+const cutoff30=Date.now()-30*24*60*60*1000;
+data.usage.requests=safeArray(data.usage.requests).filter(x=>(Date.parse(x?.at)||0)>=cutoff30);
+const rollingUsed=data.usage.requests.reduce((sum,x)=>sum+(Number(x?.count)||0),0);
+const runCap=MODE==="deep"?DEEP_RUN_CAP:LIVE_RUN_CAP;
+
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 let requests=0;
 let lastRequestAt=0;
 async function requestJson(base,path,{optional=false}={}){
-  if(requests>=REQUEST_BUDGET){
-    console.warn(`Request budget reached (${requests}/${REQUEST_BUDGET}); skipping ${path}`);
+  if(requests>=runCap){
+    console.warn(`Per-run request cap reached (${requests}/${runCap}); skipping ${path}`);
+    return null;
+  }
+  if(rollingUsed+requests>=REQUEST_BUDGET){
+    console.warn(`Rolling 30-day request budget reached (${rollingUsed+requests}/${REQUEST_BUDGET}); skipping ${path}`);
     return null;
   }
   const minGap=2300;
@@ -43,6 +56,7 @@ async function requestJson(base,path,{optional=false}={}){
 
   let attempt=0;
   while(attempt<5){
+    if(requests>=runCap||rollingUsed+requests>=REQUEST_BUDGET)return null;
     attempt++;
     requests++;
     lastRequestAt=Date.now();
@@ -230,8 +244,7 @@ function mergeGames(existing,incoming){
   return [...map.values()].sort((a,b)=>(Date.parse(a.date)||0)-(Date.parse(b.date)||0));
 }
 
-const data=readExisting();
-data.version=2;
+data.version=3;
 data.provider="Sportradar";
 data.product="Soccer API";
 data.access="trial";
@@ -277,39 +290,43 @@ for(const t of TARGETS){
 }
 
 if(MODE==="deep"){
-  const competitions=await sr("/competitions.json",{optional:true});
-  const seasons=await sr("/seasons.json",{optional:true});
-  const extendedSeasons=await sx("/seasons.json",{optional:true});
-  if(!competitions||!seasons){
-    console.warn("Deep catalog refresh is partial because competition or season metadata was unavailable.");
+  data.entities=data.entities||{competitors:{},players:{}};
+  data.catalog=data.catalog||{};
+
+  const catalogAge=Date.now()-(Date.parse(data.catalog.updatedAt||"")||0);
+  const shouldRefreshCatalog=!data.catalog.competitions?.length||!data.catalog.seasons?.length||catalogAge>7*24*60*60*1000;
+
+  if(shouldRefreshCatalog){
+    const competitions=await sr("/competitions.json",{optional:true});
+    const seasons=await sr("/seasons.json",{optional:true});
+    const extendedSeasons=await sx("/seasons.json",{optional:true});
+    if(competitions?.competitions)data.catalog.competitions=competitions.competitions;
+    if(seasons?.seasons)data.catalog.seasons=seasons.seasons;
+    if(extendedSeasons?.seasons)data.catalog.extendedSeasons=extendedSeasons.seasons;
+    if(competitions||seasons||extendedSeasons)data.catalog.updatedAt=iso;
   }
-  data.catalog.competitions=competitions?.competitions||data.catalog.competitions||[];
-  data.catalog.seasons=seasons?.seasons||data.catalog.seasons||[];
-  data.catalog.extendedSeasons=extendedSeasons?.seasons||data.catalog.extendedSeasons||[];
-  data.catalog.updatedAt=iso;
 
-  const comps=data.catalog.competitions;
-  const seasonList=data.catalog.seasons;
-  const existingKeys=Object.keys(data.leagues||{});
-  const priority=[...TARGETS.map(t=>t.key),...existingKeys.filter(k=>!TARGETS.some(t=>t.key===k))];
-  const start=Math.floor((Date.now()/86400000)%Math.max(1,priority.length));
-  const selected=Array.from({length:Math.min(4,priority.length)},(_,i)=>priority[(start+i)%priority.length]);
+  const comps=safeArray(data.catalog.competitions);
+  const seasonList=safeArray(data.catalog.seasons);
+  const dayIndex=Math.floor(Date.now()/86400000)%TARGETS.length;
+  const selected=[TARGETS[dayIndex]];
 
-  for(const key of selected){
-    const t=TARGETS.find(x=>x.key===key)||{key,label:data.leagues?.[key]?.league||key,names:[data.leagues?.[key]?.league||key]};
+  for(const t of selected){
+    if(!t)continue;
     const comp=comps.find(c=>{
       const cname=norm(c?.name);
       const cat=norm(c?.category?.name||c?.category_name||"");
       const mapped=targetKey(c?.name||"",cat);
-      return mapped===key||t.names.some(n=>cname===norm(n));
+      return mapped===t.key||t.names.some(n=>cname===norm(n));
     });
     if(!comp?.id)continue;
 
     let candidates=seasonList.filter(s=>s?.competition_id===comp.id&&!s?.disabled);
     if(!candidates.length){
-      const compSeasons=await sx(`/competitions/${encodeURIComponent(comp.id)}/seasons.json`,{optional:true});
+      const compSeasons=await sr(`/competitions/${encodeURIComponent(comp.id)}/seasons.json`,{optional:true});
       candidates=safeArray(compSeasons?.seasons).filter(s=>!s?.disabled);
     }
+
     const current=candidates
       .filter(s=>(Date.parse(s.start_date)||0)<=Date.now()+30*86400000&&(Date.parse(s.end_date)||Infinity)>=Date.now()-30*86400000)
       .sort((a,b)=>(Date.parse(b.start_date)||0)-(Date.parse(a.start_date)||0))[0]
@@ -317,28 +334,59 @@ if(MODE==="deep"){
     if(!current?.id)continue;
 
     const seasonPath=`/seasons/${encodeURIComponent(current.id)}`;
-    const [schedule,standings,info,extInfo]=await Promise.all([
-      sr(seasonPath+"/schedules.json",{optional:true}),
-      sr(seasonPath+"/standings.json",{optional:true}),
-      sr(seasonPath+"/info.json",{optional:true}),
-      sx(seasonPath+"/info.json",{optional:true})
-    ]);
+    const schedule=await sr(seasonPath+"/schedules.json",{optional:true});
+    const standings=await sr(seasonPath+"/standings.json",{optional:true});
+    const competitorsPayload=await sr(seasonPath+"/competitors.json",{optional:true});
+    const playersPayload=await sr(seasonPath+"/players.json",{optional:true});
+    const leadersPayload=await sr(seasonPath+"/leaders.json",{optional:true});
+    const missingPayload=await sr(seasonPath+"/missing_players.json",{optional:true});
 
     const normalizedSchedule=eventItems(schedule).map(normalizeGame).filter(g=>g.eventId);
-    const competitors=[...competitorsFromSeasonInfo(info),...competitorsFromSeasonInfo(extInfo)];
-    const uniqueCompetitors=[...new Map(competitors.map(x=>[x.id||x.name,x])).values()];
-    const coverage={...coverageFromSeasonInfo(info),...coverageFromSeasonInfo(extInfo)};
-
-    const enrichedCompetitors=[];
-    for(const competitor of uniqueCompetitors.slice(0,6)){
-      if(requests>=REQUEST_BUDGET-20)break;
-      const stats=await sr(`${seasonPath}/competitors/${encodeURIComponent(competitor.id)}/statistics.json`,{optional:true});
-      const extStats=await sx(`${seasonPath}/competitors/${encodeURIComponent(competitor.id)}/extended_statistics.json`,{optional:true});
-      enrichedCompetitors.push({...competitor,statistics:statsSummary(stats),extendedStatistics:statsSummary(extStats)});
+    const competitors=safeArray(competitorsPayload?.competitors);
+    const players=safeArray(playersPayload?.players);
+    for(const x of competitors){
+      if(x?.id)data.entities.competitors[x.id]={...(data.entities.competitors[x.id]||{}),...x,lastSeenAt:iso};
+    }
+    for(const x of players){
+      if(x?.id)data.entities.players[x.id]={...(data.entities.players[x.id]||{}),...x,lastSeenAt:iso};
     }
 
-    data.leagues[key]={
-      ...(data.leagues[key]||{}),
+    // Enrich one team per deep run. Cached profiles are refreshed only every 7 days.
+    let teamProfile=null;
+    let extendedStats=null;
+    const firstTeam=competitors.find(x=>x?.id);
+    if(firstTeam?.id){
+      const cached=data.entities.competitors[firstTeam.id]||{};
+      const profileAge=Date.now()-(Date.parse(cached.profileUpdatedAt||"")||0);
+      if(profileAge>7*24*60*60*1000){
+        const profile=await sr(`/competitors/${encodeURIComponent(firstTeam.id)}/profile.json`,{optional:true});
+        if(profile){
+          teamProfile=profile;
+          data.entities.competitors[firstTeam.id]={...cached,profile,profileUpdatedAt:iso,lastSeenAt:iso};
+        }
+      }else{
+        teamProfile=cached.profile||null;
+      }
+
+      const extAge=Date.now()-(Date.parse(cached.extendedStatsUpdatedAt||"")||0);
+      if(extAge>7*24*60*60*1000){
+        const ext=await sx(`${seasonPath}/competitors/${encodeURIComponent(firstTeam.id)}/extended_statistics.json`,{optional:true});
+        if(ext){
+          extendedStats=ext;
+          data.entities.competitors[firstTeam.id]={
+            ...(data.entities.competitors[firstTeam.id]||cached),
+            extendedStatistics:ext,
+            extendedStatsUpdatedAt:iso,
+            lastSeenAt:iso
+          };
+        }
+      }else{
+        extendedStats=cached.extendedStatistics||null;
+      }
+    }
+
+    data.leagues[t.key]={
+      ...(data.leagues[t.key]||{}),
       league:t.label,
       competitionId:comp.id,
       competition:comp,
@@ -346,16 +394,23 @@ if(MODE==="deep"){
       season:current.name||"",
       seasonStart:current.start_date||"",
       seasonEnd:current.end_date||"",
-      coverage,
-      competitors:uniqueCompetitors,
-      competitorStats:enrichedCompetitors,
+      competitors,
+      players,
+      leaders:leadersPayload||null,
+      missingPlayers:missingPayload||null,
       standings:standingsRows(standings),
-      games:mergeGames(data.leagues[key]?.games||[],normalizedSchedule),
+      games:mergeGames(data.leagues[t.key]?.games||[],normalizedSchedule),
+      enrichment:{
+        teamProfile:teamProfile||null,
+        extendedStatistics:extendedStats||null
+      },
       raw:{
-        seasonInfo:info||null,
-        extendedSeasonInfo:extInfo||null,
         schedule:schedule||null,
-        standings:standings||null
+        standings:standings||null,
+        competitors:competitorsPayload||null,
+        players:playersPayload||null,
+        leaders:leadersPayload||null,
+        missingPlayers:missingPayload||null
       },
       deepUpdatedAt:iso
     };
@@ -363,8 +418,12 @@ if(MODE==="deep"){
 }
 
 data.requestsLastRun=requests;
+if(requests>0)data.usage.requests.push({at:iso,count:requests,mode:MODE});
+data.usage.requests=data.usage.requests.filter(x=>(Date.parse(x?.at)||0)>=cutoff30);
+data.usage.rolling30Day=data.usage.requests.reduce((sum,x)=>sum+(Number(x?.count)||0),0);
 data.requestBudget=REQUEST_BUDGET;
-data.requestBudgetRemaining=Math.max(0,REQUEST_BUDGET-requests);
+data.requestBudgetRemaining=Math.max(0,REQUEST_BUDGET-data.usage.rolling30Day);
+data.runRequestCap=runCap;
 data.harvestMode=MODE;
 fs.writeFileSync(OUT,JSON.stringify(data,null,2)+"\n");
 console.log(`Wrote ${OUT} using ${requests} Sportradar requests (${MODE}).`);
