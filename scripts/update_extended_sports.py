@@ -107,6 +107,125 @@ NPB_TEAMS = [
 ]
 
 
+def wta_calendar_schedule():
+    """Scrape official WTA tournament pages for current and upcoming schedule."""
+    official_calendar = "https://www.wtatennis.com/tournaments"
+    pages = [
+        "https://www.wtatennis.com/tournaments/1152/singapore/2026",
+        "https://www.wtatennis.com/tournaments/1024/seoul/2026",
+        "https://www.wtatennis.com/tournaments/china-open",
+        "https://www.wtatennis.com/tournaments/1075/wuhan/2026/",
+        "https://www.wtatennis.com/tournaments/wta-finals",
+    ]
+    headers = {
+        "User-Agent": "Mozilla/5.0 (compatible; IMG-Sports-Website/1.0; +https://imgofficial.com)",
+        "Accept": "text/html,application/xhtml+xml;q=0.9,*/*;q=0.8",
+        "Accept-Language": "en-US,en;q=0.9",
+    }
+
+    def fetch_text(url):
+        req = urllib.request.Request(url, headers=headers)
+        with urllib.request.urlopen(req, timeout=30) as r:
+            return r.read().decode("utf-8", errors="replace")
+
+    def clean_text(value):
+        return re.sub(r"\\s+", " ", html_module.unescape(re.sub(r"<[^>]+>", " ", value or ""))).strip()
+
+    def first(pattern, text, flags=re.I|re.S):
+        m = re.search(pattern, text, flags)
+        return clean_text(m.group(1)) if m else ""
+
+    def parse_date_range(date_text):
+        m = re.search(
+            r"([A-Z][a-z]{2,8})\\s+(\\d{1,2})\\s*-\\s*(?:([A-Z][a-z]{2,8})\\s+)?(\\d{1,2}),\\s*(2026)",
+            date_text or "",
+        )
+        if not m:
+            return "", ""
+        sm, sd, em, ed, year = m.groups()
+        em = em or sm
+        for fmt in ("%b %d %Y", "%B %d %Y"):
+            try:
+                start = datetime.strptime(f"{sm} {sd} {year}", fmt).replace(tzinfo=timezone.utc)
+                end = datetime.strptime(f"{em} {ed} {year}", fmt).replace(tzinfo=timezone.utc)
+                return start.isoformat(), end.isoformat()
+            except Exception:
+                pass
+        return "", ""
+
+    def first_int(pattern, text):
+        value = first(pattern, text)
+        m = re.search(r"\\d+", value or "")
+        return int(m.group(0)) if m else ""
+
+    now = datetime.now(timezone.utc)
+    games = []
+    seen = set()
+
+    for url in pages:
+        try:
+            html = fetch_text(url)
+        except Exception as ex:
+            print("wta-calendar fetch-error", url, type(ex).__name__, str(ex)[:100])
+            continue
+
+        title = first(r"<h1[^>]*>(.*?)</h1>", html) or first(r"<title[^>]*>(.*?)</title>", html)
+        location = first(r"([A-Z][A-Z .'-]+\\s*•\\s*[A-Z]{3})", html)
+        level = first(r"(WTA\\s*(?:125|250|500|1000|Finals))", html)
+        surface = first(r"<h3[^>]*>\\s*(Hard|Clay|Grass)\\s*</h3>", html)
+        date_text = first(
+            r"((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\\s+\\d{1,2}\\s*-\\s*(?:(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\\s+)?\\d{1,2},\\s*2026)",
+            html,
+        )
+        start_iso, end_iso = parse_date_range(date_text)
+
+        if not title or not start_iso:
+            print("wta-calendar parse-miss", url, bool(title), bool(start_iso))
+            continue
+
+        start_dt = datetime.fromisoformat(start_iso)
+        end_dt = datetime.fromisoformat(end_iso) if end_iso else start_dt
+        if end_dt < now - timedelta(days=1):
+            continue
+
+        event_id = "wta-calendar-" + re.sub(r"[^a-z0-9]+", "-", title.lower()).strip("-")
+        if event_id in seen:
+            continue
+        seen.add(event_id)
+
+        games.append({
+            "eventId": event_id,
+            "date": start_iso,
+            "endDate": end_iso,
+            "displayTime": date_text,
+            "title": title,
+            "location": location.replace(" • ", ", ") if location else "",
+            "status": "Tournament in progress" if start_dt <= now <= end_dt + timedelta(days=1) else "Scheduled",
+            "state": "scheduled",
+            "eventOnly": True,
+            "level": level,
+            "surface": surface,
+            "singlesDraw": first_int(r"Singles Draw\\s*(\\d+)", html),
+            "doublesDraw": first_int(r"Doubles Draw\\s*(\\d+)", html),
+            "totalCommitment": first(r"Total \\$ Commitment\\s*(\\$[\\d,]+)", html),
+            "sourceName": "WTA Official",
+            "sourceUrl": url,
+        })
+
+    if not games:
+        raise RuntimeError("WTA calendar scrape found no current/upcoming tournaments")
+
+    games.sort(key=lambda g: g.get("date") or "")
+    return {
+        "league": "WTA Tour",
+        "sourceName": "WTA Official Calendar",
+        "sourceUrl": official_calendar,
+        "updatedAt": datetime.now(timezone.utc).isoformat(),
+        "note": "Current and upcoming WTA tournaments scraped from official WTA tournament pages.",
+        "games": games,
+    }
+
+
 def wta_live_scores():
     """Scrape WTA's official score pages for live player-v-player matches."""
     official_scores = "https://www.wtatennis.com/scores/"
@@ -404,7 +523,7 @@ def boxing_org(org):
 def main():
     data = load()
     leagues = data.setdefault("leagues", {})
-    jobs = [("wta", wta_live_scores), ("euroleague", euroleague), ("npb", npb), ("kbo", kbo)]
+    jobs = [("wta", wta_calendar_schedule), ("euroleague", euroleague), ("npb", npb), ("kbo", kbo)]
     for key, builder in jobs:
         try:
             result = builder()
