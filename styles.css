@@ -1371,3 +1371,94 @@ main{min-height:calc(100svh - 68px)}
   .wta-point-score,.wta-set-score{font-size:16px}
   .wta-match-meta{margin-top:6px}
 }
+
+/* WTA table scoreboard - isolated from generic game layout */
+.game.wta-game-card{
+  display:block!important;
+  grid-template-columns:none!important;
+  width:100%;
+  padding:18px 10px!important;
+}
+.wta-game-card .wta-event-name{
+  display:block!important;
+  width:100%;
+  margin:0 0 10px!important;
+  min-width:0!important;
+}
+.wta-game-card .wta-game-main{
+  display:block!important;
+  width:100%;
+  min-width:0;
+}
+.wta-table-wrap{
+  width:100%;
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+}
+.wta-score-table{
+  width:100%;
+  min-width:360px;
+  border-collapse:collapse;
+  table-layout:fixed;
+}
+.wta-score-table th,.wta-score-table td{
+  padding:8px 6px;
+  border:0;
+  text-align:center;
+  white-space:nowrap;
+  font-variant-numeric:tabular-nums;
+}
+.wta-score-table thead th{
+  font-size:12px;
+  font-weight:500;
+  color:var(--muted);
+  text-transform:uppercase;
+  letter-spacing:.04em;
+}
+.wta-score-table th:first-child{
+  width:42%;
+  text-align:left;
+}
+.wta-score-table tbody .wta-player-name{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  font-size:16px;
+  font-weight:800;
+  color:var(--text);
+}
+.wta-score-table .wta-point-score,
+.wta-score-table .wta-set-score{
+  font-size:17px;
+  font-weight:800;
+  color:var(--text);
+}
+.wta-game-card.game-is-live .wta-score-table .wta-point-score{
+  color:#dfff00;
+}
+.wta-game-card .wta-match-meta{
+  display:block!important;
+  width:100%;
+  margin-top:10px!important;
+  padding-top:10px!important;
+  border-top:1px solid rgba(255,255,255,.08);
+}
+.wta-game-card .wta-match-meta .state{
+  display:block!important;
+  position:static!important;
+  inset:auto!important;
+  width:100%!important;
+  max-width:none!important;
+  margin:0!important;
+  padding:0!important;
+  white-space:normal!important;
+  line-height:1.35!important;
+  text-align:left!important;
+}
+@media(max-width:760px){
+  .game.wta-game-card{padding:16px 10px!important}
+  .wta-score-table{min-width:340px}
+  .wta-score-table th,.wta-score-table td{padding:8px 4px}
+  .wta-score-table th:first-child{width:46%}
+  .wta-score-table tbody .wta-player-name{font-size:15px}
+  .wta-score-table .wta-point-score,.wta-score-table .wta-set-score{font-size:16px}
+}
