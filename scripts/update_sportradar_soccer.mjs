@@ -13,6 +13,8 @@ const EXT_BASE="https://api.sportradar.com/soccer-extended/trial/v4/en";
 const REQUEST_BUDGET=Number(process.env.SPORTRADAR_REQUEST_BUDGET||900);
 const LIVE_RUN_CAP=Number(process.env.SPORTRADAR_LIVE_RUN_CAP||6);
 const DEEP_RUN_CAP=Number(process.env.SPORTRADAR_DEEP_RUN_CAP||16);
+const PRETRACKING_REQUESTS=Number(process.env.SPORTRADAR_PRETRACKING_REQUESTS||0);
+const PRETRACKING_AT=Date.parse(process.env.SPORTRADAR_PRETRACKING_AT||"")||0;
 const now=new Date();
 const iso=now.toISOString();
 
@@ -35,7 +37,9 @@ const data=readExisting();
 data.usage=data.usage||{requests:[]};
 const cutoff30=Date.now()-30*24*60*60*1000;
 data.usage.requests=safeArray(data.usage.requests).filter(x=>(Date.parse(x?.at)||0)>=cutoff30);
-const rollingUsed=data.usage.requests.reduce((sum,x)=>sum+(Number(x?.count)||0),0);
+const trackedRolling=data.usage.requests.reduce((sum,x)=>sum+(Number(x?.count)||0),0);
+const pretrackingRolling=PRETRACKING_AT>=cutoff30?PRETRACKING_REQUESTS:0;
+const rollingUsed=trackedRolling+pretrackingRolling;
 const runCap=MODE==="deep"?DEEP_RUN_CAP:LIVE_RUN_CAP;
 
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
@@ -420,7 +424,9 @@ if(MODE==="deep"){
 data.requestsLastRun=requests;
 if(requests>0)data.usage.requests.push({at:iso,count:requests,mode:MODE});
 data.usage.requests=data.usage.requests.filter(x=>(Date.parse(x?.at)||0)>=cutoff30);
-data.usage.rolling30Day=data.usage.requests.reduce((sum,x)=>sum+(Number(x?.count)||0),0);
+data.usage.trackedRolling30Day=data.usage.requests.reduce((sum,x)=>sum+(Number(x?.count)||0),0);
+data.usage.preTrackingRolling30Day=pretrackingRolling;
+data.usage.rolling30Day=data.usage.trackedRolling30Day+pretrackingRolling;
 data.requestBudget=REQUEST_BUDGET;
 data.requestBudgetRemaining=Math.max(0,REQUEST_BUDGET-data.usage.rolling30Day);
 data.runRequestCap=runCap;
