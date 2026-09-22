@@ -408,6 +408,7 @@ def load_previous():
 def previous_still_live(previous):
  # Recheck every published exact video ID before removing it. Channel discovery
  # surfaces can omit simultaneous broadcasts even while their players are live.
+ # Asian Games gets a two-hour fallback only when verification itself is unavailable.
  candidates=[x for x in previous.get("streams",[]) if x.get("stream",{}).get("videoId")]
  ids=list(dict.fromkeys(x.get("stream",{}).get("videoId") for x in candidates))
  if not ids:return []
@@ -417,10 +418,12 @@ def previous_still_live(previous):
   print("previous live details",ex)
   details={}
  out=[]
+ now=datetime.now(timezone.utc)
  for item in candidates:
   stream=item.get("stream",{})
   vid=stream.get("videoId")
   d=details.get(vid)
+  verification_failed=False
   if d:
    sn=d.get("snippet",{}); live=d.get("liveStreamingDetails",{}); status=d.get("status",{})
    is_live=sn.get("liveBroadcastContent")=="live" or (live.get("actualStartTime") and not live.get("actualEndTime"))
@@ -435,8 +438,34 @@ def previous_still_live(previous):
     is_live=info.get("live",False); ended=not is_live
    except Exception as ex:
     print("previous public live check",vid,ex)
-    continue
-  if is_live and not ended:out.append(item)
+    verification_failed=True
+    is_live=False
+    ended=False
+
+  if is_live and not ended:
+   verified_at=now.isoformat()
+   item["verificationStatus"]="verified"
+   item["lastVerifiedLiveAt"]=verified_at
+   stream["verificationStatus"]="verified"
+   stream["lastVerifiedLiveAt"]=verified_at
+   out.append(item)
+   continue
+
+  if verification_failed and item.get("leagueKey")=="asian_games":
+   raw_last=item.get("lastVerifiedLiveAt") or stream.get("lastVerifiedLiveAt") or item.get("firstLiveAt")
+   try:
+    last=datetime.fromisoformat(str(raw_last).replace("Z","+00:00")).astimezone(timezone.utc)
+   except Exception:
+    last=now
+   fallback_deadline=last+timedelta(hours=2)
+   if now<fallback_deadline:
+    item["verificationStatus"]="fallback"
+    item["lastVerifiedLiveAt"]=last.isoformat()
+    item["fallbackExpiresAt"]=fallback_deadline.isoformat()
+    stream["verificationStatus"]="fallback"
+    stream["lastVerifiedLiveAt"]=last.isoformat()
+    stream["fallbackExpiresAt"]=fallback_deadline.isoformat()
+    out.append(item)
  return out
 
 def nbl_regional_schedule():
@@ -569,6 +598,15 @@ for x in streams:
  vid=x.get("stream",{}).get("videoId")
  if vid and vid in seen:continue
  if vid:seen.add(vid)
+ stream=x.get("stream",{})
+ if x.get("leagueKey")=="asian_games" and str(x.get("verificationStatus") or stream.get("verificationStatus") or "").lower()!="fallback":
+  verified_at=now.isoformat()
+  x["verificationStatus"]="verified"
+  x["lastVerifiedLiveAt"]=verified_at
+  stream["verificationStatus"]="verified"
+  stream["lastVerifiedLiveAt"]=verified_at
+  x.pop("expiresAt",None); x.pop("fallbackExpiresAt",None)
+  stream.pop("expiresAt",None); stream.pop("fallbackExpiresAt",None)
  league_key=str(x.get("leagueKey") or "").strip()
  if league_key:
   x["delivery"]={
@@ -604,6 +642,14 @@ def semantic_payload(value):
  data.pop("updatedAt",None)
  scanner=data.get("scanner")
  if isinstance(scanner,dict):scanner.pop("checkedAt",None)
+ # Positive verification timestamps change every scan but do not represent a
+ # meaningful stream-state change. Fallback/verified status and deadlines remain.
+ for item in data.get("streams",[]):
+  item.pop("lastVerifiedLiveAt",None)
+  stream=item.get("stream")
+  if isinstance(stream,dict):stream.pop("lastVerifiedLiveAt",None)
+ for item in data.get("liveExpiryLedger",{}).values():
+  if isinstance(item,dict):item.pop("lastVerifiedLiveAt",None)
  return data
 
 # Avoid a GitHub Pages deployment every five minutes when nothing meaningful
