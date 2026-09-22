@@ -3132,10 +3132,12 @@ if(document.getElementById('games')){
   setInterval(expireVisibleAsianGames,1000);
   let scoreAutoRefreshTimer=0;
   let scoreRefreshInFlight=false;
+  let lastAllLiveRefreshAt=0;
 
-  const hasLiveScores=()=>allGames.some(g=>g.state==='live')||liveNowItems.some(liveNowItemIsCurrent);
+  const hasSelectedLiveScore=()=>allGames.some(g=>g.state==='live');
+  const hasLiveScores=()=>hasSelectedLiveScore()||liveNowItems.some(liveNowItemIsCurrent);
   const hasLiveWta=()=>currentScoreLeague==='wta'&&allGames.some(g=>g.state==='live'&&!g.eventOnly)||liveNowItems.some(g=>g?.sportKey==='wta'&&liveNowItemIsCurrent(g));
-  const nextScoreRefreshDelay=()=>hasLiveWta()?2000:hasLiveScores()?15000:(currentScoreLeague==='wta'?5000:30000);
+  const nextScoreRefreshDelay=()=>hasLiveWta()?2000:hasSelectedLiveScore()?5000:hasLiveScores()?10000:(currentScoreLeague==='wta'?5000:30000);
 
   const scheduleScoreAutoRefresh=(delay=nextScoreRefreshDelay())=>{
     clearTimeout(scoreAutoRefreshTimer);
@@ -3145,16 +3147,21 @@ if(document.getElementById('games')){
 
   async function refreshScoresAutomatically(){
     if(scoreRefreshInFlight){
-      scheduleScoreAutoRefresh(30000);
+      scheduleScoreAutoRefresh(5000);
       return;
     }
     scoreRefreshInFlight=true;
     try{
       const selectedSport=currentScoreLeague;
       await loadGames({silent:true,league:selectedSport});
-      // Rebuild the complete Live Now feed on every refresh so newly live,
-      // finished, removed and newly discovered stream events update automatically.
-      await loadAllLiveGames({silent:true});
+
+      // Keep the selected live league fast, but avoid hammering every league.
+      // Live Now still rescans often enough to discover newly live and ended games.
+      const allLiveInterval=hasLiveScores()?15000:30000;
+      if(Date.now()-lastAllLiveRefreshAt>=allLiveInterval){
+        await loadAllLiveGames({silent:true});
+        lastAllLiveRefreshAt=Date.now();
+      }
     }finally{
       scoreRefreshInFlight=false;
       scheduleScoreAutoRefresh();
@@ -3163,7 +3170,7 @@ if(document.getElementById('games')){
 
   renderScoreLeagueFilters();
   void loadScoreLeagueLogos();
-  Promise.allSettled([loadGames(),loadAllLiveGames()]).finally(()=>scheduleScoreAutoRefresh());
+  Promise.allSettled([loadGames(),loadAllLiveGames()]).finally(()=>{lastAllLiveRefreshAt=Date.now();scheduleScoreAutoRefresh();});
 
   document.addEventListener('visibilitychange',()=>{
     expireVisibleAsianGames();
