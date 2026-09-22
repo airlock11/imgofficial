@@ -49,12 +49,12 @@ jobs:
 
             python scripts/update_extended_sports.py
 
-            if git diff --quiet -- extended-sports-data.json wta-live.json; then
+            if git diff --quiet -- extended-sports-data.json; then
               echo "No data changes."
               exit 0
             fi
 
-            git add extended-sports-data.json wta-live.json
+            git add extended-sports-data.json
             git commit -m "Update extended sports data"
 
             if git push origin HEAD:main; then
