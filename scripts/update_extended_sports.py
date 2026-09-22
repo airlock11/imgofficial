@@ -235,6 +235,10 @@ def wta_calendar_schedule():
             })
 
     if not games:
+        print("wta-calendar-pdf-lines-begin")
+        for debug_line in lines[:90]:
+            print("WTA-CAL-LINE", repr(debug_line))
+        print("wta-calendar-pdf-lines-end")
         raise RuntimeError("WTA official calendar PDF produced no current/upcoming Tour events")
 
     games.sort(key=lambda g: g.get("date") or "")
