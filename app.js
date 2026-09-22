@@ -278,7 +278,7 @@ async function fetchWtaLiveScores(){
   const r=await fetch('https://raw.githubusercontent.com/airlock11/imgofficial/wta-live-data/wta-live.json?ts='+Date.now(),{cache:'no-store'});
   if(!r.ok)throw new Error('GitHub WTA live data unavailable');
   const payload=await r.json();
-  const games=Array.isArray(payload?.games)?payload.games.filter(g=>['live','suspended','warmup'].includes(g?.state)&&!g?.eventOnly):[];
+  const games=Array.isArray(payload?.games)?payload.games.filter(g=>!g?.eventOnly):[];
   wtaApiLiveActivity=games.some(g=>g?.state==='live');
   if(!games.length){
     wtaApiLiveActivity=false;
@@ -1706,6 +1706,22 @@ function updateWtaScoreboard(card,g){
   return true;
 }
 
+function wtaSimpleScheduleMarkup(g){
+  const dt=Date.parse(g?.date||'');
+  const when=Number.isFinite(dt)
+    ?new Date(dt).toLocaleString([],{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'})
+    :String(g?.displayTime||'');
+  const tournament=String(g?.displayTime||g?.title||'WTA');
+  const round=String(g?.round||'').replace(/^WTA\s+/i,'');
+  return '<article class="wta-simple-schedule" data-game-key="'+esc(gameDomKey(g))+'">'+
+    '<div class="wta-simple-when">'+esc(when)+'</div>'+
+    '<div class="wta-simple-main">'+
+      '<strong>'+esc(g.away||'TBD')+' <span>vs</span> '+esc(g.home||'TBD')+'</strong>'+
+      '<small>'+esc([tournament,round].filter(Boolean).join(' · '))+'</small>'+
+    '</div>'+
+  '</article>';
+}
+
 function gameDomKey(g){
   const raw=String(g?.eventId||[g?.date||'',g?.away||'',g?.home||''].join('|'));
   return encodeURIComponent(raw);
@@ -2409,7 +2425,7 @@ function renderGames(){
   if(currentScoreLeague==='wta'&&wtaRecentGames.length){
     sections.push(
       '<section class="league-games-group wta-recent-games" aria-label="WTA recent games">'+
-        '<div class="league-games-group-head"><h3>Recent Games</h3><span>Final & suspended matches</span></div>'+
+        '<div class="league-games-group-head"><h3>Recent Games</h3><span>Latest WTA results & suspended matches</span></div>'+
         '<div class="league-games-list">'+wtaRecentGames.map(renderCard).join('')+'</div>'+
       '</section>'
     );
@@ -2417,9 +2433,9 @@ function renderGames(){
 
   if(scheduleItems.length){
     sections.push(
-      '<section class="league-games-group" aria-label="'+esc(leagueName)+' schedule">'+
-        '<div class="league-games-group-head"><h3>Schedule</h3><span>'+esc(leagueName)+'</span></div>'+
-        '<div class="league-games-list">'+scheduleItems.map(renderCard).join('')+'</div>'+
+      '<section class="league-games-group'+(currentScoreLeague==='wta'?' wta-simple-schedule-group':'')+'" aria-label="'+esc(leagueName)+' schedule">'+
+        '<div class="league-games-group-head"><h3>Schedule</h3><span>'+(currentScoreLeague==='wta'?'Upcoming matches':esc(leagueName))+'</span></div>'+
+        '<div class="league-games-list">'+(currentScoreLeague==='wta'?scheduleItems.map(wtaSimpleScheduleMarkup).join(''):scheduleItems.map(renderCard).join(''))+'</div>'+
       '</section>'
     );
   }
