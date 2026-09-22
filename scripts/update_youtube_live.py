@@ -263,6 +263,40 @@ def load_previous():
  except Exception:
   return {}
 
+def previous_still_live(previous):
+ # Recheck every published exact video ID before removing it. Channel discovery
+ # surfaces can omit simultaneous broadcasts even while their players are live.
+ candidates=[x for x in previous.get("streams",[]) if x.get("stream",{}).get("videoId")]
+ ids=list(dict.fromkeys(x.get("stream",{}).get("videoId") for x in candidates))
+ if not ids:return []
+ try:
+  details=video_details(ids[:50])
+ except Exception as ex:
+  print("previous live details",ex)
+  details={}
+ out=[]
+ for item in candidates:
+  stream=item.get("stream",{})
+  vid=stream.get("videoId")
+  d=details.get(vid)
+  if d:
+   sn=d.get("snippet",{}); live=d.get("liveStreamingDetails",{}); status=d.get("status",{})
+   is_live=sn.get("liveBroadcastContent")=="live" or (live.get("actualStartTime") and not live.get("actualEndTime"))
+   ended=bool(live.get("actualEndTime"))
+   if sn.get("channelTitle"):stream["channel"]=sn.get("channelTitle")
+   if sn.get("title"):stream["title"]=sn.get("title"); item["title"]=sn.get("title")
+   if status.get("embeddable",True):stream["embedUrl"]="https://www.youtube.com/embed/"+vid
+   else:stream.pop("embedUrl",None)
+  else:
+   try:
+    info=public_watch_info(vid)
+    is_live=info.get("live",False); ended=not is_live
+   except Exception as ex:
+    print("previous public live check",vid,ex)
+    continue
+  if is_live and not ended:out.append(item)
+ return out
+
 def nbl_regional_schedule():
  try:
   data=json.loads(REGIONAL.read_text("utf-8"))
@@ -383,6 +417,10 @@ try:
  streams.extend(mpbl_official_live())
 except Exception as ex:
  print("youtube MPBL",ex)
+try:
+ streams.extend(previous_still_live(previous))
+except Exception as ex:
+ print("youtube previous streams",ex)
 seen=set(); dedup=[]
 for x in streams:
  vid=x.get("stream",{}).get("videoId")
