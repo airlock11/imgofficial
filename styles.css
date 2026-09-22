@@ -1328,13 +1328,13 @@ main{min-height:calc(100svh - 68px)}
 .wta-event-name{min-width:130px;font-weight:700}
 .wta-game-main{min-width:0;flex:1;display:grid;gap:8px}
 .wta-scoreboard{min-width:0;display:grid;gap:4px}
-.wta-score-header,.wta-score-player{display:grid;grid-template-columns:minmax(140px,1fr) repeat(var(--wta-set-count,1),minmax(30px,42px)) minmax(42px,50px);align-items:center;column-gap:6px}
+.wta-score-header,.wta-score-player{grid-template-columns:minmax(108px,1fr) minmax(36px,42px) repeat(var(--wta-set-count,1),minmax(26px,34px));column-gap:4px}
 .wta-score-header{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
 .wta-score-player{min-height:34px}
 .wta-player-name{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:700}
 .wta-set-score,.wta-point-score,.wta-score-head{text-align:center;font-variant-numeric:tabular-nums}
-.wta-point-score{font-size:1rem;font-weight:800}
-.wta-game-card.game-is-live .wta-point-score{color:var(--accent)}
+.wta-point-score{text-align:center;font-variant-numeric:tabular-nums;font-size:1rem;font-weight:900}
+.wta-game-card.game-is-live .wta-point-score{color:#dfff00}
 @media(max-width:760px){
   .wta-game-card{display:block}
   .wta-event-name{margin-bottom:8px}
