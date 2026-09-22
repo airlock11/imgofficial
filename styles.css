@@ -1311,9 +1311,9 @@ main{min-height:calc(100svh - 68px)}
   .selected-live-activity.has-stream{grid-template-columns:1fr}
   .selected-live-stream-column{
     position:static;
-    order:2;
+    order:1;
   }
-  .selected-live-score-column{order:1}
+  .selected-live-score-column{order:2}
 }
 @media(prefers-reduced-motion:reduce){
   .score-league-filter.has-live-score-only{
