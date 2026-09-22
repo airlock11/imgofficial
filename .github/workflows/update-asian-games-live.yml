@@ -1,0 +1,70 @@
+name: Update Asian Games live scores
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/update_asian_games_live.py"
+      - ".github/workflows/update-asian-games-live.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: asian-games-live-minute
+  cancel-in-progress: true
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install browser scraper
+        shell: bash
+        run: |
+          python -m pip install --disable-pip-version-check playwright
+          if ! command -v google-chrome >/dev/null 2>&1; then
+            python -m playwright install --with-deps chromium
+          fi
+      - name: Scrape and publish Asian Games every minute
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "IMG Asian Games Live Bot"
+          git config user.email "actions@users.noreply.github.com"
+
+          for cycle in 1 2 3 4 5; do
+            echo "Asian Games live cycle $cycle/5"
+            git checkout main
+            git fetch origin main
+            git reset --hard origin/main
+
+            python scripts/update_asian_games_live.py
+            cp asian-games-live.json /tmp/asian-games-live.json
+
+            git reset --hard origin/main
+            git fetch origin asian-games-live-data
+            git checkout -B asian-games-live-data origin/asian-games-live-data
+            cp /tmp/asian-games-live.json asian-games-live.json
+
+            if ! git diff --quiet -- asian-games-live.json; then
+              git add asian-games-live.json
+              git commit -m "Update Asian Games live scores"
+              git push origin HEAD:asian-games-live-data
+            else
+              echo "No Asian Games live-score changes."
+            fi
+
+            if [ "$cycle" -lt 5 ]; then
+              sleep 60
+            fi
+          done
