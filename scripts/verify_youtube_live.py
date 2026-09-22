@@ -87,11 +87,16 @@ def main():
             stream["title"]=title
             stream["channel"]=channel
         else:
-            # Brief fail-open for transient API omission only.
+            # Brief fail-open for transient API omission only. Do NOT refresh
+            # lastVerifiedLiveAt here; otherwise repeated API omissions could
+            # keep a stale/ended stream alive indefinitely.
             last=item.get("lastVerifiedLiveAt") or stream.get("lastVerifiedLiveAt")
             if age_seconds(last)>180:
                 removed.append({"videoId":vid,"leagueKey":item.get("leagueKey"),"reason":"api_missing_stale"})
                 continue
+            item["stream"]=stream
+            kept.append(item)
+            continue
 
         item["verificationStatus"]="verified"
         item["lastVerifiedLiveAt"]=now
