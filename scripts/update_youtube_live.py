@@ -106,6 +106,10 @@ def scan_official_source(source,previous):
   ids += channel_stream_page_ids(channel_id)
  except Exception as ex:
   print("official source streams",source_id,ex)
+ try:
+  ids += channel_recent_video_ids(channel_id,25)
+ except Exception as ex:
+  print("official source uploads",source_id,ex)
  ids=list(dict.fromkeys(x for x in ids if x))[:50]
  if not ids:return [],channel_id
 
@@ -171,8 +175,8 @@ def scan_official_registry(previous):
   except Exception as ex:
    print("official source scan",source_id,ex)
  return streams,{
-  "version":2,
-  "mode":"official-only",
+  "version":3,
+  "mode":"official-auto-discovery",
   "checkedAt":datetime.now(timezone.utc).isoformat(),
   "sourcesChecked":checked,
   "resolvedChannels":resolved
@@ -183,6 +187,19 @@ def video_details(ids):
  params=urllib.parse.urlencode({"part":"snippet,status,liveStreamingDetails","id":",".join(ids),"key":KEY})
  data=get_json("https://www.googleapis.com/youtube/v3/videos?"+params)
  return {x["id"]:x for x in data.get("items",[])}
+
+def channel_recent_video_ids(channel_id,max_results=25):
+ # Cheap YouTube API fallback: inspect the channel's uploads playlist instead of
+ # running expensive global Search API queries. New livestreams appear here even
+ # when RSS or the public /streams page temporarily misses them.
+ params=urllib.parse.urlencode({"part":"contentDetails","id":channel_id,"key":KEY})
+ items=get_json("https://www.googleapis.com/youtube/v3/channels?"+params).get("items",[])
+ if not items:return []
+ uploads=items[0].get("contentDetails",{}).get("relatedPlaylists",{}).get("uploads")
+ if not uploads:return []
+ q=urllib.parse.urlencode({"part":"contentDetails","playlistId":uploads,"maxResults":max_results,"key":KEY})
+ rows=get_json("https://www.googleapis.com/youtube/v3/playlistItems?"+q).get("items",[])
+ return [x.get("contentDetails",{}).get("videoId") for x in rows if x.get("contentDetails",{}).get("videoId")]
 
 def channel_feed_ids(channel_id):
  url="https://www.youtube.com/feeds/videos.xml?channel_id="+urllib.parse.quote(channel_id)
@@ -234,6 +251,10 @@ def one_sports_live():
   ids += channel_stream_page_ids(ONE_SPORTS_CHANNEL_ID)
  except Exception as ex:
   print("One Sports streams page",ex)
+ try:
+  ids += channel_recent_video_ids(ONE_SPORTS_CHANNEL_ID,25)
+ except Exception as ex:
+  print("One Sports uploads",ex)
  ids=PINNED_ASIAN_GAMES_VIDEO_IDS + ids
  ids=list(dict.fromkeys(x for x in ids if x))
  details=video_details(ids[:50])
@@ -516,8 +537,8 @@ previous=load_previous()
 now=datetime.now(timezone.utc)
 streams=[]
 scanner_state={
- "version":2,
- "mode":"official-only",
+ "version":3,
+ "mode":"official-auto-discovery",
  "checkedAt":now.isoformat(),
  "sourcesChecked":[],
  "resolvedChannels":previous.get("scanner",{}).get("resolvedChannels",{})
