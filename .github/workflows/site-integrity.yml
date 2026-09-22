@@ -26,6 +26,8 @@ jobs:
         run: node scripts/regression-tests.cjs
       - name: Check backend contracts
         run: node scripts/backend-contract-tests.cjs
+      - name: Check SEO contracts
+        run: node scripts/seo-tests.cjs
       - name: Validate YouTube live output contract
         run: python scripts/validate_youtube_live.py
       - name: Check news embedding permissions
