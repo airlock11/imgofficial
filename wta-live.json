@@ -2,39 +2,39 @@
   "special": true,
   "league": "WTA Tour",
   "live": true,
-  "updatedAt": "2026-09-22T09:28:15.495805+00:00",
+  "updatedAt": "2026-09-22T09:32:18.736301+00:00",
   "sourceName": "WTA Official Scores scrape",
   "sourceUrl": "https://www.wtatennis.com/scores/",
   "verificationSource": "WTA Official Scores",
   "verificationUrl": "https://www.wtatennis.com/scores/",
-  "pageLiveCount": 8,
-  "parsedMatchCount": 5,
+  "pageLiveCount": 9,
+  "parsedMatchCount": 6,
   "note": "GitHub scrape of the rendered WTA Scores page. Game points, current set number, current-set games and per-set scores are stored separately.",
   "games": [
     {
       "eventId": "wta-scrape-2-a-charaeva-s-kenin",
-      "date": "2026-09-22T09:28:15.491577+00:00",
+      "date": "2026-09-22T09:32:18.731205+00:00",
       "displayTime": "Korea Open",
       "away": "A. Charaeva",
       "home": "S. Kenin",
-      "awayScore": "0 · 30",
-      "homeScore": "1 · 40",
+      "awayScore": "1 · 0",
+      "homeScore": "2 · 0",
       "awaySets": [
-        "0"
-      ],
-      "homeSets": [
         "1"
       ],
-      "awayPoint": "30",
-      "homePoint": "40",
+      "homeSets": [
+        "2"
+      ],
+      "awayPoint": "0",
+      "homePoint": "0",
       "currentSet": 1,
-      "awayCurrentSetGames": 0,
-      "homeCurrentSetGames": 1,
+      "awayCurrentSetGames": 1,
+      "homeCurrentSetGames": 2,
       "awaySetsWon": 0,
       "homeSetsWon": 0,
       "round": "Round of 32",
       "court": "Center Court",
-      "status": "Live Match: 0:06 · Round of 32 · Center Court",
+      "status": "Live Match: 0:10 · Round of 32 · Center Court",
       "state": "live",
       "eventOnly": false,
       "title": "Korea Open",
@@ -45,30 +45,30 @@
     },
     {
       "eventId": "wta-scrape-3-a-tubello-d-spiteri",
-      "date": "2026-09-22T09:28:15.491819+00:00",
+      "date": "2026-09-22T09:32:18.731501+00:00",
       "displayTime": "Delta Motors Tolentino Open",
       "away": "A. Tubello",
       "home": "D. Spiteri",
-      "awayScore": "6 2 · 15",
-      "homeScore": "2 0 · 0",
+      "awayScore": "6 3 · 15",
+      "homeScore": "2 0 · 15",
       "awaySets": [
         "6",
-        "2"
+        "3"
       ],
       "homeSets": [
         "2",
         "0"
       ],
       "awayPoint": "15",
-      "homePoint": "0",
+      "homePoint": "15",
       "currentSet": 2,
-      "awayCurrentSetGames": 2,
+      "awayCurrentSetGames": 3,
       "homeCurrentSetGames": 0,
       "awaySetsWon": 1,
       "homeSetsWon": 0,
       "round": "Round of 32",
       "court": "Court 2",
-      "status": "Live Match: 0:50 · Round of 32 · Court 2",
+      "status": "Live Match: 0:54 · Round of 32 · Court 2",
       "state": "live",
       "eventOnly": false,
       "title": "Delta Motors Tolentino Open",
@@ -78,8 +78,40 @@
       "verificationUrl": "https://www.wtatennis.com/scores/"
     },
     {
-      "eventId": "wta-scrape-5-e-pridankina-d-egorova",
-      "date": "2026-09-22T09:28:15.492097+00:00",
+      "eventId": "wta-scrape-5-l-zaar-r-masarova",
+      "date": "2026-09-22T09:32:18.731823+00:00",
+      "displayTime": "Delta Motors Tolentino Open",
+      "away": "L. Zaar",
+      "home": "R. Masarova",
+      "awayScore": "6 · 40",
+      "homeScore": "5 · 40",
+      "awaySets": [
+        "6"
+      ],
+      "homeSets": [
+        "5"
+      ],
+      "awayPoint": "40",
+      "homePoint": "40",
+      "currentSet": 1,
+      "awayCurrentSetGames": 6,
+      "homeCurrentSetGames": 5,
+      "awaySetsWon": 0,
+      "homeSetsWon": 0,
+      "round": "Round of 32",
+      "court": "Court 1",
+      "status": "Live Match: 0:51 · Round of 32 · Court 1",
+      "state": "live",
+      "eventOnly": false,
+      "title": "Delta Motors Tolentino Open",
+      "sourceName": "WTA Official Scores scrape",
+      "sourceUrl": "https://www.wtatennis.com/scores/",
+      "verificationSource": "WTA Official Scores",
+      "verificationUrl": "https://www.wtatennis.com/scores/"
+    },
+    {
+      "eventId": "wta-scrape-6-e-pridankina-d-egorova",
+      "date": "2026-09-22T09:32:18.731982+00:00",
       "displayTime": "Turk Telekom Ankara Open",
       "away": "E. Pridankina",
       "home": "D. Egorova",
@@ -110,8 +142,8 @@
       "verificationUrl": "https://www.wtatennis.com/scores/"
     },
     {
-      "eventId": "wta-scrape-6-w-falkowska-i-yoruk",
-      "date": "2026-09-22T09:28:15.492244+00:00",
+      "eventId": "wta-scrape-7-w-falkowska-i-yoruk",
+      "date": "2026-09-22T09:32:18.732130+00:00",
       "displayTime": "Turk Telekom Ankara Open",
       "away": "W. Falkowska",
       "home": "I. Yoruk",
@@ -144,8 +176,8 @@
       "verificationUrl": "https://www.wtatennis.com/scores/"
     },
     {
-      "eventId": "wta-scrape-7-a-tikhonova-a-gasanova",
-      "date": "2026-09-22T09:28:15.492392+00:00",
+      "eventId": "wta-scrape-8-a-tikhonova-a-gasanova",
+      "date": "2026-09-22T09:32:18.732298+00:00",
       "displayTime": "Turk Telekom Ankara Open",
       "away": "A. Tikhonova",
       "home": "A. Gasanova",
