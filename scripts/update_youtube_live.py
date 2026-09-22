@@ -569,6 +569,16 @@ for x in streams:
  vid=x.get("stream",{}).get("videoId")
  if vid and vid in seen:continue
  if vid:seen.add(vid)
+ league_key=str(x.get("leagueKey") or "").strip()
+ if league_key:
+  x["delivery"]={
+   "leagueKey":league_key,
+   "url":"/scores/?league="+urllib.parse.quote(league_key),
+   "placement":"above_statistics"
+  }
+  if isinstance(x.get("stream"),dict):
+   x["stream"]["deliveryLeagueKey"]=league_key
+   x["stream"]["deliveryPlacement"]="above_statistics"
  dedup.append(x)
 
 streams,expiry_ledger=expire_entries(dedup,previous,now,streams=True)
