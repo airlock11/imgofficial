@@ -40,26 +40,34 @@ jobs:
           git config user.name "IMG Stats Bot"
           git config user.email "actions@users.noreply.github.com"
 
-          for attempt in 1 2 3; do
+          # Collect once. Retry only the publish if main changes underneath us.
+          git fetch origin main
+          git reset --hard origin/main
+          python scripts/update_stats.py
+
+          if git diff --quiet -- stats-data.json; then
+            echo "No statistics changes."
+            exit 0
+          fi
+
+          git add stats-data.json
+          git commit -m "Update sports statistics"
+
+          for attempt in 1 2 3 4 5; do
             git fetch origin main
-            git reset --hard origin/main
-
-            python scripts/update_stats.py
-
-            if git diff --quiet -- stats-data.json; then
-              echo "No data changes."
-              exit 0
+            if ! git rebase origin/main; then
+              git rebase --abort || true
+              echo "Rebase conflict while publishing stats-data.json."
+              exit 1
             fi
-
-            git add stats-data.json
-            git commit -m "Update sports statistics"
 
             if git push origin HEAD:main; then
               exit 0
             fi
 
-            echo "Push raced with another automation; regenerating from latest main (attempt $attempt)."
+            echo "Push raced with another automation; retrying publish only (attempt $attempt)."
+            sleep 2
           done
 
-          echo "Unable to publish after retries."
+          echo "Unable to publish statistics after retries."
           exit 1
