@@ -1573,3 +1573,49 @@ main{min-height:calc(100svh - 68px)}
   .wta-official-set:nth-child(n+4):not(:last-child){display:none}
   .wta-score-dot{font-size:.95rem}
 }
+
+
+/* WTA simple schedule */
+.wta-simple-schedule-group .league-games-list{display:grid;gap:0}
+.wta-simple-schedule{
+  display:grid;
+  grid-template-columns:120px minmax(0,1fr);
+  gap:18px;
+  align-items:center;
+  padding:14px 8px;
+  border-bottom:1px solid var(--line);
+}
+.wta-simple-schedule:last-child{border-bottom:0}
+.wta-simple-when{
+  color:var(--muted);
+  font-size:.82rem;
+  line-height:1.35;
+  font-variant-numeric:tabular-nums;
+}
+.wta-simple-main{min-width:0;display:grid;gap:4px}
+.wta-simple-main strong{
+  min-width:0;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  font-size:.98rem;
+}
+.wta-simple-main strong span{color:var(--muted);font-weight:600}
+.wta-simple-main small{
+  min-width:0;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  color:var(--muted);
+  font-size:.78rem;
+}
+@media(max-width:760px){
+  .wta-simple-schedule{
+    grid-template-columns:82px minmax(0,1fr);
+    gap:10px;
+    padding:12px 4px;
+  }
+  .wta-simple-when{font-size:.73rem}
+  .wta-simple-main strong{font-size:.9rem}
+  .wta-simple-main small{font-size:.72rem}
+}
