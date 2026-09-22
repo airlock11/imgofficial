@@ -25,15 +25,43 @@ const TARGETS=[
 
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 let requests=0;
-async function sr(path){
-  if(requests)await sleep(1100);
-  requests++;
-  const res=await fetch(BASE+path,{headers:{"x-api-key":API_KEY,"accept":"application/json"}});
-  if(!res.ok){
+let lastRequestAt=0;
+async function sr(path,{optional=false}={}){
+  const minGap=2300;
+  const wait=Math.max(0,minGap-(Date.now()-lastRequestAt));
+  if(wait)await sleep(wait);
+
+  let attempt=0;
+  while(attempt<5){
+    attempt++;
+    requests++;
+    lastRequestAt=Date.now();
+
+    const res=await fetch(BASE+path,{headers:{"x-api-key":API_KEY,"accept":"application/json"}});
+    if(res.ok)return res.json();
+
     const body=await res.text().catch(()=>"");
-    throw new Error(`Sportradar ${res.status} for ${path}: ${body.slice(0,180)}`);
+    const safeMessage=`Sportradar ${res.status} for ${path}: ${body.slice(0,180)}`;
+
+    if(res.status===429&&attempt<5){
+      const retryAfter=Number(res.headers.get("retry-after"));
+      const backoff=Number.isFinite(retryAfter)&&retryAfter>0
+        ? retryAfter*1000
+        : Math.min(30000,2500*Math.pow(2,attempt-1));
+      console.warn(`${safeMessage} · retrying in ${Math.ceil(backoff/1000)}s`);
+      await sleep(backoff);
+      continue;
+    }
+
+    if(optional){
+      console.warn(safeMessage);
+      return null;
+    }
+    throw new Error(safeMessage);
   }
-  return res.json();
+
+  if(optional)return null;
+  throw new Error(`Sportradar request failed after retries for ${path}`);
 }
 
 function readExisting(){
@@ -142,9 +170,13 @@ data.requestsLastRun=0;
 data.leagues=data.leagues||{};
 data.catalog=data.catalog||{};
 
-const live=await sr("/schedules/live/schedules.json");
+const live=await sr("/schedules/live/schedules.json",{optional:true});
 const day=iso.slice(0,10);
-const daily=await sr(`/schedules/${day}/schedules.json`);
+const daily=await sr(`/schedules/${day}/schedules.json`,{optional:true});
+
+if(!live&&!daily){
+  throw new Error("Sportradar live and daily schedule requests were both unavailable. See the HTTP status messages above.");
+}
 
 const combined=[...eventItems(live),...eventItems(daily)].map(normalizeGame).filter(g=>g.eventId);
 const grouped={};
@@ -171,10 +203,13 @@ for(const t of TARGETS){
 }
 
 if(MODE==="deep"){
-  const competitions=await sr("/competitions.json");
-  const seasons=await sr("/seasons.json");
-  data.catalog.competitions=competitions?.competitions||[];
-  data.catalog.seasons=seasons?.seasons||[];
+  const competitions=await sr("/competitions.json",{optional:true});
+  const seasons=await sr("/seasons.json",{optional:true});
+  if(!competitions||!seasons){
+    console.warn("Deep catalog refresh is partial because competition or season metadata was unavailable.");
+  }
+  data.catalog.competitions=competitions?.competitions||data.catalog.competitions||[];
+  data.catalog.seasons=seasons?.seasons||data.catalog.seasons||[];
   data.catalog.updatedAt=iso;
 
   const comps=data.catalog.competitions;
@@ -193,8 +228,8 @@ if(MODE==="deep"){
     if(!current?.id)continue;
 
     let schedule=null, standings=null;
-    try{schedule=await sr(`/seasons/${encodeURIComponent(current.id)}/schedules.json`)}catch(e){console.warn(e.message)}
-    try{standings=await sr(`/seasons/${encodeURIComponent(current.id)}/standings.json`)}catch(e){console.warn(e.message)}
+    schedule=await sr(`/seasons/${encodeURIComponent(current.id)}/schedules.json`,{optional:true});
+    standings=await sr(`/seasons/${encodeURIComponent(current.id)}/standings.json`,{optional:true});
 
     const normalizedSchedule=eventItems(schedule).map(normalizeGame).filter(g=>g.eventId);
     data.leagues[t.key]={
