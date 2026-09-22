@@ -273,13 +273,64 @@ function mergeScoreGames(primary,fallback){
   return out;
 }
 async function fetchWtaLiveScores(){
-  const url='https://img-api-proxy.magsipocarnie.workers.dev/wta-live?ts='+Date.now();
-  const r=await fetch(url,{cache:'no-store'});
+  const official='https://www.wtatennis.com/scores/';
+  const parseEvent=e=>{
+    const category=String(e?.tournament?.category?.slug||e?.tournament?.category?.name||'').toLowerCase();
+    if(category!=='wta'||String(e?.status?.type||'').toLowerCase()!=='inprogress')return null;
+    const scoreParts=score=>{
+      const sets=[];
+      for(let i=1;i<=5;i++){
+        const v=score?.['period'+i];
+        if(v!==undefined&&v!==null&&String(v)!==''){
+          const tb=score?.['period'+i+'TieBreak'];
+          sets.push(tb!==undefined&&tb!==null&&String(tb)!==''?String(v)+'('+String(tb)+')':String(v));
+        }
+      }
+      let point=score?.point;
+      if(point===undefined||point===null||String(point)==='')point='—';
+      return {sets,point:String(point)};
+    };
+    const home=scoreParts(e?.homeScore||{});
+    const away=scoreParts(e?.awayScore||{});
+    const tournament=e?.tournament?.uniqueTournament?.name||e?.tournament?.name||'WTA';
+    const status=[e?.status?.description||'Live',e?.roundInfo?.name||''].filter(Boolean).join(' · ');
+    return {
+      eventId:'wta-live-'+String(e?.id||e?.customId||''),
+      date:e?.startTimestamp?new Date(e.startTimestamp*1000).toISOString():'',
+      displayTime:tournament,
+      away:e?.awayTeam?.shortName||e?.awayTeam?.name||'TBD',
+      home:e?.homeTeam?.shortName||e?.homeTeam?.name||'TBD',
+      awayScore:away.sets.join(' ')+(away.point!=='—'?' · '+away.point:''),
+      homeScore:home.sets.join(' ')+(home.point!=='—'?' · '+home.point:''),
+      awaySets:away.sets,
+      homeSets:home.sets,
+      awayPoint:away.point,
+      homePoint:home.point,
+      status,
+      state:'live',
+      eventOnly:false,
+      title:tournament,
+      sourceName:'Live tennis score feed',
+      sourceUrl:official,
+      odds:null,oddsList:[],highlights:[],highlightsChecked:true,streams:[],streamsChecked:true
+    };
+  };
+
+  try{
+    const r=await fetch('https://api.sofascore.com/api/v1/sport/tennis/events/live',{cache:'no-store'});
+    if(r.ok){
+      const payload=await r.json();
+      const games=(Array.isArray(payload?.events)?payload.events:[]).map(parseEvent).filter(Boolean);
+      if(games.length)return {special:true,games,live:true,sourceName:'WTA live scores',sourceUrl:official};
+    }
+  }catch{}
+
+  const r=await fetch('https://img-api-proxy.magsipocarnie.workers.dev/wta-live?ts='+Date.now(),{cache:'no-store'});
   if(!r.ok)throw new Error('WTA live scraper unavailable');
   const payload=await r.json();
   const games=Array.isArray(payload?.games)?payload.games.filter(g=>g?.state==='live'&&!g?.eventOnly):[];
   if(!games.length)throw new Error('No live WTA matches');
-  return {special:true,games,live:true,sourceName:'WTA Official Scores',sourceUrl:'https://www.wtatennis.com/scores/'};
+  return {special:true,games,live:true,sourceName:'WTA Official Scores',sourceUrl:official};
 }
 
 async function fetchAsianGamesOfficial(){
@@ -1597,30 +1648,16 @@ function parseWtaScoreParts(value){
   const raw=String(value??'—').trim();
   if(!raw||raw==='—')return {sets:[],point:'—'};
   const pieces=raw.split('·').map(x=>x.trim()).filter(Boolean);
-  const tokens=(pieces[0]||'').split(/\s+/).filter(Boolean);
-  let point=pieces.length>1?pieces[pieces.length-1]:'';
-  let sets=tokens.slice();
-
-  // Some live tennis feeds serialize the current game point as the first token.
-  // Only treat unmistakable tennis point values as game score.
-  if(!point&&sets.length){
-    const first=String(sets[0]).toUpperCase();
-    if(/^(0|15|30|40|AD|AV|A)$/.test(first)){
-      point=first==='A'?'AD':first;
-      sets=sets.slice(1);
-    }
-  }
-  sets=sets.filter(x=>/^\d+(?:\(\d+\)|\^\d+)?$/.test(x)).slice(0,5);
-  return {sets,point:point||'—'};
+  return {
+    sets:(pieces[0]||'').split(/\s+/).filter(Boolean).slice(0,5),
+    point:pieces.length>1?pieces[pieces.length-1]:'—'
+  };
 }
 function wtaScorePartsForGame(g,side){
-  const directSets=Array.isArray(g?.[side+'Sets'])?g[side+'Sets'].map(String).filter(Boolean):[];
-  let directPoint=g?.[side+'Point'];
-  if(directPoint!==undefined&&directPoint!==null&&String(directPoint)!==''){
-    directPoint=String(directPoint).toUpperCase()==='AV'?'AD':String(directPoint);
-  }
-  if(directSets.length||directPoint){
-    return {sets:directSets,point:directPoint||'—'};
+  const sets=Array.isArray(g?.[side+'Sets'])?g[side+'Sets'].map(String):[];
+  const point=g?.[side+'Point'];
+  if(sets.length||point!==undefined&&point!==null&&String(point)!==''){
+    return {sets,point:point!==undefined&&point!==null&&String(point)!==''?String(point):'—'};
   }
   return parseWtaScoreParts(g?.[side+'Score']);
 }
@@ -1628,32 +1665,31 @@ function wtaScoreGridMarkup(g){
   const away=wtaScorePartsForGame(g,'away');
   const home=wtaScorePartsForGame(g,'home');
   const setCount=Math.max(away.sets.length,home.sets.length,1);
-  const headers=Array.from({length:setCount},(_,i)=>'<span class="wta-score-head">S'+(i+1)+'</span>').join('');
-  const row=(name,score,side)=>'<div class="wta-score-player">'+
-    '<span class="wta-player-name">'+esc(name)+'</span>'+
-    '<b class="wta-point-score" data-wta-point="'+side+'">'+esc(score.point)+'</b>'+
-    Array.from({length:setCount},(_,i)=>'<b class="wta-set-score" data-wta-set="'+side+'-'+i+'">'+esc(score.sets[i]??'—')+'</b>').join('')+
-  '</div>';
-  return '<div class="wta-scoreboard" data-wta-scoreboard style="--wta-set-count:'+setCount+'">'+
-    '<div class="wta-score-header"><span>Player</span><span class="wta-score-head wta-points-head">Game</span>'+headers+'</div>'+
-    row(g.away,away,'away')+row(g.home,home,'home')+
+  const head=Array.from({length:setCount},(_,i)=>'<th scope="col">S'+(i+1)+'</th>').join('');
+  const row=(name,score,side)=>'<tr>'+
+    '<th scope="row" class="wta-player-name">'+esc(name)+'</th>'+
+    '<td class="wta-point-score" data-wta-point="'+side+'">'+esc(score.point)+'</td>'+
+    Array.from({length:setCount},(_,i)=>'<td class="wta-set-score" data-wta-set="'+side+'-'+i+'">'+esc(score.sets[i]??'—')+'</td>').join('')+
+  '</tr>';
+  return '<div class="wta-table-wrap" data-wta-scoreboard>'+
+    '<table class="wta-score-table"><thead><tr><th scope="col">Player</th><th scope="col">Game</th>'+head+'</tr></thead>'+
+    '<tbody>'+row(g.away,away,'away')+row(g.home,home,'home')+'</tbody></table>'+
   '</div>';
 }
 function updateWtaScoreboard(card,g){
   const board=card?.querySelector?.('[data-wta-scoreboard]');
   if(!board)return false;
   const away=wtaScorePartsForGame(g,'away'),home=wtaScorePartsForGame(g,'home');
-  const max=Math.max(away.sets.length,home.sets.length,1);
-  const headerCount=board.querySelectorAll('.wta-score-head:not(.wta-points-head)').length;
-  if(headerCount!==max){
+  const expected=Math.max(away.sets.length,home.sets.length,1);
+  const actual=board.querySelectorAll('thead th').length-2;
+  if(expected!==actual){
     board.outerHTML=wtaScoreGridMarkup(g);
     return true;
   }
   [['away',away],['home',home]].forEach(([side,score])=>{
-    const point=card.querySelector('[data-wta-point="'+side+'"]');
-    const nextPoint=String(score.point??'—');
-    if(point&&point.textContent!==nextPoint)point.textContent=nextPoint;
-    for(let i=0;i<max;i++){
+    const p=card.querySelector('[data-wta-point="'+side+'"]');
+    if(p&&p.textContent!==String(score.point??'—'))p.textContent=String(score.point??'—');
+    for(let i=0;i<expected;i++){
       const el=card.querySelector('[data-wta-set="'+side+'-'+i+'"]');
       const next=String(score.sets[i]??'—');
       if(el&&el.textContent!==next)el.textContent=next;
