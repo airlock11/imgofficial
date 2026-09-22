@@ -277,7 +277,7 @@ async function fetchWtaLiveScores(){
   const r=await fetch('https://raw.githubusercontent.com/airlock11/imgofficial/wta-live-data/wta-live.json?ts='+Date.now(),{cache:'no-store'});
   if(!r.ok)throw new Error('GitHub WTA live data unavailable');
   const payload=await r.json();
-  const games=Array.isArray(payload?.games)?payload.games.filter(g=>g?.state==='live'&&!g?.eventOnly):[];
+  const games=Array.isArray(payload?.games)?payload.games.filter(g=>['live','suspended'].includes(g?.state)&&!g?.eventOnly):[];
   if(!games.length)throw new Error('No live WTA matches');
   return {
     special:true,
@@ -2091,11 +2091,11 @@ function renderGames(){
     }
 
     if(currentScoreLeague==='wta'){
-      return '<article class="game wta-game-card'+(g.state==='live'?' game-is-live':'')+'" data-game-key="'+esc(gameDomKey(g))+'">'+
+      return '<article class="game wta-game-card'+(g.state==='live'?' game-is-live':g.state==='suspended'?' game-is-suspended':'')+'" data-game-key="'+esc(gameDomKey(g))+'">'+
         '<div class="time wta-event-name">'+esc(g.displayTime||g.title||'WTA')+'</div>'+
         '<div class="wta-game-main">'+
           wtaScoreGridMarkup(g)+
-          '<div class="wta-match-meta"><span class="state '+(g.state==='live'?'live':'')+'">'+esc(g.status||'Scheduled')+'</span></div>'+
+          '<div class="wta-match-meta"><span class="state '+(g.state==='live'?'live':g.state==='suspended'?'suspended':'')+'">'+esc(g.status||'Scheduled')+'</span></div>'+
         '</div>'+
         (liveStreamsForGame(g).length?'<button class="watch-live-btn" type="button" data-live-event="'+esc(g.eventId)+'"><span class="live-dot" aria-hidden="true"></span>'+(g.state==='live'?'Watch Live':'View Stream')+'</button>':'')+
       '</article>';
