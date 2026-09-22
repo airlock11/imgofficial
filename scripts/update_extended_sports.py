@@ -11,7 +11,6 @@ from pypdf import PdfReader
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "extended-sports-data.json"
-LIVE_OUT = ROOT / "wta-live.json"
 UA = "Mozilla/5.0 (compatible; IMG-Sports-Extended/1.0; +https://imgofficial.com)"
 
 def fetch(url):
@@ -606,26 +605,6 @@ def main():
     data["source"] = "Official and verified public sports sources"
     OUT.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", "utf-8")
 
-    try:
-        live = wta_live_scores()
-        live["special"] = True
-        live["live"] = bool(live.get("games"))
-        LIVE_OUT.write_text(json.dumps(live, ensure_ascii=False, indent=2) + "\n", "utf-8")
-        print("updated wta-live", len(live.get("games", [])))
-    except Exception as ex:
-        live = {
-            "special": True,
-            "league": "WTA Tour",
-            "sourceName": "WTA Official Scores",
-            "sourceUrl": "https://www.wtatennis.com/scores/",
-            "updatedAt": datetime.now(timezone.utc).isoformat(),
-            "live": False,
-            "games": [],
-            "status": "unavailable",
-            "note": "GitHub WTA live scrape failed; stale live matches were cleared.",
-        }
-        LIVE_OUT.write_text(json.dumps(live, ensure_ascii=False, indent=2) + "\n", "utf-8")
-        print("cleared wta-live", type(ex).__name__, str(ex)[:160])
 
 if __name__ == "__main__":
     main()
