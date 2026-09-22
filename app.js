@@ -277,7 +277,7 @@ async function fetchWtaLiveScores(){
   const r=await fetch('https://raw.githubusercontent.com/airlock11/imgofficial/wta-live-data/wta-live.json?ts='+Date.now(),{cache:'no-store'});
   if(!r.ok)throw new Error('GitHub WTA live data unavailable');
   const payload=await r.json();
-  const games=Array.isArray(payload?.games)?payload.games.filter(g=>['live','suspended'].includes(g?.state)&&!g?.eventOnly):[];
+  const games=Array.isArray(payload?.games)?payload.games.filter(g=>['live','suspended','warmup'].includes(g?.state)&&!g?.eventOnly):[];
   if(!games.length)throw new Error('No live WTA matches');
   return {
     special:true,
@@ -2079,11 +2079,11 @@ function renderGames(){
   const byDateAsc=(a,b)=>(Date.parse(a.date||'')||0)-(Date.parse(b.date||'')||0);
   const byDateDesc=(a,b)=>(Date.parse(b.date||'')||0)-(Date.parse(a.date||'')||0);
 
-  const live=allGames.filter(g=>g.state==='live').sort(byDateAsc);
+  const live=allGames.filter(g=>g.state==='live'||(currentScoreLeague==='wta'&&['suspended','warmup'].includes(g.state))).sort(byDateAsc);
   const scheduled=allGames.filter(g=>g.state==='scheduled').sort(byDateAsc);
   const finals=allGames.filter(g=>g.state==='final').sort(byDateDesc);
   const info=allGames.filter(g=>g.state==='info'||g.dataType==='titleholder').sort((a,b)=>String(a.title||'').localeCompare(String(b.title||'')));
-  const other=allGames.filter(g=>!['live','scheduled','final','info'].includes(g.state)&&g.dataType!=='titleholder').sort(byDateAsc);
+  const other=allGames.filter(g=>!['live','scheduled','final','info'].includes(g.state)&&!(currentScoreLeague==='wta'&&['suspended','warmup'].includes(g.state))&&g.dataType!=='titleholder').sort(byDateAsc);
 
   const renderCard=g=>{
     if(currentScoreLeague==='asian_games'){
