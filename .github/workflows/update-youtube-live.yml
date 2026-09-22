@@ -10,6 +10,7 @@ on:
     paths:
       - "scripts/update_youtube_live.py"
       - "scripts/verify_youtube_live.py"
+      - "scripts/validate_youtube_live.py"
       - "scripts/asian_live_expiry.py"
       - "live-stream-sources.json"
       - ".github/workflows/update-youtube-live.yml"
@@ -51,6 +52,11 @@ jobs:
             fi
             if ! python scripts/verify_youtube_live.py; then
               echo "Verifier failed; retrying."
+              sleep $((attempt * 5))
+              continue
+            fi
+            if ! python scripts/validate_youtube_live.py; then
+              echo "Output validation failed; retrying without publishing."
               sleep $((attempt * 5))
               continue
             fi
