@@ -336,6 +336,26 @@ function espnScoreDateKey(value){
   const day=String(d.getUTCDate()).padStart(2,'0');
   return ''+y+m+day;
 }
+async function fetchPremierLeagueScoreboard(){
+  const now=new Date();
+  const start=new Date(now.getTime()-10*86400000);
+  const end=new Date(now.getTime()+21*86400000);
+  const dates=espnScoreDateKey(start)+'-'+espnScoreDateKey(end);
+  const direct='https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard?dates='+dates;
+  try{
+    const r=await fetch(direct,{cache:'no-store'});
+    if(r.ok){
+      const j=await r.json();
+      if(Array.isArray(j?.events)&&j.events.length)return j;
+    }
+  }catch{}
+  const proxy='https://img-api-proxy.magsipocarnie.workers.dev/scoreboard?league=soccer&dates='+encodeURIComponent(dates);
+  const r=await fetch(proxy,{cache:'no-store'});
+  if(!r.ok)throw new Error('Premier League scoreboard unavailable');
+  const j=await r.json();
+  if(!Array.isArray(j?.events)||!j.events.length)throw new Error('No Premier League games in rolling window');
+  return j;
+}
 async function fetchMlbScoreboard(){
   const now=new Date();
   const start=new Date(now.getTime()-2*86400000);
@@ -348,6 +368,9 @@ async function fetchMlbScoreboard(){
   return j;
 }
 async function fetchScorePayload(sport,{fallbackOnly=false}={}){
+  if(sport==='soccer'&&!fallbackOnly){
+    try{return await fetchPremierLeagueScoreboard()}catch{}
+  }
   if(sport==='baseball'&&!fallbackOnly){
     try{return await fetchMlbScoreboard()}catch{}
   }
