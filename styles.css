@@ -1619,3 +1619,31 @@ main{min-height:calc(100svh - 68px)}
   .wta-simple-main strong{font-size:.9rem}
   .wta-simple-main small{font-size:.72rem}
 }
+
+
+/* Scores: keep league selector visible while results scroll */
+.scores-page .score-league-toolbar{
+  position:sticky;
+  top:68px;
+  z-index:45;
+  margin-left:-10px;
+  margin-right:-10px;
+  padding:10px 10px 14px;
+  background:color-mix(in srgb,var(--bg) 94%,transparent);
+  -webkit-backdrop-filter:blur(16px);
+  backdrop-filter:blur(16px);
+  box-shadow:0 8px 20px rgba(0,0,0,.12);
+}
+:root[data-theme="light"] .scores-page .score-league-toolbar{
+  background:rgba(245,247,250,.95);
+  box-shadow:0 8px 20px rgba(17,21,27,.08);
+}
+@media(max-width:760px){
+  .scores-page .score-league-toolbar{
+    top:68px;
+    margin-left:-6px;
+    margin-right:-6px;
+    padding:8px 6px 12px;
+    z-index:45;
+  }
+}
