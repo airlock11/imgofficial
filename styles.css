@@ -536,11 +536,15 @@ main{min-height:calc(100svh - 68px)}
 .score-league-filter{display:grid;place-items:center;width:56px;height:56px;padding:4px;border:1px solid var(--line);border-radius:14px;background:var(--panel);color:var(--text);cursor:pointer;transition:border-color .18s ease,background .18s ease,transform .18s ease}
 .score-league-filter:hover{border-color:color-mix(in srgb,var(--text) 28%,var(--line))}
 .score-league-filter.active{border-color:color-mix(in srgb,var(--red) 60%,var(--line));background:color-mix(in srgb,var(--red) 9%,var(--panel));box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--red) 28%,transparent)}
-.score-league-filter.has-live-activity .score-league-logo-wrap{border-radius:13px;animation:scoreLogoLiveGlow 2.4s ease-in-out infinite}
-.score-league-filter.has-live-stream .score-league-logo-wrap{animation-duration:1.9s}
-@keyframes scoreLogoLiveGlow{
-  0%,100%{filter:drop-shadow(0 0 3px rgba(239,63,69,.38));box-shadow:0 0 0 1px rgba(239,63,69,.18),0 0 8px rgba(239,63,69,.18)}
-  50%{filter:drop-shadow(0 0 9px rgba(239,63,69,.95));box-shadow:0 0 0 1px rgba(239,63,69,.62),0 0 20px rgba(239,63,69,.58)}
+.score-league-filter.has-live-activity{animation:scoreBorderLiveGlow 2.4s ease-in-out infinite}
+.score-league-filter.has-live-stream{animation-duration:1.9s}
+.score-league-filter.has-live-activity .score-league-logo-wrap{filter:none;box-shadow:none;animation:none}
+@keyframes scoreBorderLiveGlow{
+  0%,100%{border-color:rgba(239,63,69,.46);box-shadow:0 0 0 1px rgba(239,63,69,.14),0 0 7px rgba(239,63,69,.2)}
+  50%{border-color:rgba(239,63,69,1);box-shadow:0 0 0 1px rgba(239,63,69,.72),0 0 15px rgba(239,63,69,.66)}
+}
+@media (prefers-reduced-motion:reduce){
+  .score-league-filter.has-live-activity{animation:none;border-color:rgba(239,63,69,.95);box-shadow:0 0 0 1px rgba(239,63,69,.5),0 0 10px rgba(239,63,69,.35)}
 }
 .score-league-logo-wrap{width:48px;height:42px;display:grid;place-items:center;overflow:visible;padding:2px}
 .score-league-logo{display:block;width:auto;height:auto;max-width:36px;max-height:36px;object-fit:contain;object-position:center}
