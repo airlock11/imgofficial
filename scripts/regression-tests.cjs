@@ -63,22 +63,41 @@ assert.match(app,/leagueLabel:label/,'Standalone broadcasts must show their leag
 assert.match(app,/news-video-frame[\s\S]*?onerror="this\.onerror=null;this\.src=\\'about-sports\.jpg\\'"/,'News video thumbnails must fall back when YouTube has no image');
 console.log('PASS: mobile preferences, live stream eligibility, labels, stream lookup, and simplified live dialog');
 
-// An open page must expire independently of network refreshes, at the boundary.
+// A positively verified Asian Games stream must survive past two hours.
+// The two-hour boundary applies only while verification is unavailable.
 {
   const first=Date.parse('2026-09-22T00:00:00Z');
-  let clock=first+2*60*60*1000-1, scoreRenders=0, liveRenders=0;
-  const game={eventId:'ag',state:'live',firstLiveAt:new Date(first).toISOString(),expiresAt:new Date(first+2*60*60*1000).toISOString(),streams:[specific]};
-  const c=vm.createContext({Date:class extends Date {static now(){return clock}},currentScoreLeague:'asian_games',allGames:[game],liveNowItems:[{...game,sportKey:'asian_games'}],specialSportsDataCache:{updatedAt:new Date(clock).toISOString()},renderGames(){scoreRenders++},renderAllLiveGames(items){c.liveNowItems=items;liveRenders++}});
+  const direct={...specific,embedUrl:'https://www.youtube.com/embed/abcdefghijk'};
+  let clock=first+3*60*60*1000, scoreRenders=0, liveRenders=0;
+  const verified={
+    eventId:'ag26-youtube-abcdefghijk',state:'live',sportKey:'asian_games',
+    firstLiveAt:new Date(first).toISOString(),verificationStatus:'verified',
+    streams:[{...direct,verificationStatus:'verified'}]
+  };
+  const c=vm.createContext({
+    Date:class extends Date {static now(){return clock}},
+    currentScoreLeague:'asian_games',allGames:[],liveNowItems:[verified],
+    specialSportsDataCache:{updatedAt:new Date(clock).toISOString()},
+    renderGames(){scoreRenders++},
+    renderAllLiveGames(items){c.liveNowItems=items;liveRenders++}
+  });
   vm.runInContext(app.slice(app.indexOf('function normalizeAsianGamesExpiry('),app.indexOf('function normalizeScorePayload(')),c);
   vm.runInContext(app.slice(app.indexOf('function liveNowItemIsCurrent('),app.indexOf('function renderAllLiveGames(')),c);
   vm.runInContext('expireVisibleAsianGames()',c);
-  assert.equal(scoreRenders,0);
+  assert.equal(c.liveNowItems.length,1,'Verified stream must not expire after two hours');
+
+  const fallbackDeadline=clock+2*60*60*1000;
+  c.liveNowItems=[{
+    ...verified,verificationStatus:'fallback',
+    fallbackExpiresAt:new Date(fallbackDeadline).toISOString(),
+    streams:[{...direct,verificationStatus:'fallback',fallbackExpiresAt:new Date(fallbackDeadline).toISOString()}]
+  }];
+  clock=fallbackDeadline-1;
+  vm.runInContext('expireVisibleAsianGames()',c);
+  assert.equal(c.liveNowItems.length,1,'Fallback stream must remain before its fallback deadline');
   clock++;
   vm.runInContext('expireVisibleAsianGames()',c);
-  assert.equal(c.allGames[0].state,'expired');
-  assert.equal(c.allGames[0].streams.length,0);
-  assert.equal(c.liveNowItems.length,0);
-  assert.equal(scoreRenders,1);
+  assert.equal(c.liveNowItems.length,0,'Fallback stream must disappear at its fallback deadline');
   assert.equal(liveRenders,1);
   assert.match(app,/setInterval\(expireVisibleAsianGames,1000\)/);
 }
