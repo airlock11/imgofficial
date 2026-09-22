@@ -14,6 +14,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: odds-data-publish
+  cancel-in-progress: false
+
 jobs:
   update:
     runs-on: ubuntu-latest
@@ -38,25 +42,32 @@ jobs:
           git config user.name "IMG Odds Data Bot"
           git config user.email "actions@users.noreply.github.com"
 
-          for attempt in 1 2 3; do
+          cp odds-meta.json /tmp/odds-meta.json
+
+          git fetch origin main
+          git reset --hard origin/main
+          cp /tmp/odds-meta.json odds-meta.json
+
+          if git diff --quiet -- odds-meta.json; then
+            echo "No data changes."
+            exit 0
+          fi
+
+          git add odds-meta.json
+          git commit -m "Refresh OddsPapi team metadata"
+
+          for attempt in 1 2 3 4 5; do
             git fetch origin main
-            git reset --hard origin/main
-
-            python scripts/update_odds_meta.py
-
-            if git diff --quiet -- odds-meta.json; then
-              echo "No data changes."
-              exit 0
+            if ! git rebase origin/main; then
+              git rebase --abort || true
+              echo "Rebase conflict while publishing odds metadata."
+              exit 1
             fi
-
-            git add odds-meta.json
-            git commit -m "Refresh OddsPapi team metadata"
-
             if git push origin HEAD:main; then
               exit 0
             fi
-
-            echo "Push raced with another automation; regenerating from latest main (attempt $attempt)."
+            echo "Push raced with another automation; retrying publish only (attempt $attempt)."
+            sleep 2
           done
 
           echo "Unable to publish after retries."
