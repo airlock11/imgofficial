@@ -9,6 +9,7 @@ on:
     paths:
       - "league-data-registry.json"
       - "scripts/update_league_health.py"
+      - ".github/workflows/update-league-health.yml"
       - "extended-sports-data.json"
       - "special-sports-data.json"
       - "sportradar-soccer-data.json"
