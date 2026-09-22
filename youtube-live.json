@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-22T05:45:43.095361+00:00",
+  "updatedAt": "2026-09-22T05:57:45.221403+00:00",
   "freshForMinutes": 8,
   "streams": [
     {
@@ -16,31 +16,18 @@
         "channel": "One Sports",
         "title": "LIVE: PHILIPPINES VS KUWAIT | MEN\u2019S FOOTBALL GROUP C | 2026 ASIAN GAMES",
         "embedUrl": "https://www.youtube.com/embed/5i_p-Z0239E",
+        "deliveryLeagueKey": "asian_games",
+        "deliveryPlacement": "above_statistics",
         "firstLiveAt": "2026-09-22T04:44:38.877857+00:00",
         "expiresAt": "2026-09-22T06:44:38.877857+00:00"
       },
+      "delivery": {
+        "leagueKey": "asian_games",
+        "url": "/scores/?league=asian_games",
+        "placement": "above_statistics"
+      },
       "firstLiveAt": "2026-09-22T04:44:38.877857+00:00",
       "expiresAt": "2026-09-22T06:44:38.877857+00:00"
-    },
-    {
-      "eventId": "ag26-youtube-BBnQHvugAhU",
-      "sport": "Asian Games",
-      "leagueKey": "asian_games",
-      "league": "2026 ASIAN GAMES",
-      "teams": [],
-      "title": "LIVE: GILAS PILIPINAS VS JAPAN | WOMEN\u2019S BASKETBALL 5V5 | 2026 ASIAN GAMES",
-      "stream": {
-        "videoId": "BBnQHvugAhU",
-        "watchUrl": "https://www.youtube.com/watch?v=BBnQHvugAhU",
-        "provider": "YouTube",
-        "channel": "One Sports",
-        "title": "LIVE: GILAS PILIPINAS VS JAPAN | WOMEN\u2019S BASKETBALL 5V5 | 2026 ASIAN GAMES",
-        "embedUrl": "https://www.youtube.com/embed/BBnQHvugAhU",
-        "firstLiveAt": "2026-09-22T04:00:00+00:00",
-        "expiresAt": "2026-09-22T06:00:00+00:00"
-      },
-      "firstLiveAt": "2026-09-22T04:00:00+00:00",
-      "expiresAt": "2026-09-22T06:00:00+00:00"
     },
     {
       "eventId": "ag26-youtube-8w_P7ec7ILY",
@@ -56,8 +43,15 @@
         "channel": "One Sports",
         "title": "LIVE: PHILIPPINES VS CHINA | MEN\u2019S BASEBALL GROUP A | 2026 ASIAN GAMES",
         "embedUrl": "https://www.youtube.com/embed/8w_P7ec7ILY",
+        "deliveryLeagueKey": "asian_games",
+        "deliveryPlacement": "above_statistics",
         "firstLiveAt": "2026-09-22T04:00:00+00:00",
         "expiresAt": "2026-09-22T06:00:00+00:00"
+      },
+      "delivery": {
+        "leagueKey": "asian_games",
+        "url": "/scores/?league=asian_games",
+        "placement": "above_statistics"
       },
       "firstLiveAt": "2026-09-22T04:00:00+00:00",
       "expiresAt": "2026-09-22T06:00:00+00:00"
@@ -77,7 +71,14 @@
         "channel": "NCAA Philippines",
         "title": "ARELLANO BRAVES VS EAC BRIGADIERS | NCAA SEASON 102 JUNIORS BASKETBALL | SEP 22, 2026",
         "officialSourceId": "ncaa-philippines",
-        "embedUrl": "https://www.youtube.com/embed/jhZS19XiaPI"
+        "embedUrl": "https://www.youtube.com/embed/jhZS19XiaPI",
+        "deliveryLeagueKey": "ncaa_ph",
+        "deliveryPlacement": "above_statistics"
+      },
+      "delivery": {
+        "leagueKey": "ncaa_ph",
+        "url": "/scores/?league=ncaa_ph",
+        "placement": "above_statistics"
       }
     }
   ],
@@ -105,7 +106,7 @@
   "scanner": {
     "version": 3,
     "mode": "official-auto-discovery",
-    "checkedAt": "2026-09-22T05:45:43.039588+00:00",
+    "checkedAt": "2026-09-22T05:57:45.172395+00:00",
     "sourcesChecked": [
       "nbl-pilipinas",
       "mpbl",
