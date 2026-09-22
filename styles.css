@@ -425,7 +425,7 @@ main{min-height:calc(100svh - 68px)}
 .watch-live-btn{grid-column:auto;margin-top:10px;display:inline-flex;align-items:center;gap:8px;width:max-content;max-width:100%;min-height:36px;padding:7px 12px;border:1px solid rgba(239,63,69,.34);border-radius:10px;background:rgba(239,63,69,.10);color:#ff7a7f;font:800 .72rem Inter,Arial,sans-serif;letter-spacing:.02em;cursor:pointer}
 .watch-live-btn:hover{background:rgba(239,63,69,.16);border-color:rgba(239,63,69,.5)}
 .live-dot{width:8px;height:8px;flex:0 0 8px;border-radius:50%;background:#ef3f45;box-shadow:0 0 0 4px rgba(239,63,69,.13);animation:livePulse 1.5s ease-in-out infinite}
-@keyframes livePulse{50%{box-shadow:0 0 0 7px rgba(239,63,69,0)}}
+@keyframes livePulse{50%{box-shadow:0 0 0 7px rgba(0,255,140,0)}}
 .live-dialog{width:min(980px,calc(100% - 28px));max-height:90vh;padding:0;border:1px solid rgba(255,255,255,.14);border-radius:20px;background:#0b0f14;color:#f4f6f8;box-shadow:0 30px 90px rgba(0,0,0,.6);overflow:hidden}
 .live-dialog::backdrop{background:rgba(0,0,0,.78);backdrop-filter:blur(5px)}
 .live-shell{position:relative;padding:26px;max-height:90vh;overflow:auto}
@@ -540,7 +540,7 @@ main{min-height:calc(100svh - 68px)}
 .score-league-filter.has-live-stream{animation-duration:1.9s}
 .score-league-filter.has-live-activity .score-league-logo-wrap{filter:none;box-shadow:none;animation:none}
 @keyframes scoreBorderLiveGlow{
-  0%,100%{border-color:rgba(239,63,69,.46);box-shadow:0 0 0 1px rgba(239,63,69,.14),0 0 7px rgba(239,63,69,.2)}
+  0%,100%{border-color:rgba(239,63,69,.46);box-shadow:0 0 0 1px rgba(0,200,110,.12),0 0 7px rgba(239,63,69,.2)}
   50%{border-color:rgba(239,63,69,1);box-shadow:0 0 0 1px rgba(239,63,69,.72),0 0 15px rgba(239,63,69,.66)}
 }
 @media (prefers-reduced-motion:reduce){
@@ -664,7 +664,7 @@ main{min-height:calc(100svh - 68px)}
 .odds-team-fallback{width:56px;height:56px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.16);border-radius:18px;background:rgba(255,255,255,.07);font:800 1rem "Inter",Arial,sans-serif;color:#dce4ec}
 .odds-hero-center{display:grid;place-items:center}
 .odds-hero-center span{min-width:50px;padding:8px 10px;border-radius:999px;background:rgba(255,255,255,.07);color:#99a4b0;font-size:.65rem;font-weight:900;letter-spacing:.11em;text-align:center}
-.odds-match-live .odds-hero-center span{background:rgba(239,63,69,.14);color:#ff757a}
+.odds-match-live .odds-hero-center span{background:rgba(0,200,110,.12);color:#ff757a}
 .odds-market-card{padding:20px;background:#10151a}
 .odds-market-tabs{display:flex;gap:10px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
 .odds-market-tabs::-webkit-scrollbar{display:none}
@@ -673,7 +673,7 @@ main{min-height:calc(100svh - 68px)}
 .odds-market-tabs button:disabled{opacity:.28;cursor:not-allowed}
 .odds-market-note{display:flex;justify-content:flex-end;margin:14px 0 8px}
 .odds-market-note span{padding:6px 9px;border:1px solid #28303a;border-radius:8px;color:#8d98a5;font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em}
-.odds-market-note .odds-note-live{border-color:rgba(239,63,69,.22);color:#ff777c;background:rgba(239,63,69,.07)}
+.odds-market-note .odds-note-live{border-color:rgba(0,255,140,.20);color:#ff777c;background:rgba(239,63,69,.07)}
 .odds-market-pane{display:none;overflow:hidden;border:1px solid #2a323b;border-radius:14px;background:#14191e}
 .odds-market-pane.active{display:block}
 .odds-table-head,.odds-table-row{display:grid;grid-template-columns:minmax(120px,1.3fr) repeat(2,minmax(86px,.8fr));align-items:stretch}
@@ -1153,7 +1153,7 @@ main{min-height:calc(100svh - 68px)}
 .league-live-stream-head>span i{width:8px;height:8px;border-radius:50%;background:#ef3f45;box-shadow:0 0 0 0 rgba(239,63,69,.45);animation:liveCountBlink 2.2s ease-in-out infinite}
 .league-live-stream-head strong{font:800 clamp(20px,3vw,27px)/1.05 "Barlow Condensed",Arial,sans-serif}
 .league-live-stream-head small{font-size:10px;color:var(--muted)}
-.league-live-stream-player{aspect-ratio:16/9;background:#000;border-top:1px solid rgba(239,63,69,.22);border-bottom:1px solid rgba(239,63,69,.22)}
+.league-live-stream-player{aspect-ratio:16/9;background:#000;border-top:1px solid rgba(0,255,140,.20);border-bottom:1px solid rgba(0,255,140,.20)}
 .league-live-stream-player iframe{display:block;width:100%;height:100%;border:0}
 .league-live-stream-action{display:inline-flex;align-items:center;gap:9px;margin:12px 18px 16px;min-height:38px;padding:8px 13px;border:1px solid rgba(239,63,69,.42);border-radius:10px;background:rgba(239,63,69,.12);color:#ff7a7f;font:800 .72rem Inter,Arial,sans-serif;cursor:pointer}
 .league-live-stream-action:hover{background:rgba(239,63,69,.18)}
@@ -1165,7 +1165,7 @@ main{min-height:calc(100svh - 68px)}
   .league-live-stream-action{margin:11px 14px 14px}
 }
 @media(prefers-reduced-motion:reduce){
-  .score-league-filter.has-live-activity .score-league-logo-wrap{animation:none;filter:drop-shadow(0 0 7px rgba(239,63,69,.75));box-shadow:0 0 0 1px rgba(239,63,69,.52),0 0 14px rgba(239,63,69,.32)}
+  .score-league-filter.has-live-activity .score-league-logo-wrap{animation:none;filter:drop-shadow(0 0 7px rgba(239,63,69,.75));box-shadow:0 0 0 1px rgba(239,63,69,.52),0 0 14px rgba(0,200,110,.28)}
 }
 
 /* WTA rankings */
@@ -1942,10 +1942,10 @@ html[data-theme="light"] body.scores-page .score-league-toolbar:after{
     transition:opacity .28s ease,filter .28s ease;
   }
   .score-league-edge-zone-left{
-    background:linear-gradient(90deg,rgba(239,63,69,.28) 0%,rgba(239,63,69,.12) 42%,rgba(239,63,69,0) 100%);
+    background:linear-gradient(90deg,rgba(239,63,69,.28) 0%,rgba(239,63,69,.12) 42%,rgba(0,255,140,0) 100%);
   }
   .score-league-edge-zone-right{
-    background:linear-gradient(270deg,rgba(239,63,69,.28) 0%,rgba(239,63,69,.12) 42%,rgba(239,63,69,0) 100%);
+    background:linear-gradient(270deg,rgba(239,63,69,.28) 0%,rgba(239,63,69,.12) 42%,rgba(0,255,140,0) 100%);
   }
   .score-league-edge-zone:hover{
     opacity:1;
@@ -1957,10 +1957,10 @@ html[data-theme="light"] body.scores-page .score-league-toolbar:after{
     filter:drop-shadow(0 0 16px rgba(239,63,69,.42));
   }
   html[data-theme="light"] .score-league-edge-zone-left{
-    background:linear-gradient(90deg,rgba(239,63,69,.2) 0%,rgba(239,63,69,.08) 45%,rgba(239,63,69,0) 100%);
+    background:linear-gradient(90deg,rgba(239,63,69,.2) 0%,rgba(239,63,69,.08) 45%,rgba(0,255,140,0) 100%);
   }
   html[data-theme="light"] .score-league-edge-zone-right{
-    background:linear-gradient(270deg,rgba(239,63,69,.2) 0%,rgba(239,63,69,.08) 45%,rgba(239,63,69,0) 100%);
+    background:linear-gradient(270deg,rgba(239,63,69,.2) 0%,rgba(239,63,69,.08) 45%,rgba(0,255,140,0) 100%);
   }
 }
 
@@ -1975,31 +1975,31 @@ html[data-theme="light"] body.scores-page .score-league-toolbar:after{
   .score-league-edge-zone-left{
     background:
       radial-gradient(circle at 10% 50%,rgba(255,255,255,.18),rgba(255,255,255,0) 52%),
-      linear-gradient(90deg,rgba(239,63,69,.48) 0%,rgba(239,63,69,.22) 38%,rgba(239,63,69,0) 100%);
+      linear-gradient(90deg,rgba(0,255,140,.45) 0%,rgba(0,255,140,.20) 38%,rgba(0,255,140,0) 100%);
   }
   .score-league-edge-zone-right{
     background:
       radial-gradient(circle at 90% 50%,rgba(255,255,255,.18),rgba(255,255,255,0) 52%),
-      linear-gradient(270deg,rgba(239,63,69,.48) 0%,rgba(239,63,69,.22) 38%,rgba(239,63,69,0) 100%);
+      linear-gradient(270deg,rgba(0,255,140,.45) 0%,rgba(0,255,140,.20) 38%,rgba(0,255,140,0) 100%);
   }
   .score-league-edge-zone:hover{
     opacity:.9;
-    filter:drop-shadow(0 0 18px rgba(239,63,69,.48));
+    filter:drop-shadow(0 0 18px rgba(0,255,140,.45));
   }
   .score-league-filters.edge-scroll-left~.score-league-edge-zone-left,
   .score-league-filters.edge-scroll-right~.score-league-edge-zone-right{
     opacity:1;
-    filter:drop-shadow(0 0 24px rgba(239,63,69,.62));
+    filter:drop-shadow(0 0 24px rgba(0,255,140,.60));
   }
   html[data-theme="light"] .score-league-edge-zone-left{
     background:
       radial-gradient(circle at 10% 50%,rgba(255,255,255,.7),rgba(255,255,255,0) 52%),
-      linear-gradient(90deg,rgba(239,63,69,.32) 0%,rgba(239,63,69,.14) 38%,rgba(239,63,69,0) 100%);
+      linear-gradient(90deg,rgba(0,200,110,.28) 0%,rgba(0,200,110,.12) 38%,rgba(0,255,140,0) 100%);
   }
   html[data-theme="light"] .score-league-edge-zone-right{
     background:
       radial-gradient(circle at 90% 50%,rgba(255,255,255,.7),rgba(255,255,255,0) 52%),
-      linear-gradient(270deg,rgba(239,63,69,.32) 0%,rgba(239,63,69,.14) 38%,rgba(239,63,69,0) 100%);
+      linear-gradient(270deg,rgba(0,200,110,.28) 0%,rgba(0,200,110,.12) 38%,rgba(0,255,140,0) 100%);
   }
 }
 
