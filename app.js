@@ -1615,14 +1615,17 @@ function wtaScoreGridMarkup(g){
   const home=wtaScorePartsForGame(g,'home');
   const setCount=Math.max(away.sets.length,home.sets.length,1);
   const headers=Array.from({length:setCount},(_,i)=>'<span class="wta-score-head">S'+(i+1)+'</span>').join('');
-  const row=(name,score,side)=>'<div class="wta-score-player"><span class="wta-player-name">'+esc(name)+'</span>'+
+  const row=(name,score,side)=>'<div class="wta-score-player">'+
+    '<span class="wta-player-name">'+esc(name)+'</span>'+
+    '<b class="wta-point-score" data-wta-point="'+side+'">'+esc(score.point)+'</b>'+
     Array.from({length:setCount},(_,i)=>'<b class="wta-set-score" data-wta-set="'+side+'-'+i+'">'+esc(score.sets[i]??'—')+'</b>').join('')+
-    '<b class="wta-point-score" data-wta-point="'+side+'">'+esc(score.point)+'</b></div>';
+  '</div>';
   return '<div class="wta-scoreboard" data-wta-scoreboard style="--wta-set-count:'+setCount+'">'+
-    '<div class="wta-score-header"><span>Player</span>'+headers+'<span class="wta-score-head wta-points-head">Game</span></div>'+
+    '<div class="wta-score-header"><span>Player</span><span class="wta-score-head wta-points-head">Game</span>'+headers+'</div>'+
     row(g.away,away,'away')+row(g.home,home,'home')+
   '</div>';
 }
+
 function updateWtaScoreboard(card,g){
   const board=card?.querySelector?.('[data-wta-scoreboard]');
   if(!board)return false;
