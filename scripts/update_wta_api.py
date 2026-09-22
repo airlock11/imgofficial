@@ -4,7 +4,7 @@ import os
 import re
 import urllib.parse
 import urllib.request
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -88,18 +88,21 @@ def normalize_state(row):
     low = status.lower()
     if "suspend" in low:
         return "suspended"
-    if "warm" in low:
+    if "warm" in low or "on court" in low:
         return "warmup"
     if str(row.get("event_live") or "") == "1":
         return "live"
-    return "live"
+    if "finish" in low or str(row.get("event_final_result") or "").strip() not in {"", "-", "0 - 0"}:
+        return "final"
+    return "scheduled"
 
 def normalize(row):
     away = str(row.get("event_first_player") or "Player 1").strip()
     home = str(row.get("event_second_player") or "Player 2").strip()
     away_sets, home_sets = set_scores(row)
-    point = latest_point(row)
-    status = str(row.get("event_status") or "Live").strip() or "Live"
+    state = normalize_state(row)
+    point = latest_point(row) if state in {"live","suspended","warmup"} else ["—","—"]
+    status = str(row.get("event_status") or ("Finished" if state=="final" else "Scheduled")).strip() or ("Finished" if state=="final" else "Scheduled")
     current = current_set(status, away_sets)
 
     def num_at(values, idx):
@@ -140,7 +143,7 @@ def normalize(row):
         "round": round_name,
         "court": "",
         "status": " · ".join(x for x in [status, round_name] if x),
-        "state": normalize_state(row),
+        "state": state,
         "eventOnly": False,
         "title": tournament,
         "eventType": str(row.get("event_type_type") or ""),
@@ -152,17 +155,48 @@ def normalize(row):
     }
 
 def main():
-    payload = get_json({"method": "get_livescore", "timezone": "UTC"})
-    if int(payload.get("success") or 0) != 1:
+    live_payload = get_json({"method": "get_livescore", "timezone": "UTC"})
+    if int(live_payload.get("success") or 0) != 1:
         raise RuntimeError("API-Tennis livescore request failed")
 
-    rows = [x for x in (payload.get("result") or []) if isinstance(x, dict) and is_wta(x)]
+    today = datetime.now(timezone.utc).date()
+    fixture_payload = get_json({
+        "method": "get_fixtures",
+        "date_start": (today - timedelta(days=1)).isoformat(),
+        "date_stop": (today + timedelta(days=2)).isoformat(),
+        "timezone": "UTC",
+    })
+    if int(fixture_payload.get("success") or 0) != 1:
+        fixture_payload = {"result": []}
+
+    live_rows = [x for x in (live_payload.get("result") or []) if isinstance(x, dict) and is_wta(x)]
+    fixture_rows = [x for x in (fixture_payload.get("result") or []) if isinstance(x, dict) and is_wta(x)]
+
+    by_key = {}
+    for row in fixture_rows:
+        key = str(row.get("event_key") or "")
+        if key:
+            by_key[key] = row
+    for row in live_rows:
+        key = str(row.get("event_key") or "")
+        if key:
+            by_key[key] = row
+
+    rows = list(by_key.values())
     games = [normalize(x) for x in rows]
+
+    # Keep the payload focused: recent completed matches, current live matches,
+    # and the next two days of scheduled WTA matches.
+    games.sort(key=lambda g: str(g.get("date") or ""))
+    finals = [g for g in games if g["state"] == "final"][-30:]
+    active = [g for g in games if g["state"] in {"live","suspended","warmup"}]
+    scheduled = [g for g in games if g["state"] == "scheduled"][:40]
+    games = finals + active + scheduled
 
     out = {
         "special": True,
         "league": "WTA Tour",
-        "live": bool(games),
+        "live": bool(active),
         "updatedAt": datetime.now(timezone.utc).isoformat(),
         "sourceName": "API-Tennis",
         "sourceUrl": "https://api-tennis.com/",
@@ -170,7 +204,10 @@ def main():
         "verificationUrl": "https://api-tennis.com/",
         "providerMatchCount": len(rows),
         "parsedMatchCount": len(games),
-        "note": "Primary WTA live feed from API-Tennis. The WTA webpage scraper is used only if this API call fails.",
+        "recentCount": len(finals),
+        "liveCount": len(active),
+        "scheduleCount": len(scheduled),
+        "note": "WTA live, recent results and near-term schedule from API-Tennis. The WTA webpage scraper is used only if the API call fails.",
         "games": games,
     }
     OUT.write_text(json.dumps(out, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
