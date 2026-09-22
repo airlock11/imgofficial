@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-22T10:12:20.854739+00:00",
+  "updatedAt": "2026-09-22T10:56:10.350595+00:00",
   "freshForMinutes": 8,
   "streams": [
     {
@@ -17,13 +17,13 @@
         "title": "LIVE: ALAS PILIPINAS VS HONG KONG | WOMEN\u2019S VOLLEYBALL CLASSIFICATIONS | 2026 ASIAN GAMES",
         "embedUrl": "https://www.youtube.com/embed/kTTaNF1vHiM",
         "verificationStatus": "verified",
-        "lastVerifiedLiveAt": "2026-09-22T10:12:11.683972+00:00",
+        "lastVerifiedLiveAt": "2026-09-22T10:56:10.350595+00:00",
         "deliveryLeagueKey": "asian_games",
         "deliveryPlacement": "above_statistics",
         "firstLiveAt": "2026-09-22T10:03:00.683215+00:00"
       },
       "verificationStatus": "verified",
-      "lastVerifiedLiveAt": "2026-09-22T10:12:11.683972+00:00",
+      "lastVerifiedLiveAt": "2026-09-22T10:56:10.350595+00:00",
       "delivery": {
         "leagueKey": "asian_games",
         "url": "/scores/?league=asian_games",
@@ -53,64 +53,6 @@
         "url": "/scores/?league=ncaa_ph",
         "placement": "above_statistics"
       }
-    },
-    {
-      "eventId": "ag26-youtube-1YZF54gx6T0",
-      "sport": "Asian Games",
-      "leagueKey": "asian_games",
-      "league": "2026 ASIAN GAMES",
-      "teams": [],
-      "title": "LIVE: Levi Ruivivar and Team PH await final ranking | WOMEN\u2019S GYMNASTICS | 2026 ASIAN GAMES",
-      "stream": {
-        "videoId": "1YZF54gx6T0",
-        "watchUrl": "https://www.youtube.com/watch?v=1YZF54gx6T0",
-        "provider": "YouTube",
-        "channel": "One Sports",
-        "title": "LIVE: Levi Ruivivar and Team PH await final ranking | WOMEN\u2019S GYMNASTICS | 2026 ASIAN GAMES",
-        "embedUrl": "https://www.youtube.com/embed/1YZF54gx6T0",
-        "verificationStatus": "verified",
-        "lastVerifiedLiveAt": "2026-09-22T10:12:11.683972+00:00",
-        "deliveryLeagueKey": "asian_games",
-        "deliveryPlacement": "above_statistics",
-        "firstLiveAt": "2026-09-22T10:03:00.683215+00:00"
-      },
-      "verificationStatus": "verified",
-      "lastVerifiedLiveAt": "2026-09-22T10:12:11.683972+00:00",
-      "delivery": {
-        "leagueKey": "asian_games",
-        "url": "/scores/?league=asian_games",
-        "placement": "above_statistics"
-      },
-      "firstLiveAt": "2026-09-22T10:03:00.683215+00:00"
-    },
-    {
-      "eventId": "ag26-youtube-EWaY4Sk-138",
-      "sport": "Asian Games",
-      "leagueKey": "asian_games",
-      "league": "2026 ASIAN GAMES",
-      "teams": [],
-      "title": "LIVE: Kayla Sanchez leads Team PH medal bid | SWIMMING FINALS | 2026 ASIAN GAMES",
-      "stream": {
-        "videoId": "EWaY4Sk-138",
-        "watchUrl": "https://www.youtube.com/watch?v=EWaY4Sk-138",
-        "provider": "YouTube",
-        "channel": "One Sports",
-        "title": "LIVE: Kayla Sanchez leads Team PH medal bid | SWIMMING FINALS | 2026 ASIAN GAMES",
-        "embedUrl": "https://www.youtube.com/embed/EWaY4Sk-138",
-        "verificationStatus": "verified",
-        "lastVerifiedLiveAt": "2026-09-22T10:12:11.683972+00:00",
-        "deliveryLeagueKey": "asian_games",
-        "deliveryPlacement": "above_statistics",
-        "firstLiveAt": "2026-09-22T10:03:00.683215+00:00"
-      },
-      "verificationStatus": "verified",
-      "lastVerifiedLiveAt": "2026-09-22T10:12:11.683972+00:00",
-      "delivery": {
-        "leagueKey": "asian_games",
-        "url": "/scores/?league=asian_games",
-        "placement": "above_statistics"
-      },
-      "firstLiveAt": "2026-09-22T10:03:00.683215+00:00"
     },
     {
       "eventId": "mpbl-youtube-UP_EgMLP7B8",
@@ -159,7 +101,7 @@
     },
     "ag26-youtube-kTTaNF1vHiM": {
       "firstLiveAt": "2026-09-22T10:03:00.683215+00:00",
-      "lastVerifiedLiveAt": "2026-09-22T10:12:11.683972+00:00"
+      "lastVerifiedLiveAt": "2026-09-22T10:55:48.149768+00:00"
     },
     "ag26-youtube-1YZF54gx6T0": {
       "firstLiveAt": "2026-09-22T10:03:00.683215+00:00",
@@ -176,7 +118,7 @@
   "scanner": {
     "version": 3,
     "mode": "official-auto-discovery",
-    "checkedAt": "2026-09-22T10:12:20.751296+00:00",
+    "checkedAt": "2026-09-22T10:56:10.102698+00:00",
     "sourcesChecked": [
       "nbl-pilipinas",
       "mpbl",
@@ -213,5 +155,11 @@
       "volleyball-world-women": "UCNMg6XDhRZI2QzL4pWOvP_w",
       "volleyball-world-men": "UCNMg6XDhRZI2QzL4pWOvP_w"
     }
+  },
+  "asianGamesVerification": {
+    "checkedAt": "2026-09-22T10:56:10.350595+00:00",
+    "method": "YouTube videos API exact-video verification",
+    "verifiedLiveCount": 1,
+    "removedCount": 0
   }
 }
