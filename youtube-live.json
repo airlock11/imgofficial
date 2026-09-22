@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-22T05:37:57.045495+00:00",
+  "updatedAt": "2026-09-22T05:39:42.066481+00:00",
   "freshForMinutes": 8,
   "streams": [
     {
@@ -21,6 +21,24 @@
       },
       "firstLiveAt": "2026-09-22T04:44:38.877857+00:00",
       "expiresAt": "2026-09-22T06:44:38.877857+00:00"
+    },
+    {
+      "eventId": "ncaaph-youtube-jhZS19XiaPI",
+      "sport": "Basketball",
+      "leagueKey": "ncaa_ph",
+      "league": "NCAA Philippines",
+      "teams": [],
+      "title": "ARELLANO BRAVES VS EAC BRIGADIERS | NCAA SEASON 102 JUNIORS BASKETBALL | SEP 22, 2026",
+      "officialSourceId": "ncaa-philippines",
+      "stream": {
+        "videoId": "jhZS19XiaPI",
+        "watchUrl": "https://www.youtube.com/watch?v=jhZS19XiaPI",
+        "provider": "YouTube",
+        "channel": "NCAA Philippines",
+        "title": "ARELLANO BRAVES VS EAC BRIGADIERS | NCAA SEASON 102 JUNIORS BASKETBALL | SEP 22, 2026",
+        "officialSourceId": "ncaa-philippines",
+        "embedUrl": "https://www.youtube.com/embed/jhZS19XiaPI"
+      }
     },
     {
       "eventId": "ag26-youtube-8w_P7ec7ILY",
@@ -87,7 +105,7 @@
   "scanner": {
     "version": 2,
     "mode": "official-only",
-    "checkedAt": "2026-09-22T05:37:56.955201+00:00",
+    "checkedAt": "2026-09-22T05:39:42.003653+00:00",
     "sourcesChecked": [
       "nbl-pilipinas",
       "mpbl",
@@ -95,7 +113,8 @@
       "fiba",
       "fiba-3x3",
       "one-championship",
-      "ufc"
+      "ufc",
+      "ncaa-philippines"
     ],
     "resolvedChannels": {
       "nbl-pilipinas": "UCJDBLldRGVJPEvyjJdSHefw",
@@ -104,7 +123,8 @@
       "fiba": "UCtInrnU3QbWqFGsdKT1GZtg",
       "fiba-3x3": "UC7LpyJP5fupiJu2CdzRQheg",
       "one-championship": "UCiormkBf3jm6mfb7k0yPbKA",
-      "ufc": "UCvgfXK4nTYKudb0rFR6noLA"
+      "ufc": "UCvgfXK4nTYKudb0rFR6noLA",
+      "ncaa-philippines": "UC3Whnl6MzB0bJKwfbm43JMw"
     }
   }
 }
