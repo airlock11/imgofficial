@@ -35,7 +35,12 @@ def is_live_now(row):
 
 def valid_asian_title(title):
     upper=str(title or "").upper()
-    tagged=("2026 ASIAN GAMES" in upper or "AICHI-NAGOYA" in upper or "AICHI NAGOYA" in upper)
+    tagged=(
+        "ASIAN GAMES" in upper
+        or "AICHI-NAGOYA" in upper
+        or "AICHI NAGOYA" in upper
+        or "AICHI 2026" in upper
+    )
     blocked=("HIGHLIGHTS","REPLAY","FULL MATCH","FULL GAME","OPENING CEREMONY",
              "CLOSING CEREMONY","DRAW CEREMONY","PRESS CONFERENCE","INTERVIEW","PODCAST")
     return tagged and not any(x in upper for x in blocked)
@@ -68,10 +73,24 @@ def main():
         row=current.get(vid)
         title=(row or {}).get("snippet",{}).get("title") or item.get("title") or stream.get("title") or ""
         channel=(row or {}).get("snippet",{}).get("channelTitle") or stream.get("channel") or ""
-        good=bool(row) and is_live_now(row) and valid_asian_title(title) and "one sports" in str(channel).lower()
-        if not good:
-            removed.append(vid or item.get("eventId"))
-            continue
+        channel_ok="one sports" in str(channel).lower()
+        title_ok=valid_asian_title(title)
+        if row:
+            live_ok=is_live_now(row)
+            if not (live_ok and channel_ok and title_ok):
+                removed.append(vid or item.get("eventId"))
+                continue
+        else:
+            # Short fail-open grace period only for previously verified One Sports
+            # Asian Games streams when the YouTube API temporarily omits a video.
+            try:
+                last=datetime.fromisoformat(str(item.get("lastVerifiedLiveAt") or stream.get("lastVerifiedLiveAt") or "").replace("Z","+00:00"))
+                age=(datetime.now(timezone.utc)-last.astimezone(timezone.utc)).total_seconds()
+            except Exception:
+                age=999999
+            if not (channel_ok and title_ok and age <= 180):
+                removed.append(vid or item.get("eventId"))
+                continue
         item["title"]=title
         item["verificationStatus"]="verified"
         item["lastVerifiedLiveAt"]=now
