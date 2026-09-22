@@ -282,10 +282,11 @@ async function loadBoxingRankingsData(){
 async function specialSportsPayload(sport){
   const data=await loadSpecialSportsData();
   const league=data?.leagues?.[sport];
-  if(!league||!Array.isArray(league.games)||!league.games.length)return null;
-  return {special:true,games:league.games,sourceName:league.sourceName||'',sourceUrl:league.sourceUrl||''};
+  if(!league||!Array.isArray(league.games))return null;
+  if(!league.games.length&&!['cba','wcba'].includes(sport))return null;
+  return {special:true,games:league.games,sourceName:league.sourceName||'',sourceUrl:league.sourceUrl||'',note:league.note||''};
 }
-const specialScoreKeys=new Set(['atp','wta','ipl','volleyball_w','volleyball_m','asian_games','fiba','ncaa_ph','bleague','euroleague','pfl','australian_open','wimbledon','us_open','npb','kbo','khl','iihf','bigbash','cricket_world_cup','pvl','vleague_jp','motogp','formulae','one','wbc','wba','ibf','wbo']);
+const specialScoreKeys=new Set(['atp','wta','ipl','volleyball_w','volleyball_m','asian_games','fiba','ncaa_ph','bleague','euroleague','cba','wcba','pfl','australian_open','wimbledon','us_open','npb','kbo','khl','iihf','bigbash','cricket_world_cup','pvl','vleague_jp','motogp','formulae','one','wbc','wba','ibf','wbo']);
 const sportradarSoccerKeys=new Set(['soccer','jamaica_pl','mizoram_pl','laliga','el_salvador_reserves','seriea','bundesliga','champions','ucl_women','mls','pfl']);
 function scoreGameLooksGeneric(g){
   const names=[g?.away,g?.home].map(x=>String(x||'').trim().toLowerCase());
@@ -473,6 +474,8 @@ const liveNowLabels={
   ncaaf:{sport:'American Football',league:'NCAA Football'},
   bleague:{sport:'Basketball',league:'B.League'},
   euroleague:{sport:'Basketball',league:'EuroLeague'},
+  cba:{sport:'Basketball',league:'CBA'},
+  wcba:{sport:'Basketball',league:'WCBA'},
   wbsl:{sport:'Basketball',league:'WBSL'},
   pfl:{sport:'Football',league:'PFL'},
   australian_open:{sport:'Tennis',league:'Australian Open'},
@@ -507,7 +510,7 @@ function asianGamesEventLabel(game){
   const index=title.indexOf(divider);
   return index>0?title.slice(index+divider.length).trim():(title||'Asian Games event');
 }
-const scoreLeagueOrder=['asian_games','fiba','soccer','jamaica_pl','mizoram_pl','laliga','el_salvador_reserves','seriea','bundesliga','champions','ucl_women','mls','pfl','basketball','wnba','pba','ncaa_ph','uaap','mpbl','nbl','nblaus','vba','bleague','euroleague','atp','wta','australian_open','wimbledon','us_open','ipl','bigbash','cricket_world_cup','volleyball_w','volleyball_m','pvl','vleague_jp','baseball','npb','kbo','hockey','khl','iihf','football','ncaaf','f1','motogp','formulae','ufc','one','wbc','wba','ibf','wbo','ring'];
+const scoreLeagueOrder=['asian_games','fiba','soccer','jamaica_pl','mizoram_pl','laliga','el_salvador_reserves','seriea','bundesliga','champions','ucl_women','mls','pfl','basketball','wnba','pba','ncaa_ph','uaap','mpbl','nbl','nblaus','vba','bleague','euroleague','cba','wcba','atp','wta','australian_open','wimbledon','us_open','ipl','bigbash','cricket_world_cup','volleyball_w','volleyball_m','pvl','vleague_jp','baseball','npb','kbo','hockey','khl','iihf','football','ncaaf','f1','motogp','formulae','ufc','one','wbc','wba','ibf','wbo','ring'];
 const specialScoreLeagueKeys=new Set(['asian_games','fiba']);
 const scoreSportDefaultLeague={
   basketball:'basketball',
@@ -563,7 +566,7 @@ function scoreLeagueFallback(key){
   const short={
     soccer:'EPL',jamaica_pl:'JPL',mizoram_pl:'MPL',laliga:'LAL',el_salvador_reserves:'ES-R',seriea:'SA',bundesliga:'BUN',champions:'UCL',ucl_women:'UWCL',mls:'MLS',
     basketball:'NBA',wnba:'WNBA',pba:'PBA',ncaa_ph:'NCAA-PH',uaap:'UAAP',mpbl:'MPBL',nbl:'NBL-PH',nblaus:'NBL',
-    vba:'VBA',wbsl:'WBSL',fiba:'FIBA',atp:'ATP',wta:'WTA',ipl:'IPL',volleyball_w:'FIVB',volleyball_m:'FIVB',
+    vba:'VBA',wbsl:'WBSL',fiba:'FIBA',cba:'CBA',wcba:'WCBA',atp:'ATP',wta:'WTA',ipl:'IPL',volleyball_w:'FIVB',volleyball_m:'FIVB',
     baseball:'MLB',npb:'NPB',kbo:'KBO',hockey:'NHL',khl:'KHL',iihf:'IIHF',football:'NFL',ncaaf:'NCAA',f1:'F1',motogp:'MGP',formulae:'FE',ufc:'UFC',one:'ONE',wbc:'WBC',wba:'WBA',ibf:'IBF',wbo:'WBO',ring:'RING',pfl:'PFL',bleague:'B.LEAGUE',euroleague:'EL',australian_open:'AO',wimbledon:'WIM',us_open:'USO',bigbash:'BBL',cricket_world_cup:'ICC',pvl:'PVL',vleague_jp:'V.LEAGUE',asian_games:'AG26'
   };
   return '<span class="score-league-fallback">'+esc(short[key]||label.slice(0,5).toUpperCase())+'</span>';
