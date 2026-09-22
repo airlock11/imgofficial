@@ -1,0 +1,51 @@
+name: Audit all league data
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "league-data-registry.json"
+      - "scripts/update_league_health.py"
+      - "extended-sports-data.json"
+      - "special-sports-data.json"
+      - "sportradar-soccer-data.json"
+      - "regional-web.json"
+      - "stats-data.json"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: league-data-health
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Build league data health
+        run: python scripts/update_league_health.py
+      - name: Publish league health
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "IMG League Data Bot"
+          git config user.email "actions@users.noreply.github.com"
+          if git diff --quiet -- league-data-health.json; then
+            echo "No league health changes."
+            exit 0
+          fi
+          git add league-data-health.json
+          git commit -m "Update league data health"
+          git pull --rebase origin main
+          git push origin HEAD:main
