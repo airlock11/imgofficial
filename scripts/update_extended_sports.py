@@ -105,6 +105,103 @@ NPB_TEAMS = [
     "Fukuoka SoftBank Hawks"
 ]
 
+
+def wta_live_scores():
+    """Refresh individual WTA matches instead of only tournament-level activity."""
+    now = datetime.now(timezone.utc)
+    start = (now - timedelta(days=1)).strftime("%Y%m%d")
+    end = (now + timedelta(days=2)).strftime("%Y%m%d")
+    api_url = f"https://site.api.espn.com/apis/site/v2/sports/tennis/wta/scoreboard?dates={start}-{end}"
+    payload = fetch_json(api_url)
+    events = payload.get("events", []) if isinstance(payload, dict) else []
+    games = []
+
+    def competitor_name(row):
+        if not isinstance(row, dict):
+            return "TBD"
+        athlete = row.get("athlete") or {}
+        team = row.get("team") or {}
+        return str(
+            athlete.get("displayName")
+            or athlete.get("shortDisplayName")
+            or team.get("displayName")
+            or team.get("shortDisplayName")
+            or row.get("displayName")
+            or row.get("name")
+            or "TBD"
+        )
+
+    def competitor_score(row):
+        if not isinstance(row, dict):
+            return "—"
+        lines = row.get("linescores") or []
+        parts = []
+        for line in lines:
+            if isinstance(line, dict):
+                value = line.get("displayValue", line.get("value", line.get("score")))
+            else:
+                value = line
+            if value not in (None, ""):
+                parts.append(str(value))
+        if parts:
+            return " ".join(parts)
+        score = row.get("score")
+        if isinstance(score, dict):
+            score = score.get("displayValue", score.get("value", score.get("score")))
+        return str(score) if score not in (None, "") else "—"
+
+    for event in events:
+        comps = event.get("competitions") or [event]
+        for index, comp in enumerate(comps):
+            competitors = comp.get("competitors") or []
+            if len(competitors) < 2:
+                continue
+            home = next((x for x in competitors if x.get("homeAway") == "home"), competitors[0])
+            away = next((x for x in competitors if x.get("homeAway") == "away"), competitors[1])
+            status_obj = (comp.get("status") or event.get("status") or {})
+            status_type = status_obj.get("type") or {}
+            raw_state = str(status_type.get("state") or "pre").lower()
+            state = "live" if raw_state == "in" else ("final" if raw_state == "post" else "scheduled")
+            status = str(
+                status_type.get("shortDetail")
+                or status_type.get("detail")
+                or status_type.get("description")
+                or ("Live" if state == "live" else "Final" if state == "final" else "Scheduled")
+            )
+            date = comp.get("date") or event.get("date")
+            dt = parse_iso(date)
+            event_id = str(comp.get("id") or event.get("id") or f"{len(games)+1}")
+            if index:
+                event_id += f"-{index}"
+            games.append({
+                "eventId": "wta-" + event_id,
+                "date": str(date or ""),
+                "displayTime": dt.strftime("%b %d · %H:%M") if dt else "",
+                "away": competitor_name(away),
+                "home": competitor_name(home),
+                "awayScore": competitor_score(away),
+                "homeScore": competitor_score(home),
+                "status": status,
+                "state": state,
+                "eventOnly": False,
+                "sourceName": "ESPN WTA scoreboard",
+                "sourceUrl": "https://www.wtatennis.com/scores/",
+                "verificationSource": "WTA Official Scores",
+                "verificationUrl": "https://www.wtatennis.com/scores/"
+            })
+
+    # Do not replace a working WTA snapshot with an empty provider response.
+    if not games:
+        raise RuntimeError("No individual WTA matches returned")
+    games.sort(key=lambda g: (0 if g["state"] == "live" else 1 if g["state"] == "scheduled" else 2, g.get("date") or ""))
+    return {
+        "league": "WTA Tour",
+        "sourceName": "WTA Official Scores",
+        "sourceUrl": "https://www.wtatennis.com/scores/",
+        "note": "Individual match scores are refreshed automatically and cross-referenced with the official WTA Scores page.",
+        "games": games
+    }
+
 def npb():
     jst = timezone(timedelta(hours=9))
     now = datetime.now(jst)
@@ -271,7 +368,7 @@ def boxing_org(org):
 def main():
     data = load()
     leagues = data.setdefault("leagues", {})
-    jobs = [("euroleague", euroleague), ("npb", npb), ("kbo", kbo)]
+    jobs = [("wta", wta_live_scores), ("euroleague", euroleague), ("npb", npb), ("kbo", kbo)]
     for key, builder in jobs:
         try:
             result = builder()
