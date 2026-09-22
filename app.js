@@ -1995,15 +1995,19 @@ async function loadVerifiedChannelLive(){
     const r=await fetch('/youtube-live.json?ts='+Date.now(),{cache:'no-store'});
     if(!r.ok)throw new Error('youtube live unavailable');
     const y=await r.json();
+    const now=Date.now();
+    const updatedAtMs=Date.parse(y?.updatedAt||'');
+    const feedFresh=Number.isFinite(updatedAtMs)&&now-updatedAtMs<=10*60*1000;
     const entries=(Array.isArray(y?.streams)?y.streams:[]).filter(x=>{
-      if(!x?.stream?.watchUrl)return false;
+      if(!x?.stream?.watchUrl||!feedFresh)return false;
+      const verifiedAt=Date.parse(x?.lastVerifiedLiveAt||x?.stream?.lastVerifiedLiveAt||y?.updatedAt||'');
+      if(!Number.isFinite(verifiedAt)||now-verifiedAt>10*60*1000)return false;
       if(x?.leagueKey==='asian_games'){
         const fallback=String(x?.verificationStatus||x?.stream?.verificationStatus||'verified').toLowerCase()==='fallback';
         if(!fallback)return true;
         const deadline=Date.parse(x?.fallbackExpiresAt||x?.stream?.fallbackExpiresAt||'');
-        return Number.isFinite(deadline)&&Date.now()<deadline;
+        return Number.isFinite(deadline)&&now<deadline;
       }
-      // The scanner removes ended streams on its next successful monitoring run.
       return true;
     });
     return {ok:true,updatedAt:y?.updatedAt||'',entries};
