@@ -412,6 +412,15 @@ def load_previous():
  except Exception:
   return {}
 
+def verified_age_seconds(item, now=None):
+ now=now or datetime.now(timezone.utc)
+ value=item.get("lastVerifiedLiveAt") or (item.get("stream") or {}).get("lastVerifiedLiveAt")
+ try:
+  dt=datetime.fromisoformat(str(value or "").replace("Z","+00:00")).astimezone(timezone.utc)
+  return max(0,(now-dt).total_seconds())
+ except Exception:
+  return 999999
+
 def previous_still_live(previous):
  # Recheck every published exact video ID before removing it. Channel discovery
  # surfaces can omit simultaneous broadcasts even while their players are live.
@@ -458,8 +467,14 @@ def previous_still_live(previous):
    out.append(item)
    continue
 
-  # If verification fails, do not keep a stale stream visible as live.
-  # The next successful scan can publish it again if YouTube confirms it is live.
+  # A transient network/API failure must not make a real live stream blink off.
+  # Keep the last positively verified item briefly, but never renew its timestamp.
+  # Exact ended/not-live responses above still remove immediately.
+  if verification_failed and verified_age_seconds(item,now)<=600:
+   item["verificationStatus"]="grace"
+   stream["verificationStatus"]="grace"
+   item["stream"]=stream
+   out.append(item)
  return out
 
 def nbl_regional_schedule():
