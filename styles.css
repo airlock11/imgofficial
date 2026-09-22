@@ -1912,3 +1912,24 @@ html[data-theme="light"] body.scores-page .score-league-toolbar:after{
   .score-league-filters.edge-scroll-left,
   .score-league-filters.edge-scroll-right{cursor:default}
 }
+
+
+/* Reliable desktop hover zones for league auto-scroll */
+@media (hover:hover) and (pointer:fine) and (min-width:761px){
+  .score-league-scroll-shell{position:relative;min-width:0;flex:1 1 auto}
+  .score-league-scroll-shell .score-league-filters{width:100%;min-width:0}
+  .score-league-edge-zone{
+    position:absolute;
+    top:0;
+    bottom:0;
+    width:84px;
+    z-index:6;
+    pointer-events:auto;
+  }
+  .score-league-edge-zone-left{left:0}
+  .score-league-edge-zone-right{right:0}
+}
+@media(max-width:760px){
+  .score-league-scroll-shell{display:contents}
+  .score-league-edge-zone{display:none!important}
+}
