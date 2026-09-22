@@ -9,6 +9,7 @@ from asian_live_expiry import expire_entries
 KEY=os.environ["YOUTUBE_API_KEY"]
 OUT=Path(__file__).resolve().parents[1]/"youtube-live.json"
 REGIONAL=Path(__file__).resolve().parents[1]/"regional-web.json"
+SOURCE_REGISTRY=Path(__file__).resolve().parents[1]/"live-stream-sources.json"
 UA="IMG-Sports-Live/1.0"
 ONE_SPORTS_CHANNEL_ID="UCXDG9ue-emCN8Ad3h7lERqQ"
 NBL_PILIPINAS_CHANNEL_ID="UCJDBLldRGVJPEvyjJdSHefw"
@@ -56,6 +57,126 @@ def resolve_handle_channel_id(handle):
  items=get_json("https://www.googleapis.com/youtube/v3/channels?"+urllib.parse.urlencode(params)).get("items",[])
  return str(items[0].get("id","")) if items else ""
 
+
+def load_source_registry():
+ try:
+  data=json.loads(SOURCE_REGISTRY.read_text("utf-8"))
+  sources=data.get("sources",[])
+  return [x for x in sources if isinstance(x,dict) and x.get("id") and x.get("leagueKey")]
+ except Exception as ex:
+  print("livestream source registry",ex)
+  return []
+
+def source_title_allowed(source,title):
+ upper=str(title or "").upper()
+ excludes=[str(x).upper() for x in source.get("excludeAny",[]) if str(x).strip()]
+ if any(token in upper for token in excludes):return False
+ includes=[str(x).upper() for x in source.get("includeAny",[]) if str(x).strip()]
+ return not includes or any(token in upper for token in includes)
+
+def resolve_source_channel(source,previous):
+ source_id=str(source.get("id") or "")
+ cached=str(previous.get("scanner",{}).get("resolvedChannels",{}).get(source_id) or "")
+ if cached:return cached
+ direct=str(source.get("channelId") or "")
+ if direct:return direct
+ handle=str(source.get("handle") or "")
+ if handle:return resolve_handle_channel_id(handle)
+ username=str(source.get("username") or "")
+ if username:return resolve_legacy_channel_id(username)
+ return ""
+
+def scan_official_source(source,previous):
+ source_id=str(source.get("id") or "official")
+ try:
+  channel_id=resolve_source_channel(source,previous)
+ except Exception as ex:
+  print("official source resolve",source_id,ex)
+  return [],""
+ if not channel_id:
+  print("official source unresolved",source_id)
+  return [],""
+
+ ids=[]
+ try:
+  ids += channel_feed_ids(channel_id)
+ except Exception as ex:
+  print("official source feed",source_id,ex)
+ try:
+  ids += channel_stream_page_ids(channel_id)
+ except Exception as ex:
+  print("official source streams",source_id,ex)
+ ids=list(dict.fromkeys(x for x in ids if x))[:50]
+ if not ids:return [],channel_id
+
+ try:
+  details=video_details(ids)
+ except Exception as ex:
+  print("official source details",source_id,ex)
+  details={}
+
+ out=[]
+ for vid in ids:
+  d=details.get(vid)
+  if d:
+   sn=d.get("snippet",{}); status=d.get("status",{}); live=d.get("liveStreamingDetails",{})
+   if sn.get("channelId")!=channel_id:continue
+   title=sn.get("title",""); channel=(sn.get("channelTitle") or source.get("league") or source_id).strip()
+   is_live=sn.get("liveBroadcastContent")=="live" or (live.get("actualStartTime") and not live.get("actualEndTime"))
+   ended=bool(live.get("actualEndTime"))
+   embeddable=status.get("embeddable",True)
+  else:
+   try:
+    info=public_watch_info(vid)
+   except Exception:
+    continue
+   title=info.get("title",""); channel=info.get("channel") or source.get("league") or source_id
+   is_live=bool(info.get("live")); ended=not is_live; embeddable=True
+
+  if not is_live or ended or not source_title_allowed(source,title):continue
+  watch="https://www.youtube.com/watch?v="+vid
+  stream={
+   "videoId":vid,
+   "watchUrl":watch,
+   "provider":"YouTube",
+   "channel":channel,
+   "title":title,
+   "officialSourceId":source_id
+  }
+  if embeddable:stream["embedUrl"]="https://www.youtube.com/embed/"+vid
+  prefix=str(source.get("prefix") or source.get("leagueKey") or "live")
+  out.append({
+   "eventId":prefix+"-youtube-"+vid,
+   "sport":source.get("sport") or "Sport",
+   "leagueKey":source.get("leagueKey"),
+   "league":source.get("league") or source.get("leagueKey"),
+   "teams":[],
+   "title":title,
+   "officialSourceId":source_id,
+   "stream":stream
+  })
+ return out,channel_id
+
+def scan_official_registry(previous):
+ streams=[]
+ resolved={}
+ checked=[]
+ for source in load_source_registry():
+  source_id=str(source.get("id") or "")
+  checked.append(source_id)
+  try:
+   found,channel_id=scan_official_source(source,previous)
+   if channel_id:resolved[source_id]=channel_id
+   streams.extend(found)
+  except Exception as ex:
+   print("official source scan",source_id,ex)
+ return streams,{
+  "version":2,
+  "mode":"official-only",
+  "checkedAt":datetime.now(timezone.utc).isoformat(),
+  "sourcesChecked":checked,
+  "resolvedChannels":resolved
+ }
 
 def video_details(ids):
  if not ids:return {}
@@ -393,47 +514,65 @@ def nbl_pilipinas_live():
 
 previous=load_previous()
 now=datetime.now(timezone.utc)
-run_generic_search=(now.hour % 4 == 0 and now.minute < 20)
-events=live_events() if run_generic_search else []
 streams=[]
-for e in events:
- try:
-  s=search(e)
-  if s: streams.append({**e,"stream":s})
- except Exception as ex: print("youtube",e["title"],ex)
+scanner_state={
+ "version":2,
+ "mode":"official-only",
+ "checkedAt":now.isoformat(),
+ "sourcesChecked":[],
+ "resolvedChannels":previous.get("scanner",{}).get("resolvedChannels",{})
+}
+
+# One Sports is a verified multi-league channel and needs title-based league classification.
 try:
  streams.extend(one_sports_live())
 except Exception as ex:
  print("youtube One Sports",ex)
+
+# All single-league official channels are scanned through the IMG source registry.
 try:
- streams.extend(nbl_pilipinas_live())
+ official_streams,scanner_state=scan_official_registry(previous)
+ streams.extend(official_streams)
 except Exception as ex:
- print("youtube NBL Pilipinas",ex)
-try:
- streams.extend(wta_official_live())
-except Exception as ex:
- print("youtube WTA",ex)
-try:
- streams.extend(mpbl_official_live())
-except Exception as ex:
- print("youtube MPBL",ex)
+ print("youtube official registry",ex)
+
+# Exact previously-published video IDs are rechecked so simultaneous live broadcasts
+# are not lost if a channel's feed/Streams surface temporarily omits one.
 try:
  streams.extend(previous_still_live(previous))
 except Exception as ex:
  print("youtube previous streams",ex)
+
 seen=set(); dedup=[]
 for x in streams:
  vid=x.get("stream",{}).get("videoId")
- if vid and vid in seen: continue
- if vid: seen.add(vid)
+ if vid and vid in seen:continue
+ if vid:seen.add(vid)
  dedup.append(x)
-streams, expiry_ledger=expire_entries(dedup, previous, now, streams=True)
+
+streams,expiry_ledger=expire_entries(dedup,previous,now,streams=True)
 try:
  upcoming,upcoming_checked=nbl_pilipinas_upcoming(previous)
 except Exception as ex:
  print("youtube NBL Pilipinas upcoming",ex)
  upcoming=previous.get("upcoming",[])
  upcoming_checked=previous.get("upcomingCheckedAt")
-payload={"updatedAt":datetime.now(timezone.utc).isoformat(),"freshForMinutes":8,"streams":streams,"liveExpiryLedger":expiry_ledger,"upcoming":upcoming,"upcomingCheckedAt":upcoming_checked,"nblSchedule":nbl_regional_schedule()}
+
+payload={
+ "updatedAt":datetime.now(timezone.utc).isoformat(),
+ "freshForMinutes":8,
+ "streams":streams,
+ "liveExpiryLedger":expiry_ledger,
+ "upcoming":upcoming,
+ "upcomingCheckedAt":upcoming_checked,
+ "nblSchedule":nbl_regional_schedule(),
+ "scanner":scanner_state
+}
 OUT.write_text(json.dumps(payload,indent=2)+"\n",encoding="utf-8")
-print("live events",len(events),"matched streams",len(streams),"NBL upcoming",len(upcoming),"NBL scheduled",len(payload["nblSchedule"]))
+print(
+ "IMG livestream scanner",
+ "official sources",len(scanner_state.get("sourcesChecked",[])),
+ "verified live streams",len(streams),
+ "NBL upcoming",len(upcoming),
+ "NBL scheduled",len(payload["nblSchedule"])
+)
