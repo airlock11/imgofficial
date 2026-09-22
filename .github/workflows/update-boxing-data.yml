@@ -28,6 +28,8 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -48,14 +50,30 @@ jobs:
       - name: Commit updated boxing data
         shell: bash
         run: |
-          if git diff --quiet -- boxing-data.json boxing-fights-data.json; then
-            echo "No boxing data changes."
-            exit 0
-          fi
+          set -euo pipefail
           git config user.name "IMG Boxing Data Bot"
           git config user.email "actions@users.noreply.github.com"
-          git add boxing-data.json boxing-fights-data.json
-          git commit -m "Update boxing fighter data"
-          git fetch origin main
-          git rebase origin/main
-          git push
+
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git reset --hard origin/main
+
+            python scripts/update_boxing_data.py
+
+            if git diff --quiet -- boxing-data.json boxing-fights-data.json; then
+              echo "No data changes."
+              exit 0
+            fi
+
+            git add boxing-data.json boxing-fights-data.json
+            git commit -m "Update boxing fighter data"
+
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+
+            echo "Push raced with another automation; regenerating from latest main (attempt $attempt)."
+          done
+
+          echo "Unable to publish after retries."
+          exit 1
