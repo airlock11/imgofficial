@@ -283,7 +283,7 @@ async function specialSportsPayload(sport){
   const data=await loadSpecialSportsData();
   const league=data?.leagues?.[sport];
   if(!league||!Array.isArray(league.games))return null;
-  if(!league.games.length&&!['cba'].includes(sport))return null;
+  if(!league.games.length)return null;
   return {special:true,games:league.games,sourceName:league.sourceName||'',sourceUrl:league.sourceUrl||'',note:league.note||''};
 }
 const specialScoreKeys=new Set(['atp','wta','ipl','volleyball_w','volleyball_m','asian_games','fiba','ncaa_ph','bleague','euroleague','pfl','australian_open','wimbledon','us_open','npb','kbo','khl','iihf','bigbash','cricket_world_cup','pvl','vleague_jp','motogp','formulae','one','wbc','wba','ibf','wbo']);
