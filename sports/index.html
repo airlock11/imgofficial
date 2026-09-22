@@ -175,6 +175,10 @@ function capabilityBadges(key){
   if(oddsKeys.has(key))items.push('<span class="cap-odds">Odds</span>');
   return items.length?'<div class="sports-capabilities">'+items.join('')+'</div>':'';
 }
+function leagueLandingUrl(key){
+  const pages={basketball:'/leagues/nba/',pba:'/leagues/pba/',mpbl:'/leagues/mpbl/',ncaa_ph:'/leagues/ncaa-philippines/',uaap:'/leagues/uaap/',soccer:'/leagues/premier-league/',atp:'/leagues/atp/',wta:'/leagues/wta/',boxing:'/boxing/'};
+  return pages[key]||('/scores/?from=sports&league='+encodeURIComponent(key||''));
+}
 function renderSports(){
   const names=Object.keys(sportsDirectory);
   if(!sportsDirectory[activeSport])activeSport=names[0];
@@ -197,7 +201,7 @@ function renderSports(){
     '</div>'+
     '<div class="sports-logo-grid">'+leagues.map((league,i)=>{const [name,region,key]=league;const linked=key!=='wbsl';return (
       (linked
-        ?'<a class="sports-logo-tile" href="/scores/?from=sports&league='+encodeURIComponent(key||'')+'" style="--league-index:'+i+';--sport-accent:'+accent+'" data-league-key="'+esc(key||'')+'" aria-label="Open '+esc(name)+' in Scores">'
+        ?'<a class="sports-logo-tile" href="'+leagueLandingUrl(key)+'" style="--league-index:'+i+';--sport-accent:'+accent+'" data-league-key="'+esc(key||'')+'" aria-label="Open '+esc(name)+'">'
         :'<div class="sports-logo-tile sports-logo-tile-static" style="--league-index:'+i+';--sport-accent:'+accent+'" data-league-key="'+esc(key||'')+'" aria-label="'+esc(name)+'">')+
         '<div class="sports-logo-mark" data-logo-host="'+esc(key||'')+'">'+leagueLogo(name,key)+'</div>'+
         '<div class="sports-logo-copy"><strong>'+esc(name)+'</strong><small>'+esc(region)+'</small>'+capabilityBadges(key)+'</div>'+
