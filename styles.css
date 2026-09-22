@@ -1834,3 +1834,16 @@ main{min-height:calc(100svh - 68px)}
 :root[data-theme="light"] .scores-page .score-league-toolbar:after{
   background:linear-gradient(to bottom,rgba(0,0,0,.22),rgba(0,0,0,0))!important;
 }
+
+
+/* Scores sticky league selector: reduce bottom height */
+.scores-page .score-league-toolbar{
+  padding-top:6px!important;
+  padding-bottom:5px!important;
+}
+@media(max-width:760px){
+  .scores-page .score-league-toolbar{
+    padding-top:5px!important;
+    padding-bottom:4px!important;
+  }
+}
