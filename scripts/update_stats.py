@@ -904,6 +904,68 @@ def espn_mls_stats():
         errors.append("ESPN HTML "+type(ex).__name__+": "+str(ex)[:500])
     raise ValueError(" | ".join(errors))
 
+def espn_epl_stats():
+    league="eng.1"
+    season=2026
+    url=f"https://sports.core.api.espn.com/v2/sports/soccer/leagues/{league}/seasons/{season}/leaders"
+    data=fetch_json(url)
+    categories=data.get("categories",[]) or []
+    wanted=[
+        ("Goals","G",{"goals","totalgoals","goalsleader"}),
+        ("Assists","A",{"assists","totalassists","assistsleader"})
+    ]
+    groups=[]
+    for title,suffix,names in wanted:
+        category=None
+        for item in categories:
+            tokens={
+                clean(item.get("name")).lower().replace(" ",""),
+                clean(item.get("displayName")).lower().replace(" ",""),
+                clean(item.get("shortDisplayName")).lower().replace(" ",""),
+                clean(item.get("abbreviation")).lower().replace(" ","")
+            }
+            if tokens & names or any(name in token for token in tokens for name in names):
+                category=item
+                break
+        if not category:
+            continue
+        rows=[]
+        for leader in (category.get("leaders",[]) or [])[:8]:
+            athlete=leader.get("athlete") or {}
+            if athlete.get("$ref"):
+                try:
+                    athlete=fetch_json(str(athlete["$ref"]).replace("http://","https://"))
+                except Exception:
+                    athlete={}
+            player=clean(athlete.get("displayName") or athlete.get("fullName") or athlete.get("shortName"))
+            if not player:
+                continue
+            team_obj=leader.get("team") or athlete.get("team") or {}
+            if isinstance(team_obj,dict) and team_obj.get("$ref"):
+                try:
+                    team_obj=fetch_json(str(team_obj["$ref"]).replace("http://","https://"))
+                except Exception:
+                    team_obj={}
+            team=clean(team_obj.get("displayName") or team_obj.get("shortDisplayName") or team_obj.get("abbreviation")) if isinstance(team_obj,dict) else ""
+            value=leader.get("value")
+            if value is None:
+                value=num(leader.get("displayValue"))
+            if value is None:
+                continue
+            rows.append({"player":player,"team":team,"gp":None,"value":value,"displayValue":display_number(value)})
+        if rows:
+            groups.append({"title":title,"suffix":suffix,"rows":rows})
+    if not groups:
+        raise ValueError("EPL statistics leaders not returned")
+    return {
+        "league":"EPL",
+        "season":"2026–27",
+        "sourceName":"ESPN public statistics feed",
+        "sourceUrl":url,
+        "groups":groups
+    }
+
+
 def espn_hockey_stats():
     return espn_multi_group_stats("hockey","nhl","NHL","2025–26 Regular Season",2026,[
         ("Points","PTS","offensive.points",["points"],"skaters"),
@@ -1062,6 +1124,7 @@ def main():
         ("nblaus",parse_nbl_australia_stats),
         ("basketball",lambda:espn_basketball_stats("basketball","nba",2026,"2025–26 Regular Season")),
         ("wnba",lambda:espn_basketball_stats("wnba","wnba",2026,"2026 Regular Season")),
+        ("soccer",espn_epl_stats),
         ("mls",espn_mls_stats),
         ("baseball",espn_baseball_stats),
         ("hockey",espn_hockey_stats),
