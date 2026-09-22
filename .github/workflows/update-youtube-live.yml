@@ -9,6 +9,7 @@ on:
     branches: [main]
     paths:
       - "scripts/update_youtube_live.py"
+      - "scripts/verify_asian_games_live.py"
       - "scripts/asian_live_expiry.py"
       - "live-stream-sources.json"
       - ".github/workflows/update-youtube-live.yml"
@@ -46,6 +47,7 @@ jobs:
               git reset --hard origin/main
 
               python scripts/update_youtube_live.py
+              python scripts/verify_asian_games_live.py
 
               if git diff --quiet -- youtube-live.json; then
                 echo "No stream-state change."
