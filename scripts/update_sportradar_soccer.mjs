@@ -20,7 +20,6 @@ const now=new Date();
 const iso=now.toISOString();
 
 const TARGETS=[
-  {key:"soccer",names:["premier league","english premier league"],label:"Premier League"},
   {key:"jamaica_pl",names:["premier league"],label:"Jamaica Premier League"},
   {key:"mizoram_pl",names:["mizoram premier league"],label:"Mizoram Premier League"},
   {key:"laliga",names:["laliga","la liga","primera division"],label:"La Liga"},
@@ -105,7 +104,6 @@ function targetKey(name,category=""){
   const cat=norm(category);
 
   if((n==="premier league"||n.includes("jamaica premier"))&&cat.includes("jamaica"))return "jamaica_pl";
-  if((n==="premier league"||n==="english premier league"||n.includes("premier league"))&&cat.includes("england"))return "soccer";
   if(n.includes("mizoram premier league"))return "mizoram_pl";
   if((n.includes("primera division reserves")||n.includes("primera division reserve"))&&cat.includes("el salvador"))return "el_salvador_reserves";
   if((n.includes("uefa champions league women")||n.includes("women champions league"))&&!n.includes("youth"))return "ucl_women";
@@ -262,6 +260,7 @@ data.access="trial";
 data.updatedAt=iso;
 data.requestsLastRun=0;
 data.leagues=data.leagues||{};
+delete data.leagues.soccer;
 data.catalog=data.catalog||{};
 
 const live=await sr("/schedules/live/schedules.json",{optional:true});
@@ -293,7 +292,6 @@ for(const t of TARGETS){
     if(age>=8*24*60*60*1000)return false;
     const mapped=targetKey(g.competition,g.category||"");
     if(mapped!==t.key)return false;
-    if(t.key==="soccer"&&norm(g.competition)==="premier league"&&!g.category)return false;
     return true;
   });
   data.leagues[t.key]={
