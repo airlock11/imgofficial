@@ -1259,3 +1259,66 @@ main{min-height:calc(100svh - 68px)}
   .boxing-section-head{align-items:flex-start}
   .boxing-ranking-filter select{min-width:140px;max-width:160px;height:34px;font-size:.78rem}
 }
+
+
+/* Live score-only green glow + score/stream pairing */
+.score-league-filter.has-live-score-only{
+  animation:scoreOnlyGreenGlow 2.35s ease-in-out infinite;
+}
+.score-league-filter.has-live-score-only:not(.has-live-stream){
+  border-color:rgba(50,205,110,.76);
+  background:color-mix(in srgb,#32cd6e 7%,var(--panel));
+}
+@keyframes scoreOnlyGreenGlow{
+  0%,100%{
+    border-color:rgba(50,205,110,.52);
+    box-shadow:0 0 0 1px rgba(50,205,110,.14),0 0 7px rgba(50,205,110,.22);
+  }
+  50%{
+    border-color:rgba(72,235,137,1);
+    box-shadow:0 0 0 1px rgba(72,235,137,.68),0 0 16px rgba(50,205,110,.62);
+  }
+}
+.score-league-filter.has-live-stream{
+  position:relative;
+  z-index:1;
+  animation:scoreBorderLiveGlow 1.75s ease-in-out infinite;
+}
+.selected-live-activity{
+  display:grid;
+  grid-template-columns:minmax(0,1fr);
+  gap:14px;
+  align-items:start;
+  margin:0 0 30px;
+}
+.selected-live-activity.has-stream{
+  grid-template-columns:minmax(0,1.05fr) minmax(360px,.95fr);
+}
+.selected-live-activity .selected-live-scores,
+.selected-live-activity .league-live-stream{
+  margin:0;
+}
+.selected-live-stream-column{
+  min-width:0;
+  position:sticky;
+  top:86px;
+}
+.selected-live-score-column{min-width:0}
+.selected-live-activity.has-stream .selected-live-stream-column .league-live-stream{
+  box-shadow:0 16px 42px rgba(239,63,69,.18);
+}
+@media(max-width:920px){
+  .selected-live-activity.has-stream{grid-template-columns:1fr}
+  .selected-live-stream-column{
+    position:static;
+    order:2;
+  }
+  .selected-live-score-column{order:1}
+}
+@media(prefers-reduced-motion:reduce){
+  .score-league-filter.has-live-score-only{
+    animation:none;
+    border-color:rgba(50,205,110,.95);
+    box-shadow:0 0 0 1px rgba(50,205,110,.48),0 0 11px rgba(50,205,110,.34);
+  }
+}
