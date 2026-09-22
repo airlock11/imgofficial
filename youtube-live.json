@@ -1,8 +1,82 @@
 {
-  "updatedAt": "2026-09-22T00:02:57.465109+00:00",
+  "updatedAt": "2026-09-22T04:00:00+00:00",
   "freshForMinutes": 8,
-  "streams": [],
-  "liveExpiryLedger": {},
+  "streams": [
+    {
+      "eventId": "ag26-youtube-8w_P7ec7ILY",
+      "sport": "Asian Games",
+      "leagueKey": "asian_games",
+      "league": "2026 ASIAN GAMES",
+      "teams": [],
+      "title": "LIVE: PHILIPPINES VS CHINA | MEN’S BASEBALL GROUP A | 2026 ASIAN GAMES",
+      "firstLiveAt": "2026-09-22T04:00:00+00:00",
+      "expiresAt": "2026-09-22T06:00:00+00:00",
+      "stream": {
+        "videoId": "8w_P7ec7ILY",
+        "watchUrl": "https://www.youtube.com/watch?v=8w_P7ec7ILY",
+        "embedUrl": "https://www.youtube.com/embed/8w_P7ec7ILY",
+        "provider": "YouTube",
+        "channel": "One Sports",
+        "title": "LIVE: PHILIPPINES VS CHINA | MEN’S BASEBALL GROUP A | 2026 ASIAN GAMES",
+        "firstLiveAt": "2026-09-22T04:00:00+00:00",
+        "expiresAt": "2026-09-22T06:00:00+00:00"
+      }
+    },
+    {
+      "eventId": "ag26-youtube-s7u_YNw6-0Q",
+      "sport": "Asian Games",
+      "leagueKey": "asian_games",
+      "league": "2026 ASIAN GAMES",
+      "teams": [],
+      "title": "LIVE: Levi Ruivivar leads PH gymnasts | WOMEN’S GYMNASTICS | 2026 ASIAN GAMES",
+      "firstLiveAt": "2026-09-22T04:00:00+00:00",
+      "expiresAt": "2026-09-22T06:00:00+00:00",
+      "stream": {
+        "videoId": "s7u_YNw6-0Q",
+        "watchUrl": "https://www.youtube.com/watch?v=s7u_YNw6-0Q",
+        "embedUrl": "https://www.youtube.com/embed/s7u_YNw6-0Q",
+        "provider": "YouTube",
+        "channel": "One Sports",
+        "title": "LIVE: Levi Ruivivar leads PH gymnasts | WOMEN’S GYMNASTICS | 2026 ASIAN GAMES",
+        "firstLiveAt": "2026-09-22T04:00:00+00:00",
+        "expiresAt": "2026-09-22T06:00:00+00:00"
+      }
+    },
+    {
+      "eventId": "ag26-youtube-BBnQHvugAhU",
+      "sport": "Asian Games",
+      "leagueKey": "asian_games",
+      "league": "2026 ASIAN GAMES",
+      "teams": [],
+      "title": "LIVE: GILAS PILIPINAS VS JAPAN | WOMEN’S BASKETBALL 5V5 | 2026 ASIAN GAMES",
+      "firstLiveAt": "2026-09-22T04:00:00+00:00",
+      "expiresAt": "2026-09-22T06:00:00+00:00",
+      "stream": {
+        "videoId": "BBnQHvugAhU",
+        "watchUrl": "https://www.youtube.com/watch?v=BBnQHvugAhU",
+        "embedUrl": "https://www.youtube.com/embed/BBnQHvugAhU",
+        "provider": "YouTube",
+        "channel": "One Sports",
+        "title": "LIVE: GILAS PILIPINAS VS JAPAN | WOMEN’S BASKETBALL 5V5 | 2026 ASIAN GAMES",
+        "firstLiveAt": "2026-09-22T04:00:00+00:00",
+        "expiresAt": "2026-09-22T06:00:00+00:00"
+      }
+    }
+  ],
+  "liveExpiryLedger": {
+    "ag26-youtube-8w_P7ec7ILY": {
+      "firstLiveAt": "2026-09-22T04:00:00+00:00",
+      "expiresAt": "2026-09-22T06:00:00+00:00"
+    },
+    "ag26-youtube-s7u_YNw6-0Q": {
+      "firstLiveAt": "2026-09-22T04:00:00+00:00",
+      "expiresAt": "2026-09-22T06:00:00+00:00"
+    },
+    "ag26-youtube-BBnQHvugAhU": {
+      "firstLiveAt": "2026-09-22T04:00:00+00:00",
+      "expiresAt": "2026-09-22T06:00:00+00:00"
+    }
+  },
   "upcoming": [],
   "upcomingCheckedAt": "2026-09-22T00:02:57.229053+00:00",
   "nblSchedule": []
