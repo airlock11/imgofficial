@@ -8,6 +8,7 @@ on:
     paths:
       - "scripts/update_youtube_live.py"
       - "scripts/asian_live_expiry.py"
+      - "live-stream-sources.json"
       - ".github/workflows/update-youtube-live.yml"
 permissions:
   contents: write
