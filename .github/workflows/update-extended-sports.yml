@@ -33,7 +33,7 @@ jobs:
         with:
           python-version: "3.12"
       - name: Install parser
-        run: python -m pip install --disable-pip-version-check beautifulsoup4 lxml
+        run: python -m pip install --disable-pip-version-check beautifulsoup4 lxml pypdf
       - name: Refresh extended sports data
         run: python scripts/update_extended_sports.py
       - name: Commit updated data
