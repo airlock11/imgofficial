@@ -69,7 +69,7 @@ def smallest_live_blocks(soup):
 
 def player_candidates(lines):
     out=[]
-    banned=("WTA","ROUND","COURT","SET","LIVE","TIMEOUT","HARD","SINGAPORE","KOREA","OPEN","SEOUL")
+    banned=("WTA","ROUND","COURT","SET","LIVE","TIMEOUT","HARD","SINGAPORE","KOREA","OPEN","SEOUL","UPCOMING","FINISHED","GRANDSTAND","CENTER","CENTRE","STADIUM","FILTER","MATCH")
     for line in lines:
         s=clean_line(line)
         up=s.upper()
@@ -82,7 +82,11 @@ def player_candidates(lines):
         if re.fullmatch(r"[\d\s•·()-]+",s):
             continue
         if NAME_RE.match(s) and any(ch.islower() for ch in s):
-            out.append(s)
+            # WTA player rows are names, not interface labels. Prefer abbreviated
+            # initials ("T. Prozorova") or multi-word names; allow a bare surname
+            # only after a first player has already been found.
+            if "." in s or " " in s or out:
+                out.append(s)
     # de-duplicate while preserving order
     ded=[]
     for x in out:
@@ -163,6 +167,8 @@ def main():
     }
     OUT.write_text(json.dumps(payload,ensure_ascii=False,indent=2)+"\n","utf-8")
     print("WTA rendered blocks:",len(blocks))
+    for i,b in enumerate(blocks[:10]):
+        print("BLOCK",i,repr(b[:800]))
     print("WTA live matches scraped:",len(games))
     for g in games[:10]:
         print("LIVE",g["away"],g["awayScore"],"vs",g["home"],g["homeScore"],"|",g["status"])
