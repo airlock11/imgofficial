@@ -131,7 +131,7 @@ def tokens_after_name(lines, name):
             if s not in {"•", "·", "—", "-"}:
                 values.append(s)
             continue
-        if NAME_RE.match(s) and any(ch.islower() for ch in s):
+        if (PLAYER_RE.match(s) or DOUBLES_RE.match(s)) and any(ch.islower() for ch in s):
             break
     return values
 
@@ -279,6 +279,8 @@ def main():
 
     if page_live_count and not games:
         raise RuntimeError(f"WTA page reports {page_live_count} live matches but parser found none")
+    if page_live_count is not None:
+        print("WTA parse coverage", len(games), "/", page_live_count)
 
     payload = {
         "special": True,
