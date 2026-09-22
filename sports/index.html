@@ -176,7 +176,15 @@ function capabilityBadges(key){
   return items.length?'<div class="sports-capabilities">'+items.join('')+'</div>':'';
 }
 function leagueLandingUrl(key){
-  const pages={basketball:'/leagues/nba/',pba:'/leagues/pba/',mpbl:'/leagues/mpbl/',ncaa_ph:'/leagues/ncaa-philippines/',uaap:'/leagues/uaap/',soccer:'/leagues/premier-league/',atp:'/leagues/atp/',wta:'/leagues/wta/',boxing:'/boxing/'};
+  const pages={
+    basketball:'/leagues/nba/',wnba:'/leagues/wnba/',pba:'/leagues/pba/',mpbl:'/leagues/mpbl/',
+    ncaa_ph:'/leagues/ncaa-philippines/',uaap:'/leagues/uaap/',nbl:'/leagues/nbl-pilipinas/',
+    nblaus:'/leagues/nbl-australia/',vba:'/leagues/vba/',bleague:'/leagues/b-league/',euroleague:'/leagues/euroleague/',
+    soccer:'/leagues/premier-league/',laliga:'/leagues/la-liga/',seriea:'/leagues/serie-a/',bundesliga:'/leagues/bundesliga/',
+    champions:'/leagues/champions-league/',mls:'/leagues/mls/',atp:'/leagues/atp/',wta:'/leagues/wta/',
+    ipl:'/leagues/ipl/',baseball:'/leagues/mlb/',hockey:'/leagues/nhl/',football:'/leagues/nfl/',
+    f1:'/leagues/formula-1/',ufc:'/leagues/ufc/',boxing:'/boxing/'
+  };
   return pages[key]||('/scores/?from=sports&league='+encodeURIComponent(key||''));
 }
 function renderSports(){
