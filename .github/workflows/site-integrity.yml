@@ -24,6 +24,10 @@ jobs:
           done
       - name: Check startup and player regressions
         run: node scripts/regression-tests.cjs
+      - name: Check backend contracts
+        run: node scripts/backend-contract-tests.cjs
+      - name: Validate YouTube live output contract
+        run: python scripts/validate_youtube_live.py
       - name: Check news embedding permissions
         run: python scripts/test_news_embed.py
       - name: Check Asian Games expiry and rediscovery
