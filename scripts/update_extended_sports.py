@@ -470,12 +470,47 @@ def premier_league_games():
     if not games:
         raise RuntimeError("No verified EPL games returned")
     games.sort(key=lambda g: g.get("date") or "")
+
+    standings_url = "https://site.api.espn.com/apis/v2/sports/soccer/eng.1/standings?season=2026"
+    standings = []
+    try:
+        table = fetch_json(standings_url)
+        children = table.get("children", []) if isinstance(table, dict) else []
+        entries = []
+        for child in children:
+            entries.extend(((child.get("standings") or {}).get("entries") or []))
+        for entry in entries:
+            team = entry.get("team") or {}
+            stats = {str(x.get("name") or x.get("abbreviation") or ""): x for x in (entry.get("stats") or [])}
+            def sval(*names):
+                for name in names:
+                    item = stats.get(name)
+                    if item:
+                        return item.get("displayValue") if item.get("displayValue") not in (None, "") else item.get("value")
+                return ""
+            standings.append({
+                "rank": sval("rank", "Rank"),
+                "team": team.get("displayName") or team.get("shortDisplayName") or team.get("name") or "",
+                "played": sval("gamesPlayed", "GP"),
+                "wins": sval("wins", "W"),
+                "draws": sval("ties", "draws", "D"),
+                "losses": sval("losses", "L"),
+                "goalDiff": sval("pointDifferential", "goalDifference", "GD"),
+                "points": sval("points", "PTS")
+            })
+        standings = [x for x in standings if x["team"]]
+    except Exception as ex:
+        print("epl-standings", type(ex).__name__, str(ex)[:120])
+
     return {
         "league": "EPL",
+        "season": "2026–27",
         "sourceName": "ESPN EPL feed",
         "sourceUrl": url,
+        "standingsSourceUrl": standings_url,
         "updatedAt": datetime.now(timezone.utc).isoformat(),
         "note": "Verified EPL-only rolling window: recent results plus upcoming fixtures.",
+        "standings": standings,
         "games": games
     }
 
