@@ -589,11 +589,28 @@ payload={
  "nblSchedule":nbl_regional_schedule(),
  "scanner":scanner_state
 }
-OUT.write_text(json.dumps(payload,indent=2)+"\n",encoding="utf-8")
-print(
- "IMG livestream scanner",
- "official sources",len(scanner_state.get("sourcesChecked",[])),
- "verified live streams",len(streams),
- "NBL upcoming",len(upcoming),
- "NBL scheduled",len(payload["nblSchedule"])
-)
+def semantic_payload(value):
+ data=json.loads(json.dumps(value))
+ data.pop("updatedAt",None)
+ scanner=data.get("scanner")
+ if isinstance(scanner,dict):scanner.pop("checkedAt",None)
+ return data
+
+# Avoid a GitHub Pages deployment every five minutes when nothing meaningful
+# changed. Ended/new streams still change the semantic payload and publish immediately.
+if semantic_payload(payload)==semantic_payload(previous):
+ print(
+  "IMG livestream scanner",
+  "official sources",len(scanner_state.get("sourcesChecked",[])),
+  "verified live streams",len(streams),
+  "no semantic stream changes"
+ )
+else:
+ OUT.write_text(json.dumps(payload,indent=2)+"\n",encoding="utf-8")
+ print(
+  "IMG livestream scanner",
+  "official sources",len(scanner_state.get("sourcesChecked",[])),
+  "verified live streams",len(streams),
+  "NBL upcoming",len(upcoming),
+  "NBL scheduled",len(payload["nblSchedule"])
+ )
