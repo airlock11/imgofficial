@@ -299,12 +299,25 @@ async function fetchScorePayload(sport,{fallbackOnly=false}={}){
   }
   if(sport==='asian_games'){
     const local=await specialSportsPayload(sport);
+    let livePayload=null;
+    try{
+      const r=await fetch('https://raw.githubusercontent.com/airlock11/imgofficial/asian-games-live-data/asian-games-live.json?ts='+Date.now(),{cache:'no-store'});
+      if(r.ok)livePayload=await r.json();
+    }catch{}
     if(local){
+      const base=Array.isArray(local.games)?local.games.filter(g=>g?.state!=='live'):[];
+      const live=Array.isArray(livePayload?.games)?livePayload.games.filter(g=>g?.state==='live'):[];
+      const liveIds=new Set(live.map(g=>String(g.eventId||'')));
+      local.games=[...live,...base.filter(g=>!liveIds.has(String(g.eventId||'')))];
       local.officialLive=true;
       local.sourceName='Aichi-Nagoya 2026 Official Live Results';
-      local.sourceUrl='https://results.asiangames2026.org/#/schedule';
+      local.sourceUrl='https://results.asiangames2026.org/#/schedule/live';
+      return local;
     }
-    return local||fetchAsianGamesOfficial();
+    if(livePayload&&Array.isArray(livePayload.games)){
+      return {special:true,games:livePayload.games,officialLive:true,sourceName:livePayload.sourceName||'Aichi-Nagoya 2026 Official Live Results',sourceUrl:livePayload.sourceUrl||'https://results.asiangames2026.org/#/schedule/live'};
+    }
+    return fetchAsianGamesOfficial();
   }
   if(sport==='boxing'){
     const [apiResult,webResult]=await Promise.allSettled([
