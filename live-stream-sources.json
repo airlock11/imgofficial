@@ -1,0 +1,150 @@
+{
+  "version": 1,
+  "mode": "official-only",
+  "sources": [
+    {
+      "id": "nbl-pilipinas",
+      "channelId": "UCJDBLldRGVJPEvyjJdSHefw",
+      "leagueKey": "nbl",
+      "league": "NBL Pilipinas",
+      "sport": "Basketball",
+      "prefix": "nblph",
+      "includeAny": [
+        "NBL",
+        "PILIPINAS",
+        "BASKETBALL"
+      ],
+      "excludeAny": [
+        "PRESS CONFERENCE",
+        "INTERVIEW",
+        "PODCAST"
+      ]
+    },
+    {
+      "id": "mpbl",
+      "handle": "mpblofficial",
+      "leagueKey": "mpbl",
+      "league": "MPBL",
+      "sport": "Basketball",
+      "prefix": "mpbl",
+      "includeAny": [
+        "MPBL",
+        "MAHARLIKA",
+        "BASKETBALL"
+      ],
+      "excludeAny": [
+        "PRESS CONFERENCE",
+        "INTERVIEW",
+        "PODCAST"
+      ]
+    },
+    {
+      "id": "wta",
+      "username": "WTA",
+      "leagueKey": "wta",
+      "league": "WTA Tour",
+      "sport": "Tennis",
+      "prefix": "wta",
+      "includeAny": [
+        "WTA",
+        "TENNIS",
+        "OPEN",
+        "FINAL",
+        "SEMIFINAL",
+        "QUARTERFINAL",
+        "ROUND"
+      ],
+      "excludeAny": [
+        "PRESS CONFERENCE",
+        "INTERVIEW",
+        "PODCAST"
+      ]
+    },
+    {
+      "id": "fiba",
+      "handle": "FIBA",
+      "leagueKey": "fiba",
+      "league": "FIBA",
+      "sport": "Basketball",
+      "prefix": "fiba",
+      "includeAny": [
+        "FIBA",
+        "BASKETBALL"
+      ],
+      "excludeAny": [
+        "PRESS CONFERENCE",
+        "INTERVIEW",
+        "PODCAST",
+        "DRAW CEREMONY"
+      ]
+    },
+    {
+      "id": "fiba-3x3",
+      "handle": "FIBA3x3",
+      "leagueKey": "fiba",
+      "league": "FIBA",
+      "sport": "Basketball",
+      "prefix": "fiba3x3",
+      "includeAny": [
+        "FIBA",
+        "3X3",
+        "BASKETBALL"
+      ],
+      "excludeAny": [
+        "PRESS CONFERENCE",
+        "INTERVIEW",
+        "PODCAST"
+      ]
+    },
+    {
+      "id": "one-championship",
+      "handle": "ONEChampionship",
+      "leagueKey": "one",
+      "league": "ONE Championship",
+      "sport": "Combat Sports",
+      "prefix": "one",
+      "includeAny": [
+        "ONE",
+        "FRIDAY FIGHTS",
+        "FIGHT NIGHT",
+        "MUAY THAI",
+        "MMA",
+        "KICKBOXING",
+        "SUBMISSION GRAPPLING"
+      ],
+      "excludeAny": [
+        "PRESS CONFERENCE",
+        "INTERVIEW",
+        "PODCAST",
+        "WEIGH-IN",
+        "WEIGH IN"
+      ]
+    },
+    {
+      "id": "ufc",
+      "handle": "ufc",
+      "leagueKey": "ufc",
+      "league": "UFC",
+      "sport": "Combat Sports",
+      "prefix": "ufc",
+      "includeAny": [
+        "UFC",
+        "DWCS",
+        "CONTENDER SERIES",
+        "ROAD TO UFC"
+      ],
+      "excludeAny": [
+        "PRESS CONFERENCE",
+        "POST-FIGHT",
+        "POST FIGHT",
+        "INTERVIEW",
+        "PODCAST",
+        "WEIGH-IN",
+        "WEIGH IN",
+        "CEREMONIAL",
+        "MEDIA DAY",
+        "Q&A"
+      ]
+    }
+  ]
+}
