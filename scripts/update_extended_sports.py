@@ -11,6 +11,7 @@ from pypdf import PdfReader
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "extended-sports-data.json"
+LIVE_OUT = ROOT / "wta-live.json"
 UA = "Mozilla/5.0 (compatible; IMG-Sports-Extended/1.0; +https://imgofficial.com)"
 
 def fetch(url):
@@ -301,18 +302,40 @@ def wta_live_scores():
             return scalar(value, ["displayName","fullName","playerName","name","shortName"])
         return ""
 
+    def score_parts(value):
+        sets = []
+        point = ""
+        if isinstance(value, dict):
+            for key in ("set1","set2","set3","set4","set5","period1","period2","period3","period4","period5"):
+                if key in value and value[key] not in (None, ""):
+                    sets.append(str(value[key]))
+            for key in ("point","gamePoint","gameScore","currentPoint"):
+                if key in value and value[key] not in (None, ""):
+                    point = str(value[key])
+                    break
+        elif isinstance(value, list):
+            for item in value:
+                if isinstance(item, dict):
+                    v = scalar(item, ["displayValue","value","score","games"])
+                elif isinstance(item, (str, int, float)):
+                    v = str(item)
+                else:
+                    v = ""
+                if v:
+                    sets.append(v)
+        return {"sets": sets[:5], "point": point}
+
     def score_value(value):
+        parts = score_parts(value)
+        text = " ".join(parts["sets"])
+        if parts["point"]:
+            return (text + " · " if text else "") + parts["point"]
+        if text:
+            return text
         if isinstance(value, (str, int, float)):
             return str(value)
-        if isinstance(value, list):
-            vals=[score_value(x) for x in value]
-            return " ".join(x for x in vals if x and x!="—") or "—"
         if isinstance(value, dict):
-            vals=[]
-            for key in ("point","current","set1","set2","set3","set4","set5","period1","period2","period3","period4","period5"):
-                if key in value and value[key] not in (None,""):
-                    vals.append(str(value[key]))
-            return " ".join(vals) if vals else scalar(value,["displayValue","value","score"]) or "—"
+            return scalar(value, ["displayValue","value","score"]) or "—"
         return "—"
 
     def match_from_dict(d, tournament):
@@ -330,8 +353,12 @@ def wta_live_scores():
         if not a or not b or a==b:
             return None
 
-        sa = score_value(d.get("scoreA") or d.get("playerAScore") or d.get("homeScore") or d.get("score1"))
-        sb = score_value(d.get("scoreB") or d.get("playerBScore") or d.get("awayScore") or d.get("score2"))
+        raw_a = d.get("scoreA") or d.get("playerAScore") or d.get("homeScore") or d.get("score1")
+        raw_b = d.get("scoreB") or d.get("playerBScore") or d.get("awayScore") or d.get("score2")
+        parts_a = score_parts(raw_a)
+        parts_b = score_parts(raw_b)
+        sa = score_value(raw_a)
+        sb = score_value(raw_b)
         round_name=scalar(d,["round","roundName","drawLevelType"])
         court=scalar(d,["court","courtName"])
         mid=scalar(d,["matchId","id","eventId"]) or re.sub(r"[^a-z0-9]+","-",f"{tournament}-{a}-{b}".lower()).strip("-")
@@ -341,6 +368,8 @@ def wta_live_scores():
             "displayTime":tournament,
             "away":a,"home":b,
             "awayScore":sa,"homeScore":sb,
+            "awaySets":parts_a["sets"],"homeSets":parts_b["sets"],
+            "awayPoint":parts_a["point"],"homePoint":parts_b["point"],
             "status":" · ".join(x for x in [status or "Live",round_name,court] if x),
             "state":"live","eventOnly":False,"title":tournament,
             "sourceName":"WTA Official Scores","sourceUrl":official_scores,
@@ -349,6 +378,7 @@ def wta_live_scores():
 
     games=[]
     seen=set()
+    fetched_pages=0
     for tournament,url in tournaments:
         try:
             html=fetch_text(url)
@@ -356,6 +386,7 @@ def wta_live_scores():
             print("wta-scrape",tournament,"fetch-error",type(ex).__name__,str(ex)[:100])
             continue
 
+        fetched_pages+=1
         payloads=[]
         for m in re.finditer(r'<script[^>]*type=["\\\']application/json["\\\'][^>]*>(.*?)</script>',html,re.I|re.S):
             raw=html_module.unescape(m.group(1)).strip()
@@ -376,8 +407,8 @@ def wta_live_scores():
                 seen.add(key); games.append(game); found+=1
         print("wta-scrape",tournament,"json-blocks",len(payloads),"live-matches",found)
 
-    if not games:
-        raise RuntimeError("WTA scrape found no live player-v-player matches")
+    if not games and fetched_pages == 0:
+        raise RuntimeError("WTA live pages were unavailable")
 
     return {
         "league":"WTA Tour",
@@ -574,6 +605,27 @@ def main():
     data["updated_at"] = datetime.now(timezone.utc).isoformat()
     data["source"] = "Official and verified public sports sources"
     OUT.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", "utf-8")
+
+    try:
+        live = wta_live_scores()
+        live["special"] = True
+        live["live"] = bool(live.get("games"))
+        LIVE_OUT.write_text(json.dumps(live, ensure_ascii=False, indent=2) + "\n", "utf-8")
+        print("updated wta-live", len(live.get("games", [])))
+    except Exception as ex:
+        live = {
+            "special": True,
+            "league": "WTA Tour",
+            "sourceName": "WTA Official Scores",
+            "sourceUrl": "https://www.wtatennis.com/scores/",
+            "updatedAt": datetime.now(timezone.utc).isoformat(),
+            "live": False,
+            "games": [],
+            "status": "unavailable",
+            "note": "GitHub WTA live scrape failed; stale live matches were cleared.",
+        }
+        LIVE_OUT.write_text(json.dumps(live, ensure_ascii=False, indent=2) + "\n", "utf-8")
+        print("cleared wta-live", type(ex).__name__, str(ex)[:160])
 
 if __name__ == "__main__":
     main()
