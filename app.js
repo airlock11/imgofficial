@@ -529,7 +529,8 @@ function renderScoreLeagueFilters(){
     const liveLabel=state.stream?' — live stream':state.live?' — live score':'';
     const specialClass=specialScoreLeagueKeys.has(key)?' is-special-league':'';
     const scoreKind=specialScoreLeagueKeys.has(key)?'special':'league';
-    return '<div class="score-league-item'+(key==='champions'?' score-league-item-champions':'')+(key==='one'?' score-league-item-one':'')+specialClass+liveClass+streamClass+scoreOnlyClass+'" data-score-kind="'+scoreKind+'">'+
+    const priority=state.stream?0:state.live?1:2;
+    return '<div class="score-league-item'+(key==='champions'?' score-league-item-champions':'')+(key==='one'?' score-league-item-one':'')+specialClass+liveClass+streamClass+scoreOnlyClass+'" data-score-kind="'+scoreKind+'" style="order:'+priority+'">'+
       '<button type="button" class="score-league-filter'+(currentScoreLeague===key?' active':'')+specialClass+liveClass+streamClass+scoreOnlyClass+'" data-score-league="'+esc(key)+'" aria-label="'+esc(label+liveLabel)+'" title="'+esc(label+liveLabel)+'">'+
         '<span class="score-league-logo-wrap">'+scoreLeagueLogoMarkup(key)+'</span>'+
       '</button>'+
