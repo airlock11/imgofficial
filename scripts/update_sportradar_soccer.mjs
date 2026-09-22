@@ -30,7 +30,7 @@ const TARGETS=[
   {key:"champions",names:["uefa champions league","champions league"],label:"UEFA Champions League"},
   {key:"ucl_women",names:["uefa champions league women"],label:"UEFA Champions League Women"},
   {key:"mls",names:["major league soccer","mls"],label:"MLS"},
-  {key:"pfl",names:["philippines football league","philippine football league"],label:"Philippine Football League"},
+  {key:"pfl",names:["philippines football league","philippine football league"],label:"PFL"},
   {key:"j1",names:["j1 league","j.league","j league"],label:"J1 League"}
 ];
 
