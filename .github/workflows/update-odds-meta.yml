@@ -1,9 +1,15 @@
+# automation-audit: 2026-09-22
 name: Refresh OddsPapi team metadata
 
 on:
   schedule:
     - cron: "47 0 1 * *"
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/update_odds_meta.py"
+      - ".github/workflows/update-odds-meta.yml"
 
 permissions:
   contents: write
