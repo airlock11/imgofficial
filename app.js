@@ -1115,6 +1115,42 @@ function inlineStreamUrl(stream){
   }catch{}
   return'';
 }
+function streamVideoId(stream){
+  const raw=stream?.watchUrl||stream?.embedUrl||'';
+  if(!raw)return'';
+  try{
+    const u=new URL(raw,location.href);
+    const host=u.hostname.toLowerCase();
+    if(host==='youtu.be')return (u.pathname.split('/').filter(Boolean)[0]||'').slice(0,11);
+    if(host==='youtube.com'||host.endsWith('.youtube.com')||host==='youtube-nocookie.com'||host.endsWith('.youtube-nocookie.com')){
+      return u.searchParams.get('v')||((u.pathname.match(/\/(?:live|embed)\/([^/?]+)/)||[])[1]||'');
+    }
+  }catch{}
+  return String(stream?.videoId||'');
+}
+let liveDeliveryRepairing=false;
+function verifySelectedLeagueLiveDelivery(){
+  const host=document.getElementById('games');
+  if(!host)return true;
+  const expected=[];
+  for(const game of liveNowItems){
+    if(game?.sportKey!==currentScoreLeague||!liveNowItemIsCurrent(game))continue;
+    for(const stream of liveStreamsForGame(game)){
+      const videoId=streamVideoId(stream);
+      if(videoId)expected.push(videoId);
+    }
+  }
+  if(!expected.length)return true;
+  const missing=expected.some(videoId=>!host.querySelector('[data-live-video="'+CSS.escape(videoId)+'"]'));
+  if(!missing)return true;
+  if(!liveDeliveryRepairing){
+    liveDeliveryRepairing=true;
+    queueMicrotask(()=>{
+      try{renderGames()}finally{liveDeliveryRepairing=false}
+    });
+  }
+  return false;
+}
 function selectedLeagueLiveStreamMarkup(key){
   const candidates=[
     ...liveNowItems.filter(g=>g.sportKey===key&&liveNowItemIsCurrent(g)),
@@ -1132,7 +1168,8 @@ function selectedLeagueLiveStreamMarkup(key){
     const league=liveNowLabels[key]?.league||game.leagueLabel||'Live';
     const matchup=game.title||[game.away,game.home].filter(Boolean).join(' vs ')||league+' Live';
     const source=stream.channel||stream.provider||'Official live stream';
-    cards.push('<section class="league-live-stream" aria-label="'+esc(league)+' live stream">'+
+    const videoId=streamVideoId(stream);
+    cards.push('<section class="league-live-stream" data-live-league="'+esc(key)+'" data-live-video="'+esc(videoId)+'" data-live-event="'+esc(game.eventId)+'" aria-label="'+esc(league)+' live stream">'+
       '<div class="league-live-stream-head"><span><i aria-hidden="true"></i>LIVE STREAM</span><strong>'+esc(matchup)+'</strong><small>'+esc(source)+'</small></div>'+
       (embed?'<div class="league-live-stream-player"><iframe src="'+esc(embed)+'" title="'+esc(matchup)+' live stream" loading="lazy" allow="autoplay; encrypted-media; picture-in-picture; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>':'')+
       '<button type="button" class="league-live-stream-action" data-live-event="'+esc(game.eventId)+'"><span class="live-dot" aria-hidden="true"></span>Watch Live</button>'+
@@ -1698,14 +1735,15 @@ async function loadVerifiedChannelLive(){
 }
 function verifiedChannelLiveGame(x,updatedAt=''){
   const allowed=new Set(['asian_games','fiba','pba','mpbl','nbl','ncaa_ph','uaap','wta','atp','one','ufc','basketball','wnba','bleague','euroleague','volleyball_w','volleyball_m']);
-  if(!x?.stream?.watchUrl||!allowed.has(x?.leagueKey))return null;
-  const label=x.league||({asian_games:'2026 ASIAN GAMES',pba:'PBA',mpbl:'MPBL',nbl:'NBL Pilipinas',ncaa_ph:'NCAA Philippines',uaap:'UAAP',wta:'WTA Tour',atp:'ATP Tour',fiba:'FIBA',one:'ONE Championship',ufc:'UFC',basketball:'NBA',wnba:'WNBA',bleague:'B.League',euroleague:'EuroLeague',volleyball_w:'FIVB Women',volleyball_m:'FIVB Men'}[x.leagueKey]);
+  const targetKey=x?.delivery?.leagueKey||x?.stream?.deliveryLeagueKey||x?.leagueKey;
+  if(!x?.stream?.watchUrl||!allowed.has(targetKey))return null;
+  const label=x.league||({asian_games:'2026 ASIAN GAMES',pba:'PBA',mpbl:'MPBL',nbl:'NBL Pilipinas',ncaa_ph:'NCAA Philippines',uaap:'UAAP',wta:'WTA Tour',atp:'ATP Tour',fiba:'FIBA',one:'ONE Championship',ufc:'UFC',basketball:'NBA',wnba:'WNBA',bleague:'B.League',euroleague:'EuroLeague',volleyball_w:'FIVB Women',volleyball_m:'FIVB Men'}[targetKey]);
   const source=x.stream.channel||x.stream.provider||label;
   return {
     eventId:x.eventId,
     firstLiveAt:x.firstLiveAt,
     expiresAt:x.expiresAt,
-    sportKey:x.leagueKey,
+    sportKey:targetKey,
     sportLabel:x.sport||'Sport',
     leagueLabel:label,
     date:x.firstLiveAt||updatedAt||new Date().toISOString(),
@@ -2049,6 +2087,7 @@ function renderGames(){
     const standingsSection=toggle.closest('.league-standings-dropdown');
     if(standingsSection)standingsSection.classList.add('standings-open');
   }
+  verifySelectedLeagueLiveDelivery();
 }
 
 function nblBroadcastScheduleGames(){
