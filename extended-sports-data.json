@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-22T08:44:20.399863+00:00",
+  "updated_at": "2026-09-22T08:45:36.680259+00:00",
   "source": "Official and verified public sports sources",
   "leagues": {
     "bleague": {
@@ -3642,6 +3642,165 @@
         {
           "division": "Women's Bantamweight",
           "champion": "Kayla Harrison"
+        }
+      ]
+    },
+    "wta": {
+      "league": "WTA Tour",
+      "sourceName": "WTA Official Calendar",
+      "sourceUrl": "https://wtafiles.wtatennis.com/pdf/calendar/calendar.pdf",
+      "updatedAt": "2026-09-22T08:45:30.626335+00:00",
+      "note": "Current and upcoming WTA Tour tournaments scraped automatically from the official WTA calendar PDF.",
+      "games": [
+        {
+          "eventId": "wta-calendar-singapore-tennis-open",
+          "date": "2026-09-21T00:00:00+00:00",
+          "endDate": "2026-09-27T00:00:00+00:00",
+          "displayTime": "Week of Sep 21",
+          "title": "Singapore Tennis Open",
+          "location": "Singapore",
+          "status": "Tournament in progress",
+          "state": "scheduled",
+          "eventOnly": true,
+          "level": "WTA 500",
+          "surface": "Indoor Hard",
+          "sourceName": "WTA Official Calendar",
+          "sourceUrl": "https://wtafiles.wtatennis.com/pdf/calendar/calendar.pdf"
+        },
+        {
+          "eventId": "wta-calendar-korea-open",
+          "date": "2026-09-21T00:00:00+00:00",
+          "endDate": "2026-09-27T00:00:00+00:00",
+          "displayTime": "Week of Sep 21",
+          "title": "Korea Open",
+          "location": "Seoul",
+          "status": "Tournament in progress",
+          "state": "scheduled",
+          "eventOnly": true,
+          "level": "WTA 250",
+          "surface": "Hard",
+          "sourceName": "WTA Official Calendar",
+          "sourceUrl": "https://wtafiles.wtatennis.com/pdf/calendar/calendar.pdf"
+        },
+        {
+          "eventId": "wta-calendar-china-open",
+          "date": "2026-09-30T00:00:00+00:00",
+          "endDate": "2026-10-11T00:00:00+00:00",
+          "displayTime": "Sep 30–Oct 11",
+          "title": "China Open",
+          "location": "Beijing",
+          "status": "Scheduled",
+          "state": "scheduled",
+          "eventOnly": true,
+          "level": "WTA 1000",
+          "surface": "Hard",
+          "sourceName": "WTA Official Calendar",
+          "sourceUrl": "https://wtafiles.wtatennis.com/pdf/calendar/calendar.pdf"
+        },
+        {
+          "eventId": "wta-calendar-wuhan-open",
+          "date": "2026-10-12T00:00:00+00:00",
+          "endDate": "2026-10-18T00:00:00+00:00",
+          "displayTime": "Week of Oct 12",
+          "title": "Wuhan Open",
+          "location": "Wuhan",
+          "status": "Scheduled",
+          "state": "scheduled",
+          "eventOnly": true,
+          "level": "WTA 1000",
+          "surface": "Hard",
+          "sourceName": "WTA Official Calendar",
+          "sourceUrl": "https://wtafiles.wtatennis.com/pdf/calendar/calendar.pdf"
+        },
+        {
+          "eventId": "wta-calendar-ningbo-open",
+          "date": "2026-10-19T00:00:00+00:00",
+          "endDate": "2026-10-25T00:00:00+00:00",
+          "displayTime": "Week of Oct 19",
+          "title": "Ningbo Open",
+          "location": "Ningbo",
+          "status": "Scheduled",
+          "state": "scheduled",
+          "eventOnly": true,
+          "level": "",
+          "surface": "Hard",
+          "sourceName": "WTA Official Calendar",
+          "sourceUrl": "https://wtafiles.wtatennis.com/pdf/calendar/calendar.pdf"
+        },
+        {
+          "eventId": "wta-calendar-kinoshita-group-japan-open",
+          "date": "2026-10-19T00:00:00+00:00",
+          "endDate": "2026-10-25T00:00:00+00:00",
+          "displayTime": "Week of Oct 19",
+          "title": "Kinoshita Group Japan Open",
+          "location": "Osaka",
+          "status": "Scheduled",
+          "state": "scheduled",
+          "eventOnly": true,
+          "level": "",
+          "surface": "Hard",
+          "sourceName": "WTA Official Calendar",
+          "sourceUrl": "https://wtafiles.wtatennis.com/pdf/calendar/calendar.pdf"
+        },
+        {
+          "eventId": "wta-calendar-toray-pan-pacific-open-tennis",
+          "date": "2026-10-26T00:00:00+00:00",
+          "endDate": "2026-11-01T00:00:00+00:00",
+          "displayTime": "Week of Oct 26",
+          "title": "Toray Pan Pacific Open Tennis",
+          "location": "Tokyo",
+          "status": "Scheduled",
+          "state": "scheduled",
+          "eventOnly": true,
+          "level": "",
+          "surface": "Hard",
+          "sourceName": "WTA Official Calendar",
+          "sourceUrl": "https://wtafiles.wtatennis.com/pdf/calendar/calendar.pdf"
+        },
+        {
+          "eventId": "wta-calendar-guangzhou-open",
+          "date": "2026-10-26T00:00:00+00:00",
+          "endDate": "2026-11-01T00:00:00+00:00",
+          "displayTime": "Week of Oct 26",
+          "title": "Guangzhou Open",
+          "location": "Guangzhou",
+          "status": "Scheduled",
+          "state": "scheduled",
+          "eventOnly": true,
+          "level": "",
+          "surface": "Hard",
+          "sourceName": "WTA Official Calendar",
+          "sourceUrl": "https://wtafiles.wtatennis.com/pdf/calendar/calendar.pdf"
+        },
+        {
+          "eventId": "wta-calendar-chennai-open",
+          "date": "2026-11-02T00:00:00+00:00",
+          "endDate": "2026-11-08T00:00:00+00:00",
+          "displayTime": "Week of Nov 2",
+          "title": "Chennai Open",
+          "location": "Chennai - H* Prudential Hong Kong Tennis Open Hong Kong",
+          "status": "Scheduled",
+          "state": "scheduled",
+          "eventOnly": true,
+          "level": "",
+          "surface": "Hard",
+          "sourceName": "WTA Official Calendar",
+          "sourceUrl": "https://wtafiles.wtatennis.com/pdf/calendar/calendar.pdf"
+        },
+        {
+          "eventId": "wta-calendar-wta-finals-indian-wells",
+          "date": "2026-11-08T00:00:00+00:00",
+          "endDate": "2026-11-15T00:00:00+00:00",
+          "displayTime": "Nov 8–Nov 15",
+          "title": "WTA Finals Indian Wells",
+          "location": "Indian Wells",
+          "status": "Scheduled",
+          "state": "scheduled",
+          "eventOnly": true,
+          "level": "WTA Finals",
+          "surface": "Hard",
+          "sourceName": "WTA Official Calendar",
+          "sourceUrl": "https://wtafiles.wtatennis.com/pdf/calendar/calendar.pdf"
         }
       ]
     }
