@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import json
+import html as html_module
 import re
 import urllib.request
 from datetime import datetime, timezone, timedelta
@@ -107,182 +108,134 @@ NPB_TEAMS = [
 
 
 def wta_live_scores():
-    """Clean WTA live-score feed. Never use tournament-level 'In Progress' as a match."""
+    """Scrape WTA's official score pages for live player-v-player matches."""
     official_scores = "https://www.wtatennis.com/scores/"
-    browser_headers = {
+    tournaments = [
+        ("Singapore Tennis Open", "https://www.wtatennis.com/tournaments/1152/singapore/2026/scores"),
+        ("Korea Open", "https://www.wtatennis.com/tournaments/1024/seoul/2026/scores"),
+        ("Turk Telekom Ankara Open", "https://www.wtatennis.com/tournaments/1178/ankara-125/2026/scores"),
+        ("Delta Motors Tolentino Open", "https://www.wtatennis.com/tournaments/1133/tolentino-125/2026/scores"),
+    ]
+    headers = {
         "User-Agent": "Mozilla/5.0 (Linux; Android 16) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Mobile Safari/537.36",
-        "Accept": "application/json,text/plain,*/*",
+        "Accept": "text/html,application/xhtml+xml,application/json;q=0.9,*/*;q=0.8",
         "Accept-Language": "en-US,en;q=0.9",
-        "Referer": "https://www.sofascore.com/",
-        "Origin": "https://www.sofascore.com",
     }
 
-    def fetch_json_headers(url, headers):
+    def fetch_text(url):
         req = urllib.request.Request(url, headers=headers)
-        with urllib.request.urlopen(req, timeout=25) as r:
-            return json.loads(r.read().decode("utf-8", errors="replace"))
+        with urllib.request.urlopen(req, timeout=30) as r:
+            return r.read().decode("utf-8", errors="replace")
 
-    def score_text(score):
-        if not isinstance(score, dict):
-            return "—"
-        sets = []
-        for n in range(1, 6):
-            value = score.get(f"period{n}")
-            if value not in (None, ""):
-                sets.append(str(value))
-        point = score.get("point")
-        current = score.get("current")
-        if point not in (None, ""):
-            return (" ".join(sets) + " · " if sets else "") + str(point)
-        if sets:
-            return " ".join(sets)
-        return str(current) if current not in (None, "") else "—"
+    def walk(value):
+        if isinstance(value, dict):
+            yield value
+            for child in value.values():
+                yield from walk(child)
+        elif isinstance(value, list):
+            for child in value:
+                yield from walk(child)
 
-    def parse_sofa(payload):
-        games = []
-        for row in (payload.get("events", []) if isinstance(payload, dict) else []):
-            tournament = row.get("tournament") or {}
-            category = tournament.get("category") or {}
-            slug = str(category.get("slug") or category.get("name") or "").lower()
-            name_blob = " ".join([
-                str(tournament.get("name") or ""),
-                str((tournament.get("uniqueTournament") or {}).get("name") or ""),
-                slug,
-            ]).lower()
-            if "wta" not in name_blob and slug not in {"women", "wta"}:
-                continue
-            status_obj = row.get("status") or {}
-            if str(status_obj.get("type") or "").lower() not in {"inprogress", "live"}:
-                continue
-            home = row.get("homeTeam") or {}
-            away = row.get("awayTeam") or {}
-            home_name = str(home.get("name") or home.get("shortName") or "").strip()
-            away_name = str(away.get("name") or away.get("shortName") or "").strip()
-            if not home_name or not away_name:
-                continue
-            unique = tournament.get("uniqueTournament") or {}
-            tournament_name = str(unique.get("name") or tournament.get("name") or "WTA")
-            round_name = str((row.get("roundInfo") or {}).get("name") or "").strip()
-            status_desc = str(status_obj.get("description") or "Live").strip()
-            start_ts = row.get("startTimestamp")
-            date = datetime.fromtimestamp(start_ts, timezone.utc).isoformat() if start_ts else ""
-            games.append({
-                "eventId": "wta-live-" + str(row.get("id") or row.get("customId") or len(games) + 1),
-                "date": date,
-                "displayTime": tournament_name,
-                "away": away_name,
-                "home": home_name,
-                "awayScore": score_text(row.get("awayScore")),
-                "homeScore": score_text(row.get("homeScore")),
-                "status": " · ".join(x for x in [status_desc, round_name] if x) or "Live",
-                "state": "live",
-                "eventOnly": False,
-                "title": tournament_name,
-                "sourceName": "Live tennis score feed",
-                "sourceUrl": official_scores,
-                "verificationSource": "WTA Official Scores",
-                "verificationUrl": official_scores,
-            })
-        return games
+    def scalar(d, keys):
+        lower = {str(k).lower(): v for k, v in d.items()}
+        for key in keys:
+            v = lower.get(key.lower())
+            if isinstance(v, (str, int, float)) and str(v).strip():
+                return str(v).strip()
+        return ""
 
-    def parse_espn(payload):
-        games = []
-        for event in (payload.get("events", []) if isinstance(payload, dict) else []):
-            comps = event.get("competitions") or []
-            for ci, comp in enumerate(comps):
-                competitors = comp.get("competitors") or []
-                if len(competitors) < 2:
-                    continue
-                def pname(x):
-                    athlete = x.get("athlete") or {}
-                    team = x.get("team") or {}
-                    return str(athlete.get("displayName") or athlete.get("shortDisplayName") or team.get("displayName") or x.get("displayName") or "").strip()
-                a, b = competitors[0], competitors[1]
-                an, bn = pname(a), pname(b)
-                if not an or not bn:
-                    continue
-                st = (comp.get("status") or event.get("status") or {}).get("type") or {}
-                state_raw = str(st.get("state") or "").lower()
-                if state_raw != "in":
-                    continue
-                def escore(x):
-                    lines = x.get("linescores") or []
-                    vals = []
-                    for ln in lines:
-                        if isinstance(ln, dict):
-                            v = ln.get("displayValue", ln.get("value"))
-                        else:
-                            v = ln
-                        if v not in (None, ""):
-                            vals.append(str(v))
-                    score = x.get("score")
-                    if isinstance(score, dict):
-                        score = score.get("displayValue", score.get("value"))
-                    point = x.get("gameScore") or x.get("point")
-                    if point not in (None, ""):
-                        return (" ".join(vals) + " · " if vals else "") + str(point)
-                    if vals:
-                        return " ".join(vals)
-                    return str(score) if score not in (None, "") else "—"
-                status = str(st.get("shortDetail") or st.get("detail") or st.get("description") or "Live")
-                games.append({
-                    "eventId": "wta-espn-" + str(comp.get("id") or event.get("id") or ci),
-                    "date": comp.get("date") or event.get("date") or "",
-                    "displayTime": event.get("name") or event.get("shortName") or "WTA",
-                    "away": an,
-                    "home": bn,
-                    "awayScore": escore(a),
-                    "homeScore": escore(b),
-                    "status": status,
-                    "state": "live",
-                    "eventOnly": False,
-                    "title": event.get("name") or "WTA",
-                    "sourceName": "ESPN WTA live scoreboard",
-                    "sourceUrl": official_scores,
-                    "verificationSource": "WTA Official Scores",
-                    "verificationUrl": official_scores,
-                })
-        return games
+    def person_name(value):
+        if isinstance(value, str):
+            return value.strip()
+        if isinstance(value, dict):
+            return scalar(value, ["displayName","fullName","playerName","name","shortName"])
+        return ""
 
-    attempts = [
-        ("sofascore", "https://api.sofascore.com/api/v1/sport/tennis/events/live", "sofa"),
-        ("espn-site", "https://site.api.espn.com/apis/site/v2/sports/tennis/wta/scoreboard", "espn"),
-        ("espn-cdn", "https://cdn.espn.com/core/tennis/wta/scoreboard?xhr=1", "espn"),
-    ]
-    games = []
-    errors = []
-    for label, url, parser in attempts:
+    def score_value(value):
+        if isinstance(value, (str, int, float)):
+            return str(value)
+        if isinstance(value, list):
+            vals=[score_value(x) for x in value]
+            return " ".join(x for x in vals if x and x!="—") or "—"
+        if isinstance(value, dict):
+            vals=[]
+            for key in ("point","current","set1","set2","set3","set4","set5","period1","period2","period3","period4","period5"):
+                if key in value and value[key] not in (None,""):
+                    vals.append(str(value[key]))
+            return " ".join(vals) if vals else scalar(value,["displayValue","value","score"]) or "—"
+        return "—"
+
+    def match_from_dict(d, tournament):
+        status = scalar(d, ["matchState","state","status","matchStatus","statusText","matchStatusText"])
+        low = status.lower()
+        if not re.search(r"live|progress|playing|medical|set|break|suspended", low):
+            return None
+
+        a = person_name(d.get("playerA") or d.get("entrantA") or d.get("competitorA") or d.get("participantA") or d.get("teamA"))
+        b = person_name(d.get("playerB") or d.get("entrantB") or d.get("competitorB") or d.get("participantB") or d.get("teamB"))
+        if not a or not b:
+            players=d.get("players") or d.get("competitors") or d.get("participants")
+            if isinstance(players,list) and len(players)>=2:
+                a,b=person_name(players[0]),person_name(players[1])
+        if not a or not b or a==b:
+            return None
+
+        sa = score_value(d.get("scoreA") or d.get("playerAScore") or d.get("homeScore") or d.get("score1"))
+        sb = score_value(d.get("scoreB") or d.get("playerBScore") or d.get("awayScore") or d.get("score2"))
+        round_name=scalar(d,["round","roundName","drawLevelType"])
+        court=scalar(d,["court","courtName"])
+        mid=scalar(d,["matchId","id","eventId"]) or re.sub(r"[^a-z0-9]+","-",f"{tournament}-{a}-{b}".lower()).strip("-")
+        return {
+            "eventId":"wta-scrape-"+mid,
+            "date":datetime.now(timezone.utc).isoformat(),
+            "displayTime":tournament,
+            "away":a,"home":b,
+            "awayScore":sa,"homeScore":sb,
+            "status":" · ".join(x for x in [status or "Live",round_name,court] if x),
+            "state":"live","eventOnly":False,"title":tournament,
+            "sourceName":"WTA Official Scores","sourceUrl":official_scores,
+            "verificationSource":"WTA Official Scores","verificationUrl":official_scores,
+        }
+
+    games=[]
+    seen=set()
+    for tournament,url in tournaments:
         try:
-            payload = fetch_json_headers(url, browser_headers if parser == "sofa" else {"User-Agent": browser_headers["User-Agent"], "Accept": "application/json,*/*"})
-            parsed = parse_sofa(payload) if parser == "sofa" else parse_espn(payload)
-            print("wta-source", label, "live-matches", len(parsed))
-            if parsed:
-                games = parsed
-                break
+            html=fetch_text(url)
         except Exception as ex:
-            errors.append(f"{label}:{type(ex).__name__}:{str(ex)[:80]}")
-            print("wta-source", label, "error", type(ex).__name__, str(ex)[:120])
+            print("wta-scrape",tournament,"fetch-error",type(ex).__name__,str(ex)[:100])
+            continue
+
+        payloads=[]
+        for m in re.finditer(r'<script[^>]*type=["\\\']application/json["\\\'][^>]*>(.*?)</script>',html,re.I|re.S):
+            raw=html_module.unescape(m.group(1)).strip()
+            try: payloads.append(json.loads(raw))
+            except Exception: pass
+        next_m=re.search(r'<script[^>]*id=["\\\']__NEXT_DATA__["\\\'][^>]*>(.*?)</script>',html,re.I|re.S)
+        if next_m:
+            try: payloads.append(json.loads(html_module.unescape(next_m.group(1))))
+            except Exception: pass
+
+        found=0
+        for payload in payloads:
+            for d in walk(payload):
+                game=match_from_dict(d,tournament)
+                if not game: continue
+                key=(game["away"].lower(),game["home"].lower())
+                if key in seen: continue
+                seen.add(key); games.append(game); found+=1
+        print("wta-scrape",tournament,"json-blocks",len(payloads),"live-matches",found)
 
     if not games:
-        raise RuntimeError("No live WTA matches from clean sources; " + " | ".join(errors))
-
-    # Append only genuinely scheduled future tournaments from the static WTA layer.
-    try:
-        base = json.loads((ROOT / "special-sports-data.json").read_text("utf-8"))
-        base_games = ((base.get("leagues") or {}).get("wta") or {}).get("games") or []
-        for game in base_games:
-            if game.get("state") == "scheduled":
-                games.append(game)
-    except Exception:
-        pass
+        raise RuntimeError("WTA scrape found no live player-v-player matches")
 
     return {
-        "league": "WTA Tour",
-        "sourceName": "WTA Live Scores",
-        "sourceUrl": official_scores,
-        "updatedAt": datetime.now(timezone.utc).isoformat(),
-        "note": "Clean WTA feed: live player-v-player matches only; future tournaments remain schedule-only.",
-        "games": games,
+        "league":"WTA Tour",
+        "sourceName":"WTA Official Scores",
+        "sourceUrl":official_scores,
+        "updatedAt":datetime.now(timezone.utc).isoformat(),
+        "note":"Live WTA scores scraped from official WTA score pages.",
+        "games":games,
     }
 
 def npb():
