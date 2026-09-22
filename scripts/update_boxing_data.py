@@ -239,7 +239,18 @@ def build_divisions(fighters):
     return sorted(divisions.values(), key=lambda d: (d.get("weight_lb") is None, -(d.get("weight_lb") or 0), d.get("name") or ""))
 
 def main():
-    fighters, pages = fetch_all_fighters()
+    try:
+        fighters, pages = fetch_all_fighters()
+    except RuntimeError as exc:
+        text = str(exc)
+        if "MONTHLY quota" in text or ("HTTP 429" in text and "quota" in text.lower()):
+            print(json.dumps({
+                "skipped": True,
+                "reason": "RapidAPI monthly quota exhausted",
+                "preserved_existing_cache": True,
+            }))
+            return
+        raise
     if not fighters:
         raise RuntimeError("Boxing API returned no fighters; refusing to overwrite the existing cache")
 
