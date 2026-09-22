@@ -37,6 +37,8 @@ jobs:
       SPORTRADAR_REQUEST_BUDGET: "900"
       SPORTRADAR_LIVE_RUN_CAP: "6"
       SPORTRADAR_DEEP_RUN_CAP: "16"
+      SPORTRADAR_PRETRACKING_REQUESTS: "114"
+      SPORTRADAR_PRETRACKING_AT: "2026-09-22T16:54:00Z"
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
