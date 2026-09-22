@@ -1997,11 +1997,11 @@ async function loadVerifiedChannelLive(){
     const y=await r.json();
     const now=Date.now();
     const updatedAtMs=Date.parse(y?.updatedAt||'');
-    const feedFresh=Number.isFinite(updatedAtMs)&&now-updatedAtMs<=10*60*1000;
+    const feedFresh=Number.isFinite(updatedAtMs)&&now-updatedAtMs<=20*60*1000;
     const entries=(Array.isArray(y?.streams)?y.streams:[]).filter(x=>{
       if(!x?.stream?.watchUrl||!feedFresh)return false;
       const verifiedAt=Date.parse(x?.lastVerifiedLiveAt||x?.stream?.lastVerifiedLiveAt||y?.updatedAt||'');
-      if(!Number.isFinite(verifiedAt)||now-verifiedAt>10*60*1000)return false;
+      if(!Number.isFinite(verifiedAt)||now-verifiedAt>20*60*1000)return false;
       if(x?.leagueKey==='asian_games'){
         const fallback=String(x?.verificationStatus||x?.stream?.verificationStatus||'verified').toLowerCase()==='fallback';
         if(!fallback)return true;
