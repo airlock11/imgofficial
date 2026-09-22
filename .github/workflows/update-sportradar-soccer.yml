@@ -74,12 +74,13 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          if git diff --quiet -- sportradar-soccer-data.json; then
+          if git diff --quiet -- sportradar-soccer-data.json sportradar-soccer-archive.json; then
             echo "No Sportradar data changes."
             exit 0
           fi
 
           cp sportradar-soccer-data.json /tmp/sportradar-soccer-data.json
+          cp sportradar-soccer-archive.json /tmp/sportradar-soccer-archive.json
           git config user.name "IMG Sports Data Bot"
           git config user.email "actions@users.noreply.github.com"
 
@@ -87,13 +88,14 @@ jobs:
             git fetch origin main
             git reset --hard origin/main
             cp /tmp/sportradar-soccer-data.json sportradar-soccer-data.json
+            cp /tmp/sportradar-soccer-archive.json sportradar-soccer-archive.json
 
-            if git diff --quiet -- sportradar-soccer-data.json; then
+            if git diff --quiet -- sportradar-soccer-data.json sportradar-soccer-archive.json; then
               echo "Latest main already contains equivalent data."
               exit 0
             fi
 
-            git add sportradar-soccer-data.json
+            git add sportradar-soccer-data.json sportradar-soccer-archive.json
             git commit -m "Update Sportradar soccer data"
 
             if git push origin HEAD:main; then
