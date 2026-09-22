@@ -1,6 +1,153 @@
+const IMG_RATE_WINDOW_MS = 60 * 1000;
+const IMG_RATE_LIMIT = 180;
+const IMG_RATE_BUCKETS = new Map();
+const IMG_INFLIGHT = new Map();
+const IMG_LAST_GOOD = new Map();
+const IMG_LAST_GOOD_TTL_MS = 5 * 60 * 1000;
+
 addEventListener("fetch", function(event) {
-  event.respondWith(handleRequest(event.request));
+  event.respondWith(handleProtectedRequest(event.request, event));
 });
+
+function imgCorsHeaders() {
+  return {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "GET, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type",
+    "Access-Control-Expose-Headers": "X-IMG-Cache, X-IMG-Request-Id, Retry-After"
+  };
+}
+
+function imgRequestId() {
+  return "img-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 8);
+}
+
+function imgCacheTtl(pathname) {
+  if (pathname === "/scoreboard") return 5;
+  if (pathname === "/regional-scores") return 12;
+  if (pathname.indexOf("/boxing/") === 0) return 120;
+  if (pathname.indexOf("/odds") === 0) return 60;
+  if (pathname.indexOf("/wta") === 0) return 10;
+  return 15;
+}
+
+function imgRateAllowed(request) {
+  var ip = request.headers.get("CF-Connecting-IP") || "unknown";
+  var now = Date.now();
+  var bucket = IMG_RATE_BUCKETS.get(ip);
+  if (!bucket || now - bucket.started >= IMG_RATE_WINDOW_MS) {
+    IMG_RATE_BUCKETS.set(ip, { started: now, count: 1 });
+    return true;
+  }
+  bucket.count += 1;
+  if (IMG_RATE_BUCKETS.size > 5000) {
+    IMG_RATE_BUCKETS.clear();
+  }
+  return bucket.count <= IMG_RATE_LIMIT;
+}
+
+function imgRememberGood(key, response) {
+  if (!response || !response.ok) return;
+  IMG_LAST_GOOD.set(key, { at: Date.now(), response: response.clone() });
+  if (IMG_LAST_GOOD.size > 200) {
+    var first = IMG_LAST_GOOD.keys().next().value;
+    if (first) IMG_LAST_GOOD.delete(first);
+  }
+}
+
+function imgStaleResponse(key, requestId) {
+  var item = IMG_LAST_GOOD.get(key);
+  if (!item || Date.now() - item.at > IMG_LAST_GOOD_TTL_MS) return null;
+  var headers = new Headers(item.response.headers);
+  headers.set("X-IMG-Cache", "STALE");
+  headers.set("X-IMG-Request-Id", requestId);
+  headers.set("Warning", '110 - "Response is stale"');
+  return new Response(item.response.body, {
+    status: item.response.status,
+    statusText: item.response.statusText,
+    headers: headers
+  });
+}
+
+async function handleProtectedRequest(request, event) {
+  var requestId = imgRequestId();
+  var cors = imgCorsHeaders();
+  var url = new URL(request.url);
+
+  if (request.method === "OPTIONS") {
+    return new Response(null, { status: 204, headers: cors });
+  }
+  if (request.method !== "GET") {
+    return new Response(JSON.stringify({ error: "Method not allowed", requestId: requestId }), {
+      status: 405,
+      headers: Object.assign({}, cors, { "Content-Type": "application/json; charset=utf-8", "Allow": "GET, OPTIONS" })
+    });
+  }
+  if (!imgRateAllowed(request)) {
+    return new Response(JSON.stringify({ error: "Too many requests", retryAfter: 60, requestId: requestId }), {
+      status: 429,
+      headers: Object.assign({}, cors, { "Content-Type": "application/json; charset=utf-8", "Retry-After": "60", "Cache-Control": "no-store" })
+    });
+  }
+
+  var cacheKey = new Request(url.toString(), { method: "GET" });
+  var cache = caches.default;
+  var cached = await cache.match(cacheKey);
+  if (cached) {
+    var hitHeaders = new Headers(cached.headers);
+    hitHeaders.set("X-IMG-Cache", "HIT");
+    hitHeaders.set("X-IMG-Request-Id", requestId);
+    return new Response(cached.body, { status: cached.status, statusText: cached.statusText, headers: hitHeaders });
+  }
+
+  var key = url.toString();
+  if (IMG_INFLIGHT.has(key)) {
+    var shared = await IMG_INFLIGHT.get(key);
+    var sharedHeaders = new Headers(shared.headers);
+    sharedHeaders.set("X-IMG-Cache", "COALESCED");
+    sharedHeaders.set("X-IMG-Request-Id", requestId);
+    return new Response(shared.clone().body, { status: shared.status, statusText: shared.statusText, headers: sharedHeaders });
+  }
+
+  var work = (async function() {
+    try {
+      var response = await handleRequest(request);
+      var headers = new Headers(response.headers);
+      var ttl = imgCacheTtl(url.pathname);
+      headers.set("Cache-Control", "public, max-age=0, s-maxage=" + ttl + ", stale-while-revalidate=" + Math.max(30, ttl * 6) + ", stale-if-error=300");
+      headers.set("X-IMG-Cache", "MISS");
+      headers.set("X-IMG-Request-Id", requestId);
+      var finalResponse = new Response(response.body, { status: response.status, statusText: response.statusText, headers: headers });
+      if (finalResponse.ok) {
+        imgRememberGood(key, finalResponse.clone());
+        event.waitUntil(cache.put(cacheKey, finalResponse.clone()));
+      }
+      return finalResponse;
+    } catch (error) {
+      var stale = imgStaleResponse(key, requestId);
+      if (stale) return stale;
+      return new Response(JSON.stringify({
+        error: "IMG data service temporarily unavailable",
+        requestId: requestId
+      }), {
+        status: 503,
+        headers: Object.assign({}, cors, {
+          "Content-Type": "application/json; charset=utf-8",
+          "Cache-Control": "no-store",
+          "X-IMG-Cache": "ERROR",
+          "X-IMG-Request-Id": requestId
+        })
+      });
+    }
+  })();
+
+  IMG_INFLIGHT.set(key, work);
+  try {
+    return (await work).clone();
+  } finally {
+    IMG_INFLIGHT.delete(key);
+  }
+}
 
 async function handleRequest(request) {
   var url = new URL(request.url);
