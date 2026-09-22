@@ -17,6 +17,7 @@ class RefParser(html.parser.HTMLParser):
         self._script=False
         self._buf=[]
         self._script_src=False
+        self._script_type=""
     def handle_starttag(self,tag,attrs):
         d=dict(attrs)
         for key in ("src","href"):
@@ -26,13 +27,15 @@ class RefParser(html.parser.HTMLParser):
             self._script=True
             self._buf=[]
             self._script_src=bool(d.get("src"))
+            self._script_type=str(d.get("type") or "").strip().lower()
     def handle_endtag(self,tag):
         if tag=="script" and self._script:
-            if not self._script_src:
+            if not self._script_src and self._script_type in ("","text/javascript","application/javascript","module"):
                 self.scripts.append("".join(self._buf))
             self._script=False
             self._buf=[]
             self._script_src=False
+            self._script_type=""
     def handle_data(self,data):
         if self._script and not self._script_src:self._buf.append(data)
 
@@ -45,7 +48,15 @@ def local_path(ref,base):
     p=u.path
     if not p:return None
     candidate=(ROOT/p.lstrip("/")) if p.startswith("/") else (base.parent/p)
-    try:return candidate.resolve()
+    try:
+        candidate=candidate.resolve()
+        if candidate.exists():
+            return candidate
+        if not p.startswith("/"):
+            root_candidate=(ROOT/p).resolve()
+            if root_candidate.exists():
+                return root_candidate
+        return candidate
     except:return None
 
 def node_check(code,label):
