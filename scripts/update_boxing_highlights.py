@@ -35,7 +35,7 @@ INCLUDE=(
 EXCLUDE=(
  "live:"," live ","full fight","full event","press conference","weigh-in","weigh in",
  "interview","podcast","convention","ceremony","promo","trailer","face off","face-off",
- "conference","meeting","documentary"
+ "conference","meeting","documentary","seminar","presentation","donation","donations"
 )
 
 def get_json(url):
