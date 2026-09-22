@@ -1697,9 +1697,9 @@ async function loadVerifiedChannelLive(){
   }
 }
 function verifiedChannelLiveGame(x,updatedAt=''){
-  const allowed=new Set(['asian_games','fiba','pba','mpbl','nbl','ncaa_ph','uaap','wta','one','ufc']);
+  const allowed=new Set(['asian_games','fiba','pba','mpbl','nbl','ncaa_ph','uaap','wta','atp','one','ufc','basketball','wnba','bleague','euroleague','volleyball_w','volleyball_m']);
   if(!x?.stream?.watchUrl||!allowed.has(x?.leagueKey))return null;
-  const label=x.league||({asian_games:'2026 ASIAN GAMES',pba:'PBA',mpbl:'MPBL',nbl:'NBL Pilipinas',ncaa_ph:'NCAA Philippines',uaap:'UAAP',wta:'WTA Tour',fiba:'FIBA',one:'ONE Championship',ufc:'UFC'}[x.leagueKey]);
+  const label=x.league||({asian_games:'2026 ASIAN GAMES',pba:'PBA',mpbl:'MPBL',nbl:'NBL Pilipinas',ncaa_ph:'NCAA Philippines',uaap:'UAAP',wta:'WTA Tour',atp:'ATP Tour',fiba:'FIBA',one:'ONE Championship',ufc:'UFC',basketball:'NBA',wnba:'WNBA',bleague:'B.League',euroleague:'EuroLeague',volleyball_w:'FIVB Women',volleyball_m:'FIVB Men'}[x.leagueKey]);
   const source=x.stream.channel||x.stream.provider||label;
   return {
     eventId:x.eventId,
