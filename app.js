@@ -123,7 +123,7 @@ document.addEventListener('click',e=>{
     }
     return;
   }
-  const sport=e.target.closest('[data-sport]');if(sport)openSport(sport.dataset.sport);if(e.target.matches('.close'))e.target.closest('dialog').close();const highlightButton=e.target.closest('[data-highlight-event]');if(highlightButton)openHighlights(highlightButton.dataset.highlightEvent);const liveButton=e.target.closest('[data-live-event]');if(liveButton)openLiveStream(liveButton.dataset.liveEvent)});
+  const sport=e.target.closest('[data-sport]');if(sport)openSport(sport.dataset.sport);if(e.target.matches('.close'))e.target.closest('dialog').close();const highlightButton=e.target.closest('[data-highlight-event]');if(highlightButton)openHighlights(highlightButton.dataset.highlightEvent);const boxingHighlight=e.target.closest('[data-boxing-highlight]');if(boxingHighlight)openBoxingHighlight(boxingHighlight.dataset.boxingHighlight);const liveButton=e.target.closest('[data-live-event]');if(liveButton)openLiveStream(liveButton.dataset.liveEvent)});
 const scoreFeeds={
   soccer:'https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard',
   laliga:'https://site.api.espn.com/apis/site/v2/sports/soccer/esp.1/scoreboard',
@@ -198,6 +198,26 @@ async function loadSpecialSportsData(){
     return merged;
   }).catch(()=>null).finally(()=>{specialSportsDataPromise=null});
   return specialSportsDataPromise;
+}
+
+let boxingHighlightsDataCache=null;
+let boxingHighlightsDataTime=0;
+let boxingHighlightsDataPromise=null;
+async function loadBoxingHighlightsData(){
+  if(boxingHighlightsDataCache&&Date.now()-boxingHighlightsDataTime<10*60*1000)return boxingHighlightsDataCache;
+  if(boxingHighlightsDataPromise)return boxingHighlightsDataPromise;
+  boxingHighlightsDataPromise=fetch('/boxing-highlights.json?ts='+Date.now(),{cache:'no-store'})
+    .then(r=>r.ok?r.json():null)
+    .then(j=>{
+      if(j&&j.highlights){
+        boxingHighlightsDataCache=j;
+        boxingHighlightsDataTime=Date.now();
+      }
+      return boxingHighlightsDataCache;
+    })
+    .catch(()=>boxingHighlightsDataCache)
+    .finally(()=>{boxingHighlightsDataPromise=null});
+  return boxingHighlightsDataPromise;
 }
 
 async function specialSportsPayload(sport){
@@ -754,6 +774,56 @@ function boxingTitleholdersMarkup(items,leagueName,key){
         '</div></section>').join('')+
       '</div>'+
     '</div>'+
+  '</section>';
+}
+
+const boxingHighlightKeys=new Set(['wbc','wba','wbo','ibf','ring']);
+function boxingHighlightById(videoId){
+  const groups=boxingHighlightsDataCache?.highlights||{};
+  for(const rows of Object.values(groups)){
+    if(!Array.isArray(rows))continue;
+    const hit=rows.find(x=>String(x?.videoId||'')===String(videoId));
+    if(hit)return hit;
+  }
+  return null;
+}
+function ensureBoxingHighlightDialog(){
+  let d=document.getElementById('boxingHighlightDialog');
+  if(d)return d;
+  d=document.createElement('dialog');
+  d.id='boxingHighlightDialog';
+  d.className='boxing-highlight-dialog';
+  d.innerHTML='<div class="boxing-highlight-shell"><button class="boxing-highlight-close" type="button" aria-label="Close boxing highlight"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button><div id="boxingHighlightContent"></div></div>';
+  document.body.append(d);
+  d.addEventListener('click',e=>{if(e.target===d)d.close()});
+  d.querySelector('.boxing-highlight-close').addEventListener('click',()=>d.close());
+  d.addEventListener('close',()=>{const frame=d.querySelector('iframe');if(frame)frame.src='about:blank'});
+  return d;
+}
+function openBoxingHighlight(videoId){
+  const item=boxingHighlightById(videoId);
+  if(!item)return;
+  const d=ensureBoxingHighlightDialog();
+  const host=d.querySelector('#boxingHighlightContent');
+  host.innerHTML='<div class="boxing-highlight-player-wrap"><iframe src="https://www.youtube-nocookie.com/embed/'+encodeURIComponent(item.videoId)+'?autoplay=1&playsinline=1&rel=0" title="'+esc(item.title||'Boxing highlight')+'" allow="autoplay; encrypted-media; picture-in-picture; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div><div class="boxing-highlight-now"><strong>'+esc(item.title||'Boxing highlight')+'</strong><span>'+esc(item.officialSource||item.channel||'Official boxing source')+'</span></div>';
+  d.showModal();
+}
+function boxingHighlightsMarkup(key){
+  const rows=boxingHighlightsDataCache?.highlights?.[key];
+  if(!Array.isArray(rows)||!rows.length)return'';
+  const source=boxingHighlightsDataCache?.sources?.[key];
+  const label=liveNowLabels[key]?.league||key.toUpperCase();
+  return '<section class="league-games-group boxing-highlights-section" aria-label="'+esc(label)+' official highlights">'+
+    '<div class="league-games-group-head"><h3>Official Highlights</h3><span>'+esc(source?.name||label+' official channel')+'</span></div>'+
+    '<div class="boxing-highlight-grid">'+rows.slice(0,8).map(item=>
+      '<button type="button" class="boxing-highlight-card" data-boxing-highlight="'+esc(item.videoId)+'">'+
+        '<span class="boxing-highlight-thumb">'+
+          (item.thumb?'<img src="'+esc(item.thumb)+'" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer">':'<span class="boxing-highlight-placeholder"></span>')+
+          '<span class="boxing-highlight-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>'+
+        '</span>'+
+        '<span class="boxing-highlight-copy"><strong>'+esc(item.title||'Boxing highlight')+'</strong><small>'+esc(item.officialSource||item.channel||'Official source')+'</small></span>'+
+      '</button>'
+    ).join('')+'</div>'+
   '</section>';
 }
 
@@ -1966,6 +2036,11 @@ function renderGames(){
   const leagueStatsHtml=leagueStatsMarkup(currentScoreLeague);
   if(leagueStatsHtml)sections.push(leagueStatsHtml);
 
+  if(boxingHighlightKeys.has(currentScoreLeague)){
+    const boxingHighlightsHtml=boxingHighlightsMarkup(currentScoreLeague);
+    if(boxingHighlightsHtml)sections.push(boxingHighlightsHtml);
+  }
+
   if(currentScoreLeague==='ufc'||currentScoreLeague==='one'){
     const titleholdersHtml=combatTitleholdersMarkup(currentScoreLeague);
     if(titleholdersHtml)sections.push(titleholdersHtml);
@@ -2158,6 +2233,7 @@ async function loadGames({silent=false,league=currentScoreLeague}={}){
   const st=document.getElementById('gameStatus');
   const sport=league||currentScoreLeague||'soccer';
   await loadSportsStatsData();
+  if(boxingHighlightKeys.has(sport))await loadBoxingHighlightsData();
   if(sport==='ufc'||sport==='one')await loadSpecialSportsData();
   const isCurrent=()=>requestToken===scoreLoadToken&&currentScoreLeague===sport;
   const isWebLeague=['pba','uaap','mpbl','nbl','nblaus','vba'].includes(sport);
