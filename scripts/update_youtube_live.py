@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import json, os, re, urllib.parse, urllib.request
+import json, os, re, time, urllib.parse, urllib.request
 import xml.etree.ElementTree as ET
 import html as html_lib
 from datetime import datetime, timezone, timedelta
@@ -23,9 +23,16 @@ SCOREBOARDS={
  "Hockey":"https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard",
  "American Football":"https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard",
 }
-def get_json(url):
- req=urllib.request.Request(url,headers={"User-Agent":UA})
- with urllib.request.urlopen(req,timeout=20) as r:return json.load(r)
+def get_json(url, attempts=3):
+ last=None
+ for attempt in range(attempts):
+  try:
+   req=urllib.request.Request(url,headers={"User-Agent":UA})
+   with urllib.request.urlopen(req,timeout=20) as r:return json.load(r)
+  except Exception as ex:
+   last=ex
+   if attempt+1<attempts: time.sleep(1.5*(attempt+1))
+ raise last
 def tokens(s):
  return {x for x in re.findall(r"[a-z0-9]+",str(s).lower()) if len(x)>2 and x not in {"live","vs","the","game","official"}}
 def live_events():
