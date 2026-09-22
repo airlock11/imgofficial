@@ -420,169 +420,138 @@ def wta_live_scores():
 
 
 def fiba_games():
-    """Refresh FIBA games from the official FIBA Games & Results page."""
-    url = "https://www.fiba.basketball/en/games"
-    html = fetch(url)
-    soup = BeautifulSoup(html, "html.parser")
-
-    payloads = []
-    for tag in soup.find_all("script"):
-        typ = str(tag.get("type") or "").lower()
-        sid = str(tag.get("id") or "")
-        if typ == "application/json" or sid == "__NEXT_DATA__":
-            raw = tag.string or tag.get_text() or ""
-            raw = html_module.unescape(raw).strip()
-            if not raw:
-                continue
-            try:
-                payloads.append(json.loads(raw))
-            except Exception:
-                pass
-
-    def walk(value):
-        if isinstance(value, dict):
-            yield value
-            for child in value.values():
-                yield from walk(child)
-        elif isinstance(value, list):
-            for child in value:
-                yield from walk(child)
-
-    def scalar(obj, names):
-        if not isinstance(obj, dict):
-            return ""
-        lower = {str(k).lower(): v for k, v in obj.items()}
-        for name in names:
-            v = lower.get(name.lower())
-            if isinstance(v, (str, int, float)) and str(v).strip():
-                return str(v).strip()
-        return ""
-
-    def team_name(value):
-        if isinstance(value, str):
-            return value.strip()
-        if isinstance(value, dict):
-            direct = scalar(value, ["name", "displayName", "shortName", "teamName", "officialName", "code"])
-            if direct:
-                return direct
-            for key in ("team", "competitor", "participant"):
-                if key in value:
-                    found = team_name(value.get(key))
-                    if found:
-                        return found
-        return ""
-
-    def score_value(value):
-        if isinstance(value, (str, int, float)):
-            return str(value)
-        if isinstance(value, dict):
-            return scalar(value, ["score", "points", "value", "displayValue", "total"]) or "—"
-        return "—"
+    """Refresh FIBA games from official FIBA competition pages."""
+    hub_url = "https://www.fiba.basketball/en/games"
+    event_urls = [
+        ("FIBA Intercontinental Cup 2026", "https://www.fiba.basketball/en/events/fiba-intercontinental-cup-2026"),
+        ("FIBA Europe Cup 2026-27", "https://www.fiba.basketball/en/events/fiba-europe-cup-2026-27"),
+        ("EuroCup Women 2026-27", "https://www.fiba.basketball/en/events/eurocup-women-2026-27"),
+        ("EuroLeague Women 2026-27", "https://www.fiba.basketball/en/events/euroleague-women-2026-27"),
+        ("FIBA West Asia Super League Final 8", "https://www.fiba.basketball/en/events/fiba-wasl-final-8-2025-26"),
+    ]
 
     now = datetime.now(timezone.utc)
     games = []
     seen = set()
+    fetched = 0
 
-    for payload in payloads:
-        for d in walk(payload):
-            if not isinstance(d, dict):
+    month_map = {
+        "jan": 1, "feb": 2, "mar": 3, "apr": 4, "may": 5, "jun": 6,
+        "jul": 7, "aug": 8, "sep": 9, "sept": 9, "oct": 10, "nov": 11, "dec": 12,
+    }
+
+    def parse_card(event_name, event_url, text, context):
+        text = re.sub(r"\s+", " ", text).strip()
+        context = re.sub(r"\s+", " ", context).strip()
+        # FIBA cards repeat each team's short code, e.g. "VILN VILN 107 RSSB RSSB 89".
+        m = re.search(
+            r"\b([A-Z0-9]{2,8})\s+\1(?:\s+(\d{1,3}))?\s+([A-Z0-9]{2,8})\s+\3(?:\s+(\d{1,3}))?\b",
+            text,
+        )
+        if not m:
+            return None
+
+        away, away_score, home, home_score = m.group(1), m.group(2), m.group(3), m.group(4)
+        low = text.lower()
+        if "final" in low:
+            state, status = "final", "Final"
+        elif re.search(r"\blive\b|\bq[1-4]\b|quarter|halftime|overtime|\bot\b|in progress", low):
+            state, status = "live", "Live"
+        else:
+            state, status = "scheduled", "Scheduled"
+
+        dm = re.search(r"\b(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s*([A-Za-z]{3,4})\s+(\d{1,2})\b", context, re.I)
+        year = now.year
+        date_value = now.isoformat()
+        display = status
+        if dm:
+            month = month_map.get(dm.group(1).lower())
+            day = int(dm.group(2))
+            if month:
+                dt = datetime(year, month, day, 0, 0, tzinfo=timezone.utc)
+                # Handle year rollover for late-December pages listing January games.
+                if dt < now - timedelta(days=120):
+                    dt = dt.replace(year=year + 1)
+                date_value = dt.isoformat()
+                display = dt.strftime("%b %d")
+        tm = re.search(r"\b([0-2]?\d:[0-5]\d)\b", context)
+        if tm and state == "scheduled":
+            display += " · " + tm.group(1)
+        elif state == "final":
+            display += " · Final"
+        elif state == "live":
+            display += " · Live"
+
+        phase = text[:m.start()].strip(" ·-")
+        event_id = re.sub(r"[^a-z0-9]+", "-", f"{event_name}-{date_value[:10]}-{away}-{home}".lower()).strip("-")
+        return {
+            "eventId": "fiba-" + event_id,
+            "date": date_value,
+            "displayTime": display,
+            "away": away,
+            "home": home,
+            "awayScore": away_score or "—",
+            "homeScore": home_score or "—",
+            "status": status,
+            "state": state,
+            "title": " · ".join(x for x in [event_name, phase] if x),
+            "sourceName": "FIBA Official",
+            "sourceUrl": event_url,
+            "verificationSource": "FIBA Official",
+            "verificationUrl": event_url,
+        }
+
+    for event_name, event_url in event_urls:
+        try:
+            soup = BeautifulSoup(fetch(event_url), "html.parser")
+            fetched += 1
+        except Exception as ex:
+            print("fiba-event", event_name, "fetch-error", type(ex).__name__, str(ex)[:100])
+            continue
+
+        found = 0
+        for a in soup.find_all("a"):
+            text = " ".join(a.stripped_strings)
+            if not text:
                 continue
-
-            home_raw = (
-                d.get("homeTeam") or d.get("teamHome") or d.get("home") or
-                d.get("teamB") or d.get("competitor2")
-            )
-            away_raw = (
-                d.get("awayTeam") or d.get("teamAway") or d.get("away") or
-                d.get("teamA") or d.get("competitor1")
-            )
-
-            if (not home_raw or not away_raw) and isinstance(d.get("teams"), list) and len(d["teams"]) >= 2:
-                away_raw, home_raw = d["teams"][0], d["teams"][1]
-            if (not home_raw or not away_raw) and isinstance(d.get("competitors"), list) and len(d["competitors"]) >= 2:
-                away_raw, home_raw = d["competitors"][0], d["competitors"][1]
-            if (not home_raw or not away_raw) and isinstance(d.get("participants"), list) and len(d["participants"]) >= 2:
-                away_raw, home_raw = d["participants"][0], d["participants"][1]
-
-            home = team_name(home_raw)
-            away = team_name(away_raw)
-            if not home or not away or home == away:
+            parent = a.parent
+            context = " ".join(parent.stripped_strings) if parent else text
+            game = parse_card(event_name, event_url, text, context)
+            if not game:
                 continue
-
-            raw_date = scalar(d, [
-                "gameDateTime", "startDateTime", "startTime", "scheduledAt",
-                "dateTime", "utcDate", "date"
-            ])
-            dt = parse_iso(raw_date)
-            if dt:
-                dt_utc = dt.astimezone(timezone.utc) if dt.tzinfo else dt.replace(tzinfo=timezone.utc)
-                if not (now - timedelta(days=14) <= dt_utc <= now + timedelta(days=45)):
-                    continue
-                date_value = dt_utc.isoformat()
-            else:
-                date_value = raw_date or now.isoformat()
-
-            status_text = scalar(d, [
-                "status", "gameStatus", "statusText", "gameStatusText",
-                "phase", "state"
-            ])
-            low = status_text.lower()
-            if re.search(r"final|finished|ended|complete", low):
-                state, status = "final", "Final"
-            elif re.search(r"live|playing|in progress|quarter|q[1-4]|overtime|ot", low):
-                state, status = "live", status_text or "Live"
-            else:
-                state, status = "scheduled", status_text or "Scheduled"
-
-            home_score = score_value(
-                d.get("homeScore") or d.get("scoreHome") or
-                (home_raw.get("score") if isinstance(home_raw, dict) else None)
-            )
-            away_score = score_value(
-                d.get("awayScore") or d.get("scoreAway") or
-                (away_raw.get("score") if isinstance(away_raw, dict) else None)
-            )
-
-            event_id = scalar(d, ["id", "gameId", "eventId", "gameCode", "code"])
-            if not event_id:
-                event_id = re.sub(r"[^a-z0-9]+", "-", f"{date_value}-{away}-{home}".lower()).strip("-")
-
-            title = scalar(d, ["competitionName", "eventName", "tournamentName", "competition", "event"])
-            key = (str(event_id), away.lower(), home.lower())
+            key = (game["date"][:10], game["away"], game["home"])
             if key in seen:
                 continue
             seen.add(key)
+            games.append(game)
+            found += 1
+        print("fiba-event", event_name, "games", found)
 
-            games.append({
-                "eventId": "fiba-" + str(event_id),
-                "date": date_value,
-                "displayTime": (dt.strftime("%b %d · %H:%M") if dt and state != "final" else ("Final" if state == "final" else status)),
-                "away": away,
-                "home": home,
-                "awayScore": away_score,
-                "homeScore": home_score,
-                "status": status,
-                "state": state,
-                "title": title,
-                "sourceName": "FIBA Official Games",
-                "sourceUrl": url,
-                "verificationSource": "FIBA Official Games",
-                "verificationUrl": url,
-            })
+    if fetched == 0:
+        raise RuntimeError("All FIBA event pages were unavailable")
 
-    games.sort(key=lambda g: g.get("date") or "")
-    if not payloads:
-        raise RuntimeError("FIBA page returned no structured JSON payloads")
+    # Keep the useful current window; final games remain briefly for post-game viewing.
+    floor = now - timedelta(days=7)
+    ceiling = now + timedelta(days=35)
+    filtered = []
+    for game in games:
+        dt = parse_iso(game.get("date"))
+        if not dt:
+            filtered.append(game)
+            continue
+        dt = dt.astimezone(timezone.utc) if dt.tzinfo else dt.replace(tzinfo=timezone.utc)
+        if floor <= dt <= ceiling:
+            filtered.append(game)
 
+    filtered.sort(key=lambda g: g.get("date") or "")
     return {
         "league": "FIBA",
-        "sourceName": "FIBA Official Games",
-        "sourceUrl": url,
+        "sourceName": "FIBA Official",
+        "sourceUrl": hub_url,
         "updatedAt": datetime.now(timezone.utc).isoformat(),
-        "note": "Automatically refreshed from FIBA's official Games & Results page.",
-        "games": games,
+        "note": "Automatically refreshed from official FIBA competition game cards.",
+        "games": filtered,
     }
-
 
 def npb():
     jst = timezone(timedelta(hours=9))
