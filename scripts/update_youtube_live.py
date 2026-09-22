@@ -632,9 +632,10 @@ def semantic_payload(value):
  # Positive verification timestamps change every scan but do not represent a
  # meaningful stream-state change. Fallback/verified status and deadlines remain.
  for item in data.get("streams",[]):
-  item.pop("lastVerifiedLiveAt",None)
-  stream=item.get("stream")
-  if isinstance(stream,dict):stream.pop("lastVerifiedLiveAt",None)
+  if item.get("leagueKey")!="asian_games":
+   item.pop("lastVerifiedLiveAt",None)
+   stream=item.get("stream")
+   if isinstance(stream,dict):stream.pop("lastVerifiedLiveAt",None)
  for item in data.get("liveExpiryLedger",{}).values():
   if isinstance(item,dict):item.pop("lastVerifiedLiveAt",None)
  return data
