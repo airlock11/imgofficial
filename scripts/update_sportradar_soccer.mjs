@@ -20,7 +20,7 @@ const now=new Date();
 const iso=now.toISOString();
 
 const TARGETS=[
-  {key:"jamaica_pl",names:["premier league"],label:"Jamaica Premier League"},
+  {key:"jamaica_pl",names:["premier league"],label:"JPL"},
   {key:"mizoram_pl",names:["mizoram premier league"],label:"Mizoram Premier League"},
   {key:"laliga",names:["laliga","la liga","primera division"],label:"La Liga"},
   {key:"el_salvador_reserves",names:["primera division, reserves","primera division reserves"],label:"Primera Division, Reserves"},
