@@ -455,40 +455,6 @@
         "highlights"
       ]
     },
-    "cba": {
-      "label": "CBA",
-      "sport": "Basketball",
-      "pipeline": "extended",
-      "automatic": true,
-      "required": [
-        "scores",
-        "schedule"
-      ],
-      "optional": [
-        "statistics",
-        "rankings",
-        "standings",
-        "liveStreams",
-        "highlights"
-      ]
-    },
-    "wcba": {
-      "label": "WCBA",
-      "sport": "Basketball",
-      "pipeline": "extended",
-      "automatic": true,
-      "required": [
-        "scores",
-        "schedule"
-      ],
-      "optional": [
-        "statistics",
-        "rankings",
-        "standings",
-        "liveStreams",
-        "highlights"
-      ]
-    },
     "atp": {
       "label": "ATP Tour",
       "sport": "Tennis",
