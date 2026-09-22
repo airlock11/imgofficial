@@ -107,161 +107,101 @@ NPB_TEAMS = [
 
 
 def wta_live_scores():
-    """Refresh individual WTA matches from the official WTA tournament API."""
+    """Refresh real-time individual WTA scores server-side."""
+    live_url = "https://www.sofascore.com/api/v1/sport/tennis/events/live"
     official_scores = "https://www.wtatennis.com/scores/"
-    active = [
-        (1024, 2026, "Korea Open", "Seoul, South Korea"),
-        (1152, 2026, "Singapore Tennis Open", "Singapore"),
-    ]
+    payload = fetch_json(live_url)
+    rows = payload.get("events", []) if isinstance(payload, dict) else []
 
-    def first_value(row, names):
-        if not isinstance(row, dict):
-            return None
-        lower = {str(k).lower(): v for k, v in row.items()}
-        for name in names:
-            if name.lower() in lower and lower[name.lower()] not in (None, ""):
-                return lower[name.lower()]
-        return None
-
-    def display_name(value):
-        if value in (None, ""):
-            return ""
-        if isinstance(value, str):
-            return value.strip()
-        if isinstance(value, dict):
-            for key in ("fullName", "displayName", "name", "playerName", "shortName"):
-                v = value.get(key)
-                if v:
-                    return str(v).strip()
-            player = value.get("player")
-            if isinstance(player, dict):
-                return display_name(player)
-            players = value.get("players")
-            if isinstance(players, list):
-                names = [display_name(x) for x in players]
-                names = [x for x in names if x]
-                if names:
-                    return " / ".join(names)
-        return ""
-
-    def side_name(row, side):
-        suffix = side.lower()
-        candidates = [
-            f"player{suffix}", f"entrant{suffix}", f"entry{suffix}",
-            f"competitor{suffix}", f"participant{suffix}", f"team{suffix}",
-            f"name{suffix}", f"{suffix}player", f"{suffix}entrant",
-        ]
-        value = first_value(row, candidates)
-        name = display_name(value)
-        if name:
-            return name
-
-        # WTA payloads occasionally expose side objects under keys ending in A/B.
-        for key, value in row.items():
-            lk = str(key).lower()
-            if lk.endswith(suffix) and isinstance(value, dict):
-                name = display_name(value)
-                if name:
-                    return name
-        return ""
-
-    def score_text(row, side):
-        suffix = side.lower()
-        direct = first_value(row, [
-            f"score{suffix}", f"matchscore{suffix}", f"totalscore{suffix}",
-            f"gamescore{suffix}", f"setswon{suffix}"
-        ])
-        if direct not in (None, ""):
-            if isinstance(direct, (list, tuple)):
-                return " ".join(str(x) for x in direct)
-            if isinstance(direct, dict):
-                vals = []
-                for k in sorted(direct):
-                    v = direct[k]
-                    if v not in (None, ""):
-                        vals.append(str(v))
-                if vals:
-                    return " ".join(vals)
-            return str(direct)
-
+    def score_text(score):
+        if not isinstance(score, dict):
+            return "—"
         sets = []
         for n in range(1, 6):
-            v = first_value(row, [
-                f"set{n}{suffix}", f"set{n}score{suffix}",
-                f"score{n}{suffix}", f"{suffix}set{n}"
-            ])
-            if v not in (None, ""):
-                sets.append(str(v))
-        return " ".join(sets) if sets else "—"
-
-    def match_state(row):
-        raw = str(first_value(row, ["MatchState", "matchState", "state", "status", "matchStatus"]) or "").strip()
-        low = raw.lower()
-        if re.search(r"live|progress|playing|started|in play|in-play", low):
-            return "live", raw or "Live"
-        if re.search(r"final|finished|complete|completed|ended|retired|walkover", low):
-            return "final", raw or "Final"
-        if re.search(r"scheduled|upcoming|not started|pending|suspended", low):
-            return "scheduled", raw or "Scheduled"
-        # Known compact provider codes.
-        if low in {"l", "i", "ip"}:
-            return "live", "Live"
-        if low in {"f", "c", "p"}:
-            return "final", "Final"
-        return "scheduled", raw or "Scheduled"
+            value = score.get(f"period{n}")
+            if value not in (None, ""):
+                sets.append(str(value))
+        point = score.get("point")
+        current = score.get("current")
+        display = score.get("display")
+        prefix = " ".join(sets)
+        if point not in (None, ""):
+            return (prefix + " · " if prefix else "") + str(point)
+        if prefix:
+            return prefix
+        if current not in (None, ""):
+            return str(current)
+        if display not in (None, ""):
+            return str(display)
+        return "—"
 
     games = []
-    for group_id, year, tournament_name, location in active:
-        api_url = f"https://api.wtatennis.com/tennis/tournaments/{group_id}/{year}/matches"
-        payload = fetch_json(api_url)
-        rows = payload.get("matches", []) if isinstance(payload, dict) else []
-        for index, row in enumerate(rows):
-            if not isinstance(row, dict):
-                continue
-            away = side_name(row, "A")
-            home = side_name(row, "B")
-            if not away or not home:
-                continue
+    for row in rows:
+        tournament = row.get("tournament") or {}
+        category = tournament.get("category") or {}
+        slug = str(category.get("slug") or category.get("name") or "").lower()
+        if slug != "wta" and "wta" not in slug:
+            continue
 
-            state, status = match_state(row)
-            raw_date = first_value(row, ["StartDate", "startDate", "Date", "date", "LastUpdated", "lastUpdated"])
-            dt = parse_iso(raw_date)
-            match_id = first_value(row, ["MatchID", "matchId", "id"]) or f"{group_id}-{index+1}"
-            round_name = first_value(row, ["Round", "round", "DrawLevelType", "drawLevelType", "roundName"])
-            court = first_value(row, ["Court", "court", "CourtID", "courtId"])
+        status_obj = row.get("status") or {}
+        if str(status_obj.get("type") or "").lower() != "inprogress":
+            continue
 
-            details = [str(x) for x in (round_name, court) if x not in (None, "")]
-            games.append({
-                "eventId": "wta-" + str(match_id),
-                "date": dt.isoformat() if dt else "",
-                "displayTime": (dt.strftime("%b %d · %H:%M") if dt else tournament_name),
-                "away": away,
-                "home": home,
-                "awayScore": score_text(row, "A"),
-                "homeScore": score_text(row, "B"),
-                "status": ("Live" if state == "live" else "Final" if state == "final" else status) + ((" · " + " · ".join(details)) if details else ""),
-                "state": state,
-                "eventOnly": False,
-                "tournament": tournament_name,
-                "location": location,
-                "sourceName": "WTA Official",
-                "sourceUrl": official_scores,
-                "verificationUrl": official_scores
-            })
+        home = row.get("homeTeam") or {}
+        away = row.get("awayTeam") or {}
+        home_name = str(home.get("name") or home.get("shortName") or "").strip()
+        away_name = str(away.get("name") or away.get("shortName") or "").strip()
+        if not home_name or not away_name:
+            continue
+
+        unique = tournament.get("uniqueTournament") or {}
+        tournament_name = str(unique.get("name") or tournament.get("name") or "WTA")
+        round_info = row.get("roundInfo") or {}
+        round_name = str(round_info.get("name") or "").strip()
+        status_desc = str(status_obj.get("description") or "Live").strip()
+        details = [x for x in [status_desc, round_name] if x]
+        start_ts = row.get("startTimestamp")
+        date = datetime.fromtimestamp(start_ts, timezone.utc).isoformat() if start_ts else ""
+
+        games.append({
+            "eventId": "wta-live-" + str(row.get("id") or row.get("customId") or len(games) + 1),
+            "date": date,
+            "displayTime": tournament_name,
+            "away": away_name,
+            "home": home_name,
+            "awayScore": score_text(row.get("awayScore")),
+            "homeScore": score_text(row.get("homeScore")),
+            "status": " · ".join(details) or "Live",
+            "state": "live",
+            "eventOnly": False,
+            "title": tournament_name,
+            "location": "",
+            "sourceName": "Live WTA score feed",
+            "sourceUrl": official_scores,
+            "verificationSource": "WTA Official Scores",
+            "verificationUrl": official_scores
+        })
 
     if not games:
-        raise RuntimeError("Official WTA API returned no usable individual matches")
+        raise RuntimeError("No live WTA matches returned")
 
-    # Put live matches first, then today's/upcoming matches, then completed results.
-    games.sort(key=lambda g: (
-        0 if g["state"] == "live" else 1 if g["state"] == "scheduled" else 2,
-        g.get("date") or ""
-    ))
+    # Keep the future tournament schedule from IMG's official WTA snapshot,
+    # but never mix tournament-level 'In Progress' cards into real live scores.
+    try:
+        base = json.loads((ROOT / "special-sports-data.json").read_text("utf-8"))
+        base_games = ((base.get("leagues") or {}).get("wta") or {}).get("games") or []
+        for game in base_games:
+            if game.get("state") == "scheduled":
+                games.append(game)
+    except Exception:
+        pass
+
     return {
         "league": "WTA Tour",
-        "sourceName": "WTA Official",
+        "sourceName": "WTA Official Scores",
         "sourceUrl": official_scores,
-        "note": "Individual WTA match scores are refreshed from the official WTA tournament backend.",
+        "updatedAt": datetime.now(timezone.utc).isoformat(),
+        "note": "Live WTA player-v-player scores refresh automatically server-side; WTA Official Scores is the verification reference.",
         "games": games
     }
 
