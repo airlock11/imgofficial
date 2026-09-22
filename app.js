@@ -284,7 +284,7 @@ async function fetchWtaLiveScores(){
     games,
     live:true,
     updatedAt:payload?.updatedAt||'',
-    sourceName:payload?.sourceName||'WTA Official Scores',
+    sourceName:payload?.sourceName||'API-Tennis',
     sourceUrl:payload?.sourceUrl||official
   };
 }
