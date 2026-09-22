@@ -274,7 +274,7 @@ function mergeScoreGames(primary,fallback){
 }
 async function fetchWtaLiveScores(){
   const official='https://www.wtatennis.com/scores/';
-  const r=await fetch('/wta-live.json?ts='+Date.now(),{cache:'no-store'});
+  const r=await fetch('https://raw.githubusercontent.com/airlock11/imgofficial/wta-live-data/wta-live.json?ts='+Date.now(),{cache:'no-store'});
   if(!r.ok)throw new Error('GitHub WTA live data unavailable');
   const payload=await r.json();
   const games=Array.isArray(payload?.games)?payload.games.filter(g=>g?.state==='live'&&!g?.eventOnly):[];
@@ -1516,6 +1516,13 @@ function normalizeScorePayload(sport,payload){
         awaySets:Array.isArray(g.awaySets)?g.awaySets.map(String):[],
         homePoint:g.homePoint??'',
         awayPoint:g.awayPoint??'',
+        currentSet:Number(g.currentSet)||1,
+        awayCurrentSetGames:g.awayCurrentSetGames??'',
+        homeCurrentSetGames:g.homeCurrentSetGames??'',
+        awaySetsWon:g.awaySetsWon??'',
+        homeSetsWon:g.homeSetsWon??'',
+        round:g.round||'',
+        court:g.court||'',
         title:g.title||'',
         location:g.location||'',
         level:g.level||'',
