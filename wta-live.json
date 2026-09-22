@@ -2,57 +2,18 @@
   "special": true,
   "league": "WTA Tour",
   "live": true,
-  "updatedAt": "2026-09-22T10:44:06.437876+00:00",
+  "updatedAt": "2026-09-22T10:44:11.515575+00:00",
   "sourceName": "API-Tennis",
   "sourceUrl": "https://api-tennis.com/",
   "verificationSource": "API-Tennis",
   "verificationUrl": "https://api-tennis.com/",
   "providerMatchCount": 65,
-  "parsedMatchCount": 61,
+  "parsedMatchCount": 60,
   "recentCount": 30,
-  "liveCount": 5,
+  "liveCount": 4,
   "scheduleCount": 26,
   "note": "WTA live, recent results and near-term schedule from API-Tennis. The WTA webpage scraper is used only if the API call fails.",
   "games": [
-    {
-      "eventId": "api-tennis-wta-12164298",
-      "apiEventKey": "12164298",
-      "date": "2026-09-21T04:35:00",
-      "displayTime": "Seoul",
-      "away": "A. Korneeva",
-      "home": "M. Sawangkaew",
-      "awayLogo": "https://api.api-tennis.com/logo-tennis/14547_a-korneeva.jpg",
-      "homeLogo": "https://api.api-tennis.com/logo-tennis/12716_m-sawangkaew.jpg",
-      "awayScore": "6 6",
-      "homeScore": "4 2",
-      "awaySets": [
-        "6",
-        "6"
-      ],
-      "homeSets": [
-        "4",
-        "2"
-      ],
-      "awayPoint": "—",
-      "homePoint": "—",
-      "currentSet": 2,
-      "awayCurrentSetGames": 6,
-      "homeCurrentSetGames": 2,
-      "awaySetsWon": 1,
-      "homeSetsWon": 0,
-      "round": "WTA Seoul - 1/16-finals",
-      "court": "",
-      "status": "Finished · WTA Seoul - 1/16-finals",
-      "state": "final",
-      "eventOnly": false,
-      "title": "Seoul",
-      "eventType": "Wta Singles",
-      "serve": null,
-      "sourceName": "API-Tennis",
-      "sourceUrl": "https://api-tennis.com/",
-      "verificationSource": "API-Tennis",
-      "verificationUrl": "https://api-tennis.com/"
-    },
     {
       "eventId": "api-tennis-wta-12164556",
       "apiEventKey": "12164556",
@@ -1221,8 +1182,8 @@
       "home": "Hon/ Osborne",
       "awayLogo": "",
       "homeLogo": "",
-      "awayScore": "6 6 · 40",
-      "homeScore": "4 4 · 30",
+      "awayScore": "6 6",
+      "homeScore": "4 4",
       "awaySets": [
         "6",
         "6"
@@ -1231,8 +1192,8 @@
         "4",
         "4"
       ],
-      "awayPoint": "40",
-      "homePoint": "30",
+      "awayPoint": "—",
+      "homePoint": "—",
       "currentSet": 2,
       "awayCurrentSetGames": 6,
       "homeCurrentSetGames": 4,
@@ -1241,7 +1202,7 @@
       "round": "WTA Seoul - 1/8-finals",
       "court": "",
       "status": "Finished · WTA Seoul - 1/8-finals",
-      "state": "live",
+      "state": "final",
       "eventOnly": false,
       "title": "Seoul",
       "eventType": "Wta Doubles",
@@ -1260,8 +1221,8 @@
       "home": "Ninomiya/ Radisic",
       "awayLogo": "",
       "homeLogo": "",
-      "awayScore": "7.7 4 · 40",
-      "homeScore": "6.3 3 · 40",
+      "awayScore": "7.7 4 · 0",
+      "homeScore": "6.3 3 · 15",
       "awaySets": [
         "7.7",
         "4"
@@ -1270,8 +1231,8 @@
         "6.3",
         "3"
       ],
-      "awayPoint": "40",
-      "homePoint": "40",
+      "awayPoint": "0",
+      "homePoint": "15",
       "currentSet": 2,
       "awayCurrentSetGames": 4,
       "homeCurrentSetGames": 3,
@@ -1299,17 +1260,17 @@
       "home": "S. Kartal",
       "awayLogo": "https://api.api-tennis.com/logo-tennis/2820_m-bouzkova.jpg",
       "homeLogo": "https://api.api-tennis.com/logo-tennis/1961_s-kartal.jpg",
-      "awayScore": "7.7 0 · 40",
-      "homeScore": "6.2 2 · 40",
+      "awayScore": "7 0 · A",
+      "homeScore": "6 2 · 40",
       "awaySets": [
-        "7.7",
+        "7",
         "0"
       ],
       "homeSets": [
-        "6.2",
+        "6",
         "2"
       ],
-      "awayPoint": "40",
+      "awayPoint": "A",
       "homePoint": "40",
       "currentSet": 2,
       "awayCurrentSetGames": 0,
@@ -1338,7 +1299,7 @@
       "home": "S. Kenin",
       "awayLogo": "https://api.api-tennis.com/logo-tennis/13421_a-charaeva.jpg",
       "homeLogo": "https://api.api-tennis.com/logo-tennis/2904_s-kenin.jpg",
-      "awayScore": "3 2 · 15",
+      "awayScore": "3 2 · 40",
       "homeScore": "6 4 · 0",
       "awaySets": [
         "3",
@@ -1348,7 +1309,7 @@
         "6",
         "4"
       ],
-      "awayPoint": "15",
+      "awayPoint": "40",
       "homePoint": "0",
       "currentSet": 2,
       "awayCurrentSetGames": 2,
@@ -1377,7 +1338,7 @@
       "home": "A-L. Friedsam",
       "awayLogo": "https://api.api-tennis.com/logo-tennis/2801_b-krejcikova.jpg",
       "homeLogo": "https://api.api-tennis.com/logo-tennis/522_a-l-friedsam.jpg",
-      "awayScore": "1 · 15",
+      "awayScore": "1 · 30",
       "homeScore": "0 · 0",
       "awaySets": [
         "1"
@@ -1385,7 +1346,7 @@
       "homeSets": [
         "0"
       ],
-      "awayPoint": "15",
+      "awayPoint": "30",
       "homePoint": "0",
       "currentSet": 1,
       "awayCurrentSetGames": 1,
