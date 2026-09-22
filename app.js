@@ -514,6 +514,15 @@ function scoreLeagueActivityMap(){
 
   return map;
 }
+function scoreLeaguePriority(state){
+  // 0 = verified livestream (with or without live score)
+  // 1 = live score only
+  // 2 = inactive
+  return state?.stream?0:state?.live?1:2;
+}
+function scoreLeagueLiveState(state){
+  return state?.stream?'stream':state?.live?'score':'inactive';
+}
 function renderScoreLeagueFilters(){
   const host=document.getElementById('scoreLeagueFilters');
   if(!host)return;
@@ -530,22 +539,23 @@ function renderScoreLeagueFilters(){
     const aa=activity.get(a)||{live:false,stream:false};
     const bb=activity.get(b)||{live:false,stream:false};
     // Left-to-right priority: verified live stream, then live score only, then inactive.
-    const aRank=aa.stream?0:aa.live?1:2;
-    const bRank=bb.stream?0:bb.live?1:2;
+    const aRank=scoreLeaguePriority(aa);
+    const bRank=scoreLeaguePriority(bb);
     return (aRank-bRank)||((baseIndex.get(a)||0)-(baseIndex.get(b)||0));
   });
   host.innerHTML=ordered.map(key=>{
     const label=liveNowLabels[key]?.league||key.toUpperCase();
     const displayLabel=label.replace(/Philippines/gi,'PH').replace(/Australia/gi,'AUS');
     const state=activity.get(key)||{live:false,stream:false};
-    const liveClass=state.live?' has-live-activity':'';
-    const streamClass=state.stream?' has-live-stream':'';
-    const scoreOnlyClass=state.live&&!state.stream?' has-live-score-only':'';
-    const liveLabel=state.stream?' — live stream':state.live?' — live score':'';
+    const liveState=scoreLeagueLiveState(state);
+    const liveClass=liveState!=='inactive'?' has-live-activity':'';
+    const streamClass=liveState==='stream'?' has-live-stream':'';
+    const scoreOnlyClass=liveState==='score'?' has-live-score-only':'';
+    const liveLabel=liveState==='stream'?' — live stream':liveState==='score'?' — live score':'';
     const specialClass=specialScoreLeagueKeys.has(key)?' is-special-league':'';
     const scoreKind=specialScoreLeagueKeys.has(key)?'special':'league';
-    const priority=state.stream?0:state.live?1:2;
-    return '<div class="score-league-item'+(key==='champions'?' score-league-item-champions':'')+(key==='one'?' score-league-item-one':'')+specialClass+liveClass+streamClass+scoreOnlyClass+'" data-score-kind="'+scoreKind+'" style="order:'+priority+'">'+
+    const priority=scoreLeaguePriority(state);
+    return '<div class="score-league-item'+(key==='champions'?' score-league-item-champions':'')+(key==='one'?' score-league-item-one':'')+specialClass+liveClass+streamClass+scoreOnlyClass+'" data-score-kind="'+scoreKind+'" data-live-state="'+liveState+'" style="order:'+priority+'">'+
       '<button type="button" class="score-league-filter'+(currentScoreLeague===key?' active':'')+specialClass+liveClass+streamClass+scoreOnlyClass+'" data-score-league="'+esc(key)+'" aria-label="'+esc(label+liveLabel)+'" title="'+esc(label+liveLabel)+'">'+
         '<span class="score-league-logo-wrap">'+scoreLeagueLogoMarkup(key)+'</span>'+
       '</button>'+
