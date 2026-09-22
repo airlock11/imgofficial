@@ -173,6 +173,15 @@ def wta_calendar_schedule():
         blob = block["text"]
         blob = re.sub(r"\bBJK Cup Finals\b", " ", blob, flags=re.I)
         blob = re.sub(r"\bBJK Cup Playoffs\b", " ", blob, flags=re.I)
+        # The PDF extraction splits Hong Kong's tournament name and location
+        # across lines without a pipe, so normalize that week before parsing.
+        if block["date"] == "2-NOV":
+            blob = re.sub(
+                r"Chennai Open\s*\|\s*Chennai\s*-\s*H\*?\s*Prudential Hong Kong Tennis Open\s+Hong Kong\s*-\s*H",
+                "Chennai Open | Chennai - H Prudential Hong Kong Tennis Open | Hong Kong - H",
+                blob,
+                flags=re.I,
+            )
 
         for match in event_re.finditer(blob):
             name = re.sub(r"\s+", " ", match.group(1)).strip(" -")
@@ -211,7 +220,7 @@ def wta_calendar_schedule():
                 "G": "Grass",
             }.get(surface_code, surface_code)
 
-            if start_date != week_start.date().isoformat() or end_date != (week_start + timedelta(days=6)).date().isoformat():
+            if name in exact_dates:
                 start_label = start_dt.strftime("%b %-d")
                 end_label = end_dt.strftime("%b %-d")
                 display = f"{start_label}–{end_label}"
