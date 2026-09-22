@@ -1,7 +1,30 @@
 {
-  "updatedAt": "2026-09-22T06:12:33.628634+00:00",
+  "updatedAt": "2026-09-22T06:49:14.079667+00:00",
   "freshForMinutes": 8,
   "streams": [
+    {
+      "eventId": "ncaaph-youtube-AW-kMYvCJrc",
+      "sport": "Basketball",
+      "leagueKey": "ncaa_ph",
+      "league": "NCAA Philippines",
+      "teams": [],
+      "title": "LIVE: BENILDE vs JRU | NCAA SEASON 102 MEN\u2019S BASKETBALL | SEP 22, 2026",
+      "stream": {
+        "videoId": "AW-kMYvCJrc",
+        "watchUrl": "https://www.youtube.com/watch?v=AW-kMYvCJrc",
+        "provider": "YouTube",
+        "channel": "One Sports",
+        "title": "LIVE: BENILDE vs JRU | NCAA SEASON 102 MEN\u2019S BASKETBALL | SEP 22, 2026",
+        "embedUrl": "https://www.youtube.com/embed/AW-kMYvCJrc",
+        "deliveryLeagueKey": "ncaa_ph",
+        "deliveryPlacement": "above_statistics"
+      },
+      "delivery": {
+        "leagueKey": "ncaa_ph",
+        "url": "/scores/?league=ncaa_ph",
+        "placement": "above_statistics"
+      }
+    },
     {
       "eventId": "ag26-youtube-5i_p-Z0239E",
       "sport": "Asian Games",
@@ -17,13 +40,13 @@
         "title": "LIVE: PHILIPPINES VS KUWAIT | MEN\u2019S FOOTBALL GROUP C | 2026 ASIAN GAMES",
         "embedUrl": "https://www.youtube.com/embed/5i_p-Z0239E",
         "verificationStatus": "verified",
-        "lastVerifiedLiveAt": "2026-09-22T06:12:19.469429+00:00",
+        "lastVerifiedLiveAt": "2026-09-22T06:48:50.440841+00:00",
         "deliveryLeagueKey": "asian_games",
         "deliveryPlacement": "above_statistics",
         "firstLiveAt": "2026-09-22T04:44:38.877857+00:00"
       },
       "verificationStatus": "verified",
-      "lastVerifiedLiveAt": "2026-09-22T06:12:19.469429+00:00",
+      "lastVerifiedLiveAt": "2026-09-22T06:48:50.440841+00:00",
       "delivery": {
         "leagueKey": "asian_games",
         "url": "/scores/?league=asian_games",
@@ -32,33 +55,29 @@
       "firstLiveAt": "2026-09-22T04:44:38.877857+00:00"
     },
     {
-      "eventId": "ag26-youtube-8w_P7ec7ILY",
-      "sport": "Asian Games",
-      "leagueKey": "asian_games",
-      "league": "2026 ASIAN GAMES",
+      "eventId": "mpbl-youtube-mrDO0K9o320",
+      "sport": "Basketball",
+      "leagueKey": "mpbl",
+      "league": "MPBL",
       "teams": [],
-      "title": "LIVE: PHILIPPINES VS CHINA | MEN\u2019S BASEBALL GROUP A | 2026 ASIAN GAMES",
+      "title": "Zamboanga vs Caloocan | September 22, 2026 | MPBL REGULAR SEASON 2026",
+      "officialSourceId": "mpbl",
       "stream": {
-        "videoId": "8w_P7ec7ILY",
-        "watchUrl": "https://www.youtube.com/watch?v=8w_P7ec7ILY",
+        "videoId": "mrDO0K9o320",
+        "watchUrl": "https://www.youtube.com/watch?v=mrDO0K9o320",
         "provider": "YouTube",
-        "channel": "One Sports",
-        "title": "LIVE: PHILIPPINES VS CHINA | MEN\u2019S BASEBALL GROUP A | 2026 ASIAN GAMES",
-        "embedUrl": "https://www.youtube.com/embed/8w_P7ec7ILY",
-        "verificationStatus": "verified",
-        "lastVerifiedLiveAt": "2026-09-22T06:12:19.469429+00:00",
-        "deliveryLeagueKey": "asian_games",
-        "deliveryPlacement": "above_statistics",
-        "firstLiveAt": "2026-09-22T04:00:00+00:00"
+        "channel": "MPBL",
+        "title": "Zamboanga vs Caloocan | September 22, 2026 | MPBL REGULAR SEASON 2026",
+        "officialSourceId": "mpbl",
+        "embedUrl": "https://www.youtube.com/embed/mrDO0K9o320",
+        "deliveryLeagueKey": "mpbl",
+        "deliveryPlacement": "above_statistics"
       },
-      "verificationStatus": "verified",
-      "lastVerifiedLiveAt": "2026-09-22T06:12:19.469429+00:00",
       "delivery": {
-        "leagueKey": "asian_games",
-        "url": "/scores/?league=asian_games",
+        "leagueKey": "mpbl",
+        "url": "/scores/?league=mpbl",
         "placement": "above_statistics"
-      },
-      "firstLiveAt": "2026-09-22T04:00:00+00:00"
+      }
     }
   ],
   "liveExpiryLedger": {
@@ -76,7 +95,7 @@
     },
     "ag26-youtube-5i_p-Z0239E": {
       "firstLiveAt": "2026-09-22T04:44:38.877857+00:00",
-      "lastVerifiedLiveAt": "2026-09-22T06:12:19.469429+00:00"
+      "lastVerifiedLiveAt": "2026-09-22T06:48:50.440841+00:00"
     },
     "ncaaph-youtube-jhZS19XiaPI": {
       "lastVerifiedLiveAt": "2026-09-22T06:10:13.441019+00:00"
@@ -88,7 +107,7 @@
   "scanner": {
     "version": 3,
     "mode": "official-auto-discovery",
-    "checkedAt": "2026-09-22T06:12:33.497899+00:00",
+    "checkedAt": "2026-09-22T06:49:13.987755+00:00",
     "sourcesChecked": [
       "nbl-pilipinas",
       "mpbl",
