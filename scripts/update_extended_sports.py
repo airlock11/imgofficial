@@ -420,7 +420,7 @@ def wta_live_scores():
 
 
 def premier_league_games():
-    """Refresh verified Premier League recent/upcoming fixtures from ESPN's EPL feed."""
+    """Refresh verified EPL recent/upcoming fixtures from ESPN's English top-flight feed."""
     now = datetime.now(timezone.utc)
     start = (now - timedelta(days=10)).strftime("%Y%m%d")
     end = (now + timedelta(days=21)).strftime("%Y%m%d")
@@ -464,15 +464,15 @@ def premier_league_games():
             "homeScore": str(home_score if home_score not in (None, "") else "—"),
             "status": status,
             "state": state,
-            "sourceName": "ESPN Premier League feed",
+            "sourceName": "ESPN EPL feed",
             "sourceUrl": url
         })
     if not games:
-        raise RuntimeError("No verified Premier League games returned")
+        raise RuntimeError("No verified EPL games returned")
     games.sort(key=lambda g: g.get("date") or "")
     return {
-        "league": "Premier League",
-        "sourceName": "ESPN Premier League feed",
+        "league": "EPL",
+        "sourceName": "ESPN EPL feed",
         "sourceUrl": url,
         "updatedAt": datetime.now(timezone.utc).isoformat(),
         "note": "Verified EPL-only rolling window: recent results plus upcoming fixtures.",
