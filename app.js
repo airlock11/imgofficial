@@ -274,63 +274,19 @@ function mergeScoreGames(primary,fallback){
 }
 async function fetchWtaLiveScores(){
   const official='https://www.wtatennis.com/scores/';
-  const parseEvent=e=>{
-    const category=String(e?.tournament?.category?.slug||e?.tournament?.category?.name||'').toLowerCase();
-    if(category!=='wta'||String(e?.status?.type||'').toLowerCase()!=='inprogress')return null;
-    const scoreParts=score=>{
-      const sets=[];
-      for(let i=1;i<=5;i++){
-        const v=score?.['period'+i];
-        if(v!==undefined&&v!==null&&String(v)!==''){
-          const tb=score?.['period'+i+'TieBreak'];
-          sets.push(tb!==undefined&&tb!==null&&String(tb)!==''?String(v)+'('+String(tb)+')':String(v));
-        }
-      }
-      let point=score?.point;
-      if(point===undefined||point===null||String(point)==='')point='—';
-      return {sets,point:String(point)};
-    };
-    const home=scoreParts(e?.homeScore||{});
-    const away=scoreParts(e?.awayScore||{});
-    const tournament=e?.tournament?.uniqueTournament?.name||e?.tournament?.name||'WTA';
-    const status=[e?.status?.description||'Live',e?.roundInfo?.name||''].filter(Boolean).join(' · ');
-    return {
-      eventId:'wta-live-'+String(e?.id||e?.customId||''),
-      date:e?.startTimestamp?new Date(e.startTimestamp*1000).toISOString():'',
-      displayTime:tournament,
-      away:e?.awayTeam?.shortName||e?.awayTeam?.name||'TBD',
-      home:e?.homeTeam?.shortName||e?.homeTeam?.name||'TBD',
-      awayScore:away.sets.join(' ')+(away.point!=='—'?' · '+away.point:''),
-      homeScore:home.sets.join(' ')+(home.point!=='—'?' · '+home.point:''),
-      awaySets:away.sets,
-      homeSets:home.sets,
-      awayPoint:away.point,
-      homePoint:home.point,
-      status,
-      state:'live',
-      eventOnly:false,
-      title:tournament,
-      sourceName:'Live tennis score feed',
-      sourceUrl:official,
-      odds:null,oddsList:[],highlights:[],highlightsChecked:true,streams:[],streamsChecked:true
-    };
-  };
-
-  try{
-    const r=await fetch('https://api.sofascore.com/api/v1/sport/tennis/events/live',{cache:'no-store'});
-    if(r.ok){
-      const payload=await r.json();
-      const games=(Array.isArray(payload?.events)?payload.events:[]).map(parseEvent).filter(Boolean);
-      if(games.length)return {special:true,games,live:true,sourceName:'WTA live scores',sourceUrl:official};
-    }
-  }catch{}
-
-  const r=await fetch('https://img-api-proxy.magsipocarnie.workers.dev/wta-live?ts='+Date.now(),{cache:'no-store'});
-  if(!r.ok)throw new Error('WTA live scraper unavailable');
+  const r=await fetch('/wta-live.json?ts='+Date.now(),{cache:'no-store'});
+  if(!r.ok)throw new Error('GitHub WTA live data unavailable');
   const payload=await r.json();
   const games=Array.isArray(payload?.games)?payload.games.filter(g=>g?.state==='live'&&!g?.eventOnly):[];
   if(!games.length)throw new Error('No live WTA matches');
-  return {special:true,games,live:true,sourceName:'WTA Official Scores',sourceUrl:official};
+  return {
+    special:true,
+    games,
+    live:true,
+    updatedAt:payload?.updatedAt||'',
+    sourceName:payload?.sourceName||'WTA Official Scores',
+    sourceUrl:payload?.sourceUrl||official
+  };
 }
 
 async function fetchAsianGamesOfficial(){
