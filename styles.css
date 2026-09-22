@@ -2124,3 +2124,15 @@ html[data-theme="light"] body.scores-page .score-league-toolbar:after{
   body.scores-page .score-league-edge-zone{display:none!important}
 }
 /* IMG_DESKTOP_LEAGUE_POINTERS_END */
+
+/* IMG_APPROVED_SOCCER_LOGO_START */
+.logo img{
+  content:url('/img-logo-soccer.svg');
+  width:96px!important;
+  height:30px!important;
+  object-fit:contain;
+  object-position:left center;
+}
+.logo{min-width:104px}
+html[data-theme="light"] .logo img{filter:brightness(0)}
+/* IMG_APPROVED_SOCCER_LOGO_END */
