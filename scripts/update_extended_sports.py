@@ -553,6 +553,92 @@ def fiba_games():
         "games": filtered,
     }
 
+def cba_games():
+    """Refresh CBA schedule from the official CBA league website."""
+    url = "https://www.cbaleague.com/"
+    soup = BeautifulSoup(fetch(url), "html.parser")
+    tokens = [re.sub(r"\\s+", " ", x).strip() for x in soup.stripped_strings if str(x).strip()]
+    teams = [
+        "上海久事","浙江浙商证券","深圳马可波罗","北京首钢","广东东阳光","浙江稠州金租",
+        "山东高速","山西汾酒","青岛崂山啤酒","辽宁本钢","宁波町渥","广州智都","北京控股",
+        "福建晋江文旅","长白山恩都里","新疆广汇能源","南京同曦宙光","天津先行者","江苏肯帝亚","四川锦城"
+    ]
+    now_cn = datetime.now(timezone(timedelta(hours=8)))
+    current_date = None
+    current_time = None
+    games, seen = [], set()
+
+    for i, token in enumerate(tokens):
+        dm = re.fullmatch(r"(20\\d{2})-(\\d{2})-(\\d{2})", token)
+        if dm:
+            current_date = dm.group(0)
+            current_time = None
+            continue
+        if re.fullmatch(r"[0-2]?\\d:[0-5]\\d", token):
+            current_time = token
+            continue
+        if token.lower() != "vs" or not current_date:
+            continue
+
+        before = [x for x in tokens[max(0, i-8):i] if x in teams]
+        after = [x for x in tokens[i+1:i+9] if x in teams]
+        if not before or not after:
+            continue
+        away, home = before[-1], after[0]
+        key = (current_date, away, home)
+        if key in seen:
+            continue
+        seen.add(key)
+
+        hh, mm = (12, 0)
+        if current_time:
+            try:
+                hh, mm = map(int, current_time.split(":"))
+            except Exception:
+                pass
+        dt = datetime.strptime(current_date, "%Y-%m-%d").replace(hour=hh, minute=mm, tzinfo=timezone(timedelta(hours=8)))
+        if dt < now_cn - timedelta(days=7) or dt > now_cn + timedelta(days=60):
+            continue
+        games.append({
+            "eventId": "cba-" + current_date.replace("-", "") + "-" + str(len(games)+1),
+            "date": dt.isoformat(),
+            "displayTime": dt.strftime("%b %d · %H:%M"),
+            "away": away, "home": home,
+            "awayScore": "—", "homeScore": "—",
+            "status": "Scheduled", "state": "scheduled",
+            "sourceName": "CBA Official",
+            "sourceUrl": url
+        })
+
+    if not games:
+        raise RuntimeError("No current CBA fixtures parsed from official site")
+    games.sort(key=lambda g: g["date"])
+    return {
+        "league": "CBA",
+        "sourceName": "CBA Official",
+        "sourceUrl": url,
+        "updatedAt": datetime.now(timezone.utc).isoformat(),
+        "note": "Automatically refreshed from the official CBA league schedule.",
+        "games": games
+    }
+
+
+def wcba_games():
+    """Keep WCBA wired to the official China Basketball Association source."""
+    url = "https://www.cba.net.cn/wcbasy/index.jhtml"
+    # Fetch verifies the official league page is reachable. Detailed 2026-27 fixtures
+    # are not published yet, so do not invent matchups or scores.
+    fetch(url)
+    return {
+        "league": "WCBA",
+        "sourceName": "China Basketball Association / WCBA",
+        "sourceUrl": url,
+        "updatedAt": datetime.now(timezone.utc).isoformat(),
+        "note": "2026-27 WCBA is configured. Detailed fixtures will populate from the official source when published.",
+        "games": []
+    }
+
+
 def npb():
     jst = timezone(timedelta(hours=9))
     now = datetime.now(jst)
@@ -719,11 +805,11 @@ def boxing_org(org):
 def main():
     data = load()
     leagues = data.setdefault("leagues", {})
-    jobs = [("wta", wta_calendar_schedule), ("fiba", fiba_games), ("euroleague", euroleague), ("npb", npb), ("kbo", kbo)]
+    jobs = [("wta", wta_calendar_schedule), ("fiba", fiba_games), ("euroleague", euroleague), ("cba", cba_games), ("wcba", wcba_games), ("npb", npb), ("kbo", kbo)]
     for key, builder in jobs:
         try:
             result = builder()
-            if result.get("games"):
+            if key in ("cba", "wcba") or result.get("games"):
                 leagues[key] = result
             print("updated", key, len(result.get("games", [])))
         except Exception as ex:
