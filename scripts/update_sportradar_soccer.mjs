@@ -248,7 +248,7 @@ function mergeGames(existing,incoming){
   return [...map.values()].sort((a,b)=>(Date.parse(a.date)||0)-(Date.parse(b.date)||0));
 }
 
-data.version=3;
+data.version=4;
 data.provider="Sportradar";
 data.product="Soccer API";
 data.access="trial";
@@ -264,6 +264,12 @@ const daily=await sr(`/schedules/${day}/schedules.json`,{optional:true});
 if(!live&&!daily){
   throw new Error("Sportradar live and daily schedule requests were both unavailable. See the HTTP status messages above.");
 }
+
+data.latestFeeds={
+  live:live||null,
+  daily:daily||null,
+  updatedAt:iso
+};
 
 const combined=[...eventItems(live),...eventItems(daily)].map(normalizeGame).filter(g=>g.eventId);
 const grouped={};
@@ -338,16 +344,45 @@ if(MODE==="deep"){
     if(!current?.id)continue;
 
     const seasonPath=`/seasons/${encodeURIComponent(current.id)}`;
+
+    // Start with Season Info so coverage flags decide which expensive feeds are worth calling.
+    const seasonInfo=await sr(seasonPath+"/info.json",{optional:true});
+    const coverage=coverageFromSeasonInfo(seasonInfo);
+    const competitionProperties=coverage?.competition_properties||coverage?.competition||{};
+    const sportEventProperties=coverage?.sport_event_properties||coverage?.sport_event||{};
+
     const schedule=await sr(seasonPath+"/schedules.json",{optional:true});
-    const standings=await sr(seasonPath+"/standings.json",{optional:true});
     const competitorsPayload=await sr(seasonPath+"/competitors.json",{optional:true});
-    const playersPayload=await sr(seasonPath+"/players.json",{optional:true});
-    const leadersPayload=await sr(seasonPath+"/leaders.json",{optional:true});
-    const missingPayload=await sr(seasonPath+"/missing_players.json",{optional:true});
+    const venuesPayload=await sr(seasonPath+"/venues.json",{optional:true});
+
+    const standingsSupported=competitionProperties?.standings!==false&&String(competitionProperties?.standings||"").toLowerCase()!=="false";
+    const leadersSupported=Boolean(competitionProperties?.season_stats_leaders||competitionProperties?.season_player_statistics||competitionProperties?.season_team_statistics);
+    const missingSupported=Boolean(competitionProperties?.missing_players);
+    const squadsSupported=Boolean(competitionProperties?.team_squads);
+    const lineupsSupported=Boolean(sportEventProperties?.lineups);
+    const summariesSupported=Boolean(
+      sportEventProperties?.basic_team_stats||
+      sportEventProperties?.basic_player_stats||
+      sportEventProperties?.extended_team_stats||
+      sportEventProperties?.extended_player_stats||
+      sportEventProperties?.deeper_team_stats||
+      sportEventProperties?.deeper_player_stats
+    );
+
+    const standings=standingsSupported?await sr(seasonPath+"/standings.json",{optional:true}):null;
+    const leadersPayload=leadersSupported?await sr(seasonPath+"/leaders.json",{optional:true}):null;
+    const missingPayload=missingSupported?await sr(seasonPath+"/missing_players.json",{optional:true}):null;
+    const playersPayload=squadsSupported?await sx(seasonPath+"/competitor_players.json",{optional:true}):null;
+    const summariesPayload=summariesSupported?await sr(seasonPath+"/summaries.json?limit=100",{optional:true}):null;
+    const lineupsPayload=lineupsSupported?await sx(seasonPath+"/lineups.json?limit=100",{optional:true}):null;
+    const transfersPayload=await sr(seasonPath+"/transfers.json",{optional:true});
 
     const normalizedSchedule=eventItems(schedule).map(normalizeGame).filter(g=>g.eventId);
     const competitors=safeArray(competitorsPayload?.competitors);
-    const players=safeArray(playersPayload?.players);
+    const players=[
+      ...safeArray(playersPayload?.players),
+      ...safeArray(playersPayload?.competitors).flatMap(x=>safeArray(x?.players))
+    ];
     for(const x of competitors){
       if(x?.id)data.entities.competitors[x.id]={...(data.entities.competitors[x.id]||{}),...x,lastSeenAt:iso};
     }
@@ -355,8 +390,9 @@ if(MODE==="deep"){
       if(x?.id)data.entities.players[x.id]={...(data.entities.players[x.id]||{}),...x,lastSeenAt:iso};
     }
 
-    // Enrich one team per deep run. Cached profiles are refreshed only every 7 days.
+    // Enrich one team per deep run. Cached profiles/stats are refreshed only every 7 days.
     let teamProfile=null;
+    let basicStats=null;
     let extendedStats=null;
     const firstTeam=competitors.find(x=>x?.id);
     if(firstTeam?.id){
@@ -372,8 +408,32 @@ if(MODE==="deep"){
         teamProfile=cached.profile||null;
       }
 
+      const statsAge=Date.now()-(Date.parse(cached.statsUpdatedAt||"")||0);
+      if(statsAge>7*24*60*60*1000){
+        const stats=await sx(`${seasonPath}/competitors/${encodeURIComponent(firstTeam.id)}/statistics.json`,{optional:true});
+        if(stats){
+          basicStats=stats;
+          data.entities.competitors[firstTeam.id]={
+            ...(data.entities.competitors[firstTeam.id]||cached),
+            statistics:stats,
+            statsUpdatedAt:iso,
+            lastSeenAt:iso
+          };
+        }
+      }else{
+        basicStats=cached.statistics||null;
+      }
+
+      const extendedAllowed=Boolean(
+        competitionProperties?.season_team_statistics||
+        competitionProperties?.season_player_statistics||
+        sportEventProperties?.extended_team_stats||
+        sportEventProperties?.extended_player_stats||
+        sportEventProperties?.deeper_team_stats||
+        sportEventProperties?.deeper_player_stats
+      );
       const extAge=Date.now()-(Date.parse(cached.extendedStatsUpdatedAt||"")||0);
-      if(extAge>7*24*60*60*1000){
+      if(extendedAllowed&&extAge>7*24*60*60*1000){
         const ext=await sx(`${seasonPath}/competitors/${encodeURIComponent(firstTeam.id)}/extended_statistics.json`,{optional:true});
         if(ext){
           extendedStats=ext;
@@ -398,23 +458,34 @@ if(MODE==="deep"){
       season:current.name||"",
       seasonStart:current.start_date||"",
       seasonEnd:current.end_date||"",
+      coverage,
       competitors,
       players,
+      venues:safeArray(venuesPayload?.venues),
       leaders:leadersPayload||null,
       missingPlayers:missingPayload||null,
+      transfers:transfersPayload||null,
+      summaries:summariesPayload||null,
+      lineups:lineupsPayload||null,
       standings:standingsRows(standings),
       games:mergeGames(data.leagues[t.key]?.games||[],normalizedSchedule),
       enrichment:{
         teamProfile:teamProfile||null,
+        statistics:basicStats||null,
         extendedStatistics:extendedStats||null
       },
       raw:{
+        seasonInfo:seasonInfo||null,
         schedule:schedule||null,
         standings:standings||null,
         competitors:competitorsPayload||null,
+        venues:venuesPayload||null,
         players:playersPayload||null,
         leaders:leadersPayload||null,
-        missingPlayers:missingPayload||null
+        missingPlayers:missingPayload||null,
+        summaries:summariesPayload||null,
+        lineups:lineupsPayload||null,
+        transfers:transfersPayload||null
       },
       deepUpdatedAt:iso
     };
