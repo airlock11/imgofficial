@@ -202,7 +202,33 @@ async function loadSpecialSportsData(){
     const leagueKeys=new Set([...Object.keys(baseLeagues),...Object.keys(extendedLeagues),...Object.keys(sportradarLeagues)]);
     const mergedLeagues={};
     for(const key of leagueKeys){
-      mergedLeagues[key]={...(baseLeagues[key]||{}),...(extendedLeagues[key]||{}),...(sportradarLeagues[key]||{})};
+      const baseLeague=baseLeagues[key]||{};
+      const extendedLeague=extendedLeagues[key]||{};
+      const sportradarLeague=sportradarLeagues[key]||{};
+      const mergedLeague={...baseLeague,...extendedLeague,...sportradarLeague};
+
+      const srGames=Array.isArray(sportradarLeague.games)?sportradarLeague.games:[];
+      const extendedGames=Array.isArray(extendedLeague.games)?extendedLeague.games:[];
+      const baseGames=Array.isArray(baseLeague.games)?baseLeague.games:[];
+      if(!srGames.length){
+        mergedLeague.games=extendedGames.length?extendedGames:baseGames;
+        if(extendedGames.length){
+          mergedLeague.sourceName=extendedLeague.sourceName||mergedLeague.sourceName;
+          mergedLeague.sourceUrl=extendedLeague.sourceUrl||mergedLeague.sourceUrl;
+        }else if(baseGames.length){
+          mergedLeague.sourceName=baseLeague.sourceName||mergedLeague.sourceName;
+          mergedLeague.sourceUrl=baseLeague.sourceUrl||mergedLeague.sourceUrl;
+        }
+      }
+
+      const srStandings=Array.isArray(sportradarLeague.standings)?sportradarLeague.standings:[];
+      const extendedStandings=Array.isArray(extendedLeague.standings)?extendedLeague.standings:[];
+      const baseStandings=Array.isArray(baseLeague.standings)?baseLeague.standings:[];
+      if(!srStandings.length&&(extendedStandings.length||baseStandings.length)){
+        mergedLeague.standings=extendedStandings.length?extendedStandings:baseStandings;
+      }
+
+      mergedLeagues[key]=mergedLeague;
     }
     const merged={...base,...extended,sportradar,leagues:mergedLeagues};
     specialSportsDataCache=merged;
