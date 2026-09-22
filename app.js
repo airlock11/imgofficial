@@ -1887,6 +1887,9 @@ function liveNowItemIsCurrent(g){
       if(fallback){
         const deadline=Date.parse(g.fallbackExpiresAt||streamList[0]?.fallbackExpiresAt||'');
         if(!Number.isFinite(deadline)||now>=deadline)return false;
+      }else{
+        const verifiedAt=Date.parse(g.lastVerifiedLiveAt||streamList[0]?.lastVerifiedLiveAt||g.date||'');
+        if(Number.isFinite(verifiedAt)&&now-verifiedAt>10*60*1000)return false;
       }
       return true;
     }
@@ -2030,7 +2033,8 @@ function verifiedChannelLiveGame(x,updatedAt=''){
     status:'LIVE · '+source,
     state:'live',
     streams:[x.stream],
-    streamsChecked:true
+    streamsChecked:true,
+    standaloneStream:targetKey==='asian_games'
   };
 }
 async function loadAllLiveGames({silent=false}={}){
@@ -2080,7 +2084,6 @@ async function loadAllLiveGames({silent=false}={}){
   // Fetch the verified channel file once per refresh.
   const verified=await loadVerifiedChannelLive();
   const verifiedGames=verified.entries
-    .filter(x=>(x?.delivery?.leagueKey||x?.stream?.deliveryLeagueKey||x?.leagueKey)!=='asian_games')
     .map(x=>verifiedChannelLiveGame(x,verified.updatedAt))
     .filter(Boolean);
 
@@ -2108,11 +2111,21 @@ async function loadAllLiveGames({silent=false}={}){
       }
     }
 
-    // Asian Games streams must match one specific, currently-live official
-    // event before they can make the league show "Live Stream".
+    // Try to attach Asian Games streams to one specific live event first.
     attachVerifiedAsianGamesStreams(live,verified.entries);
 
+    const attachedUrls=new Set(
+      live.filter(g=>g?.sportKey==='asian_games')
+        .flatMap(g=>liveStreamsForGame(g))
+        .map(s=>String(s?.watchUrl||''))
+        .filter(Boolean)
+    );
+
     for(const game of verifiedGames){
+      if(game?.sportKey==='asian_games'){
+        const url=String(liveStreamsForGame(game)[0]?.watchUrl||'');
+        if(url&&attachedUrls.has(url))continue;
+      }
       if(!live.some(g=>String(g.eventId)===String(game.eventId)))live.push(game);
     }
   }else{
