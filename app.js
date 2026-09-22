@@ -472,7 +472,7 @@ const liveNowLabels={
   bundesliga:{sport:'Football',league:'Bundesliga'},
   champions:{sport:'Football',league:'UEFA Champions League'},
   ucl_women:{sport:'Football',league:'UEFA Champions League Women'},
-  jamaica_pl:{sport:'Football',league:'JPL'},
+  jamaica_pl:{sport:'Football',league:'Jamaican Premier League'},
   mizoram_pl:{sport:'Football',league:'Mizoram Premier League'},
   el_salvador_reserves:{sport:'Football',league:'Primera Division, Reserves'},
   mls:{sport:'Football',league:'MLS'},
