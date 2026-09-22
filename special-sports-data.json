@@ -62,7 +62,7 @@
       "league": "WTA Tour",
       "sourceName": "WTA Official",
       "sourceUrl": "https://www.wtatennis.com/",
-      "updatedAt": "2026-09-22T00:00:00Z",
+      "updatedAt": "2026-09-22T08:10:00Z",
       "rankingsUpdated": "September 21, 2026",
       "rankingsSourceUrl": "https://www.wtatennis.com/rankings/singles",
       "raceSourceUrl": "https://www.wtatennis.com/rankings/race-singles",
@@ -393,40 +393,6 @@
       ],
       "games": [
         {
-          "eventId": "wta-20260921-seoul",
-          "date": "2026-09-21T00:00:00Z",
-          "displayTime": "Sep 21–27",
-          "title": "Korea Open",
-          "location": "Seoul, South Korea",
-          "status": "In Progress",
-          "state": "live",
-          "eventOnly": true,
-          "level": "WTA 250",
-          "surface": "Hard",
-          "singlesDraw": 32,
-          "doublesDraw": 16,
-          "totalCommitment": "$283,347",
-          "sourceName": "WTA Official",
-          "sourceUrl": "https://www.wtatennis.com/tournaments/1024/seoul/2026"
-        },
-        {
-          "eventId": "wta-20260921-singapore",
-          "date": "2026-09-21T00:00:00Z",
-          "displayTime": "Sep 21–27",
-          "title": "Singapore Tennis Open",
-          "location": "Singapore",
-          "status": "In Progress",
-          "state": "live",
-          "eventOnly": true,
-          "level": "WTA 500",
-          "surface": "Hard",
-          "singlesDraw": 28,
-          "doublesDraw": 16,
-          "totalCommitment": "$1,206,446",
-          "sourceName": "WTA Official",
-          "sourceUrl": "https://www.wtatennis.com/tournaments/1152/singapore/2026"
-        },
-        {
           "eventId": "wta-20260930-beijing",
           "date": "2026-09-30T00:00:00Z",
           "displayTime": "Sep 30–Oct 11",
@@ -476,7 +442,8 @@
           "sourceName": "WTA Official",
           "sourceUrl": "https://www.wtatennis.com/tournaments/wta-finals"
         }
-      ]
+      ],
+      "note": "Rankings and future tournament schedule only. Live scores are supplied separately as player-v-player matches."
     },
     "ipl": {
       "sourceName": "IPL",
