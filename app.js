@@ -295,15 +295,6 @@ async function fetchAsianGamesOfficial(){
 }
 async function fetchScorePayload(sport,{fallbackOnly=false}={}){
   if(sport==='wta'&&!fallbackOnly){
-    try{
-      const local=await fetch('wta-live-data.json?v='+Date.now(),{cache:'no-store'});
-      if(local.ok){
-        const j=await local.json();
-        if(Array.isArray(j?.games)&&j.games.length){
-          return {special:true,games:j.games,sourceName:j.sourceName||'WTA Official Scores',sourceUrl:j.sourceUrl||'https://www.wtatennis.com/scores/'};
-        }
-      }
-    }catch{}
     try{return await fetchWtaLiveScores()}catch{}
   }
   if(sport==='asian_games'){
