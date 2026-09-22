@@ -63,8 +63,7 @@ assert.match(app,/leagueLabel:label/,'Standalone broadcasts must show their leag
 assert.match(app,/news-video-frame[\s\S]*?onerror="this\.onerror=null;this\.src=\\'about-sports\.jpg\\'"/,'News video thumbnails must fall back when YouTube has no image');
 console.log('PASS: mobile preferences, live stream eligibility, labels, stream lookup, and simplified live dialog');
 
-// A positively verified Asian Games stream must survive past two hours.
-// The two-hour boundary applies only while verification is unavailable.
+// Asian Games live status is source-driven, not governed by a fixed elapsed-time expiry.
 {
   const first=Date.parse('2026-09-22T00:00:00Z');
   const direct={...specific,embedUrl:'https://www.youtube.com/embed/abcdefghijk'};
@@ -84,21 +83,15 @@ console.log('PASS: mobile preferences, live stream eligibility, labels, stream l
   vm.runInContext(app.slice(app.indexOf('function normalizeAsianGamesExpiry('),app.indexOf('function normalizeScorePayload(')),c);
   vm.runInContext(app.slice(app.indexOf('function liveNowItemIsCurrent('),app.indexOf('function renderAllLiveGames(')),c);
   vm.runInContext('expireVisibleAsianGames()',c);
-  assert.equal(c.liveNowItems.length,1,'Verified stream must not expire after two hours');
+  assert.equal(c.liveNowItems.length,1,'Verified Asian Games stream must remain until source verification removes it');
 
-  const fallbackDeadline=clock+2*60*60*1000;
   c.liveNowItems=[{
     ...verified,verificationStatus:'fallback',
-    fallbackExpiresAt:new Date(fallbackDeadline).toISOString(),
-    streams:[{...direct,verificationStatus:'fallback',fallbackExpiresAt:new Date(fallbackDeadline).toISOString()}]
+    fallbackExpiresAt:new Date(clock-1).toISOString(),
+    streams:[{...direct,verificationStatus:'fallback',fallbackExpiresAt:new Date(clock-1).toISOString()}]
   }];
-  clock=fallbackDeadline-1;
   vm.runInContext('expireVisibleAsianGames()',c);
-  assert.equal(c.liveNowItems.length,1,'Fallback stream must remain before its fallback deadline');
-  clock++;
-  vm.runInContext('expireVisibleAsianGames()',c);
-  assert.equal(c.liveNowItems.length,0,'Fallback stream must disappear at its fallback deadline');
-  assert.equal(liveRenders,1);
+  assert.equal(c.liveNowItems.length,1,'Asian Games fallback must not use a fixed-time expiry');
   assert.match(app,/setInterval\(expireVisibleAsianGames,1000\)/);
 }
 
