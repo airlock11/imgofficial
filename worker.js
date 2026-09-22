@@ -12,6 +12,24 @@ export default {
       return new Response(null, { status: 204, headers: cors });
     }
 
+
+    if (url.pathname === "/wta-live") {
+      try {
+        const data = await scrapeWtaOfficialLive();
+        return jsonResponse(data, cors, data.live ? 10 : 45);
+      } catch (error) {
+        return jsonResponse({
+          special: true,
+          league: "WTA Tour",
+          live: false,
+          games: [],
+          error: String(error && error.message || error || "WTA scrape unavailable"),
+          sourceName: "WTA Official Scores",
+          sourceUrl: "https://www.wtatennis.com/scores/"
+        }, cors, 15);
+      }
+    }
+
     if (url.pathname === "/scoreboard") {
       const leagueKey = (url.searchParams.get("league") || "").trim().toLowerCase();
       const paths = {
@@ -1003,6 +1021,142 @@ async function mapWithConcurrency(items, concurrency, mapper) {
   );
   await Promise.all(workers);
   return output;
+}
+
+
+async function scrapeWtaOfficialLive() {
+  const officialScores = "https://www.wtatennis.com/scores/";
+  const pages = [
+    ["Singapore Tennis Open", "https://www.wtatennis.com/tournaments/1152/singapore/2026/scores"],
+    ["Korea Open", "https://www.wtatennis.com/tournaments/1024/seoul/2026/scores"],
+    ["Turk Telekom Ankara Open", "https://www.wtatennis.com/tournaments/1178/ankara-125/2026/scores"],
+    ["Delta Motors Tolentino Open", "https://www.wtatennis.com/tournaments/1133/tolentino-125/2026/scores"]
+  ];
+  const headers = {
+    "User-Agent": "Mozilla/5.0 (compatible; IMG-Sports-Website/1.0; +https://imgofficial.com)",
+    "Accept": "text/html,application/xhtml+xml,application/json;q=0.9,*/*;q=0.8",
+    "Accept-Language": "en-US,en;q=0.9"
+  };
+  const games = [];
+  const seen = new Set();
+
+  const scalar = (obj, keys) => {
+    if (!obj || typeof obj !== "object") return "";
+    const entries = Object.entries(obj);
+    for (const key of keys) {
+      const hit = entries.find(([k]) => String(k).toLowerCase() === key.toLowerCase());
+      if (!hit) continue;
+      const v = hit[1];
+      if (["string","number"].includes(typeof v) && String(v).trim()) return String(v).trim();
+    }
+    return "";
+  };
+  const pname = value => {
+    if (typeof value === "string") return value.trim();
+    if (!value || typeof value !== "object") return "";
+    return scalar(value, ["displayName","fullName","playerName","name","shortName"]);
+  };
+  const scoreText = value => {
+    if (value == null) return "—";
+    if (["string","number"].includes(typeof value)) return String(value);
+    if (Array.isArray(value)) {
+      const out = value.map(scoreText).filter(x => x && x !== "—");
+      return out.length ? out.join(" ") : "—";
+    }
+    if (typeof value === "object") {
+      const vals = [];
+      for (const key of ["set1","set2","set3","set4","set5","period1","period2","period3","period4","period5"]) {
+        if (value[key] != null && value[key] !== "") vals.push(String(value[key]));
+      }
+      const point = value.point ?? value.current;
+      if (point != null && point !== "") return (vals.length ? vals.join(" ") + " · " : "") + String(point);
+      if (vals.length) return vals.join(" ");
+      return scalar(value, ["displayValue","value","score"]) || "—";
+    }
+    return "—";
+  };
+  const walk = (value, visit) => {
+    if (Array.isArray(value)) {
+      for (const x of value) walk(x, visit);
+      return;
+    }
+    if (!value || typeof value !== "object") return;
+    visit(value);
+    for (const x of Object.values(value)) walk(x, visit);
+  };
+  const parseMatch = (d, tournament) => {
+    const status = scalar(d, ["matchState","state","status","matchStatus","statusText","matchStatusText"]);
+    if (!/live|progress|playing|medical|set|break|suspended/i.test(status)) return null;
+    let a = pname(d.playerA || d.entrantA || d.competitorA || d.participantA || d.teamA);
+    let b = pname(d.playerB || d.entrantB || d.competitorB || d.participantB || d.teamB);
+    if (!a || !b) {
+      const list = d.players || d.competitors || d.participants;
+      if (Array.isArray(list) && list.length >= 2) {
+        a = pname(list[0]);
+        b = pname(list[1]);
+      }
+    }
+    if (!a || !b || a === b) return null;
+    const round = scalar(d, ["round","roundName","drawLevelType"]);
+    const court = scalar(d, ["court","courtName"]);
+    const id = scalar(d, ["matchId","id","eventId"]) || [tournament,a,b].join("-").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+    return {
+      eventId: "wta-scrape-" + id,
+      date: new Date().toISOString(),
+      displayTime: tournament,
+      away: a,
+      home: b,
+      awayScore: scoreText(d.scoreA || d.playerAScore || d.homeScore || d.score1),
+      homeScore: scoreText(d.scoreB || d.playerBScore || d.awayScore || d.score2),
+      status: [status || "Live", round, court].filter(Boolean).join(" · "),
+      state: "live",
+      eventOnly: false,
+      title: tournament,
+      sourceName: "WTA Official Scores",
+      sourceUrl: officialScores
+    };
+  };
+
+  for (const [tournament, pageUrl] of pages) {
+    let html = "";
+    try {
+      const response = await fetch(pageUrl, { headers, cf: { cacheTtl: 10, cacheEverything: true } });
+      if (!response.ok) continue;
+      html = await response.text();
+    } catch (_) {
+      continue;
+    }
+
+    const payloads = [];
+    const scripts = html.match(/<script\b[^>]*>[\s\S]*?<\/script>/gi) || [];
+    for (const script of scripts) {
+      if (!/application\/json|__NEXT_DATA__/i.test(script)) continue;
+      const m = script.match(/<script\b[^>]*>([\s\S]*?)<\/script>/i);
+      if (!m) continue;
+      try { payloads.push(JSON.parse(m[1].trim())); } catch (_) {}
+    }
+
+    for (const payload of payloads) {
+      walk(payload, d => {
+        const game = parseMatch(d, tournament);
+        if (!game) return;
+        const key = (game.away + "|" + game.home).toLowerCase();
+        if (seen.has(key)) return;
+        seen.add(key);
+        games.push(game);
+      });
+    }
+  }
+
+  return {
+    special: true,
+    league: "WTA Tour",
+    live: games.length > 0,
+    updatedAt: new Date().toISOString(),
+    games,
+    sourceName: "WTA Official Scores",
+    sourceUrl: officialScores
+  };
 }
 
 function jsonResponse(data, cors, cacheSeconds) {
