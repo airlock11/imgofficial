@@ -2,7 +2,7 @@
   "special": true,
   "league": "WTA Tour",
   "live": true,
-  "updatedAt": "2026-09-22T13:30:16.901296+00:00",
+  "updatedAt": "2026-09-22T13:30:28.658293+00:00",
   "sourceName": "API-Tennis",
   "sourceUrl": "https://api-tennis.com/",
   "verificationSource": "API-Tennis",
@@ -1260,13 +1260,15 @@
       "home": "K. Boulter",
       "awayLogo": "https://api.api-tennis.com/logo-tennis/447_l-noskova.jpg",
       "homeLogo": "https://api.api-tennis.com/logo-tennis/2993_k-boulter.jpg",
-      "awayScore": "4 · 0",
-      "homeScore": "0 · 15",
+      "awayScore": "4 0 · 0",
+      "homeScore": "0 1 · 15",
       "awaySets": [
-        "4"
+        "4",
+        "0"
       ],
       "homeSets": [
-        "0"
+        "0",
+        "1"
       ],
       "awayPoint": "0",
       "homePoint": "15",
