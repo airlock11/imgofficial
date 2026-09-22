@@ -1505,6 +1505,10 @@ function normalizeScorePayload(sport,payload){
         awayLogo:g.awayLogo||'',
         homeScore:g.homeScore??'—',
         awayScore:g.awayScore??'—',
+        homeSets:Array.isArray(g.homeSets)?g.homeSets.map(String):[],
+        awaySets:Array.isArray(g.awaySets)?g.awaySets.map(String):[],
+        homePoint:g.homePoint??'',
+        awayPoint:g.awayPoint??'',
         title:g.title||'',
         location:g.location||'',
         level:g.level||'',
@@ -1593,29 +1597,38 @@ function parseWtaScoreParts(value){
   const raw=String(value??'—').trim();
   if(!raw||raw==='—')return {sets:[],point:'—'};
   const pieces=raw.split('·').map(x=>x.trim()).filter(Boolean);
-  const setTokens=(pieces[0]||'').split(/\s+/).filter(x=>/^\d+(?:\^\d+)?$/.test(x));
-  const point=pieces.length>1?pieces[pieces.length-1]:(setTokens.length? '—' : pieces[0]||'—');
+  const first=pieces[0]||'';
+  const setTokens=first.split(/\s+/).filter(x=>/^\d+(?:\(\d+\)|\^\d+)?$/.test(x));
+  const point=pieces.length>1?pieces[pieces.length-1]:'—';
   return {sets:setTokens.slice(0,5),point:point||'—'};
 }
+function wtaScorePartsForGame(g,side){
+  const directSets=Array.isArray(g?.[side+'Sets'])?g[side+'Sets'].map(String).filter(Boolean):[];
+  const directPoint=g?.[side+'Point'];
+  if(directSets.length||directPoint!==undefined&&directPoint!==null&&String(directPoint)!==''){
+    return {sets:directSets,point:directPoint!==undefined&&directPoint!==null&&String(directPoint)!==''?String(directPoint):'—'};
+  }
+  return parseWtaScoreParts(g?.[side+'Score']);
+}
 function wtaScoreGridMarkup(g){
-  const away=parseWtaScoreParts(g.awayScore);
-  const home=parseWtaScoreParts(g.homeScore);
-  const setCount=Math.max(away.sets.length,home.sets.length,2);
+  const away=wtaScorePartsForGame(g,'away');
+  const home=wtaScorePartsForGame(g,'home');
+  const setCount=Math.max(away.sets.length,home.sets.length,1);
   const headers=Array.from({length:setCount},(_,i)=>'<span class="wta-score-head">S'+(i+1)+'</span>').join('');
   const row=(name,score,side)=>'<div class="wta-score-player"><span class="wta-player-name">'+esc(name)+'</span>'+
     Array.from({length:setCount},(_,i)=>'<b class="wta-set-score" data-wta-set="'+side+'-'+i+'">'+esc(score.sets[i]??'—')+'</b>').join('')+
     '<b class="wta-point-score" data-wta-point="'+side+'">'+esc(score.point)+'</b></div>';
-  return '<div class="wta-scoreboard" data-wta-scoreboard>'+
-    '<div class="wta-score-header"><span>Player</span>'+headers+'<span class="wta-score-head">Pts</span></div>'+
+  return '<div class="wta-scoreboard" data-wta-scoreboard style="--wta-set-count:'+setCount+'">'+
+    '<div class="wta-score-header"><span>Player</span>'+headers+'<span class="wta-score-head wta-points-head">Game</span></div>'+
     row(g.away,away,'away')+row(g.home,home,'home')+
   '</div>';
 }
 function updateWtaScoreboard(card,g){
   const board=card?.querySelector?.('[data-wta-scoreboard]');
   if(!board)return false;
-  const away=parseWtaScoreParts(g.awayScore),home=parseWtaScoreParts(g.homeScore);
-  const max=Math.max(away.sets.length,home.sets.length,2);
-  const headerCount=board.querySelectorAll('.wta-score-head').length-1;
+  const away=wtaScorePartsForGame(g,'away'),home=wtaScorePartsForGame(g,'home');
+  const max=Math.max(away.sets.length,home.sets.length,1);
+  const headerCount=board.querySelectorAll('.wta-score-head:not(.wta-points-head)').length;
   if(headerCount!==max){
     board.outerHTML=wtaScoreGridMarkup(g);
     return true;
