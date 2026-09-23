@@ -234,31 +234,45 @@ function renderHighlights({streams,official}){
   }
 
   wrap.innerHTML=shorts.slice(0,10).map(x=>`<article class="reel-card">
-    <button class="reel-media" type="button" data-short-id="${safe(x.id)}" aria-label="Play ${safe(x.title)}">
+    <div class="reel-media" tabindex="0" data-short-id="${safe(x.id)}" aria-label="Play ${safe(x.title)}">
       <img class="reel-thumb" src="${safe(x.thumbnail)}" alt="${safe(x.title)}" loading="lazy">
       <span class="reel-shade"></span>
       <span class="reel-play" aria-hidden="true">▶</span>
       <span class="reel-source">PBA SHORTS</span>
-    </button>
+    </div>
     <div class="reel-caption">
       <strong>${safe(x.title)}</strong>
       <span>PBA Official</span>
     </div>
   </article>`).join("");
 
-  qsa("#highlights .reel-media").forEach(btn=>btn.addEventListener("click",()=>{
-    const id=btn.dataset.shortId;
-    if(!id)return;
+  const startPreview=stage=>{
+    const id=stage.dataset.shortId;
+    if(!id||stage.querySelector(".reel-frame"))return;
     const frame=document.createElement("iframe");
     frame.className="reel-frame";
-    frame.src=`https://www.youtube.com/embed/${encodeURIComponent(id)}?autoplay=1&playsinline=1&rel=0`;
-    frame.title=btn.getAttribute("aria-label")||"PBA Short";
-    frame.loading="lazy";
-    frame.allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+    frame.src=`https://www.youtube.com/embed/${encodeURIComponent(id)}?autoplay=1&mute=1&controls=0&playsinline=1&rel=0&disablekb=1&fs=0&iv_load_policy=3&loop=1&playlist=${encodeURIComponent(id)}`;
+    frame.title=stage.getAttribute("aria-label")||"PBA Short";
+    frame.loading="eager";
+    frame.allow="autoplay; encrypted-media; picture-in-picture";
     frame.referrerPolicy="strict-origin-when-cross-origin";
-    frame.allowFullscreen=true;
-    btn.replaceWith(frame);
-  }));
+    stage.appendChild(frame);
+    stage.classList.add("is-playing");
+  };
+
+  const stopPreview=stage=>{
+    const frame=stage.querySelector(".reel-frame");
+    if(frame)frame.remove();
+    stage.classList.remove("is-playing");
+  };
+
+  qsa("#highlights .reel-media").forEach(stage=>{
+    stage.addEventListener("mouseenter",()=>startPreview(stage));
+    stage.addEventListener("mouseleave",()=>stopPreview(stage));
+    stage.addEventListener("focus",()=>startPreview(stage));
+    stage.addEventListener("blur",()=>stopPreview(stage));
+    stage.addEventListener("click",()=>startPreview(stage));
+  });
 }
 
 function renderStandings({official,assets}){
