@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
     paths:
-      - "assets/uaap/uaap-hero-hq-v7.jpg"
+      - "assets/uaap/uaap-hero-hq.webp"
       - "scripts/build_uaap_hero_hq.py"
       - ".github/workflows/build-uaap-hero-hq.yml"
   workflow_dispatch:
