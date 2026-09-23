@@ -755,48 +755,66 @@ footer{
   .shell{width:min(100% - 20px,1180px)}
   .navlinks{gap:12px}
   .navlinks a:nth-child(4),.navlinks a:nth-child(5){display:none}
-  .hero{min-height:360px}
+  .hero{min-height:340px}
   .hero::before{
     background-image:
       linear-gradient(180deg,
         rgba(0,0,0,0) 0%,
-        rgba(0,0,0,0) 55%,
-        rgba(0,0,0,.10) 66%,
-        rgba(0,0,0,.32) 78%,
-        rgba(0,0,0,.62) 88%,
-        rgba(0,0,0,.86) 95%,
+        rgba(0,0,0,.02) 48%,
+        rgba(0,0,0,.14) 63%,
+        rgba(0,0,0,.38) 76%,
+        rgba(0,0,0,.68) 87%,
+        rgba(0,0,0,.90) 96%,
         #000 100%
       ),
       linear-gradient(90deg,
-        rgba(0,0,0,.56) 0%,
-        rgba(0,0,0,.28) 40%,
-        rgba(0,0,0,.10) 72%,
-        rgba(0,0,0,.08) 100%
+        rgba(0,0,0,.62) 0%,
+        rgba(0,0,0,.34) 42%,
+        rgba(0,0,0,.10) 78%,
+        rgba(0,0,0,.06) 100%
       ),
       var(--hero-image);
-    background-position:center center
+    background-position:40% center
   }
-  .hero-shell{min-height:360px;padding-top:24px;padding-bottom:24px}
-  .hero-copy{width:68%;padding-top:0}
+  .hero-shell{min-height:340px;padding-top:20px;padding-bottom:22px}
+  .hero-copy{width:100%;max-width:410px;padding-top:0}
   .league-lockup{gap:11px}
-  .league-logo{width:112px;height:60px}
+  .league-logo{width:108px;height:58px}
   .league-label{font-size:.64rem;letter-spacing:.13em}
   .hero h1{font-size:3.7rem}
-  .hero p{font-size:.9rem;max-width:100%}
+  .hero p{font-size:.88rem;line-height:1.45;max-width:94%}
+  .hero-actions{margin-top:17px}
+  .primary-btn{min-height:44px;padding:0 19px;font-size:.9rem}
   .status-shell{margin-top:10px}
   .status-strip{grid-template-columns:1fr 1fr}
   .status-card{padding:14px}
-  .featured-game{grid-template-columns:1fr auto 1fr;gap:9px;padding:27px 12px 16px;min-height:118px}
+  .featured-game{
+    grid-template-columns:minmax(0,1fr) 56px minmax(0,1fr);
+    gap:4px;
+    padding:27px 8px 15px;
+    min-height:118px
+  }
   .featured-game::before{left:12px;top:8px;font-size:.51rem}
-  .game-team{gap:8px;min-height:86px;padding:14px 4px 12px}
+  .game-team{
+    min-width:0;
+    gap:7px;
+    min-height:86px;
+    padding:14px 0 12px
+  }
   .game-team.right{justify-content:flex-end;text-align:right}
-  .team-logo{width:54px;height:54px}
-  .team-name{font-size:.82rem}
-  .team-side{font-size:.66rem}
-  .game-center{min-width:78px;padding:0 4px}
-  .game-status{font-size:.72rem;letter-spacing:.08em}
-  .team-main{gap:14px;min-height:40px}
-  .team-score{flex-basis:48px;min-width:48px;font-size:1.8rem}
+  .team-logo{width:48px;height:48px;flex:0 0 48px}
+  .team-copy{min-width:0}
+  .team-name{
+    min-width:0;
+    max-width:none;
+    font-size:.78rem;
+    overflow-wrap:anywhere
+  }
+  .team-side{font-size:.64rem}
+  .game-center{min-width:56px;padding:0}
+  .game-status{font-size:.68rem;letter-spacing:.07em}
+  .team-main{min-width:0;gap:6px;min-height:40px}
+  .team-score{flex:0 0 36px;min-width:36px;font-size:1.78rem}
   .media-row{grid-auto-columns:76%}
   .highlight-row{grid-auto-columns:58vw}
   .top-player-row{grid-auto-columns:72%}
@@ -810,13 +828,26 @@ footer{
   .media-row{grid-auto-columns:84%}
   .highlight-row{grid-auto-columns:64vw}
   .top-player-row{grid-auto-columns:84%}
-  .featured-game{grid-template-columns:1fr auto 1fr}
-  .team-logo{width:48px;height:48px}
-  .team-name{font-size:.76rem;max-width:100px}
-  .game-center{min-width:64px}
-  .game-status{font-size:.68rem}
-  .team-main{gap:10px}
-  .team-score{flex-basis:44px;min-width:44px;font-size:1.65rem}
+  .hero{min-height:330px}
+  .hero::before{background-position:37% center}
+  .hero-shell{min-height:330px;padding-top:18px;padding-bottom:20px}
+  .hero-copy{width:100%;max-width:none}
+  .league-logo{width:102px;height:54px}
+  .hero p{font-size:.84rem;line-height:1.43;max-width:96%}
+  .primary-btn{min-height:42px;padding:0 17px;font-size:.86rem}
+  .featured-game{
+    grid-template-columns:minmax(0,1fr) 50px minmax(0,1fr);
+    gap:3px;
+    padding-left:7px;
+    padding-right:7px
+  }
+  .game-team{gap:5px}
+  .team-logo{width:42px;height:42px;flex-basis:42px}
+  .team-name{font-size:.72rem;line-height:1.12}
+  .game-center{min-width:50px}
+  .game-status{font-size:.64rem;letter-spacing:.055em}
+  .team-main{gap:4px}
+  .team-score{flex:0 0 32px;min-width:32px;font-size:1.62rem}
   .standings-table th,.standings-table td{padding:9px 7px}
   .standing-team{gap:9px;min-height:46px;font-size:.78rem}
   .standing-team img{width:42px;height:42px;flex-basis:42px}
