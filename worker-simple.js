@@ -23,6 +23,7 @@ function imgRequestId() {
 }
 
 function imgCacheTtl(pathname) {
+  if (pathname === "/live-streams") return 20;
   if (pathname === "/scoreboard") return 5;
   if (pathname === "/regional-scores") return 12;
   if (pathname.indexOf("/boxing/") === 0) return 120;
@@ -163,6 +164,43 @@ async function handleRequest(request) {
 
   if (url.pathname === "/") {
     return new Response("IMG sports API proxy", { status: 200, headers: cors });
+  }
+
+  if (url.pathname === "/live-streams") {
+    var upstreamUrl = "https://raw.githubusercontent.com/airlock11/imgofficial/live-data/youtube-live.json";
+    try {
+      var controller = new AbortController();
+      var timeout = setTimeout(function(){ controller.abort(); }, 7000);
+      var upstream = await fetch(upstreamUrl, {
+        cache: "no-store",
+        signal: controller.signal,
+        headers: { "User-Agent": "IMG-Live-Proxy/1.0" }
+      });
+      clearTimeout(timeout);
+      if (!upstream.ok) throw new Error("GitHub live feed " + upstream.status);
+      var body = await upstream.text();
+      JSON.parse(body);
+      return new Response(body, {
+        status: 200,
+        headers: Object.assign({}, cors, {
+          "Content-Type": "application/json; charset=utf-8",
+          "Cache-Control": "public, max-age=0, s-maxage=20, stale-while-revalidate=60, stale-if-error=300",
+          "X-IMG-Live-Cache": "MISS"
+        })
+      });
+    } catch (error) {
+      return new Response(JSON.stringify({
+        ok: false,
+        error: "Live stream feed temporarily unavailable",
+        detail: String(error && error.message || error || "unknown")
+      }), {
+        status: 503,
+        headers: Object.assign({}, cors, {
+          "Content-Type": "application/json; charset=utf-8",
+          "Cache-Control": "no-store"
+        })
+      });
+    }
   }
 
   if (url.pathname === "/scoreboard") {
