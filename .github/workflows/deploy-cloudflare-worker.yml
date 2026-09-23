@@ -18,6 +18,7 @@ jobs:
     env:
       CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
       CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
     steps:
       - uses: actions/checkout@v4
 
@@ -32,6 +33,16 @@ jobs:
             echo "::error::Add CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID to GitHub Actions secrets."
             exit 1
           fi
+
+      - name: Sync YouTube API secret to Cloudflare
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -z "$YOUTUBE_API_KEY" ]; then
+            echo "::error::YOUTUBE_API_KEY is missing from GitHub Actions secrets."
+            exit 1
+          fi
+          printf '%s' "$YOUTUBE_API_KEY" | npx --yes wrangler@4 secret put YOUTUBE_API_KEY
 
       - name: Deploy IMG API Worker
         run: npx --yes wrangler@4 deploy
