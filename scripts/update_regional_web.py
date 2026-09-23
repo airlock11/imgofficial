@@ -6,6 +6,7 @@ import re
 import urllib.request
 import urllib.parse
 from datetime import datetime, timezone, timedelta
+from email.utils import parsedate_to_datetime
 from pathlib import Path
 from bs4 import BeautifulSoup
 from PIL import Image, ImageOps
@@ -13,6 +14,7 @@ import pytesseract
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "regional-web.json"
+PBA_OFFICIAL_OUT = ROOT / "pba-official.json"
 UA = "Mozilla/5.0 (compatible; IMG-Sports-WebUpdater/1.0; +https://imgofficial.com)"
 PHT = timezone(timedelta(hours=8))
 
@@ -119,6 +121,233 @@ def parse_pba():
     }]
     games = dedupe_games(games + verified_recent)
     return {"league":"PBA","season":"2026 Governors' Cup","coverage":"Schedule and final scores","note":"Automatically refreshed from public web schedule/results.","sources":[{"name":"SkedCheck","url":URLS["pba"]},{"name":"PBA Official","url":"https://www.pba.ph/"}],"games":games[:40]}
+
+
+PBA_PHOTO_FEEDS = [
+    {"name":"Philstar Sports","url":"https://www.philstar.com/rss/sports"},
+    {"name":"Inquirer Sports","url":"https://sports.inquirer.net/feed"},
+    {"name":"Tiebreaker Times","url":"https://tiebreakertimes.com.ph/feed"},
+    {"name":"GMA News Sports","url":"https://data.gmanetwork.com/gno/rss/sports/feed.xml"},
+]
+
+PBA_TEAM_ALIASES = {
+    "Barangay Ginebra": ["barangay ginebra", "ginebra", "gin kings"],
+    "Barangay Ginebra San Miguel": ["barangay ginebra", "ginebra", "gin kings"],
+    "Meralco Bolts": ["meralco", "bolts"],
+    "NLEX Road Warriors": ["nlex", "road warriors"],
+    "Converge FiberXers": ["converge", "fiberxers", "fiber xers"],
+    "Phoenix": ["phoenix", "fuel masters"],
+    "Magnolia Chicken Timplados Hotshots": ["magnolia", "hotshots"],
+    "San Miguel Beermen": ["san miguel", "beermen"],
+    "TNT Tropang 5G": ["tnt", "tropang 5g", "tropang giga"],
+    "Terrafirma Dyip": ["terrafirma", "dyip"],
+    "Rain or Shine Elasto Painters": ["rain or shine", "elasto painters", "painters"],
+    "Blackwater Bossing": ["blackwater", "bossing"],
+    "Macau Giant Pandas": ["macau giant pandas", "giant pandas"],
+    "Titan Ultra Giant Risers": ["titan ultra", "giant risers", "titan"],
+}
+
+def _photo_text(value):
+    return re.sub(r"[^a-z0-9]+", " ", str(value or "").lower()).strip()
+
+def _team_aliases(team):
+    aliases = PBA_TEAM_ALIASES.get(str(team or "").strip())
+    if aliases:
+        return [_photo_text(x) for x in aliases]
+    value = _photo_text(team)
+    return [value] if value else []
+
+def _team_in_text(team, text):
+    hay = " " + _photo_text(text) + " "
+    return any((" " + alias + " ") in hay for alias in _team_aliases(team) if alias)
+
+def _rss_image(item):
+    for tag_name in ("media:content", "media:thumbnail", "enclosure"):
+        tag = item.find(tag_name)
+        if tag:
+            value = tag.get("url") or tag.get("href")
+            if value and str(value).startswith("http"):
+                return str(value)
+    desc = item.find("description")
+    if desc:
+        soup = BeautifulSoup(desc.get_text(" ", strip=False), "html.parser")
+        img = soup.find("img")
+        if img:
+            value = img.get("src") or img.get("data-src")
+            if value and str(value).startswith("http"):
+                return str(value)
+    return ""
+
+def _rss_date(item):
+    for name in ("pubDate", "published", "updated"):
+        tag = item.find(name)
+        if not tag:
+            continue
+        value = tag.get_text(" ", strip=True)
+        try:
+            dt = parsedate_to_datetime(value)
+            if dt.tzinfo is None:
+                dt = dt.replace(tzinfo=timezone.utc)
+            return dt
+        except Exception:
+            try:
+                return datetime.fromisoformat(value.replace("Z", "+00:00"))
+            except Exception:
+                pass
+    return None
+
+def pba_photo_feed_items():
+    rows = []
+    for cfg in PBA_PHOTO_FEEDS:
+        try:
+            xml = fetch(cfg["url"])
+            soup = BeautifulSoup(xml, "xml")
+            for item in soup.find_all("item")[:40]:
+                title = item.find("title")
+                link = item.find("link")
+                desc = item.find("description")
+                title_text = title.get_text(" ", strip=True) if title else ""
+                link_text = link.get_text(" ", strip=True) if link else ""
+                desc_text = BeautifulSoup(desc.get_text(" ", strip=False), "html.parser").get_text(" ", strip=True) if desc else ""
+                if not title_text or not link_text:
+                    continue
+                rows.append({
+                    "sourceName": cfg["name"],
+                    "title": title_text,
+                    "url": link_text,
+                    "description": desc_text,
+                    "published": _rss_date(item),
+                    "feedImage": _rss_image(item),
+                })
+        except Exception as ex:
+            print("PBA photo feed", cfg["name"], type(ex).__name__, str(ex)[:120])
+    return rows
+
+def article_game_photo(url):
+    try:
+        page = fetch(url)
+        soup = BeautifulSoup(page, "html.parser")
+        image = ""
+        for attrs in (
+            {"property":"og:image"},
+            {"name":"twitter:image"},
+            {"property":"twitter:image"},
+        ):
+            tag = soup.find("meta", attrs=attrs)
+            if tag and tag.get("content"):
+                image = str(tag.get("content")).strip()
+                if image.startswith("http"):
+                    break
+        page_text = re.sub(r"\s+", " ", soup.get_text(" ", strip=True))
+        return image, page_text
+    except Exception:
+        return "", ""
+
+def discover_pba_game_photo(game, feed_items):
+    try:
+        game_dt = datetime.fromisoformat(str(game.get("date") or "").replace("Z","+00:00"))
+    except Exception:
+        return None
+    if game_dt.tzinfo is None:
+        game_dt = game_dt.replace(tzinfo=PHT)
+
+    away = game.get("away") or ""
+    home = game.get("home") or ""
+    candidates = []
+    for item in feed_items:
+        published = item.get("published")
+        if published:
+            try:
+                delta_days = abs((published.astimezone(PHT).date() - game_dt.astimezone(PHT).date()).days)
+            except Exception:
+                delta_days = 99
+            if delta_days > 2:
+                continue
+        combined = (item.get("title") or "") + " " + (item.get("description") or "")
+        away_hit = _team_in_text(away, combined)
+        home_hit = _team_in_text(home, combined)
+        if not (away_hit and home_hit):
+            continue
+        title = item.get("title") or ""
+        score = 100
+        if _team_in_text(away, title) and _team_in_text(home, title):
+            score += 25
+        if "pba" in _photo_text(combined):
+            score += 5
+        candidates.append((score, item))
+
+    for _, item in sorted(candidates, key=lambda row: row[0], reverse=True):
+        image, page_text = article_game_photo(item["url"])
+        # Final verification: the article itself must mention both teams/aliases.
+        if page_text and not (_team_in_text(away, page_text) and _team_in_text(home, page_text)):
+            continue
+        image = image or item.get("feedImage") or ""
+        if not image.startswith("http"):
+            continue
+        return {
+            "eventId": game.get("eventId") or game.get("id") or "",
+            "date": str(game.get("date") or "")[:10],
+            "away": away,
+            "home": home,
+            "image": image,
+            "credit": item["sourceName"],
+            "sourceName": item["sourceName"],
+            "sourceUrl": item["url"],
+        }
+    return None
+
+def update_pba_previous_game_photos(pba_league):
+    try:
+        official = json.loads(PBA_OFFICIAL_OUT.read_text("utf-8"))
+    except Exception:
+        official = {}
+
+    games = list((pba_league or {}).get("games") or [])
+    finals = sorted(
+        [g for g in games if g.get("state") == "final"],
+        key=lambda g: g.get("date", ""),
+        reverse=True,
+    )[:3]
+    existing = list(official.get("previousGamePhotos") or [])
+    feed_items = None
+    updated = []
+
+    def prior_for(game):
+        event_id = str(game.get("eventId") or game.get("id") or "")
+        day = str(game.get("date") or "")[:10]
+        for item in existing:
+            if event_id and str(item.get("eventId") or "") == event_id:
+                return item
+            if (
+                str(item.get("date") or "") == day
+                and _photo_text(item.get("away")) == _photo_text(game.get("away"))
+                and _photo_text(item.get("home")) == _photo_text(game.get("home"))
+            ):
+                return item
+        return None
+
+    for game in finals:
+        prior = prior_for(game)
+        if prior and str(prior.get("image") or "").startswith("http"):
+            updated.append(prior)
+            continue
+        if feed_items is None:
+            feed_items = pba_photo_feed_items()
+        found = discover_pba_game_photo(game, feed_items)
+        if found:
+            updated.append(found)
+
+    old_compact = json.dumps(existing, sort_keys=True, ensure_ascii=False)
+    new_compact = json.dumps(updated, sort_keys=True, ensure_ascii=False)
+    if old_compact != new_compact:
+        official["previousGamePhotos"] = updated
+        official["previousGamePhotosUpdatedAt"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
+        PBA_OFFICIAL_OUT.write_text(json.dumps(official, ensure_ascii=False, indent=2) + "\n", "utf-8")
+        print(json.dumps({
+            "pba_previous_game_photos": len(updated),
+            "games": [x.get("eventId") for x in updated],
+        }, ensure_ascii=False))
+
 
 def parse_uaap():
     xs = lines(URLS["uaap"])
@@ -1141,6 +1370,10 @@ def main():
                 data["leagues"][key] = fresh
         except Exception as e:
             errors[key] = str(e)
+    try:
+        update_pba_previous_game_photos(data["leagues"].get("pba", {}))
+    except Exception as e:
+        errors["pba_photos"] = str(e)
     data["updated_at"] = datetime.now(PHT).isoformat(timespec="seconds")
     data["refresh_minutes"] = 30
     data["errors"] = errors
