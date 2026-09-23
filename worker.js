@@ -1,3 +1,197 @@
+const IMG_LIVE_UPSTREAM = "https://raw.githubusercontent.com/airlock11/imgofficial/live-data/youtube-live.json";
+const IMG_LIVE_CACHE_URL = "https://img-api-proxy.magsipocarnie.workers.dev/live-streams";
+const ONE_SPORTS_CHANNEL_ID = "UCXDG9ue-emCN8Ad3h7lERqQ";
+const ONE_SPORTS_UPLOADS_PLAYLIST = "UU" + ONE_SPORTS_CHANNEL_ID.slice(2);
+const IMG_LIVE_CACHE_SECONDS = 60;
+
+function asianGamesLiveTitleAllowed(value) {
+  const upper = String(value || "").toUpperCase();
+  const tagged =
+    upper.includes("ASIAN GAMES") ||
+    upper.includes("AICHI-NAGOYA") ||
+    upper.includes("AICHI NAGOYA") ||
+    upper.includes("AICHI 2026");
+  const blocked = [
+    "HIGHLIGHTS",
+    "REPLAY",
+    "FULL MATCH",
+    "FULL GAME",
+    "OPENING CEREMONY",
+    "CLOSING CEREMONY",
+    "DRAW CEREMONY",
+    "PRESS CONFERENCE",
+    "INTERVIEW",
+    "PODCAST"
+  ];
+  return tagged && !blocked.some((token) => upper.includes(token));
+}
+
+async function fetchOneSportsAsianGamesLive(env) {
+  if (!env.YOUTUBE_API_KEY) {
+    return { ok: false, reason: "YOUTUBE_API_KEY is not configured", entries: [] };
+  }
+
+  try {
+    const playlistUrl = new URL("https://www.googleapis.com/youtube/v3/playlistItems");
+    playlistUrl.searchParams.set("part", "snippet,contentDetails");
+    playlistUrl.searchParams.set("playlistId", ONE_SPORTS_UPLOADS_PLAYLIST);
+    playlistUrl.searchParams.set("maxResults", "50");
+    playlistUrl.searchParams.set("key", env.YOUTUBE_API_KEY);
+
+    const playlistResponse = await fetch(playlistUrl.toString(), { cache: "no-store" });
+    if (!playlistResponse.ok) {
+      return { ok: false, reason: "YouTube playlistItems " + playlistResponse.status, entries: [] };
+    }
+
+    const playlistData = await playlistResponse.json();
+    const videoIds = [...new Set(
+      (playlistData.items || [])
+        .map((item) => item?.contentDetails?.videoId || item?.snippet?.resourceId?.videoId)
+        .filter(Boolean)
+    )].slice(0, 50);
+
+    if (!videoIds.length) return { ok: true, entries: [] };
+
+    const videosUrl = new URL("https://www.googleapis.com/youtube/v3/videos");
+    videosUrl.searchParams.set("part", "snippet,liveStreamingDetails,status");
+    videosUrl.searchParams.set("id", videoIds.join(","));
+    videosUrl.searchParams.set("key", env.YOUTUBE_API_KEY);
+
+    const videosResponse = await fetch(videosUrl.toString(), { cache: "no-store" });
+    if (!videosResponse.ok) {
+      return { ok: false, reason: "YouTube videos " + videosResponse.status, entries: [] };
+    }
+
+    const videosData = await videosResponse.json();
+    const checkedAt = new Date().toISOString();
+    const entries = (videosData.items || [])
+      .filter((item) => item?.id && item?.snippet?.channelId === ONE_SPORTS_CHANNEL_ID)
+      .filter((item) => {
+        const live = item?.liveStreamingDetails || {};
+        const broadcast = String(item?.snippet?.liveBroadcastContent || "").toLowerCase();
+        return broadcast === "live" || Boolean(live.actualStartTime && !live.actualEndTime);
+      })
+      .filter((item) => asianGamesLiveTitleAllowed(item?.snippet?.title))
+      .filter((item) => item?.status?.embeddable !== false)
+      .map((item) => {
+        const videoId = item.id;
+        const title = item?.snippet?.title || "2026 Asian Games Live";
+        const firstLiveAt = item?.liveStreamingDetails?.actualStartTime || checkedAt;
+        const stream = {
+          videoId,
+          watchUrl: "https://www.youtube.com/watch?v=" + videoId,
+          provider: "YouTube",
+          channel: "One Sports",
+          title,
+          sourceChannelId: ONE_SPORTS_CHANNEL_ID,
+          verificationStatus: "verified",
+          lastVerifiedLiveAt: checkedAt,
+          embedUrl: "https://www.youtube.com/embed/" + videoId,
+          deliveryLeagueKey: "asian_games",
+          deliveryPlacement: "above_statistics",
+          firstLiveAt
+        };
+        return {
+          eventId: "ag26-youtube-" + videoId,
+          sport: "Asian Games",
+          leagueKey: "asian_games",
+          league: "2026 ASIAN GAMES",
+          teams: [],
+          title,
+          verificationStatus: "verified",
+          lastVerifiedLiveAt: checkedAt,
+          stream,
+          delivery: {
+            leagueKey: "asian_games",
+            url: "/scores/?league=asian_games",
+            placement: "above_statistics"
+          },
+          firstLiveAt
+        };
+      });
+
+    return { ok: true, checkedAt, entries };
+  } catch (error) {
+    return {
+      ok: false,
+      reason: String(error && error.message || error || "YouTube verification failed"),
+      entries: []
+    };
+  }
+}
+
+async function buildFreshLivePayload(env) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 7000);
+  try {
+    const upstream = await fetch(IMG_LIVE_UPSTREAM, {
+      cache: "no-store",
+      signal: controller.signal,
+      headers: { "User-Agent": "IMG-Live-Proxy/2.0" }
+    });
+    clearTimeout(timeout);
+    if (!upstream.ok) throw new Error("GitHub live feed " + upstream.status);
+
+    const payload = await upstream.json();
+    const streams = Array.isArray(payload?.streams) ? payload.streams : [];
+    const dynamic = await fetchOneSportsAsianGamesLive(env);
+
+    if (dynamic.ok) {
+      const checkedAt = dynamic.checkedAt || new Date().toISOString();
+      const nonAsian = streams.filter((item) => item?.leagueKey !== "asian_games");
+      payload.streams = [...dynamic.entries, ...nonAsian];
+      payload.updatedAt = checkedAt;
+      payload.freshForMinutes = 30;
+      payload.liveVerification = {
+        ...(payload.liveVerification || {}),
+        checkedAt,
+        method: "Cloudflare exact-channel YouTube verification",
+        verifiedLiveCount: dynamic.entries.length,
+        graceCount: 0
+      };
+      payload.cloudflareLiveVerification = {
+        checkedAt,
+        source: "One Sports",
+        sourceChannelId: ONE_SPORTS_CHANNEL_ID,
+        asianGamesVerifiedLiveCount: dynamic.entries.length,
+        status: "verified"
+      };
+    } else {
+      payload.cloudflareLiveVerification = {
+        checkedAt: new Date().toISOString(),
+        source: "One Sports",
+        sourceChannelId: ONE_SPORTS_CHANNEL_ID,
+        status: "upstream-fallback",
+        reason: dynamic.reason || "YouTube verification unavailable"
+      };
+    }
+
+    return payload;
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
+async function refreshLiveStreamsCache(env) {
+  const cache = caches.default;
+  const cacheKey = new Request(IMG_LIVE_CACHE_URL, { method: "GET" });
+  const payload = await buildFreshLivePayload(env);
+  const body = JSON.stringify(payload);
+  const response = new Response(body, {
+    status: 200,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type",
+      "Content-Type": "application/json; charset=utf-8",
+      "Cache-Control": "public, max-age=0, s-maxage=" + IMG_LIVE_CACHE_SECONDS + ", stale-while-revalidate=120, stale-if-error=300",
+      "X-IMG-Live-Cache": "REFRESH"
+    }
+  });
+  await cache.put(cacheKey, response.clone());
+  return response;
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
@@ -17,9 +211,8 @@ export default {
     }
 
     if (url.pathname === "/live-streams") {
-      const upstreamUrl = "https://raw.githubusercontent.com/airlock11/imgofficial/live-data/youtube-live.json";
       const cache = caches.default;
-      const cacheKey = new Request(url.origin + "/live-streams", { method: "GET" });
+      const cacheKey = new Request(IMG_LIVE_CACHE_URL, { method: "GET" });
       try {
         const cached = await cache.match(cacheKey);
         if (cached) {
@@ -28,30 +221,10 @@ export default {
           return new Response(cached.body, { status: cached.status, headers });
         }
 
-        const controller = new AbortController();
-        const timeout = setTimeout(() => controller.abort(), 7000);
-        const upstream = await fetch(upstreamUrl, {
-          cache: "no-store",
-          signal: controller.signal,
-          headers: { "User-Agent": "IMG-Live-Proxy/1.0" }
-        });
-        clearTimeout(timeout);
-        if (!upstream.ok) throw new Error("GitHub live feed " + upstream.status);
-
-        const body = await upstream.text();
-        JSON.parse(body);
-
-        const response = new Response(body, {
-          status: 200,
-          headers: {
-            ...cors,
-            "Content-Type": "application/json; charset=utf-8",
-            "Cache-Control": "public, max-age=0, s-maxage=20, stale-while-revalidate=60, stale-if-error=300",
-            "X-IMG-Live-Cache": "MISS"
-          }
-        });
-        try { await cache.put(cacheKey, response.clone()); } catch (_) {}
-        return response;
+        const response = await refreshLiveStreamsCache(env);
+        const headers = new Headers(response.headers);
+        headers.set("X-IMG-Live-Cache", "MISS");
+        return new Response(response.body, { status: response.status, headers });
       } catch (error) {
         try {
           const stale = await cache.match(cacheKey);
@@ -519,6 +692,13 @@ export default {
       status: 200,
       headers: cors,
     });
+  },
+  async scheduled(controller, env, ctx) {
+    ctx.waitUntil(
+      refreshLiveStreamsCache(env).catch((error) => {
+        console.error("IMG livestream scheduled verification failed", error);
+      })
+    );
   },
 };
 
