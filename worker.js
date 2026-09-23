@@ -16,6 +16,60 @@ export default {
       return jsonResponse({ ok: false, error: "Method not allowed" }, cors, 0, 405);
     }
 
+    if (url.pathname === "/live-streams") {
+      const upstreamUrl = "https://raw.githubusercontent.com/airlock11/imgofficial/live-data/youtube-live.json";
+      const cache = caches.default;
+      const cacheKey = new Request(request.url, { method: "GET" });
+      try {
+        const cached = await cache.match(cacheKey);
+        if (cached) {
+          const headers = new Headers(cached.headers);
+          headers.set("X-IMG-Live-Cache", "HIT");
+          return new Response(cached.body, { status: cached.status, headers });
+        }
+
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 7000);
+        const upstream = await fetch(upstreamUrl, {
+          cache: "no-store",
+          signal: controller.signal,
+          headers: { "User-Agent": "IMG-Live-Proxy/1.0" }
+        });
+        clearTimeout(timeout);
+        if (!upstream.ok) throw new Error("GitHub live feed " + upstream.status);
+
+        const body = await upstream.text();
+        JSON.parse(body);
+
+        const response = new Response(body, {
+          status: 200,
+          headers: {
+            ...cors,
+            "Content-Type": "application/json; charset=utf-8",
+            "Cache-Control": "public, max-age=0, s-maxage=20, stale-while-revalidate=60, stale-if-error=300",
+            "X-IMG-Live-Cache": "MISS"
+          }
+        });
+        try { await cache.put(cacheKey, response.clone()); } catch (_) {}
+        return response;
+      } catch (error) {
+        try {
+          const stale = await cache.match(cacheKey);
+          if (stale) {
+            const headers = new Headers(stale.headers);
+            headers.set("X-IMG-Live-Cache", "STALE");
+            headers.set("Warning", '110 - "Response is stale"');
+            return new Response(stale.body, { status: stale.status, headers });
+          }
+        } catch (_) {}
+        return jsonResponse({
+          ok: false,
+          error: "Live stream feed temporarily unavailable",
+          detail: String(error && error.message || error || "unknown")
+        }, cors, 0, 503);
+      }
+    }
+
     if (url.pathname === "/health") {
       return jsonResponse({
         ok: true,
