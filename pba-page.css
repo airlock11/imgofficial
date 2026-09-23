@@ -752,8 +752,12 @@ footer{
   height:100%;
   border:0;
   border-radius:18px;
-  background:#000
+  background:#000;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .12s ease
 }
+.reel-media.is-playing .reel-frame{opacity:1}
 .reel-media.is-playing .reel-thumb,
 .reel-media.is-playing .reel-shade,
 .reel-media.is-playing .reel-source{

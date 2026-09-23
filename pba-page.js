@@ -233,8 +233,11 @@ function renderHighlights({streams,official}){
     return;
   }
 
-  wrap.innerHTML=shorts.slice(0,10).map(x=>`<article class="reel-card">
-    <div class="reel-media" tabindex="0" data-short-id="${safe(x.id)}" aria-label="Play ${safe(x.title)}">
+  const items=shorts.slice(0,10);
+  const BATCH_SIZE=3;
+
+  wrap.innerHTML=items.map((x,index)=>`<article class="reel-card">
+    <div class="reel-media" tabindex="0" data-short-id="${safe(x.id)}" data-index="${index}" aria-label="Play ${safe(x.title)}">
       <img class="reel-thumb" src="${safe(x.thumbnail)}" alt="${safe(x.title)}" loading="lazy">
       <span class="reel-shade"></span>
       <span class="reel-source">PBA SHORTS</span>
@@ -245,32 +248,122 @@ function renderHighlights({streams,official}){
     </div>
   </article>`).join("");
 
-  const startPreview=stage=>{
+  const stages=qsa("#highlights .reel-media");
+  let activeBatchStart=-1;
+  let scrollFrame=0;
+
+  const youtubeSrc=(id,autoplay=0)=>{
+    const origin=encodeURIComponent(location.origin);
+    return `https://www.youtube.com/embed/${encodeURIComponent(id)}?autoplay=${autoplay}&mute=1&controls=0&playsinline=1&rel=0&disablekb=1&fs=0&iv_load_policy=3&loop=1&playlist=${encodeURIComponent(id)}&enablejsapi=1&origin=${origin}`;
+  };
+
+  const sendCommand=(frame,func)=>{
+    try{
+      frame.contentWindow?.postMessage(JSON.stringify({
+        event:"command",
+        func,
+        args:[]
+      }),"https://www.youtube.com");
+    }catch{}
+  };
+
+  const ensurePreloaded=stage=>{
+    let frame=stage.querySelector(".reel-frame");
+    if(frame)return frame;
     const id=stage.dataset.shortId;
-    if(!id||stage.querySelector(".reel-frame"))return;
-    const frame=document.createElement("iframe");
+    if(!id)return null;
+    frame=document.createElement("iframe");
     frame.className="reel-frame";
-    frame.src=`https://www.youtube.com/embed/${encodeURIComponent(id)}?autoplay=1&mute=1&controls=0&playsinline=1&rel=0&disablekb=1&fs=0&iv_load_policy=3&loop=1&playlist=${encodeURIComponent(id)}`;
+    frame.src=youtubeSrc(id,0);
     frame.title=stage.getAttribute("aria-label")||"PBA Short";
     frame.loading="eager";
     frame.allow="autoplay; encrypted-media; picture-in-picture";
     frame.referrerPolicy="strict-origin-when-cross-origin";
+    frame.dataset.ready="0";
+    frame.addEventListener("load",()=>{
+      frame.dataset.ready="1";
+      sendCommand(frame,"mute");
+      if(stage.classList.contains("is-playing"))sendCommand(frame,"playVideo");
+    });
     stage.appendChild(frame);
-    stage.classList.add("is-playing");
+    stage.classList.add("is-preloaded");
+    return frame;
   };
 
   const stopPreview=stage=>{
     const frame=stage.querySelector(".reel-frame");
-    if(frame)frame.remove();
+    if(frame)sendCommand(frame,"pauseVideo");
     stage.classList.remove("is-playing");
   };
 
-  qsa("#highlights .reel-media").forEach(stage=>{
+  const activateBatch=start=>{
+    const maxStart=Math.max(0,Math.floor((stages.length-1)/BATCH_SIZE)*BATCH_SIZE);
+    const batchStart=Math.min(Math.max(0,start),maxStart);
+    if(batchStart===activeBatchStart)return;
+    activeBatchStart=batchStart;
+    stages.forEach((stage,index)=>{
+      const keep=index>=batchStart&&index<batchStart+BATCH_SIZE;
+      if(keep){
+        ensurePreloaded(stage);
+      }else{
+        stopPreview(stage);
+        const frame=stage.querySelector(".reel-frame");
+        if(frame)frame.remove();
+        stage.classList.remove("is-preloaded");
+      }
+    });
+  };
+
+  const startPreview=stage=>{
+    const index=Number(stage.dataset.index||0);
+    const batchStart=Math.floor(index/BATCH_SIZE)*BATCH_SIZE;
+    if(batchStart!==activeBatchStart)activateBatch(batchStart);
+    const frame=ensurePreloaded(stage);
+    if(!frame)return;
+    stage.classList.add("is-playing");
+    if(frame.dataset.ready==="1"){
+      sendCommand(frame,"mute");
+      sendCommand(frame,"playVideo");
+    }
+  };
+
+  const batchFromScroll=()=>{
+    if(!stages.length)return 0;
+    const card=stages[0].closest(".reel-card");
+    const cardWidth=card?.getBoundingClientRect().width||210;
+    const styles=getComputedStyle(wrap);
+    const gap=parseFloat(styles.columnGap||styles.gap)||14;
+    const span=Math.max(1,cardWidth+gap);
+    const visibleIndex=Math.max(0,Math.min(stages.length-1,Math.floor((wrap.scrollLeft+span*.75)/span)));
+    return Math.floor(visibleIndex/BATCH_SIZE)*BATCH_SIZE;
+  };
+
+  stages.forEach(stage=>{
     stage.addEventListener("mouseenter",()=>startPreview(stage));
     stage.addEventListener("mouseleave",()=>stopPreview(stage));
     stage.addEventListener("focus",()=>startPreview(stage));
     stage.addEventListener("blur",()=>stopPreview(stage));
     stage.addEventListener("click",()=>startPreview(stage));
+  });
+
+  wrap.addEventListener("scroll",()=>{
+    if(scrollFrame)return;
+    scrollFrame=requestAnimationFrame(()=>{
+      scrollFrame=0;
+      activateBatch(batchFromScroll());
+    });
+  },{passive:true});
+
+  const preloadObserver=new IntersectionObserver(entries=>{
+    if(entries.some(entry=>entry.isIntersecting)){
+      activateBatch(0);
+      preloadObserver.disconnect();
+    }
+  },{rootMargin:"240px 0px"});
+  preloadObserver.observe(wrap);
+
+  document.addEventListener("visibilitychange",()=>{
+    if(document.visibilityState!=="visible")stages.forEach(stopPreview);
   });
 }
 
