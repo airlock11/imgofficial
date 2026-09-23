@@ -18,8 +18,10 @@ class RefParser(html.parser.HTMLParser):
         self._buf=[]
         self._script_src=False
         self._script_type=""
+        self.ids=[]
     def handle_starttag(self,tag,attrs):
         d=dict(attrs)
+        if d.get("id"): self.ids.append(d.get("id"))
         for key in ("src","href"):
             val=d.get(key)
             if val:self.refs.append((tag,key,val))
@@ -89,6 +91,31 @@ for p in files:
         ext=pathlib.Path(urlsplit(ref).path).suffix.lower()
         if ext in ASSET_EXTS and not target.exists():
             errors.append(f"{p.relative_to(ROOT)}: missing local {key} asset {ref}")
+
+# 1b. Frontend page contracts: duplicate IDs and league-page asset consistency.
+retired_league_assets=("league-enrich.js","league-live.js","league-page.css")
+required_league_assets=("league-modern.css","league-modern.js","team-player-hub.js","league-photo-gallery.js")
+for p in files:
+    if p.suffix.lower()!=".html": continue
+    text=p.read_text("utf-8",errors="replace")
+    parser=RefParser()
+    try: parser.feed(text)
+    except Exception: continue
+    seen=set()
+    for value in parser.ids:
+        if value in seen:
+            errors.append(f"{p.relative_to(ROOT)}: duplicate HTML id {value!r}")
+        seen.add(value)
+    rel=str(p.relative_to(ROOT)).replace("\\","/")
+    if rel.startswith("leagues/") and rel.endswith("/index.html"):
+        for asset in retired_league_assets:
+            if asset in text:
+                errors.append(f"{rel}: retired frontend asset still referenced: {asset}")
+        for asset in required_league_assets:
+            if asset not in text:
+                errors.append(f"{rel}: required league frontend asset missing: {asset}")
+        if 'class="league-data"' in text:
+            errors.append(f"{rel}: retired league-data markup still present")
 
 # 2. CSS url(...) references.
 css_url=re.compile(r"url\((['\"]?)([^)'\"]+)\1\)",re.I)
