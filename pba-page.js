@@ -29,7 +29,7 @@ async function load(){
   const streams=(yt.streams||[]).filter(x=>x.leagueKey==="pba"&&String(x.verificationStatus||x.stream?.verificationStatus||"")==="verified");
 
   const hero=qs("#pba-hero");
-  if(hero&&official.heroImage)hero.style.setProperty("--hero-image",`url("${official.heroImage}")`);
+  if(hero)hero.style.setProperty("--hero-image",`url("/assets/pba/pba-background-v3.jpg?v=20260923-1")`);
 
   const logo=qs("#pba-league-logo");
   if(logo&&assets.leagueLogo)logo.src=assets.leagueLogo;
