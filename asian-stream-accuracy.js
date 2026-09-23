@@ -1,5 +1,5 @@
 (function(){
-  const MAX_VERIFIED_AGE_MS=20*60*1000;
+  const MAX_VERIFIED_AGE_MS=30*60*1000;
   const blocked=["HIGHLIGHTS","REPLAY","FULL MATCH","FULL GAME","OPENING CEREMONY","CLOSING CEREMONY","DRAW CEREMONY","PRESS CONFERENCE","INTERVIEW","PODCAST"];
 
   function asianTitleAllowed(value){
@@ -21,23 +21,20 @@
   }
 
   if(typeof loadVerifiedChannelLive==="function"){
+    const originalLoadVerifiedChannelLive=loadVerifiedChannelLive;
     loadVerifiedChannelLive=async function(){
-      try{
-        const r=await fetch("/youtube-live.json?ts="+Date.now(),{cache:"no-store"});
-        if(!r.ok)throw new Error("youtube live unavailable");
-        const y=await r.json();
-        const updated=Date.parse(y&&y.updatedAt||"");
-        const fileFresh=Number.isFinite(updated)&&Date.now()-updated<=MAX_VERIFIED_AGE_MS;
-        const rows=Array.isArray(y&&y.streams)?y.streams:[];
-        const entries=rows.filter(x=>{
-          if(!x||!x.stream||!x.stream.watchUrl)return false;
-          if(x.leagueKey!=="asian_games")return true;
-          return fileFresh&&asianVerificationFresh(x);
-        });
-        return {ok:true,updatedAt:y&&y.updatedAt||"",entries};
-      }catch{
-        return {ok:false,updatedAt:"",entries:[]};
-      }
+      const result=await originalLoadVerifiedChannelLive();
+      if(!result||!result.ok)return result||{ok:false,updatedAt:"",entries:[]};
+
+      const updated=Date.parse(result.updatedAt||"");
+      const fileFresh=Number.isFinite(updated)&&Date.now()-updated<=MAX_VERIFIED_AGE_MS;
+      const rows=Array.isArray(result.entries)?result.entries:[];
+      const entries=rows.filter(x=>{
+        if(!x||!x.stream||!x.stream.watchUrl)return false;
+        if(x.leagueKey!=="asian_games")return true;
+        return fileFresh&&asianVerificationFresh(x);
+      });
+      return {...result,entries};
     };
   }
 
