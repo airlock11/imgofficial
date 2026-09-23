@@ -103,7 +103,7 @@ function teamButton(t,i){
 function renderTeams(){
  panel();const host=qs('#imgRosterBody');if(!host)return;
  if(sourceCfg?.mode!=='teams'){renderParticipantSources(host);return}
- host.innerHTML='<div class="img-roster-tools"><input id="imgRosterSearch" class="img-roster-search" type="search" placeholder="Search teams or players" aria-label="Search teams or players"></div>'+(allTeams.length?'<div class="img-team-browser" id="imgTeamBrowser">'+allTeams.map(teamButton).join('')+'</div>':'<div class="img-roster-empty">IMG is connecting to the verified team directory. Use the official team and player sources below while the structured feed refreshes.</div><div class="img-player-links">'+officialTeamLinks({})+'</div>')+'<div class="img-roster-shell" id="imgRosterShell" hidden></div>';
+ host.innerHTML='<div class="img-roster-tools"><input id="imgRosterSearch" class="img-roster-search" type="search" placeholder="Search teams or players" aria-label="Search teams or players"></div><div class="img-team-browser" id="imgTeamBrowser">'+allTeams.map(teamButton).join('')+'</div>'+(!allTeams.length?'<div class="img-roster-empty">IMG is connecting to the verified team directory. Use the official team and player sources below while the structured feed refreshes.</div><div class="img-player-links">'+officialTeamLinks({})+'</div>':'')+'<div class="img-roster-shell" id="imgRosterShell" hidden></div>';
  const search=qs('#imgRosterSearch');
  const browser=qs('#imgTeamBrowser');
  browser?.addEventListener('click',e=>{const b=e.target.closest('[data-team-index]');if(b)openTeam(Number(b.dataset.teamIndex))});
