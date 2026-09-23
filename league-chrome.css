@@ -32,3 +32,44 @@ html,body{transition:background-color .25s ease,color .25s ease}body>header{disp
   color:#687482;
   border-color:rgba(16,23,32,.12)
 }
+
+.league-backbtn{display:none}
+@media(max-width:760px){
+  .league-backbtn{
+    position:fixed;
+    z-index:1095;
+    width:44px;
+    height:44px;
+    display:grid;
+    place-items:center;
+    padding:0;
+    border:1px solid rgba(255,255,255,.14);
+    border-radius:50%;
+    background:rgba(13,17,23,.94);
+    color:#fff;
+    box-shadow:0 10px 30px rgba(0,0,0,.32);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+    text-decoration:none;
+    transition:background-color .25s ease,color .25s ease,border-color .25s ease,box-shadow .25s ease
+  }
+  .league-backbtn svg{
+    width:20px;
+    height:20px;
+    fill:none;
+    stroke:currentColor;
+    stroke-width:2;
+    stroke-linecap:round;
+    stroke-linejoin:round
+  }
+  .league-backbtn:focus-visible{
+    outline:2px solid #ef3f45;
+    outline-offset:3px
+  }
+  :root[data-theme="light"] .league-backbtn{
+    background:rgba(255,255,255,.96);
+    border-color:rgba(17,21,27,.16);
+    color:#11151b;
+    box-shadow:0 10px 28px rgba(17,21,27,.16)
+  }
+}
