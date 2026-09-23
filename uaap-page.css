@@ -251,7 +251,7 @@ main,.page-shell,.content-section,footer{background:#000}
   box-shadow:0 16px 38px rgba(0,0,0,.34),inset 0 1px 0 rgba(255,255,255,.025)
 }
 .featured-game::before{
-  content:"PBA GOVERNORS' CUP";
+  content:"UAAP SEASON 89";
   position:absolute;
   left:20px;top:10px;
   z-index:5;
@@ -913,17 +913,8 @@ footer{
 
 /* UAAP template overrides */
 .uaap-hero{
-  --hero-image:url("/assets/uaap/uaap-hero-hq.webp?v=20260924-hqsharp1");
+  --hero-image:url("/assets/uaap/uaap-hero-hq.webp?v=20260924-pbarules1");
   background:#000
-}
-.uaap-hero::before{
-  background-image:
-    linear-gradient(180deg,rgba(0,0,0,.02) 0%,rgba(0,0,0,.08) 48%,rgba(0,0,0,.52) 78%,#000 100%),
-    linear-gradient(90deg,rgba(0,0,0,.42),rgba(0,0,0,.08) 58%,rgba(0,0,0,.18)),
-    var(--hero-image);
-  background-size:100% 100%,100% 100%,cover;
-  background-position:center center,center center,center center;
-  background-repeat:no-repeat
 }
 .uaap-single{grid-template-columns:1fr}
 .uaap-single .glass-panel{max-width:none}
@@ -945,50 +936,4 @@ footer{
   .highlight-row{scrollbar-width:none;-ms-overflow-style:none}
   #previous-games .media-row::-webkit-scrollbar,
   .highlight-row::-webkit-scrollbar{width:0;height:0;display:none}
-}
-
-@media(max-width:720px){
-  .uaap-hero{
-    min-height:470px;
-    overflow:hidden
-  }
-  .uaap-hero::before{
-    background-image:
-      linear-gradient(180deg,
-        rgba(0,0,0,0) 0%,
-        rgba(0,0,0,0) 38%,
-        rgba(0,0,0,.10) 54%,
-        rgba(0,0,0,.58) 76%,
-        #000 100%
-      ),
-      linear-gradient(90deg,
-        rgba(0,0,0,.10) 0%,
-        rgba(0,0,0,0) 50%,
-        rgba(0,0,0,.08) 100%
-      ),
-      var(--hero-image);
-    background-size:100% 100%,100% 100%,100% auto;
-    background-position:center center,center center,center top;
-    background-repeat:no-repeat
-  }
-  .uaap-hero .hero-shell{
-    min-height:470px;
-    align-items:flex-end;
-    padding-top:calc(56.25vw + 24px);
-    padding-bottom:28px
-  }
-  .uaap-hero .hero-copy{
-    width:100%;
-    max-width:410px
-  }
-}
-@media(max-width:520px){
-  .uaap-hero{
-    min-height:450px
-  }
-  .uaap-hero .hero-shell{
-    min-height:450px;
-    padding-top:calc(56.25vw + 18px);
-    padding-bottom:24px
-  }
 }
