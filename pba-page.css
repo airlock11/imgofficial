@@ -92,8 +92,8 @@ button{font:inherit}
 .hero-copy{width:min(520px,54%)}
 .league-lockup{display:flex;align-items:center;gap:14px}
 .league-logo{
-  width:145px;
-  height:76px;
+  width:180px;
+  height:94px;
   object-fit:contain;
   filter:drop-shadow(0 8px 18px rgba(0,0,0,.38));
   transform:translateZ(0)
@@ -795,7 +795,7 @@ footer{
   }
   .hero-copy{width:100%;max-width:410px;padding-top:0}
   .league-lockup{gap:11px}
-  .league-logo{width:108px;height:58px}
+  .league-logo{width:140px;height:74px}
   .league-label{font-size:.64rem;letter-spacing:.13em}
   .hero h1{font-size:3.7rem}
   .hero p{font-size:.88rem;line-height:1.45;max-width:94%}
@@ -851,7 +851,7 @@ footer{
   }
   .hero-shell{min-height:450px;align-items:flex-end;padding-top:138px;padding-bottom:26px}
   .hero-copy{width:100%;max-width:none}
-  .league-logo{width:102px;height:54px}
+  .league-logo{width:132px;height:70px}
   .hero p{font-size:.84rem;line-height:1.43;max-width:96%}
   .primary-btn{min-height:42px;padding:0 17px;font-size:.86rem}
   .featured-game{
