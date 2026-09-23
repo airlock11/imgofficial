@@ -4,6 +4,9 @@ const qsa=s=>[...document.querySelectorAll(s)];
 const safe=v=>String(v??"");
 const fmtDate=v=>{try{return new Date(v).toLocaleDateString(undefined,{month:"short",day:"numeric",year:"numeric"})}catch{return v||""}};
 const fmtTime=v=>{try{return new Date(v).toLocaleTimeString([],{hour:"numeric",minute:"2-digit"})}catch{return "—"}};
+const PBA_LIVE_URL="https://img-api-proxy.magsipocarnie.workers.dev/regional-scores?league=pba";
+let gameController=null;
+let livePollTimer=null;
 
 async function getJSON(url,fallback={}){
   try{
@@ -31,6 +34,7 @@ async function load(){
   const logo=qs("#pba-league-logo");
   if(logo&&assets.leagueLogo)logo.src=assets.leagueLogo;
   renderGames({live,upcoming,finals,assets});
+  startLiveScorePolling();
   renderGallery({finals,assets,official});
   renderHighlights({streams,official});
   renderStandings({official,assets});
@@ -43,7 +47,7 @@ function teamLogo(name,assets){return assets?.teams?.[name]||""}
 function teamBlock(name,side,assets,score=""){
   const src=teamLogo(name,assets);
   const hasScore=score!==null&&score!==undefined&&String(score)!=="";
-  const scoreHtml=hasScore?`<div class="team-score">${safe(score)}</div>`:"";
+  const scoreHtml=hasScore?`<div class="team-score" data-score-side="${side}">${safe(score)}</div>`:"";
   const nameHtml=`<div class="team-name">${safe(name)}</div>`;
   return `<div class="game-team ${side==="right"?"right":""}">
     ${side!=="right"&&src?`<img class="team-logo" src="${src}" alt="${safe(name)} logo">`:""}
@@ -60,24 +64,46 @@ function teamBlock(name,side,assets,score=""){
 }
 
 function renderGames({live,upcoming,finals,assets}){
-  const groups={live,upcoming,results:finals};
+  const groups={live:[...live],upcoming:[...upcoming],results:[...finals]};
   const slot=qs("#game-slot");
-  const paint=key=>{
+  let active=live.length?"live":upcoming.length?"upcoming":"results";
+  let shownEventId="";
+
+  const eventId=g=>safe(g?.eventId||g?.id||[g?.away,g?.home,g?.date].filter(Boolean).join("|"));
+
+  const patchLiveCard=g=>{
+    const id=eventId(g);
+    const card=slot?.querySelector(".featured-game");
+    if(!card||card.dataset.eventId!==id)return false;
+    const away=slot.querySelector('[data-score-side="left"]');
+    const home=slot.querySelector('[data-score-side="right"]');
+    if(away&&away.textContent!==safe(g.awayScore))away.textContent=safe(g.awayScore);
+    if(home&&home.textContent!==safe(g.homeScore))home.textContent=safe(g.homeScore);
+    const status=slot.querySelector(".game-status");
+    if(status&&status.textContent!=="LIVE")status.textContent="LIVE";
+    return true;
+  };
+
+  const paint=(key,force=false)=>{
+    active=key;
     const g=(groups[key]||[])[0];
     qsa(".tab-btn").forEach(b=>b.classList.toggle("active",b.dataset.tab===key));
     if(!g){
+      shownEventId="";
       slot.innerHTML='<div class="empty-card">No verified PBA game is available for this tab.</div>';
       return;
     }
     const final=g.state==="final";
     const liveGame=g.state==="in"||/live/i.test(g.status||"");
+    if(!force&&key==="live"&&liveGame&&shownEventId===eventId(g)&&patchLiveCard(g))return;
     const showScore=final||liveGame;
     const centerMain=final
       ?"FINAL"
       :liveGame
         ?"LIVE"
         :safe(g.displayTime||fmtDate(g.date));
-    slot.innerHTML=`<article class="featured-game">
+    shownEventId=eventId(g);
+    slot.innerHTML=`<article class="featured-game" data-event-id="${shownEventId}">
       ${teamBlock(g.away||"Away","left",assets,showScore?g.awayScore:"")}
       <div class="game-center">
         <div class="game-status">${centerMain}</div>
@@ -85,8 +111,85 @@ function renderGames({live,upcoming,finals,assets}){
       ${teamBlock(g.home||"Home","right",assets,showScore?g.homeScore:"")}
     </article>`;
   };
-  qsa(".tab-btn").forEach(b=>b.addEventListener("click",()=>paint(b.dataset.tab)));
-  paint(live.length?"live":upcoming.length?"upcoming":"results");
+
+  qsa(".tab-btn").forEach(b=>b.addEventListener("click",()=>paint(b.dataset.tab,true)));
+  paint(active,true);
+
+  gameController={
+    updateLive(nextLive){
+      const hadLive=groups.live.length>0;
+      groups.live=Array.isArray(nextLive)?nextLive:[];
+      const hasLive=groups.live.length>0;
+      if(hasLive&&active==="live"){
+        paint("live");
+      }else if(hasLive&&!hadLive){
+        paint("live",true);
+      }else if(!hasLive&&hadLive&&active==="live"){
+        paint(groups.upcoming.length?"upcoming":"results",true);
+      }
+    }
+  };
+}
+
+function normalizeWorkerLiveEvent(event){
+  const competitors=event?.competitions?.[0]?.competitors||[];
+  const home=competitors.find(x=>x?.homeAway==="home")||{};
+  const away=competitors.find(x=>x?.homeAway==="away")||{};
+  const state=event?.status?.type?.state;
+  if(state&&state!=="in")return null;
+  return {
+    eventId:safe(event?.id),
+    date:event?.date||new Date().toISOString(),
+    displayTime:"LIVE",
+    away:away?.team?.displayName||"Away",
+    home:home?.team?.displayName||"Home",
+    awayScore:safe(away?.score??"0"),
+    homeScore:safe(home?.score??"0"),
+    status:event?.status?.type?.shortDetail||"Live",
+    state:"in"
+  };
+}
+
+async function fetchLiveScores(){
+  const controller=new AbortController();
+  const timeout=setTimeout(()=>controller.abort(),8000);
+  try{
+    const r=await fetch(PBA_LIVE_URL+"&ts="+Date.now(),{
+      cache:"no-store",
+      signal:controller.signal
+    });
+    if(!r.ok)throw new Error(r.status);
+    const data=await r.json();
+    if(!Array.isArray(data?.events))throw new Error("Invalid live-score payload");
+    return data.events.map(normalizeWorkerLiveEvent).filter(Boolean);
+  }catch{
+    return null;
+  }finally{
+    clearTimeout(timeout);
+  }
+}
+
+async function pollLiveScores(){
+  if(document.visibilityState==="visible"){
+    const live=await fetchLiveScores();
+    if(live!==null&&gameController)gameController.updateLive(live);
+    clearTimeout(livePollTimer);
+    livePollTimer=setTimeout(pollLiveScores,live?.length?10000:30000);
+  }else{
+    clearTimeout(livePollTimer);
+    livePollTimer=setTimeout(pollLiveScores,30000);
+  }
+}
+
+function startLiveScorePolling(){
+  clearTimeout(livePollTimer);
+  pollLiveScores();
+  document.addEventListener("visibilitychange",()=>{
+    if(document.visibilityState==="visible"){
+      clearTimeout(livePollTimer);
+      pollLiveScores();
+    }
+  });
 }
 
 function renderGallery({finals,assets,official}){
