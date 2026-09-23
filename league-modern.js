@@ -73,8 +73,29 @@ function setLeagueIdentityLogo(src){
  if(!src)return;
  let box=document.querySelector('.img-league-identity');
  if(!box){box=document.createElement('div');box.className='img-league-identity';document.querySelector('.hero .shell')?.append(box)}
- box.innerHTML='<img src="'+esc(src)+'" alt="'+esc(cfg.name)+' logo" referrerpolicy="no-referrer">';
- const img=box.querySelector('img');if(img)img.onerror=()=>{box.innerHTML='<span class="img-league-identity-fallback">'+esc(cfg.name.replace(/[^A-Za-z0-9]/g,'').slice(0,4).toUpperCase())+'</span>'};
+ const paint=finalSrc=>{
+   box.innerHTML='<img src="'+esc(finalSrc)+'" alt="'+esc(cfg.name)+' logo" referrerpolicy="no-referrer">';
+   const img=box.querySelector('img');if(img)img.onerror=()=>{box.innerHTML='<span class="img-league-identity-fallback">'+esc(cfg.name.replace(/[^A-Za-z0-9]/g,'').slice(0,4).toUpperCase())+'</span>'};
+ };
+ if(/^data:image\/(jpeg|jpg)/i.test(src)){
+   try{
+     const im=new Image();
+     im.onload=()=>{
+       try{
+         const c=document.createElement('canvas'),ctx=c.getContext('2d',{willReadFrequently:true});
+         c.width=im.naturalWidth||im.width;c.height=im.naturalHeight||im.height;ctx.drawImage(im,0,0);
+         const d=ctx.getImageData(0,0,c.width,c.height),p=d.data;
+         for(let i=0;i<p.length;i+=4){
+           const r=p[i],g=p[i+1],b=p[i+2],max=Math.max(r,g,b),min=Math.min(r,g,b);
+           if(max>238&&min>228){const a=Math.max(0,255-(max-228)*12);p[i+3]=Math.min(p[i+3],a)}
+         }
+         ctx.putImageData(d,0,0);paint(c.toDataURL('image/png'));
+       }catch{paint(src)}
+     };
+     im.onerror=()=>paint(src);im.src=src;return;
+   }catch{}
+ }
+ paint(src);
 }
 async function resolveLeagueIdentity(){
  const map=await loadUserLogoMap(),mapped=map?.[cfg.key]||'';
