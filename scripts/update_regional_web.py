@@ -3,6 +3,8 @@ import html
 import io
 import json
 import re
+import subprocess
+import sys
 import urllib.request
 import urllib.parse
 from datetime import datetime, timezone, timedelta
@@ -347,6 +349,92 @@ def update_pba_previous_game_photos(pba_league):
             "pba_previous_game_photos": len(updated),
             "games": [x.get("eventId") for x in updated],
         }, ensure_ascii=False))
+
+
+
+PBA_YOUTUBE_CHANNEL_ID = "UC9WkScCyThtumtf9XVO4eWQ"
+PBA_YOUTUBE_SHORTS_URL = "https://www.youtube.com/@PBAOfficial/shorts"
+
+def fetch_pba_youtube_shorts(limit=12):
+    cmd = [
+        sys.executable, "-m", "yt_dlp",
+        "--flat-playlist",
+        "--playlist-end", str(limit),
+        "--dump-json",
+        "--no-warnings",
+        "--quiet",
+        PBA_YOUTUBE_SHORTS_URL,
+    ]
+    proc = subprocess.run(cmd, capture_output=True, text=True, timeout=90, check=False)
+    if proc.returncode != 0 and not proc.stdout.strip():
+        raise RuntimeError((proc.stderr or "Unable to read PBA Shorts")[:220])
+
+    rows = []
+    seen = set()
+    for line in proc.stdout.splitlines():
+        line = line.strip()
+        if not line:
+            continue
+        try:
+            item = json.loads(line)
+        except Exception:
+            continue
+        video_id = str(item.get("id") or "").strip()
+        title = re.sub(r"\s+", " ", str(item.get("title") or "")).strip()
+        if not re.fullmatch(r"[A-Za-z0-9_-]{6,}", video_id) or video_id in seen:
+            continue
+        seen.add(video_id)
+        upload_date = str(item.get("upload_date") or "")
+        published = ""
+        if re.fullmatch(r"\d{8}", upload_date):
+            try:
+                published = datetime.strptime(upload_date, "%Y%m%d").replace(tzinfo=timezone.utc).isoformat()
+            except Exception:
+                published = ""
+        rows.append({
+            "id": video_id,
+            "title": title or "PBA Short",
+            "channel": "PBA Official",
+            "channelId": PBA_YOUTUBE_CHANNEL_ID,
+            "watchUrl": "https://www.youtube.com/shorts/" + video_id,
+            "embedUrl": "https://www.youtube.com/embed/" + video_id + "?playsinline=1&rel=0",
+            "thumbnail": "https://i.ytimg.com/vi/" + video_id + "/hqdefault.jpg",
+            "published": published,
+            "source": "PBA Official YouTube Shorts",
+        })
+        if len(rows) >= limit:
+            break
+    return rows
+
+def update_pba_shorts():
+    try:
+        official = json.loads(PBA_OFFICIAL_OUT.read_text("utf-8"))
+    except Exception:
+        official = {}
+    previous = list(official.get("shorts") or [])
+    try:
+        fresh = fetch_pba_youtube_shorts(12)
+    except Exception as ex:
+        print("PBA shorts", type(ex).__name__, str(ex)[:180])
+        fresh = []
+
+    # Never erase a known-good Shorts row because YouTube temporarily blocks a runner.
+    if not fresh:
+        return len(previous)
+
+    old_compact = json.dumps(previous, sort_keys=True, ensure_ascii=False)
+    new_compact = json.dumps(fresh, sort_keys=True, ensure_ascii=False)
+    if old_compact != new_compact:
+        official["shorts"] = fresh
+        official["shortsSource"] = {
+            "name": "PBA Official YouTube",
+            "channelId": PBA_YOUTUBE_CHANNEL_ID,
+            "url": PBA_YOUTUBE_SHORTS_URL,
+        }
+        official["shortsUpdatedAt"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
+        PBA_OFFICIAL_OUT.write_text(json.dumps(official, ensure_ascii=False, indent=2) + "\n", "utf-8")
+        print(json.dumps({"pba_shorts": len(fresh)}, ensure_ascii=False))
+    return len(fresh)
 
 
 def parse_uaap():

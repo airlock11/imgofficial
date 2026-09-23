@@ -456,6 +456,97 @@ main,.page-shell,.content-section,footer{background:#000}
   border:1px solid rgba(255,255,255,.32);
   backdrop-filter:blur(10px)
 }
+
+/* PBA SHORTS / REELS */
+.highlight-row{
+  grid-auto-columns:210px;
+  gap:14px;
+  padding-bottom:10px
+}
+.reel-card{
+  min-width:0;
+  scroll-snap-align:start
+}
+.reel-media,
+.reel-frame{
+  width:100%;
+  aspect-ratio:9/16;
+  display:block;
+  border:0;
+  border-radius:18px;
+  overflow:hidden;
+  background:#050505
+}
+.reel-media{
+  position:relative;
+  padding:0;
+  cursor:pointer;
+  color:#fff;
+  box-shadow:0 14px 34px rgba(0,0,0,.32);
+  transition:transform .2s ease,box-shadow .2s ease
+}
+.reel-media:hover{
+  transform:translateY(-3px);
+  box-shadow:0 18px 40px rgba(0,0,0,.42)
+}
+.reel-thumb{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover
+}
+.reel-shade{
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(180deg,rgba(0,0,0,.05) 0%,rgba(0,0,0,.04) 55%,rgba(0,0,0,.72) 100%)
+}
+.reel-play{
+  position:absolute;
+  left:50%;
+  top:47%;
+  transform:translate(-50%,-50%);
+  width:54px;
+  height:54px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  background:rgba(0,0,0,.52);
+  border:1px solid rgba(255,255,255,.45);
+  backdrop-filter:blur(8px);
+  font-size:1.1rem;
+  padding-left:3px
+}
+.reel-source{
+  position:absolute;
+  left:12px;
+  bottom:12px;
+  font-size:.62rem;
+  font-weight:900;
+  letter-spacing:.14em;
+  text-shadow:0 2px 10px rgba(0,0,0,.8)
+}
+.reel-caption{
+  padding:9px 4px 0;
+  min-height:62px
+}
+.reel-caption strong{
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
+  overflow:hidden;
+  color:#f7f9fc;
+  font-size:.86rem;
+  line-height:1.28
+}
+.reel-caption span{
+  display:block;
+  margin-top:4px;
+  color:#8999ac;
+  font-size:.72rem
+}
+
 .empty-card{
   min-height:112px;
   border-radius:14px;
@@ -647,6 +738,7 @@ footer{
   .team-main{gap:14px;min-height:40px}
   .team-score{flex-basis:48px;min-width:48px;font-size:1.8rem}
   .media-row{grid-auto-columns:76%}
+  .highlight-row{grid-auto-columns:58vw}
   .top-player-row{grid-auto-columns:72%}
   .section-head h2{font-size:1.55rem}
   .section-head p{font-size:.82rem}
@@ -656,6 +748,7 @@ footer{
   .status-card+.status-card{border-left:0;border-top:1px solid rgba(255,255,255,.09)}
   .status-card:nth-child(5){grid-column:auto}
   .media-row{grid-auto-columns:84%}
+  .highlight-row{grid-auto-columns:64vw}
   .top-player-row{grid-auto-columns:84%}
   .featured-game{grid-template-columns:1fr auto 1fr}
   .team-logo{width:48px;height:48px}

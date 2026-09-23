@@ -226,28 +226,39 @@ function renderGallery({finals,assets,official}){
 
 function renderHighlights({streams,official}){
   const wrap=qs("#highlights");
-  const items=[];
-  const features=Array.isArray(official.highlights)?official.highlights:[];
+  const shorts=Array.isArray(official.shorts)?official.shorts:[];
 
-  streams.forEach(x=>items.push(`<a class="media-card highlight-card" href="${safe(x.stream?.watchUrl)}" target="_blank" rel="noopener">
-    <div class="play-button">▶</div>
-    <div class="media-card-content">
-      <div class="media-kicker">${safe(x.stream?.channel||"PBA")}</div>
-      <div class="media-title">${safe(x.title||x.stream?.title)}</div>
-      <div class="media-meta">Verified live video</div>
+  if(!shorts.length){
+    wrap.innerHTML='<div class="empty-card">PBA Official Shorts are temporarily unavailable.</div>';
+    return;
+  }
+
+  wrap.innerHTML=shorts.slice(0,10).map(x=>`<article class="reel-card">
+    <button class="reel-media" type="button" data-short-id="${safe(x.id)}" aria-label="Play ${safe(x.title)}">
+      <img class="reel-thumb" src="${safe(x.thumbnail)}" alt="${safe(x.title)}" loading="lazy">
+      <span class="reel-shade"></span>
+      <span class="reel-play" aria-hidden="true">▶</span>
+      <span class="reel-source">PBA SHORTS</span>
+    </button>
+    <div class="reel-caption">
+      <strong>${safe(x.title)}</strong>
+      <span>PBA Official</span>
     </div>
-  </a>`));
+  </article>`).join("");
 
-  features.forEach(x=>items.push(`<a class="media-card highlight-card" href="${safe(x.url||"https://pba.ph/")}" target="_blank" rel="noopener">
-    ${x.thumbnail?`<img class="media-bg" src="${safe(x.thumbnail)}" alt="${safe(x.title)}">`:""}
-    <div class="media-card-content">
-      <div class="media-kicker">${safe(x.source||"PBA Official")}</div>
-      <div class="media-title">${safe(x.title)}</div>
-      <div class="media-meta">${safe(x.meta||"Official PBA feature")}</div>
-    </div>
-  </a>`));
-
-  wrap.innerHTML=items.length?items.slice(0,8).join(""):'<div class="empty-card">No verified PBA highlight or live video is available right now.</div>';
+  qsa("#highlights .reel-media").forEach(btn=>btn.addEventListener("click",()=>{
+    const id=btn.dataset.shortId;
+    if(!id)return;
+    const frame=document.createElement("iframe");
+    frame.className="reel-frame";
+    frame.src=`https://www.youtube.com/embed/${encodeURIComponent(id)}?autoplay=1&playsinline=1&rel=0`;
+    frame.title=btn.getAttribute("aria-label")||"PBA Short";
+    frame.loading="lazy";
+    frame.allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+    frame.referrerPolicy="strict-origin-when-cross-origin";
+    frame.allowFullscreen=true;
+    btn.replaceWith(frame);
+  }));
 }
 
 function renderStandings({official,assets}){

@@ -36,7 +36,7 @@ jobs:
         run: |
           sudo apt-get update -qq
           sudo apt-get install -y -qq tesseract-ocr
-          python -m pip install --disable-pip-version-check beautifulsoup4 pillow pytesseract lxml
+          python -m pip install --disable-pip-version-check beautifulsoup4 pillow pytesseract lxml yt-dlp
       - name: Refresh and publish regional basketball web data
         shell: bash
         run: |
