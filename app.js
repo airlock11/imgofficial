@@ -2151,6 +2151,9 @@ async function loadVerifiedChannelLive(){
       const feedFresh=Number.isFinite(updatedAtMs)&&now-updatedAtMs<=freshMinutes*60000;
       const entries=(Array.isArray(y?.streams)?y.streams:[]).filter(x=>{
         if(!x?.stream?.watchUrl||!feedFresh)return false;
+        const targetKey=x?.delivery?.leagueKey||x?.stream?.deliveryLeagueKey||x?.leagueKey;
+        const title=String(x?.title||x?.stream?.title||'');
+        if(targetKey==='asian_games'&&/ASIAN\s+GAMES\s+UPDATE/i.test(title))return false;
         const verifiedAt=Date.parse(x?.lastVerifiedLiveAt||x?.stream?.lastVerifiedLiveAt||y?.updatedAt||'');
         if(!Number.isFinite(verifiedAt)||now-verifiedAt>freshMinutes*60000)return false;
         if(x?.leagueKey==='asian_games'){
@@ -2870,7 +2873,10 @@ function renderNews(items,videos=[]){
   if(!host)return;
   if(!items.length&&!videos.length)return;
 
-  const videoRows=(Array.isArray(videos)?videos:[]).filter(v=>v?.id&&v?.thumbnail).slice(0,2);
+  const videoRows=(Array.isArray(videos)?videos:[])
+    .filter(v=>v?.id&&v?.thumbnail)
+    .filter((v,index,all)=>index===all.findIndex(x=>String(x?.id||'')===String(v.id)))
+    .slice(0,2);
   const videosHtml=videoRows.length
     ? '<section class="news-videos" aria-label="Sports videos">'+videoRows.map(v=>
         '<article class="news-video-card" data-news-video="'+esc(v.id)+'">'+
@@ -2904,12 +2910,34 @@ function renderNews(items,videos=[]){
   }
 }
 
+async function loadAsianGamesUpdateVideos(){
+  try{
+    const r=await fetch('https://img-api-proxy.magsipocarnie.workers.dev/live-streams',{cache:'no-store'});
+    if(!r.ok)return [];
+    const y=await r.json();
+    const rows=Array.isArray(y?.streams)?y.streams:[];
+    return rows.map(x=>{
+      const targetKey=x?.delivery?.leagueKey||x?.stream?.deliveryLeagueKey||x?.leagueKey;
+      const title=String(x?.title||x?.stream?.title||'');
+      const id=String(x?.stream?.videoId||'');
+      if(targetKey!=='asian_games'||!/ASIAN\s+GAMES\s+UPDATE/i.test(title)||!id)return null;
+      return {
+        id,
+        title,
+        source:x?.stream?.channel||'One Sports',
+        thumbnail:'https://i.ytimg.com/vi/'+encodeURIComponent(id)+'/hqdefault.jpg'
+      };
+    }).filter(Boolean);
+  }catch{return []}
+}
+
 async function loadNews(){
   const host=document.getElementById('newsFeed');
   if(!host)return;
   const ns=document.getElementById('newsStatus');
   ns?.closest('.news-livebar')?.classList.remove('is-empty');
   if(ns)ns.textContent='Updating';
+  const asianUpdateVideosPromise=loadAsianGamesUpdateVideos();
 
   const tryItems=async(url,type)=>{
     const r=await fetch(url,{cache:'no-store'});
@@ -2928,13 +2956,15 @@ async function loadNews(){
 
   try{
     const data=await tryItems('news-data.json?v='+Date.now(),'json');
-    renderNews(data.items,data.videos);
+    const asianUpdateVideos=await asianUpdateVideosPromise;
+    renderNews(data.items,[...asianUpdateVideos,...data.videos]);
     return;
   }catch{}
 
   try{
     const data=await tryItems('https://img-api-proxy.magsipocarnie.workers.dev/news','worker');
-    renderNews(data.items,data.videos);
+    const asianUpdateVideos=await asianUpdateVideosPromise;
+    renderNews(data.items,[...asianUpdateVideos,...data.videos]);
     return;
   }catch{}
 
