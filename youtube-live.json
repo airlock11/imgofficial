@@ -1,7 +1,66 @@
 {
-  "updatedAt": "2026-09-22T23:37:10.769495+00:00",
+  "updatedAt": "2026-09-23T01:46:21.335441+00:00",
   "freshForMinutes": 8,
-  "streams": [],
+  "streams": [
+    {
+      "eventId": "ag26-youtube-wbQel73jlII",
+      "sport": "Asian Games",
+      "leagueKey": "asian_games",
+      "league": "2026 ASIAN GAMES",
+      "teams": [],
+      "title": "LIVE: Kayla Sanchez leads Team PH | SWIMMING QUALIFIERS | 2026 ASIAN GAMES",
+      "stream": {
+        "videoId": "wbQel73jlII",
+        "watchUrl": "https://www.youtube.com/watch?v=wbQel73jlII",
+        "provider": "YouTube",
+        "channel": "One Sports",
+        "title": "LIVE: Kayla Sanchez leads Team PH | SWIMMING QUALIFIERS | 2026 ASIAN GAMES",
+        "embedUrl": "https://www.youtube.com/embed/wbQel73jlII",
+        "verificationStatus": "verified",
+        "lastVerifiedLiveAt": "2026-09-23T01:46:21.335441+00:00",
+        "deliveryLeagueKey": "asian_games",
+        "deliveryPlacement": "above_statistics",
+        "firstLiveAt": "2026-09-23T01:46:02.363969+00:00"
+      },
+      "verificationStatus": "verified",
+      "lastVerifiedLiveAt": "2026-09-23T01:46:21.335441+00:00",
+      "delivery": {
+        "leagueKey": "asian_games",
+        "url": "/scores/?league=asian_games",
+        "placement": "above_statistics"
+      },
+      "firstLiveAt": "2026-09-23T01:46:02.363969+00:00"
+    },
+    {
+      "eventId": "ag26-youtube-sNtSGiRMno4",
+      "sport": "Asian Games",
+      "leagueKey": "asian_games",
+      "league": "2026 ASIAN GAMES",
+      "teams": [],
+      "title": "LIVE: PHILIPPINES VS INDIA | SEPAK TAKRAW GROUP B | 2026 ASIAN GAMES",
+      "stream": {
+        "videoId": "sNtSGiRMno4",
+        "watchUrl": "https://www.youtube.com/watch?v=sNtSGiRMno4",
+        "provider": "YouTube",
+        "channel": "One Sports",
+        "title": "LIVE: PHILIPPINES VS INDIA | SEPAK TAKRAW GROUP B | 2026 ASIAN GAMES",
+        "embedUrl": "https://www.youtube.com/embed/sNtSGiRMno4",
+        "verificationStatus": "verified",
+        "lastVerifiedLiveAt": "2026-09-23T01:46:21.335441+00:00",
+        "deliveryLeagueKey": "asian_games",
+        "deliveryPlacement": "above_statistics",
+        "firstLiveAt": "2026-09-23T01:46:02.363969+00:00"
+      },
+      "verificationStatus": "verified",
+      "lastVerifiedLiveAt": "2026-09-23T01:46:21.335441+00:00",
+      "delivery": {
+        "leagueKey": "asian_games",
+        "url": "/scores/?league=asian_games",
+        "placement": "above_statistics"
+      },
+      "firstLiveAt": "2026-09-23T01:46:02.363969+00:00"
+    }
+  ],
   "liveExpiryLedger": {
     "ncaaph-youtube-jhZS19XiaPI": {
       "lastVerifiedLiveAt": "2026-09-22T06:10:13.441019+00:00"
@@ -35,6 +94,14 @@
     },
     "fiba-youtube-vP1XJtfk6lc": {
       "lastVerifiedLiveAt": "2026-09-22T12:09:56.852733+00:00"
+    },
+    "ag26-youtube-wbQel73jlII": {
+      "firstLiveAt": "2026-09-23T01:46:02.363969+00:00",
+      "lastVerifiedLiveAt": "2026-09-23T01:46:02.363969+00:00"
+    },
+    "ag26-youtube-sNtSGiRMno4": {
+      "firstLiveAt": "2026-09-23T01:46:02.363969+00:00",
+      "lastVerifiedLiveAt": "2026-09-23T01:46:02.363969+00:00"
     }
   },
   "upcoming": [],
@@ -43,7 +110,7 @@
   "scanner": {
     "version": 3,
     "mode": "official-auto-discovery",
-    "checkedAt": "2026-09-22T23:37:10.488507+00:00",
+    "checkedAt": "2026-09-23T01:46:21.180279+00:00",
     "sourcesChecked": [
       "nbl-pilipinas",
       "mpbl",
@@ -82,9 +149,9 @@
     }
   },
   "liveVerification": {
-    "checkedAt": "2026-09-22T23:37:10.769495+00:00",
+    "checkedAt": "2026-09-23T01:46:21.335441+00:00",
     "method": "YouTube videos API exact-video verification",
-    "verifiedLiveCount": 0,
+    "verifiedLiveCount": 2,
     "removedCount": 0,
     "removed": []
   }
