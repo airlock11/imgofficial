@@ -9,15 +9,12 @@
   --blue:#176acb;
 }
 *{box-sizing:border-box}
-html{background:#02070c;scroll-behavior:smooth}
+html{background:#000;scroll-behavior:smooth}
 body{
   margin:0;
   color:var(--text);
   font-family:Inter,Arial,Helvetica,sans-serif;
-  background:
-    radial-gradient(circle at 16% 8%,rgba(210,35,61,.16),transparent 26%),
-    radial-gradient(circle at 84% 8%,rgba(25,103,199,.16),transparent 26%),
-    linear-gradient(180deg,#071522 0%,#03101a 46%,#020a11 100%);
+  background:#000;
 }
 a{color:inherit}
 button{font:inherit}
@@ -49,23 +46,37 @@ button{font:inherit}
   position:relative;
   min-height:390px;
   overflow:hidden;
-  border-bottom:1px solid rgba(255,255,255,.07);
-  background:#071521
+  border-bottom:0;
+  background:#000
 }
 .hero::before{
   content:"";
   position:absolute;inset:0;
   background-image:
-    linear-gradient(90deg,rgba(2,8,14,.76) 0%,rgba(3,10,17,.58) 32%,rgba(3,10,17,.18) 58%,rgba(3,10,17,.08) 100%),
-    linear-gradient(180deg,rgba(2,7,12,.05) 0%,rgba(2,7,12,.06) 62%,rgba(2,8,14,.48) 100%),
+    linear-gradient(180deg,
+      rgba(0,0,0,0) 0%,
+      rgba(0,0,0,.02) 42%,
+      rgba(0,0,0,.12) 58%,
+      rgba(0,0,0,.34) 72%,
+      rgba(0,0,0,.62) 84%,
+      rgba(0,0,0,.86) 93%,
+      #000 100%
+    ),
+    linear-gradient(90deg,
+      rgba(0,0,0,.48) 0%,
+      rgba(0,0,0,.22) 30%,
+      rgba(0,0,0,.08) 62%,
+      rgba(0,0,0,.10) 100%
+    ),
     var(--hero-image);
   background-size:cover;
   background-position:center center;
+  background-repeat:no-repeat;
 }
 .hero::after{
   content:"";
   position:absolute;inset:0;
-  background:linear-gradient(90deg,rgba(180,18,35,.05),transparent 34%,transparent 72%,rgba(25,95,205,.04));
+  background:none;
   pointer-events:none
 }
 .hero-overlay,.hero-watermark{display:none!important}
@@ -162,6 +173,8 @@ button{font:inherit}
   background:#ff354f;
   box-shadow:0 0 0 7px rgba(255,53,79,.11),0 0 20px rgba(255,53,79,.5)
 }
+
+main,.page-shell,.content-section,footer{background:#000}
 
 /* SECTIONS */
 .page-shell{padding:8px 0 78px}
@@ -507,8 +520,21 @@ footer{
   .hero{min-height:360px}
   .hero::before{
     background-image:
-      linear-gradient(90deg,rgba(2,8,14,.80) 0%,rgba(3,10,17,.58) 43%,rgba(3,10,17,.16) 72%,rgba(3,10,17,.05) 100%),
-      linear-gradient(180deg,rgba(2,7,12,.05) 0%,rgba(2,7,12,.08) 64%,rgba(2,8,14,.55) 100%),
+      linear-gradient(180deg,
+        rgba(0,0,0,0) 0%,
+        rgba(0,0,0,.03) 38%,
+        rgba(0,0,0,.16) 56%,
+        rgba(0,0,0,.40) 72%,
+        rgba(0,0,0,.70) 85%,
+        rgba(0,0,0,.91) 94%,
+        #000 100%
+      ),
+      linear-gradient(90deg,
+        rgba(0,0,0,.56) 0%,
+        rgba(0,0,0,.28) 40%,
+        rgba(0,0,0,.10) 72%,
+        rgba(0,0,0,.08) 100%
+      ),
       var(--hero-image);
     background-position:center center
   }
