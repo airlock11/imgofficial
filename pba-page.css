@@ -333,7 +333,14 @@ main,.page-shell,.content-section,footer{background:#000}
   object-fit:contain;
   filter:drop-shadow(0 9px 19px rgba(0,0,0,.58))
 }
-.team-copy{min-width:0}
+.team-copy{min-width:0;flex:1}
+.team-main{
+  display:flex;
+  align-items:center;
+  gap:28px;
+  min-height:50px
+}
+.game-team.right .team-main{justify-content:flex-end}
 .team-name{font-size:1rem;font-weight:900;line-height:1.15}
 .team-side{margin-top:3px;color:#aeb9c8;font-size:.77rem}
 .team-score{
@@ -342,7 +349,6 @@ main,.page-shell,.content-section,footer{background:#000}
   display:flex;
   align-items:center;
   justify-content:center;
-  align-self:center;
   color:#fff;
   font-size:clamp(2.2rem,4vw,3.15rem);
   line-height:.95;
@@ -351,8 +357,6 @@ main,.page-shell,.content-section,footer{background:#000}
   text-align:center;
   text-shadow:0 4px 22px rgba(0,0,0,.78)
 }
-.game-team:not(.right) .team-score{margin-left:22px}
-.game-team.right .team-score{margin-right:22px}
 .game-center{
   position:relative;
   z-index:3;
@@ -640,9 +644,8 @@ footer{
   .team-side{font-size:.66rem}
   .game-center{min-width:78px;padding:0 4px}
   .game-status{font-size:.72rem;letter-spacing:.08em}
+  .team-main{gap:14px;min-height:40px}
   .team-score{flex-basis:48px;min-width:48px;font-size:1.8rem}
-  .game-team:not(.right) .team-score{margin-left:10px}
-  .game-team.right .team-score{margin-right:10px}
   .media-row{grid-auto-columns:76%}
   .top-player-row{grid-auto-columns:72%}
   .section-head h2{font-size:1.55rem}
@@ -659,6 +662,7 @@ footer{
   .team-name{font-size:.76rem;max-width:100px}
   .game-center{min-width:64px}
   .game-status{font-size:.68rem}
+  .team-main{gap:10px}
   .team-score{flex-basis:44px;min-width:44px;font-size:1.65rem}
   .standings-table th,.standings-table td{padding:8px 8px}
 }

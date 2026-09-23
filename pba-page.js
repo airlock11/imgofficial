@@ -44,11 +44,17 @@ function teamBlock(name,side,assets,score=""){
   const src=teamLogo(name,assets);
   const hasScore=score!==null&&score!==undefined&&String(score)!=="";
   const scoreHtml=hasScore?`<div class="team-score">${safe(score)}</div>`:"";
+  const nameHtml=`<div class="team-name">${safe(name)}</div>`;
   return `<div class="game-team ${side==="right"?"right":""}">
     ${side!=="right"&&src?`<img class="team-logo" src="${src}" alt="${safe(name)} logo">`:""}
-    ${side==="right"?scoreHtml:""}
-    <div class="team-copy"><div class="team-name">${safe(name)}</div><div class="team-side">${side==="right"?"Home":"Away"}</div></div>
-    ${side!=="right"?scoreHtml:""}
+    <div class="team-copy">
+      <div class="team-main">
+        ${side==="right"?scoreHtml:""}
+        ${nameHtml}
+        ${side!=="right"?scoreHtml:""}
+      </div>
+      <div class="team-side">${side==="right"?"Home":"Away"}</div>
+    </div>
     ${side==="right"&&src?`<img class="team-logo" src="${src}" alt="${safe(name)} logo">`:""}
   </div>`
 }
