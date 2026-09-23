@@ -86,13 +86,59 @@ function setLeagueIdentityFromPayload(j){
  const logo=j?.leagues?.[0]?.logos?.[0]?.href||j?.leagues?.[0]?.logo||'';
  if(logo)setLeagueIdentityLogo(logo);
 }
+function historyStorageKey(){return 'img-history-v2:'+slug}
+function normalizeHistoryEvent(e){
+ const t=teamPair(e),date=eventDate(e);
+ return {id:String(e?.id||e?.eventId||e?.uid||[date,t.away.name,t.home.name].join('|')),date,
+  away:t.away.name,home:t.home.name,awayScore:t.away.score,homeScore:t.home.score,
+  awayLogo:t.away.logo||'',homeLogo:t.home.logo||'',state:'final'};
+}
+function readHistoryCache(){
+ try{const x=JSON.parse(localStorage.getItem(historyStorageKey())||'[]');return Array.isArray(x)?x:[]}catch{return[]}
+}
+function writeHistoryCache(events){
+ try{
+   const seen=new Set(),merged=events.filter(Boolean).filter(e=>{
+     const k=String(e.id||[e.date,e.away,e.home].join('|'));if(!k||seen.has(k))return false;seen.add(k);return true
+   }).sort((a,b)=>new Date(b.date||0)-new Date(a.date||0)).slice(0,80);
+   localStorage.setItem(historyStorageKey(),JSON.stringify(merged));return merged
+ }catch{return events}
+}
+function cacheToEvent(e){return{id:e.id||'',date:e.date||'',state:'final',status:'Final',away:e.away||'',home:e.home||'',awayScore:e.awayScore??'',homeScore:e.homeScore??'',awayLogo:e.awayLogo||'',homeLogo:e.homeLogo||''}}
+async function archivedLocalFinals(){
+ try{
+   const [a,b,h]=await Promise.allSettled([
+     fetch('/special-sports-data.json?v='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null),
+     fetch('/extended-sports-data.json?v='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null),
+     fetch('/league-history.json?v='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null)
+   ]);
+   const rows=[];
+   const addLeague=obj=>{
+     const l=obj?.leagues?.[cfg.key]||obj?.leagues?.[slug];
+     (Array.isArray(l?.games)?l.games:[]).filter(g=>String(g?.state||'').toLowerCase()==='final').forEach(g=>rows.push(specialToEvent(g)));
+   };
+   addLeague(a.value);addLeague(b.value);
+   const hist=h.value?.leagues?.[slug]||h.value?.leagues?.[cfg.key]||[];
+   (Array.isArray(hist)?hist:[]).forEach(g=>rows.push(cacheToEvent(g)));
+   return rows;
+ }catch{return[]}
+}
+function officialArchiveCard(){
+ const host=q('#imgHistory');if(!host)return;
+ fetch('/league-sources.json?v=20260923-3',{cache:'no-store'}).then(r=>r.ok?r.json():null).then(j=>{
+   const src=j?.leagues?.[slug]||{},url=src.schedule||src.official||'/scores/',name=src.name||cfg.name;
+   if(host.children.length)return;
+   host.innerHTML='<a class="img-history-card" href="'+esc(url)+'" target="_blank" rel="noopener noreferrer" style="text-decoration:none;color:inherit"><div class="img-history-date"><span>Verified archive source</span><span class="img-history-final">OFFICIAL</span></div><strong style="display:block;font-size:1rem;line-height:1.45">'+esc(name)+' previous results</strong><span style="display:block;margin-top:12px;color:var(--muted);font-size:.75rem;line-height:1.5">IMG is syncing completed games from the official results archive. Open the verified source while the archive updates.</span></a>';
+ }).catch(()=>{});
+}
 function renderHistory(finals){
  const host=q('#imgHistory');if(!host)return;
- if(!finals.length){
-   host.innerHTML='<article class="img-history-card"><div class="img-history-date"><span>IMG archive</span><span class="img-history-final">VERIFYING</span></div><strong style="display:block;font-size:.92rem;line-height:1.5">Previous verified results will appear here automatically as IMG receives them from the league data sources.</strong></article>';
-   return;
- }
- host.innerHTML=finals.slice(0,24).map(e=>{
+ const cached=readHistoryCache().map(cacheToEvent);
+ const fresh=(finals||[]).map(normalizeHistoryEvent);
+ const combined=writeHistoryCache([...fresh,...readHistoryCache()]).map(cacheToEvent);
+ const list=combined.length?combined:(cached.length?cached:[]);
+ if(!list.length){host.innerHTML='';officialArchiveCard();return}
+ host.innerHTML=list.slice(0,40).map(e=>{
    const t=teamPair(e),d=eventDate(e),logo=x=>x.logo?'<img src="'+esc(x.logo)+'" alt="" loading="lazy">':'<span class="img-team-logo-fallback">'+esc((x.name||'?').slice(0,2).toUpperCase())+'</span>';
    return '<article class="img-history-card"><div class="img-history-date"><span>'+esc(dt(d))+'</span><span class="img-history-final">FINAL</span></div>'+
     '<div class="img-history-team">'+logo(t.away)+'<span>'+esc(t.away.name)+'</span><b>'+esc(t.away.score)+'</b></div>'+
@@ -102,7 +148,7 @@ function renderHistory(finals){
 async function localLeague(){const [a,b]=await Promise.allSettled([fetch('/special-sports-data.json?v='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null),fetch('/extended-sports-data.json?v='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null)]);return a.value?.leagues?.[cfg.key]||b.value?.leagues?.[cfg.key]||null}
 function specialToEvent(g){return{id:g?.eventId||'',date:g?.date||'',state:g?.state||'',status:g?.status||g?.displayTime||'',home:g?.home||'',away:g?.away||'',homeScore:g?.homeScore??'',awayScore:g?.awayScore??'',homeLogo:g?.homeLogo||'',awayLogo:g?.awayLogo||''}}
 async function getEvents(){if(cfg.local){const l=await localLeague();lastSource=l?.sourceName||'IMG data';return(Array.isArray(l?.games)?l.games:[]).map(specialToEvent)}if(cfg.regional){const r=await fetch(worker+'/regional-scores?league='+encodeURIComponent(cfg.key),{cache:'no-store'});if(!r.ok)throw 0;const j=await r.json();lastSource=j.source||'IMG regional feed';return Array.isArray(j.events)?j.events:[]}if(cfg.score){const now=new Date(),a=new Date(now-60*86400000),b=new Date(now.getTime()+21*86400000),url=cfg.score+(cfg.score.includes('?')?'&':'?')+'dates='+dateKey(a)+'-'+dateKey(b);try{const r=await fetch(url,{cache:'no-store'});if(r.ok){const j=await r.json();setLeagueIdentityFromPayload(j);lastSource=j?.leagues?.[0]?.name||'Connected sports feed';return j.events||[]}}catch{}const r=await fetch(worker+'/scoreboard?league='+encodeURIComponent(cfg.key)+'&dates='+dateKey(a)+'-'+dateKey(b),{cache:'no-store'});if(!r.ok)throw 0;const j=await r.json();lastSource='IMG proxy';return j.events||[]}return[]}
-async function renderEvents(){try{const ev=await getEvents();lastEvents=ev;const now=Date.now(),live=ev.filter(e=>stateOf(e)==='live'),up=ev.filter(e=>stateOf(e)==='scheduled'&&new Date(eventDate(e)||0).getTime()>=now).sort((a,b)=>new Date(eventDate(a))-new Date(eventDate(b))).slice(0,10),finals=ev.filter(e=>stateOf(e)==='final').sort((a,b)=>new Date(eventDate(b))-new Date(eventDate(a))).slice(0,10);modes=[];if(live.length)modes.push({label:'Live now',items:live});if(up.length)modes.push({label:'Upcoming',items:up});if(finals.length)modes.push({label:'Results',items:finals});modeIndex=0;updateGameMode();renderHistory(finals);q('#imgUpdateText').textContent='Updated '+new Intl.DateTimeFormat(undefined,{hour:'numeric',minute:'2-digit'}).format(new Date())+' · '+lastSource;renderKpis(live,up,finals);queueHighlights()}catch{q('#imgGamesPanel').hidden=true;q('#imgUpdateText').textContent='Waiting for the next verified data refresh';renderKpis([],[],[])}}
+async function renderEvents(){try{const ev=await getEvents(),archived=await archivedLocalFinals();const seen=new Set(),merged=[...ev,...archived].filter(e=>{const t=teamPair(e),k=String(e?.id||e?.eventId||[eventDate(e),t.away.name,t.home.name].join('|'));if(seen.has(k))return false;seen.add(k);return true});lastEvents=merged;const now=Date.now(),live=merged.filter(e=>stateOf(e)==='live'),up=merged.filter(e=>stateOf(e)==='scheduled'&&new Date(eventDate(e)||0).getTime()>=now).sort((a,b)=>new Date(eventDate(a))-new Date(eventDate(b))).slice(0,10),finals=merged.filter(e=>stateOf(e)==='final').sort((a,b)=>new Date(eventDate(b))-new Date(eventDate(a))).slice(0,40);modes=[];if(live.length)modes.push({label:'Live now',items:live});if(up.length)modes.push({label:'Upcoming',items:up});if(finals.length)modes.push({label:'Results',items:finals});modeIndex=0;updateGameMode();renderHistory(finals);q('#imgUpdateText').textContent='Updated '+new Intl.DateTimeFormat(undefined,{hour:'numeric',minute:'2-digit'}).format(new Date())+' · '+lastSource;renderKpis(live,up,finals);queueHighlights()}catch{q('#imgGamesPanel').hidden=true;q('#imgUpdateText').textContent='Waiting for the next verified data refresh';renderKpis([],[],[])}}
 function renderKpis(live,up,finals){const next=up[0],nextPair=next?teamPair(next):null;const data=[['Live now',live.length?live.length+' game'+(live.length>1?'s':''):'No live game'],['Next',nextPair?nextPair.away.name+' vs '+nextPair.home.name:'Check back soon'],['Recent results',finals.length?finals.length+' available':'No recent result'],['Source',lastSource]];q('#imgKpis').innerHTML=data.map(x=>'<div class="img-kpi img-reveal"><small>'+esc(x[0])+'</small><strong>'+esc(x[1])+'</strong></div>').join('');observe()}
 function stat(e,names){for(const s of(Array.isArray(e?.stats)?e.stats:[])){if(names.includes(String(s.name||s.type||'').toLowerCase()))return s.displayValue??s.value??''}return''}
 function standardEntries(j){const groups=[];if(Array.isArray(j?.children))groups.push(...j.children);if(j?.standings)groups.push({standings:j.standings});return groups.flatMap(g=>g?.standings?.entries||g?.entries||[])}
