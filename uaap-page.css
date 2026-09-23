@@ -948,13 +948,47 @@ footer{
 }
 
 @media(max-width:720px){
+  .uaap-hero{
+    min-height:470px;
+    overflow:hidden
+  }
   .uaap-hero::before{
     background-image:
-      linear-gradient(180deg,rgba(0,0,0,.02) 0%,rgba(0,0,0,.10) 46%,rgba(0,0,0,.58) 78%,#000 100%),
-      linear-gradient(90deg,rgba(0,0,0,.28),rgba(0,0,0,.04) 60%,rgba(0,0,0,.14)),
+      linear-gradient(180deg,
+        rgba(0,0,0,0) 0%,
+        rgba(0,0,0,0) 38%,
+        rgba(0,0,0,.10) 54%,
+        rgba(0,0,0,.58) 76%,
+        #000 100%
+      ),
+      linear-gradient(90deg,
+        rgba(0,0,0,.10) 0%,
+        rgba(0,0,0,0) 50%,
+        rgba(0,0,0,.08) 100%
+      ),
       var(--hero-image);
-    background-size:100% 100%,100% 100%,cover;
+    background-size:100% 100%,100% 100%,100% auto;
     background-position:center center,center center,center top;
     background-repeat:no-repeat
+  }
+  .uaap-hero .hero-shell{
+    min-height:470px;
+    align-items:flex-end;
+    padding-top:calc(56.25vw + 24px);
+    padding-bottom:28px
+  }
+  .uaap-hero .hero-copy{
+    width:100%;
+    max-width:410px
+  }
+}
+@media(max-width:520px){
+  .uaap-hero{
+    min-height:450px
+  }
+  .uaap-hero .hero-shell{
+    min-height:450px;
+    padding-top:calc(56.25vw + 18px);
+    padding-bottom:24px
   }
 }
