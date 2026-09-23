@@ -2132,13 +2132,17 @@ async function loadVerifiedChannelLive(){
   }
 
   const sources=[
+    'https://raw.githubusercontent.com/airlock11/imgofficial/live-data/youtube-live.json?ts='+now,
     'https://raw.githubusercontent.com/airlock11/imgofficial/main/youtube-live.json?ts='+now,
     '/youtube-live.json?ts='+now
   ];
 
   for(const url of sources){
+    const controller=new AbortController();
+    const timer=setTimeout(()=>controller.abort(),7000);
     try{
-      const r=await fetch(url,{cache:'no-store'});
+      const r=await fetch(url,{cache:'no-store',signal:controller.signal});
+      clearTimeout(timer);
       if(!r.ok)continue;
       const y=await r.json();
       const freshMinutes=Math.max(10,Number(y?.freshForMinutes)||30);
@@ -2159,7 +2163,9 @@ async function loadVerifiedChannelLive(){
       const result={ok:true,updatedAt:y?.updatedAt||'',entries};
       verifiedChannelLiveCache={time:now,result};
       return result;
-    }catch{}
+    }catch{
+      clearTimeout(timer);
+    }
   }
 
   // Short fail-safe: a brief network/CDN failure must not make an already-playing
