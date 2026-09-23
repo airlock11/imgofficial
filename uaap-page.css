@@ -913,8 +913,29 @@ footer{
 
 /* UAAP template overrides */
 .uaap-hero{
-  --hero-image:url("/assets/uaap/uaap-hero-user-upload.avif?v=20260924-mobilehero2");
-  background:#000
+  --hero-image:url("/assets/uaap/uaap-hero-hq.webp?v=20260924-visible3");
+  min-height:300px;
+  background:#000;
+}
+.uaap-hero::before{
+  background-image:
+    linear-gradient(180deg,
+      rgba(0,0,0,0) 0%,
+      rgba(0,0,0,.04) 45%,
+      rgba(0,0,0,.22) 66%,
+      rgba(0,0,0,.62) 84%,
+      #000 100%
+    ),
+    linear-gradient(90deg,
+      rgba(0,0,0,.42) 0%,
+      rgba(0,0,0,.16) 35%,
+      rgba(0,0,0,.04) 68%,
+      rgba(0,0,0,.10) 100%
+    ),
+    var(--hero-image);
+  background-size:100% 100%,100% 100%,cover;
+  background-position:center center,center center,center center;
+  background-repeat:no-repeat;
 }
 .uaap-hero::after{
   content:"";
@@ -922,61 +943,69 @@ footer{
   left:0;
   right:0;
   bottom:-1px;
-  height:52%;
+  height:38%;
   z-index:2;
   pointer-events:none;
   background:linear-gradient(
     to bottom,
     rgba(0,0,0,0) 0%,
-    rgba(0,0,0,.10) 18%,
-    rgba(0,0,0,.34) 42%,
-    rgba(0,0,0,.68) 68%,
-    rgba(0,0,0,.92) 88%,
+    rgba(0,0,0,.22) 30%,
+    rgba(0,0,0,.65) 68%,
     #000 100%
-  )
+  );
 }
-@media(max-width:720px){
-  .uaap-hero::after{
-    height:58%;
-    background:linear-gradient(
-      to bottom,
-      rgba(0,0,0,0) 0%,
-      rgba(0,0,0,.12) 16%,
-      rgba(0,0,0,.42) 40%,
-      rgba(0,0,0,.78) 68%,
-      rgba(0,0,0,.96) 88%,
-      #000 100%
-    )
-  }
+.uaap-hero .hero-shell{
+  min-height:300px;
+  padding-top:18px;
+  padding-bottom:22px;
 }
-
+.uaap-hero .hero-copy{
+  width:min(500px,52%);
+}
+.uaap-hero .league-logo{
+  width:230px;
+  height:118px;
+  object-fit:contain;
+  background:transparent;
+}
 @media(max-width:720px){
   .uaap-hero{
-    min-height:350px;
+    min-height:320px;
   }
   .uaap-hero::before{
-    background-size:100% 100%,100% 100%,100% auto;
-    background-position:center center,center center,center top;
-    background-repeat:no-repeat;
+    background-size:100% 100%,100% 100%,cover;
+    background-position:center center,center center,center center;
+  }
+  .uaap-hero::after{
+    height:42%;
   }
   .uaap-hero .hero-shell{
-    min-height:350px;
+    min-height:320px;
     align-items:flex-end;
-    padding-top:122px;
-    padding-bottom:22px;
+    padding-top:96px;
+    padding-bottom:18px;
   }
   .uaap-hero .hero-copy{
-    max-width:380px;
+    width:100%;
+    max-width:390px;
+  }
+  .uaap-hero .league-logo{
+    width:190px;
+    height:96px;
   }
 }
 @media(max-width:520px){
   .uaap-hero{
-    min-height:330px;
+    min-height:300px;
   }
   .uaap-hero .hero-shell{
-    min-height:330px;
-    padding-top:112px;
-    padding-bottom:18px;
+    min-height:300px;
+    padding-top:84px;
+    padding-bottom:16px;
+  }
+  .uaap-hero .league-logo{
+    width:180px;
+    height:90px;
   }
 }
 
