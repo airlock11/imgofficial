@@ -26,6 +26,7 @@ URLS = {
     "pba_news": "https://www.pba.ph/news",
     "uaap": "https://skedcheck.com/uaap-mens-basketball-schedule-scores/",
     "uaap_stats": "https://uaap.org/stats/uaap-season-89-men-s-basketball",
+    "uaap_live_stats": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball",
     "uaap_basketball": "https://uaap.org/sports/basketball",
     "uaap_articles": "https://uaap.org/posts/articles",
     "uaap_photos": "https://uaap.org/posts/photo_gallery",
@@ -729,6 +730,156 @@ def fetch_uaap_stats():
 
     return result
 
+
+UAAP_TEAM_FULL = {
+    "ATENEO":"Ateneo Blue Eagles",
+    "ADMU":"Ateneo Blue Eagles",
+    "ADU":"Adamson Soaring Falcons",
+    "ADAMSON":"Adamson Soaring Falcons",
+    "LA SALLE":"De La Salle Green Archers",
+    "DLSU":"De La Salle Green Archers",
+    "FEU":"FEU Tamaraws",
+    "NU":"NU Bulldogs",
+    "UE":"UE Red Warriors",
+    "UP":"UP Fighting Maroons",
+    "UST":"UST Growling Tigers",
+}
+
+def _uaap_full_team(value):
+    key = _uaap_text(value).upper()
+    return UAAP_TEAM_FULL.get(key, _uaap_text(value))
+
+def _uaap_livestats_card(label):
+    label = _uaap_text(label)
+    m = re.fullmatch(r"(.+?)\s+(\d{1,3})\s+(Final|Live)\s+(.+?)\s+(\d{1,3})", label, re.I)
+    if not m:
+        return None
+    first, first_score, status, second, second_score = m.groups()
+    return {
+        "first": _uaap_full_team(first),
+        "firstScore": int(first_score),
+        "second": _uaap_full_team(second),
+        "secondScore": int(second_score),
+        "status": status.title(),
+        "state": "final" if status.lower()=="final" else "in",
+    }
+
+def _uaap_boxscore_players(soup, teams):
+    out = []
+    tables = []
+    for table in soup.find_all("table"):
+        rows = table.find_all("tr")
+        if not rows:
+            continue
+        headers = [_uaap_text(x.get_text(" ", strip=True)).upper() for x in rows[0].find_all(["th","td"])]
+        compact = [re.sub(r"[^A-Z0-9]+", "", x) for x in headers]
+        if "PLAYER" in compact and "PTS" in compact and "REB" in compact and "AST" in compact:
+            tables.append((table, compact))
+    for table_index, (table, headers) in enumerate(tables[:2]):
+        team = teams[table_index] if table_index < len(teams) else ""
+        player_i, pts_i, reb_i, ast_i = headers.index("PLAYER"), headers.index("PTS"), headers.index("REB"), headers.index("AST")
+        for tr in table.find_all("tr")[1:]:
+            cells = [_uaap_text(x.get_text(" ", strip=True)) for x in tr.find_all(["td","th"])]
+            if max(player_i, pts_i, reb_i, ast_i) >= len(cells):
+                continue
+            player = cells[player_i]
+            if not player or "TEAM TOTAL" in player.upper() or player.lower() in ("starters","bench","team / coach"):
+                continue
+            pts, reb, ast = _uaap_number(cells[pts_i]), _uaap_number(cells[reb_i]), _uaap_number(cells[ast_i])
+            if pts is None:
+                continue
+            out.append({
+                "player": player,
+                "team": team,
+                "pts": pts,
+                "reb": reb or 0,
+                "ast": ast or 0,
+            })
+    return out
+
+def fetch_uaap_livestats():
+    base = URLS["uaap_live_stats"]
+    soup = BeautifulSoup(fetch(base), "html.parser")
+    games = []
+    seen = set()
+    for a in soup.find_all("a", href=True):
+        href = urllib.parse.urljoin(base, str(a.get("href") or "").strip())
+        parsed = urllib.parse.urlparse(href)
+        query = urllib.parse.parse_qs(parsed.query)
+        game_ids = query.get("game_id") or []
+        if not game_ids:
+            continue
+        game_id = str(game_ids[0])
+        if game_id in seen:
+            continue
+        card = _uaap_livestats_card(a.get_text(" ", strip=True))
+        if not card:
+            continue
+        seen.add(game_id)
+        card["gameId"] = game_id
+        card["url"] = base + "?game_id=" + urllib.parse.quote(game_id)
+        games.append(card)
+
+    # Standings are computed from all final game cards currently exposed by the
+    # official live-stat tournament page, so one bad third-party table cannot
+    # overwrite them.
+    records = {}
+    for game in games:
+        if game.get("state") != "final":
+            continue
+        a, b = game["first"], game["second"]
+        records.setdefault(a, {"team":a,"wins":0,"losses":0})
+        records.setdefault(b, {"team":b,"wins":0,"losses":0})
+        if game["firstScore"] > game["secondScore"]:
+            records[a]["wins"] += 1
+            records[b]["losses"] += 1
+        elif game["secondScore"] > game["firstScore"]:
+            records[b]["wins"] += 1
+            records[a]["losses"] += 1
+    standings = sorted(records.values(), key=lambda x:(-x["wins"],x["losses"],x["team"]))
+
+    # Build current player leaders from the latest official box scores. This is
+    # a live-stats fallback until the UAAP season aggregate stats page exposes
+    # stable machine-readable tables.
+    aggregates = {}
+    detail_games = sorted(
+        games,
+        key=lambda x:int(x["gameId"]) if str(x["gameId"]).isdigit() else -1,
+        reverse=True,
+    )[:12]
+    for game in detail_games:
+        try:
+            game_soup = BeautifulSoup(fetch(game["url"]), "html.parser")
+            players = _uaap_boxscore_players(game_soup, [game["first"], game["second"]])
+        except Exception as ex:
+            print("UAAP livestats game", game.get("gameId"), type(ex).__name__, str(ex)[:100])
+            continue
+        for row in players:
+            key = (row["team"], row["player"])
+            agg = aggregates.setdefault(key, {
+                "player":row["player"],"team":row["team"],"games":0,
+                "ptsTotal":0.0,"rebTotal":0.0,"astTotal":0.0,
+            })
+            agg["games"] += 1
+            agg["ptsTotal"] += row["pts"]
+            agg["rebTotal"] += row["reb"]
+            agg["astTotal"] += row["ast"]
+
+    leaders = []
+    for agg in aggregates.values():
+        gp = max(1, agg["games"])
+        leaders.append({
+            "player": agg["player"],
+            "team": agg["team"],
+            "games": gp,
+            "ppg": round(agg["ptsTotal"]/gp, 1),
+            "rpg": round(agg["rebTotal"]/gp, 1),
+            "apg": round(agg["astTotal"]/gp, 1),
+        })
+    leaders.sort(key=lambda x:(x["ppg"],x["rpg"],x["apg"]), reverse=True)
+    return {"standings":standings,"topPlayers":leaders[:8],"games":games}
+
+
 def _uaap_listing_links(url, prefix, limit=80):
     soup = BeautifulSoup(fetch(url), "html.parser")
     found, seen = [], set()
@@ -882,11 +1033,23 @@ def update_uaap_official(uaap_league):
         print("UAAP stats", type(ex).__name__, str(ex)[:180])
         stats = {}
 
-    if stats.get("standings"):
-        official["standings"] = stats["standings"]
+    try:
+        livestats = fetch_uaap_livestats()
+    except Exception as ex:
+        print("UAAP livestats", type(ex).__name__, str(ex)[:180])
+        livestats = {}
+
+    standings = stats.get("standings") or livestats.get("standings") or []
+    top_players = stats.get("topPlayers") or livestats.get("topPlayers") or []
+    if standings:
+        official["standings"] = standings
         changed = True
-    if stats.get("topPlayers"):
-        official["topPlayers"] = stats["topPlayers"]
+    if top_players:
+        official["topPlayers"] = top_players
+        official["topPlayersMode"] = "season" if stats.get("topPlayers") else "recent-official-boxscores"
+        changed = True
+    if livestats.get("games"):
+        official["liveStatsGames"] = livestats["games"]
         changed = True
 
     try:
@@ -941,6 +1104,7 @@ def update_uaap_official(uaap_league):
     official["season"] = "Season 89 Men's Basketball"
     official["sources"] = {
         "stats": URLS["uaap_stats"],
+        "liveStats": URLS["uaap_live_stats"],
         "basketball": URLS["uaap_basketball"],
         "articles": URLS["uaap_articles"],
         "photos": URLS["uaap_photos"],

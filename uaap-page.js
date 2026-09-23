@@ -95,8 +95,10 @@ function renderStandings(regional,official){
   qs("#standings-body").innerHTML=list.map((x,i)=>'<tr><td>'+(i+1)+'</td><td><div class="standing-team">'+teamVisual(x.team)+'<span>'+safe(x.team)+'</span></div></td><td>'+safe(x.wins)+'</td><td>'+safe(x.losses)+'</td></tr>').join("");
 }
 function playerCard(x,rank){
-  const value=x.pts!==null&&x.pts!==undefined?safe(x.pts):"—";
-  return '<article class="top-player-card"><div class="top-player-rank">'+rank+'</div><div class="top-player-fallback">'+safe(initials(x.player))+'</div><div class="top-player-label">'+safe(x.team||"UAAP")+'</div><div class="top-player-name">'+safe(x.player)+'</div><div class="top-player-value">'+value+'<small>PTS</small></div><div class="top-player-meta">'+(x.reb!=null?safe(x.reb)+' REB · ':'')+(x.ast!=null?safe(x.ast)+' AST':'')+'</div></article>';
+  const average=x.ppg!==null&&x.ppg!==undefined;
+  const value=average?safe(x.ppg):(x.pts!==null&&x.pts!==undefined?safe(x.pts):"—");
+  const reb=average?x.rpg:x.reb,ast=average?x.apg:x.ast;
+  return '<article class="top-player-card"><div class="top-player-rank">'+rank+'</div><div class="top-player-fallback">'+safe(initials(x.player))+'</div><div class="top-player-label">'+safe(x.team||"UAAP")+'</div><div class="top-player-name">'+safe(x.player)+'</div><div class="top-player-value">'+value+'<small>'+(average?'PPG':'PTS')+'</small></div><div class="top-player-meta">'+(reb!=null?safe(reb)+(average?' RPG':' REB')+' · ':'')+(ast!=null?safe(ast)+(average?' APG':' AST'):'')+(average&&x.games?' · '+safe(x.games)+' GP':'')+'</div></article>';
 }
 function renderTopPlayers(official){
   const list=Array.isArray(official.topPlayers)?official.topPlayers:[];
