@@ -87,7 +87,6 @@ function setSectionVisible(el,visible){
   const section=el?.closest(".content-section");
   if(section)section.hidden=!visible;
 }
-
 function renderGallery(finals,official){
   const wrap=qs("#previous-games"),photos=Array.isArray(official.previousGamePhotos)?official.previousGamePhotos:[],cards=[];
   finals.slice(0,3).forEach(g=>{
@@ -99,7 +98,6 @@ function renderGallery(finals,official){
   setSectionVisible(wrap,cards.length>0);
   wrap.innerHTML=cards.length?cards.join(""):"";
 }
-
 function renderHighlights(official){
   const wrap=qs("#highlights"),items=Array.isArray(official.highlights)?official.highlights.slice(0,10):[];
   setSectionVisible(wrap,items.length>0);
@@ -107,14 +105,12 @@ function renderHighlights(official){
     (x.thumbnail?'<img class="highlight-thumb" src="'+safe(x.thumbnail)+'" alt="'+safe(x.title)+'" loading="lazy">':'<div class="highlight-thumb"></div>')+
     '<div class="highlight-copy"><strong>'+safe(x.title)+'</strong><span>'+safe(x.sourceName||x.channel||"UAAP Official")+'</span></div></a></article>').join(""):"";
 }
-
 function renderStandings(regional,official){
   const list=(Array.isArray(official.standings)&&official.standings.length?official.standings:regional.standings)||[];
   const wrap=qs("#standings-body");
   setSectionVisible(wrap,list.length>0);
   wrap.innerHTML=list.map((x,i)=>'<tr><td>'+(i+1)+'</td><td><div class="standing-team">'+teamVisual(x.team)+'<span>'+safe(x.team)+'</span></div></td><td>'+safe(x.wins)+'</td><td>'+safe(x.losses)+'</td></tr>').join("");
 }
-
 function playerCard(x,rank){
   const average=x.ppg!==null&&x.ppg!==undefined;
   const value=average?safe(x.ppg):(x.pts!==null&&x.pts!==undefined?safe(x.pts):"—");
@@ -127,7 +123,6 @@ function renderTopPlayers(official){
   setSectionVisible(wrap,list.length>0);
   wrap.innerHTML=list.length?list.slice(0,8).map((x,i)=>playerCard(x,i+1)).join(""):"";
 }
-
 function renderNews(official){
   const news=Array.isArray(official.headlines)?official.headlines.slice(0,6):[];
   const wrap=qs("#news");
@@ -140,3 +135,16 @@ function renderNews(official){
       '<span class="news-copy"><small>UAAP Official'+(date?" · "+safe(date):"")+'</small><strong>'+safe(x.title)+'</strong></span></a>';
   }).join(""):"";
 }
+async function load(){
+  const [regional,official]=await Promise.all([getJSON("/regional-web.json",{}),getJSON("/uaap-official.json",{})]);
+  const league=regional?.leagues?.uaap||{},games=Array.isArray(league.games)?league.games:[];
+  const live=games.filter(g=>g.state==="in"||/live/i.test(g.status||""));
+  const upcoming=games.filter(g=>g.state==="scheduled").sort((a,b)=>new Date(a.date)-new Date(b.date));
+  const finals=games.filter(g=>g.state==="final").sort((a,b)=>new Date(b.date)-new Date(a.date));
+  const logo=qs("#uaap-league-logo"),logoSrc=window.IMG_SCORE_LEAGUE_LOGOS?.uaap||"";
+  if(logo&&logoSrc)logo.src=logoSrc;
+  renderGames({live,upcoming,finals});startLive();renderGallery(finals,official);renderHighlights(official);renderStandings(league,official);renderTopPlayers(official);renderNews(official);
+}
+load();
+setInterval(()=>{if(document.visibilityState!=="hidden")load()},UAAP_REFRESH_MS);
+})();
