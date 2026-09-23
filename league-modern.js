@@ -34,7 +34,6 @@ const dt=v=>{const d=new Date(v);return Number.isNaN(d.getTime())?'':new Intl.Da
 const dateKey=d=>{const x=new Date(d),y=x.getUTCFullYear(),m=String(x.getUTCMonth()+1).padStart(2,'0'),z=String(x.getUTCDate()).padStart(2,'0');return ''+y+m+z};
 const saved=localStorage.getItem('img-theme');document.documentElement.dataset.theme=saved||((matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark');
 const nav=q('header nav');if(nav&&!q('.img-theme-toggle')){const b=document.createElement('button');b.className='img-theme-toggle';b.type='button';b.setAttribute('aria-label','Switch color theme');b.innerHTML='<svg viewBox="0 0 24 24"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5 8.5 8.5 0 1 0 20.5 14.2Z"/></svg>';b.onclick=()=>{const n=document.documentElement.dataset.theme==='light'?'dark':'light';document.documentElement.dataset.theme=n;localStorage.setItem('img-theme',n)};nav.append(b)}
-q('.league-data')?.remove();
 const content=q('main .content');if(content)content.classList.add('img-reveal');
 const hero=q('.hero');if(!hero)return;
 const app=document.createElement('section');app.className='img-league-app';app.id='imgLeagueApp';app.innerHTML='<div class="shell">'+
