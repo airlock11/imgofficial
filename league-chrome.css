@@ -34,30 +34,39 @@ html,body{transition:background-color .25s ease,color .25s ease}body>header{disp
 }
 
 
+
 .league-mobile-tools{display:contents}
 .league-backbtn{display:none}
 
 @media(max-width:760px){
   .league-mobile-tools{
     position:fixed;
-    right:14px;
+    right:12px;
     bottom:82px;
     z-index:1100;
     display:flex;
     align-items:center;
-    gap:7px;
-    padding:6px;
+    gap:5px;
+    padding:4px;
     border:1px solid rgba(255,255,255,.14);
     border-radius:999px;
-    background:
-      linear-gradient(180deg,rgba(38,45,56,.96),rgba(12,16,22,.97));
+    background:linear-gradient(180deg,rgba(38,45,56,.96),rgba(12,16,22,.97));
     box-shadow:
-      0 14px 30px rgba(0,0,0,.34),
-      0 4px 10px rgba(0,0,0,.26),
+      0 10px 22px rgba(0,0,0,.32),
+      0 3px 8px rgba(0,0,0,.24),
       inset 0 1px 0 rgba(255,255,255,.12),
-      inset 0 -1px 0 rgba(0,0,0,.44);
-    backdrop-filter:blur(14px);
-    -webkit-backdrop-filter:blur(14px)
+      inset 0 -1px 0 rgba(0,0,0,.42);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+    touch-action:none;
+    user-select:none;
+    -webkit-user-select:none;
+    cursor:grab
+  }
+
+  .league-mobile-tools.is-dragging{
+    cursor:grabbing;
+    transition:none
   }
 
   .league-backbtn,
@@ -68,53 +77,54 @@ html,body{transition:background-color .25s ease,color .25s ease}body>header{disp
     bottom:auto!important;
     left:auto!important;
     top:auto!important;
-    width:43px;
-    height:43px;
-    flex:0 0 43px;
+    width:36px;
+    height:36px;
+    flex:0 0 36px;
     display:grid;
     place-items:center;
     padding:0;
+    margin:0;
     border:1px solid rgba(255,255,255,.13);
     border-radius:50%;
-    background:
-      linear-gradient(180deg,#3a4350 0%,#242b35 48%,#151a21 100%);
+    background:linear-gradient(180deg,#3a4350 0%,#242b35 48%,#151a21 100%);
     color:#fff;
     text-decoration:none;
     box-shadow:
-      0 6px 10px rgba(0,0,0,.38),
-      0 2px 3px rgba(0,0,0,.30),
+      0 5px 8px rgba(0,0,0,.36),
+      0 2px 3px rgba(0,0,0,.28),
       inset 0 1px 0 rgba(255,255,255,.20),
-      inset 0 -2px 3px rgba(0,0,0,.34);
+      inset 0 -2px 3px rgba(0,0,0,.32);
     transition:
       transform .12s ease,
       box-shadow .12s ease,
       background-color .2s ease,
       color .2s ease,
       border-color .2s ease;
-    touch-action:manipulation;
+    touch-action:none;
     cursor:pointer
   }
 
   .league-backbtn:hover,
-  .league-themebtn:hover{
-    transform:translateY(-1px)
-  }
+  .league-themebtn:hover{transform:translateY(-1px)}
 
   .league-backbtn:active,
   .league-themebtn:active{
     transform:translateY(2px) scale(.98);
     box-shadow:
-      0 2px 4px rgba(0,0,0,.28),
-      inset 0 3px 7px rgba(0,0,0,.42),
+      0 2px 4px rgba(0,0,0,.25),
+      inset 0 3px 6px rgba(0,0,0,.40),
       inset 0 1px 0 rgba(255,255,255,.08)
   }
 
   .league-backbtn svg{
-    width:20px;
-    height:20px;
+    display:block;
+    width:18px;
+    height:18px;
+    margin:auto;
+    transform:none;
     fill:none;
     stroke:currentColor;
-    stroke-width:2.2;
+    stroke-width:2.35;
     stroke-linecap:round;
     stroke-linejoin:round
   }
@@ -122,19 +132,24 @@ html,body{transition:background-color .25s ease,color .25s ease}body>header{disp
   .league-backbtn:focus-visible,
   .league-themebtn:focus-visible{
     outline:2px solid #ef3f45;
-    outline-offset:3px
+    outline-offset:2px
   }
 
   .league-theme-track{display:none}
-  .league-theme-mobile-icon{display:block;width:20px;height:20px}
+  .league-theme-mobile-icon{
+    display:grid;
+    place-items:center;
+    width:18px;
+    height:18px;
+    margin:auto
+  }
 
   :root[data-theme="light"] .league-mobile-tools{
-    background:
-      linear-gradient(180deg,rgba(255,255,255,.98),rgba(223,229,236,.98));
+    background:linear-gradient(180deg,rgba(255,255,255,.98),rgba(223,229,236,.98));
     border-color:rgba(17,21,27,.14);
     box-shadow:
-      0 14px 28px rgba(17,21,27,.18),
-      0 4px 9px rgba(17,21,27,.10),
+      0 10px 22px rgba(17,21,27,.16),
+      0 3px 8px rgba(17,21,27,.09),
       inset 0 1px 0 rgba(255,255,255,1),
       inset 0 -1px 0 rgba(17,21,27,.10)
   }
@@ -143,11 +158,10 @@ html,body{transition:background-color .25s ease,color .25s ease}body>header{disp
   :root[data-theme="light"] .league-themebtn{
     color:#11151b;
     border-color:rgba(17,21,27,.13);
-    background:
-      linear-gradient(180deg,#ffffff 0%,#eef2f6 48%,#d8dee6 100%);
+    background:linear-gradient(180deg,#ffffff 0%,#eef2f6 48%,#d8dee6 100%);
     box-shadow:
-      0 6px 10px rgba(17,21,27,.18),
-      0 2px 3px rgba(17,21,27,.10),
+      0 5px 8px rgba(17,21,27,.16),
+      0 2px 3px rgba(17,21,27,.09),
       inset 0 1px 0 #fff,
       inset 0 -2px 3px rgba(17,21,27,.12)
   }
@@ -155,8 +169,8 @@ html,body{transition:background-color .25s ease,color .25s ease}body>header{disp
   :root[data-theme="light"] .league-backbtn:active,
   :root[data-theme="light"] .league-themebtn:active{
     box-shadow:
-      0 2px 4px rgba(17,21,27,.12),
-      inset 0 3px 7px rgba(17,21,27,.18),
+      0 2px 4px rgba(17,21,27,.11),
+      inset 0 3px 6px rgba(17,21,27,.17),
       inset 0 1px 0 rgba(255,255,255,.7)
   }
 }
