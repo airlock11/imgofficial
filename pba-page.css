@@ -78,3 +78,13 @@ footer{border-top:1px solid var(--pba-line);padding:26px 0 86px;color:#748295;fo
   .pba-logo-box{width:112px;height:70px}
   .status-value{font-size:.94rem;line-height:1.22}
 }
+
+.logo-filter-defs{position:absolute;width:0;height:0;overflow:hidden}
+.team-badge.image img,
+.standing-team img,
+.gallery-logos img{
+  filter:url(#pba-remove-white) drop-shadow(0 7px 16px rgba(0,0,0,.48)) saturate(1.16) contrast(1.08);
+}
+.team-badge.image img{transform:scale(1.08)}
+.standing-team img{transform:scale(1.06)}
+.gallery-logos img{transform:scale(1.04)}
