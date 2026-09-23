@@ -2132,6 +2132,7 @@ async function loadVerifiedChannelLive(){
   }
 
   const sources=[
+    'https://img-api-proxy.magsipocarnie.workers.dev/live-streams?ts='+now,
     'https://raw.githubusercontent.com/airlock11/imgofficial/live-data/youtube-live.json?ts='+now,
     'https://raw.githubusercontent.com/airlock11/imgofficial/main/youtube-live.json?ts='+now,
     '/youtube-live.json?ts='+now
