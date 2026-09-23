@@ -375,3 +375,27 @@ footer{border-top:1px solid var(--line);padding:26px 0 84px;color:var(--muted);f
  .img-source-fallback,.img-highlight-fallback{min-height:135px;padding:16px}
  .img-highlight-fallback{min-height:190px;max-width:none}
 }
+
+/* IMG SEGMENTED LEAGUE GAMES 2026-09-23 */
+.img-kpis{grid-template-columns:repeat(5,1fr)!important}
+.img-panel-link{font-size:.72rem;font-weight:800;text-decoration:none;color:var(--muted);white-space:nowrap}
+.img-panel-link:hover{color:var(--text)}
+.img-game-tabs{
+ display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin:0 0 14px;padding:4px;
+ border:1px solid var(--line);border-radius:999px;background:var(--surface-soft)
+}
+.img-game-tabs button{
+ min-height:38px;border:0;border-radius:999px;background:transparent;color:var(--muted);
+ font:inherit;font-size:.74rem;font-weight:820;cursor:pointer
+}
+.img-game-tabs button.active{background:var(--text);color:var(--bg)}
+.img-game-tabs button:disabled{opacity:.38;cursor:default}
+@media(max-width:980px){.img-kpis{grid-template-columns:repeat(3,1fr)!important}}
+@media(max-width:680px){
+ .img-kpis{grid-template-columns:1fr 1fr!important}
+ .img-kpi:last-child{grid-column:1/-1!important}
+ .img-game-tabs{margin-bottom:12px}
+ .img-game-tabs button{font-size:.7rem;min-height:36px}
+ .img-panel-link{white-space:normal}
+}
+@media(max-width:430px){.img-kpis{grid-template-columns:1fr!important}.img-kpi:last-child{grid-column:auto!important}}
