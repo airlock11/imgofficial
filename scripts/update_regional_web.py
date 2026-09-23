@@ -1462,6 +1462,10 @@ def main():
         update_pba_previous_game_photos(data["leagues"].get("pba", {}))
     except Exception as e:
         errors["pba_photos"] = str(e)
+    try:
+        update_pba_shorts()
+    except Exception as e:
+        errors["pba_shorts"] = str(e)
     data["updated_at"] = datetime.now(PHT).isoformat(timespec="seconds")
     data["refresh_minutes"] = 30
     data["errors"] = errors
