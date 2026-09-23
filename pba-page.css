@@ -557,9 +557,10 @@ main,.page-shell,.content-section,footer{background:#000}
 .panel-title{padding:15px 17px 4px;font-size:.95rem;font-weight:900}
 .standings-table{width:100%;border-collapse:collapse}
 .standings-table th,.standings-table td{
-  padding:9px 12px;
+  padding:11px 12px;
   border-bottom:1px solid rgba(255,255,255,.055);
-  font-size:.8rem
+  font-size:.82rem;
+  vertical-align:middle
 }
 .standings-table th{
   color:#8395aa;
@@ -568,12 +569,44 @@ main,.page-shell,.content-section,footer{background:#000}
   font-size:.58rem;
   text-align:left
 }
-.standings-table td:last-child,.standings-table th:last-child{text-align:right}
-.standing-team{display:flex;align-items:center;gap:9px}
+.standings-table td:nth-child(3),
+.standings-table td:nth-child(4){
+  width:64px;
+  font-size:1.18rem;
+  line-height:1;
+  font-weight:950;
+  color:#f7fbff;
+  text-align:center;
+  letter-spacing:-.02em
+}
+.standings-table th:nth-child(3),
+.standings-table th:nth-child(4){
+  width:64px;
+  text-align:center
+}
+.standings-table td:last-child,.standings-table th:last-child{text-align:center}
+.standing-team{
+  display:flex;
+  align-items:center;
+  gap:13px;
+  min-height:52px;
+  font-size:.88rem;
+  font-weight:850
+}
 .standing-team img{
-  width:30px;height:30px;
+  width:50px;
+  height:50px;
+  flex:0 0 50px;
   object-fit:contain;
-  filter:drop-shadow(0 4px 8px rgba(0,0,0,.4))
+  background:transparent!important;
+  border:0;
+  border-radius:0;
+  box-shadow:none;
+  filter:
+    drop-shadow(0 1px 0 rgba(255,255,255,.28))
+    drop-shadow(0 4px 3px rgba(0,0,0,.52))
+    drop-shadow(0 10px 16px rgba(0,0,0,.48));
+  transform:translateZ(0) scale(1.03)
 }
 
 /* TOP PLAYERS */
@@ -741,7 +774,10 @@ footer{
   .game-status{font-size:.68rem}
   .team-main{gap:10px}
   .team-score{flex-basis:44px;min-width:44px;font-size:1.65rem}
-  .standings-table th,.standings-table td{padding:8px 8px}
+  .standings-table th,.standings-table td{padding:9px 7px}
+  .standing-team{gap:9px;min-height:46px;font-size:.78rem}
+  .standing-team img{width:42px;height:42px;flex-basis:42px}
+  .standings-table td:nth-child(3),.standings-table td:nth-child(4){width:50px;font-size:1.05rem}
 }
 .reel-media{position:relative}
 .reel-frame{
