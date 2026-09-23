@@ -35,3 +35,49 @@ jobs:
 
       - name: Deploy IMG API Worker
         run: npx --yes wrangler@4 deploy
+
+      - name: Verify IMG livestream endpoint
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE="https://img-api-proxy.magsipocarnie.workers.dev"
+
+          health=""
+          live=""
+          for attempt in 1 2 3 4 5; do
+            health="$(curl -fsS --max-time 12 "$BASE/health" || true)"
+            live="$(curl -fsS --max-time 12 "$BASE/live-streams" || true)"
+            if [ -n "$health" ] && [ -n "$live" ]; then
+              break
+            fi
+            sleep 3
+          done
+
+          HEALTH_JSON="$health" LIVE_JSON="$live" python - <<'PY'
+          import json, os
+
+          health = json.loads(os.environ["HEALTH_JSON"])
+          live = json.loads(os.environ["LIVE_JSON"])
+
+          if health.get("ok") is not True:
+              raise SystemExit("Cloudflare /health did not return ok=true")
+          if not isinstance(live.get("streams"), list):
+              raise SystemExit("Cloudflare /live-streams did not return a streams array")
+
+          configured = health.get("configured") or {}
+          cf = live.get("cloudflareLiveVerification") or {}
+          asian = [
+              item for item in live.get("streams", [])
+              if item.get("leagueKey") == "asian_games"
+          ]
+
+          print("Cloudflare YouTube configured:", bool(configured.get("youtube")))
+          print("Cloudflare live verification status:", cf.get("status", "missing"))
+          print("Cloudflare Asian Games verified live count:", len(asian))
+          print("Cloudflare feed updatedAt:", live.get("updatedAt", ""))
+
+          if not configured.get("youtube"):
+              raise SystemExit("Cloudflare YOUTUBE_API_KEY is not configured")
+          if cf.get("status") != "verified":
+              raise SystemExit("Cloudflare direct YouTube verification is not active")
+          PY
