@@ -49,13 +49,13 @@ jobs:
           git reset --hard origin/main
           python scripts/update_regional_web.py
 
-          if git diff --quiet -- regional-web.json pba-official.json; then
+          if git diff --quiet -- regional-web.json pba-official.json uaap-official.json; then
             echo "No regional data changes."
             exit 0
           fi
 
-          git add regional-web.json pba-official.json
-          git commit -m "Update regional basketball web data and PBA game photos"
+          git add regional-web.json pba-official.json uaap-official.json
+          git commit -m "Update regional basketball web data and league official feeds"
 
           for attempt in 1 2 3 4 5; do
             git fetch origin main

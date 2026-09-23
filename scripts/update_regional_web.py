@@ -17,6 +17,7 @@ import pytesseract
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "regional-web.json"
 PBA_OFFICIAL_OUT = ROOT / "pba-official.json"
+UAAP_OFFICIAL_OUT = ROOT / "uaap-official.json"
 UA = "Mozilla/5.0 (compatible; IMG-Sports-WebUpdater/1.0; +https://imgofficial.com)"
 PHT = timezone(timedelta(hours=8))
 
@@ -24,6 +25,11 @@ URLS = {
     "pba": "https://skedcheck.com/pba-games-schedule-scores/",
     "pba_news": "https://www.pba.ph/news",
     "uaap": "https://skedcheck.com/uaap-mens-basketball-schedule-scores/",
+    "uaap_stats": "https://uaap.org/stats/uaap-season-89-men-s-basketball",
+    "uaap_basketball": "https://uaap.org/sports/basketball",
+    "uaap_articles": "https://uaap.org/posts/articles",
+    "uaap_photos": "https://uaap.org/posts/photo_gallery",
+    "uaap_videos": "https://uaap.org/posts/video_gallery",
     "mpbl_fixtures": "https://www.forebet.com/en/basketball/philippines/mpbl/fixtures",
     "mpbl_results": "https://www.forebet.com/en/basketball/philippines/mpbl/results",
     "mpbl_standings": "https://live2sport.com/Basketball.php/Philippines_MBPL/1/2026/",
@@ -581,6 +587,379 @@ def update_pba_shorts():
     return len(fresh)
 
 
+
+UAAP_TEAM_NAMES = [
+    "Adamson", "Ateneo", "De La Salle", "DLSU", "Far Eastern", "FEU",
+    "National University", "NU", "University of the East", "UE",
+    "University of the Philippines", "UP", "University of Santo Tomas", "UST",
+]
+
+def _uaap_text(value):
+    return re.sub(r"\s+", " ", str(value or "")).strip()
+
+def _uaap_number(value):
+    m = re.search(r"-?\d+(?:\.\d+)?", str(value or "").replace(",", ""))
+    return float(m.group(0)) if m else None
+
+def _uaap_article_image(soup, base_url):
+    for attrs in (
+        {"property":"og:image"},
+        {"name":"twitter:image"},
+        {"property":"twitter:image"},
+    ):
+        tag = soup.find("meta", attrs=attrs)
+        if tag and tag.get("content"):
+            value = urllib.parse.urljoin(base_url, str(tag.get("content")).strip())
+            if value.startswith("http"):
+                return value
+    img = soup.find("img")
+    if img:
+        value = img.get("src") or img.get("data-src")
+        if value:
+            value = urllib.parse.urljoin(base_url, str(value).strip())
+            if value.startswith("http"):
+                return value
+    return ""
+
+def _uaap_published(soup):
+    time_tag = soup.find("time")
+    if time_tag:
+        raw = time_tag.get("datetime") or time_tag.get_text(" ", strip=True)
+        if raw:
+            try:
+                return datetime.fromisoformat(str(raw).replace("Z","+00:00")).isoformat()
+            except Exception:
+                pass
+    text = _uaap_text(soup.get_text(" ", strip=True))
+    m = re.search(
+        r"Published on\s+(\d{1,2})(?:st|nd|rd|th)?\s+"
+        r"(January|February|March|April|May|June|July|August|September|October|November|December)\s+"
+        r"(20\d{2})(?:,\s+(\d{1,2}):(\d{2})\s*(AM|PM))?",
+        text, re.I
+    )
+    if not m:
+        return ""
+    day, month, year, hh, mm, ap = m.groups()
+    try:
+        dt = datetime.strptime(f"{day} {month} {year}", "%d %B %Y")
+        if hh and mm and ap:
+            hour = int(hh)
+            if ap.upper()=="PM" and hour < 12: hour += 12
+            if ap.upper()=="AM" and hour == 12: hour = 0
+            dt = dt.replace(hour=hour, minute=int(mm))
+        return dt.replace(tzinfo=PHT).isoformat()
+    except Exception:
+        return ""
+
+def _uaap_is_mens_basketball(text):
+    t = _uaap_text(text).lower()
+    if "basketball" not in t:
+        return False
+    if any(x in t for x in ("women's basketball", "womens basketball", "girls basketball", "boys basketball", "jhs basketball", "junior high school")):
+        return False
+    return (
+        "men's basketball" in t
+        or "mens basketball" in t
+        or "collegiate men's basketball" in t
+        or "collegiate mens basketball" in t
+        or ("season 89" in t and any(name.lower() in t for name in UAAP_TEAM_NAMES))
+    )
+
+def fetch_uaap_stats():
+    result = {"standings": [], "topPlayers": []}
+    page = fetch(URLS["uaap_stats"])
+    soup = BeautifulSoup(page, "html.parser")
+
+    # Support server-rendered tables from UAAP. If the page later changes its
+    # table order, header matching keeps the parser tied to labels, not positions.
+    for table in soup.find_all("table"):
+        rows = table.find_all("tr")
+        if not rows:
+            continue
+        headers = [_uaap_text(x.get_text(" ", strip=True)).lower() for x in rows[0].find_all(["th","td"])]
+        if not headers:
+            continue
+
+        def col(*names):
+            for idx, header in enumerate(headers):
+                compact = re.sub(r"[^a-z0-9]+", "", header)
+                for name in names:
+                    if compact == re.sub(r"[^a-z0-9]+", "", name.lower()):
+                        return idx
+            return -1
+
+        team_i = col("team", "school", "participant")
+        win_i = col("w", "win", "wins")
+        loss_i = col("l", "loss", "losses")
+        if team_i >= 0 and win_i >= 0 and loss_i >= 0:
+            standing_rows = []
+            for tr in rows[1:]:
+                cells = [_uaap_text(x.get_text(" ", strip=True)) for x in tr.find_all(["td","th"])]
+                if max(team_i, win_i, loss_i) >= len(cells):
+                    continue
+                wins, losses = _uaap_number(cells[win_i]), _uaap_number(cells[loss_i])
+                if wins is None or losses is None or not cells[team_i]:
+                    continue
+                standing_rows.append({"team":cells[team_i],"wins":int(wins),"losses":int(losses)})
+            if standing_rows:
+                result["standings"] = standing_rows
+
+        player_i = col("player", "name")
+        team_i = col("team", "school")
+        pts_i = col("pts", "ppg", "points")
+        reb_i = col("reb", "rpg", "rebounds")
+        ast_i = col("ast", "apg", "assists")
+        if player_i >= 0 and any(i >= 0 for i in (pts_i, reb_i, ast_i)):
+            players = []
+            for tr in rows[1:]:
+                cells = [_uaap_text(x.get_text(" ", strip=True)) for x in tr.find_all(["td","th"])]
+                if player_i >= len(cells) or not cells[player_i]:
+                    continue
+                row = {
+                    "player": cells[player_i],
+                    "team": cells[team_i] if team_i >= 0 and team_i < len(cells) else "",
+                    "pts": _uaap_number(cells[pts_i]) if pts_i >= 0 and pts_i < len(cells) else None,
+                    "reb": _uaap_number(cells[reb_i]) if reb_i >= 0 and reb_i < len(cells) else None,
+                    "ast": _uaap_number(cells[ast_i]) if ast_i >= 0 and ast_i < len(cells) else None,
+                }
+                players.append(row)
+            if players:
+                players.sort(key=lambda x: (x.get("pts") is not None, x.get("pts") or -1), reverse=True)
+                result["topPlayers"] = players[:8]
+
+    return result
+
+def _uaap_listing_links(url, prefix, limit=80):
+    soup = BeautifulSoup(fetch(url), "html.parser")
+    found, seen = [], set()
+    for a in soup.find_all("a", href=True):
+        href = urllib.parse.urljoin(url, str(a.get("href") or "").strip())
+        parsed = urllib.parse.urlparse(href)
+        if parsed.netloc.lower() not in ("uaap.org", "www.uaap.org"):
+            continue
+        if prefix not in parsed.path:
+            continue
+        canonical = "https://uaap.org" + parsed.path.rstrip("/")
+        if canonical in seen:
+            continue
+        title = _uaap_text(a.get_text(" ", strip=True))
+        if len(title) < 8:
+            continue
+        seen.add(canonical)
+        found.append((title, canonical))
+        if len(found) >= limit:
+            break
+    return found
+
+def fetch_uaap_headlines(limit=6):
+    rows = []
+    links = _uaap_listing_links(URLS["uaap_articles"], "/posts/articles/", 60)
+    for fallback_title, url in links:
+        if len(rows) >= limit:
+            break
+        try:
+            soup = BeautifulSoup(fetch(url), "html.parser")
+            page_text = _uaap_text(soup.get_text(" ", strip=True))
+            if not _uaap_is_mens_basketball(page_text):
+                continue
+            h1 = soup.find("h1")
+            title = _uaap_text(h1.get_text(" ", strip=True) if h1 else fallback_title)
+            rows.append({
+                "title": title or fallback_title,
+                "url": url,
+                "image": _uaap_article_image(soup, url),
+                "published": _uaap_published(soup),
+                "sourceName": "UAAP Official",
+            })
+        except Exception as ex:
+            print("UAAP article", url, type(ex).__name__, str(ex)[:100])
+    return rows
+
+def fetch_uaap_photo_gallery(limit=8):
+    rows = []
+    links = _uaap_listing_links(URLS["uaap_photos"], "/posts/photo_gallery/", 80)
+    for title, url in links:
+        compact = title.lower()
+        if not (
+            ("89" in compact and ("bbm" in compact or "basketball" in compact))
+            or "season 89" in compact
+        ):
+            continue
+        try:
+            soup = BeautifulSoup(fetch(url), "html.parser")
+            page_text = _uaap_text(soup.get_text(" ", strip=True))
+            if "basketball" not in page_text.lower() and "bbm" not in compact:
+                continue
+            image = _uaap_article_image(soup, url)
+            rows.append({
+                "title": title,
+                "url": url,
+                "image": image,
+                "published": _uaap_published(soup),
+                "sourceName": "UAAP Official",
+            })
+            if len(rows) >= limit:
+                break
+        except Exception:
+            continue
+    return rows
+
+def fetch_uaap_video_gallery(limit=10):
+    rows = []
+    soup = BeautifulSoup(fetch(URLS["uaap_videos"]), "html.parser")
+    seen = set()
+    for a in soup.find_all("a", href=True):
+        text = _uaap_text(a.get_text(" ", strip=True))
+        lower = text.lower()
+        if not text or "basketball" not in lower:
+            continue
+        if not ("season 89" in lower or "89" in lower):
+            continue
+        if any(x in lower for x in ("women", "girls", "boys", "jhs", "junior")):
+            continue
+        href = urllib.parse.urljoin(URLS["uaap_videos"], str(a.get("href") or "").strip())
+        if href in seen:
+            continue
+        seen.add(href)
+        img = a.find("img")
+        thumb = ""
+        if img:
+            thumb = img.get("src") or img.get("data-src") or ""
+            if thumb:
+                thumb = urllib.parse.urljoin(URLS["uaap_videos"], str(thumb))
+        rows.append({
+            "title": text,
+            "url": href,
+            "thumbnail": thumb,
+            "sourceName": "UAAP Official",
+        })
+        if len(rows) >= limit:
+            break
+    return rows
+
+def _uaap_match_game_photo(game, galleries):
+    away = _photo_text(game.get("away"))
+    home = _photo_text(game.get("home"))
+    aliases = {
+        "adamson soaring falcons":["adamson","adu"],
+        "ateneo blue eagles":["ateneo","admu"],
+        "de la salle green archers":["la salle","dlsu"],
+        "feu tamaraws":["feu","far eastern"],
+        "nu bulldogs":["nu","national university"],
+        "ue red warriors":["ue","university of the east"],
+        "up fighting maroons":["up","university of the philippines"],
+        "ust growling tigers":["ust","santo tomas"],
+    }
+    def team_hit(team, text):
+        options = aliases.get(team, [team])
+        return any(x and x in text for x in options)
+    for item in galleries:
+        text = _photo_text(item.get("title"))
+        if team_hit(away, text) and team_hit(home, text) and str(item.get("image") or "").startswith("http"):
+            return {
+                "eventId": game.get("eventId") or "",
+                "date": str(game.get("date") or "")[:10],
+                "away": game.get("away") or "",
+                "home": game.get("home") or "",
+                "image": item.get("image"),
+                "credit": "UAAP Official",
+                "sourceName": "UAAP Official",
+                "sourceUrl": item.get("url") or URLS["uaap_photos"],
+            }
+    return None
+
+def update_uaap_official(uaap_league):
+    try:
+        official = json.loads(UAAP_OFFICIAL_OUT.read_text("utf-8"))
+    except Exception:
+        official = {}
+
+    changed = False
+
+    try:
+        stats = fetch_uaap_stats()
+    except Exception as ex:
+        print("UAAP stats", type(ex).__name__, str(ex)[:180])
+        stats = {}
+
+    if stats.get("standings"):
+        official["standings"] = stats["standings"]
+        changed = True
+    if stats.get("topPlayers"):
+        official["topPlayers"] = stats["topPlayers"]
+        changed = True
+
+    try:
+        headlines = fetch_uaap_headlines(6)
+    except Exception as ex:
+        print("UAAP headlines", type(ex).__name__, str(ex)[:180])
+        headlines = []
+    if headlines:
+        official["headlines"] = headlines
+        changed = True
+
+    try:
+        galleries = fetch_uaap_photo_gallery(12)
+    except Exception as ex:
+        print("UAAP photos", type(ex).__name__, str(ex)[:180])
+        galleries = []
+    if galleries:
+        official["photoGallery"] = galleries
+        changed = True
+
+    try:
+        videos = fetch_uaap_video_gallery(10)
+    except Exception as ex:
+        print("UAAP videos", type(ex).__name__, str(ex)[:180])
+        videos = []
+    if videos:
+        official["highlights"] = videos
+        changed = True
+
+    games = list((uaap_league or {}).get("games") or [])
+    finals = sorted(
+        [g for g in games if g.get("state") == "final"],
+        key=lambda g: g.get("date", ""),
+        reverse=True,
+    )[:3]
+    previous = list(official.get("previousGamePhotos") or [])
+    photos = []
+    for game in finals:
+        found = _uaap_match_game_photo(game, galleries)
+        if found:
+            photos.append(found)
+            continue
+        # Preserve last verified match photo during source outages.
+        event_id = str(game.get("eventId") or "")
+        prior = next((x for x in previous if event_id and str(x.get("eventId") or "") == event_id), None)
+        if prior and str(prior.get("image") or "").startswith("http"):
+            photos.append(prior)
+    if photos:
+        official["previousGamePhotos"] = photos
+        changed = True
+
+    official["season"] = "Season 89 Men's Basketball"
+    official["sources"] = {
+        "stats": URLS["uaap_stats"],
+        "basketball": URLS["uaap_basketball"],
+        "articles": URLS["uaap_articles"],
+        "photos": URLS["uaap_photos"],
+        "videos": URLS["uaap_videos"],
+    }
+    official["updatedAt"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    UAAP_OFFICIAL_OUT.write_text(json.dumps(official, ensure_ascii=False, indent=2) + "\n", "utf-8")
+    print(json.dumps({
+        "uaap_official": {
+            "standings": len(official.get("standings") or []),
+            "topPlayers": len(official.get("topPlayers") or []),
+            "headlines": len(official.get("headlines") or []),
+            "photos": len(official.get("previousGamePhotos") or []),
+            "highlights": len(official.get("highlights") or []),
+        }
+    }, ensure_ascii=False))
+    return changed
+
+
 def parse_uaap():
     xs = lines(URLS["uaap"])
     games, day = [], None
@@ -661,9 +1040,10 @@ def parse_uaap():
         "coverage":"Schedule, final scores and standings",
         "note":"Automatically refreshed from the current UAAP Season 89 public schedule/results page. Live One Sports broadcasts are handled separately by the YouTube live scanner.",
         "sources":[
-            {"name":"UAAP Official","url":"https://uaap.org/"},
+            {"name":"UAAP Official Stats","url":URLS["uaap_stats"]},
+            {"name":"UAAP Official Basketball","url":URLS["uaap_basketball"]},
             {"name":"UAAP Live Stats","url":"https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball"},
-            {"name":"SkedCheck","url":URLS["uaap"]},
+            {"name":"SkedCheck Fallback","url":URLS["uaap"]},
             {"name":"One Sports","url":"https://www.youtube.com/@OneSportsPHL"}
         ],
         "standings": standings,
@@ -1602,6 +1982,10 @@ def main():
                 data["leagues"][key] = fresh
         except Exception as e:
             errors[key] = str(e)
+    try:
+        update_uaap_official(data["leagues"].get("uaap", {}))
+    except Exception as e:
+        errors["uaap_official"] = str(e)
     try:
         update_pba_previous_game_photos(data["leagues"].get("pba", {}))
     except Exception as e:
