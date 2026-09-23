@@ -1,0 +1,663 @@
+{
+  "updated_at": "2026-09-23T05:54:56.143638+00:00",
+  "leagues": {
+    "nba": {
+      "name": "nba",
+      "mode": "teams",
+      "sources": {
+        "teams": "https://www.nba.com/teams",
+        "players": "https://www.nba.com/players",
+        "stats": "https://www.nba.com/stats",
+        "youtube": "https://www.youtube.com/@NBA",
+        "facebook": "https://www.facebook.com/nba"
+      },
+      "teams": [],
+      "team_count": 0,
+      "player_count": 0,
+      "last_error": "HTTPError: HTTP Error 403: Forbidden"
+    },
+    "wnba": {
+      "name": "wnba",
+      "mode": "teams",
+      "sources": {
+        "teams": "https://www.wnba.com/teams",
+        "players": "https://www.wnba.com/players",
+        "stats": "https://www.wnba.com/stats",
+        "youtube": "https://www.youtube.com/@WNBA",
+        "facebook": "https://www.facebook.com/wnba"
+      },
+      "teams": [],
+      "team_count": 0,
+      "player_count": 0,
+      "last_error": "HTTPError: HTTP Error 403: Forbidden"
+    },
+    "pba": {
+      "name": "pba",
+      "mode": "teams",
+      "sources": {
+        "teams": "https://www.pba.ph/teams",
+        "players": "https://www.pba.ph/players",
+        "stats": "https://www.pba.ph/stats",
+        "youtube": "https://www.youtube.com/@OneSportsPHL",
+        "facebook": "https://www.facebook.com/pbaconnect"
+      },
+      "teams": [
+        {
+          "id": "nlex-road-warriors",
+          "slug": "nlex-road-warriors",
+          "name": "NLEX Road Warriors",
+          "roster": []
+        },
+        {
+          "id": "macau-black-knights",
+          "slug": "macau-black-knights",
+          "name": "Macau Black Knights",
+          "roster": []
+        },
+        {
+          "id": "terrafirma-dyip",
+          "slug": "terrafirma-dyip",
+          "name": "Terrafirma Dyip",
+          "roster": []
+        },
+        {
+          "id": "tnt-tropang-5g",
+          "slug": "tnt-tropang-5g",
+          "name": "TNT Tropang 5G",
+          "roster": []
+        },
+        {
+          "id": "converge-fiberxers",
+          "slug": "converge-fiberxers",
+          "name": "Converge FiberXers",
+          "roster": []
+        },
+        {
+          "id": "barangay-ginebra",
+          "slug": "barangay-ginebra",
+          "name": "Barangay Ginebra",
+          "roster": []
+        },
+        {
+          "id": "meralco-bolts",
+          "slug": "meralco-bolts",
+          "name": "Meralco Bolts",
+          "roster": []
+        }
+      ],
+      "team_count": 7,
+      "player_count": 0
+    },
+    "mpbl": {
+      "name": "mpbl",
+      "mode": "teams",
+      "sources": {
+        "teams": "https://mpbl.com.ph/",
+        "players": "https://mpbl.com.ph/",
+        "stats": "https://mpbl.com.ph/",
+        "youtube": "https://www.youtube.com/results?search_query=MPBL+official",
+        "facebook": "https://www.facebook.com/MPBLOfficial"
+      },
+      "teams": [
+        {
+          "id": "sarangani-marlins",
+          "slug": "sarangani-marlins",
+          "name": "Sarangani Marlins",
+          "roster": []
+        },
+        {
+          "id": "imus-braderhood",
+          "slug": "imus-braderhood",
+          "name": "Imus Braderhood",
+          "roster": []
+        },
+        {
+          "id": "rizal-golden-coolers",
+          "slug": "rizal-golden-coolers",
+          "name": "Rizal Golden Coolers",
+          "roster": []
+        },
+        {
+          "id": "quezon-huskers",
+          "slug": "quezon-huskers",
+          "name": "Quezon Huskers",
+          "roster": []
+        },
+        {
+          "id": "bulacan-kuyas",
+          "slug": "bulacan-kuyas",
+          "name": "Bulacan Kuyas",
+          "roster": []
+        },
+        {
+          "id": "gensan-warriors",
+          "slug": "gensan-warriors",
+          "name": "GenSan Warriors",
+          "roster": []
+        },
+        {
+          "id": "batang-kankaloo",
+          "slug": "batang-kankaloo",
+          "name": "Batang Kankaloo",
+          "roster": []
+        },
+        {
+          "id": "zamboanga-sikat",
+          "slug": "zamboanga-sikat",
+          "name": "Zamboanga Sikat",
+          "roster": []
+        },
+        {
+          "id": "batangas-city",
+          "slug": "batangas-city",
+          "name": "Batangas City",
+          "roster": []
+        },
+        {
+          "id": "marikina-shoemasters",
+          "slug": "marikina-shoemasters",
+          "name": "Marikina Shoemasters",
+          "roster": []
+        }
+      ],
+      "team_count": 10,
+      "player_count": 0
+    },
+    "nbl-pilipinas": {
+      "name": "nbl-pilipinas",
+      "mode": "teams",
+      "sources": {
+        "teams": "http://nblp.web.geniussports.com/",
+        "players": "http://nblp.web.geniussports.com/",
+        "stats": "http://nblp.web.geniussports.com/",
+        "youtube": "https://www.youtube.com/channel/UCJDBLldRGVJPEvyjJdSHefw",
+        "facebook": "https://www.facebook.com/nblpilipinas"
+      },
+      "teams": [
+        {
+          "id": "batangas-barako-venom-art",
+          "slug": "batangas-barako-venom-art",
+          "name": "Batangas Barako - Venom Art",
+          "roster": []
+        },
+        {
+          "id": "tikas-kapampangan",
+          "slug": "tikas-kapampangan",
+          "name": "Tikas Kapampangan",
+          "roster": []
+        },
+        {
+          "id": "camsur-express",
+          "slug": "camsur-express",
+          "name": "CamSur Express",
+          "roster": []
+        },
+        {
+          "id": "nueva-ecija-granary-buffalos",
+          "slug": "nueva-ecija-granary-buffalos",
+          "name": "Nueva Ecija Granary Buffalos",
+          "roster": []
+        },
+        {
+          "id": "zamboanga-valientes",
+          "slug": "zamboanga-valientes",
+          "name": "Zamboanga Valientes",
+          "roster": []
+        },
+        {
+          "id": "manila-mlb",
+          "slug": "manila-mlb",
+          "name": "Manila MLB",
+          "roster": []
+        },
+        {
+          "id": "quezon-city-titans",
+          "slug": "quezon-city-titans",
+          "name": "Quezon City Titans",
+          "roster": []
+        },
+        {
+          "id": "taguig-city-generals",
+          "slug": "taguig-city-generals",
+          "name": "Taguig City Generals",
+          "roster": []
+        },
+        {
+          "id": "pangasinan-asinderos",
+          "slug": "pangasinan-asinderos",
+          "name": "Pangasinan Asinderos",
+          "roster": []
+        },
+        {
+          "id": "quezon-starhorse",
+          "slug": "quezon-starhorse",
+          "name": "Quezon Starhorse",
+          "roster": []
+        }
+      ],
+      "team_count": 10,
+      "player_count": 0
+    },
+    "nbl-australia": {
+      "name": "nbl-australia",
+      "mode": "teams",
+      "sources": {
+        "teams": "https://www.nbl.com.au/teams",
+        "players": "https://www.nbl.com.au/players",
+        "stats": "https://www.nbl.com.au/stats/statistics",
+        "youtube": "https://www.youtube.com/@nbl",
+        "facebook": "https://www.facebook.com/NBL"
+      },
+      "teams": [
+        {
+          "id": "adelaide-36ers",
+          "slug": "adelaide-36ers",
+          "name": "Adelaide 36ers",
+          "roster": []
+        },
+        {
+          "id": "melbourne-united",
+          "slug": "melbourne-united",
+          "name": "Melbourne United",
+          "roster": []
+        },
+        {
+          "id": "south-east-melbourne-phoenix",
+          "slug": "south-east-melbourne-phoenix",
+          "name": "South East Melbourne Phoenix",
+          "roster": []
+        },
+        {
+          "id": "perth-wildcats",
+          "slug": "perth-wildcats",
+          "name": "Perth Wildcats",
+          "roster": []
+        },
+        {
+          "id": "illawarra-hawks",
+          "slug": "illawarra-hawks",
+          "name": "Illawarra Hawks",
+          "roster": []
+        },
+        {
+          "id": "new-zealand-breakers",
+          "slug": "new-zealand-breakers",
+          "name": "New Zealand Breakers",
+          "roster": []
+        },
+        {
+          "id": "cairns-taipans",
+          "slug": "cairns-taipans",
+          "name": "Cairns Taipans",
+          "roster": []
+        },
+        {
+          "id": "sydney-kings",
+          "slug": "sydney-kings",
+          "name": "Sydney Kings",
+          "roster": []
+        },
+        {
+          "id": "tasmania-jackjumpers",
+          "slug": "tasmania-jackjumpers",
+          "name": "Tasmania JackJumpers",
+          "roster": []
+        },
+        {
+          "id": "brisbane-bullets",
+          "slug": "brisbane-bullets",
+          "name": "Brisbane Bullets",
+          "roster": []
+        }
+      ],
+      "team_count": 10,
+      "player_count": 0
+    },
+    "vba": {
+      "name": "vba",
+      "mode": "teams",
+      "sources": {
+        "teams": "https://vba.vn/teams",
+        "players": "https://vba.vn/",
+        "stats": "https://vba.vn/",
+        "youtube": "https://www.youtube.com/results?search_query=VBA+Vietnam+basketball+official",
+        "facebook": "https://www.facebook.com/VBA.vn"
+      },
+      "teams": [
+        {
+          "id": "hanoi-buffaloes",
+          "slug": "hanoi-buffaloes",
+          "name": "Hanoi Buffaloes",
+          "roster": []
+        },
+        {
+          "id": "saigon-heat",
+          "slug": "saigon-heat",
+          "name": "Saigon Heat",
+          "roster": []
+        },
+        {
+          "id": "nhatrang-dolphins",
+          "slug": "nhatrang-dolphins",
+          "name": "Nhatrang Dolphins",
+          "roster": []
+        },
+        {
+          "id": "ho-chi-minh-city-wings",
+          "slug": "ho-chi-minh-city-wings",
+          "name": "Ho Chi Minh City Wings",
+          "roster": []
+        }
+      ],
+      "team_count": 4,
+      "player_count": 0
+    },
+    "b-league": {
+      "name": "b-league",
+      "mode": "teams",
+      "sources": {
+        "teams": "https://www.bleague.jp/club/",
+        "players": "https://www.bleague.jp/roster/",
+        "stats": "https://www.bleague.jp/stats/",
+        "youtube": "https://www.youtube.com/@B.LEAGUE",
+        "facebook": "https://www.facebook.com/B.LEAGUEOFFICIAL"
+      },
+      "teams": [],
+      "team_count": 0,
+      "player_count": 0
+    },
+    "euroleague": {
+      "name": "euroleague",
+      "mode": "teams",
+      "sources": {
+        "teams": "https://www.euroleaguebasketball.net/euroleague/teams/",
+        "players": "https://www.euroleaguebasketball.net/euroleague/players/",
+        "stats": "https://www.euroleaguebasketball.net/euroleague/stats/",
+        "youtube": "https://www.youtube.com/@euroleague",
+        "facebook": "https://www.facebook.com/TheEuroLeague"
+      },
+      "teams": [],
+      "team_count": 0,
+      "player_count": 0
+    },
+    "uaap": {
+      "name": "uaap",
+      "mode": "teams",
+      "sources": {
+        "teams": "https://uaap.org/",
+        "players": "https://uaap.livestats.ph/",
+        "stats": "https://uaap.livestats.ph/",
+        "youtube": "https://www.youtube.com/@OneSportsPHL",
+        "facebook": "https://www.facebook.com/UAAPvarsitychannel"
+      },
+      "teams": [
+        {
+          "id": "adamson-soaring-falcons",
+          "slug": "adamson-soaring-falcons",
+          "name": "Adamson Soaring Falcons",
+          "roster": []
+        },
+        {
+          "id": "ateneo-blue-eagles",
+          "slug": "ateneo-blue-eagles",
+          "name": "Ateneo Blue Eagles",
+          "roster": []
+        },
+        {
+          "id": "feu-tamaraws",
+          "slug": "feu-tamaraws",
+          "name": "FEU Tamaraws",
+          "roster": []
+        },
+        {
+          "id": "ue-red-warriors",
+          "slug": "ue-red-warriors",
+          "name": "UE Red Warriors",
+          "roster": []
+        },
+        {
+          "id": "up-fighting-maroons",
+          "slug": "up-fighting-maroons",
+          "name": "UP Fighting Maroons",
+          "roster": []
+        },
+        {
+          "id": "nu-bulldogs",
+          "slug": "nu-bulldogs",
+          "name": "NU Bulldogs",
+          "roster": []
+        },
+        {
+          "id": "ust-growling-tigers",
+          "slug": "ust-growling-tigers",
+          "name": "UST Growling Tigers",
+          "roster": []
+        },
+        {
+          "id": "de-la-salle-green-archers",
+          "slug": "de-la-salle-green-archers",
+          "name": "De La Salle Green Archers",
+          "roster": []
+        }
+      ],
+      "team_count": 8,
+      "player_count": 0
+    },
+    "ncaa-philippines": {
+      "name": "ncaa-philippines",
+      "mode": "teams",
+      "sources": {
+        "teams": "https://www.gmanetwork.com/news/sports/basketball/",
+        "players": "https://www.gmanetwork.com/news/sports/basketball/",
+        "stats": "https://www.gmanetwork.com/news/sports/basketball/",
+        "youtube": "https://www.youtube.com/@OneSportsPHL",
+        "facebook": "https://www.facebook.com/OneSportsPHL"
+      },
+      "teams": [],
+      "team_count": 0,
+      "player_count": 0
+    },
+    "premier-league": {
+      "name": "premier-league",
+      "mode": "teams",
+      "sources": {
+        "teams": "https://www.premierleague.com/en/clubs",
+        "players": "https://www.premierleague.com/en/players",
+        "stats": "https://www.premierleague.com/en/stats",
+        "youtube": "https://www.youtube.com/@premierleague",
+        "facebook": "https://www.facebook.com/premierleague"
+      },
+      "teams": [],
+      "team_count": 0,
+      "player_count": 0,
+      "last_error": "HTTPError: HTTP Error 403: Forbidden"
+    },
+    "la-liga": {
+      "name": "la-liga",
+      "mode": "teams",
+      "sources": {
+        "teams": "https://www.laliga.com/en-US/laliga-easports/clubs",
+        "players": "https://www.laliga.com/en-US/laliga-easports/players",
+        "stats": "https://www.laliga.com/en-US/stats",
+        "youtube": "https://www.youtube.com/@LaLiga",
+        "facebook": "https://www.facebook.com/LaLiga"
+      },
+      "teams": [],
+      "team_count": 0,
+      "player_count": 0,
+      "last_error": "HTTPError: HTTP Error 403: Forbidden"
+    },
+    "serie-a": {
+      "name": "serie-a",
+      "mode": "teams",
+      "sources": {
+        "teams": "https://www.legaseriea.it/en/serie-a/teams",
+        "players": "https://www.legaseriea.it/en/serie-a/players",
+        "stats": "https://www.legaseriea.it/en/serie-a/statistics",
+        "youtube": "https://www.youtube.com/@seriea",
+        "facebook": "https://www.facebook.com/SerieA"
+      },
+      "teams": [],
+      "team_count": 0,
+      "player_count": 0,
+      "last_error": "HTTPError: HTTP Error 403: Forbidden"
+    },
+    "bundesliga": {
+      "name": "bundesliga",
+      "mode": "teams",
+      "sources": {
+        "teams": "https://www.bundesliga.com/en/bundesliga/clubs",
+        "players": "https://www.bundesliga.com/en/bundesliga/player",
+        "stats": "https://www.bundesliga.com/en/bundesliga/stats",
+        "youtube": "https://www.youtube.com/@bundesliga",
+        "facebook": "https://www.facebook.com/BundesligaOfficial"
+      },
+      "teams": [],
+      "team_count": 0,
+      "player_count": 0,
+      "last_error": "HTTPError: HTTP Error 403: Forbidden"
+    },
+    "champions-league": {
+      "name": "champions-league",
+      "mode": "teams",
+      "sources": {
+        "teams": "https://www.uefa.com/uefachampionsleague/clubs/",
+        "players": "https://www.uefa.com/uefachampionsleague/clubs/",
+        "stats": "https://www.uefa.com/uefachampionsleague/statistics/",
+        "youtube": "https://www.youtube.com/@UEFA",
+        "facebook": "https://www.facebook.com/ChampionsLeague"
+      },
+      "teams": [],
+      "team_count": 0,
+      "player_count": 0,
+      "last_error": "HTTPError: HTTP Error 403: Forbidden"
+    },
+    "mls": {
+      "name": "mls",
+      "mode": "teams",
+      "sources": {
+        "teams": "https://www.mlssoccer.com/clubs/",
+        "players": "https://www.mlssoccer.com/players/",
+        "stats": "https://www.mlssoccer.com/stats/",
+        "youtube": "https://www.youtube.com/@mls",
+        "facebook": "https://www.facebook.com/MLS"
+      },
+      "teams": [],
+      "team_count": 0,
+      "player_count": 0,
+      "last_error": "HTTPError: HTTP Error 403: Forbidden"
+    },
+    "atp": {
+      "name": "atp",
+      "mode": "players",
+      "sources": {
+        "players": "https://www.atptour.com/en/players",
+        "stats": "https://www.atptour.com/en/stats",
+        "rankings": "https://www.atptour.com/en/rankings/singles/live",
+        "youtube": "https://www.youtube.com/@ATPTour",
+        "facebook": "https://www.facebook.com/ATPTour"
+      },
+      "participants": [],
+      "participant_count": 0
+    },
+    "wta": {
+      "name": "wta",
+      "mode": "players",
+      "sources": {
+        "players": "https://www.wtatennis.com/players",
+        "stats": "https://www.wtatennis.com/stats",
+        "rankings": "https://www.wtatennis.com/rankings/singles",
+        "youtube": "https://www.youtube.com/@WTA",
+        "facebook": "https://www.facebook.com/WTA"
+      },
+      "participants": [],
+      "participant_count": 0
+    },
+    "ipl": {
+      "name": "ipl",
+      "mode": "teams",
+      "sources": {
+        "teams": "https://www.iplt20.com/teams",
+        "players": "https://www.iplt20.com/teams",
+        "stats": "https://www.iplt20.com/stats",
+        "youtube": "https://www.youtube.com/@IPL",
+        "facebook": "https://www.facebook.com/IPL"
+      },
+      "teams": [],
+      "team_count": 0,
+      "player_count": 0,
+      "last_error": "HTTPError: HTTP Error 403: Forbidden"
+    },
+    "mlb": {
+      "name": "mlb",
+      "mode": "teams",
+      "sources": {
+        "teams": "https://www.mlb.com/team",
+        "players": "https://www.mlb.com/players",
+        "stats": "https://www.mlb.com/stats",
+        "youtube": "https://www.youtube.com/@MLB",
+        "facebook": "https://www.facebook.com/mlb"
+      },
+      "teams": [],
+      "team_count": 0,
+      "player_count": 0,
+      "last_error": "HTTPError: HTTP Error 403: Forbidden"
+    },
+    "nhl": {
+      "name": "nhl",
+      "mode": "teams",
+      "sources": {
+        "teams": "https://www.nhl.com/info/teams",
+        "players": "https://www.nhl.com/players",
+        "stats": "https://www.nhl.com/stats",
+        "youtube": "https://www.youtube.com/@NHL",
+        "facebook": "https://www.facebook.com/NHL"
+      },
+      "teams": [],
+      "team_count": 0,
+      "player_count": 0,
+      "last_error": "HTTPError: HTTP Error 403: Forbidden"
+    },
+    "nfl": {
+      "name": "nfl",
+      "mode": "teams",
+      "sources": {
+        "teams": "https://www.nfl.com/teams/",
+        "players": "https://www.nfl.com/players/",
+        "stats": "https://www.nfl.com/stats/",
+        "youtube": "https://www.youtube.com/@NFL",
+        "facebook": "https://www.facebook.com/NFL"
+      },
+      "teams": [],
+      "team_count": 0,
+      "player_count": 0,
+      "last_error": "HTTPError: HTTP Error 403: Forbidden"
+    },
+    "formula-1": {
+      "name": "formula-1",
+      "mode": "drivers",
+      "sources": {
+        "teams": "https://www.formula1.com/en/teams",
+        "players": "https://www.formula1.com/en/drivers",
+        "stats": "https://www.formula1.com/en/results/2026/drivers",
+        "youtube": "https://www.youtube.com/@Formula1",
+        "facebook": "https://www.facebook.com/Formula1"
+      },
+      "participants": [],
+      "participant_count": 0
+    },
+    "ufc": {
+      "name": "ufc",
+      "mode": "fighters",
+      "sources": {
+        "players": "https://www.ufc.com/athletes/all",
+        "stats": "http://ufcstats.com/statistics/fighters",
+        "rankings": "https://www.ufc.com/rankings",
+        "youtube": "https://www.youtube.com/@ufc",
+        "facebook": "https://www.facebook.com/UFC"
+      },
+      "participants": [],
+      "participant_count": 0
+    }
+  }
+}
