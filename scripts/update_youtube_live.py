@@ -137,22 +137,24 @@ def scan_official_source(source,previous):
    ended=bool(live.get("actualEndTime"))
    embeddable=status.get("embeddable",True)
   else:
-   try:
-    info=public_watch_info(vid)
-   except Exception:
-    continue
-   title=info.get("title",""); channel=info.get("channel") or source.get("league") or source_id
-   is_live=bool(info.get("live")); ended=not is_live; embeddable=True
+   # Accuracy-first: do not publish a stream that the exact-video API did not return.
+   # Public watch-page markup is useful for diagnostics, but not strong enough to
+   # prove the source channel identity for a LIVE badge.
+   continue
 
   if not is_live or ended or not source_title_allowed(source,title):continue
   watch="https://www.youtube.com/watch?v="+vid
+  verified_at=datetime.now(timezone.utc).isoformat()
   stream={
    "videoId":vid,
    "watchUrl":watch,
    "provider":"YouTube",
    "channel":channel,
    "title":title,
-   "officialSourceId":source_id
+   "officialSourceId":source_id,
+   "sourceChannelId":channel_id,
+   "verificationStatus":"verified",
+   "lastVerifiedLiveAt":verified_at
   }
   if embeddable:stream["embedUrl"]="https://www.youtube.com/embed/"+vid
   prefix=str(source.get("prefix") or source.get("leagueKey") or "live")
@@ -164,6 +166,8 @@ def scan_official_source(source,previous):
    "teams":[],
    "title":title,
    "officialSourceId":source_id,
+   "verificationStatus":"verified",
+   "lastVerifiedLiveAt":verified_at,
    "stream":stream
   })
  return out,channel_id
@@ -268,32 +272,18 @@ def one_sports_live():
  out=[]
  for vid in ids[:50]:
   d=details.get(vid)
-  if d:
-   dsn=d.get("snippet",{}); status=d.get("status",{}); live=d.get("liveStreamingDetails",{})
-   title=dsn.get("title",""); channel=(dsn.get("channelTitle") or "").strip()
-   is_live=dsn.get("liveBroadcastContent")=="live" or (live.get("actualStartTime") and not live.get("actualEndTime"))
-   ended=bool(live.get("actualEndTime"))
-   embeddable=status.get("embeddable",True)
-  else:
-   try:
-    info=public_watch_info(vid)
-   except Exception as ex:
-    if vid in PINNED_ASIAN_GAMES_VIDEO_IDS: print("Pinned public page",vid,ex)
-    continue
-   title=info["title"]; channel=info["channel"]; is_live=info["live"]; ended=False; embeddable=True
+  if not d:
+   # Fail closed: a public page alone cannot prove exact official-channel ownership.
+   continue
+  dsn=d.get("snippet",{}); status=d.get("status",{}); live=d.get("liveStreamingDetails",{})
+  if dsn.get("channelId")!=ONE_SPORTS_CHANNEL_ID:
+   continue
+  title=dsn.get("title",""); channel=(dsn.get("channelTitle") or "One Sports").strip()
+  is_live=dsn.get("liveBroadcastContent")=="live" or (live.get("actualStartTime") and not live.get("actualEndTime"))
+  ended=bool(live.get("actualEndTime"))
+  embeddable=status.get("embeddable",True)
   if vid in PINNED_ASIAN_GAMES_VIDEO_IDS:
-   print("Pinned stream diagnostic",vid,repr(title),repr(channel),"live=",bool(is_live),"ended=",bool(ended),"api=",bool(d))
-  if "one sports" not in channel.lower():continue
-  if is_live and not ended and not d:
-   try:
-    public=public_watch_info(vid)
-    if public.get("channel") and "one sports" not in public.get("channel","").lower():
-     is_live=False
-    elif not public.get("live"):
-     print("Public watch page says ended",vid,repr(title))
-     is_live=False
-   except Exception as ex:
-    print("One Sports public live check",vid,ex)
+   print("Pinned stream diagnostic",vid,repr(title),repr(channel),"live=",bool(is_live),"ended=",bool(ended),"api=",True)
   if not is_live or ended:continue
   upper=title.upper()
   if "2026 ASIAN GAMES" in upper:
@@ -307,9 +297,10 @@ def one_sports_live():
   else:
    continue
   watch="https://www.youtube.com/watch?v="+vid
-  stream={"videoId":vid,"watchUrl":watch,"provider":"YouTube","channel":channel,"title":title}
+  verified_at=datetime.now(timezone.utc).isoformat()
+  stream={"videoId":vid,"watchUrl":watch,"provider":"YouTube","channel":channel,"title":title,"sourceChannelId":ONE_SPORTS_CHANNEL_ID,"verificationStatus":"verified","lastVerifiedLiveAt":verified_at}
   if embeddable:stream["embedUrl"]="https://www.youtube.com/embed/"+vid
-  out.append({"eventId":prefix+"-youtube-"+vid,"sport":sport,"leagueKey":league_key,"league":league,"teams":[],"title":title,"stream":stream})
+  out.append({"eventId":prefix+"-youtube-"+vid,"sport":sport,"leagueKey":league_key,"league":league,"teams":[],"title":title,"verificationStatus":"verified","lastVerifiedLiveAt":verified_at,"stream":stream})
  return out
 
 def wta_official_live():
@@ -428,49 +419,47 @@ def previous_still_live(previous):
  candidates=[x for x in previous.get("streams",[]) if x.get("stream",{}).get("videoId")]
  ids=list(dict.fromkeys(x.get("stream",{}).get("videoId") for x in candidates))
  if not ids:return []
+ api_failed=False
  try:
   details=video_details(ids[:50])
  except Exception as ex:
   print("previous live details",ex)
   details={}
+  api_failed=True
  out=[]
  now=datetime.now(timezone.utc)
  for item in candidates:
   stream=item.get("stream",{})
   vid=stream.get("videoId")
   d=details.get(vid)
-  verification_failed=False
   if d:
    sn=d.get("snippet",{}); live=d.get("liveStreamingDetails",{}); status=d.get("status",{})
+   expected_channel=str(stream.get("sourceChannelId") or "")
+   if item.get("leagueKey")=="asian_games":
+    expected_channel=ONE_SPORTS_CHANNEL_ID
+   if expected_channel and sn.get("channelId")!=expected_channel:
+    continue
    is_live=sn.get("liveBroadcastContent")=="live" or (live.get("actualStartTime") and not live.get("actualEndTime"))
    ended=bool(live.get("actualEndTime"))
+   if not is_live or ended:
+    continue
    if sn.get("channelTitle"):stream["channel"]=sn.get("channelTitle")
+   if sn.get("channelId"):stream["sourceChannelId"]=sn.get("channelId")
    if sn.get("title"):stream["title"]=sn.get("title"); item["title"]=sn.get("title")
    if status.get("embeddable",True):stream["embedUrl"]="https://www.youtube.com/embed/"+vid
    else:stream.pop("embedUrl",None)
-  else:
-   try:
-    info=public_watch_info(vid)
-    is_live=info.get("live",False); ended=not is_live
-   except Exception as ex:
-    print("previous public live check",vid,ex)
-    verification_failed=True
-    is_live=False
-    ended=False
-
-  if is_live and not ended:
    verified_at=now.isoformat()
    item["verificationStatus"]="verified"
    item["lastVerifiedLiveAt"]=verified_at
    stream["verificationStatus"]="verified"
    stream["lastVerifiedLiveAt"]=verified_at
+   item["stream"]=stream
    out.append(item)
    continue
 
-  # A transient network/API failure must not make a real live stream blink off.
-  # Keep the last positively verified item briefly, but never renew its timestamp.
-  # Exact ended/not-live responses above still remove immediately.
-  if verification_failed and verified_age_seconds(item,now)<=600:
+  # Grace is allowed only when the whole exact-video API request failed.
+  # If the API request succeeded but omitted this ID, fail closed and remove it.
+  if api_failed and verified_age_seconds(item,now)<=300:
    item["verificationStatus"]="grace"
    stream["verificationStatus"]="grace"
    item["stream"]=stream
@@ -608,12 +597,8 @@ for x in streams:
  if vid and vid in seen:continue
  if vid:seen.add(vid)
  stream=x.get("stream",{})
- if x.get("leagueKey")=="asian_games" and str(x.get("verificationStatus") or stream.get("verificationStatus") or "").lower()!="fallback":
-  verified_at=now.isoformat()
-  x["verificationStatus"]="verified"
-  x["lastVerifiedLiveAt"]=verified_at
-  stream["verificationStatus"]="verified"
-  stream["lastVerifiedLiveAt"]=verified_at
+ if x.get("leagueKey")=="asian_games":
+  # Preserve the verifier's state exactly. Never upgrade grace/fallback to verified.
   x.pop("expiresAt",None); x.pop("fallbackExpiresAt",None)
   stream.pop("expiresAt",None); stream.pop("fallbackExpiresAt",None)
  league_key=str(x.get("leagueKey") or "").strip()
@@ -638,7 +623,7 @@ except Exception as ex:
 
 payload={
  "updatedAt":datetime.now(timezone.utc).isoformat(),
- "freshForMinutes":8,
+ "freshForMinutes":20,
  "streams":streams,
  "liveExpiryLedger":expiry_ledger,
  "upcoming":upcoming,
