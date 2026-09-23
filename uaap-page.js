@@ -102,7 +102,7 @@ function renderHighlights(official){
   const wrap=qs("#highlights"),items=Array.isArray(official.highlights)?official.highlights.slice(0,10):[];
   setSectionVisible(wrap,items.length>0);
   wrap.innerHTML=items.length?items.map(x=>'<article class="reel-card"><a class="highlight-link" href="'+safe(x.url||"https://uaap.org/posts/video_gallery")+'" target="_blank" rel="noopener">'+
-    (x.thumbnail?'<img class="highlight-thumb" src="'+safe(x.thumbnail)+'" alt="'+safe(x.title)+'" loading="lazy">':'<div class="highlight-thumb"></div>')+
+    (x.thumbnail?'<img class="highlight-thumb" src="'+safe(String(x.thumbnail).replace(/(?:hqdefault|sddefault|mqdefault|default)\.jpg(?:\?.*)?$/,"maxresdefault.jpg"))+'" data-fallback="'+safe(x.thumbnail)+'" alt="'+safe(x.title)+'" loading="lazy" decoding="async" onerror="if(this.dataset.fallback&&this.src!==this.dataset.fallback){this.src=this.dataset.fallback}">':'<div class="highlight-thumb"></div>')+
     '<div class="highlight-copy"><strong>'+safe(x.title)+'</strong><span>'+safe(x.sourceName||x.channel||"UAAP Official")+'</span></div></a></article>').join(""):"";
 }
 function renderStandings(regional,official){
@@ -141,7 +141,7 @@ async function load(){
   const live=games.filter(g=>g.state==="in"||/live/i.test(g.status||""));
   const upcoming=games.filter(g=>g.state==="scheduled").sort((a,b)=>new Date(a.date)-new Date(b.date));
   const finals=games.filter(g=>g.state==="final").sort((a,b)=>new Date(b.date)-new Date(a.date));
-  const logo=qs("#uaap-league-logo"),logoSrc="/assets/uaap/uaap-logo-transparent.svg?v=20260924-transparent1";
+  const logo=qs("#uaap-league-logo"),logoSrc="https://uaap.org/images/logos/uaap_up.png";
   if(logo&&logoSrc)logo.src=logoSrc;
   renderGames({live,upcoming,finals});startLive();renderGallery(finals,official);renderHighlights(official);renderStandings(league,official);renderTopPlayers(official);renderNews(official);
 }
