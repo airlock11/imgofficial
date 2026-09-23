@@ -91,7 +91,8 @@ async function handleProtectedRequest(request, event) {
     });
   }
 
-  var cacheKey = new Request(url.toString(), { method: "GET" });
+  var cacheKeyUrl = url.pathname === "/live-streams" ? url.origin + "/live-streams" : url.toString();
+  var cacheKey = new Request(cacheKeyUrl, { method: "GET" });
   var cache = caches.default;
   var cached = await cache.match(cacheKey);
   if (cached) {
@@ -101,7 +102,7 @@ async function handleProtectedRequest(request, event) {
     return new Response(cached.body, { status: cached.status, statusText: cached.statusText, headers: hitHeaders });
   }
 
-  var key = url.toString();
+  var key = cacheKeyUrl;
   if (IMG_INFLIGHT.has(key)) {
     var shared = await IMG_INFLIGHT.get(key);
     var sharedHeaders = new Headers(shared.headers);
