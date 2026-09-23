@@ -4,93 +4,195 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>PBA Scores, Schedule, Standings, Highlights & News | IMG</title>
-<meta name="description" content="Follow PBA live status, schedules, recent results, standings, player leaders and official news on IMG.">
+<meta name="description" content="Follow PBA live status, schedules, recent results, standings, player leaders, highlights and official league updates on IMG.">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
-<link rel="canonical" href="https://imgofficial.com/leagues/pba/">
+<link rel="canonical" href="https://www.imgofficial.com/leagues/pba/">
 <link rel="icon" type="image/png" href="/img-logo-hq.png">
 <link rel="apple-touch-icon" href="/img-logo-hq.png">
-<link rel="stylesheet" href="/pba-page.css?v=20260923-2">
+<link rel="stylesheet" href="/pba-page.css?v=20260923-premium-1">
 </head>
-<body>\n<svg class="logo-filter-defs" aria-hidden="true" width="0" height="0"><filter id="pba-remove-white" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  -1 -1 -1 1 3" result="keyed"/><feComponentTransfer in="keyed"><feFuncA type="discrete" tableValues="0 0 0 1 1 1"/></feComponentTransfer></filter></svg>
-<header>
-  <nav class="shell">
+<body>
+<header class="site-header">
+  <nav class="shell nav-shell">
     <a class="brand" href="/" aria-label="IMG home"><img src="/img-logo-soccer.svg" alt="IMG"></a>
-    <div class="navlinks"><a href="/">Home</a><a href="/sports/">Sports</a><a href="/scores/">Scores</a><a href="/news/">News</a><a href="/odds/">Odds</a></div>
+    <div class="navlinks">
+      <a href="/">Home</a>
+      <a href="/sports/">Sports</a>
+      <a href="/scores/">Scores</a>
+      <a href="/news/">News</a>
+      <a href="/odds/">Odds</a>
+    </div>
   </nav>
 </header>
 
-<section class="hero">
-  <div class="shell">
-    <div class="hero-grid">
-      <div>
-        <div class="pba-mark"><div class="pba-logo-box"><img id="pba-league-logo" src="https://commons.wikimedia.org/wiki/Special:FilePath/PBAlogo.svg" alt="Philippine Basketball Association logo"></div><span>Basketball · Philippines</span></div>
+<main>
+  <section class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-watermark" aria-hidden="true">PBA</div>
+
+    <div class="shell hero-shell">
+      <div class="hero-copy">
+        <div class="league-lockup">
+          <img id="pba-league-logo" class="league-logo" alt="Philippine Basketball Association logo">
+          <div class="league-label">Basketball · Philippines</div>
+        </div>
+
         <h1>PBA</h1>
-        <p>The home of Philippine basketball on IMG. Get the latest PBA game information, schedules, recent results, rankings, player leaders and official league updates in one place.</p>
+        <p>The home of Philippine basketball. Get the latest PBA news, game information, schedules, results, rankings and player leaders on IMG.</p>
+
         <div class="hero-actions">
-          <a class="btn btn-primary" href="/scores/?from=league&league=pba">View PBA scores</a>
+          <a class="primary-btn" href="/scores/?from=league&league=pba">
+            <span>View PBA scores</span>
+            <span class="arrow">›</span>
+          </a>
         </div>
       </div>
-      <div class="hero-art" aria-hidden="true"><div class="ball"></div></div>
-    </div>
 
-    <div class="status-wrap">
-      <div class="statusbar">
-        <div class="status-item"><div class="status-label"><span class="live-dot"></span>Live</div><div class="status-value" id="status-live">Checking live status…</div></div>
-        <div class="status-item"><div class="status-label">Next game</div><div class="status-value" id="status-next">Loading…</div><div class="status-sub" id="status-next-sub"></div></div>
-        <div class="status-item"><div class="status-label">Recent results</div><div class="status-value" id="status-results">Loading…</div></div>
-        <div class="status-item"><div class="status-label">Source</div><div class="status-value" id="status-source">PBA</div><div class="status-sub">Official + IMG verified feeds</div></div>
-        <div class="status-item"><div class="status-label">Last updated</div><div class="status-value" id="status-updated">—</div><div class="status-sub" id="status-updated-sub"></div></div>
+      <div class="hero-tagline" aria-hidden="true">
+        <span>Philippine</span>
+        <span>Basketball</span>
+        <span>Always</span>
+      </div>
+
+      <div class="status-strip">
+        <article class="status-card">
+          <div class="status-label"><span class="live-dot"></span>Live</div>
+          <div class="status-value" id="status-live">Checking…</div>
+        </article>
+
+        <article class="status-card">
+          <div class="status-label">Next game</div>
+          <div class="status-value" id="status-next">Loading…</div>
+          <div class="status-sub" id="status-next-sub"></div>
+        </article>
+
+        <article class="status-card">
+          <div class="status-label">Recent results</div>
+          <div class="status-value" id="status-results">Loading…</div>
+        </article>
+
+        <article class="status-card">
+          <div class="status-label">Source</div>
+          <div class="status-value">PBA</div>
+          <div class="status-sub">Official + IMG verified feeds</div>
+        </article>
+
+        <article class="status-card">
+          <div class="status-label">Last updated</div>
+          <div class="status-value" id="status-updated">—</div>
+          <div class="status-sub" id="status-updated-sub"></div>
+        </article>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<main>
-  <div class="shell">
-    <section class="section">
-      <div class="section-head"><div class="section-title"><h2>Games</h2><p>Live, upcoming and recent PBA results</p></div><a class="view-all" href="/scores/?from=league&league=pba">View all games ›</a></div>
-      <div class="tabs" role="tablist">
-        <button class="tab" data-tab="live">Live</button>
-        <button class="tab" data-tab="upcoming">Upcoming</button>
-        <button class="tab" data-tab="results">Results</button>
+  <div class="shell page-shell">
+    <section class="content-section">
+      <div class="section-head">
+        <div>
+          <h2>Games</h2>
+          <p>Live, upcoming and recent results</p>
+        </div>
+        <a href="/scores/?from=league&league=pba">View all games <span>›</span></a>
       </div>
-      <div id="game-slot"></div>
+
+      <div class="segmented-control" role="tablist" aria-label="PBA game status">
+        <button class="tab-btn" data-tab="live">Live</button>
+        <button class="tab-btn" data-tab="upcoming">Upcoming</button>
+        <button class="tab-btn" data-tab="results">Results</button>
+      </div>
+
+      <div id="game-slot" class="featured-game-wrap"></div>
     </section>
 
-    <section class="section">
-      <div class="section-head"><div class="section-title"><h2>Previous Games Gallery</h2><p>Recent verified PBA results and matchups</p></div><a class="view-all" href="/scores/?from=league&league=pba">View all ›</a></div>
-      <div class="carousel" id="previous-games"><div class="empty">Loading recent games…</div></div>
+    <section class="content-section">
+      <div class="section-head">
+        <div>
+          <h2>Previous Games Gallery</h2>
+          <p>Relive recent PBA matchups</p>
+        </div>
+        <a href="/scores/?from=league&league=pba">View all <span>›</span></a>
+      </div>
+      <div id="previous-games" class="media-row"></div>
     </section>
 
-    <section class="section">
-      <div class="section-head"><div class="section-title"><h2>Highlights</h2><p>Verified PBA live and video coverage when available</p></div><a class="view-all" href="/news/">View all ›</a></div>
-      <div class="carousel" id="highlights"><div class="empty">Checking verified PBA video…</div></div>
+    <section class="content-section">
+      <div class="section-head">
+        <div>
+          <h2>Highlights</h2>
+          <p>Top plays, game highlights and verified video coverage</p>
+        </div>
+        <a href="/news/">View all <span>›</span></a>
+      </div>
+      <div id="highlights" class="media-row highlight-row"></div>
     </section>
 
-    <section class="section">
-      <div class="section-head"><div class="section-title"><h2>Standings</h2><p>Current PBA group rankings from the official PBA site</p></div></div>
-      <div class="grid-2">
-        <div class="panel"><h3>Group A</h3><table class="table"><thead><tr><th>#</th><th>Team</th><th>W</th><th>L</th></tr></thead><tbody id="group-a"></tbody></table></div>
-        <div class="panel"><h3>Group B</h3><table class="table"><thead><tr><th>#</th><th>Team</th><th>W</th><th>L</th></tr></thead><tbody id="group-b"></tbody></table></div>
+    <section class="content-section">
+      <div class="section-head">
+        <div>
+          <h2>Standings</h2>
+          <p>Current PBA group rankings</p>
+        </div>
+      </div>
+
+      <div class="standings-grid">
+        <article class="glass-panel">
+          <div class="panel-title">Group A</div>
+          <table class="standings-table">
+            <thead><tr><th>#</th><th>Team</th><th>W</th><th>L</th></tr></thead>
+            <tbody id="group-a"></tbody>
+          </table>
+        </article>
+
+        <article class="glass-panel">
+          <div class="panel-title">Group B</div>
+          <table class="standings-table">
+            <thead><tr><th>#</th><th>Team</th><th>W</th><th>L</th></tr></thead>
+            <tbody id="group-b"></tbody>
+          </table>
+        </article>
       </div>
     </section>
 
-    <section class="section">
-      <div class="section-head"><div class="section-title"><h2>Teams / Rosters / Player Stats</h2><p>Official PBA player performance and league leaders</p></div></div>
-      <div class="grid-2">
-        <div class="panel"><h3>Player of the Game</h3><div class="leader-list" id="players"></div></div>
-        <div class="panel"><h3>Stat Leaders</h3><div class="leader-list" id="leaders"></div></div>
+    <section class="content-section">
+      <div class="section-head">
+        <div>
+          <h2>Teams / Rosters / Player Stats</h2>
+          <p>Official PBA player performance and league leaders</p>
+        </div>
+      </div>
+
+      <div class="player-grid">
+        <article class="glass-panel">
+          <div class="panel-title">Player of the Game</div>
+          <div id="players" class="player-list"></div>
+        </article>
+
+        <article class="glass-panel">
+          <div class="panel-title">Stat Leaders</div>
+          <div id="leaders" class="player-list"></div>
+        </article>
       </div>
     </section>
 
-    <section class="section">
-      <div class="section-head"><div class="section-title"><h2>Latest News</h2><p>Official PBA headlines</p></div><a class="view-all" href="https://pba.ph/" target="_blank" rel="noopener">PBA.ph ›</a></div>
-      <div class="panel"><div class="news-list" id="news"></div></div>
+    <section class="content-section">
+      <div class="section-head">
+        <div>
+          <h2>Latest News</h2>
+          <p>Official PBA headlines</p>
+        </div>
+        <a href="https://pba.ph/" target="_blank" rel="noopener">PBA.ph <span>›</span></a>
+      </div>
+
+      <div id="news" class="news-grid"></div>
     </section>
   </div>
 </main>
 
-<footer><div class="shell">IMG · Global sports data platform · PBA data sourced from official and verified public feeds</div></footer>
-<script src="/pba-page.js?v=20260923-2" defer></script>
+<footer>
+  <div class="shell">IMG · Global sports data platform · PBA data sourced from official and verified public feeds</div>
+</footer>
+
+<script src="/pba-page.js?v=20260923-premium-1" defer></script>
 </body>
 </html>
