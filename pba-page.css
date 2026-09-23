@@ -755,28 +755,35 @@ footer{
   .shell{width:min(100% - 20px,1180px)}
   .navlinks{gap:12px}
   .navlinks a:nth-child(4),.navlinks a:nth-child(5){display:none}
-  .hero{min-height:340px}
+  .hero{min-height:470px}
   .hero::before{
     background-image:
       linear-gradient(180deg,
         rgba(0,0,0,0) 0%,
-        rgba(0,0,0,.02) 48%,
-        rgba(0,0,0,.14) 63%,
-        rgba(0,0,0,.38) 76%,
-        rgba(0,0,0,.68) 87%,
-        rgba(0,0,0,.90) 96%,
+        rgba(0,0,0,.02) 26%,
+        rgba(0,0,0,.10) 34%,
+        rgba(0,0,0,.38) 48%,
+        rgba(0,0,0,.72) 62%,
+        rgba(0,0,0,.94) 78%,
         #000 100%
       ),
       linear-gradient(90deg,
-        rgba(0,0,0,.62) 0%,
-        rgba(0,0,0,.34) 42%,
-        rgba(0,0,0,.10) 78%,
-        rgba(0,0,0,.06) 100%
+        rgba(0,0,0,.30) 0%,
+        rgba(0,0,0,.12) 44%,
+        rgba(0,0,0,.04) 82%,
+        rgba(0,0,0,.02) 100%
       ),
       var(--hero-image);
-    background-position:40% center
+    background-size:100% 100%,100% 100%,100% auto;
+    background-position:center center,center center,center top;
+    background-repeat:no-repeat
   }
-  .hero-shell{min-height:340px;padding-top:20px;padding-bottom:22px}
+  .hero-shell{
+    min-height:470px;
+    align-items:flex-end;
+    padding-top:150px;
+    padding-bottom:30px
+  }
   .hero-copy{width:100%;max-width:410px;padding-top:0}
   .league-lockup{gap:11px}
   .league-logo{width:108px;height:58px}
@@ -828,9 +835,12 @@ footer{
   .media-row{grid-auto-columns:84%}
   .highlight-row{grid-auto-columns:64vw}
   .top-player-row{grid-auto-columns:84%}
-  .hero{min-height:330px}
-  .hero::before{background-position:37% center}
-  .hero-shell{min-height:330px;padding-top:18px;padding-bottom:20px}
+  .hero{min-height:450px}
+  .hero::before{
+    background-size:100% 100%,100% 100%,100% auto;
+    background-position:center center,center center,center top
+  }
+  .hero-shell{min-height:450px;align-items:flex-end;padding-top:138px;padding-bottom:26px}
   .hero-copy{width:100%;max-width:none}
   .league-logo{width:102px;height:54px}
   .hero p{font-size:.84rem;line-height:1.43;max-width:96%}
