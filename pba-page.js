@@ -237,7 +237,6 @@ function renderHighlights({streams,official}){
     <div class="reel-media" tabindex="0" data-short-id="${safe(x.id)}" aria-label="Play ${safe(x.title)}">
       <img class="reel-thumb" src="${safe(x.thumbnail)}" alt="${safe(x.title)}" loading="lazy">
       <span class="reel-shade"></span>
-      <span class="reel-play" aria-hidden="true">▶</span>
       <span class="reel-source">PBA SHORTS</span>
     </div>
     <div class="reel-caption">

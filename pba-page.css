@@ -502,22 +502,6 @@ main,.page-shell,.content-section,footer{background:#000}
   background:
     linear-gradient(180deg,rgba(0,0,0,.05) 0%,rgba(0,0,0,.04) 55%,rgba(0,0,0,.72) 100%)
 }
-.reel-play{
-  position:absolute;
-  left:50%;
-  top:47%;
-  transform:translate(-50%,-50%);
-  width:54px;
-  height:54px;
-  display:grid;
-  place-items:center;
-  border-radius:50%;
-  background:rgba(0,0,0,.52);
-  border:1px solid rgba(255,255,255,.45);
-  backdrop-filter:blur(8px);
-  font-size:1.1rem;
-  padding-left:3px
-}
 .reel-source{
   position:absolute;
   left:12px;
@@ -772,7 +756,6 @@ footer{
 }
 .reel-media.is-playing .reel-thumb,
 .reel-media.is-playing .reel-shade,
-.reel-media.is-playing .reel-play,
 .reel-media.is-playing .reel-source{
   visibility:hidden
 }
