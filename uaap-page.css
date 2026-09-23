@@ -913,8 +913,41 @@ footer{
 
 /* UAAP template overrides */
 .uaap-hero{
-  --hero-image:url("/assets/uaap/uaap-hero-hq.webp?v=20260924-pbarules1");
+  --hero-image:url("/assets/uaap/uaap-hero-hq.webp?v=20260924-fade2");
   background:#000
+}
+.uaap-hero::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:-1px;
+  height:52%;
+  z-index:2;
+  pointer-events:none;
+  background:linear-gradient(
+    to bottom,
+    rgba(0,0,0,0) 0%,
+    rgba(0,0,0,.10) 18%,
+    rgba(0,0,0,.34) 42%,
+    rgba(0,0,0,.68) 68%,
+    rgba(0,0,0,.92) 88%,
+    #000 100%
+  )
+}
+@media(max-width:720px){
+  .uaap-hero::after{
+    height:58%;
+    background:linear-gradient(
+      to bottom,
+      rgba(0,0,0,0) 0%,
+      rgba(0,0,0,.12) 16%,
+      rgba(0,0,0,.42) 40%,
+      rgba(0,0,0,.78) 68%,
+      rgba(0,0,0,.96) 88%,
+      #000 100%
+    )
+  }
 }
 .uaap-single{grid-template-columns:1fr}
 .uaap-single .glass-panel{max-width:none}
