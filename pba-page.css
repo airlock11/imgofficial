@@ -461,7 +461,14 @@ main,.page-shell,.content-section,footer{background:#000}
 .highlight-row{
   grid-auto-columns:210px;
   gap:14px;
-  padding-bottom:10px
+  padding-bottom:10px;
+  scrollbar-width:none;
+  -ms-overflow-style:none
+}
+.highlight-row::-webkit-scrollbar{
+  width:0;
+  height:0;
+  display:none
 }
 .reel-card{
   min-width:0;
