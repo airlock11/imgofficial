@@ -46,6 +46,30 @@ async function liveEspnTeams(c){
    return out;
  }catch{return[]}
 }
+async function liveParticipants(c){
+ const base=espnBase(c);if(!base)return[];
+ try{
+  const j=await jfetch(base+'/scoreboard');
+  const out=[],seen=new Set();
+  for(const e of(j?.events||[])){
+   for(const comp of(e?.competitions||[])){
+    for(const row of(comp?.competitors||[])){
+     const a=row?.athlete||row?.player||row?.team||row||{};
+     const name=a.displayName||a.fullName||a.name||row?.displayName||'';
+     const id=String(a.id||row?.id||name);
+     if(!name||seen.has(id))continue;seen.add(id);
+     out.push({
+      id,name,shortName:a.shortName||'',position:a?.position?.abbreviation||a?.position?.displayName||'',
+      headshot:a?.headshot?.href||a?.headshot||a?.logo||row?.logo||'',
+      profile:(a.links||[]).find(x=>x?.href)?.href||'',
+      stats:row?.statistics||row?.stats||a?.statistics||a?.stats||null
+     });
+    }
+   }
+  }
+  return out;
+ }catch{return[]}
+}
 async function regionalTeams(key){
  const files=['/regional-web.json','/special-sports-data.json','/extended-sports-data.json'],names=new Map();
  for(const file of files){
@@ -79,7 +103,7 @@ function teamButton(t,i){
 function renderTeams(){
  panel();const host=qs('#imgRosterBody');if(!host)return;
  if(sourceCfg?.mode!=='teams'){renderParticipantSources(host);return}
- host.innerHTML='<div class="img-roster-tools"><input id="imgRosterSearch" class="img-roster-search" type="search" placeholder="Search teams or players" aria-label="Search teams or players"></div><div class="img-team-browser" id="imgTeamBrowser">'+allTeams.map(teamButton).join('')+'</div><div class="img-roster-shell" id="imgRosterShell" hidden></div>';
+ host.innerHTML='<div class="img-roster-tools"><input id="imgRosterSearch" class="img-roster-search" type="search" placeholder="Search teams or players" aria-label="Search teams or players"></div>'+(allTeams.length?'<div class="img-team-browser" id="imgTeamBrowser">'+allTeams.map(teamButton).join('')+'</div>':'<div class="img-roster-empty">IMG is connecting to the verified team directory. Use the official team and player sources below while the structured feed refreshes.</div><div class="img-player-links">'+officialTeamLinks({})+'</div>')+'<div class="img-roster-shell" id="imgRosterShell" hidden></div>';
  const search=qs('#imgRosterSearch');
  const browser=qs('#imgTeamBrowser');
  browser?.addEventListener('click',e=>{const b=e.target.closest('[data-team-index]');if(b)openTeam(Number(b.dataset.teamIndex))});
@@ -90,8 +114,11 @@ function renderTeams(){
 }
 function renderParticipantSources(host){
  const label=sourceCfg.mode==='drivers'?'Drivers':sourceCfg.mode==='fighters'?'Fighters':'Players';
+ const participants=leagueData?.participants||[];
+ const cards=participants.length?'<div class="img-roster-grid img-participant-grid">'+participants.slice(0,80).map(p=>'<button class="img-player-card" type="button" data-participant-id="'+esc(p.id||p.name)+'">'+(p.headshot?'<img src="'+esc(p.headshot)+'" alt="" loading="lazy">':'<span class="img-team-logo-fallback">'+esc((p.name||'?').slice(0,2).toUpperCase())+'</span>')+'<span><strong>'+esc(p.name)+'</strong><span>'+esc(p.position||label.slice(0,-1)||'Profile')+'</span></span></button>').join('')+'</div>':'';
  const links=[['players',label],['rankings','Rankings'],['stats','Statistics'],['youtube','YouTube'],['facebook','Facebook']].filter(([k])=>sourceCfg[k]);
- host.innerHTML='<div class="img-athlete-sources">'+links.map(([k,l])=>'<a href="'+esc(sourceCfg[k])+'" target="_blank" rel="noopener noreferrer"><small>'+esc(l)+'</small><strong>'+esc(leagueData?.name||slug)+'</strong></a>').join('')+'</div>';
+ host.innerHTML=cards+'<div class="img-athlete-sources">'+links.map(([k,l])=>'<a href="'+esc(sourceCfg[k])+'" target="_blank" rel="noopener noreferrer"><small>'+esc(l)+'</small><strong>'+esc(leagueData?.name||slug)+'</strong></a>').join('')+'</div>';
+ if(participants.length)host.querySelectorAll('[data-participant-id]').forEach((b,i)=>b.addEventListener('click',()=>openPlayer({name:leagueData?.name||slug},participants[i])));
 }
 function openTeam(i){
  const t=allTeams[i];if(!t)return;
@@ -145,6 +172,12 @@ async function start(){
   if(sourceCfg.mode==='teams'&&sourceCfg.structured)live=await liveEspnTeams(sourceCfg);
   if(sourceCfg.mode==='teams'&&sourceCfg.regionalKey)regional=await regionalTeams(sourceCfg.regionalKey);
   allTeams=mergeTeams(live,mergeTeams(published,regional));
+  if(sourceCfg.mode!=='teams'&&sourceCfg.structured){
+    const livePeople=await liveParticipants(sourceCfg);
+    const oldPeople=leagueData?.participants||[],seen=new Set(),merged=[];
+    for(const p of[...livePeople,...oldPeople]){const k=String(p.id||p.name).toLowerCase();if(!k||seen.has(k))continue;seen.add(k);merged.push(p)}
+    leagueData={...(leagueData||{}),name:leagueData?.name||slug,participants:merged};
+  }
   renderTeams()
  }catch{}
 }
