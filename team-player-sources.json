@@ -1,0 +1,289 @@
+{
+  "updatedAt": "2026-09-23",
+  "policy": {
+    "rosterPriority": [
+      "official structured roster",
+      "official league/team roster page",
+      "IMG verified adapter",
+      "official social announcement"
+    ],
+    "statsPriority": [
+      "official stats source",
+      "official league data feed",
+      "IMG verified structured fallback"
+    ],
+    "socialUse": "Use official Facebook, YouTube and other social channels for roster announcements, transactions, player features, game video and profile enrichment. Do not override official statistical records with social posts."
+  },
+  "leagues": {
+    "nba": {
+      "mode": "teams",
+      "teams": "https://www.nba.com/teams",
+      "players": "https://www.nba.com/players",
+      "stats": "https://www.nba.com/stats",
+      "structured": {
+        "sport": "basketball",
+        "league": "nba"
+      },
+      "youtube": "https://www.youtube.com/@NBA",
+      "facebook": "https://www.facebook.com/nba"
+    },
+    "wnba": {
+      "mode": "teams",
+      "teams": "https://www.wnba.com/teams",
+      "players": "https://www.wnba.com/players",
+      "stats": "https://www.wnba.com/stats",
+      "structured": {
+        "sport": "basketball",
+        "league": "wnba"
+      },
+      "youtube": "https://www.youtube.com/@WNBA",
+      "facebook": "https://www.facebook.com/wnba"
+    },
+    "pba": {
+      "mode": "teams",
+      "teams": "https://www.pba.ph/teams",
+      "players": "https://www.pba.ph/players",
+      "stats": "https://www.pba.ph/stats",
+      "youtube": "https://www.youtube.com/@OneSportsPHL",
+      "facebook": "https://www.facebook.com/pbaconnect",
+      "regionalKey": "pba"
+    },
+    "mpbl": {
+      "mode": "teams",
+      "teams": "https://mpbl.com.ph/",
+      "players": "https://mpbl.com.ph/",
+      "stats": "https://mpbl.com.ph/",
+      "youtube": "https://www.youtube.com/results?search_query=MPBL+official",
+      "facebook": "https://www.facebook.com/MPBLOfficial",
+      "regionalKey": "mpbl"
+    },
+    "nbl-pilipinas": {
+      "mode": "teams",
+      "teams": "http://nblp.web.geniussports.com/",
+      "players": "http://nblp.web.geniussports.com/",
+      "stats": "http://nblp.web.geniussports.com/",
+      "youtube": "https://www.youtube.com/channel/UCJDBLldRGVJPEvyjJdSHefw",
+      "facebook": "https://www.facebook.com/nblpilipinas",
+      "regionalKey": "nbl"
+    },
+    "nbl-australia": {
+      "mode": "teams",
+      "teams": "https://www.nbl.com.au/teams",
+      "players": "https://www.nbl.com.au/players",
+      "stats": "https://www.nbl.com.au/stats/statistics",
+      "youtube": "https://www.youtube.com/@nbl",
+      "facebook": "https://www.facebook.com/NBL",
+      "regionalKey": "nblaus"
+    },
+    "vba": {
+      "mode": "teams",
+      "teams": "https://vba.vn/teams",
+      "players": "https://vba.vn/",
+      "stats": "https://vba.vn/",
+      "youtube": "https://www.youtube.com/results?search_query=VBA+Vietnam+basketball+official",
+      "facebook": "https://www.facebook.com/VBA.vn",
+      "regionalKey": "vba"
+    },
+    "b-league": {
+      "mode": "teams",
+      "teams": "https://www.bleague.jp/club/",
+      "players": "https://www.bleague.jp/roster/",
+      "stats": "https://www.bleague.jp/stats/",
+      "youtube": "https://www.youtube.com/@B.LEAGUE",
+      "facebook": "https://www.facebook.com/B.LEAGUEOFFICIAL"
+    },
+    "euroleague": {
+      "mode": "teams",
+      "teams": "https://www.euroleaguebasketball.net/euroleague/teams/",
+      "players": "https://www.euroleaguebasketball.net/euroleague/players/",
+      "stats": "https://www.euroleaguebasketball.net/euroleague/stats/",
+      "youtube": "https://www.youtube.com/@euroleague",
+      "facebook": "https://www.facebook.com/TheEuroLeague"
+    },
+    "uaap": {
+      "mode": "teams",
+      "teams": "https://uaap.org/",
+      "players": "https://uaap.livestats.ph/",
+      "stats": "https://uaap.livestats.ph/",
+      "youtube": "https://www.youtube.com/@OneSportsPHL",
+      "facebook": "https://www.facebook.com/UAAPvarsitychannel",
+      "regionalKey": "uaap"
+    },
+    "ncaa-philippines": {
+      "mode": "teams",
+      "teams": "https://www.gmanetwork.com/news/sports/basketball/",
+      "players": "https://www.gmanetwork.com/news/sports/basketball/",
+      "stats": "https://www.gmanetwork.com/news/sports/basketball/",
+      "youtube": "https://www.youtube.com/@OneSportsPHL",
+      "facebook": "https://www.facebook.com/OneSportsPHL"
+    },
+    "premier-league": {
+      "mode": "teams",
+      "teams": "https://www.premierleague.com/en/clubs",
+      "players": "https://www.premierleague.com/en/players",
+      "stats": "https://www.premierleague.com/en/stats",
+      "structured": {
+        "sport": "soccer",
+        "league": "eng.1"
+      },
+      "youtube": "https://www.youtube.com/@premierleague",
+      "facebook": "https://www.facebook.com/premierleague"
+    },
+    "la-liga": {
+      "mode": "teams",
+      "teams": "https://www.laliga.com/en-US/laliga-easports/clubs",
+      "players": "https://www.laliga.com/en-US/laliga-easports/players",
+      "stats": "https://www.laliga.com/en-US/stats",
+      "structured": {
+        "sport": "soccer",
+        "league": "esp.1"
+      },
+      "youtube": "https://www.youtube.com/@LaLiga",
+      "facebook": "https://www.facebook.com/LaLiga"
+    },
+    "serie-a": {
+      "mode": "teams",
+      "teams": "https://www.legaseriea.it/en/serie-a/teams",
+      "players": "https://www.legaseriea.it/en/serie-a/players",
+      "stats": "https://www.legaseriea.it/en/serie-a/statistics",
+      "structured": {
+        "sport": "soccer",
+        "league": "ita.1"
+      },
+      "youtube": "https://www.youtube.com/@seriea",
+      "facebook": "https://www.facebook.com/SerieA"
+    },
+    "bundesliga": {
+      "mode": "teams",
+      "teams": "https://www.bundesliga.com/en/bundesliga/clubs",
+      "players": "https://www.bundesliga.com/en/bundesliga/player",
+      "stats": "https://www.bundesliga.com/en/bundesliga/stats",
+      "structured": {
+        "sport": "soccer",
+        "league": "ger.1"
+      },
+      "youtube": "https://www.youtube.com/@bundesliga",
+      "facebook": "https://www.facebook.com/BundesligaOfficial"
+    },
+    "champions-league": {
+      "mode": "teams",
+      "teams": "https://www.uefa.com/uefachampionsleague/clubs/",
+      "players": "https://www.uefa.com/uefachampionsleague/clubs/",
+      "stats": "https://www.uefa.com/uefachampionsleague/statistics/",
+      "structured": {
+        "sport": "soccer",
+        "league": "uefa.champions"
+      },
+      "youtube": "https://www.youtube.com/@UEFA",
+      "facebook": "https://www.facebook.com/ChampionsLeague"
+    },
+    "mls": {
+      "mode": "teams",
+      "teams": "https://www.mlssoccer.com/clubs/",
+      "players": "https://www.mlssoccer.com/players/",
+      "stats": "https://www.mlssoccer.com/stats/",
+      "structured": {
+        "sport": "soccer",
+        "league": "usa.1"
+      },
+      "youtube": "https://www.youtube.com/@mls",
+      "facebook": "https://www.facebook.com/MLS"
+    },
+    "atp": {
+      "mode": "players",
+      "players": "https://www.atptour.com/en/players",
+      "stats": "https://www.atptour.com/en/stats",
+      "rankings": "https://www.atptour.com/en/rankings/singles/live",
+      "structured": {
+        "sport": "tennis",
+        "league": "atp"
+      },
+      "youtube": "https://www.youtube.com/@ATPTour",
+      "facebook": "https://www.facebook.com/ATPTour"
+    },
+    "wta": {
+      "mode": "players",
+      "players": "https://www.wtatennis.com/players",
+      "stats": "https://www.wtatennis.com/stats",
+      "rankings": "https://www.wtatennis.com/rankings/singles",
+      "structured": {
+        "sport": "tennis",
+        "league": "wta"
+      },
+      "youtube": "https://www.youtube.com/@WTA",
+      "facebook": "https://www.facebook.com/WTA"
+    },
+    "ipl": {
+      "mode": "teams",
+      "teams": "https://www.iplt20.com/teams",
+      "players": "https://www.iplt20.com/teams",
+      "stats": "https://www.iplt20.com/stats",
+      "structured": {
+        "sport": "cricket",
+        "league": "ipl"
+      },
+      "youtube": "https://www.youtube.com/@IPL",
+      "facebook": "https://www.facebook.com/IPL"
+    },
+    "mlb": {
+      "mode": "teams",
+      "teams": "https://www.mlb.com/team",
+      "players": "https://www.mlb.com/players",
+      "stats": "https://www.mlb.com/stats",
+      "structured": {
+        "sport": "baseball",
+        "league": "mlb"
+      },
+      "youtube": "https://www.youtube.com/@MLB",
+      "facebook": "https://www.facebook.com/mlb"
+    },
+    "nhl": {
+      "mode": "teams",
+      "teams": "https://www.nhl.com/info/teams",
+      "players": "https://www.nhl.com/players",
+      "stats": "https://www.nhl.com/stats",
+      "structured": {
+        "sport": "hockey",
+        "league": "nhl"
+      },
+      "youtube": "https://www.youtube.com/@NHL",
+      "facebook": "https://www.facebook.com/NHL"
+    },
+    "nfl": {
+      "mode": "teams",
+      "teams": "https://www.nfl.com/teams/",
+      "players": "https://www.nfl.com/players/",
+      "stats": "https://www.nfl.com/stats/",
+      "structured": {
+        "sport": "football",
+        "league": "nfl"
+      },
+      "youtube": "https://www.youtube.com/@NFL",
+      "facebook": "https://www.facebook.com/NFL"
+    },
+    "formula-1": {
+      "mode": "drivers",
+      "teams": "https://www.formula1.com/en/teams",
+      "players": "https://www.formula1.com/en/drivers",
+      "stats": "https://www.formula1.com/en/results/2026/drivers",
+      "structured": {
+        "sport": "racing",
+        "league": "f1"
+      },
+      "youtube": "https://www.youtube.com/@Formula1",
+      "facebook": "https://www.facebook.com/Formula1"
+    },
+    "ufc": {
+      "mode": "fighters",
+      "players": "https://www.ufc.com/athletes/all",
+      "stats": "http://ufcstats.com/statistics/fighters",
+      "rankings": "https://www.ufc.com/rankings",
+      "structured": {
+        "sport": "mma",
+        "league": "ufc"
+      },
+      "youtube": "https://www.youtube.com/@ufc",
+      "facebook": "https://www.facebook.com/UFC"
+    }
+  }
+}
