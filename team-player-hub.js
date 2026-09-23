@@ -69,8 +69,9 @@ function panel(){
  const left=qs('.img-dashboard > .img-stack');if(!left)return null;
  let p=qs('#imgRosterPanel');if(p)return p;
  p=document.createElement('section');p.id='imgRosterPanel';p.className='img-panel img-reveal';
- p.innerHTML='<div class="img-panel-head"><div><h2>Teams, rosters & player profiles</h2><p>Auto-updated from official and verified league sources</p></div></div><div id="imgRosterBody"></div>';
- left.append(p);setTimeout(()=>p.classList.add('in'),30);return p;
+ p.innerHTML='<div class="img-panel-head"><div><h2>Teams, rosters & player stats</h2><p>Auto-updated from official and verified league sources</p></div></div><div id="imgRosterBody"></div>';
+ const news=qs('#imgNewsPanel');if(news&&news.parentElement===left)left.insertBefore(p,news);else left.append(p);
+ setTimeout(()=>p.classList.add('in'),30);return p;
 }
 function teamButton(t,i){
  return '<button type="button" data-team-index="'+i+'">'+(t.logo?'<img src="'+esc(t.logo)+'" alt="" loading="lazy">':'')+'<strong>'+esc(t.name)+'</strong></button>';
