@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-22T23:02:13.850837+00:00",
+  "updated_at": "2026-09-23T01:26:22.770514+00:00",
   "source": "Official and verified public sports sources",
   "leagues": {
     "bleague": {
@@ -3701,7 +3701,7 @@
       "league": "WTA Tour",
       "sourceName": "WTA Official Calendar",
       "sourceUrl": "https://wtafiles.wtatennis.com/pdf/calendar/calendar.pdf",
-      "updatedAt": "2026-09-22T23:02:07.977792+00:00",
+      "updatedAt": "2026-09-23T01:26:16.747506+00:00",
       "note": "Current and upcoming WTA Tour tournaments scraped automatically from the official WTA calendar PDF.",
       "games": [
         {
@@ -3875,41 +3875,9 @@
       "league": "FIBA",
       "sourceName": "FIBA Official",
       "sourceUrl": "https://www.fiba.basketball/en/games",
-      "updatedAt": "2026-09-22T23:02:08.439958+00:00",
+      "updatedAt": "2026-09-23T01:26:17.361331+00:00",
       "note": "Automatically refreshed from official FIBA competition game cards.",
       "games": [
-        {
-          "eventId": "fiba-fiba-intercontinental-cup-2026-2026-09-22-viln-rssb",
-          "date": "2026-09-22T23:02:07.977825+00:00",
-          "displayTime": "Final · Final",
-          "away": "VILN",
-          "home": "RSSB",
-          "awayScore": "107",
-          "homeScore": "89",
-          "status": "Final",
-          "state": "final",
-          "title": "FIBA Intercontinental Cup 2026 · Group Phase · Group A Final",
-          "sourceName": "FIBA Official",
-          "sourceUrl": "https://www.fiba.basketball/en/events/fiba-intercontinental-cup-2026",
-          "verificationSource": "FIBA Official",
-          "verificationUrl": "https://www.fiba.basketball/en/events/fiba-intercontinental-cup-2026"
-        },
-        {
-          "eventId": "fiba-fiba-intercontinental-cup-2026-2026-09-22-bjbg-boc",
-          "date": "2026-09-22T23:02:07.977825+00:00",
-          "displayTime": "Final · Final",
-          "away": "BJBG",
-          "home": "BOC",
-          "awayScore": "78",
-          "homeScore": "88",
-          "status": "Final",
-          "state": "final",
-          "title": "FIBA Intercontinental Cup 2026 · Group Phase · Group B Final",
-          "sourceName": "FIBA Official",
-          "sourceUrl": "https://www.fiba.basketball/en/events/fiba-intercontinental-cup-2026",
-          "verificationSource": "FIBA Official",
-          "verificationUrl": "https://www.fiba.basketball/en/events/fiba-intercontinental-cup-2026"
-        },
         {
           "eventId": "fiba-fiba-intercontinental-cup-2026-2026-09-23-shs-rssb",
           "date": "2026-09-23T00:00:00+00:00",
@@ -3937,6 +3905,38 @@
           "status": "Scheduled",
           "state": "scheduled",
           "title": "FIBA Intercontinental Cup 2026 · Group Phase · Group B",
+          "sourceName": "FIBA Official",
+          "sourceUrl": "https://www.fiba.basketball/en/events/fiba-intercontinental-cup-2026",
+          "verificationSource": "FIBA Official",
+          "verificationUrl": "https://www.fiba.basketball/en/events/fiba-intercontinental-cup-2026"
+        },
+        {
+          "eventId": "fiba-fiba-intercontinental-cup-2026-2026-09-23-viln-rssb",
+          "date": "2026-09-23T01:26:16.747534+00:00",
+          "displayTime": "Final · Final",
+          "away": "VILN",
+          "home": "RSSB",
+          "awayScore": "107",
+          "homeScore": "89",
+          "status": "Final",
+          "state": "final",
+          "title": "FIBA Intercontinental Cup 2026 · Group Phase · Group A Final",
+          "sourceName": "FIBA Official",
+          "sourceUrl": "https://www.fiba.basketball/en/events/fiba-intercontinental-cup-2026",
+          "verificationSource": "FIBA Official",
+          "verificationUrl": "https://www.fiba.basketball/en/events/fiba-intercontinental-cup-2026"
+        },
+        {
+          "eventId": "fiba-fiba-intercontinental-cup-2026-2026-09-23-bjbg-boc",
+          "date": "2026-09-23T01:26:16.747534+00:00",
+          "displayTime": "Final · Final",
+          "away": "BJBG",
+          "home": "BOC",
+          "awayScore": "78",
+          "homeScore": "88",
+          "status": "Final",
+          "state": "final",
+          "title": "FIBA Intercontinental Cup 2026 · Group Phase · Group B Final",
           "sourceName": "FIBA Official",
           "sourceUrl": "https://www.fiba.basketball/en/events/fiba-intercontinental-cup-2026",
           "verificationSource": "FIBA Official",
