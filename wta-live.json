@@ -2,7 +2,7 @@
   "special": true,
   "league": "WTA Tour",
   "live": false,
-  "updatedAt": "2026-09-23T17:15:49.436938+00:00",
+  "updatedAt": "2026-09-23T20:21:01.791308+00:00",
   "sourceName": "API-Tennis",
   "sourceUrl": "https://api-tennis.com/",
   "verificationSource": "API-Tennis",
@@ -220,15 +220,15 @@
       "home": "Ninomiya/ Radisic",
       "awayLogo": "",
       "homeLogo": "",
-      "awayScore": "7.7 7.7",
-      "homeScore": "6.3 6.4",
+      "awayScore": "7 7",
+      "homeScore": "6 6",
       "awaySets": [
-        "7.7",
-        "7.7"
+        "7",
+        "7"
       ],
       "homeSets": [
-        "6.3",
-        "6.4"
+        "6",
+        "6"
       ],
       "awayPoint": "—",
       "homePoint": "—",
@@ -259,15 +259,15 @@
       "home": "S. Kartal",
       "awayLogo": "https://api.api-tennis.com/logo-tennis/2820_m-bouzkova.jpg",
       "homeLogo": "https://api.api-tennis.com/logo-tennis/1961_s-kartal.jpg",
-      "awayScore": "7.7 4 6",
-      "homeScore": "6.2 6 4",
+      "awayScore": "7 4 6",
+      "homeScore": "6 6 4",
       "awaySets": [
-        "7.7",
+        "7",
         "4",
         "6"
       ],
       "homeSets": [
-        "6.2",
+        "6",
         "6",
         "4"
       ],
@@ -341,17 +341,17 @@
       "home": "A-L. Friedsam",
       "awayLogo": "https://api.api-tennis.com/logo-tennis/2801_b-krejcikova.jpg",
       "homeLogo": "https://api.api-tennis.com/logo-tennis/522_a-l-friedsam.jpg",
-      "awayScore": "6 5 7.7",
-      "homeScore": "0 7 6.4",
+      "awayScore": "6 5 7",
+      "homeScore": "0 7 6",
       "awaySets": [
         "6",
         "5",
-        "7.7"
+        "7"
       ],
       "homeSets": [
         "0",
         "7",
-        "6.4"
+        "6"
       ],
       "awayPoint": "—",
       "homePoint": "—",
@@ -382,15 +382,15 @@
       "home": "K. Boulter",
       "awayLogo": "https://api.api-tennis.com/logo-tennis/447_l-noskova.jpg",
       "homeLogo": "https://api.api-tennis.com/logo-tennis/2993_k-boulter.jpg",
-      "awayScore": "6 7.7",
-      "homeScore": "2 6.3",
+      "awayScore": "6 7",
+      "homeScore": "2 6",
       "awaySets": [
         "6",
-        "7.7"
+        "7"
       ],
       "homeSets": [
         "2",
-        "6.3"
+        "6"
       ],
       "awayPoint": "—",
       "homePoint": "—",
@@ -1768,10 +1768,14 @@
       "home": "S- Garland/ Hsieh",
       "awayLogo": "",
       "homeLogo": "",
-      "awayScore": "",
-      "homeScore": "",
-      "awaySets": [],
-      "homeSets": [],
+      "awayScore": "0",
+      "homeScore": "0",
+      "awaySets": [
+        "0"
+      ],
+      "homeSets": [
+        "0"
+      ],
       "awayPoint": "—",
       "homePoint": "—",
       "currentSet": 1,
@@ -1779,9 +1783,9 @@
       "homeCurrentSetGames": 0,
       "awaySetsWon": 0,
       "homeSetsWon": 0,
-      "round": "",
+      "round": "WTA Singapore - Quarter-finals",
       "court": "",
-      "status": "1",
+      "status": "1 · WTA Singapore - Quarter-finals",
       "state": "scheduled",
       "eventOnly": false,
       "title": "Singapore",
@@ -1986,10 +1990,14 @@
       "home": "L. Fernandez",
       "awayLogo": "https://api.api-tennis.com/logo-tennis/9534_m-andreeva.jpg",
       "homeLogo": "https://api.api-tennis.com/logo-tennis/2394_l-a-fernandez.jpg",
-      "awayScore": "",
-      "homeScore": "",
-      "awaySets": [],
-      "homeSets": [],
+      "awayScore": "0",
+      "homeScore": "0",
+      "awaySets": [
+        "0"
+      ],
+      "homeSets": [
+        "0"
+      ],
       "awayPoint": "—",
       "homePoint": "—",
       "currentSet": 1,
@@ -1997,9 +2005,9 @@
       "homeCurrentSetGames": 0,
       "awaySetsWon": 0,
       "homeSetsWon": 0,
-      "round": "",
+      "round": "WTA Singapore - Quarter-finals",
       "court": "",
-      "status": "1",
+      "status": "1 · WTA Singapore - Quarter-finals",
       "state": "scheduled",
       "eventOnly": false,
       "title": "Singapore",
