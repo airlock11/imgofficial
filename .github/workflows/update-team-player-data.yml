@@ -44,7 +44,7 @@ jobs:
           git reset --hard origin/main
           python scripts/update_team_player_data.py
 
-          if git diff --quiet -- team-player-data.json; then
+          if [ -z "$(git status --porcelain -- team-player-data.json)" ]; then
             echo "No team/player data changes."
             exit 0
           fi
