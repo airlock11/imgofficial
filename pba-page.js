@@ -68,14 +68,19 @@ function renderHighlights(streams){
  wrap.innerHTML=streams.slice(0,8).map(x=>'<a class="media-card" href="'+x.stream.watchUrl+'" target="_blank" rel="noopener"><div class="play">▶</div><div class="media-content"><div class="media-kicker">'+(x.stream.channel||"PBA")+'</div><div class="media-title">'+(x.title||x.stream.title)+'</div><div class="media-meta">Verified live source</div></div></a>').join("");
 }
 function rows(list,assets){return (list||[]).map((x,i)=>'<tr><td>'+(i+1)+'</td><td><div class="standing-team">'+(logoFor(x.team,assets)?'<img src="'+logoFor(x.team,assets)+'" alt="'+x.team+' logo" loading="lazy">':'')+'<span>'+x.team+'</span></div></td><td>'+x.wins+'</td><td>'+x.losses+'</td></tr>').join("")}
+function playerPhoto(x){
+ const name=String((x&&x.player)||"Player");
+ if(x&&x.photo)return '<div class="player-photo"><img src="'+x.photo+'" alt="'+name+' photo" loading="lazy"></div>';
+ return '<div class="player-photo fallback" aria-label="'+name+' photo unavailable"><span>'+short(name)+'</span></div>';
+}
 function renderOfficial(o,assets){
  o=o||{};
  qs("#group-a").innerHTML=rows(o.rankings&&o.rankings.groupA,assets);
  qs("#group-b").innerHTML=rows(o.rankings&&o.rankings.groupB,assets);
  const leaders=o.leaders||[];
- qs("#leaders").innerHTML=leaders.length?leaders.map(x=>'<div class="leader"><span>'+x.category+'</span><strong>'+x.player+'<br>'+x.value+'</strong></div>').join(""):'<div class="empty">No official leader data available.</div>';
+ qs("#leaders").innerHTML=leaders.length?leaders.map(x=>'<div class="player-card">'+playerPhoto(x)+'<div class="player-copy"><span>'+x.category+'</span><strong>'+x.player+'</strong><b>'+x.value+'</b></div></div>').join(""):'<div class="empty">No official leader data available.</div>';
  const pog=o.playerOfGame||[];
- qs("#players").innerHTML=pog.length?pog.map(x=>'<div class="leader"><span>'+x.matchup+'<br>'+fmtDate(x.date)+'</span><strong>'+x.player+'<br>'+x.pts+' PTS · '+x.reb+' REB · '+x.ast+' AST</strong></div>').join(""):'<div class="empty">No player data available.</div>';
+ qs("#players").innerHTML=pog.length?pog.map(x=>'<div class="player-card">'+playerPhoto(x)+'<div class="player-copy"><span>'+x.matchup+' · '+fmtDate(x.date)+'</span><strong>'+x.player+'</strong><b>'+x.pts+' PTS · '+x.reb+' REB · '+x.ast+' AST</b></div></div>').join(""):'<div class="empty">No player data available.</div>';
  const news=o.headlines||[];
  qs("#news").innerHTML=news.length?news.map(x=>'<a class="news-item" href="'+x.url+'" target="_blank" rel="noopener"><small>PBA Official</small><strong>'+x.title+'</strong></a>').join(""):'<div class="empty">No official PBA headlines available.</div>';
 }
