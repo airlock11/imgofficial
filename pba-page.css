@@ -47,75 +47,68 @@ button{font:inherit}
 .hero{
   --hero-image:none;
   position:relative;
-  min-height:440px;
+  min-height:390px;
   overflow:hidden;
-  border-bottom:1px solid rgba(255,255,255,.08);
+  border-bottom:1px solid rgba(255,255,255,.07);
   background:#071521
 }
 .hero::before{
   content:"";
   position:absolute;inset:0;
   background-image:
-    linear-gradient(90deg,rgba(5,9,15,.94) 0%,rgba(6,11,18,.76) 34%,rgba(6,13,22,.24) 64%,rgba(5,10,18,.48) 100%),
-    linear-gradient(180deg,rgba(3,8,14,.12) 0%,rgba(3,10,16,.12) 48%,rgba(3,10,17,.86) 100%),
+    linear-gradient(90deg,rgba(2,8,14,.76) 0%,rgba(3,10,17,.58) 32%,rgba(3,10,17,.18) 58%,rgba(3,10,17,.08) 100%),
+    linear-gradient(180deg,rgba(2,7,12,.05) 0%,rgba(2,7,12,.06) 62%,rgba(2,8,14,.48) 100%),
     var(--hero-image);
   background-size:cover;
-  background-position:center 40%;
-  transform:scale(1.015)
+  background-position:center center;
 }
 .hero::after{
   content:"";
   position:absolute;inset:0;
-  background:
-    radial-gradient(circle at 8% 14%,rgba(229,40,65,.22),transparent 28%),
-    radial-gradient(circle at 88% 10%,rgba(36,111,222,.22),transparent 30%);
+  background:linear-gradient(90deg,rgba(180,18,35,.05),transparent 34%,transparent 72%,rgba(25,95,205,.04));
   pointer-events:none
 }
-.hero-overlay{display:none}
-.hero-watermark{
-  position:absolute;
-  right:3%;top:0;
-  z-index:1;
-  color:rgba(255,255,255,.025);
-  font-size:clamp(10rem,26vw,23rem);
-  line-height:.8;
-  font-weight:1000;
-  letter-spacing:-.08em
-}
+.hero-overlay,.hero-watermark{display:none!important}
 .hero-shell{
   position:relative;
   z-index:3;
-  padding-top:34px;
-  padding-bottom:22px
+  min-height:390px;
+  display:flex;
+  align-items:center;
+  padding-top:30px;
+  padding-bottom:30px
 }
-.hero-copy{width:min(540px,62%)}
-.league-lockup{display:flex;align-items:center;gap:16px}
+.hero-copy{width:min(520px,54%)}
+.league-lockup{display:flex;align-items:center;gap:14px}
 .league-logo{
-  width:154px;
-  height:82px;
+  width:145px;
+  height:76px;
   object-fit:contain;
-  filter:drop-shadow(0 10px 24px rgba(0,0,0,.52));
-  transform:translateZ(0);
+  filter:drop-shadow(0 8px 18px rgba(0,0,0,.38));
+  transform:translateZ(0)
 }
 .league-label{
-  color:#e4e9ef;
+  color:#f0f3f7;
   text-transform:uppercase;
-  letter-spacing:.2em;
-  font-size:.74rem;
-  font-weight:900
+  letter-spacing:.18em;
+  font-size:.72rem;
+  font-weight:900;
+  text-shadow:0 2px 12px rgba(0,0,0,.55)
 }
 .hero h1{
   margin:10px 0 8px;
-  font-size:clamp(4.3rem,8.8vw,7.3rem);
-  line-height:.83;
-  letter-spacing:-.065em
+  font-size:clamp(4rem,8vw,6.6rem);
+  line-height:.86;
+  letter-spacing:-.06em;
+  text-shadow:0 4px 22px rgba(0,0,0,.35)
 }
 .hero p{
-  max-width:525px;
+  max-width:500px;
   margin:0;
-  color:#d7dfe9;
-  font-size:1rem;
-  line-height:1.55
+  color:#eef2f6;
+  font-size:.98rem;
+  line-height:1.5;
+  text-shadow:0 2px 14px rgba(0,0,0,.55)
 }
 .hero-actions{margin-top:20px}
 .primary-btn{
@@ -129,25 +122,24 @@ button{font:inherit}
   color:#07111c;
   text-decoration:none;
   font-weight:900;
-  box-shadow:0 12px 28px rgba(0,0,0,.28);
+  box-shadow:0 12px 28px rgba(0,0,0,.24);
   transition:transform .2s ease
 }
 .primary-btn:hover{transform:translateY(-2px)}
 .primary-btn .arrow{font-size:1.35rem}
 
+.status-shell{margin-top:14px}
 .status-strip{
-  margin-top:30px;
   display:grid;
   grid-template-columns:repeat(5,1fr);
   border-radius:18px;
-  border:1px solid rgba(255,255,255,.17);
-  background:rgba(8,24,40,.84);
-  backdrop-filter:blur(18px);
-  box-shadow:0 18px 50px rgba(0,0,0,.28);
+  border:1px solid rgba(255,255,255,.13);
+  background:rgba(8,24,40,.93);
+  box-shadow:0 12px 34px rgba(0,0,0,.22);
   overflow:hidden
 }
 .status-card{padding:17px 20px;min-width:0}
-.status-card+.status-card{border-left:1px solid rgba(255,255,255,.12)}
+.status-card+.status-card{border-left:1px solid rgba(255,255,255,.10)}
 .status-label{
   text-transform:uppercase;
   letter-spacing:.13em;
@@ -501,7 +493,7 @@ footer{
 }
 
 @media(max-width:900px){
-  .hero-copy{width:70%}
+  .hero-copy{width:62%}
   .status-strip{grid-template-columns:repeat(2,1fr)}
   .status-card:nth-child(3){border-left:0}
   .status-card:nth-child(5){grid-column:1/-1}
@@ -512,22 +504,23 @@ footer{
   .shell{width:min(100% - 20px,1180px)}
   .navlinks{gap:12px}
   .navlinks a:nth-child(4),.navlinks a:nth-child(5){display:none}
-  .hero{min-height:500px}
+  .hero{min-height:360px}
   .hero::before{
     background-image:
-      linear-gradient(180deg,rgba(3,8,14,.54) 0%,rgba(3,9,15,.5) 37%,rgba(3,10,17,.95) 100%),
-      linear-gradient(90deg,rgba(5,9,15,.82),rgba(5,9,15,.2)),
+      linear-gradient(90deg,rgba(2,8,14,.80) 0%,rgba(3,10,17,.58) 43%,rgba(3,10,17,.16) 72%,rgba(3,10,17,.05) 100%),
+      linear-gradient(180deg,rgba(2,7,12,.05) 0%,rgba(2,7,12,.08) 64%,rgba(2,8,14,.55) 100%),
       var(--hero-image);
-    background-position:center top
+    background-position:center center
   }
-  .hero-shell{padding-top:28px}
-  .hero-copy{width:100%;padding-top:138px}
+  .hero-shell{min-height:360px;padding-top:24px;padding-bottom:24px}
+  .hero-copy{width:68%;padding-top:0}
   .league-lockup{gap:11px}
   .league-logo{width:112px;height:60px}
   .league-label{font-size:.64rem;letter-spacing:.13em}
-  .hero h1{font-size:4rem}
-  .hero p{font-size:.92rem;max-width:94%}
-  .status-strip{margin-top:22px;grid-template-columns:1fr 1fr}
+  .hero h1{font-size:3.7rem}
+  .hero p{font-size:.9rem;max-width:100%}
+  .status-shell{margin-top:10px}
+  .status-strip{grid-template-columns:1fr 1fr}
   .status-card{padding:14px}
   .featured-game{grid-template-columns:1fr auto 1fr;gap:9px;padding:27px 12px 16px;min-height:118px}
   .featured-game::before{left:12px;top:8px;font-size:.51rem}
