@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-09-23T08:28:28.971184+00:00",
-  "freshForMinutes": 20,
+  "updatedAt": "2026-09-23T09:03:29.339660+00:00",
+  "freshForMinutes": 30,
   "streams": [
     {
       "eventId": "ag26-youtube-QK1C8Q0w-co",
@@ -10,7 +10,7 @@
       "teams": [],
       "title": "LIVE: Rosegie Ramos goes for Asian Games medal | WEIGHTLIFTING | 2026 ASIAN GAMES",
       "verificationStatus": "verified",
-      "lastVerifiedLiveAt": "2026-09-23T08:28:28.971184+00:00",
+      "lastVerifiedLiveAt": "2026-09-23T09:03:29.339660+00:00",
       "stream": {
         "videoId": "QK1C8Q0w-co",
         "watchUrl": "https://www.youtube.com/watch?v=QK1C8Q0w-co",
@@ -19,7 +19,7 @@
         "title": "LIVE: Rosegie Ramos goes for Asian Games medal | WEIGHTLIFTING | 2026 ASIAN GAMES",
         "sourceChannelId": "UCXDG9ue-emCN8Ad3h7lERqQ",
         "verificationStatus": "verified",
-        "lastVerifiedLiveAt": "2026-09-23T08:28:28.971184+00:00",
+        "lastVerifiedLiveAt": "2026-09-23T09:03:29.339660+00:00",
         "embedUrl": "https://www.youtube.com/embed/QK1C8Q0w-co",
         "deliveryLeagueKey": "asian_games",
         "deliveryPlacement": "above_statistics",
@@ -33,6 +33,36 @@
       "firstLiveAt": "2026-09-23T08:27:37.862704+00:00"
     },
     {
+      "eventId": "ag26-youtube-Suu5onUy70k",
+      "sport": "Asian Games",
+      "leagueKey": "asian_games",
+      "league": "2026 ASIAN GAMES",
+      "teams": [],
+      "title": "LIVE: PHILIPPINES VS MALAYSIA | WOMEN\u2019S 3X3 BASKETBALL | 2026 ASIAN GAMES",
+      "verificationStatus": "verified",
+      "lastVerifiedLiveAt": "2026-09-23T09:03:29.339660+00:00",
+      "stream": {
+        "videoId": "Suu5onUy70k",
+        "watchUrl": "https://www.youtube.com/watch?v=Suu5onUy70k",
+        "provider": "YouTube",
+        "channel": "One Sports",
+        "title": "LIVE: PHILIPPINES VS MALAYSIA | WOMEN\u2019S 3X3 BASKETBALL | 2026 ASIAN GAMES",
+        "sourceChannelId": "UCXDG9ue-emCN8Ad3h7lERqQ",
+        "verificationStatus": "verified",
+        "lastVerifiedLiveAt": "2026-09-23T09:03:29.339660+00:00",
+        "embedUrl": "https://www.youtube.com/embed/Suu5onUy70k",
+        "deliveryLeagueKey": "asian_games",
+        "deliveryPlacement": "above_statistics",
+        "firstLiveAt": "2026-09-23T09:02:48.461722+00:00"
+      },
+      "delivery": {
+        "leagueKey": "asian_games",
+        "url": "/scores/?league=asian_games",
+        "placement": "above_statistics"
+      },
+      "firstLiveAt": "2026-09-23T09:02:48.461722+00:00"
+    },
+    {
       "eventId": "fiba-youtube-QkNpu_nBnRg",
       "sport": "Basketball",
       "leagueKey": "fiba",
@@ -41,7 +71,7 @@
       "title": "LIVE - Shanghai Sharks v RSSB Tigers | FIBA Intercontinental Cup Beijing 2026",
       "officialSourceId": "fiba",
       "verificationStatus": "verified",
-      "lastVerifiedLiveAt": "2026-09-23T08:28:28.971184+00:00",
+      "lastVerifiedLiveAt": "2026-09-23T09:03:29.339660+00:00",
       "stream": {
         "videoId": "QkNpu_nBnRg",
         "watchUrl": "https://www.youtube.com/watch?v=QkNpu_nBnRg",
@@ -51,7 +81,7 @@
         "officialSourceId": "fiba",
         "sourceChannelId": "UCtInrnU3QbWqFGsdKT1GZtg",
         "verificationStatus": "verified",
-        "lastVerifiedLiveAt": "2026-09-23T08:28:28.971184+00:00",
+        "lastVerifiedLiveAt": "2026-09-23T09:03:29.339660+00:00",
         "embedUrl": "https://www.youtube.com/embed/QkNpu_nBnRg",
         "deliveryLeagueKey": "fiba",
         "deliveryPlacement": "above_statistics"
@@ -103,7 +133,14 @@
     },
     "ag26-youtube-QK1C8Q0w-co": {
       "firstLiveAt": "2026-09-23T08:27:37.862704+00:00",
-      "lastVerifiedLiveAt": "2026-09-23T08:27:40.770875+00:00"
+      "lastVerifiedLiveAt": "2026-09-23T09:02:51.057287+00:00"
+    },
+    "fiba-youtube-QkNpu_nBnRg": {
+      "lastVerifiedLiveAt": "2026-09-23T09:03:29.206648+00:00"
+    },
+    "ag26-youtube-Suu5onUy70k": {
+      "firstLiveAt": "2026-09-23T09:02:48.461722+00:00",
+      "lastVerifiedLiveAt": "2026-09-23T09:02:51.057323+00:00"
     }
   },
   "upcoming": [],
@@ -112,7 +149,7 @@
   "scanner": {
     "version": 3,
     "mode": "official-auto-discovery",
-    "checkedAt": "2026-09-23T08:28:05.387216+00:00",
+    "checkedAt": "2026-09-23T09:03:05.836542+00:00",
     "sourcesChecked": [
       "nbl-pilipinas",
       "mpbl",
@@ -151,9 +188,9 @@
     }
   },
   "liveVerification": {
-    "checkedAt": "2026-09-23T08:28:28.971184+00:00",
+    "checkedAt": "2026-09-23T09:03:29.339660+00:00",
     "method": "YouTube videos API exact-video verification",
-    "verifiedLiveCount": 2,
+    "verifiedLiveCount": 3,
     "graceCount": 0,
     "removedCount": 0,
     "removed": []
