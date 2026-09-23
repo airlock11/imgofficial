@@ -6,7 +6,8 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/"youtube-live.json"
 KEY=os.environ["YOUTUBE_API_KEY"]
-UA="IMG-Sports-Live-Verify/2.0"
+UA="IMG-Sports-Live-Verify/3.0"
+ONE_SPORTS_CHANNEL_ID="UCXDG9ue-emCN8Ad3h7lERqQ"
 
 def get_json(url, attempts=3):
     last=None
@@ -85,21 +86,30 @@ def main():
                 removed.append({"videoId":vid,"leagueKey":item.get("leagueKey"),"reason":state})
                 continue
 
-            title=row.get("snippet",{}).get("title") or item.get("title") or stream.get("title") or ""
-            channel=row.get("snippet",{}).get("channelTitle") or stream.get("channel") or ""
+            snippet=row.get("snippet",{})
+            title=snippet.get("title") or item.get("title") or stream.get("title") or ""
+            channel=snippet.get("channelTitle") or stream.get("channel") or ""
+            channel_id=snippet.get("channelId") or ""
+            expected_channel=str(stream.get("sourceChannelId") or "")
             if item.get("leagueKey")=="asian_games":
-                if "one sports" not in str(channel).lower() or not valid_asian_title(title):
-                    removed.append({"videoId":vid,"leagueKey":"asian_games","reason":"source_or_title_invalid"})
+                expected_channel=ONE_SPORTS_CHANNEL_ID
+                if not valid_asian_title(title):
+                    removed.append({"videoId":vid,"leagueKey":"asian_games","reason":"title_invalid"})
                     continue
+            if expected_channel and channel_id!=expected_channel:
+                removed.append({"videoId":vid,"leagueKey":item.get("leagueKey"),"reason":"official_channel_mismatch"})
+                continue
             item["title"]=title
             stream["title"]=title
             stream["channel"]=channel
+            if channel_id:
+                stream["sourceChannelId"]=channel_id
         else:
             # Brief fail-open for transient API omission only. Do NOT refresh
             # lastVerifiedLiveAt here; otherwise repeated API omissions could
             # keep a stale/ended stream alive indefinitely.
             last=item.get("lastVerifiedLiveAt") or stream.get("lastVerifiedLiveAt")
-            if age_seconds(last)>600:
+            if age_seconds(last)>300:
                 removed.append({"videoId":vid,"leagueKey":item.get("leagueKey"),"reason":"api_missing_stale"})
                 continue
             item["verificationStatus"]="grace"
@@ -120,7 +130,8 @@ def main():
     payload["liveVerification"]={
         "checkedAt":now,
         "method":"YouTube videos API exact-video verification",
-        "verifiedLiveCount":len(kept),
+        "verifiedLiveCount":sum(1 for x in kept if str(x.get("verificationStatus") or (x.get("stream") or {}).get("verificationStatus") or "").lower()=="verified"),
+        "graceCount":sum(1 for x in kept if str(x.get("verificationStatus") or (x.get("stream") or {}).get("verificationStatus") or "").lower()=="grace"),
         "removedCount":len(removed),
         "removed":removed
     }
