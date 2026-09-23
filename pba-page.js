@@ -68,14 +68,13 @@ function renderGames({live,upcoming,finals,assets}){
     const showScore=final||liveGame;
     const centerMain=final
       ?"FINAL"
-      :safe(g.displayTime||fmtDate(g.date));
-    const centerSub=final
-      :"";
+      :liveGame
+        ?"LIVE"
+        :safe(g.displayTime||fmtDate(g.date));
     slot.innerHTML=`<article class="featured-game">
       ${teamBlock(g.away||"Away","left",assets,showScore?g.awayScore:"")}
       <div class="game-center">
         <div class="game-status">${centerMain}</div>
-        ${centerSub?`<div class="game-meta">${centerSub}</div>`:""}
       </div>
       ${teamBlock(g.home||"Home","right",assets,showScore?g.homeScore:"")}
     </article>`;
