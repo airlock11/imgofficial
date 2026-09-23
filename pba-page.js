@@ -196,8 +196,9 @@ function renderGallery({finals,assets,official}){
   const wrap=qs("#previous-games");
   const media=Array.isArray(official.mediaGallery)?official.mediaGallery:[];
   const cards=[];
+  const recentFinals=(Array.isArray(finals)?finals:[]).slice(0,3);
 
-  finals.forEach((g,i)=>{
+  recentFinals.forEach((g,i)=>{
     const photo=media[i%Math.max(media.length,1)]?.image||"";
     const a=teamLogo(g.away,assets),h=teamLogo(g.home,assets);
     cards.push(`<article class="media-card">
@@ -210,18 +211,7 @@ function renderGallery({finals,assets,official}){
     </article>`);
   });
 
-  media.slice(finals.length).forEach(x=>{
-    cards.push(`<a class="media-card" href="${safe(x.url||"https://pba.ph/")}" target="_blank" rel="noopener">
-      <img class="media-bg" src="${safe(x.image)}" alt="${safe(x.title)}">
-      <div class="media-card-content">
-        <div class="media-kicker">${safe(x.source||"PBA Official")}</div>
-        <div class="media-title">${safe(x.title)}</div>
-        <div class="media-meta">Official PBA media</div>
-      </div>
-    </a>`);
-  });
-
-  wrap.innerHTML=cards.length?cards.join(""):'<div class="empty-card">No recent verified PBA media is available.</div>';
+  wrap.innerHTML=cards.length?cards.join(""):'<div class="empty-card">No recent verified PBA games are available.</div>';
 }
 
 function renderHighlights({streams,official}){
