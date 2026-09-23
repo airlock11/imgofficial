@@ -958,9 +958,10 @@ footer{
   width:min(500px,52%);
 }
 .uaap-hero .league-logo{
-  width:190px;
-  height:92px;
+  width:168px;
+  height:168px;
   object-fit:contain;
+  object-position:center;
   background:transparent;
   filter:drop-shadow(0 8px 18px rgba(0,0,0,.5));
 }
@@ -1001,8 +1002,8 @@ footer{
     max-width:390px;
   }
   .uaap-hero .league-logo{
-    width:155px;
-    height:76px;
+    width:142px;
+    height:142px;
   }
   .uaap-hero p{
     max-width:100%;
@@ -1029,8 +1030,8 @@ footer{
     padding-bottom:16px;
   }
   .uaap-hero .league-logo{
-    width:150px;
-    height:72px;
+    width:136px;
+    height:136px;
   }
 }
 
