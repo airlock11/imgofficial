@@ -13,26 +13,7 @@ async function getJSON(url,fallback={}){
   }catch{return fallback}
 }
 
-async function setHighQualityHero(){
-  const hero=qs("#pba-hero");
-  if(!hero)return;
-  const urls=Array.from({length:7},(_,i)=>`/assets/pba/hero-hq-v6/p${String(i).padStart(2,"0")}.txt?v=20260923-hq-v6`);
-  try{
-    const parts=await Promise.all(urls.map(async url=>{
-      const r=await fetch(url,{cache:"force-cache"});
-      if(!r.ok)throw new Error(`PBA hero chunk ${r.status}`);
-      return (await r.text()).trim();
-    }));
-    const b64=parts.join("");
-    if(b64.length<80000)throw new Error("PBA hero asset incomplete");
-    hero.style.setProperty("--hero-image",`url("data:image/webp;base64,${b64}")`);
-  }catch(err){
-    console.warn("PBA HQ hero fallback in use",err);
-  }
-}
-
 async function load(){
-  setHighQualityHero();
   const [regional,official,yt,assets]=await Promise.all([
     getJSON("/regional-web.json",{}),
     getJSON("/pba-official.json",{}),
