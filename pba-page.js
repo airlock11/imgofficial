@@ -33,24 +33,12 @@ async function load(){
 
   const logo=qs("#pba-league-logo");
   if(logo&&assets.leagueLogo)logo.src=assets.leagueLogo;
-
-  renderStatus({live,upcoming,finals,updated:regional.updated_at,streams});
   renderGames({live,upcoming,finals,assets});
   renderGallery({finals,assets,official});
   renderHighlights({streams,official});
   renderStandings({official,assets});
   renderTopPlayers(official);
   renderNews(official);
-}
-
-function renderStatus({live,upcoming,finals,updated,streams}){
-  const next=upcoming[0];
-  qs("#status-live").textContent=streams[0]?.title||live[0]?.title||"No live game";
-  qs("#status-next").textContent=next?`${next.away} vs ${next.home}`:"No scheduled game";
-  qs("#status-next-sub").textContent=next?(next.displayTime||fmtDate(next.date)):"";
-  qs("#status-results").textContent=`${finals.length} available`;
-  qs("#status-updated").textContent=updated?fmtTime(updated):"—";
-  qs("#status-updated-sub").textContent=updated?fmtDate(updated):"";
 }
 
 function teamLogo(name,assets){return assets?.teams?.[name]||""}
