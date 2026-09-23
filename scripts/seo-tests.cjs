@@ -3,12 +3,12 @@ const fs=require('node:fs');
 const path=require('node:path');
 const root=path.resolve(__dirname,'..');
 const pages=[
-['index.html','https://www.imgofficial.com/'],
-['sports/index.html','https://www.imgofficial.com/sports/'],
-['scores/index.html','https://www.imgofficial.com/scores/'],
-['news/index.html','https://www.imgofficial.com/news/'],
-['boxing/index.html','https://www.imgofficial.com/boxing/'],
-['odds/index.html','https://www.imgofficial.com/odds/']
+['index.html','https://imgofficial.com/'],
+['sports/index.html','https://imgofficial.com/sports/'],
+['scores/index.html','https://imgofficial.com/scores/'],
+['news/index.html','https://imgofficial.com/news/'],
+['boxing/index.html','https://imgofficial.com/boxing/'],
+['odds/index.html','https://imgofficial.com/odds/']
 ];
 for(const [file,url] of pages){
  const s=fs.readFileSync(path.join(root,file),'utf8');
