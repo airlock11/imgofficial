@@ -1,8 +1,9 @@
 {
-  "updatedAt": "2026-09-23T16:53:51+00:00",
+  "updatedAt": "2026-09-23T16:58:54+00:00",
   "season": "Season 89 Men's Basketball",
   "sources": {
     "stats": "https://uaap.org/stats/uaap-season-89-men-s-basketball",
+    "liveStats": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball",
     "basketball": "https://uaap.org/sports/basketball",
     "articles": "https://uaap.org/posts/articles",
     "photos": "https://uaap.org/posts/photo_gallery",
@@ -20,22 +21,22 @@
       "losses": 0
     },
     {
-      "team": "NU Bulldogs",
-      "wins": 1,
-      "losses": 1
-    },
-    {
       "team": "Ateneo Blue Eagles",
       "wins": 1,
       "losses": 1
     },
     {
-      "team": "UST Growling Tigers",
+      "team": "De La Salle Green Archers",
       "wins": 1,
       "losses": 1
     },
     {
-      "team": "De La Salle Green Archers",
+      "team": "NU Bulldogs",
+      "wins": 1,
+      "losses": 1
+    },
+    {
+      "team": "UST Growling Tigers",
       "wins": 1,
       "losses": 1
     },
@@ -50,9 +51,147 @@
       "losses": 2
     }
   ],
-  "topPlayers": [],
+  "topPlayers": [
+    {
+      "player": "A. Acido",
+      "team": "UST Growling Tigers",
+      "games": 2,
+      "ppg": 18.5,
+      "rpg": 5.0,
+      "apg": 5.5
+    },
+    {
+      "player": "K. Alas",
+      "team": "Ateneo Blue Eagles",
+      "games": 2,
+      "ppg": 18.5,
+      "rpg": 2.5,
+      "apg": 0.5
+    },
+    {
+      "player": "M. Montebon",
+      "team": "Adamson Soaring Falcons",
+      "games": 1,
+      "ppg": 18.0,
+      "rpg": 3.0,
+      "apg": 1.0
+    },
+    {
+      "player": "J. Bahay",
+      "team": "Ateneo Blue Eagles",
+      "games": 2,
+      "ppg": 17.0,
+      "rpg": 2.0,
+      "apg": 2.5
+    },
+    {
+      "player": "C. Akowe",
+      "team": "UST Growling Tigers",
+      "games": 2,
+      "ppg": 15.5,
+      "rpg": 14.0,
+      "apg": 2.0
+    },
+    {
+      "player": "F. Nnoruka",
+      "team": "UP Fighting Maroons",
+      "games": 2,
+      "ppg": 15.0,
+      "rpg": 12.5,
+      "apg": 1.0
+    },
+    {
+      "player": "J. Edoukou",
+      "team": "UE Red Warriors",
+      "games": 1,
+      "ppg": 14.0,
+      "rpg": 8.0,
+      "apg": 0.0
+    },
+    {
+      "player": "L. Pablo",
+      "team": "De La Salle Green Archers",
+      "games": 2,
+      "ppg": 13.0,
+      "rpg": 5.0,
+      "apg": 0.5
+    }
+  ],
   "headlines": [],
   "photoGallery": [],
   "previousGamePhotos": [],
-  "highlights": []
+  "highlights": [],
+  "topPlayersMode": "recent-official-boxscores",
+  "liveStatsGames": [
+    {
+      "first": "Ateneo Blue Eagles",
+      "firstScore": 75,
+      "second": "UP Fighting Maroons",
+      "secondScore": 94,
+      "status": "Final",
+      "state": "final",
+      "gameId": "7",
+      "url": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball?game_id=7"
+    },
+    {
+      "first": "NU Bulldogs",
+      "firstScore": 76,
+      "second": "UE Red Warriors",
+      "secondScore": 56,
+      "status": "Final",
+      "state": "final",
+      "gameId": "6",
+      "url": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball?game_id=6"
+    },
+    {
+      "first": "De La Salle Green Archers",
+      "firstScore": 75,
+      "second": "UST Growling Tigers",
+      "secondScore": 80,
+      "status": "Final",
+      "state": "final",
+      "gameId": "5",
+      "url": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball?game_id=5"
+    },
+    {
+      "first": "Ateneo Blue Eagles",
+      "firstScore": 101,
+      "second": "UE Red Warriors",
+      "secondScore": 74,
+      "status": "Final",
+      "state": "final",
+      "gameId": "4",
+      "url": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball?game_id=4"
+    },
+    {
+      "first": "UP Fighting Maroons",
+      "firstScore": 92,
+      "second": "UST Growling Tigers",
+      "secondScore": 85,
+      "status": "Final",
+      "state": "final",
+      "gameId": "3",
+      "url": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball?game_id=3"
+    },
+    {
+      "first": "De La Salle Green Archers",
+      "firstScore": 89,
+      "second": "NU Bulldogs",
+      "secondScore": 87,
+      "status": "Final",
+      "state": "final",
+      "gameId": "2",
+      "url": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball?game_id=2"
+    },
+    {
+      "first": "FEU Tamaraws",
+      "firstScore": 53,
+      "second": "Adamson Soaring Falcons",
+      "secondScore": 56,
+      "status": "Final",
+      "state": "final",
+      "gameId": "1",
+      "url": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball?game_id=1"
+    }
+  ]
 }
