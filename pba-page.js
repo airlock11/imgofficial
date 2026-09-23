@@ -406,10 +406,21 @@ function renderTopPlayers(official){
 }
 
 function renderNews(official){
-  const news=official.headlines||[];
-  qs("#news").innerHTML=news.length?news.map(x=>`<a class="news-card" href="${safe(x.url||"https://pba.ph/")}" target="_blank" rel="noopener">
-    <small>PBA Official</small><strong>${safe(x.title)}</strong>
-  </a>`).join(""):'<div class="empty-card">No official PBA headlines available.</div>';
+  const news=Array.isArray(official.headlines)?official.headlines:[];
+  qs("#news").innerHTML=news.length?news.slice(0,6).map(x=>{
+    const image=String(x.image||"").startsWith("http")?safe(x.image):"";
+    const published=x.published?new Date(x.published):null;
+    const date=published&&!Number.isNaN(published.getTime())
+      ?published.toLocaleDateString(undefined,{month:"short",day:"numeric"})
+      :"";
+    return `<a class="news-card${image?" has-photo":""}" href="${safe(x.url||"https://www.pba.ph/news")}" target="_blank" rel="noopener">
+      ${image?`<img class="news-photo" src="${image}" alt="" loading="lazy" decoding="async">`:""}
+      <span class="news-copy">
+        <small>${safe(x.sourceName||"PBA Official")}${date?` · ${safe(date)}`:""}</small>
+        <strong>${safe(x.title)}</strong>
+      </span>
+    </a>`;
+  }).join(""):'<div class="empty-card">No official PBA headlines available.</div>';
 }
 
 load();

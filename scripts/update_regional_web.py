@@ -22,6 +22,7 @@ PHT = timezone(timedelta(hours=8))
 
 URLS = {
     "pba": "https://skedcheck.com/pba-games-schedule-scores/",
+    "pba_news": "https://www.pba.ph/news",
     "uaap": "https://skedcheck.com/uaap-mens-basketball-schedule-scores/",
     "mpbl_fixtures": "https://www.forebet.com/en/basketball/philippines/mpbl/fixtures",
     "mpbl_results": "https://www.forebet.com/en/basketball/philippines/mpbl/results",
@@ -350,6 +351,149 @@ def update_pba_previous_game_photos(pba_league):
             "games": [x.get("eventId") for x in updated],
         }, ensure_ascii=False))
 
+
+
+
+def _pba_news_image(soup, article_url):
+    for attrs in (
+        {"property":"og:image"},
+        {"name":"twitter:image"},
+        {"property":"twitter:image"},
+    ):
+        tag = soup.find("meta", attrs=attrs)
+        if tag and tag.get("content"):
+            value = urllib.parse.urljoin(article_url, str(tag.get("content")).strip())
+            if value.startswith("http"):
+                return value
+
+    # PBA article photos are currently served from dashboard.pba.ph/assets/news/.
+    for tag in soup.find_all(["img", "a"]):
+        value = tag.get("src") or tag.get("data-src") or tag.get("href")
+        if not value:
+            continue
+        value = urllib.parse.urljoin(article_url, str(value).strip())
+        if "/assets/news/" in value and value.startswith("http"):
+            return value
+    return ""
+
+
+def _pba_news_date(soup):
+    time_tag = soup.find("time")
+    if time_tag:
+        raw = time_tag.get("datetime") or time_tag.get_text(" ", strip=True)
+        if raw:
+            try:
+                return datetime.fromisoformat(str(raw).replace("Z","+00:00")).isoformat()
+            except Exception:
+                pass
+
+    text = re.sub(r"\s+", " ", soup.get_text(" ", strip=True))
+    m = re.search(
+        r"\b(Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)\s+(\d{1,2}),\s+(20\d{2})\b",
+        text,
+        re.I,
+    )
+    if not m:
+        return ""
+    raw = " ".join(m.groups())
+    for fmt in ("%b %d %Y", "%B %d %Y"):
+        try:
+            return datetime.strptime(raw, fmt).replace(tzinfo=PHT).isoformat()
+        except Exception:
+            pass
+    return ""
+
+
+def fetch_pba_official_news(limit=6):
+    page = fetch(URLS["pba_news"])
+    soup = BeautifulSoup(page, "html.parser")
+    links = []
+    seen = set()
+
+    for a in soup.find_all("a", href=True):
+        href = urllib.parse.urljoin(URLS["pba_news"], str(a.get("href") or "").strip())
+        parsed = urllib.parse.urlparse(href)
+        if parsed.netloc.lower() not in ("pba.ph", "www.pba.ph"):
+            continue
+        path = parsed.path.rstrip("/")
+        if not path.startswith("/news/") or path == "/news":
+            continue
+        title = re.sub(r"\s+", " ", a.get_text(" ", strip=True)).strip()
+        if len(title) < 12:
+            continue
+        canonical = "https://www.pba.ph" + path
+        if canonical in seen:
+            continue
+        seen.add(canonical)
+        links.append((title, canonical))
+        if len(links) >= limit:
+            break
+
+    rows = []
+    for fallback_title, url in links:
+        try:
+            article = BeautifulSoup(fetch(url), "html.parser")
+            h1 = article.find("h1")
+            title = re.sub(r"\s+", " ", h1.get_text(" ", strip=True) if h1 else fallback_title).strip()
+            image = _pba_news_image(article, url)
+            published = _pba_news_date(article)
+        except Exception as ex:
+            print("PBA news article", url, type(ex).__name__, str(ex)[:120])
+            title, image, published = fallback_title, "", ""
+
+        rows.append({
+            "title": title or fallback_title,
+            "url": url,
+            "image": image,
+            "published": published,
+            "sourceName": "PBA Official",
+        })
+    return rows
+
+
+def update_pba_official_news():
+    try:
+        official = json.loads(PBA_OFFICIAL_OUT.read_text("utf-8"))
+    except Exception:
+        official = {}
+
+    previous = list(official.get("headlines") or [])
+    previous_by_url = {str(x.get("url") or ""): x for x in previous if x.get("url")}
+
+    try:
+        fresh = fetch_pba_official_news(6)
+    except Exception as ex:
+        print("PBA official news", type(ex).__name__, str(ex)[:180])
+        fresh = []
+
+    # Keep a previously verified photo/date when one article fetch is temporarily blocked.
+    for row in fresh:
+        prior = previous_by_url.get(str(row.get("url") or ""))
+        if prior:
+            if not str(row.get("image") or "").startswith("http"):
+                row["image"] = prior.get("image") or ""
+            if not row.get("published"):
+                row["published"] = prior.get("published") or ""
+
+    # Never erase known-good news because the PBA site temporarily blocks the runner.
+    if not fresh:
+        return len(previous)
+
+    old_compact = json.dumps(previous, sort_keys=True, ensure_ascii=False)
+    new_compact = json.dumps(fresh, sort_keys=True, ensure_ascii=False)
+    if old_compact != new_compact:
+        official["headlines"] = fresh
+        official["headlinesSource"] = {
+            "name": "PBA Official",
+            "url": URLS["pba_news"],
+        }
+        official["headlinesUpdatedAt"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
+        PBA_OFFICIAL_OUT.write_text(json.dumps(official, ensure_ascii=False, indent=2) + "\n", "utf-8")
+        print(json.dumps({
+            "pba_headlines": len(fresh),
+            "photos": sum(1 for x in fresh if str(x.get("image") or "").startswith("http")),
+        }, ensure_ascii=False))
+    return len(fresh)
 
 
 PBA_YOUTUBE_CHANNEL_ID = "UC9WkScCyThtumtf9XVO4eWQ"
@@ -1462,6 +1606,10 @@ def main():
         update_pba_previous_game_photos(data["leagues"].get("pba", {}))
     except Exception as e:
         errors["pba_photos"] = str(e)
+    try:
+        update_pba_official_news()
+    except Exception as e:
+        errors["pba_news"] = str(e)
     try:
         update_pba_shorts()
     except Exception as e:
