@@ -61,3 +61,10 @@ footer{border-top:1px solid var(--pba-line);padding:26px 0 86px;color:#748295;fo
 .team-badge.image img{width:100%;height:100%;object-fit:contain;display:block}
 .standing-team{display:flex;align-items:center;gap:9px;min-width:0}.standing-team img{width:30px;height:30px;object-fit:contain;border-radius:7px;background:rgba(255,255,255,.95);padding:2px;flex:0 0 auto}.standing-team span{min-width:0}
 .game-gallery-card{min-height:250px}.gallery-logos{position:absolute;inset:22px 18px 74px;z-index:1;display:flex;align-items:center;justify-content:center;gap:16px}.gallery-logos img{width:42%;max-width:110px;max-height:110px;object-fit:contain;filter:drop-shadow(0 10px 22px rgba(0,0,0,.35))}
+
+.player-card{display:grid;grid-template-columns:86px 1fr;gap:14px;align-items:center;padding:12px;border:1px solid rgba(255,255,255,.08);border-radius:16px;background:rgba(255,255,255,.025)}
+.player-photo{width:86px;height:86px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,rgba(215,38,57,.22),rgba(36,91,181,.26));display:grid;place-items:center;border:1px solid rgba(255,255,255,.10)}
+.player-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
+.player-photo.fallback{color:#d6deea;font-weight:1000;letter-spacing:.05em}
+.player-copy{min-width:0;display:grid;gap:4px}.player-copy span{color:#8fa0b4;font-size:.78rem}.player-copy strong{font-size:1rem;line-height:1.2}.player-copy b{font-size:.9rem;color:#f4f7fb}
+@media(max-width:520px){.player-card{grid-template-columns:70px 1fr}.player-photo{width:70px;height:70px;border-radius:14px}}
