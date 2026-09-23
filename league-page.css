@@ -10,3 +10,37 @@ nav{height:72px;display:flex;align-items:center;justify-content:space-between;ga
 .related{margin-top:28px}.related h2{font-size:1.3rem}.pillrow{display:flex;flex-wrap:wrap;gap:10px}.pillrow a{text-decoration:none;padding:10px 13px;border-radius:999px;border:1px solid var(--line);color:#c4ccd5}
 footer{border-top:1px solid var(--line);padding:24px 0 92px;color:#7f8995;font-size:.82rem}
 @media(max-width:760px){.navlinks{gap:12px}.navlinks a:nth-child(4),.navlinks a:nth-child(5){display:none}.hero{padding-top:58px}.grid{grid-template-columns:1fr}.shell{width:min(100% - 28px,1080px)}}
+/* Live league data blocks */
+.league-data{padding:0 0 74px}
+.data-head{display:flex;align-items:end;justify-content:space-between;gap:18px;margin-bottom:18px}
+.data-head h2{margin:0;font-size:clamp(1.55rem,3vw,2.15rem)}
+.data-head p{margin:5px 0 0;color:var(--muted);font-size:.88rem}
+.data-status{font-size:.74rem;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);white-space:nowrap}
+.data-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.data-panel{border:1px solid var(--line);background:var(--panel);border-radius:18px;padding:20px;min-width:0}
+.data-panel-wide{grid-column:1/-1}
+.data-panel h3{margin:0 0 14px;font-size:1.08rem}
+.game-list{display:grid;gap:10px}
+.game-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px;align-items:center;padding:13px 0;border-top:1px solid var(--line)}
+.game-row:first-child{border-top:0;padding-top:0}
+.game-meta{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:.73rem;margin-bottom:6px;flex-wrap:wrap}
+.live-chip{display:inline-flex;align-items:center;padding:3px 7px;border-radius:999px;background:rgba(239,63,69,.14);color:#ff7478;font-weight:800;letter-spacing:.05em}
+.game-teams{display:grid;gap:5px;font-size:.92rem;font-weight:700}
+.game-team{display:flex;align-items:center;gap:8px;min-width:0}
+.game-team img{width:22px;height:22px;object-fit:contain;flex:0 0 auto}
+.game-team span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.game-score{font-variant-numeric:tabular-nums;font-size:1.12rem;font-weight:800;text-align:right;min-width:42px}
+.data-empty{margin:0;color:var(--muted);line-height:1.6;font-size:.9rem}
+.data-empty a{font-weight:700}
+.standings-wrap{overflow:auto}
+.standings-table{width:100%;border-collapse:collapse;min-width:480px;font-size:.82rem}
+.standings-table th,.standings-table td{padding:10px 8px;border-top:1px solid var(--line);text-align:right}
+.standings-table th:first-child,.standings-table td:first-child{text-align:left}
+.standings-table thead th{border-top:0;color:var(--muted);font-size:.7rem;text-transform:uppercase;letter-spacing:.06em}
+.news-list{display:grid;gap:12px}
+.news-item{display:grid;grid-template-columns:74px minmax(0,1fr);gap:12px;text-decoration:none;padding-top:12px;border-top:1px solid var(--line)}
+.news-item:first-child{padding-top:0;border-top:0}
+.news-item img{width:74px;height:58px;object-fit:cover;border-radius:9px;background:#111}
+.news-item strong{display:block;font-size:.9rem;line-height:1.35}
+.news-item small{display:block;color:var(--muted);margin-top:5px;font-size:.7rem}
+@media(max-width:760px){.data-head{align-items:flex-start;flex-direction:column}.data-grid{grid-template-columns:1fr}.data-panel-wide{grid-column:auto}.league-data{padding-bottom:56px}}
