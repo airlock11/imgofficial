@@ -1,0 +1,68 @@
+name: Update team rosters and player profiles
+
+on:
+  schedule:
+    - cron: "17 * * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/update_team_player_data.py"
+      - "team-player-sources.json"
+      - ".github/workflows/update-team-player-data.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: team-player-data-update
+  cancel-in-progress: true
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Refresh team rosters and player profiles
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "IMG Team Data Bot"
+          git config user.email "actions@users.noreply.github.com"
+
+          git fetch origin main
+          git reset --hard origin/main
+          python scripts/update_team_player_data.py
+
+          if git diff --quiet -- team-player-data.json; then
+            echo "No team/player data changes."
+            exit 0
+          fi
+
+          git add team-player-data.json
+          git commit -m "Update team rosters and player profiles"
+
+          for attempt in 1 2 3 4 5; do
+            git fetch origin main
+            if ! git rebase origin/main; then
+              git rebase --abort || true
+              echo "Rebase conflict while publishing team-player-data.json."
+              exit 1
+            fi
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            echo "Push raced with another automation; retrying publish only (attempt $attempt)."
+            sleep 2
+          done
+          exit 1
