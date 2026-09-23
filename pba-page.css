@@ -461,14 +461,7 @@ main,.page-shell,.content-section,footer{background:#000}
 .highlight-row{
   grid-auto-columns:210px;
   gap:14px;
-  padding-bottom:10px;
-  scrollbar-width:none;
-  -ms-overflow-style:none
-}
-.highlight-row::-webkit-scrollbar{
-  width:0;
-  height:0;
-  display:none
+  padding-bottom:10px
 }
 .reel-card{
   min-width:0;
@@ -759,6 +752,15 @@ footer{
   .news-grid{grid-template-columns:1fr}
 }
 @media(max-width:720px){
+  .highlight-row{
+    scrollbar-width:none;
+    -ms-overflow-style:none
+  }
+  .highlight-row::-webkit-scrollbar{
+    width:0;
+    height:0;
+    display:none
+  }
   .shell{width:min(100% - 20px,1180px)}
   .navlinks{gap:12px}
   .navlinks a:nth-child(4),.navlinks a:nth-child(5){display:none}
