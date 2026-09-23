@@ -354,3 +354,24 @@ footer{border-top:1px solid var(--line);padding:26px 0 84px;color:var(--muted);f
  .img-game-strip,.img-photo-gallery-rail{grid-auto-columns:94%!important}
  .img-reel-rail{grid-auto-columns:88%!important}
 }
+
+/* IMG COMPLETE LEAGUE DATA FALLBACKS 2026-09-23 */
+.img-source-fallback,.img-highlight-fallback{
+ display:flex;flex-direction:column;justify-content:center;gap:7px;min-height:150px;padding:20px;
+ border:1px solid var(--line);border-radius:18px;background:linear-gradient(145deg,var(--surface-strong),var(--surface-soft));
+ color:var(--text);text-decoration:none
+}
+.img-source-fallback small,.img-highlight-fallback small{font-size:.6rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:850}
+.img-source-fallback strong,.img-highlight-fallback strong{font-size:1rem;line-height:1.3}
+.img-source-fallback span,.img-highlight-fallback span{font-size:.74rem;line-height:1.55;color:var(--muted)}
+.img-highlight-fallback{position:relative;min-height:220px;max-width:420px;overflow:hidden}
+.img-highlight-fallback:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 80% 15%,color-mix(in srgb,var(--accent2) 28%,transparent),transparent 42%);pointer-events:none}
+.img-highlight-fallback-play{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line-strong);background:rgba(0,0,0,.2);position:relative}
+.img-roster-empty{padding:16px 0;color:var(--muted);font-size:.78rem;line-height:1.6}
+.img-participant-grid{padding:0!important;margin-bottom:14px}
+#imgStandingsPanel .img-standings:has(.img-source-fallback){overflow:visible!important}
+#imgNewsPanel .img-news-list:has(.img-source-fallback){display:block!important}
+@media(max-width:680px){
+ .img-source-fallback,.img-highlight-fallback{min-height:135px;padding:16px}
+ .img-highlight-fallback{min-height:190px;max-width:none}
+}
