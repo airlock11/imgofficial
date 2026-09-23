@@ -94,7 +94,7 @@ button{font:inherit}
   width:154px;
   height:82px;
   object-fit:contain;
-  filter:url(#pba-logo-remove-white) drop-shadow(0 10px 24px rgba(0,0,0,.52));
+  filter:drop-shadow(0 10px 24px rgba(0,0,0,.52));
   transform:translateZ(0);
 }
 .league-label{
@@ -557,4 +557,3 @@ footer{
   .game-center strong{font-size:.78rem}
   .standings-table th,.standings-table td{padding:8px 8px}
 }
-.pba-filter-defs{position:absolute;width:0;height:0;overflow:hidden;pointer-events:none}
