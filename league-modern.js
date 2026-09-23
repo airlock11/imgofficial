@@ -62,20 +62,36 @@ async function loadUserLogoMap(){
    document.head.append(sc);
  });
 }
+async function loadBackgroundLogoMap(){
+ if(window.IMG_LEAGUE_BACKGROUND_LOGOS)return window.IMG_LEAGUE_BACKGROUND_LOGOS;
+ return new Promise(resolve=>{
+   const sc=document.createElement('script');sc.src='/league-background-logos.js?v=20260923-1';
+   sc.onload=()=>resolve(window.IMG_LEAGUE_BACKGROUND_LOGOS||{});sc.onerror=()=>resolve({});
+   document.head.append(sc);
+ });
+}
 async function officialFallbackLogo(){
  try{
    const r=await fetch('/league-sources.json?v=20260923-2',{cache:'no-store'});if(!r.ok)throw 0;
    const j=await r.json(),u=j?.leagues?.[slug]?.official||'';if(!u)return'';
-   const host=new URL(u).hostname;return 'https://www.google.com/s2/favicons?domain='+encodeURIComponent(host)+'&sz=256';
+   const host=new URL(u).hostname;return 'https://www.google.com/s2/favicons?domain='+encodeURIComponent(host)+'&sz=512';
  }catch{return''}
 }
-function setLeagueIdentityLogo(src){
+let heroIdentityDedicated=false;
+function setLeagueIdentityLogo(src,{dedicated=false,onerrorFallback=''}={}){
  if(!src)return;
  let box=document.querySelector('.img-league-identity');
  if(!box){box=document.createElement('div');box.className='img-league-identity';document.querySelector('.hero .shell')?.append(box)}
  const paint=finalSrc=>{
-   box.innerHTML='<img src="'+esc(finalSrc)+'" alt="'+esc(cfg.name)+' logo" referrerpolicy="no-referrer">';
-   const img=box.querySelector('img');if(img)img.onerror=()=>{box.innerHTML='<span class="img-league-identity-fallback">'+esc(cfg.name.replace(/[^A-Za-z0-9]/g,'').slice(0,4).toUpperCase())+'</span>'};
+   box.innerHTML='<img src="'+esc(finalSrc)+'" alt="'+esc(cfg.name)+' background logo" referrerpolicy="no-referrer" decoding="async">';
+   const img=box.querySelector('img');
+   if(img){
+     img.onload=()=>{if(dedicated)heroIdentityDedicated=true};
+     img.onerror=()=>{
+       if(onerrorFallback&&onerrorFallback!==finalSrc){setLeagueIdentityLogo(onerrorFallback,{dedicated:false});return}
+       box.innerHTML='<span class="img-league-identity-fallback">'+esc(cfg.name.replace(/[^A-Za-z0-9]/g,'').slice(0,4).toUpperCase())+'</span>';
+     };
+   }
  };
  if(/^data:image\/(jpeg|jpg)/i.test(src)){
    try{
@@ -83,7 +99,10 @@ function setLeagueIdentityLogo(src){
      im.onload=()=>{
        try{
          const c=document.createElement('canvas'),ctx=c.getContext('2d',{willReadFrequently:true});
-         c.width=im.naturalWidth||im.width;c.height=im.naturalHeight||im.height;ctx.drawImage(im,0,0);
+         c.width=Math.max(1200,im.naturalWidth||im.width);c.height=Math.max(1200,im.naturalHeight||im.height);
+         const w=im.naturalWidth||im.width,h=im.naturalHeight||im.height,scale=Math.min(c.width/w,c.height/h);
+         const dw=w*scale,dh=h*scale,dx=(c.width-dw)/2,dy=(c.height-dh)/2;
+         ctx.clearRect(0,0,c.width,c.height);ctx.drawImage(im,dx,dy,dw,dh);
          const d=ctx.getImageData(0,0,c.width,c.height),p=d.data;
          for(let i=0;i<p.length;i+=4){
            const r=p[i],g=p[i+1],b=p[i+2],max=Math.max(r,g,b),min=Math.min(r,g,b);
@@ -98,12 +117,16 @@ function setLeagueIdentityLogo(src){
  paint(src);
 }
 async function resolveLeagueIdentity(){
- const map=await loadUserLogoMap(),mapped=map?.[cfg.key]||'';
- if(mapped){setLeagueIdentityLogo(mapped);return}
+ const [bgMap,logoMap]=await Promise.all([loadBackgroundLogoMap(),loadUserLogoMap()]);
+ const normal=logoMap?.[cfg.key]||logoMap?.[slug]||'';
+ const dedicated=bgMap?.[slug]||bgMap?.[cfg.key]||'';
+ if(dedicated){setLeagueIdentityLogo(dedicated,{dedicated:true,onerrorFallback:normal});return}
+ if(normal){setLeagueIdentityLogo(normal);return}
  const fallback=await officialFallbackLogo();if(fallback)setLeagueIdentityLogo(fallback);
  else{let box=document.querySelector('.img-league-identity');if(!box){box=document.createElement('div');box.className='img-league-identity';document.querySelector('.hero .shell')?.append(box)}box.innerHTML='<span class="img-league-identity-fallback">'+esc(cfg.name.replace(/[^A-Za-z0-9]/g,'').slice(0,4).toUpperCase())+'</span>'}
 }
 function setLeagueIdentityFromPayload(j){
+ if(heroIdentityDedicated)return;
  const logo=j?.leagues?.[0]?.logos?.[0]?.href||j?.leagues?.[0]?.logo||'';
  if(logo)setLeagueIdentityLogo(logo);
 }
