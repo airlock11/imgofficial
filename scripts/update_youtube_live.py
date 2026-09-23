@@ -698,7 +698,7 @@ except Exception as ex:
 
 payload={
  "updatedAt":datetime.now(timezone.utc).isoformat(),
- "freshForMinutes":20,
+ "freshForMinutes":30,
  "streams":streams,
  "liveExpiryLedger":expiry_ledger,
  "upcoming":upcoming,
@@ -709,27 +709,39 @@ payload={
 def semantic_payload(value):
  data=json.loads(json.dumps(value))
  data.pop("updatedAt",None)
+ # Verification diagnostics/timestamps are heartbeat metadata, not stream identity.
+ # Ignoring them prevents unnecessary site deployments while still publishing
+ # immediately when a stream appears, ends, changes status, changes URL, or changes league.
+ data.pop("liveVerification",None)
  scanner=data.get("scanner")
  if isinstance(scanner,dict):scanner.pop("checkedAt",None)
- # Positive verification timestamps change every scan but do not represent a
- # meaningful stream-state change. Fallback/verified status and deadlines remain.
  for item in data.get("streams",[]):
-  if item.get("leagueKey")!="asian_games":
-   item.pop("lastVerifiedLiveAt",None)
-   stream=item.get("stream")
-   if isinstance(stream,dict):stream.pop("lastVerifiedLiveAt",None)
+  item.pop("lastVerifiedLiveAt",None)
+  stream=item.get("stream")
+  if isinstance(stream,dict):stream.pop("lastVerifiedLiveAt",None)
  for item in data.get("liveExpiryLedger",{}).values():
   if isinstance(item,dict):item.pop("lastVerifiedLiveAt",None)
  return data
 
-# Avoid a GitHub Pages deployment every five minutes when nothing meaningful
-# changed. Ended/new streams still change the semantic payload and publish immediately.
-if semantic_payload(payload)==semantic_payload(previous):
+def previous_feed_age_seconds(previous):
+ try:
+  dt=datetime.fromisoformat(str(previous.get("updatedAt") or "").replace("Z","+00:00")).astimezone(timezone.utc)
+  return max(0,(datetime.now(timezone.utc)-dt).total_seconds())
+ except Exception:
+  return 999999
+
+semantic_changed=semantic_payload(payload)!=semantic_payload(previous)
+# Keep a verified heartbeat while anything is live so browsers never reject an
+# otherwise-current stream as stale. Fifteen minutes leaves a wide margin under
+# freshForMinutes=30 and cuts deployment churn substantially.
+heartbeat_due=bool(streams) and previous_feed_age_seconds(previous)>=15*60
+
+if not semantic_changed and not heartbeat_due:
  print(
   "IMG livestream scanner",
   "official sources",len(scanner_state.get("sourcesChecked",[])),
   "verified live streams",len(streams),
-  "no semantic stream changes"
+  "stable; no publish needed"
  )
 else:
  OUT.write_text(json.dumps(payload,indent=2)+"\n",encoding="utf-8")
@@ -737,6 +749,7 @@ else:
   "IMG livestream scanner",
   "official sources",len(scanner_state.get("sourcesChecked",[])),
   "verified live streams",len(streams),
+  "publish reason",("stream-state-change" if semantic_changed else "verification-heartbeat"),
   "NBL upcoming",len(upcoming),
   "NBL scheduled",len(payload["nblSchedule"])
  )
