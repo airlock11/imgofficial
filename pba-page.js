@@ -50,27 +50,21 @@ function teamBlock(name,side,assets){
 }
 
 function renderGames({live,upcoming,finals,assets}){
-  const groups={live,upcoming,results:finals};
   const slot=qs("#game-slot");
-  const paint=key=>{
-    const g=(groups[key]||[])[0];
-    qsa(".tab-btn").forEach(b=>b.classList.toggle("active",b.dataset.tab===key));
-    if(!g){
-      slot.innerHTML='<div class="empty-card">No verified PBA game is available for this tab.</div>';
-      return;
-    }
-    const final=g.state==="final";
-    const mid=final
-      ?`<strong class="score">${safe(g.awayScore)} — ${safe(g.homeScore)}</strong><div class="vs-pill">FINAL</div>`
-      :`<strong>${safe(g.displayTime||fmtDate(g.date))}</strong><div class="vs-pill">VS</div><div>${safe(g.location||g.status||"Scheduled")}</div>`;
-    slot.innerHTML=`<article class="featured-game">
-      ${teamBlock(g.away||"Away","left",assets)}
-      <div class="game-center">${mid}</div>
-      ${teamBlock(g.home||"Home","right",assets)}
-    </article>`;
-  };
-  qsa(".tab-btn").forEach(b=>b.addEventListener("click",()=>paint(b.dataset.tab)));
-  paint(live.length?"live":upcoming.length?"upcoming":"results");
+  const g=live[0]||upcoming[0]||finals[0];
+  if(!g){
+    slot.innerHTML='<div class="empty-card">No verified PBA game is available right now.</div>';
+    return;
+  }
+  const final=g.state==="final";
+  const mid=final
+    ?`<strong class="score">${safe(g.awayScore)} — ${safe(g.homeScore)}</strong><div class="vs-pill">FINAL</div>`
+    :`<strong>${safe(g.displayTime||fmtDate(g.date))}</strong><div class="vs-pill">VS</div><div>${safe(g.location||g.status||"Scheduled")}</div>`;
+  slot.innerHTML=`<article class="featured-game">
+    ${teamBlock(g.away||"Away","left",assets)}
+    <div class="game-center">${mid}</div>
+    ${teamBlock(g.home||"Home","right",assets)}
+  </article>`;
 }
 
 function renderGallery({finals,assets,official}){
