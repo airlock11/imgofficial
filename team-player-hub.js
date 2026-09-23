@@ -46,6 +46,16 @@ async function liveEspnTeams(c){
    return out;
  }catch{return[]}
 }
+async function regionalTeams(key){
+ const files=['/regional-web.json','/special-sports-data.json','/extended-sports-data.json'],names=new Map();
+ for(const file of files){
+  try{
+   const j=await jfetch(file+'?v='+Date.now()),l=j?.leagues?.[key]||{};
+   for(const g of(l.games||[]))for(const n of[g.away,g.home])if(n)names.set(String(n).toLowerCase(),{id:String(n).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''),name:n,roster:[]});
+  }catch{}
+ }
+ return [...names.values()];
+}
 function mergeTeams(a,b){
  const m=new Map();
  for(const t of [...(b||[]),...(a||[])]){
@@ -127,7 +137,15 @@ function openPlayer(team,p){
  d.showModal();
 }
 async function start(){
- try{sourceCfg=await loadSources();if(!sourceCfg)return;leagueData=await loadPublished();let published=leagueData?.teams||[];let live=[];if(sourceCfg.mode==='teams'&&sourceCfg.structured)live=await liveEspnTeams(sourceCfg);allTeams=mergeTeams(live,published);renderTeams()}catch{}
+ try{
+  sourceCfg=await loadSources();if(!sourceCfg)return;
+  leagueData=await loadPublished();
+  let published=leagueData?.teams||[],live=[],regional=[];
+  if(sourceCfg.mode==='teams'&&sourceCfg.structured)live=await liveEspnTeams(sourceCfg);
+  if(sourceCfg.mode==='teams'&&sourceCfg.regionalKey)regional=await regionalTeams(sourceCfg.regionalKey);
+  allTeams=mergeTeams(live,mergeTeams(published,regional));
+  renderTeams()
+ }catch{}
 }
 start();
 })();
