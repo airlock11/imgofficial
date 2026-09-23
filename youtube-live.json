@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-09-23T06:58:11.462990+00:00",
-  "freshForMinutes": 8,
+  "updatedAt": "2026-09-23T07:04:02.123863+00:00",
+  "freshForMinutes": 20,
   "streams": [
     {
       "eventId": "ag26-youtube-NORA9lKUkX0",
@@ -9,21 +9,22 @@
       "league": "2026 ASIAN GAMES",
       "teams": [],
       "title": "LIVE: Yulo brothers lead PH medal bid | MEN\u2019S GYMNASTICS TEAM FINAL | 2026 ASIAN GAMES",
+      "verificationStatus": "verified",
+      "lastVerifiedLiveAt": "2026-09-23T07:04:02.123863+00:00",
       "stream": {
         "videoId": "NORA9lKUkX0",
         "watchUrl": "https://www.youtube.com/watch?v=NORA9lKUkX0",
         "provider": "YouTube",
         "channel": "One Sports",
         "title": "LIVE: Yulo brothers lead PH medal bid | MEN\u2019S GYMNASTICS TEAM FINAL | 2026 ASIAN GAMES",
-        "embedUrl": "https://www.youtube.com/embed/NORA9lKUkX0",
+        "sourceChannelId": "UCXDG9ue-emCN8Ad3h7lERqQ",
         "verificationStatus": "verified",
-        "lastVerifiedLiveAt": "2026-09-23T06:58:11.462990+00:00",
+        "lastVerifiedLiveAt": "2026-09-23T07:04:02.123863+00:00",
+        "embedUrl": "https://www.youtube.com/embed/NORA9lKUkX0",
         "deliveryLeagueKey": "asian_games",
         "deliveryPlacement": "above_statistics",
         "firstLiveAt": "2026-09-23T06:57:59.766423+00:00"
       },
-      "verificationStatus": "verified",
-      "lastVerifiedLiveAt": "2026-09-23T06:58:11.462990+00:00",
       "delivery": {
         "leagueKey": "asian_games",
         "url": "/scores/?league=asian_games",
@@ -68,7 +69,7 @@
     },
     "ag26-youtube-NORA9lKUkX0": {
       "firstLiveAt": "2026-09-23T06:57:59.766423+00:00",
-      "lastVerifiedLiveAt": "2026-09-23T06:57:59.766423+00:00"
+      "lastVerifiedLiveAt": "2026-09-23T07:03:49.438654+00:00"
     }
   },
   "upcoming": [],
@@ -77,7 +78,7 @@
   "scanner": {
     "version": 3,
     "mode": "official-auto-discovery",
-    "checkedAt": "2026-09-23T06:58:11.170522+00:00",
+    "checkedAt": "2026-09-23T07:04:01.904790+00:00",
     "sourcesChecked": [
       "nbl-pilipinas",
       "mpbl",
@@ -116,9 +117,10 @@
     }
   },
   "liveVerification": {
-    "checkedAt": "2026-09-23T06:58:11.462990+00:00",
+    "checkedAt": "2026-09-23T07:04:02.123863+00:00",
     "method": "YouTube videos API exact-video verification",
     "verifiedLiveCount": 1,
+    "graceCount": 0,
     "removedCount": 0,
     "removed": []
   }
