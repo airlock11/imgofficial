@@ -42,8 +42,15 @@ jobs:
           published=0
           for attempt in 1 2 3; do
             echo "YouTube refresh attempt $attempt/3"
-            git fetch origin main
+
+            git fetch origin main live-data || git fetch origin main
             git reset --hard origin/main
+
+            # Restore the latest livestream state from the dedicated data branch.
+            # This keeps rapid live updates independent from normal site deploys.
+            if git rev-parse --verify origin/live-data >/dev/null 2>&1; then
+              git show origin/live-data:youtube-live.json > youtube-live.json || true
+            fi
 
             if ! python scripts/update_youtube_live.py; then
               echo "Scanner failed; retrying."
@@ -61,19 +68,23 @@ jobs:
               continue
             fi
 
-            if git diff --quiet -- youtube-live.json; then
-              echo "No stream-state change."
+            git add youtube-live.json
+            if git diff --cached --quiet; then
+              echo "No livestream publish needed."
               published=1
               break
             fi
 
-            git add youtube-live.json
             git commit -m "Update verified YouTube live streams"
-            if git push origin HEAD:main; then
+
+            # Publish only to the dedicated live-data branch. The website reads
+            # raw GitHub from this branch first, so live state no longer waits
+            # for a GitHub Pages deployment or competes with other main pushes.
+            if git push --force-with-lease origin HEAD:live-data; then
               published=1
               break
             fi
-            echo "Push raced with another automation; retrying."
+            echo "Live-data push raced; retrying."
             sleep $((attempt * 5))
           done
 
