@@ -40,11 +40,34 @@ function renderList(id,items,empty){
  const el=document.getElementById(id);if(!el)return;
  el.innerHTML=items.length?'<div class="game-list">'+items.map(gameMarkup).join('')+'</div>':'<p class="data-empty">'+empty+'</p>';
 }
+function specialGameToEvent(g){
+ const state=String(g?.state||'scheduled').toLowerCase();
+ const espnState=state==='live'?'in':state==='final'?'post':'pre';
+ return {
+   id:g?.eventId||'',
+   date:g?.date||'',
+   status:{type:{state:espnState,shortDetail:g?.status||g?.displayTime||'',description:g?.status||g?.displayTime||''}},
+   competitions:[{competitors:[
+     {homeAway:'away',score:g?.awayScore??'',team:{displayName:g?.away||'Away',logo:g?.awayLogo||''}},
+     {homeAway:'home',score:g?.homeScore??'',team:{displayName:g?.home||'Home',logo:g?.homeLogo||''}}
+   ]}]
+ };
+}
+async function fetchSpecialLeagueData(){
+ const r=await fetch('/special-sports-data.json?v='+Date.now(),{cache:'no-store'});
+ if(!r.ok)throw new Error('Special league data unavailable');
+ const j=await r.json();
+ return j?.leagues?.[key]||null;
+}
 async function fetchScoreboard(){
  if(key==='pba'){
    const r=await fetch(worker+'/regional-scores?league=pba',{cache:'no-store'});
    if(!r.ok)throw new Error('PBA feed unavailable');
    return r.json();
+ }
+ if(key==='uaap'||key==='ncaa_ph'){
+   const leagueData=await fetchSpecialLeagueData();
+   return {events:(Array.isArray(leagueData?.games)?leagueData.games:[]).map(specialGameToEvent)};
  }
  if(!scoreUrl)return {events:[]};
  const now=new Date(),a=new Date(now.getTime()-7*86400000),b=new Date(now.getTime()+21*86400000);
@@ -97,8 +120,26 @@ function standingsEntries(j){
  }
  return out;
 }
+function simpleStandingsTable(rows,title){
+ if(!rows.length)return '';
+ return (title?'<h4>'+esc(title)+'</h4>':'')+'<div class="standings-wrap"><table class="standings-table"><thead><tr><th>Team</th><th>W</th><th>L</th><th>PCT</th></tr></thead><tbody>'+
+ rows.map(e=>{const w=Number(e?.wins)||0,l=Number(e?.losses)||0,t=w+l,p=t?(w/t).toFixed(3):'';return '<tr><td>'+esc(e?.team||'Team')+'</td><td>'+esc(w)+'</td><td>'+esc(l)+'</td><td>'+esc(p)+'</td></tr>'}).join('')+
+ '</tbody></table></div>';
+}
 async function renderStandings(){
  const host=document.getElementById('leagueStandings');if(!host)return;
+ if(key==='uaap'||key==='ncaa_ph'){
+   try{
+     const leagueData=await fetchSpecialLeagueData();
+     const st=leagueData?.standings;
+     if(Array.isArray(st)&&st.length){host.innerHTML=simpleStandingsTable(st,'');return}
+     if(st&&typeof st==='object'){
+       const groups=Object.entries(st).filter(([,rows])=>Array.isArray(rows)&&rows.length);
+       if(groups.length){host.innerHTML=groups.map(([name,rows])=>simpleStandingsTable(rows,name.replace(/([A-Z])/g,' $1').replace(/^./,x=>x.toUpperCase()))).join('');return}
+     }
+     throw 0;
+   }catch{host.innerHTML='<p class="data-empty">Standings are temporarily unavailable. IMG will display them when the verified feed responds.</p>';return}
+ }
  if(!standingsUrl){host.innerHTML='<p class="data-empty">Verified standings are not available from IMG’s current '+esc(league)+' feed.</p>';return}
  try{
    const r=await fetch(standingsUrl,{cache:'no-store'});if(!r.ok)throw 0;
