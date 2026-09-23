@@ -24,8 +24,8 @@ linear-gradient(110deg,rgba(130,0,18,.18),transparent 35%),
 linear-gradient(250deg,rgba(0,74,170,.18),transparent 34%);pointer-events:none}
 .hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:end}
 .pba-mark{display:inline-flex;align-items:center;gap:14px;font-size:.82rem;font-weight:900;letter-spacing:.18em;text-transform:uppercase;color:#cbd5e1}
-.pba-logo-box{width:112px;height:72px;border-radius:16px;background:rgba(255,255,255,.96);display:grid;place-items:center;box-shadow:0 12px 34px rgba(0,0,0,.28);padding:8px;overflow:hidden}
-.pba-logo-box img{width:100%;height:100%;object-fit:contain;display:block}
+.pba-logo-box{width:126px;height:80px;border-radius:0;background:transparent;display:grid;place-items:center;box-shadow:none;padding:0;overflow:visible}
+.pba-logo-box img{width:100%;height:100%;object-fit:contain;display:block;filter:drop-shadow(0 8px 18px rgba(0,0,0,.35))}
 .hero h1{font-size:clamp(4rem,9vw,7.5rem);line-height:.82;letter-spacing:-.07em;margin:18px 0 18px;text-transform:uppercase}
 .hero p{max-width:620px;margin:0;color:#c3ccda;font-size:1.05rem;line-height:1.65}
 .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 20px;border-radius:999px;text-decoration:none;font-weight:900;border:1px solid var(--pba-line)}.btn-primary{background:#fff;color:#07111c}.btn-secondary{background:rgba(255,255,255,.04)}
@@ -57,10 +57,10 @@ footer{border-top:1px solid var(--pba-line);padding:26px 0 86px;color:#748295;fo
 @media(max-width:900px){.hero-grid{grid-template-columns:1fr}.hero-art{display:none}.statusbar{grid-template-columns:1fr 1fr}.status-item:nth-child(5){grid-column:1/-1}.status-item:nth-child(3){border-left:0}.grid-2{grid-template-columns:1fr}.game-feature{grid-template-columns:1fr}.team.right{justify-content:flex-start;text-align:left}.game-center{text-align:left}.status-item{border-top:1px solid var(--pba-line)}.status-item:first-child,.status-item:nth-child(2){border-top:0}}
 @media(max-width:720px){.shell{width:min(100% - 24px,1180px)}.navlinks{gap:12px}.navlinks a:nth-child(4),.navlinks a:nth-child(5){display:none}.hero{padding-top:42px}.statusbar{grid-template-columns:1fr}.status-item+.status-item{border-left:0}.status-item{border-top:1px solid var(--pba-line)!important}.status-item:first-child{border-top:0!important}.status-item:nth-child(5){grid-column:auto}.carousel{grid-auto-columns:82%}.game-feature{padding:18px}.section{margin-top:28px}}
 
-.team-badge.image{background:rgba(255,255,255,.96);padding:5px;overflow:hidden}
-.team-badge.image img{width:100%;height:100%;object-fit:contain;display:block}
-.standing-team{display:flex;align-items:center;gap:9px;min-width:0}.standing-team img{width:30px;height:30px;object-fit:contain;border-radius:7px;background:rgba(255,255,255,.95);padding:2px;flex:0 0 auto}.standing-team span{min-width:0}
-.game-gallery-card{min-height:250px}.gallery-logos{position:absolute;inset:22px 18px 74px;z-index:1;display:flex;align-items:center;justify-content:center;gap:16px}.gallery-logos img{width:42%;max-width:110px;max-height:110px;object-fit:contain;filter:drop-shadow(0 10px 22px rgba(0,0,0,.35))}
+.team-badge.image{background:transparent;padding:0;overflow:visible;border:0;box-shadow:none;width:64px;height:64px}
+.team-badge.image img{width:100%;height:100%;object-fit:contain;display:block;filter:drop-shadow(0 6px 14px rgba(0,0,0,.42))}
+.standing-team{display:flex;align-items:center;gap:10px;min-width:0}.standing-team img{width:36px;height:36px;object-fit:contain;border-radius:0;background:transparent;padding:0;flex:0 0 auto;filter:drop-shadow(0 4px 9px rgba(0,0,0,.34))}.standing-team span{min-width:0;white-space:normal;line-height:1.2}
+.game-gallery-card{min-height:250px}.gallery-logos{position:absolute;inset:18px 16px 78px;z-index:1;display:flex;align-items:center;justify-content:center;gap:18px}.gallery-logos img{width:45%;max-width:124px;max-height:124px;object-fit:contain;background:transparent;filter:drop-shadow(0 10px 24px rgba(0,0,0,.46))}
 
 .player-card{display:grid;grid-template-columns:86px 1fr;gap:14px;align-items:center;padding:12px;border:1px solid rgba(255,255,255,.08);border-radius:16px;background:rgba(255,255,255,.025)}
 .player-photo{width:86px;height:86px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,rgba(215,38,57,.22),rgba(36,91,181,.26));display:grid;place-items:center;border:1px solid rgba(255,255,255,.10)}
@@ -68,3 +68,13 @@ footer{border-top:1px solid var(--pba-line);padding:26px 0 86px;color:#748295;fo
 .player-photo.fallback{color:#d6deea;font-weight:1000;letter-spacing:.05em}
 .player-copy{min-width:0;display:grid;gap:4px}.player-copy span{color:#8fa0b4;font-size:.78rem}.player-copy strong{font-size:1rem;line-height:1.2}.player-copy b{font-size:.9rem;color:#f4f7fb}
 @media(max-width:520px){.player-card{grid-template-columns:70px 1fr}.player-photo{width:70px;height:70px;border-radius:14px}}
+
+.team-name{white-space:normal;overflow:visible;text-overflow:clip;line-height:1.15}
+.status-value{white-space:normal;overflow:visible;text-overflow:clip}
+@media(max-width:720px){
+  .team-badge.image{width:56px;height:56px}
+  .team-name{font-size:.93rem;max-width:118px}
+  .standing-team img{width:34px;height:34px}
+  .pba-logo-box{width:112px;height:70px}
+  .status-value{font-size:.94rem;line-height:1.22}
+}
