@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-24T00:17:00+08:00",
+  "updated_at": "2026-09-24T00:53:52+08:00",
   "refresh_minutes": 30,
   "leagues": {
     "pba": {
@@ -424,7 +424,20 @@
         "facebook_blocked": true,
         "error": "HTTP Error 403: Forbidden"
       },
-      "broadcast": [],
+      "broadcast": [
+        {
+          "date": "2026-09-25",
+          "time": "4:00 PM",
+          "title": "NBL PILIPINAS Governor's Cup 2026",
+          "source": "Tap Sports"
+        },
+        {
+          "date": "2026-09-25",
+          "time": "6:00 PM",
+          "title": "NBL PILIPINAS Governor's Cup 2026",
+          "source": "Tap Sports"
+        }
+      ],
       "games": [
         {
           "eventId": "verified-nbl-20260920-tikas-batangas",
@@ -858,15 +871,19 @@
       "note": "Automatically refreshed from the current UAAP Season 89 public schedule/results page. Live One Sports broadcasts are handled separately by the YouTube live scanner.",
       "sources": [
         {
-          "name": "UAAP Official",
-          "url": "https://uaap.org/"
+          "name": "UAAP Official Stats",
+          "url": "https://uaap.org/stats/uaap-season-89-men-s-basketball"
+        },
+        {
+          "name": "UAAP Official Basketball",
+          "url": "https://uaap.org/sports/basketball"
         },
         {
           "name": "UAAP Live Stats",
           "url": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball"
         },
         {
-          "name": "SkedCheck",
+          "name": "SkedCheck Fallback",
           "url": "https://skedcheck.com/uaap-mens-basketball-schedule-scores/"
         },
         {
