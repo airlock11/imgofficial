@@ -194,15 +194,25 @@ function startLiveScorePolling(){
 
 function renderGallery({finals,assets,official}){
   const wrap=qs("#previous-games");
-  const media=Array.isArray(official.mediaGallery)?official.mediaGallery:[];
+  const exactPhotos=Array.isArray(official.previousGamePhotos)?official.previousGamePhotos:[];
   const cards=[];
   const recentFinals=(Array.isArray(finals)?finals:[]).slice(0,3);
+  const norm=v=>safe(v).trim().toLowerCase();
 
-  recentFinals.forEach((g,i)=>{
-    const photo=media[i%Math.max(media.length,1)]?.image||"";
+  recentFinals.forEach(g=>{
+    const day=safe(g.date).slice(0,10);
+    const photo=exactPhotos.find(x=>
+      (x.eventId&&x.eventId===g.eventId) ||
+      (
+        x.date===day &&
+        norm(x.away)===norm(g.away) &&
+        norm(x.home)===norm(g.home)
+      )
+    );
     const a=teamLogo(g.away,assets),h=teamLogo(g.home,assets);
+    const image=photo?.image||"";
     cards.push(`<article class="media-card">
-      ${photo?`<img class="media-bg" src="${photo}" alt="PBA action">`:`<div class="logo-pair">${a?`<img src="${a}" alt="">`:""}${h?`<img src="${h}" alt="">`:""}</div>`}
+      ${image?`<img class="media-bg" src="${safe(image)}" alt="${safe(g.away)} vs ${safe(g.home)} PBA game photo">`:`<div class="logo-pair">${a?`<img src="${a}" alt="">`:""}${h?`<img src="${h}" alt="">`:""}</div>`}
       <div class="media-card-content">
         <div class="media-kicker">PBA · Final</div>
         <div class="media-title">${safe(g.away)} ${safe(g.awayScore)} — ${safe(g.homeScore)} ${safe(g.home)}</div>
