@@ -589,6 +589,9 @@ def update_pba_shorts():
 
 
 
+ONE_SPORTS_CHANNEL_ID = "UCXDG9ue-emCN8Ad3h7lERqQ"
+ONE_SPORTS_VIDEOS_URL = f"https://www.youtube.com/channel/{ONE_SPORTS_CHANNEL_ID}/videos"
+
 UAAP_TEAM_NAMES = [
     "Adamson", "Ateneo", "De La Salle", "DLSU", "Far Eastern", "FEU",
     "National University", "NU", "University of the East", "UE",
@@ -988,6 +991,71 @@ def fetch_uaap_video_gallery(limit=10):
             break
     return rows
 
+def fetch_uaap_one_sports_highlights(limit=10):
+    """Verified fallback for current UAAP Season 89 men's basketball highlights.
+
+    The UAAP gallery is client-rendered and can expose no links to a plain HTML
+    scraper. One Sports is the verified broadcast source already used by IMG for
+    UAAP live coverage, so scan only that exact channel and fail closed on title.
+    """
+    cmd = [
+        sys.executable, "-m", "yt_dlp",
+        "--flat-playlist",
+        "--playlist-end", "80",
+        "--dump-json",
+        "--no-warnings",
+        ONE_SPORTS_VIDEOS_URL,
+    ]
+    proc = subprocess.run(cmd, capture_output=True, text=True, timeout=90)
+    if proc.returncode != 0:
+        raise RuntimeError((proc.stderr or "yt-dlp failed")[:240])
+
+    rows = []
+    seen = set()
+    for line in proc.stdout.splitlines():
+        if not line.strip():
+            continue
+        try:
+            item = json.loads(line)
+        except Exception:
+            continue
+        video_id = str(item.get("id") or "").strip()
+        title = _uaap_text(item.get("title"))
+        upper = title.upper().replace("’", "'")
+        if not video_id or video_id in seen:
+            continue
+        if "UAAP" not in upper or "SEASON 89" not in upper or "BASKETBALL" not in upper:
+            continue
+        if "HIGHLIGHT" not in upper:
+            continue
+        if any(x in upper for x in ("WOMEN", "GIRLS", "BOYS", "JHS", "JUNIOR HIGH")):
+            continue
+        if "MEN" not in upper:
+            continue
+        seen.add(video_id)
+        upload_date = str(item.get("upload_date") or "")
+        published = ""
+        if re.fullmatch(r"\d{8}", upload_date):
+            try:
+                published = datetime.strptime(upload_date, "%Y%m%d").replace(tzinfo=timezone.utc).isoformat()
+            except Exception:
+                published = ""
+        rows.append({
+            "id": video_id,
+            "title": title,
+            "url": "https://www.youtube.com/watch?v=" + video_id,
+            "thumbnail": "https://i.ytimg.com/vi/" + video_id + "/hqdefault.jpg",
+            "published": published,
+            "channel": "One Sports",
+            "sourceName": "One Sports",
+            "sourceChannelId": ONE_SPORTS_CHANNEL_ID,
+            "verificationStatus": "verified",
+        })
+        if len(rows) >= limit:
+            break
+    return rows
+
+
 def _uaap_match_game_photo(game, galleries):
     away = _photo_text(game.get("away"))
     home = _photo_text(game.get("home"))
@@ -1075,8 +1143,26 @@ def update_uaap_official(uaap_league):
     except Exception as ex:
         print("UAAP videos", type(ex).__name__, str(ex)[:180])
         videos = []
+
+    # The UAAP gallery is client-rendered; supplement it with verified One Sports
+    # Season 89 men's basketball highlights when the official HTML exposes none.
+    try:
+        one_sports_videos = fetch_uaap_one_sports_highlights(10)
+    except Exception as ex:
+        print("UAAP One Sports highlights", type(ex).__name__, str(ex)[:180])
+        one_sports_videos = []
+
+    if one_sports_videos:
+        seen_video_urls = {str(x.get("url") or "") for x in videos}
+        for item in one_sports_videos:
+            if str(item.get("url") or "") not in seen_video_urls:
+                videos.append(item)
+                seen_video_urls.add(str(item.get("url") or ""))
+            if len(videos) >= 10:
+                break
     if videos:
-        official["highlights"] = videos
+        official["highlights"] = videos[:10]
+        official["highlightsUpdatedAt"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
         changed = True
 
     games = list((uaap_league or {}).get("games") or [])
@@ -1109,6 +1195,7 @@ def update_uaap_official(uaap_league):
         "articles": URLS["uaap_articles"],
         "photos": URLS["uaap_photos"],
         "videos": URLS["uaap_videos"],
+        "highlightsFallback": ONE_SPORTS_VIDEOS_URL,
     }
     official["updatedAt"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
     UAAP_OFFICIAL_OUT.write_text(json.dumps(official, ensure_ascii=False, indent=2) + "\n", "utf-8")
@@ -2163,7 +2250,7 @@ def main():
     except Exception as e:
         errors["pba_shorts"] = str(e)
     data["updated_at"] = datetime.now(PHT).isoformat(timespec="seconds")
-    data["refresh_minutes"] = 30
+    data["refresh_minutes"] = 15
     data["errors"] = errors
     OUT.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", "utf-8")
     print(json.dumps({"updated_at":data["updated_at"],"errors":errors,"counts":{k:len(v.get("games",[])) for k,v in data["leagues"].items()}}, ensure_ascii=False))
