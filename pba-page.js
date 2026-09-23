@@ -40,11 +40,15 @@ async function load(){
 
 function teamLogo(name,assets){return assets?.teams?.[name]||""}
 
-function teamBlock(name,side,assets){
+function teamBlock(name,side,assets,score=""){
   const src=teamLogo(name,assets);
+  const hasScore=score!==null&&score!==undefined&&String(score)!=="";
+  const scoreHtml=hasScore?`<div class="team-score">${safe(score)}</div>`:"";
   return `<div class="game-team ${side==="right"?"right":""}">
     ${side!=="right"&&src?`<img class="team-logo" src="${src}" alt="${safe(name)} logo">`:""}
-    <div><div class="team-name">${safe(name)}</div><div class="team-side">${side==="right"?"Home":"Away"}</div></div>
+    ${side==="right"?scoreHtml:""}
+    <div class="team-copy"><div class="team-name">${safe(name)}</div><div class="team-side">${side==="right"?"Home":"Away"}</div></div>
+    ${side!=="right"?scoreHtml:""}
     ${side==="right"&&src?`<img class="team-logo" src="${src}" alt="${safe(name)} logo">`:""}
   </div>`
 }
@@ -60,13 +64,20 @@ function renderGames({live,upcoming,finals,assets}){
       return;
     }
     const final=g.state==="final";
-    const mid=final
-      ?`<strong class="score">${safe(g.awayScore)} — ${safe(g.homeScore)}</strong><div class="vs-pill">FINAL</div>`
-      :`<strong>${safe(g.displayTime||fmtDate(g.date))}</strong><div class="vs-pill">VS</div><div>${safe(g.location||g.status||"Scheduled")}</div>`;
+    const liveGame=g.state==="in"||/live/i.test(g.status||"");
+    const showScore=final||liveGame;
+    const centerMain=final
+      ?"FINAL"
+      :safe(g.displayTime||fmtDate(g.date));
+    const centerSub=final
+      :"";
     slot.innerHTML=`<article class="featured-game">
-      ${teamBlock(g.away||"Away","left",assets)}
-      <div class="game-center">${mid}</div>
-      ${teamBlock(g.home||"Home","right",assets)}
+      ${teamBlock(g.away||"Away","left",assets,showScore?g.awayScore:"")}
+      <div class="game-center">
+        <div class="game-status">${centerMain}</div>
+        ${centerSub?`<div class="game-meta">${centerSub}</div>`:""}
+      </div>
+      ${teamBlock(g.home||"Home","right",assets,showScore?g.homeScore:"")}
     </article>`;
   };
   qsa(".tab-btn").forEach(b=>b.addEventListener("click",()=>paint(b.dataset.tab)));
