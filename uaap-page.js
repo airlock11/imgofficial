@@ -4,7 +4,8 @@ const qsa=s=>[...document.querySelectorAll(s)];
 const safe=v=>String(v??"");
 const fmtDate=v=>{try{return new Date(v).toLocaleDateString(undefined,{month:"short",day:"numeric",year:"numeric"})}catch{return v||""}};
 const UAAP_LIVE_URL="https://img-api-proxy.magsipocarnie.workers.dev/regional-scores?league=uaap";
-let gameController=null,livePollTimer=null;
+let gameController=null,livePollTimer=null,visibilityBound=false;
+const UAAP_REFRESH_MS=15*60*1000;
 
 async function getJSON(url,fallback={}){
   try{const r=await fetch(url+"?ts="+Date.now(),{cache:"no-store"});if(!r.ok)throw new Error(r.status);return await r.json()}catch{return fallback}
@@ -72,7 +73,20 @@ async function pollLive(){
   if(document.visibilityState==="visible"){const live=await fetchLive();if(live!==null&&gameController)gameController.updateLive(live);clearTimeout(livePollTimer);livePollTimer=setTimeout(pollLive,live?.length?10000:30000)}
   else{clearTimeout(livePollTimer);livePollTimer=setTimeout(pollLive,30000)}
 }
-function startLive(){clearTimeout(livePollTimer);pollLive();document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"){clearTimeout(livePollTimer);pollLive()}})}
+function startLive(){
+  clearTimeout(livePollTimer);
+  pollLive();
+  if(!visibilityBound){
+    document.addEventListener("visibilitychange",()=>{
+      if(document.visibilityState==="visible"){clearTimeout(livePollTimer);pollLive()}
+    });
+    visibilityBound=true;
+  }
+}
+function setSectionVisible(el,visible){
+  const section=el?.closest(".content-section");
+  if(section)section.hidden=!visible;
+}
 
 function renderGallery(finals,official){
   const wrap=qs("#previous-games"),photos=Array.isArray(official.previousGamePhotos)?official.previousGamePhotos:[],cards=[];
@@ -82,18 +96,25 @@ function renderGallery(finals,official){
       (photo?.image?'<img class="media-bg" src="'+safe(photo.image)+'" alt="'+safe(g.away)+' vs '+safe(g.home)+' UAAP game photo" loading="lazy">':'<div class="logo-pair">'+teamVisual(g.away)+teamVisual(g.home)+'</div>')+
       '<div class="media-card-content"><div class="media-kicker">UAAP · Final</div><div class="media-title">'+safe(g.away)+' '+safe(g.awayScore)+' — '+safe(g.homeScore)+' '+safe(g.home)+'</div><div class="media-meta">'+safe(g.displayTime||fmtDate(g.date))+'</div></div></article>');
   });
-  wrap.innerHTML=cards.length?cards.join(""):'<div class="empty-card">No recent verified UAAP games are available.</div>';
+  setSectionVisible(wrap,cards.length>0);
+  wrap.innerHTML=cards.length?cards.join(""):"";
 }
+
 function renderHighlights(official){
   const wrap=qs("#highlights"),items=Array.isArray(official.highlights)?official.highlights.slice(0,10):[];
+  setSectionVisible(wrap,items.length>0);
   wrap.innerHTML=items.length?items.map(x=>'<article class="reel-card"><a class="highlight-link" href="'+safe(x.url||"https://uaap.org/posts/video_gallery")+'" target="_blank" rel="noopener">'+
     (x.thumbnail?'<img class="highlight-thumb" src="'+safe(x.thumbnail)+'" alt="'+safe(x.title)+'" loading="lazy">':'<div class="highlight-thumb"></div>')+
-    '<div class="highlight-copy"><strong>'+safe(x.title)+'</strong><span>UAAP Official</span></div></a></article>').join(""):'<div class="empty-card">No verified Season 89 highlights are available yet.</div>';
+    '<div class="highlight-copy"><strong>'+safe(x.title)+'</strong><span>'+safe(x.sourceName||x.channel||"UAAP Official")+'</span></div></a></article>').join(""):"";
 }
+
 function renderStandings(regional,official){
   const list=(Array.isArray(official.standings)&&official.standings.length?official.standings:regional.standings)||[];
-  qs("#standings-body").innerHTML=list.map((x,i)=>'<tr><td>'+(i+1)+'</td><td><div class="standing-team">'+teamVisual(x.team)+'<span>'+safe(x.team)+'</span></div></td><td>'+safe(x.wins)+'</td><td>'+safe(x.losses)+'</td></tr>').join("");
+  const wrap=qs("#standings-body");
+  setSectionVisible(wrap,list.length>0);
+  wrap.innerHTML=list.map((x,i)=>'<tr><td>'+(i+1)+'</td><td><div class="standing-team">'+teamVisual(x.team)+'<span>'+safe(x.team)+'</span></div></td><td>'+safe(x.wins)+'</td><td>'+safe(x.losses)+'</td></tr>').join("");
 }
+
 function playerCard(x,rank){
   const average=x.ppg!==null&&x.ppg!==undefined;
   const value=average?safe(x.ppg):(x.pts!==null&&x.pts!==undefined?safe(x.pts):"—");
@@ -102,27 +123,20 @@ function playerCard(x,rank){
 }
 function renderTopPlayers(official){
   const list=Array.isArray(official.topPlayers)?official.topPlayers:[];
-  qs("#top-players").innerHTML=list.length?list.slice(0,8).map((x,i)=>playerCard(x,i+1)).join(""):'<div class="empty-card">Official Season 89 player statistics will appear here when the UAAP stats feed exposes them.</div>';
+  const wrap=qs("#top-players");
+  setSectionVisible(wrap,list.length>0);
+  wrap.innerHTML=list.length?list.slice(0,8).map((x,i)=>playerCard(x,i+1)).join(""):"";
 }
+
 function renderNews(official){
   const news=Array.isArray(official.headlines)?official.headlines.slice(0,6):[];
-  qs("#news").innerHTML=news.length?news.map(x=>{
+  const wrap=qs("#news");
+  setSectionVisible(wrap,news.length>0);
+  wrap.innerHTML=news.length?news.map(x=>{
     const image=String(x.image||"").startsWith("http")?safe(x.image):"";
     const d=x.published?new Date(x.published):null,date=d&&!Number.isNaN(d.getTime())?d.toLocaleDateString(undefined,{month:"short",day:"numeric"}):"";
     return '<a class="news-card'+(image?" has-photo":"")+'" href="'+safe(x.url||"https://uaap.org/posts/articles")+'" target="_blank" rel="noopener">'+
       (image?'<img class="news-photo" src="'+image+'" alt="" loading="lazy" decoding="async">':"")+
       '<span class="news-copy"><small>UAAP Official'+(date?" · "+safe(date):"")+'</small><strong>'+safe(x.title)+'</strong></span></a>';
-  }).join(""):'<div class="empty-card">No verified Season 89 UAAP Men\'s Basketball headlines are available yet.</div>';
+  }).join(""):"";
 }
-async function load(){
-  const [regional,official]=await Promise.all([getJSON("/regional-web.json",{}),getJSON("/uaap-official.json",{})]);
-  const league=regional?.leagues?.uaap||{},games=Array.isArray(league.games)?league.games:[];
-  const live=games.filter(g=>g.state==="in"||/live/i.test(g.status||""));
-  const upcoming=games.filter(g=>g.state==="scheduled").sort((a,b)=>new Date(a.date)-new Date(b.date));
-  const finals=games.filter(g=>g.state==="final").sort((a,b)=>new Date(b.date)-new Date(a.date));
-  const logo=qs("#uaap-league-logo"),logoSrc=window.IMG_SCORE_LEAGUE_LOGOS?.uaap||"";
-  if(logo&&logoSrc)logo.src=logoSrc;
-  renderGames({live,upcoming,finals});startLive();renderGallery(finals,official);renderHighlights(official);renderStandings(league,official);renderTopPlayers(official);renderNews(official);
-}
-load();
-})();
