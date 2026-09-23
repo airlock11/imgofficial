@@ -752,6 +752,15 @@ footer{
   .news-grid{grid-template-columns:1fr}
 }
 @media(max-width:720px){
+  #previous-games .media-row{
+    scrollbar-width:none;
+    -ms-overflow-style:none
+  }
+  #previous-games .media-row::-webkit-scrollbar{
+    width:0;
+    height:0;
+    display:none
+  }
   .highlight-row{
     scrollbar-width:none;
     -ms-overflow-style:none
