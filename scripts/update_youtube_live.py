@@ -397,6 +397,74 @@ def mpbl_official_live():
   out.append({"eventId":"mpbl-youtube-"+vid,"sport":"Basketball","leagueKey":"mpbl","league":"MPBL","teams":[],"title":title,"stream":stream})
  return out
 
+def approved_channel_ids(previous):
+ ids={ONE_SPORTS_CHANNEL_ID,NBL_PILIPINAS_CHANNEL_ID}
+ for source in load_source_registry():
+  direct=str(source.get("channelId") or "").strip()
+  if direct: ids.add(direct)
+  cached=str(previous.get("scanner",{}).get("resolvedChannels",{}).get(str(source.get("id") or "")) or "").strip()
+  if cached: ids.add(cached)
+ return {x for x in ids if x}
+
+def discover_live_event_streams(previous):
+ # Secondary discovery pass: search currently-live matchups, but publish only
+ # candidates whose exact YouTube channel is already approved by IMG.
+ out=[]
+ approved=approved_channel_ids(previous)
+ try:
+  events=live_events()
+ except Exception as ex:
+  print("live event discovery",ex)
+  return out
+ for event in events[:6]:
+  try:
+   candidate=search(event)
+   if not candidate: continue
+   vid=candidate.get("videoId")
+   details=video_details([vid]).get(vid) if vid else None
+   if not details: continue
+   sn=details.get("snippet",{}); live=details.get("liveStreamingDetails",{}); status=details.get("status",{})
+   channel_id=str(sn.get("channelId") or "")
+   if channel_id not in approved: continue
+   is_live=sn.get("liveBroadcastContent")=="live" or (live.get("actualStartTime") and not live.get("actualEndTime"))
+   if not is_live or live.get("actualEndTime"): continue
+   title=sn.get("title","")
+   wanted=tokens(" ".join(event.get("teams") or []))
+   if len(wanted & tokens(title))<2: continue
+   league_key=""
+   for source in load_source_registry():
+    sid=str(source.get("id") or "")
+    known=str(source.get("channelId") or previous.get("scanner",{}).get("resolvedChannels",{}).get(sid) or "")
+    if known==channel_id:
+      league_key=str(source.get("leagueKey") or "")
+      league=str(source.get("league") or league_key)
+      break
+   else:
+    league="Live Sports"
+   if channel_id==ONE_SPORTS_CHANNEL_ID and not league_key:
+    upper=title.upper()
+    if "ASIAN GAMES" in upper: league_key="asian_games"; league="2026 ASIAN GAMES"
+    elif re.search(r"\bPBA\b",upper): league_key="pba"; league="PBA"
+    elif re.search(r"\bNCAA\b",upper): league_key="ncaa_ph"; league="NCAA Philippines"
+    elif re.search(r"\bUAAP\b",upper): league_key="uaap"; league="UAAP"
+   if not league_key: continue
+   verified_at=datetime.now(timezone.utc).isoformat()
+   stream={
+    "videoId":vid,"watchUrl":"https://www.youtube.com/watch?v="+vid,
+    "provider":"YouTube","channel":sn.get("channelTitle",""),"title":title,
+    "sourceChannelId":channel_id,"verificationStatus":"verified","lastVerifiedLiveAt":verified_at
+   }
+   if status.get("embeddable",True): stream["embedUrl"]="https://www.youtube.com/embed/"+vid
+   out.append({
+    "eventId":"auto-"+league_key+"-"+vid,
+    "sport":event.get("sport") or "Sport","leagueKey":league_key,"league":league,
+    "teams":event.get("teams") or [],"title":title,
+    "verificationStatus":"verified","lastVerifiedLiveAt":verified_at,"stream":stream
+   })
+  except Exception as ex:
+   print("live matchup discovery",event.get("title") or event.get("teams"),ex)
+ return out
+
 def load_previous():
  try:
   return json.loads(OUT.read_text("utf-8"))
@@ -583,6 +651,13 @@ try:
  streams.extend(official_streams)
 except Exception as ex:
  print("youtube official registry",ex)
+
+# Secondary schedule-aware discovery: match current live games to verified
+# approved YouTube channels, catching streams omitted by channel feeds/pages.
+try:
+ streams.extend(discover_live_event_streams(previous))
+except Exception as ex:
+ print("youtube live matchup discovery",ex)
 
 # Exact previously-published video IDs are rechecked so simultaneous live broadcasts
 # are not lost if a channel's feed/Streams surface temporarily omits one.
