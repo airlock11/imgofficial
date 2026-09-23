@@ -1,0 +1,271 @@
+{
+  "updatedAt": "2026-09-23",
+  "policy": {
+    "priority": [
+      "official structured/live source",
+      "official website",
+      "IMG verified feed",
+      "reliable secondary structured feed"
+    ],
+    "highlights": "Only surface clips that have a playable or official watch source. Never fabricate or label an unverified clip as a highlight.",
+    "emptySections": "Hide unavailable modules and replace them with other verified information."
+  },
+  "leagues": {
+    "nba": {
+      "name": "NBA",
+      "official": "https://www.nba.com/",
+      "schedule": "https://www.nba.com/schedule",
+      "standings": "https://www.nba.com/standings",
+      "stats": "https://www.nba.com/stats",
+      "highlights": "https://www.nba.com/watch",
+      "teams": "https://www.nba.com/teams",
+      "secondary": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard"
+    },
+    "wnba": {
+      "name": "WNBA",
+      "official": "https://www.wnba.com/",
+      "schedule": "https://www.wnba.com/schedule",
+      "standings": "https://www.wnba.com/standings",
+      "stats": "https://www.wnba.com/stats",
+      "highlights": "https://www.wnba.com/videos",
+      "teams": "https://www.wnba.com/teams",
+      "secondary": "https://site.api.espn.com/apis/site/v2/sports/basketball/wnba/scoreboard"
+    },
+    "pba": {
+      "name": "PBA",
+      "official": "https://www.pba.ph/",
+      "schedule": "https://www.pba.ph/schedule",
+      "standings": "https://www.pba.ph/",
+      "stats": "https://www.pba.ph/",
+      "news": "https://www.pba.ph/",
+      "highlights": "https://www.youtube.com/@OneSportsPHL",
+      "secondary": "https://img-api-proxy.magsipocarnie.workers.dev/regional-scores?league=pba"
+    },
+    "mpbl": {
+      "name": "MPBL",
+      "official": "https://www.facebook.com/MPBLOfficial",
+      "schedule": "https://www.facebook.com/MPBLOfficial",
+      "standings": "https://www.facebook.com/MPBLOfficial",
+      "news": "https://www.facebook.com/MPBLOfficial",
+      "highlights": "https://www.facebook.com/MPBLOfficial",
+      "secondary": "https://img-api-proxy.magsipocarnie.workers.dev/regional-scores?league=mpbl"
+    },
+    "nbl-pilipinas": {
+      "name": "NBL-Pilipinas",
+      "official": "https://www.facebook.com/",
+      "schedule": "https://www.facebook.com/",
+      "standings": "https://www.facebook.com/",
+      "news": "https://www.facebook.com/",
+      "highlights": "https://www.facebook.com/",
+      "secondary": "https://img-api-proxy.magsipocarnie.workers.dev/regional-scores?league=nbl"
+    },
+    "nbl-australia": {
+      "name": "NBL Australia",
+      "official": "https://www.nbl.com.au/",
+      "schedule": "https://www.nbl.com.au/schedule",
+      "standings": "https://www.nbl.com.au/standings",
+      "stats": "https://www.nbl.com.au/stats",
+      "news": "https://www.nbl.com.au/news",
+      "highlights": "https://www.nbl.com.au/videos",
+      "teams": "https://www.nbl.com.au/teams",
+      "secondary": "https://img-api-proxy.magsipocarnie.workers.dev/regional-scores?league=nblaus"
+    },
+    "vba": {
+      "name": "VBA",
+      "official": "https://vba.vn/",
+      "schedule": "https://vba.vn/schedule",
+      "standings": "https://vba.vn/standings",
+      "news": "https://vba.vn/news",
+      "highlights": "https://vba.vn/videos",
+      "teams": "https://vba.vn/teams",
+      "secondary": "https://img-api-proxy.magsipocarnie.workers.dev/regional-scores?league=vba"
+    },
+    "b-league": {
+      "name": "B.League",
+      "official": "https://www.bleague.jp/",
+      "schedule": "https://www.bleague.jp/schedule/",
+      "standings": "https://www.bleague.jp/standings/",
+      "stats": "https://www.bleague.jp/stats/",
+      "highlights": "https://www.bleague.jp/video/",
+      "teams": "https://www.bleague.jp/club/"
+    },
+    "euroleague": {
+      "name": "EuroLeague",
+      "official": "https://www.euroleaguebasketball.net/euroleague/",
+      "schedule": "https://www.euroleaguebasketball.net/euroleague/game-center/",
+      "standings": "https://www.euroleaguebasketball.net/euroleague/standings/",
+      "stats": "https://www.euroleaguebasketball.net/euroleague/stats/",
+      "highlights": "https://www.euroleaguebasketball.net/euroleague/videos/",
+      "teams": "https://www.euroleaguebasketball.net/euroleague/teams/"
+    },
+    "uaap": {
+      "name": "UAAP",
+      "official": "https://uaap.org/",
+      "schedule": "https://uaap.org/schedule",
+      "standings": "https://uaap.org/sports/basketball",
+      "stats": "https://uaap.livestats.ph/",
+      "news": "https://uaap.org/",
+      "highlights": "https://www.youtube.com/@OneSportsPHL"
+    },
+    "ncaa-philippines": {
+      "name": "NCAA Philippines",
+      "official": "https://www.gmanetwork.com/news/sports/basketball/",
+      "schedule": "https://www.gmanetwork.com/news/sports/basketball/",
+      "standings": "https://www.gmanetwork.com/news/sports/basketball/",
+      "news": "https://www.gmanetwork.com/news/sports/basketball/",
+      "highlights": "https://www.youtube.com/@OneSportsPHL"
+    },
+    "premier-league": {
+      "name": "Premier League",
+      "official": "https://www.premierleague.com/",
+      "schedule": "https://www.premierleague.com/en/fixtures",
+      "standings": "https://www.premierleague.com/en/tables",
+      "stats": "https://www.premierleague.com/en/stats",
+      "news": "https://www.premierleague.com/en/news",
+      "highlights": "https://www.premierleague.com/en/video",
+      "teams": "https://www.premierleague.com/en/clubs",
+      "secondary": "https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard"
+    },
+    "la-liga": {
+      "name": "La Liga",
+      "official": "https://www.laliga.com/en-US",
+      "schedule": "https://www.laliga.com/en-US/laliga-easports/results",
+      "standings": "https://www.laliga.com/en-US/laliga-easports/standing",
+      "stats": "https://www.laliga.com/en-US/stats",
+      "news": "https://www.laliga.com/en-US/news",
+      "highlights": "https://www.laliga.com/en-US/videos",
+      "teams": "https://www.laliga.com/en-US/clubs",
+      "secondary": "https://site.api.espn.com/apis/site/v2/sports/soccer/esp.1/scoreboard"
+    },
+    "serie-a": {
+      "name": "Serie A",
+      "official": "https://www.legaseriea.it/en",
+      "schedule": "https://www.legaseriea.it/en/serie-a/fixtures-and-results",
+      "standings": "https://www.legaseriea.it/en/serie-a/standings",
+      "stats": "https://www.legaseriea.it/en/serie-a/statistics",
+      "news": "https://www.legaseriea.it/en/media/serie-a",
+      "highlights": "https://www.legaseriea.it/en/media/serie-a",
+      "secondary": "https://site.api.espn.com/apis/site/v2/sports/soccer/ita.1/scoreboard"
+    },
+    "bundesliga": {
+      "name": "Bundesliga",
+      "official": "https://www.bundesliga.com/en/bundesliga",
+      "schedule": "https://www.bundesliga.com/en/bundesliga/matchday",
+      "standings": "https://www.bundesliga.com/en/bundesliga/table",
+      "stats": "https://www.bundesliga.com/en/bundesliga/stats",
+      "news": "https://www.bundesliga.com/en/bundesliga/news",
+      "highlights": "https://www.bundesliga.com/en/bundesliga/videos",
+      "secondary": "https://site.api.espn.com/apis/site/v2/sports/soccer/ger.1/scoreboard"
+    },
+    "champions-league": {
+      "name": "UEFA Champions League",
+      "official": "https://www.uefa.com/uefachampionsleague/",
+      "schedule": "https://www.uefa.com/uefachampionsleague/fixtures-results/",
+      "standings": "https://www.uefa.com/uefachampionsleague/standings/",
+      "stats": "https://www.uefa.com/uefachampionsleague/statistics/",
+      "news": "https://www.uefa.com/uefachampionsleague/news/",
+      "highlights": "https://www.uefa.com/uefachampionsleague/video/",
+      "teams": "https://www.uefa.com/uefachampionsleague/clubs/",
+      "secondary": "https://site.api.espn.com/apis/site/v2/sports/soccer/uefa.champions/scoreboard"
+    },
+    "mls": {
+      "name": "MLS",
+      "official": "https://www.mlssoccer.com/",
+      "schedule": "https://www.mlssoccer.com/schedule/",
+      "standings": "https://www.mlssoccer.com/standings/",
+      "stats": "https://www.mlssoccer.com/stats/",
+      "news": "https://www.mlssoccer.com/news/",
+      "highlights": "https://www.mlssoccer.com/video/",
+      "teams": "https://www.mlssoccer.com/clubs/",
+      "secondary": "https://site.api.espn.com/apis/site/v2/sports/soccer/usa.1/scoreboard"
+    },
+    "atp": {
+      "name": "ATP Tour",
+      "official": "https://www.atptour.com/",
+      "schedule": "https://www.atptour.com/en/scores/current",
+      "rankings": "https://www.atptour.com/en/rankings/singles/live",
+      "stats": "https://www.atptour.com/en/stats",
+      "news": "https://www.atptour.com/en/news",
+      "highlights": "https://www.atptour.com/en/video",
+      "players": "https://www.atptour.com/en/players",
+      "secondary": "https://site.api.espn.com/apis/site/v2/sports/tennis/atp/scoreboard"
+    },
+    "wta": {
+      "name": "WTA Tour",
+      "official": "https://www.wtatennis.com/",
+      "schedule": "https://www.wtatennis.com/the-tour",
+      "rankings": "https://www.wtatennis.com/rankings/singles",
+      "stats": "https://www.wtatennis.com/stats",
+      "news": "https://www.wtatennis.com/news",
+      "highlights": "https://www.wtatennis.com/videos/highlights",
+      "players": "https://www.wtatennis.com/players",
+      "secondary": "https://site.api.espn.com/apis/site/v2/sports/tennis/wta/scoreboard"
+    },
+    "ipl": {
+      "name": "IPL",
+      "official": "https://www.iplt20.com/",
+      "schedule": "https://www.iplt20.com/matches/fixtures",
+      "standings": "https://www.iplt20.com/points-table/men",
+      "stats": "https://www.iplt20.com/stats",
+      "news": "https://www.iplt20.com/news",
+      "highlights": "https://www.iplt20.com/video/highlights",
+      "teams": "https://www.iplt20.com/teams",
+      "secondary": "https://site.api.espn.com/apis/site/v2/sports/cricket/ipl/scoreboard"
+    },
+    "mlb": {
+      "name": "MLB",
+      "official": "https://www.mlb.com/",
+      "schedule": "https://www.mlb.com/schedule",
+      "standings": "https://www.mlb.com/standings",
+      "stats": "https://www.mlb.com/stats",
+      "news": "https://www.mlb.com/news",
+      "highlights": "https://www.mlb.com/video",
+      "teams": "https://www.mlb.com/team",
+      "secondary": "https://site.api.espn.com/apis/site/v2/sports/baseball/mlb/scoreboard"
+    },
+    "nhl": {
+      "name": "NHL",
+      "official": "https://www.nhl.com/",
+      "schedule": "https://www.nhl.com/schedule",
+      "standings": "https://www.nhl.com/standings",
+      "stats": "https://www.nhl.com/stats",
+      "news": "https://www.nhl.com/news",
+      "highlights": "https://www.nhl.com/video",
+      "teams": "https://www.nhl.com/info/teams",
+      "secondary": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard"
+    },
+    "nfl": {
+      "name": "NFL",
+      "official": "https://www.nfl.com/",
+      "schedule": "https://www.nfl.com/schedules/",
+      "standings": "https://www.nfl.com/standings/",
+      "stats": "https://www.nfl.com/stats/",
+      "news": "https://www.nfl.com/news/",
+      "highlights": "https://www.nfl.com/videos/",
+      "teams": "https://www.nfl.com/teams/",
+      "secondary": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard"
+    },
+    "formula-1": {
+      "name": "Formula 1",
+      "official": "https://www.formula1.com/",
+      "schedule": "https://www.formula1.com/en/racing/2026",
+      "standings": "https://www.formula1.com/en/results/2026/drivers",
+      "stats": "https://www.formula1.com/en/results/2026/races",
+      "news": "https://www.formula1.com/en/latest",
+      "highlights": "https://www.formula1.com/en/video?page=1&videoFilters=Highlights",
+      "teams": "https://www.formula1.com/en/teams",
+      "secondary": "https://site.api.espn.com/apis/site/v2/sports/racing/f1/scoreboard"
+    },
+    "ufc": {
+      "name": "UFC",
+      "official": "https://www.ufc.com/",
+      "schedule": "https://www.ufc.com/events",
+      "rankings": "https://www.ufc.com/rankings",
+      "stats": "http://ufcstats.com/statistics/events/completed",
+      "news": "https://www.ufc.com/news",
+      "highlights": "https://www.ufc.com/video",
+      "athletes": "https://www.ufc.com/athletes",
+      "secondary": "https://site.api.espn.com/apis/site/v2/sports/mma/ufc/scoreboard"
+    }
+  }
+}
