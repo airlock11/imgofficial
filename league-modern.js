@@ -41,6 +41,7 @@ const app=document.createElement('section');app.className='img-league-app';app.i
 '<div class="img-livebar"><div class="img-livebar-left"><span class="img-pulse"></span><div><strong>IMG Auto Update</strong> <span id="imgUpdateText">Connecting to verified sources…</span></div></div><div class="img-livebar-links"><a href="/scores/?from=league&league='+encodeURIComponent(cfg.key)+'">Full scores</a><a href="/news/">News</a></div></div>'+
 '<div class="img-kpis" id="imgKpis"></div>'+
 '<div class="img-dashboard"><div class="img-stack"><section class="img-panel img-reveal" id="imgGamesPanel" hidden><div class="img-panel-head"><div><h2>Games</h2><p>Live, upcoming and recent results</p></div><button class="img-panel-action" id="imgGamesMode" type="button">Upcoming</button></div><div class="img-game-strip" id="imgGames"></div></section>'+
+'<section class="img-panel img-reveal" id="imgHistoryPanel"><div class="img-panel-head"><div><h2>Previous games gallery</h2><p>Swipe through verified final results</p></div><div class="img-history-controls"><button type="button" id="imgHistoryPrev" aria-label="Previous games">‹</button><button type="button" id="imgHistoryNext" aria-label="Next games">›</button></div></div><div class="img-history-rail" id="imgHistory"></div></section>'+
 '<section class="img-panel img-reveal" id="imgHighlightsPanel" hidden><div class="img-panel-head"><div><h2>Highlights</h2><p>Verified clips · swipe like Reels</p></div><span class="img-panel-action">Auto refreshed</span></div><div class="img-reels"><div class="img-reel-rail" id="imgReels"></div></div></section>'+
 '<section class="img-panel img-reveal" id="imgStandingsPanel" hidden><div class="img-panel-head"><div><h2>Standings</h2><p>Current table from connected data</p></div></div><div class="img-standings" id="imgStandings"></div></section></div>'+
 '<aside class="img-stack"><section class="img-panel img-reveal" id="imgNewsPanel" hidden><div class="img-panel-head"><div><h2>Latest '+esc(cfg.name)+' news</h2><p>From IMG news sources</p></div></div><div class="img-news-list" id="imgNews"></div></section></aside></div></div>';
@@ -53,10 +54,55 @@ function eventDate(e){return e?.date||e?.competitions?.[0]?.date||''}
 function gameCard(e){const st=stateOf(e),t=teamPair(e),detail=e?.status?.type?.shortDetail||e?.status?.type?.description||e?.status||e?.displayTime||dt(eventDate(e));const team=(x)=>'<div class="img-team">'+(x.logo?'<img src="'+esc(x.logo)+'" alt="" loading="lazy">':'<span class="img-team-logo-fallback">'+esc((x.name||'?').slice(0,2).toUpperCase())+'</span>')+'<strong>'+esc(x.name)+'</strong><b>'+(st==='scheduled'?'':esc(x.score))+'</b></div>';return'<article class="img-game-card '+(st==='live'?'live':'')+'"><div class="img-game-meta"><span>'+(st==='live'?'<b class="img-live-chip">LIVE</b>':esc(st==='final'?'FINAL':'SCHEDULED'))+'</span><span class="img-game-time">'+esc(detail||dt(eventDate(e)))+'</span></div>'+team(t.away)+team(t.home)+'</article>'}
 function updateGameMode(){if(!modes.length){q('#imgGamesPanel').hidden=true;return}const m=modes[modeIndex%modes.length],list=m.items;q('#imgGamesMode').textContent=m.label;q('#imgGames').innerHTML=list.map(gameCard).join('');q('#imgGamesPanel').hidden=false}
 q('#imgGamesMode').onclick=()=>{if(modes.length>1){modeIndex=(modeIndex+1)%modes.length;updateGameMode()}};
+async function loadUserLogoMap(){
+ if(window.IMG_SCORE_LEAGUE_LOGOS)return window.IMG_SCORE_LEAGUE_LOGOS;
+ return new Promise(resolve=>{
+   const sc=document.createElement('script');sc.src='/score-league-user-logos.js?v=20260923-2';
+   sc.onload=()=>resolve(window.IMG_SCORE_LEAGUE_LOGOS||{});sc.onerror=()=>resolve({});
+   document.head.append(sc);
+ });
+}
+async function officialFallbackLogo(){
+ try{
+   const r=await fetch('/league-sources.json?v=20260923-2',{cache:'no-store'});if(!r.ok)throw 0;
+   const j=await r.json(),u=j?.leagues?.[slug]?.official||'';if(!u)return'';
+   const host=new URL(u).hostname;return 'https://www.google.com/s2/favicons?domain='+encodeURIComponent(host)+'&sz=256';
+ }catch{return''}
+}
+function setLeagueIdentityLogo(src){
+ if(!src)return;
+ let box=document.querySelector('.img-league-identity');
+ if(!box){box=document.createElement('div');box.className='img-league-identity';document.querySelector('.hero .shell')?.append(box)}
+ box.innerHTML='<img src="'+esc(src)+'" alt="'+esc(cfg.name)+' logo" referrerpolicy="no-referrer">';
+ const img=box.querySelector('img');if(img)img.onerror=()=>{box.innerHTML='<span class="img-league-identity-fallback">'+esc(cfg.name.replace(/[^A-Za-z0-9]/g,'').slice(0,4).toUpperCase())+'</span>'};
+}
+async function resolveLeagueIdentity(){
+ const map=await loadUserLogoMap(),mapped=map?.[cfg.key]||'';
+ if(mapped){setLeagueIdentityLogo(mapped);return}
+ const fallback=await officialFallbackLogo();if(fallback)setLeagueIdentityLogo(fallback);
+ else{let box=document.querySelector('.img-league-identity');if(!box){box=document.createElement('div');box.className='img-league-identity';document.querySelector('.hero .shell')?.append(box)}box.innerHTML='<span class="img-league-identity-fallback">'+esc(cfg.name.replace(/[^A-Za-z0-9]/g,'').slice(0,4).toUpperCase())+'</span>'}
+}
+function setLeagueIdentityFromPayload(j){
+ const logo=j?.leagues?.[0]?.logos?.[0]?.href||j?.leagues?.[0]?.logo||'';
+ if(logo)setLeagueIdentityLogo(logo);
+}
+function renderHistory(finals){
+ const host=q('#imgHistory');if(!host)return;
+ if(!finals.length){
+   host.innerHTML='<article class="img-history-card"><div class="img-history-date"><span>IMG archive</span><span class="img-history-final">VERIFYING</span></div><strong style="display:block;font-size:.92rem;line-height:1.5">Previous verified results will appear here automatically as IMG receives them from the league data sources.</strong></article>';
+   return;
+ }
+ host.innerHTML=finals.slice(0,24).map(e=>{
+   const t=teamPair(e),d=eventDate(e),logo=x=>x.logo?'<img src="'+esc(x.logo)+'" alt="" loading="lazy">':'<span class="img-team-logo-fallback">'+esc((x.name||'?').slice(0,2).toUpperCase())+'</span>';
+   return '<article class="img-history-card"><div class="img-history-date"><span>'+esc(dt(d))+'</span><span class="img-history-final">FINAL</span></div>'+
+    '<div class="img-history-team">'+logo(t.away)+'<span>'+esc(t.away.name)+'</span><b>'+esc(t.away.score)+'</b></div>'+
+    '<div class="img-history-team">'+logo(t.home)+'<span>'+esc(t.home.name)+'</span><b>'+esc(t.home.score)+'</b></div></article>';
+ }).join('');
+}
 async function localLeague(){const [a,b]=await Promise.allSettled([fetch('/special-sports-data.json?v='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null),fetch('/extended-sports-data.json?v='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null)]);return a.value?.leagues?.[cfg.key]||b.value?.leagues?.[cfg.key]||null}
 function specialToEvent(g){return{id:g?.eventId||'',date:g?.date||'',state:g?.state||'',status:g?.status||g?.displayTime||'',home:g?.home||'',away:g?.away||'',homeScore:g?.homeScore??'',awayScore:g?.awayScore??'',homeLogo:g?.homeLogo||'',awayLogo:g?.awayLogo||''}}
-async function getEvents(){if(cfg.local){const l=await localLeague();lastSource=l?.sourceName||'IMG data';return(Array.isArray(l?.games)?l.games:[]).map(specialToEvent)}if(cfg.regional){const r=await fetch(worker+'/regional-scores?league='+encodeURIComponent(cfg.key),{cache:'no-store'});if(!r.ok)throw 0;const j=await r.json();lastSource=j.source||'IMG regional feed';return Array.isArray(j.events)?j.events:[]}if(cfg.score){const now=new Date(),a=new Date(now-7*86400000),b=new Date(now.getTime()+21*86400000),url=cfg.score+(cfg.score.includes('?')?'&':'?')+'dates='+dateKey(a)+'-'+dateKey(b);try{const r=await fetch(url,{cache:'no-store'});if(r.ok){const j=await r.json();lastSource=j?.leagues?.[0]?.name||'Connected sports feed';return j.events||[]}}catch{}const r=await fetch(worker+'/scoreboard?league='+encodeURIComponent(cfg.key)+'&dates='+dateKey(a)+'-'+dateKey(b),{cache:'no-store'});if(!r.ok)throw 0;const j=await r.json();lastSource='IMG proxy';return j.events||[]}return[]}
-async function renderEvents(){try{const ev=await getEvents();lastEvents=ev;const now=Date.now(),live=ev.filter(e=>stateOf(e)==='live'),up=ev.filter(e=>stateOf(e)==='scheduled'&&new Date(eventDate(e)||0).getTime()>=now).sort((a,b)=>new Date(eventDate(a))-new Date(eventDate(b))).slice(0,10),finals=ev.filter(e=>stateOf(e)==='final').sort((a,b)=>new Date(eventDate(b))-new Date(eventDate(a))).slice(0,10);modes=[];if(live.length)modes.push({label:'Live now',items:live});if(up.length)modes.push({label:'Upcoming',items:up});if(finals.length)modes.push({label:'Results',items:finals});modeIndex=0;updateGameMode();q('#imgUpdateText').textContent='Updated '+new Intl.DateTimeFormat(undefined,{hour:'numeric',minute:'2-digit'}).format(new Date())+' · '+lastSource;renderKpis(live,up,finals);queueHighlights()}catch{q('#imgGamesPanel').hidden=true;q('#imgUpdateText').textContent='Waiting for the next verified data refresh';renderKpis([],[],[])}}
+async function getEvents(){if(cfg.local){const l=await localLeague();lastSource=l?.sourceName||'IMG data';return(Array.isArray(l?.games)?l.games:[]).map(specialToEvent)}if(cfg.regional){const r=await fetch(worker+'/regional-scores?league='+encodeURIComponent(cfg.key),{cache:'no-store'});if(!r.ok)throw 0;const j=await r.json();lastSource=j.source||'IMG regional feed';return Array.isArray(j.events)?j.events:[]}if(cfg.score){const now=new Date(),a=new Date(now-60*86400000),b=new Date(now.getTime()+21*86400000),url=cfg.score+(cfg.score.includes('?')?'&':'?')+'dates='+dateKey(a)+'-'+dateKey(b);try{const r=await fetch(url,{cache:'no-store'});if(r.ok){const j=await r.json();setLeagueIdentityFromPayload(j);lastSource=j?.leagues?.[0]?.name||'Connected sports feed';return j.events||[]}}catch{}const r=await fetch(worker+'/scoreboard?league='+encodeURIComponent(cfg.key)+'&dates='+dateKey(a)+'-'+dateKey(b),{cache:'no-store'});if(!r.ok)throw 0;const j=await r.json();lastSource='IMG proxy';return j.events||[]}return[]}
+async function renderEvents(){try{const ev=await getEvents();lastEvents=ev;const now=Date.now(),live=ev.filter(e=>stateOf(e)==='live'),up=ev.filter(e=>stateOf(e)==='scheduled'&&new Date(eventDate(e)||0).getTime()>=now).sort((a,b)=>new Date(eventDate(a))-new Date(eventDate(b))).slice(0,10),finals=ev.filter(e=>stateOf(e)==='final').sort((a,b)=>new Date(eventDate(b))-new Date(eventDate(a))).slice(0,10);modes=[];if(live.length)modes.push({label:'Live now',items:live});if(up.length)modes.push({label:'Upcoming',items:up});if(finals.length)modes.push({label:'Results',items:finals});modeIndex=0;updateGameMode();renderHistory(finals);q('#imgUpdateText').textContent='Updated '+new Intl.DateTimeFormat(undefined,{hour:'numeric',minute:'2-digit'}).format(new Date())+' · '+lastSource;renderKpis(live,up,finals);queueHighlights()}catch{q('#imgGamesPanel').hidden=true;q('#imgUpdateText').textContent='Waiting for the next verified data refresh';renderKpis([],[],[])}}
 function renderKpis(live,up,finals){const next=up[0],nextPair=next?teamPair(next):null;const data=[['Live now',live.length?live.length+' game'+(live.length>1?'s':''):'No live game'],['Next',nextPair?nextPair.away.name+' vs '+nextPair.home.name:'Check back soon'],['Recent results',finals.length?finals.length+' available':'No recent result'],['Source',lastSource]];q('#imgKpis').innerHTML=data.map(x=>'<div class="img-kpi img-reveal"><small>'+esc(x[0])+'</small><strong>'+esc(x[1])+'</strong></div>').join('');observe()}
 function stat(e,names){for(const s of(Array.isArray(e?.stats)?e.stats:[])){if(names.includes(String(s.name||s.type||'').toLowerCase()))return s.displayValue??s.value??''}return''}
 function standardEntries(j){const groups=[];if(Array.isArray(j?.children))groups.push(...j.children);if(j?.standings)groups.push({standings:j.standings});return groups.flatMap(g=>g?.standings?.entries||g?.entries||[])}
@@ -72,5 +118,8 @@ function renderReels(clips){const panel=q('#imgHighlightsPanel'),host=q('#imgRee
 function playReel(el,c){document.querySelectorAll('.img-reel video').forEach(v=>{v.pause();v.remove()});if(c.youtube){const f=document.createElement('iframe');f.src='https://www.youtube-nocookie.com/embed/'+encodeURIComponent(c.youtube)+'?autoplay=1&playsinline=1&rel=0';f.allow='autoplay; encrypted-media; picture-in-picture';f.allowFullscreen=true;Object.assign(f.style,{position:'absolute',inset:'0',width:'100%',height:'100%',border:'0',zIndex:'1'});el.append(f);return}const v=document.createElement('video');v.src=c.media;v.controls=true;v.autoplay=true;v.playsInline=true;v.poster=c.thumb||'';el.append(v);v.play().catch(()=>{})}
 function observe(){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.08});document.querySelectorAll('.img-reveal:not(.in)').forEach(x=>io.observe(x))}
 async function refreshAll(){await Promise.allSettled([renderEvents(),renderStandings(),renderNews()]);observe()}
+resolveLeagueIdentity();
+q('#imgHistoryPrev')?.addEventListener('click',()=>q('#imgHistory')?.scrollBy({left:-420,behavior:'smooth'}));
+q('#imgHistoryNext')?.addEventListener('click',()=>q('#imgHistory')?.scrollBy({left:420,behavior:'smooth'}));
 refreshAll();setInterval(()=>{if(!document.hidden)renderEvents()},60000);setInterval(()=>{if(!document.hidden){renderNews();queueHighlights();renderStandings()}},300000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)refreshAll()});
 })();
