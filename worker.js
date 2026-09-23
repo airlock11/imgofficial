@@ -19,7 +19,7 @@ export default {
     if (url.pathname === "/live-streams") {
       const upstreamUrl = "https://raw.githubusercontent.com/airlock11/imgofficial/live-data/youtube-live.json";
       const cache = caches.default;
-      const cacheKey = new Request(request.url, { method: "GET" });
+      const cacheKey = new Request(url.origin + "/live-streams", { method: "GET" });
       try {
         const cached = await cache.match(cacheKey);
         if (cached) {
