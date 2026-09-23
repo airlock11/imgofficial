@@ -19,10 +19,10 @@
 <meta name="twitter:title" content="NBA Scores, Schedule, Standings & Results | IMG">
 <meta name="twitter:description" content="Follow NBA scores, schedules, results and league coverage on IMG. Check current game information and move quickly to the live Scores center.">
 <meta name="twitter:image" content="https://imgofficial.com/img-logo-hq.png">
-<link rel="stylesheet" href="/league-page.css?v=20260923-1">
+<link rel="stylesheet" href="/league-page.css?v=20260923-3">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"CollectionPage","@id":"https://imgofficial.com/leagues/nba/#page","name":"NBA Scores, Schedule, Standings & Results","url":"https://imgofficial.com/leagues/nba/","description":"Follow NBA scores, schedules, results and league coverage on IMG. Check current game information and move quickly to the live Scores center.","isPartOf":{"@type":"WebSite","name":"IMG","url":"https://imgofficial.com/"}},{"@type":"SportsOrganization","@id":"https://imgofficial.com/leagues/nba/#league","name":"NBA","sport":"Basketball","areaServed":"United States / Canada","url":"https://imgofficial.com/leagues/nba/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"IMG","item":"https://imgofficial.com/"},{"@type":"ListItem","position":2,"name":"Sports","item":"https://imgofficial.com/sports/"},{"@type":"ListItem","position":3,"name":"NBA","item":"https://imgofficial.com/leagues/nba/"}]}]}</script>
 </head>
-<body>
+<body data-league-key="basketball" data-league-name="NBA" data-score-url="https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard" data-standings-url="https://site.api.espn.com/apis/v2/sports/basketball/nba/standings?region=us&lang=en" data-news-pattern="\\bNBA\\b" data-refresh-ms="60000">
 <header><nav class="shell"><a class="brand" href="/" aria-label="IMG home"><img src="/img-logo-soccer.svg" alt="IMG"></a><div class="navlinks"><a href="/">Home</a><a href="/sports/">Sports</a><a href="/scores/">Scores</a><a href="/news/">News</a><a href="/odds/">Odds</a></div></nav></header>
 <main>
 <section class="hero"><div class="shell">
@@ -34,6 +34,15 @@
 <a class="btn btn-secondary" href="/sports/">Browse sports</a>
 </div>
 </div></section>
+<section class="league-data"><div class="shell">
+<div class="data-head"><div><h2>NBA scores, schedule &amp; coverage</h2><p>Live information is shown only when IMG's connected feed verifies an active game.</p></div><span id="leagueDataStatus" class="data-status">Loading current data</span></div>
+<div class="data-grid">
+<section class="data-panel"><h3>Live now</h3><div id="leagueLive"><p class="data-empty">Checking verified live games…</p></div></section>
+<section class="data-panel"><h3>Upcoming</h3><div id="leagueUpcoming"><p class="data-empty">Loading schedule…</p></div></section>
+<section class="data-panel"><h3>Recent results</h3><div id="leagueRecent"><p class="data-empty">Loading recent results…</p></div></section>
+<section class="data-panel"><h3>Latest NBA news</h3><div id="leagueNews"><p class="data-empty">Checking IMG's current news feed…</p></div></section>
+<section class="data-panel data-panel-wide"><h3>NBA standings</h3><div id="leagueStandings"><p class="data-empty">Loading verified standings…</p></div></section>
+</div></div></section>
 <section class="content"><div class="shell">
 <div class="grid">
 <article class="card"><h2>NBA on IMG</h2><p>IMG brings NBA into one sports data experience so visitors can move from league discovery to schedules, scores and results without searching across unrelated pages.</p></article>
@@ -50,4 +59,5 @@
 </div></section>
 </main>
 <footer><div class="shell">IMG · Global sports data platform · <a href="/privacy/">Privacy &amp; Advertising</a></div></footer>
+<script src="/league-live.js?v=20260923-1" defer></script>
 </body></html>
