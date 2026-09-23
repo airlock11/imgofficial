@@ -40,7 +40,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          if git diff --quiet -- assets/uaap/uaap-hero-hq.webp; then
+          if [ -z "$(git status --porcelain -- assets/uaap/uaap-hero-hq.webp)" ]; then
             echo "HQ hero is already current."
             exit 0
           fi
