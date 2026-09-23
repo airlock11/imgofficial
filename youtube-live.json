@@ -1,36 +1,66 @@
 {
-  "updatedAt": "2026-09-23T07:04:40.286601+00:00",
+  "updatedAt": "2026-09-23T08:28:28.971184+00:00",
   "freshForMinutes": 20,
   "streams": [
     {
-      "eventId": "ag26-youtube-NORA9lKUkX0",
+      "eventId": "ag26-youtube-QK1C8Q0w-co",
       "sport": "Asian Games",
       "leagueKey": "asian_games",
       "league": "2026 ASIAN GAMES",
       "teams": [],
-      "title": "LIVE: Yulo brothers lead PH medal bid | MEN\u2019S GYMNASTICS TEAM FINAL | 2026 ASIAN GAMES",
+      "title": "LIVE: Rosegie Ramos goes for Asian Games medal | WEIGHTLIFTING | 2026 ASIAN GAMES",
       "verificationStatus": "verified",
-      "lastVerifiedLiveAt": "2026-09-23T07:04:40.286601+00:00",
+      "lastVerifiedLiveAt": "2026-09-23T08:28:28.971184+00:00",
       "stream": {
-        "videoId": "NORA9lKUkX0",
-        "watchUrl": "https://www.youtube.com/watch?v=NORA9lKUkX0",
+        "videoId": "QK1C8Q0w-co",
+        "watchUrl": "https://www.youtube.com/watch?v=QK1C8Q0w-co",
         "provider": "YouTube",
         "channel": "One Sports",
-        "title": "LIVE: Yulo brothers lead PH medal bid | MEN\u2019S GYMNASTICS TEAM FINAL | 2026 ASIAN GAMES",
+        "title": "LIVE: Rosegie Ramos goes for Asian Games medal | WEIGHTLIFTING | 2026 ASIAN GAMES",
         "sourceChannelId": "UCXDG9ue-emCN8Ad3h7lERqQ",
         "verificationStatus": "verified",
-        "lastVerifiedLiveAt": "2026-09-23T07:04:40.286601+00:00",
-        "embedUrl": "https://www.youtube.com/embed/NORA9lKUkX0",
+        "lastVerifiedLiveAt": "2026-09-23T08:28:28.971184+00:00",
+        "embedUrl": "https://www.youtube.com/embed/QK1C8Q0w-co",
         "deliveryLeagueKey": "asian_games",
         "deliveryPlacement": "above_statistics",
-        "firstLiveAt": "2026-09-23T06:57:59.766423+00:00"
+        "firstLiveAt": "2026-09-23T08:27:37.862704+00:00"
       },
       "delivery": {
         "leagueKey": "asian_games",
         "url": "/scores/?league=asian_games",
         "placement": "above_statistics"
       },
-      "firstLiveAt": "2026-09-23T06:57:59.766423+00:00"
+      "firstLiveAt": "2026-09-23T08:27:37.862704+00:00"
+    },
+    {
+      "eventId": "fiba-youtube-QkNpu_nBnRg",
+      "sport": "Basketball",
+      "leagueKey": "fiba",
+      "league": "FIBA",
+      "teams": [],
+      "title": "LIVE - Shanghai Sharks v RSSB Tigers | FIBA Intercontinental Cup Beijing 2026",
+      "officialSourceId": "fiba",
+      "verificationStatus": "verified",
+      "lastVerifiedLiveAt": "2026-09-23T08:28:28.971184+00:00",
+      "stream": {
+        "videoId": "QkNpu_nBnRg",
+        "watchUrl": "https://www.youtube.com/watch?v=QkNpu_nBnRg",
+        "provider": "YouTube",
+        "channel": "FIBA Basketball",
+        "title": "LIVE - Shanghai Sharks v RSSB Tigers | FIBA Intercontinental Cup Beijing 2026",
+        "officialSourceId": "fiba",
+        "sourceChannelId": "UCtInrnU3QbWqFGsdKT1GZtg",
+        "verificationStatus": "verified",
+        "lastVerifiedLiveAt": "2026-09-23T08:28:28.971184+00:00",
+        "embedUrl": "https://www.youtube.com/embed/QkNpu_nBnRg",
+        "deliveryLeagueKey": "fiba",
+        "deliveryPlacement": "above_statistics"
+      },
+      "delivery": {
+        "leagueKey": "fiba",
+        "url": "/scores/?league=fiba",
+        "placement": "above_statistics"
+      }
     }
   ],
   "liveExpiryLedger": {
@@ -70,6 +100,10 @@
     "ag26-youtube-NORA9lKUkX0": {
       "firstLiveAt": "2026-09-23T06:57:59.766423+00:00",
       "lastVerifiedLiveAt": "2026-09-23T07:04:16.604254+00:00"
+    },
+    "ag26-youtube-QK1C8Q0w-co": {
+      "firstLiveAt": "2026-09-23T08:27:37.862704+00:00",
+      "lastVerifiedLiveAt": "2026-09-23T08:27:40.770875+00:00"
     }
   },
   "upcoming": [],
@@ -78,7 +112,7 @@
   "scanner": {
     "version": 3,
     "mode": "official-auto-discovery",
-    "checkedAt": "2026-09-23T07:04:40.073775+00:00",
+    "checkedAt": "2026-09-23T08:28:05.387216+00:00",
     "sourcesChecked": [
       "nbl-pilipinas",
       "mpbl",
@@ -117,9 +151,9 @@
     }
   },
   "liveVerification": {
-    "checkedAt": "2026-09-23T07:04:40.286601+00:00",
+    "checkedAt": "2026-09-23T08:28:28.971184+00:00",
     "method": "YouTube videos API exact-video verification",
-    "verifiedLiveCount": 1,
+    "verifiedLiveCount": 2,
     "graceCount": 0,
     "removedCount": 0,
     "removed": []
