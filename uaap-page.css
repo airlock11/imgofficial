@@ -913,7 +913,7 @@ footer{
 
 /* UAAP template overrides */
 .uaap-hero{
-  --hero-image:url("/assets/uaap/uaap-hero-user-hq-sharp.webp?v=20260924-userhero1");
+  --hero-image:url("/assets/uaap/uaap-hero-user-upload.avif?v=20260924-mobilehero2");
   background:#000
 }
 .uaap-hero::after{
@@ -949,6 +949,37 @@ footer{
     )
   }
 }
+
+@media(max-width:720px){
+  .uaap-hero{
+    min-height:350px;
+  }
+  .uaap-hero::before{
+    background-size:100% 100%,100% 100%,100% auto;
+    background-position:center center,center center,center top;
+    background-repeat:no-repeat;
+  }
+  .uaap-hero .hero-shell{
+    min-height:350px;
+    align-items:flex-end;
+    padding-top:122px;
+    padding-bottom:22px;
+  }
+  .uaap-hero .hero-copy{
+    max-width:380px;
+  }
+}
+@media(max-width:520px){
+  .uaap-hero{
+    min-height:330px;
+  }
+  .uaap-hero .hero-shell{
+    min-height:330px;
+    padding-top:112px;
+    padding-bottom:18px;
+  }
+}
+
 .uaap-single{grid-template-columns:1fr}
 .uaap-single .glass-panel{max-width:none}
 .team-initial{
