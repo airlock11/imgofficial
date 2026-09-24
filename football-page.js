@@ -133,7 +133,14 @@ async function fetchGames(){
     if(cached.length)return cached;
   }
   const local=await getJSON("/sportradar-soccer-data.json",{});
-  return (local?.leagues?.[key]?.games||[]).filter(validLocalGame).map(normalizeLocalGame);
+  const localGames=(local?.leagues?.[key]?.games||[]).filter(validLocalGame).map(normalizeLocalGame);
+  if(localGames.length)return localGames;
+  if(key==="pfl"){
+    const extended=await getJSON("/extended-sports-data.json",{});
+    const verified=(extended?.leagues?.pfl?.games||[]).map(normalizeLocalGame);
+    if(verified.length)return verified;
+  }
+  return [];
 }
 
 function setLeagueLogo(src){
