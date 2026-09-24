@@ -103,7 +103,7 @@ function normalizeLocalGame(g){
 
 async function fetchGames(){
   if(cfg.espn){
-    const d=new Date(),start=new Date(d.getTime()-14*86400000),end=new Date(d.getTime()+21*86400000);
+    const d=new Date(),start=new Date(d.getTime()-14*86400000),end=new Date(d.getTime()+14*86400000);
     const keyDate=x=>x.toISOString().slice(0,10).replaceAll("-","");
     const dates=keyDate(start)+"-"+keyDate(end);
     const worker="https://img-api-proxy.magsipocarnie.workers.dev/scoreboard?league="+encodeURIComponent(cfg.scoreKey)+"&dates="+dates;
