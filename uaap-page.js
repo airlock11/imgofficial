@@ -220,8 +220,7 @@ async function load(){
   const live=games.filter(g=>g.state==="in"||/live/i.test(g.status||""));
   const upcoming=games.filter(g=>g.state==="scheduled").sort((a,b)=>new Date(a.date)-new Date(b.date));
   const finals=games.filter(g=>g.state==="final").sort((a,b)=>new Date(b.date)-new Date(a.date));
-  const logo=qs("#uaap-league-logo"),logoSrc="https://uaap.org/images/logos/uaap_up.png";
-  if(logo&&logoSrc)logo.src=logoSrc;
+  const logo=qs("#uaap-league-logo"); if(logo) logo.removeAttribute("src");
   renderGames({live,upcoming,finals});startLive();renderGallery(finals,official);renderHighlights(official);renderStandings(league,official);renderTopPlayers(official);renderNews(official);
 }
 load();
