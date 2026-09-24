@@ -37,7 +37,7 @@ jobs:
             git fetch origin main
             git reset --hard origin/main
             python scripts/update_ucl_women_highlights.py
-            if git diff --quiet -- ucl-women-highlights.json; then
+            if [ -z "$(git status --porcelain -- ucl-women-highlights.json)" ]; then
               echo "No Women's Champions League highlight changes."
               exit 0
             fi
