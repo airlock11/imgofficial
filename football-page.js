@@ -135,6 +135,41 @@ function setLeagueLogo(src){
   }
 }
 
+const TEAM_LOGO_ALIASES={
+  bundesliga:{
+    "bayern munich":"FC Bayern Munchen",
+    "borussia dortmund":"BV Borussia 09 Dortmund",
+    "borussia monchengladbach":"Borussia Monchengladbach",
+    "fsv mainz":"1. FSV Mainz 05",
+    "fc cologne":"1. FC Koln",
+    "tsg hoffenheim":"TSG 1899 Hoffenheim",
+    "werder bremen":"SV Werder Bremen",
+    "bayer leverkusen":"Bayer 04 Leverkusen",
+    "union berlin":"1. FC Union Berlin"
+  },
+  ucl_women:{
+    "inter milano":"FC Internazionale Milano",
+    "bayern munich":"FC Bayern Munchen",
+    "real madrid":"Real Madrid CF Femenino",
+    "juventus turin":"Juventus FC",
+    "sl benfica":"Sport Lisboa e Benfica",
+    "olympique lyon":"OL Lyonnes",
+    "hacken gothenburg":"BK Hacken FF",
+    "oud-heverlee leuven":"Oud-Heverlee Leuven Women",
+    "paris saint-germain":"Paris Saint-Germain FC",
+    "servette fc chenois feminin":"Servette FC Chenois Feminin"
+  },
+  pfl:{
+    "mendiola fc 1991":"Valenzuela PB Mendiola FC",
+    "azkals development club":"PFF Development Team",
+    "azkals development team":"PFF Development Team",
+    "kaya fc iloilo":"Kaya FC-Iloilo"
+  },
+  mizoram_pl:{
+    "mls fc lawtngtlai":"MLS FC",
+    "kanan fc aizawl":"Kanan FC"
+  }
+};
 function normalizedTeamName(value){
   return String(value||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g," ").trim();
 }
@@ -142,6 +177,11 @@ function loadLocalTeamLogos(){
   const registry=window.IMG_FOOTBALL_TEAM_LOGOS?.[key]||{};
   for(const [name,logo] of Object.entries(registry)){
     if(name&&logo)teamLogoMap.set(normalizedTeamName(name),logo);
+  }
+  const aliases=TEAM_LOGO_ALIASES[key]||{};
+  for(const [alias,canonical] of Object.entries(aliases)){
+    const logo=teamLogoMap.get(normalizedTeamName(canonical));
+    if(logo)teamLogoMap.set(normalizedTeamName(alias),logo);
   }
 }
 async function fetchTeamLogos(){
