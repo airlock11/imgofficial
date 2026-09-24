@@ -262,6 +262,32 @@ async function fetchEspnHighlights(games){
   }));
   return found.filter((x,i,a)=>i===a.findIndex(y=>(y.link||y.title)===(x.link||x.title))).slice(0,8);
 }
+function decodeEntities(value){
+  const t=document.createElement("textarea");
+  t.innerHTML=String(value??"");
+  return t.value;
+}
+function ensureFootballHighlightDialog(){
+  let d=document.getElementById("footballHighlightDialog");
+  if(d)return d;
+  d=document.createElement("dialog");
+  d.id="footballHighlightDialog";
+  d.className="football-highlight-dialog";
+  d.innerHTML='<div class="football-highlight-shell"><button type="button" class="football-highlight-close" aria-label="Close highlight">×</button><div id="footballHighlightPlayer"></div></div>';
+  document.body.appendChild(d);
+  d.querySelector(".football-highlight-close").addEventListener("click",()=>d.close());
+  d.addEventListener("click",e=>{if(e.target===d)d.close()});
+  d.addEventListener("close",()=>{const p=d.querySelector("#footballHighlightPlayer");if(p)p.innerHTML=""});
+  return d;
+}
+function playFootballHighlight(item){
+  if(!item?.embedUrl)return false;
+  const d=ensureFootballHighlightDialog();
+  const host=d.querySelector("#footballHighlightPlayer");
+  host.innerHTML='<div class="football-highlight-video"><iframe src="'+esc(item.embedUrl)+'?autoplay=1&playsinline=1&rel=0" title="'+esc(decodeEntities(item.title||cfg.name+" highlight"))+'" allow="autoplay; encrypted-media; picture-in-picture; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>';
+  d.showModal();
+  return true;
+}
 function renderHighlights(items){
   const wrap=qs("#highlights");
   if(!wrap)return;
@@ -269,15 +295,23 @@ function renderHighlights(items){
     wrap.innerHTML='<div class="empty-card">No verified '+esc(cfg.name)+' highlight video is available from the current feed.</div>';
     return;
   }
-  wrap.innerHTML=items.map(x=>{
+  wrap.innerHTML=items.map((x,i)=>{
     const link=x.url||x.link||"#";
     const image=x.thumbnail||x.image||"";
     const meta=[x.sourceName||x.provider||cfg.name,x.publishedAt?fmtDate(x.publishedAt):""].filter(Boolean).join(" · ");
-    return '<a class="football-highlight-link" href="'+esc(link)+'" '+(link!=="#"? 'target="_blank" rel="noopener"':"")+'><article class="media-card highlight-card">'+
+    const tag=x.embedUrl?"button":"a";
+    const attrs=x.embedUrl
+      ?'type="button" data-football-highlight="'+i+'"'
+      :(link!=="#"? 'href="'+esc(link)+'" target="_blank" rel="noopener"':'href="#"');
+    return '<'+tag+' class="football-highlight-link" '+attrs+'><article class="media-card highlight-card">'+
       (image?'<img class="media-bg" src="'+esc(image)+'" alt="" loading="lazy">':"")+
-      '<span class="play-button" aria-hidden="true">▶</span><div class="media-card-content"><div class="media-kicker">HIGHLIGHT</div><div class="media-title">'+esc(x.title)+'</div><div class="media-meta">'+esc(meta||cfg.name)+'</div></div>'+
-    '</article></a>';
+      '<span class="play-button" aria-hidden="true">▶</span><div class="media-card-content"><div class="media-kicker">HIGHLIGHT</div><div class="media-title">'+esc(decodeEntities(x.title))+'</div><div class="media-meta">'+esc(meta||cfg.name)+'</div></div>'+
+    '</article></'+tag+'>';
   }).join("");
+  wrap.querySelectorAll("[data-football-highlight]").forEach(btn=>btn.addEventListener("click",()=>{
+    const item=items[Number(btn.dataset.footballHighlight)];
+    playFootballHighlight(item);
+  }));
 }
 
 function normalizeEspnStandings(j){
