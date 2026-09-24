@@ -291,6 +291,14 @@ function playFootballHighlight(item){
 function renderHighlights(items){
   const wrap=qs("#highlights");
   if(!wrap)return;
+  const seenTitles=new Set();
+  items=(Array.isArray(items)?items:[]).filter(x=>{
+    const title=decodeEntities(x?.title||"").toLowerCase().replace(/[^a-z0-9]+/g," ").trim();
+    if(!title)return false;
+    if(seenTitles.has(title))return false;
+    seenTitles.add(title);
+    return true;
+  });
   if(!items.length){
     wrap.innerHTML='<div class="empty-card">No verified '+esc(cfg.name)+' highlight video is available from the current feed.</div>';
     return;
