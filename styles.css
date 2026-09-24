@@ -2151,3 +2151,40 @@ html[data-theme="light"] .logo img{filter:brightness(0)}
   .soccer-standings-head,.soccer-standings-row{grid-template-columns:30px minmax(130px,1fr) repeat(6,40px);min-width:470px;gap:6px}
   .soccer-standings-row{font-size:.68rem}
 }
+
+/* IMG_SCORE_LEAGUE_SPACING_V2_START */
+@media (max-width:760px){
+  body.scores-page .score-league-filters{
+    gap:10px!important;
+    padding:4px 12px 6px!important;
+    scroll-padding-inline:12px;
+    align-items:flex-start!important;
+  }
+
+  body.scores-page .score-league-item,
+  body.scores-page .score-league-item-champions,
+  body.scores-page .score-league-item-one{
+    flex:0 0 92px!important;
+    width:92px!important;
+    min-width:92px!important;
+    max-width:92px!important;
+    gap:6px!important;
+    box-sizing:border-box;
+  }
+
+  body.scores-page .score-league-name,
+  body.scores-page .score-league-item-champions .score-league-name{
+    width:92px!important;
+    max-width:92px!important;
+    min-height:30px;
+    padding:0 2px!important;
+    text-align:center;
+    line-height:1.08;
+    white-space:normal!important;
+    overflow:visible!important;
+    text-overflow:clip!important;
+    -webkit-line-clamp:unset!important;
+    line-clamp:unset!important;
+  }
+}
+/* IMG_SCORE_LEAGUE_SPACING_V2_END */
