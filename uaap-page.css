@@ -1049,9 +1049,9 @@ footer{
 .uaap-single .glass-panel{max-width:none}
 .team-visual{
   position:relative;
-  width:72px;
-  height:72px;
-  flex:0 0 72px;
+  width:78px;
+  height:78px;
+  flex:0 0 78px;
   display:grid;
   place-items:center;
   overflow:visible;
@@ -1074,8 +1074,8 @@ footer{
   position:relative;
   z-index:2;
   display:block;
-  width:68px;
-  height:68px;
+  width:74px;
+  height:74px;
   object-fit:contain;
   object-position:center;
   background:transparent!important;
@@ -1088,33 +1088,37 @@ footer{
     drop-shadow(0 8px 10px rgba(0,0,0,.38));
   transform:translateZ(0);
 }
-.team-visual.has-white-source .uaap-team-logo{
-  mix-blend-mode:multiply;
-  filter:
-    saturate(1.12)
-    contrast(1.16)
-    drop-shadow(0 2px 1px rgba(0,0,0,.48))
-    drop-shadow(0 8px 10px rgba(0,0,0,.36));
-}
+
 .logo-pair .team-visual{
-  width:86px;
-  height:86px;
-  flex-basis:86px;
+  width:94px;
+  height:94px;
+  flex-basis:94px;
 }
 .logo-pair .uaap-team-logo{
-  width:82px;
-  height:82px;
+  width:90px;
+  height:90px;
 }
 .standing-team .team-visual{
-  width:54px;
-  height:54px;
-  flex-basis:54px;
+  width:58px;
+  height:58px;
+  flex-basis:58px;
 }
 .standing-team .uaap-team-logo{
-  width:50px;
-  height:50px;
+  width:54px;
+  height:54px;
 }
 @media(max-width:720px){
+  .game-team .team-visual{
+    width:62px;
+    height:62px;
+    flex-basis:62px;
+  }
+  .game-team .uaap-team-logo{
+    width:60px;
+    height:60px;
+  }
+}
+@media(max-width:520px){
   .game-team .team-visual{
     width:58px;
     height:58px;
@@ -1123,17 +1127,6 @@ footer{
   .game-team .uaap-team-logo{
     width:56px;
     height:56px;
-  }
-}
-@media(max-width:520px){
-  .game-team .team-visual{
-    width:52px;
-    height:52px;
-    flex-basis:52px;
-  }
-  .game-team .uaap-team-logo{
-    width:50px;
-    height:50px;
   }
   .standing-team .team-visual{
     width:48px;
@@ -1161,15 +1154,15 @@ footer{
 .game-team .team-visual,
 .standing-team .team-visual{border-radius:0}
 .standing-team img.uaap-team-logo{
-  width:50px;
-  height:50px;
+  width:54px;
+  height:54px;
   flex-basis:auto;
   border-radius:0;
 }
 @media(max-width:520px){
   .standing-team img.uaap-team-logo{
-    width:46px;
-    height:46px;
+    width:50px;
+    height:50px;
     flex-basis:auto;
   }
 }
