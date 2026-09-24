@@ -135,7 +135,17 @@ function setLeagueLogo(src){
   }
 }
 
+function normalizedTeamName(value){
+  return String(value||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g," ").trim();
+}
+function loadLocalTeamLogos(){
+  const registry=window.IMG_FOOTBALL_TEAM_LOGOS?.[key]||{};
+  for(const [name,logo] of Object.entries(registry)){
+    if(name&&logo)teamLogoMap.set(normalizedTeamName(name),logo);
+  }
+}
 async function fetchTeamLogos(){
+  loadLocalTeamLogos();
   if(!cfg.espn)return;
   try{
     const r=await fetch("https://site.api.espn.com/apis/site/v2/sports/soccer/"+cfg.espn+"/teams?limit=100",{cache:"force-cache"});
@@ -146,11 +156,11 @@ async function fetchTeamLogos(){
       const t=row?.team||row;
       const name=t?.displayName||t?.name;
       const logo=t?.logos?.[0]?.href||t?.logo||"";
-      if(name&&logo)teamLogoMap.set(name,logo);
+      if(name&&logo&&!teamLogoMap.has(normalizedTeamName(name)))teamLogoMap.set(normalizedTeamName(name),logo);
     }
   }catch{}
 }
-function teamLogo(name,provided=""){return provided||teamLogoMap.get(name)||""}
+function teamLogo(name,provided=""){return teamLogoMap.get(normalizedTeamName(name))||provided||teamLogoMap.get(name)||""}
 
 function teamBlock(name,side,score="",logo=""){
   const src=teamLogo(name,logo);
