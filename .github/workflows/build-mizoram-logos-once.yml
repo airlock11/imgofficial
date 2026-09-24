@@ -3,7 +3,8 @@ on:
   push:
     branches: [main]
     paths:
-      - "scripts/build_mizoram_team_logos_once.py"\n      - "scripts/wire_football_team_logos_once.py"
+      - "scripts/build_mizoram_team_logos_once.py"
+      - "scripts/wire_football_team_logos_once.py"
       - ".github/workflows/build-mizoram-logos-once.yml"
 permissions:
   contents: write
@@ -36,11 +37,14 @@ jobs:
           open('football-team-logos-report.json','w',encoding='utf-8').write(json.dumps(report,indent=2)+'\n')
           if obj.get('missing'): raise SystemExit('Missing Mizoram crests: '+', '.join(obj['missing']))
           PY
+      - name: Wire remaining league pages
+        run: python scripts/wire_football_team_logos_once.py
       - name: Publish
         run: |
           git config user.name "IMG Asset Builder"
           git config user.email "actions@users.noreply.github.com"
           git add assets/football/teams/mizoram_pl football-team-logos.js football-team-logos-report.json leagues/el-salvador-reserves/index.html leagues/serie-a/index.html leagues/bundesliga/index.html leagues/champions-league/index.html leagues/champions-league-women/index.html leagues/mls/index.html leagues/pfl/index.html
-          git commit -m "Add Mizoram team crests"
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Finish football team crest integration"
           git pull --rebase origin main
           git push origin HEAD:main
