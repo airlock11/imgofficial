@@ -6,7 +6,7 @@ import subprocess
 import sys
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
-from urllib.parse import urlparse
+from urllib.parse import urlparse, quote_plus
 from urllib.request import Request, urlopen
 
 import feedparser
@@ -39,6 +39,39 @@ FEEDS = [
     {"region":"Philippines","sport":"Sports","name":"GMA News Sports","url":"https://data.gmanetwork.com/gno/rss/sports/feed.xml"},
     {"region":"Philippines","sport":"Sports","name":"Tiebreaker Times","url":"https://tiebreakertimes.com.ph/feed"},
 ]
+
+LEAGUE_NEWS_QUERIES = {
+    "soccer": {
+        "name": "Premier League",
+        "region": "England",
+        "query": '"Premier League" England football',
+    },
+    "laliga": {
+        "name": "La Liga",
+        "region": "Spain",
+        "query": '"La Liga" Spain football',
+    },
+    "bundesliga": {
+        "name": "Bundesliga",
+        "region": "Germany",
+        "query": '"Bundesliga" Germany football',
+    },
+    "seriea": {
+        "name": "Serie A",
+        "region": "Italy",
+        "query": '"Serie A" Italy football',
+    },
+    "jamaica_pl": {
+        "name": "Jamaican Premier League",
+        "region": "Jamaica",
+        "query": '"Jamaican Premier League" football',
+    },
+    "pfl": {
+        "name": "Philippines Football League",
+        "region": "Philippines",
+        "query": '"Philippines Football League" OR "Philippine Football League" football',
+    },
+}
 
 def clean_html(value, limit=320):
     soup = BeautifulSoup(value or "", "html.parser")
@@ -113,6 +146,53 @@ def fetch_feed(cfg):
             "published": published_iso(entry),
         })
     return items
+
+
+def google_news_search_url(query):
+    return (
+        "https://news.google.com/rss/search?q="
+        + quote_plus(query)
+        + "&hl=en-US&gl=US&ceid=US:en"
+    )
+
+
+def fetch_league_news(key, cfg):
+    parsed = feedparser.parse(
+        google_news_search_url(cfg["query"]),
+        agent=UA,
+        request_headers={"Accept":"application/rss+xml, application/xml, text/xml, */*"},
+    )
+    rows = []
+    seen = set()
+    for entry in parsed.entries[:24]:
+        title = clean_html(entry.get("title"), 180)
+        link = (entry.get("link") or "").strip()
+        if not title or not link:
+            continue
+        link_key = normalize_link(link)
+        if not link_key or link_key in seen:
+            continue
+        seen.add(link_key)
+        source_obj = entry.get("source") or {}
+        source = ""
+        if isinstance(source_obj, dict):
+            source = clean_html(source_obj.get("title"), 80)
+        rows.append({
+            "title": title,
+            "link": link,
+            "description": clean_html(entry.get("summary") or entry.get("description"), 260),
+            "source": source or cfg["name"],
+            "sport": "Football",
+            "region": cfg["region"],
+            "league_key": key,
+            "league": cfg["name"],
+            "image": image_from_entry(entry),
+            "published": published_iso(entry),
+        })
+        if len(rows) >= 12:
+            break
+    rows.sort(key=lambda x: timestamp(x.get("published","")), reverse=True)
+    return rows
 
 
 def _extract_json_object(text, marker):
@@ -441,8 +521,30 @@ def fetch_videos():
 def main():
     collected = []
     errors = {}
+    try:
+        previous = json.loads(OUT.read_text("utf-8")) if OUT.exists() else {}
+    except Exception:
+        previous = {}
     videos, video_errors = fetch_videos()
     errors.update({"video:" + k: v for k, v in video_errors.items()})
+    league_news = {}
+    previous_leagues = previous.get("leagues") if isinstance(previous, dict) else {}
+    if not isinstance(previous_leagues, dict):
+        previous_leagues = {}
+    for league_key, league_cfg in LEAGUE_NEWS_QUERIES.items():
+        try:
+            rows = fetch_league_news(league_key, league_cfg)
+            if rows:
+                league_news[league_key] = rows
+            else:
+                old_rows = previous_leagues.get(league_key) or []
+                league_news[league_key] = old_rows[:12] if isinstance(old_rows, list) else []
+                errors["league:" + league_key] = "No league-specific articles returned"
+        except Exception as exc:
+            old_rows = previous_leagues.get(league_key) or []
+            league_news[league_key] = old_rows[:12] if isinstance(old_rows, list) else []
+            errors["league:" + league_key] = str(exc)[:180]
+
     for cfg in FEEDS:
         try:
             rows = fetch_feed(cfg)
@@ -491,9 +593,11 @@ def main():
             "total": len(selected),
             "philippines": sum(1 for x in selected if x["region"] == "Philippines"),
             "international": sum(1 for x in selected if x["region"] == "International"),
+            "league_specific": {k: len(v) for k, v in league_news.items()},
         },
         "errors": errors,
         "videos": videos,
+        "leagues": league_news,
         "items": selected,
     }
     OUT.write_text(json.dumps(out, ensure_ascii=False, indent=2) + "\n", "utf-8")
