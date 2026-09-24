@@ -10,7 +10,9 @@ const LEAGUES={
   seriea:{name:"Serie A",espn:"ita.1",category:"Italy"}
 };
 
-const seasonYear=String(now.getUTCFullYear());\nconst windowStart=now.getTime()-14*DAY;\nconst windowEnd=now.getTime()+30*DAY;
+const seasonYear=String(now.getUTCFullYear());
+const windowStart=now.getTime()-14*DAY;
+const windowEnd=now.getTime()+30*DAY;
 const previous=(()=>{try{return JSON.parse(fs.readFileSync(OUT,"utf8"))}catch{return {version:1,leagues:{}}}})();
 
 async function json(url){
