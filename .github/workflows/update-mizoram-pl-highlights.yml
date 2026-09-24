@@ -37,7 +37,7 @@ jobs:
             git fetch origin main
             git reset --hard origin/main
             python scripts/update_mizoram_pl_highlights.py
-            if git diff --quiet -- mizoram-pl-highlights.json; then
+            if [ -z "$(git status --porcelain -- mizoram-pl-highlights.json)" ]; then
               echo "No Mizoram Premier League highlight changes."
               exit 0
             fi
