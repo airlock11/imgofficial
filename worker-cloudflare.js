@@ -116,6 +116,39 @@ async function handleRequest(request) {
       }
     }
 
+    if (url.pathname === "/teams") {
+      const leagueKey = (url.searchParams.get("league") || "").trim().toLowerCase();
+      const paths = {
+        soccer: "soccer/eng.1",
+        laliga: "soccer/esp.1",
+        seriea: "soccer/ita.1",
+        bundesliga: "soccer/ger.1",
+        champions: "soccer/uefa.champions",
+        ucl_women: "soccer/uefa.wchampions",
+        mls: "soccer/usa.1",
+      };
+      const path = paths[leagueKey];
+      if (!path) return jsonResponse({ sports: [], error: "Unsupported teams league" }, cors, 300);
+      try {
+        const upstream = new URL(`https://site.api.espn.com/apis/site/v2/sports/${path}/teams`);
+        upstream.searchParams.set("limit", "100");
+        const response = await fetch(upstream.toString(), {
+          cf: { cacheTtl: 86400, cacheEverything: true },
+        });
+        const body = await response.text();
+        return new Response(body, {
+          status: response.status,
+          headers: {
+            ...cors,
+            "Content-Type": "application/json; charset=utf-8",
+            "Cache-Control": "public, max-age=3600, s-maxage=86400",
+          },
+        });
+      } catch (_) {
+        return jsonResponse({ sports: [], error: "Team directory unavailable" }, cors, 300);
+      }
+    }
+
     if (url.pathname === "/scoreboard") {
       const leagueKey = (url.searchParams.get("league") || "").trim().toLowerCase();
       const paths = {
