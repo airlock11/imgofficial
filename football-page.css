@@ -535,3 +535,47 @@ body[data-football-league] .football-highlight-link{
     height:50% !important;
   }
 }
+
+
+/* LIGHT MODE HERO BOTTOM FADE — six football league pages */
+:root[data-theme="light"] #football-hero.hero--artwork{
+  background:#f4f6f8 !important;
+}
+:root[data-theme="light"] #football-hero.hero--artwork::after{
+  content:"" !important;
+  display:block !important;
+  position:absolute !important;
+  left:0 !important;
+  right:0 !important;
+  top:auto !important;
+  bottom:-1px !important;
+  height:46% !important;
+  pointer-events:none !important;
+  background:linear-gradient(
+    180deg,
+    rgba(244,246,248,0) 0%,
+    rgba(244,246,248,.05) 18%,
+    rgba(244,246,248,.14) 34%,
+    rgba(244,246,248,.30) 52%,
+    rgba(244,246,248,.56) 68%,
+    rgba(244,246,248,.82) 84%,
+    #f4f6f8 100%
+  ) !important;
+  box-shadow:none !important;
+}
+@media(max-width:900px){
+  :root[data-theme="light"] #football-hero.hero--artwork::after{
+    height:56% !important;
+    background:linear-gradient(
+      180deg,
+      rgba(244,246,248,0) 0%,
+      rgba(244,246,248,.06) 16%,
+      rgba(244,246,248,.16) 32%,
+      rgba(244,246,248,.34) 50%,
+      rgba(244,246,248,.60) 68%,
+      rgba(244,246,248,.84) 86%,
+      #f4f6f8 100%
+    ) !important;
+  }
+}
+
