@@ -11,7 +11,7 @@ const LEAGUES={
 };
 
 const keyDate=d=>d.toISOString().slice(0,10).replaceAll("-","");
-const dates=keyDate(new Date(now.getTime()-14*DAY))+"-"+keyDate(new Date(now.getTime()+21*DAY));
+const dates=keyDate(new Date(now.getTime()-14*DAY))+"-"+keyDate(new Date(now.getTime()+14*DAY));
 const previous=(()=>{try{return JSON.parse(fs.readFileSync(OUT,"utf8"))}catch{return {version:1,leagues:{}}}})();
 
 async function json(url){
