@@ -74,6 +74,15 @@ def load_source_registry():
   print("livestream source registry",ex)
   return []
 
+def ncaa_senior_title_allowed(title):
+ upper=str(title or "").upper()
+ if not re.search(r"\bNCAA\b",upper):return False
+ junior_tokens=[
+  "JUNIOR","JUNIORS","JUNIOR'S","JUNIORS'","JHS",
+  "BOYS","GIRLS","HIGH SCHOOL","JUNIOR HIGH","JUNIOR HIGH SCHOOL"
+ ]
+ return not any(token in upper for token in junior_tokens)
+
 def source_title_allowed(source,title):
  upper=str(title or "").upper()
  excludes=[str(x).upper() for x in source.get("excludeAny",[]) if str(x).strip()]
@@ -290,7 +299,7 @@ def one_sports_live():
    league_key="asian_games"; sport="Asian Games"; league="2026 ASIAN GAMES"; prefix="ag26"
   elif re.search(r"\bPBA\b",upper):
    league_key="pba"; sport="Basketball"; league="PBA"; prefix="pba"
-  elif re.search(r"\bNCAA\b",upper):
+  elif re.search(r"\bNCAA\b",upper) and ncaa_senior_title_allowed(title):
    league_key="ncaa_ph"; sport="Basketball"; league="NCAA Philippines"; prefix="ncaaph"
   elif re.search(r"\bUAAP\b",upper):
    league_key="uaap"; sport="Basketball"; league="UAAP"; prefix="uaap"
@@ -445,7 +454,7 @@ def discover_live_event_streams(previous):
     upper=title.upper()
     if "ASIAN GAMES" in upper: league_key="asian_games"; league="2026 ASIAN GAMES"
     elif re.search(r"\bPBA\b",upper): league_key="pba"; league="PBA"
-    elif re.search(r"\bNCAA\b",upper): league_key="ncaa_ph"; league="NCAA Philippines"
+    elif re.search(r"\bNCAA\b",upper) and ncaa_senior_title_allowed(title): league_key="ncaa_ph"; league="NCAA Philippines"
     elif re.search(r"\bUAAP\b",upper): league_key="uaap"; league="UAAP"
    if not league_key: continue
    verified_at=datetime.now(timezone.utc).isoformat()
@@ -505,6 +514,10 @@ def previous_still_live(previous):
    expected_channel=str(stream.get("sourceChannelId") or "")
    if item.get("leagueKey")=="asian_games":
     expected_channel=ONE_SPORTS_CHANNEL_ID
+   if item.get("leagueKey")=="ncaa_ph":
+    expected_channel=ONE_SPORTS_CHANNEL_ID
+    if not ncaa_senior_title_allowed(sn.get("title","")):
+     continue
    if expected_channel and sn.get("channelId")!=expected_channel:
     continue
    is_live=sn.get("liveBroadcastContent")=="live" or (live.get("actualStartTime") and not live.get("actualEndTime"))
@@ -668,6 +681,13 @@ except Exception as ex:
 
 seen=set(); dedup=[]
 for x in streams:
+ # NCAA Philippines policy: only One Sports senior streams may be published.
+ if x.get("leagueKey")=="ncaa_ph":
+  stream=x.get("stream") or {}
+  if str(stream.get("sourceChannelId") or "")!=ONE_SPORTS_CHANNEL_ID:
+   continue
+  if not ncaa_senior_title_allowed(x.get("title") or stream.get("title") or ""):
+   continue
  vid=x.get("stream",{}).get("videoId")
  if vid and vid in seen:continue
  if vid:seen.add(vid)
