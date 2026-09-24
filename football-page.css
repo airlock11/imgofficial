@@ -360,3 +360,56 @@ body[data-football-league] .football-highlight-link{
     max-width:134px !important;
   }
 }
+
+
+/* Artwork-first league heroes: preserve the full 3:1 artwork on every screen. */
+#football-hero.hero--artwork {
+  min-height: 0 !important;
+  height: 33.333vw !important;
+  padding: 0 !important;
+  background: #000 !important;
+  --football-hero-end: #000;
+}
+#football-hero.hero--artwork .hero-overlay,
+#football-hero.hero--artwork .hero-shell {
+  display: none !important;
+}
+#football-hero.hero--artwork::before {
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  background-image: var(--hero-image) !important;
+  background-size: 100% auto !important;
+  background-position: center top !important;
+  background-repeat: no-repeat !important;
+}
+#football-hero.hero--artwork::after {
+  content: "" !important;
+  display: block !important;
+  position: absolute !important;
+  z-index: 1 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  height: 24% !important;
+  pointer-events: none !important;
+  background: linear-gradient(180deg, rgba(0,0,0,0), #000) !important;
+}
+@media (max-width: 900px) {
+  #football-hero.hero--artwork {
+    min-height: 0 !important;
+    height: 33.333vw !important;
+    padding: 0 !important;
+  }
+  #football-hero.hero--artwork::before {
+    height: 100% !important;
+    background-image: var(--hero-image) !important;
+    background-size: 100% auto !important;
+    background-position: center top !important;
+  }
+  #football-hero.hero--artwork::after {
+    display: block !important;
+    content: "" !important;
+    height: 28% !important;
+  }
+}
