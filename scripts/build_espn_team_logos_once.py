@@ -7,7 +7,10 @@ import cairosvg
 ROOT=Path(__file__).resolve().parents[1]
 key,code=sys.argv[1],sys.argv[2]
 url=f"https://img-api-proxy.magsipocarnie.workers.dev/teams?league={key}"
-j=requests.get(url,timeout=30,headers={"User-Agent":"IMG-Sports-Assets/1.0"}).json()
+r0=requests.get(url,timeout=30,headers={"User-Agent":"IMG-Sports-Assets/1.0"})
+print("FETCH",r0.status_code,r0.headers.get("content-type"),file=sys.stderr)
+r0.raise_for_status()
+j=r0.json()
 rows=j.get("sports",[{}])[0].get("leagues",[{}])[0].get("teams",[])
 out={};folder=ROOT/"assets"/"football"/"teams"/key
 folder.mkdir(parents=True,exist_ok=True)
