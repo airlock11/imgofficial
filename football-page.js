@@ -6,17 +6,17 @@ const now=()=>Date.now();
 const ROOT="/";
 
 const CONFIG={
-  soccer:{name:"Premier League",region:"England",scoreKey:"soccer",espn:"eng.1",path:"premier-league",aliases:["premier league","epl"],description:"England's top-flight football competition.",competition:"Premier League"},
-  jamaica_pl:{name:"Jamaican Premier League",region:"Jamaica",scoreKey:"jamaica_pl",path:"jamaican-premier-league",aliases:["jamaican premier league","jamaica premier league","jpl"],description:"Top-flight club football in Jamaica.",competition:"Premier League",category:"Jamaica",logo:"https://r2.thesportsdb.com/images/media/league/badgearchive/pg49fr1727716904.png"},
-  mizoram_pl:{name:"Mizoram Premier League",region:"India",scoreKey:"mizoram_pl",path:"mizoram-premier-league",aliases:["mizoram premier league"],description:"Club football from Mizoram, India.",competition:"Mizoram Premier League",category:"India",logo:"https://static.toiimg.com/thumb/msid-92395083%2Cwidth-1280%2Cheight-720%2Cresizemode-4/92395083.jpg"},
-  laliga:{name:"La Liga",region:"Spain",scoreKey:"laliga",espn:"esp.1",path:"la-liga",aliases:["la liga","laliga"],description:"Spain's top-flight football competition.",competition:"LaLiga"},
-  el_salvador_reserves:{name:"Primera Division, Reserves",region:"El Salvador",scoreKey:"el_salvador_reserves",path:"el-salvador-reserves",aliases:["primera division reserves","el salvador reserves"],description:"Reserve competition football from El Salvador.",competition:"Primera Division, Reserves",category:"El Salvador",logo:"https://cdn.resfu.com/media/img/league_logos/primera-el-salvador.png"},
-  seriea:{name:"Serie A",region:"Italy",scoreKey:"seriea",espn:"ita.1",path:"serie-a",aliases:["serie a"],description:"Italy's top-flight football competition.",competition:"Serie A"},
-  bundesliga:{name:"Bundesliga",region:"Germany",scoreKey:"bundesliga",espn:"ger.1",path:"bundesliga",aliases:["bundesliga"],description:"Germany's top-flight football competition.",competition:"Bundesliga"},
-  champions:{name:"UEFA Champions League",region:"Europe",scoreKey:"champions",espn:"uefa.champions",path:"champions-league",aliases:["uefa champions league","champions league","ucl"],description:"UEFA's premier men's club competition.",competition:"UEFA Champions League"},
-  ucl_women:{name:"UEFA Champions League Women",region:"Europe",scoreKey:"ucl_women",path:"champions-league-women",aliases:["women's champions league","womens champions league","uefa champions league women","uwcl"],description:"UEFA's premier women's club competition.",competition:"UEFA Champions League Women",category:"International Clubs",logo:"https://commons.wikimedia.org/wiki/Special:Redirect/file/UEFA%20Women%27s%20Champions%20League%20logo.svg"},
-  mls:{name:"MLS",region:"United States / Canada",scoreKey:"mls",espn:"usa.1",path:"mls",aliases:["major league soccer","mls"],description:"Major League Soccer in the United States and Canada.",competition:"MLS"},
-  pfl:{name:"PFL",region:"Philippines",scoreKey:"pfl",path:"pfl",aliases:["philippines football league","philippine football league","pfl"],description:"Professional club football in the Philippines.",competition:"Philippines Football League",category:"Philippines",logo:"https://webcdn.ticketmax.ph/uploads/20241008/1728401723_895c0017ad979c1b70f1.jpg"}
+  soccer:{name:"Premier League",region:"England",scoreKey:"soccer",espn:"eng.1",path:"premier-league",highlightsFile:"premier-league-highlights.json",aliases:["premier league","epl"],description:"England's top-flight football competition.",competition:"Premier League"},
+  jamaica_pl:{name:"Jamaican Premier League",region:"Jamaica",scoreKey:"jamaica_pl",path:"jamaican-premier-league",highlightsFile:"jamaica-pl-highlights.json",aliases:["jamaican premier league","jamaica premier league","jpl"],description:"Top-flight club football in Jamaica.",competition:"Premier League",category:"Jamaica",logo:"https://r2.thesportsdb.com/images/media/league/badgearchive/pg49fr1727716904.png"},
+  mizoram_pl:{name:"Mizoram Premier League",region:"India",scoreKey:"mizoram_pl",path:"mizoram-premier-league",highlightsFile:"mizoram-pl-highlights.json",aliases:["mizoram premier league"],description:"Club football from Mizoram, India.",competition:"Mizoram Premier League",category:"India",logo:"https://static.toiimg.com/thumb/msid-92395083%2Cwidth-1280%2Cheight-720%2Cresizemode-4/92395083.jpg"},
+  laliga:{name:"La Liga",region:"Spain",scoreKey:"laliga",espn:"esp.1",path:"la-liga",highlightsFile:"laliga-highlights.json",aliases:["la liga","laliga"],description:"Spain's top-flight football competition.",competition:"LaLiga"},
+  el_salvador_reserves:{name:"Primera Division, Reserves",region:"El Salvador",scoreKey:"el_salvador_reserves",path:"el-salvador-reserves",highlightsFile:"el-salvador-reserves-highlights.json",aliases:["primera division reserves","el salvador reserves"],description:"Reserve competition football from El Salvador.",competition:"Primera Division, Reserves",category:"El Salvador",logo:"https://cdn.resfu.com/media/img/league_logos/primera-el-salvador.png"},
+  seriea:{name:"Serie A",region:"Italy",scoreKey:"seriea",espn:"ita.1",path:"serie-a",highlightsFile:"seriea-highlights.json",aliases:["serie a"],description:"Italy's top-flight football competition.",competition:"Serie A"},
+  bundesliga:{name:"Bundesliga",region:"Germany",scoreKey:"bundesliga",espn:"ger.1",path:"bundesliga",highlightsFile:"bundesliga-highlights.json",aliases:["bundesliga"],description:"Germany's top-flight football competition.",competition:"Bundesliga"},
+  champions:{name:"UEFA Champions League",region:"Europe",scoreKey:"champions",espn:"uefa.champions",path:"champions-league",highlightsFile:"champions-highlights.json",aliases:["uefa champions league","champions league","ucl"],description:"UEFA's premier men's club competition.",competition:"UEFA Champions League"},
+  ucl_women:{name:"UEFA Champions League Women",region:"Europe",scoreKey:"ucl_women",path:"champions-league-women",highlightsFile:"ucl-women-highlights.json",aliases:["women's champions league","womens champions league","uefa champions league women","uwcl"],description:"UEFA's premier women's club competition.",competition:"UEFA Champions League Women",category:"International Clubs",logo:"https://commons.wikimedia.org/wiki/Special:Redirect/file/UEFA%20Women%27s%20Champions%20League%20logo.svg"},
+  mls:{name:"MLS",region:"United States / Canada",scoreKey:"mls",espn:"usa.1",path:"mls",highlightsFile:"mls-highlights.json",aliases:["major league soccer","mls"],description:"Major League Soccer in the United States and Canada.",competition:"MLS"},
+  pfl:{name:"PFL",region:"Philippines",scoreKey:"pfl",path:"pfl",highlightsFile:"pfl-highlights.json",aliases:["philippines football league","philippine football league","pfl"],description:"Professional club football in the Philippines.",competition:"Philippines Football League",category:"Philippines",logo:"https://webcdn.ticketmax.ph/uploads/20241008/1728401723_895c0017ad979c1b70f1.jpg"}
 };
 
 const key=document.body?.dataset?.footballLeague||"soccer";
@@ -269,12 +269,15 @@ function renderHighlights(items){
     wrap.innerHTML='<div class="empty-card">No verified '+esc(cfg.name)+' highlight video is available from the current feed.</div>';
     return;
   }
-  wrap.innerHTML=items.map(x=>
-    '<a class="football-highlight-link" href="'+esc(x.link||"#")+'" '+(x.link?'target="_blank" rel="noopener"':"")+'><article class="media-card highlight-card">'+
-      (x.image?'<img class="media-bg" src="'+esc(x.image)+'" alt="" loading="lazy">':"")+
-      '<span class="play-button" aria-hidden="true">▶</span><div class="media-card-content"><div class="media-kicker">HIGHLIGHT</div><div class="media-title">'+esc(x.title)+'</div><div class="media-meta">'+esc(x.meta||cfg.name)+'</div></div>'+
-    '</article></a>'
-  ).join("");
+  wrap.innerHTML=items.map(x=>{
+    const link=x.url||x.link||"#";
+    const image=x.thumbnail||x.image||"";
+    const meta=[x.sourceName||x.provider||cfg.name,x.publishedAt?fmtDate(x.publishedAt):""].filter(Boolean).join(" · ");
+    return '<a class="football-highlight-link" href="'+esc(link)+'" '+(link!=="#"? 'target="_blank" rel="noopener"':"")+'><article class="media-card highlight-card">'+
+      (image?'<img class="media-bg" src="'+esc(image)+'" alt="" loading="lazy">':"")+
+      '<span class="play-button" aria-hidden="true">▶</span><div class="media-card-content"><div class="media-kicker">HIGHLIGHT</div><div class="media-title">'+esc(x.title)+'</div><div class="media-meta">'+esc(meta||cfg.name)+'</div></div>'+
+    '</article></a>';
+  }).join("");
 }
 
 function normalizeEspnStandings(j){
@@ -388,10 +391,11 @@ function renderNews(news){
 
 async function load(){
   if(cfg.logo)setLeagueLogo(cfg.logo);
-  const [local,stats,news,games]=await Promise.all([
+  const [local,stats,news,highlightData,games]=await Promise.all([
     getJSON("/sportradar-soccer-data.json",{}),
     getJSON("/stats-data.json",{}),
     getJSON("/news-data.json",{}),
+    getJSON("/"+cfg.highlightsFile,{highlights:[]}),
     fetchGames()
   ]);
   cachedGames=games;
@@ -400,11 +404,9 @@ async function load(){
   renderPreviousGames(games);
 
   const localLeague=local?.leagues?.[key]||{};
-  const [standings,highlights]=await Promise.all([
-    fetchStandings(localLeague),
-    fetchEspnHighlights(games)
-  ]);
+  const standings=await fetchStandings(localLeague);
   renderStandings(standings,localLeague?.sourceName|| (cfg.espn?"ESPN public football data":""));
+  const highlights=(Array.isArray(highlightData?.highlights)?highlightData.highlights:[]).filter(x=>x?.verified===true);
   renderHighlights(highlights);
   renderTopPlayers(stats?.leagues?.[key]||{});
   renderNews(news);
