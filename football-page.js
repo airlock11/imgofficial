@@ -4,6 +4,7 @@ const qsa=s=>[...document.querySelectorAll(s)];
 const esc=v=>String(v??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[ch]));
 const now=()=>Date.now();
 const ROOT="/";
+const POLL_MS=30000;
 
 const CONFIG={
   soccer:{name:"Premier League",region:"England",scoreKey:"soccer",espn:"eng.1",path:"premier-league",highlightsFile:"premier-league-highlights.json",aliases:["premier league","epl"],description:"England's top-flight football competition.",competition:"Premier League"},
@@ -25,6 +26,7 @@ let gameController=null;
 let pollTimer=0;
 let cachedGames=[];
 let teamLogoMap=new Map();
+let espnCachePromise=null;
 
 function withTs(url){return url+(url.includes("?")?"&":"?")+"ts="+now()}
 async function getJSON(url,fallback={}){
@@ -33,6 +35,10 @@ async function getJSON(url,fallback={}){
     if(!r.ok)throw new Error(String(r.status));
     return await r.json();
   }catch{return fallback}
+}
+function getEspnCache(){
+  if(!espnCachePromise)espnCachePromise=getJSON("/football-espn-cache.json",{});
+  return espnCachePromise;
 }
 function fmtDate(v){
   try{return new Date(v).toLocaleDateString(undefined,{month:"short",day:"numeric",year:"numeric"})}catch{return String(v||"")}
@@ -73,7 +79,7 @@ function validLocalGame(g){
   const cat=String(g?.category||"").toLowerCase();
   const wantComp=String(cfg.competition||cfg.name).toLowerCase();
   const wantCat=String(cfg.category||"").toLowerCase();
-  if(wantCat&&cat&&cat!==wantCat)return false;
+  if(wantCat&&cat!==wantCat)return false;
   if(wantComp&&comp&&comp!==wantComp){
     const aliases=cfg.aliases||[];
     if(!aliases.some(a=>comp.includes(a)))return false;
@@ -116,6 +122,13 @@ async function fetchGames(){
         }
       }catch{}
     }
+  }
+  if(cfg.espn){
+    const cache=await getEspnCache();
+    const cached=cache?.leagues?.[key];
+    const games=Array.isArray(cached?.games)?cached.games:[];
+    if(cached?.leagueLogo)setLeagueLogo(cached.leagueLogo);
+    if(games.length)return games.filter(validLocalGame).map(normalizeLocalGame);
   }
   const local=await getJSON("/sportradar-soccer-data.json",{});
   return (local?.leagues?.[key]?.games||[]).filter(validLocalGame).map(normalizeLocalGame);
@@ -401,6 +414,9 @@ async function fetchStandings(localLeague){
   let rows=(localLeague?.standings||[]).filter(x=>x?.team);
   if(rows.length)return rows;
   if(!cfg.espn)return [];
+  const cache=await getEspnCache();
+  const cachedRows=cache?.leagues?.[key]?.standings;
+  if(Array.isArray(cachedRows)&&cachedRows.length)return cachedRows;
   const urls=[
     "https://site.api.espn.com/apis/v2/sports/soccer/"+cfg.espn+"/standings",
     "https://site.web.api.espn.com/apis/v2/sports/soccer/"+cfg.espn+"/standings"
@@ -516,11 +532,11 @@ async function poll(){
     if(gameController)gameController.update(games);
     if(hadLive!==hasLive)renderPreviousGames(games);
   }
-  pollTimer=setTimeout(poll,cachedGames.some(g=>g.state==="live")?2000:30000);
+  pollTimer=setTimeout(poll,POLL_MS);
 }
 function startPolling(){
   clearTimeout(pollTimer);
-  pollTimer=setTimeout(poll,cachedGames.some(g=>g.state==="live")?2000:30000);
+  pollTimer=setTimeout(poll,POLL_MS);
   document.addEventListener("visibilitychange",()=>{if(!document.hidden){clearTimeout(pollTimer);poll()}});
   addEventListener("focus",()=>{if(!document.hidden){clearTimeout(pollTimer);poll()}});
   addEventListener("online",()=>{if(!document.hidden){clearTimeout(pollTimer);poll()}});
