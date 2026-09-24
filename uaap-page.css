@@ -1835,3 +1835,36 @@ footer{
   .hero p{font-size:.84rem;line-height:1.43;max-width:96%}
   .primary-btn{min-height:42px;padding:0 17px;font-size:.86rem}
 }
+
+
+/* FINAL UAAP league logo — exact PBA logo rules */
+.uaap-hero .league-lockup{
+  display:flex !important;
+  align-items:center !important;
+  gap:14px !important;
+  margin:0 !important;
+}
+.uaap-hero .league-logo{
+  display:block !important;
+  width:180px !important;
+  height:94px !important;
+  object-fit:contain !important;
+  object-position:center !important;
+  filter:drop-shadow(0 8px 18px rgba(0,0,0,.38)) !important;
+  transform:translateZ(0) !important;
+}
+@media(max-width:720px){
+  .uaap-hero .league-lockup{
+    gap:11px !important;
+  }
+  .uaap-hero .league-logo{
+    width:140px !important;
+    height:74px !important;
+  }
+}
+@media(max-width:520px){
+  .uaap-hero .league-logo{
+    width:132px !important;
+    height:70px !important;
+  }
+}
