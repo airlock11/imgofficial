@@ -5,6 +5,7 @@ on:
     paths:
       - "scripts/build_gsa_team_logos_once.py"
       - "scripts/build_page_team_logos_once.py"
+      - "scripts/build_mizoram_team_logos_once.py"
       - "tmp-logo-mizoram.json"
       - ".github/workflows/build-football-logos-once.yml"
 permissions:
@@ -34,7 +35,7 @@ jobs:
           python scripts/build_gsa_team_logos_once.py jamaica_pl "https://globalsportsarchive.com/en/soccer/competition/wray--nephew-jamaica-premier-league-2026-2027/81510" > /tmp/img-logos/jamaica_pl.json
           python scripts/build_gsa_team_logos_once.py pfl "https://globalsportsarchive.com/en/soccer/competition/philippines-football-league-2026-2027/80423" > /tmp/img-logos/pfl.json
           python scripts/build_gsa_team_logos_once.py el_salvador_reserves "https://globalsportsarchive.com/en/soccer/competition/liga-pepsi-primera-division-2026-2027/80363" > /tmp/img-logos/el_salvador_reserves.json
-          python scripts/build_page_team_logos_once.py mizoram_pl "https://footballin.in/mizoram-fa/" tmp-logo-mizoram.json > /tmp/img-logos/mizoram_pl.json
+          python scripts/build_mizoram_team_logos_once.py > /tmp/img-logos/mizoram_pl.json
           python - <<'PY'
           import json,glob,os
           data={};report={}
