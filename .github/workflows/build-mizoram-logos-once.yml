@@ -3,7 +3,7 @@ on:
   push:
     branches: [main]
     paths:
-      - "scripts/build_mizoram_team_logos_once.py"
+      - "scripts/build_mizoram_team_logos_once.py"\n      - "scripts/wire_football_team_logos_once.py"
       - ".github/workflows/build-mizoram-logos-once.yml"
 permissions:
   contents: write
@@ -40,7 +40,7 @@ jobs:
         run: |
           git config user.name "IMG Asset Builder"
           git config user.email "actions@users.noreply.github.com"
-          git add assets/football/teams/mizoram_pl football-team-logos.js football-team-logos-report.json
+          git add assets/football/teams/mizoram_pl football-team-logos.js football-team-logos-report.json leagues/el-salvador-reserves/index.html leagues/serie-a/index.html leagues/bundesliga/index.html leagues/champions-league/index.html leagues/champions-league-women/index.html leagues/mls/index.html leagues/pfl/index.html
           git commit -m "Add Mizoram team crests"
           git pull --rebase origin main
           git push origin HEAD:main
