@@ -1285,19 +1285,19 @@ footer{
     z-index:-1 !important;
     left:50% !important;
     top:50% !important;
-    width:176px !important;
-    height:176px !important;
+    width:150px !important;
+    height:150px !important;
     transform:translate(-50%,-50%) !important;
     border-radius:50% !important;
     pointer-events:none !important;
     background:radial-gradient(
       circle,
-      rgba(255,255,255,.86) 0%,
-      rgba(255,255,255,.52) 30%,
-      rgba(255,255,255,.20) 54%,
+      rgba(255,255,255,.34) 0%,
+      rgba(255,255,255,.16) 34%,
+      rgba(255,255,255,.06) 58%,
       rgba(255,255,255,0) 76%
     ) !important;
-    filter:blur(7px) !important;
+    filter:blur(4px) !important;
   }
   #uaap-hero .league-logo{
     width:auto !important;
@@ -1306,9 +1306,8 @@ footer{
     object-fit:contain !important;
     image-rendering:auto !important;
     filter:
-      drop-shadow(0 0 5px rgba(255,255,255,.96))
-      drop-shadow(0 0 13px rgba(255,255,255,.64))
-      drop-shadow(0 7px 18px rgba(0,0,0,.52)) !important;
+      drop-shadow(0 0 3px rgba(255,255,255,.42))
+      drop-shadow(0 6px 16px rgba(0,0,0,.48)) !important;
   }
   #uaap-hero p{
     margin:0 !important;
@@ -1385,24 +1384,23 @@ footer{
     z-index:-1 !important;
     left:50% !important;
     top:50% !important;
-    width:170px !important;
-    height:170px !important;
+    width:145px !important;
+    height:145px !important;
     transform:translate(-50%,-50%) !important;
     border-radius:50% !important;
     pointer-events:none !important;
     background:radial-gradient(
       circle,
-      rgba(255,255,255,.80) 0%,
-      rgba(255,255,255,.44) 34%,
-      rgba(255,255,255,.16) 58%,
+      rgba(255,255,255,.28) 0%,
+      rgba(255,255,255,.12) 36%,
+      rgba(255,255,255,.04) 60%,
       rgba(255,255,255,0) 78%
     ) !important;
-    filter:blur(7px) !important;
+    filter:blur(4px) !important;
   }
   #uaap-hero .league-logo{
     filter:
-      drop-shadow(0 0 5px rgba(255,255,255,.94))
-      drop-shadow(0 0 13px rgba(255,255,255,.62))
-      drop-shadow(0 7px 18px rgba(0,0,0,.42)) !important;
+      drop-shadow(0 0 3px rgba(255,255,255,.34))
+      drop-shadow(0 6px 16px rgba(0,0,0,.40)) !important;
   }
 }
