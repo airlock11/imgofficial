@@ -484,26 +484,24 @@ function renderTopPlayers(stats){
 }
 
 function articleMatches(item){
-  const text=[item?.title,item?.description,item?.sport,item?.region].join(" ").toLowerCase();
-  if((cfg.aliases||[]).some(a=>text.includes(a)))return true;
-  const teamNames=[...teamLogoMap.keys()].slice(0,40).map(x=>x.toLowerCase());
+  const text=[item?.title,item?.description,item?.sport,item?.region,item?.league].join(" ").toLowerCase();
+  if(key==="soccer"&&text.includes("jamaican premier league"))return false;
+  if((cfg.aliases||[]).some(a=>text.includes(String(a).toLowerCase())))return true;
+  if(text.includes(String(cfg.name||"").toLowerCase()))return true;
+  const teamNames=[...teamLogoMap.keys()].slice(0,60).map(x=>x.toLowerCase());
   return teamNames.some(t=>t.length>4&&text.includes(t));
 }
 function renderNews(news){
   const wrap=qs("#news");
   if(!wrap)return;
+  const leagueBucket=Array.isArray(news?.leagues?.[key])?news.leagues[key]:[];
   const all=Array.isArray(news?.items)?news.items:[];
-  let items=all.filter(articleMatches);
-  if(items.length<6){
-    const football=all.filter(x=>/football|soccer/i.test([x?.title,x?.description].join(" ")));
-    items=[...items,...football.filter(x=>!items.includes(x))];
-  }
-  items=items.slice(0,9);
+  const items=(leagueBucket.length?leagueBucket:all.filter(articleMatches)).slice(0,9);
   wrap.innerHTML=items.length?items.map(x=>
     '<a class="news-card" href="'+esc(x.link||"#")+'" target="_blank" rel="noopener">'+
       (x.image?'<img class="news-photo" src="'+esc(x.image)+'" alt="" loading="lazy">':"")+
-      '<span class="news-copy"><small>'+esc(x.source||"Football")+'</small><strong>'+esc(x.title||"Football update")+'</strong></span></a>'
-  ).join(""):'<div class="empty-card">No current '+esc(cfg.name)+' headlines matched the verified IMG news feed.</div>';
+      '<span class="news-copy"><small>'+esc(x.source||cfg.name)+'</small><strong>'+esc(x.title||cfg.name+" update")+'</strong></span></a>'
+  ).join(""):'<div class="empty-card">No current '+esc(cfg.name)+'-specific headlines are available yet.</div>';
 }
 
 async function load(){
