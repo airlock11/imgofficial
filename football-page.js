@@ -102,33 +102,35 @@ function normalizeLocalGame(g){
 }
 
 async function fetchGames(){
+  let cached=[];
   if(cfg.espn){
-    const d=new Date(),start=new Date(d.getTime()-14*86400000),end=new Date(d.getTime()+14*86400000);
-    const keyDate=x=>x.toISOString().slice(0,10).replaceAll("-","");
-    const dates=keyDate(start)+"-"+keyDate(end);
-    const worker="https://img-api-proxy.magsipocarnie.workers.dev/scoreboard?league="+encodeURIComponent(cfg.scoreKey)+"&dates="+dates;
-    const direct="https://site.api.espn.com/apis/site/v2/sports/soccer/"+cfg.espn+"/scoreboard?dates="+dates;
+    const cache=await getEspnCache();
+    const cachedLeague=cache?.leagues?.[key];
+    if(cachedLeague?.leagueLogo)setLeagueLogo(cachedLeague.leagueLogo);
+    cached=(Array.isArray(cachedLeague?.games)?cachedLeague.games:[])
+      .filter(validLocalGame)
+      .map(normalizeLocalGame);
+
+    const today=new Date().toISOString().slice(0,10).replaceAll("-","");
+    const worker="https://img-api-proxy.magsipocarnie.workers.dev/scoreboard?league="+encodeURIComponent(cfg.scoreKey)+"&dates="+today;
+    const direct="https://site.api.espn.com/apis/site/v2/sports/soccer/"+cfg.espn+"/scoreboard?dates="+today;
     for(const url of [worker,direct]){
       try{
         const r=await fetch(withTs(url),{cache:"no-store"});
         if(!r.ok)continue;
         const j=await r.json();
-        const games=(j?.events||[]).map(normalizeEspnEvent);
-        if(games.length){
+        const fresh=(j?.events||[]).map(normalizeEspnEvent);
+        if(fresh.length){
           const lg=j?.leagues?.[0];
           const logo=lg?.logos?.find?.(x=>/default|full/i.test(String(x?.rel||"")))?.href||lg?.logos?.[0]?.href||lg?.logo||"";
           if(logo)setLeagueLogo(logo);
-          return games;
+          const map=new Map();
+          for(const g of [...cached,...fresh])map.set(eventId(g),g);
+          return [...map.values()].sort((a,b)=>(Date.parse(a.date)||0)-(Date.parse(b.date)||0));
         }
       }catch{}
     }
-  }
-  if(cfg.espn){
-    const cache=await getEspnCache();
-    const cached=cache?.leagues?.[key];
-    const games=Array.isArray(cached?.games)?cached.games:[];
-    if(cached?.leagueLogo)setLeagueLogo(cached.leagueLogo);
-    if(games.length)return games.filter(validLocalGame).map(normalizeLocalGame);
+    if(cached.length)return cached;
   }
   const local=await getJSON("/sportradar-soccer-data.json",{});
   return (local?.leagues?.[key]?.games||[]).filter(validLocalGame).map(normalizeLocalGame);
