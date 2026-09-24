@@ -20,7 +20,7 @@ jobs:
         run: python scripts/repository_audit.py
       - name: Check JavaScript syntax
         run: |
-          find . -type f -name '*.js' -not -path './.git/*' -print0 | while IFS= read -r -d '' f; do
+          find . -type f \( -name '*.js' -o -name '*.mjs' \) -not -path './.git/*' -print0 | while IFS= read -r -d '' f; do
             echo "Checking $f"
             node --check "$f"
           done
