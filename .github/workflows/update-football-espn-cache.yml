@@ -1,0 +1,57 @@
+name: Update football ESPN cache
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/update_football_espn_cache.mjs"
+      - ".github/workflows/update-football-espn-cache.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: football-espn-cache-update
+  cancel-in-progress: true
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+      - name: Refresh ESPN football cache
+        run: node scripts/update_football_espn_cache.mjs
+      - name: Publish cache changes
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- football-espn-cache.json; then
+            echo "No ESPN football cache changes."
+            exit 0
+          fi
+          cp football-espn-cache.json /tmp/football-espn-cache.json
+          git config user.name "IMG Football Cache Bot"
+          git config user.email "actions@users.noreply.github.com"
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git reset --hard origin/main
+            cp /tmp/football-espn-cache.json football-espn-cache.json
+            if git diff --quiet -- football-espn-cache.json; then
+              echo "Latest main already has equivalent cache."
+              exit 0
+            fi
+            git add football-espn-cache.json
+            git commit -m "Update football ESPN cache"
+            if git push origin HEAD:main; then exit 0; fi
+            echo "Push raced with another automation; retrying attempt $attempt."
+          done
+          exit 1
