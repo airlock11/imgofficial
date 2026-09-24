@@ -34,7 +34,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          if git diff --quiet -- football-espn-cache.json; then
+          if [ -z "$(git status --porcelain -- football-espn-cache.json)" ]; then
             echo "No ESPN football cache changes."
             exit 0
           fi
