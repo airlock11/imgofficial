@@ -1617,117 +1617,8 @@ footer{
   }
 }
 
-
-/* FINAL UAAP simple hero — explicit image, no pseudo-background or logo overlay */
-.uaap-hero-simple{
-  position:relative !important;
-  min-height:390px !important;
-  overflow:hidden !important;
-  background:#000 !important;
-}
-.uaap-hero-simple::before,
-.uaap-hero-simple::after{
-  display:none !important;
-  content:none !important;
-}
-.uaap-hero-simple .uaap-hero-media{
-  position:absolute !important;
-  inset:0 !important;
-  z-index:0 !important;
-  overflow:hidden !important;
-  background:#000 !important;
-}
-.uaap-hero-simple .uaap-hero-bg{
-  display:block !important;
-  width:100% !important;
-  height:100% !important;
-  object-fit:cover !important;
-  object-position:center center !important;
-}
-.uaap-hero-simple .uaap-hero-media::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  background:
-    linear-gradient(180deg,rgba(0,0,0,0) 0%,rgba(0,0,0,.06) 64%,rgba(0,0,0,.58) 88%,#000 100%),
-    linear-gradient(90deg,rgba(0,0,0,.40) 0%,rgba(0,0,0,.16) 36%,rgba(0,0,0,.04) 72%,rgba(0,0,0,.06) 100%);
-}
-.uaap-hero-simple .hero-shell{
-  position:relative !important;
-  z-index:2 !important;
-  min-height:390px !important;
-  display:flex !important;
-  align-items:center !important;
-  padding-top:30px !important;
-  padding-bottom:30px !important;
-}
-.uaap-hero-simple .hero-copy{
-  width:min(520px,54%) !important;
-  max-width:none !important;
-}
-.uaap-hero-simple .league-lockup{
-  display:none !important;
-}
-.uaap-hero-simple p{
-  margin:0 !important;
-  max-width:500px !important;
-  color:#fff !important;
-  font-size:.98rem !important;
-  line-height:1.5 !important;
-  font-weight:600 !important;
-  text-shadow:0 2px 10px rgba(0,0,0,.84) !important;
-}
-.uaap-hero-simple .hero-actions{margin-top:20px !important;}
-
-@media(max-width:720px){
-  .uaap-hero-simple{
-    min-height:0 !important;
-    height:auto !important;
-    overflow:visible !important;
-  }
-  .uaap-hero-simple .uaap-hero-media{
-    position:relative !important;
-    inset:auto !important;
-    width:100% !important;
-    aspect-ratio:16/9 !important;
-  }
-  .uaap-hero-simple .uaap-hero-bg{
-    width:100% !important;
-    height:100% !important;
-    object-fit:contain !important;
-    object-position:center center !important;
-  }
-  .uaap-hero-simple .uaap-hero-media::after{
-    background:linear-gradient(180deg,rgba(0,0,0,0) 0%,rgba(0,0,0,0) 78%,rgba(0,0,0,.20) 90%,#000 100%);
-  }
-  .uaap-hero-simple .hero-shell{
-    min-height:0 !important;
-    display:block !important;
-    padding-top:12px !important;
-    padding-bottom:22px !important;
-  }
-  .uaap-hero-simple .hero-copy{
-    width:100% !important;
-    max-width:none !important;
-  }
-  .uaap-hero-simple p{
-    max-width:100% !important;
-    font-size:.86rem !important;
-    line-height:1.45 !important;
-    text-shadow:none !important;
-  }
-  .uaap-hero-simple .hero-actions{
-    margin-top:14px !important;
-  }
-}
-@media(max-width:520px){
-  .uaap-hero-simple p{font-size:.84rem !important;}
-}
-
-
-/* FINAL UAAP hero — exact PBA hero rules */
-.hero{
+/* FINAL UAAP HERO — exact PBA hero rules */
+.uaap-hero{
   --hero-image:none;
   position:relative;
   min-height:390px;
@@ -1735,7 +1626,7 @@ footer{
   border-bottom:0;
   background:#000
 }
-.hero::before{
+.uaap-hero::before{
   content:"";
   position:absolute;inset:0;
   background-image:
@@ -1759,14 +1650,14 @@ footer{
   background-position:center center;
   background-repeat:no-repeat;
 }
-.hero::after{
+.uaap-hero::after{
   content:"";
   position:absolute;inset:0;
   background:none;
   pointer-events:none
 }
-.hero-overlay,.hero-watermark{display:none!important}
-.hero-shell{
+.uaap-hero .hero-overlay,.uaap-hero .hero-watermark{display:none!important}
+.uaap-hero .hero-shell{
   position:relative;
   z-index:3;
   min-height:390px;
@@ -1775,8 +1666,16 @@ footer{
   padding-top:30px;
   padding-bottom:30px
 }
-.hero-copy{width:min(520px,54%)}
-.hero p{
+.uaap-hero .hero-copy{width:min(520px,54%)}
+.uaap-hero .league-lockup{display:flex;align-items:center;gap:14px}
+.uaap-hero .league-logo{
+  width:180px;
+  height:94px;
+  object-fit:contain;
+  filter:drop-shadow(0 8px 18px rgba(0,0,0,.38));
+  transform:translateZ(0)
+}
+.uaap-hero p{
   max-width:500px;
   margin:0;
   color:#eef2f6;
@@ -1784,14 +1683,10 @@ footer{
   line-height:1.5;
   text-shadow:0 2px 14px rgba(0,0,0,.55)
 }
-.hero-actions{margin-top:20px}
-
-@media(max-width:900px){
-  .hero-copy{width:62%}
-}
+.uaap-hero .hero-actions{margin-top:20px}
 @media(max-width:720px){
-  .hero{min-height:470px}
-  .hero::before{
+  .uaap-hero{min-height:470px}
+  .uaap-hero::before{
     background-image:
       linear-gradient(180deg,
         rgba(0,0,0,0) 0%,
@@ -1813,58 +1708,28 @@ footer{
     background-position:center center,center center,center top;
     background-repeat:no-repeat
   }
-  .hero-shell{
+  .uaap-hero .hero-shell{
     min-height:470px;
     align-items:flex-end;
     padding-top:150px;
     padding-bottom:30px
   }
-  .hero-copy{width:100%;max-width:410px;padding-top:0}
-  .hero p{font-size:.88rem;line-height:1.45;max-width:94%}
-  .hero-actions{margin-top:17px}
+  .uaap-hero .hero-copy{width:100%;max-width:410px;padding-top:0}
+  .uaap-hero .league-lockup{gap:11px}
+  .uaap-hero .league-logo{width:140px;height:74px}
+  .uaap-hero p{font-size:.88rem;line-height:1.45;max-width:94%}
+  .uaap-hero .hero-actions{margin-top:17px}
   .primary-btn{min-height:44px;padding:0 19px;font-size:.9rem}
 }
 @media(max-width:520px){
-  .hero{min-height:450px}
-  .hero::before{
+  .uaap-hero{min-height:450px}
+  .uaap-hero::before{
     background-size:100% 100%,100% 100%,100% auto;
     background-position:center center,center center,center top
   }
-  .hero-shell{min-height:450px;align-items:flex-end;padding-top:138px;padding-bottom:26px}
-  .hero-copy{width:100%;max-width:none}
-  .hero p{font-size:.84rem;line-height:1.43;max-width:96%}
+  .uaap-hero .hero-shell{min-height:450px;align-items:flex-end;padding-top:138px;padding-bottom:26px}
+  .uaap-hero .hero-copy{width:100%;max-width:none}
+  .uaap-hero .league-logo{width:132px;height:70px}
+  .uaap-hero p{font-size:.84rem;line-height:1.43;max-width:96%}
   .primary-btn{min-height:42px;padding:0 17px;font-size:.86rem}
-}
-
-
-/* FINAL UAAP league logo — exact PBA logo rules */
-.uaap-hero .league-lockup{
-  display:flex !important;
-  align-items:center !important;
-  gap:14px !important;
-  margin:0 !important;
-}
-.uaap-hero .league-logo{
-  display:block !important;
-  width:180px !important;
-  height:94px !important;
-  object-fit:contain !important;
-  object-position:center !important;
-  filter:drop-shadow(0 8px 18px rgba(0,0,0,.38)) !important;
-  transform:translateZ(0) !important;
-}
-@media(max-width:720px){
-  .uaap-hero .league-lockup{
-    gap:11px !important;
-  }
-  .uaap-hero .league-logo{
-    width:140px !important;
-    height:74px !important;
-  }
-}
-@media(max-width:520px){
-  .uaap-hero .league-logo{
-    width:132px !important;
-    height:70px !important;
-  }
 }
