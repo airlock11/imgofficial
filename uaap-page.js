@@ -124,9 +124,65 @@ function renderGallery(finals,official){
 function renderHighlights(official){
   const wrap=qs("#highlights"),items=Array.isArray(official.highlights)?official.highlights.slice(0,10):[];
   setSectionVisible(wrap,items.length>0);
-  wrap.innerHTML=items.length?items.map(x=>'<article class="reel-card"><a class="highlight-link" href="'+safe(x.url||"https://uaap.org/posts/video_gallery")+'" target="_blank" rel="noopener">'+
-    (x.thumbnail?'<img class="highlight-thumb" src="'+safe(String(x.thumbnail).replace(/(?:hqdefault|sddefault|mqdefault|default)\.jpg(?:\?.*)?$/,"maxresdefault.jpg"))+'" data-fallback="'+safe(x.thumbnail)+'" alt="'+safe(x.title)+'" loading="lazy" decoding="async" onerror="if(this.dataset.fallback&&this.src!==this.dataset.fallback){this.src=this.dataset.fallback}">':'<div class="highlight-thumb"></div>')+
-    '<div class="highlight-copy"><strong>'+safe(x.title)+'</strong><span>'+safe(x.sourceName||x.channel||"UAAP Official")+'</span></div></a></article>').join(""):"";
+  if(!items.length){wrap.innerHTML="";return}
+
+  const youtubeId=x=>{
+    const direct=safe(x?.id).trim();
+    if(direct)return direct;
+    const url=safe(x?.url);
+    const m=url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([^?&/]+)/i);
+    return m?m[1]:"";
+  };
+  const thumb=x=>safe(String(x.thumbnail||"").replace(/(?:hqdefault|sddefault|mqdefault|default)\.jpg(?:\?.*)?$/,"maxresdefault.jpg"));
+
+  wrap.innerHTML=items.map((x,index)=>{
+    const id=youtubeId(x),fallback=safe(x.thumbnail||"");
+    if(!id)return "";
+    return '<article class="reel-card uaap-highlight-card">'+
+      '<div class="uaap-highlight-media" tabindex="0" role="button" data-video-id="'+safe(id)+'" data-index="'+index+'" aria-label="Play '+safe(x.title)+'">'+
+        (x.thumbnail?'<img class="highlight-thumb" src="'+thumb(x)+'" data-fallback="'+fallback+'" alt="'+safe(x.title)+'" loading="lazy" decoding="async" onerror="if(this.dataset.fallback&&this.src!==this.dataset.fallback){this.src=this.dataset.fallback}">':'<div class="highlight-thumb"></div>')+
+        '<span class="uaap-highlight-shade" aria-hidden="true"></span>'+
+        '<span class="uaap-highlight-play" aria-hidden="true"></span>'+
+      '</div>'+
+      '<div class="highlight-copy"><strong>'+safe(x.title)+'</strong><span>'+safe(x.sourceName||x.channel||"UAAP Official")+'</span></div>'+
+    '</article>';
+  }).join("");
+
+  const stopOtherPlayers=current=>{
+    qsa("#highlights .uaap-highlight-media.is-playing").forEach(stage=>{
+      if(stage===current)return;
+      const frame=stage.querySelector("iframe");
+      if(frame)frame.remove();
+      stage.classList.remove("is-playing");
+    });
+  };
+
+  const play=stage=>{
+    if(!stage||stage.classList.contains("is-playing"))return;
+    const id=stage.dataset.videoId;
+    if(!id)return;
+    stopOtherPlayers(stage);
+    const frame=document.createElement("iframe");
+    frame.className="uaap-highlight-frame";
+    frame.src="https://www.youtube.com/embed/"+encodeURIComponent(id)+"?autoplay=1&playsinline=1&rel=0&modestbranding=1";
+    frame.title=stage.getAttribute("aria-label")||"UAAP highlight";
+    frame.loading="eager";
+    frame.allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+    frame.allowFullscreen=true;
+    frame.referrerPolicy="strict-origin-when-cross-origin";
+    stage.appendChild(frame);
+    stage.classList.add("is-playing");
+  };
+
+  qsa("#highlights .uaap-highlight-media").forEach(stage=>{
+    stage.addEventListener("click",()=>play(stage));
+    stage.addEventListener("keydown",event=>{
+      if(event.key==="Enter"||event.key===" "){
+        event.preventDefault();
+        play(stage);
+      }
+    });
+  });
 }
 function renderStandings(regional,official){
   const list=(Array.isArray(official.standings)&&official.standings.length?official.standings:regional.standings)||[];
