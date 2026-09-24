@@ -55,3 +55,34 @@ body[data-football-league] .league-logo-fallback.visible{display:block}
   body[data-football-league] .league-logo{width:136px;height:72px}
   body[data-football-league] .standings-table{min-width:650px}
 }
+
+body[data-football-league] .football-highlight-link{
+  appearance:none;
+  width:100%;
+  padding:0;
+  border:0;
+  background:transparent;
+  text-align:left;
+  font:inherit;
+  cursor:pointer;
+}
+.football-highlight-dialog{
+  width:min(960px,calc(100vw - 24px));
+  max-width:960px;
+  padding:0;
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:18px;
+  background:#000;
+  color:#fff;
+  box-shadow:0 24px 80px rgba(0,0,0,.72);
+}
+.football-highlight-dialog::backdrop{background:rgba(0,0,0,.82)}
+.football-highlight-shell{position:relative;padding:42px 10px 10px}
+.football-highlight-close{
+  position:absolute;right:12px;top:8px;
+  width:32px;height:32px;border:0;border-radius:50%;
+  background:rgba(255,255,255,.12);color:#fff;
+  font-size:1.35rem;line-height:1;cursor:pointer
+}
+.football-highlight-video{position:relative;aspect-ratio:16/9;background:#000;border-radius:12px;overflow:hidden}
+.football-highlight-video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
