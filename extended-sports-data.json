@@ -1361,7 +1361,7 @@
       "league": "Philippine Football League",
       "sourceName": "Philippine Football League",
       "sourceUrl": "https://pfl.org.ph/",
-      "note": "Dates verified; exact kickoff time is intentionally not asserted where unavailable.",
+      "note": "Verified PFL dates and results are retained as a fallback when the primary Sportradar feed has no Philippines Football League coverage; exact kickoff time is not asserted where unavailable.",
       "games": [
         {
           "eventId": "pfl-20260920-stallion-manila",
@@ -1370,7 +1370,7 @@
           "away": "Manila Digger",
           "home": "Stallion Laguna",
           "awayScore": "3",
-          "homeScore": "1",
+          "homeScore": "0",
           "status": "Final",
           "state": "final",
           "sourceName": "Philippine Football League",
