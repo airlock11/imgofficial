@@ -579,3 +579,116 @@ body[data-football-league] .football-highlight-link{
   }
 }
 
+
+
+/* MOBILE FOOTBALL STANDINGS — fit all columns in one view */
+@media(max-width:720px){
+  body[data-football-league] .football-table-scroll{
+    width:100% !important;
+    max-width:100% !important;
+    overflow-x:hidden !important;
+  }
+  body[data-football-league] .standings-table{
+    width:100% !important;
+    min-width:0 !important;
+    max-width:100% !important;
+    table-layout:fixed !important;
+  }
+  body[data-football-league] .standings-table th,
+  body[data-football-league] .standings-table td{
+    padding:7px 2px !important;
+    font-size:.66rem !important;
+    line-height:1.05 !important;
+    white-space:nowrap !important;
+    overflow:hidden !important;
+    text-overflow:clip !important;
+  }
+  body[data-football-league] .standings-table th{
+    font-size:.50rem !important;
+    letter-spacing:.03em !important;
+  }
+  body[data-football-league] .standings-table th:nth-child(1),
+  body[data-football-league] .standings-table td:nth-child(1){
+    width:22px !important;
+    text-align:center !important;
+  }
+  body[data-football-league] .standings-table th:nth-child(2),
+  body[data-football-league] .standings-table td:nth-child(2){
+    width:auto !important;
+    min-width:0 !important;
+  }
+  body[data-football-league] .standings-table th:nth-child(3),
+  body[data-football-league] .standings-table td:nth-child(3),
+  body[data-football-league] .standings-table th:nth-child(4),
+  body[data-football-league] .standings-table td:nth-child(4),
+  body[data-football-league] .standings-table th:nth-child(5),
+  body[data-football-league] .standings-table td:nth-child(5),
+  body[data-football-league] .standings-table th:nth-child(6),
+  body[data-football-league] .standings-table td:nth-child(6){
+    width:26px !important;
+    min-width:0 !important;
+    text-align:center !important;
+    font-size:.68rem !important;
+  }
+  body[data-football-league] .standings-table th:nth-child(7),
+  body[data-football-league] .standings-table td:nth-child(7){
+    width:32px !important;
+    min-width:0 !important;
+    text-align:center !important;
+    font-size:.66rem !important;
+  }
+  body[data-football-league] .standings-table th:nth-child(8),
+  body[data-football-league] .standings-table td:nth-child(8){
+    width:34px !important;
+    min-width:0 !important;
+    text-align:center !important;
+    font-size:.74rem !important;
+    font-weight:950 !important;
+  }
+  body[data-football-league] .standing-team{
+    min-width:0 !important;
+    min-height:36px !important;
+    gap:5px !important;
+    font-size:.66rem !important;
+    font-weight:850 !important;
+  }
+  body[data-football-league] .standing-team img{
+    width:28px !important;
+    height:28px !important;
+    flex:0 0 28px !important;
+  }
+  body[data-football-league] .standing-team span{
+    min-width:0 !important;
+    overflow:hidden !important;
+    text-overflow:ellipsis !important;
+    white-space:nowrap !important;
+  }
+}
+@media(max-width:390px){
+  body[data-football-league] .standings-table th,
+  body[data-football-league] .standings-table td{
+    padding-left:1px !important;
+    padding-right:1px !important;
+  }
+  body[data-football-league] .standings-table th:nth-child(3),
+  body[data-football-league] .standings-table td:nth-child(3),
+  body[data-football-league] .standings-table th:nth-child(4),
+  body[data-football-league] .standings-table td:nth-child(4),
+  body[data-football-league] .standings-table th:nth-child(5),
+  body[data-football-league] .standings-table td:nth-child(5),
+  body[data-football-league] .standings-table th:nth-child(6),
+  body[data-football-league] .standings-table td:nth-child(6){
+    width:24px !important;
+  }
+  body[data-football-league] .standings-table th:nth-child(7),
+  body[data-football-league] .standings-table td:nth-child(7){width:30px !important}
+  body[data-football-league] .standings-table th:nth-child(8),
+  body[data-football-league] .standings-table td:nth-child(8){width:32px !important}
+  body[data-football-league] .standing-team{gap:4px !important;font-size:.62rem !important}
+  body[data-football-league] .standing-team img{
+    width:25px !important;
+    height:25px !important;
+    flex-basis:25px !important;
+  }
+}
+
