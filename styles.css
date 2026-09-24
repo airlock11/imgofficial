@@ -2199,3 +2199,23 @@ html[data-theme="light"] .logo img{filter:brightness(0)}
   }
 }
 /* IMG_SCORE_LEAGUE_EQUAL_MOBILE_SPACING_END */
+
+/* IMG_UEFA_MOBILE_LABEL_FIX_START */
+@media (max-width:760px){
+  /* Keep the league-button spacing unchanged; tighten only the two long UEFA labels. */
+  body.scores-page .score-league-filter[data-score-league="champions"] + .score-league-name,
+  body.scores-page .score-league-filter[data-score-league="ucl_women"] + .score-league-name{
+    width:56px!important;
+    max-width:56px!important;
+    align-self:center!important;
+    font-size:.40rem!important;
+    line-height:1.08!important;
+    letter-spacing:-.02em!important;
+    white-space:normal!important;
+    overflow:hidden!important;
+    overflow-wrap:anywhere!important;
+    word-break:normal!important;
+    text-align:center!important;
+  }
+}
+/* IMG_UEFA_MOBILE_LABEL_FIX_END */
