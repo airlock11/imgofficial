@@ -1,0 +1,57 @@
+/* Football league pages intentionally inherit the PBA page template. */
+body[data-football-league] .featured-game::before{
+  content:attr(data-competition);
+}
+body[data-football-league] .hero-copy{max-width:590px}
+body[data-football-league] .league-logo{
+  width:150px;
+  height:82px;
+  object-fit:contain;
+}
+body[data-football-league] .standings-grid{
+  grid-template-columns:1fr;
+}
+body[data-football-league] .standings-table th,
+body[data-football-league] .standings-table td{
+  white-space:nowrap;
+}
+body[data-football-league] .standings-table th:nth-child(n+3),
+body[data-football-league] .standings-table td:nth-child(n+3){
+  width:auto;
+  min-width:48px;
+  text-align:center;
+  font-size:.82rem;
+  letter-spacing:0;
+}
+body[data-football-league] .standings-table td:last-child{
+  font-size:1rem;
+  font-weight:950;
+}
+body[data-football-league] .football-table-scroll{overflow-x:auto}
+body[data-football-league] .football-source-note{
+  margin-top:9px;
+  color:#76889b;
+  font-size:.7rem;
+}
+body[data-football-league] .football-highlight-link{
+  display:block;
+  color:inherit;
+  text-decoration:none;
+}
+body[data-football-league] .media-card .play-button{
+  color:#fff;
+}
+body[data-football-league] .top-player-card.no-photo{
+  padding-left:18px;
+}
+body[data-football-league] .league-logo-fallback{
+  display:none;
+  font-size:2rem;
+  font-weight:1000;
+  letter-spacing:-.05em;
+}
+body[data-football-league] .league-logo-fallback.visible{display:block}
+@media(max-width:720px){
+  body[data-football-league] .league-logo{width:136px;height:72px}
+  body[data-football-league] .standings-table{min-width:650px}
+}
