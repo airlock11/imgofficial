@@ -12,22 +12,22 @@ async function getJSON(url,fallback={}){
 }
 function initials(name){return safe(name).split(/\s+/).filter(Boolean).map(x=>x[0]).join("").slice(0,3).toUpperCase()}
 const UAAP_TEAM_LOGOS={
-  "Adamson Soaring Falcons":"https://commons.wikimedia.org/wiki/Special:Redirect/file/Adamson%20Soaring%20Falcons%20logo.png",
-  "Ateneo Blue Eagles":"https://commons.wikimedia.org/wiki/Special:Redirect/file/Logo%20of%20the%20Ateneo%20Blue%20Eagles.svg",
-  "UP Fighting Maroons":"https://commons.wikimedia.org/wiki/Special:Redirect/file/UP%20Fighting%20Maroons%20Secondary%20Logo.svg",
-  "De La Salle Green Archers":"https://commons.wikimedia.org/wiki/Special:Redirect/file/DLSGreenArchers.png",
-  "NU Bulldogs":"https://commons.wikimedia.org/wiki/Special:Redirect/file/Bulldog%20Logo.jpg",
-  "UST Growling Tigers":"https://commons.wikimedia.org/wiki/Special:Redirect/file/Logo%20of%20the%20UST%20Growling%20Tigers.svg",
-  "FEU Tamaraws":"https://commons.wikimedia.org/wiki/Special:Redirect/file/FEU%20Tamaraws%20official%20logo.svg",
-  "UE Red Warriors":"https://commons.wikimedia.org/wiki/Special:Redirect/file/UE%20Red%20Warriors%20Logo.svg"
-};
+  "Adamson Soaring Falcons":"/assets/uaap/teams/adamson.png?v=20260924-local2",
+  "Ateneo Blue Eagles":"/assets/uaap/teams/ateneo.png?v=20260924-local2",
+  "UP Fighting Maroons":"/assets/uaap/teams/up.png?v=20260924-local2",
+  "De La Salle Green Archers":"/assets/uaap/teams/dlsu.png?v=20260924-local2",
+  "NU Bulldogs":"/assets/uaap/teams/nu.png?v=20260924-local2",
+  "UST Growling Tigers":"/assets/uaap/teams/ust.png?v=20260924-local2",
+  "FEU Tamaraws":"/assets/uaap/teams/feu.png?v=20260924-local2",
+  "UE Red Warriors":"/assets/uaap/teams/ue.png?v=20260924-local2"
+}
 function teamVisual(name){
   const team=safe(name),src=UAAP_TEAM_LOGOS[team]||"";
   const initialsHtml='<span class="team-initial-fallback">'+safe(initials(team))+'</span>';
   if(!src)return '<div class="team-visual team-visual-fallback" aria-label="'+team+'">'+initialsHtml+'</div>';
-  const extra=team==="NU Bulldogs"?" has-white-source":"";
+  const extra="";
   return '<div class="team-visual'+extra+'" aria-label="'+team+'">'+initialsHtml+
-    '<img class="uaap-team-logo" src="'+src+'" alt="'+team+' logo" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.remove()"></div>';
+    '<img class="uaap-team-logo" src="'+src+'" alt="'+team+' logo" loading="eager" decoding="async" onerror="this.remove()"></div>';
 }
 function teamBlock(name,side,score=""){
   const hasScore=score!==null&&score!==undefined&&String(score)!=="";
