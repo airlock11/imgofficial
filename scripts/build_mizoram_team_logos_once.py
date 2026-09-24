@@ -1,4 +1,5 @@
-import io,json,re\n# One-time asset build; remove after crest integration.
+import io,json,re
+# One-time asset build; remove after crest integration.
 from pathlib import Path
 import requests
 from PIL import Image,ImageEnhance,ImageFilter
