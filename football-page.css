@@ -459,3 +459,79 @@ body[data-football-league] .football-highlight-link{
     box-shadow: 0 2px 0 #000 !important;
   }
 }
+
+
+/* HERO IMAGE RENDER FIX — six football league pages */
+#football-hero.hero--artwork{
+  position:relative !important;
+  width:100% !important;
+  min-height:0 !important;
+  height:auto !important;
+  aspect-ratio:3 / 1 !important;
+  padding:0 !important;
+  overflow:hidden !important;
+  isolation:isolate !important;
+  background:#000 !important;
+}
+#football-hero.hero--artwork::before{
+  content:none !important;
+  display:none !important;
+  background:none !important;
+}
+#football-hero.hero--artwork .hero-artwork-img{
+  position:absolute !important;
+  inset:0 !important;
+  z-index:0 !important;
+  display:block !important;
+  width:100% !important;
+  height:100% !important;
+  max-width:none !important;
+  object-fit:cover !important;
+  object-position:center center !important;
+  opacity:1 !important;
+  visibility:visible !important;
+  filter:none !important;
+  transform:none !important;
+}
+#football-hero.hero--artwork .hero-overlay,
+#football-hero.hero--artwork .hero-shell{
+  display:none !important;
+}
+#football-hero.hero--artwork::after{
+  content:"" !important;
+  display:block !important;
+  position:absolute !important;
+  z-index:1 !important;
+  left:0 !important;
+  right:0 !important;
+  top:auto !important;
+  bottom:-1px !important;
+  height:42% !important;
+  pointer-events:none !important;
+  background:linear-gradient(
+    180deg,
+    rgba(0,0,0,0) 0%,
+    rgba(0,0,0,.04) 24%,
+    rgba(0,0,0,.16) 44%,
+    rgba(0,0,0,.40) 64%,
+    rgba(0,0,0,.72) 82%,
+    #000 100%
+  ) !important;
+  box-shadow:0 2px 0 #000 !important;
+}
+@media(max-width:900px){
+  #football-hero.hero--artwork{
+    min-height:0 !important;
+    height:auto !important;
+    aspect-ratio:3 / 1 !important;
+  }
+  #football-hero.hero--artwork .hero-artwork-img{
+    width:100% !important;
+    height:100% !important;
+    object-fit:cover !important;
+    object-position:center center !important;
+  }
+  #football-hero.hero--artwork::after{
+    height:50% !important;
+  }
+}
