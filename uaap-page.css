@@ -1193,3 +1193,70 @@ footer{
 @media(max-width:520px){
   .game-team .team-visual.logo-white-circle::before{inset:5px}
 }
+
+
+/* UAAP highlights play inside IMG */
+.uaap-highlight-media{
+  position:relative;
+  width:100%;
+  aspect-ratio:16/9;
+  overflow:hidden;
+  border-radius:16px;
+  background:#05080c;
+  cursor:pointer;
+  outline:none;
+}
+.uaap-highlight-media:focus-visible{
+  box-shadow:0 0 0 3px rgba(255,255,255,.28);
+}
+.uaap-highlight-media .highlight-thumb{
+  width:100%;
+  height:100%;
+  aspect-ratio:auto;
+  object-fit:cover;
+  border-radius:0;
+}
+.uaap-highlight-shade{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,rgba(0,0,0,.02),rgba(0,0,0,.25));
+  pointer-events:none;
+}
+.uaap-highlight-play{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:54px;
+  height:54px;
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+  background:rgba(0,0,0,.72);
+  border:1px solid rgba(255,255,255,.48);
+  box-shadow:0 10px 28px rgba(0,0,0,.42);
+  pointer-events:none;
+}
+.uaap-highlight-play::after{
+  content:"";
+  position:absolute;
+  left:21px;
+  top:16px;
+  width:0;
+  height:0;
+  border-top:11px solid transparent;
+  border-bottom:11px solid transparent;
+  border-left:17px solid #fff;
+}
+.uaap-highlight-frame{
+  position:absolute;
+  inset:0;
+  z-index:5;
+  width:100%;
+  height:100%;
+  border:0;
+  background:#000;
+}
+.uaap-highlight-media.is-playing .highlight-thumb,
+.uaap-highlight-media.is-playing .uaap-highlight-shade,
+.uaap-highlight-media.is-playing .uaap-highlight-play{
+  visibility:hidden;
+}
