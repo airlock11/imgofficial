@@ -161,6 +161,7 @@ const cloudflareFallbackFeeds={
   seriea:'https://img-api-proxy.magsipocarnie.workers.dev/scoreboard?league=seriea',
   bundesliga:'https://img-api-proxy.magsipocarnie.workers.dev/scoreboard?league=bundesliga',
   champions:'https://img-api-proxy.magsipocarnie.workers.dev/scoreboard?league=champions',
+  mls:'https://img-api-proxy.magsipocarnie.workers.dev/scoreboard?league=mls',
   basketball:'https://img-api-proxy.magsipocarnie.workers.dev/scoreboard?league=basketball',
   wnba:'https://img-api-proxy.magsipocarnie.workers.dev/scoreboard?league=wnba',
   atp:'https://img-api-proxy.magsipocarnie.workers.dev/scoreboard?league=atp',
@@ -342,19 +343,18 @@ async function fetchPremierLeagueScoreboard(){
   const end=new Date(now.getTime()+21*86400000);
   const dates=espnScoreDateKey(start)+'-'+espnScoreDateKey(end);
   const direct='https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard?dates='+dates;
-  try{
-    const r=await fetch(direct,{cache:'no-store'});
-    if(r.ok){
+  const proxy='https://img-api-proxy.magsipocarnie.workers.dev/scoreboard?league=soccer&dates='+encodeURIComponent(dates);
+  const liveSelected=currentScoreLeague==='soccer'&&allGames.some(g=>g?.state==='live');
+  const sources=liveSelected?[proxy,direct]:[direct,proxy];
+  for(const source of sources){
+    try{
+      const r=await fetch(source,{cache:'no-store'});
+      if(!r.ok)continue;
       const j=await r.json();
       if(Array.isArray(j?.events)&&j.events.length)return j;
-    }
-  }catch{}
-  const proxy='https://img-api-proxy.magsipocarnie.workers.dev/scoreboard?league=soccer&dates='+encodeURIComponent(dates);
-  const r=await fetch(proxy,{cache:'no-store'});
-  if(!r.ok)throw new Error('Premier League scoreboard unavailable');
-  const j=await r.json();
-  if(!Array.isArray(j?.events)||!j.events.length)throw new Error('No Premier League games in rolling window');
-  return j;
+    }catch{}
+  }
+  throw new Error('Premier League scoreboard unavailable');
 }
 async function fetchMlbScoreboard(){
   const now=new Date();
@@ -440,6 +440,27 @@ async function fetchScorePayload(sport,{fallbackOnly=false}={}){
     }catch{}
   }
 
+  const fallback=cloudflareFallbackFeeds[sport];
+  const lowLatencyFootballKeys=new Set(['soccer','laliga','seriea','bundesliga','champions','mls']);
+  const preferEdgeLiveScore=!fallbackOnly
+    &&lowLatencyFootballKeys.has(sport)
+    &&currentScoreLeague===sport
+    &&allGames.some(g=>g?.state==='live')
+    &&fallback;
+
+  // Once a selected football league is live, use IMG's short edge cache first.
+  // This keeps viewers close to the upstream score while preventing every
+  // browser from hammering the provider independently.
+  if(preferEdgeLiveScore){
+    try{
+      const r=await fetch(fallback,{cache:'no-store'});
+      if(r.ok){
+        const j=await r.json();
+        if(Array.isArray(j?.events)&&j.events.length)return j;
+      }
+    }catch{}
+  }
+
   if(!fallbackOnly&&scoreFeeds[sport]){
     try{
       const r=await fetch(scoreFeeds[sport],{cache:'no-store'});
@@ -450,7 +471,7 @@ async function fetchScorePayload(sport,{fallbackOnly=false}={}){
     }catch{}
   }
 
-  const fallback=cloudflareFallbackFeeds[sport];
+
   if(fallback){
     try{
       const r=await fetch(fallback,{cache:'no-store'});
@@ -3252,7 +3273,8 @@ if(document.getElementById('games')){
   const hasSelectedLiveScore=()=>allGames.some(g=>g.state==='live');
   const hasLiveScores=()=>hasSelectedLiveScore()||liveNowItems.some(liveNowItemIsCurrent);
   const hasLiveWta=()=>currentScoreLeague==='wta'&&allGames.some(g=>g.state==='live'&&!g.eventOnly)||liveNowItems.some(g=>g?.sportKey==='wta'&&liveNowItemIsCurrent(g));
-  const nextScoreRefreshDelay=()=>hasLiveWta()?2000:(currentScoreLeague==='baseball'&&hasSelectedLiveScore())?5000:currentScoreLeague==='baseball'?15000:hasSelectedLiveScore()?5000:hasLiveScores()?10000:(currentScoreLeague==='wta'?5000:30000);
+  const lowLatencyFootballKeys=new Set(['soccer','jamaica_pl','mizoram_pl','laliga','el_salvador_reserves','seriea','bundesliga','champions','ucl_women','mls','pfl']);
+  const nextScoreRefreshDelay=()=>hasLiveWta()?2000:(lowLatencyFootballKeys.has(currentScoreLeague)&&hasSelectedLiveScore())?2000:(currentScoreLeague==='baseball'&&hasSelectedLiveScore())?5000:currentScoreLeague==='baseball'?15000:hasSelectedLiveScore()?5000:hasLiveScores()?10000:(currentScoreLeague==='wta'?5000:30000);
 
   const scheduleScoreAutoRefresh=(delay=nextScoreRefreshDelay())=>{
     clearTimeout(scoreAutoRefreshTimer);
@@ -3290,6 +3312,12 @@ if(document.getElementById('games')){
   document.addEventListener('visibilitychange',()=>{
     expireVisibleAsianGames();
     clearTimeout(scoreAutoRefreshTimer);
+    if(!document.hidden)refreshScoresAutomatically();
+  });
+  addEventListener('focus',()=>{
+    if(!document.hidden)refreshScoresAutomatically();
+  });
+  addEventListener('online',()=>{
     if(!document.hidden)refreshScoresAutomatically();
   });
 }if(document.getElementById('newsFeed')){loadNews();setInterval(loadNews,300000)}if(document.getElementById('oddsFeed')){
