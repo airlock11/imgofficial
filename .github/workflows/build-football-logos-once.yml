@@ -3,14 +3,16 @@ on:
   push:
     branches: [main]
     paths:
-      - "scripts/build_espn_team_logos_once.py"
+      - "scripts/build_gsa_team_logos_once.py"
+      - "scripts/build_page_team_logos_once.py"
+      - "tmp-logo-mizoram.json"
       - ".github/workflows/build-football-logos-once.yml"
 permissions:
   contents: write
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
         with:
@@ -18,24 +20,32 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: python -m pip install --disable-pip-version-check pillow requests cairosvg
-      - name: Build current major-league crests
+      - run: python -m pip install --disable-pip-version-check pillow requests cairosvg beautifulsoup4
+      - name: Download and enhance current football crests
         run: |
           mkdir -p /tmp/img-logos
-          python scripts/build_espn_team_logos_once.py soccer eng.1 > /tmp/img-logos/soccer.json
-          python scripts/build_espn_team_logos_once.py laliga esp.1 > /tmp/img-logos/laliga.json
-          python scripts/build_espn_team_logos_once.py seriea ita.1 > /tmp/img-logos/seriea.json
-          python scripts/build_espn_team_logos_once.py bundesliga ger.1 > /tmp/img-logos/bundesliga.json
-          python scripts/build_espn_team_logos_once.py champions uefa.champions > /tmp/img-logos/champions.json
-          python scripts/build_espn_team_logos_once.py mls usa.1 > /tmp/img-logos/mls.json
-          python scripts/build_espn_team_logos_once.py ucl_women uefa.wchampions > /tmp/img-logos/ucl_women.json || echo '{}' > /tmp/img-logos/ucl_women.json
+          python scripts/build_gsa_team_logos_once.py soccer "https://globalsportsarchive.com/en/soccer/competition/premier-league-2026-2027/80278" > /tmp/img-logos/soccer.json
+          python scripts/build_gsa_team_logos_once.py laliga "https://globalsportsarchive.com/en/soccer/competition/la-liga-ea-sports-2026-2027/80342" > /tmp/img-logos/laliga.json
+          python scripts/build_gsa_team_logos_once.py seriea "https://globalsportsarchive.com/en/soccer/competition/serie-a-enilive-2026-2027/80361" > /tmp/img-logos/seriea.json
+          python scripts/build_gsa_team_logos_once.py bundesliga "https://globalsportsarchive.com/en/soccer/competition/bundesliga-2026-2027/80261" > /tmp/img-logos/bundesliga.json
+          python scripts/build_gsa_team_logos_once.py champions "https://globalsportsarchive.com/en/soccer/competition/uefa-champions-league-2026-2027/80388" > /tmp/img-logos/champions.json
+          python scripts/build_gsa_team_logos_once.py ucl_women "https://globalsportsarchive.com/en/soccer/competition/uefa-womens-champions-league-2026-2027/80325" > /tmp/img-logos/ucl_women.json
+          python scripts/build_gsa_team_logos_once.py mls "https://globalsportsarchive.com/en/soccer/competition/mls-2026/77976" > /tmp/img-logos/mls.json
+          python scripts/build_gsa_team_logos_once.py jamaica_pl "https://globalsportsarchive.com/en/soccer/competition/wray--nephew-jamaica-premier-league-2026-2027/81510" > /tmp/img-logos/jamaica_pl.json
+          python scripts/build_gsa_team_logos_once.py pfl "https://globalsportsarchive.com/en/soccer/competition/philippines-football-league-2026-2027/80423" > /tmp/img-logos/pfl.json
+          python scripts/build_gsa_team_logos_once.py el_salvador_reserves "https://globalsportsarchive.com/en/soccer/competition/liga-pepsi-primera-division-2026-2027/80363" > /tmp/img-logos/el_salvador_reserves.json
+          python scripts/build_page_team_logos_once.py mizoram_pl "https://footballin.in/mizoram-fa/" tmp-logo-mizoram.json > /tmp/img-logos/mizoram_pl.json
           python - <<'PY'
           import json,glob,os
-          data={}
+          data={};report={}
           for p in glob.glob('/tmp/img-logos/*.json'):
-              data[os.path.basename(p)[:-5]]=json.load(open(p))
-          open('football-team-logos.js','w').write('window.IMG_FOOTBALL_TEAM_LOGOS='+json.dumps(data,separators=(',',':'))+';\n')
-          open('football-team-logos-report.json','w').write(json.dumps({k:len(v) for k,v in data.items()},indent=2)+'\n')
+              key=os.path.basename(p)[:-5];obj=json.load(open(p))
+              logos=obj.get('logos',{})
+              data[key]=logos
+              report[key]={'count':len(logos),'missing':obj.get('missing',[]),'failed':obj.get('failed',[])}
+          open('football-team-logos.js','w',encoding='utf-8').write('window.IMG_FOOTBALL_TEAM_LOGOS='+json.dumps(data,separators=(',',':'))+';\n')
+          open('football-team-logos-report.json','w',encoding='utf-8').write(json.dumps(report,indent=2)+'\n')
+          print(json.dumps(report,indent=2))
           PY
       - name: Commit logo assets
         run: |
