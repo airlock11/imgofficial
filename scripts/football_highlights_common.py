@@ -95,13 +95,13 @@ def espn(cfg):
 def clean(s):return re.sub(r"\s+"," ",re.sub(r"<[^>]+>"," ",s)).strip()
 def uefa(cfg):
  html=text(cfg["uefaPage"]);out=[];seen=set()
- for m in re.finditer(r'href=["\\']([^"\\']*/video/highlights/[^"\\']+)["\\']',html,re.I):
+ for m in re.finditer(r"href=[\\\"']([^\\\"']*/video/highlights/[^\\\"']+)[\\\"']",html,re.I):
   href=m.group(1);href="https://www.uefa.com"+href if href.startswith("/") else urllib.parse.urljoin(cfg["uefaPage"],href)
   if href in seen:continue
   seen.add(href);win=html[max(0,m.start()-500):min(len(html),m.end()+700)]
-  tm=re.search(r'(?:aria-label|title)=["\\']([^"\\']+)["\\']',win,re.I);title=tm.group(1) if tm else clean(win)[:180]
+  tm=re.search(r"(?:aria-label|title)=[\\\"']([^\\\"']+)[\\\"']",win,re.I);title=tm.group(1) if tm else clean(win)[:180]
   try:
-   d=text(href);im=re.search(r'<meta[^>]+property=["\\']og:image["\\'][^>]+content=["\\']([^"\\']+)',d,re.I);thumb=im.group(1) if im else ""
+   d=text(href);im=re.search(r"<meta[^>]+property=[\\\"']og:image[\\\"'][^>]+content=[\\\"']([^\\\"']+)",d,re.I);thumb=im.group(1) if im else ""
   except:thumb=""
   out.append({"id":href.rstrip("/").split("/")[-1],"title":clean(title),"url":href,"embedUrl":"","thumbnail":thumb,"publishedAt":"","provider":"UEFA.com","sourceName":cfg["sourceName"],"verified":True,"verification":"official-competition-highlight-page"})
   if len(out)>=int(cfg.get("limit",12)):break
