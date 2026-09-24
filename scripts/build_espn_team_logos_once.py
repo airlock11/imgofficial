@@ -6,7 +6,7 @@ import cairosvg
 
 ROOT=Path(__file__).resolve().parents[1]
 key,code=sys.argv[1],sys.argv[2]
-url=f"https://site.api.espn.com/apis/site/v2/sports/soccer/{code}/teams?limit=100"
+url=f"https://img-api-proxy.magsipocarnie.workers.dev/teams?league={key}"
 j=requests.get(url,timeout=30,headers={"User-Agent":"IMG-Sports-Assets/1.0"}).json()
 rows=j.get("sports",[{}])[0].get("leagues",[{}])[0].get("teams",[])
 out={};folder=ROOT/"assets"/"football"/"teams"/key
