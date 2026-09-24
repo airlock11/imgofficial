@@ -2,13 +2,62 @@
   "version": 1,
   "leagueKey": "soccer",
   "league": "Premier League",
-  "updatedAt": "2026-09-24T17:08:59Z",
+  "updatedAt": "2026-09-24T17:11:11Z",
   "source": {
-    "mode": "espn",
-    "name": "ESPN match video",
-    "url": "https://www.premierleague.com/"
+    "mode": "youtube",
+    "name": "Premier League Official YouTube",
+    "url": "https://www.youtube.com/PremierLeague"
   },
-  "highlights": [],
-  "count": 0,
-  "error": "HTTP Error 403: Forbidden"
+  "highlights": [
+    {
+      "id": "GBXD1X_5sBc",
+      "title": "EVERY Weekend Goal | Matchweek 5 | 2026/27 Premier League Highlights",
+      "url": "https://www.youtube.com/watch?v=GBXD1X_5sBc",
+      "embedUrl": "https://www.youtube.com/embed/GBXD1X_5sBc",
+      "thumbnail": "https://i.ytimg.com/vi/GBXD1X_5sBc/maxresdefault.jpg",
+      "publishedAt": "2026-09-20T21:00:09Z",
+      "provider": "YouTube",
+      "sourceName": "Premier League",
+      "verified": true,
+      "verification": "exact-channel"
+    },
+    {
+      "id": "ua8NqzrmtJ8",
+      "title": "Fast Start, Outrageous Goals! | Spurs v Aston Villa 25/26",
+      "url": "https://www.youtube.com/watch?v=ua8NqzrmtJ8",
+      "embedUrl": "https://www.youtube.com/embed/ua8NqzrmtJ8",
+      "thumbnail": "https://i.ytimg.com/vi/ua8NqzrmtJ8/maxresdefault.jpg",
+      "publishedAt": "2026-09-16T16:36:05Z",
+      "provider": "YouTube",
+      "sourceName": "Premier League",
+      "verified": true,
+      "verification": "exact-channel"
+    },
+    {
+      "id": "roN9gxXHEkU",
+      "title": "INCREDIBLE Goals By Centre Backs",
+      "url": "https://www.youtube.com/watch?v=roN9gxXHEkU",
+      "embedUrl": "https://www.youtube.com/embed/roN9gxXHEkU",
+      "thumbnail": "https://i.ytimg.com/vi/roN9gxXHEkU/maxresdefault.jpg",
+      "publishedAt": "2026-09-14T16:56:15Z",
+      "provider": "YouTube",
+      "sourceName": "Premier League",
+      "verified": true,
+      "verification": "exact-channel"
+    },
+    {
+      "id": "jbXc4VgoglA",
+      "title": "EVERY Weekend Goal | Matchweek 4 | 2026/27 Premier League Highlights",
+      "url": "https://www.youtube.com/watch?v=jbXc4VgoglA",
+      "embedUrl": "https://www.youtube.com/embed/jbXc4VgoglA",
+      "thumbnail": "https://i.ytimg.com/vi/jbXc4VgoglA/maxresdefault.jpg",
+      "publishedAt": "2026-09-13T21:00:37Z",
+      "provider": "YouTube",
+      "sourceName": "Premier League",
+      "verified": true,
+      "verification": "exact-channel"
+    }
+  ],
+  "count": 4,
+  "error": ""
 }
