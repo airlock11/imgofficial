@@ -37,7 +37,7 @@ jobs:
             git fetch origin main
             git reset --hard origin/main
             python scripts/update_pfl_highlights.py
-            if git diff --quiet -- pfl-highlights.json; then
+            if [ -z "$(git status --porcelain -- pfl-highlights.json)" ]; then
               echo "No PFL highlight changes."
               exit 0
             fi
