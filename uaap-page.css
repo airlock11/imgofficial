@@ -1536,3 +1536,21 @@ footer{
     filter:blur(5px);
   }
 }
+
+
+/* FINAL mobile scrollbar cleanup — swipe remains enabled */
+@media(max-width:720px){
+  .media-row,
+  .highlight-row,
+  .top-player-row{
+    scrollbar-width:none !important;
+    -ms-overflow-style:none !important;
+  }
+  .media-row::-webkit-scrollbar,
+  .highlight-row::-webkit-scrollbar,
+  .top-player-row::-webkit-scrollbar{
+    width:0 !important;
+    height:0 !important;
+    display:none !important;
+  }
+}
