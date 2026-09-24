@@ -1485,59 +1485,54 @@ footer{
     0 5px 14px rgba(0,0,0,.88) !important;
 }
 
-
-/* FINAL UAAP hero contrast enhancement — preserves PBA geometry */
+/* FINAL UAAP hero contrast enhancement — logo-only glow */
 .uaap-hero .hero-copy{
   position:relative !important;
   isolation:isolate;
 }
-.uaap-hero .hero-copy::before{
+.uaap-hero .league-lockup{
+  position:relative !important;
+  display:inline-flex !important;
+  align-items:center !important;
+}
+.uaap-hero .league-lockup::before{
   content:"";
   position:absolute;
-  z-index:-1;
-  left:-22px;
-  top:-18px;
-  width:calc(100% + 44px);
-  height:calc(100% + 36px);
+  left:-10px;
+  top:50%;
+  transform:translateY(-50%);
+  width:210px;
+  height:120px;
+  border-radius:999px;
   pointer-events:none;
+  z-index:-1;
   background:radial-gradient(
-    ellipse at 28% 48%,
-    rgba(0,0,0,.60) 0%,
-    rgba(0,0,0,.48) 36%,
-    rgba(0,0,0,.24) 66%,
+    ellipse at center,
+    rgba(0,0,0,.62) 0%,
+    rgba(0,0,0,.42) 45%,
+    rgba(0,0,0,.18) 72%,
     rgba(0,0,0,0) 100%
   );
-  filter:blur(2px);
+  filter:blur(6px);
 }
 .uaap-hero .league-logo{
   filter:
-    drop-shadow(0 0 2px rgba(255,255,255,.48))
-    drop-shadow(0 3px 5px rgba(0,0,0,.96))
-    drop-shadow(0 10px 24px rgba(0,0,0,.72)) !important;
+    drop-shadow(0 0 2px rgba(255,255,255,.35))
+    drop-shadow(0 2px 6px rgba(0,0,0,.95))
+    drop-shadow(0 8px 18px rgba(0,0,0,.68)) !important;
 }
 .uaap-hero p{
   color:#fff !important;
   font-weight:600 !important;
   text-shadow:
-    0 2px 3px rgba(0,0,0,1),
-    0 0 14px rgba(0,0,0,.98),
-    0 0 28px rgba(0,0,0,.80) !important;
+    0 2px 3px rgba(0,0,0,.95),
+    0 0 10px rgba(0,0,0,.72) !important;
 }
 @media(max-width:720px){
-  .uaap-hero .hero-copy::before{
-    left:-14px;
-    top:-12px;
-    width:calc(100% + 28px);
-    height:calc(100% + 24px);
-    background:radial-gradient(
-      ellipse at 25% 58%,
-      rgba(0,0,0,.66) 0%,
-      rgba(0,0,0,.50) 42%,
-      rgba(0,0,0,.20) 72%,
-      rgba(0,0,0,0) 100%
-    );
-  }
-  .uaap-hero p{
-    font-weight:600 !important;
+  .uaap-hero .league-lockup::before{
+    width:170px;
+    height:100px;
+    left:-8px;
+    filter:blur(5px);
   }
 }
