@@ -201,6 +201,29 @@
       ]
     },
     {
+      "id": "mlb",
+      "handle": "MLB",
+      "leagueKey": "baseball",
+      "league": "MLB",
+      "sport": "Baseball",
+      "prefix": "mlb",
+      "requireLiveGameMatch": true,
+      "includeAny": [],
+      "excludeAny": [
+        "PRESS CONFERENCE",
+        "INTERVIEW",
+        "PODCAST",
+        "HIGHLIGHTS",
+        "RECAP",
+        "MLB TONIGHT",
+        "MLB NETWORK",
+        "BATTING PRACTICE",
+        "HOME RUN DERBY",
+        "DRAFT",
+        "PLAY BALL LIVE"
+      ]
+    },
+    {
       "id": "atp",
       "channelId": "UCY_5h5zaSwN7Or4kIJDYNXA",
       "leagueKey": "atp",
