@@ -36,6 +36,6 @@ for _,(name,src) in found.items():
         im=Image.merge("RGBA",(*rgb.split(),im.getchannel("A")))
         canvas=Image.new("RGBA",(512,512),(0,0,0,0));canvas.alpha_composite(im,((512-im.width)//2,(512-im.height)//2))
         path=folder/(slug(name)+".png");canvas.save(path,"PNG",optimize=True)
-        out[norm(name)]="/"+path.relative_to(ROOT).as_posix()
+        out[name]="/"+path.relative_to(ROOT).as_posix()
     except Exception as e:failed.append(name)
 print(json.dumps({"logos":out,"failed":failed},ensure_ascii=False))
