@@ -2152,3 +2152,39 @@ html[data-theme="light"] .logo img{filter:brightness(0)}
   .soccer-standings-row{font-size:.68rem}
 }
 
+/* IMG_SCORE_LEAGUE_EQUAL_MOBILE_SPACING_START */
+@media (max-width:760px){
+  /* Keep every league on the same horizontal rhythm.
+     Long names may wrap wider visually, but they no longer push neighboring league buttons apart. */
+  body.scores-page .score-league-filters{
+    gap:7px!important;
+    align-items:flex-start!important;
+  }
+
+  body.scores-page .score-league-item,
+  body.scores-page .score-league-item-champions,
+  body.scores-page .score-league-item-one{
+    flex:0 0 64px!important;
+    width:64px!important;
+    min-width:64px!important;
+    max-width:64px!important;
+    box-sizing:border-box;
+  }
+
+  body.scores-page .score-league-name,
+  body.scores-page .score-league-item-champions .score-league-name,
+  body.scores-page .score-league-item-one .score-league-name{
+    width:96px!important;
+    max-width:96px!important;
+    margin-left:-16px!important;
+    margin-right:-16px!important;
+    padding:0 1px!important;
+    text-align:center!important;
+    white-space:normal!important;
+    overflow:visible!important;
+    text-overflow:clip!important;
+    -webkit-line-clamp:unset!important;
+    line-clamp:unset!important;
+  }
+}
+/* IMG_SCORE_LEAGUE_EQUAL_MOBILE_SPACING_END */
