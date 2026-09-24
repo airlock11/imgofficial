@@ -1,17 +1,943 @@
 {
-  "updated_at": "2026-09-24T20:46:03+00:00",
+  "updated_at": "2026-09-24T21:37:00+00:00",
   "refresh_minutes": 20,
   "counts": {
     "total": 30,
     "philippines": 8,
-    "international": 22
+    "international": 22,
+    "league_specific": {
+      "soccer": 12,
+      "laliga": 12,
+      "bundesliga": 12,
+      "seriea": 12,
+      "jamaica_pl": 12,
+      "pfl": 12
+    }
   },
   "errors": {
     "ESPN": "No articles returned",
     "Inquirer Sports": "No articles returned"
   },
   "videos": [],
+  "leagues": {
+    "soccer": [
+      {
+        "title": "Premier League hopeful of reaching agreement with EFL over funding offer - BBC",
+        "link": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE52LXFYdFNqcEp3S3FvazZPemhBbG5PSFdQQm9RVXFSd013RzBVSkcwSnhQeEZ5STBVNDM5dFFnQnpfQmNrYk41ZmQydFI4VFZMdlhxTXM3and6SVNkZTFsZ192ZkVJRE1Y?oc=5",
+        "description": "Premier League hopeful of reaching agreement with EFL over funding offer BBC",
+        "source": "BBC",
+        "sport": "Football",
+        "region": "England",
+        "league_key": "soccer",
+        "league": "Premier League",
+        "image": "",
+        "published": "2026-09-24T17:52:44+00:00"
+      },
+      {
+        "title": "Drinking at football matches - would fans welcome it? - BBC",
+        "link": "https://news.google.com/rss/articles/CBMiaEFVX3lxTFB1ekxxVVVLMk1DelR1NVJQSXEzM05GRk5NWTEwNS1OdjlZSFhaMmVwZ0pfcUZ0cDJyWW5rX2pCUUxtUmctUXVfQl9PdjZCSmxBWHR4T1RnWnpTeWgwbV83QVlCQjh0ZElh?oc=5",
+        "description": "Drinking at football matches - would fans welcome it? BBC",
+        "source": "BBC",
+        "sport": "Football",
+        "region": "England",
+        "league_key": "soccer",
+        "league": "Premier League",
+        "image": "",
+        "published": "2026-09-24T14:03:49+00:00"
+      },
+      {
+        "title": "Andy Burnham: Prime Minister says drinking ban in stands at football matches could be scrapped - Sky Sports",
+        "link": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxQQTNEZU9WMDI1YWxKdUxKMlROWjN5Si1kcWl0N0JCT3lTRm1BeXk4cXQwZkZmRWx2WnVBYmpkVm9PVEFraVE3eWgtQ2RkSTZaamc3a0pZY2E0eHdjN19xQjNWRzBuSEVhMDNhUlNEdmUyT2had1dlSlltb0ViUlVqRXA2TXZsT2ZQMnhIQ3FBZVZORkNpUlZRdUU3cnFXRnpxNDBveTgtdElrQjl2X2lYbnFiVDB5MGZrdVh6S3RveElNZ0xKVVhlbUh4UWlvWTFHSGJmTG03elBrZw?oc=5",
+        "description": "Andy Burnham: Prime Minister says drinking ban in stands at football matches could be scrapped Sky Sports",
+        "source": "Sky Sports",
+        "sport": "Football",
+        "region": "England",
+        "league_key": "soccer",
+        "league": "Premier League",
+        "image": "",
+        "published": "2026-09-24T13:50:34+00:00"
+      },
+      {
+        "title": "Tuchel's England dilemma: Emulate Spain or embrace Premier League 'chaos'? - ESPN",
+        "link": "https://news.google.com/rss/articles/CBMivAFBVV95cUxQQ2RscnJPcFNaRlJyc2RRX25qSEg4ZlJEOXdXSmg4OGpVZDlPZTVYaUFUUHFkRERiY1AweVc2R3NhZ2FiV2tQX1hJS2NhaXhVR0Nqa21yVHJETGRDRFJqdVFoSkFfZUJteEotQ1hQY3NVdkFGNFYxem5xcUg3N0pUdFBNVzduYXZURHJVS05CWUxqZE5oY0FDOG85elBQWE5FUC1RWVBmVTBXYlhfXzMta3BGVElHUGdlcTRqMw?oc=5",
+        "description": "Tuchel's England dilemma: Emulate Spain or embrace Premier League 'chaos'? ESPN",
+        "source": "ESPN",
+        "sport": "Football",
+        "region": "England",
+        "league_key": "soccer",
+        "league": "Premier League",
+        "image": "",
+        "published": "2026-09-24T12:52:02+00:00"
+      },
+      {
+        "title": "Barcelona's Anthony Gordon highlights differences between English and Spanish football: 'Don't think we can ever achieve it' - Barca Universal",
+        "link": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxOaGNSTFhObmd2V3ZWNlpFWV9XTWdpME1SeG5qeGxDUHZwUU50eWVXSldUd21vaUMyS0NXdWRpS08wVWRwYlpqZ3RIOGxsVjlMbGpVZ21EYW5CYTBvTkh0Q19LYWF5ZEh2WXpiLVZRQkt1RDdxVF9lUk1JWmRYUDVIY3IzcC1WNDZaLXBBdGxNWTcwVG96QVhiMVBkUi1MNFVYTVd6cnRxR2pTNDZJLTMzamVsTWg2dmpIamR5NUNNRGQzN253dklrR2NzVVV5MEVsWld4UkV6Nm56Qms3LWwxUQ?oc=5",
+        "description": "Barcelona's Anthony Gordon highlights differences between English and Spanish football: 'Don't think we can ever achieve it' Barca Universal",
+        "source": "Barca Universal",
+        "sport": "Football",
+        "region": "England",
+        "league_key": "soccer",
+        "league": "Premier League",
+        "image": "",
+        "published": "2026-09-24T10:45:06+00:00"
+      },
+      {
+        "title": "Harry Kane | 2026 FIFA World Cup, Life, Career, Football, Soccer, Tottenham Hotspur FC, Bayern Munich, & Records - Britannica",
+        "link": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE90ZDJOcEpiZ0NqUVhTajZLeTY4LVBfVDRrM293MG0xZzZBNnpxbEQtNUg2YjVxYWZvZDRMaWg4dzROSm5xQmROc2JnYlJSbEtLeDZvOUJzQ0p5Y0k?oc=5",
+        "description": "Harry Kane | 2026 FIFA World Cup, Life, Career, Football, Soccer, Tottenham Hotspur FC, Bayern Munich, & Records Britannica",
+        "source": "Britannica",
+        "sport": "Football",
+        "region": "England",
+        "league_key": "soccer",
+        "league": "Premier League",
+        "image": "",
+        "published": "2026-09-23T05:00:00+00:00"
+      },
+      {
+        "title": "The Premier League’s glass ceiling: How financial rules limit many clubs’ ambitions - The Athletic - The New York Times",
+        "link": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPWk4yRWd1NXh0Ni1KTmYtZ0p4V3R1d0hTNkxVOEh1Z1RyX1BrWi1OZzA3Nzg2bjJNdHVCZndlS21MMk9QVlAtejU2Z2xLdEtrMEcwTTZ3TUFZR3FZeEJna1hvT1FHV3RuUzl2aHc3MmtHLUpXdk1ZZHMta3o3alVRZ0ZUam04Q0pmaTg0aVlSRjJXS1I0TXZiQ29XQkI?oc=5",
+        "description": "The Premier League’s glass ceiling: How financial rules limit many clubs’ ambitions - The Athletic The New York Times",
+        "source": "The New York Times",
+        "sport": "Football",
+        "region": "England",
+        "league_key": "soccer",
+        "league": "Premier League",
+        "image": "",
+        "published": "2026-09-19T07:00:00+00:00"
+      },
+      {
+        "title": "‘Embrace the chaos’: Tuchel aims to harness England’s football culture - theguardian.com",
+        "link": "https://news.google.com/rss/articles/CBMiowFBVV95cUxNb0JqX3RtQXViYmlxMHdqZk1lRkdsYW5WUkpxUmg5b3Iwem44anZzN25EWi1aUFROVDNZNXRFalpUN3JhR3FDenhlWW5nejZkSXNSTEtfZnFBSUQ1ZWdNWWFqSkpZZG9GYlBkcHNDWUV6clUtU05pRk1HdVlJSEFCQ1RDdFJ3NHZwWnQ4eWNweFk5YVZiQ3BFS1RoYnRuenpESTNr?oc=5",
+        "description": "‘Embrace the chaos’: Tuchel aims to harness England’s football culture theguardian.com",
+        "source": "theguardian.com",
+        "sport": "Football",
+        "region": "England",
+        "league_key": "soccer",
+        "league": "Premier League",
+        "image": "",
+        "published": "2026-09-18T21:10:00+00:00"
+      },
+      {
+        "title": "The Premier League Conquered the World. At What Cost? - Bloomberg.com",
+        "link": "https://news.google.com/rss/articles/CBMixgFBVV95cUxNcDdKd0pGcGh3LUJQRkUyN0h0c1Npek5mWkpsQ3ROSGphZ0VVODZORVNIX2RWcmptUWJBYTl6Qko3OHZnU1pZeHBvbXpXRDltTTVFNUduQ3B5N1Z2cklHSElUdkJSOWdwQ0hTaDFsazFKU0l6MmhlenhyQjUwekZzOXZKLVlfbklCR243UEVxU0JKZklULWtQZU9tZDJVWk5tX0lVd2VMNDV4N1FmeWllSUZrdzBQbWNNWGN1YWRuQS1pYkJIc3c?oc=5",
+        "description": "The Premier League Conquered the World. At What Cost? Bloomberg.com",
+        "source": "Bloomberg.com",
+        "sport": "Football",
+        "region": "England",
+        "league_key": "soccer",
+        "league": "Premier League",
+        "image": "",
+        "published": "2026-09-10T07:00:00+00:00"
+      },
+      {
+        "title": "Which 2026 Premier League clubs have the most local fans? - YouGov",
+        "link": "https://news.google.com/rss/articles/CBMipwFBVV95cUxNQVNEajVZajFDMmFtTk5QeVJzeE5JanIzdXZUbXhWVnJiV0doMVRvc2hoMy02TGNhYml3MlZJTXR2LVhpblJ5S20zRkFpU3E1bkVCVmxZYUQyZXhNUENVakdXMjlZZE9qVFdIRHloemN5Z2UzVU9vdVlISmdJM2dqVnFCcHZwWHZiQmF2Vm1FZ1Vma2trb2pqcHVnN3ItRlktcnp0bm9STQ?oc=5",
+        "description": "Which 2026 Premier League clubs have the most local fans? YouGov",
+        "source": "YouGov",
+        "sport": "Football",
+        "region": "England",
+        "league_key": "soccer",
+        "league": "Premier League",
+        "image": "",
+        "published": "2026-09-07T07:00:00+00:00"
+      },
+      {
+        "title": "Premier League club kits for 2026/27 season - Premier League",
+        "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxOS2JsWnhYQzczMEVBdXZ3YXBJV2hQalRub3RVTFhtYXJELTNSX3J1cWdfbDJ0MkdTel8xNkpKMTFvYTBIVVMwaUI2b3R3T1ZWUE9ueTVhV3JWVVF5VmMzZldaTVF0aExFYUFBcldIOHgxLVZ6NHpkNkFMZHI3a1Vzcl95bnl4cWNLWkt3MldPeVVHUQ?oc=5",
+        "description": "Premier League club kits for 2026/27 season Premier League",
+        "source": "Premier League",
+        "sport": "Football",
+        "region": "England",
+        "league_key": "soccer",
+        "league": "Premier League",
+        "image": "",
+        "published": "2026-09-07T07:00:00+00:00"
+      },
+      {
+        "title": "Why would Jeff Bezos want to buy an English football team? - marketplace.org",
+        "link": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNZGgxX2xET0NPNXRTT0wzck1CZ1hxOWZQbFR2ZTMxSzh2c3haZkZraDNwSVhYZzh0NWR2X0R0WEp5RU5wcjR5MzQwM1ZzdTZWb2t0elllaVdXTWRqTVl0VW9Vc2JtaUdlRUx3ck81WTdtYXF5dy1hMGZ2YWprXzQ0UmZ3cGZvR3FWNk9RQ1l2WXZzMmQ4c3V0Y2pn?oc=5",
+        "description": "Why would Jeff Bezos want to buy an English football team? marketplace.org",
+        "source": "marketplace.org",
+        "sport": "Football",
+        "region": "England",
+        "league_key": "soccer",
+        "league": "Premier League",
+        "image": "",
+        "published": "2026-08-20T07:00:00+00:00"
+      }
+    ],
+    "laliga": [
+      {
+        "title": "Barcelona's Anthony Gordon highlights differences between English and Spanish football: 'Don't think we can ever achieve it' - Barca Universal",
+        "link": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxOaGNSTFhObmd2V3ZWNlpFWV9XTWdpME1SeG5qeGxDUHZwUU50eWVXSldUd21vaUMyS0NXdWRpS08wVWRwYlpqZ3RIOGxsVjlMbGpVZ21EYW5CYTBvTkh0Q19LYWF5ZEh2WXpiLVZRQkt1RDdxVF9lUk1JWmRYUDVIY3IzcC1WNDZaLXBBdGxNWTcwVG96QVhiMVBkUi1MNFVYTVd6cnRxR2pTNDZJLTMzamVsTWg2dmpIamR5NUNNRGQzN253dklrR2NzVVV5MEVsWld4UkV6Nm56Qms3LWwxUQ?oc=5",
+        "description": "Barcelona's Anthony Gordon highlights differences between English and Spanish football: 'Don't think we can ever achieve it' Barca Universal",
+        "source": "Barca Universal",
+        "sport": "Football",
+        "region": "Spain",
+        "league_key": "laliga",
+        "league": "La Liga",
+        "image": "",
+        "published": "2026-09-24T10:45:06+00:00"
+      },
+      {
+        "title": "Spain Built the Youth Development Pathway England Still Crave - Opta Analyst",
+        "link": "https://news.google.com/rss/articles/CBMieEFVX3lxTE5Ea2tPQnlTMnB3R0NnaFpZeW5lMmtsNjFzVWhNVXlWWVhFY096dzRvZTk4WC1YbGREZUFKUHFfcFNvRHc2elhzS290OUhtV2x2VjNNRWEzRFBSTGRLaDVCT294Y2FyYkNNRHluTDMxdUtuNVlLV1RyUQ?oc=5",
+        "description": "Spain Built the Youth Development Pathway England Still Crave Opta Analyst",
+        "source": "Opta Analyst",
+        "sport": "Football",
+        "region": "Spain",
+        "league_key": "laliga",
+        "league": "La Liga",
+        "image": "",
+        "published": "2026-09-24T10:34:25+00:00"
+      },
+      {
+        "title": "What Does Real Madrid’s Feud With La Liga President Mean for Spanish Soccer? - Sports Illustrated",
+        "link": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNQWVQNVU4bjZhTl9MSVFsQ0NFTURHMjdReVVpNnNjSDlsOVlnUldobG44a04zQWZPNmdHYlBKeTIxbnBZREFhVDBmQ0ViaEo2SDM5RmRnNmJIeHpRVy0za0VVM1lHR2RMRERaWmJ4VThHcFMwVXd1OW55Uld0aU1rTktiamMxb0szRWd2alBR?oc=5",
+        "description": "What Does Real Madrid’s Feud With La Liga President Mean for Spanish Soccer? Sports Illustrated",
+        "source": "Sports Illustrated",
+        "sport": "Football",
+        "region": "Spain",
+        "league_key": "laliga",
+        "league": "La Liga",
+        "image": "",
+        "published": "2026-09-23T18:30:00+00:00"
+      },
+      {
+        "title": "Javier Aguirre returns to La Liga! Veteran manager takes charge of his seventh different Spanish club as he agrees Valencia deal - Goal.com",
+        "link": "https://news.google.com/rss/articles/CBMikwFBVV95cUxPa3Q2X2lidkI3T1VucUZUQ2ZIRThWTHVJRVNEQzkzOTVHVjB6UXBPUG01b2RXVmdQaWE2ZFJZRVl0UHFQdXZ2SG1lVTlvcC10a3p5M1I3VVRoZVNfaTlYU2lwN1NoR3FLTGJNT3ZkY0VCNVBuZ1dDd3gyRTZhWFBiNEJHLTZRZllXc2FySHJtSDBSX1U?oc=5",
+        "description": "Javier Aguirre returns to La Liga! Veteran manager takes charge of his seventh different Spanish club as he agrees Valencia deal Goal.com",
+        "source": "Goal.com",
+        "sport": "Football",
+        "region": "Spain",
+        "league_key": "laliga",
+        "league": "La Liga",
+        "image": "",
+        "published": "2026-09-23T13:36:15+00:00"
+      },
+      {
+        "title": "Real Madrid demands new La Liga leader amid escalating Tebas feud - Daily Sabah",
+        "link": "https://news.google.com/rss/articles/CBMirAFBVV95cUxOOGE4SV82eUNOdUNIN2k3QTdocjZOUUpiMC1IckRMcG9RWHlfXzV0UnpycGlmVUFpOFdiN3FCUDdBRFZkZUZVRk1EcEpfV3gyNk4teDZ1QS1LWUJNZGY4SDBhbVd3Y05jNVhuVG9INFE5clItUVY2VzhrSUVod21kMkJrQ2QtelU2S3RFTGcyUXBfQVlDNEEwcnozVWs2Y2ZLWUNOUzVaWW1reGZK?oc=5",
+        "description": "Real Madrid demands new La Liga leader amid escalating Tebas feud Daily Sabah",
+        "source": "Daily Sabah",
+        "sport": "Football",
+        "region": "Spain",
+        "league_key": "laliga",
+        "league": "La Liga",
+        "image": "",
+        "published": "2026-09-23T11:04:56+00:00"
+      },
+      {
+        "title": "Barcelona’s flying start, Jose Mourinho’s printouts, and Betis brilliance – La Liga so far - The Athletic - The New York Times",
+        "link": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxOWEd2UzB1S3Jra1BBRXp0aVU2UHRweTJRR2lRTkVyMDk0SHdQWTNUd2tRNkQzdDB6QXBXRUx1aVFzaGhycnpPUWhOdFR4RWlOOVNtZGdYTE16dk01VmdKNFNic1lvSk5TVE45dHVVSTFEd3lOOFZ2NjBZRzQ0MWtmd1pCVTgzT0xlcnFIOHFPWGZmVVZwTnE0ZzhPMGMzTWdSVUNNTFlQOW1PQQ?oc=5",
+        "description": "Barcelona’s flying start, Jose Mourinho’s printouts, and Betis brilliance – La Liga so far - The Athletic The New York Times",
+        "source": "The New York Times",
+        "sport": "Football",
+        "region": "Spain",
+        "league_key": "laliga",
+        "league": "La Liga",
+        "image": "",
+        "published": "2026-09-22T14:29:08+00:00"
+      },
+      {
+        "title": "Real Madrid: Conspiracy claims against club 'like living in another galaxy' - Javier Tebas - BBC",
+        "link": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE5BZHdncVBwQkwwek5iZ1llVU04aXJadUlTMGFaSFdMUDlGbGNSQ0RMOFhBX0RyODMyVFRLMmhhaEpVMkx5dEZiMTdxekpjU0tYS25yS0N3T0hpOU8wWGk2S2dsVGpIUnRK?oc=5",
+        "description": "Real Madrid: Conspiracy claims against club 'like living in another galaxy' - Javier Tebas BBC",
+        "source": "BBC",
+        "sport": "Football",
+        "region": "Spain",
+        "league_key": "laliga",
+        "league": "La Liga",
+        "image": "",
+        "published": "2026-09-22T12:09:29+00:00"
+      },
+      {
+        "title": "Luis de la Fuente admits shock over Rodri’s Barcelona move as the Spain manager celebrates La Liga homecoming - Yahoo Sports",
+        "link": "https://news.google.com/rss/articles/CBMiggFBVV95cUxPY0YtcjVhZDNNWmxRTy14YThuWHJiTXQzWUlwTHd4NTBUVnpmZ3ladEJBUjFXYTd5Nl82eUhxWDV4czN5b0ZoWE85UGFfYmJNWmdJMEU3TzlFaUlDTGluN0l6Nk1tajBZT28tNVdTSk5lemNVbGp5YlhUZ0F0TEZ0MGRR?oc=5",
+        "description": "Luis de la Fuente admits shock over Rodri’s Barcelona move as the Spain manager celebrates La Liga homecoming Yahoo Sports",
+        "source": "Yahoo Sports",
+        "sport": "Football",
+        "region": "Spain",
+        "league_key": "laliga",
+        "league": "La Liga",
+        "image": "",
+        "published": "2026-09-22T05:14:00+00:00"
+      },
+      {
+        "title": "José Mourinho speaks on Real Madrid’s La Liga title chances - Get Spanish Football News",
+        "link": "https://news.google.com/rss/articles/CBMilwFBVV95cUxOM0kyMHQyTnNOU2kyLVNQdlVyX3N2UThESm01MlFaZlQ4S0ZjUDRiNjdtaG5PVXRoX3k5d01meWtzdE1zZFF1NV9RUjdobjBFczFEdzZRSXJmUTZkRTRtc1lTVFdqUmI1YzZmYzVNSnZhMlA0M1UzaDYxblVuU3FPSzJBR2pOYnNwVG50ZDE2Nm9OVXo3Vmw4?oc=5",
+        "description": "José Mourinho speaks on Real Madrid’s La Liga title chances Get Spanish Football News",
+        "source": "Get Spanish Football News",
+        "sport": "Football",
+        "region": "Spain",
+        "league_key": "laliga",
+        "league": "La Liga",
+        "image": "",
+        "published": "2026-09-21T21:30:00+00:00"
+      },
+      {
+        "title": "Diego Simeone: Barcelona are ‘playing a different sport’ - Get Spanish Football News",
+        "link": "https://news.google.com/rss/articles/CBMikAFBVV95cUxPTUlFWlNJanIybFBZazNsZnA5VVdkRUxKcmEzeC1qOE12ZWNTQ2psR3Y1UVlYZWVOcEVvbVRYUzJxVHVfZkUwbEZCVlpMV2puZzBNMkpUb09BcWhmc29GdmlQMGlhNDlPOU81STdkNlRXT1lCMndzaG9YVU9jalF0VUR5UG9yd21tRUVhLVZGWFQ?oc=5",
+        "description": "Diego Simeone: Barcelona are ‘playing a different sport’ Get Spanish Football News",
+        "source": "Get Spanish Football News",
+        "sport": "Football",
+        "region": "Spain",
+        "league_key": "laliga",
+        "league": "La Liga",
+        "image": "",
+        "published": "2026-09-21T19:35:00+00:00"
+      },
+      {
+        "title": "Ceuta solidarity shirt row: How the crisis engulfed Spanish football - Al Jazeera",
+        "link": "https://news.google.com/rss/articles/CBMirwFBVV95cUxQVnVIU25YV01MYm45T09fUnk5NlRobjJBWk80eDdrdG11dEJvdVFuR0RVNTJzWGFJZDdOS0FjZUJKdndyM1NKWDdYdk9jWHNXU19XLXowLUc1TzFlRGY0YUFvQ2VnUGI1SDhiRk1lSmstRElpOW4zeVRpQndOYllwdFFvelRpbnpuUmgzZjJmYnZxU2RacE9NOGI0WWRYZk1aN0JlQWhXNVlpVlJnc1NB0gG0AUFVX3lxTE15WTVHV2FDUlZQNWJSdDdrQ0VmRkw3bXJZeWlPQms0VThmeWMweWF2WkMwbHJTRkhmMXIxcXNRZUxoSzU3NThScHZYal91ZVdJZjl4UDhPb21KTWs1YmZpX083MFk5YkZtU29NLTZySndxRlI3Y2tMdDk3QloyQXFzbWhLajd6dld2T1V0TnFsN0ZKN1k2U0dBSkdTTG1DUlpPeDR6bTFNY0MzTG5mTEpnLTFBLQ?oc=5",
+        "description": "Ceuta solidarity shirt row: How the crisis engulfed Spanish football Al Jazeera",
+        "source": "Al Jazeera",
+        "sport": "Football",
+        "region": "Spain",
+        "league_key": "laliga",
+        "league": "La Liga",
+        "image": "",
+        "published": "2026-09-21T18:01:14+00:00"
+      },
+      {
+        "title": "How Malaga returned to La Liga after dropping into Spain's third tier - BBC",
+        "link": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE5jVHJYUzBMV0ZFb2p5Rk9aMHBfN0VQZmU1RllFeTFTUUh3WUFyeWJJWTU4akJVSnJzMHYzNFRkUGRkUzVLM3BvNS16Y01zbmt2WGxkN1lWRC1OOVI1ekpqWGlPUjVoQ3M?oc=5",
+        "description": "How Malaga returned to La Liga after dropping into Spain's third tier BBC",
+        "source": "BBC",
+        "sport": "Football",
+        "region": "Spain",
+        "league_key": "laliga",
+        "league": "La Liga",
+        "image": "",
+        "published": "2026-08-19T07:00:00+00:00"
+      }
+    ],
+    "bundesliga": [
+      {
+        "title": "Bundesliga Tactics Check | RasenBallSport Leipzig - Get German Football News",
+        "link": "https://news.google.com/rss/articles/CBMifEFVX3lxTE5YT0ZnS0xaMkx6REZqVi05MFJsVGV2T1B2WFQ0N3ljOVoxTGNHVVhZQ2p0MGpaczJxT0UxclFYcy1sdnIwMGhQaS1IQVdDUmJveHdnNDhSaElBaHVIejNLUkdpUS0zSHFabDBzaEhfM0Q4ZjlsZnR2cnlHUnM?oc=5",
+        "description": "Bundesliga Tactics Check | RasenBallSport Leipzig Get German Football News",
+        "source": "Get German Football News",
+        "sport": "Football",
+        "region": "Germany",
+        "league_key": "bundesliga",
+        "league": "Bundesliga",
+        "image": "",
+        "published": "2026-09-24T18:42:34+00:00"
+      },
+      {
+        "title": "Former Bundesliga flop unstoppable: will he ruin Klopp's Germany debut? - Yahoo Sports",
+        "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxOakxSaHZmSjZqNXBvOWFmQmZGWEtmaVNMd0RCeHM5dHRhUmlCMlFvU0NVREJsOFpCS3hjU0w2SjlNQWhMU3NQU3J2RVJPSFFXc0twQlJJYXhKeHkxbjRLQl9maDVodFZFX3JndkVkUDhHakNoMG5QeXFrQUFxQThkN1hDN3hJSXFlekJaenIzOG11QQ?oc=5",
+        "description": "Former Bundesliga flop unstoppable: will he ruin Klopp's Germany debut? Yahoo Sports",
+        "source": "Yahoo Sports",
+        "sport": "Football",
+        "region": "Germany",
+        "league_key": "bundesliga",
+        "league": "Bundesliga",
+        "image": "",
+        "published": "2026-09-24T16:04:00+00:00"
+      },
+      {
+        "title": "'He's thinking about the future of German football' - Lothar Matthäus discusses Jürgen Klopp's start to life as Germany head coach - bundesliga.com",
+        "link": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQY3VQMVZpaTBaUE00TnJuVmFURy1yYTVKRWdEZXJYV0ZneHl1cndpeG1tbjhJU2JIOGZLc2FnSTB6TzVWZGtxcVlxMFlsNHFMUF9XVXlBYk43c0FUa1I2cjU0YW9tMWZBN2w0RWd3MTloWUtoWXVfeHhvSUlPUlBkNHg5aFZmZndqVzJiSnp5X3YzemJkbzBIT1lCREh1b0lqQjhzRVVqbDFnRlE?oc=5",
+        "description": "'He's thinking about the future of German football' - Lothar Matthäus discusses Jürgen Klopp's start to life as Germany head coach bundesliga.com",
+        "source": "bundesliga.com",
+        "sport": "Football",
+        "region": "Germany",
+        "league_key": "bundesliga",
+        "league": "Bundesliga",
+        "image": "",
+        "published": "2026-09-24T07:35:41+00:00"
+      },
+      {
+        "title": "Netherlands vs. Germany: UEFA Nations League preview and live blog - bundesliga.com",
+        "link": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxPdVBVb3daRE9JMWZCNi0zSG1nRzhxWVYxS0ltZjlWaEttZTh5a1MzbVc0VjQ2Y1IyY2htOG1vSDhOWC1JY1VfV0NUWExJeHZvQWxSNHlXbmZ5djJCMGFwX2lOdlBybFZGRHkyNWVzcnNudW05TWZVaDNwamdmeFVwbHZPdlJuenVOV1ZfdzEtcWRsRG10cXJ5dmRLcWRiYUoyV1RZUkZZY0NUc3MxTVR2dXB2cFl3N1F0NmZnVkNsUWhnT0E?oc=5",
+        "description": "Netherlands vs. Germany: UEFA Nations League preview and live blog bundesliga.com",
+        "source": "bundesliga.com",
+        "sport": "Football",
+        "region": "Germany",
+        "league_key": "bundesliga",
+        "league": "Bundesliga",
+        "image": "",
+        "published": "2026-09-23T16:09:29+00:00"
+      },
+      {
+        "title": "Joey Veerman credits Bundesliga move for helping him return to Dutch national team - Get German Football News",
+        "link": "https://news.google.com/rss/articles/CBMieEFVX3lxTE1qZGIxVkVPSWdlWlVrNTM0T1JiU1R6dGdSd2F2cVdkeWFVTWcwaDdldVpKSlJ3YWR5NDFSbjMyS2dqelZjbnktdTdiT1dZS3VQajdiVnVsQmZRdzFqZ2owOVowOHMzTEdtX3dKbldRblZRcmFPNVVaOA?oc=5",
+        "description": "Joey Veerman credits Bundesliga move for helping him return to Dutch national team Get German Football News",
+        "source": "Get German Football News",
+        "sport": "Football",
+        "region": "Germany",
+        "league_key": "bundesliga",
+        "league": "Bundesliga",
+        "image": "",
+        "published": "2026-09-23T09:20:25+00:00"
+      },
+      {
+        "title": "Bayern Munich star Jamal Musiala feeling ready to start for Germany - Bavarian Football Works",
+        "link": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxObjFCRW9qWERwU1htcUtHck5nNktLV1BBRmFtNzF1RGtyeFA5LU54WHlUdFlVQ3g2OFRvanBwUDVWeDdVYXVTaWItamJQVW93dlhFckF0cXJHeXl2c1pGYmttYUtfWWZ4Wml1VFdoUVBFYkcwWkw3NkQyeFFiSmpQanhJVEhTaHRQclcxNU43X2hFY1RZZHFhZnowdXJ0MW5iZ0ljLW92WmR6eVhNQnExRV9SbDlvYmN2akgteng1YmxtQnZnaS1kRjNidzQxRl9hakFVUHRoQkI?oc=5",
+        "description": "Bayern Munich star Jamal Musiala feeling ready to start for Germany Bavarian Football Works",
+        "source": "Bavarian Football Works",
+        "sport": "Football",
+        "region": "Germany",
+        "league_key": "bundesliga",
+        "league": "Bundesliga",
+        "image": "",
+        "published": "2026-09-23T08:45:00+00:00"
+      },
+      {
+        "title": "Five standout players from Bundesliga Matchday 4 - Yahoo Sports",
+        "link": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPUTlMcnpzVGNtaHVYQXRUMTRlOXJPOHR5SDdVaFB4S3RrejY4Yk9QYU5hLTRCWGlYYWV2c2lvVFF0cVE2MnhyZUNMakdDbFg5eTVjUDNTYXJBNnhacHBfWWZlYW02blZjbHFnR0ZLQzIxTF8xWno1ejlzMkVhTXVldHFFS2xMdTVud3JMUlA0QVJDdU45?oc=5",
+        "description": "Five standout players from Bundesliga Matchday 4 Yahoo Sports",
+        "source": "Yahoo Sports",
+        "sport": "Football",
+        "region": "Germany",
+        "league_key": "bundesliga",
+        "league": "Bundesliga",
+        "image": "",
+        "published": "2026-09-21T20:40:00+00:00"
+      },
+      {
+        "title": "From the Regionaliga to the Bundesliga via Belgium? Mateo Biondic is the latest Union St Gilloise success story from the lower reaches of German football - Yahoo Sports",
+        "link": "https://news.google.com/rss/articles/CBMikwFBVV95cUxOX1VaOW5lLWlfZWRGWWdkVnF5RDliUHh6Y1BOVjNMclljTldIa29YQU1UY0pPZUoyaWZ6UzhJUXRIemJpdkxWbzNiOEJ6Z3R6X0VJUTZ2Mjg3MUdEWjcxQmZGeGplLV9KUUJSNXRINm03TUdqUGxCUEdKN3FTMHN0eHNJSjdaQ3dLNGRRcmVEZ2NnVE0?oc=5",
+        "description": "From the Regionaliga to the Bundesliga via Belgium? Mateo Biondic is the latest Union St Gilloise success story from the lower reaches of German football Yahoo Sports",
+        "source": "Yahoo Sports",
+        "sport": "Football",
+        "region": "Germany",
+        "league_key": "bundesliga",
+        "league": "Bundesliga",
+        "image": "",
+        "published": "2026-09-21T10:45:00+00:00"
+      },
+      {
+        "title": "Weekend Warm-up: Jürgen Klopp’s big gamble with Germany begins; Bundesliga predictions; and MORE! - Bavarian Football Works",
+        "link": "https://news.google.com/rss/articles/CBMi_gFBVV95cUxQY0J4OTJJWTZzc1JxOFdZQUNZaXBIdkFMWUtRU01qRmo0dlRNU3lNTER4a3hKMVdEUy1LLVNkRUtfcUdSLXdHQzlnYlg0QWRRa0xFMjNXVlNLZV9kUEl5SFRLX1Q3dDg2N0p5NkUteEthMTZVWlNSb3BlVjFRNXJHWE8zbFJxSDVvZi1oaFpUbk9UMng5SnhqeGgxWjZBdGpMMi05eHJxWlpfT1ZhOW91U3llVjVjWlY4QnhJZjJFeUdCVjdjREhYekJJdzNSVVk5cU9kR0k0SjRMeXpZRDQzX2IwbU9ieDdwQjFNYjNKcnIxUC02amVyVnU0UlZvZw?oc=5",
+        "description": "Weekend Warm-up: Jürgen Klopp’s big gamble with Germany begins; Bundesliga predictions; and MORE! Bavarian Football Works",
+        "source": "Bavarian Football Works",
+        "sport": "Football",
+        "region": "Germany",
+        "league_key": "bundesliga",
+        "league": "Bundesliga",
+        "image": "",
+        "published": "2026-09-20T23:15:00+00:00"
+      },
+      {
+        "title": "🚨 Bitter blow in the Bundesliga, Germany debutant forced off injured - Yahoo Sports",
+        "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxONVhzQTJfN1lTNDhNNThEMGZXaDU3RFJwTEdidGZUSU81Q1VOcEhUYldhLW9qVHhVMkRDM1Y2R3Uwa3htRUZnWGVYSkdJQ044Z2RRUXlUUG1tQmZRZU9TQzVxOG1lbjFTUUVQZFJMSnBQSEJBRVBXT2prRjN4a2REMkcxNWRia0hTa0xSX1NqUTlwUQ?oc=5",
+        "description": "🚨 Bitter blow in the Bundesliga, Germany debutant forced off injured Yahoo Sports",
+        "source": "Yahoo Sports",
+        "sport": "Football",
+        "region": "Germany",
+        "league_key": "bundesliga",
+        "league": "Bundesliga",
+        "image": "",
+        "published": "2026-09-20T14:08:00+00:00"
+      },
+      {
+        "title": "English football players in Germany: The 2026/27 edition - bundesliga.com",
+        "link": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQSlZLX2hGalNBRVZlb1ZrR0ZsTy01NjE4b3k3c2libDBJUnZMUUUzRHg4eXp0RkR1Vl9EZkZ5cVFQd1RCdmREbVJLQXdfaXBqVURGX3BqOXFSOFJOR19TTkplVi1Yd1NWaFVNQTRGZ3p0aDdoSHVXUUhacEFkNThuR1o5T0l1QzFpUXY0VjMyZDFSa0lNR1BBamFBUTVMOUxEMXNQQ1RnbTY2WE0?oc=5",
+        "description": "English football players in Germany: The 2026/27 edition bundesliga.com",
+        "source": "bundesliga.com",
+        "sport": "Football",
+        "region": "Germany",
+        "league_key": "bundesliga",
+        "league": "Bundesliga",
+        "image": "",
+        "published": "2026-09-13T07:00:00+00:00"
+      },
+      {
+        "title": "SV Elversberg's ascent to the Bundesliga is amazing. Just don't call it a fairytale - ESPN",
+        "link": "https://news.google.com/rss/articles/CBMizgFBVV95cUxPN2ZyMFVNRmEtTU1XNEJha1VXS2xCLVo0cXYwYUZJZU81d2REcjZwNW5oMHBsX1hObWpxXzhicGtxS3VJektnaTZybG1XU2IwUFljZWVBd3ZzYl9HRlpsU0tGMGc2aDRyRk1CS3FoRVktZk9tNTFLWllvR3pwY0x3b0Y5WTlMeVVGRjc3aU56Ym1jRlJuNExBN1BQck1GSWZQdElHYXJpWC1Bdk5rYTFEN1J0aUFVckdvVE1wanFEOWVrY3Fuc3E3dHhlanVnZw?oc=5",
+        "description": "SV Elversberg's ascent to the Bundesliga is amazing. Just don't call it a fairytale ESPN",
+        "source": "ESPN",
+        "sport": "Football",
+        "region": "Germany",
+        "league_key": "bundesliga",
+        "league": "Bundesliga",
+        "image": "",
+        "published": "2026-09-09T07:00:00+00:00"
+      }
+    ],
+    "seriea": [
+      {
+        "title": "Report Serie A, Premier League, LaLiga and Bundesliga to release joint statement against FIFA - Yahoo Sports",
+        "link": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxQWWlmWlZFVWlfTjFmQnNhS0x1TUxVSjdQTi1oS0kzVTZBeEhLQnVnQUlJd19pa3BKRTNIdlBBY29UZGFHMWdNaEZKajYyM2F1OE5JYWtTby12SzhyS3I1WW9TM094bFdGazBSWnd0VlE3ejBMV09XS1NjQ2pjT05PTnZ2azZmQ0dpNVBZ?oc=5",
+        "description": "Report Serie A, Premier League, LaLiga and Bundesliga to release joint statement against FIFA Yahoo Sports",
+        "source": "Yahoo Sports",
+        "sport": "Football",
+        "region": "Italy",
+        "league_key": "seriea",
+        "league": "Serie A",
+        "image": "",
+        "published": "2026-09-24T19:45:00+00:00"
+      },
+      {
+        "title": "Roberto Mancini returns as Italy head coach but can the Azzurri recover from lowest ebb with a youth-inspired revolution? - Sky Sports",
+        "link": "https://news.google.com/rss/articles/CBMi_gFBVV95cUxPZlkzYjhPZ0RLNE5OaDJNU2Z5QnVuTXJzQWdEdkRYYmhMZ3hkV0o4UVZOQmFiNHJnb3VjeGVSOFl2Q2Ixd1N1UWN0cmhIdGpNb3hISUYzcVllZ0dpZURuZ2JHTjB4dzc2UkVPTUM0MUIxV3llQ0duV2t0VTRNbUtNeFl5VmxZZkpINVFUS1NfZWl1YXNLdU1mZmNNb0RmaFJhQWFyNzd1TFBLYUhWRHRDbEJDakl0b2c3ZnZhUVpmMEVRcWpVck5jRDBJTW5kR1ZwSGNQOFc5VDJGQlF5RVRZRVRNYmpRVDV2Q1ROYkthcWpORERWSFphNnRYZjlodw?oc=5",
+        "description": "Roberto Mancini returns as Italy head coach but can the Azzurri recover from lowest ebb with a youth-inspired revolution? Sky Sports",
+        "source": "Sky Sports",
+        "sport": "Football",
+        "region": "Italy",
+        "league_key": "seriea",
+        "league": "Serie A",
+        "image": "",
+        "published": "2026-09-24T19:36:51+00:00"
+      },
+      {
+        "title": "Assessing Frosinone’s rise in Serie A this season - Get Italian Football News",
+        "link": "https://news.google.com/rss/articles/CBMilgFBVV95cUxPZHI3a3dTRm43UDc2bWJNLW1oVVZaY2pjOTluSjJjZXhiTEl6TnlwdXRBWFluX2F6SDN4X1R4MktVeXZXYklHejNvWWRZOEM4UWRBUHhsS3pRX1IxdEtKdjdMUWUtTWFGcG1lSGlJRkxRX2ppRHQtZkkzVldlSlE3WlZHcmJRX19sTkZTQXdyeDhid2QxRUE?oc=5",
+        "description": "Assessing Frosinone’s rise in Serie A this season Get Italian Football News",
+        "source": "Get Italian Football News",
+        "sport": "Football",
+        "region": "Italy",
+        "league_key": "seriea",
+        "league": "Serie A",
+        "image": "",
+        "published": "2026-09-24T16:15:00+00:00"
+      },
+      {
+        "title": "Milan to scout Alessandro Romano on Ruben Amorim’s request - Get Italian Football News",
+        "link": "https://news.google.com/rss/articles/CBMiogFBVV95cUxOeG9NeVEyT0Q3dDRjNE00NXV1S3FORVNlMWtEbEJfbEJEN05rMXU5YmR1UnpaSHlPejlFTTNFNENVZ0pkMnJTM1diV0Q3enBlV09rRURYRWR3QjA4RjVFLVkwNDhMVUFSc2pncVg3aTRiWlVQZGxIMmUwaGE4aVNwdzZPZDZpdnFSel9ZN19RcWpVd0xQWDBLdkdyd3JPa3UtekE?oc=5",
+        "description": "Milan to scout Alessandro Romano on Ruben Amorim’s request Get Italian Football News",
+        "source": "Get Italian Football News",
+        "sport": "Football",
+        "region": "Italy",
+        "league_key": "seriea",
+        "league": "Serie A",
+        "image": "",
+        "published": "2026-09-24T15:08:17+00:00"
+      },
+      {
+        "title": "Forgotten Italy talent Pellegri eyes Serie A comeback after returning to Torino training - Yahoo Sports",
+        "link": "https://news.google.com/rss/articles/CBMijgFBVV95cUxObjNkWlVyWVhNT0t2VzBienVnLVJmNEtqTzh3R1hTb0M4WDFENkNBbjdBY09vQmk1S09UOEJtYkw5TXB4aWxNRHFYRUxKSHVrY2txOVRfOG5uUlNmbVBtaVZDOGdQZDd1V00zUUdtZFhFWS0tVlJpY19jSkZCcDRxbWFaVUhJbXF5WGIxXzVB?oc=5",
+        "description": "Forgotten Italy talent Pellegri eyes Serie A comeback after returning to Torino training Yahoo Sports",
+        "source": "Yahoo Sports",
+        "sport": "Football",
+        "region": "Italy",
+        "league_key": "seriea",
+        "league": "Serie A",
+        "image": "",
+        "published": "2026-09-24T14:05:00+00:00"
+      },
+      {
+        "title": "EXCLUSIVE: Ex-AC Milan CEO Fassone on Italy's crisis, Como's rise & multi-club ownership - Flashscore.com",
+        "link": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxOUFlqU2tEZWVOaVlkMXcxNTBYZTJSRURxOTNhVG5MdU9pNGpOZ1pPbmdVclVudG1pYjJCZnQ4bnVjN3h0clM5ZHhTX3F3RzlPLWZBWXRvR0IzbXdnbWc1S1FCQkNFczlkcVVtcmt1TXR0WW42SEk3bFIxY3NlajBJWFN3TzhoM2hDeEs0c1NzVlpHd19YVmdKUWo0Nk1ZZzl4QUJyUjFVN29UX0txOFU3SW5NemdrT0FDY3lSZ2hENy1NYS1lXzBvc1QySXdaWEhseDlSeWxoa0w?oc=5",
+        "description": "EXCLUSIVE: Ex-AC Milan CEO Fassone on Italy's crisis, Como's rise & multi-club ownership Flashscore.com",
+        "source": "Flashscore.com",
+        "sport": "Football",
+        "region": "Italy",
+        "league_key": "seriea",
+        "league": "Serie A",
+        "image": "",
+        "published": "2026-09-24T05:33:43+00:00"
+      },
+      {
+        "title": "Computer predicts Serie A 2026/27 winners, top 4 and doomed to relegation - Yahoo Sports",
+        "link": "https://news.google.com/rss/articles/CBMihwFBVV95cUxOOWNydU5WbmdPTEhzNlRnTUhodHJtdGxIc0cyMzZ4ZTd3UzF2ajdaUjFLNFJ0d3EwU2duTnIwRTVIZ2l2ZFJBRlAxWlBFZWd4dmJQcm5pT25ZUkRZeVJwXzdxSThmR1FQT0dNUENSSVFPenJ5QTdqVUxqaDluRlA0cmpXUkxVWHc?oc=5",
+        "description": "Computer predicts Serie A 2026/27 winners, top 4 and doomed to relegation Yahoo Sports",
+        "source": "Yahoo Sports",
+        "sport": "Football",
+        "region": "Italy",
+        "league_key": "seriea",
+        "league": "Serie A",
+        "image": "",
+        "published": "2026-09-23T14:10:00+00:00"
+      },
+      {
+        "title": "Italy squad: 10 players from outside Serie A, with Leoni, Palestra and others still to come - Yahoo Sports",
+        "link": "https://news.google.com/rss/articles/CBMihgFBVV95cUxQaFNoN1hlUmt2NE5qR0p5QmZ3MGN4MWxmb3kzUzlDOTNDaUxUdkVhazhQRWtqcDNHWFFzcWt6Y0h2eEllSkViTElrdUcwSW80bml0a0g2UTM0aHc4dWQtYnZzUEdWaFBuMlpvNUZ5SURTc3h1VDd0amFXUzUzck5jTkNaSzZ0Zw?oc=5",
+        "description": "Italy squad: 10 players from outside Serie A, with Leoni, Palestra and others still to come Yahoo Sports",
+        "source": "Yahoo Sports",
+        "sport": "Football",
+        "region": "Italy",
+        "league_key": "seriea",
+        "league": "Serie A",
+        "image": "",
+        "published": "2026-09-23T09:40:00+00:00"
+      },
+      {
+        "title": "Capello Unsurprised By Roma’s 2026/27 Serie A Start - Yahoo Sports",
+        "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQdGVuejJFN1lhSUEwMnBtR2JfampJa1hTa0lTMzVKTkVGYVAtbEJTclpyVWdtZ3c4TFJJVVJ2YnVCVlBYc2VWTkpsVk9XQm9pdGlwbW1QSGFiOE5aVDE0OFNOMzJGNXJ4ZVR4VlhSNDRVZ3hJTDJpY0hMUUZhZHE5REJZdVRxMkJu?oc=5",
+        "description": "Capello Unsurprised By Roma’s 2026/27 Serie A Start Yahoo Sports",
+        "source": "Yahoo Sports",
+        "sport": "Football",
+        "region": "Italy",
+        "league_key": "seriea",
+        "league": "Serie A",
+        "image": "",
+        "published": "2026-09-22T19:50:00+00:00"
+      },
+      {
+        "title": "Venezia reach decision on Stroppa future after picking up 0 points from first 5 games - Yahoo Sports",
+        "link": "https://news.google.com/rss/articles/CBMijwFBVV95cUxPQTNzOWs4VHlmY3hNQVNmYXBUTjY4Q1Rzb2hJTUNJdF8zYkQ4VXptRGwzY3EyWS00OWZJLU9teE9LZWRlNzJ0QUJ0aGVzeld3SUtDcGRCSUJSUlBnRmpoMTU1VVFvQ3cyUWFsclFpV2pLWHNxakdWdVpUS0dOYTdac29sc2NnQWpGZF9SOGhXcw?oc=5",
+        "description": "Venezia reach decision on Stroppa future after picking up 0 points from first 5 games Yahoo Sports",
+        "source": "Yahoo Sports",
+        "sport": "Football",
+        "region": "Italy",
+        "league_key": "seriea",
+        "league": "Serie A",
+        "image": "",
+        "published": "2026-09-22T18:35:00+00:00"
+      },
+      {
+        "title": "Champions League: Atalanta only Serie A team into last 16 - so what is going on with Italian football? - Sky Sports",
+        "link": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxNRllXQ1Z6YmZodzlYSWd0Zi1PSVQzbnQ0YWlVZ3c4NVdBWWxMejluY1ZXRHRxakxOTFlRYmRRR25fUzF6RHpfb1BmVGI4WTAxMTA5dFN1UGlROEx5bWJWX0ZYcmQ0blF2eFpBYkVId085RmZGcFpndTJBLUNVQmRiUk5qc1R1aWlzNUZGVlFUcF9iQUZMdkZSVE03Rk5Nc1ZiVTBCYzBXcHU0V2NSTTlySlFRRzBya3hkRzlkQUdkMXJLblZZUTdMaVN5MzQ1eV9DdTlEQkVnRGZRSGpveXRZNQ?oc=5",
+        "description": "Champions League: Atalanta only Serie A team into last 16 - so what is going on with Italian football? Sky Sports",
+        "source": "Sky Sports",
+        "sport": "Football",
+        "region": "Italy",
+        "league_key": "seriea",
+        "league": "Serie A",
+        "image": "",
+        "published": "2026-09-11T07:00:00+00:00"
+      },
+      {
+        "title": "Serie A preview: Clubs splash out on extravagant young talent as Italian football attempts to reassert itself - The Athletic - The New York Times",
+        "link": "https://news.google.com/rss/articles/CBMirgFBVV95cUxOTjN5cHZTODFGR1lLR2xBSzIwQ2tMODFteHZpUy02QmVWUUlpWkQ0TEhWTlZYQlhqTDJVS29KVng1dFAtRlhYb0ZCSUJQNXpQQXFiSEFMV216N1hoR3I4MWx1TlZCLUp3TFZiaG5VUDF6TXVsMWVNRW5tUS10VlNUVzdPajVQd2Rjak1Jbm1RdDdkX0lDb1NnLUpCSUN4X0pfVG9tWEpZNW5lem5VbkE?oc=5",
+        "description": "Serie A preview: Clubs splash out on extravagant young talent as Italian football attempts to reassert itself - The Athletic The New York Times",
+        "source": "The New York Times",
+        "sport": "Football",
+        "region": "Italy",
+        "league_key": "seriea",
+        "league": "Serie A",
+        "image": "",
+        "published": "2026-08-22T07:00:00+00:00"
+      }
+    ],
+    "jamaica_pl": [
+      {
+        "title": "PFJL: No VAR to be introduced in Jamaica Premier League playoffs - Trinidad Guardian",
+        "link": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPZ3NRTzNwbV9vTmhFSi1Ha2xkMG9CVnVWcmx4cHByN0RnYVpIZzVSZ1lySi13c1dMV3otSkcwbGc3a2dsdEhhSkZ1SlE5VUVUS3FBM1VPSGhFSTN0ejZxdzgzZnQ4aW83eUJGNXQ0eHU1cHlZaFpTZW5OVndIeS15eHhZb3dabHNUTHhYZWVIUFRIcmFfZUdKbkJ3OGNnZHBCSjRpZGh1b2s0NmR6MEhETFIyMVo3ZFVnbnM4?oc=5",
+        "description": "PFJL: No VAR to be introduced in Jamaica Premier League playoffs Trinidad Guardian",
+        "source": "Trinidad Guardian",
+        "sport": "Football",
+        "region": "Jamaica",
+        "league_key": "jamaica_pl",
+        "league": "Jamaican Premier League",
+        "image": "",
+        "published": "2026-05-22T18:47:26+00:00"
+      },
+      {
+        "title": "Mount Pleasant vs. LA Galaxy: How to watch, stream Concacaf Champions Cup Leg 2 - mlssoccer.com",
+        "link": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxPQ2VCNExFUXh2Vm1VSHJyeHNHc1NyMXEycnJYUFdqVVVHY1BkblpGWHVKNnZYTzJTUm5UQ19lM3E1akZlSzY5TE0wRGZxVFZQaEhsa1BuTHZnSWJWRXNmbV9Na0llWjExWGhSbUJPS2o5cVlkWDBCQzczeTRTaEV2ZnBWTk1IUFRCZEczRHpJaTJsOTg3OG83UHVTLUZnQVhFNTVUd0JhWFEzMEUxVC1UejZ1ZUtQRWh5cTY5ZExHQm5pZi1DQ1VUaE1pZlV3U0RnUTZvTUJ6cWpEVGs?oc=5",
+        "description": "Mount Pleasant vs. LA Galaxy: How to watch, stream Concacaf Champions Cup Leg 2 mlssoccer.com",
+        "source": "mlssoccer.com",
+        "sport": "Football",
+        "region": "Jamaica",
+        "league_key": "jamaica_pl",
+        "league": "Jamaican Premier League",
+        "image": "",
+        "published": "2026-03-18T07:00:00+00:00"
+      },
+      {
+        "title": "Jamaican team has visas problem for 10 players ahead of LA Galaxy trip - The Athletic - The New York Times",
+        "link": "https://news.google.com/rss/articles/CBMingFBVV95cUxNbkF5VjFyQks4UXBCTmV6NklJLXc0MGRJc1hYRC1vUHIzdXBNV1p3X1NyTS1YcjgyY0oySW9EZUVjWGhhQndzU19Xa3Y2V2xxQmszUGlLdGJMSDFwZ1VuQjdkcTFEYUlpMzhMdXJiT2g1ZW5Ta0ZuQllYeC14MlhpMlIxZ0tzTTNrc0R5SkZjM2ozcTk4RXZ4bEttZGJuQQ?oc=5",
+        "description": "Jamaican team has visas problem for 10 players ahead of LA Galaxy trip - The Athletic The New York Times",
+        "source": "The New York Times",
+        "sport": "Football",
+        "region": "Jamaica",
+        "league_key": "jamaica_pl",
+        "league": "Jamaican Premier League",
+        "image": "",
+        "published": "2026-03-07T08:00:00+00:00"
+      },
+      {
+        "title": "Haitian football wonder signed to Montego called “brightest” in Jamaica league - The Haitian Times",
+        "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNTFBlX0hPZ005cGIta1hBdmtWOXhMeHpUSWVEX1V4OTJuTHNERGo4QnFIVVdkTlllZUJuNWFreU00bWhwS1FZdTFyeE5tcktWMzFVLU9SbU5OMkRyY25kQU5rREVaazlyMTJPb0lhc0pPTEdNSGktUFIwb0VaZk5CUDBDeHdtdTN5SnpZc2hFZTRZZw?oc=5",
+        "description": "Haitian football wonder signed to Montego called “brightest” in Jamaica league The Haitian Times",
+        "source": "The Haitian Times",
+        "sport": "Football",
+        "region": "Jamaica",
+        "league_key": "jamaica_pl",
+        "league": "Jamaican Premier League",
+        "image": "",
+        "published": "2026-01-22T08:00:00+00:00"
+      },
+      {
+        "title": "Neron Barrow signs two-year contract with Jamaica’s Waterhouse FC - Stabroek News",
+        "link": "https://news.google.com/rss/articles/CBMisgFBVV95cUxQUWF5SFhJMTROT3p3Mm1lcGxqdnFlN0hFVVY0UC15WGwwcUU1TWp5X0hFWlVxUXAxX0ZPdVdjcWYySzB0dnJUdk9EbUx4bl9IM1JQNUlxWWhEaUZJM2dseXIwSTVJajQyZlZWdWpFLXpoWjdJbFdOZnc3S01NNlZOVmFXVUthMEpmeEtoODZmdF9qYmtDd2NuZGFiLS1DSGVNQjNCT2NHTFZZdDZzRXFVZzhB?oc=5",
+        "description": "Neron Barrow signs two-year contract with Jamaica’s Waterhouse FC Stabroek News",
+        "source": "Stabroek News",
+        "sport": "Football",
+        "region": "Jamaica",
+        "league_key": "jamaica_pl",
+        "league": "Jamaican Premier League",
+        "image": "",
+        "published": "2026-01-11T08:00:00+00:00"
+      },
+      {
+        "title": "An interview with Craig Butler of Phoenix Academy - Back Page Football",
+        "link": "https://news.google.com/rss/articles/CBMijwFBVV95cUxNMzNObFd2SUd4QWF4Q3Z5NlJuMlVyOHZNZUh5cU5jSlB3OW83Um9fZTA5a1A4a0xTN0dVUllFeE9LQnFBSGwwOW90cWNKaUhXek0tZW9FczlJVk9OMlZhdEYzaXVKakxBbkdDaEVqaktMMVNzdlhZZGJXSWtSbTVxYnVwMXRncjlROTY4ZlZ4UQ?oc=5",
+        "description": "An interview with Craig Butler of Phoenix Academy Back Page Football",
+        "source": "Back Page Football",
+        "sport": "Football",
+        "region": "Jamaica",
+        "league_key": "jamaica_pl",
+        "league": "Jamaican Premier League",
+        "image": "",
+        "published": "2025-12-08T08:00:00+00:00"
+      },
+      {
+        "title": "Hubert Busby Jr. – An interview with the Jamaican women’s national team manager - Back Page Football",
+        "link": "https://news.google.com/rss/articles/CBMisgFBVV95cUxQZ00xUW9PMDZ1N2xjQlN4TTc2N19lcEVZZjBQTl9fYmh3N1ZiUnVZU1Z0M0JVMnJ6cWpZOGk1ZFd6SlA0S2JLQXpGUXNOR3lxYVBhanJVblhXdEpBSEItSUxfcFM5eFA2SUZtbjBVV29UR29KNHVobkp6VFNxbXI5eDBkSGF0cU9WNmVDeXl0YmRFYldZWTR1bUk1c09yZzVzeTBYV3RNYXUwbGlza1F0RTlB?oc=5",
+        "description": "Hubert Busby Jr. – An interview with the Jamaican women’s national team manager Back Page Football",
+        "source": "Back Page Football",
+        "sport": "Football",
+        "region": "Jamaica",
+        "league_key": "jamaica_pl",
+        "league": "Jamaican Premier League",
+        "image": "",
+        "published": "2025-06-30T07:00:00+00:00"
+      },
+      {
+        "title": "Farewell to a warrior! Jamaican football mourns Hugh ‘Gorilla’ Howell - Caribbean National Weekly",
+        "link": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPamRSajdlQkpzUWFYQkpBRUVNLW5LLXNyaklnXzk0Q0tXc3JYaGVaTVZvUmNaLVRreC1rSlVOUndGZjctekVpMXY5NVVlbGdkbXFFblNzaEhWLXNfdWYtRnpfcGxaTTc3R2d3QzVIZ3NHdy1pYkx2Yld1a3BXLTFjaUhzV2FNQWF3RlBKN2x2UVJ6N2t2VHRKWWJpajF6UDl1c2ZJazJfRC1hb2NOM2R5UzJB?oc=5",
+        "description": "Farewell to a warrior! Jamaican football mourns Hugh ‘Gorilla’ Howell Caribbean National Weekly",
+        "source": "Caribbean National Weekly",
+        "sport": "Football",
+        "region": "Jamaica",
+        "league_key": "jamaica_pl",
+        "league": "Jamaican Premier League",
+        "image": "",
+        "published": "2025-05-27T07:00:00+00:00"
+      },
+      {
+        "title": "Unconvincing Inter Miami manage shaky victory over Jamaican Premier League side Cavalier SC in CONCACAF Champions Cup without Lionel Messi available - Goal.com",
+        "link": "https://news.google.com/rss/articles/CBMiqAJBVV95cUxQYXJQeDdDSVBuMm55T2dTQ2U2M1VxWGVWMVdmcHllb3hMZ2VqTnVDQ0lhUFJwbjFYQThpdHFqN0lOVkdFZTJibjRxUGZSdFJxNzRRaHRBUGxoVDcwQ3FfY1FWRFdKMDN1T3VJandvMm9OQ2NjeVlrN2poRkxNTTE4ZVNOUHFYY09VUXQ1TkQ2cGFzTC10R1dkd2YzRnhld0V3MGZncnd2b056b2o3cElDN1VRa3NOM1ZfWWFUSmFyZWpsMFM4NEw2Z2I1VHVGN2ZoVWxUOFZXM0JYZGE3TDlMU0xPM1daellSUnBESFFjRTZ6OERySzFaQmh3a0ZnbFEwbHF4V01fQzd2UE40bkd4VG5IZnpGNHZ2d0xqUS1jN0k4M2ZIQjAxQg?oc=5",
+        "description": "Unconvincing Inter Miami manage shaky victory over Jamaican Premier League side Cavalier SC in CONCACAF Champions Cup without Lionel Messi available Goal.com",
+        "source": "Goal.com",
+        "sport": "Football",
+        "region": "Jamaica",
+        "league_key": "jamaica_pl",
+        "league": "Jamaican Premier League",
+        "image": "",
+        "published": "2025-03-07T08:00:00+00:00"
+      },
+      {
+        "title": "Alex Thomas guides promoted Slingers to second in Guyana Premier League - Jamaican striker Beckford racks up 17 goals, eight assists - jamaica-star.com",
+        "link": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxPaDhYcnhzc0RjWThrVXlyVzNKV1dtQnN3anFuM1VxY1Q2N1htdHlMaWtzUHJkRVZUX3pBTDdaTmRoS1JkeE5XSHc1bEw3THlyNjU0VUtqZHE3XzN3SThudHRNd29Jd2xKM3lEZ3JnQWlFMzBfNC1yNzhRcFc5TWxYVUFrM0xWSW9ZZXVIa2VwYzJCLVpHdU0zckIwVzJwTTl6WmtIcWRsblVYdTgyY05xcTZ5bkljZWtUSGpKRWs0dDk?oc=5",
+        "description": "Alex Thomas guides promoted Slingers to second in Guyana Premier League - Jamaican striker Beckford racks up 17 goals, eight assists jamaica-star.com",
+        "source": "jamaica-star.com",
+        "sport": "Football",
+        "region": "Jamaica",
+        "league_key": "jamaica_pl",
+        "league": "Jamaican Premier League",
+        "image": "",
+        "published": "2024-08-27T07:00:00+00:00"
+      },
+      {
+        "title": "Leon Bailey’s fight with Jamaica’s football federation is a long-running family affair - The New York Times",
+        "link": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxPRHc3S29wMVF4bld6QlViUUw3ak5lLUgwZ0lMRHhLQ0hDZ3hfS2h5SHVvdEpiNjhYU0hLLVdaeHBOYUVLVENWVE5JTkRCNnItQ2loZ1RkeVhjSk9tNXFrMmdWSzllSW1vVjdvRVppdHNBdXFzUVhfQXY0Ul9oSTY4ajF4TUd0WFI4NG44?oc=5",
+        "description": "Leon Bailey’s fight with Jamaica’s football federation is a long-running family affair The New York Times",
+        "source": "The New York Times",
+        "sport": "Football",
+        "region": "Jamaica",
+        "league_key": "jamaica_pl",
+        "league": "Jamaican Premier League",
+        "image": "",
+        "published": "2024-03-27T07:00:00+00:00"
+      },
+      {
+        "title": "Hatters legend Ricky Hill named technical director at Jamaican Premier League side Montego Bay United - Luton Today",
+        "link": "https://news.google.com/rss/articles/CBMi9wFBVV95cUxOSFFyX1l5N0ZsX1lKZzQyeVowMUdacXVuZDYxTTIyWWJEenBrUmd1QUZTRUNqS2VQQXhuV2Qtc2Z4aFlRaDY3aWFJSGlKR1NmRE9Lak82NUZRai1uc3JrY0Y2elpLbkttOHp6NVZqR3NBTFVFZXdCWUxtcW56Sm8zcGVoaFhWckFwZ3ZTd1NZRUg3RXJPcE1rVTFpU3NYUVNIRlhVMFk1NWdQM0lSeU1uSk5relU3ckRZNE5EenR3TDVxSlBEeXB4dU5VRFdvQ3F5X1N6OGd0VS1HVEZBWmpLcVZ6dk5ScTVrQWY5VTZ0Y3l1cjc0UWlB?oc=5",
+        "description": "Hatters legend Ricky Hill named technical director at Jamaican Premier League side Montego Bay United Luton Today",
+        "source": "Luton Today",
+        "sport": "Football",
+        "region": "Jamaica",
+        "league_key": "jamaica_pl",
+        "league": "Jamaican Premier League",
+        "image": "",
+        "published": "2022-01-24T08:00:00+00:00"
+      }
+    ],
+    "pfl": [
+      {
+        "title": "Maharlika FC - Dynamic Herb Cebu FC, 12/09/2026 - Philippines Football League - Match sheet - Transfermarkt",
+        "link": "https://news.google.com/rss/articles/CBMimwFBVV95cUxPRU9fWEJxY2UwQ21tR1ZybGNrNUNhSld6MWdGQWRIV041SUwtSm1NLWNnUU5WTnlLSENILVFGU3lYY2hVRFpJS2J6TVdBOE84NVZWeWQyRjU4UllqcUUzblZrUG9tNFJPY2ZmUGF4NURnTm50b3E5ZUI2YXgzZDVZZTRGdFMyQm9odVlFdVV1c2hJakU1QjdKRGZTRQ?oc=5",
+        "description": "Maharlika FC - Dynamic Herb Cebu FC, 12/09/2026 - Philippines Football League - Match sheet Transfermarkt",
+        "source": "Transfermarkt",
+        "sport": "Football",
+        "region": "Philippines",
+        "league_key": "pfl",
+        "league": "Philippines Football League",
+        "image": "",
+        "published": "2026-09-23T23:11:56+00:00"
+      },
+      {
+        "title": "Philippines Football League - Transfermarkt",
+        "link": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxNYkFubEQ1RlFzdWRZX0RsN3FLbHZSSFFkRV9TbWJRaEY4UzNRbDQ3aC14Vnh4WmdiRERvUERBQzJ6cnZTeDBKY1EySGdWUjNvTVZGRk1hWGZwSzBKZkNJWnJZTUNxRzFXYWlkcjlSWlJndUp4bThjNXlrZzdrM3VUb1F4Y09GeW1La1JQcTVUcDVtRUgtdlBacHlBUjhJcWVrRmd0dF9WY3pMOVBsSFRXSFdTN0pVam03eWJ6M0FRSnB5c2NVdTVZSw?oc=5",
+        "description": "Philippines Football League Transfermarkt",
+        "source": "Transfermarkt",
+        "sport": "Football",
+        "region": "Philippines",
+        "league_key": "pfl",
+        "league": "Philippines Football League",
+        "image": "",
+        "published": "2026-09-22T11:44:25+00:00"
+      },
+      {
+        "title": "Philippines Football League - List of goalscorers 26/27 (Gallery) - Transfermarkt",
+        "link": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxQRXItRll4aG1LdGt3QTJtNkJNdXJJb1lPYjN4WFZ1bXpDVVpkZDF0TEtJWVZFaWx4R0U4YXMzTWJIS3JIWmZodFN6NkJ3ZTFvZEJzTEZiZUVtb3A5d2ZzTG9QNE1MMWh0bm5FRnJNRWhvaHJJbWlfVlhMX0VGY0RjckRUVjFCSmpSSlpIcmM2MFJaSmVkWnFUTkZqbS00Q1RlMHU4Z1NndjY0Y0Z0Wk1JVUJOakJYR0NhbTFZSFZOd2RuQktiTTdMMmdybzZHck1ReWtHNE1sMHc4M0ZIcVE?oc=5",
+        "description": "Philippines Football League - List of goalscorers 26/27 (Gallery) Transfermarkt",
+        "source": "Transfermarkt",
+        "sport": "Football",
+        "region": "Philippines",
+        "league_key": "pfl",
+        "league": "Philippines Football League",
+        "image": "",
+        "published": "2026-09-22T02:45:15+00:00"
+      },
+      {
+        "title": "Maharlika FC - Manila Digger FC, 08/11/2026 - Philippines Football League - Match sheet - Transfermarkt",
+        "link": "https://news.google.com/rss/articles/CBMijwFBVV95cUxPVTNqS2NSSktYbnRrOXhhY3lpeVQ4WTZ0Y0owR2lQZWR4MzhhVVdkX0JabXNNYThUNkR6U3RiOVlZYnRNTlM0TnRQTThtN2pCRVR0c2gxVlNWTzMyd2Q1ekRYTjlDcWpMUjc2czZSbnl2NUlsZVJoXzFfd1JjWHJvaVRlc1JMV1RtUzVVUUtlaw?oc=5",
+        "description": "Maharlika FC - Manila Digger FC, 08/11/2026 - Philippines Football League - Match sheet Transfermarkt",
+        "source": "Transfermarkt",
+        "sport": "Football",
+        "region": "Philippines",
+        "league_key": "pfl",
+        "league": "Philippines Football League",
+        "image": "",
+        "published": "2026-09-20T13:36:11+00:00"
+      },
+      {
+        "title": "Philippine Army FC - Tuloy FC, 20/09/2026 - Philippines Football League - Match sheet - Transfermarkt",
+        "link": "https://news.google.com/rss/articles/CBMieEFVX3lxTE9NVmNsd3piOVFiZXhHbHRYOUxvdDdsckdtLWtpX3dQR0szVDRuMkxueTVXZzN1aU50X0dfWk5yYm0wNnV6dVlJbWxYRFlSRFlScWlRODFkT3hGVlRFRGVLcU9wUjRzTmRscjB4b3AxcF9CN2JvS19QbQ?oc=5",
+        "description": "Philippine Army FC - Tuloy FC, 20/09/2026 - Philippines Football League - Match sheet Transfermarkt",
+        "source": "Transfermarkt",
+        "sport": "Football",
+        "region": "Philippines",
+        "league_key": "pfl",
+        "league": "Philippines Football League",
+        "image": "",
+        "published": "2026-09-20T11:21:07+00:00"
+      },
+      {
+        "title": "Philippine Army vs Tuloy FC live score, H2H and lineups - Sofascore",
+        "link": "https://news.google.com/rss/articles/CBMigAFBVV95cUxNX1JHR2FFRGM1NTd0VXQySkVCQXlqUlV5eXE3b2tTN3phVTR3Znp4TzBHX1RoZ3JXYVY0NjU5ajBobnc2SXV6V3RjMHdJaWxNTGVnWm91QTM1YzFnY3VySU8zYUVzaUhaZWhNZ3kyOHJVc3BiQXpNVEZpcjZkMHlUUQ?oc=5",
+        "description": "Philippine Army vs Tuloy FC live score, H2H and lineups Sofascore",
+        "source": "Sofascore",
+        "sport": "Football",
+        "region": "Philippines",
+        "league_key": "pfl",
+        "league": "Philippines Football League",
+        "image": "",
+        "published": "2026-09-20T07:00:00+00:00"
+      },
+      {
+        "title": "Stallion Laguna FC - Manila Digger FC Live - Philippines Football League: Football Scores & Highlights - 20/09/2026 - TNT Sports",
+        "link": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxQZFZPVW9xRjFUdGxCYVluQzlZTURFSkRDLVN3QlZZN3ltSEg3Rk9rM0ZRWjI4aEdyckdBc3daZHdzY01pSUpFRUdFQ1hPc2ZyMTVkODdoTG16aVRNUWNqUjNvNjZ0VEE0cDNFRDFQTXNQZDFXZmpoTWdEZVlqTzVvOWFycXZwZzd4UXg0c0o1LTZkTGlSS2xtYlpycjNaOVhpRF8tcHdVcXlHOU1CUHBlUmpCd2xTS3VRS09vdWJxQi1heVRjT1ItRmd2eEpPYmdnaXFlcA?oc=5",
+        "description": "Stallion Laguna FC - Manila Digger FC Live - Philippines Football League: Football Scores & Highlights - 20/09/2026 TNT Sports",
+        "source": "TNT Sports",
+        "sport": "Football",
+        "region": "Philippines",
+        "league_key": "pfl",
+        "league": "Philippines Football League",
+        "image": "",
+        "published": "2026-09-19T23:20:50+00:00"
+      },
+      {
+        "title": "Stallion Laguna FC - Manila Digger FC Stats: Football Scores & Results - TNT Sports",
+        "link": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxObG83MFg0M0NQaUhDeXVTd1NUNHYzWGFoRkVZU1BTeU4yWTl0MUN5RXJLak5xLXV0QkY3OWUxNm10d3ZUelhDRjFha1M3MGNhWmNrcTJjZzV3U1paM2NzQVB1dUx4N3poSXB3NmZQVVdFaEhPWUNsUDNudGMwRlBiSWFqOE9seS1tY0RnR3FCTXlZV1VudFozcVREMENtTHN0bDcxT2xiZEt5OTA2a2E3c3M3dDRCUEdnb2NlbE5GRUxVRnVEaHByaDRZOXFTZ3k4eDBFU0ExWkxHcW9z?oc=5",
+        "description": "Stallion Laguna FC - Manila Digger FC Stats: Football Scores & Results TNT Sports",
+        "source": "TNT Sports",
+        "sport": "Football",
+        "region": "Philippines",
+        "league_key": "pfl",
+        "league": "Philippines Football League",
+        "image": "",
+        "published": "2026-09-19T20:58:38+00:00"
+      },
+      {
+        "title": "Philippines Football League - Transfermarkt",
+        "link": "https://news.google.com/rss/articles/CBMitgFBVV95cUxQWVRJWmV0b2tsWGFSaHFyS3U0TFE4Z3ZEM1dJOFNUdGtiYmp4d3lFMERmS0tLSnlHM1ZGalFMaWhRUkEyZllKbzRqakY2dHJSSUNuQWRmbXdkMEJyaGRMUkQ1RGJTSjNRTzA1bUxoVGJ6b2JMNXZ3WGduTzdnUVRPWVQyUVd0UVBVSmVhd3VrdjJvZm1jbjMxSm9ZdFl4dWp1M1gzblhKWDNJekQ5T2gxa0FUTEtHdw?oc=5",
+        "description": "Philippines Football League Transfermarkt",
+        "source": "Transfermarkt",
+        "sport": "Football",
+        "region": "Philippines",
+        "league_key": "pfl",
+        "league": "Philippines Football League",
+        "image": "",
+        "published": "2026-09-19T19:18:24+00:00"
+      },
+      {
+        "title": "Cebu Football Club unveils new faces in season-opening loss to Maharlika - Cebu Daily News",
+        "link": "https://news.google.com/rss/articles/CBMitAFBVV95cUxQdWNxcXM0X1cyUDY2YTB0OW9FRWREVlNkUGhZcEJHcUVvQ3dfQzdHLUFiRlRXVHFKdFl3Q2RoQU1UZktxTVlxQ1h0QUhCZUtnX0JLSWxvbWplX1VCUS1wRGk4WUh6X0lSMnNaeno2RG56R0R1UmNPY1d5UmI1OTFsMHJiaHE3TlR1RFlxSDdhVVJnSzNFV2ZHYm9vUnJkSlBaQ2ZyY3NvYlRnWkFhUVJMcU96RDPSAboBQVVfeXFMTWJpaUNjTE1FS1BEaFRLbGR4Nk9xODRFSUtkNWxTM1dzdXlxczhXRjhKbHBrLXNwN3pNd1lkY2VlMlNMcERPejIza0tRT1lXSjFHQkhBOUg2SkQtMDZnQVVYeEJBTW1kT3J3WGk5emYxZGJNQnE1QXBIb2o2VWdRdFZ5TDhfdW1PS2dUVHpYd292Z2lRR1ZVRTNxWVh6VmZjY3FoZW5ramVXb1lEQk9SODB3SEppWkdvVGVR?oc=5",
+        "description": "Cebu Football Club unveils new faces in season-opening loss to Maharlika Cebu Daily News",
+        "source": "Cebu Daily News",
+        "sport": "Football",
+        "region": "Philippines",
+        "league_key": "pfl",
+        "league": "Philippines Football League",
+        "image": "",
+        "published": "2026-09-17T09:39:00+00:00"
+      },
+      {
+        "title": "Maharlika FC - Kaya FC-Iloilo, 28/11/2026 - Philippines Football League - Match sheet - Transfermarkt",
+        "link": "https://news.google.com/rss/articles/CBMijAFBVV95cUxNYWpKU3UySHVWVVJyaXN0S3Rsck15dGV6bnc3UVVZbGZDVnhjeHZnUDJjWW0zNWpjRm5iUUVDU25oZFQxR0ZUMFJ4aHA4cF9nRExwZmtiWmd0NWtmMWE4ZEYxemZZOUpXZ0ZMOS05MlJJUkVFLXVlNEdlUVNnZkd5R1QzNXU5NFZDSUlELQ?oc=5",
+        "description": "Maharlika FC - Kaya FC-Iloilo, 28/11/2026 - Philippines Football League - Match sheet Transfermarkt",
+        "source": "Transfermarkt",
+        "sport": "Football",
+        "region": "Philippines",
+        "league_key": "pfl",
+        "league": "Philippines Football League",
+        "image": "",
+        "published": "2026-09-16T15:39:19+00:00"
+      },
+      {
+        "title": "Maharlika FC - Philippine Army FC Live - Philippines Football League: Football Scores & Highlights - 04/10/2026 - TNT Sports",
+        "link": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxPUk13eVlwRDV2Nmg3MTM2NGp0YTBrSGREb19JOTNNYzRCUTVxOGNrdTdoVnNTUkdqMV9xdXkzcjBqcVJHVTVzRThqWHM4dFBGS3BIeFpfY0I1NVF4OTFxalZsV0F0ZDJzei1PVHlNMjRiY04xWHJ4NHlvbmtFcXZheEMyUmdEUDhIalJHUlBKb3NoY1Q3bGRtSVZPcUVCUWtJV1p5c2ZpYkZMd2ljMWQtWTlObWM4VjFyWVFjemxWb2pVMzVuRW5vSw?oc=5",
+        "description": "Maharlika FC - Philippine Army FC Live - Philippines Football League: Football Scores & Highlights - 04/10/2026 TNT Sports",
+        "source": "TNT Sports",
+        "sport": "Football",
+        "region": "Philippines",
+        "league_key": "pfl",
+        "league": "Philippines Football League",
+        "image": "",
+        "published": "2026-09-12T16:55:12+00:00"
+      }
+    ]
+  },
   "items": [
+    {
+      "title": "Man City latest: Haaland scores twice as Norway win Nations League opener",
+      "link": "https://www.skysports.com/football/live-blog/12040/13025499/man-city-transfer-news-rumours-and-gossip-live-updates-and-latest-on-deals-signings-loans-and-contracts",
+      "description": "",
+      "source": "Sky Sports",
+      "sport": "Sports",
+      "region": "International",
+      "image": "https://e1.365dm.com/26/09/1920x1080/skysports-erling-haaland-norway_7360674.jpg?20260924211141",
+      "published": "2026-09-24T22:02:00+00:00"
+    },
+    {
+      "title": "Alcaraz felt burnt out after too much exposure on and off the court",
+      "link": "https://www.skysports.com/tennis/news/12040/13590778/laver-cup-carlos-alcaraz-felt-burnt-out-due-to-exposure-before-a-lengthy-layoff-with-a-wrist-injury",
+      "description": "Carlos Alcaraz has admitted feeling burnt out due to being exposed to a lot of commitments before he suffered a lengthy layoff due to an injury sustained in April.",
+      "source": "Sky Sports",
+      "sport": "Sports",
+      "region": "International",
+      "image": "https://e2.365dm.com/26/09/1920x1080/skysports-carlos-alcaraz-us-open_7345693.jpg?20260909073620",
+      "published": "2026-09-24T22:00:00+00:00"
+    },
+    {
+      "title": "Republic of Ireland slip to deserved defeat in Kosovo",
+      "link": "https://www.skysports.com/football/kosovo-vs-republic-of-ireland/report/553983",
+      "description": "The Republic of Ireland slipped to a 1-0 defeat away to Kosovo in their Nations League opener in Pristina.",
+      "source": "Sky Sports",
+      "sport": "Sports",
+      "region": "International",
+      "image": "https://e1.365dm.com/26/09/1920x1080/skysports-football-dara-o-shea_7360714.jpg?20260924222008",
+      "published": "2026-09-24T22:00:00+00:00"
+    },
+    {
+      "title": "Felix gives Portugal win over Wales in Nations League opener",
+      "link": "https://www.bbc.co.uk/sport/football/videos/cq770gkr1zy2o?at_medium=RSS&at_campaign=rss",
+      "description": "Watch the best of the action as Portugal beat Wales 1-0 in Lisbon in the Nations League",
+      "source": "BBC Sport",
+      "sport": "Sports",
+      "region": "International",
+      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/c98f/live/8c586740-b859-11f1-b1d1-571ed4d7ff2c.jpg",
+      "published": "2026-09-24T21:09:33+00:00"
+    },
     {
       "title": "Newcastle latest: Wissa scores in DR Congo win",
       "link": "https://www.skysports.com/football/live-blog/12040/13025496/newcastle-transfer-news-rumours-and-gossip-live-updates-and-latest-on-deals-signings-loans-and-contracts",
@@ -23,6 +949,26 @@
       "published": "2026-09-24T21:02:00+00:00"
     },
     {
+      "title": "Gakpo denies Klopp perfect start as Xavi’s Netherlands rescue draw against Germany",
+      "link": "https://www.theguardian.com/football/2026/sep/24/netherlands-germany-nations-league-match-report",
+      "description": "Jürgen Klopp had predicted his bow as Germany manager could be wild, a trait he would accept as long as his team looked lively. He got both in a strange, frayed and at times alarmingly pinball-like game that ended with a dramatic Netherlands equaliser and moun",
+      "source": "The Guardian Football",
+      "sport": "Football",
+      "region": "International",
+      "image": "https://i.guim.co.uk/img/media/21a86f8f7e00d39b4eff84d5dfb159224a2c0ec7/353_0_3903_3122/master/3903.jpg?width=140&quality=85&auto=format&fit=max&s=e5bc0fa4b4907c68f97305f244829686",
+      "published": "2026-09-24T20:59:30+00:00"
+    },
+    {
+      "title": "João Félix strike for Portugal enough to sink Wales but Ronaldo fever falls flat",
+      "link": "https://www.theguardian.com/football/2026/sep/24/portugal-wales-nations-league-match-report",
+      "description": "There was a comic-strip feel to another eventful evening in the world of Cristiano Ronaldo. Where to start? It was the 67th minute when his No 7 went up on the fourth official’s board, prompting Ronaldo to remove the captain’s armband from his left bicep befor",
+      "source": "The Guardian Sport",
+      "sport": "Sports",
+      "region": "International",
+      "image": "https://i.guim.co.uk/img/media/a345cbed7acaff2fdd5549aedcda8bccd5328618/80_0_4249_3400/master/4249.jpg?width=140&quality=85&auto=format&fit=max&s=92bab8cee8c9e1e0cccea65d0c7f36b6",
+      "published": "2026-09-24T20:55:15+00:00"
+    },
+    {
       "title": "Sunderland latest: Brobbey taken off injured during Netherlands game",
       "link": "https://www.skysports.com/football/live-blog/12040/13375102/sunderland-transfer-news-rumours-and-gossip-live-updates-and-latest-on-deals-signings-loans-and-contracts",
       "description": "",
@@ -31,16 +977,6 @@
       "region": "International",
       "image": "https://e0.365dm.com/26/09/1920x1080/skysports-brian-brobbey-netherlands_7360656.jpg?20260924204243",
       "published": "2026-09-24T20:44:00+00:00"
-    },
-    {
-      "title": "Netherlands v Germany, Portugal v Wales and more: Uefa Nations League – live",
-      "link": "https://www.theguardian.com/football/live/2026/sep/24/netherlands-v-germany-portugal-v-wales-and-more-uefa-nations-league-live",
-      "description": "⚽ Updates across Thursday night’s Nations League games ⚽ Get in touch: email Daniel and follow us on BlueSky Robert Earnshaw is in the BBC studio wearing the same rig he was in on Sky this morning. The thing with red and blue is you leave yourself open to accu",
-      "source": "The Guardian Football",
-      "sport": "Football",
-      "region": "International",
-      "image": "https://i.guim.co.uk/img/media/758754ebdd4aa46999cdf8729a25731dce8ebe5e/981_0_4355_3483/master/4355.jpg?width=140&quality=85&auto=format&fit=max&s=0c09cadbeebf174e7b80e26e982f5c7c",
-      "published": "2026-09-24T20:39:56+00:00"
     },
     {
       "title": "Arsenal latest: Havertz off injured in Germany's game vs Netherlands",
@@ -55,7 +991,7 @@
     {
       "title": "Jos Buttler injury and Kusal Mendis century derail England as Sri Lanka level ODI series",
       "link": "https://www.theguardian.com/sport/2026/sep/24/jos-buttler-injury-and-kusal-mendis-century-derail-england-as-sri-lanka-level-odi-series",
-      "description": "Wicketkeeper sustains hamstring injury while taking run Series set for decider at the Oval on Sunday A beautiful batting surface and a greased lightning outfield made this second one-day international wildly different to the first 48 hours earlier. Unfortunate",
+      "description": "Wicketkeeper sustains hamstring injury while taking run Series goes to a decider at the Oval on Sunday A beautiful batting surface and a greased lightning outfield made this second one-day international wildly different from the first 48 hours earlier. Unfortu",
       "source": "The Guardian Sport",
       "sport": "Sports",
       "region": "International",
@@ -103,16 +1039,6 @@
       "published": "2026-09-24T19:02:33+00:00"
     },
     {
-      "title": "Warwickshire close in on County Championship title after skittling Leicestershire",
-      "link": "https://www.skysports.com/cricket/news/12040/13591557/county-championship-warwickshire-close-in-on-title-after-skittling-relegation-threatened-leicestershire",
-      "description": "Warwickshire took a big step towards clinching the Rothesay County Championship title after skittling relegation-threatened Leicestershire for 125 at Edgbaston.",
-      "source": "Sky Sports",
-      "sport": "Sports",
-      "region": "International",
-      "image": "https://e2.365dm.com/26/09/1920x1080/skysports-warwickshire-county-cricket_7353875.jpg?20260916175329",
-      "published": "2026-09-24T19:02:00+00:00"
-    },
-    {
       "title": "Warwickshire blow through Leicestershire to hone in on title: County Championship cricket, day one – as it happened",
       "link": "https://www.theguardian.com/sport/live/2026/sep/24/somerset-v-surrey-warwickshire-v-leics-and-more-county-championship-cricket-live",
       "description": "Warwickshire bowled out Leicestershire for just 125 at Edgbaston, while Surrey racked up runs at Somerset That man Jack Leach has got the breakthrough in Taunton. Michael Vaughan and Steve Finn have both been calling for Leach to be recalled into the Test side",
@@ -123,16 +1049,6 @@
       "published": "2026-09-24T18:54:06+00:00"
     },
     {
-      "title": "Fitzpatrick impresses as Kim grabs lead after 'dream start' in France",
-      "link": "https://www.skysports.com/golf/news/12040/13591499/open-de-france-michael-kim-leads-after-dream-start-as-matt-fitzpatrick-impresses-on-low-scoring-day-at-le-golf-national",
-      "description": "Matt Fitzpatrick sits two shots off the early lead at the FedEx Open de France, as defending champion Michael Kim topped the leaderboard after a ‘dream start’ at Le Golf National.",
-      "source": "Sky Sports",
-      "sport": "Sports",
-      "region": "International",
-      "image": "https://e1.365dm.com/26/09/1920x1080/skysports-matt-fitzpatrick_7360578.jpg?20260924185745",
-      "published": "2026-09-24T18:45:00+00:00"
-    },
-    {
       "title": "The compromises and power struggles that shaped Fury-Joshua",
       "link": "https://www.bbc.co.uk/sport/boxing/articles/c65y74pjl0w4o?at_medium=RSS&at_campaign=rss",
       "description": "BBC Sport takes a look at the compromises, power struggles and competing interests behind Tyson Fury v Anthony Joshua.",
@@ -141,26 +1057,6 @@
       "region": "International",
       "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/60d8/live/f284d560-b842-11f1-bc1f-3f186ca4140c.jpg",
       "published": "2026-09-24T18:41:35+00:00"
-    },
-    {
-      "title": "Min Woo Lee holes monster birdie for Internationals at Presidents Cup!",
-      "link": "https://www.skysports.com/watch/video/13591545/look-at-that-min-woo-lee-holes-50ft-putt-at-presidents-cup",
-      "description": "Min Woo Lee holed a 50 foot putt on the second hole on the first day of the Presidents Cup.",
-      "source": "Sky Sports",
-      "sport": "Sports",
-      "region": "International",
-      "image": "https://e1.365dm.com/26/09/1920x1080/skysports-f-a_7360550.jpg?20260924182528",
-      "published": "2026-09-24T18:22:00+00:00"
-    },
-    {
-      "title": "'The lads wanted me to stick one up him' - Wood relives fastest spells",
-      "link": "https://www.bbc.co.uk/sport/cricket/articles/cqm27gwz9ge1o?at_medium=RSS&at_campaign=rss",
-      "description": "As England bowler Mark Wood retires from international cricket, he talks through his most famous spells from his Test career.",
-      "source": "BBC Sport",
-      "sport": "Sports",
-      "region": "International",
-      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/b7db/live/ed6258b0-b83c-11f1-aeab-cbd1b7662429.jpg",
-      "published": "2026-09-24T18:13:02+00:00"
     },
     {
       "title": "UK Football Police Unit accused of ‘bringing Hillsborough’ into alcohol debate",
@@ -201,16 +1097,6 @@
       "region": "International",
       "image": "https://i.guim.co.uk/img/media/b93f205dba4151f0086eaec4972d01106988c70d/748_0_5000_4000/master/5000.jpg?width=140&quality=85&auto=format&fit=max&s=fded5200bc77ccd9d4be6335be07f193",
       "published": "2026-09-24T17:16:42+00:00"
-    },
-    {
-      "title": "NHL’s Andrei Kuzmenko steps away from team after father killed in Siberia bear attack",
-      "link": "https://www.theguardian.com/sport/2026/sep/24/andrei-kuzmenko-father-alexander-kuzmenko-bear-attack-russia",
-      "description": "Alexander Kuzmenko was fatally injured on fishing trip Region had been flagged as site of recent bear activity Forward joined Pittsburgh Penguins this year Pittsburgh Penguins forward Andrei Kuzmenko has stepped away from the team after his father, Alexander K",
-      "source": "The Guardian Sport",
-      "sport": "Sports",
-      "region": "International",
-      "image": "https://i.guim.co.uk/img/media/dff8d843f0f05b6007b1500affcef1bcf212ec20/162_0_5714_4569/master/5714.jpg?width=140&quality=85&auto=format&fit=max&s=718152df51ad156f3f526aea5fb87f29",
-      "published": "2026-09-24T17:08:37+00:00"
     },
     {
       "title": "Raphinha: ‘In my head I was leaving Barça, but a few small words can change you’",
@@ -283,14 +1169,14 @@
       "published": "2026-09-24T16:00:00+00:00"
     },
     {
-      "title": "Football Daily | Pints and points: the arguments for and against booze at football matches",
-      "link": "https://www.theguardian.com/football/2026/sep/24/pints-points-arguments-for-against-booze-football-daily",
-      "description": "Sign up now! Sign up now! Sign up now? Sign up now! Considering he is a lifelong Everton fan, it’s no surprise that Andy Burnham seems to be in favour of allowing fans to drink Tin at football matches . Bouts of boardroom turmoil, points deductions and assorte",
+      "title": "Vinícius Júnior et al land in unlikely outpost of Townsville as Brazil reboot begins | Joey Lynch",
+      "link": "https://www.theguardian.com/football/2026/sep/24/vinicius-junior-et-al-land-in-unlikely-outpost-of-townsville-as-brazil-reboot-begins",
+      "description": "The Seleção’s rebuild after their latest World Cup exit begins against the Socceroos in a place better known for rugby league than joga bonito It’s a safe bet that Vinícius Júnior, who plays week in and week out for Real Madrid at the Santiago Bernabéu, doesn’",
       "source": "The Guardian Football",
       "sport": "Football",
       "region": "International",
-      "image": "https://i.guim.co.uk/img/media/c57660f0e87edcd9f48627d556e43acabca56fc0/183_53_2551_2041/master/2551.jpg?width=140&quality=85&auto=format&fit=max&s=7b1cf69d0eb7c085ea2355dc545c4f7b",
-      "published": "2026-09-24T15:08:57+00:00"
+      "image": "https://i.guim.co.uk/img/media/a26e045fd53d2641851b88dae676c92942cfb086/158_41_2150_1721/master/2150.jpg?width=140&quality=85&auto=format&fit=max&s=ee5ba1133e4cba916663cd5b332e039c",
+      "published": "2026-09-24T15:00:20+00:00"
     },
     {
       "title": "Alex Eala falls to Tatiana Prozorova to exit early in Singapore Tennis Open",
