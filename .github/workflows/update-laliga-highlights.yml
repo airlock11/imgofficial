@@ -37,7 +37,7 @@ jobs:
             git fetch origin main
             git reset --hard origin/main
             python scripts/update_laliga_highlights.py
-            if git diff --quiet -- laliga-highlights.json; then
+            if [ -z "$(git status --porcelain -- laliga-highlights.json)" ]; then
               echo "No La Liga highlight changes."
               exit 0
             fi
