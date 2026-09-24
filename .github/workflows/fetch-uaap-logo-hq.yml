@@ -1,0 +1,62 @@
+name: Fetch UAAP HQ logo
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/fetch-uaap-logo-hq.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download official UAAP logo
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 3 --retry-delay 2             "https://uaap.org/images/logos/uaap_up.png"             -o assets/uaap/uaap-logo-hq.png
+
+      - name: Validate logo
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import struct
+          p=Path("assets/uaap/uaap-logo-hq.png")
+          b=p.read_bytes()
+          assert b[:8] == b"\x89PNG\r\n\x1a\n", "not PNG"
+          w,h=struct.unpack(">II", b[16:24])
+          assert w >= 500 and h >= 500, (w,h)
+          assert p.stat().st_size > 20000, p.stat().st_size
+          print("validated", w, h, p.stat().st_size)
+          PY
+
+      - name: Commit logo
+        run: |
+          set -euo pipefail
+          git config user.name "IMG Asset Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add assets/uaap/uaap-logo-hq.png
+          if git diff --cached --quiet; then
+            echo "UAAP logo already current"
+            exit 0
+          fi
+          git commit -m "Add official UAAP HQ logo"
+          for attempt in 1 2 3 4 5; do
+            git fetch origin main
+            if ! git rebase origin/main; then
+              git rebase --abort || true
+              exit 1
+            fi
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            sleep 2
+          done
+          exit 1
