@@ -2154,7 +2154,7 @@ html[data-theme="light"] .logo img{filter:brightness(0)}
 
 /* IMG_SCORE_LEAGUE_EQUAL_MOBILE_SPACING_START */
 @media (max-width:760px){
-  /* Preserve the existing button spacing while keeping every full league name readable. */
+  /* Keep the established league spacing; only constrain/wrap labels so they cannot overlap. */
   body.scores-page .score-league-filters{
     gap:7px!important;
     align-items:flex-start!important;
@@ -2169,25 +2169,30 @@ html[data-theme="light"] .logo img{filter:brightness(0)}
     max-width:64px!important;
     box-sizing:border-box;
     gap:5px!important;
+    overflow:visible;
   }
 
   body.scores-page .score-league-name,
   body.scores-page .score-league-item-champions .score-league-name,
   body.scores-page .score-league-item-one .score-league-name{
+    display:block!important;
     width:64px!important;
+    min-width:0!important;
     max-width:64px!important;
     min-height:30px;
     margin:0!important;
-    padding:0!important;
+    padding:0 1px!important;
     box-sizing:border-box;
     text-align:center!important;
-    font-size:.48rem!important;
-    line-height:1.03!important;
-    letter-spacing:-.01em!important;
+    font-size:.44rem!important;
+    line-height:1.08!important;
+    letter-spacing:-.015em!important;
     white-space:normal!important;
-    overflow:visible!important;
-    overflow-wrap:normal!important;
+    text-wrap:wrap!important;
+    overflow:hidden!important;
+    overflow-wrap:anywhere!important;
     word-break:normal!important;
+    hyphens:auto;
     text-overflow:clip!important;
     -webkit-line-clamp:unset!important;
     line-clamp:unset!important;
