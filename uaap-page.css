@@ -1132,3 +1132,69 @@ footer{
 :root[data-theme="light"] #uaap-hero p{
   color:#fff !important;
 }
+
+
+/* FINAL UAAP mobile fade + HQ logo */
+#uaap-hero .league-logo{
+  width:auto !important;
+  height:170px !important;
+  max-width:150px !important;
+  object-fit:contain !important;
+  object-position:center !important;
+  image-rendering:auto !important;
+  filter:drop-shadow(0 8px 20px rgba(0,0,0,.52)) !important;
+}
+#uaap-hero .league-lockup{
+  align-items:center !important;
+  margin-bottom:8px !important;
+}
+
+@media(max-width:720px){
+  #uaap-hero::before{
+    background-image:var(--hero-image) !important;
+    background-size:100% auto !important;
+    background-position:center top !important;
+    background-repeat:no-repeat !important;
+  }
+  #uaap-hero::after{
+    content:"" !important;
+    display:block !important;
+    position:absolute !important;
+    z-index:1 !important;
+    left:0 !important;
+    right:0 !important;
+    top:0 !important;
+    bottom:auto !important;
+    height:calc(33.333vw + 82px) !important;
+    pointer-events:none !important;
+    background:linear-gradient(
+      180deg,
+      rgba(0,0,0,0) 0%,
+      rgba(0,0,0,0) calc(100% - 82px),
+      rgba(0,0,0,.08) calc(100% - 68px),
+      rgba(0,0,0,.28) calc(100% - 50px),
+      rgba(0,0,0,.58) calc(100% - 30px),
+      rgba(0,0,0,.84) calc(100% - 14px),
+      #000 100%
+    ) !important;
+  }
+  #uaap-hero .hero-shell{
+    position:relative !important;
+    z-index:2 !important;
+  }
+  #uaap-hero .league-logo{
+    width:auto !important;
+    height:160px !important;
+    max-width:142px !important;
+  }
+  #uaap-hero .league-lockup{
+    margin-bottom:10px !important;
+  }
+}
+
+@media(max-width:520px){
+  #uaap-hero .league-logo{
+    height:150px !important;
+    max-width:134px !important;
+  }
+}
