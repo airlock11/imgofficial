@@ -1,0 +1,50 @@
+name: Update PFL highlights
+on:
+  schedule:
+    - cron: "17,47 * * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/football_highlights_common.py"
+      - "scripts/update_pfl_highlights.py"
+      - ".github/workflows/update-pfl-highlights.yml"
+permissions:
+  contents: write
+concurrency:
+  group: pfl-highlights-update
+  cancel-in-progress: true
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Refresh PFL highlights
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "IMG PFL Highlights Bot"
+          git config user.email "actions@users.noreply.github.com"
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git reset --hard origin/main
+            python scripts/update_pfl_highlights.py
+            if git diff --quiet -- pfl-highlights.json; then
+              echo "No PFL highlight changes."
+              exit 0
+            fi
+            git add pfl-highlights.json
+            git commit -m "Update PFL highlights"
+            if git push origin HEAD:main; then exit 0; fi
+            echo "Push raced with another main update; regenerating (attempt $attempt)."
+          done
+          echo "Unable to publish PFL highlights after retries."
+          exit 1
