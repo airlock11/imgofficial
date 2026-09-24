@@ -365,8 +365,10 @@ body[data-football-league] .football-highlight-link{
 /* Artwork-first league heroes: preserve the full 3:1 artwork on every screen. */
 #football-hero.hero--artwork {
   min-height: 0 !important;
-  height: 33.333vw !important;
+  height: auto !important;
+  aspect-ratio: 3 / 1 !important;
   padding: 0 !important;
+  overflow: hidden !important;
   background: #000 !important;
   --football-hero-end: #000;
 }
@@ -375,12 +377,20 @@ body[data-football-league] .football-highlight-link{
   display: none !important;
 }
 #football-hero.hero--artwork::before {
+  content: "" !important;
+  display: block !important;
+  position: absolute !important;
+  z-index: 0 !important;
   inset: 0 !important;
   width: 100% !important;
   height: 100% !important;
+  opacity: 1 !important;
+  filter: none !important;
+  transform: none !important;
+  background-color: #000 !important;
   background-image: var(--hero-image) !important;
-  background-size: 100% auto !important;
-  background-position: center top !important;
+  background-size: cover !important;
+  background-position: center center !important;
   background-repeat: no-repeat !important;
 }
 #football-hero.hero--artwork::after {
@@ -398,14 +408,26 @@ body[data-football-league] .football-highlight-link{
 @media (max-width: 900px) {
   #football-hero.hero--artwork {
     min-height: 0 !important;
-    height: 33.333vw !important;
+    height: auto !important;
+    aspect-ratio: 3 / 1 !important;
     padding: 0 !important;
+    overflow: hidden !important;
   }
   #football-hero.hero--artwork::before {
+    content: "" !important;
+    display: block !important;
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
     height: 100% !important;
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
+    background-color: #000 !important;
     background-image: var(--hero-image) !important;
-    background-size: 100% auto !important;
-    background-position: center top !important;
+    background-size: cover !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
   }
   #football-hero.hero--artwork::after {
     display: block !important;
