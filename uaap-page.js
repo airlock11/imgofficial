@@ -77,7 +77,7 @@ function renderGames({live,upcoming,finals}){
       teamBlock(g.home||"Home","right",showScore?g.homeScore:"")+
       '</article>';
   };
-  qsa(".tab-btn").forEach(b=>b.addEventListener("click",()=>paint(b.dataset.tab,true)));
+  qsa(".tab-btn").forEach(b=>{b.onclick=()=>paint(b.dataset.tab,true)});
   paint(active,true);
   gameController={updateLive(next){const had=groups.live.length>0;groups.live=Array.isArray(next)?next:[];const has=groups.live.length>0;if(has&&active==="live")paint("live");else if(has&&!had)paint("live",true);else if(!has&&had&&active==="live")paint(groups.upcoming.length?"upcoming":"results",true)}};
 }
