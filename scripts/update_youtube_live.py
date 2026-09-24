@@ -90,6 +90,49 @@ def source_title_allowed(source,title):
  includes=[str(x).upper() for x in source.get("includeAny",[]) if str(x).strip()]
  return not includes or any(token in upper for token in includes)
 
+_LIVE_EVENT_MATCH_CACHE=None
+def _normalize_match_text(value):
+ text=str(value or "").upper()
+ text=text.replace("D-BACKS","DIAMONDBACKS").replace("D BACKS","DIAMONDBACKS")
+ text=re.sub(r"[^A-Z0-9]+"," ",text)
+ return " ".join(text.split())
+
+def _team_match_name(team):
+ name=_normalize_match_text(team)
+ parts=name.split()
+ if not parts:return ""
+ # Preserve common two-word MLB nicknames so Red Sox / White Sox remain distinct
+ # and Blue Jays is not reduced to the generic word "Jays".
+ if len(parts)>=2 and " ".join(parts[-2:]) in {"RED SOX","WHITE SOX","BLUE JAYS"}:
+  return " ".join(parts[-2:])
+ return parts[-1]
+
+def _live_event_match_cache():
+ global _LIVE_EVENT_MATCH_CACHE
+ if _LIVE_EVENT_MATCH_CACHE is None:
+  try:
+   _LIVE_EVENT_MATCH_CACHE=live_events()
+  except Exception as ex:
+   print("live event match cache",ex)
+   _LIVE_EVENT_MATCH_CACHE=[]
+ return _LIVE_EVENT_MATCH_CACHE
+
+def source_live_game_allowed(source,title):
+ if not source.get("requireLiveGameMatch"):
+  return True
+ sport=str(source.get("sport") or "")
+ title_norm=_normalize_match_text(title)
+ for event in _live_event_match_cache():
+  if str(event.get("sport") or "")!=sport:
+   continue
+  teams=list(event.get("teams") or [])
+  if len(teams)<2:
+   continue
+  a=_team_match_name(teams[0]); b=_team_match_name(teams[1])
+  if a and b and a in title_norm and b in title_norm:
+   return True
+ return False
+
 def resolve_source_channel(source,previous):
  source_id=str(source.get("id") or "")
  cached=str(previous.get("scanner",{}).get("resolvedChannels",{}).get(source_id) or "")
@@ -152,6 +195,7 @@ def scan_official_source(source,previous):
    continue
 
   if not is_live or ended or not source_title_allowed(source,title):continue
+  if not source_live_game_allowed(source,title):continue
   watch="https://www.youtube.com/watch?v="+vid
   verified_at=datetime.now(timezone.utc).isoformat()
   stream={
