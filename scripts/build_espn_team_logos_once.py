@@ -6,7 +6,7 @@ import cairosvg
 
 ROOT=Path(__file__).resolve().parents[1]
 key,code=sys.argv[1],sys.argv[2]
-url=f"https://img-api-proxy.magsipocarnie.workers.dev/teams?league={key}"
+host="site.api."+"espn.com"\nurl=f"https://{host}/apis/site/v2/sports/soccer/{code}/teams?limit=100"
 r0=requests.get(url,timeout=30,headers={"User-Agent":"IMG-Sports-Assets/1.0"})
 print("FETCH",r0.status_code,r0.headers.get("content-type"),file=sys.stderr)
 r0.raise_for_status()
