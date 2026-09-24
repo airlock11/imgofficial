@@ -1449,3 +1449,38 @@ footer{
     font-size:.86rem !important;
   }
 }
+
+
+/* FINAL UAAP hero contrast treatment — preserve PBA geometry */
+.uaap-hero .league-lockup{
+  position:relative !important;
+  isolation:isolate;
+}
+.uaap-hero .league-lockup::before{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  inset:-10px -16px;
+  border-radius:20px;
+  background:
+    radial-gradient(circle at 38% 50%,
+      rgba(0,0,0,.62) 0%,
+      rgba(0,0,0,.46) 48%,
+      rgba(0,0,0,.18) 72%,
+      rgba(0,0,0,0) 100%);
+  pointer-events:none;
+}
+.uaap-hero .league-logo{
+  filter:
+    drop-shadow(0 0 1px rgba(255,255,255,.95))
+    drop-shadow(0 2px 3px rgba(0,0,0,.88))
+    drop-shadow(0 8px 18px rgba(0,0,0,.68)) !important;
+}
+.uaap-hero p{
+  color:#fff !important;
+  font-weight:600 !important;
+  text-shadow:
+    0 1px 1px rgba(0,0,0,1),
+    0 2px 5px rgba(0,0,0,.96),
+    0 5px 14px rgba(0,0,0,.88) !important;
+}
