@@ -25,9 +25,17 @@ function teamVisual(name){
   const team=safe(name),src=UAAP_TEAM_LOGOS[team]||"";
   const initialsHtml='<span class="team-initial-fallback">'+safe(initials(team))+'</span>';
   if(!src)return '<div class="team-visual team-visual-fallback" aria-label="'+team+'">'+initialsHtml+'</div>';
-  const extra="";
+  const whiteBgTeams=new Set([
+    "Ateneo Blue Eagles",
+    "UE Red Warriors",
+    "FEU Tamaraws",
+    "De La Salle Green Archers"
+  ]);
+  const extra=whiteBgTeams.has(team)?" logo-white-circle":"";
   return '<div class="team-visual'+extra+'" aria-label="'+team+'">'+initialsHtml+
-    '<img class="uaap-team-logo" src="'+src+'" alt="'+team+' logo" loading="eager" decoding="async" onerror="this.remove()"></div>';
+    '<img class="uaap-team-logo" src="'+src+'" alt="'+team+' logo" loading="eager" decoding="async" '+
+    'onload="const fb=this.parentElement.querySelector(\'.team-initial-fallback\');if(fb)fb.style.display=\'none\';" '+
+    'onerror="this.remove()"></div>';
 }
 function teamBlock(name,side,score=""){
   const hasScore=score!==null&&score!==undefined&&String(score)!=="";
