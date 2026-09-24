@@ -115,8 +115,10 @@ function targetKey(name,category=""){
   if((n==="major league soccer"||n==="mls")&&(cat.includes("usa")||cat.includes("united states")))return "mls";
   if((n.includes("philippine football league")||n.includes("philippines football league"))&&cat.includes("philippines"))return "pfl";
 
-  const exact=TARGETS.find(t=>t.names.some(x=>n===norm(x)));
-  return exact?.key||null;
+  // Every supported target is handled above with a country/category guard.
+  // Do not fall back to a name-only match: names such as "Premier League"
+  // and "Primera Division" are shared by competitions in many countries.
+  return null;
 }
 function eventItems(payload){
   if(Array.isArray(payload?.schedules))return payload.schedules;
