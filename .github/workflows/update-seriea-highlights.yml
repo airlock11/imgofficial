@@ -37,7 +37,7 @@ jobs:
             git fetch origin main
             git reset --hard origin/main
             python scripts/update_seriea_highlights.py
-            if git diff --quiet -- seriea-highlights.json; then
+            if [ -z "$(git status --porcelain -- seriea-highlights.json)" ]; then
               echo "No Serie A highlight changes."
               exit 0
             fi
