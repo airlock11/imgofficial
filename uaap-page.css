@@ -760,6 +760,52 @@ footer{
   .standings-grid{grid-template-columns:1fr}
   .news-grid{grid-template-columns:1fr}
 }
+
+/* Desktop UAAP hero: keep copy below the artwork so it never covers the hero */
+@media(min-width:721px){
+  .uaap-hero{
+    height:402px;
+    min-height:402px;
+    overflow:hidden;
+    background:#000;
+  }
+  .uaap-hero-media{
+    position:absolute;
+    inset:0 0 auto 0;
+    height:300px;
+    background:#000;
+  }
+  .uaap-hero-media::after{
+    background:
+      linear-gradient(90deg,rgba(0,0,0,.18) 0%,rgba(0,0,0,.05) 34%,rgba(0,0,0,0) 72%,rgba(0,0,0,.02) 100%),
+      linear-gradient(180deg,rgba(0,0,0,0) 0%,rgba(0,0,0,0) 67%,rgba(0,0,0,.22) 82%,rgba(0,0,0,.70) 95%,#000 100%);
+  }
+  .uaap-hero .hero-shell{
+    height:402px;
+    min-height:402px;
+    align-items:flex-end;
+    padding-top:300px;
+    padding-bottom:10px;
+  }
+  .uaap-hero .hero-copy{
+    width:min(680px,70%);
+  }
+  .uaap-hero p{
+    max-width:650px;
+    font-size:.82rem;
+    line-height:1.35;
+    text-shadow:none;
+  }
+  .uaap-hero .hero-actions{
+    margin-top:8px;
+  }
+  .uaap-hero .primary-btn{
+    min-height:38px;
+    padding:0 16px;
+    font-size:.82rem;
+  }
+}
+
 @media(max-width:720px){
   #previous-games .media-row{
     scrollbar-width:none;
