@@ -53,7 +53,8 @@ function eventId(g){return safe(g?.eventId||g?.id||[g?.away,g?.home,g?.date].fil
 function renderGames({live,upcoming,finals}){
   const groups={live:[...live],upcoming:[...upcoming],results:[...finals]};
   const slot=qs("#game-slot");
-  let active=live.length?"live":upcoming.length?"upcoming":"results",shown="";
+  const previousActive=qs(".tab-btn.active")?.dataset?.tab;
+  let active=previousActive&&groups[previousActive]?.length?previousActive:live.length?"live":upcoming.length?"upcoming":"results",shown="";
   const patch=g=>{
     const card=slot?.querySelector(".featured-game");
     if(!card||card.dataset.eventId!==eventId(g))return false;
@@ -122,9 +123,7 @@ function renderGallery(finals,official){
   wrap.innerHTML=cards.length?cards.join(""):"";
 }
 function renderHighlights(official){
-  const wrap=qs("#highlights"),items=Array.isArray(official.highlights)?official.highlights.slice(0,10):[];
-  setSectionVisible(wrap,items.length>0);
-  if(!items.length){wrap.innerHTML="";return}
+  const wrap=qs("#highlights"),raw=Array.isArray(official.highlights)?official.highlights.slice(0,10):[];
 
   const youtubeId=x=>{
     const direct=safe(x?.id).trim();
@@ -134,10 +133,13 @@ function renderHighlights(official){
     return m?m[1]:"";
   };
   const thumb=x=>safe(String(x.thumbnail||"").replace(/(?:hqdefault|sddefault|mqdefault|default)\.jpg(?:\?.*)?$/,"maxresdefault.jpg"));
+  const items=raw.map(x=>({item:x,id:youtubeId(x)})).filter(x=>x.id);
 
-  wrap.innerHTML=items.map((x,index)=>{
-    const id=youtubeId(x),fallback=safe(x.thumbnail||"");
-    if(!id)return "";
+  setSectionVisible(wrap,items.length>0);
+  if(!items.length){wrap.innerHTML="";return}
+
+  wrap.innerHTML=items.map(({item:x,id},index)=>{
+    const fallback=safe(x.thumbnail||"");
     return '<article class="reel-card uaap-highlight-card">'+
       '<div class="uaap-highlight-media" tabindex="0" role="button" data-video-id="'+safe(id)+'" data-index="'+index+'" aria-label="Play '+safe(x.title)+'">'+
         (x.thumbnail?'<img class="highlight-thumb" src="'+thumb(x)+'" data-fallback="'+fallback+'" alt="'+safe(x.title)+'" loading="lazy" decoding="async" onerror="if(this.dataset.fallback&&this.src!==this.dataset.fallback){this.src=this.dataset.fallback}">':'<div class="highlight-thumb"></div>')+
@@ -185,7 +187,8 @@ function renderHighlights(official){
   });
 }
 function renderStandings(regional,official){
-  const list=(Array.isArray(official.standings)&&official.standings.length?official.standings:regional.standings)||[];
+  const officialList=Array.isArray(official.standings)?official.standings:[],regionalList=Array.isArray(regional.standings)?regional.standings:[];
+  const list=officialList.length?officialList:regionalList;
   const wrap=qs("#standings-body");
   setSectionVisible(wrap,list.length>0);
   wrap.innerHTML=list.map((x,i)=>'<tr><td>'+(i+1)+'</td><td><div class="standing-team">'+teamVisual(x.team)+'<span>'+safe(x.team)+'</span></div></td><td>'+safe(x.wins)+'</td><td>'+safe(x.losses)+'</td></tr>').join("");

@@ -761,24 +761,7 @@ footer{
   .news-grid{grid-template-columns:1fr}
 }
 @media(max-width:720px){
-  #previous-games .media-row{
-    scrollbar-width:none;
-    -ms-overflow-style:none
-  }
-  #previous-games .media-row::-webkit-scrollbar{
-    width:0;
-    height:0;
-    display:none
-  }
-  .highlight-row{
-    scrollbar-width:none;
-    -ms-overflow-style:none
-  }
-  .highlight-row::-webkit-scrollbar{
-    width:0;
-    height:0;
-    display:none
-  }
+
   .shell{width:min(100% - 20px,1180px)}
   .navlinks{gap:12px}
   .navlinks a:nth-child(4),.navlinks a:nth-child(5){display:none}
@@ -1010,12 +993,7 @@ footer{
 .highlight-copy{padding:9px 3px 0}
 .highlight-copy strong{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;font-size:.86rem;line-height:1.28}
 .highlight-copy span{display:block;margin-top:4px;color:#8999ac;font-size:.72rem}
-@media(max-width:720px){
-  #previous-games .media-row,
-  .highlight-row{scrollbar-width:none;-ms-overflow-style:none}
-  #previous-games .media-row::-webkit-scrollbar,
-  .highlight-row::-webkit-scrollbar{width:0;height:0;display:none}
-}
+
 
 /* UAAP team logo quality overrides */
 .game-team .team-visual,
@@ -1146,123 +1124,11 @@ footer{
   }
 }
 
-
-/* FINAL UAAP approved hero rendering — no crop on mobile */
-.uaap-hero{
-  position:relative !important;
-  min-height:390px !important;
-  height:390px !important;
-  overflow:hidden !important;
+/* Keep the UAAP hero image/text readable in light mode. */
+:root[data-theme="light"] #uaap-hero{
   background:#000 !important;
-}
-.uaap-hero::before,
-.uaap-hero::after{
-  content:none !important;
-  display:none !important;
-  background:none !important;
-}
-.uaap-hero .uaap-hero-media{
-  position:absolute !important;
-  inset:0 !important;
-  z-index:0 !important;
-  overflow:hidden !important;
-  background:#000 !important;
-}
-.uaap-hero .uaap-hero-bg{
-  display:block !important;
-  width:100% !important;
-  height:100% !important;
-  max-width:none !important;
-  object-fit:cover !important;
-  object-position:center center !important;
-  filter:none !important;
-  transform:none !important;
-}
-.uaap-hero .uaap-hero-media::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  background:
-    linear-gradient(180deg,transparent 0%,transparent 60%,rgba(0,0,0,.12) 74%,rgba(0,0,0,.58) 92%,#000 100%),
-    linear-gradient(90deg,rgba(0,0,0,.36) 0%,rgba(0,0,0,.12) 34%,transparent 66%);
-}
-.uaap-hero .hero-shell{
-  position:relative !important;
-  z-index:2 !important;
-  min-height:390px !important;
-  height:390px !important;
-  display:flex !important;
-  align-items:flex-end !important;
-  padding-top:30px !important;
-  padding-bottom:30px !important;
-}
-.uaap-hero .hero-copy{
-  position:relative !important;
-  width:min(500px,48%) !important;
-  max-width:500px !important;
-  padding:0 !important;
-}
-.uaap-hero p{
-  margin:0 !important;
-  max-width:500px !important;
   color:#fff !important;
-  font-weight:600 !important;
-  text-shadow:0 2px 4px rgba(0,0,0,.95),0 0 12px rgba(0,0,0,.72) !important;
 }
-.uaap-hero .hero-actions{
-  margin-top:17px !important;
-}
-
-@media(max-width:720px){
-  .uaap-hero{
-    min-height:0 !important;
-    height:auto !important;
-    overflow:visible !important;
-    background:#000 !important;
-  }
-  .uaap-hero .uaap-hero-media{
-    position:relative !important;
-    inset:auto !important;
-    width:100% !important;
-    height:auto !important;
-    aspect-ratio:16/9 !important;
-    overflow:hidden !important;
-  }
-  .uaap-hero .uaap-hero-bg{
-    width:100% !important;
-    height:100% !important;
-    object-fit:contain !important;
-    object-position:center center !important;
-  }
-  .uaap-hero .uaap-hero-media::after{
-    background:linear-gradient(180deg,transparent 0%,transparent 82%,rgba(0,0,0,.22) 93%,#000 100%);
-  }
-  .uaap-hero .hero-shell{
-    min-height:0 !important;
-    height:auto !important;
-    display:block !important;
-    padding-top:10px !important;
-    padding-bottom:26px !important;
-  }
-  .uaap-hero .hero-copy{
-    width:100% !important;
-    max-width:none !important;
-    padding:0 !important;
-  }
-  .uaap-hero p{
-    margin:0 !important;
-    max-width:100% !important;
-    font-size:.88rem !important;
-    line-height:1.45 !important;
-  }
-  .uaap-hero .hero-actions{
-    margin-top:17px !important;
-  }
-}
-@media(max-width:520px){
-  .uaap-hero p{
-    font-size:.84rem !important;
-    line-height:1.43 !important;
-  }
+:root[data-theme="light"] #uaap-hero p{
+  color:#fff !important;
 }
