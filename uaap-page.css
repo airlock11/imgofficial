@@ -1209,37 +1209,198 @@ footer{
   --uaap-hero-button-fg:#fff;
 }
 
+
 /* FINAL UAAP desktop full-hero artwork */
-@media(min-width:721px){
+@media(min-width:901px){
   #uaap-hero{
     width:100% !important;
-    height:auto !important;
-    min-height:390px !important;
-    aspect-ratio:3 / 1 !important;
+    height:33.333vw !important;
+    min-height:0 !important;
+    max-height:560px !important;
+    aspect-ratio:auto !important;
+    overflow:hidden !important;
     background:#000 !important;
+    color:#fff !important;
   }
   #uaap-hero::before{
+    inset:0 !important;
+    width:100% !important;
+    height:100% !important;
     background-image:
       linear-gradient(180deg,
         rgba(0,0,0,0) 0%,
-        rgba(0,0,0,0) 72%,
-        rgba(0,0,0,.10) 82%,
-        rgba(0,0,0,.34) 91%,
-        #000 100%
-      ),
-      linear-gradient(90deg,
-        rgba(0,0,0,.42) 0%,
-        rgba(0,0,0,.18) 28%,
-        rgba(0,0,0,.04) 62%,
-        rgba(0,0,0,.04) 100%
+        rgba(0,0,0,0) 76%,
+        rgba(0,0,0,.08) 84%,
+        rgba(0,0,0,.24) 92%,
+        rgba(0,0,0,.46) 100%
       ),
       var(--hero-image) !important;
-    background-size:100% 100%,100% 100%,contain !important;
-    background-position:center center,center center,center top !important;
+    background-size:100% 100%,100% 100% !important;
+    background-position:center center,center center !important;
     background-repeat:no-repeat !important;
   }
+  #uaap-hero::after{
+    display:none !important;
+    content:none !important;
+  }
   #uaap-hero .hero-shell{
-    min-height:390px !important;
+    position:relative !important;
+    z-index:2 !important;
+    min-height:0 !important;
     height:100% !important;
+    display:flex !important;
+    align-items:center !important;
+    padding-top:18px !important;
+    padding-bottom:18px !important;
+  }
+  #uaap-hero .hero-copy{
+    position:relative !important;
+    width:min(430px,44%) !important;
+    max-width:430px !important;
+    padding:14px 18px 16px !important;
+    border-radius:18px !important;
+    background:linear-gradient(
+      90deg,
+      rgba(0,0,0,.72) 0%,
+      rgba(0,0,0,.54) 68%,
+      rgba(0,0,0,.18) 100%
+    ) !important;
+    box-shadow:0 12px 32px rgba(0,0,0,.18) !important;
+    backdrop-filter:blur(2px) !important;
+    -webkit-backdrop-filter:blur(2px) !important;
+  }
+  #uaap-hero .league-lockup{
+    position:relative !important;
+    display:inline-flex !important;
+    align-items:center !important;
+    margin:0 0 6px !important;
+    isolation:isolate !important;
+  }
+  #uaap-hero .league-lockup::before{
+    content:"" !important;
+    position:absolute !important;
+    z-index:-1 !important;
+    left:50% !important;
+    top:50% !important;
+    width:190px !important;
+    height:190px !important;
+    transform:translate(-50%,-50%) !important;
+    border-radius:50% !important;
+    pointer-events:none !important;
+    background:radial-gradient(
+      circle,
+      rgba(255,255,255,.88) 0%,
+      rgba(255,255,255,.56) 32%,
+      rgba(255,255,255,.24) 56%,
+      rgba(255,255,255,0) 78%
+    ) !important;
+    filter:blur(8px) !important;
+  }
+  #uaap-hero .league-logo{
+    width:auto !important;
+    height:170px !important;
+    max-width:150px !important;
+    object-fit:contain !important;
+    image-rendering:auto !important;
+    filter:
+      drop-shadow(0 0 5px rgba(255,255,255,.96))
+      drop-shadow(0 0 14px rgba(255,255,255,.68))
+      drop-shadow(0 7px 18px rgba(0,0,0,.46)) !important;
+  }
+  #uaap-hero p{
+    margin:0 !important;
+    max-width:100% !important;
+    color:#fff !important;
+    font-weight:700 !important;
+    font-size:.96rem !important;
+    line-height:1.48 !important;
+    text-shadow:
+      0 2px 3px rgba(0,0,0,1),
+      0 0 12px rgba(0,0,0,.92) !important;
+  }
+  #uaap-hero .hero-actions{
+    margin-top:14px !important;
+  }
+  #uaap-hero .primary-btn{
+    background:#fff !important;
+    color:#07111c !important;
+    box-shadow:0 9px 24px rgba(0,0,0,.30) !important;
+  }
+}
+
+/* Compact desktop/tablet mode: keep full image and avoid a black extension below it. */
+@media(min-width:721px) and (max-width:900px){
+  #uaap-hero{
+    min-height:0 !important;
+    height:auto !important;
+    background:var(--uaap-hero-end) !important;
+  }
+  #uaap-hero::before{
+    inset:0 0 auto 0 !important;
+    width:100% !important;
+    height:33.333vw !important;
+    background-image:
+      linear-gradient(
+        180deg,
+        rgba(0,0,0,0) 0%,
+        rgba(0,0,0,0) 58%,
+        color-mix(in srgb,var(--uaap-hero-end) 16%,transparent) 72%,
+        color-mix(in srgb,var(--uaap-hero-end) 46%,transparent) 86%,
+        var(--uaap-hero-end) 100%
+      ),
+      var(--hero-image) !important;
+    background-size:100% 100%,100% auto !important;
+    background-position:center center,center top !important;
+    background-repeat:no-repeat !important;
+  }
+  #uaap-hero::after{
+    display:none !important;
+    content:none !important;
+  }
+  #uaap-hero .hero-shell{
+    min-height:0 !important;
+    padding-top:calc(33.333vw + 10px) !important;
+    padding-bottom:22px !important;
+  }
+  #uaap-hero .hero-copy{
+    width:100% !important;
+    max-width:520px !important;
+  }
+}
+
+
+
+/* FINAL UAAP mobile logo white glow */
+@media(max-width:720px){
+  #uaap-hero .league-lockup{
+    position:relative !important;
+    display:inline-flex !important;
+    isolation:isolate !important;
+  }
+  #uaap-hero .league-lockup::before{
+    content:"" !important;
+    position:absolute !important;
+    z-index:-1 !important;
+    left:50% !important;
+    top:50% !important;
+    width:170px !important;
+    height:170px !important;
+    transform:translate(-50%,-50%) !important;
+    border-radius:50% !important;
+    pointer-events:none !important;
+    background:radial-gradient(
+      circle,
+      rgba(255,255,255,.80) 0%,
+      rgba(255,255,255,.44) 34%,
+      rgba(255,255,255,.16) 58%,
+      rgba(255,255,255,0) 78%
+    ) !important;
+    filter:blur(7px) !important;
+  }
+  #uaap-hero .league-logo{
+    filter:
+      drop-shadow(0 0 5px rgba(255,255,255,.94))
+      drop-shadow(0 0 13px rgba(255,255,255,.62))
+      drop-shadow(0 7px 18px rgba(0,0,0,.42)) !important;
   }
 }
