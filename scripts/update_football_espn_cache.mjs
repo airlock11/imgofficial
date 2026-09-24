@@ -10,7 +10,7 @@ const LEAGUES={
   seriea:{name:"Serie A",espn:"ita.1",category:"Italy"}
 };
 
-const seasonYear=String(now.getUTCFullYear());
+const seasonYear=String(now.getUTCFullYear());\nconst windowStart=now.getTime()-14*DAY;\nconst windowEnd=now.getTime()+30*DAY;
 const previous=(()=>{try{return JSON.parse(fs.readFileSync(OUT,"utf8"))}catch{return {version:1,leagues:{}}}})();
 
 async function json(url){
@@ -76,8 +76,8 @@ for(const [key,cfg] of Object.entries(LEAGUES)){
   let leagueLogo=old.leagueLogo||"";
   let scoreboardOk=false, standingsOk=false;
   try{
-    const sb=await json("https://site.api.espn.com/apis/site/v2/sports/soccer/"+cfg.espn+"/scoreboard?dates="+seasonYear);
-    games=(sb?.events||[]).map(x=>event(x,cfg)).filter(x=>x.eventId);
+    const sb=await json("https://site.api.espn.com/apis/site/v2/sports/soccer/"+cfg.espn+"/scoreboard?dates="+seasonYear+"&limit=1000");
+    games=(sb?.events||[]).map(x=>event(x,cfg)).filter(x=>x.eventId&&(Date.parse(x.date)||0)>=windowStart&&(Date.parse(x.date)||0)<=windowEnd);
     const lg=sb?.leagues?.[0];
     leagueLogo=lg?.logos?.find?.(x=>String(x?.rel||"").includes("full"))?.href||lg?.logos?.[0]?.href||lg?.logo||leagueLogo;
     scoreboardOk=true;
