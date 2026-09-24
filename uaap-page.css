@@ -1337,3 +1337,26 @@ footer{
     font-size:.82rem !important;
   }
 }
+
+
+/* FINAL UAAP league logo visibility fix */
+.uaap-hero .league-lockup{
+  display:flex !important;
+  align-items:center;
+  margin:0 0 8px;
+}
+.uaap-hero .league-logo{
+  display:block !important;
+  width:104px;
+  height:78px;
+  object-fit:contain;
+  object-position:left center;
+  filter:drop-shadow(0 5px 12px rgba(0,0,0,.42));
+}
+@media(max-width:720px){
+  .uaap-hero .league-lockup{margin-bottom:6px}
+  .uaap-hero .league-logo{
+    width:88px;
+    height:66px;
+  }
+}
