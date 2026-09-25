@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import json, re, unicodedata, urllib.parse, urllib.request
+import json, os, re, unicodedata, urllib.parse, urllib.request
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
@@ -7,6 +7,7 @@ ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/"laliga-highlights.json"
 UA="IMG-LaLiga-Highlights/2.0"
 CACHE=ROOT/"football-espn-cache.json"
+YT="https://www.googleapis.com/youtube/v3"
 PROFILES=[
     ("beINSPORTS","beIN SPORTS"),
     ("beinsports-ph","beIN SPORTS Philippines"),
@@ -77,6 +78,113 @@ def title_matches_fixture(title, fixtures):
             return True
     return False
 
+def yt(path, params):
+    key=os.environ.get("YOUTUBE_API_KEY","").strip()
+    if not key:
+        raise RuntimeError("YOUTUBE_API_KEY missing")
+    p=dict(params); p["key"]=key
+    return get_json(YT+"/"+path+"?"+urllib.parse.urlencode(p))
+
+def youtube_channel_id():
+    rows=yt("channels",{"part":"snippet,contentDetails","forHandle":"LaLiga"}).get("items",[])
+    return str(rows[0].get("id") or "") if rows else ""
+
+def youtube_recent(channel_id):
+    ch=yt("channels",{"part":"contentDetails","id":channel_id}).get("items",[])
+    if not ch:return []
+    uploads=ch[0].get("contentDetails",{}).get("relatedPlaylists",{}).get("uploads","")
+    if not uploads:return []
+    pis=yt("playlistItems",{"part":"contentDetails","playlistId":uploads,"maxResults":50}).get("items",[])
+    ids=[x.get("contentDetails",{}).get("videoId") for x in pis]
+    ids=[x for x in ids if x]
+    if not ids:return []
+    return yt("videos",{"part":"snippet,status,contentDetails","id":",".join(ids[:50])}).get("items",[])
+
+def youtube_global(meta):
+    if not bool(meta.get("status",{}).get("embeddable")):
+        return False
+    restriction=meta.get("contentDetails",{}).get("regionRestriction")
+    # Any explicit allow/block country list means the video is not truly global.
+    if restriction:
+        if restriction.get("allowed") or restriction.get("blocked"):
+            return False
+    return True
+
+def youtube_embed_ok(video_id):
+    url="https://www.youtube.com/embed/"+urllib.parse.quote(video_id)+"?playsinline=1&rel=0"
+    req=urllib.request.Request(url,headers={
+        "User-Agent":"Mozilla/5.0 (Linux; Android 16) AppleWebKit/537.36 Chrome/140 Safari/537.36",
+        "Accept-Language":"en-US,en;q=0.9",
+        "Referer":"https://www.imgofficial.com/",
+        "Origin":"https://www.imgofficial.com"
+    })
+    try:
+        with urllib.request.urlopen(req,timeout=25) as r:
+            page=r.read().decode("utf-8","ignore")
+    except Exception as ex:
+        print("YouTube embed fetch",video_id,ex)
+        return False
+    ok=bool(re.search(r'"playabilityStatus"\s*:\s*\{[^{}]{0,500}"status"\s*:\s*"OK"',page,re.S))
+    if not ok:
+        m=re.search(r'"playabilityStatus"\s*:\s*\{.{0,700}?\}',page,re.S)
+        print("YouTube embed blocked",video_id,(m.group(0)[:350] if m else "no playability status"))
+    return ok
+
+def collect_youtube(fixtures):
+    try:
+        cid=youtube_channel_id()
+    except Exception as ex:
+        print("YouTube channel",ex)
+        return []
+    if not cid:return []
+    try:
+        rows=youtube_recent(cid)
+    except Exception as ex:
+        print("YouTube uploads",ex)
+        return []
+    cutoff=now()-timedelta(days=30)
+    out=[]
+    seen=set()
+    for v in rows:
+        sn=v.get("snippet",{})
+        if sn.get("channelId")!=cid:
+            continue
+        title=str(sn.get("title") or "")
+        if not title_matches_fixture(title,fixtures):
+            continue
+        pub=str(sn.get("publishedAt") or "")
+        try:
+            if datetime.fromisoformat(pub.replace("Z","+00:00"))<cutoff:
+                continue
+        except Exception:
+            pass
+        if not youtube_global(v):
+            print("YouTube not global",v.get("id"),v.get("contentDetails",{}).get("regionRestriction"))
+            continue
+        vid=str(v.get("id") or "")
+        if not vid or vid in seen:
+            continue
+        if not youtube_embed_ok(vid):
+            continue
+        th=sn.get("thumbnails",{})
+        thumb=(th.get("maxres") or th.get("standard") or th.get("high") or {}).get("url","")
+        seen.add(vid)
+        out.append({
+            "id":vid,
+            "title":title,
+            "url":"",
+            "embedUrl":"https://www.youtube.com/embed/"+vid,
+            "thumbnail":thumb,
+            "publishedAt":pub,
+            "provider":"YouTube",
+            "sourceName":sn.get("channelTitle") or "LALIGA",
+            "verified":True,
+            "verification":"official-laliga-youtube-global-domain-embed",
+            "playback":"internal"
+        })
+    out.sort(key=lambda x:x.get("publishedAt",""),reverse=True)
+    return out[:12]
+
 def dailymotion_list(profile):
     fields="id,title,created_time,thumbnail_720_url,thumbnail_480_url"
     params={
@@ -131,8 +239,7 @@ def to_iso(ts):
     except Exception:
         return ""
 
-def collect():
-    fixtures=recent_laliga_matches()
+def collect_dailymotion(fixtures):
     candidates=[]
     api_ok=False
     for profile,label in PROFILES:
@@ -201,6 +308,20 @@ def collect():
     out.sort(key=lambda x:x.get("publishedAt",""),reverse=True)
     return out[:12]
 
+def collect():
+    fixtures=recent_laliga_matches()
+    youtube_items=collect_youtube(fixtures)
+    dm_items=collect_dailymotion(fixtures)
+    out=[]; seen_titles=set()
+    for item in youtube_items+dm_items:
+        key=norm(item.get("title"))
+        if not key or key in seen_titles:
+            continue
+        seen_titles.add(key)
+        out.append(item)
+    out.sort(key=lambda x:x.get("publishedAt",""),reverse=True)
+    return out[:12]
+
 def main():
     try:
         items=collect()
@@ -208,25 +329,25 @@ def main():
     except Exception as ex:
         items=[]
         err=str(ex)
-        print("La Liga Dailymotion scan",ex)
+        print("La Liga global embed scan",ex)
 
     # On transient total failure, retain only previously verified internal
     # Dailymotion embeds. Never restore the blocked LaLiga YouTube iframes.
     if not items and err and OUT.exists():
         try:
             old=json.loads(OUT.read_text("utf-8"))
-            items=[x for x in old.get("highlights",[]) if x.get("provider")=="Dailymotion" and x.get("embedUrl") and x.get("verified") is True]
+            items=[x for x in old.get("highlights",[]) if x.get("embedUrl") and x.get("verified") is True and "global" in str(x.get("verification") or "")]
         except Exception:
             pass
 
     payload={
-        "version":2,
+        "version":3,
         "leagueKey":"laliga",
         "league":"La Liga",
         "updatedAt":iso(),
         "source":{
-            "mode":"dailymotion-oembed",
-            "name":"Official beIN SPORTS Dailymotion",
+            "mode":"global-internal-embeds",
+            "name":"Official LALIGA YouTube + verified global Dailymotion",
             "url":""
         },
         "highlights":items,
@@ -235,7 +356,7 @@ def main():
         "playbackPolicy":"internal-only"
     }
     OUT.write_text(json.dumps(payload,ensure_ascii=False,indent=2)+"\n","utf-8")
-    print("La Liga internal highlights",len(items),err or "ok")
+    print("La Liga global internal highlights",len(items),err or "ok")
 
 if __name__=="__main__":
     main()
