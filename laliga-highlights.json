@@ -1,14 +1,15 @@
 {
-  "version": 1,
+  "version": 2,
   "leagueKey": "laliga",
   "league": "La Liga",
-  "updatedAt": "2026-09-25T01:19:48Z",
+  "updatedAt": "2026-09-25T01:25:26Z",
   "source": {
-    "mode": "youtube",
-    "name": "LALIGA Official YouTube",
-    "url": "https://www.youtube.com/@LaLiga"
+    "mode": "dailymotion-oembed",
+    "name": "Official beIN SPORTS Dailymotion",
+    "url": ""
   },
   "highlights": [],
   "count": 0,
-  "error": ""
+  "error": "HTTP Error 403: Forbidden",
+  "playbackPolicy": "internal-only"
 }
