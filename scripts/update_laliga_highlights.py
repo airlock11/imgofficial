@@ -148,31 +148,48 @@ def explicit_embed_urls(page):
             seen.add(value); out.append(value)
     return out
 
-def athletic_play_item(url, fixtures):
-    # Athletic Club publishes an explicit public /embed/video/ route for its
-    # free short LaLiga highlights. This is an official club embed endpoint.
-    page=get_text(url)
-    title=meta(page,prop="og:title")
-    if not title:
-        m=re.search(r"<h1[^>]*>(.*?)</h1>",page,re.I|re.S)
-        title=clean_text(m.group(1)) if m else ""
-    title=title.replace("| Athletic Play","").strip()
-    if not title or "HIGHLIGHT" not in title.upper():
-        return None
-    if "LALIGA" not in title.upper():
+def slugify_athletic(title):
+    text=unicodedata.normalize("NFKD",str(title or ""))
+    text="".join(ch for ch in text if not unicodedata.combining(ch))
+    text=re.sub(r"\bJ(\d+)\b",r"MD\1",text,flags=re.I)
+    text=text.lower()
+    text=re.sub(r"[^a-z0-9]+","-",text).strip("-")
+    return text
+
+def athletic_play_item(title, fixtures):
+    if not title or "HIGHLIGHT" not in title.upper() or "LALIGA" not in title.upper():
         return None
     if not title_matches_fixture(title,fixtures):
         return None
-    low=clean_text(page).lower()
+
+    slug=slugify_athletic(title)
+    embed="https://play.athletic-club.eus/en/embed/video/"+slug
+    page_url="https://play.athletic-club.eus/en/video/"+slug
+
+    # The /embed/video/ route is the club's explicit iframe endpoint. Verify it
+    # is reachable before publishing it to IMG.
+    try:
+        embed_page=get_text(embed)
+    except Exception as ex:
+        print("Athletic embed unavailable",embed,ex)
+        return None
+    low=clean_text(embed_page).lower()
     if "exclusive content" in low or "contenido exclusivo" in low:
         return None
-    image=meta(page,prop="og:image") or meta(page,name="twitter:image")
+
+    image=""
+    try:
+        normal=get_text(page_url)
+        image=meta(normal,prop="og:image") or meta(normal,name="twitter:image")
+    except Exception:
+        pass
+
     return {
-        "id":"athletic-"+url.rstrip("/").split("/")[-1],
+        "id":"athletic-"+slug,
         "title":title,
         "url":"",
-        "sourcePage":url.replace("/embed/video/","/video/"),
-        "embedUrl":url,
+        "sourcePage":page_url,
+        "embedUrl":embed,
         "thumbnail":image,
         "publishedAt":"",
         "provider":"Athletic Play",
@@ -183,41 +200,33 @@ def athletic_play_item(url, fixtures):
     }
 
 def collect_athletic_play(fixtures):
-    # Use the official Athletic Club media index to discover recent public
-    # LaLiga highlights, then switch only those exact pages to the documented
-    # /embed/video/ form.
-    index="https://www.athletic-club.eus/en/media/"
+    # The Athletic Club media index is server-rendered and exposes public short
+    # LaLiga highlight titles. Derive only the documented Athletic Play embed
+    # route and verify each one before publishing.
+    index="https://www.athletic-club.eus/media/"
     try:
         page=get_text(index)
     except Exception as ex:
         print("Athletic media index",ex)
         return []
-    hrefs=re.findall(r'href=["\']([^"\']+)["\']',page,re.I)
-    candidates=[]
-    seen=set()
-    for href in hrefs:
-        href=html_lib.unescape(href)
-        full=urllib.parse.urljoin(index,href)
-        p=urllib.parse.urlparse(full)
-        if (p.hostname or "").lower()!="play.athletic-club.eus":
-            continue
-        if "/en/video/" not in p.path:
-            continue
-        slug=p.path.split("/en/video/",1)[1].strip("/")
-        if not slug or slug in seen:
-            continue
-        seen.add(slug)
-        embed="https://play.athletic-club.eus/en/embed/video/"+slug
-        candidates.append(embed)
-        if len(candidates)>=40:
-            break
+    flat=clean_text(page)
+    titles=[]
+    patterns=[
+        r"Highlights\s*\|\s*[^|]{3,120}\s*\|\s*LaLiga\s+2026/27\s+J\d+",
+        r"Highlights\s*\|\s*[^|]{3,120}\s*\|\s*LaLiga\s+2026/27\s+MD\d+"
+    ]
+    for pat in patterns:
+        for title in re.findall(pat,flat,re.I):
+            title=re.sub(r"\s+"," ",title).strip()
+            if title not in titles:
+                titles.append(title)
 
     out=[]
-    for url in candidates:
+    for title in titles[:30]:
         try:
-            item=athletic_play_item(url,fixtures)
+            item=athletic_play_item(title,fixtures)
         except Exception as ex:
-            print("Athletic embed",url,ex)
+            print("Athletic candidate",title,ex)
             continue
         if item:
             out.append(item)
