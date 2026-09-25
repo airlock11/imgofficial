@@ -148,6 +148,83 @@ def explicit_embed_urls(page):
             seen.add(value); out.append(value)
     return out
 
+def athletic_play_item(url, fixtures):
+    # Athletic Club publishes an explicit public /embed/video/ route for its
+    # free short LaLiga highlights. This is an official club embed endpoint.
+    page=get_text(url)
+    title=meta(page,prop="og:title")
+    if not title:
+        m=re.search(r"<h1[^>]*>(.*?)</h1>",page,re.I|re.S)
+        title=clean_text(m.group(1)) if m else ""
+    title=title.replace("| Athletic Play","").strip()
+    if not title or "HIGHLIGHT" not in title.upper():
+        return None
+    if "LALIGA" not in title.upper():
+        return None
+    if not title_matches_fixture(title,fixtures):
+        return None
+    low=clean_text(page).lower()
+    if "exclusive content" in low or "contenido exclusivo" in low:
+        return None
+    image=meta(page,prop="og:image") or meta(page,name="twitter:image")
+    return {
+        "id":"athletic-"+url.rstrip("/").split("/")[-1],
+        "title":title,
+        "url":"",
+        "sourcePage":url.replace("/embed/video/","/video/"),
+        "embedUrl":url,
+        "thumbnail":image,
+        "publishedAt":"",
+        "provider":"Athletic Play",
+        "sourceName":"Athletic Club Official",
+        "verified":True,
+        "verification":"official-athletic-club-explicit-embed",
+        "playback":"internal"
+    }
+
+def collect_athletic_play(fixtures):
+    # Use the official Athletic Club media index to discover recent public
+    # LaLiga highlights, then switch only those exact pages to the documented
+    # /embed/video/ form.
+    index="https://www.athletic-club.eus/en/media/"
+    try:
+        page=get_text(index)
+    except Exception as ex:
+        print("Athletic media index",ex)
+        return []
+    hrefs=re.findall(r'href=["\']([^"\']+)["\']',page,re.I)
+    candidates=[]
+    seen=set()
+    for href in hrefs:
+        href=html_lib.unescape(href)
+        full=urllib.parse.urljoin(index,href)
+        p=urllib.parse.urlparse(full)
+        if (p.hostname or "").lower()!="play.athletic-club.eus":
+            continue
+        if "/en/video/" not in p.path:
+            continue
+        slug=p.path.split("/en/video/",1)[1].strip("/")
+        if not slug or slug in seen:
+            continue
+        seen.add(slug)
+        embed="https://play.athletic-club.eus/en/embed/video/"+slug
+        candidates.append(embed)
+        if len(candidates)>=40:
+            break
+
+    out=[]
+    for url in candidates:
+        try:
+            item=athletic_play_item(url,fixtures)
+        except Exception as ex:
+            print("Athletic embed",url,ex)
+            continue
+        if item:
+            out.append(item)
+        if len(out)>=8:
+            break
+    return out
+
 def page_data(url, fixtures):
     page=get_text(url)
     title=meta(page,prop="og:title")
@@ -190,10 +267,12 @@ def page_data(url, fixtures):
 
 def collect():
     fixtures=recent_laliga_matches()
-    pages=listing_pages()
     out=[]
     seen=set()
-    for url in pages:
+
+    # Primary source: LALIGA's own official video pages when they expose a
+    # sanctioned third-party embed.
+    for url in listing_pages():
         try:
             item=page_data(url,fixtures)
         except Exception as ex:
@@ -204,7 +283,15 @@ def collect():
         if not key or key in seen: continue
         seen.add(key); out.append(item)
         if len(out)>=12: break
-    out.sort(key=lambda x:x.get("publishedAt",""),reverse=True)
+
+    # Supplemental official source: Athletic Club's public Athletic Play embed
+    # endpoint, which is explicitly intended for iframe playback.
+    for item in collect_athletic_play(fixtures):
+        key=norm(item.get("title"))
+        if not key or key in seen: continue
+        seen.add(key); out.append(item)
+        if len(out)>=12: break
+
     return out
 
 def main():
@@ -230,13 +317,13 @@ def main():
             pass
 
     payload={
-        "version":4,
+        "version":5,
         "leagueKey":"laliga",
         "league":"La Liga",
         "updatedAt":iso(),
         "source":{
             "mode":"official-laliga-website",
-            "name":"LALIGA Official Website",
+            "name":"LALIGA Official Website + official club embed sources",
             "url":"https://www.laliga.com/videos?competitionslug=laliga-easports&page=1"
         },
         "highlights":items,
