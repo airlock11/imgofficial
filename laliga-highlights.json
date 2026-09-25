@@ -1,15 +1,15 @@
 {
-  "version": 3,
+  "version": 4,
   "leagueKey": "laliga",
   "league": "La Liga",
-  "updatedAt": "2026-09-25T01:32:48Z",
+  "updatedAt": "2026-09-25T01:38:06Z",
   "source": {
-    "mode": "global-internal-embeds",
-    "name": "Official LALIGA YouTube + verified global Dailymotion",
-    "url": ""
+    "mode": "official-laliga-website",
+    "name": "LALIGA Official Website",
+    "url": "https://www.laliga.com/videos?competitionslug=laliga-easports&page=1"
   },
   "highlights": [],
   "count": 0,
   "error": "",
-  "playbackPolicy": "internal-only"
+  "playbackPolicy": "internal-only-explicit-embed"
 }
