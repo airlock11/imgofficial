@@ -2490,18 +2490,27 @@ function renderGames(){
 
   if(currentScoreLeague==='asian_games'){
     const agData=specialSportsDataCache?.leagues?.asian_games;
-    const medals=Array.isArray(agData?.medals)?agData.medals:[];
+    const medalRows=Array.isArray(agData?.medals)?agData.medals:[];
+    // IMG ranks this view by TOTAL medals, highest first. Gold, silver and bronze
+    // are deterministic tie-breakers; the official source rank remains in the feed.
+    const medals=[...medalRows].sort((a,b)=>
+      (Number(b?.total)||0)-(Number(a?.total)||0)||
+      (Number(b?.gold)||0)-(Number(a?.gold)||0)||
+      (Number(b?.silver)||0)-(Number(a?.silver)||0)||
+      (Number(b?.bronze)||0)-(Number(a?.bronze)||0)||
+      String(a?.country||'').localeCompare(String(b?.country||''))
+    );
     if(medals.length){
       const medalPanelId='asian-games-medal-standings';
       sections.push('<section class="league-games-group asian-medal-table league-standings-dropdown" aria-label="Asian Games medal standings">'+
         '<button type="button" class="standings-dropdown-toggle" data-standings-toggle aria-expanded="false" aria-controls="'+medalPanelId+'">'+
-          '<span class="standings-dropdown-copy"><span class="standings-dropdown-kicker">Medal table</span><strong>Medal Standings</strong><small>Gold · Silver · Bronze · Total</small></span>'+
+          '<span class="standings-dropdown-copy"><span class="standings-dropdown-kicker">Medal table</span><strong>Medal Standings</strong><small>Ranked by total medals · highest first</small></span>'+
           '<span class="standings-dropdown-side"><span class="standings-dropdown-count">'+esc(medals.length)+' '+(medals.length===1?'country':'countries')+'</span><span class="standings-dropdown-chevron" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span></span>'+
         '</button>'+
         '<div id="'+medalPanelId+'" class="standings-dropdown-content">'+
           '<div class="standings-dropdown-inner"><div class="medal-table-scroll">'+
             '<div class="medal-table-head"><span>Rank</span><span>Country</span><b>Gold</b><b>Silver</b><b>Bronze</b><b>Total</b></div>'+
-            '<div class="medal-table-body">'+medals.map(m=>'<div class="medal-table-row"><span>'+esc(m.rank)+'</span><strong>'+esc(m.country)+'</strong><b>'+esc(m.gold)+'</b><b>'+esc(m.silver)+'</b><b>'+esc(m.bronze)+'</b><b>'+esc(m.total)+'</b></div>').join('')+'</div>'+
+            '<div class="medal-table-body">'+medals.map((m,index)=>'<div class="medal-table-row"><span>'+esc(index+1)+'</span><strong>'+esc(m.country)+'</strong><b>'+esc(m.gold)+'</b><b>'+esc(m.silver)+'</b><b>'+esc(m.bronze)+'</b><b>'+esc(m.total)+'</b></div>').join('')+'</div>'+
           '</div></div>'+
         '</div>'+
       '</section>');
