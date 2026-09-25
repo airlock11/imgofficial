@@ -2,7 +2,7 @@
   "special": true,
   "league": "WTA Tour",
   "live": true,
-  "updatedAt": "2026-09-25T12:20:12.166404+00:00",
+  "updatedAt": "2026-09-25T12:20:21.221364+00:00",
   "sourceName": "API-Tennis",
   "sourceUrl": "https://api-tennis.com/",
   "verificationSource": "API-Tennis",
@@ -1197,10 +1197,14 @@
       "home": "Bouzkova/ Siniakova",
       "awayLogo": "",
       "homeLogo": "",
-      "awayScore": "",
-      "homeScore": "",
-      "awaySets": [],
-      "homeSets": [],
+      "awayScore": "0",
+      "homeScore": "0",
+      "awaySets": [
+        "0"
+      ],
+      "homeSets": [
+        "0"
+      ],
       "awayPoint": "—",
       "homePoint": "—",
       "currentSet": 1,
