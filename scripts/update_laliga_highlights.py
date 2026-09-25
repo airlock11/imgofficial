@@ -11,6 +11,12 @@ UA="Mozilla/5.0 (Linux; Android 16) AppleWebKit/537.36 Chrome/140 Safari/537.36"
 LIST_URL="https://www.laliga.com/videos?competitionslug=laliga-easports&page=1"
 BASE="https://www.laliga.com"
 MAX_PAGES=24
+ATHLETIC_EMBED_SEEDS=[
+    ("Highlights | Athletic Club 0-0 Deportivo Alavés | LaLiga 2026/27 MD7",
+     "https://play.athletic-club.eus/en/embed/video/highlights-athletic-club-0-0-deportivo-alaves-laliga-2026-27-md7"),
+    ("Highlights | Athletic Club 3-0 Atlético de Madrid | LaLiga 2026/27 MD4",
+     "https://play.athletic-club.eus/en/embed/video/highlights-athletic-club-3-0-atletico-de-madrid-laliga-2026-27-md4"),
+]
 
 def now():
     return datetime.now(timezone.utc)
@@ -200,15 +206,52 @@ def athletic_play_item(title, fixtures):
     }
 
 def collect_athletic_play(fixtures):
-    # The Athletic Club media index is server-rendered and exposes public short
-    # LaLiga highlight titles. Derive only the documented Athletic Play embed
-    # route and verify each one before publishing.
+    # Start with verified public embed routes already discovered from Athletic
+    # Club's official site, then augment from the media index when accessible.
+    out=[]
+    seen_urls=set()
+    for title,embed in ATHLETIC_EMBED_SEEDS:
+        if not title_matches_fixture(title,fixtures):
+            continue
+        try:
+            page=get_text(embed)
+        except Exception as ex:
+            print("Athletic seed unavailable",embed,ex)
+            continue
+        low=clean_text(page).lower()
+        if "exclusive content" in low or "contenido exclusivo" in low:
+            continue
+        slug=embed.rstrip("/").split("/")[-1]
+        page_url="https://play.athletic-club.eus/en/video/"+slug
+        image=""
+        try:
+            normal=get_text(page_url)
+            image=meta(normal,prop="og:image") or meta(normal,name="twitter:image")
+        except Exception:
+            pass
+        out.append({
+            "id":"athletic-"+slug,
+            "title":title,
+            "url":"",
+            "sourcePage":page_url,
+            "embedUrl":embed,
+            "thumbnail":image,
+            "publishedAt":"",
+            "provider":"Athletic Play",
+            "sourceName":"Athletic Club Official",
+            "verified":True,
+            "verification":"official-athletic-club-explicit-embed",
+            "playback":"internal"
+        })
+        seen_urls.add(embed)
+
     index="https://www.athletic-club.eus/media/"
     try:
         page=get_text(index)
     except Exception as ex:
         print("Athletic media index",ex)
-        return []
+        return out
+
     flat=clean_text(page)
     titles=[]
     patterns=[
@@ -221,14 +264,14 @@ def collect_athletic_play(fixtures):
             if title not in titles:
                 titles.append(title)
 
-    out=[]
     for title in titles[:30]:
         try:
             item=athletic_play_item(title,fixtures)
         except Exception as ex:
             print("Athletic candidate",title,ex)
             continue
-        if item:
+        if item and item.get("embedUrl") not in seen_urls:
+            seen_urls.add(item.get("embedUrl"))
             out.append(item)
         if len(out)>=8:
             break
