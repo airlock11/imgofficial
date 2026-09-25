@@ -55,7 +55,7 @@ def youtube(cfg):
    if datetime.fromisoformat(pub.replace("Z","+00:00"))<cutoff:continue
   except:pass
   vid=v.get("id","");th=sn.get("thumbnails",{});thumb=(th.get("maxres") or th.get("standard") or th.get("high") or {}).get("url","")
-  emb=bool(v.get("status",{}).get("embeddable"))
+  emb=bool(v.get("status",{}).get("embeddable")) and not bool(cfg.get("disableEmbed"))
   out.append({"id":vid,"title":title,"url":"https://www.youtube.com/watch?v="+vid,"embedUrl":"https://www.youtube.com/embed/"+vid if emb else "","thumbnail":thumb,"publishedAt":pub,"provider":"YouTube","sourceName":cname,"verified":True,"verification":"exact-channel"})
  out.sort(key=lambda x:x.get("publishedAt",""),reverse=True)
  return out[:int(cfg.get("limit",12))]
