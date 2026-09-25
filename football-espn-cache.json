@@ -1,7 +1,7 @@
 {
   "version": 1,
   "source": "ESPN public football data",
-  "updatedAt": "2026-09-25T07:15:00.548Z",
+  "updatedAt": "2026-09-25T12:49:34.388Z",
   "leagues": {
     "soccer": {
       "name": "Premier League",
@@ -952,7 +952,7 @@
           "points": 2
         }
       ],
-      "verifiedAt": "2026-09-25T07:15:00.182Z"
+      "verifiedAt": "2026-09-25T12:49:33.891Z"
     },
     "laliga": {
       "name": "La Liga",
@@ -2047,7 +2047,7 @@
           "points": 3
         }
       ],
-      "verifiedAt": "2026-09-25T07:15:00.349Z"
+      "verifiedAt": "2026-09-25T12:49:34.067Z"
     },
     "bundesliga": {
       "name": "Bundesliga",
@@ -2944,7 +2944,7 @@
           "points": 0
         }
       ],
-      "verifiedAt": "2026-09-25T07:15:00.429Z"
+      "verifiedAt": "2026-09-25T12:49:34.210Z"
     },
     "seriea": {
       "name": "Serie A",
@@ -3671,6 +3671,22 @@
           "venue": "Olimpico",
           "competition": "Serie A",
           "category": "Italy"
+        },
+        {
+          "eventId": "401875036",
+          "date": "2026-10-25T11:30Z",
+          "displayTime": "",
+          "home": "Internazionale",
+          "away": "Fiorentina",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/110.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/109.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "San Siro",
+          "competition": "Serie A",
+          "category": "Italy"
         }
       ],
       "standings": [
@@ -3895,7 +3911,7 @@
           "points": 0
         }
       ],
-      "verifiedAt": "2026-09-25T07:15:00.548Z"
+      "verifiedAt": "2026-09-25T12:49:34.387Z"
     }
   }
 }
