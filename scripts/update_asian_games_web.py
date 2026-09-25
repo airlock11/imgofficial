@@ -240,6 +240,24 @@ def scrape_medals(page):
     return medals
 
 
+def rank_medals_by_total(rows):
+    """IMG display order: most total medals first; preserve the official source rank."""
+    ordered = sorted(
+        (dict(row) for row in rows),
+        key=lambda row: (
+            -int(row.get("total") or 0),
+            -int(row.get("gold") or 0),
+            -int(row.get("silver") or 0),
+            -int(row.get("bronze") or 0),
+            str(row.get("country") or ""),
+        ),
+    )
+    for index, row in enumerate(ordered, 1):
+        row["officialRank"] = row.get("officialRank", row.get("rank"))
+        row["rank"] = index
+    return ordered
+
+
 def merge_games(*groups):
     by_id = {}
     priority = {"scheduled": 1, "final": 2, "live": 3}
@@ -333,6 +351,7 @@ def main():
     if len(medals) < 3:
         medals = previous.get("medals", [])
         print("Asian Games scrape guard: preserving previous medals")
+    medals = rank_medals_by_total(medals)
 
     now = now_dt.isoformat()
     leagues["asian_games"] = {
