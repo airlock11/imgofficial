@@ -10,7 +10,7 @@ const CONFIG={
   soccer:{name:"Premier League",region:"England",scoreKey:"soccer",espn:"eng.1",path:"premier-league",highlightsFile:"premier-league-highlights.json",aliases:["premier league","epl"],description:"England's top-flight football competition.",competition:"Premier League",newsImage:"/assets/football/heroes/premier-league-hero.jpg"},
   jamaica_pl:{name:"Jamaican Premier League",region:"Jamaica",scoreKey:"jamaica_pl",path:"jamaican-premier-league",highlightsFile:"jamaica-pl-highlights.json",aliases:["jamaican premier league","jamaica premier league","jpl"],description:"Top-flight club football in Jamaica.",competition:"Premier League",category:"Jamaica",logo:"https://r2.thesportsdb.com/images/media/league/badgearchive/pg49fr1727716904.png",newsImage:"/assets/football/heroes/jamaican-premier-league-hero.jpg"},
   mizoram_pl:{name:"Mizoram Premier League",region:"India",scoreKey:"mizoram_pl",path:"mizoram-premier-league",highlightsFile:"mizoram-pl-highlights.json",aliases:["mizoram premier league"],description:"Club football from Mizoram, India.",competition:"Mizoram Premier League",category:"India",logo:"https://static.toiimg.com/thumb/msid-92395083%2Cwidth-1280%2Cheight-720%2Cresizemode-4/92395083.jpg"},
-  laliga:{name:"La Liga",region:"Spain",scoreKey:"laliga",espn:"esp.1",path:"la-liga",highlightsFile:"laliga-highlights.json",aliases:["la liga","laliga"],description:"Spain's top-flight football competition.",competition:"LaLiga",newsImage:"/assets/football/heroes/la-liga-hero.jpg",externalHighlights:true},
+  laliga:{name:"La Liga",region:"Spain",scoreKey:"laliga",espn:"esp.1",path:"la-liga",highlightsFile:"laliga-highlights.json",aliases:["la liga","laliga"],description:"Spain's top-flight football competition.",competition:"LaLiga",newsImage:"/assets/football/heroes/la-liga-hero.jpg",internalHighlightsOnly:true},
   el_salvador_reserves:{name:"Primera Division, Reserves",region:"El Salvador",scoreKey:"el_salvador_reserves",path:"el-salvador-reserves",highlightsFile:"el-salvador-reserves-highlights.json",aliases:["primera division reserves","el salvador reserves"],description:"Reserve competition football from El Salvador.",competition:"Primera Division, Reserves",category:"El Salvador",logo:"https://cdn.resfu.com/media/img/league_logos/primera-el-salvador.png"},
   seriea:{name:"Serie A",region:"Italy",scoreKey:"seriea",espn:"ita.1",path:"serie-a",highlightsFile:"seriea-highlights.json",aliases:["serie a"],description:"Italy's top-flight football competition.",competition:"Serie A",newsImage:"/assets/football/heroes/serie-a-hero.jpg"},
   bundesliga:{name:"Bundesliga",region:"Germany",scoreKey:"bundesliga",espn:"ger.1",path:"bundesliga",highlightsFile:"bundesliga-highlights.json",aliases:["bundesliga"],description:"Germany's top-flight football competition.",competition:"Bundesliga",newsImage:"/assets/football/heroes/bundesliga-hero.jpg"},
@@ -363,6 +363,9 @@ function playFootballHighlight(item){
 function renderHighlights(items){
   const wrap=qs("#highlights");
   if(!wrap)return;
+  if(cfg.internalHighlightsOnly){
+    items=(Array.isArray(items)?items:[]).filter(x=>Boolean(x?.embedUrl));
+  }
   const seenTitles=new Set();
   items=(Array.isArray(items)?items:[]).filter(x=>{
     const title=decodeEntities(x?.title||"").toLowerCase().replace(/[^a-z0-9]+/g," ").trim();
@@ -372,18 +375,18 @@ function renderHighlights(items){
     return true;
   });
   if(!items.length){
-    wrap.innerHTML='<div class="empty-card">No verified '+esc(cfg.name)+' highlight video is available from the current feed.</div>';
+    wrap.innerHTML='<div class="empty-card">'+(cfg.internalHighlightsOnly?'No La Liga highlight is currently available for playback inside IMG.':'No verified '+esc(cfg.name)+' highlight video is available from the current feed.')+'</div>';
     return;
   }
   wrap.innerHTML=items.map((x,i)=>{
     const link=x.url||x.link||"#";
     const image=x.thumbnail||x.image||"";
     const meta=[x.sourceName||x.provider||cfg.name,x.publishedAt?fmtDate(x.publishedAt):""].filter(Boolean).join(" · ");
-    const canEmbed=Boolean(x.embedUrl)&&!cfg.externalHighlights;
+    const canEmbed=Boolean(x.embedUrl);
     const tag=canEmbed?"button":"a";
     const attrs=canEmbed
       ?'type="button" data-football-highlight="'+i+'"'
-      :(link!=="#"? 'href="'+esc(link)+'" target="_blank" rel="noopener noreferrer"':'href="#"');
+      :(cfg.internalHighlightsOnly?'href="#" aria-disabled="true" tabindex="-1"':(link!=="#"? 'href="'+esc(link)+'" target="_blank" rel="noopener noreferrer"':'href="#"'));
     return '<'+tag+' class="football-highlight-link" '+attrs+'><article class="media-card highlight-card">'+
       (image?'<img class="media-bg" src="'+esc(image)+'" alt="" loading="lazy">':"")+
       '<span class="play-button" aria-hidden="true">▶</span><div class="media-card-content"><div class="media-kicker">HIGHLIGHT</div><div class="media-title">'+esc(decodeEntities(x.title))+'</div><div class="media-meta">'+esc(meta||cfg.name)+'</div></div>'+
