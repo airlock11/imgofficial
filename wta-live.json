@@ -1,17 +1,17 @@
 {
   "special": true,
   "league": "WTA Tour",
-  "live": false,
-  "updatedAt": "2026-09-25T01:47:19.775854+00:00",
+  "live": true,
+  "updatedAt": "2026-09-25T06:39:58.070429+00:00",
   "sourceName": "API-Tennis",
   "sourceUrl": "https://api-tennis.com/",
   "verificationSource": "API-Tennis",
   "verificationUrl": "https://api-tennis.com/",
   "providerMatchCount": 33,
   "parsedMatchCount": 33,
-  "recentCount": 19,
-  "liveCount": 0,
-  "scheduleCount": 14,
+  "recentCount": 21,
+  "liveCount": 1,
+  "scheduleCount": 11,
   "note": "WTA live, recent results and near-term schedule from API-Tennis. The WTA webpage scraper is used only if the API call fails.",
   "games": [
     {
@@ -23,15 +23,15 @@
       "home": "J. Otzipka",
       "awayLogo": "https://api.api-tennis.com/logo-tennis/2393_a-kalinina.jpg",
       "homeLogo": "https://api.api-tennis.com/logo-tennis/51326_j-otzipka.jpg",
-      "awayScore": "6.6 6 6",
-      "homeScore": "7.8 1 1",
+      "awayScore": "6 6 6",
+      "homeScore": "7 1 1",
       "awaySets": [
-        "6.6",
+        "6",
         "6",
         "6"
       ],
       "homeSets": [
-        "7.8",
+        "7",
         "1",
         "1"
       ],
@@ -142,17 +142,17 @@
       "home": "A. Charaeva",
       "awayLogo": "https://api.api-tennis.com/logo-tennis/505_a-bondar.jpg",
       "homeLogo": "https://api.api-tennis.com/logo-tennis/13421_a-charaeva.jpg",
-      "awayScore": "6 6.6 7.7",
-      "homeScore": "4 7.8 6.5",
+      "awayScore": "6 6 7",
+      "homeScore": "4 7 6",
       "awaySets": [
         "6",
-        "6.6",
-        "7.7"
+        "6",
+        "7"
       ],
       "homeSets": [
         "4",
-        "7.8",
-        "6.5"
+        "7",
+        "6"
       ],
       "awayPoint": "—",
       "homePoint": "—",
@@ -183,15 +183,15 @@
       "home": "G. Minnen",
       "awayLogo": "https://api.api-tennis.com/logo-tennis/2816_e-svitolina.jpg",
       "homeLogo": "https://api.api-tennis.com/logo-tennis/2191_g-minnen.jpg",
-      "awayScore": "7.7 4 4",
-      "homeScore": "6.5 6 6",
+      "awayScore": "7 4 4",
+      "homeScore": "6 6 6",
       "awaySets": [
-        "7.7",
+        "7",
         "4",
         "4"
       ],
       "homeSets": [
-        "6.5",
+        "6",
         "6",
         "6"
       ],
@@ -224,16 +224,16 @@
       "home": "G. Ruse",
       "awayLogo": "https://api.api-tennis.com/logo-tennis/9407_y-ku.jpg",
       "homeLogo": "https://api.api-tennis.com/logo-tennis/1151_g-ruse.jpg",
-      "awayScore": "6 6.1 1",
-      "homeScore": "2 7.7 6",
+      "awayScore": "6 6 1",
+      "homeScore": "2 7 6",
       "awaySets": [
         "6",
-        "6.1",
+        "6",
         "1"
       ],
       "homeSets": [
         "2",
-        "7.7",
+        "7",
         "6"
       ],
       "awayPoint": "—",
@@ -265,15 +265,15 @@
       "home": "V. Morvayova",
       "awayLogo": "https://api.api-tennis.com/logo-tennis/3326_t-gibson.jpg",
       "homeLogo": "https://api.api-tennis.com/logo-tennis/72_v-morvayova.jpg",
-      "awayScore": "7.7 7.7",
-      "homeScore": "6.2 6.1",
+      "awayScore": "7 7",
+      "homeScore": "6 6",
       "awaySets": [
-        "7.7",
-        "7.7"
+        "7",
+        "7"
       ],
       "homeSets": [
-        "6.2",
-        "6.1"
+        "6",
+        "6"
       ],
       "awayPoint": "—",
       "homePoint": "—",
@@ -460,15 +460,15 @@
       "home": "Mladenovic/ Panova",
       "awayLogo": "",
       "homeLogo": "",
-      "awayScore": "6 7.7",
-      "homeScore": "3 6.4",
+      "awayScore": "6 7",
+      "homeScore": "3 6",
       "awaySets": [
         "6",
-        "7.7"
+        "7"
       ],
       "homeSets": [
         "3",
-        "6.4"
+        "6"
       ],
       "awayPoint": "—",
       "homePoint": "—",
@@ -655,15 +655,15 @@
       "home": "Q. Zheng",
       "awayLogo": "https://api.api-tennis.com/logo-tennis/2811_j-paolini.jpg",
       "homeLogo": "https://api.api-tennis.com/logo-tennis/1813_q-zheng.jpg",
-      "awayScore": "6 7.7",
-      "homeScore": "3 6.4",
+      "awayScore": "6 7",
+      "homeScore": "3 6",
       "awaySets": [
         "6",
-        "7.7"
+        "7"
       ],
       "homeSets": [
         "3",
-        "6.4"
+        "6"
       ],
       "awayPoint": "—",
       "homePoint": "—",
@@ -766,6 +766,125 @@
       "verificationUrl": "https://api-tennis.com/"
     },
     {
+      "eventId": "api-tennis-wta-12165794",
+      "apiEventKey": "12165794",
+      "date": "2026-09-25T03:10:00",
+      "displayTime": "Seoul",
+      "away": "K. Volynets",
+      "home": "K. Birrell",
+      "awayLogo": "https://api.api-tennis.com/logo-tennis/2826_k-volynets.jpg",
+      "homeLogo": "https://api.api-tennis.com/logo-tennis/92_k-birrell.jpg",
+      "awayScore": "6 2 2",
+      "homeScore": "2 6 4",
+      "awaySets": [
+        "6",
+        "2",
+        "2"
+      ],
+      "homeSets": [
+        "2",
+        "6",
+        "4"
+      ],
+      "awayPoint": "—",
+      "homePoint": "—",
+      "currentSet": 3,
+      "awayCurrentSetGames": 2,
+      "homeCurrentSetGames": 4,
+      "awaySetsWon": 1,
+      "homeSetsWon": 1,
+      "round": "WTA Seoul - Quarter-finals",
+      "court": "",
+      "status": "Interrupted · WTA Seoul - Quarter-finals",
+      "state": "final",
+      "eventOnly": false,
+      "title": "Seoul",
+      "eventType": "Wta Singles",
+      "serve": "First Player",
+      "sourceName": "API-Tennis",
+      "sourceUrl": "https://api-tennis.com/",
+      "verificationSource": "API-Tennis",
+      "verificationUrl": "https://api-tennis.com/"
+    },
+    {
+      "eventId": "api-tennis-wta-12165804",
+      "apiEventKey": "12165804",
+      "date": "2026-09-25T03:10:00",
+      "displayTime": "Seoul",
+      "away": "Chong/ Hozumi",
+      "home": "Lee/ Ye",
+      "awayLogo": "",
+      "homeLogo": "",
+      "awayScore": "4 3",
+      "homeScore": "6 6",
+      "awaySets": [
+        "4",
+        "3"
+      ],
+      "homeSets": [
+        "6",
+        "6"
+      ],
+      "awayPoint": "—",
+      "homePoint": "—",
+      "currentSet": 2,
+      "awayCurrentSetGames": 3,
+      "homeCurrentSetGames": 6,
+      "awaySetsWon": 0,
+      "homeSetsWon": 1,
+      "round": "WTA Seoul - Semi-finals",
+      "court": "",
+      "status": "Finished · WTA Seoul - Semi-finals",
+      "state": "final",
+      "eventOnly": false,
+      "title": "Seoul",
+      "eventType": "Wta Doubles",
+      "serve": null,
+      "sourceName": "API-Tennis",
+      "sourceUrl": "https://api-tennis.com/",
+      "verificationSource": "API-Tennis",
+      "verificationUrl": "https://api-tennis.com/"
+    },
+    {
+      "eventId": "api-tennis-wta-12165503",
+      "apiEventKey": "12165503",
+      "date": "2026-09-25T05:10:00",
+      "displayTime": "Singapore",
+      "away": "E. Mertens",
+      "home": "M. Chwalinska",
+      "awayLogo": "https://api.api-tennis.com/logo-tennis/521_e-mertens.jpg",
+      "homeLogo": "https://api.api-tennis.com/logo-tennis/1434_m-chwalinska.jpg",
+      "awayScore": "2 2 · 15",
+      "homeScore": "6 6 · 40",
+      "awaySets": [
+        "2",
+        "2"
+      ],
+      "homeSets": [
+        "6",
+        "6"
+      ],
+      "awayPoint": "15",
+      "homePoint": "40",
+      "currentSet": 2,
+      "awayCurrentSetGames": 2,
+      "homeCurrentSetGames": 6,
+      "awaySetsWon": 0,
+      "homeSetsWon": 1,
+      "round": "WTA Singapore - Quarter-finals",
+      "court": "",
+      "status": "Finished · WTA Singapore - Quarter-finals",
+      "state": "live",
+      "eventOnly": false,
+      "title": "Singapore",
+      "eventType": "Wta Singles",
+      "serve": null,
+      "sourceName": "API-Tennis",
+      "sourceUrl": "https://api-tennis.com/",
+      "verificationSource": "API-Tennis",
+      "verificationUrl": "https://api-tennis.com/"
+    },
+    {
       "eventId": "api-tennis-wta-12164699",
       "apiEventKey": "12164699",
       "date": "2026-09-24T02:00:00",
@@ -840,83 +959,9 @@
       "verificationUrl": "https://api-tennis.com/"
     },
     {
-      "eventId": "api-tennis-wta-12165794",
-      "apiEventKey": "12165794",
-      "date": "2026-09-25T03:00:00",
-      "displayTime": "Seoul",
-      "away": "K. Volynets",
-      "home": "K. Birrell",
-      "awayLogo": "https://api.api-tennis.com/logo-tennis/2826_k-volynets.jpg",
-      "homeLogo": "https://api.api-tennis.com/logo-tennis/92_k-birrell.jpg",
-      "awayScore": "0",
-      "homeScore": "0",
-      "awaySets": [
-        "0"
-      ],
-      "homeSets": [
-        "0"
-      ],
-      "awayPoint": "—",
-      "homePoint": "—",
-      "currentSet": 1,
-      "awayCurrentSetGames": 0,
-      "homeCurrentSetGames": 0,
-      "awaySetsWon": 0,
-      "homeSetsWon": 0,
-      "round": "WTA Seoul - Quarter-finals",
-      "court": "",
-      "status": "Scheduled · WTA Seoul - Quarter-finals",
-      "state": "scheduled",
-      "eventOnly": false,
-      "title": "Seoul",
-      "eventType": "Wta Singles",
-      "serve": null,
-      "sourceName": "API-Tennis",
-      "sourceUrl": "https://api-tennis.com/",
-      "verificationSource": "API-Tennis",
-      "verificationUrl": "https://api-tennis.com/"
-    },
-    {
-      "eventId": "api-tennis-wta-12165804",
-      "apiEventKey": "12165804",
-      "date": "2026-09-25T03:00:00",
-      "displayTime": "Seoul",
-      "away": "Chong/ Hozumi",
-      "home": "Lee/ Ye",
-      "awayLogo": "",
-      "homeLogo": "",
-      "awayScore": "0",
-      "homeScore": "0",
-      "awaySets": [
-        "0"
-      ],
-      "homeSets": [
-        "0"
-      ],
-      "awayPoint": "—",
-      "homePoint": "—",
-      "currentSet": 1,
-      "awayCurrentSetGames": 0,
-      "homeCurrentSetGames": 0,
-      "awaySetsWon": 0,
-      "homeSetsWon": 0,
-      "round": "WTA Seoul - Semi-finals",
-      "court": "",
-      "status": "Scheduled · WTA Seoul - Semi-finals",
-      "state": "scheduled",
-      "eventOnly": false,
-      "title": "Seoul",
-      "eventType": "Wta Doubles",
-      "serve": null,
-      "sourceName": "API-Tennis",
-      "sourceUrl": "https://api-tennis.com/",
-      "verificationSource": "API-Tennis",
-      "verificationUrl": "https://api-tennis.com/"
-    },
-    {
       "eventId": "api-tennis-wta-12165803",
       "apiEventKey": "12165803",
-      "date": "2026-09-25T04:30:00",
+      "date": "2026-09-25T05:45:00",
       "displayTime": "Seoul",
       "away": "A. Bondar",
       "home": "G. Ruse",
@@ -951,83 +996,9 @@
       "verificationUrl": "https://api-tennis.com/"
     },
     {
-      "eventId": "api-tennis-wta-12165503",
-      "apiEventKey": "12165503",
-      "date": "2026-09-25T05:00:00",
-      "displayTime": "Singapore",
-      "away": "E. Mertens",
-      "home": "M. Chwalinska",
-      "awayLogo": "https://api.api-tennis.com/logo-tennis/521_e-mertens.jpg",
-      "homeLogo": "https://api.api-tennis.com/logo-tennis/1434_m-chwalinska.jpg",
-      "awayScore": "0",
-      "homeScore": "0",
-      "awaySets": [
-        "0"
-      ],
-      "homeSets": [
-        "0"
-      ],
-      "awayPoint": "—",
-      "homePoint": "—",
-      "currentSet": 1,
-      "awayCurrentSetGames": 0,
-      "homeCurrentSetGames": 0,
-      "awaySetsWon": 0,
-      "homeSetsWon": 0,
-      "round": "WTA Singapore - Quarter-finals",
-      "court": "",
-      "status": "Scheduled · WTA Singapore - Quarter-finals",
-      "state": "scheduled",
-      "eventOnly": false,
-      "title": "Singapore",
-      "eventType": "Wta Singles",
-      "serve": null,
-      "sourceName": "API-Tennis",
-      "sourceUrl": "https://api-tennis.com/",
-      "verificationSource": "API-Tennis",
-      "verificationUrl": "https://api-tennis.com/"
-    },
-    {
-      "eventId": "api-tennis-wta-12165813",
-      "apiEventKey": "12165813",
-      "date": "2026-09-25T06:00:00",
-      "displayTime": "Seoul",
-      "away": "T. Preston",
-      "home": "A. Korneeva",
-      "awayLogo": "https://api.api-tennis.com/logo-tennis/3324_t-preston.jpg",
-      "homeLogo": "https://api.api-tennis.com/logo-tennis/14547_a-korneeva.jpg",
-      "awayScore": "0",
-      "homeScore": "0",
-      "awaySets": [
-        "0"
-      ],
-      "homeSets": [
-        "0"
-      ],
-      "awayPoint": "—",
-      "homePoint": "—",
-      "currentSet": 1,
-      "awayCurrentSetGames": 0,
-      "homeCurrentSetGames": 0,
-      "awaySetsWon": 0,
-      "homeSetsWon": 0,
-      "round": "WTA Seoul - Quarter-finals",
-      "court": "",
-      "status": "Scheduled · WTA Seoul - Quarter-finals",
-      "state": "scheduled",
-      "eventOnly": false,
-      "title": "Seoul",
-      "eventType": "Wta Singles",
-      "serve": null,
-      "sourceName": "API-Tennis",
-      "sourceUrl": "https://api-tennis.com/",
-      "verificationSource": "API-Tennis",
-      "verificationUrl": "https://api-tennis.com/"
-    },
-    {
       "eventId": "api-tennis-wta-12165855",
       "apiEventKey": "12165855",
-      "date": "2026-09-25T06:30:00",
+      "date": "2026-09-25T06:55:00",
       "displayTime": "Singapore",
       "away": "Xin. Wang",
       "home": "T. Prozorova",
@@ -1062,9 +1033,46 @@
       "verificationUrl": "https://api-tennis.com/"
     },
     {
+      "eventId": "api-tennis-wta-12165813",
+      "apiEventKey": "12165813",
+      "date": "2026-09-25T07:15:00",
+      "displayTime": "Seoul",
+      "away": "T. Preston",
+      "home": "A. Korneeva",
+      "awayLogo": "https://api.api-tennis.com/logo-tennis/3324_t-preston.jpg",
+      "homeLogo": "https://api.api-tennis.com/logo-tennis/14547_a-korneeva.jpg",
+      "awayScore": "0",
+      "homeScore": "0",
+      "awaySets": [
+        "0"
+      ],
+      "homeSets": [
+        "0"
+      ],
+      "awayPoint": "—",
+      "homePoint": "—",
+      "currentSet": 1,
+      "awayCurrentSetGames": 0,
+      "homeCurrentSetGames": 0,
+      "awaySetsWon": 0,
+      "homeSetsWon": 0,
+      "round": "WTA Seoul - Quarter-finals",
+      "court": "",
+      "status": "Scheduled · WTA Seoul - Quarter-finals",
+      "state": "scheduled",
+      "eventOnly": false,
+      "title": "Seoul",
+      "eventType": "Wta Singles",
+      "serve": null,
+      "sourceName": "API-Tennis",
+      "sourceUrl": "https://api-tennis.com/",
+      "verificationSource": "API-Tennis",
+      "verificationUrl": "https://api-tennis.com/"
+    },
+    {
       "eventId": "api-tennis-wta-12165497",
       "apiEventKey": "12165497",
-      "date": "2026-09-25T07:30:00",
+      "date": "2026-09-25T08:45:00",
       "displayTime": "Seoul",
       "away": "L. Tararudee",
       "home": "M. Joint",
@@ -1101,7 +1109,7 @@
     {
       "eventId": "api-tennis-wta-12165522",
       "apiEventKey": "12165522",
-      "date": "2026-09-25T09:00:00",
+      "date": "2026-09-25T09:10:00",
       "displayTime": "Singapore",
       "away": "Kato/ Perez",
       "home": "Lansere/ Prozorova",
@@ -1235,7 +1243,7 @@
       "homeSetsWon": 0,
       "round": "WTA Seoul - Semi-finals",
       "court": "",
-      "status": "Scheduled · WTA Seoul - Semi-finals",
+      "status": "1 · WTA Seoul - Semi-finals",
       "state": "scheduled",
       "eventOnly": false,
       "title": "Seoul",
@@ -1272,7 +1280,7 @@
       "homeSetsWon": 0,
       "round": "WTA Singapore - Semi-finals",
       "court": "",
-      "status": "Scheduled · WTA Singapore - Semi-finals",
+      "status": "1 · WTA Singapore - Semi-finals",
       "state": "scheduled",
       "eventOnly": false,
       "title": "Singapore",
