@@ -356,7 +356,11 @@ function playFootballHighlight(item){
   if(!item?.embedUrl)return false;
   const d=ensureFootballHighlightDialog();
   const host=d.querySelector("#footballHighlightPlayer");
-  host.innerHTML='<div class="football-highlight-video"><iframe src="'+esc(item.embedUrl)+'?autoplay=1&playsinline=1&rel=0" title="'+esc(decodeEntities(item.title||cfg.name+" highlight"))+'" allow="autoplay; encrypted-media; picture-in-picture; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>';
+  const base=String(item.embedUrl||"");
+  const sep=base.includes("?")?"&":"?";
+  const provider=String(item.provider||"").toLowerCase();
+  const params=provider==="dailymotion"?"autoplay=1":"autoplay=1&playsinline=1&rel=0";
+  host.innerHTML='<div class="football-highlight-video"><iframe src="'+esc(base+sep+params)+'" title="'+esc(decodeEntities(item.title||cfg.name+" highlight"))+'" allow="autoplay; fullscreen; encrypted-media; picture-in-picture; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>';
   d.showModal();
   return true;
 }
