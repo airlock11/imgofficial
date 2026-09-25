@@ -8,12 +8,13 @@ OUT=ROOT/"laliga-highlights.json"
 UA="IMG-LaLiga-Highlights/2.0"
 CACHE=ROOT/"football-espn-cache.json"
 PROFILES=[
+    ("beINSPORTS","beIN SPORTS"),
     ("beinsports-ph","beIN SPORTS Philippines"),
     ("Beinsports-AU","beIN SPORTS Australia"),
 ]
 # Current verified beIN/Dailymotion examples are retained only as a discovery
 # fallback; they are still required to match a recent La Liga fixture.
-SEED_IDS=["xbam0qm","xbaqtxm","xbaobem","xbak4ou","xbaoc0m"]
+SEED_IDS=["xa97i0o","xbam0qm","xbaqtxm","xbaobem","xbak4ou","xbaoc0m"]
 
 def now():
     return datetime.now(timezone.utc)
@@ -95,6 +96,27 @@ def dailymotion_oembed(video_id):
     url="https://www.dailymotion.com/services/oembed?"+urllib.parse.urlencode({"url":page,"format":"json"})
     return get_json(url)
 
+def dailymotion_meta(video_id):
+    fields="id,title,geoblocking,allow_embed,owner.username"
+    url="https://api.dailymotion.com/video/"+urllib.parse.quote(video_id)+"?"+urllib.parse.urlencode({"fields":fields})
+    return get_json(url)
+
+def globally_available(meta):
+    # Dailymotion documents an empty geoblocking list (or just "allow") as
+    # accessible from everywhere. Any country list means territory rules apply.
+    geo=meta.get("geoblocking")
+    if geo is None:
+        return False
+    if isinstance(geo,str):
+        parts=[x.strip().lower() for x in geo.split(",") if x.strip()]
+    else:
+        parts=[str(x).strip().lower() for x in (geo or []) if str(x).strip()]
+    if parts not in ([],["allow"]):
+        return False
+    if meta.get("allow_embed") is False:
+        return False
+    return True
+
 def embed_src(html):
     m=re.search(r'<iframe[^>]+src=["\']([^"\']+)["\']',str(html or ""),re.I)
     return m.group(1).replace("&amp;","&") if m else ""
@@ -141,9 +163,13 @@ def collect():
         if not vid or vid in seen_ids:
             continue
         try:
+            meta=dailymotion_meta(vid)
             oe=dailymotion_oembed(vid)
         except Exception as ex:
-            print("Dailymotion oEmbed",vid,ex)
+            print("Dailymotion verify",vid,ex)
+            continue
+        if not globally_available(meta):
+            print("Dailymotion not global",vid,meta.get("geoblocking"))
             continue
         if str(oe.get("provider_name") or "").lower()!="dailymotion":
             continue
@@ -169,7 +195,7 @@ def collect():
             "provider":"Dailymotion",
             "sourceName":str(oe.get("author_name") or label),
             "verified":True,
-            "verification":"official-beIN-dailymotion-oembed-ph-web",
+            "verification":"official-beIN-dailymotion-global-embed",
             "playback":"internal"
         })
     out.sort(key=lambda x:x.get("publishedAt",""),reverse=True)
