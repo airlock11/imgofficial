@@ -2652,9 +2652,54 @@ function renderGames(){
     );
   }
 
-  host.innerHTML=sections.length
+  const nextMarkup=sections.length
     ?sections.join('')
     :'<div class="empty">No verified schedule or scores were returned for this league right now.</div>';
+
+  // Keep an already-playing verified live iframe mounted when the same stream is
+  // still present after an automatic score/data refresh. Replacing #games with
+  // innerHTML destroys the iframe browsing context and causes visible flicker.
+  // Rebuild only the surrounding sections and the live-score column instead.
+  const existingLiveActivity=host.querySelector('.selected-live-activity.has-stream');
+  let preservedLiveActivity=false;
+  if(existingLiveActivity){
+    const currentVideos=[...existingLiveActivity.querySelectorAll('.league-live-stream[data-live-video]')]
+      .map(node=>String(node.dataset.liveVideo||''))
+      .filter(Boolean)
+      .sort()
+      .join('|');
+    if(currentVideos){
+      const scratch=document.createElement('div');
+      scratch.innerHTML=nextMarkup;
+      const nextLiveActivity=scratch.querySelector('.selected-live-activity.has-stream');
+      const nextVideos=nextLiveActivity
+        ?[...nextLiveActivity.querySelectorAll('.league-live-stream[data-live-video]')]
+          .map(node=>String(node.dataset.liveVideo||''))
+          .filter(Boolean)
+          .sort()
+          .join('|')
+        :'';
+
+      if(nextLiveActivity&&nextVideos===currentVideos){
+        const currentScoreColumn=existingLiveActivity.querySelector('.selected-live-score-column');
+        const nextScoreColumn=nextLiveActivity.querySelector('.selected-live-score-column');
+        if(currentScoreColumn&&nextScoreColumn&&currentScoreColumn.innerHTML!==nextScoreColumn.innerHTML){
+          currentScoreColumn.innerHTML=nextScoreColumn.innerHTML;
+        }
+        existingLiveActivity.className=nextLiveActivity.className;
+        const nextAria=nextLiveActivity.getAttribute('aria-label');
+        if(nextAria)existingLiveActivity.setAttribute('aria-label',nextAria);
+
+        const desired=[...scratch.children];
+        const liveIndex=desired.indexOf(nextLiveActivity);
+        [...host.children].forEach(node=>{if(node!==existingLiveActivity)node.remove()});
+        for(let i=0;i<liveIndex;i++)host.insertBefore(desired[i],existingLiveActivity);
+        for(let i=liveIndex+1;i<desired.length;i++)host.appendChild(desired[i]);
+        preservedLiveActivity=true;
+      }
+    }
+  }
+  if(!preservedLiveActivity)host.innerHTML=nextMarkup;
 
   for(const panelId of openPanels){
     const toggle=[...host.querySelectorAll('[aria-controls]')].find(el=>el.getAttribute('aria-controls')===panelId);
