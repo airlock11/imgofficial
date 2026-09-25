@@ -1,7 +1,7 @@
 {
   "version": 1,
   "source": "ESPN public football data",
-  "updatedAt": "2026-09-25T17:48:26.374Z",
+  "updatedAt": "2026-09-25T21:12:47.860Z",
   "leagues": {
     "soccer": {
       "name": "Premier League",
@@ -1032,7 +1032,7 @@
           "points": 2
         }
       ],
-      "verifiedAt": "2026-09-25T17:48:24.968Z"
+      "verifiedAt": "2026-09-25T21:12:46.665Z"
     },
     "laliga": {
       "name": "La Liga",
@@ -1040,22 +1040,6 @@
       "espn": "esp.1",
       "leagueLogo": "https://a.espncdn.com/i/leaguelogos/soccer/500/15.png",
       "games": [
-        {
-          "eventId": "401882878",
-          "date": "2026-09-11T19:00Z",
-          "displayTime": "",
-          "home": "Sevilla",
-          "away": "Valencia",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/243.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/94.png",
-          "homeScore": "1",
-          "awayScore": "0",
-          "state": "final",
-          "status": "FT",
-          "venue": "Ramón Sánchez Pizjuán Stadium",
-          "competition": "La Liga",
-          "category": "Spain"
-        },
         {
           "eventId": "401882881",
           "date": "2026-09-12T12:00Z",
@@ -1951,6 +1935,22 @@
           "venue": "Reale Arena",
           "competition": "La Liga",
           "category": "Spain"
+        },
+        {
+          "eventId": "401882832",
+          "date": "2026-10-25T20:00Z",
+          "displayTime": "",
+          "home": "Barcelona",
+          "away": "Real Madrid",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/83.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/86.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "Spotify Camp Nou",
+          "competition": "La Liga",
+          "category": "Spain"
         }
       ],
       "standings": [
@@ -2175,7 +2175,7 @@
           "points": 3
         }
       ],
-      "verifiedAt": "2026-09-25T17:48:25.352Z"
+      "verifiedAt": "2026-09-25T21:12:46.975Z"
     },
     "bundesliga": {
       "name": "Bundesliga",
@@ -2183,22 +2183,6 @@
       "espn": "ger.1",
       "leagueLogo": "https://a.espncdn.com/i/leaguelogos/soccer/500/10.png",
       "games": [
-        {
-          "eventId": "401884793",
-          "date": "2026-09-11T18:30Z",
-          "displayTime": "",
-          "home": "1. FC Union Berlin",
-          "away": "Schalke 04",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/598.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/133.png",
-          "homeScore": "1",
-          "awayScore": "3",
-          "state": "final",
-          "status": "FT",
-          "venue": "Stadion An der Alten Försterei",
-          "competition": "Bundesliga",
-          "category": "Germany"
-        },
         {
           "eventId": "401884799",
           "date": "2026-09-12T13:30Z",
@@ -3104,7 +3088,7 @@
           "points": 0
         }
       ],
-      "verifiedAt": "2026-09-25T17:48:25.799Z"
+      "verifiedAt": "2026-09-25T21:12:47.316Z"
     },
     "seriea": {
       "name": "Serie A",
@@ -3112,22 +3096,6 @@
       "espn": "ita.1",
       "leagueLogo": "https://a.espncdn.com/i/leaguelogos/soccer/500/12.png",
       "games": [
-        {
-          "eventId": "401874759",
-          "date": "2026-09-11T18:45Z",
-          "displayTime": "",
-          "home": "Venezia",
-          "away": "Fiorentina",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/17530.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/109.png",
-          "homeScore": "2",
-          "awayScore": "4",
-          "state": "final",
-          "status": "FT",
-          "venue": "Stadio Pier Luigi Penzo",
-          "competition": "Serie A",
-          "category": "Italy"
-        },
         {
           "eventId": "401874991",
           "date": "2026-09-12T13:00Z",
@@ -3895,6 +3863,22 @@
           "venue": "Via Del Mare",
           "competition": "Serie A",
           "category": "Italy"
+        },
+        {
+          "eventId": "401874779",
+          "date": "2026-10-25T19:45Z",
+          "displayTime": "",
+          "home": "Udinese",
+          "away": "AC Milan",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/118.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/103.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "Stadio Friuli",
+          "competition": "Serie A",
+          "category": "Italy"
         }
       ],
       "standings": [
@@ -4119,7 +4103,7 @@
           "points": 0
         }
       ],
-      "verifiedAt": "2026-09-25T17:48:26.373Z"
+      "verifiedAt": "2026-09-25T21:12:47.859Z"
     }
   }
 }
