@@ -6,7 +6,7 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/"laliga-highlights.json"
 UA="IMG-LaLiga-Highlights/2.0"
-ESPN="https://site.api.espn.com/apis/site/v2/sports/soccer/esp.1/scoreboard"
+CACHE=ROOT/"football-espn-cache.json"
 PROFILES=[
     ("beinsports-ph","beIN SPORTS Philippines"),
     ("Beinsports-AU","beIN SPORTS Australia"),
@@ -43,20 +43,25 @@ def team_tokens(name):
     return {x for x in norm(name).split() if len(x)>=3 and x not in STOP}
 
 def recent_laliga_matches(days=24):
-    start=(now()-timedelta(days=days)).strftime("%Y%m%d")
-    end=(now()+timedelta(days=1)).strftime("%Y%m%d")
-    url=ESPN+"?dates="+start+"-"+end+"&limit=1000"
-    data=get_json(url)
+    # Use IMG's already-maintained ESPN cache. Direct ESPN calls can reject
+    # GitHub-hosted automation traffic even when the same data is valid.
+    data=json.loads(CACHE.read_text("utf-8"))
+    rows=data.get("leagues",{}).get("laliga",{}).get("games",[])
+    cutoff=now()-timedelta(days=days)
     out=[]
-    for event in data.get("events",[]):
-        state=event.get("status",{}).get("type",{}).get("state")
-        if state not in {"post","in"}:
+    for game in rows:
+        if str(game.get("state") or "").lower() not in {"final","live","in"}:
             continue
-        comp=(event.get("competitions") or [{}])[0]
-        teams=[x.get("team",{}).get("displayName") or x.get("team",{}).get("name") or "" for x in comp.get("competitors",[])]
-        teams=[x for x in teams if x]
-        if len(teams)>=2:
-            out.append((teams[0],teams[1]))
+        try:
+            dt=datetime.fromisoformat(str(game.get("date") or "").replace("Z","+00:00")).astimezone(timezone.utc)
+            if dt<cutoff:
+                continue
+        except Exception:
+            pass
+        home=str(game.get("home") or "").strip()
+        away=str(game.get("away") or "").strip()
+        if home and away:
+            out.append((home,away))
     return out
 
 def title_matches_fixture(title, fixtures):
