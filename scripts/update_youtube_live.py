@@ -162,6 +162,10 @@ def scan_official_source(source,previous):
  except Exception as ex:
   print("official source feed",source_id,ex)
  try:
+  ids += channel_live_page_ids(channel_id)
+ except Exception as ex:
+  print("official source live page",source_id,ex)
+ try:
   ids += channel_stream_page_ids(channel_id)
  except Exception as ex:
   print("official source streams",source_id,ex)
@@ -273,9 +277,24 @@ def channel_feed_ids(channel_id):
  ns={"yt":"http://www.youtube.com/xml/schemas/2015","atom":"http://www.w3.org/2005/Atom"}
  return [e.text for e in root.findall(".//yt:videoId",ns) if e.text]
 
+def channel_live_page_ids(channel_id):
+ # YouTube's /live route is a useful low-cost fallback when RSS or the uploads
+ # playlist lags behind a newly-started broadcast. We still verify every ID with
+ # videos.list below, including exact channel ownership and actual live state.
+ url="https://www.youtube.com/channel/"+urllib.parse.quote(channel_id)+"/live"
+ req=urllib.request.Request(url,headers={"User-Agent":"Mozilla/5.0","Accept-Language":"en-US,en;q=0.9"})
+ with urllib.request.urlopen(req,timeout=20) as r:
+  final_url=r.geturl()
+  html=r.read().decode("utf-8","ignore")
+ ids=[]
+ m=re.search(r"(?:watch\?v=|/live/)([A-Za-z0-9_-]{11})",final_url)
+ if m:ids.append(m.group(1))
+ ids += re.findall(r'"videoId":"([A-Za-z0-9_-]{11})"',html)
+ return list(dict.fromkeys(x for x in ids if x))[:10]
+
 def channel_stream_page_ids(channel_id):
  url="https://www.youtube.com/channel/"+urllib.parse.quote(channel_id)+"/streams"
- req=urllib.request.Request(url,headers={"User-Agent":"Mozilla/5.0"})
+ req=urllib.request.Request(url,headers={"User-Agent":"Mozilla/5.0","Accept-Language":"en-US,en;q=0.9"})
  with urllib.request.urlopen(req,timeout=20) as r:
   html=r.read().decode("utf-8","ignore")
  return list(dict.fromkeys(re.findall(r'"videoId":"([A-Za-z0-9_-]{11})"',html)))
