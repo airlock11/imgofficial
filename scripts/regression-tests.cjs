@@ -103,5 +103,5 @@ console.log('PASS: mobile preferences, live stream eligibility, labels, stream l
   assert.ok(start>=0&&end>start,'renderGames must exist');
   assert.ok(block.includes('const sections=[]'),'renderGames must declare its sections accumulator');
   assert.ok(block.indexOf('const sections=[]')<block.indexOf('sections.push'),'renderGames must build sections after card renderer');
-  assert.ok(block.includes('host.innerHTML=sections.length'),'renderGames must render schedule/score sections');
+  assert.ok(block.includes('const nextMarkup=sections.length')&&block.includes('host.innerHTML=nextMarkup'),'renderGames must render schedule/score sections');
 }
