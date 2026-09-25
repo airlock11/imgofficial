@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-25T19:21:52.205197+00:00",
+  "updated_at": "2026-09-25T22:33:00.428182+00:00",
   "source": "Official and verified public sports sources",
   "leagues": {
     "bleague": {
@@ -1228,26 +1228,26 @@
         {
           "eventId": "euroleague-10",
           "date": "2026-09-25T20:45:00",
-          "displayTime": "Sep 25 · 20:45",
+          "displayTime": "Sep 25 · Final",
           "away": "Armani Olimpia Milan",
           "home": "Partizan Mozzart Bet Belgrade",
-          "awayScore": "0",
-          "homeScore": "0",
-          "status": "Scheduled",
-          "state": "scheduled",
+          "awayScore": "76",
+          "homeScore": "92",
+          "status": "Final",
+          "state": "final",
           "sourceName": "EuroLeague Official API",
           "sourceUrl": "https://api-live.euroleague.net/v2/competitions/E/seasons/E2026/games"
         },
         {
           "eventId": "euroleague-9",
           "date": "2026-09-25T19:45:00",
-          "displayTime": "Sep 25 · 19:45",
+          "displayTime": "Sep 25 · Final",
           "away": "Virtus Bologna",
           "home": "Fenerbahce Tarfin Istanbul",
-          "awayScore": "0",
-          "homeScore": "0",
-          "status": "Scheduled",
-          "state": "scheduled",
+          "awayScore": "68",
+          "homeScore": "78",
+          "status": "Final",
+          "state": "final",
           "sourceName": "EuroLeague Official API",
           "sourceUrl": "https://api-live.euroleague.net/v2/competitions/E/seasons/E2026/games"
         },
@@ -3701,7 +3701,7 @@
       "league": "WTA Tour",
       "sourceName": "WTA Official Calendar",
       "sourceUrl": "https://wtafiles.wtatennis.com/pdf/calendar/calendar.pdf",
-      "updatedAt": "2026-09-25T19:21:45.951649+00:00",
+      "updatedAt": "2026-09-25T22:32:55.856461+00:00",
       "note": "Current and upcoming WTA Tour tournaments scraped automatically from the official WTA calendar PDF.",
       "games": [
         {
@@ -3875,12 +3875,12 @@
       "league": "FIBA",
       "sourceName": "FIBA Official",
       "sourceUrl": "https://www.fiba.basketball/en/games",
-      "updatedAt": "2026-09-25T19:21:46.683538+00:00",
+      "updatedAt": "2026-09-25T22:32:56.479868+00:00",
       "note": "Automatically refreshed from official FIBA competition game cards.",
       "games": [
         {
           "eventId": "fiba-fiba-intercontinental-cup-2026-2026-09-25-viln-rssb",
-          "date": "2026-09-25T19:21:45.951675+00:00",
+          "date": "2026-09-25T22:32:55.856495+00:00",
           "displayTime": "Final · Final",
           "away": "VILN",
           "home": "RSSB",
@@ -3896,7 +3896,7 @@
         },
         {
           "eventId": "fiba-fiba-intercontinental-cup-2026-2026-09-25-bjbg-boc",
-          "date": "2026-09-25T19:21:45.951675+00:00",
+          "date": "2026-09-25T22:32:55.856495+00:00",
           "displayTime": "Final · Final",
           "away": "BJBG",
           "home": "BOC",
@@ -3912,7 +3912,7 @@
         },
         {
           "eventId": "fiba-fiba-intercontinental-cup-2026-2026-09-25-shs-rssb",
-          "date": "2026-09-25T19:21:45.951675+00:00",
+          "date": "2026-09-25T22:32:55.856495+00:00",
           "displayTime": "Final · Final",
           "away": "SHS",
           "home": "RSSB",
@@ -3928,7 +3928,7 @@
         },
         {
           "eventId": "fiba-fiba-intercontinental-cup-2026-2026-09-25-bjbg-glu",
-          "date": "2026-09-25T19:21:45.951675+00:00",
+          "date": "2026-09-25T22:32:55.856495+00:00",
           "displayTime": "Final · Final",
           "away": "BJBG",
           "home": "GLU",
@@ -3944,7 +3944,7 @@
         },
         {
           "eventId": "fiba-fiba-intercontinental-cup-2026-2026-09-25-viln-shs",
-          "date": "2026-09-25T19:21:45.951675+00:00",
+          "date": "2026-09-25T22:32:55.856495+00:00",
           "displayTime": "Final · Final",
           "away": "VILN",
           "home": "SHS",
@@ -3960,7 +3960,7 @@
         },
         {
           "eventId": "fiba-fiba-intercontinental-cup-2026-2026-09-25-boc-glu",
-          "date": "2026-09-25T19:21:45.951675+00:00",
+          "date": "2026-09-25T22:32:55.856495+00:00",
           "displayTime": "Final · Final",
           "away": "BOC",
           "home": "GLU",
