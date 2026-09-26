@@ -1,7 +1,7 @@
 {
   "version": 1,
   "source": "ESPN public football data",
-  "updatedAt": "2026-09-26T17:38:52.479Z",
+  "updatedAt": "2026-09-26T20:09:28.057Z",
   "leagues": {
     "soccer": {
       "name": "Premier League",
@@ -9,22 +9,6 @@
       "espn": "eng.1",
       "leagueLogo": "https://a.espncdn.com/i/leaguelogos/soccer/500/23.png",
       "games": [
-        {
-          "eventId": "401878779",
-          "date": "2026-09-12T19:00Z",
-          "displayTime": "",
-          "home": "Sunderland",
-          "away": "Arsenal",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/366.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/359.png",
-          "homeScore": "0",
-          "awayScore": "2",
-          "state": "final",
-          "status": "FT",
-          "venue": "Stadium of Light",
-          "competition": "Premier League",
-          "category": "England"
-        },
         {
           "eventId": "401879282",
           "date": "2026-09-13T13:00Z",
@@ -936,7 +920,7 @@
           "points": 2
         }
       ],
-      "verifiedAt": "2026-09-26T17:38:51.954Z"
+      "verifiedAt": "2026-09-26T20:09:27.344Z"
     },
     "laliga": {
       "name": "La Liga",
@@ -944,22 +928,6 @@
       "espn": "esp.1",
       "leagueLogo": "https://a.espncdn.com/i/leaguelogos/soccer/500/15.png",
       "games": [
-        {
-          "eventId": "401882880",
-          "date": "2026-09-12T19:00Z",
-          "displayTime": "",
-          "home": "Real Madrid",
-          "away": "Rayo Vallecano",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/86.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/101.png",
-          "homeScore": "4",
-          "awayScore": "1",
-          "state": "final",
-          "status": "FT",
-          "venue": "Santiago Bernabéu",
-          "competition": "La Liga",
-          "category": "Spain"
-        },
         {
           "eventId": "401882885",
           "date": "2026-09-13T12:00Z",
@@ -1807,6 +1775,22 @@
           "venue": "Spotify Camp Nou",
           "competition": "La Liga",
           "category": "Spain"
+        },
+        {
+          "eventId": "401882828",
+          "date": "2026-10-26T20:00Z",
+          "displayTime": "",
+          "home": "Sevilla",
+          "away": "Osasuna",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/243.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/97.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "Ramón Sánchez Pizjuán Stadium",
+          "competition": "La Liga",
+          "category": "Spain"
         }
       ],
       "standings": [
@@ -2031,7 +2015,7 @@
           "points": 3
         }
       ],
-      "verifiedAt": "2026-09-26T17:38:52.136Z"
+      "verifiedAt": "2026-09-26T20:09:27.608Z"
     },
     "bundesliga": {
       "name": "Bundesliga",
@@ -2848,7 +2832,7 @@
           "points": 0
         }
       ],
-      "verifiedAt": "2026-09-26T17:38:52.286Z"
+      "verifiedAt": "2026-09-26T20:09:27.833Z"
     },
     "seriea": {
       "name": "Serie A",
@@ -2856,22 +2840,6 @@
       "espn": "ita.1",
       "leagueLogo": "https://a.espncdn.com/i/leaguelogos/soccer/500/12.png",
       "games": [
-        {
-          "eventId": "401874979",
-          "date": "2026-09-12T18:45Z",
-          "displayTime": "",
-          "home": "Atalanta",
-          "away": "Cagliari",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/105.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/2925.png",
-          "homeScore": "1",
-          "awayScore": "2",
-          "state": "final",
-          "status": "FT",
-          "venue": "New Balance Arena",
-          "competition": "Serie A",
-          "category": "Italy"
-        },
         {
           "eventId": "401874936",
           "date": "2026-09-13T13:00Z",
@@ -3831,7 +3799,7 @@
           "points": 0
         }
       ],
-      "verifiedAt": "2026-09-26T17:38:52.479Z"
+      "verifiedAt": "2026-09-26T20:09:28.057Z"
     }
   }
 }
