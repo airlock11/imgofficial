@@ -1,7 +1,7 @@
 {
   "version": 1,
   "source": "ESPN public football data",
-  "updatedAt": "2026-09-27T17:13:30.006Z",
+  "updatedAt": "2026-09-27T20:12:10.671Z",
   "leagues": {
     "soccer": {
       "name": "Premier League",
@@ -888,7 +888,7 @@
           "points": 2
         }
       ],
-      "verifiedAt": "2026-09-27T17:13:29.535Z"
+      "verifiedAt": "2026-09-27T20:12:10.075Z"
     },
     "laliga": {
       "name": "La Liga",
@@ -896,22 +896,6 @@
       "espn": "esp.1",
       "leagueLogo": "https://a.espncdn.com/i/leaguelogos/soccer/500/15.png",
       "games": [
-        {
-          "eventId": "401882879",
-          "date": "2026-09-13T19:00Z",
-          "displayTime": "",
-          "home": "Real Sociedad",
-          "away": "Atlético Madrid",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/89.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/1068.png",
-          "homeScore": "0",
-          "awayScore": "3",
-          "state": "final",
-          "status": "FT",
-          "venue": "Reale Arena",
-          "competition": "La Liga",
-          "category": "Spain"
-        },
         {
           "eventId": "401882877",
           "date": "2026-09-14T19:00Z",
@@ -1935,7 +1919,7 @@
           "points": 3
         }
       ],
-      "verifiedAt": "2026-09-27T17:13:29.706Z"
+      "verifiedAt": "2026-09-27T20:12:10.308Z"
     },
     "bundesliga": {
       "name": "Bundesliga",
@@ -2720,7 +2704,7 @@
           "points": 0
         }
       ],
-      "verifiedAt": "2026-09-27T17:13:29.854Z"
+      "verifiedAt": "2026-09-27T20:12:10.525Z"
     },
     "seriea": {
       "name": "Serie A",
@@ -2728,22 +2712,6 @@
       "espn": "ita.1",
       "leagueLogo": "https://a.espncdn.com/i/leaguelogos/soccer/500/12.png",
       "games": [
-        {
-          "eventId": "401874750",
-          "date": "2026-09-13T18:45Z",
-          "displayTime": "",
-          "home": "Sassuolo",
-          "away": "Juventus",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/3997.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/111.png",
-          "homeScore": "3",
-          "awayScore": "2",
-          "state": "final",
-          "status": "FT",
-          "venue": "Mapei Stadium",
-          "competition": "Serie A",
-          "category": "Italy"
-        },
         {
           "eventId": "401874933",
           "date": "2026-09-14T16:30Z",
@@ -3431,6 +3399,54 @@
           "venue": "Stadio Friuli",
           "competition": "Serie A",
           "category": "Italy"
+        },
+        {
+          "eventId": "401874980",
+          "date": "2026-10-27T17:30Z",
+          "displayTime": "",
+          "home": "Sassuolo",
+          "away": "Lazio",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/3997.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/112.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "Mapei Stadium",
+          "competition": "Serie A",
+          "category": "Italy"
+        },
+        {
+          "eventId": "401874780",
+          "date": "2026-10-27T19:45Z",
+          "displayTime": "",
+          "home": "AS Roma",
+          "away": "Cagliari",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/104.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/2925.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "Olimpico",
+          "competition": "Serie A",
+          "category": "Italy"
+        },
+        {
+          "eventId": "401874786",
+          "date": "2026-10-27T19:45Z",
+          "displayTime": "",
+          "home": "Torino",
+          "away": "Como",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/239.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/2572.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "Stadio Olimpico Grande Torino",
+          "competition": "Serie A",
+          "category": "Italy"
         }
       ],
       "standings": [
@@ -3655,7 +3671,7 @@
           "points": 0
         }
       ],
-      "verifiedAt": "2026-09-27T17:13:30.006Z"
+      "verifiedAt": "2026-09-27T20:12:10.670Z"
     }
   }
 }
