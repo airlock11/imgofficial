@@ -236,21 +236,34 @@ function renderHighlights({streams,official}){
   const items=shorts.slice(0,10);
   const BATCH_SIZE=3;
 
-  const highQualityThumb=x=>{
+  const localPoster=x=>{
     const id=String(x?.id||"").trim();
-    if(id)return `https://i.ytimg.com/vi/${encodeURIComponent(id)}/maxresdefault.jpg`;
-    return String(x?.thumbnail||"");
+    return id?`/assets/pba/highlights/${encodeURIComponent(id)}.jpg`:"";
+  };
+
+  const ytPortraitThumb=x=>{
+    const id=String(x?.id||"").trim();
+    return id?`https://i.ytimg.com/vi/${encodeURIComponent(id)}/oardefault.jpg`:"";
+  };
+
+  const ytPortraitAlt=x=>{
+    const id=String(x?.id||"").trim();
+    return id?`https://i.ytimg.com/vi/${encodeURIComponent(id)}/oar2.jpg`:"";
+  };
+
+  const maxresThumb=x=>{
+    const id=String(x?.id||"").trim();
+    return id?`https://i.ytimg.com/vi/${encodeURIComponent(id)}/maxresdefault.jpg`:"";
   };
 
   const sdThumb=x=>{
     const id=String(x?.id||"").trim();
-    if(id)return `https://i.ytimg.com/vi/${encodeURIComponent(id)}/sddefault.jpg`;
-    return String(x?.thumbnail||"");
+    return id?`https://i.ytimg.com/vi/${encodeURIComponent(id)}/sddefault.jpg`:"";
   };
 
   wrap.innerHTML=items.map((x,index)=>`<article class="reel-card">
     <div class="reel-media" tabindex="0" data-short-id="${safe(x.id)}" data-index="${index}" aria-label="Play ${safe(x.title)}">
-      <img class="reel-thumb" src="${safe(highQualityThumb(x))}" data-sd-thumb="${safe(sdThumb(x))}" data-fallback-thumb="${safe(x.thumbnail||"")}" alt="${safe(x.title)}" loading="lazy" decoding="async">
+      <img class="reel-thumb" src="${safe(localPoster(x))}" data-thumb-fallbacks="${safe(JSON.stringify([ytPortraitThumb(x),ytPortraitAlt(x),maxresThumb(x),sdThumb(x),String(x.thumbnail||"")].filter(Boolean)))}" alt="${safe(x.title)}" loading="lazy" decoding="async">
       <span class="reel-shade"></span>
       <span class="reel-source">PBA SHORTS</span>
     </div>
@@ -261,17 +274,13 @@ function renderHighlights({streams,official}){
   </article>`).join("");
 
   qsa("#highlights .reel-thumb").forEach(img=>{
+    let fallbacks=[];
+    try{fallbacks=JSON.parse(img.dataset.thumbFallbacks||"[]")}catch{}
     img.addEventListener("error",()=>{
-      const sd=img.dataset.sdThumb||"";
-      const fallback=img.dataset.fallbackThumb||"";
-      if(sd&&img.src!==new URL(sd,location.href).href){
-        img.src=sd;
-        img.dataset.sdThumb="";
-        return;
-      }
-      if(fallback&&img.src!==new URL(fallback,location.href).href){
-        img.src=fallback;
-        img.dataset.fallbackThumb="";
+      const next=fallbacks.shift();
+      if(next){
+        img.dataset.thumbFallbacks=JSON.stringify(fallbacks);
+        img.src=next;
       }
     });
   });
