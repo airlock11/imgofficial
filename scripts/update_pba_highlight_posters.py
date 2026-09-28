@@ -1,91 +1,131 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+import io
 import json
-import shutil
-import subprocess
-import tempfile
 from pathlib import Path
+
+import requests
+from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "pba-official.json"
 OUT = ROOT / "assets" / "pba" / "highlights"
 OUT.mkdir(parents=True, exist_ok=True)
 
-def run(cmd):
-    print("+", " ".join(str(x) for x in cmd))
-    subprocess.run(cmd, check=True)
+HEADERS = {
+    "User-Agent": "Mozilla/5.0 (compatible; IMG-Sports-Data/1.0; +https://www.imgofficial.com/)"
+}
 
-def make_poster(video_id: str, out: Path):
-    with tempfile.TemporaryDirectory(prefix="pba-short-") as td:
-        td = Path(td)
-        template = td / f"{video_id}.%(ext)s"
+# YouTube Shorts can expose their full vertical cover/frame separately from
+# the standard landscape maxresdefault.jpg. Prefer the true 9:16 files.
+CANDIDATES = (
+    "oardefault.jpg",
+    "oar2.jpg",
+    "oar1.jpg",
+    "oar3.jpg",
+)
 
-        # Video-only is enough and avoids unnecessary audio bandwidth.
-        run([
-            "yt-dlp",
-            "--no-playlist",
-            "--quiet",
-            "--no-warnings",
-            "-f", "bestvideo[height<=1920]/best[height<=1920]/best",
-            "-o", str(template),
-            f"https://www.youtube.com/shorts/{video_id}",
-        ])
+def fetch_candidate(session: requests.Session, video_id: str, name: str):
+    url = f"https://i.ytimg.com/vi/{video_id}/{name}"
+    r = session.get(url, headers=HEADERS, timeout=35)
+    r.raise_for_status()
+    data = r.content
 
-        media = next((p for p in td.iterdir() if p.is_file()), None)
-        if not media:
-            raise RuntimeError(f"No downloaded media for {video_id}")
+    with Image.open(io.BytesIO(data)) as im:
+        width, height = im.size
+        fmt = (im.format or "").upper()
+        # Only accept a real portrait Shorts image. This rejects YouTube's
+        # tiny placeholder/error images and standard landscape thumbnails.
+        if height <= width:
+            raise RuntimeError(f"not portrait: {width}x{height}")
+        if height < 1000 or width < 500:
+            raise RuntimeError(f"too small: {width}x{height}")
+        rgb = im.convert("RGB")
+        return {
+            "url": url,
+            "name": name,
+            "width": width,
+            "height": height,
+            "pixels": width * height,
+            "image": rgb.copy(),
+            "format": fmt,
+        }
 
-        # Extract a clean frame near the start. Keep the source vertical
-        # geometry and cap width at 1080 for sharp mobile cards.
-        run([
-            "ffmpeg", "-y",
-            "-ss", "1.25",
-            "-i", str(media),
-            "-frames:v", "1",
-            "-vf", "scale='min(1080,iw)':-2:flags=lanczos",
-            "-q:v", "2",
-            str(out),
-        ])
+def build_one(session: requests.Session, video_id: str):
+    valid = []
+    errors = {}
+    for name in CANDIDATES:
+        try:
+            valid.append(fetch_candidate(session, video_id, name))
+        except Exception as e:
+            errors[name] = str(e)
 
-        if not out.exists() or out.stat().st_size < 20_000:
-            raise RuntimeError(f"Poster output invalid for {video_id}")
+    if not valid:
+        raise RuntimeError("no HD portrait Shorts thumbnail available: " + json.dumps(errors))
+
+    # Pick the largest real portrait source.
+    best = max(valid, key=lambda x: x["pixels"])
+    out = OUT / f"{video_id}.jpg"
+
+    # Preserve the full vertical composition and use a high JPEG quality.
+    best["image"].save(
+        out,
+        format="JPEG",
+        quality=94,
+        subsampling=0,
+        optimize=True,
+        progressive=True,
+    )
+
+    if out.stat().st_size < 30_000:
+        raise RuntimeError(f"saved poster unexpectedly small: {out.stat().st_size} bytes")
+
+    return {
+        "local": "/" + out.relative_to(ROOT).as_posix(),
+        "source": best["url"],
+        "sourceName": best["name"],
+        "width": best["width"],
+        "height": best["height"],
+        "bytes": out.stat().st_size,
+    }
 
 def main():
     obj = json.loads(DATA.read_text(encoding="utf-8"))
-    shorts = obj.get("shorts") or []
-    shorts = [x for x in shorts if x.get("id")][:10]
+    shorts = [x for x in (obj.get("shorts") or []) if x.get("id")][:10]
+
     if not shorts:
         print("No PBA Shorts found.")
         return 0
 
+    session = requests.Session()
+    posters = {}
     failures = {}
+
     for item in shorts:
         video_id = str(item["id"]).strip()
-        out = OUT / f"{video_id}.jpg"
         try:
-            make_poster(video_id, out)
-            print(f"POSTER {video_id}: {out.relative_to(ROOT)} ({out.stat().st_size} bytes)")
+            meta = build_one(session, video_id)
+            posters[video_id] = meta
+            print(
+                f"POSTER {video_id}: {meta['width']}x{meta['height']} "
+                f"{meta['local']} ({meta['bytes']} bytes)"
+            )
         except Exception as e:
             failures[video_id] = str(e)
             print(f"FAILED {video_id}: {e}")
 
     report = {
         "requested": len(shorts),
-        "created": len(shorts) - len(failures),
+        "created": len(posters),
         "failed": failures,
-        "posters": {
-            str(x["id"]): f"/assets/pba/highlights/{x['id']}.jpg"
-            for x in shorts
-            if (OUT / f"{x['id']}.jpg").exists()
-        },
+        "posters": posters,
     }
     (OUT / "posters.json").write_text(
         json.dumps(report, indent=2, ensure_ascii=False) + "\n",
         encoding="utf-8",
     )
 
-    # Require all current visible highlight posters to succeed.
     return 1 if failures else 0
 
 if __name__ == "__main__":
