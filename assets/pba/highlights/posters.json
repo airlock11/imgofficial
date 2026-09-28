@@ -1,17 +1,87 @@
 {
   "requested": 10,
-  "created": 0,
-  "failed": {
-    "qOsLyPXemvU": "Command '['yt-dlp', '--no-playlist', '--quiet', '--no-warnings', '-f', 'bestvideo[height<=1920]/best[height<=1920]/best', '-o', '/tmp/pba-short-31gam60m/qOsLyPXemvU.%(ext)s', 'https://www.youtube.com/shorts/qOsLyPXemvU']' returned non-zero exit status 1.",
-    "Js92O_RuAkk": "Command '['yt-dlp', '--no-playlist', '--quiet', '--no-warnings', '-f', 'bestvideo[height<=1920]/best[height<=1920]/best', '-o', '/tmp/pba-short-g0dsqd4g/Js92O_RuAkk.%(ext)s', 'https://www.youtube.com/shorts/Js92O_RuAkk']' returned non-zero exit status 1.",
-    "D0URhE8bP8Y": "Command '['yt-dlp', '--no-playlist', '--quiet', '--no-warnings', '-f', 'bestvideo[height<=1920]/best[height<=1920]/best', '-o', '/tmp/pba-short-nd2zi46b/D0URhE8bP8Y.%(ext)s', 'https://www.youtube.com/shorts/D0URhE8bP8Y']' returned non-zero exit status 1.",
-    "6m68urS8j90": "Command '['yt-dlp', '--no-playlist', '--quiet', '--no-warnings', '-f', 'bestvideo[height<=1920]/best[height<=1920]/best', '-o', '/tmp/pba-short-vtkzpnl5/6m68urS8j90.%(ext)s', 'https://www.youtube.com/shorts/6m68urS8j90']' returned non-zero exit status 1.",
-    "brZA9J1i5S4": "Command '['yt-dlp', '--no-playlist', '--quiet', '--no-warnings', '-f', 'bestvideo[height<=1920]/best[height<=1920]/best', '-o', '/tmp/pba-short-etkcnomi/brZA9J1i5S4.%(ext)s', 'https://www.youtube.com/shorts/brZA9J1i5S4']' returned non-zero exit status 1.",
-    "zODXjqeiwj4": "Command '['yt-dlp', '--no-playlist', '--quiet', '--no-warnings', '-f', 'bestvideo[height<=1920]/best[height<=1920]/best', '-o', '/tmp/pba-short-kuydri6f/zODXjqeiwj4.%(ext)s', 'https://www.youtube.com/shorts/zODXjqeiwj4']' returned non-zero exit status 1.",
-    "TSRmcywtvEE": "Command '['yt-dlp', '--no-playlist', '--quiet', '--no-warnings', '-f', 'bestvideo[height<=1920]/best[height<=1920]/best', '-o', '/tmp/pba-short-ifx53dgf/TSRmcywtvEE.%(ext)s', 'https://www.youtube.com/shorts/TSRmcywtvEE']' returned non-zero exit status 1.",
-    "RxVPKQ4Vht8": "Command '['yt-dlp', '--no-playlist', '--quiet', '--no-warnings', '-f', 'bestvideo[height<=1920]/best[height<=1920]/best', '-o', '/tmp/pba-short-50o1kj6u/RxVPKQ4Vht8.%(ext)s', 'https://www.youtube.com/shorts/RxVPKQ4Vht8']' returned non-zero exit status 1.",
-    "DJG06O6wBXk": "Command '['yt-dlp', '--no-playlist', '--quiet', '--no-warnings', '-f', 'bestvideo[height<=1920]/best[height<=1920]/best', '-o', '/tmp/pba-short-fddu8h_s/DJG06O6wBXk.%(ext)s', 'https://www.youtube.com/shorts/DJG06O6wBXk']' returned non-zero exit status 1.",
-    "A86-pel2EpE": "Command '['yt-dlp', '--no-playlist', '--quiet', '--no-warnings', '-f', 'bestvideo[height<=1920]/best[height<=1920]/best', '-o', '/tmp/pba-short-eqhkywoi/A86-pel2EpE.%(ext)s', 'https://www.youtube.com/shorts/A86-pel2EpE']' returned non-zero exit status 1."
-  },
-  "posters": {}
+  "created": 10,
+  "failed": {},
+  "posters": {
+    "qOsLyPXemvU": {
+      "local": "/assets/pba/highlights/qOsLyPXemvU.jpg",
+      "source": "https://i.ytimg.com/vi/qOsLyPXemvU/oardefault.jpg",
+      "sourceName": "oardefault.jpg",
+      "width": 1214,
+      "height": 2160,
+      "bytes": 471253
+    },
+    "Js92O_RuAkk": {
+      "local": "/assets/pba/highlights/Js92O_RuAkk.jpg",
+      "source": "https://i.ytimg.com/vi/Js92O_RuAkk/oardefault.jpg",
+      "sourceName": "oardefault.jpg",
+      "width": 1214,
+      "height": 2160,
+      "bytes": 669425
+    },
+    "D0URhE8bP8Y": {
+      "local": "/assets/pba/highlights/D0URhE8bP8Y.jpg",
+      "source": "https://i.ytimg.com/vi/D0URhE8bP8Y/oardefault.jpg",
+      "sourceName": "oardefault.jpg",
+      "width": 1080,
+      "height": 1920,
+      "bytes": 278786
+    },
+    "6m68urS8j90": {
+      "local": "/assets/pba/highlights/6m68urS8j90.jpg",
+      "source": "https://i.ytimg.com/vi/6m68urS8j90/oardefault.jpg",
+      "sourceName": "oardefault.jpg",
+      "width": 1214,
+      "height": 2160,
+      "bytes": 684795
+    },
+    "brZA9J1i5S4": {
+      "local": "/assets/pba/highlights/brZA9J1i5S4.jpg",
+      "source": "https://i.ytimg.com/vi/brZA9J1i5S4/oardefault.jpg",
+      "sourceName": "oardefault.jpg",
+      "width": 1215,
+      "height": 2160,
+      "bytes": 488790
+    },
+    "zODXjqeiwj4": {
+      "local": "/assets/pba/highlights/zODXjqeiwj4.jpg",
+      "source": "https://i.ytimg.com/vi/zODXjqeiwj4/oardefault.jpg",
+      "sourceName": "oardefault.jpg",
+      "width": 1215,
+      "height": 2160,
+      "bytes": 662208
+    },
+    "TSRmcywtvEE": {
+      "local": "/assets/pba/highlights/TSRmcywtvEE.jpg",
+      "source": "https://i.ytimg.com/vi/TSRmcywtvEE/oardefault.jpg",
+      "sourceName": "oardefault.jpg",
+      "width": 1215,
+      "height": 2160,
+      "bytes": 470530
+    },
+    "RxVPKQ4Vht8": {
+      "local": "/assets/pba/highlights/RxVPKQ4Vht8.jpg",
+      "source": "https://i.ytimg.com/vi/RxVPKQ4Vht8/oardefault.jpg",
+      "sourceName": "oardefault.jpg",
+      "width": 1215,
+      "height": 2160,
+      "bytes": 504114
+    },
+    "DJG06O6wBXk": {
+      "local": "/assets/pba/highlights/DJG06O6wBXk.jpg",
+      "source": "https://i.ytimg.com/vi/DJG06O6wBXk/oardefault.jpg",
+      "sourceName": "oardefault.jpg",
+      "width": 1215,
+      "height": 2160,
+      "bytes": 582011
+    },
+    "A86-pel2EpE": {
+      "local": "/assets/pba/highlights/A86-pel2EpE.jpg",
+      "source": "https://i.ytimg.com/vi/A86-pel2EpE/oardefault.jpg",
+      "sourceName": "oardefault.jpg",
+      "width": 1215,
+      "height": 2160,
+      "bytes": 586234
+    }
+  }
 }
