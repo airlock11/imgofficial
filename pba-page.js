@@ -236,9 +236,21 @@ function renderHighlights({streams,official}){
   const items=shorts.slice(0,10);
   const BATCH_SIZE=3;
 
+  const highQualityThumb=x=>{
+    const id=String(x?.id||"").trim();
+    if(id)return `https://i.ytimg.com/vi/${encodeURIComponent(id)}/maxresdefault.jpg`;
+    return String(x?.thumbnail||"");
+  };
+
+  const sdThumb=x=>{
+    const id=String(x?.id||"").trim();
+    if(id)return `https://i.ytimg.com/vi/${encodeURIComponent(id)}/sddefault.jpg`;
+    return String(x?.thumbnail||"");
+  };
+
   wrap.innerHTML=items.map((x,index)=>`<article class="reel-card">
     <div class="reel-media" tabindex="0" data-short-id="${safe(x.id)}" data-index="${index}" aria-label="Play ${safe(x.title)}">
-      <img class="reel-thumb" src="${safe(x.thumbnail)}" alt="${safe(x.title)}" loading="lazy">
+      <img class="reel-thumb" src="${safe(highQualityThumb(x))}" data-sd-thumb="${safe(sdThumb(x))}" data-fallback-thumb="${safe(x.thumbnail||"")}" alt="${safe(x.title)}" loading="lazy" decoding="async">
       <span class="reel-shade"></span>
       <span class="reel-source">PBA SHORTS</span>
     </div>
@@ -247,6 +259,22 @@ function renderHighlights({streams,official}){
       <span>PBA Official</span>
     </div>
   </article>`).join("");
+
+  qsa("#highlights .reel-thumb").forEach(img=>{
+    img.addEventListener("error",()=>{
+      const sd=img.dataset.sdThumb||"";
+      const fallback=img.dataset.fallbackThumb||"";
+      if(sd&&img.src!==new URL(sd,location.href).href){
+        img.src=sd;
+        img.dataset.sdThumb="";
+        return;
+      }
+      if(fallback&&img.src!==new URL(fallback,location.href).href){
+        img.src=fallback;
+        img.dataset.fallbackThumb="";
+      }
+    });
+  });
 
   const stages=qsa("#highlights .reel-media");
   let activeBatchStart=-1;
