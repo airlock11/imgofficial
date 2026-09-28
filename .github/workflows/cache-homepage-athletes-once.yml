@@ -1,0 +1,117 @@
+name: Cache homepage athlete photos once
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/cache-homepage-athletes-once.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  cache:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download exact homepage photos
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p assets/homepage
+
+          download() {
+            url="$1"
+            out="$2"
+            echo "Downloading $out"
+            curl -fL --retry 4 --retry-all-errors --connect-timeout 20 --max-time 180 \
+              -A "IMG-Sports-Data/1.0 (homepage asset cache)" \
+              "$url" -o "$out"
+            test "$(stat -c%s "$out")" -gt 10000
+            file --mime-type "$out" | grep -q 'image/'
+          }
+
+          download "https://commons.wikimedia.org/wiki/Special:FilePath/Cristiano%20Ronaldo.jpg?width=2200" "assets/homepage/cristiano-ronaldo.jpg"
+          download "https://commons.wikimedia.org/wiki/Special:FilePath/Steph%20Curry.jpg?width=2200" "assets/homepage/steph-curry.jpg"
+          download "https://commons.wikimedia.org/wiki/Special:FilePath/Lando%20Norris%20at%20the%20Melbourne%20Walk%20during%20the%202026%20Australian%20Grand%20Prix%20(028A7960).jpg?width=2200" "assets/homepage/lando-norris.jpg"
+          download "https://commons.wikimedia.org/wiki/Special:FilePath/Jannik%20Sinner%20at%202026%20Wimbledon%20final.jpg?width=2200" "assets/homepage/jannik-sinner.jpg"
+          download "https://commons.wikimedia.org/wiki/Special:FilePath/LeBron%20James%20(51915230244).jpg?width=1800" "assets/homepage/lebron-james.jpg"
+          download "https://commons.wikimedia.org/wiki/Special:FilePath/Lionel%20Messi%20NE%20Revolution%20Inter%20Miami%207.9.25-143.jpg?width=1800" "assets/homepage/lionel-messi.jpg"
+          download "https://commons.wikimedia.org/wiki/Special:FilePath/Carlos%20Alcaraz%20-%20Roland-Garros%202025.jpg?width=2200" "assets/homepage/carlos-alcaraz.jpg"
+          download "https://commons.wikimedia.org/wiki/Special:FilePath/Shohei%20Ohtani%20(51005075907).jpg?width=2200" "assets/homepage/shohei-ohtani.jpg"
+          download "https://commons.wikimedia.org/wiki/Special:FilePath/2025%20Singapore%20GP%20-%20Red%20Bull%20-%20Max%20Verstappen%20-%20FP1.jpg?width=2200" "assets/homepage/max-verstappen.jpg"
+          download "https://commons.wikimedia.org/wiki/Special:FilePath/Conor%20McGregor%2C%20UFC%20189%20World%20Tour%20London.jpg?width=1800" "assets/homepage/conor-mcgregor.jpg"
+          download "https://commons.wikimedia.org/wiki/Special:FilePath/Connor%20McDavid%20of%20the%20Edmonton%20Oilers.jpg?width=1800" "assets/homepage/connor-mcdavid.jpg"
+          download "https://commons.wikimedia.org/wiki/Special:FilePath/Y%C5%ABji%20Nishida%20(Legavolley%202021).png?width=1800" "assets/homepage/yuji-nishida.png"
+          download "https://commons.wikimedia.org/wiki/Special:FilePath/Pat%20Cummins%20bowling%20at%20Perth%20Stadium%2C%20First%20Test%20Australia%20versus%20West%20Indies%2C%202%20December%202022%2002.jpg?width=2200" "assets/homepage/pat-cummins.jpg"
+          download "https://commons.wikimedia.org/wiki/Special:FilePath/Buccaneers%20at%20Chiefs%20(54133020752).jpg?width=1800" "assets/homepage/american-football-game.jpg"
+
+      - name: Point homepage to repository copies
+        shell: python
+        run: |
+          from pathlib import Path
+
+          path = Path("index.html")
+          html = path.read_text(encoding="utf-8")
+
+          mapping = {
+            "https://commons.wikimedia.org/wiki/Special:FilePath/Cristiano%20Ronaldo.jpg?width=2200": "./assets/homepage/cristiano-ronaldo.jpg",
+            "https://commons.wikimedia.org/wiki/Special:FilePath/Steph%20Curry.jpg?width=2200": "./assets/homepage/steph-curry.jpg",
+            "https://commons.wikimedia.org/wiki/Special:FilePath/Lando%20Norris%20at%20the%20Melbourne%20Walk%20during%20the%202026%20Australian%20Grand%20Prix%20(028A7960).jpg?width=2200": "./assets/homepage/lando-norris.jpg",
+            "https://commons.wikimedia.org/wiki/Special:FilePath/Jannik%20Sinner%20at%202026%20Wimbledon%20final.jpg?width=2200": "./assets/homepage/jannik-sinner.jpg",
+            "https://commons.wikimedia.org/wiki/Special:FilePath/LeBron%20James%20(51915230244).jpg?width=1800": "./assets/homepage/lebron-james.jpg",
+            "https://commons.wikimedia.org/wiki/Special:FilePath/Lionel%20Messi%20NE%20Revolution%20Inter%20Miami%207.9.25-143.jpg?width=1800": "./assets/homepage/lionel-messi.jpg",
+            "https://commons.wikimedia.org/wiki/Special:FilePath/Carlos%20Alcaraz%20-%20Roland-Garros%202025.jpg?width=2200": "./assets/homepage/carlos-alcaraz.jpg",
+            "https://commons.wikimedia.org/wiki/Special:FilePath/Shohei%20Ohtani%20(51005075907).jpg?width=2200": "./assets/homepage/shohei-ohtani.jpg",
+            "https://commons.wikimedia.org/wiki/Special:FilePath/2025%20Singapore%20GP%20-%20Red%20Bull%20-%20Max%20Verstappen%20-%20FP1.jpg?width=2200": "./assets/homepage/max-verstappen.jpg",
+            "https://commons.wikimedia.org/wiki/Special:FilePath/Conor%20McGregor%2C%20UFC%20189%20World%20Tour%20London.jpg?width=1800": "./assets/homepage/conor-mcgregor.jpg",
+            "https://commons.wikimedia.org/wiki/Special:FilePath/Connor%20McDavid%20of%20the%20Edmonton%20Oilers.jpg?width=1800": "./assets/homepage/connor-mcdavid.jpg",
+            "https://commons.wikimedia.org/wiki/Special:FilePath/Y%C5%ABji%20Nishida%20(Legavolley%202021).png?width=1800": "./assets/homepage/yuji-nishida.png",
+            "https://commons.wikimedia.org/wiki/Special:FilePath/Pat%20Cummins%20bowling%20at%20Perth%20Stadium%2C%20First%20Test%20Australia%20versus%20West%20Indies%2C%202%20December%202022%2002.jpg?width=2200": "./assets/homepage/pat-cummins.jpg",
+            "https://commons.wikimedia.org/wiki/Special:FilePath/Buccaneers%20at%20Chiefs%20(54133020752).jpg?width=1800": "./assets/homepage/american-football-game.jpg",
+          }
+
+          missing = [src for src in mapping if src not in html]
+          if missing:
+            raise SystemExit("Expected homepage image references missing: " + repr(missing))
+
+          for src, local in mapping.items():
+            html = html.replace(src, local)
+
+          path.write_text(html, encoding="utf-8")
+
+          sources = ["# Homepage image sources", "", "The local homepage image files below are cached copies of the exact Wikimedia Commons images previously referenced directly by the homepage.", ""]
+          for src, local in mapping.items():
+            sources.append(f"- `{local}` — {src}")
+          Path("assets/homepage/SOURCES.md").write_text("\n".join(sources) + "\n", encoding="utf-8")
+
+      - name: Verify local references
+        shell: bash
+        run: |
+          set -euo pipefail
+          if grep -q "commons.wikimedia.org/wiki/Special:FilePath" index.html; then
+            echo "External homepage image hotlinks still remain."
+            exit 1
+          fi
+          grep -q "./assets/homepage/cristiano-ronaldo.jpg" index.html
+          grep -q "./assets/homepage/lebron-james.jpg" index.html
+          grep -q "./assets/homepage/lionel-messi.jpg" index.html
+
+      - name: Commit cached images
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "IMG Asset Builder"
+          git config user.email "actions@users.noreply.github.com"
+          git add index.html assets/homepage
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git commit -m "Store homepage athlete photos locally"
+          git pull --rebase origin main
+          git push origin HEAD:main
