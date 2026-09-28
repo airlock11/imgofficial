@@ -1,0 +1,763 @@
+{
+  "detected": 117,
+  "cached": 107,
+  "failed": {
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/EuroLeague_logo.svg": "429 Client Error: Too many requests (f061ab2) for url: https://upload.wikimedia.org/wikipedia/commons/9/90/EuroLeague_logo.svg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/FIA_Formula_E_World_Championship_Logo.svg": "429 Client Error: Too many requests (f061ab2) for url: https://upload.wikimedia.org/wikipedia/commons/a/a4/FIA_Formula_E_World_Championship_Logo.svg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/ICC_Men%E2%80%99s_Cricket_World_Cup_logo.svg": "429 Client Error: Too many requests (f061ab2) for url: https://upload.wikimedia.org/wikipedia/commons/8/81/ICC_Men%E2%80%99s_Cricket_World_Cup_logo.svg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/IIHF_text_logo.svg": "429 Client Error: Too many requests (f061ab2) for url: https://upload.wikimedia.org/wikipedia/commons/2/27/IIHF_text_logo_%282005%29.svg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/UEFA%20Women%27s%20Champions%20League%20logo.svg": "429 Client Error: Too many requests (f061ab2) for url: https://upload.wikimedia.org/wikipedia/commons/9/96/UEFA_Women%27s_Champions_League_logo.svg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Usopen-header-logo.svg": "429 Client Error: Too many requests (f061ab2) for url: https://upload.wikimedia.org/wikipedia/commons/2/26/Usopen-header-logo.svg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/V.League_Japan_logo.png": "429 Client Error: Too many requests. Please contact noc@wikimedia.org for further information (0068e25) for url: https://upload.wikimedia.org/wikipedia/commons/1/10/V.League_Japan_logo.png?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/WB-Logo.png": "429 Client Error: Too many requests - please contact noc@wikimedia.org to discuss a less disruptive approach or instead use thumbnail images in sizes listed on https://w.wiki/GHai. (0c640b1) for url: https://upload.wikimedia.org/wikipedia/commons/4/46/WB-Logo.png?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+    "https://upload.wikimedia.org/wikipedia/commons/e/e4/FIBA_logo.svg": "429 Client Error: Too many requests - please contact noc@wikimedia.org to discuss a less disruptive approach or instead use thumbnail images in sizes listed on https://w.wiki/GHai. (0c640b1) for url: https://upload.wikimedia.org/wikipedia/commons/e/e4/FIBA_logo.svg",
+    "https://upload.wikimedia.org/wikipedia/en/thumb/d/dd/Philippine_Basketball_Association_%28logo%29.svg/1280px-Philippine_Basketball_Association_%28logo%29.svg.png": "429 Client Error: Too many requests. Please contact noc@wikimedia.org for further information (0068e25) for url: https://upload.wikimedia.org/wikipedia/en/thumb/d/dd/Philippine_Basketball_Association_%28logo%29.svg/1280px-Philippine_Basketball_Association_%28logo%29.svg.png"
+  },
+  "changed_files": [
+    "pba-assets.json",
+    "index.html",
+    "score-league-user-logos.js",
+    "football-page.js",
+    "app.js",
+    "football-espn-cache.json",
+    "scores/index.html",
+    "sports/index.html",
+    "boxing/index.html",
+    "odds/index.html",
+    "news/index.html",
+    "leagues/wta/index.html",
+    "leagues/mpbl/index.html",
+    "leagues/nba/index.html",
+    "leagues/atp/index.html",
+    "leagues/vba/index.html",
+    "leagues/nbl-pilipinas/index.html",
+    "leagues/nhl/index.html",
+    "leagues/ncaa-philippines/index.html",
+    "leagues/nfl/index.html",
+    "leagues/nbl-australia/index.html",
+    "leagues/b-league/index.html",
+    "leagues/formula-1/index.html",
+    "leagues/ufc/index.html",
+    "leagues/wnba/index.html",
+    "leagues/ipl/index.html",
+    "leagues/mlb/index.html",
+    "leagues/euroleague/index.html"
+  ],
+  "remaining_external_logo_urls": {
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/EuroLeague_logo.svg": [
+      "score-league-user-logos.js",
+      "sports/index.html"
+    ],
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/FIA_Formula_E_World_Championship_Logo.svg": [
+      "score-league-user-logos.js",
+      "sports/index.html"
+    ],
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/ICC_Men%E2%80%99s_Cricket_World_Cup_logo.svg": [
+      "score-league-user-logos.js",
+      "sports/index.html"
+    ],
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/IIHF_text_logo.svg": [
+      "score-league-user-logos.js",
+      "sports/index.html"
+    ],
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/UEFA%20Women%27s%20Champions%20League%20logo.svg": [
+      "football-page.js",
+      "score-league-user-logos.js"
+    ],
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Usopen-header-logo.svg": [
+      "score-league-user-logos.js",
+      "sports/index.html"
+    ],
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/V.League_Japan_logo.png": [
+      "score-league-user-logos.js",
+      "sports/index.html"
+    ],
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/WB-Logo.png": [
+      "score-league-user-logos.js",
+      "sports/index.html"
+    ],
+    "https://upload.wikimedia.org/wikipedia/commons/e/e4/FIBA_logo.svg": [
+      "score-league-user-logos.js"
+    ],
+    "https://upload.wikimedia.org/wikipedia/en/thumb/d/dd/Philippine_Basketball_Association_%28logo%29.svg/1280px-Philippine_Basketball_Association_%28logo%29.svg.png": [
+      "pba-assets.json"
+    ]
+  },
+  "sources": {
+    "/assets/logos/external/a.espncdn.com--10--2f2fb4052a.png": {
+      "source_url": "https://a.espncdn.com/i/leaguelogos/soccer/500/10.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--12--6736982029.png": {
+      "source_url": "https://a.espncdn.com/i/leaguelogos/soccer/500/12.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--15--1638a19665.png": {
+      "source_url": "https://a.espncdn.com/i/leaguelogos/soccer/500/15.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--23--7675e22a71.png": {
+      "source_url": "https://a.espncdn.com/i/leaguelogos/soccer/500/23.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--101--6a6f4d8390.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/101.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--102--9611443b45.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/102.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--103--ec4cdaccef.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/103.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--10388--7aea2b2acc.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/10388.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--104--e168723b8c.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/104.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--105--b23238054f.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/105.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--1068--0a19237e80.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/1068.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--107--dbb0b1107a.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/107.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--109--b2b6ebb4cf.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/109.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--110--c6097bc86c.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/110.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--111--7a75d00dac.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/111.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--112--5a70142586.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/112.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--113--894e60abd3.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/113.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--114--307cbddd83.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/114.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--11420--fccb206011.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/11420.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--115--8ff3ea69b3.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/115.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--118--e8d0d0469e.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/118.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--122--cc4925ab9b.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/122.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--124--1d45340173.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/124.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--125--27f70d2584.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/125.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--126--575f9fcf3a.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/126.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--127--aae9d863ae.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/127.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--131--7272862327.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/131.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--132--07fcd40f20.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/132.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--133--200e98cc02.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/133.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--134--fa2cb64f3b.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/134.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--137--fb943f1952.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/137.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--1538--75794fdb1a.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/1538.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--17530--e0f4d6a993.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/17530.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--239--43abea56d1.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/239.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--243--1d934d1239.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/243.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--244--73eea6fd58.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/244.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--2572--b5fcd47722.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/2572.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--268--0ec22a981c.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/268.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--2922--e7055ae7e4.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/2922.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--2925--64bf69dcac.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/2925.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--2950--517f0bf0fd.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/2950.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--306--c5a5413925.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/306.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--3263--187bd637db.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/3263.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--3307--48f66a3909.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/3307.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--331--579aefa8cd.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/331.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--337--203c7c849e.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/337.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--349--9755380ff0.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/349.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--357--369e54f976.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/357.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--359--9ccb335946.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/359.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--360--664d0eb3b1.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/360.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--361--062eabdac6.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/361.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--362--c275d579f1.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/362.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--363--eaabb39953.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/363.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--364--500f02856e.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/364.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--366--8e3cdeb9ba.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/366.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--367--9732b8bccc.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/367.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--368--9e98bf04b2.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/368.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--370--dd4bf81d56.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/370.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--373--3ae4d86323.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/373.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--3751--d099c68416.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/3751.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--382--3e9f9da759.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/382.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--384--657171029f.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/384.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--3841--cf13f1cac1.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/3841.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--388--4100d528b6.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/388.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--393--52828a7365.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/393.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--3997--420b71daec.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/3997.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--4007--1751d00119.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/4007.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--4057--d724a35c3c.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/4057.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--598--9be5bd92cd.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/598.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--7911--bd975768d7.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/7911.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--83--545419bb2f.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/83.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--85--0d5ee633d9.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/85.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--86--6b0b9bab7a.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/86.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--87--8d00248eb1.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/87.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--88--e8e3d4a33a.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/88.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--89--dc3fc34977.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/89.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--90--5513989f7f.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/90.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--93--df9093c775.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/93.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--94--cbea42e967.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/94.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--96--971ec444c9.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/96.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--97--a68df39870.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/97.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/a.espncdn.com--99--afe8a34070.png": {
+      "source_url": "https://a.espncdn.com/i/teamlogos/soccer/500/99.png",
+      "referenced_by": [
+        "football-espn-cache.json"
+      ]
+    },
+    "/assets/logos/external/cdn.resfu.com--primera-el-salvador--27480b5475.png": {
+      "source_url": "https://cdn.resfu.com/media/img/league_logos/primera-el-salvador.png",
+      "referenced_by": [
+        "football-page.js",
+        "score-league-user-logos.js"
+      ]
+    },
+    "/assets/logos/external/commons.wikimedia.org--ao26_logo--d8b9de10e2.svg": {
+      "source_url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/AO26_logo.svg",
+      "referenced_by": [
+        "score-league-user-logos.js",
+        "sports/index.html"
+      ]
+    },
+    "/assets/logos/external/commons.wikimedia.org--b.league_logo--4246d6e116.svg": {
+      "source_url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/B.League_logo.svg",
+      "referenced_by": [
+        "score-league-user-logos.js",
+        "sports/index.html"
+      ]
+    },
+    "/assets/logos/external/commons.wikimedia.org--bbl--796987bd73.svg": {
+      "source_url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/BBL.svg",
+      "referenced_by": [
+        "score-league-user-logos.js",
+        "sports/index.html"
+      ]
+    },
+    "/assets/logos/external/commons.wikimedia.org--motogp_logo_2026--2e42a98cd6.png": {
+      "source_url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/MotoGP_Logo_2026.png",
+      "referenced_by": [
+        "score-league-user-logos.js",
+        "sports/index.html"
+      ]
+    },
+    "/assets/logos/external/commons.wikimedia.org--npb_logo--7f983926f2.svg": {
+      "source_url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/NPB_logo.svg",
+      "referenced_by": [
+        "score-league-user-logos.js",
+        "sports/index.html"
+      ]
+    },
+    "/assets/logos/external/commons.wikimedia.org--one_championship--6575994eb6.png": {
+      "source_url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/ONE_Championship.png",
+      "referenced_by": [
+        "score-league-user-logos.js",
+        "sports/index.html"
+      ]
+    },
+    "/assets/logos/external/pbs.twimg.com--hc7tzxkayaalrhg--9c5b6c603c.jpg": {
+      "source_url": "https://pbs.twimg.com/media/HC7tzxkaYAALRHg.jpg",
+      "referenced_by": [
+        "score-league-user-logos.js"
+      ]
+    },
+    "/assets/logos/external/r2.thesportsdb.com--pg49fr1727716904--f3bab4da51.png": {
+      "source_url": "https://r2.thesportsdb.com/images/media/league/badgearchive/pg49fr1727716904.png",
+      "referenced_by": [
+        "football-page.js",
+        "score-league-user-logos.js"
+      ]
+    },
+    "/assets/logos/external/static.toiimg.com--92395083--79f5cb8ed3.jpg": {
+      "source_url": "https://static.toiimg.com/thumb/msid-92395083%2Cwidth-1280%2Cheight-720%2Cresizemode-4/92395083.jpg",
+      "referenced_by": [
+        "score-league-user-logos.js"
+      ]
+    },
+    "/assets/logos/external/statsspace01.sgp1.digitaloceanspaces.com--logo_l1--774c6c9cce.png": {
+      "source_url": "https://statsspace01.sgp1.digitaloceanspaces.com/organizer/teams/1/logo_L1.png",
+      "referenced_by": [
+        "pba-assets.json"
+      ]
+    },
+    "/assets/logos/external/statsspace01.sgp1.digitaloceanspaces.com--logo_l1--0462c899f3.png": {
+      "source_url": "https://statsspace01.sgp1.digitaloceanspaces.com/organizer/teams/10/logo_L1.png",
+      "referenced_by": [
+        "pba-assets.json"
+      ]
+    },
+    "/assets/logos/external/statsspace01.sgp1.digitaloceanspaces.com--logo_l1--e24e61d3c2.png": {
+      "source_url": "https://statsspace01.sgp1.digitaloceanspaces.com/organizer/teams/11/logo_L1.png",
+      "referenced_by": [
+        "pba-assets.json"
+      ]
+    },
+    "/assets/logos/external/statsspace01.sgp1.digitaloceanspaces.com--logo_l1--78db39fd44.png": {
+      "source_url": "https://statsspace01.sgp1.digitaloceanspaces.com/organizer/teams/12/logo_L1.png",
+      "referenced_by": [
+        "pba-assets.json"
+      ]
+    },
+    "/assets/logos/external/statsspace01.sgp1.digitaloceanspaces.com--logo_l1--49217441d5.png": {
+      "source_url": "https://statsspace01.sgp1.digitaloceanspaces.com/organizer/teams/14/logo_L1.png",
+      "referenced_by": [
+        "pba-assets.json"
+      ]
+    },
+    "/assets/logos/external/statsspace01.sgp1.digitaloceanspaces.com--logo_l1--92dd9cc5f9.png": {
+      "source_url": "https://statsspace01.sgp1.digitaloceanspaces.com/organizer/teams/2/logo_L1.png",
+      "referenced_by": [
+        "pba-assets.json"
+      ]
+    },
+    "/assets/logos/external/statsspace01.sgp1.digitaloceanspaces.com--logo_l1--8c76d722ff.png": {
+      "source_url": "https://statsspace01.sgp1.digitaloceanspaces.com/organizer/teams/20/logo_L1.png",
+      "referenced_by": [
+        "pba-assets.json"
+      ]
+    },
+    "/assets/logos/external/statsspace01.sgp1.digitaloceanspaces.com--logo_l1--ad1dd1883d.png": {
+      "source_url": "https://statsspace01.sgp1.digitaloceanspaces.com/organizer/teams/3/logo_L1.png",
+      "referenced_by": [
+        "pba-assets.json"
+      ]
+    },
+    "/assets/logos/external/statsspace01.sgp1.digitaloceanspaces.com--logo_l1--40e34a4586.png": {
+      "source_url": "https://statsspace01.sgp1.digitaloceanspaces.com/organizer/teams/4/logo_L1.png",
+      "referenced_by": [
+        "pba-assets.json"
+      ]
+    },
+    "/assets/logos/external/statsspace01.sgp1.digitaloceanspaces.com--logo_l1--57c409c1c7.png": {
+      "source_url": "https://statsspace01.sgp1.digitaloceanspaces.com/organizer/teams/5/logo_L1.png",
+      "referenced_by": [
+        "app.js",
+        "pba-assets.json"
+      ]
+    },
+    "/assets/logos/external/statsspace01.sgp1.digitaloceanspaces.com--logo_l1--854de2a92f.png": {
+      "source_url": "https://statsspace01.sgp1.digitaloceanspaces.com/organizer/teams/6/logo_L1.png",
+      "referenced_by": [
+        "pba-assets.json"
+      ]
+    },
+    "/assets/logos/external/statsspace01.sgp1.digitaloceanspaces.com--logo_l1--3621bff9b6.png": {
+      "source_url": "https://statsspace01.sgp1.digitaloceanspaces.com/organizer/teams/7/logo_L1.png",
+      "referenced_by": [
+        "pba-assets.json"
+      ]
+    },
+    "/assets/logos/external/statsspace01.sgp1.digitaloceanspaces.com--logo_l1--6cd81c96d4.png": {
+      "source_url": "https://statsspace01.sgp1.digitaloceanspaces.com/organizer/teams/9/logo_L1.png",
+      "referenced_by": [
+        "pba-assets.json"
+      ]
+    },
+    "/assets/logos/external/webcdn.ticketmax.ph--1728401723_895c0017ad979c1b70f1--312839d1e4.jpg": {
+      "source_url": "https://webcdn.ticketmax.ph/uploads/20241008/1728401723_895c0017ad979c1b70f1.jpg",
+      "referenced_by": [
+        "football-page.js",
+        "score-league-user-logos.js",
+        "sports/index.html"
+      ]
+    },
+    "/assets/logos/external/www.imgofficial.com--img-logo-hq--2d2bdbe0b4.png": {
+      "source_url": "https://www.imgofficial.com/img-logo-hq.png",
+      "referenced_by": [
+        "boxing/index.html",
+        "index.html",
+        "leagues/atp/index.html",
+        "leagues/b-league/index.html",
+        "leagues/euroleague/index.html",
+        "leagues/formula-1/index.html",
+        "leagues/ipl/index.html",
+        "leagues/mlb/index.html",
+        "leagues/mpbl/index.html",
+        "leagues/nba/index.html",
+        "leagues/nbl-australia/index.html",
+        "leagues/nbl-pilipinas/index.html",
+        "leagues/ncaa-philippines/index.html",
+        "leagues/nfl/index.html",
+        "leagues/nhl/index.html",
+        "leagues/ufc/index.html",
+        "leagues/vba/index.html",
+        "leagues/wnba/index.html",
+        "leagues/wta/index.html",
+        "news/index.html",
+        "odds/index.html",
+        "scores/index.html",
+        "sports/index.html"
+      ]
+    }
+  }
+}

@@ -1191,7 +1191,7 @@ const verifiedTeamLogoOverrides={
   pba:{
     'barangay ginebra':'https://statsspace01.sgp1.digitaloceanspaces.com/basketball_organizer/images/845go3mfbdxvlmrxq4jnv93ema08',
     'barangay ginebra san miguel':'https://statsspace01.sgp1.digitaloceanspaces.com/basketball_organizer/images/845go3mfbdxvlmrxq4jnv93ema08',
-    'converge fiberxers':'https://statsspace01.sgp1.digitaloceanspaces.com/organizer/teams/5/logo_L1.png',
+    'converge fiberxers':'/assets/logos/external/statsspace01.sgp1.digitaloceanspaces.com--logo_l1--57c409c1c7.png',
     'meralco bolts':'https://statsspace01.sgp1.digitaloceanspaces.com/basketball_organizer/images/5rg0jlac21fve9xix02wncz1t1uy',
     'nlex road warriors':'https://statsspace01.sgp1.digitaloceanspaces.com/basketball_organizer/images/b72j58tho2ipkl065bemw71n9byl',
     'tnt tropang 5g':'https://statsspace01.sgp1.digitaloceanspaces.com/basketball_organizer/images/6a0o355pjdq3syfi83969r81dqp6',
