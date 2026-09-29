@@ -12,6 +12,16 @@ async function getJSON(url,fallback={}){
   }catch{return fallback}
 }
 
+async function getFirstJSON(urls,fallback={}){
+  for(const url of urls){
+    try{
+      const value=await getJSON(url,null);
+      if(value&&typeof value==="object")return value;
+    }catch{}
+  }
+  return fallback;
+}
+
 function teamLogo(name,assets){return assets?.teams?.[name]||""}
 
 function teamBlock(name,side,assets,score=""){
@@ -211,11 +221,22 @@ function renderNews(official){
 }
 
 async function load(){
-  const [official,assets,yt]=await Promise.all([
-    getJSON("/tat-official.json",{}),
+  const [official,baseAssets,yt]=await Promise.all([
+    getFirstJSON([
+      "https://raw.githubusercontent.com/airlock11/imgofficial/tat-data/tat-official.json",
+      "/tat-official.json"
+    ],{}),
     getJSON("/tat-assets.json",{teams:{}}),
-    getJSON("/youtube-live.json",{})
+    getFirstJSON([
+      "https://raw.githubusercontent.com/airlock11/imgofficial/live-data/youtube-live.json",
+      "https://raw.githubusercontent.com/airlock11/imgofficial/main/youtube-live.json",
+      "/youtube-live.json"
+    ],{})
   ]);
+  const assets={
+    ...baseAssets,
+    teams:{...(baseAssets.teams||{}),...(official.teamLogos||{})}
+  };
   const logo=qs("#tat-league-logo");
   if(logo&&assets.leagueLogo)logo.src=assets.leagueLogo;
   const games=Array.isArray(official.games)?official.games:[];
@@ -225,11 +246,13 @@ async function load(){
     String(x.verificationStatus||x.stream?.verificationStatus||"")==="verified"
   );
   renderGallery({finals,official,assets});
-  renderHighlights({official,streams});
+  if(!qs("#highlights .reel-media.is-playing"))renderHighlights({official,streams});
   renderCompetition({official,assets});
   renderPlayers(official);
   renderNews(official);
 }
 
 load();
+setInterval(()=>{if(!document.hidden)load()},60000);
+document.addEventListener("visibilitychange",()=>{if(!document.hidden)load()});
 })();
