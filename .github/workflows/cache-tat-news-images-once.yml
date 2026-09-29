@@ -1,0 +1,32 @@
+name: Cache TAT news images once
+on:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/cache_tat_news_images.py"
+      - ".github/workflows/cache-tat-news-images-once.yml"
+permissions:
+  contents: write
+jobs:
+  cache:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install --disable-pip-version-check requests
+      - run: python scripts/cache_tat_news_images.py
+      - name: Commit TAT news images
+        run: |
+          set -euo pipefail
+          git config user.name "IMG TAT Assets"
+          git config user.email "actions@users.noreply.github.com"
+          git add assets/tat/news
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Store TAT news images locally"
+          git pull --rebase origin main
+          git push origin HEAD:main
