@@ -1296,7 +1296,7 @@ main{min-height:calc(100svh - 68px)}
 .score-league-filter.has-live-stream{
   position:relative;
   z-index:1;
-  animation:scoreBorderLiveGlow 1.75s ease-in-out infinite;
+  animation:scoreBorderStreamGlow 1.75s ease-in-out infinite;
 }
 .selected-live-activity{
   display:grid;
