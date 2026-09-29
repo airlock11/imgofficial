@@ -761,7 +761,43 @@ async function loadRegionalAutoData(){
     .finally(()=>{regionalAutoDataPromise=null});
   return regionalAutoDataPromise;
 }
+let tatAutoDataCache=null;
+let tatAutoDataTime=0;
+let tatAutoDataPromise=null;
+async function loadTatAutoData(){
+  if(tatAutoDataCache&&Date.now()-tatAutoDataTime<30000)return tatAutoDataCache;
+  if(tatAutoDataPromise)return tatAutoDataPromise;
+  const urls=[
+    'https://raw.githubusercontent.com/airlock11/imgofficial/tat-data/tat-official.json?ts='+Date.now(),
+    '/tat-official.json?ts='+Date.now()
+  ];
+  tatAutoDataPromise=(async()=>{
+    for(const url of urls){
+      try{
+        const r=await fetch(url,{cache:'no-store'});
+        if(!r.ok)continue;
+        const j=await r.json();
+        if(j&&Array.isArray(j.games)){
+          tatAutoDataCache=j;
+          tatAutoDataTime=Date.now();
+          return j;
+        }
+      }catch{}
+    }
+    return tatAutoDataCache;
+  })().finally(()=>{tatAutoDataPromise=null});
+  return tatAutoDataPromise;
+}
 function getRegionalSnapshot(sport){
+  if(sport==='tat'&&tatAutoDataCache){
+    return {
+      league:'The Asian Tournament',
+      season:tatAutoDataCache?.season?.name||'2026 TAT',
+      coverage:'Automated TAT schedules, live scores and results',
+      note:'Updated from verified TAT data sources. Unverified fixtures are not invented.',
+      games:Array.isArray(tatAutoDataCache.games)?tatAutoDataCache.games:[]
+    };
+  }
   return regionalAutoDataCache?.leagues?.[sport]||regionalWebSnapshots[sport]||null;
 }
 let sportsStatsDataCache=null;
@@ -2324,12 +2360,12 @@ function verifiedChannelLiveGame(x,updatedAt=''){
 }
 async function loadAllLiveGames({silent=false}={}){
   const live=[];
-  const webKeys=['pba','mpbl','nbl','nblaus','vba'];
+  const webKeys=['pba','mpbl','nbl','nblaus','vba','tat'];
   const apiKeys=['soccer','jamaica_pl','mizoram_pl','laliga','el_salvador_reserves','seriea','bundesliga','champions','ucl_women','mls','pfl','basketball','wnba','ncaa_ph','uaap','bleague','euroleague','fiba','atp','wta','australian_open','wimbledon','us_open','ipl','bigbash','cricket_world_cup','volleyball_w','volleyball_m','pvl','vleague_jp','f1','motogp','formulae','ufc','one','wbc','wba','ibf','wbo','ring','baseball','npb','kbo','hockey','khl','iihf','football','ncaaf'];
 
   // Start score requests in parallel, but never make verified streams wait for them.
   const regionalPromise=(async()=>{
-    await loadRegionalAutoData();
+    await Promise.all([loadRegionalAutoData(),loadTatAutoData()]);
     await Promise.all(webKeys.map(async key=>{
       const labels=liveNowLabels[key]||{};
       const primaryLive=regionalSnapshotGames(key).filter(game=>game.state==='live');
@@ -2840,7 +2876,7 @@ async function loadGames({silent=false,league=currentScoreLeague}={}){
   if(!silent)st.textContent='';
 
   if(isWebLeague){
-    await loadRegionalAutoData();
+    await Promise.all([loadRegionalAutoData(),sport==='tat'?loadTatAutoData():Promise.resolve(null)]);
     let webGames=regionalSnapshotGames(sport);
     if(sport==='nbl'){
       const upcoming=await nblYoutubeScheduledGames();
@@ -3404,7 +3440,7 @@ if(document.getElementById('games')){
 
   renderScoreLeagueFilters();
   void loadScoreLeagueLogos();
-  Promise.allSettled([loadGames(),loadAllLiveGames()]).finally(()=>{lastAllLiveRefreshAt=Date.now();scheduleScoreAutoRefresh();});
+  Promise.allSettled([loadTatAutoData(),loadGames(),loadAllLiveGames()]).finally(()=>{lastAllLiveRefreshAt=Date.now();renderScoreLeagueFilters();scheduleScoreAutoRefresh();});
 
   document.addEventListener('visibilitychange',()=>{
     expireVisibleAsianGames();
