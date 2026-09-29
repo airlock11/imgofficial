@@ -2,7 +2,7 @@
   "special": true,
   "league": "WTA Tour",
   "live": true,
-  "updatedAt": "2026-09-29T06:06:48.664169+00:00",
+  "updatedAt": "2026-09-29T06:06:55.201790+00:00",
   "sourceName": "API-Tennis",
   "sourceUrl": "https://api-tennis.com/",
   "verificationSource": "API-Tennis",
@@ -1203,19 +1203,21 @@
       "home": "H. Shi",
       "awayLogo": "https://api.api-tennis.com/logo-tennis/198_e-kalieva.jpg",
       "homeLogo": "",
-      "awayScore": "7.7 · 40",
-      "homeScore": "6.5 · A",
+      "awayScore": "7.7 0 · 40",
+      "homeScore": "6.5 1 · A",
       "awaySets": [
-        "7.7"
+        "7.7",
+        "0"
       ],
       "homeSets": [
-        "6.5"
+        "6.5",
+        "1"
       ],
       "awayPoint": "40",
       "homePoint": "A",
       "currentSet": 2,
       "awayCurrentSetGames": 0,
-      "homeCurrentSetGames": 0,
+      "homeCurrentSetGames": 1,
       "awaySetsWon": 1,
       "homeSetsWon": 0,
       "round": "WTA Beijing - Final",
