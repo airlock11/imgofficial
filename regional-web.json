@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-29T23:21:24+08:00",
+  "updated_at": "2026-09-30T03:33:07+08:00",
   "refresh_minutes": 15,
   "leagues": {
     "pba": {
@@ -83,7 +83,27 @@
           "sourceName": "SkedCheck",
           "sourceUrl": "https://skedcheck.com/pba-games-schedule-scores/"
         }
-      ]
+      ],
+      "automation": {
+        "enabled": true,
+        "mode": "idle",
+        "dataRefreshMinutes": 180,
+        "livestreamRefreshMinutes": 0,
+        "scheduleAware": {
+          "enabled": true,
+          "timezone": "Asia/Manila",
+          "mode": "idle",
+          "gameDay": false,
+          "todayGameCount": 0,
+          "todayGames": [],
+          "nextGameAt": "2026-10-07T17:15:00+08:00",
+          "idleDiscoveryMinutes": 180,
+          "gameDayDataRefreshMinutes": 15,
+          "gameDayLivestreamRefreshMinutes": 5,
+          "lastSlowCheckAt": "2026-09-30T03:32:28+08:00"
+        },
+        "failClosed": true
+      }
     },
     "mpbl": {
       "league": "MPBL",
@@ -1233,8 +1253,76 @@
           "sourceName": "SkedCheck",
           "sourceUrl": "https://skedcheck.com/uaap-mens-basketball-schedule-scores/"
         }
-      ]
+      ],
+      "automation": {
+        "enabled": true,
+        "mode": "game-day",
+        "dataRefreshMinutes": 15,
+        "livestreamRefreshMinutes": 5,
+        "scheduleAware": {
+          "enabled": true,
+          "timezone": "Asia/Manila",
+          "mode": "game-day",
+          "gameDay": true,
+          "todayGameCount": 2,
+          "todayGames": [
+            "web-uaap-scheduled-8",
+            "web-uaap-scheduled-9"
+          ],
+          "nextGameAt": "2026-09-30T15:00:00+08:00",
+          "idleDiscoveryMinutes": 180,
+          "gameDayDataRefreshMinutes": 15,
+          "gameDayLivestreamRefreshMinutes": 5,
+          "lastSlowCheckAt": "2026-09-30T03:32:31+08:00"
+        },
+        "failClosed": true
+      }
     }
   },
-  "errors": {}
+  "errors": {},
+  "adaptive": {
+    "pba": {
+      "enabled": true,
+      "mode": "idle",
+      "dataRefreshMinutes": 180,
+      "livestreamRefreshMinutes": 0,
+      "scheduleAware": {
+        "enabled": true,
+        "timezone": "Asia/Manila",
+        "mode": "idle",
+        "gameDay": false,
+        "todayGameCount": 0,
+        "todayGames": [],
+        "nextGameAt": "2026-10-07T17:15:00+08:00",
+        "idleDiscoveryMinutes": 180,
+        "gameDayDataRefreshMinutes": 15,
+        "gameDayLivestreamRefreshMinutes": 5,
+        "lastSlowCheckAt": "2026-09-30T03:32:28+08:00"
+      },
+      "failClosed": true
+    },
+    "uaap": {
+      "enabled": true,
+      "mode": "game-day",
+      "dataRefreshMinutes": 15,
+      "livestreamRefreshMinutes": 5,
+      "scheduleAware": {
+        "enabled": true,
+        "timezone": "Asia/Manila",
+        "mode": "game-day",
+        "gameDay": true,
+        "todayGameCount": 2,
+        "todayGames": [
+          "web-uaap-scheduled-8",
+          "web-uaap-scheduled-9"
+        ],
+        "nextGameAt": "2026-09-30T15:00:00+08:00",
+        "idleDiscoveryMinutes": 180,
+        "gameDayDataRefreshMinutes": 15,
+        "gameDayLivestreamRefreshMinutes": 5,
+        "lastSlowCheckAt": "2026-09-30T03:32:31+08:00"
+      },
+      "failClosed": true
+    }
+  }
 }
