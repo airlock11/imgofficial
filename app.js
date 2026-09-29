@@ -628,7 +628,7 @@ function scoreLeagueLogoMarkup(key){
       '<span class="score-league-fallback score-league-fallback-hidden">FIVB</span>';
   }
 
-  const suppliedFirst=['atp','wta','ipl','boxing','asian_games'].includes(key);
+  const suppliedFirst=['atp','wta','ipl','boxing','asian_games','soccer','jamaica_pl','mizoram_pl','laliga','el_salvador_reserves','seriea','bundesliga','champions','ucl_women','mls','pfl'].includes(key);
   const logo=suppliedFirst?(supplied||feedLogo):(feedLogo||supplied);
   if(!logo)return scoreLeagueFallback(key);
   return '<img class="score-league-logo" src="'+esc(logo)+'" alt="'+esc(liveNowLabels[key]?.league||key)+' logo" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'grid\'">'+
@@ -1165,7 +1165,31 @@ const oddsLeagueNames={nfl:'NFL',ncaaf:'NCAA Football',nba:'NBA',wnba:'WNBA',nca
 const oddsLeagueSports={nfl:'American Football',ncaaf:'American Football',nba:'Basketball',wnba:'Basketball',ncaam:'Basketball',mlb:'Baseball',nhl:'Hockey',epl:'Football',laliga:'Football',seriea:'Football',bundesliga:'Football',ligue1:'Football',champions:'Football',mls:'Football'};
 let availableOdds={},oddsLeagueLogos={},currentOddsSport='all',currentOddsLeague='',oddsLeaguePanelOpen=false,oddsLeaguePanelTimer=0;
 function mapOdds(o){return{provider:o.provider?.displayName||o.provider?.name||'Odds provider',details:o.details||'—',total:o.overUnder??'—',home:o.moneyline?.home?.close?.odds||'—',away:o.moneyline?.away?.close?.odds||'—',draw:o.moneyline?.draw?.close?.odds||'—'}}function teamLogoUrl(team){return team?.team?.logo||team?.team?.logos?.[0]?.href||team?.logo||team?.logos?.[0]?.href||''}
-function teamLogoMarkup(url,name,extraClass=''){return url?'<img class="team-logo '+extraClass+'" src="'+esc(url)+'" alt="'+esc(name)+' logo" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.remove()">':''}
+const FOOTBALL_SCORE_TEAM_ALIASES={
+  soccer:{"tottenham hotspur":"Tottenham Hotspur FC","brighton hove albion":"Brighton & Hove Albion FC","ipswich town":"Ipswich Town FC","newcastle united":"Newcastle United FC","hull city":"Hull City AFC","nottingham forest":"Nottingham Forest FC","coventry city":"Coventry City FC","leeds united":"Leeds United FC","manchester city":"Manchester City FC","manchester united":"Manchester United FC"},
+  jamaica_pl:{"humble lions fc":"Humble Lion FC","molynes":"Molynes United","chapelton maroons fc":"Phoenix Chapelton Maroons FC","mount pleasant fc":"Mount Pleasant FA","portmore united":"Portmore United FC","montego bay united":"Montego Bay United FC"},
+  laliga:{"atletico madrid":"Club Atlético de Madrid","deportivo":"RC Deportivo A Coruña","barcelona":"FC Barcelona","racing santander":"Real Racing Club","real betis":"Real Betis Balompié","celta vigo":"RC Celta de Vigo"},
+  el_salvador_reserves:{"municipal limeno":"CD Municipal Limeño","cd atletico balboa u20":"CD Atlético Balboa"},
+  seriea:{"internazionale":"FC Internazionale Milano"},
+  bundesliga:{"bayern munich":"FC Bayern München","borussia dortmund":"BV Borussia 09 Dortmund","borussia monchengladbach":"Borussia Mönchengladbach","mainz":"Mainz 05","fsv mainz":"1. FSV Mainz 05","hamburg sv":"Hamburger SV","fc cologne":"1. FC Köln","schalke 04":"Schalke","sv elversberg":"Elversberg","tsg hoffenheim":"TSG 1899 Hoffenheim","werder bremen":"SV Werder Bremen","bayer leverkusen":"Bayer 04 Leverkusen","union berlin":"1. FC Union Berlin"},
+  champions:{"paris saint germain":"Paris Saint-Germain FC","bayern munich":"FC Bayern München","manchester united":"Manchester United FC","manchester city":"Manchester City FC","real betis seville":"Real Betis Balompié","borussia dortmund":"BV Borussia 09 Dortmund","aek athens":"AEK","fc shakhtar donetsk":"FK Shakhtar Donetsk","fenerbahce istanbul":"Fenerbahçe SK","psv eindhoven":"PSV","slavia prague":"SK Slavia Praha","atletico madrid":"Club Atlético de Madrid","inter milano":"FC Internazionale Milano","galatasaray istanbul":"Galatasaray SK","sabah masazir":"Sabah FK","bodoe glimt":"FK Bodø/Glimt","fk ml viciebsk":"ML Viciebsk"},
+  ucl_women:{"inter milano":"FC Internazionale Milano","bayern munich":"FC Bayern München","real madrid":"Real Madrid CF Femenino","juventus turin":"Juventus FC","sl benfica":"Sport Lisboa e Benfica","olympique lyon":"OL Lyonnes","hacken gothenburg":"BK Häcken FF","hb koege":"HB Køge","oud heverlee leuven":"Oud-Heverlee Leuven Women","paris saint germain":"Paris Saint-Germain FC","servette fc chenois feminin":"Servette FC Chênois Féminin"},
+  mls:{"seattle sounders":"Seattle Sounders FC","saint louis city sc":"St. Louis City SC","colorado rapids":"Colorado Rapids SC","dc united":"D.C. United","red bull new york":"New York Red Bulls"},
+  mizoram_pl:{"mls fc lawtngtlai":"MLS FC","kanan fc aizawl":"Kanan FC"},
+  pfl:{"mendiola fc 1991":"Valenzuela PB–Mendiola FC","azkals development club":"PFF Development Team","azkals development team":"PFF Development Team","kaya fc iloilo":"Kaya FC-Iloilo"}
+};
+function localFootballScoreTeamLogo(name){
+  const registry=window.IMG_FOOTBALL_TEAM_LOGOS?.[currentScoreLeague];
+  if(!registry||!name)return'';
+  const key=normalizeTeamLogoKey(name);
+  const alias=FOOTBALL_SCORE_TEAM_ALIASES[currentScoreLeague]?.[key]||'';
+  const target=normalizeTeamLogoKey(alias||name);
+  for(const [registered,src] of Object.entries(registry)){
+    if(normalizeTeamLogoKey(registered)===target)return src||'';
+  }
+  return'';
+}
+function teamLogoMarkup(url,name,extraClass=''){const src=localFootballScoreTeamLogo(name)||url;return src?'<img class="team-logo '+extraClass+'" src="'+esc(src)+'" alt="'+esc(name)+' logo" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.remove()">':''}
 
 const teamDirectoryFeeds={
   soccer:'soccer/eng.1',
