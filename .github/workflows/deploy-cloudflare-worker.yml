@@ -98,7 +98,7 @@ jobs:
         run: |
           set -euo pipefail
           BASE="https://img-api-proxy.magsipocarnie.workers.dev"
-          ARTICLE="https://pba.ph/news/terrafirma-titan-outing-headlines-pba-campus-tour"
+          ARTICLE="https://www.theasiantournament.com/news/the-vanta-black-dragons-take-out-leg-1"
           payload="$(curl -fsS --max-time 15 --get --data-urlencode "url=$ARTICLE" "$BASE/article-preview")"
           ARTICLE_JSON="$payload" python - <<'PY'
           import json, os
@@ -107,7 +107,7 @@ jobs:
               raise SystemExit("article-preview did not return ok=true")
           if not str(data.get("title") or "").strip():
               raise SystemExit("article-preview returned no title")
-          if "pba.ph" not in str(data.get("sourceUrl") or ""):
-              raise SystemExit("article-preview source URL was not PBA")
+          if "theasiantournament.com" not in str(data.get("sourceUrl") or ""):
+              raise SystemExit("article-preview source URL was not The Asian Tournament")
           print("Article preview verified:", data.get("title"))
           PY
