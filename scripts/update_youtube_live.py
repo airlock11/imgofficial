@@ -165,11 +165,46 @@ def tat_game_day_scan_allowed():
   _TAT_GAME_DAY_GATE_CACHE=False
  return _TAT_GAME_DAY_GATE_CACHE
 
+_REGIONAL_GAME_DAY_GATE_CACHE={}
+def regional_game_day_scan_allowed(league_key):
+ key=str(league_key or "").strip()
+ if not key:return False
+ if key in _REGIONAL_GAME_DAY_GATE_CACHE:
+  return _REGIONAL_GAME_DAY_GATE_CACHE[key]
+ try:
+  data=json.loads(REGIONAL.read_text("utf-8"))
+  league=(data.get("leagues",{}) or {}).get(key,{})
+  manila=timezone(timedelta(hours=8))
+  today=datetime.now(timezone.utc).astimezone(manila).date()
+  count=0
+  for game in league.get("games",[]):
+   raw=str(game.get("date") or "").strip()
+   if not raw:continue
+   try:
+    if raw.endswith("Z"):raw=raw[:-1]+"+00:00"
+    dt=datetime.fromisoformat(raw)
+    if dt.tzinfo is None:dt=dt.replace(tzinfo=manila)
+    dt=dt.astimezone(manila)
+   except Exception:
+    continue
+   if dt.date()==today:
+    count+=1
+  allowed=count>0
+  _REGIONAL_GAME_DAY_GATE_CACHE[key]=allowed
+  print(key.upper(),"schedule gate","game-day" if allowed else "idle","games today",count)
+ except Exception as ex:
+  print(key.upper(),"schedule gate unavailable; skipping game-day-only scan",ex)
+  _REGIONAL_GAME_DAY_GATE_CACHE[key]=False
+ return _REGIONAL_GAME_DAY_GATE_CACHE[key]
+
 def source_schedule_gate_allowed(source):
  if not source.get("gameDayOnly"):
   return True
- if str(source.get("scheduleGate") or "")=="tat-data":
+ gate=str(source.get("scheduleGate") or "")
+ if gate=="tat-data":
   return tat_game_day_scan_allowed()
+ if gate=="regional-web":
+  return regional_game_day_scan_allowed(source.get("scheduleLeagueKey") or source.get("leagueKey"))
  return True
 
 def resolve_source_channel(source,previous):
@@ -405,11 +440,11 @@ def one_sports_live():
   upper=title.upper()
   if "2026 ASIAN GAMES" in upper:
    league_key="asian_games"; sport="Asian Games"; league="2026 ASIAN GAMES"; prefix="ag26"
-  elif re.search(r"\bPBA\b",upper):
+  elif re.search(r"\bPBA\b",upper) and regional_game_day_scan_allowed("pba"):
    league_key="pba"; sport="Basketball"; league="PBA"; prefix="pba"
   elif re.search(r"\bNCAA\b",upper) and ncaa_senior_title_allowed(title):
    league_key="ncaa_ph"; sport="Basketball"; league="NCAA Philippines"; prefix="ncaaph"
-  elif re.search(r"\bUAAP\b",upper):
+  elif re.search(r"\bUAAP\b",upper) and regional_game_day_scan_allowed("uaap"):
    league_key="uaap"; sport="Basketball"; league="UAAP"; prefix="uaap"
   else:
    continue
@@ -561,9 +596,9 @@ def discover_live_event_streams(previous):
    if channel_id==ONE_SPORTS_CHANNEL_ID and not league_key:
     upper=title.upper()
     if "ASIAN GAMES" in upper: league_key="asian_games"; league="2026 ASIAN GAMES"
-    elif re.search(r"\bPBA\b",upper): league_key="pba"; league="PBA"
+    elif re.search(r"\bPBA\b",upper) and regional_game_day_scan_allowed("pba"): league_key="pba"; league="PBA"
     elif re.search(r"\bNCAA\b",upper) and ncaa_senior_title_allowed(title): league_key="ncaa_ph"; league="NCAA Philippines"
-    elif re.search(r"\bUAAP\b",upper): league_key="uaap"; league="UAAP"
+    elif re.search(r"\bUAAP\b",upper) and regional_game_day_scan_allowed("uaap"): league_key="uaap"; league="UAAP"
    if not league_key: continue
    verified_at=datetime.now(timezone.utc).isoformat()
    stream={
@@ -615,6 +650,9 @@ def previous_still_live(previous):
  now=datetime.now(timezone.utc)
  for item in candidates:
   stream=item.get("stream",{})
+  league_key=str(item.get("leagueKey") or "")
+  if league_key in {"pba","uaap"} and not regional_game_day_scan_allowed(league_key):
+   continue
   vid=stream.get("videoId")
   d=details.get(vid)
   if d:
