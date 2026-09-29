@@ -74,19 +74,30 @@ function renderGallery({finals,official,assets}){
   const photos=Array.isArray(official.previousGamePhotos)?official.previousGamePhotos:[];
   const cards=(finals||[]).slice(0,3).map((g,i)=>{
     const a=teamLogo(g.away,assets),h=teamLogo(g.home,assets);
-    const photo=photos[i];
-    return `<article class="media-card">
-      ${photo?.image?`<img class="media-bg" src="${safe(photo.image)}" alt="${safe(g.away)} vs ${safe(g.home)} TAT game image" loading="lazy" decoding="async">`:`<div class="logo-pair">${a?`<img src="${a}" alt="">`:""}${h?`<img src="${h}" alt="">`:""}</div>`}
-      <div class="media-card-content">
-        <div class="media-kicker">TAT · Final</div>
-        <div class="media-title">${safe(g.away)} ${safe(g.awayScore)} — ${safe(g.homeScore)} ${safe(g.home)}</div>
-        <div class="media-meta">${safe(g.displayTime||fmtDate(g.date))}</div>
+    const photo=photos.find(x=>x.eventId===g.eventId)||photos[i]||null;
+    return `<article class="media-card previous-game-card">
+      ${photo?.image?`<img class="media-bg" src="${safe(photo.image)}" alt="${safe(g.away)} vs ${safe(g.home)} TAT game image" loading="lazy" decoding="async">`:`<div class="logo-pair">${a?`<img src="${a}" alt="${safe(g.away)} logo">`:""}${h?`<img src="${h}" alt="${safe(g.home)} logo">`:""}</div>`}
+      <div class="media-card-content previous-game-content">
+        <div class="previous-game-head">
+          <span class="media-kicker">TAT · FINAL</span>
+          <span class="previous-game-date">${safe(g.displayTime||fmtDate(g.date))}</span>
+        </div>
+        <div class="previous-game-matchup">
+          <div class="previous-game-team">
+            <span class="previous-game-team-name">${safe(g.away)}</span>
+            <strong class="previous-game-score">${safe(g.awayScore)}</strong>
+          </div>
+          <div class="previous-game-divider"></div>
+          <div class="previous-game-team">
+            <span class="previous-game-team-name">${safe(g.home)}</span>
+            <strong class="previous-game-score">${safe(g.homeScore)}</strong>
+          </div>
+        </div>
       </div>
     </article>`;
   });
   wrap.innerHTML=cards.length?cards.join(""):'<div class="empty-card">No recent verified TAT games are available.</div>';
 }
-
 function renderHighlights({official,streams}){
   const wrap=qs("#highlights");
   const officialVideos=Array.isArray(official.highlights)?official.highlights.map(x=>({...x,isLive:false})):[];
