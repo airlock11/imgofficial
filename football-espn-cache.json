@@ -1,7 +1,7 @@
 {
   "version": 1,
   "source": "ESPN public football data",
-  "updatedAt": "2026-09-29T14:22:42.838Z",
+  "updatedAt": "2026-09-29T19:34:23.558Z",
   "leagues": {
     "soccer": {
       "name": "Premier League",
@@ -872,7 +872,7 @@
           "points": 2
         }
       ],
-      "verifiedAt": "2026-09-29T14:22:42.399Z"
+      "verifiedAt": "2026-09-29T19:34:22.882Z"
     },
     "laliga": {
       "name": "La Liga",
@@ -880,54 +880,6 @@
       "espn": "esp.1",
       "leagueLogo": "https://a.espncdn.com/i/leaguelogos/soccer/500/15.png",
       "games": [
-        {
-          "eventId": "401882868",
-          "date": "2026-09-15T17:00Z",
-          "displayTime": "",
-          "home": "Rayo Vallecano",
-          "away": "Espanyol",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/101.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/88.png",
-          "homeScore": "2",
-          "awayScore": "1",
-          "state": "final",
-          "status": "FT",
-          "venue": "Estadio Municipal de Butarque",
-          "competition": "La Liga",
-          "category": "Spain"
-        },
-        {
-          "eventId": "401882876",
-          "date": "2026-09-15T18:00Z",
-          "displayTime": "",
-          "home": "Alavés",
-          "away": "Valencia",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/96.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/94.png",
-          "homeScore": "0",
-          "awayScore": "1",
-          "state": "final",
-          "status": "FT",
-          "venue": "Mendizorrotza",
-          "competition": "La Liga",
-          "category": "Spain"
-        },
-        {
-          "eventId": "401882872",
-          "date": "2026-09-15T19:30Z",
-          "displayTime": "",
-          "home": "Elche",
-          "away": "Real Madrid",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/3751.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/86.png",
-          "homeScore": "2",
-          "awayScore": "3",
-          "state": "final",
-          "status": "FT",
-          "venue": "Estadio Martínez Valero",
-          "competition": "La Liga",
-          "category": "Spain"
-        },
         {
           "eventId": "401882875",
           "date": "2026-09-16T17:00Z",
@@ -1887,7 +1839,7 @@
           "points": 3
         }
       ],
-      "verifiedAt": "2026-09-29T14:22:42.625Z"
+      "verifiedAt": "2026-09-29T19:34:23.170Z"
     },
     "bundesliga": {
       "name": "Bundesliga",
@@ -2672,7 +2624,7 @@
           "points": 0
         }
       ],
-      "verifiedAt": "2026-09-29T14:22:42.717Z"
+      "verifiedAt": "2026-09-29T19:34:23.383Z"
     },
     "seriea": {
       "name": "Serie A",
@@ -3447,6 +3399,22 @@
           "venue": "U-Power Stadium",
           "competition": "Serie A",
           "category": "Italy"
+        },
+        {
+          "eventId": "401874976",
+          "date": "2026-10-29T17:30Z",
+          "displayTime": "",
+          "home": "Frosinone",
+          "away": "Lecce",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/4057.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/113.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "Stadio Benito Stirpe",
+          "competition": "Serie A",
+          "category": "Italy"
         }
       ],
       "standings": [
@@ -3671,7 +3639,7 @@
           "points": 0
         }
       ],
-      "verifiedAt": "2026-09-29T14:22:42.838Z"
+      "verifiedAt": "2026-09-29T19:34:23.558Z"
     }
   }
 }
