@@ -76,7 +76,7 @@ const sportsDirectory={
     ['Premier League','England','soccer'],['Jamaican Premier League','Jamaica','jamaica_pl'],['Mizoram Premier League','India','mizoram_pl'],['La Liga','Spain','laliga'],['Primera Division, Reserves','El Salvador','el_salvador_reserves'],['Serie A','Italy','seriea'],['Bundesliga','Germany','bundesliga'],['UEFA Champions League','Europe','champions'],['UEFA Champions League Women','Europe','ucl_women'],['MLS','United States / Canada','mls'],['PFL','Philippines','pfl']
   ],
   Basketball:[
-    ['NBA','United States / Canada','basketball'],['WNBA','United States / Canada','wnba'],['PBA','Philippines','pba'],['NCAA Philippines','Philippines','ncaa_ph'],['UAAP','Philippines','uaap'],['MPBL','Philippines','mpbl'],['NBL-Pilipinas','Philippines','nbl'],['NBL Australia','Australia / New Zealand','nblaus'],['VBA','Vietnam','vba'],['B.League','Japan','bleague'],['EuroLeague','Europe','euroleague'],['WBSL','International','wbsl']
+    ['NBA','United States / Canada','basketball'],['WNBA','United States / Canada','wnba'],['PBA','Philippines','pba'],['NCAA Philippines','Philippines','ncaa_ph'],['UAAP','Philippines','uaap'],['MPBL','Philippines','mpbl'],['NBL-Pilipinas','Philippines','nbl'],['NBL Australia','Australia / New Zealand','nblaus'],['VBA','Vietnam','vba'],['B.League','Japan','bleague'],['EuroLeague','Europe','euroleague'],['The Asian Tournament','Asia / International','tat'],['WBSL','International','wbsl']
   ],
   Tennis:[
     ['ATP Tour','International','atp'],['WTA Tour','International','wta'],['Australian Open','Australia','australian_open'],['Wimbledon','United Kingdom','wimbledon'],['US Open','United States','us_open']
@@ -116,6 +116,7 @@ const staticLeagueLogos={
   mls:'/assets/football/leagues/mls.png',
   bleague:'/assets/logos/external/commons.wikimedia.org--b.league_logo--4246d6e116.svg',
   euroleague:'/assets/logos/external/euroleague.png',
+  tat:'/assets/tat/tat-icon-black.png',
   australian_open:'/assets/logos/external/commons.wikimedia.org--ao26_logo--d8b9de10e2.svg',
   wimbledon:'/assets/logos/external/wimbledon.png',
   us_open:'/assets/logos/external/us-open.png',
@@ -159,7 +160,7 @@ const logoFeeds={
   football:'https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard',
   ncaaf:'https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard'
 };
-const scoreKeys=new Set(['asian_games','fiba','soccer','jamaica_pl','mizoram_pl','laliga','el_salvador_reserves','seriea','bundesliga','champions','ucl_women','mls','pfl','basketball','wnba','pba','ncaa_ph','uaap','mpbl','nbl','nblaus','vba','bleague','euroleague','atp','wta','australian_open','wimbledon','us_open','ipl','bigbash','cricket_world_cup','volleyball_w','volleyball_m','pvl','vleague_jp','baseball','npb','kbo','hockey','khl','iihf','football','ncaaf','f1','motogp','formulae','ufc','one','wbc','wba','ibf','wbo','ring']);
+const scoreKeys=new Set(['asian_games','fiba','soccer','jamaica_pl','mizoram_pl','laliga','el_salvador_reserves','seriea','bundesliga','champions','ucl_women','mls','pfl','basketball','wnba','pba','ncaa_ph','uaap','mpbl','nbl','nblaus','vba','bleague','euroleague','tat','atp','wta','australian_open','wimbledon','us_open','ipl','bigbash','cricket_world_cup','volleyball_w','volleyball_m','pvl','vleague_jp','baseball','npb','kbo','hockey','khl','iihf','football','ncaaf','f1','motogp','formulae','ufc','one','wbc','wba','ibf','wbo','ring']);
 const oddsKeys=new Set(['soccer','laliga','seriea','bundesliga','champions','mls','basketball','wnba','baseball','hockey','football','ncaaf']);
 let statsKeys=new Set();
 const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
@@ -185,7 +186,7 @@ function leagueLandingUrl(key){
   const pages={
     basketball:'/leagues/nba/',wnba:'/leagues/wnba/',pba:'/leagues/pba/',mpbl:'/leagues/mpbl/',
     ncaa_ph:'/leagues/ncaa-philippines/',uaap:'/leagues/uaap/',nbl:'/leagues/nbl-pilipinas/',
-    nblaus:'/leagues/nbl-australia/',vba:'/leagues/vba/',bleague:'/leagues/b-league/',euroleague:'/leagues/euroleague/',
+    nblaus:'/leagues/nbl-australia/',vba:'/leagues/vba/',bleague:'/leagues/b-league/',euroleague:'/leagues/euroleague/',tat:'/leagues/the-asian-tournament/',
     soccer:'/leagues/premier-league/',jamaica_pl:'/leagues/jamaican-premier-league/',mizoram_pl:'/leagues/mizoram-premier-league/',laliga:'/leagues/la-liga/',
     el_salvador_reserves:'/leagues/el-salvador-reserves/',seriea:'/leagues/serie-a/',bundesliga:'/leagues/bundesliga/',
     champions:'/leagues/champions-league/',ucl_women:'/leagues/champions-league-women/',mls:'/leagues/mls/',pfl:'/leagues/pfl/',atp:'/leagues/atp/',wta:'/leagues/wta/',
