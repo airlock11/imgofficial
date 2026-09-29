@@ -265,6 +265,27 @@
       ]
     },
     {
+      "id": "the-asian-tournament",
+      "handle": "TheAsianTournament",
+      "leagueKey": "tat",
+      "league": "The Asian Tournament",
+      "sport": "Basketball",
+      "prefix": "tat",
+      "includeAny": [
+        "THE ASIAN TOURNAMENT",
+        "TAT",
+        "SUMMER SLAM",
+        "BASKETBALL"
+      ],
+      "excludeAny": [
+        "PRESS CONFERENCE",
+        "INTERVIEW",
+        "PODCAST",
+        "TRAILER",
+        "PROMO"
+      ]
+    },
+    {
       "id": "bleague-international",
       "channelId": "UCx4M7pOU3Yhq9VAxmEbe1Vg",
       "leagueKey": "bleague",
