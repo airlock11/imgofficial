@@ -1311,11 +1311,7 @@ function articlePreviewAllowed(value) {
 }
 
 function articleMeta(html, key) {
-  const escaped = String(key || "").replace(/[.*+?^$()|[\]\\]/g, "\\function stripHtml(value) {
-  return String(value || "").replace(/<[^>]*>/g, " ");
-}
-
-");
+  const escaped = String(key || "").replace(/:/g, "\\:");
   const patterns = [
     new RegExp('<meta[^>]+(?:property|name)\\s*=\\s*["\\\']' + escaped + '["\\\'][^>]+content\\s*=\\s*["\\\']([^"\\\']*)["\\\']', 'i'),
     new RegExp('<meta[^>]+content\\s*=\\s*["\\\']([^"\\\']*)["\\\'][^>]+(?:property|name)\\s*=\\s*["\\\']' + escaped + '["\\\']', 'i')
