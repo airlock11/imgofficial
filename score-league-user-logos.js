@@ -31,6 +31,7 @@ uaap:"data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAoHBwgHBgoICAgLCgo
 boxing:"/assets/leagues/boxing-user-logo-transparent.svg?v=20260921-3",
 bleague:"/assets/logos/external/commons.wikimedia.org--b.league_logo--4246d6e116.svg",
 euroleague:"/assets/logos/external/euroleague.png",
+tat:"/assets/tat/tat-icon-black.png",
 pfl:"/assets/logos/external/webcdn.ticketmax.ph--1728401723_895c0017ad979c1b70f1--312839d1e4.jpg",
 australian_open:"/assets/logos/external/commons.wikimedia.org--ao26_logo--d8b9de10e2.svg",
 wimbledon:"/assets/logos/external/wimbledon.png",
