@@ -604,10 +604,24 @@ def main():
     local = local_json(DATA_PATH, {})
     prior = prior_remote_data()
     current = prior if isinstance(prior, dict) and prior.get("games") else local
+
     # Preserve user-owned metadata from main even when the automation branch exists.
     for key in ("source", "previousGamePhotos"):
         if local.get(key):
             current[key] = local[key]
+
+    current_schedule = schedule_summary(current)
+    env_game_day = str(os.getenv("TAT_GAME_DAY", "")).strip().lower() == "true"
+    game_day = bool(current_schedule["gameDay"] or env_game_day)
+    run_slow_env = str(os.getenv("TAT_RUN_SLOW", "")).strip().lower()
+    run_slow = True if not run_slow_env else run_slow_env == "true"
+
+    print(
+        "TAT automation mode:",
+        "game-day" if game_day else "idle",
+        "| slow discovery:", run_slow,
+        "| known games today:", current_schedule["todayGameCount"],
+    )
 
     assets = local_json(ASSETS_PATH, {"teams": {}})
     candidate = deepcopy(current)
@@ -620,38 +634,51 @@ def main():
         },
     )
 
+    # Schedules/scores/standings are checked on game days and during the slower
+    # discovery pass. This allows a newly published game date to switch IMG into
+    # game-day mode automatically without running every expensive task all day.
     sofa = None
-    try:
-        sofa = fetch_sofascore(current, assets)
-        candidate["games"] = sofa["games"]
-        candidate["standings"] = sofa["standings"]
-        candidate["season"] = sofa["season"]
-    except Exception as ex:
-        print("SofaScore automation failed; preserving prior games:", ex)
+    if game_day or run_slow:
+        try:
+            sofa = fetch_sofascore(current, assets)
+            candidate["games"] = sofa["games"]
+            candidate["standings"] = sofa["standings"]
+            candidate["season"] = sofa["season"]
+        except Exception as ex:
+            print("SofaScore automation failed; preserving prior games:", ex)
 
-    try:
-        official_teams = fetch_official_teams(current)
-    except Exception as ex:
-        print("Official team refresh failed:", ex)
+    # Team directory, leg metadata and news are deliberately slow-path tasks.
+    # They do not need a 15-minute refresh when there is no scheduled TAT game.
+    if run_slow:
+        try:
+            official_teams = fetch_official_teams(current)
+        except Exception as ex:
+            print("Official team refresh failed:", ex)
+            official_teams = current.get("teams") or []
+    else:
         official_teams = current.get("teams") or []
 
     discovered = (sofa or {}).get("discoveredTeams") or {}
     candidate["teams"] = merge_team_directory(official_teams, discovered, current)
 
-    try:
-        candidate["legs"] = fetch_official_legs(current)
-    except Exception as ex:
-        print("Official leg refresh failed:", ex)
+    if run_slow:
+        try:
+            candidate["legs"] = fetch_official_legs(current)
+        except Exception as ex:
+            print("Official leg refresh failed:", ex)
 
-    try:
-        candidate["headlines"] = fetch_official_news(current)
-    except Exception as ex:
-        print("Official news refresh failed:", ex)
+        try:
+            candidate["headlines"] = fetch_official_news(current)
+        except Exception as ex:
+            print("Official news refresh failed:", ex)
 
-    try:
-        candidate["highlights"] = fetch_youtube_highlights(current)
-    except Exception as ex:
-        print("YouTube highlight refresh failed:", ex)
+    # New replays/highlights can appear soon after a game, so keep this fast on a
+    # game day. On idle days it follows the slower discovery cadence.
+    if game_day or run_slow:
+        try:
+            candidate["highlights"] = fetch_youtube_highlights(current)
+        except Exception as ex:
+            print("YouTube highlight refresh failed:", ex)
 
     team_logos = dict(candidate.get("teamLogos") or {})
     for name, team in discovered.items():
@@ -661,10 +688,55 @@ def main():
             team_logos[name] = f"https://api.sofascore.app/api/v1/team/{team['id']}/image"
     candidate["teamLogos"] = team_logos
 
+    refreshed_schedule = schedule_summary(candidate)
+    # The workflow gate may already know today is a game day from the previous
+    # snapshot even if one upstream source is temporarily unavailable.
+    final_game_day = bool(refreshed_schedule["gameDay"] or env_game_day)
+    final_mode = "game-day" if final_game_day else "idle"
+
+    previous_auto = current.get("automation") or {}
+    previous_schedule = previous_auto.get("scheduleAware") or {}
+    checked_at = now_iso()
+
+    schedule_aware = {
+        "enabled": True,
+        "timezone": "Asia/Manila",
+        "mode": final_mode,
+        "gameDay": final_game_day,
+        "todayGameCount": max(
+            int(refreshed_schedule.get("todayGameCount") or 0),
+            int(os.getenv("TAT_TODAY_GAME_COUNT") or 0),
+        ),
+        "todayGames": refreshed_schedule.get("todayGames") or [],
+        "nextGameAt": refreshed_schedule.get("nextGameAt")
+        or str(os.getenv("TAT_NEXT_GAME_AT") or "")
+        or previous_schedule.get("nextGameAt")
+        or "",
+        "idleDiscoveryMinutes": 180,
+        "gameDayDataRefreshMinutes": 15,
+        "gameDayLivestreamRefreshMinutes": 5,
+        "gameDayOnlyTasks": [
+            "fast score/result refresh",
+            "live-game status",
+            "official TAT livestream scan",
+            "post-game highlight refresh",
+        ],
+        "slowTasks": [
+            "schedule discovery",
+            "teams",
+            "legs",
+            "news",
+            "standings discovery",
+        ],
+        "lastSlowCheckAt": checked_at if run_slow else previous_schedule.get("lastSlowCheckAt", ""),
+    }
+
     candidate["automation"] = {
         "enabled": True,
-        "dataRefreshMinutes": 15,
-        "livestreamRefreshMinutes": 5,
+        "mode": final_mode,
+        "dataRefreshMinutes": 15 if final_game_day else 180,
+        "livestreamRefreshMinutes": 5 if final_game_day else 0,
+        "scheduleAware": schedule_aware,
         "sources": [
             "The Asian Tournament official website",
             "Sofascore The Asian Tournament tournament feed",
@@ -677,8 +749,8 @@ def main():
         print("TAT data checked: no publishable changes.")
         return
 
-    candidate["updatedAt"] = now_iso()
-    candidate["automation"]["lastChangedAt"] = candidate["updatedAt"]
+    candidate["updatedAt"] = checked_at
+    candidate["automation"]["lastChangedAt"] = checked_at
     DATA_PATH.write_text(json.dumps(candidate, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     print(
         "TAT data changed:",
@@ -691,9 +763,9 @@ def main():
         len(candidate.get("highlights") or []),
         "videos,",
         len(candidate.get("standings") or []),
-        "standings rows",
+        "standings rows, mode",
+        final_mode,
     )
-
 
 if __name__ == "__main__":
     main()
