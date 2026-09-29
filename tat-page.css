@@ -1090,3 +1090,142 @@ footer{
   .previous-game-team-name{font-size:.8rem}
   .previous-game-score{font-size:1.34rem}
 }
+
+
+/* TAT previous games scoreboard cards */
+#previous-games{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  grid-auto-flow:row;
+  grid-auto-columns:auto;
+  gap:14px;
+  overflow:visible;
+  padding:0;
+  scroll-snap-type:none
+}
+.previous-score-card{
+  position:relative;
+  min-width:0;
+  min-height:184px;
+  padding:15px 16px 16px;
+  border:1px solid rgba(255,255,255,.11);
+  border-radius:16px;
+  background:
+    radial-gradient(circle at 16% 8%,rgba(31,120,255,.12),transparent 42%),
+    linear-gradient(180deg,rgba(14,24,38,.96),rgba(5,11,19,.98));
+  box-shadow:0 14px 32px rgba(0,0,0,.22);
+  overflow:hidden
+}
+.previous-score-card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:linear-gradient(115deg,rgba(255,255,255,.04),transparent 32%,transparent 68%,rgba(255,255,255,.025))
+}
+.previous-score-date{
+  position:relative;
+  z-index:1;
+  color:#9cabbc;
+  font-size:.69rem;
+  font-weight:800;
+  letter-spacing:.04em
+}
+.previous-score-status{
+  position:absolute;
+  top:13px;
+  right:14px;
+  z-index:1;
+  color:#f7f9fc;
+  font-size:.57rem;
+  font-weight:950;
+  letter-spacing:.14em
+}
+.previous-score-matchup{
+  position:relative;
+  z-index:1;
+  display:grid;
+  gap:7px;
+  margin-top:15px
+}
+.previous-score-team{
+  display:grid;
+  grid-template-columns:48px minmax(0,1fr) auto;
+  align-items:center;
+  gap:10px;
+  min-height:54px
+}
+.previous-score-logo-wrap{
+  width:48px;
+  height:48px;
+  display:grid;
+  place-items:center
+}
+.previous-score-logo{
+  display:block;
+  width:44px;
+  height:44px;
+  object-fit:contain;
+  filter:drop-shadow(0 7px 14px rgba(0,0,0,.38))
+}
+.previous-score-name{
+  min-width:0;
+  color:#f4f7fb;
+  font-size:.78rem;
+  font-weight:850;
+  line-height:1.15;
+  overflow-wrap:anywhere
+}
+.previous-score-number{
+  min-width:42px;
+  text-align:right;
+  color:#fff;
+  font-size:1.75rem;
+  font-weight:950;
+  line-height:1;
+  font-variant-numeric:tabular-nums
+}
+.previous-score-separator{
+  height:1px;
+  margin:0 1px;
+  overflow:hidden;
+  text-indent:-9999px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.13),transparent)
+}
+:root[data-theme="light"] .previous-score-card{
+  border-color:rgba(20,30,45,.10);
+  background:
+    radial-gradient(circle at 16% 8%,rgba(31,120,255,.08),transparent 42%),
+    linear-gradient(180deg,#fff,#f5f7fa);
+  box-shadow:0 12px 28px rgba(23,37,56,.08)
+}
+:root[data-theme="light"] .previous-score-name,
+:root[data-theme="light"] .previous-score-number,
+:root[data-theme="light"] .previous-score-status{color:#111820}
+:root[data-theme="light"] .previous-score-date{color:#667385}
+
+@media(max-width:720px){
+  #previous-games{
+    grid-template-columns:none;
+    grid-auto-flow:column;
+    grid-auto-columns:minmax(260px,82vw);
+    gap:10px;
+    overflow-x:auto;
+    overscroll-behavior-inline:contain;
+    scroll-snap-type:x mandatory;
+    padding:1px 1px 5px;
+    scrollbar-width:none;
+    -ms-overflow-style:none
+  }
+  #previous-games::-webkit-scrollbar{display:none}
+  .previous-score-card{
+    min-height:178px;
+    scroll-snap-align:start;
+    padding:14px
+  }
+  .previous-score-team{grid-template-columns:44px minmax(0,1fr) auto;gap:9px;min-height:51px}
+  .previous-score-logo-wrap{width:44px;height:44px}
+  .previous-score-logo{width:41px;height:41px}
+  .previous-score-name{font-size:.75rem}
+  .previous-score-number{font-size:1.62rem}
+}
