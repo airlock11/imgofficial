@@ -1,4 +1,10 @@
 window.IMG_SCORE_LEAGUE_LOGOS={
+soccer:"/assets/football/leagues/premier-league.png",
+laliga:"/assets/football/leagues/la-liga.png",
+seriea:"/assets/football/leagues/serie-a.png",
+bundesliga:"/assets/football/leagues/bundesliga.png",
+champions:"/assets/football/leagues/champions-league.png",
+mls:"/assets/football/leagues/mls.png",
 jamaica_pl:"/assets/logos/external/r2.thesportsdb.com--pg49fr1727716904--f3bab4da51.png",
 mizoram_pl:"/assets/logos/external/static.toiimg.com--92395083--79f5cb8ed3.jpg",
 el_salvador_reserves:"/assets/logos/external/cdn.resfu.com--primera-el-salvador--27480b5475.png",
