@@ -947,3 +947,64 @@ footer{
   }
   #tat-hero .hero-shell{min-height:0;height:100%;padding:0}
 }
+
+
+/* TAT inline video highlights */
+#highlights.highlight-row{
+  grid-auto-columns:minmax(300px,380px);
+  gap:16px
+}
+#highlights .reel-media,
+#highlights .reel-frame{
+  aspect-ratio:16/9;
+  border-radius:16px
+}
+#highlights .reel-thumb{
+  object-fit:cover
+}
+#highlights .reel-play{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:52px;
+  height:52px;
+  display:grid;
+  place-items:center;
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+  background:rgba(0,0,0,.58);
+  border:1px solid rgba(255,255,255,.28);
+  box-shadow:0 8px 24px rgba(0,0,0,.38);
+  z-index:4;
+  pointer-events:none;
+  transition:transform .16s ease,background .16s ease
+}
+#highlights .reel-play svg{
+  width:24px;
+  height:24px;
+  fill:#fff;
+  transform:translateX(2px)
+}
+#highlights .reel-media:hover .reel-play{
+  transform:translate(-50%,-50%) scale(1.06);
+  background:rgba(0,0,0,.72)
+}
+#highlights .reel-media.is-playing{
+  transform:none
+}
+#highlights .reel-media.is-playing .reel-frame{
+  opacity:1;
+  pointer-events:auto
+}
+#highlights .reel-media.is-playing .reel-thumb,
+#highlights .reel-media.is-playing .reel-shade,
+#highlights .reel-media.is-playing .reel-source,
+#highlights .reel-media.is-playing .reel-play{
+  visibility:hidden
+}
+@media(max-width:760px){
+  #highlights.highlight-row{grid-auto-columns:78vw}
+}
+@media(max-width:430px){
+  #highlights.highlight-row{grid-auto-columns:82vw}
+}
