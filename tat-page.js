@@ -89,13 +89,14 @@ function renderGallery({finals,official,assets}){
 
 function renderHighlights({official,streams}){
   const wrap=qs("#highlights");
-  const officialVideos=Array.isArray(official.highlights)?official.highlights:[];
+  const officialVideos=Array.isArray(official.highlights)?official.highlights.map(x=>({...x,isLive:false})):[];
   const liveVideos=(streams||[]).map(x=>({
     id:x.stream?.videoId||x.videoId||"",
     title:x.title||"TAT live stream",
     watchUrl:x.stream?.watchUrl||x.watchUrl||"",
     thumbnail:x.stream?.thumbnail||x.thumbnail||"",
-    source:"The Asian Tournament"
+    source:"The Asian Tournament",
+    isLive:true
   }));
   const seen=new Set();
   const items=[...liveVideos,...officialVideos].filter(x=>{
@@ -109,17 +110,52 @@ function renderHighlights({official,streams}){
     return;
   }
 
-  wrap.innerHTML=items.map(x=>`<article class="reel-card">
-    <a class="reel-media" href="${safe(x.watchUrl)}" target="_blank" rel="noopener" aria-label="Open ${safe(x.title)}">
+  wrap.innerHTML=items.map((x,index)=>`<article class="reel-card">
+    <div class="reel-media" role="button" tabindex="0" data-tat-video="${safe(x.id)}" data-index="${index}" aria-label="Play ${safe(x.title)} inside IMG">
       <img class="reel-thumb" src="${safe(x.thumbnail||(`https://i.ytimg.com/vi/${x.id}/maxresdefault.jpg`))}" alt="${safe(x.title)}" loading="lazy" decoding="async"
         onerror="if(this.dataset.fallback!=='1'){this.dataset.fallback='1';this.src='https://i.ytimg.com/vi/${safe(x.id)}/hqdefault.jpg'}">
       <span class="reel-shade"></span>
-      <span class="reel-source">${liveVideos.includes(x)?"LIVE":"TAT VIDEO"}</span>
-    </a>
+      <span class="reel-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+      <span class="reel-source">${x.isLive?"LIVE":"TAT VIDEO"}</span>
+    </div>
     <div class="reel-caption"><strong>${safe(x.title)}</strong><span>${safe(x.source||"The Asian Tournament")}</span></div>
   </article>`).join("");
-}
 
+  const stages=qsa("#highlights .reel-media");
+  const stopStage=stage=>{
+    const frame=stage.querySelector(".reel-frame");
+    if(frame)frame.remove();
+    stage.classList.remove("is-playing");
+    stage.setAttribute("role","button");
+    stage.tabIndex=0;
+  };
+  const playStage=stage=>{
+    if(!stage||stage.classList.contains("is-playing"))return;
+    const id=safe(stage.dataset.tatVideo).trim();
+    if(!id)return;
+    stages.forEach(other=>{if(other!==stage)stopStage(other)});
+    const frame=document.createElement("iframe");
+    frame.className="reel-frame";
+    frame.src=`https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}?autoplay=1&playsinline=1&rel=0&modestbranding=1`;
+    frame.title=stage.getAttribute("aria-label")||"TAT video";
+    frame.allow="autoplay; encrypted-media; picture-in-picture; web-share";
+    frame.allowFullscreen=true;
+    frame.referrerPolicy="strict-origin-when-cross-origin";
+    stage.appendChild(frame);
+    stage.classList.add("is-playing");
+    stage.removeAttribute("role");
+    stage.removeAttribute("tabindex");
+  };
+  stages.forEach(stage=>{
+    stage.addEventListener("click",()=>playStage(stage));
+    stage.addEventListener("keydown",e=>{
+      if(e.key==="Enter"||e.key===" "){
+        e.preventDefault();
+        playStage(stage);
+      }
+    });
+  });
+}
 function renderCompetition({official,assets}){
   const teamRows=(official.teams||[]).map((x,i)=>{
     const logo=teamLogo(x.team,assets);
