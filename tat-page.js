@@ -71,27 +71,29 @@ function renderGames({games,assets}){
 
 function renderGallery({finals,official,assets}){
   const wrap=qs("#previous-games");
-  const photos=Array.isArray(official.previousGamePhotos)?official.previousGamePhotos:[];
-  const cards=(finals||[]).slice(0,3).map((g,i)=>{
-    const a=teamLogo(g.away,assets),h=teamLogo(g.home,assets);
-    const photo=photos.find(x=>x.eventId===g.eventId)||photos[i]||null;
-    return `<article class="media-card previous-game-card">
-      ${photo?.image?`<img class="media-bg" src="${safe(photo.image)}" alt="${safe(g.away)} vs ${safe(g.home)} TAT game image" loading="lazy" decoding="async">`:`<div class="logo-pair">${a?`<img src="${a}" alt="${safe(g.away)} logo">`:""}${h?`<img src="${h}" alt="${safe(g.home)} logo">`:""}</div>`}
-      <div class="media-card-content previous-game-content">
-        <div class="previous-game-head">
-          <span class="media-kicker">TAT · FINAL</span>
-          <span class="previous-game-date">${safe(g.displayTime||fmtDate(g.date))}</span>
+  const recent=(Array.isArray(finals)?finals:[]).slice(0,3);
+  const cards=recent.map(g=>{
+    const awayLogo=teamLogo(g.away,assets)||g.awayLogo||"";
+    const homeLogo=teamLogo(g.home,assets)||g.homeLogo||"";
+    const date=safe(g.displayTime||fmtDate(g.date)).replace(/\s*·\s*Final$/i,"");
+    return `<article class="previous-score-card">
+      <div class="previous-score-date">${safe(date)}</div>
+      <div class="previous-score-status">FINAL</div>
+      <div class="previous-score-matchup">
+        <div class="previous-score-team">
+          <div class="previous-score-logo-wrap">
+            ${awayLogo?`<img class="previous-score-logo" src="${safe(awayLogo)}" alt="${safe(g.away)} logo" loading="lazy" decoding="async">`:""}
+          </div>
+          <div class="previous-score-name">${safe(g.away)}</div>
+          <div class="previous-score-number">${safe(g.awayScore)}</div>
         </div>
-        <div class="previous-game-matchup">
-          <div class="previous-game-team">
-            <span class="previous-game-team-name">${safe(g.away)}</span>
-            <strong class="previous-game-score">${safe(g.awayScore)}</strong>
+        <div class="previous-score-separator">—</div>
+        <div class="previous-score-team">
+          <div class="previous-score-logo-wrap">
+            ${homeLogo?`<img class="previous-score-logo" src="${safe(homeLogo)}" alt="${safe(g.home)} logo" loading="lazy" decoding="async">`:""}
           </div>
-          <div class="previous-game-divider"></div>
-          <div class="previous-game-team">
-            <span class="previous-game-team-name">${safe(g.home)}</span>
-            <strong class="previous-game-score">${safe(g.homeScore)}</strong>
-          </div>
+          <div class="previous-score-name">${safe(g.home)}</div>
+          <div class="previous-score-number">${safe(g.homeScore)}</div>
         </div>
       </div>
     </article>`;
