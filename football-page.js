@@ -7,16 +7,16 @@ const ROOT="/";
 const POLL_MS=30000;
 
 const CONFIG={
-  soccer:{name:"Premier League",region:"England",scoreKey:"soccer",espn:"eng.1",path:"premier-league",highlightsFile:"premier-league-highlights.json",aliases:["premier league","epl"],description:"England's top-flight football competition.",competition:"Premier League",newsImage:"/assets/football/heroes/premier-league-hero.jpg"},
+  soccer:{name:"Premier League",region:"England",scoreKey:"soccer",espn:"eng.1",path:"premier-league",highlightsFile:"premier-league-highlights.json",aliases:["premier league","epl"],description:"England's top-flight football competition.",competition:"Premier League",logo:"/assets/football/leagues/premier-league.png",newsImage:"/assets/football/heroes/premier-league-hero.jpg"},
   jamaica_pl:{name:"Jamaican Premier League",region:"Jamaica",scoreKey:"jamaica_pl",path:"jamaican-premier-league",highlightsFile:"jamaica-pl-highlights.json",aliases:["jamaican premier league","jamaica premier league","jpl"],description:"Top-flight club football in Jamaica.",competition:"Premier League",category:"Jamaica",logo:"/assets/logos/external/r2.thesportsdb.com--pg49fr1727716904--f3bab4da51.png",newsImage:"/assets/football/heroes/jamaican-premier-league-hero.jpg"},
   mizoram_pl:{name:"Mizoram Premier League",region:"India",scoreKey:"mizoram_pl",path:"mizoram-premier-league",highlightsFile:"mizoram-pl-highlights.json",aliases:["mizoram premier league"],description:"Club football from Mizoram, India.",competition:"Mizoram Premier League",category:"India",logo:"/assets/logos/external/static.toiimg.com--92395083--79f5cb8ed3.jpg"},
-  laliga:{name:"La Liga",region:"Spain",scoreKey:"laliga",espn:"esp.1",path:"la-liga",highlightsFile:"laliga-highlights.json",aliases:["la liga","laliga"],description:"Spain's top-flight football competition.",competition:"LaLiga",newsImage:"/assets/football/heroes/la-liga-hero.jpg",internalHighlightsOnly:true},
+  laliga:{name:"La Liga",region:"Spain",scoreKey:"laliga",espn:"esp.1",path:"la-liga",highlightsFile:"laliga-highlights.json",aliases:["la liga","laliga"],description:"Spain's top-flight football competition.",competition:"LaLiga",logo:"/assets/football/leagues/la-liga.png",newsImage:"/assets/football/heroes/la-liga-hero.jpg",internalHighlightsOnly:true},
   el_salvador_reserves:{name:"Primera Division, Reserves",region:"El Salvador",scoreKey:"el_salvador_reserves",path:"el-salvador-reserves",highlightsFile:"el-salvador-reserves-highlights.json",aliases:["primera division reserves","el salvador reserves"],description:"Reserve competition football from El Salvador.",competition:"Primera Division, Reserves",category:"El Salvador",logo:"/assets/logos/external/cdn.resfu.com--primera-el-salvador--27480b5475.png"},
-  seriea:{name:"Serie A",region:"Italy",scoreKey:"seriea",espn:"ita.1",path:"serie-a",highlightsFile:"seriea-highlights.json",aliases:["serie a"],description:"Italy's top-flight football competition.",competition:"Serie A",newsImage:"/assets/football/heroes/serie-a-hero.jpg"},
-  bundesliga:{name:"Bundesliga",region:"Germany",scoreKey:"bundesliga",espn:"ger.1",path:"bundesliga",highlightsFile:"bundesliga-highlights.json",aliases:["bundesliga"],description:"Germany's top-flight football competition.",competition:"Bundesliga",newsImage:"/assets/football/heroes/bundesliga-hero.jpg"},
-  champions:{name:"UEFA Champions League",region:"Europe",scoreKey:"champions",espn:"uefa.champions",path:"champions-league",highlightsFile:"champions-highlights.json",aliases:["uefa champions league","champions league","ucl"],description:"UEFA's premier men's club competition.",competition:"UEFA Champions League"},
+  seriea:{name:"Serie A",region:"Italy",scoreKey:"seriea",espn:"ita.1",path:"serie-a",highlightsFile:"seriea-highlights.json",aliases:["serie a"],description:"Italy's top-flight football competition.",competition:"Serie A",logo:"/assets/football/leagues/serie-a.png",newsImage:"/assets/football/heroes/serie-a-hero.jpg"},
+  bundesliga:{name:"Bundesliga",region:"Germany",scoreKey:"bundesliga",espn:"ger.1",path:"bundesliga",highlightsFile:"bundesliga-highlights.json",aliases:["bundesliga"],description:"Germany's top-flight football competition.",competition:"Bundesliga",logo:"/assets/football/leagues/bundesliga.png",newsImage:"/assets/football/heroes/bundesliga-hero.jpg"},
+  champions:{name:"UEFA Champions League",region:"Europe",scoreKey:"champions",espn:"uefa.champions",path:"champions-league",highlightsFile:"champions-highlights.json",aliases:["uefa champions league","champions league","ucl"],description:"UEFA's premier men's club competition.",competition:"UEFA Champions League",logo:"/assets/football/leagues/champions-league.png"},
   ucl_women:{name:"UEFA Champions League Women",region:"Europe",scoreKey:"ucl_women",path:"champions-league-women",highlightsFile:"ucl-women-highlights.json",aliases:["women's champions league","womens champions league","uefa champions league women","uwcl"],description:"UEFA's premier women's club competition.",competition:"UEFA Champions League Women",category:"International Clubs",logo:"/assets/logos/external/uefa-womens-champions-league.png"},
-  mls:{name:"MLS",region:"United States / Canada",scoreKey:"mls",espn:"usa.1",path:"mls",highlightsFile:"mls-highlights.json",aliases:["major league soccer","mls"],description:"Major League Soccer in the United States and Canada.",competition:"MLS"},
+  mls:{name:"MLS",region:"United States / Canada",scoreKey:"mls",espn:"usa.1",path:"mls",highlightsFile:"mls-highlights.json",aliases:["major league soccer","mls"],description:"Major League Soccer in the United States and Canada.",competition:"MLS",logo:"/assets/football/leagues/mls.png"},
   pfl:{name:"PFL",region:"Philippines",scoreKey:"pfl",path:"pfl",highlightsFile:"pfl-highlights.json",aliases:["philippines football league","philippine football league","pfl"],description:"Professional club football in the Philippines.",competition:"Philippines Football League",category:"Philippines",logo:"/assets/logos/external/webcdn.ticketmax.ph--1728401723_895c0017ad979c1b70f1--312839d1e4.jpg",newsImage:"/assets/football/heroes/pfl-hero.jpg"}
 };
 
@@ -106,7 +106,7 @@ async function fetchGames(){
   if(cfg.espn){
     const cache=await getEspnCache();
     const cachedLeague=cache?.leagues?.[key];
-    if(cachedLeague?.leagueLogo)setLeagueLogo(cachedLeague.leagueLogo);
+    if(cachedLeague?.leagueLogo&&!cfg.logo)setLeagueLogo(cachedLeague.leagueLogo);
     cached=(Array.isArray(cachedLeague?.games)?cachedLeague.games:[])
       .filter(validLocalGame)
       .map(normalizeLocalGame);
@@ -123,7 +123,7 @@ async function fetchGames(){
         if(fresh.length){
           const lg=j?.leagues?.[0];
           const logo=lg?.logos?.find?.(x=>/default|full/i.test(String(x?.rel||"")))?.href||lg?.logos?.[0]?.href||lg?.logo||"";
-          if(logo)setLeagueLogo(logo);
+          if(logo&&!cfg.logo)setLeagueLogo(logo);
           const map=new Map();
           for(const g of [...cached,...fresh])map.set(eventId(g),g);
           return [...map.values()].sort((a,b)=>(Date.parse(a.date)||0)-(Date.parse(b.date)||0));
@@ -158,16 +158,74 @@ function setLeagueLogo(src){
 }
 
 const TEAM_LOGO_ALIASES={
+  soccer:{
+    "tottenham hotspur":"Tottenham Hotspur FC",
+    "brighton & hove albion":"Brighton & Hove Albion FC",
+    "ipswich town":"Ipswich Town FC",
+    "newcastle united":"Newcastle United FC",
+    "hull city":"Hull City AFC",
+    "nottingham forest":"Nottingham Forest FC",
+    "coventry city":"Coventry City FC",
+    "leeds united":"Leeds United FC",
+    "manchester city":"Manchester City FC",
+    "manchester united":"Manchester United FC"
+  },
+  jamaica_pl:{
+    "humble lions fc":"Humble Lion FC",
+    "molynes":"Molynes United",
+    "chapelton maroons fc":"Phoenix Chapelton Maroons FC",
+    "mount pleasant fc":"Mount Pleasant FA",
+    "portmore united":"Portmore United FC",
+    "montego bay united":"Montego Bay United FC"
+  },
+  laliga:{
+    "atletico madrid":"Club Atlético de Madrid",
+    "deportivo":"RC Deportivo A Coruña",
+    "barcelona":"FC Barcelona",
+    "racing santander":"Real Racing Club",
+    "real betis":"Real Betis Balompié",
+    "celta vigo":"RC Celta de Vigo"
+  },
+  el_salvador_reserves:{
+    "municipal limeno":"CD Municipal Limeño",
+    "cd atletico balboa u20":"CD Atlético Balboa"
+  },
+  seriea:{
+    "internazionale":"FC Internazionale Milano"
+  },
   bundesliga:{
     "bayern munich":"FC Bayern Munchen",
     "borussia dortmund":"BV Borussia 09 Dortmund",
     "borussia monchengladbach":"Borussia Monchengladbach",
     "fsv mainz":"1. FSV Mainz 05",
+    "mainz":"Mainz 05",
+    "hamburg sv":"Hamburger SV",
     "fc cologne":"1. FC Koln",
+    "schalke 04":"Schalke",
+    "sv elversberg":"Elversberg",
     "tsg hoffenheim":"TSG 1899 Hoffenheim",
     "werder bremen":"SV Werder Bremen",
     "bayer leverkusen":"Bayer 04 Leverkusen",
     "union berlin":"1. FC Union Berlin"
+  },
+  champions:{
+    "paris saint-germain":"Paris Saint-Germain FC",
+    "bayern munich":"FC Bayern München",
+    "manchester united":"Manchester United FC",
+    "manchester city":"Manchester City FC",
+    "real betis seville":"Real Betis Balompié",
+    "borussia dortmund":"BV Borussia 09 Dortmund",
+    "aek athens":"AEK",
+    "fc shakhtar donetsk":"FK Shakhtar Donetsk",
+    "fenerbahce istanbul":"Fenerbahçe SK",
+    "psv eindhoven":"PSV",
+    "slavia prague":"SK Slavia Praha",
+    "atletico madrid":"Club Atlético de Madrid",
+    "inter milano":"FC Internazionale Milano",
+    "galatasaray istanbul":"Galatasaray SK",
+    "sabah masazir":"Sabah FK",
+    "bodoe/glimt":"FK Bodø/Glimt",
+    "fk ml viciebsk":"ML Viciebsk"
   },
   ucl_women:{
     "inter milano":"FC Internazionale Milano",
@@ -177,9 +235,17 @@ const TEAM_LOGO_ALIASES={
     "sl benfica":"Sport Lisboa e Benfica",
     "olympique lyon":"OL Lyonnes",
     "hacken gothenburg":"BK Hacken FF",
+    "hb koege":"HB Køge",
     "oud-heverlee leuven":"Oud-Heverlee Leuven Women",
     "paris saint-germain":"Paris Saint-Germain FC",
     "servette fc chenois feminin":"Servette FC Chenois Feminin"
+  },
+  mls:{
+    "seattle sounders":"Seattle Sounders FC",
+    "saint louis city sc":"St. Louis City SC",
+    "colorado rapids":"Colorado Rapids SC",
+    "dc united":"D.C. United",
+    "red bull new york":"New York Red Bulls"
   },
   pfl:{
     "mendiola fc 1991":"Valenzuela PB Mendiola FC",
