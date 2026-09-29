@@ -761,15 +761,6 @@ footer{
   .news-grid{grid-template-columns:1fr}
 }
 @media(max-width:720px){
-  #previous-games .media-row{
-    scrollbar-width:none;
-    -ms-overflow-style:none
-  }
-  #previous-games .media-row::-webkit-scrollbar{
-    width:0;
-    height:0;
-    display:none
-  }
   .highlight-row{
     scrollbar-width:none;
     -ms-overflow-style:none
@@ -1007,4 +998,95 @@ footer{
 }
 @media(max-width:430px){
   #highlights.highlight-row{grid-auto-columns:82vw}
+}
+
+
+/* TAT previous games — fixed three-card grid, readable scores, no horizontal scroll */
+#previous-games{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  grid-auto-flow:row;
+  grid-auto-columns:auto;
+  gap:14px;
+  overflow:visible;
+  padding:0;
+  scroll-snap-type:none
+}
+#previous-games .previous-game-card{
+  min-height:218px;
+  border-radius:16px;
+  scroll-snap-align:none
+}
+#previous-games .previous-game-card::after{
+  background:
+    linear-gradient(180deg,rgba(1,5,10,.03) 0%,rgba(1,5,10,.12) 38%,rgba(1,5,10,.82) 67%,rgba(1,5,10,.98) 100%)
+}
+#previous-games .previous-game-content{
+  left:14px;
+  right:14px;
+  bottom:13px
+}
+.previous-game-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:8px
+}
+.previous-game-date{
+  flex:0 0 auto;
+  color:#a6b3c2;
+  font-size:.64rem;
+  font-weight:800
+}
+.previous-game-matchup{
+  display:grid;
+  gap:6px
+}
+.previous-game-team{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  align-items:center;
+  gap:10px
+}
+.previous-game-team-name{
+  min-width:0;
+  color:#f7f9fc;
+  font-size:.82rem;
+  font-weight:800;
+  line-height:1.16
+}
+.previous-game-score{
+  min-width:34px;
+  text-align:right;
+  color:#fff;
+  font-size:1.4rem;
+  font-weight:950;
+  line-height:1
+}
+.previous-game-divider{
+  height:1px;
+  background:linear-gradient(90deg,rgba(255,255,255,.16),rgba(255,255,255,.04))
+}
+@media(max-width:900px){
+  #previous-games{grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+  #previous-games .previous-game-card{min-height:190px}
+  .previous-game-team-name{font-size:.72rem}
+  .previous-game-score{font-size:1.2rem}
+  .previous-game-date{font-size:.56rem}
+}
+@media(max-width:720px){
+  #previous-games{
+    grid-template-columns:1fr;
+    gap:10px;
+    overflow:visible;
+    scrollbar-width:none
+  }
+  #previous-games::-webkit-scrollbar{display:none}
+  #previous-games .previous-game-card{
+    min-height:182px;
+    width:100%
+  }
+  .previous-game-team-name{font-size:.8rem}
+  .previous-game-score{font-size:1.34rem}
 }
