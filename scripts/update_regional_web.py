@@ -2315,34 +2315,110 @@ def main():
     data = load()
     data.setdefault("leagues", {})
     errors = {}
-    for key, fn in [("pba", parse_pba), ("uaap", parse_uaap), ("mpbl", parse_mpbl), ("nbl", parse_nbl), ("nblaus", parse_nbl_australia), ("vba", parse_vba)]:
+
+    adaptive = {
+        key: adaptive_schedule_state(data["leagues"].get(key, {}))
+        for key in ADAPTIVE_KEYS
+    }
+    for key in sorted(ADAPTIVE_KEYS):
+        plan = adaptive[key]
+        print(json.dumps({
+            "adaptive": key,
+            "mode": "game-day" if plan["gameDay"] else "idle",
+            "gameDay": plan["gameDay"],
+            "todayGameCount": plan["todayGameCount"],
+            "nextGameAt": plan["nextGameAt"],
+            "slowDue": plan["slowDue"],
+            "run": plan["run"],
+        }, ensure_ascii=False))
+
+    parsers = [
+        ("pba", parse_pba),
+        ("uaap", parse_uaap),
+        ("mpbl", parse_mpbl),
+        ("nbl", parse_nbl),
+        ("nblaus", parse_nbl_australia),
+        ("vba", parse_vba),
+    ]
+    for key, fn in parsers:
+        if key in ADAPTIVE_KEYS and not adaptive[key]["run"]:
+            print(json.dumps({"adaptive_skip": key, "reason": "idle-not-due"}, ensure_ascii=False))
+            continue
         try:
             fresh = fn()
             if fresh.get("games") or fresh.get("broadcast"):
+                if key in ADAPTIVE_KEYS:
+                    fresh = apply_adaptive_automation(
+                        fresh,
+                        key,
+                        prior_state=adaptive[key],
+                        ran_slow=bool(adaptive[key]["slowDue"] or adaptive[key]["manual"]),
+                    )
                 data["leagues"][key] = fresh
         except Exception as e:
             errors[key] = str(e)
-    try:
-        update_uaap_official(data["leagues"].get("uaap", {}))
-    except Exception as e:
-        errors["uaap_official"] = str(e)
-    try:
-        update_pba_previous_game_photos(data["leagues"].get("pba", {}))
-    except Exception as e:
-        errors["pba_photos"] = str(e)
-    try:
-        update_pba_official_news()
-    except Exception as e:
-        errors["pba_news"] = str(e)
-    try:
-        update_pba_shorts()
-    except Exception as e:
-        errors["pba_shorts"] = str(e)
+            if key in ADAPTIVE_KEYS and data["leagues"].get(key):
+                data["leagues"][key] = apply_adaptive_automation(
+                    data["leagues"][key],
+                    key,
+                    prior_state=adaptive[key],
+                    ran_slow=False,
+                )
+
+    uaap_run = bool(adaptive["uaap"]["run"])
+    pba_run = bool(adaptive["pba"]["run"])
+
+    if uaap_run:
+        try:
+            update_uaap_official(data["leagues"].get("uaap", {}))
+        except Exception as e:
+            errors["uaap_official"] = str(e)
+    else:
+        print(json.dumps({"adaptive_skip": "uaap_official", "reason": "idle-not-due"}, ensure_ascii=False))
+
+    if pba_run:
+        try:
+            update_pba_previous_game_photos(data["leagues"].get("pba", {}))
+        except Exception as e:
+            errors["pba_photos"] = str(e)
+        try:
+            update_pba_official_news()
+        except Exception as e:
+            errors["pba_news"] = str(e)
+        try:
+            update_pba_shorts()
+        except Exception as e:
+            errors["pba_shorts"] = str(e)
+    else:
+        print(json.dumps({"adaptive_skip": "pba_official_enrichment", "reason": "idle-not-due"}, ensure_ascii=False))
+
+    # Keep the adaptive state visible to the league pages as well as Scores.
+    if data["leagues"].get("pba"):
+        update_official_automation(PBA_OFFICIAL_OUT, data["leagues"]["pba"])
+    if data["leagues"].get("uaap"):
+        update_official_automation(UAAP_OFFICIAL_OUT, data["leagues"]["uaap"])
+
     data["updated_at"] = datetime.now(PHT).isoformat(timespec="seconds")
     data["refresh_minutes"] = 15
+    data["adaptive"] = {
+        key: (data["leagues"].get(key, {}).get("automation") or {})
+        for key in sorted(ADAPTIVE_KEYS)
+    }
     data["errors"] = errors
     OUT.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", "utf-8")
-    print(json.dumps({"updated_at":data["updated_at"],"errors":errors,"counts":{k:len(v.get("games",[])) for k,v in data["leagues"].items()}}, ensure_ascii=False))
+    print(json.dumps({
+        "updated_at": data["updated_at"],
+        "errors": errors,
+        "adaptive": {
+            key: {
+                "mode": ((data["leagues"].get(key, {}).get("automation") or {}).get("mode")),
+                "dataRefreshMinutes": ((data["leagues"].get(key, {}).get("automation") or {}).get("dataRefreshMinutes")),
+                "livestreamRefreshMinutes": ((data["leagues"].get(key, {}).get("automation") or {}).get("livestreamRefreshMinutes")),
+            }
+            for key in sorted(ADAPTIVE_KEYS)
+        },
+        "counts": {k: len(v.get("games", [])) for k, v in data["leagues"].items()},
+    }, ensure_ascii=False))
 
 if __name__ == "__main__":
     main()
