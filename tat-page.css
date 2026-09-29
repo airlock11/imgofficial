@@ -1229,3 +1229,35 @@ footer{
   .previous-score-name{font-size:.75rem}
   .previous-score-number{font-size:1.62rem}
 }
+
+
+/* TAT Teams & Legs mobile typography */
+@media(max-width:720px){
+  #group-a,
+  #group-b{
+    font-size:.68rem
+  }
+  #group-a .standing-team,
+  #group-b .standing-team{
+    font-size:.68rem;
+    line-height:1.15
+  }
+  #group-a td,
+  #group-b td{
+    font-size:.66rem;
+    line-height:1.18
+  }
+  #group-a td:nth-child(3),
+  #group-a td:nth-child(4),
+  #group-b td:nth-child(3),
+  #group-b td:nth-child(4){
+    font-size:.66rem
+  }
+  .standings-grid .standings-table th{
+    font-size:.58rem;
+    letter-spacing:.045em
+  }
+  .standings-grid .panel-title{
+    font-size:.76rem
+  }
+}
