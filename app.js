@@ -88,7 +88,7 @@ document.querySelectorAll('.bottomnav a').forEach(a=>{let label=a.textContent.tr
 document.querySelectorAll('.navlinks a').forEach(a=>{const label=a.textContent.trim();if(a.classList.contains('active'))a.setAttribute('aria-current','page')});
 document.querySelector('header nav')?.setAttribute('aria-label','Primary navigation');document.querySelectorAll('.bottomnav').forEach(n=>{n.setAttribute('role','navigation');n.setAttribute('aria-label','Mobile navigation')});
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const leagues={Basketball:[['NBA','United States / Canada'],['WNBA','United States / Canada'],['PBA','Philippines'],['MPBL','Philippines'],['NBL-Pilipinas','Philippines'],['NBL Australia','Australia / New Zealand'],['VBA','Vietnam'],['B.League','Japan'],['EuroLeague','Europe'],['WBSL','International']],Football:[['Premier League','England'],['La Liga','Spain'],['Serie A','Italy'],['Bundesliga','Germany'],['UEFA Champions League','Europe'],['PFL','Philippines']],Tennis:[['ATP Tour','International'],['WTA Tour','International'],['Australian Open','Australia'],['Wimbledon','United Kingdom'],['US Open','United States']],Baseball:[['MLB','USA / Canada'],['NPB','Japan'],['KBO League','South Korea']],Hockey:[['NHL','USA / Canada'],['KHL','Eurasia'],['IIHF World Championship','International']],Cricket:[['IPL','India'],['Big Bash League','Australia'],['ICC Cricket World Cup','International']],Volleyball:[['Volleyball Nations League','International'],['PVL','Philippines'],['V.League','Japan']],Motorsport:[['Formula 1','International'],['MotoGP','International'],['Formula E','International']],Boxing:[['WBC','International'],['WBA','International'],['IBF','International'],['WBO','International'],['Professional Boxing','Worldwide']],'Combat Sports':[['UFC','International'],['ONE Championship','Asia']],'American Football':[['NFL','United States'],['NCAA Football','United States']]};
+const leagues={Basketball:[['NBA','United States / Canada'],['WNBA','United States / Canada'],['PBA','Philippines'],['MPBL','Philippines'],['NBL-Pilipinas','Philippines'],['NBL Australia','Australia / New Zealand'],['VBA','Vietnam'],['B.League','Japan'],['EuroLeague','Europe'],['The Asian Tournament','Asia / International'],['WBSL','International']],Football:[['Premier League','England'],['La Liga','Spain'],['Serie A','Italy'],['Bundesliga','Germany'],['UEFA Champions League','Europe'],['PFL','Philippines']],Tennis:[['ATP Tour','International'],['WTA Tour','International'],['Australian Open','Australia'],['Wimbledon','United Kingdom'],['US Open','United States']],Baseball:[['MLB','USA / Canada'],['NPB','Japan'],['KBO League','South Korea']],Hockey:[['NHL','USA / Canada'],['KHL','Eurasia'],['IIHF World Championship','International']],Cricket:[['IPL','India'],['Big Bash League','Australia'],['ICC Cricket World Cup','International']],Volleyball:[['Volleyball Nations League','International'],['PVL','Philippines'],['V.League','Japan']],Motorsport:[['Formula 1','International'],['MotoGP','International'],['Formula E','International']],Boxing:[['WBC','International'],['WBA','International'],['IBF','International'],['WBO','International'],['Professional Boxing','Worldwide']],'Combat Sports':[['UFC','International'],['ONE Championship','Asia']],'American Football':[['NFL','United States'],['NCAA Football','United States']]};
 function openSport(name){if(name==='Boxing'){location.href='/boxing/';return}const modal=document.getElementById('sportModal');if(!modal)return;modal.querySelector('h2').textContent=name;modal.querySelector('.modalbody').innerHTML=(leagues[name]||[]).map(x=>'<div class="league-row"><strong>'+esc(x[0])+'</strong><small>'+esc(x[1])+'</small></div>').join('');modal.showModal()}
 document.addEventListener('click',e=>{
   const statsToggle=e.target.closest('[data-stats-toggle]');
@@ -522,6 +522,7 @@ const liveNowLabels={
   ncaaf:{sport:'American Football',league:'NCAA Football'},
   bleague:{sport:'Basketball',league:'B.League'},
   euroleague:{sport:'Basketball',league:'EuroLeague'},
+  tat:{sport:'Basketball',league:'The Asian Tournament'},
   wbsl:{sport:'Basketball',league:'WBSL'},
   pfl:{sport:'Football',league:'PFL'},
   australian_open:{sport:'Tennis',league:'Australian Open'},
@@ -556,7 +557,7 @@ function asianGamesEventLabel(game){
   const index=title.indexOf(divider);
   return index>0?title.slice(index+divider.length).trim():(title||'Asian Games event');
 }
-const scoreLeagueOrder=['asian_games','fiba','soccer','jamaica_pl','mizoram_pl','laliga','el_salvador_reserves','seriea','bundesliga','champions','ucl_women','mls','pfl','basketball','wnba','pba','ncaa_ph','uaap','mpbl','nbl','nblaus','vba','bleague','euroleague','atp','wta','australian_open','wimbledon','us_open','ipl','bigbash','cricket_world_cup','volleyball_w','volleyball_m','pvl','vleague_jp','baseball','npb','kbo','hockey','khl','iihf','football','ncaaf','f1','motogp','formulae','ufc','one','wbc','wba','ibf','wbo','ring'];
+const scoreLeagueOrder=['asian_games','fiba','soccer','jamaica_pl','mizoram_pl','laliga','el_salvador_reserves','seriea','bundesliga','champions','ucl_women','mls','pfl','basketball','wnba','pba','ncaa_ph','uaap','mpbl','nbl','nblaus','vba','bleague','euroleague','tat','atp','wta','australian_open','wimbledon','us_open','ipl','bigbash','cricket_world_cup','volleyball_w','volleyball_m','pvl','vleague_jp','baseball','npb','kbo','hockey','khl','iihf','football','ncaaf','f1','motogp','formulae','ufc','one','wbc','wba','ibf','wbo','ring'];
 const specialScoreLeagueKeys=new Set(['asian_games','fiba']);
 const scoreSportDefaultLeague={
   basketball:'basketball',
@@ -613,7 +614,7 @@ function scoreLeagueFallback(key){
     soccer:'PL',jamaica_pl:'JPL',mizoram_pl:'MPL',laliga:'LAL',el_salvador_reserves:'ES-R',seriea:'SA',bundesliga:'BUN',champions:'UCL',ucl_women:'UWCL',mls:'MLS',
     basketball:'NBA',wnba:'WNBA',pba:'PBA',ncaa_ph:'NCAA-PH',uaap:'UAAP',mpbl:'MPBL',nbl:'NBL-PH',nblaus:'NBL',
     vba:'VBA',wbsl:'WBSL',fiba:'FIBA',atp:'ATP',wta:'WTA',ipl:'IPL',volleyball_w:'FIVB',volleyball_m:'FIVB',
-    baseball:'MLB',npb:'NPB',kbo:'KBO',hockey:'NHL',khl:'KHL',iihf:'IIHF',football:'NFL',ncaaf:'NCAA',f1:'F1',motogp:'MGP',formulae:'FE',ufc:'UFC',one:'ONE',wbc:'WBC',wba:'WBA',ibf:'IBF',wbo:'WBO',ring:'RING',pfl:'PFL',bleague:'B.LEAGUE',euroleague:'EL',australian_open:'AO',wimbledon:'WIM',us_open:'USO',bigbash:'BBL',cricket_world_cup:'ICC',pvl:'PVL',vleague_jp:'V.LEAGUE',asian_games:'AG26'
+    baseball:'MLB',npb:'NPB',kbo:'KBO',hockey:'NHL',khl:'KHL',iihf:'IIHF',football:'NFL',ncaaf:'NCAA',f1:'F1',motogp:'MGP',formulae:'FE',ufc:'UFC',one:'ONE',wbc:'WBC',wba:'WBA',ibf:'IBF',wbo:'WBO',ring:'RING',pfl:'PFL',bleague:'B.LEAGUE',euroleague:'EL',tat:'TAT',australian_open:'AO',wimbledon:'WIM',us_open:'USO',bigbash:'BBL',cricket_world_cup:'ICC',pvl:'PVL',vleague_jp:'V.LEAGUE',asian_games:'AG26'
   };
   return '<span class="score-league-fallback">'+esc(short[key]||label.slice(0,5).toUpperCase())+'</span>';
 }
@@ -628,7 +629,7 @@ function scoreLeagueLogoMarkup(key){
       '<span class="score-league-fallback score-league-fallback-hidden">FIVB</span>';
   }
 
-  const suppliedFirst=['atp','wta','ipl','boxing','asian_games','soccer','jamaica_pl','mizoram_pl','laliga','el_salvador_reserves','seriea','bundesliga','champions','ucl_women','mls','pfl'].includes(key);
+  const suppliedFirst=['atp','wta','ipl','boxing','asian_games','soccer','jamaica_pl','mizoram_pl','laliga','el_salvador_reserves','seriea','bundesliga','champions','ucl_women','mls','pfl','tat'].includes(key);
   const logo=suppliedFirst?(supplied||feedLogo):(feedLogo||supplied);
   if(!logo)return scoreLeagueFallback(key);
   return '<img class="score-league-logo" src="'+esc(logo)+'" alt="'+esc(liveNowLabels[key]?.league||key)+' logo" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'grid\'">'+
@@ -1078,6 +1079,24 @@ function boxingHighlightsMarkup(key){
 }
 
 const regionalWebSnapshots={
+  tat:{
+    league:'The Asian Tournament',
+    season:'2026 TAT',
+    coverage:'Official TAT competition structure with verified recent results · updated September 30, 2026',
+    note:'TAT lists its October 2026 Leg 6 as upcoming with the venue and exact match schedule still TBD. IMG will not invent unannounced fixtures.',
+    sources:[
+      {name:'The Asian Tournament Official',url:'https://www.theasiantournament.com/'},
+      {name:'Sofascore',url:'https://www.sofascore.com/basketball/tournament/international/the-asian-tournament/31390'},
+      {name:'BsportsFan',url:'https://bsportsfan.com/basketball/l/36845/the-asian-tournament'}
+    ],
+    games:[
+      {eventId:'tat-20260823-ntk-pau',date:'2026-08-23T20:00:00+08:00',displayTime:'Aug 23 · Final',away:'Philippine Aces United',home:'New Taipei Kings',awayLogo:'/assets/tat/teams/philippine-aces-united.png',homeLogo:'',awayScore:'76',homeScore:'88',status:'Final',state:'final',sourceName:'Sofascore',sourceUrl:'https://www.sofascore.com/basketball/match/philippine-aces-united-new-taipei-kings/fFodsoLJj'},
+      {eventId:'tat-20260823-tbl-nihon',date:'2026-08-23T18:00:00+08:00',displayTime:'Aug 23 · Final',away:'Nihon Tengus',home:'Taoyuan Taiwan Beer Leopards',awayLogo:'/assets/tat/teams/nihon-tengus.webp',homeLogo:'',awayScore:'83',homeScore:'87',status:'Final',state:'final',sourceName:'BsportsFan',sourceUrl:'https://bsportsfan.com/basketball/l/36845/the-asian-tournament'},
+      {eventId:'tat-20260823-shenzhen-statham',date:'2026-08-23T15:00:00+08:00',displayTime:'Aug 23 · Final',away:'Statham Academy',home:'Shenzhen New Century Leopards II',awayLogo:'/assets/tat/teams/statham-academy.png',homeLogo:'/assets/tat/teams/shenzhen-new-century-leopards-ii.png',awayScore:'114',homeScore:'84',status:'Final',state:'final',sourceName:'BsportsFan',sourceUrl:'https://bsportsfan.com/basketball/l/36845/the-asian-tournament'},
+      {eventId:'tat-20260823-macau-sichuan',date:'2026-08-23T13:00:00+08:00',displayTime:'Aug 23 · Final',away:'Sichuan Blue Whales II',home:'Macau Black Knights',awayLogo:'/assets/tat/teams/sichuan-blue-whales-ii.png',homeLogo:'/assets/tat/teams/macau-black-knights.png',awayScore:'84',homeScore:'106',status:'Final',state:'final',sourceName:'BsportsFan',sourceUrl:'https://bsportsfan.com/basketball/l/36845/the-asian-tournament'},
+      {eventId:'tat-20260822-statham-aces',date:'2026-08-22T20:00:00+08:00',displayTime:'Aug 22 · Final',away:'Statham Academy',home:'Philippine Aces United',awayLogo:'/assets/tat/teams/statham-academy.png',homeLogo:'/assets/tat/teams/philippine-aces-united.png',awayScore:'90',homeScore:'102',status:'Final',state:'final',sourceName:'BsportsFan',sourceUrl:'https://bsportsfan.com/basketball/l/36845/the-asian-tournament'}
+    ]
+  },
   pba:{
     league:'PBA',
     season:"2026 Governors' Cup",
@@ -2817,7 +2836,7 @@ async function loadGames({silent=false,league=currentScoreLeague}={}){
   }
   if(sport==='ufc'||sport==='one')await loadSpecialSportsData();
   const isCurrent=()=>requestToken===scoreLoadToken&&currentScoreLeague===sport;
-  const isWebLeague=['pba','uaap','mpbl','nbl','nblaus','vba'].includes(sport);
+  const isWebLeague=['pba','uaap','mpbl','nbl','nblaus','vba','tat'].includes(sport);
   if(!silent)st.textContent='';
 
   if(isWebLeague){
