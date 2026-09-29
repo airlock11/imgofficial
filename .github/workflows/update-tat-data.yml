@@ -8,6 +8,7 @@ on:
     branches: [main]
     paths:
       - "scripts/update_tat_data.py"
+      - "scripts/tat_automation_gate.py"
       - ".github/workflows/update-tat-data.yml"
       - "tat-assets.json"
       - "tat-official.json"
@@ -28,26 +29,60 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-
-      - name: Restore automated TAT media cache
+      - name: Read latest TAT automation state
         shell: bash
         run: |
           git fetch origin tat-data || true
           if git rev-parse --verify origin/tat-data >/dev/null 2>&1; then
+            git show origin/tat-data:tat-official.json > /tmp/tat-current.json 2>/dev/null || cp tat-official.json /tmp/tat-current.json
             git checkout origin/tat-data -- assets/tat/news assets/tat/highlights 2>/dev/null || true
+          else
+            cp tat-official.json /tmp/tat-current.json
           fi
 
-      - run: python -m pip install --disable-pip-version-check requests beautifulsoup4
+      - name: Decide TAT automation mode
+        id: gate
+        shell: bash
+        run: |
+          python3 scripts/tat_automation_gate.py --data /tmp/tat-current.json --event "${{ github.event_name }}" | tee /tmp/tat-gate.txt
+          cat /tmp/tat-gate.txt >> "$GITHUB_OUTPUT"
 
-      - name: Refresh TAT schedules, results, teams, news, stats and videos
+      - name: Show TAT automation plan
+        shell: bash
+        run: |
+          echo "mode=${{ steps.gate.outputs.mode }}"
+          echo "game_day=${{ steps.gate.outputs.game_day }}"
+          echo "today_game_count=${{ steps.gate.outputs.today_game_count }}"
+          echo "run_update=${{ steps.gate.outputs.run_update }}"
+          echo "run_slow=${{ steps.gate.outputs.run_slow }}"
+          echo "next_game_at=${{ steps.gate.outputs.next_game_at }}"
+
+      - uses: actions/setup-python@v5
+        if: steps.gate.outputs.run_update == 'true'
+        with:
+          python-version: "3.12"
+
+      - name: Install TAT updater dependencies
+        if: steps.gate.outputs.run_update == 'true'
+        run: python -m pip install --disable-pip-version-check requests beautifulsoup4
+
+      - name: Refresh TAT data
+        if: steps.gate.outputs.run_update == 'true'
         env:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+          TAT_GAME_DAY: ${{ steps.gate.outputs.game_day }}
+          TAT_RUN_SLOW: ${{ steps.gate.outputs.run_slow }}
+          TAT_AUTOMATION_MODE: ${{ steps.gate.outputs.mode }}
+          TAT_TODAY_GAME_COUNT: ${{ steps.gate.outputs.today_game_count }}
+          TAT_NEXT_GAME_AT: ${{ steps.gate.outputs.next_game_at }}
         run: python scripts/update_tat_data.py
 
+      - name: Idle day skip
+        if: steps.gate.outputs.run_update != 'true'
+        run: echo "No TAT game today and the slow discovery interval is not due; skipping heavy TAT automation."
+
       - name: Validate TAT data
+        if: steps.gate.outputs.run_update == 'true'
         run: |
           python - <<'PY'
           import json
@@ -58,10 +93,14 @@ jobs:
           assert isinstance(j.get("teams"), list)
           assert isinstance(j.get("headlines"), list)
           assert isinstance(j.get("highlights"), list)
-          print("Validated", len(j["games"]), "games", len(j["teams"]), "teams")
+          auto=j.get("automation") or {}
+          schedule=auto.get("scheduleAware") or {}
+          assert schedule.get("mode") in {"idle","game-day"}
+          print("Validated", len(j["games"]), "games", len(j["teams"]), "teams", "mode", schedule.get("mode"))
           PY
 
       - name: Publish TAT data branch
+        if: steps.gate.outputs.run_update == 'true'
         shell: bash
         run: |
           set -euo pipefail
