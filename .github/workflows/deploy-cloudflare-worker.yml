@@ -92,3 +92,22 @@ jobs:
           if cf.get("status") != "verified":
               raise SystemExit("Cloudflare direct YouTube verification is not active")
           PY
+
+      - name: Verify IMG article preview endpoint
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE="https://img-api-proxy.magsipocarnie.workers.dev"
+          ARTICLE="https://pba.ph/news/terrafirma-titan-outing-headlines-pba-campus-tour"
+          payload="$(curl -fsS --max-time 15 --get --data-urlencode "url=$ARTICLE" "$BASE/article-preview")"
+          ARTICLE_JSON="$payload" python - <<'PY'
+          import json, os
+          data=json.loads(os.environ["ARTICLE_JSON"])
+          if data.get("ok") is not True:
+              raise SystemExit("article-preview did not return ok=true")
+          if not str(data.get("title") or "").strip():
+              raise SystemExit("article-preview returned no title")
+          if "pba.ph" not in str(data.get("sourceUrl") or ""):
+              raise SystemExit("article-preview source URL was not PBA")
+          print("Article preview verified:", data.get("title"))
+          PY
