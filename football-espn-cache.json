@@ -1,7 +1,7 @@
 {
   "version": 1,
   "source": "ESPN public football data",
-  "updatedAt": "2026-09-29T19:34:23.558Z",
+  "updatedAt": "2026-09-29T23:13:24.193Z",
   "leagues": {
     "soccer": {
       "name": "Premier League",
@@ -872,7 +872,7 @@
           "points": 2
         }
       ],
-      "verifiedAt": "2026-09-29T19:34:22.882Z"
+      "verifiedAt": "2026-09-29T23:13:23.194Z"
     },
     "laliga": {
       "name": "La Liga",
@@ -1839,7 +1839,7 @@
           "points": 3
         }
       ],
-      "verifiedAt": "2026-09-29T19:34:23.170Z"
+      "verifiedAt": "2026-09-29T23:13:23.570Z"
     },
     "bundesliga": {
       "name": "Bundesliga",
@@ -2624,7 +2624,7 @@
           "points": 0
         }
       ],
-      "verifiedAt": "2026-09-29T19:34:23.383Z"
+      "verifiedAt": "2026-09-29T23:13:23.823Z"
     },
     "seriea": {
       "name": "Serie A",
@@ -3415,6 +3415,22 @@
           "venue": "Stadio Benito Stirpe",
           "competition": "Serie A",
           "category": "Italy"
+        },
+        {
+          "eventId": "401874969",
+          "date": "2026-10-29T19:45Z",
+          "displayTime": "",
+          "home": "Fiorentina",
+          "away": "Atalanta",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/109.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/105.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "Stadio Artemio Franchi",
+          "competition": "Serie A",
+          "category": "Italy"
         }
       ],
       "standings": [
@@ -3639,7 +3655,7 @@
           "points": 0
         }
       ],
-      "verifiedAt": "2026-09-29T19:34:23.558Z"
+      "verifiedAt": "2026-09-29T23:13:24.192Z"
     }
   }
 }
