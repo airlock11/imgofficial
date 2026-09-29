@@ -2,6 +2,7 @@
 import html
 import io
 import json
+import os
 import re
 import subprocess
 import sys
@@ -62,6 +63,94 @@ def load():
         return json.loads(OUT.read_text("utf-8"))
     except Exception:
         return {"leagues": {}}
+
+ADAPTIVE_IDLE_MINUTES = 180
+ADAPTIVE_KEYS = {"pba", "uaap"}
+
+def _adaptive_dt(value):
+    raw = str(value or "").strip()
+    if not raw:
+        return None
+    try:
+        if raw.endswith("Z"):
+            raw = raw[:-1] + "+00:00"
+        dt = datetime.fromisoformat(raw)
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=PHT)
+        return dt.astimezone(PHT)
+    except Exception:
+        return None
+
+def adaptive_schedule_state(league):
+    now = datetime.now(PHT)
+    today = now.date()
+    today_games = []
+    future = []
+    for game in (league or {}).get("games", []):
+        dt = _adaptive_dt(game.get("date"))
+        if not dt:
+            continue
+        if dt.date() == today:
+            today_games.append(game)
+        if dt > now and str(game.get("state") or "").lower() == "scheduled":
+            future.append(dt)
+    auto = (league or {}).get("automation") or {}
+    schedule = auto.get("scheduleAware") or {}
+    last_slow = _adaptive_dt(schedule.get("lastSlowCheckAt") or auto.get("lastSlowCheckAt"))
+    slow_due = last_slow is None or (now - last_slow) >= timedelta(minutes=ADAPTIVE_IDLE_MINUTES)
+    manual = str(os.getenv("GITHUB_EVENT_NAME") or "").lower() != "schedule"
+    return {
+        "gameDay": bool(today_games),
+        "todayGameCount": len(today_games),
+        "todayGames": [str(x.get("eventId") or "") for x in today_games if x.get("eventId")],
+        "nextGameAt": min(future).isoformat(timespec="seconds") if future else "",
+        "slowDue": slow_due,
+        "manual": manual,
+        "run": bool(manual or today_games or slow_due),
+    }
+
+def apply_adaptive_automation(league, key, prior_state=None, ran_slow=False):
+    state = adaptive_schedule_state(league)
+    if prior_state and prior_state.get("gameDay"):
+        state["gameDay"] = True
+        state["todayGameCount"] = max(int(state.get("todayGameCount") or 0), int(prior_state.get("todayGameCount") or 0))
+        if not state.get("todayGames"):
+            state["todayGames"] = prior_state.get("todayGames") or []
+    mode = "game-day" if state["gameDay"] else "idle"
+    old_auto = (league or {}).get("automation") or {}
+    old_schedule = old_auto.get("scheduleAware") or {}
+    now = datetime.now(PHT).isoformat(timespec="seconds")
+    league["automation"] = {
+        "enabled": True,
+        "mode": mode,
+        "dataRefreshMinutes": 15 if state["gameDay"] else ADAPTIVE_IDLE_MINUTES,
+        "livestreamRefreshMinutes": 5 if state["gameDay"] else 0,
+        "scheduleAware": {
+            "enabled": True,
+            "timezone": "Asia/Manila",
+            "mode": mode,
+            "gameDay": bool(state["gameDay"]),
+            "todayGameCount": int(state.get("todayGameCount") or 0),
+            "todayGames": state.get("todayGames") or [],
+            "nextGameAt": state.get("nextGameAt") or old_schedule.get("nextGameAt") or "",
+            "idleDiscoveryMinutes": ADAPTIVE_IDLE_MINUTES,
+            "gameDayDataRefreshMinutes": 15,
+            "gameDayLivestreamRefreshMinutes": 5,
+            "lastSlowCheckAt": now if ran_slow else old_schedule.get("lastSlowCheckAt", ""),
+        },
+        "failClosed": True,
+    }
+    return league
+
+def update_official_automation(path, league):
+    try:
+        payload = json.loads(path.read_text("utf-8"))
+    except Exception:
+        payload = {}
+    if not isinstance(payload, dict):
+        payload = {}
+    payload["automation"] = (league or {}).get("automation") or {}
+    path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", "utf-8")
 
 def pht_iso_from_dmy(dmy):
     dt = datetime.strptime(dmy, "%d/%m/%Y").replace(hour=12, tzinfo=PHT)
