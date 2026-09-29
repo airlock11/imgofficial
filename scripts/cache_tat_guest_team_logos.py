@@ -6,8 +6,8 @@ OUT=ROOT/"assets"/"tat"/"teams"
 OUT.mkdir(parents=True,exist_ok=True)
 
 FILES={
-  "new-taipei-kings.png":"https://commons.wikimedia.org/wiki/Special:Redirect/file/New%20Taipei%20Kings%20logo.png",
-  "taoyuan-taiwan-beer-leopards.webp":"https://commons.wikimedia.org/wiki/Special:Redirect/file/Taoyuan%20Taiwan%20Beer%20Leopards.webp",
+  "new-taipei-kings.png":"https://en.wikipedia.org/wiki/Special:Redirect/file/New%20Taipei%20Kings%20logo.png",
+  "taoyuan-taiwan-beer-leopards.webp":"https://en.wikipedia.org/wiki/Special:Redirect/file/Taoyuan%20Taiwan%20Beer%20Leopards.webp",
 }
 s=requests.Session()
 s.headers.update({"User-Agent":"IMG-Sports-Data/1.0 (team logo cache)"})
