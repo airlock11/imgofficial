@@ -133,6 +133,45 @@ def source_live_game_allowed(source,title):
    return True
  return False
 
+_TAT_GAME_DAY_GATE_CACHE=None
+def tat_game_day_scan_allowed():
+ global _TAT_GAME_DAY_GATE_CACHE
+ if _TAT_GAME_DAY_GATE_CACHE is not None:
+  return _TAT_GAME_DAY_GATE_CACHE
+ try:
+  url="https://raw.githubusercontent.com/airlock11/imgofficial/tat-data/tat-official.json?ts="+str(int(time.time()))
+  data=get_json(url,attempts=2)
+  manila=timezone(timedelta(hours=8))
+  today=datetime.now(timezone.utc).astimezone(manila).date()
+  count=0
+  for game in data.get("games",[]):
+   raw=str(game.get("date") or "").strip()
+   if not raw:continue
+   try:
+    if raw.endswith("Z"):raw=raw[:-1]+"+00:00"
+    dt=datetime.fromisoformat(raw)
+    if dt.tzinfo is None:dt=dt.replace(tzinfo=manila)
+    dt=dt.astimezone(manila)
+   except Exception:
+    continue
+   if dt.date()==today:
+    count+=1
+  _TAT_GAME_DAY_GATE_CACHE=count>0
+  print("TAT schedule gate","game-day" if _TAT_GAME_DAY_GATE_CACHE else "idle","games today",count)
+ except Exception as ex:
+  # Fail closed for a game-day-only source: if IMG cannot verify today's
+  # TAT schedule, do not spend API calls or publish an ungrounded LIVE state.
+  print("TAT schedule gate unavailable; skipping TAT channel scan",ex)
+  _TAT_GAME_DAY_GATE_CACHE=False
+ return _TAT_GAME_DAY_GATE_CACHE
+
+def source_schedule_gate_allowed(source):
+ if not source.get("gameDayOnly"):
+  return True
+ if str(source.get("scheduleGate") or "")=="tat-data":
+  return tat_game_day_scan_allowed()
+ return True
+
 def resolve_source_channel(source,previous):
  source_id=str(source.get("id") or "")
  cached=str(previous.get("scanner",{}).get("resolvedChannels",{}).get(source_id) or "")
@@ -233,9 +272,15 @@ def scan_official_registry(previous):
  streams=[]
  resolved={}
  checked=[]
+ previous_resolved=previous.get("scanner",{}).get("resolvedChannels",{})
  for source in load_source_registry():
   source_id=str(source.get("id") or "")
   checked.append(source_id)
+  if not source_schedule_gate_allowed(source):
+   cached=str(previous_resolved.get(source_id) or "")
+   if cached:resolved[source_id]=cached
+   print("official source schedule-skipped",source_id)
+   continue
   try:
    found,channel_id=scan_official_source(source,previous)
    if channel_id:resolved[source_id]=channel_id
