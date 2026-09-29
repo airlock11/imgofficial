@@ -204,6 +204,7 @@ function renderNews(official){
     const published=x.published?new Date(x.published):null;
     const date=published&&!Number.isNaN(published.getTime())?published.toLocaleDateString(undefined,{month:"short",day:"numeric"}):"";
     return `<a class="news-card" href="${safe(x.url||"https://www.theasiantournament.com/news")}" target="_blank" rel="noopener">
+      ${x.image?`<img class="news-photo" src="${safe(x.image)}" alt="${safe(x.title)}" loading="lazy" decoding="async">`:""}
       <span class="news-copy"><small>${safe(x.sourceName||"The Asian Tournament")}${date?` · ${date}`:""}</small><strong>${safe(x.title)}</strong></span>
     </a>`;
   }).join(""):'<div class="empty-card">No official TAT headlines available.</div>';
