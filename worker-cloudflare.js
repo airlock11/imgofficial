@@ -84,6 +84,18 @@ async function handleRequest(request) {
       }
     }
 
+    if (url.pathname === "/article-preview") {
+      const target = (url.searchParams.get("url") || "").trim();
+      try {
+        const preview = await fetchArticlePreview(target);
+        return jsonResponse(preview, cors, 0, 200);
+      } catch (error) {
+        const message = String(error && error.message || error || "Article preview unavailable");
+        const status = /unsupported publisher|invalid article url/i.test(message) ? 400 : 502;
+        return jsonResponse({ ok: false, error: message }, cors, 0, status);
+      }
+    }
+
     if (url.pathname === "/health") {
       return jsonResponse({
         ok: true,
@@ -1108,6 +1120,106 @@ function cleanXml(value) {
 
 function stripHtml(value) {
   return String(value || "").replace(/<[^>]*>/g, " ");
+}
+
+function articlePreviewAllowed(value) {
+  try {
+    const u = new URL(value);
+    if (u.protocol !== "https:") return false;
+    const host = u.hostname.toLowerCase().replace(/^www\./, "");
+    return (
+      host === "pba.ph" ||
+      host.endsWith(".pba.ph") ||
+      host === "uaap.org" ||
+      host.endsWith(".uaap.org") ||
+      host === "theasiantournament.com" ||
+      host.endsWith(".theasiantournament.com")
+    );
+  } catch (_) {
+    return false;
+  }
+}
+
+function articleMeta(html, key) {
+  const escaped = String(key || "").replace(/:/g, "\\:");
+  const patterns = [
+    new RegExp('<meta[^>]+(?:property|name)\\s*=\\s*["\\\']' + escaped + '["\\\'][^>]+content\\s*=\\s*["\\\']([^"\\\']*)["\\\']', 'i'),
+    new RegExp('<meta[^>]+content\\s*=\\s*["\\\']([^"\\\']*)["\\\'][^>]+(?:property|name)\\s*=\\s*["\\\']' + escaped + '["\\\']', 'i')
+  ];
+  for (const pattern of patterns) {
+    const m = html.match(pattern);
+    if (m && m[1]) return cleanXml(m[1]).replace(/\s+/g, " ").trim();
+  }
+  return "";
+}
+
+function articleTitle(html) {
+  const meta = articleMeta(html, "og:title") || articleMeta(html, "twitter:title");
+  if (meta) return meta;
+  const m = html.match(/<title\b[^>]*>([\s\S]*?)<\/title>/i);
+  return m ? cleanXml(stripHtml(m[1])).replace(/\s+/g, " ").trim() : "";
+}
+
+function articlePublished(html) {
+  return (
+    articleMeta(html, "article:published_time") ||
+    articleMeta(html, "date") ||
+    articleMeta(html, "datePublished") ||
+    articleMeta(html, "publish-date")
+  );
+}
+
+function articleAuthor(html) {
+  return articleMeta(html, "author") || articleMeta(html, "article:author");
+}
+
+function articleDescription(html) {
+  const value =
+    articleMeta(html, "og:description") ||
+    articleMeta(html, "twitter:description") ||
+    articleMeta(html, "description");
+  return String(value || "").replace(/\s+/g, " ").trim().slice(0, 500);
+}
+
+async function fetchArticlePreview(target) {
+  if (!target || !articlePreviewAllowed(target)) {
+    throw new Error("Unsupported publisher or invalid article URL");
+  }
+
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 7000);
+  try {
+    const response = await fetch(target, {
+      cache: "no-store",
+      signal: controller.signal,
+      redirect: "follow",
+      headers: {
+        "User-Agent": "Mozilla/5.0 (compatible; IMG-Sports-Website/1.0; +https://imgofficial.com)",
+        "Accept": "text/html,application/xhtml+xml;q=0.9,*/*;q=0.1",
+        "Accept-Language": "en-US,en;q=0.9"
+      }
+    });
+    if (!response.ok) throw new Error("Publisher returned HTTP " + response.status);
+
+    const finalUrl = response.url || target;
+    if (!articlePreviewAllowed(finalUrl)) {
+      throw new Error("Unsupported publisher redirect");
+    }
+
+    const html = (await response.text()).slice(0, 700000);
+    return {
+      ok: true,
+      fetchedAt: new Date().toISOString(),
+      sourceUrl: finalUrl,
+      title: articleTitle(html),
+      image: extractMetaImage(html),
+      description: articleDescription(html),
+      published: articlePublished(html),
+      author: articleAuthor(html)
+    };
+  } finally {
+    clearTimeout(timeout);
+  }
 }
 
 function isHttpsUrl(value) {
