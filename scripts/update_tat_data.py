@@ -26,7 +26,7 @@ TAT_URL = "https://www.theasiantournament.com/"
 TAT_TEAMS_URL = urljoin(TAT_URL, "all-teams")
 TAT_NEWS_URL = urljoin(TAT_URL, "news")
 SOFASCORE_TOURNAMENT_ID = 31390
-SOFASCORE_BASE = "https://www.sofascore.com/api/v1"
+SOFASCORE_BASE = "https://api.sofascore.com/api/v1"
 RAW_TAT_BASE = "https://raw.githubusercontent.com/airlock11/imgofficial/tat-data"
 YOUTUBE_API_KEY = os.getenv("YOUTUBE_API_KEY", "").strip()
 MANILA = ZoneInfo("Asia/Manila")
@@ -42,6 +42,43 @@ session.headers.update(
 
 def now_iso() -> str:
     return datetime.now(timezone.utc).astimezone(MANILA).isoformat(timespec="seconds")
+
+
+def parse_game_datetime(value):
+    raw = str(value or "").strip()
+    if not raw:
+        return None
+    try:
+        if raw.endswith("Z"):
+            raw = raw[:-1] + "+00:00"
+        dt = datetime.fromisoformat(raw)
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=MANILA)
+        return dt.astimezone(MANILA)
+    except Exception:
+        return None
+
+
+def schedule_summary(data):
+    now = datetime.now(timezone.utc).astimezone(MANILA)
+    today = now.date()
+    today_games = []
+    future = []
+    for game in data.get("games") or []:
+        dt = parse_game_datetime(game.get("date"))
+        if not dt:
+            continue
+        if dt.date() == today:
+            today_games.append(game)
+        if dt > now and str(game.get("state") or "").lower() == "scheduled":
+            future.append(dt)
+    return {
+        "mode": "game-day" if today_games else "idle",
+        "gameDay": bool(today_games),
+        "todayGameCount": len(today_games),
+        "todayGames": [str(x.get("eventId") or "") for x in today_games if x.get("eventId")],
+        "nextGameAt": min(future).isoformat(timespec="seconds") if future else "",
+    }
 
 
 def get_json(url: str, *, timeout: int = 25):
