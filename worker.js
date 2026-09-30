@@ -1274,18 +1274,37 @@ function firstTag(block, names) {
 }
 
 function cleanXml(value) {
-  return String(value || "")
-    .replace(/^<!\[CDATA\[/i, "")
-    .replace(/\]\]>$/i, "")
-    .replace(/&amp;/g, "&")
-    .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">")
-    .replace(/&quot;/g, '"')
-    .replace(/&#39;|&apos;/g, "'")
-    .replace(/&#(\d+);/g, (_, n) => {
-      try { return String.fromCodePoint(Number(n)); } catch (_) { return ""; }
-    })
-    .trim();
+  let text=String(value||"")
+    .replace(/^<!\[CDATA\[/i,"")
+    .replace(/\]\]>$/i,"");
+
+  const named={
+    amp:"&",lt:"<",gt:">",quot:'"',apos:"'",nbsp:" ",
+    rsquo:"’",lsquo:"‘",ldquo:"“",rdquo:"”",
+    ndash:"–",mdash:"—",hellip:"…",
+    laquo:"«",raquo:"»",middot:"·",bull:"•",
+    copy:"©",reg:"®",trade:"™",times:"×",divide:"÷"
+  };
+
+  // Publishers sometimes double-encode punctuation (for example &amp;rsquo;).
+  // Decode a few passes so the reader never shows raw HTML entities.
+  for(let pass=0;pass<3;pass++){
+    const next=text
+      .replace(/&#x([0-9a-f]+);/gi,(_,n)=>{
+        try{return String.fromCodePoint(parseInt(n,16))}catch{return ""}
+      })
+      .replace(/&#(\d+);/g,(_,n)=>{
+        try{return String.fromCodePoint(Number(n))}catch{return ""}
+      })
+      .replace(/&([a-z][a-z0-9]+);/gi,(m,name)=>{
+        const key=String(name||"").toLowerCase();
+        return Object.prototype.hasOwnProperty.call(named,key)?named[key]:m;
+      });
+    if(next===text)break;
+    text=next;
+  }
+
+  return text.trim();
 }
 
 function stripHtml(value) {
