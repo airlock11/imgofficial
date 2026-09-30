@@ -212,9 +212,9 @@ function renderNews(official){
   wrap.innerHTML=news.length?news.map(x=>{
     const image=String(x.image||"").startsWith("http")?safe(x.image):"";
     const d=x.published?new Date(x.published):null,date=d&&!Number.isNaN(d.getTime())?d.toLocaleDateString(undefined,{month:"short",day:"numeric"}):"";
-    return '<button class="news-card'+(image?" has-photo":"")+'" type="button" data-news-url="'+safe(x.url||"https://uaap.org/posts/articles")+'" aria-label="Read '+safe(x.title||"news article")+' in IMG">'+
+    return '<a class="news-card'+(image?" has-photo":"")+'" href="'+safe(x.url||"https://uaap.org/posts/articles")+'" target="_blank" rel="noopener">'+
       (image?'<img class="news-photo" src="'+image+'" alt="" loading="lazy" decoding="async">':"")+
-      '<span class="news-copy"><small>UAAP Official'+(date?" · "+safe(date):"")+'</small><strong>'+safe(x.title)+'</strong></span></button>';
+      '<span class="news-copy"><small>UAAP Official'+(date?" · "+safe(date):"")+'</small><strong>'+safe(x.title)+'</strong></span></a>';
   }).join(""):"";
 }
 async function load(){
