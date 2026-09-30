@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-30T15:37:35+00:00",
+  "updatedAt": "2026-09-30T20:19:41+00:00",
   "season": "Season 89 Men's Basketball",
   "sources": {
     "stats": "https://uaap.org/stats/uaap-season-89-men-s-basketball",
@@ -123,6 +123,17 @@
   "previousGamePhotos": [],
   "highlights": [
     {
+      "id": "YBR1309Mozo",
+      "title": "FEU vs DLSU | SMART PLAYS EXTENDED HIGHLIGHTS | UAAP SEASON 89 MEN’S BASKETBALL | OCT 1, 2026",
+      "url": "https://www.youtube.com/watch?v=YBR1309Mozo",
+      "thumbnail": "https://i.ytimg.com/vi/YBR1309Mozo/hqdefault.jpg",
+      "published": "",
+      "channel": "One Sports",
+      "sourceName": "One Sports",
+      "sourceChannelId": "UCXDG9ue-emCN8Ad3h7lERqQ",
+      "verificationStatus": "verified"
+    },
+    {
       "id": "ARrdubP35qQ",
       "title": "Cabs Cabonilas POSTS 17 PTS, 6 REB vs DLSU | UAAP SEASON 89 MEN’S BASKETBALL | HIGHLIGHTS",
       "url": "https://www.youtube.com/watch?v=ARrdubP35qQ",
@@ -215,17 +226,6 @@
       "title": "FEU vs DLSU | 1ST QUARTER HIGHLIGHTS | UAAP SEASON 89 MEN’S BASKETBALL",
       "url": "https://www.youtube.com/watch?v=EHajjNMxUrw",
       "thumbnail": "https://i.ytimg.com/vi/EHajjNMxUrw/hqdefault.jpg",
-      "published": "",
-      "channel": "One Sports",
-      "sourceName": "One Sports",
-      "sourceChannelId": "UCXDG9ue-emCN8Ad3h7lERqQ",
-      "verificationStatus": "verified"
-    },
-    {
-      "id": "F2bQJnlbrBE",
-      "title": "UE vs UST | SMART PLAYS EXTENDED HIGHLIGHTS | UAAP SEASON 89 MEN’S BASKETBALL | SEP 30, 2026",
-      "url": "https://www.youtube.com/watch?v=F2bQJnlbrBE",
-      "thumbnail": "https://i.ytimg.com/vi/F2bQJnlbrBE/hqdefault.jpg",
       "published": "",
       "channel": "One Sports",
       "sourceName": "One Sports",
@@ -356,27 +356,24 @@
       "url": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball?game_id=1"
     }
   ],
-  "highlightsUpdatedAt": "2026-09-30T15:37:35+00:00",
+  "highlightsUpdatedAt": "2026-09-30T20:19:41+00:00",
   "automation": {
     "enabled": true,
-    "mode": "game-day",
-    "dataRefreshMinutes": 15,
-    "livestreamRefreshMinutes": 5,
+    "mode": "idle",
+    "dataRefreshMinutes": 180,
+    "livestreamRefreshMinutes": 0,
     "scheduleAware": {
       "enabled": true,
       "timezone": "Asia/Manila",
-      "mode": "game-day",
-      "gameDay": true,
-      "todayGameCount": 2,
-      "todayGames": [
-        "web-uaap-scheduled-8",
-        "web-uaap-scheduled-9"
-      ],
+      "mode": "idle",
+      "gameDay": false,
+      "todayGameCount": 0,
+      "todayGames": [],
       "nextGameAt": "2026-10-03T14:00:00+08:00",
       "idleDiscoveryMinutes": 180,
       "gameDayDataRefreshMinutes": 15,
       "gameDayLivestreamRefreshMinutes": 5,
-      "lastSlowCheckAt": "2026-09-30T23:36:22+08:00"
+      "lastSlowCheckAt": "2026-10-01T04:18:59+08:00"
     },
     "failClosed": true
   }
