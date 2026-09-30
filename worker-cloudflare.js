@@ -1155,9 +1155,18 @@ function articleMeta(html, key) {
 
 function articleTitle(html) {
   const meta = articleMeta(html, "og:title") || articleMeta(html, "twitter:title");
-  if (meta) return meta;
+  const generic = value => /^(?:the asian tournament|pba|uaap)(?:\s*[|\-–—].*)?$/i.test(String(value || "").trim());
+  if (meta && !generic(meta)) return meta;
+
+  const h1 = html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/i);
+  if (h1) {
+    const value = cleanXml(stripHtml(h1[1])).replace(/\s+/g, " ").trim();
+    if (value && !generic(value)) return value;
+  }
+
   const m = html.match(/<title\b[^>]*>([\s\S]*?)<\/title>/i);
-  return m ? cleanXml(stripHtml(m[1])).replace(/\s+/g, " ").trim() : "";
+  const title = m ? cleanXml(stripHtml(m[1])).replace(/\s+/g, " ").trim() : "";
+  return title && !generic(title) ? title : (meta || title);
 }
 
 function articlePublished(html) {
