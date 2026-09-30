@@ -77,6 +77,13 @@ function publisherName(url){
   }catch{return "Source"}
 }
 
+function preferredArticleTitle(value,fallback){
+  const title=String(value||"").trim();
+  if(!title)return fallback;
+  if(/^(?:the asian tournament|pba|uaap)(?:\s*[|\-–—].*)?$/i.test(title))return fallback;
+  return title;
+}
+
 async function openModal(card){
   const href=card.href||card.getAttribute("href");
   if(!href)return;
@@ -108,7 +115,7 @@ async function openModal(card){
     if(token!==requestToken)return;
     if(!response.ok||!data?.ok)throw new Error(data?.error||"Article preview unavailable");
 
-    const title=String(data.title||d.title||"News article").trim();
+    const title=preferredArticleTitle(data.title,d.title||"News article");
     const sourceUrl=String(data.sourceUrl||href);
     const date=cleanDate(data.published);
     const author=String(data.author||"").trim();
