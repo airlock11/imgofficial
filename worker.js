@@ -1360,6 +1360,40 @@ function articleDescription(html) {
   return String(value || "").replace(/\s+/g, " ").trim().slice(0, 500);
 }
 
+
+function articleExcerpt(html) {
+  const source=String(html||"");
+  const article=source.match(/<article\b[^>]*>([\s\S]*?)<\/article>/i);
+  const main=source.match(/<main\b[^>]*>([\s\S]*?)<\/main>/i);
+  let scope=article?.[1]||main?.[1]||source;
+  scope=scope
+    .replace(/<(script|style|nav|footer|header|form|aside)\b[\s\S]*?<\/\1>/gi," ")
+    .replace(/<!--([\s\S]*?)-->/g," ");
+
+  const paragraphs=[];
+  const seen=new Set();
+  const re=/<p\b[^>]*>([\s\S]*?)<\/p>/gi;
+  let match;
+  while((match=re.exec(scope))&&paragraphs.length<5){
+    const value=cleanXml(stripHtml(match[1]))
+      .replace(/&nbsp;|&#160;/gi," ")
+      .replace(/\s+/g," ")
+      .trim();
+    if(value.length<45) continue;
+    if(/subscribe|privacy policy|terms and conditions|cookie|newsletter/i.test(value)) continue;
+    const key=value.toLowerCase();
+    if(seen.has(key)) continue;
+    seen.add(key);
+    paragraphs.push(value);
+  }
+
+  const fallback=articleDescription(html);
+  const chosen=paragraphs.length?paragraphs.join("\n\n"):fallback;
+  const words=chosen.split(/\s+/).filter(Boolean);
+  if(words.length>190) return words.slice(0,190).join(" ")+"…";
+  return chosen.slice(0,1400);
+}
+
 async function fetchArticlePreview(target) {
   if (!target || !articlePreviewAllowed(target)) {
     throw new Error("Unsupported publisher or invalid article URL");
@@ -1393,6 +1427,7 @@ async function fetchArticlePreview(target) {
       title: articleTitle(html),
       image: extractMetaImage(html),
       description: articleDescription(html),
+      excerpt: articleExcerpt(html),
       published: articlePublished(html),
       author: articleAuthor(html)
     };
