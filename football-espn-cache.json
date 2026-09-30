@@ -1,7 +1,7 @@
 {
   "version": 1,
   "source": "ESPN public football data",
-  "updatedAt": "2026-09-30T15:21:07.726Z",
+  "updatedAt": "2026-09-30T20:13:14.183Z",
   "leagues": {
     "soccer": {
       "name": "Premier League",
@@ -872,7 +872,7 @@
           "points": 2
         }
       ],
-      "verifiedAt": "2026-09-30T15:21:06.788Z"
+      "verifiedAt": "2026-09-30T20:13:12.646Z"
     },
     "laliga": {
       "name": "La Liga",
@@ -880,54 +880,6 @@
       "espn": "esp.1",
       "leagueLogo": "https://a.espncdn.com/i/leaguelogos/soccer/500/15.png",
       "games": [
-        {
-          "eventId": "401882875",
-          "date": "2026-09-16T17:00Z",
-          "displayTime": "",
-          "home": "Atlético Madrid",
-          "away": "Osasuna",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/1068.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/97.png",
-          "homeScore": "4",
-          "awayScore": "0",
-          "state": "final",
-          "status": "FT",
-          "venue": "Riyadh Air Metropolitano",
-          "competition": "La Liga",
-          "category": "Spain"
-        },
-        {
-          "eventId": "401882873",
-          "date": "2026-09-16T17:00Z",
-          "displayTime": "",
-          "home": "Deportivo",
-          "away": "Sevilla",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/90.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/243.png",
-          "homeScore": "0",
-          "awayScore": "1",
-          "state": "final",
-          "status": "FT",
-          "venue": "Riazor",
-          "competition": "La Liga",
-          "category": "Spain"
-        },
-        {
-          "eventId": "401882871",
-          "date": "2026-09-16T19:30Z",
-          "displayTime": "",
-          "home": "Barcelona",
-          "away": "Racing Santander",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/83.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/87.png",
-          "homeScore": "7",
-          "awayScore": "2",
-          "state": "final",
-          "status": "FT",
-          "venue": "Spotify Camp Nou",
-          "competition": "La Liga",
-          "category": "Spain"
-        },
         {
           "eventId": "401882874",
           "date": "2026-09-17T17:00Z",
@@ -1839,7 +1791,7 @@
           "points": 3
         }
       ],
-      "verifiedAt": "2026-09-30T15:21:07.073Z"
+      "verifiedAt": "2026-09-30T20:13:13.153Z"
     },
     "bundesliga": {
       "name": "Bundesliga",
@@ -2422,6 +2374,22 @@
           "venue": "Europa-Park Stadion",
           "competition": "Bundesliga",
           "category": "Germany"
+        },
+        {
+          "eventId": "401884746",
+          "date": "2026-10-30T19:30Z",
+          "displayTime": "",
+          "home": "SV Elversberg",
+          "away": "Mainz",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/10388.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/2950.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "URSAPHARM-Arena an der Kaiserlinde",
+          "competition": "Bundesliga",
+          "category": "Germany"
         }
       ],
       "standings": [
@@ -2624,7 +2592,7 @@
           "points": 0
         }
       ],
-      "verifiedAt": "2026-09-30T15:21:07.475Z"
+      "verifiedAt": "2026-09-30T20:13:13.711Z"
     },
     "seriea": {
       "name": "Serie A",
@@ -3655,7 +3623,7 @@
           "points": 0
         }
       ],
-      "verifiedAt": "2026-09-30T15:21:07.726Z"
+      "verifiedAt": "2026-09-30T20:13:14.183Z"
     }
   }
 }
