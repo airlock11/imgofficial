@@ -20,11 +20,11 @@ function ensureModal(){
       '</header>'+
       '<div class="img-news-modal__hero" hidden><img alt=""></div>'+
       '<div class="img-news-modal__viewer">'+
-        '<div class="img-news-modal__loader">Loading article preview…</div>'+
+        '<div class="img-news-modal__loader">Loading article…</div>'+
         '<div class="img-news-modal__body" hidden>'+
-          '<p class="img-news-modal__description"></p>'+
-          '<div class="img-news-modal__notice">This preview is fetched only when you open the article.</div>'+
-          '<a class="img-news-modal__source" href="">Read full source <span>›</span></a>'+
+          '<div class="img-news-modal__description"></div>'+
+          '<div class="img-news-modal__notice">IMG shows an on-demand reader preview from the publisher. Use the source button for the complete original article.</div>'+
+          '<a class="img-news-modal__source" href="">Open original source <span>›</span></a>'+
         '</div>'+
       '</div>'+
     '</section>';
@@ -85,7 +85,7 @@ function preferredArticleTitle(value,fallback){
 }
 
 async function openModal(card){
-  const href=card.href||card.getAttribute("href");
+  const href=card.dataset.newsUrl||card.href||card.getAttribute("href");
   if(!href)return;
   ensureModal();
   const token=++requestToken;
@@ -96,12 +96,12 @@ async function openModal(card){
   metaEl.textContent=d.meta;
   setHero(d.image,d.title);
   loader.hidden=false;
-  loader.textContent="Loading article preview…";
+  loader.textContent="Loading article…";
   bodyEl.hidden=true;
   bodyEl.querySelector(".img-news-modal__description").textContent="";
   sourceLink.href=href;
   sourceLink.removeAttribute("target");
-  sourceLink.setAttribute("rel","noopener");
+  sourceLink.setAttribute("rel","noopener noreferrer");
 
   modal.classList.add("is-open");
   modal.setAttribute("aria-hidden","false");
@@ -125,11 +125,11 @@ async function openModal(card){
     metaEl.textContent=[author,source,date].filter(Boolean).join(" · ")||d.meta;
     setHero(data.image||d.image,title);
 
-    const description=String(data.description||"").trim();
+    const excerpt=String(data.excerpt||data.description||"").trim();
     bodyEl.querySelector(".img-news-modal__description").textContent=
-      description||"A preview is not available for this article. You can continue to the original publisher.";
+      excerpt||"IMG could not extract a readable preview from this publisher page.";
     sourceLink.href=sourceUrl;
-    sourceLink.textContent="Read full source ›";
+    sourceLink.textContent="Open original source ›";
     loader.hidden=true;
     bodyEl.hidden=false;
   }catch(error){
@@ -137,9 +137,9 @@ async function openModal(card){
     loader.hidden=true;
     bodyEl.hidden=false;
     bodyEl.querySelector(".img-news-modal__description").textContent=
-      "IMG could not load this publisher’s preview right now. You can still open the original article.";
+      "IMG could not load this publisher page right now. The original source is still available below.";
     sourceLink.href=href;
-    sourceLink.textContent="Read full source ›";
+    sourceLink.textContent="Open original source ›";
   }
 }
 
@@ -151,17 +151,17 @@ function closeModal(){
   document.documentElement.classList.remove("img-news-modal-open");
   if(loader){
     loader.hidden=false;
-    loader.textContent="Loading article preview…";
+    loader.textContent="Loading article…";
   }
   if(bodyEl)bodyEl.hidden=true;
   if(lastTrigger&&document.contains(lastTrigger))lastTrigger.focus({preventScroll:true});
 }
 
 document.addEventListener("click",e=>{
-  const card=e.target.closest("a.news-card[href]");
+  const card=e.target.closest(".news-card[data-news-url],a.news-card[href]");
   if(!card)return;
   e.preventDefault();
-  e.stopPropagation();
+  e.stopImmediatePropagation();
   openModal(card);
 },true);
 })();
