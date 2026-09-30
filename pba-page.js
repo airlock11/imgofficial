@@ -450,13 +450,13 @@ function renderNews(official){
     const date=published&&!Number.isNaN(published.getTime())
       ?published.toLocaleDateString(undefined,{month:"short",day:"numeric"})
       :"";
-    return `<a class="news-card${image?" has-photo":""}" href="${safe(x.url||"https://www.pba.ph/news")}" target="_blank" rel="noopener">
+    return `<button class="news-card${image?" has-photo":""}" type="button" data-news-url="${safe(x.url||"https://www.pba.ph/news")}" aria-label="Read ${safe(x.title||"news article")} in IMG">
       ${image?`<img class="news-photo" src="${image}" alt="" loading="lazy" decoding="async">`:""}
       <span class="news-copy">
         <small>${safe(x.sourceName||"PBA Official")}${date?` · ${safe(date)}`:""}</small>
         <strong>${safe(x.title)}</strong>
       </span>
-    </a>`;
+    </button>`;
   }).join(""):'<div class="empty-card">No official PBA headlines available.</div>';
 }
 
