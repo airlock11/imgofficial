@@ -215,3 +215,19 @@ html.img-news-modal-open body{overflow:hidden}
   .img-news-modal__body{padding:18px 16px 24px;gap:15px}
   .img-news-modal__description{font-size:.93rem;line-height:1.6}
 }
+
+
+/* News cards are buttons now so publisher links cannot open automatically. */
+button.news-card{
+  width:100%;
+  padding:0;
+  color:inherit;
+  font:inherit;
+  text-align:left;
+  cursor:pointer;
+  appearance:none;
+  -webkit-appearance:none;
+}
+.img-news-modal__description{
+  white-space:pre-line;
+}
