@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-01T08:44:58.796174+00:00",
+  "updated_at": "2026-10-01T15:42:37.211091+00:00",
   "source": "Official and verified public sports sources",
   "leagues": {
     "bleague": {
@@ -3831,7 +3831,7 @@
       "league": "WTA Tour",
       "sourceName": "WTA Official Calendar",
       "sourceUrl": "https://wtafiles.wtatennis.com/pdf/calendar/calendar.pdf",
-      "updatedAt": "2026-10-01T08:44:52.875870+00:00",
+      "updatedAt": "2026-10-01T15:42:32.478830+00:00",
       "note": "Current and upcoming WTA Tour tournaments scraped automatically from the official WTA calendar PDF.",
       "games": [
         {
@@ -3866,9 +3866,9 @@
         },
         {
           "eventId": "wta-calendar-ningbo-open",
-          "date": "2026-10-19T00:00:00+00:00",
-          "endDate": "2026-10-25T00:00:00+00:00",
-          "displayTime": "Week of Oct 19",
+          "date": "2026-10-18T00:00:00+00:00",
+          "endDate": "2026-10-24T00:00:00+00:00",
+          "displayTime": "Week of Oct 18",
           "title": "Ningbo Open",
           "location": "Ningbo",
           "status": "Scheduled",
@@ -3881,9 +3881,9 @@
         },
         {
           "eventId": "wta-calendar-kinoshita-group-japan-open",
-          "date": "2026-10-19T00:00:00+00:00",
-          "endDate": "2026-10-25T00:00:00+00:00",
-          "displayTime": "Week of Oct 19",
+          "date": "2026-10-18T00:00:00+00:00",
+          "endDate": "2026-10-24T00:00:00+00:00",
+          "displayTime": "Week of Oct 18",
           "title": "Kinoshita Group Japan Open",
           "location": "Osaka",
           "status": "Scheduled",
@@ -3896,9 +3896,9 @@
         },
         {
           "eventId": "wta-calendar-toray-pan-pacific-open-tennis",
-          "date": "2026-10-26T00:00:00+00:00",
-          "endDate": "2026-11-01T00:00:00+00:00",
-          "displayTime": "Week of Oct 26",
+          "date": "2026-10-25T00:00:00+00:00",
+          "endDate": "2026-10-31T00:00:00+00:00",
+          "displayTime": "Week of Oct 25",
           "title": "Toray Pan Pacific Open Tennis",
           "location": "Tokyo",
           "status": "Scheduled",
@@ -3911,9 +3911,9 @@
         },
         {
           "eventId": "wta-calendar-guangzhou-open",
-          "date": "2026-10-26T00:00:00+00:00",
-          "endDate": "2026-11-01T00:00:00+00:00",
-          "displayTime": "Week of Oct 26",
+          "date": "2026-10-25T00:00:00+00:00",
+          "endDate": "2026-10-31T00:00:00+00:00",
+          "displayTime": "Week of Oct 25",
           "title": "Guangzhou Open",
           "location": "Guangzhou",
           "status": "Scheduled",
@@ -3925,12 +3925,12 @@
           "sourceUrl": "https://wtafiles.wtatennis.com/pdf/calendar/calendar.pdf"
         },
         {
-          "eventId": "wta-calendar-chennai-open",
-          "date": "2026-11-02T00:00:00+00:00",
-          "endDate": "2026-11-08T00:00:00+00:00",
-          "displayTime": "Week of Nov 2",
-          "title": "Chennai Open",
-          "location": "Chennai",
+          "eventId": "wta-calendar-prudential-hong-kong-tennis-open-hong-kong-h-philippine-women-s-open",
+          "date": "2026-11-01T00:00:00+00:00",
+          "endDate": "2026-11-07T00:00:00+00:00",
+          "displayTime": "Week of Nov 1",
+          "title": "Prudential Hong Kong Tennis Open Hong Kong - H Philippine Women’s Open",
+          "location": "Manila",
           "status": "Scheduled",
           "state": "scheduled",
           "eventOnly": true,
@@ -3940,32 +3940,17 @@
           "sourceUrl": "https://wtafiles.wtatennis.com/pdf/calendar/calendar.pdf"
         },
         {
-          "eventId": "wta-calendar-prudential-hong-kong-tennis-open",
-          "date": "2026-11-02T00:00:00+00:00",
-          "endDate": "2026-11-08T00:00:00+00:00",
-          "displayTime": "Week of Nov 2",
-          "title": "Prudential Hong Kong Tennis Open",
-          "location": "Hong Kong",
-          "status": "Scheduled",
-          "state": "scheduled",
-          "eventOnly": true,
-          "level": "",
-          "surface": "Hard",
-          "sourceName": "WTA Official Calendar",
-          "sourceUrl": "https://wtafiles.wtatennis.com/pdf/calendar/calendar.pdf"
-        },
-        {
-          "eventId": "wta-calendar-wta-finals-indian-wells",
+          "eventId": "wta-calendar-wta-finals",
           "date": "2026-11-08T00:00:00+00:00",
-          "endDate": "2026-11-15T00:00:00+00:00",
-          "displayTime": "Nov 8–Nov 15",
-          "title": "WTA Finals Indian Wells",
-          "location": "Indian Wells",
+          "endDate": "2026-11-14T00:00:00+00:00",
+          "displayTime": "Week of Nov 8",
+          "title": "WTA Finals",
+          "location": "Charlotte",
           "status": "Scheduled",
           "state": "scheduled",
           "eventOnly": true,
-          "level": "WTA Finals",
-          "surface": "Hard",
+          "level": "",
+          "surface": "Indoor Hard",
           "sourceName": "WTA Official Calendar",
           "sourceUrl": "https://wtafiles.wtatennis.com/pdf/calendar/calendar.pdf"
         }
@@ -3975,12 +3960,12 @@
       "league": "FIBA",
       "sourceName": "FIBA Official",
       "sourceUrl": "https://www.fiba.basketball/en/games",
-      "updatedAt": "2026-10-01T08:44:53.589513+00:00",
+      "updatedAt": "2026-10-01T15:42:33.392544+00:00",
       "note": "Automatically refreshed from official FIBA competition game cards.",
       "games": [
         {
           "eventId": "fiba-fiba-intercontinental-cup-2026-2026-10-01-viln-glu",
-          "date": "2026-10-01T08:44:52.875903+00:00",
+          "date": "2026-10-01T15:42:32.478857+00:00",
           "displayTime": "Final · Final",
           "away": "VILN",
           "home": "GLU",
@@ -3996,7 +3981,7 @@
         },
         {
           "eventId": "fiba-fiba-intercontinental-cup-2026-2026-10-01-boc-rssb",
-          "date": "2026-10-01T08:44:52.875903+00:00",
+          "date": "2026-10-01T15:42:32.478857+00:00",
           "displayTime": "Final · Final",
           "away": "BOC",
           "home": "RSSB",
@@ -4012,7 +3997,7 @@
         },
         {
           "eventId": "fiba-fiba-intercontinental-cup-2026-2026-10-01-viln-boc",
-          "date": "2026-10-01T08:44:52.875903+00:00",
+          "date": "2026-10-01T15:42:32.478857+00:00",
           "displayTime": "Final · Final",
           "away": "VILN",
           "home": "BOC",
@@ -4028,7 +4013,7 @@
         },
         {
           "eventId": "fiba-fiba-intercontinental-cup-2026-2026-10-01-rssb-glu",
-          "date": "2026-10-01T08:44:52.875903+00:00",
+          "date": "2026-10-01T15:42:32.478857+00:00",
           "displayTime": "Final · Final",
           "away": "RSSB",
           "home": "GLU",
@@ -4044,7 +4029,7 @@
         },
         {
           "eventId": "fiba-fiba-intercontinental-cup-2026-2026-10-01-bjbg-shs",
-          "date": "2026-10-01T08:44:52.875903+00:00",
+          "date": "2026-10-01T15:42:32.478857+00:00",
           "displayTime": "Final · Final",
           "away": "BJBG",
           "home": "SHS",
@@ -4060,7 +4045,7 @@
         },
         {
           "eventId": "fiba-fiba-intercontinental-cup-2026-2026-10-01-boc-glu",
-          "date": "2026-10-01T08:44:52.875903+00:00",
+          "date": "2026-10-01T15:42:32.478857+00:00",
           "displayTime": "Final · Final",
           "away": "BOC",
           "home": "GLU",
@@ -4076,7 +4061,7 @@
         },
         {
           "eventId": "fiba-fiba-intercontinental-cup-2026-2026-10-01-viln-shs",
-          "date": "2026-10-01T08:44:52.875903+00:00",
+          "date": "2026-10-01T15:42:32.478857+00:00",
           "displayTime": "Final · Final",
           "away": "VILN",
           "home": "SHS",
@@ -4092,7 +4077,7 @@
         },
         {
           "eventId": "fiba-fiba-intercontinental-cup-2026-2026-10-01-bjbg-glu",
-          "date": "2026-10-01T08:44:52.875903+00:00",
+          "date": "2026-10-01T15:42:32.478857+00:00",
           "displayTime": "Final · Final",
           "away": "BJBG",
           "home": "GLU",
@@ -4108,7 +4093,7 @@
         },
         {
           "eventId": "fiba-fiba-intercontinental-cup-2026-2026-10-01-shs-rssb",
-          "date": "2026-10-01T08:44:52.875903+00:00",
+          "date": "2026-10-01T15:42:32.478857+00:00",
           "displayTime": "Final · Final",
           "away": "SHS",
           "home": "RSSB",
@@ -4124,7 +4109,7 @@
         },
         {
           "eventId": "fiba-fiba-intercontinental-cup-2026-2026-10-01-bjbg-boc",
-          "date": "2026-10-01T08:44:52.875903+00:00",
+          "date": "2026-10-01T15:42:32.478857+00:00",
           "displayTime": "Final · Final",
           "away": "BJBG",
           "home": "BOC",
@@ -4140,7 +4125,7 @@
         },
         {
           "eventId": "fiba-fiba-intercontinental-cup-2026-2026-10-01-viln-rssb",
-          "date": "2026-10-01T08:44:52.875903+00:00",
+          "date": "2026-10-01T15:42:32.478857+00:00",
           "displayTime": "Final · Final",
           "away": "VILN",
           "home": "RSSB",
