@@ -1,9 +1,1447 @@
 {
-  "updated_at": "2026-10-01T13:35:43+00:00",
+  "updated_at": "2026-10-01T22:48:08+00:00",
   "provider": "OddsPapi + The Odds API",
   "bookmaker": "Multiple",
   "leagues": {
+    "nfl": [
+      {
+        "eventId": "id1400003171515842",
+        "date": "2026-10-02T00:15:00.000Z",
+        "home": "Cleveland Browns",
+        "away": "Pittsburgh Steelers",
+        "participant1Id": 4417,
+        "participant2Id": 4345,
+        "homeLogo": "",
+        "awayLogo": "",
+        "oddsList": [
+          {
+            "provider": "Bet365",
+            "details": "—",
+            "total": "—",
+            "home": "2.25",
+            "away": "1.63"
+          },
+          {
+            "provider": "DraftKings",
+            "details": "—",
+            "total": "—",
+            "home": "2.24",
+            "away": "1.68"
+          },
+          {
+            "provider": "BetUS",
+            "details": "—",
+            "total": "—",
+            "home": "2.34",
+            "away": "1.65"
+          },
+          {
+            "provider": "FanDuel",
+            "details": "—",
+            "total": "—",
+            "home": "2.26",
+            "away": "1.68"
+          },
+          {
+            "provider": "MyBookie.ag",
+            "details": "—",
+            "total": "—",
+            "home": "2.27",
+            "away": "1.67"
+          },
+          {
+            "provider": "BetOnline.ag",
+            "details": "—",
+            "total": "—",
+            "home": "2.37",
+            "away": "1.64"
+          },
+          {
+            "provider": "LowVig.ag",
+            "details": "—",
+            "total": "—",
+            "home": "2.37",
+            "away": "1.64"
+          },
+          {
+            "provider": "BetRivers",
+            "details": "—",
+            "total": "—",
+            "home": "2.25",
+            "away": "1.66"
+          },
+          {
+            "provider": "Bovada",
+            "details": "—",
+            "total": "—",
+            "home": "2.35",
+            "away": "1.62"
+          },
+          {
+            "provider": "BetMGM",
+            "details": "—",
+            "total": "—",
+            "home": "2.25",
+            "away": "1.67"
+          }
+        ]
+      },
+      {
+        "eventId": "id1400003171488622",
+        "date": "2026-10-04T13:30:00.000Z",
+        "home": "Washington Commanders",
+        "away": "Indianapolis Colts",
+        "participant1Id": 4432,
+        "participant2Id": 4421,
+        "homeLogo": "",
+        "awayLogo": "",
+        "oddsList": [
+          {
+            "provider": "Bet365",
+            "details": "—",
+            "total": "—",
+            "home": "2.65",
+            "away": "1.47"
+          },
+          {
+            "provider": "DraftKings",
+            "details": "—",
+            "total": "—",
+            "home": "2.6",
+            "away": "1.52"
+          },
+          {
+            "provider": "FanDuel",
+            "details": "—",
+            "total": "—",
+            "home": "2.64",
+            "away": "1.51"
+          },
+          {
+            "provider": "BetMGM",
+            "details": "—",
+            "total": "—",
+            "home": "2.65",
+            "away": "1.48"
+          },
+          {
+            "provider": "Bovada",
+            "details": "—",
+            "total": "—",
+            "home": "2.7",
+            "away": "1.5"
+          },
+          {
+            "provider": "BetUS",
+            "details": "—",
+            "total": "—",
+            "home": "2.67",
+            "away": "1.51"
+          },
+          {
+            "provider": "MyBookie.ag",
+            "details": "—",
+            "total": "—",
+            "home": "2.58",
+            "away": "1.51"
+          },
+          {
+            "provider": "LowVig.ag",
+            "details": "—",
+            "total": "—",
+            "home": "2.71",
+            "away": "1.51"
+          },
+          {
+            "provider": "BetOnline.ag",
+            "details": "—",
+            "total": "—",
+            "home": "2.71",
+            "away": "1.51"
+          },
+          {
+            "provider": "BetRivers",
+            "details": "—",
+            "total": "—",
+            "home": "2.6",
+            "away": "1.51"
+          }
+        ]
+      },
+      {
+        "eventId": "id1400003171515844",
+        "date": "2026-10-04T17:00:00.000Z",
+        "home": "Baltimore Ravens",
+        "away": "Tennessee Titans",
+        "participant1Id": 4413,
+        "participant2Id": 367364,
+        "homeLogo": "",
+        "awayLogo": "",
+        "oddsList": [
+          {
+            "provider": "Bet365",
+            "details": "—",
+            "total": "—",
+            "home": "1.11",
+            "away": "6.0"
+          },
+          {
+            "provider": "DraftKings",
+            "details": "—",
+            "total": "—",
+            "home": "1.15",
+            "away": "5.7"
+          },
+          {
+            "provider": "BetUS",
+            "details": "—",
+            "total": "—",
+            "home": "1.15",
+            "away": "5.9"
+          },
+          {
+            "provider": "FanDuel",
+            "details": "—",
+            "total": "—",
+            "home": "1.13",
+            "away": "6.4"
+          },
+          {
+            "provider": "BetOnline.ag",
+            "details": "—",
+            "total": "—",
+            "home": "1.15",
+            "away": "5.94"
+          },
+          {
+            "provider": "LowVig.ag",
+            "details": "—",
+            "total": "—",
+            "home": "1.15",
+            "away": "5.94"
+          },
+          {
+            "provider": "BetRivers",
+            "details": "—",
+            "total": "—",
+            "home": "1.14",
+            "away": "6.0"
+          },
+          {
+            "provider": "MyBookie.ag",
+            "details": "—",
+            "total": "—",
+            "home": "1.12",
+            "away": "6.2"
+          },
+          {
+            "provider": "BetMGM",
+            "details": "—",
+            "total": "—",
+            "home": "1.15",
+            "away": "6.0"
+          },
+          {
+            "provider": "Bovada",
+            "details": "—",
+            "total": "—",
+            "home": "1.14",
+            "away": "5.75"
+          }
+        ]
+      },
+      {
+        "eventId": "id1400003171515846",
+        "date": "2026-10-04T17:00:00.000Z",
+        "home": "Buffalo Bills",
+        "away": "New England Patriots",
+        "participant1Id": 4376,
+        "participant2Id": 4424,
+        "homeLogo": "",
+        "awayLogo": "",
+        "oddsList": [
+          {
+            "provider": "Bet365",
+            "details": "—",
+            "total": "—",
+            "home": "1.28",
+            "away": "3.55"
+          },
+          {
+            "provider": "DraftKings",
+            "details": "—",
+            "total": "—",
+            "home": "1.33",
+            "away": "3.45"
+          },
+          {
+            "provider": "FanDuel",
+            "details": "—",
+            "total": "—",
+            "home": "1.29",
+            "away": "3.75"
+          },
+          {
+            "provider": "BetUS",
+            "details": "—",
+            "total": "—",
+            "home": "1.31",
+            "away": "3.65"
+          },
+          {
+            "provider": "LowVig.ag",
+            "details": "—",
+            "total": "—",
+            "home": "1.31",
+            "away": "3.63"
+          },
+          {
+            "provider": "BetOnline.ag",
+            "details": "—",
+            "total": "—",
+            "home": "1.31",
+            "away": "3.63"
+          },
+          {
+            "provider": "BetRivers",
+            "details": "—",
+            "total": "—",
+            "home": "1.32",
+            "away": "3.5"
+          },
+          {
+            "provider": "MyBookie.ag",
+            "details": "—",
+            "total": "—",
+            "home": "1.31",
+            "away": "3.44"
+          },
+          {
+            "provider": "BetMGM",
+            "details": "—",
+            "total": "—",
+            "home": "1.31",
+            "away": "3.7"
+          },
+          {
+            "provider": "Bovada",
+            "details": "—",
+            "total": "—",
+            "home": "1.32",
+            "away": "3.55"
+          }
+        ]
+      },
+      {
+        "eventId": "id1400003171515848",
+        "date": "2026-10-04T17:00:00.000Z",
+        "home": "Chicago Bears",
+        "away": "New York Jets",
+        "participant1Id": 4391,
+        "participant2Id": 4427,
+        "homeLogo": "",
+        "awayLogo": "",
+        "oddsList": [
+          {
+            "provider": "Bet365",
+            "details": "—",
+            "total": "—",
+            "home": "1.51",
+            "away": "2.55"
+          },
+          {
+            "provider": "DraftKings",
+            "details": "—",
+            "total": "—",
+            "home": "1.57",
+            "away": "2.45"
+          },
+          {
+            "provider": "FanDuel",
+            "details": "—",
+            "total": "—",
+            "home": "1.57",
+            "away": "2.48"
+          },
+          {
+            "provider": "BetUS",
+            "details": "—",
+            "total": "—",
+            "home": "1.54",
+            "away": "2.59"
+          },
+          {
+            "provider": "LowVig.ag",
+            "details": "—",
+            "total": "—",
+            "home": "1.55",
+            "away": "2.6"
+          },
+          {
+            "provider": "BetOnline.ag",
+            "details": "—",
+            "total": "—",
+            "home": "1.55",
+            "away": "2.6"
+          },
+          {
+            "provider": "BetRivers",
+            "details": "—",
+            "total": "—",
+            "home": "1.57",
+            "away": "2.4"
+          },
+          {
+            "provider": "MyBookie.ag",
+            "details": "—",
+            "total": "—",
+            "home": "1.55",
+            "away": "2.48"
+          },
+          {
+            "provider": "BetMGM",
+            "details": "—",
+            "total": "—",
+            "home": "1.57",
+            "away": "2.45"
+          },
+          {
+            "provider": "Bovada",
+            "details": "—",
+            "total": "—",
+            "home": "1.56",
+            "away": "2.55"
+          }
+        ]
+      },
+      {
+        "eventId": "id1400003171515850",
+        "date": "2026-10-04T17:00:00.000Z",
+        "home": "Cincinnati Bengals",
+        "away": "Jacksonville Jaguars",
+        "participant1Id": 4416,
+        "participant2Id": 4386,
+        "homeLogo": "",
+        "awayLogo": "",
+        "oddsList": [
+          {
+            "provider": "Bet365",
+            "details": "—",
+            "total": "—",
+            "home": "1.68",
+            "away": "2.2"
+          },
+          {
+            "provider": "DraftKings",
+            "details": "—",
+            "total": "—",
+            "home": "1.7",
+            "away": "2.2"
+          },
+          {
+            "provider": "BetUS",
+            "details": "—",
+            "total": "—",
+            "home": "1.71",
+            "away": "2.2"
+          },
+          {
+            "provider": "FanDuel",
+            "details": "—",
+            "total": "—",
+            "home": "1.75",
+            "away": "2.14"
+          },
+          {
+            "provider": "BetOnline.ag",
+            "details": "—",
+            "total": "—",
+            "home": "1.7",
+            "away": "2.22"
+          },
+          {
+            "provider": "LowVig.ag",
+            "details": "—",
+            "total": "—",
+            "home": "1.7",
+            "away": "2.22"
+          },
+          {
+            "provider": "BetRivers",
+            "details": "—",
+            "total": "—",
+            "home": "1.71",
+            "away": "2.16"
+          },
+          {
+            "provider": "MyBookie.ag",
+            "details": "—",
+            "total": "—",
+            "home": "1.68",
+            "away": "2.19"
+          },
+          {
+            "provider": "BetMGM",
+            "details": "—",
+            "total": "—",
+            "home": "1.69",
+            "away": "2.2"
+          },
+          {
+            "provider": "Bovada",
+            "details": "—",
+            "total": "—",
+            "home": "1.67",
+            "away": "2.3"
+          }
+        ]
+      },
+      {
+        "eventId": "id1400003171515852",
+        "date": "2026-10-04T17:00:00.000Z",
+        "home": "Houston Texans",
+        "away": "Dallas Cowboys",
+        "participant1Id": 4324,
+        "participant2Id": 4392,
+        "homeLogo": "",
+        "awayLogo": "",
+        "oddsList": [
+          {
+            "provider": "Bet365",
+            "details": "—",
+            "total": "—",
+            "home": "1.59",
+            "away": "2.35"
+          },
+          {
+            "provider": "DraftKings",
+            "details": "—",
+            "total": "—",
+            "home": "1.62",
+            "away": "2.36"
+          },
+          {
+            "provider": "BetUS",
+            "details": "—",
+            "total": "—",
+            "home": "1.62",
+            "away": "2.38"
+          },
+          {
+            "provider": "FanDuel",
+            "details": "—",
+            "total": "—",
+            "home": "1.65",
+            "away": "2.3"
+          },
+          {
+            "provider": "BetOnline.ag",
+            "details": "—",
+            "total": "—",
+            "home": "1.62",
+            "away": "2.42"
+          },
+          {
+            "provider": "LowVig.ag",
+            "details": "—",
+            "total": "—",
+            "home": "1.62",
+            "away": "2.42"
+          },
+          {
+            "provider": "BetRivers",
+            "details": "—",
+            "total": "—",
+            "home": "1.65",
+            "away": "2.25"
+          },
+          {
+            "provider": "MyBookie.ag",
+            "details": "—",
+            "total": "—",
+            "home": "1.61",
+            "away": "2.33"
+          },
+          {
+            "provider": "BetMGM",
+            "details": "—",
+            "total": "—",
+            "home": "1.62",
+            "away": "2.35"
+          },
+          {
+            "provider": "Bovada",
+            "details": "—",
+            "total": "—",
+            "home": "1.61",
+            "away": "2.4"
+          }
+        ]
+      },
+      {
+        "eventId": "id1400003171515854",
+        "date": "2026-10-04T17:00:00.000Z",
+        "home": "New York Giants",
+        "away": "Arizona Cardinals",
+        "participant1Id": 4426,
+        "participant2Id": 4412,
+        "homeLogo": "",
+        "awayLogo": "",
+        "oddsList": [
+          {
+            "provider": "Bet365",
+            "details": "—",
+            "total": "—",
+            "home": "2.2",
+            "away": "1.68"
+          },
+          {
+            "provider": "DraftKings",
+            "details": "—",
+            "total": "—",
+            "home": "2.2",
+            "away": "1.7"
+          },
+          {
+            "provider": "BetUS",
+            "details": "—",
+            "total": "—",
+            "home": "2.21",
+            "away": "1.71"
+          },
+          {
+            "provider": "FanDuel",
+            "details": "—",
+            "total": "—",
+            "home": "2.16",
+            "away": "1.74"
+          },
+          {
+            "provider": "BetRivers",
+            "details": "—",
+            "total": "—",
+            "home": "2.12",
+            "away": "1.74"
+          },
+          {
+            "provider": "MyBookie.ag",
+            "details": "—",
+            "total": "—",
+            "home": "2.15",
+            "away": "1.71"
+          },
+          {
+            "provider": "BetOnline.ag",
+            "details": "—",
+            "total": "—",
+            "home": "2.21",
+            "away": "1.71"
+          },
+          {
+            "provider": "BetMGM",
+            "details": "—",
+            "total": "—",
+            "home": "2.2",
+            "away": "1.69"
+          },
+          {
+            "provider": "LowVig.ag",
+            "details": "—",
+            "total": "—",
+            "home": "2.21",
+            "away": "1.71"
+          },
+          {
+            "provider": "Bovada",
+            "details": "—",
+            "total": "—",
+            "home": "2.2",
+            "away": "1.71"
+          }
+        ]
+      },
+      {
+        "eventId": "id1400003171515858",
+        "date": "2026-10-04T17:00:00.000Z",
+        "home": "Tampa Bay Buccaneers",
+        "away": "Green Bay Packers",
+        "participant1Id": 4388,
+        "participant2Id": 4420,
+        "homeLogo": "",
+        "awayLogo": "",
+        "oddsList": [
+          {
+            "provider": "Bet365",
+            "details": "—",
+            "total": "—",
+            "home": "2.5",
+            "away": "1.52"
+          },
+          {
+            "provider": "DraftKings",
+            "details": "—",
+            "total": "—",
+            "home": "2.5",
+            "away": "1.56"
+          },
+          {
+            "provider": "BetUS",
+            "details": "—",
+            "total": "—",
+            "home": "2.59",
+            "away": "1.54"
+          },
+          {
+            "provider": "FanDuel",
+            "details": "—",
+            "total": "—",
+            "home": "2.52",
+            "away": "1.56"
+          },
+          {
+            "provider": "BetOnline.ag",
+            "details": "—",
+            "total": "—",
+            "home": "2.61",
+            "away": "1.54"
+          },
+          {
+            "provider": "LowVig.ag",
+            "details": "—",
+            "total": "—",
+            "home": "2.61",
+            "away": "1.54"
+          },
+          {
+            "provider": "BetRivers",
+            "details": "—",
+            "total": "—",
+            "home": "2.55",
+            "away": "1.51"
+          },
+          {
+            "provider": "Bovada",
+            "details": "—",
+            "total": "—",
+            "home": "2.6",
+            "away": "1.54"
+          },
+          {
+            "provider": "MyBookie.ag",
+            "details": "—",
+            "total": "—",
+            "home": "2.54",
+            "away": "1.53"
+          },
+          {
+            "provider": "BetMGM",
+            "details": "—",
+            "total": "—",
+            "home": "2.55",
+            "away": "1.53"
+          }
+        ]
+      },
+      {
+        "eventId": "1b4f2e60ce83fa1d63a5dff83769d27c",
+        "date": "2026-10-04T17:00:00Z",
+        "home": "Philadelphia Eagles",
+        "away": "Los Angeles Rams",
+        "participant1Id": null,
+        "participant2Id": null,
+        "homeLogo": "",
+        "awayLogo": "",
+        "oddsList": [
+          {
+            "provider": "DraftKings",
+            "details": "—",
+            "total": "—",
+            "home": "2.42",
+            "away": "1.59"
+          },
+          {
+            "provider": "BetUS",
+            "details": "—",
+            "total": "—",
+            "home": "2.46",
+            "away": "1.59"
+          },
+          {
+            "provider": "FanDuel",
+            "details": "—",
+            "total": "—",
+            "home": "2.4",
+            "away": "1.6"
+          },
+          {
+            "provider": "BetOnline.ag",
+            "details": "—",
+            "total": "—",
+            "home": "2.49",
+            "away": "1.59"
+          },
+          {
+            "provider": "LowVig.ag",
+            "details": "—",
+            "total": "—",
+            "home": "2.49",
+            "away": "1.59"
+          },
+          {
+            "provider": "BetRivers",
+            "details": "—",
+            "total": "—",
+            "home": "2.4",
+            "away": "1.57"
+          },
+          {
+            "provider": "MyBookie.ag",
+            "details": "—",
+            "total": "—",
+            "home": "2.41",
+            "away": "1.57"
+          },
+          {
+            "provider": "BetMGM",
+            "details": "—",
+            "total": "—",
+            "home": "2.45",
+            "away": "1.57"
+          },
+          {
+            "provider": "Bovada",
+            "details": "—",
+            "total": "—",
+            "home": "2.5",
+            "away": "1.57"
+          }
+        ]
+      },
+      {
+        "eventId": "id1400003171515860",
+        "date": "2026-10-04T20:05:00.000Z",
+        "home": "Minnesota Vikings",
+        "away": "Miami Dolphins",
+        "participant1Id": 4423,
+        "participant2Id": 4287,
+        "homeLogo": "",
+        "awayLogo": "",
+        "oddsList": [
+          {
+            "provider": "Bet365",
+            "details": "—",
+            "total": "—",
+            "home": "1.13",
+            "away": "5.5"
+          },
+          {
+            "provider": "DraftKings",
+            "details": "—",
+            "total": "—",
+            "home": "1.16",
+            "away": "5.55"
+          },
+          {
+            "provider": "BetUS",
+            "details": "—",
+            "total": "—",
+            "home": "1.16",
+            "away": "5.6"
+          },
+          {
+            "provider": "FanDuel",
+            "details": "—",
+            "total": "—",
+            "home": "1.15",
+            "away": "5.8"
+          },
+          {
+            "provider": "BetOnline.ag",
+            "details": "—",
+            "total": "—",
+            "home": "1.16",
+            "away": "5.55"
+          },
+          {
+            "provider": "LowVig.ag",
+            "details": "—",
+            "total": "—",
+            "home": "1.16",
+            "away": "5.55"
+          },
+          {
+            "provider": "BetRivers",
+            "details": "—",
+            "total": "—",
+            "home": "1.16",
+            "away": "5.5"
+          },
+          {
+            "provider": "MyBookie.ag",
+            "details": "—",
+            "total": "—",
+            "home": "1.14",
+            "away": "5.8"
+          },
+          {
+            "provider": "BetMGM",
+            "details": "—",
+            "total": "—",
+            "home": "1.16",
+            "away": "5.75"
+          },
+          {
+            "provider": "Bovada",
+            "details": "—",
+            "total": "—",
+            "home": "1.17",
+            "away": "5.25"
+          }
+        ]
+      },
+      {
+        "eventId": "id1400003171515862",
+        "date": "2026-10-04T20:25:00.000Z",
+        "home": "Las Vegas Raiders",
+        "away": "Kansas City Chiefs",
+        "participant1Id": 4390,
+        "participant2Id": 4422,
+        "homeLogo": "",
+        "awayLogo": "",
+        "oddsList": [
+          {
+            "provider": "Bet365",
+            "details": "—",
+            "total": "—",
+            "home": "2.8",
+            "away": "1.42"
+          },
+          {
+            "provider": "DraftKings",
+            "details": "—",
+            "total": "—",
+            "home": "2.8",
+            "away": "1.46"
+          },
+          {
+            "provider": "BetUS",
+            "details": "—",
+            "total": "—",
+            "home": "2.8",
+            "away": "1.48"
+          },
+          {
+            "provider": "FanDuel",
+            "details": "—",
+            "total": "—",
+            "home": "2.88",
+            "away": "1.44"
+          },
+          {
+            "provider": "LowVig.ag",
+            "details": "—",
+            "total": "—",
+            "home": "2.8",
+            "away": "1.48"
+          },
+          {
+            "provider": "BetOnline.ag",
+            "details": "—",
+            "total": "—",
+            "home": "2.8",
+            "away": "1.48"
+          },
+          {
+            "provider": "BetRivers",
+            "details": "—",
+            "total": "—",
+            "home": "2.8",
+            "away": "1.45"
+          },
+          {
+            "provider": "MyBookie.ag",
+            "details": "—",
+            "total": "—",
+            "home": "2.76",
+            "away": "1.45"
+          },
+          {
+            "provider": "BetMGM",
+            "details": "—",
+            "total": "—",
+            "home": "2.8",
+            "away": "1.45"
+          },
+          {
+            "provider": "Bovada",
+            "details": "—",
+            "total": "—",
+            "home": "2.75",
+            "away": "1.48"
+          }
+        ]
+      },
+      {
+        "eventId": "id1400003171515864",
+        "date": "2026-10-04T20:25:00.000Z",
+        "home": "Seattle Seahawks",
+        "away": "Los Angeles Chargers",
+        "participant1Id": 4430,
+        "participant2Id": 4429,
+        "homeLogo": "",
+        "awayLogo": "",
+        "oddsList": [
+          {
+            "provider": "Bet365",
+            "details": "—",
+            "total": "—",
+            "home": "1.25",
+            "away": "3.75"
+          },
+          {
+            "provider": "DraftKings",
+            "details": "—",
+            "total": "—",
+            "home": "1.26",
+            "away": "4.0"
+          },
+          {
+            "provider": "BetUS",
+            "details": "—",
+            "total": "—",
+            "home": "1.3",
+            "away": "3.7"
+          },
+          {
+            "provider": "FanDuel",
+            "details": "—",
+            "total": "—",
+            "home": "1.27",
+            "away": "3.95"
+          },
+          {
+            "provider": "BetOnline.ag",
+            "details": "—",
+            "total": "—",
+            "home": "1.29",
+            "away": "3.78"
+          },
+          {
+            "provider": "LowVig.ag",
+            "details": "—",
+            "total": "—",
+            "home": "1.29",
+            "away": "3.78"
+          },
+          {
+            "provider": "BetRivers",
+            "details": "—",
+            "total": "—",
+            "home": "1.28",
+            "away": "3.65"
+          },
+          {
+            "provider": "MyBookie.ag",
+            "details": "—",
+            "total": "—",
+            "home": "1.28",
+            "away": "3.75"
+          },
+          {
+            "provider": "BetMGM",
+            "details": "—",
+            "total": "—",
+            "home": "1.29",
+            "away": "3.8"
+          },
+          {
+            "provider": "Bovada",
+            "details": "—",
+            "total": "—",
+            "home": "1.29",
+            "away": "3.7"
+          }
+        ]
+      },
+      {
+        "eventId": "a7e7efb75a9792ac63480ae6328dca18",
+        "date": "2026-10-04T20:25:00Z",
+        "home": "San Francisco 49ers",
+        "away": "Denver Broncos",
+        "participant1Id": null,
+        "participant2Id": null,
+        "homeLogo": "",
+        "awayLogo": "",
+        "oddsList": [
+          {
+            "provider": "DraftKings",
+            "details": "—",
+            "total": "—",
+            "home": "1.68",
+            "away": "2.24"
+          },
+          {
+            "provider": "BetUS",
+            "details": "—",
+            "total": "—",
+            "home": "1.69",
+            "away": "2.25"
+          },
+          {
+            "provider": "FanDuel",
+            "details": "—",
+            "total": "—",
+            "home": "1.68",
+            "away": "2.26"
+          },
+          {
+            "provider": "BetOnline.ag",
+            "details": "—",
+            "total": "—",
+            "home": "1.69",
+            "away": "2.25"
+          },
+          {
+            "provider": "LowVig.ag",
+            "details": "—",
+            "total": "—",
+            "home": "1.69",
+            "away": "2.25"
+          },
+          {
+            "provider": "BetRivers",
+            "details": "—",
+            "total": "—",
+            "home": "1.73",
+            "away": "2.14"
+          },
+          {
+            "provider": "MyBookie.ag",
+            "details": "—",
+            "total": "—",
+            "home": "1.62",
+            "away": "2.3"
+          },
+          {
+            "provider": "BetMGM",
+            "details": "—",
+            "total": "—",
+            "home": "1.67",
+            "away": "2.25"
+          },
+          {
+            "provider": "Bovada",
+            "details": "—",
+            "total": "—",
+            "home": "1.69",
+            "away": "2.25"
+          }
+        ]
+      },
+      {
+        "eventId": "a73a76599a4f3422803e57bd8f61b626",
+        "date": "2026-10-05T00:20:00Z",
+        "home": "Carolina Panthers",
+        "away": "Detroit Lions",
+        "participant1Id": null,
+        "participant2Id": null,
+        "homeLogo": "",
+        "awayLogo": "",
+        "oddsList": [
+          {
+            "provider": "DraftKings",
+            "details": "—",
+            "total": "—",
+            "home": "2.54",
+            "away": "1.54"
+          },
+          {
+            "provider": "FanDuel",
+            "details": "—",
+            "total": "—",
+            "home": "2.68",
+            "away": "1.5"
+          },
+          {
+            "provider": "BetUS",
+            "details": "—",
+            "total": "—",
+            "home": "2.63",
+            "away": "1.53"
+          },
+          {
+            "provider": "LowVig.ag",
+            "details": "—",
+            "total": "—",
+            "home": "2.65",
+            "away": "1.53"
+          },
+          {
+            "provider": "BetOnline.ag",
+            "details": "—",
+            "total": "—",
+            "home": "2.65",
+            "away": "1.53"
+          },
+          {
+            "provider": "BetRivers",
+            "details": "—",
+            "total": "—",
+            "home": "2.55",
+            "away": "1.53"
+          },
+          {
+            "provider": "Bovada",
+            "details": "—",
+            "total": "—",
+            "home": "2.65",
+            "away": "1.51"
+          },
+          {
+            "provider": "MyBookie.ag",
+            "details": "—",
+            "total": "—",
+            "home": "2.56",
+            "away": "1.5"
+          },
+          {
+            "provider": "BetMGM",
+            "details": "—",
+            "total": "—",
+            "home": "2.65",
+            "away": "1.5"
+          }
+        ]
+      },
+      {
+        "eventId": "8bd90781e17e6d97df3941063cedae1e",
+        "date": "2026-10-06T00:15:00Z",
+        "home": "New Orleans Saints",
+        "away": "Atlanta Falcons",
+        "participant1Id": null,
+        "participant2Id": null,
+        "homeLogo": "",
+        "awayLogo": "",
+        "oddsList": [
+          {
+            "provider": "DraftKings",
+            "details": "—",
+            "total": "—",
+            "home": "1.68",
+            "away": "2.24"
+          },
+          {
+            "provider": "BetUS",
+            "details": "—",
+            "total": "—",
+            "home": "1.71",
+            "away": "2.2"
+          },
+          {
+            "provider": "FanDuel",
+            "details": "—",
+            "total": "—",
+            "home": "1.69",
+            "away": "2.22"
+          },
+          {
+            "provider": "BetOnline.ag",
+            "details": "—",
+            "total": "—",
+            "home": "1.7",
+            "away": "2.22"
+          },
+          {
+            "provider": "LowVig.ag",
+            "details": "—",
+            "total": "—",
+            "home": "1.7",
+            "away": "2.22"
+          },
+          {
+            "provider": "BetRivers",
+            "details": "—",
+            "total": "—",
+            "home": "1.66",
+            "away": "2.25"
+          },
+          {
+            "provider": "MyBookie.ag",
+            "details": "—",
+            "total": "—",
+            "home": "1.67",
+            "away": "2.17"
+          },
+          {
+            "provider": "BetMGM",
+            "details": "—",
+            "total": "—",
+            "home": "1.69",
+            "away": "2.2"
+          },
+          {
+            "provider": "Bovada",
+            "details": "—",
+            "total": "—",
+            "home": "1.71",
+            "away": "2.2"
+          }
+        ]
+      },
+      {
+        "eventId": "259b5df9aa0d10257f56de78523495e0",
+        "date": "2026-10-09T00:15:00Z",
+        "home": "Dallas Cowboys",
+        "away": "Tampa Bay Buccaneers",
+        "participant1Id": null,
+        "participant2Id": null,
+        "homeLogo": "",
+        "awayLogo": "",
+        "oddsList": [
+          {
+            "provider": "DraftKings",
+            "details": "—",
+            "total": "—",
+            "home": "1.19",
+            "away": "5.0"
+          },
+          {
+            "provider": "FanDuel",
+            "details": "—",
+            "total": "—",
+            "home": "1.19",
+            "away": "5.0"
+          },
+          {
+            "provider": "BetRivers",
+            "details": "—",
+            "total": "—",
+            "home": "1.18",
+            "away": "5.0"
+          }
+        ]
+      },
+      {
+        "eventId": "21b26266f3d78af02eb672e606275d95",
+        "date": "2026-10-11T13:30:00Z",
+        "home": "Jacksonville Jaguars",
+        "away": "Philadelphia Eagles",
+        "participant1Id": null,
+        "participant2Id": null,
+        "homeLogo": "",
+        "awayLogo": "",
+        "oddsList": [
+          {
+            "provider": "DraftKings",
+            "details": "—",
+            "total": "—",
+            "home": "1.68",
+            "away": "2.24"
+          },
+          {
+            "provider": "FanDuel",
+            "details": "—",
+            "total": "—",
+            "home": "1.7",
+            "away": "2.2"
+          },
+          {
+            "provider": "BetRivers",
+            "details": "—",
+            "total": "—",
+            "home": "1.71",
+            "away": "2.17"
+          }
+        ]
+      },
+      {
+        "eventId": "2caea57b1e5cfbba1334cfbfd46f6771",
+        "date": "2026-10-11T17:00:00Z",
+        "home": "Green Bay Packers",
+        "away": "Chicago Bears",
+        "participant1Id": null,
+        "participant2Id": null,
+        "homeLogo": "",
+        "awayLogo": "",
+        "oddsList": [
+          {
+            "provider": "DraftKings",
+            "details": "—",
+            "total": "—",
+            "home": "1.74",
+            "away": "2.14"
+          },
+          {
+            "provider": "FanDuel",
+            "details": "—",
+            "total": "—",
+            "home": "1.72",
+            "away": "2.18"
+          },
+          {
+            "provider": "BetRivers",
+            "details": "—",
+            "total": "—",
+            "home": "1.74",
+            "away": "2.12"
+          }
+        ]
+      },
+      {
+        "eventId": "c4647ca1201e6768501877267ca8251b",
+        "date": "2026-10-11T17:00:00Z",
+        "home": "Miami Dolphins",
+        "away": "Cincinnati Bengals",
+        "participant1Id": null,
+        "participant2Id": null,
+        "homeLogo": "",
+        "awayLogo": "",
+        "oddsList": [
+          {
+            "provider": "DraftKings",
+            "details": "—",
+            "total": "—",
+            "home": "4.6",
+            "away": "1.21"
+          },
+          {
+            "provider": "FanDuel",
+            "details": "—",
+            "total": "—",
+            "home": "5.1",
+            "away": "1.18"
+          },
+          {
+            "provider": "BetRivers",
+            "details": "—",
+            "total": "—",
+            "home": "4.6",
+            "away": "1.21"
+          }
+        ]
+      }
+    ],
     "laliga": [
+      {
+        "eventId": "id1000000872478616",
+        "date": "2026-10-09T19:00:00.000Z",
+        "home": "Malaga CF",
+        "away": "Espanyol Barcelona",
+        "participant1Id": 2830,
+        "participant2Id": 2814,
+        "homeLogo": "",
+        "awayLogo": "",
+        "oddsList": [
+          {
+            "provider": "Bet365",
+            "details": "—",
+            "total": "—",
+            "home": "2.62",
+            "away": "2.7",
+            "draw": "3.1"
+          }
+        ]
+      },
       {
         "eventId": "4e4c6763037ffc0e1dfe92ed16287b6d",
         "date": "2026-10-09T19:00:00Z",
@@ -35,8 +1473,8 @@
             "details": "—",
             "total": "—",
             "home": "2.6",
-            "away": "2.7",
-            "draw": "3.2"
+            "away": "2.75",
+            "draw": "3.25"
           },
           {
             "provider": "BetMGM",
@@ -213,6 +1651,26 @@
         ]
       },
       {
+        "eventId": "id1000000872478612",
+        "date": "2026-10-10T16:30:00.000Z",
+        "home": "FC Barcelona",
+        "away": "Getafe CF",
+        "participant1Id": 2817,
+        "participant2Id": 2859,
+        "homeLogo": "",
+        "awayLogo": "",
+        "oddsList": [
+          {
+            "provider": "Bet365",
+            "details": "—",
+            "total": "—",
+            "home": "1.045",
+            "away": "29.0",
+            "draw": "13.0"
+          }
+        ]
+      },
+      {
         "eventId": "edb80d633a1906e5865ab70cc9b540ea",
         "date": "2026-10-10T16:30:00Z",
         "home": "Barcelona",
@@ -234,7 +1692,7 @@
             "provider": "Bovada",
             "details": "—",
             "total": "—",
-            "home": "1.05",
+            "home": "1.04",
             "away": "26.0",
             "draw": "17.0"
           },
@@ -242,8 +1700,8 @@
             "provider": "DraftKings",
             "details": "—",
             "total": "—",
-            "home": "1.06",
-            "away": "21.0",
+            "home": "1.05",
+            "away": "23.0",
             "draw": "14.0"
           },
           {
@@ -267,8 +1725,28 @@
             "details": "—",
             "total": "—",
             "home": "1.05",
-            "away": "27.11",
-            "draw": "17.33"
+            "away": "28.51",
+            "draw": "17.94"
+          }
+        ]
+      },
+      {
+        "eventId": "id1000000872478622",
+        "date": "2026-10-10T19:00:00.000Z",
+        "home": "Real Madrid",
+        "away": "Villarreal CF",
+        "participant1Id": 2829,
+        "participant2Id": 2819,
+        "homeLogo": "",
+        "awayLogo": "",
+        "oddsList": [
+          {
+            "provider": "Bet365",
+            "details": "—",
+            "total": "—",
+            "home": "1.27",
+            "away": "7.5",
+            "draw": "5.5"
           }
         ]
       },
@@ -296,7 +1774,7 @@
             "total": "—",
             "home": "1.33",
             "away": "7.5",
-            "draw": "5.75"
+            "draw": "6.0"
           },
           {
             "provider": "DraftKings",
@@ -318,8 +1796,8 @@
             "provider": "FanDuel",
             "details": "—",
             "total": "—",
-            "home": "1.31",
-            "away": "7.0",
+            "home": "1.3",
+            "away": "7.5",
             "draw": "6.0"
           },
           {
@@ -327,8 +1805,28 @@
             "details": "—",
             "total": "—",
             "home": "1.33",
-            "away": "7.37",
-            "draw": "5.9"
+            "away": "7.39",
+            "draw": "5.92"
+          }
+        ]
+      },
+      {
+        "eventId": "id1000000872478610",
+        "date": "2026-10-11T12:00:00.000Z",
+        "home": "Elche CF",
+        "away": "RC Celta de Vigo",
+        "participant1Id": 2846,
+        "participant2Id": 2821,
+        "homeLogo": "",
+        "awayLogo": "",
+        "oddsList": [
+          {
+            "provider": "Bet365",
+            "details": "—",
+            "total": "—",
+            "home": "2.75",
+            "away": "2.55",
+            "draw": "3.2"
           }
         ]
       },
@@ -362,8 +1860,8 @@
             "provider": "DraftKings",
             "details": "—",
             "total": "—",
-            "home": "2.75",
-            "away": "2.55",
+            "home": "2.7",
+            "away": "2.6",
             "draw": "3.2"
           },
           {
@@ -389,6 +1887,26 @@
             "home": "2.75",
             "away": "2.5",
             "draw": "3.4"
+          }
+        ]
+      },
+      {
+        "eventId": "id1000000872478624",
+        "date": "2026-10-11T14:15:00.000Z",
+        "home": "Real Sociedad San Sebastian",
+        "away": "RC Deportivo de A Coruna",
+        "participant1Id": 2824,
+        "participant2Id": 2832,
+        "homeLogo": "",
+        "awayLogo": "",
+        "oddsList": [
+          {
+            "provider": "Bet365",
+            "details": "—",
+            "total": "—",
+            "home": "1.67",
+            "away": "4.33",
+            "draw": "3.7"
           }
         ]
       },
@@ -453,6 +1971,26 @@
         ]
       },
       {
+        "eventId": "id1000000872478608",
+        "date": "2026-10-11T16:30:00.000Z",
+        "home": "Real Betis Seville",
+        "away": "CA Osasuna",
+        "participant1Id": 2816,
+        "participant2Id": 2820,
+        "homeLogo": "",
+        "awayLogo": "",
+        "oddsList": [
+          {
+            "provider": "Bet365",
+            "details": "—",
+            "total": "—",
+            "home": "1.62",
+            "away": "4.75",
+            "draw": "3.7"
+          }
+        ]
+      },
+      {
         "eventId": "984691837d31fd0c59c088f377f55f75",
         "date": "2026-10-11T16:30:00Z",
         "home": "Real Betis",
@@ -513,6 +2051,26 @@
         ]
       },
       {
+        "eventId": "id1000000872478618",
+        "date": "2026-10-11T19:00:00.000Z",
+        "home": "Racing Santander",
+        "away": "Valencia CF",
+        "participant1Id": 2835,
+        "participant2Id": 2828,
+        "homeLogo": "",
+        "awayLogo": "",
+        "oddsList": [
+          {
+            "provider": "Bet365",
+            "details": "—",
+            "total": "—",
+            "home": "2.2",
+            "away": "3.1",
+            "draw": "3.5"
+          }
+        ]
+      },
+      {
         "eventId": "66a4f4201806b928c9007116727fdd61",
         "date": "2026-10-11T19:00:00Z",
         "home": "Real Racing Club de Santander",
@@ -561,6 +2119,26 @@
             "home": "2.2",
             "away": "3.1",
             "draw": "3.5"
+          }
+        ]
+      },
+      {
+        "eventId": "id1000000872478614",
+        "date": "2026-10-12T19:00:00.000Z",
+        "home": "Levante UD",
+        "away": "Sevilla FC",
+        "participant1Id": 2849,
+        "participant2Id": 2833,
+        "homeLogo": "",
+        "awayLogo": "",
+        "oddsList": [
+          {
+            "provider": "Bet365",
+            "details": "—",
+            "total": "—",
+            "home": "2.62",
+            "away": "2.62",
+            "draw": "3.25"
           }
         ]
       },
@@ -617,379 +2195,47 @@
         ]
       },
       {
-        "eventId": "19ee731602634e5c9e3106630e087464",
-        "date": "2026-10-16T19:00:00Z",
-        "home": "Deportivo La Coruña",
-        "away": "Levante",
-        "participant1Id": null,
-        "participant2Id": null,
+        "eventId": "id1000000872478630",
+        "date": "2026-10-16T19:00:00.000Z",
+        "home": "RC Deportivo de A Coruna",
+        "away": "Levante UD",
+        "participant1Id": 2832,
+        "participant2Id": 2849,
         "homeLogo": "",
         "awayLogo": "",
         "oddsList": [
           {
-            "provider": "FanDuel",
-            "details": "—",
-            "total": "—",
-            "home": "2.1",
-            "away": "3.4",
-            "draw": "3.5"
-          },
-          {
-            "provider": "Bovada",
-            "details": "—",
-            "total": "—",
-            "home": "2.09",
-            "away": "3.5",
-            "draw": "3.45"
-          },
-          {
-            "provider": "DraftKings",
+            "provider": "Bet365",
             "details": "—",
             "total": "—",
             "home": "2.1",
             "away": "3.4",
             "draw": "3.4"
-          },
-          {
-            "provider": "BetRivers",
-            "details": "—",
-            "total": "—",
-            "home": "2.08",
-            "away": "3.6",
-            "draw": "3.55"
-          }
-        ]
-      },
-      {
-        "eventId": "6436925dd15916d7041ba32b60000d48",
-        "date": "2026-10-17T12:00:00Z",
-        "home": "Espanyol",
-        "away": "Atlético Madrid",
-        "participant1Id": null,
-        "participant2Id": null,
-        "homeLogo": "",
-        "awayLogo": "",
-        "oddsList": [
-          {
-            "provider": "FanDuel",
-            "details": "—",
-            "total": "—",
-            "home": "4.1",
-            "away": "1.77",
-            "draw": "3.8"
-          },
-          {
-            "provider": "Bovada",
-            "details": "—",
-            "total": "—",
-            "home": "4.15",
-            "away": "1.85",
-            "draw": "3.7"
-          },
-          {
-            "provider": "DraftKings",
-            "details": "—",
-            "total": "—",
-            "home": "3.95",
-            "away": "1.83",
-            "draw": "3.65"
-          },
-          {
-            "provider": "BetRivers",
-            "details": "—",
-            "total": "—",
-            "home": "4.1",
-            "away": "1.83",
-            "draw": "3.65"
-          }
-        ]
-      },
-      {
-        "eventId": "aef660734585649651415961a9d177c6",
-        "date": "2026-10-17T14:15:00Z",
-        "home": "Villarreal",
-        "away": "Elche CF",
-        "participant1Id": null,
-        "participant2Id": null,
-        "homeLogo": "",
-        "awayLogo": "",
-        "oddsList": [
-          {
-            "provider": "FanDuel",
-            "details": "—",
-            "total": "—",
-            "home": "1.38",
-            "away": "6.5",
-            "draw": "4.8"
-          },
-          {
-            "provider": "Bovada",
-            "details": "—",
-            "total": "—",
-            "home": "1.47",
-            "away": "6.0",
-            "draw": "4.85"
-          },
-          {
-            "provider": "DraftKings",
-            "details": "—",
-            "total": "—",
-            "home": "1.45",
-            "away": "5.75",
-            "draw": "4.7"
-          },
-          {
-            "provider": "BetRivers",
-            "details": "—",
-            "total": "—",
-            "home": "1.44",
-            "away": "6.25",
-            "draw": "4.9"
-          }
-        ]
-      },
-      {
-        "eventId": "846e496fc232b2fc20214754836727d0",
-        "date": "2026-10-17T16:30:00Z",
-        "home": "Real Betis",
-        "away": "Barcelona",
-        "participant1Id": null,
-        "participant2Id": null,
-        "homeLogo": "",
-        "awayLogo": "",
-        "oddsList": [
-          {
-            "provider": "FanDuel",
-            "details": "—",
-            "total": "—",
-            "home": "5.2",
-            "away": "1.4",
-            "draw": "5.7"
-          },
-          {
-            "provider": "DraftKings",
-            "details": "—",
-            "total": "—",
-            "home": "5.25",
-            "away": "1.49",
-            "draw": "4.9"
-          },
-          {
-            "provider": "BetRivers",
-            "details": "—",
-            "total": "—",
-            "home": "5.3",
-            "away": "1.49",
-            "draw": "5.1"
-          }
-        ]
-      },
-      {
-        "eventId": "f00cd1ea41fa39149729d14ebc07aa6c",
-        "date": "2026-10-17T19:00:00Z",
-        "home": "Valencia",
-        "away": "Athletic Bilbao",
-        "participant1Id": null,
-        "participant2Id": null,
-        "homeLogo": "",
-        "awayLogo": "",
-        "oddsList": [
-          {
-            "provider": "FanDuel",
-            "details": "—",
-            "total": "—",
-            "home": "3.4",
-            "away": "2.1",
-            "draw": "3.4"
-          },
-          {
-            "provider": "Bovada",
-            "details": "—",
-            "total": "—",
-            "home": "3.6",
-            "away": "2.08",
-            "draw": "3.4"
-          },
-          {
-            "provider": "DraftKings",
-            "details": "—",
-            "total": "—",
-            "home": "3.45",
-            "away": "2.05",
-            "draw": "3.35"
-          },
-          {
-            "provider": "BetRivers",
-            "details": "—",
-            "total": "—",
-            "home": "3.6",
-            "away": "2.12",
-            "draw": "3.45"
-          }
-        ]
-      },
-      {
-        "eventId": "1f566f17c50fe5162724ec2863d2207b",
-        "date": "2026-10-18T12:00:00Z",
-        "home": "CA Osasuna",
-        "away": "Real Racing Club de Santander",
-        "participant1Id": null,
-        "participant2Id": null,
-        "homeLogo": "",
-        "awayLogo": "",
-        "oddsList": [
-          {
-            "provider": "FanDuel",
-            "details": "—",
-            "total": "—",
-            "home": "1.83",
-            "away": "3.9",
-            "draw": "3.7"
-          },
-          {
-            "provider": "Bovada",
-            "details": "—",
-            "total": "—",
-            "home": "1.9",
-            "away": "4.3",
-            "draw": "3.4"
-          },
-          {
-            "provider": "DraftKings",
-            "details": "—",
-            "total": "—",
-            "home": "1.87",
-            "away": "4.0",
-            "draw": "3.5"
-          }
-        ]
-      },
-      {
-        "eventId": "aabe899ecc4c19a1fafe5440151b62e4",
-        "date": "2026-10-18T14:15:00Z",
-        "home": "Celta Vigo",
-        "away": "Alavés",
-        "participant1Id": null,
-        "participant2Id": null,
-        "homeLogo": "",
-        "awayLogo": "",
-        "oddsList": [
-          {
-            "provider": "FanDuel",
-            "details": "—",
-            "total": "—",
-            "home": "2.0",
-            "away": "3.8",
-            "draw": "3.4"
-          },
-          {
-            "provider": "Bovada",
-            "details": "—",
-            "total": "—",
-            "home": "2.0",
-            "away": "3.85",
-            "draw": "3.4"
-          },
-          {
-            "provider": "DraftKings",
-            "details": "—",
-            "total": "—",
-            "home": "2.0",
-            "away": "3.75",
-            "draw": "3.35"
-          },
-          {
-            "provider": "BetRivers",
-            "details": "—",
-            "total": "—",
-            "home": "2.0",
-            "away": "3.85",
-            "draw": "3.35"
-          }
-        ]
-      },
-      {
-        "eventId": "1051298b4aca6f07113309bff598a5c1",
-        "date": "2026-10-18T16:30:00Z",
-        "home": "Málaga",
-        "away": "Real Sociedad",
-        "participant1Id": null,
-        "participant2Id": null,
-        "homeLogo": "",
-        "awayLogo": "",
-        "oddsList": [
-          {
-            "provider": "FanDuel",
-            "details": "—",
-            "total": "—",
-            "home": "3.1",
-            "away": "2.1",
-            "draw": "3.6"
-          },
-          {
-            "provider": "Bovada",
-            "details": "—",
-            "total": "—",
-            "home": "3.2",
-            "away": "2.2",
-            "draw": "3.45"
-          },
-          {
-            "provider": "DraftKings",
-            "details": "—",
-            "total": "—",
-            "home": "3.1",
-            "away": "2.2",
-            "draw": "3.45"
-          },
-          {
-            "provider": "BetRivers",
-            "details": "—",
-            "total": "—",
-            "home": "3.15",
-            "away": "2.2",
-            "draw": "3.5"
-          }
-        ]
-      },
-      {
-        "eventId": "eccd63bf768e2f2a358b871d3f33a63d",
-        "date": "2026-10-18T19:00:00Z",
-        "home": "Real Madrid",
-        "away": "Sevilla",
-        "participant1Id": null,
-        "participant2Id": null,
-        "homeLogo": "",
-        "awayLogo": "",
-        "oddsList": [
-          {
-            "provider": "FanDuel",
-            "details": "—",
-            "total": "—",
-            "home": "1.2",
-            "away": "10.5",
-            "draw": "6.5"
-          },
-          {
-            "provider": "DraftKings",
-            "details": "—",
-            "total": "—",
-            "home": "1.26",
-            "away": "9.0",
-            "draw": "6.0"
-          },
-          {
-            "provider": "BetRivers",
-            "details": "—",
-            "total": "—",
-            "home": "1.24",
-            "away": "11.0",
-            "draw": "6.25"
           }
         ]
       }
     ],
     "epl": [
+      {
+        "eventId": "id1000001772221292",
+        "date": "2026-10-10T11:30:00.000Z",
+        "home": "Arsenal FC",
+        "away": "Leeds United",
+        "participant1Id": 42,
+        "participant2Id": 34,
+        "homeLogo": "",
+        "awayLogo": "",
+        "oddsList": [
+          {
+            "provider": "Bet365",
+            "details": "—",
+            "total": "—",
+            "home": "1.35",
+            "away": "7.5",
+            "draw": "4.5"
+          }
+        ]
+      },
       {
         "eventId": "b870dcfba5e5920d3f1551a3aa1ea435",
         "date": "2026-10-10T11:30:00Z",
@@ -1005,16 +2251,16 @@
             "details": "—",
             "total": "—",
             "home": "1.38",
-            "away": "7.0",
+            "away": "6.9",
             "draw": "4.6"
           },
           {
             "provider": "FanDuel",
             "details": "—",
             "total": "—",
-            "home": "1.33",
+            "home": "1.32",
             "away": "8.0",
-            "draw": "5.1"
+            "draw": "4.8"
           },
           {
             "provider": "DraftKings",
@@ -1071,6 +2317,86 @@
             "home": "1.38",
             "away": "8.25",
             "draw": "5.25"
+          }
+        ]
+      },
+      {
+        "eventId": "id1000001772221294",
+        "date": "2026-10-10T14:00:00.000Z",
+        "home": "Aston Villa",
+        "away": "Brentford FC",
+        "participant1Id": 40,
+        "participant2Id": 50,
+        "homeLogo": "",
+        "awayLogo": "",
+        "oddsList": [
+          {
+            "provider": "Bet365",
+            "details": "—",
+            "total": "—",
+            "home": "2.55",
+            "away": "2.55",
+            "draw": "3.5"
+          }
+        ]
+      },
+      {
+        "eventId": "id1000001772221296",
+        "date": "2026-10-10T14:00:00.000Z",
+        "home": "Chelsea FC",
+        "away": "AFC Bournemouth",
+        "participant1Id": 38,
+        "participant2Id": 60,
+        "homeLogo": "",
+        "awayLogo": "",
+        "oddsList": [
+          {
+            "provider": "Bet365",
+            "details": "—",
+            "total": "—",
+            "home": "1.67",
+            "away": "4.33",
+            "draw": "4.0"
+          }
+        ]
+      },
+      {
+        "eventId": "id1000001772221304",
+        "date": "2026-10-10T14:00:00.000Z",
+        "home": "Ipswich Town",
+        "away": "Fulham FC",
+        "participant1Id": 32,
+        "participant2Id": 43,
+        "homeLogo": "",
+        "awayLogo": "",
+        "oddsList": [
+          {
+            "provider": "Bet365",
+            "details": "—",
+            "total": "—",
+            "home": "2.75",
+            "away": "2.45",
+            "draw": "3.4"
+          }
+        ]
+      },
+      {
+        "eventId": "id1000001772221310",
+        "date": "2026-10-10T14:00:00.000Z",
+        "home": "Sunderland AFC",
+        "away": "Brighton & Hove Albion",
+        "participant1Id": 41,
+        "participant2Id": 30,
+        "homeLogo": "",
+        "awayLogo": "",
+        "oddsList": [
+          {
+            "provider": "Bet365",
+            "details": "—",
+            "total": "—",
+            "home": "2.87",
+            "away": "2.35",
+            "draw": "3.4"
           }
         ]
       },
@@ -1181,8 +2507,8 @@
             "details": "—",
             "total": "—",
             "home": "1.65",
-            "away": "4.6",
-            "draw": "4.0"
+            "away": "4.4",
+            "draw": "4.1"
           },
           {
             "provider": "DraftKings",
@@ -1196,7 +2522,7 @@
             "provider": "Bovada",
             "details": "—",
             "total": "—",
-            "home": "1.7",
+            "home": "1.72",
             "away": "4.3",
             "draw": "4.0"
           },
@@ -1212,7 +2538,7 @@
             "provider": "BetUS",
             "details": "—",
             "total": "—",
-            "home": "1.7",
+            "home": "1.72",
             "away": "4.3",
             "draw": "4.0"
           },
@@ -1256,9 +2582,9 @@
             "provider": "FanDuel",
             "details": "—",
             "total": "—",
-            "home": "3.0",
+            "home": "2.85",
             "away": "2.35",
-            "draw": "3.3"
+            "draw": "3.4"
           },
           {
             "provider": "MyBookie.ag",
@@ -1274,7 +2600,7 @@
             "total": "—",
             "home": "2.85",
             "away": "2.35",
-            "draw": "3.4"
+            "draw": "3.45"
           },
           {
             "provider": "BetRivers",
@@ -1290,7 +2616,7 @@
             "total": "—",
             "home": "2.85",
             "away": "2.35",
-            "draw": "3.4"
+            "draw": "3.45"
           },
           {
             "provider": "BetMGM",
@@ -1458,7 +2784,7 @@
             "total": "—",
             "home": "1.73",
             "away": "4.5",
-            "draw": "4.2"
+            "draw": "4.25"
           },
           {
             "provider": "BetUS",
@@ -1503,15 +2829,23 @@
         ]
       },
       {
-        "eventId": "86effab5c6e7bfd58c8e88b1fb7c6ba9",
-        "date": "2026-10-11T13:00:00Z",
+        "eventId": "id1000001772221300",
+        "date": "2026-10-11T13:00:00.000Z",
         "home": "Crystal Palace",
         "away": "Nottingham Forest",
-        "participant1Id": null,
-        "participant2Id": null,
+        "participant1Id": 7,
+        "participant2Id": 14,
         "homeLogo": "",
         "awayLogo": "",
         "oddsList": [
+          {
+            "provider": "Bet365",
+            "details": "—",
+            "total": "—",
+            "home": "2.62",
+            "away": "2.7",
+            "draw": "3.0"
+          },
           {
             "provider": "MyBookie.ag",
             "details": "—",
@@ -1583,6 +2917,26 @@
             "home": "2.6",
             "away": "2.6",
             "draw": "3.35"
+          }
+        ]
+      },
+      {
+        "eventId": "id1000001772221302",
+        "date": "2026-10-11T13:00:00.000Z",
+        "home": "Hull City",
+        "away": "Everton FC",
+        "participant1Id": 96,
+        "participant2Id": 48,
+        "homeLogo": "",
+        "awayLogo": "",
+        "oddsList": [
+          {
+            "provider": "Bet365",
+            "details": "—",
+            "total": "—",
+            "home": "3.4",
+            "away": "2.02",
+            "draw": "3.4"
           }
         ]
       },
@@ -1671,6 +3025,26 @@
         ]
       },
       {
+        "eventId": "id1000001772221306",
+        "date": "2026-10-11T15:30:00.000Z",
+        "home": "Liverpool FC",
+        "away": "Manchester City",
+        "participant1Id": 44,
+        "participant2Id": 17,
+        "homeLogo": "",
+        "awayLogo": "",
+        "oddsList": [
+          {
+            "provider": "Bet365",
+            "details": "—",
+            "total": "—",
+            "home": "2.5",
+            "away": "2.5",
+            "draw": "3.6"
+          }
+        ]
+      },
+      {
         "eventId": "6dbab232dd8d2aed0cb1d6f7978fb7b1",
         "date": "2026-10-11T15:30:00Z",
         "home": "Liverpool",
@@ -1686,15 +3060,15 @@
             "total": "—",
             "home": "2.55",
             "away": "2.5",
-            "draw": "3.7"
+            "draw": "3.6"
           },
           {
             "provider": "MyBookie.ag",
             "details": "—",
             "total": "—",
-            "home": "2.5",
+            "home": "2.49",
             "away": "2.5",
-            "draw": "3.55"
+            "draw": "3.6"
           },
           {
             "provider": "Bovada",
@@ -1755,15 +3129,23 @@
         ]
       },
       {
-        "eventId": "acd5bd945dd953ad1e300df5bfe696f9",
-        "date": "2026-10-12T19:00:00Z",
+        "eventId": "id1000001772221298",
+        "date": "2026-10-12T19:00:00.000Z",
         "home": "Coventry City",
         "away": "Newcastle United",
-        "participant1Id": null,
-        "participant2Id": null,
+        "participant1Id": 11,
+        "participant2Id": 39,
         "homeLogo": "",
         "awayLogo": "",
         "oddsList": [
+          {
+            "provider": "Bet365",
+            "details": "—",
+            "total": "—",
+            "home": "3.25",
+            "away": "2.1",
+            "draw": "3.5"
+          },
           {
             "provider": "FanDuel",
             "details": "—",
@@ -1839,6 +3221,26 @@
         ]
       },
       {
+        "eventId": "id1000001772221318",
+        "date": "2026-10-17T11:30:00.000Z",
+        "home": "Everton FC",
+        "away": "Chelsea FC",
+        "participant1Id": 48,
+        "participant2Id": 38,
+        "homeLogo": "",
+        "awayLogo": "",
+        "oddsList": [
+          {
+            "provider": "Bet365",
+            "details": "—",
+            "total": "—",
+            "home": "2.9",
+            "away": "2.3",
+            "draw": "3.5"
+          }
+        ]
+      },
+      {
         "eventId": "764e6513cb3f348881503df70ccb90e0",
         "date": "2026-10-17T11:30:00Z",
         "home": "Everton",
@@ -1878,181 +3280,25 @@
             "total": "—",
             "home": "2.95",
             "away": "2.28",
-            "draw": "3.75"
-          },
-          {
-            "provider": "DraftKings",
-            "details": "—",
-            "total": "—",
-            "home": "2.75",
-            "away": "2.3",
-            "draw": "3.75"
-          }
-        ]
-      },
-      {
-        "eventId": "8f1945e7272bc7e89016439f5ab321c7",
-        "date": "2026-10-17T14:00:00Z",
-        "home": "Brentford",
-        "away": "Liverpool",
-        "participant1Id": null,
-        "participant2Id": null,
-        "homeLogo": "",
-        "awayLogo": "",
-        "oddsList": [
-          {
-            "provider": "FanDuel",
-            "details": "—",
-            "total": "—",
-            "home": "2.6",
-            "away": "2.4",
             "draw": "3.8"
           },
           {
-            "provider": "MyBookie.ag",
-            "details": "—",
-            "total": "—",
-            "home": "2.72",
-            "away": "2.3",
-            "draw": "3.6"
-          },
-          {
-            "provider": "Bovada",
-            "details": "—",
-            "total": "—",
-            "home": "2.7",
-            "away": "2.35",
-            "draw": "3.65"
-          },
-          {
-            "provider": "BetRivers",
-            "details": "—",
-            "total": "—",
-            "home": "2.7",
-            "away": "2.45",
-            "draw": "3.75"
-          },
-          {
             "provider": "DraftKings",
             "details": "—",
             "total": "—",
             "home": "2.75",
-            "away": "2.35",
-            "draw": "3.55"
+            "away": "2.3",
+            "draw": "3.75"
           }
         ]
       },
       {
-        "eventId": "7895f97f2f9577f3b13287a3d086859d",
-        "date": "2026-10-17T14:00:00Z",
-        "home": "Fulham",
-        "away": "Hull City",
-        "participant1Id": null,
-        "participant2Id": null,
-        "homeLogo": "",
-        "awayLogo": "",
-        "oddsList": [
-          {
-            "provider": "FanDuel",
-            "details": "—",
-            "total": "—",
-            "home": "1.61",
-            "away": "4.8",
-            "draw": "4.1"
-          },
-          {
-            "provider": "MyBookie.ag",
-            "details": "—",
-            "total": "—",
-            "home": "1.65",
-            "away": "4.6",
-            "draw": "3.9"
-          },
-          {
-            "provider": "Bovada",
-            "details": "—",
-            "total": "—",
-            "home": "1.64",
-            "away": "4.8",
-            "draw": "4.0"
-          },
-          {
-            "provider": "BetRivers",
-            "details": "—",
-            "total": "—",
-            "home": "1.71",
-            "away": "4.8",
-            "draw": "4.1"
-          },
-          {
-            "provider": "DraftKings",
-            "details": "—",
-            "total": "—",
-            "home": "1.65",
-            "away": "4.7",
-            "draw": "4.0"
-          }
-        ]
-      },
-      {
-        "eventId": "bf2142d1ca76ba2fc9e61afce80f86c0",
-        "date": "2026-10-17T14:00:00Z",
-        "home": "Manchester City",
-        "away": "Ipswich Town",
-        "participant1Id": null,
-        "participant2Id": null,
-        "homeLogo": "",
-        "awayLogo": "",
-        "oddsList": [
-          {
-            "provider": "FanDuel",
-            "details": "—",
-            "total": "—",
-            "home": "1.18",
-            "away": "11.0",
-            "draw": "6.5"
-          },
-          {
-            "provider": "MyBookie.ag",
-            "details": "—",
-            "total": "—",
-            "home": "1.22",
-            "away": "9.7",
-            "draw": "6.4"
-          },
-          {
-            "provider": "Bovada",
-            "details": "—",
-            "total": "—",
-            "home": "1.21",
-            "away": "11.0",
-            "draw": "6.5"
-          },
-          {
-            "provider": "BetRivers",
-            "details": "—",
-            "total": "—",
-            "home": "1.24",
-            "away": "11.5",
-            "draw": "6.75"
-          },
-          {
-            "provider": "DraftKings",
-            "details": "—",
-            "total": "—",
-            "home": "1.21",
-            "away": "10.0",
-            "draw": "6.5"
-          }
-        ]
-      },
-      {
-        "eventId": "id1000001772221326",
-        "date": "2026-10-17T16:30:00.000Z",
-        "home": "Newcastle United",
-        "away": "Aston Villa",
-        "participant1Id": 39,
-        "participant2Id": 40,
+        "eventId": "id1000001772221314",
+        "date": "2026-10-17T14:00:00.000Z",
+        "home": "Brentford FC",
+        "away": "Liverpool FC",
+        "participant1Id": 50,
+        "participant2Id": 44,
         "homeLogo": "",
         "awayLogo": "",
         "oddsList": [
@@ -2060,1679 +3306,31 @@
             "provider": "Bet365",
             "details": "—",
             "total": "—",
-            "home": "2.02",
-            "away": "3.25",
-            "draw": "3.6"
-          },
-          {
-            "provider": "MyBookie.ag",
-            "details": "—",
-            "total": "—",
-            "home": "2.03",
-            "away": "3.22",
-            "draw": "3.6"
-          },
-          {
-            "provider": "FanDuel",
-            "details": "—",
-            "total": "—",
-            "home": "2.1",
-            "away": "3.0",
-            "draw": "3.8"
-          },
-          {
-            "provider": "Bovada",
-            "details": "—",
-            "total": "—",
-            "home": "2.05",
-            "away": "3.15",
-            "draw": "3.75"
-          },
-          {
-            "provider": "BetRivers",
-            "details": "—",
-            "total": "—",
-            "home": "2.12",
-            "away": "3.25",
-            "draw": "3.85"
-          },
-          {
-            "provider": "DraftKings",
-            "details": "—",
-            "total": "—",
-            "home": "2.05",
-            "away": "3.2",
-            "draw": "3.7"
-          }
-        ]
-      },
-      {
-        "eventId": "dfd5d6648be46426e418801584d46a68",
-        "date": "2026-10-18T13:00:00Z",
-        "home": "Bournemouth",
-        "away": "Sunderland",
-        "participant1Id": null,
-        "participant2Id": null,
-        "homeLogo": "",
-        "awayLogo": "",
-        "oddsList": [
-          {
-            "provider": "MyBookie.ag",
-            "details": "—",
-            "total": "—",
-            "home": "1.99",
-            "away": "3.46",
-            "draw": "3.48"
-          },
-          {
-            "provider": "FanDuel",
-            "details": "—",
-            "total": "—",
-            "home": "2.0",
-            "away": "3.5",
-            "draw": "3.6"
-          },
-          {
-            "provider": "Bovada",
-            "details": "—",
-            "total": "—",
-            "home": "2.0",
-            "away": "3.55",
-            "draw": "3.5"
-          },
-          {
-            "provider": "BetRivers",
-            "details": "—",
-            "total": "—",
-            "home": "2.0",
-            "away": "3.7",
-            "draw": "3.75"
-          },
-          {
-            "provider": "DraftKings",
-            "details": "—",
-            "total": "—",
-            "home": "2.0",
-            "away": "3.5",
-            "draw": "3.5"
-          }
-        ]
-      },
-      {
-        "eventId": "9fc08b390a49c4434f7cf631a0bb88fb",
-        "date": "2026-10-18T13:00:00Z",
-        "home": "Brighton and Hove Albion",
-        "away": "Crystal Palace",
-        "participant1Id": null,
-        "participant2Id": null,
-        "homeLogo": "",
-        "awayLogo": "",
-        "oddsList": [
-          {
-            "provider": "FanDuel",
-            "details": "—",
-            "total": "—",
-            "home": "1.53",
-            "away": "5.3",
-            "draw": "4.4"
-          },
-          {
-            "provider": "MyBookie.ag",
-            "details": "—",
-            "total": "—",
-            "home": "1.56",
-            "away": "5.0",
-            "draw": "4.2"
-          },
-          {
-            "provider": "Bovada",
-            "details": "—",
-            "total": "—",
-            "home": "1.56",
-            "away": "5.0",
-            "draw": "4.4"
-          },
-          {
-            "provider": "BetRivers",
-            "details": "—",
-            "total": "—",
-            "home": "1.57",
-            "away": "5.4",
-            "draw": "4.5"
-          },
-          {
-            "provider": "DraftKings",
-            "details": "—",
-            "total": "—",
-            "home": "1.54",
-            "away": "5.25",
-            "draw": "4.4"
-          }
-        ]
-      },
-      {
-        "eventId": "676b3b0b609e9cf565da450786618d26",
-        "date": "2026-10-18T13:00:00Z",
-        "home": "Leeds United",
-        "away": "Manchester United",
-        "participant1Id": null,
-        "participant2Id": null,
-        "homeLogo": "",
-        "awayLogo": "",
-        "oddsList": [
-          {
-            "provider": "FanDuel",
-            "details": "—",
-            "total": "—",
-            "home": "2.8",
-            "away": "2.25",
-            "draw": "3.7"
-          },
-          {
-            "provider": "MyBookie.ag",
-            "details": "—",
-            "total": "—",
-            "home": "2.8",
-            "away": "2.27",
-            "draw": "3.55"
-          },
-          {
-            "provider": "Bovada",
-            "details": "—",
-            "total": "—",
-            "home": "2.75",
-            "away": "2.3",
-            "draw": "3.65"
-          },
-          {
-            "provider": "BetRivers",
-            "details": "—",
-            "total": "—",
-            "home": "2.88",
-            "away": "2.33",
-            "draw": "3.8"
-          },
-          {
-            "provider": "DraftKings",
-            "details": "—",
-            "total": "—",
-            "home": "2.75",
-            "away": "2.3",
-            "draw": "3.6"
-          }
-        ]
-      },
-      {
-        "eventId": "f696a248965373d9071dc0662e5c58a8",
-        "date": "2026-10-18T15:30:00Z",
-        "home": "Nottingham Forest",
-        "away": "Arsenal",
-        "participant1Id": null,
-        "participant2Id": null,
-        "homeLogo": "",
-        "awayLogo": "",
-        "oddsList": [
-          {
-            "provider": "MyBookie.ag",
-            "details": "—",
-            "total": "—",
-            "home": "5.3",
-            "away": "1.58",
-            "draw": "3.85"
-          },
-          {
-            "provider": "FanDuel",
-            "details": "—",
-            "total": "—",
-            "home": "5.9",
-            "away": "1.53",
-            "draw": "4.0"
-          },
-          {
-            "provider": "Bovada",
-            "details": "—",
-            "total": "—",
-            "home": "5.75",
-            "away": "1.57",
-            "draw": "3.85"
-          },
-          {
-            "provider": "BetRivers",
-            "details": "—",
-            "total": "—",
-            "home": "6.0",
-            "away": "1.57",
-            "draw": "4.1"
-          },
-          {
-            "provider": "DraftKings",
-            "details": "—",
-            "total": "—",
-            "home": "5.75",
-            "away": "1.59",
-            "draw": "3.8"
-          }
-        ]
-      },
-      {
-        "eventId": "9baaf4e48b041cfef04e70e42532502e",
-        "date": "2026-10-19T19:00:00Z",
-        "home": "Tottenham Hotspur",
-        "away": "Coventry City",
-        "participant1Id": null,
-        "participant2Id": null,
-        "homeLogo": "",
-        "awayLogo": "",
-        "oddsList": [
-          {
-            "provider": "FanDuel",
-            "details": "—",
-            "total": "—",
-            "home": "1.48",
-            "away": "5.9",
-            "draw": "4.6"
-          },
-          {
-            "provider": "MyBookie.ag",
-            "details": "—",
-            "total": "—",
-            "home": "1.46",
-            "away": "5.7",
-            "draw": "4.5"
-          },
-          {
-            "provider": "Bovada",
-            "details": "—",
-            "total": "—",
-            "home": "1.5",
-            "away": "5.6",
-            "draw": "4.5"
-          },
-          {
-            "provider": "BetRivers",
-            "details": "—",
-            "total": "—",
-            "home": "1.5",
-            "away": "6.4",
-            "draw": "4.5"
-          },
-          {
-            "provider": "DraftKings",
-            "details": "—",
-            "total": "—",
-            "home": "1.48",
-            "away": "5.75",
-            "draw": "4.5"
-          }
-        ]
-      }
-    ],
-    "nfl": [
-      {
-        "eventId": "d55cb69fed50a09170560b5b75d8de86",
-        "date": "2026-10-02T00:15:00Z",
-        "home": "Cleveland Browns",
-        "away": "Pittsburgh Steelers",
-        "participant1Id": null,
-        "participant2Id": null,
-        "homeLogo": "",
-        "awayLogo": "",
-        "oddsList": [
-          {
-            "provider": "DraftKings",
-            "details": "—",
-            "total": "—",
-            "home": "2.24",
-            "away": "1.68"
-          },
-          {
-            "provider": "BetUS",
-            "details": "—",
-            "total": "—",
-            "home": "2.29",
-            "away": "1.67"
-          },
-          {
-            "provider": "FanDuel",
-            "details": "—",
-            "total": "—",
-            "home": "2.22",
-            "away": "1.69"
-          },
-          {
-            "provider": "MyBookie.ag",
-            "details": "—",
-            "total": "—",
-            "home": "2.26",
-            "away": "1.68"
-          },
-          {
-            "provider": "BetOnline.ag",
-            "details": "—",
-            "total": "—",
-            "home": "2.32",
-            "away": "1.66"
-          },
-          {
-            "provider": "LowVig.ag",
-            "details": "—",
-            "total": "—",
-            "home": "2.32",
-            "away": "1.66"
-          },
-          {
-            "provider": "BetRivers",
-            "details": "—",
-            "total": "—",
-            "home": "2.23",
-            "away": "1.68"
-          },
-          {
-            "provider": "Bovada",
-            "details": "—",
-            "total": "—",
-            "home": "2.25",
-            "away": "1.69"
-          },
-          {
-            "provider": "BetMGM",
-            "details": "—",
-            "total": "—",
-            "home": "2.25",
-            "away": "1.69"
-          }
-        ]
-      },
-      {
-        "eventId": "c9d8ed8aa4889486eaf10a630138ede0",
-        "date": "2026-10-04T13:30:00Z",
-        "home": "Washington Commanders",
-        "away": "Indianapolis Colts",
-        "participant1Id": null,
-        "participant2Id": null,
-        "homeLogo": "",
-        "awayLogo": "",
-        "oddsList": [
-          {
-            "provider": "DraftKings",
-            "details": "—",
-            "total": "—",
-            "home": "2.6",
-            "away": "1.52"
-          },
-          {
-            "provider": "FanDuel",
-            "details": "—",
-            "total": "—",
-            "home": "2.6",
-            "away": "1.53"
-          },
-          {
-            "provider": "BetMGM",
-            "details": "—",
-            "total": "—",
-            "home": "2.65",
-            "away": "1.5"
-          },
-          {
-            "provider": "Bovada",
-            "details": "—",
-            "total": "—",
             "home": "2.7",
-            "away": "1.5"
-          },
-          {
-            "provider": "BetUS",
-            "details": "—",
-            "total": "—",
-            "home": "2.67",
-            "away": "1.51"
-          },
-          {
-            "provider": "MyBookie.ag",
-            "details": "—",
-            "total": "—",
-            "home": "2.6",
-            "away": "1.5"
-          },
-          {
-            "provider": "LowVig.ag",
-            "details": "—",
-            "total": "—",
-            "home": "2.71",
-            "away": "1.51"
-          },
-          {
-            "provider": "BetOnline.ag",
-            "details": "—",
-            "total": "—",
-            "home": "2.71",
-            "away": "1.51"
-          },
-          {
-            "provider": "BetRivers",
-            "details": "—",
-            "total": "—",
-            "home": "2.6",
-            "away": "1.51"
-          }
-        ]
-      },
-      {
-        "eventId": "664e6bda5721dc63be16bcf7d962a436",
-        "date": "2026-10-04T17:00:00Z",
-        "home": "New York Giants",
-        "away": "Arizona Cardinals",
-        "participant1Id": null,
-        "participant2Id": null,
-        "homeLogo": "",
-        "awayLogo": "",
-        "oddsList": [
-          {
-            "provider": "DraftKings",
-            "details": "—",
-            "total": "—",
-            "home": "2.14",
-            "away": "1.74"
-          },
-          {
-            "provider": "BetUS",
-            "details": "—",
-            "total": "—",
-            "home": "2.21",
-            "away": "1.71"
-          },
-          {
-            "provider": "FanDuel",
-            "details": "—",
-            "total": "—",
-            "home": "2.16",
-            "away": "1.74"
-          },
-          {
-            "provider": "BetRivers",
-            "details": "—",
-            "total": "—",
-            "home": "2.1",
-            "away": "1.75"
-          },
-          {
-            "provider": "MyBookie.ag",
-            "details": "—",
-            "total": "—",
-            "home": "2.09",
-            "away": "1.72"
-          },
-          {
-            "provider": "BetOnline.ag",
-            "details": "—",
-            "total": "—",
-            "home": "2.21",
-            "away": "1.71"
-          },
-          {
-            "provider": "BetMGM",
-            "details": "—",
-            "total": "—",
-            "home": "2.15",
-            "away": "1.71"
-          },
-          {
-            "provider": "LowVig.ag",
-            "details": "—",
-            "total": "—",
-            "home": "2.21",
-            "away": "1.71"
-          },
-          {
-            "provider": "Bovada",
-            "details": "—",
-            "total": "—",
-            "home": "2.2",
-            "away": "1.71"
-          }
-        ]
-      },
-      {
-        "eventId": "f01589b0e7e6dd4f4ac1220a1db81f53",
-        "date": "2026-10-04T17:00:00Z",
-        "home": "Baltimore Ravens",
-        "away": "Tennessee Titans",
-        "participant1Id": null,
-        "participant2Id": null,
-        "homeLogo": "",
-        "awayLogo": "",
-        "oddsList": [
-          {
-            "provider": "DraftKings",
-            "details": "—",
-            "total": "—",
-            "home": "1.14",
-            "away": "6.0"
-          },
-          {
-            "provider": "BetUS",
-            "details": "—",
-            "total": "—",
-            "home": "1.15",
-            "away": "5.9"
-          },
-          {
-            "provider": "FanDuel",
-            "details": "—",
-            "total": "—",
-            "home": "1.13",
-            "away": "6.4"
-          },
-          {
-            "provider": "BetOnline.ag",
-            "details": "—",
-            "total": "—",
-            "home": "1.15",
-            "away": "5.94"
-          },
-          {
-            "provider": "LowVig.ag",
-            "details": "—",
-            "total": "—",
-            "home": "1.15",
-            "away": "5.94"
-          },
-          {
-            "provider": "BetRivers",
-            "details": "—",
-            "total": "—",
-            "home": "1.14",
-            "away": "6.0"
-          },
-          {
-            "provider": "MyBookie.ag",
-            "details": "—",
-            "total": "—",
-            "home": "1.12",
-            "away": "5.8"
-          },
-          {
-            "provider": "BetMGM",
-            "details": "—",
-            "total": "—",
-            "home": "1.14",
-            "away": "6.25"
-          },
-          {
-            "provider": "Bovada",
-            "details": "—",
-            "total": "—",
-            "home": "1.14",
-            "away": "5.75"
-          }
-        ]
-      },
-      {
-        "eventId": "573cc0ef39631a4f6673ec843a8bedd4",
-        "date": "2026-10-04T17:00:00Z",
-        "home": "Buffalo Bills",
-        "away": "New England Patriots",
-        "participant1Id": null,
-        "participant2Id": null,
-        "homeLogo": "",
-        "awayLogo": "",
-        "oddsList": [
-          {
-            "provider": "DraftKings",
-            "details": "—",
-            "total": "—",
-            "home": "1.34",
-            "away": "3.35"
-          },
-          {
-            "provider": "FanDuel",
-            "details": "—",
-            "total": "—",
-            "home": "1.29",
-            "away": "3.75"
-          },
-          {
-            "provider": "BetUS",
-            "details": "—",
-            "total": "—",
-            "home": "1.33",
-            "away": "3.5"
-          },
-          {
-            "provider": "LowVig.ag",
-            "details": "—",
-            "total": "—",
-            "home": "1.33",
-            "away": "3.45"
-          },
-          {
-            "provider": "BetOnline.ag",
-            "details": "—",
-            "total": "—",
-            "home": "1.33",
-            "away": "3.45"
-          },
-          {
-            "provider": "BetRivers",
-            "details": "—",
-            "total": "—",
-            "home": "1.32",
-            "away": "3.5"
-          },
-          {
-            "provider": "MyBookie.ag",
-            "details": "—",
-            "total": "—",
-            "home": "1.33",
-            "away": "3.24"
-          },
-          {
-            "provider": "BetMGM",
-            "details": "—",
-            "total": "—",
-            "home": "1.31",
-            "away": "3.6"
-          },
-          {
-            "provider": "Bovada",
-            "details": "—",
-            "total": "—",
-            "home": "1.32",
-            "away": "3.55"
-          }
-        ]
-      },
-      {
-        "eventId": "164e6eb68f31bac190381903c3cccd31",
-        "date": "2026-10-04T17:00:00Z",
-        "home": "Chicago Bears",
-        "away": "New York Jets",
-        "participant1Id": null,
-        "participant2Id": null,
-        "homeLogo": "",
-        "awayLogo": "",
-        "oddsList": [
-          {
-            "provider": "DraftKings",
-            "details": "—",
-            "total": "—",
-            "home": "1.57",
-            "away": "2.45"
-          },
-          {
-            "provider": "FanDuel",
-            "details": "—",
-            "total": "—",
-            "home": "1.57",
-            "away": "2.48"
-          },
-          {
-            "provider": "BetUS",
-            "details": "—",
-            "total": "—",
-            "home": "1.56",
-            "away": "2.55"
-          },
-          {
-            "provider": "LowVig.ag",
-            "details": "—",
-            "total": "—",
-            "home": "1.56",
-            "away": "2.57"
-          },
-          {
-            "provider": "BetOnline.ag",
-            "details": "—",
-            "total": "—",
-            "home": "1.56",
-            "away": "2.57"
-          },
-          {
-            "provider": "BetRivers",
-            "details": "—",
-            "total": "—",
-            "home": "1.57",
-            "away": "2.4"
-          },
-          {
-            "provider": "MyBookie.ag",
-            "details": "—",
-            "total": "—",
-            "home": "1.53",
-            "away": "2.45"
-          },
-          {
-            "provider": "BetMGM",
-            "details": "—",
-            "total": "—",
-            "home": "1.54",
-            "away": "2.5"
-          },
-          {
-            "provider": "Bovada",
-            "details": "—",
-            "total": "—",
-            "home": "1.56",
-            "away": "2.55"
-          }
-        ]
-      },
-      {
-        "eventId": "2ea94ddf20f66432b9024fe2e2eaba5f",
-        "date": "2026-10-04T17:00:00Z",
-        "home": "Cincinnati Bengals",
-        "away": "Jacksonville Jaguars",
-        "participant1Id": null,
-        "participant2Id": null,
-        "homeLogo": "",
-        "awayLogo": "",
-        "oddsList": [
-          {
-            "provider": "DraftKings",
-            "details": "—",
-            "total": "—",
-            "home": "1.7",
-            "away": "2.2"
-          },
-          {
-            "provider": "BetUS",
-            "details": "—",
-            "total": "—",
-            "home": "1.69",
-            "away": "2.25"
-          },
-          {
-            "provider": "FanDuel",
-            "details": "—",
-            "total": "—",
-            "home": "1.7",
-            "away": "2.2"
-          },
-          {
-            "provider": "BetOnline.ag",
-            "details": "—",
-            "total": "—",
-            "home": "1.7",
-            "away": "2.23"
-          },
-          {
-            "provider": "LowVig.ag",
-            "details": "—",
-            "total": "—",
-            "home": "1.7",
-            "away": "2.23"
-          },
-          {
-            "provider": "BetRivers",
-            "details": "—",
-            "total": "—",
-            "home": "1.71",
-            "away": "2.16"
-          },
-          {
-            "provider": "MyBookie.ag",
-            "details": "—",
-            "total": "—",
-            "home": "1.67",
-            "away": "2.18"
-          },
-          {
-            "provider": "BetMGM",
-            "details": "—",
-            "total": "—",
-            "home": "1.69",
-            "away": "2.25"
-          },
-          {
-            "provider": "Bovada",
-            "details": "—",
-            "total": "—",
-            "home": "1.67",
-            "away": "2.3"
-          }
-        ]
-      },
-      {
-        "eventId": "daf55e2df5341c007fee5a0fc5bbc2d4",
-        "date": "2026-10-04T17:00:00Z",
-        "home": "Houston Texans",
-        "away": "Dallas Cowboys",
-        "participant1Id": null,
-        "participant2Id": null,
-        "homeLogo": "",
-        "awayLogo": "",
-        "oddsList": [
-          {
-            "provider": "DraftKings",
-            "details": "—",
-            "total": "—",
-            "home": "1.62",
-            "away": "2.36"
-          },
-          {
-            "provider": "BetUS",
-            "details": "—",
-            "total": "—",
-            "home": "1.62",
-            "away": "2.38"
-          },
-          {
-            "provider": "FanDuel",
-            "details": "—",
-            "total": "—",
-            "home": "1.62",
-            "away": "2.36"
-          },
-          {
-            "provider": "BetOnline.ag",
-            "details": "—",
-            "total": "—",
-            "home": "1.62",
-            "away": "2.42"
-          },
-          {
-            "provider": "LowVig.ag",
-            "details": "—",
-            "total": "—",
-            "home": "1.62",
-            "away": "2.42"
-          },
-          {
-            "provider": "BetRivers",
-            "details": "—",
-            "total": "—",
-            "home": "1.64",
-            "away": "2.25"
-          },
-          {
-            "provider": "MyBookie.ag",
-            "details": "—",
-            "total": "—",
-            "home": "1.6",
-            "away": "2.3"
-          },
-          {
-            "provider": "BetMGM",
-            "details": "—",
-            "total": "—",
-            "home": "1.62",
-            "away": "2.35"
-          },
-          {
-            "provider": "Bovada",
-            "details": "—",
-            "total": "—",
-            "home": "1.61",
-            "away": "2.4"
-          }
-        ]
-      },
-      {
-        "eventId": "99a9bae4dc0dc2590496bd3102b211f2",
-        "date": "2026-10-04T17:00:00Z",
-        "home": "Tampa Bay Buccaneers",
-        "away": "Green Bay Packers",
-        "participant1Id": null,
-        "participant2Id": null,
-        "homeLogo": "",
-        "awayLogo": "",
-        "oddsList": [
-          {
-            "provider": "DraftKings",
-            "details": "—",
-            "total": "—",
-            "home": "2.5",
-            "away": "1.56"
-          },
-          {
-            "provider": "BetUS",
-            "details": "—",
-            "total": "—",
-            "home": "2.59",
-            "away": "1.54"
-          },
-          {
-            "provider": "FanDuel",
-            "details": "—",
-            "total": "—",
-            "home": "2.5",
-            "away": "1.56"
-          },
-          {
-            "provider": "BetOnline.ag",
-            "details": "—",
-            "total": "—",
-            "home": "2.61",
-            "away": "1.54"
-          },
-          {
-            "provider": "LowVig.ag",
-            "details": "—",
-            "total": "—",
-            "home": "2.61",
-            "away": "1.54"
-          },
-          {
-            "provider": "BetRivers",
-            "details": "—",
-            "total": "—",
-            "home": "2.55",
-            "away": "1.51"
-          },
-          {
-            "provider": "Bovada",
-            "details": "—",
-            "total": "—",
-            "home": "2.6",
-            "away": "1.54"
-          },
-          {
-            "provider": "MyBookie.ag",
-            "details": "—",
-            "total": "—",
-            "home": "2.47",
-            "away": "1.53"
-          },
-          {
-            "provider": "BetMGM",
-            "details": "—",
-            "total": "—",
-            "home": "2.55",
-            "away": "1.53"
-          }
-        ]
-      },
-      {
-        "eventId": "1b4f2e60ce83fa1d63a5dff83769d27c",
-        "date": "2026-10-04T17:00:00Z",
-        "home": "Philadelphia Eagles",
-        "away": "Los Angeles Rams",
-        "participant1Id": null,
-        "participant2Id": null,
-        "homeLogo": "",
-        "awayLogo": "",
-        "oddsList": [
-          {
-            "provider": "DraftKings",
-            "details": "—",
-            "total": "—",
-            "home": "2.36",
-            "away": "1.62"
-          },
-          {
-            "provider": "BetUS",
-            "details": "—",
-            "total": "—",
-            "home": "2.46",
-            "away": "1.59"
-          },
-          {
-            "provider": "FanDuel",
-            "details": "—",
-            "total": "—",
-            "home": "2.38",
-            "away": "1.61"
-          },
-          {
-            "provider": "BetOnline.ag",
-            "details": "—",
-            "total": "—",
-            "home": "2.49",
-            "away": "1.59"
-          },
-          {
-            "provider": "LowVig.ag",
-            "details": "—",
-            "total": "—",
-            "home": "2.49",
-            "away": "1.59"
-          },
-          {
-            "provider": "BetRivers",
-            "details": "—",
-            "total": "—",
-            "home": "2.4",
-            "away": "1.57"
-          },
-          {
-            "provider": "MyBookie.ag",
-            "details": "—",
-            "total": "—",
-            "home": "2.29",
-            "away": "1.6"
-          },
-          {
-            "provider": "BetMGM",
-            "details": "—",
-            "total": "—",
-            "home": "2.4",
-            "away": "1.61"
-          },
-          {
-            "provider": "Bovada",
-            "details": "—",
-            "total": "—",
-            "home": "2.5",
-            "away": "1.57"
-          }
-        ]
-      },
-      {
-        "eventId": "c327223d76a3b7b0db8c6c104442f44b",
-        "date": "2026-10-04T20:05:00Z",
-        "home": "Minnesota Vikings",
-        "away": "Miami Dolphins",
-        "participant1Id": null,
-        "participant2Id": null,
-        "homeLogo": "",
-        "awayLogo": "",
-        "oddsList": [
-          {
-            "provider": "DraftKings",
-            "details": "—",
-            "total": "—",
-            "home": "1.17",
-            "away": "5.4"
-          },
-          {
-            "provider": "BetUS",
-            "details": "—",
-            "total": "—",
-            "home": "1.16",
-            "away": "5.6"
-          },
-          {
-            "provider": "FanDuel",
-            "details": "—",
-            "total": "—",
-            "home": "1.15",
-            "away": "5.8"
-          },
-          {
-            "provider": "BetOnline.ag",
-            "details": "—",
-            "total": "—",
-            "home": "1.16",
-            "away": "5.55"
-          },
-          {
-            "provider": "LowVig.ag",
-            "details": "—",
-            "total": "—",
-            "home": "1.16",
-            "away": "5.55"
-          },
-          {
-            "provider": "BetRivers",
-            "details": "—",
-            "total": "—",
-            "home": "1.16",
-            "away": "5.5"
-          },
-          {
-            "provider": "MyBookie.ag",
-            "details": "—",
-            "total": "—",
-            "home": "1.14",
-            "away": "5.5"
-          },
-          {
-            "provider": "BetMGM",
-            "details": "—",
-            "total": "—",
-            "home": "1.16",
-            "away": "5.75"
-          },
-          {
-            "provider": "Bovada",
-            "details": "—",
-            "total": "—",
-            "home": "1.16",
-            "away": "5.3"
-          }
-        ]
-      },
-      {
-        "eventId": "a7e7efb75a9792ac63480ae6328dca18",
-        "date": "2026-10-04T20:25:00Z",
-        "home": "San Francisco 49ers",
-        "away": "Denver Broncos",
-        "participant1Id": null,
-        "participant2Id": null,
-        "homeLogo": "",
-        "awayLogo": "",
-        "oddsList": [
-          {
-            "provider": "DraftKings",
-            "details": "—",
-            "total": "—",
-            "home": "1.68",
-            "away": "2.24"
-          },
-          {
-            "provider": "BetUS",
-            "details": "—",
-            "total": "—",
-            "home": "1.69",
-            "away": "2.25"
-          },
-          {
-            "provider": "FanDuel",
-            "details": "—",
-            "total": "—",
-            "home": "1.68",
-            "away": "2.26"
-          },
-          {
-            "provider": "BetOnline.ag",
-            "details": "—",
-            "total": "—",
-            "home": "1.69",
-            "away": "2.25"
-          },
-          {
-            "provider": "LowVig.ag",
-            "details": "—",
-            "total": "—",
-            "home": "1.69",
-            "away": "2.25"
-          },
-          {
-            "provider": "BetRivers",
-            "details": "—",
-            "total": "—",
-            "home": "1.72",
-            "away": "2.14"
-          },
-          {
-            "provider": "MyBookie.ag",
-            "details": "—",
-            "total": "—",
-            "home": "1.62",
-            "away": "2.25"
-          },
-          {
-            "provider": "BetMGM",
-            "details": "—",
-            "total": "—",
-            "home": "1.69",
-            "away": "2.25"
-          },
-          {
-            "provider": "Bovada",
-            "details": "—",
-            "total": "—",
-            "home": "1.71",
-            "away": "2.2"
-          }
-        ]
-      },
-      {
-        "eventId": "e0cbd266dcf997089203a1b33ba0333d",
-        "date": "2026-10-04T20:25:00Z",
-        "home": "Las Vegas Raiders",
-        "away": "Kansas City Chiefs",
-        "participant1Id": null,
-        "participant2Id": null,
-        "homeLogo": "",
-        "awayLogo": "",
-        "oddsList": [
-          {
-            "provider": "DraftKings",
-            "details": "—",
-            "total": "—",
-            "home": "2.8",
-            "away": "1.46"
-          },
-          {
-            "provider": "BetUS",
-            "details": "—",
-            "total": "—",
-            "home": "2.8",
-            "away": "1.48"
-          },
-          {
-            "provider": "FanDuel",
-            "details": "—",
-            "total": "—",
-            "home": "2.84",
-            "away": "1.45"
-          },
-          {
-            "provider": "LowVig.ag",
-            "details": "—",
-            "total": "—",
-            "home": "2.8",
-            "away": "1.48"
-          },
-          {
-            "provider": "BetOnline.ag",
-            "details": "—",
-            "total": "—",
-            "home": "2.8",
-            "away": "1.48"
-          },
-          {
-            "provider": "BetRivers",
-            "details": "—",
-            "total": "—",
-            "home": "2.8",
-            "away": "1.45"
-          },
-          {
-            "provider": "MyBookie.ag",
-            "details": "—",
-            "total": "—",
-            "home": "2.72",
-            "away": "1.45"
-          },
-          {
-            "provider": "BetMGM",
-            "details": "—",
-            "total": "—",
-            "home": "2.75",
-            "away": "1.48"
-          },
-          {
-            "provider": "Bovada",
-            "details": "—",
-            "total": "—",
-            "home": "2.75",
-            "away": "1.48"
-          }
-        ]
-      },
-      {
-        "eventId": "96d2373cda647873b971f268482bced0",
-        "date": "2026-10-04T20:25:00Z",
-        "home": "Seattle Seahawks",
-        "away": "Los Angeles Chargers",
-        "participant1Id": null,
-        "participant2Id": null,
-        "homeLogo": "",
-        "awayLogo": "",
-        "oddsList": [
-          {
-            "provider": "DraftKings",
-            "details": "—",
-            "total": "—",
-            "home": "1.26",
-            "away": "4.0"
-          },
-          {
-            "provider": "BetUS",
-            "details": "—",
-            "total": "—",
-            "home": "1.3",
-            "away": "3.7"
-          },
-          {
-            "provider": "FanDuel",
-            "details": "—",
-            "total": "—",
-            "home": "1.27",
-            "away": "3.95"
-          },
-          {
-            "provider": "BetOnline.ag",
-            "details": "—",
-            "total": "—",
-            "home": "1.29",
-            "away": "3.78"
-          },
-          {
-            "provider": "LowVig.ag",
-            "details": "—",
-            "total": "—",
-            "home": "1.29",
-            "away": "3.78"
-          },
-          {
-            "provider": "BetRivers",
-            "details": "—",
-            "total": "—",
-            "home": "1.28",
-            "away": "3.65"
-          },
-          {
-            "provider": "MyBookie.ag",
-            "details": "—",
-            "total": "—",
-            "home": "1.27",
-            "away": "3.7"
-          },
-          {
-            "provider": "BetMGM",
-            "details": "—",
-            "total": "—",
-            "home": "1.29",
-            "away": "3.8"
-          },
-          {
-            "provider": "Bovada",
-            "details": "—",
-            "total": "—",
-            "home": "1.29",
-            "away": "3.7"
-          }
-        ]
-      },
-      {
-        "eventId": "a73a76599a4f3422803e57bd8f61b626",
-        "date": "2026-10-05T00:20:00Z",
-        "home": "Carolina Panthers",
-        "away": "Detroit Lions",
-        "participant1Id": null,
-        "participant2Id": null,
-        "homeLogo": "",
-        "awayLogo": "",
-        "oddsList": [
-          {
-            "provider": "DraftKings",
-            "details": "—",
-            "total": "—",
-            "home": "2.5",
-            "away": "1.56"
-          },
-          {
-            "provider": "FanDuel",
-            "details": "—",
-            "total": "—",
-            "home": "2.68",
-            "away": "1.5"
-          },
-          {
-            "provider": "BetUS",
-            "details": "—",
-            "total": "—",
-            "home": "2.63",
-            "away": "1.53"
-          },
-          {
-            "provider": "LowVig.ag",
-            "details": "—",
-            "total": "—",
-            "home": "2.65",
-            "away": "1.53"
-          },
-          {
-            "provider": "BetOnline.ag",
-            "details": "—",
-            "total": "—",
-            "home": "2.65",
-            "away": "1.53"
-          },
-          {
-            "provider": "BetRivers",
-            "details": "—",
-            "total": "—",
-            "home": "2.55",
-            "away": "1.53"
-          },
-          {
-            "provider": "Bovada",
-            "details": "—",
-            "total": "—",
-            "home": "2.65",
-            "away": "1.51"
-          },
-          {
-            "provider": "MyBookie.ag",
-            "details": "—",
-            "total": "—",
-            "home": "2.56",
-            "away": "1.5"
-          },
-          {
-            "provider": "BetMGM",
-            "details": "—",
-            "total": "—",
-            "home": "2.65",
-            "away": "1.5"
-          }
-        ]
-      },
-      {
-        "eventId": "8bd90781e17e6d97df3941063cedae1e",
-        "date": "2026-10-06T00:15:00Z",
-        "home": "New Orleans Saints",
-        "away": "Atlanta Falcons",
-        "participant1Id": null,
-        "participant2Id": null,
-        "homeLogo": "",
-        "awayLogo": "",
-        "oddsList": [
-          {
-            "provider": "DraftKings",
-            "details": "—",
-            "total": "—",
-            "home": "1.68",
-            "away": "2.24"
-          },
-          {
-            "provider": "BetUS",
-            "details": "—",
-            "total": "—",
-            "home": "1.71",
-            "away": "2.2"
-          },
-          {
-            "provider": "FanDuel",
-            "details": "—",
-            "total": "—",
-            "home": "1.69",
-            "away": "2.22"
-          },
-          {
-            "provider": "BetOnline.ag",
-            "details": "—",
-            "total": "—",
-            "home": "1.7",
-            "away": "2.22"
-          },
-          {
-            "provider": "LowVig.ag",
-            "details": "—",
-            "total": "—",
-            "home": "1.7",
-            "away": "2.22"
-          },
-          {
-            "provider": "BetRivers",
-            "details": "—",
-            "total": "—",
-            "home": "1.66",
-            "away": "2.25"
-          },
-          {
-            "provider": "MyBookie.ag",
-            "details": "—",
-            "total": "—",
-            "home": "1.67",
-            "away": "2.17"
-          },
-          {
-            "provider": "BetMGM",
-            "details": "—",
-            "total": "—",
-            "home": "1.69",
-            "away": "2.2"
-          },
-          {
-            "provider": "Bovada",
-            "details": "—",
-            "total": "—",
-            "home": "1.69",
-            "away": "2.25"
-          }
-        ]
-      },
-      {
-        "eventId": "259b5df9aa0d10257f56de78523495e0",
-        "date": "2026-10-09T00:15:00Z",
-        "home": "Dallas Cowboys",
-        "away": "Tampa Bay Buccaneers",
-        "participant1Id": null,
-        "participant2Id": null,
-        "homeLogo": "",
-        "awayLogo": "",
-        "oddsList": [
-          {
-            "provider": "DraftKings",
-            "details": "—",
-            "total": "—",
-            "home": "1.19",
-            "away": "4.9"
-          },
-          {
-            "provider": "FanDuel",
-            "details": "—",
-            "total": "—",
-            "home": "1.19",
-            "away": "5.0"
-          },
-          {
-            "provider": "MyBookie.ag",
-            "details": "—",
-            "total": "—",
-            "home": "1.2",
-            "away": "4.4"
-          },
-          {
-            "provider": "BetRivers",
-            "details": "—",
-            "total": "—",
-            "home": "1.18",
-            "away": "5.0"
-          }
-        ]
-      },
-      {
-        "eventId": "21b26266f3d78af02eb672e606275d95",
-        "date": "2026-10-11T13:30:00Z",
-        "home": "Jacksonville Jaguars",
-        "away": "Philadelphia Eagles",
-        "participant1Id": null,
-        "participant2Id": null,
-        "homeLogo": "",
-        "awayLogo": "",
-        "oddsList": [
-          {
-            "provider": "DraftKings",
-            "details": "—",
-            "total": "—",
-            "home": "1.68",
-            "away": "2.24"
-          },
-          {
-            "provider": "FanDuel",
-            "details": "—",
-            "total": "—",
-            "home": "1.7",
-            "away": "2.2"
-          },
-          {
-            "provider": "BetRivers",
-            "details": "—",
-            "total": "—",
-            "home": "1.71",
-            "away": "2.17"
-          }
-        ]
-      },
-      {
-        "eventId": "id1400003171515876",
-        "date": "2026-10-11T17:00:00.000Z",
-        "home": "New England Patriots",
-        "away": "Las Vegas Raiders",
-        "participant1Id": 4424,
-        "participant2Id": 4390,
-        "homeLogo": "",
-        "awayLogo": "",
-        "oddsList": [
-          {
-            "provider": "Bet365",
-            "details": "—",
-            "total": "—",
-            "home": "1.49",
-            "away": "2.6"
-          },
-          {
-            "provider": "DraftKings",
-            "details": "—",
-            "total": "—",
-            "home": "1.52",
-            "away": "2.6"
-          },
-          {
-            "provider": "FanDuel",
-            "details": "—",
-            "total": "—",
-            "home": "1.54",
-            "away": "2.54"
-          },
-          {
-            "provider": "BetRivers",
-            "details": "—",
-            "total": "—",
-            "home": "1.55",
-            "away": "2.5"
-          }
-        ]
-      },
-      {
-        "eventId": "id1400003171515880",
-        "date": "2026-10-11T17:00:00.000Z",
-        "home": "New York Jets",
-        "away": "Cleveland Browns",
-        "participant1Id": 4427,
-        "participant2Id": 4417,
-        "homeLogo": "",
-        "awayLogo": "",
-        "oddsList": [
-          {
-            "provider": "Bet365",
-            "details": "—",
-            "total": "—",
-            "home": "1.68",
-            "away": "2.2"
-          },
-          {
-            "provider": "DraftKings",
-            "details": "—",
-            "total": "—",
-            "home": "1.7",
-            "away": "2.2"
-          },
-          {
-            "provider": "FanDuel",
-            "details": "—",
-            "total": "—",
-            "home": "1.74",
-            "away": "2.16"
-          },
-          {
-            "provider": "BetRivers",
-            "details": "—",
-            "total": "—",
-            "home": "1.7",
-            "away": "2.18"
+            "away": "2.3",
+            "draw": "3.75"
           }
         ]
       }
     ],
     "nba": [
       {
-        "eventId": "26b036ff107f3c658258eaf4a6f26228",
-        "date": "2026-10-20T19:00:00Z",
+        "eventId": "id1100013273682354",
+        "date": "2026-10-20T19:00:00.000Z",
         "home": "Detroit Pistons",
         "away": "Boston Celtics",
-        "participant1Id": null,
-        "participant2Id": null,
+        "participant1Id": 3424,
+        "participant2Id": 3422,
         "homeLogo": "",
         "awayLogo": "",
         "oddsList": [
+          {
+            "provider": "Bet365",
+            "details": "—",
+            "total": "—",
+            "home": "1.73",
+            "away": "2.1"
+          },
           {
             "provider": "FanDuel",
             "details": "—",
@@ -3771,15 +3369,22 @@
         ]
       },
       {
-        "eventId": "2b042ddad3d3c6c6fe5b7005dc26c775",
-        "date": "2026-10-20T23:00:00Z",
+        "eventId": "id1100013273682356",
+        "date": "2026-10-20T23:00:00.000Z",
         "home": "New York Knicks",
         "away": "Philadelphia 76ers",
-        "participant1Id": null,
-        "participant2Id": null,
+        "participant1Id": 3421,
+        "participant2Id": 3420,
         "homeLogo": "",
         "awayLogo": "",
         "oddsList": [
+          {
+            "provider": "Bet365",
+            "details": "—",
+            "total": "—",
+            "home": "1.45",
+            "away": "2.7"
+          },
           {
             "provider": "FanDuel",
             "details": "—",
@@ -3885,8 +3490,8 @@
             "provider": "DraftKings",
             "details": "—",
             "total": "—",
-            "home": "1.44",
-            "away": "2.85"
+            "home": "1.51",
+            "away": "2.64"
           },
           {
             "provider": "Bovada",
@@ -3952,12 +3557,12 @@
         ]
       },
       {
-        "eventId": "id1100013273682416",
+        "eventId": "id1100013273719336",
         "date": "2026-10-21T23:30:00.000Z",
-        "home": "Miami Heat",
-        "away": "Minnesota Timberwolves",
-        "participant1Id": 3435,
-        "participant2Id": 3426,
+        "home": "Brooklyn Nets",
+        "away": "Charlotte Hornets",
+        "participant1Id": 3436,
+        "participant2Id": 3430,
         "homeLogo": "",
         "awayLogo": "",
         "oddsList": [
@@ -3965,9 +3570,49 @@
             "provider": "Bet365",
             "details": "—",
             "total": "—",
-            "home": "1.8",
-            "away": "1.97"
+            "home": "2.55",
+            "away": "1.51"
           },
+          {
+            "provider": "DraftKings",
+            "details": "—",
+            "total": "—",
+            "home": "2.42",
+            "away": "1.59"
+          },
+          {
+            "provider": "Bovada",
+            "details": "—",
+            "total": "—",
+            "home": "2.55",
+            "away": "1.56"
+          },
+          {
+            "provider": "BetMGM",
+            "details": "—",
+            "total": "—",
+            "home": "2.4",
+            "away": "1.61"
+          },
+          {
+            "provider": "BetRivers",
+            "details": "—",
+            "total": "—",
+            "home": "2.4",
+            "away": "1.54"
+          }
+        ]
+      },
+      {
+        "eventId": "93cdd8e4ade5697cfccf42ee42c4d207",
+        "date": "2026-10-21T23:40:00Z",
+        "home": "Miami Heat",
+        "away": "Minnesota Timberwolves",
+        "participant1Id": null,
+        "participant2Id": null,
+        "homeLogo": "",
+        "awayLogo": "",
+        "oddsList": [
           {
             "provider": "DraftKings",
             "details": "—",
@@ -4002,46 +3647,6 @@
             "total": "—",
             "home": "1.8",
             "away": "2.02"
-          }
-        ]
-      },
-      {
-        "eventId": "47cc511bb5ce50f715e3625ce5ef77ee",
-        "date": "2026-10-21T23:40:00Z",
-        "home": "Brooklyn Nets",
-        "away": "Charlotte Hornets",
-        "participant1Id": null,
-        "participant2Id": null,
-        "homeLogo": "",
-        "awayLogo": "",
-        "oddsList": [
-          {
-            "provider": "DraftKings",
-            "details": "—",
-            "total": "—",
-            "home": "2.42",
-            "away": "1.59"
-          },
-          {
-            "provider": "Bovada",
-            "details": "—",
-            "total": "—",
-            "home": "2.55",
-            "away": "1.56"
-          },
-          {
-            "provider": "BetMGM",
-            "details": "—",
-            "total": "—",
-            "home": "2.4",
-            "away": "1.61"
-          },
-          {
-            "provider": "BetRivers",
-            "details": "—",
-            "total": "—",
-            "home": "2.4",
-            "away": "1.54"
           }
         ]
       },
@@ -4099,8 +3704,8 @@
             "provider": "DraftKings",
             "details": "—",
             "total": "—",
-            "home": "2.24",
-            "away": "1.68"
+            "home": "2.14",
+            "away": "1.74"
           },
           {
             "provider": "Bovada",
@@ -4166,15 +3771,22 @@
         ]
       },
       {
-        "eventId": "6fff70f4bf196dba25060a5775a03b54",
-        "date": "2026-10-22T02:10:00Z",
+        "eventId": "id1100013273682476",
+        "date": "2026-10-22T02:00:00.000Z",
         "home": "Los Angeles Lakers",
         "away": "Golden State Warriors",
-        "participant1Id": null,
-        "participant2Id": null,
+        "participant1Id": 3427,
+        "participant2Id": 3428,
         "homeLogo": "",
         "awayLogo": "",
         "oddsList": [
+          {
+            "provider": "Bet365",
+            "details": "—",
+            "total": "—",
+            "home": "1.52",
+            "away": "2.5"
+          },
           {
             "provider": "DraftKings",
             "details": "—",
@@ -4213,15 +3825,22 @@
         ]
       },
       {
-        "eventId": "71e24359951927c356bd8c852fb867dd",
-        "date": "2026-10-22T02:10:00Z",
+        "eventId": "id1100013273719346",
+        "date": "2026-10-22T02:00:00.000Z",
         "home": "Portland Trail Blazers",
         "away": "Phoenix Suns",
-        "participant1Id": null,
-        "participant2Id": null,
+        "participant1Id": 3414,
+        "participant2Id": 3416,
         "homeLogo": "",
         "awayLogo": "",
         "oddsList": [
+          {
+            "provider": "Bet365",
+            "details": "—",
+            "total": "—",
+            "home": "1.55",
+            "away": "2.45"
+          },
           {
             "provider": "DraftKings",
             "details": "—",
@@ -4266,8 +3885,8 @@
             "provider": "DraftKings",
             "details": "—",
             "total": "—",
-            "home": "1.57",
-            "away": "2.45"
+            "home": "1.62",
+            "away": "2.36"
           },
           {
             "provider": "BetMGM",
@@ -4338,21 +3957,28 @@
         ]
       },
       {
-        "eventId": "49fc89a9696a9a20b658732b34ce61c4",
-        "date": "2026-10-24T01:40:00Z",
+        "eventId": "id1100013273682598",
+        "date": "2026-10-24T01:30:00.000Z",
         "home": "San Antonio Spurs",
         "away": "Houston Rockets",
-        "participant1Id": null,
-        "participant2Id": null,
+        "participant1Id": 3429,
+        "participant2Id": 3412,
         "homeLogo": "",
         "awayLogo": "",
         "oddsList": [
           {
+            "provider": "Bet365",
+            "details": "—",
+            "total": "—",
+            "home": "1.34",
+            "away": "3.2"
+          },
+          {
             "provider": "DraftKings",
             "details": "—",
             "total": "—",
-            "home": "1.46",
-            "away": "2.8"
+            "home": "1.51",
+            "away": "2.64"
           }
         ]
       },
