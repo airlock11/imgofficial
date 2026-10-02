@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-02T16:21:16+08:00",
+  "updated_at": "2026-10-02T22:53:59+08:00",
   "refresh_minutes": 15,
   "leagues": {
     "pba": {
@@ -100,7 +100,7 @@
           "idleDiscoveryMinutes": 180,
           "gameDayDataRefreshMinutes": 15,
           "gameDayLivestreamRefreshMinutes": 5,
-          "lastSlowCheckAt": "2026-10-02T16:20:31+08:00"
+          "lastSlowCheckAt": "2026-10-02T22:53:09+08:00"
         },
         "failClosed": true
       }
@@ -472,9 +472,23 @@
       ],
       "games": [
         {
+          "eventId": "yt-nbl-PvcTnnGOyvQ",
+          "date": "2026-10-02T18:00:00+08:00",
+          "displayTime": "Oct 2",
+          "away": "Pangasinan Asinderos",
+          "home": "Taguig City Generals",
+          "awayScore": "—",
+          "homeScore": "—",
+          "status": "Replay available · Jun Dueñas Gym Central Signal, Taguig City",
+          "state": "final",
+          "location": "Jun Dueñas Gym Central Signal, Taguig City",
+          "sourceName": "NBL-Pilipinas YouTube",
+          "sourceUrl": "https://www.youtube.com/watch?v=PvcTnnGOyvQ"
+        },
+        {
           "eventId": "yt-nbl-aLcixSWhYHE",
-          "date": "2026-10-01T18:00:00+08:00",
-          "displayTime": "Oct 1",
+          "date": "2026-10-02T18:00:00+08:00",
+          "displayTime": "Oct 2",
           "away": "Pamapanga",
           "home": "CamSur Express",
           "awayScore": "—",
@@ -619,20 +633,6 @@
           "location": "Robert B. Estrella, SR. Memorial Stadium Rosales, Pangasinan",
           "sourceName": "NBL-Pilipinas YouTube",
           "sourceUrl": "https://www.youtube.com/watch?v=RF0CfZ5EujE"
-        },
-        {
-          "eventId": "yt-nbl-6Ge20fqTFWo",
-          "date": "2026-09-11T18:00:00+08:00",
-          "displayTime": "Sep 11",
-          "away": "Quezon City Titans",
-          "home": "Nueva Ecija Granary Buffalos",
-          "awayScore": "—",
-          "homeScore": "—",
-          "status": "Replay available · Robert B. Estrella, SR. Memorial Stadium Rosales, Pangasinan",
-          "state": "final",
-          "location": "Robert B. Estrella, SR. Memorial Stadium Rosales, Pangasinan",
-          "sourceName": "NBL-Pilipinas YouTube",
-          "sourceUrl": "https://www.youtube.com/watch?v=6Ge20fqTFWo"
         },
         {
           "eventId": "verified-nbl-20260830-starhorse-tikas",
@@ -1309,7 +1309,7 @@
           "idleDiscoveryMinutes": 180,
           "gameDayDataRefreshMinutes": 15,
           "gameDayLivestreamRefreshMinutes": 5,
-          "lastSlowCheckAt": "2026-10-02T16:20:34+08:00"
+          "lastSlowCheckAt": "2026-10-02T22:53:12+08:00"
         },
         "failClosed": true
       }
@@ -1333,7 +1333,7 @@
         "idleDiscoveryMinutes": 180,
         "gameDayDataRefreshMinutes": 15,
         "gameDayLivestreamRefreshMinutes": 5,
-        "lastSlowCheckAt": "2026-10-02T16:20:31+08:00"
+        "lastSlowCheckAt": "2026-10-02T22:53:09+08:00"
       },
       "failClosed": true
     },
@@ -1353,7 +1353,7 @@
         "idleDiscoveryMinutes": 180,
         "gameDayDataRefreshMinutes": 15,
         "gameDayLivestreamRefreshMinutes": 5,
-        "lastSlowCheckAt": "2026-10-02T16:20:34+08:00"
+        "lastSlowCheckAt": "2026-10-02T22:53:12+08:00"
       },
       "failClosed": true
     }
