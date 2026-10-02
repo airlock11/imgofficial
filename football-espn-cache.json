@@ -1,7 +1,7 @@
 {
   "version": 1,
   "source": "ESPN public football data",
-  "updatedAt": "2026-10-02T07:23:33.561Z",
+  "updatedAt": "2026-10-02T14:01:42.483Z",
   "leagues": {
     "soccer": {
       "name": "Premier League",
@@ -1000,7 +1000,7 @@
           "points": 2
         }
       ],
-      "verifiedAt": "2026-10-02T07:23:33.234Z"
+      "verifiedAt": "2026-10-02T14:01:41.858Z"
     },
     "laliga": {
       "name": "La Liga",
@@ -1887,7 +1887,7 @@
           "points": 3
         }
       ],
-      "verifiedAt": "2026-10-02T07:23:33.358Z"
+      "verifiedAt": "2026-10-02T14:01:42.094Z"
     },
     "bundesliga": {
       "name": "Bundesliga",
@@ -2784,7 +2784,7 @@
           "points": 0
         }
       ],
-      "verifiedAt": "2026-10-02T07:23:33.438Z"
+      "verifiedAt": "2026-10-02T14:01:42.293Z"
     },
     "seriea": {
       "name": "Serie A",
@@ -3639,6 +3639,54 @@
           "venue": "San Siro",
           "competition": "Serie A",
           "category": "Italy"
+        },
+        {
+          "eventId": "401875002",
+          "date": "2026-11-01T11:30Z",
+          "displayTime": "",
+          "home": "Como",
+          "away": "Venezia",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/2572.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/17530.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "Giuseppe Sinigaglia",
+          "competition": "Serie A",
+          "category": "Italy"
+        },
+        {
+          "eventId": "401874782",
+          "date": "2026-11-01T14:00Z",
+          "displayTime": "",
+          "home": "Frosinone",
+          "away": "Torino",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/4057.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/239.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "Stadio Benito Stirpe",
+          "competition": "Serie A",
+          "category": "Italy"
+        },
+        {
+          "eventId": "401874983",
+          "date": "2026-11-01T14:00Z",
+          "displayTime": "",
+          "home": "Lazio",
+          "away": "Cagliari",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/112.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/2925.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "Olimpico",
+          "competition": "Serie A",
+          "category": "Italy"
         }
       ],
       "standings": [
@@ -3863,7 +3911,7 @@
           "points": 0
         }
       ],
-      "verifiedAt": "2026-10-02T07:23:33.561Z"
+      "verifiedAt": "2026-10-02T14:01:42.483Z"
     }
   }
 }
