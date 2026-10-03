@@ -1,7 +1,7 @@
 {
   "version": 1,
   "source": "ESPN public football data",
-  "updatedAt": "2026-10-03T07:57:28.891Z",
+  "updatedAt": "2026-10-03T13:16:06.641Z",
   "leagues": {
     "soccer": {
       "name": "Premier League",
@@ -9,22 +9,6 @@
       "espn": "eng.1",
       "leagueLogo": "https://a.espncdn.com/i/leaguelogos/soccer/500/23.png",
       "games": [
-        {
-          "eventId": "401879269",
-          "date": "2026-09-19T11:30Z",
-          "displayTime": "",
-          "home": "Tottenham Hotspur",
-          "away": "Aston Villa",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/367.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/362.png",
-          "homeScore": "2",
-          "awayScore": "3",
-          "state": "final",
-          "status": "FT",
-          "venue": "Tottenham Hotspur Stadium",
-          "competition": "Premier League",
-          "category": "England"
-        },
         {
           "eventId": "401879274",
           "date": "2026-09-19T14:00Z",
@@ -1000,7 +984,7 @@
           "points": 2
         }
       ],
-      "verifiedAt": "2026-10-03T07:57:28.381Z"
+      "verifiedAt": "2026-10-03T13:16:05.950Z"
     },
     "laliga": {
       "name": "La Liga",
@@ -1008,22 +992,6 @@
       "espn": "esp.1",
       "leagueLogo": "https://a.espncdn.com/i/leaguelogos/soccer/500/15.png",
       "games": [
-        {
-          "eventId": "401882860",
-          "date": "2026-09-19T12:00Z",
-          "displayTime": "",
-          "home": "Osasuna",
-          "away": "Rayo Vallecano",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/97.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/101.png",
-          "homeScore": "1",
-          "awayScore": "1",
-          "state": "final",
-          "status": "FT",
-          "venue": "El Sadar",
-          "competition": "La Liga",
-          "category": "Spain"
-        },
         {
           "eventId": "401882866",
           "date": "2026-09-19T14:15Z",
@@ -1649,6 +1617,134 @@
           "category": "Spain"
         },
         {
+          "eventId": "401882817",
+          "date": "2026-10-30T20:00Z",
+          "displayTime": "",
+          "home": "Villarreal",
+          "away": "Espanyol",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/102.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/88.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "Estadio de la Cerámica",
+          "competition": "La Liga",
+          "category": "Spain"
+        },
+        {
+          "eventId": "401882820",
+          "date": "2026-10-31T13:00Z",
+          "displayTime": "",
+          "home": "Levante",
+          "away": "Atlético Madrid",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/1538.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/1068.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "Estadi Ciutat de València",
+          "competition": "La Liga",
+          "category": "Spain"
+        },
+        {
+          "eventId": "401882818",
+          "date": "2026-10-31T15:15Z",
+          "displayTime": "",
+          "home": "Rayo Vallecano",
+          "away": "Celta Vigo",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/101.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/85.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "Estadio de Vallecas",
+          "competition": "La Liga",
+          "category": "Spain"
+        },
+        {
+          "eventId": "401882825",
+          "date": "2026-10-31T17:30Z",
+          "displayTime": "",
+          "home": "Real Betis",
+          "away": "Málaga",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/244.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/99.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "Estadio La Cartuja",
+          "competition": "La Liga",
+          "category": "Spain"
+        },
+        {
+          "eventId": "401882822",
+          "date": "2026-10-31T20:00Z",
+          "displayTime": "",
+          "home": "Barcelona",
+          "away": "Alavés",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/83.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/96.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "Spotify Camp Nou",
+          "competition": "La Liga",
+          "category": "Spain"
+        },
+        {
+          "eventId": "401882821",
+          "date": "2026-11-01T13:00Z",
+          "displayTime": "",
+          "home": "Getafe",
+          "away": "Sevilla",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/2922.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/243.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "Estadio Coliseum",
+          "competition": "La Liga",
+          "category": "Spain"
+        },
+        {
+          "eventId": "401882819",
+          "date": "2026-11-01T15:15Z",
+          "displayTime": "",
+          "home": "Racing Santander",
+          "away": "Real Madrid",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/87.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/86.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "El Sardineros",
+          "competition": "La Liga",
+          "category": "Spain"
+        },
+        {
+          "eventId": "401882823",
+          "date": "2026-11-01T17:30Z",
+          "displayTime": "",
+          "home": "Elche",
+          "away": "Valencia",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/3751.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/94.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "Estadio Martínez Valero",
+          "competition": "La Liga",
+          "category": "Spain"
+        },
+        {
           "eventId": "401882826",
           "date": "2026-11-01T20:00Z",
           "displayTime": "",
@@ -1659,152 +1755,8 @@
           "homeScore": "0",
           "awayScore": "0",
           "state": "scheduled",
-          "status": "TBD",
+          "status": "Scheduled",
           "venue": "San Mamés",
-          "competition": "La Liga",
-          "category": "Spain"
-        },
-        {
-          "eventId": "401882822",
-          "date": "2026-11-01T20:00Z",
-          "displayTime": "",
-          "home": "Barcelona",
-          "away": "Alavés",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/83.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/96.png",
-          "homeScore": "0",
-          "awayScore": "0",
-          "state": "scheduled",
-          "status": "TBD",
-          "venue": "Spotify Camp Nou",
-          "competition": "La Liga",
-          "category": "Spain"
-        },
-        {
-          "eventId": "401882824",
-          "date": "2026-11-01T20:00Z",
-          "displayTime": "",
-          "home": "Deportivo",
-          "away": "Osasuna",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/90.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/97.png",
-          "homeScore": "0",
-          "awayScore": "0",
-          "state": "scheduled",
-          "status": "TBD",
-          "venue": "Riazor",
-          "competition": "La Liga",
-          "category": "Spain"
-        },
-        {
-          "eventId": "401882823",
-          "date": "2026-11-01T20:00Z",
-          "displayTime": "",
-          "home": "Elche",
-          "away": "Valencia",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/3751.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/94.png",
-          "homeScore": "0",
-          "awayScore": "0",
-          "state": "scheduled",
-          "status": "TBD",
-          "venue": "Estadio Martínez Valero",
-          "competition": "La Liga",
-          "category": "Spain"
-        },
-        {
-          "eventId": "401882821",
-          "date": "2026-11-01T20:00Z",
-          "displayTime": "",
-          "home": "Getafe",
-          "away": "Sevilla",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/2922.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/243.png",
-          "homeScore": "0",
-          "awayScore": "0",
-          "state": "scheduled",
-          "status": "TBD",
-          "venue": "Estadio Coliseum",
-          "competition": "La Liga",
-          "category": "Spain"
-        },
-        {
-          "eventId": "401882820",
-          "date": "2026-11-01T20:00Z",
-          "displayTime": "",
-          "home": "Levante",
-          "away": "Atlético Madrid",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/1538.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/1068.png",
-          "homeScore": "0",
-          "awayScore": "0",
-          "state": "scheduled",
-          "status": "TBD",
-          "venue": "Estadi Ciutat de València",
-          "competition": "La Liga",
-          "category": "Spain"
-        },
-        {
-          "eventId": "401882819",
-          "date": "2026-11-01T20:00Z",
-          "displayTime": "",
-          "home": "Racing Santander",
-          "away": "Real Madrid",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/87.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/86.png",
-          "homeScore": "0",
-          "awayScore": "0",
-          "state": "scheduled",
-          "status": "TBD",
-          "venue": "El Sardineros",
-          "competition": "La Liga",
-          "category": "Spain"
-        },
-        {
-          "eventId": "401882818",
-          "date": "2026-11-01T20:00Z",
-          "displayTime": "",
-          "home": "Rayo Vallecano",
-          "away": "Celta Vigo",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/101.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/85.png",
-          "homeScore": "0",
-          "awayScore": "0",
-          "state": "scheduled",
-          "status": "TBD",
-          "venue": "Estadio de Vallecas",
-          "competition": "La Liga",
-          "category": "Spain"
-        },
-        {
-          "eventId": "401882825",
-          "date": "2026-11-01T20:00Z",
-          "displayTime": "",
-          "home": "Real Betis",
-          "away": "Málaga",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/244.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/99.png",
-          "homeScore": "0",
-          "awayScore": "0",
-          "state": "scheduled",
-          "status": "TBD",
-          "venue": "Estadio La Cartuja",
-          "competition": "La Liga",
-          "category": "Spain"
-        },
-        {
-          "eventId": "401882817",
-          "date": "2026-11-01T20:00Z",
-          "displayTime": "",
-          "home": "Villarreal",
-          "away": "Espanyol",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/102.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/88.png",
-          "homeScore": "0",
-          "awayScore": "0",
-          "state": "scheduled",
-          "status": "TBD",
-          "venue": "Estadio de la Cerámica",
           "competition": "La Liga",
           "category": "Spain"
         }
@@ -2031,7 +1983,7 @@
           "points": 3
         }
       ],
-      "verifiedAt": "2026-10-03T07:57:28.554Z"
+      "verifiedAt": "2026-10-03T13:16:06.168Z"
     },
     "bundesliga": {
       "name": "Bundesliga",
@@ -2944,7 +2896,7 @@
           "points": 0
         }
       ],
-      "verifiedAt": "2026-10-03T07:57:28.741Z"
+      "verifiedAt": "2026-10-03T13:16:06.424Z"
     },
     "seriea": {
       "name": "Serie A",
@@ -2952,38 +2904,6 @@
       "espn": "ita.1",
       "leagueLogo": "https://a.espncdn.com/i/leaguelogos/soccer/500/12.png",
       "games": [
-        {
-          "eventId": "401874767",
-          "date": "2026-09-19T13:00Z",
-          "displayTime": "",
-          "home": "Bologna",
-          "away": "Torino",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/107.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/239.png",
-          "homeScore": "1",
-          "awayScore": "1",
-          "state": "final",
-          "status": "FT",
-          "venue": "Renato Dall'Ara",
-          "competition": "Serie A",
-          "category": "Italy"
-        },
-        {
-          "eventId": "401874964",
-          "date": "2026-09-19T13:00Z",
-          "displayTime": "",
-          "home": "Udinese",
-          "away": "Cagliari",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/118.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/2925.png",
-          "homeScore": "0",
-          "awayScore": "1",
-          "state": "final",
-          "status": "FT",
-          "venue": "Stadio Friuli",
-          "competition": "Serie A",
-          "category": "Italy"
-        },
         {
           "eventId": "401874753",
           "date": "2026-09-19T16:00Z",
@@ -4087,7 +4007,7 @@
           "points": 0
         }
       ],
-      "verifiedAt": "2026-10-03T07:57:28.891Z"
+      "verifiedAt": "2026-10-03T13:16:06.641Z"
     }
   }
 }
