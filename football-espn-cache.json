@@ -1,7 +1,7 @@
 {
   "version": 1,
   "source": "ESPN public football data",
-  "updatedAt": "2026-10-03T17:30:40.091Z",
+  "updatedAt": "2026-10-03T20:12:50.082Z",
   "leagues": {
     "soccer": {
       "name": "Premier League",
@@ -696,6 +696,22 @@
           "venue": "Anfield",
           "competition": "Premier League",
           "category": "England"
+        },
+        {
+          "eventId": "401878762",
+          "date": "2026-11-02T20:00Z",
+          "displayTime": "",
+          "home": "Newcastle United",
+          "away": "Everton",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/361.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/368.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "St. James' Park",
+          "competition": "Premier League",
+          "category": "England"
         }
       ],
       "standings": [
@@ -920,7 +936,7 @@
           "points": 2
         }
       ],
-      "verifiedAt": "2026-10-03T17:30:39.429Z"
+      "verifiedAt": "2026-10-03T20:12:49.527Z"
     },
     "laliga": {
       "name": "La Liga",
@@ -928,22 +944,6 @@
       "espn": "esp.1",
       "leagueLogo": "https://a.espncdn.com/i/leaguelogos/soccer/500/15.png",
       "games": [
-        {
-          "eventId": "401882859",
-          "date": "2026-09-19T19:00Z",
-          "displayTime": "",
-          "home": "Sevilla",
-          "away": "Barcelona",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/243.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/83.png",
-          "homeScore": "1",
-          "awayScore": "3",
-          "state": "final",
-          "status": "FT",
-          "venue": "Ramón Sánchez Pizjuán Stadium",
-          "competition": "La Liga",
-          "category": "Spain"
-        },
         {
           "eventId": "401882861",
           "date": "2026-09-20T12:00Z",
@@ -1663,6 +1663,22 @@
           "venue": "San Mamés",
           "competition": "La Liga",
           "category": "Spain"
+        },
+        {
+          "eventId": "401882824",
+          "date": "2026-11-02T20:00Z",
+          "displayTime": "",
+          "home": "Deportivo",
+          "away": "Osasuna",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/90.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/97.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "Riazor",
+          "competition": "La Liga",
+          "category": "Spain"
         }
       ],
       "standings": [
@@ -1887,7 +1903,7 @@
           "points": 3
         }
       ],
-      "verifiedAt": "2026-10-03T17:30:39.667Z"
+      "verifiedAt": "2026-10-03T20:12:49.717Z"
     },
     "bundesliga": {
       "name": "Bundesliga",
@@ -2720,7 +2736,7 @@
           "points": 0
         }
       ],
-      "verifiedAt": "2026-10-03T17:30:39.848Z"
+      "verifiedAt": "2026-10-03T20:12:49.877Z"
     },
     "seriea": {
       "name": "Serie A",
@@ -2728,22 +2744,6 @@
       "espn": "ita.1",
       "leagueLogo": "https://a.espncdn.com/i/leaguelogos/soccer/500/12.png",
       "games": [
-        {
-          "eventId": "401874956",
-          "date": "2026-09-19T18:45Z",
-          "displayTime": "",
-          "home": "Venezia",
-          "away": "Lazio",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/17530.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/112.png",
-          "homeScore": "0",
-          "awayScore": "2",
-          "state": "final",
-          "status": "FT",
-          "venue": "Stadio Pier Luigi Penzo",
-          "competition": "Serie A",
-          "category": "Italy"
-        },
         {
           "eventId": "401874934",
           "date": "2026-09-20T10:30Z",
@@ -3607,6 +3607,22 @@
           "venue": "Mapei Stadium",
           "competition": "Serie A",
           "category": "Italy"
+        },
+        {
+          "eventId": "401874971",
+          "date": "2026-11-02T19:45Z",
+          "displayTime": "",
+          "home": "Atalanta",
+          "away": "Parma",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/105.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/115.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "New Balance Arena",
+          "competition": "Serie A",
+          "category": "Italy"
         }
       ],
       "standings": [
@@ -3831,7 +3847,7 @@
           "points": 0
         }
       ],
-      "verifiedAt": "2026-10-03T17:30:40.090Z"
+      "verifiedAt": "2026-10-03T20:12:50.081Z"
     }
   }
 }
