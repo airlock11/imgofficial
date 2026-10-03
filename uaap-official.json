@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-03T02:13:18+00:00",
+  "updatedAt": "2026-10-03T08:08:52+00:00",
   "season": "Season 89 Men's Basketball",
   "sources": {
     "stats": "https://uaap.org/stats/uaap-season-89-men-s-basketball",
@@ -78,6 +78,14 @@
       "apg": 0.5
     },
     {
+      "player": "K. Mongcopa",
+      "team": "FEU Tamaraws",
+      "games": 2,
+      "ppg": 16.5,
+      "rpg": 9.0,
+      "apg": 4.5
+    },
+    {
       "player": "M. Llemit",
       "team": "UST Growling Tigers",
       "games": 3,
@@ -108,20 +116,23 @@
       "ppg": 13.7,
       "rpg": 5.7,
       "apg": 0.7
-    },
-    {
-      "player": "P. Jonah",
-      "team": "Adamson Soaring Falcons",
-      "games": 2,
-      "ppg": 12.5,
-      "rpg": 9.5,
-      "apg": 1.5
     }
   ],
   "headlines": [],
   "photoGallery": [],
   "previousGamePhotos": [],
   "highlights": [
+    {
+      "id": "i-iCgcx60nw",
+      "title": "UST vs AdU | 1ST QUARTER HIGHLIGHTS | UAAP SEASON 89 MEN’S BASKETBALL",
+      "url": "https://www.youtube.com/watch?v=i-iCgcx60nw",
+      "thumbnail": "https://i.ytimg.com/vi/i-iCgcx60nw/hqdefault.jpg",
+      "published": "",
+      "channel": "One Sports",
+      "sourceName": "One Sports",
+      "sourceChannelId": "UCXDG9ue-emCN8Ad3h7lERqQ",
+      "verificationStatus": "verified"
+    },
     {
       "id": "YBR1309Mozo",
       "title": "FEU vs DLSU | SMART PLAYS EXTENDED HIGHLIGHTS | UAAP SEASON 89 MEN’S BASKETBALL | OCT 1, 2026",
@@ -220,21 +231,20 @@
       "sourceName": "One Sports",
       "sourceChannelId": "UCXDG9ue-emCN8Ad3h7lERqQ",
       "verificationStatus": "verified"
-    },
-    {
-      "id": "EHajjNMxUrw",
-      "title": "FEU vs DLSU | 1ST QUARTER HIGHLIGHTS | UAAP SEASON 89 MEN’S BASKETBALL",
-      "url": "https://www.youtube.com/watch?v=EHajjNMxUrw",
-      "thumbnail": "https://i.ytimg.com/vi/EHajjNMxUrw/hqdefault.jpg",
-      "published": "",
-      "channel": "One Sports",
-      "sourceName": "One Sports",
-      "sourceChannelId": "UCXDG9ue-emCN8Ad3h7lERqQ",
-      "verificationStatus": "verified"
     }
   ],
   "topPlayersMode": "recent-official-boxscores",
   "liveStatsGames": [
+    {
+      "first": "PERIOD 2 00:00 UST",
+      "firstScore": 23,
+      "second": "Adamson Soaring Falcons",
+      "secondScore": 36,
+      "status": "Live",
+      "state": "in",
+      "gameId": "14",
+      "url": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball?game_id=14"
+    },
     {
       "first": "FEU Tamaraws",
       "firstScore": 90,
@@ -356,7 +366,7 @@
       "url": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball?game_id=1"
     }
   ],
-  "highlightsUpdatedAt": "2026-10-03T02:13:18+00:00",
+  "highlightsUpdatedAt": "2026-10-03T08:08:52+00:00",
   "automation": {
     "enabled": true,
     "mode": "game-day",
@@ -372,11 +382,11 @@
         "web-uaap-scheduled-10",
         "web-uaap-scheduled-11"
       ],
-      "nextGameAt": "2026-10-03T14:00:00+08:00",
+      "nextGameAt": "2026-10-03T17:30:00+08:00",
       "idleDiscoveryMinutes": 180,
       "gameDayDataRefreshMinutes": 15,
       "gameDayLivestreamRefreshMinutes": 5,
-      "lastSlowCheckAt": ""
+      "lastSlowCheckAt": "2026-10-03T16:08:08+08:00"
     },
     "failClosed": true
   }
