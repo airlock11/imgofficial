@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-02T22:29:29+00:00",
+  "updated_at": "2026-10-03T05:39:54+00:00",
   "source": "Official boxing websites",
   "sources": [
     {
@@ -13,7 +13,7 @@
   ],
   "source_counts": {
     "Premier Boxing Champions": 3,
-    "Matchroom Boxing": 4
+    "Matchroom Boxing": 3
   },
   "errors": {
     "Matchroom Boxing": "Parser returned no current rows; retained last verified official schedule"
@@ -101,37 +101,6 @@
         },
         "fighter_2": {
           "name": "Koen Mazoudier",
-          "winner": false
-        }
-      },
-      "results": {
-        "outcome": null,
-        "outcome_long": null,
-        "round": null,
-        "time": null,
-        "scores": []
-      }
-    },
-    {
-      "id": "matchroom-20261002-jones-sanchez",
-      "title": "Jones vs. Sanchez",
-      "date": "2026-10-02T12:00:00Z",
-      "displayTime": "Oct 2 · Time TBA",
-      "status": "NOT_STARTED",
-      "sourceName": "Matchroom Boxing",
-      "sourceUrl": "https://www.matchroomboxing.com/events/",
-      "event": {
-        "title": "Jones vs. Sanchez",
-        "location": "Orlando, USA",
-        "venue": "Caribe Royale"
-      },
-      "fighters": {
-        "fighter_1": {
-          "name": "Jones",
-          "winner": false
-        },
-        "fighter_2": {
-          "name": "Sanchez",
           "winner": false
         }
       },
