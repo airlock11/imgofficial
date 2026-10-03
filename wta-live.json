@@ -2,7 +2,7 @@
   "special": true,
   "league": "WTA Tour",
   "live": true,
-  "updatedAt": "2026-10-03T05:44:42.091644+00:00",
+  "updatedAt": "2026-10-03T05:44:48.961382+00:00",
   "sourceName": "API-Tennis",
   "sourceUrl": "https://api-tennis.com/",
   "verificationSource": "API-Tennis",
@@ -821,7 +821,7 @@
       "home": "P. Badosa",
       "awayLogo": "https://api.api-tennis.com/logo-tennis/2802_j-ostapenko.jpg",
       "homeLogo": "https://api.api-tennis.com/logo-tennis/2178_p-badosa.jpg",
-      "awayScore": "1 · 15",
+      "awayScore": "1 · 30",
       "homeScore": "4 · 15",
       "awaySets": [
         "1"
@@ -829,7 +829,7 @@
       "homeSets": [
         "4"
       ],
-      "awayPoint": "15",
+      "awayPoint": "30",
       "homePoint": "15",
       "currentSet": 1,
       "awayCurrentSetGames": 1,
@@ -887,43 +887,6 @@
       "verificationUrl": "https://api-tennis.com/"
     },
     {
-      "eventId": "api-tennis-wta-12167725",
-      "apiEventKey": "12167725",
-      "date": "2026-10-03T05:45:00",
-      "displayTime": "Beijing",
-      "away": "X. Gao",
-      "home": "I. Swiatek",
-      "awayLogo": "https://api.api-tennis.com/logo-tennis/7289_x-gao.jpg",
-      "homeLogo": "https://api.api-tennis.com/logo-tennis/1910_i-swiatek.jpg",
-      "awayScore": "0",
-      "homeScore": "0",
-      "awaySets": [
-        "0"
-      ],
-      "homeSets": [
-        "0"
-      ],
-      "awayPoint": "—",
-      "homePoint": "—",
-      "currentSet": 1,
-      "awayCurrentSetGames": 0,
-      "homeCurrentSetGames": 0,
-      "awaySetsWon": 0,
-      "homeSetsWon": 0,
-      "round": "WTA Beijing - 1/32-finals",
-      "court": "",
-      "status": "Scheduled · WTA Beijing - 1/32-finals",
-      "state": "scheduled",
-      "eventOnly": false,
-      "title": "Beijing",
-      "eventType": "Wta Singles",
-      "serve": null,
-      "sourceName": "API-Tennis",
-      "sourceUrl": "https://api-tennis.com/",
-      "verificationSource": "API-Tennis",
-      "verificationUrl": "https://api-tennis.com/"
-    },
-    {
       "eventId": "api-tennis-wta-12167629",
       "apiEventKey": "12167629",
       "date": "2026-10-03T06:00:00",
@@ -961,14 +924,14 @@
       "verificationUrl": "https://api-tennis.com/"
     },
     {
-      "eventId": "api-tennis-wta-12167648",
-      "apiEventKey": "12167648",
-      "date": "2026-10-03T06:30:00",
+      "eventId": "api-tennis-wta-12167725",
+      "apiEventKey": "12167725",
+      "date": "2026-10-03T06:00:00",
       "displayTime": "Beijing",
-      "away": "B. Bencic",
-      "home": "A. Zakharova",
-      "awayLogo": "https://api.api-tennis.com/logo-tennis/2387_b-bencic.jpg",
-      "homeLogo": "https://api.api-tennis.com/logo-tennis/1794_a-zakharova.jpg",
+      "away": "X. Gao",
+      "home": "I. Swiatek",
+      "awayLogo": "https://api.api-tennis.com/logo-tennis/7289_x-gao.jpg",
+      "homeLogo": "https://api.api-tennis.com/logo-tennis/1910_i-swiatek.jpg",
       "awayScore": "0",
       "homeScore": "0",
       "awaySets": [
@@ -1035,9 +998,46 @@
       "verificationUrl": "https://api-tennis.com/"
     },
     {
+      "eventId": "api-tennis-wta-12167648",
+      "apiEventKey": "12167648",
+      "date": "2026-10-03T07:15:00",
+      "displayTime": "Beijing",
+      "away": "B. Bencic",
+      "home": "A. Zakharova",
+      "awayLogo": "https://api.api-tennis.com/logo-tennis/2387_b-bencic.jpg",
+      "homeLogo": "https://api.api-tennis.com/logo-tennis/1794_a-zakharova.jpg",
+      "awayScore": "0",
+      "homeScore": "0",
+      "awaySets": [
+        "0"
+      ],
+      "homeSets": [
+        "0"
+      ],
+      "awayPoint": "—",
+      "homePoint": "—",
+      "currentSet": 1,
+      "awayCurrentSetGames": 0,
+      "homeCurrentSetGames": 0,
+      "awaySetsWon": 0,
+      "homeSetsWon": 0,
+      "round": "WTA Beijing - 1/32-finals",
+      "court": "",
+      "status": "Scheduled · WTA Beijing - 1/32-finals",
+      "state": "scheduled",
+      "eventOnly": false,
+      "title": "Beijing",
+      "eventType": "Wta Singles",
+      "serve": null,
+      "sourceName": "API-Tennis",
+      "sourceUrl": "https://api-tennis.com/",
+      "verificationSource": "API-Tennis",
+      "verificationUrl": "https://api-tennis.com/"
+    },
+    {
       "eventId": "api-tennis-wta-12167619",
       "apiEventKey": "12167619",
-      "date": "2026-10-03T07:15:00",
+      "date": "2026-10-03T07:30:00",
       "displayTime": "Beijing",
       "away": "Q. Zheng",
       "home": "A. Kalinskaya",
