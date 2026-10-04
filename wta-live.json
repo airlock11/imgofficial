@@ -2,7 +2,7 @@
   "special": true,
   "league": "WTA Tour",
   "live": true,
-  "updatedAt": "2026-10-04T11:35:40.185084+00:00",
+  "updatedAt": "2026-10-04T11:35:45.035360+00:00",
   "sourceName": "WTA Official Scores scrape",
   "sourceUrl": "https://www.wtatennis.com/scores/",
   "verificationSource": "WTA Official Scores",
@@ -13,20 +13,20 @@
   "games": [
     {
       "eventId": "wta-scrape-0-s-bejlek-n-osaka",
-      "date": "2026-10-04T11:35:40.183277+00:00",
+      "date": "2026-10-04T11:35:45.033543+00:00",
       "displayTime": "China Open • CHN",
       "away": "S. Bejlek",
       "home": "N. Osaka",
-      "awayScore": "3 · 30",
-      "homeScore": "3 · 30",
+      "awayScore": "3 · 40",
+      "homeScore": "3 · 40",
       "awaySets": [
         "3"
       ],
       "homeSets": [
         "3"
       ],
-      "awayPoint": "30",
-      "homePoint": "30",
+      "awayPoint": "40",
+      "homePoint": "40",
       "currentSet": 1,
       "awayCurrentSetGames": 3,
       "homeCurrentSetGames": 3,
@@ -34,7 +34,7 @@
       "homeSetsWon": 0,
       "round": "Round of 32",
       "court": "",
-      "status": "Live Match: 0:26 · Round of 32",
+      "status": "Live Match: 0:27 · Round of 32",
       "state": "live",
       "eventOnly": false,
       "title": "China Open • CHN",
@@ -45,12 +45,12 @@
     },
     {
       "eventId": "wta-scrape-1-a-tikhonova-m-tkacheva",
-      "date": "2026-10-04T11:35:40.183435+00:00",
+      "date": "2026-10-04T11:35:45.033711+00:00",
       "displayTime": "Samsun Open • TUR",
       "away": "A. Tikhonova",
       "home": "M. Tkacheva",
       "awayScore": "2 0 · 40",
-      "homeScore": "6 1 · 40",
+      "homeScore": "6 1 · AD",
       "awaySets": [
         "2",
         "0"
@@ -60,7 +60,7 @@
         "1"
       ],
       "awayPoint": "40",
-      "homePoint": "40",
+      "homePoint": "AD",
       "currentSet": 2,
       "awayCurrentSetGames": 0,
       "homeCurrentSetGames": 1,
@@ -79,12 +79,12 @@
     },
     {
       "eventId": "wta-scrape-2-a-lacinova-a-smith",
-      "date": "2026-10-04T11:35:40.183535+00:00",
+      "date": "2026-10-04T11:35:45.033812+00:00",
       "displayTime": "Samsun Open • TUR",
       "away": "A. Lacinova",
       "home": "A. Smith",
       "awayScore": "5 · 15",
-      "homeScore": "2 · 15",
+      "homeScore": "2 · 30",
       "awaySets": [
         "5"
       ],
@@ -92,7 +92,7 @@
         "2"
       ],
       "awayPoint": "15",
-      "homePoint": "15",
+      "homePoint": "30",
       "currentSet": 1,
       "awayCurrentSetGames": 5,
       "homeCurrentSetGames": 2,
@@ -111,7 +111,7 @@
     },
     {
       "eventId": "wta-scrape-3-d-turkmen-w-falkowska",
-      "date": "2026-10-04T11:35:40.183628+00:00",
+      "date": "2026-10-04T11:35:45.033904+00:00",
       "displayTime": "Samsun Open • TUR",
       "away": "D. Turkmen",
       "home": "W. Falkowska",
@@ -132,7 +132,7 @@
       "homeSetsWon": 0,
       "round": "Qualifying",
       "court": "",
-      "status": "Live Match: 0:24 · Qualifying",
+      "status": "Live Match: 0:25 · Qualifying",
       "state": "live",
       "eventOnly": false,
       "title": "Samsun Open • TUR",
