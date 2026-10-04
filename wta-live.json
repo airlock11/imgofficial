@@ -2,7 +2,7 @@
   "special": true,
   "league": "WTA Tour",
   "live": true,
-  "updatedAt": "2026-10-04T05:54:43.623210+00:00",
+  "updatedAt": "2026-10-04T05:54:50.691804+00:00",
   "sourceName": "API-Tennis",
   "sourceUrl": "https://api-tennis.com/",
   "verificationSource": "API-Tennis",
@@ -884,7 +884,7 @@
       "eventOnly": false,
       "title": "Beijing",
       "eventType": "Wta Singles",
-      "serve": "Second Player",
+      "serve": "First Player",
       "sourceName": "API-Tennis",
       "sourceUrl": "https://api-tennis.com/",
       "verificationSource": "API-Tennis",
@@ -899,18 +899,20 @@
       "home": "Perez/ Schuurs",
       "awayLogo": "",
       "homeLogo": "",
-      "awayScore": "4 · 40",
-      "homeScore": "6 · 0",
+      "awayScore": "4 1 · 40",
+      "homeScore": "6 0 · 0",
       "awaySets": [
-        "4"
+        "4",
+        "1"
       ],
       "homeSets": [
-        "6"
+        "6",
+        "0"
       ],
       "awayPoint": "40",
       "homePoint": "0",
       "currentSet": 2,
-      "awayCurrentSetGames": 0,
+      "awayCurrentSetGames": 1,
       "homeCurrentSetGames": 0,
       "awaySetsWon": 0,
       "homeSetsWon": 1,
@@ -921,7 +923,7 @@
       "eventOnly": false,
       "title": "Beijing",
       "eventType": "Wta Doubles",
-      "serve": "First Player",
+      "serve": "Second Player",
       "sourceName": "API-Tennis",
       "sourceUrl": "https://api-tennis.com/",
       "verificationSource": "API-Tennis",
