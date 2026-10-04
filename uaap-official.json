@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-04T02:39:21+00:00",
+  "updatedAt": "2026-10-04T08:49:08+00:00",
   "season": "Season 89 Men's Basketball",
   "sources": {
     "stats": "https://uaap.org/stats/uaap-season-89-men-s-basketball",
@@ -32,6 +32,11 @@
       "losses": 1
     },
     {
+      "team": "De La Salle Green Archers",
+      "wins": 2,
+      "losses": 2
+    },
+    {
       "team": "NU Bulldogs",
       "wins": 2,
       "losses": 2
@@ -42,24 +47,27 @@
       "losses": 2
     },
     {
-      "team": "De La Salle Green Archers",
-      "wins": 1,
-      "losses": 2
-    },
-    {
       "team": "UE Red Warriors",
       "wins": 0,
-      "losses": 4
+      "losses": 5
     }
   ],
   "topPlayers": [
     {
       "player": "T. Lagat",
       "team": "UE Red Warriors",
-      "games": 4,
+      "games": 5,
+      "ppg": 19.6,
+      "rpg": 2.2,
+      "apg": 1.0
+    },
+    {
+      "player": "C. Akowe",
+      "team": "UST Growling Tigers",
+      "games": 3,
       "ppg": 17.0,
-      "rpg": 2.8,
-      "apg": 0.5
+      "rpg": 12.0,
+      "apg": 2.3
     },
     {
       "player": "K. Mongcopa",
@@ -70,28 +78,20 @@
       "apg": 4.5
     },
     {
-      "player": "C. Akowe",
-      "team": "UST Growling Tigers",
-      "games": 4,
-      "ppg": 16.0,
-      "rpg": 13.5,
-      "apg": 2.0
-    },
-    {
-      "player": "A. Acido",
-      "team": "UST Growling Tigers",
-      "games": 4,
-      "ppg": 16.0,
-      "rpg": 6.0,
-      "apg": 4.2
-    },
-    {
       "player": "K. Alas",
       "team": "Ateneo Blue Eagles",
       "games": 4,
       "ppg": 15.5,
       "rpg": 4.5,
       "apg": 2.0
+    },
+    {
+      "player": "A. Acido",
+      "team": "UST Growling Tigers",
+      "games": 3,
+      "ppg": 15.3,
+      "rpg": 7.0,
+      "apg": 4.3
     },
     {
       "player": "J. Bahay",
@@ -122,6 +122,50 @@
   "photoGallery": [],
   "previousGamePhotos": [],
   "highlights": [
+    {
+      "id": "ggfOmwXND7g",
+      "title": "UE vs DLSU | 3RD QUARTER HIGHLIGHTS | UAAP SEASON 89 MEN’S BASKETBALL",
+      "url": "https://www.youtube.com/watch?v=ggfOmwXND7g",
+      "thumbnail": "https://i.ytimg.com/vi/ggfOmwXND7g/hqdefault.jpg",
+      "published": "",
+      "channel": "One Sports",
+      "sourceName": "One Sports",
+      "sourceChannelId": "UCXDG9ue-emCN8Ad3h7lERqQ",
+      "verificationStatus": "verified"
+    },
+    {
+      "id": "JmqDJ56XT9s",
+      "title": "UE vs DLSU | FIRST HALF HIGHLIGHTS | UAAP SEASON 89 MEN’S BASKETBALL",
+      "url": "https://www.youtube.com/watch?v=JmqDJ56XT9s",
+      "thumbnail": "https://i.ytimg.com/vi/JmqDJ56XT9s/hqdefault.jpg",
+      "published": "",
+      "channel": "One Sports",
+      "sourceName": "One Sports",
+      "sourceChannelId": "UCXDG9ue-emCN8Ad3h7lERqQ",
+      "verificationStatus": "verified"
+    },
+    {
+      "id": "jOBF_xatp-E",
+      "title": "UE vs DLSU | 2ND QUARTER HIGHLIGHTS | UAAP SEASON 89 MEN’S BASKETBALL",
+      "url": "https://www.youtube.com/watch?v=jOBF_xatp-E",
+      "thumbnail": "https://i.ytimg.com/vi/jOBF_xatp-E/hqdefault.jpg",
+      "published": "",
+      "channel": "One Sports",
+      "sourceName": "One Sports",
+      "sourceChannelId": "UCXDG9ue-emCN8Ad3h7lERqQ",
+      "verificationStatus": "verified"
+    },
+    {
+      "id": "T451MgDL8ls",
+      "title": "UE vs DLSU | 1ST QUARTER HIGHLIGHTS | UAAP SEASON 89 MEN’S BASKETBALL",
+      "url": "https://www.youtube.com/watch?v=T451MgDL8ls",
+      "thumbnail": "https://i.ytimg.com/vi/T451MgDL8ls/hqdefault.jpg",
+      "published": "",
+      "channel": "One Sports",
+      "sourceName": "One Sports",
+      "sourceChannelId": "UCXDG9ue-emCN8Ad3h7lERqQ",
+      "verificationStatus": "verified"
+    },
     {
       "id": "eBUJeheQ9Vw",
       "title": "ADMU vs NU | SMART PLAYS EXTENDED HIGHLIGHTS | UAAP SEASON 89 MEN’S BASKETBALL | OCT 3, 2026",
@@ -187,54 +231,20 @@
       "sourceName": "One Sports",
       "sourceChannelId": "UCXDG9ue-emCN8Ad3h7lERqQ",
       "verificationStatus": "verified"
-    },
-    {
-      "id": "5vUuy7GEbQ8",
-      "title": "NU vs ADMU | 4TH QUARTER HIGHLIGHTS | UAAP SEASON 89 MEN'S BASKETBALL",
-      "url": "https://www.youtube.com/watch?v=5vUuy7GEbQ8",
-      "thumbnail": "https://i.ytimg.com/vi/5vUuy7GEbQ8/hqdefault.jpg",
-      "published": "",
-      "channel": "One Sports",
-      "sourceName": "One Sports",
-      "sourceChannelId": "UCXDG9ue-emCN8Ad3h7lERqQ",
-      "verificationStatus": "verified"
-    },
-    {
-      "id": "nU8DYxwhksM",
-      "title": "NU vs ADMU | 3RD QUARTER HIGHLIGHTS | UAAP SEASON 89 MEN'S BASKETBALL",
-      "url": "https://www.youtube.com/watch?v=nU8DYxwhksM",
-      "thumbnail": "https://i.ytimg.com/vi/nU8DYxwhksM/hqdefault.jpg",
-      "published": "",
-      "channel": "One Sports",
-      "sourceName": "One Sports",
-      "sourceChannelId": "UCXDG9ue-emCN8Ad3h7lERqQ",
-      "verificationStatus": "verified"
-    },
-    {
-      "id": "ijMdysN5Sfs",
-      "title": "NU vs ADMU | FIRST HALF HIGHLIGHTS | UAAP SEASON 89 MEN’S BASKETBALL",
-      "url": "https://www.youtube.com/watch?v=ijMdysN5Sfs",
-      "thumbnail": "https://i.ytimg.com/vi/ijMdysN5Sfs/hqdefault.jpg",
-      "published": "",
-      "channel": "One Sports",
-      "sourceName": "One Sports",
-      "sourceChannelId": "UCXDG9ue-emCN8Ad3h7lERqQ",
-      "verificationStatus": "verified"
-    },
-    {
-      "id": "Y9g4lwuHHGo",
-      "title": "NU vs ADMU | 2ND QUARTER HIGHLIGHTS | UAAP SEASON 89 MEN'S BASKETBALL",
-      "url": "https://www.youtube.com/watch?v=Y9g4lwuHHGo",
-      "thumbnail": "https://i.ytimg.com/vi/Y9g4lwuHHGo/hqdefault.jpg",
-      "published": "",
-      "channel": "One Sports",
-      "sourceName": "One Sports",
-      "sourceChannelId": "UCXDG9ue-emCN8Ad3h7lERqQ",
-      "verificationStatus": "verified"
     }
   ],
   "topPlayersMode": "recent-official-boxscores",
   "liveStatsGames": [
+    {
+      "first": "UE Red Warriors",
+      "firstScore": 87,
+      "second": "De La Salle Green Archers",
+      "secondScore": 112,
+      "status": "Final",
+      "state": "final",
+      "gameId": "16",
+      "url": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball?game_id=16"
+    },
     {
       "first": "NU Bulldogs",
       "firstScore": 76,
@@ -376,7 +386,7 @@
       "url": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball?game_id=1"
     }
   ],
-  "highlightsUpdatedAt": "2026-10-04T02:39:21+00:00",
+  "highlightsUpdatedAt": "2026-10-04T08:49:08+00:00",
   "automation": {
     "enabled": true,
     "mode": "game-day",
@@ -392,11 +402,11 @@
         "web-uaap-scheduled-8",
         "web-uaap-scheduled-9"
       ],
-      "nextGameAt": "2026-10-04T14:00:00+08:00",
+      "nextGameAt": "2026-10-04T17:30:00+08:00",
       "idleDiscoveryMinutes": 180,
       "gameDayDataRefreshMinutes": 15,
       "gameDayLivestreamRefreshMinutes": 5,
-      "lastSlowCheckAt": "2026-10-04T10:38:42+08:00"
+      "lastSlowCheckAt": "2026-10-04T16:48:27+08:00"
     },
     "failClosed": true
   }
