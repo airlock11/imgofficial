@@ -1,7 +1,7 @@
 {
   "version": 1,
   "source": "ESPN public football data",
-  "updatedAt": "2026-10-04T14:40:09.346Z",
+  "updatedAt": "2026-10-04T18:23:17.285Z",
   "leagues": {
     "soccer": {
       "name": "Premier League",
@@ -9,22 +9,6 @@
       "espn": "eng.1",
       "leagueLogo": "https://a.espncdn.com/i/leaguelogos/soccer/500/23.png",
       "games": [
-        {
-          "eventId": "401878777",
-          "date": "2026-09-20T15:30Z",
-          "displayTime": "",
-          "home": "Fulham",
-          "away": "Manchester United",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/370.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/360.png",
-          "homeScore": "1",
-          "awayScore": "1",
-          "state": "final",
-          "status": "FT",
-          "venue": "Craven Cottage",
-          "competition": "Premier League",
-          "category": "England"
-        },
         {
           "eventId": "401879268",
           "date": "2026-10-10T11:30Z",
@@ -888,7 +872,7 @@
           "points": 2
         }
       ],
-      "verifiedAt": "2026-10-04T14:40:08.841Z"
+      "verifiedAt": "2026-10-04T18:23:16.634Z"
     },
     "laliga": {
       "name": "La Liga",
@@ -896,38 +880,6 @@
       "espn": "esp.1",
       "leagueLogo": "https://a.espncdn.com/i/leaguelogos/soccer/500/15.png",
       "games": [
-        {
-          "eventId": "401882863",
-          "date": "2026-09-20T16:30Z",
-          "displayTime": "",
-          "home": "Deportivo",
-          "away": "Real Betis",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/90.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/244.png",
-          "homeScore": "1",
-          "awayScore": "1",
-          "state": "final",
-          "status": "FT",
-          "venue": "Riazor",
-          "competition": "La Liga",
-          "category": "Spain"
-        },
-        {
-          "eventId": "401882857",
-          "date": "2026-09-20T16:30Z",
-          "displayTime": "",
-          "home": "Villarreal",
-          "away": "Levante",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/102.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/1538.png",
-          "homeScore": "3",
-          "awayScore": "1",
-          "state": "final",
-          "status": "FT",
-          "venue": "Estadio de la Cerámica",
-          "competition": "La Liga",
-          "category": "Spain"
-        },
         {
           "eventId": "401882858",
           "date": "2026-09-20T19:00Z",
@@ -1823,7 +1775,7 @@
           "points": 3
         }
       ],
-      "verifiedAt": "2026-10-04T14:40:09.061Z"
+      "verifiedAt": "2026-10-04T18:23:16.957Z"
     },
     "bundesliga": {
       "name": "Bundesliga",
@@ -1831,38 +1783,6 @@
       "espn": "ger.1",
       "leagueLogo": "https://a.espncdn.com/i/leaguelogos/soccer/500/10.png",
       "games": [
-        {
-          "eventId": "401884783",
-          "date": "2026-09-20T15:30Z",
-          "displayTime": "",
-          "home": "Schalke 04",
-          "away": "SV Elversberg",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/133.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/10388.png",
-          "homeScore": "0",
-          "awayScore": "0",
-          "state": "final",
-          "status": "FT",
-          "venue": "Veltins Arena",
-          "competition": "Bundesliga",
-          "category": "Germany"
-        },
-        {
-          "eventId": "401884782",
-          "date": "2026-09-20T17:30Z",
-          "displayTime": "",
-          "home": "SC Paderborn 07",
-          "away": "TSG Hoffenheim",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/3307.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/7911.png",
-          "homeScore": "3",
-          "awayScore": "1",
-          "state": "final",
-          "status": "FT",
-          "venue": "Home Deluxe Arena",
-          "competition": "Bundesliga",
-          "category": "Germany"
-        },
         {
           "eventId": "401884781",
           "date": "2026-10-09T18:30Z",
@@ -2640,7 +2560,7 @@
           "points": 0
         }
       ],
-      "verifiedAt": "2026-10-04T14:40:09.224Z"
+      "verifiedAt": "2026-10-04T18:23:17.098Z"
     },
     "seriea": {
       "name": "Serie A",
@@ -2648,22 +2568,6 @@
       "espn": "ita.1",
       "leagueLogo": "https://a.espncdn.com/i/leaguelogos/soccer/500/12.png",
       "games": [
-        {
-          "eventId": "401874757",
-          "date": "2026-09-20T16:00Z",
-          "displayTime": "",
-          "home": "Juventus",
-          "away": "Atalanta",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/111.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/105.png",
-          "homeScore": "2",
-          "awayScore": "0",
-          "state": "final",
-          "status": "FT",
-          "venue": "Allianz Stadium",
-          "competition": "Serie A",
-          "category": "Italy"
-        },
         {
           "eventId": "401874944",
           "date": "2026-09-20T18:45Z",
@@ -3703,7 +3607,7 @@
           "points": 0
         }
       ],
-      "verifiedAt": "2026-10-04T14:40:09.346Z"
+      "verifiedAt": "2026-10-04T18:23:17.285Z"
     }
   }
 }
