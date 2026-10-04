@@ -1,7 +1,7 @@
 {
   "version": 1,
   "source": "ESPN public football data",
-  "updatedAt": "2026-10-04T08:49:35.483Z",
+  "updatedAt": "2026-10-04T14:40:09.346Z",
   "leagues": {
     "soccer": {
       "name": "Premier League",
@@ -9,54 +9,6 @@
       "espn": "eng.1",
       "leagueLogo": "https://a.espncdn.com/i/leaguelogos/soccer/500/23.png",
       "games": [
-        {
-          "eventId": "401879276",
-          "date": "2026-09-20T13:00Z",
-          "displayTime": "",
-          "home": "AFC Bournemouth",
-          "away": "Liverpool",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/349.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/364.png",
-          "homeScore": "0",
-          "awayScore": "1",
-          "state": "final",
-          "status": "FT",
-          "venue": "Vitality Stadium",
-          "competition": "Premier League",
-          "category": "England"
-        },
-        {
-          "eventId": "401879273",
-          "date": "2026-09-20T13:00Z",
-          "displayTime": "",
-          "home": "Leeds United",
-          "away": "Crystal Palace",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/357.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/384.png",
-          "homeScore": "0",
-          "awayScore": "0",
-          "state": "final",
-          "status": "FT",
-          "venue": "Elland Road",
-          "competition": "Premier League",
-          "category": "England"
-        },
-        {
-          "eventId": "401879272",
-          "date": "2026-09-20T13:00Z",
-          "displayTime": "",
-          "home": "Manchester City",
-          "away": "Sunderland",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/382.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/366.png",
-          "homeScore": "5",
-          "awayScore": "3",
-          "state": "final",
-          "status": "FT",
-          "venue": "Etihad Stadium",
-          "competition": "Premier League",
-          "category": "England"
-        },
         {
           "eventId": "401878777",
           "date": "2026-09-20T15:30Z",
@@ -936,7 +888,7 @@
           "points": 2
         }
       ],
-      "verifiedAt": "2026-10-04T08:49:34.676Z"
+      "verifiedAt": "2026-10-04T14:40:08.841Z"
     },
     "laliga": {
       "name": "La Liga",
@@ -944,38 +896,6 @@
       "espn": "esp.1",
       "leagueLogo": "https://a.espncdn.com/i/leaguelogos/soccer/500/15.png",
       "games": [
-        {
-          "eventId": "401882861",
-          "date": "2026-09-20T12:00Z",
-          "displayTime": "",
-          "home": "Getafe",
-          "away": "Málaga",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/2922.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/99.png",
-          "homeScore": "1",
-          "awayScore": "0",
-          "state": "final",
-          "status": "FT",
-          "venue": "Estadio Coliseum",
-          "competition": "La Liga",
-          "category": "Spain"
-        },
-        {
-          "eventId": "401882865",
-          "date": "2026-09-20T14:15Z",
-          "displayTime": "",
-          "home": "Atlético Madrid",
-          "away": "Real Madrid",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/1068.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/86.png",
-          "homeScore": "2",
-          "awayScore": "1",
-          "state": "final",
-          "status": "FT",
-          "venue": "Riyadh Air Metropolitano",
-          "competition": "La Liga",
-          "category": "Spain"
-        },
         {
           "eventId": "401882863",
           "date": "2026-09-20T16:30Z",
@@ -1903,7 +1823,7 @@
           "points": 3
         }
       ],
-      "verifiedAt": "2026-10-04T08:49:34.977Z"
+      "verifiedAt": "2026-10-04T14:40:09.061Z"
     },
     "bundesliga": {
       "name": "Bundesliga",
@@ -1911,22 +1831,6 @@
       "espn": "ger.1",
       "leagueLogo": "https://a.espncdn.com/i/leaguelogos/soccer/500/10.png",
       "games": [
-        {
-          "eventId": "401884788",
-          "date": "2026-09-20T13:30Z",
-          "displayTime": "",
-          "home": "Bayer Leverkusen",
-          "away": "RB Leipzig",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/131.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/11420.png",
-          "homeScore": "2",
-          "awayScore": "0",
-          "state": "final",
-          "status": "FT",
-          "venue": "BayArena",
-          "competition": "Bundesliga",
-          "category": "Germany"
-        },
         {
           "eventId": "401884783",
           "date": "2026-09-20T15:30Z",
@@ -2736,7 +2640,7 @@
           "points": 0
         }
       ],
-      "verifiedAt": "2026-10-04T08:49:35.199Z"
+      "verifiedAt": "2026-10-04T14:40:09.224Z"
     },
     "seriea": {
       "name": "Serie A",
@@ -2744,54 +2648,6 @@
       "espn": "ita.1",
       "leagueLogo": "https://a.espncdn.com/i/leaguelogos/soccer/500/12.png",
       "games": [
-        {
-          "eventId": "401874934",
-          "date": "2026-09-20T10:30Z",
-          "displayTime": "",
-          "home": "Fiorentina",
-          "away": "Napoli",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/109.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/114.png",
-          "homeScore": "1",
-          "awayScore": "1",
-          "state": "final",
-          "status": "FT",
-          "venue": "Stadio Artemio Franchi",
-          "competition": "Serie A",
-          "category": "Italy"
-        },
-        {
-          "eventId": "401874752",
-          "date": "2026-09-20T13:00Z",
-          "displayTime": "",
-          "home": "Frosinone",
-          "away": "Como",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/4057.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/2572.png",
-          "homeScore": "2",
-          "awayScore": "0",
-          "state": "final",
-          "status": "FT",
-          "venue": "Stadio Benito Stirpe",
-          "competition": "Serie A",
-          "category": "Italy"
-        },
-        {
-          "eventId": "401874801",
-          "date": "2026-09-20T13:00Z",
-          "displayTime": "",
-          "home": "Parma",
-          "away": "Genoa",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/115.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/3263.png",
-          "homeScore": "2",
-          "awayScore": "1",
-          "state": "final",
-          "status": "FT",
-          "venue": "Ennio Tardini",
-          "competition": "Serie A",
-          "category": "Italy"
-        },
         {
           "eventId": "401874757",
           "date": "2026-09-20T16:00Z",
@@ -3847,7 +3703,7 @@
           "points": 0
         }
       ],
-      "verifiedAt": "2026-10-04T08:49:35.482Z"
+      "verifiedAt": "2026-10-04T14:40:09.346Z"
     }
   }
 }
