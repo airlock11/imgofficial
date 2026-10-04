@@ -1,7 +1,7 @@
 {
   "version": 1,
   "source": "ESPN public football data",
-  "updatedAt": "2026-10-04T18:23:17.285Z",
+  "updatedAt": "2026-10-04T21:47:43.179Z",
   "leagues": {
     "soccer": {
       "name": "Premier League",
@@ -872,7 +872,7 @@
           "points": 2
         }
       ],
-      "verifiedAt": "2026-10-04T18:23:16.634Z"
+      "verifiedAt": "2026-10-04T21:47:42.415Z"
     },
     "laliga": {
       "name": "La Liga",
@@ -880,22 +880,6 @@
       "espn": "esp.1",
       "leagueLogo": "https://a.espncdn.com/i/leaguelogos/soccer/500/15.png",
       "games": [
-        {
-          "eventId": "401882858",
-          "date": "2026-09-20T19:00Z",
-          "displayTime": "",
-          "home": "Valencia",
-          "away": "Real Sociedad",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/94.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/89.png",
-          "homeScore": "2",
-          "awayScore": "3",
-          "state": "final",
-          "status": "FT",
-          "venue": "Mestalla Stadium",
-          "competition": "La Liga",
-          "category": "Spain"
-        },
         {
           "eventId": "401882851",
           "date": "2026-10-09T19:00Z",
@@ -1775,7 +1759,7 @@
           "points": 3
         }
       ],
-      "verifiedAt": "2026-10-04T18:23:16.957Z"
+      "verifiedAt": "2026-10-04T21:47:42.724Z"
     },
     "bundesliga": {
       "name": "Bundesliga",
@@ -2560,7 +2544,7 @@
           "points": 0
         }
       ],
-      "verifiedAt": "2026-10-04T18:23:17.098Z"
+      "verifiedAt": "2026-10-04T21:47:42.984Z"
     },
     "seriea": {
       "name": "Serie A",
@@ -2568,22 +2552,6 @@
       "espn": "ita.1",
       "leagueLogo": "https://a.espncdn.com/i/leaguelogos/soccer/500/12.png",
       "games": [
-        {
-          "eventId": "401874944",
-          "date": "2026-09-20T18:45Z",
-          "displayTime": "",
-          "home": "AC Milan",
-          "away": "Lecce",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/103.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/113.png",
-          "homeScore": "3",
-          "awayScore": "0",
-          "state": "final",
-          "status": "FT",
-          "venue": "San Siro",
-          "competition": "Serie A",
-          "category": "Italy"
-        },
         {
           "eventId": "401874947",
           "date": "2026-10-10T13:00Z",
@@ -3607,7 +3575,7 @@
           "points": 0
         }
       ],
-      "verifiedAt": "2026-10-04T18:23:17.285Z"
+      "verifiedAt": "2026-10-04T21:47:43.179Z"
     }
   }
 }
