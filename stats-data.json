@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-04T14:39:10.530908+00:00",
+  "updatedAt": "2026-10-04T18:24:01.624138+00:00",
   "leagues": {
     "uaap": {
       "league": "UAAP",
@@ -11253,91 +11253,57 @@
       "league": "NCAA Football",
       "season": "2026 Regular Season",
       "sourceName": "ESPN public statistics feed",
-      "sourceUrl": "https://site.web.api.espn.com/apis/common/v3/sports/football/college-football/statistics/byathlete?region=us&lang=en&contentorigin=espn&isqualified=false&page=1&limit=50&sort=passing.passingYards%3Adesc&season=2026&seasontype=2&category=offense%3Apassing",
+      "sourceUrl": "https://site.web.api.espn.com/apis/common/v3/sports/football/college-football/statistics/byathlete?region=us&lang=en&contentorigin=espn&isqualified=false&page=1&limit=50&sort=passing.passingTouchdowns%3Adesc&season=2026&seasontype=2&category=offense%3Apassing",
       "groups": [
-        {
-          "title": "Passing Yards",
-          "suffix": "YDS",
-          "rows": [
-            {
-              "player": "Max Johnson",
-              "team": "GASO",
-              "gp": null,
-              "value": 996.0,
-              "displayValue": "996"
-            },
-            {
-              "player": "Colton Joseph",
-              "team": "WIS",
-              "gp": null,
-              "value": 987.0,
-              "displayValue": "987"
-            },
-            {
-              "player": "Jaron-Keawe Sagapolutele",
-              "team": "CAL",
-              "gp": null,
-              "value": 985.0,
-              "displayValue": "985"
-            },
-            {
-              "player": "Alberto Mendoza",
-              "team": "GT",
-              "gp": null,
-              "value": 975.0,
-              "displayValue": "975"
-            },
-            {
-              "player": "Noah Kim",
-              "team": "EMU",
-              "gp": null,
-              "value": 968.0,
-              "displayValue": "968"
-            },
-            {
-              "player": "Will Hammond",
-              "team": "TTU",
-              "gp": null,
-              "value": 968.0,
-              "displayValue": "968"
-            },
-            {
-              "player": "CJ Carr",
-              "team": "ND",
-              "gp": null,
-              "value": 963.0,
-              "displayValue": "963"
-            },
-            {
-              "player": "Drake Lindsey",
-              "team": "MINN",
-              "gp": null,
-              "value": 951.0,
-              "displayValue": "951"
-            }
-          ]
-        },
         {
           "title": "Passing TDs",
           "suffix": "TD",
           "rows": [
             {
+              "player": "Kamario Taylor",
+              "team": "MSST",
+              "gp": null,
+              "value": 17.0,
+              "displayValue": "17"
+            },
+            {
+              "player": "Braden Atkinson",
+              "team": "ORST",
+              "gp": null,
+              "value": 16.0,
+              "displayValue": "16"
+            },
+            {
+              "player": "Josh Hoover",
+              "team": "IU",
+              "gp": null,
+              "value": 15.0,
+              "displayValue": "15"
+            },
+            {
               "player": "Jayden Maiava",
               "team": "USC",
               "gp": null,
-              "value": 14.0,
-              "displayValue": "14"
+              "value": 15.0,
+              "displayValue": "15"
             },
             {
               "player": "Darian Mensah",
               "team": "MIA",
               "gp": null,
+              "value": 15.0,
+              "displayValue": "15"
+            },
+            {
+              "player": "Kevin Jennings",
+              "team": "SMU",
+              "gp": null,
               "value": 14.0,
               "displayValue": "14"
             },
             {
-              "player": "Kamario Taylor",
-              "team": "MSST",
+              "player": "Marcus Stokes",
+              "team": "MEM",
               "gp": null,
               "value": 14.0,
               "displayValue": "14"
@@ -11348,34 +11314,6 @@
               "gp": null,
               "value": 14.0,
               "displayValue": "14"
-            },
-            {
-              "player": "John Alan Richter",
-              "team": "TOL",
-              "gp": null,
-              "value": 12.0,
-              "displayValue": "12"
-            },
-            {
-              "player": "Kevin Jennings",
-              "team": "SMU",
-              "gp": null,
-              "value": 12.0,
-              "displayValue": "12"
-            },
-            {
-              "player": "Josh Hoover",
-              "team": "IU",
-              "gp": null,
-              "value": 11.0,
-              "displayValue": "11"
-            },
-            {
-              "player": "Conner Weigman",
-              "team": "HOU",
-              "gp": null,
-              "value": 11.0,
-              "displayValue": "11"
             }
           ]
         },
@@ -11384,6 +11322,20 @@
           "suffix": "YDS",
           "rows": [
             {
+              "player": "Dylan Riley",
+              "team": "BOIS",
+              "gp": null,
+              "value": 685.0,
+              "displayValue": "685"
+            },
+            {
+              "player": "Cam Cook",
+              "team": "WVU",
+              "gp": null,
+              "value": 652.0,
+              "displayValue": "652"
+            },
+            {
               "player": "Nate Sheppard",
               "team": "DUKE",
               "gp": null,
@@ -11391,53 +11343,39 @@
               "displayValue": "644"
             },
             {
-              "player": "Jadan Baugh",
-              "team": "FLA",
-              "gp": null,
-              "value": 600.0,
-              "displayValue": "600"
-            },
-            {
-              "player": "Dylan Riley",
-              "team": "BOIS",
-              "gp": null,
-              "value": 592.0,
-              "displayValue": "592"
-            },
-            {
-              "player": "Jahiem White",
-              "team": "UNT",
-              "gp": null,
-              "value": 582.0,
-              "displayValue": "582"
-            },
-            {
               "player": "Torrance Burgess Jr.",
               "team": "TXST",
               "gp": null,
-              "value": 537.0,
-              "displayValue": "537"
+              "value": 614.0,
+              "displayValue": "614"
             },
             {
-              "player": "Cam Cook",
-              "team": "WVU",
+              "player": "Jadan Baugh",
+              "team": "FLA",
               "gp": null,
-              "value": 510.0,
-              "displayValue": "510"
+              "value": 613.0,
+              "displayValue": "613"
             },
             {
-              "player": "James Jones",
-              "team": "NMSU",
+              "player": "Jamal Roberts",
+              "team": "MIZ",
               "gp": null,
-              "value": 510.0,
-              "displayValue": "510"
+              "value": 606.0,
+              "displayValue": "606"
             },
             {
-              "player": "Kam Davis",
-              "team": "LIB",
+              "player": "Aiden Flora",
+              "team": "ISU",
               "gp": null,
-              "value": 457.0,
-              "displayValue": "457"
+              "value": 594.0,
+              "displayValue": "594"
+            },
+            {
+              "player": "Turbo Richard",
+              "team": "IU",
+              "gp": null,
+              "value": 587.0,
+              "displayValue": "587"
             }
           ]
         },
@@ -11449,57 +11387,57 @@
               "player": "Jeremiah Smith",
               "team": "OSU",
               "gp": null,
-              "value": 617.0,
-              "displayValue": "617"
+              "value": 823.0,
+              "displayValue": "823"
             },
             {
               "player": "Jesse Legree",
               "team": "ORST",
               "gp": null,
-              "value": 585.0,
-              "displayValue": "585"
-            },
-            {
-              "player": "Malachi Toney",
-              "team": "MIA",
-              "gp": null,
-              "value": 564.0,
-              "displayValue": "564"
+              "value": 744.0,
+              "displayValue": "744"
             },
             {
               "player": "KJ Duff",
               "team": "RUTG",
               "gp": null,
-              "value": 550.0,
-              "displayValue": "550"
+              "value": 628.0,
+              "displayValue": "628"
+            },
+            {
+              "player": "Malachi Toney",
+              "team": "MIA",
+              "gp": null,
+              "value": 604.0,
+              "displayValue": "604"
             },
             {
               "player": "Carlos Hernandez",
               "team": "WAKE",
               "gp": null,
-              "value": 516.0,
-              "displayValue": "516"
+              "value": 603.0,
+              "displayValue": "603"
+            },
+            {
+              "player": "Anthony Evans III",
+              "team": "MSST",
+              "gp": null,
+              "value": 574.0,
+              "displayValue": "574"
             },
             {
               "player": "Chris Marshall",
               "team": "ARK",
               "gp": null,
-              "value": 473.0,
-              "displayValue": "473"
-            },
-            {
-              "player": "Makai Jackson",
-              "team": "LIB",
-              "gp": null,
-              "value": 469.0,
-              "displayValue": "469"
+              "value": 549.0,
+              "displayValue": "549"
             },
             {
               "player": "Collin Dixon",
               "team": "ILL",
               "gp": null,
-              "value": 430.0,
-              "displayValue": "430"
+              "value": 546.0,
+              "displayValue": "546"
             }
           ]
         }
