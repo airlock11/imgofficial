@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-04T16:49:09+08:00",
+  "updated_at": "2026-10-04T22:37:41+08:00",
   "refresh_minutes": 15,
   "leagues": {
     "pba": {
@@ -100,7 +100,7 @@
           "idleDiscoveryMinutes": 180,
           "gameDayDataRefreshMinutes": 15,
           "gameDayLivestreamRefreshMinutes": 5,
-          "lastSlowCheckAt": "2026-10-04T16:48:25+08:00"
+          "lastSlowCheckAt": "2026-10-04T22:37:01+08:00"
         },
         "failClosed": true
       }
@@ -472,6 +472,20 @@
       ],
       "games": [
         {
+          "eventId": "yt-nbl-gdXQ37vGH7Q",
+          "date": "2026-10-04T18:00:00+08:00",
+          "displayTime": "Oct 4",
+          "away": "Tikas Kapampangan",
+          "home": "CamSur Express",
+          "awayScore": "—",
+          "homeScore": "—",
+          "status": "Replay available · Bren Z. Guiao Convention Center San Fernando, Pampanga",
+          "state": "final",
+          "location": "Bren Z. Guiao Convention Center San Fernando, Pampanga",
+          "sourceName": "NBL-Pilipinas YouTube",
+          "sourceUrl": "https://www.youtube.com/watch?v=gdXQ37vGH7Q"
+        },
+        {
           "eventId": "yt-nbl-TFvmOLftk64",
           "date": "2026-10-04T18:00:00+08:00",
           "displayTime": "Oct 4",
@@ -479,8 +493,8 @@
           "home": "Taguig City Generals",
           "awayScore": "—",
           "homeScore": "—",
-          "status": "Scheduled · Bren Z. Guiao Convention Center San Fernando, Pampanga",
-          "state": "scheduled",
+          "status": "Replay available · Bren Z. Guiao Convention Center San Fernando, Pampanga",
+          "state": "final",
           "location": "Bren Z. Guiao Convention Center San Fernando, Pampanga",
           "sourceName": "NBL-Pilipinas YouTube",
           "sourceUrl": "https://www.youtube.com/watch?v=TFvmOLftk64"
@@ -633,20 +647,6 @@
           "location": "Jun Dueñas Gym Central Signal, Taguig City",
           "sourceName": "NBL-Pilipinas YouTube",
           "sourceUrl": "https://www.youtube.com/watch?v=f9zXTRkn3hk"
-        },
-        {
-          "eventId": "yt-nbl-RF0CfZ5EujE",
-          "date": "2026-09-11T18:00:00+08:00",
-          "displayTime": "Sep 11",
-          "away": "CamSur Express",
-          "home": "Pangasinan Asinderos",
-          "awayScore": "—",
-          "homeScore": "—",
-          "status": "Replay available · Robert B. Estrella, SR. Memorial Stadium Rosales, Pangasinan",
-          "state": "final",
-          "location": "Robert B. Estrella, SR. Memorial Stadium Rosales, Pangasinan",
-          "sourceName": "NBL-Pilipinas YouTube",
-          "sourceUrl": "https://www.youtube.com/watch?v=RF0CfZ5EujE"
         },
         {
           "eventId": "verified-nbl-20260830-starhorse-tikas",
@@ -1270,11 +1270,11 @@
             "web-uaap-scheduled-8",
             "web-uaap-scheduled-9"
           ],
-          "nextGameAt": "2026-10-04T17:30:00+08:00",
+          "nextGameAt": "2026-10-07T14:30:00+08:00",
           "idleDiscoveryMinutes": 180,
           "gameDayDataRefreshMinutes": 15,
           "gameDayLivestreamRefreshMinutes": 5,
-          "lastSlowCheckAt": "2026-10-04T16:48:27+08:00"
+          "lastSlowCheckAt": "2026-10-04T22:37:03+08:00"
         },
         "failClosed": true
       }
@@ -1298,7 +1298,7 @@
         "idleDiscoveryMinutes": 180,
         "gameDayDataRefreshMinutes": 15,
         "gameDayLivestreamRefreshMinutes": 5,
-        "lastSlowCheckAt": "2026-10-04T16:48:25+08:00"
+        "lastSlowCheckAt": "2026-10-04T22:37:01+08:00"
       },
       "failClosed": true
     },
@@ -1317,11 +1317,11 @@
           "web-uaap-scheduled-8",
           "web-uaap-scheduled-9"
         ],
-        "nextGameAt": "2026-10-04T17:30:00+08:00",
+        "nextGameAt": "2026-10-07T14:30:00+08:00",
         "idleDiscoveryMinutes": 180,
         "gameDayDataRefreshMinutes": 15,
         "gameDayLivestreamRefreshMinutes": 5,
-        "lastSlowCheckAt": "2026-10-04T16:48:27+08:00"
+        "lastSlowCheckAt": "2026-10-04T22:37:03+08:00"
       },
       "failClosed": true
     }
