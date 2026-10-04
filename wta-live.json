@@ -2,18 +2,18 @@
   "special": true,
   "league": "WTA Tour",
   "live": true,
-  "updatedAt": "2026-10-04T07:46:10.893061+00:00",
+  "updatedAt": "2026-10-04T07:46:16.031342+00:00",
   "sourceName": "WTA Official Scores scrape",
   "sourceUrl": "https://www.wtatennis.com/scores/",
   "verificationSource": "WTA Official Scores",
   "verificationUrl": "https://www.wtatennis.com/scores/",
-  "pageLiveCount": 3,
-  "parsedMatchCount": 3,
+  "pageLiveCount": 4,
+  "parsedMatchCount": 4,
   "note": "GitHub scrape of the rendered WTA Scores page. Game points, current set number, current-set games and per-set scores are stored separately.",
   "games": [
     {
-      "eventId": "wta-scrape-1-y-yang-r-saigo",
-      "date": "2026-10-04T07:46:10.891498+00:00",
+      "eventId": "wta-scrape-2-y-yang-r-saigo",
+      "date": "2026-10-04T07:46:16.029786+00:00",
       "displayTime": "Suzhou Open • CHN",
       "away": "Y. Yang",
       "home": "R. Saigo",
@@ -46,8 +46,8 @@
       "verificationUrl": "https://www.wtatennis.com/scores/"
     },
     {
-      "eventId": "wta-scrape-2-h-shi-c-yuan",
-      "date": "2026-10-04T07:46:10.891598+00:00",
+      "eventId": "wta-scrape-3-h-shi-c-yuan",
+      "date": "2026-10-04T07:46:16.029876+00:00",
       "displayTime": "Suzhou Open • CHN",
       "away": "H. Shi",
       "home": "C. Yuan",
@@ -80,12 +80,46 @@
       "verificationUrl": "https://www.wtatennis.com/scores/"
     },
     {
-      "eventId": "wta-scrape-0-d-snigur-t-preston",
-      "date": "2026-10-04T07:46:10.891334+00:00",
+      "eventId": "wta-scrape-0-upcoming-brad-drewett-mcnally-tjen",
+      "date": "2026-10-04T07:46:16.029522+00:00",
+      "displayTime": "China Open • CHN",
+      "away": "Upcoming / Brad Drewett",
+      "home": "McNally / Tjen",
+      "awayScore": "2 2 · 0",
+      "homeScore": "2 2 · 0",
+      "awaySets": [
+        "2",
+        "2"
+      ],
+      "homeSets": [
+        "2",
+        "2"
+      ],
+      "awayPoint": "0",
+      "homePoint": "0",
+      "currentSet": 2,
+      "awayCurrentSetGames": 2,
+      "homeCurrentSetGames": 2,
+      "awaySetsWon": 0,
+      "homeSetsWon": 0,
+      "round": "Round of 32",
+      "court": "",
+      "status": "Live Match: 1:02 · Round of 32",
+      "state": "live",
+      "eventOnly": false,
+      "title": "China Open • CHN",
+      "sourceName": "WTA Official Scores scrape",
+      "sourceUrl": "https://www.wtatennis.com/scores/",
+      "verificationSource": "WTA Official Scores",
+      "verificationUrl": "https://www.wtatennis.com/scores/"
+    },
+    {
+      "eventId": "wta-scrape-1-d-snigur-t-preston",
+      "date": "2026-10-04T07:46:16.029688+00:00",
       "displayTime": "China Open • CHN",
       "away": "D. Snigur",
       "home": "T. Preston",
-      "awayScore": "6 1 · 30",
+      "awayScore": "6 1 · 40",
       "homeScore": "1 0 · 30",
       "awaySets": [
         "6",
@@ -95,7 +129,7 @@
         "1",
         "0"
       ],
-      "awayPoint": "30",
+      "awayPoint": "40",
       "homePoint": "30",
       "currentSet": 2,
       "awayCurrentSetGames": 1,
