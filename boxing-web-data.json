@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-03T21:41:57+00:00",
+  "updated_at": "2026-10-04T06:14:43+00:00",
   "source": "Official boxing websites",
   "sources": [
     {
@@ -13,7 +13,7 @@
   ],
   "source_counts": {
     "Premier Boxing Champions": 3,
-    "Matchroom Boxing": 3
+    "Matchroom Boxing": 2
   },
   "errors": {
     "Matchroom Boxing": "Parser returned no current rows; retained last verified official schedule"
@@ -101,37 +101,6 @@
         },
         "fighter_2": {
           "name": "Koen Mazoudier",
-          "winner": false
-        }
-      },
-      "results": {
-        "outcome": null,
-        "outcome_long": null,
-        "round": null,
-        "time": null,
-        "scores": []
-      }
-    },
-    {
-      "id": "matchroom-20261003-whittaker-wallace",
-      "title": "Whittaker vs. Wallace",
-      "date": "2026-10-03T12:00:00Z",
-      "displayTime": "Oct 3 · Time TBA",
-      "status": "NOT_STARTED",
-      "sourceName": "Matchroom Boxing",
-      "sourceUrl": "https://www.matchroomboxing.com/events/",
-      "event": {
-        "title": "Whittaker vs. Wallace",
-        "location": "Birmingham, UK",
-        "venue": "Utilita Arena"
-      },
-      "fighters": {
-        "fighter_1": {
-          "name": "Whittaker",
-          "winner": false
-        },
-        "fighter_2": {
-          "name": "Wallace",
           "winner": false
         }
       },
