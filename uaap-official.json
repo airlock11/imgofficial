@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-04T14:37:40+00:00",
+  "updatedAt": "2026-10-04T18:23:26+00:00",
   "season": "Season 89 Men's Basketball",
   "sources": {
     "stats": "https://uaap.org/stats/uaap-season-89-men-s-basketball",
@@ -396,27 +396,24 @@
       "url": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball?game_id=1"
     }
   ],
-  "highlightsUpdatedAt": "2026-10-04T14:37:40+00:00",
+  "highlightsUpdatedAt": "2026-10-04T18:23:26+00:00",
   "automation": {
     "enabled": true,
-    "mode": "game-day",
-    "dataRefreshMinutes": 15,
-    "livestreamRefreshMinutes": 5,
+    "mode": "idle",
+    "dataRefreshMinutes": 180,
+    "livestreamRefreshMinutes": 0,
     "scheduleAware": {
       "enabled": true,
       "timezone": "Asia/Manila",
-      "mode": "game-day",
-      "gameDay": true,
-      "todayGameCount": 2,
-      "todayGames": [
-        "web-uaap-scheduled-8",
-        "web-uaap-scheduled-9"
-      ],
+      "mode": "idle",
+      "gameDay": false,
+      "todayGameCount": 0,
+      "todayGames": [],
       "nextGameAt": "2026-10-07T14:30:00+08:00",
       "idleDiscoveryMinutes": 180,
       "gameDayDataRefreshMinutes": 15,
       "gameDayLivestreamRefreshMinutes": 5,
-      "lastSlowCheckAt": "2026-10-04T22:37:03+08:00"
+      "lastSlowCheckAt": "2026-10-05T02:22:49+08:00"
     },
     "failClosed": true
   }
