@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-05T00:28:02.773226+00:00",
+  "updatedAt": "2026-10-05T06:05:54.668112+00:00",
   "leagues": {
     "uaap": {
       "league": "UAAP",
@@ -9766,34 +9766,69 @@
     },
     "pba": {
       "league": "PBA",
-      "season": "Current PBA Conference Leaders",
+      "season": "Current PBA player statistics",
       "sourceName": "PBA Official",
-      "sourceUrl": "https://www.pba.ph/leaders",
+      "sourceUrl": "https://www.pba.ph/stats",
       "groups": [
         {
           "title": "Points",
           "suffix": "PPG",
           "rows": [
             {
-              "player": "George King",
+              "player": "G. King",
               "team": "",
-              "gp": null,
-              "value": 34.8,
+              "gp": 9,
+              "value": 34.78,
               "displayValue": "34.8"
             },
             {
-              "player": "De'Vondre Perry",
+              "player": "D. Perry",
               "team": "",
-              "gp": null,
+              "gp": 6,
               "value": 34.5,
               "displayValue": "34.5"
             },
             {
-              "player": "Riley James Grigsby",
+              "player": "R. Grigsby",
               "team": "",
-              "gp": null,
-              "value": 34,
+              "gp": 1,
+              "value": 34.0,
               "displayValue": "34"
+            },
+            {
+              "player": "J. Varnado",
+              "team": "",
+              "gp": 1,
+              "value": 31.0,
+              "displayValue": "31"
+            },
+            {
+              "player": "R. Johnson III",
+              "team": "",
+              "gp": 7,
+              "value": 30.71,
+              "displayValue": "30.7"
+            },
+            {
+              "player": "J. Strings",
+              "team": "",
+              "gp": 7,
+              "value": 30.29,
+              "displayValue": "30.3"
+            },
+            {
+              "player": "K. Barkley",
+              "team": "",
+              "gp": 6,
+              "value": 29.83,
+              "displayValue": "29.8"
+            },
+            {
+              "player": "C. Clark",
+              "team": "",
+              "gp": 2,
+              "value": 29.5,
+              "displayValue": "29.5"
             }
           ]
         },
@@ -9802,25 +9837,60 @@
           "suffix": "RPG",
           "rows": [
             {
-              "player": "De'Vondre Perry",
+              "player": "D. Perry",
               "team": "",
-              "gp": null,
-              "value": 14.8,
+              "gp": 6,
+              "value": 14.83,
               "displayValue": "14.8"
             },
             {
-              "player": "Kentrell Debarrus Barkley",
+              "player": "K. Barkley",
               "team": "",
-              "gp": null,
+              "gp": 6,
               "value": 14.5,
               "displayValue": "14.5"
             },
             {
-              "player": "Aaron Craig Fuller",
+              "player": "A. Fuller",
               "team": "",
-              "gp": null,
-              "value": 13,
+              "gp": 6,
+              "value": 13.0,
               "displayValue": "13"
+            },
+            {
+              "player": "S. Chiu",
+              "team": "",
+              "gp": 8,
+              "value": 12.13,
+              "displayValue": "12.1"
+            },
+            {
+              "player": "J. Franklin",
+              "team": "",
+              "gp": 1,
+              "value": 12.0,
+              "displayValue": "12"
+            },
+            {
+              "player": "R. Hollis-Jefferson",
+              "team": "",
+              "gp": 3,
+              "value": 11.67,
+              "displayValue": "11.7"
+            },
+            {
+              "player": "K. Buffen",
+              "team": "",
+              "gp": 7,
+              "value": 11.57,
+              "displayValue": "11.6"
+            },
+            {
+              "player": "J. Strings",
+              "team": "",
+              "gp": 7,
+              "value": 11.14,
+              "displayValue": "11.1"
             }
           ]
         },
@@ -9829,25 +9899,60 @@
           "suffix": "APG",
           "rows": [
             {
-              "player": "Maverick Ahanmisi",
+              "player": "M. Ahanmisi",
               "team": "",
-              "gp": null,
-              "value": 7.6,
+              "gp": 8,
+              "value": 7.63,
               "displayValue": "7.6"
             },
             {
-              "player": "Robert Lee Bolick",
+              "player": "R. Bolick",
               "team": "",
-              "gp": null,
-              "value": 7.6,
+              "gp": 9,
+              "value": 7.56,
               "displayValue": "7.6"
             },
             {
-              "player": "Adrian Clarence Nocum",
+              "player": "A. Nocum",
               "team": "",
-              "gp": null,
-              "value": 7.2,
+              "gp": 6,
+              "value": 7.17,
               "displayValue": "7.2"
+            },
+            {
+              "player": "J. Gomez de Liano",
+              "team": "",
+              "gp": 9,
+              "value": 6.67,
+              "displayValue": "6.7"
+            },
+            {
+              "player": "F. Yu",
+              "team": "",
+              "gp": 9,
+              "value": 6.56,
+              "displayValue": "6.6"
+            },
+            {
+              "player": "J. Brickman",
+              "team": "",
+              "gp": 6,
+              "value": 6.0,
+              "displayValue": "6"
+            },
+            {
+              "player": "G. Mamuyac",
+              "team": "",
+              "gp": 1,
+              "value": 6.0,
+              "displayValue": "6"
+            },
+            {
+              "player": "D. Chongqui",
+              "team": "",
+              "gp": 8,
+              "value": 5.38,
+              "displayValue": "5.4"
             }
           ]
         },
@@ -9856,25 +9961,60 @@
           "suffix": "SPG",
           "rows": [
             {
-              "player": "Jenning Leung",
+              "player": "J. Leung",
               "team": "",
-              "gp": null,
-              "value": 3.7,
+              "gp": 3,
+              "value": 3.67,
               "displayValue": "3.7"
             },
             {
-              "player": "Jordon Varnado",
+              "player": "J. Varnado",
               "team": "",
-              "gp": null,
-              "value": 3,
+              "gp": 1,
+              "value": 3.0,
               "displayValue": "3"
             },
             {
-              "player": "Rahlir Hollis-Jefferson",
+              "player": "R. Hollis-Jefferson",
               "team": "",
-              "gp": null,
-              "value": 2.7,
+              "gp": 3,
+              "value": 2.67,
               "displayValue": "2.7"
+            },
+            {
+              "player": "R. Ilagan",
+              "team": "",
+              "gp": 6,
+              "value": 2.17,
+              "displayValue": "2.2"
+            },
+            {
+              "player": "R. Johnson III",
+              "team": "",
+              "gp": 7,
+              "value": 2.0,
+              "displayValue": "2"
+            },
+            {
+              "player": "D. Perry",
+              "team": "",
+              "gp": 6,
+              "value": 2.0,
+              "displayValue": "2"
+            },
+            {
+              "player": "R. Pogoy",
+              "team": "",
+              "gp": 6,
+              "value": 2.0,
+              "displayValue": "2"
+            },
+            {
+              "player": "J. Hudson",
+              "team": "",
+              "gp": 3,
+              "value": 2.0,
+              "displayValue": "2"
             }
           ]
         },
@@ -9883,25 +10023,60 @@
           "suffix": "BPG",
           "rows": [
             {
-              "player": "Cameron Clark",
+              "player": "S. Chiu",
               "team": "",
-              "gp": null,
+              "gp": 8,
               "value": 2.5,
               "displayValue": "2.5"
             },
             {
-              "player": "Shaun Geoffrey Chiu",
+              "player": "C. Clark",
               "team": "",
-              "gp": null,
+              "gp": 2,
               "value": 2.5,
               "displayValue": "2.5"
             },
             {
-              "player": "June Mar Fajardo",
+              "player": "J. Fajardo",
               "team": "",
-              "gp": null,
-              "value": 2.1,
+              "gp": 8,
+              "value": 2.13,
               "displayValue": "2.1"
+            },
+            {
+              "player": "R. Grigsby",
+              "team": "",
+              "gp": 1,
+              "value": 2.0,
+              "displayValue": "2"
+            },
+            {
+              "player": "J. Varnado",
+              "team": "",
+              "gp": 1,
+              "value": 2.0,
+              "displayValue": "2"
+            },
+            {
+              "player": "J. Aguilar",
+              "team": "",
+              "gp": 6,
+              "value": 1.83,
+              "displayValue": "1.8"
+            },
+            {
+              "player": "Z. Lucero",
+              "team": "",
+              "gp": 7,
+              "value": 1.43,
+              "displayValue": "1.4"
+            },
+            {
+              "player": "J. Una",
+              "team": "",
+              "gp": 6,
+              "value": 1.33,
+              "displayValue": "1.3"
             }
           ]
         }
