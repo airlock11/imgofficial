@@ -2,18 +2,18 @@
   "special": true,
   "league": "WTA Tour",
   "live": true,
-  "updatedAt": "2026-10-05T07:08:53.722530+00:00",
+  "updatedAt": "2026-10-05T07:09:00.693358+00:00",
   "sourceName": "WTA Official Scores scrape",
   "sourceUrl": "https://www.wtatennis.com/scores/",
   "verificationSource": "WTA Official Scores",
   "verificationUrl": "https://www.wtatennis.com/scores/",
-  "pageLiveCount": 6,
-  "parsedMatchCount": 6,
+  "pageLiveCount": 5,
+  "parsedMatchCount": 5,
   "note": "GitHub scrape of the rendered WTA Scores page. Game points, current set number, current-set games and per-set scores are stored separately.",
   "games": [
     {
-      "eventId": "wta-scrape-3-upcoming-korpatsch-tagger-cho",
-      "date": "2026-10-05T07:08:53.719199+00:00",
+      "eventId": "wta-scrape-2-upcoming-korpatsch-tagger-cho",
+      "date": "2026-10-05T07:09:00.689225+00:00",
       "displayTime": "Suzhou Open • CHN",
       "away": "Upcoming / Korpatsch",
       "home": "Tagger / Cho",
@@ -44,8 +44,8 @@
       "verificationUrl": "https://www.wtatennis.com/scores/"
     },
     {
-      "eventId": "wta-scrape-4-e-kalieva-y-ma",
-      "date": "2026-10-05T07:08:53.719367+00:00",
+      "eventId": "wta-scrape-3-e-kalieva-y-ma",
+      "date": "2026-10-05T07:09:00.689395+00:00",
       "displayTime": "Suzhou Open • CHN",
       "away": "E. Kalieva",
       "home": "Y. Ma",
@@ -77,11 +77,11 @@
     },
     {
       "eventId": "wta-scrape-0-i-jovic-k-rakhimova",
-      "date": "2026-10-05T07:08:53.718126+00:00",
+      "date": "2026-10-05T07:09:00.688309+00:00",
       "displayTime": "China Open • CHN",
       "away": "I. Jovic",
       "home": "K. Rakhimova",
-      "awayScore": "6 6 · 15",
+      "awayScore": "6 6 · 40",
       "homeScore": "1 5 · 0",
       "awaySets": [
         "6",
@@ -91,7 +91,7 @@
         "1",
         "5"
       ],
-      "awayPoint": "15",
+      "awayPoint": "40",
       "homePoint": "0",
       "currentSet": 2,
       "awayCurrentSetGames": 6,
@@ -100,7 +100,7 @@
       "homeSetsWon": 0,
       "round": "Round of 32",
       "court": "",
-      "status": "Live Match: 1:52 · Round of 32",
+      "status": "Live Match: 1:53 · Round of 32",
       "state": "live",
       "eventOnly": false,
       "title": "China Open • CHN",
@@ -111,14 +111,14 @@
     },
     {
       "eventId": "wta-scrape-1-m-bouzkova-q-zheng",
-      "date": "2026-10-05T07:08:53.718423+00:00",
+      "date": "2026-10-05T07:09:00.688643+00:00",
       "displayTime": "China Open • CHN",
       "away": "M. Bouzkova",
       "home": "Q. Zheng",
-      "awayScore": "2 6",
+      "awayScore": "3 6",
       "homeScore": "3 6",
       "awaySets": [
-        "2",
+        "3",
         "6"
       ],
       "homeSets": [
@@ -144,40 +144,8 @@
       "verificationUrl": "https://www.wtatennis.com/scores/"
     },
     {
-      "eventId": "wta-scrape-2-a-charaeva-s-kartal",
-      "date": "2026-10-05T07:08:53.718628+00:00",
-      "displayTime": "China Open • CHN",
-      "away": "A. Charaeva",
-      "home": "S. Kartal",
-      "awayScore": "2 · 0",
-      "homeScore": "1 · 0",
-      "awaySets": [
-        "2"
-      ],
-      "homeSets": [
-        "1"
-      ],
-      "awayPoint": "0",
-      "homePoint": "0",
-      "currentSet": 1,
-      "awayCurrentSetGames": 2,
-      "homeCurrentSetGames": 1,
-      "awaySetsWon": 0,
-      "homeSetsWon": 0,
-      "round": "Round of 32",
-      "court": "",
-      "status": "Live Match: 0:15 · Round of 32",
-      "state": "live",
-      "eventOnly": false,
-      "title": "China Open • CHN",
-      "sourceName": "WTA Official Scores scrape",
-      "sourceUrl": "https://www.wtatennis.com/scores/",
-      "verificationSource": "WTA Official Scores",
-      "verificationUrl": "https://www.wtatennis.com/scores/"
-    },
-    {
-      "eventId": "wta-scrape-5-upcoming-huang-plipuech-kobori",
-      "date": "2026-10-05T07:08:53.719658+00:00",
+      "eventId": "wta-scrape-4-upcoming-huang-plipuech-kobori",
+      "date": "2026-10-05T07:09:00.689750+00:00",
       "displayTime": "Suzhou Open • CHN",
       "away": "Upcoming / Huang",
       "home": "Plipuech / Kobori",
