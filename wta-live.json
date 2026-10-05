@@ -2,18 +2,18 @@
   "special": true,
   "league": "WTA Tour",
   "live": true,
-  "updatedAt": "2026-10-05T07:09:56.763087+00:00",
+  "updatedAt": "2026-10-05T07:10:03.716756+00:00",
   "sourceName": "WTA Official Scores scrape",
   "sourceUrl": "https://www.wtatennis.com/scores/",
   "verificationSource": "WTA Official Scores",
   "verificationUrl": "https://www.wtatennis.com/scores/",
-  "pageLiveCount": 6,
-  "parsedMatchCount": 6,
+  "pageLiveCount": 5,
+  "parsedMatchCount": 5,
   "note": "GitHub scrape of the rendered WTA Scores page. Game points, current set number, current-set games and per-set scores are stored separately.",
   "games": [
     {
-      "eventId": "wta-scrape-3-upcoming-korpatsch-tagger-cho",
-      "date": "2026-10-05T07:09:56.759634+00:00",
+      "eventId": "wta-scrape-2-upcoming-korpatsch-tagger-cho",
+      "date": "2026-10-05T07:10:03.713444+00:00",
       "displayTime": "Suzhou Open • CHN",
       "away": "Upcoming / Korpatsch",
       "home": "Tagger / Cho",
@@ -44,8 +44,8 @@
       "verificationUrl": "https://www.wtatennis.com/scores/"
     },
     {
-      "eventId": "wta-scrape-4-upcoming-huang-plipuech-kobori",
-      "date": "2026-10-05T07:09:56.759923+00:00",
+      "eventId": "wta-scrape-3-upcoming-huang-plipuech-kobori",
+      "date": "2026-10-05T07:10:03.713747+00:00",
       "displayTime": "Suzhou Open • CHN",
       "away": "Upcoming / Huang",
       "home": "Plipuech / Kobori",
@@ -76,8 +76,8 @@
       "verificationUrl": "https://www.wtatennis.com/scores/"
     },
     {
-      "eventId": "wta-scrape-5-e-kalieva-y-ma",
-      "date": "2026-10-05T07:09:56.760086+00:00",
+      "eventId": "wta-scrape-4-e-kalieva-y-ma",
+      "date": "2026-10-05T07:10:03.713910+00:00",
       "displayTime": "Suzhou Open • CHN",
       "away": "E. Kalieva",
       "home": "Y. Ma",
@@ -108,42 +108,8 @@
       "verificationUrl": "https://www.wtatennis.com/scores/"
     },
     {
-      "eventId": "wta-scrape-0-i-jovic-k-rakhimova",
-      "date": "2026-10-05T07:09:56.758494+00:00",
-      "displayTime": "China Open • CHN",
-      "away": "I. Jovic",
-      "home": "K. Rakhimova",
-      "awayScore": "6 6 · 40",
-      "homeScore": "1 5 · 0",
-      "awaySets": [
-        "6",
-        "6"
-      ],
-      "homeSets": [
-        "1",
-        "5"
-      ],
-      "awayPoint": "40",
-      "homePoint": "0",
-      "currentSet": 2,
-      "awayCurrentSetGames": 6,
-      "homeCurrentSetGames": 5,
-      "awaySetsWon": 1,
-      "homeSetsWon": 0,
-      "round": "Round of 32",
-      "court": "",
-      "status": "Live Match: 1:53 · Round of 32",
-      "state": "live",
-      "eventOnly": false,
-      "title": "China Open • CHN",
-      "sourceName": "WTA Official Scores scrape",
-      "sourceUrl": "https://www.wtatennis.com/scores/",
-      "verificationSource": "WTA Official Scores",
-      "verificationUrl": "https://www.wtatennis.com/scores/"
-    },
-    {
-      "eventId": "wta-scrape-1-m-bouzkova-q-zheng",
-      "date": "2026-10-05T07:09:56.758840+00:00",
+      "eventId": "wta-scrape-0-m-bouzkova-q-zheng",
+      "date": "2026-10-05T07:10:03.712609+00:00",
       "displayTime": "China Open • CHN",
       "away": "M. Bouzkova",
       "home": "Q. Zheng",
@@ -176,21 +142,21 @@
       "verificationUrl": "https://www.wtatennis.com/scores/"
     },
     {
-      "eventId": "wta-scrape-2-a-charaeva-s-kartal",
-      "date": "2026-10-05T07:09:56.759018+00:00",
+      "eventId": "wta-scrape-1-a-charaeva-s-kartal",
+      "date": "2026-10-05T07:10:03.712888+00:00",
       "displayTime": "China Open • CHN",
       "away": "A. Charaeva",
       "home": "S. Kartal",
-      "awayScore": "2 · 0",
-      "homeScore": "1 · 0",
+      "awayScore": "2 · 15",
+      "homeScore": "1 · 15",
       "awaySets": [
         "2"
       ],
       "homeSets": [
         "1"
       ],
-      "awayPoint": "0",
-      "homePoint": "0",
+      "awayPoint": "15",
+      "homePoint": "15",
       "currentSet": 1,
       "awayCurrentSetGames": 2,
       "homeCurrentSetGames": 1,
@@ -198,7 +164,7 @@
       "homeSetsWon": 0,
       "round": "Round of 32",
       "court": "",
-      "status": "Live Match: 0:17 · Round of 32",
+      "status": "Live Match: 0:18 · Round of 32",
       "state": "live",
       "eventOnly": false,
       "title": "China Open • CHN",
