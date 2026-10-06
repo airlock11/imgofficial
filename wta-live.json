@@ -2,41 +2,41 @@
   "special": true,
   "league": "WTA Tour",
   "live": true,
-  "updatedAt": "2026-10-06T09:24:35.630699+00:00",
+  "updatedAt": "2026-10-06T09:24:42.905845+00:00",
   "sourceName": "WTA Official Scores scrape",
   "sourceUrl": "https://www.wtatennis.com/scores/",
   "verificationSource": "WTA Official Scores",
   "verificationUrl": "https://www.wtatennis.com/scores/",
-  "pageLiveCount": 8,
-  "parsedMatchCount": 8,
+  "pageLiveCount": 7,
+  "parsedMatchCount": 7,
   "note": "GitHub scrape of the rendered WTA Scores page. Game points, current set number, current-set games and per-set scores are stored separately.",
   "games": [
     {
       "eventId": "wta-scrape-2-upcoming-prozorova-sasnovich-dang",
-      "date": "2026-10-06T09:24:35.626382+00:00",
+      "date": "2026-10-06T09:24:42.901533+00:00",
       "displayTime": "Suzhou Open • CHN",
       "away": "Upcoming / Prozorova",
       "home": "Sasnovich / Dang",
-      "awayScore": "2 4 · 30",
-      "homeScore": "6 1 · 15",
+      "awayScore": "2 5 · 0",
+      "homeScore": "6 1 · 0",
       "awaySets": [
         "2",
-        "4"
+        "5"
       ],
       "homeSets": [
         "6",
         "1"
       ],
-      "awayPoint": "30",
-      "homePoint": "15",
+      "awayPoint": "0",
+      "homePoint": "0",
       "currentSet": 2,
-      "awayCurrentSetGames": 4,
+      "awayCurrentSetGames": 5,
       "homeCurrentSetGames": 1,
       "awaySetsWon": 0,
       "homeSetsWon": 1,
       "round": "Round of 16",
       "court": "Center Court",
-      "status": "Live Match: 1:02 · Round of 16 · Center Court",
+      "status": "Live Match: 1:03 · Round of 16 · Center Court",
       "state": "live",
       "eventOnly": false,
       "title": "Suzhou Open • CHN",
@@ -47,7 +47,7 @@
     },
     {
       "eventId": "wta-scrape-3-upcoming-brooks-ovcharenko-lee",
-      "date": "2026-10-06T09:24:35.626670+00:00",
+      "date": "2026-10-06T09:24:42.901817+00:00",
       "displayTime": "Suzhou Open • CHN",
       "away": "Upcoming / Brooks",
       "home": "Ovcharenko / Lee",
@@ -82,30 +82,30 @@
     },
     {
       "eventId": "wta-scrape-4-e-jones-m-hontama",
-      "date": "2026-10-06T09:24:35.626873+00:00",
+      "date": "2026-10-06T09:24:42.902014+00:00",
       "displayTime": "Suzhou Open • CHN",
       "away": "E. Jones",
       "home": "M. Hontama",
-      "awayScore": "6 0 · 30",
+      "awayScore": "6 1 · 0",
       "homeScore": "4 0 · 0",
       "awaySets": [
         "6",
-        "0"
+        "1"
       ],
       "homeSets": [
         "4",
         "0"
       ],
-      "awayPoint": "30",
+      "awayPoint": "0",
       "homePoint": "0",
       "currentSet": 2,
-      "awayCurrentSetGames": 0,
+      "awayCurrentSetGames": 1,
       "homeCurrentSetGames": 0,
       "awaySetsWon": 1,
       "homeSetsWon": 0,
       "round": "Round of 32",
       "court": "Court 1",
-      "status": "Live Match: 0:56 · Round of 32 · Court 1",
+      "status": "Live Match: 0:57 · Round of 32 · Court 1",
       "state": "live",
       "eventOnly": false,
       "title": "Suzhou Open • CHN",
@@ -116,7 +116,7 @@
     },
     {
       "eventId": "wta-scrape-0-k-muchova-n-osaka",
-      "date": "2026-10-06T09:24:35.625316+00:00",
+      "date": "2026-10-06T09:24:42.900536+00:00",
       "displayTime": "China Open • CHN",
       "away": "K. Muchova",
       "home": "N. Osaka",
@@ -152,7 +152,7 @@
     },
     {
       "eventId": "wta-scrape-1-upcoming-hsbc-moon-perez-schuurs",
-      "date": "2026-10-06T09:24:35.626102+00:00",
+      "date": "2026-10-06T09:24:42.901257+00:00",
       "displayTime": "China Open • CHN",
       "away": "Upcoming / HSBC Moon",
       "home": "Perez / Schuurs",
@@ -183,40 +183,8 @@
       "verificationUrl": "https://www.wtatennis.com/scores/"
     },
     {
-      "eventId": "wta-scrape-5-e-arango-a-aksu",
-      "date": "2026-10-06T09:24:35.627049+00:00",
-      "displayTime": "Samsun Open • TUR",
-      "away": "E. Arango",
-      "home": "A. Aksu",
-      "awayScore": "3 · 0",
-      "homeScore": "4 · 0",
-      "awaySets": [
-        "3"
-      ],
-      "homeSets": [
-        "4"
-      ],
-      "awayPoint": "0",
-      "homePoint": "0",
-      "currentSet": 1,
-      "awayCurrentSetGames": 3,
-      "homeCurrentSetGames": 4,
-      "awaySetsWon": 0,
-      "homeSetsWon": 0,
-      "round": "Round of 32",
-      "court": "",
-      "status": "Live Match: 0:28 · Round of 32",
-      "state": "live",
-      "eventOnly": false,
-      "title": "Samsun Open • TUR",
-      "sourceName": "WTA Official Scores scrape",
-      "sourceUrl": "https://www.wtatennis.com/scores/",
-      "verificationSource": "WTA Official Scores",
-      "verificationUrl": "https://www.wtatennis.com/scores/"
-    },
-    {
-      "eventId": "wta-scrape-6-a-ruzic-a-dudeney",
-      "date": "2026-10-06T09:24:35.627222+00:00",
+      "eventId": "wta-scrape-5-a-ruzic-a-dudeney",
+      "date": "2026-10-06T09:24:42.902196+00:00",
       "displayTime": "Samsun Open • TUR",
       "away": "A. Ruzic",
       "home": "A. Dudeney",
@@ -237,7 +205,7 @@
       "homeSetsWon": 0,
       "round": "Round of 32",
       "court": "",
-      "status": "Live Match: 0:09 · Round of 32",
+      "status": "Live Match: 0:11 · Round of 32",
       "state": "live",
       "eventOnly": false,
       "title": "Samsun Open • TUR",
@@ -247,12 +215,12 @@
       "verificationUrl": "https://www.wtatennis.com/scores/"
     },
     {
-      "eventId": "wta-scrape-7-e-micic-n-noha-akugue",
-      "date": "2026-10-06T09:24:35.627386+00:00",
+      "eventId": "wta-scrape-6-e-micic-n-noha-akugue",
+      "date": "2026-10-06T09:24:42.902362+00:00",
       "displayTime": "Samsun Open • TUR",
       "away": "E. Micic",
       "home": "N. Noha Akugue",
-      "awayScore": "1 · 0",
+      "awayScore": "1 · 15",
       "homeScore": "2 · 0",
       "awaySets": [
         "1"
@@ -260,7 +228,7 @@
       "homeSets": [
         "2"
       ],
-      "awayPoint": "0",
+      "awayPoint": "15",
       "homePoint": "0",
       "currentSet": 1,
       "awayCurrentSetGames": 1,
