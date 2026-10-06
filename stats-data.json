@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-06T01:55:56.510968+00:00",
+  "updatedAt": "2026-10-06T08:36:03.715019+00:00",
   "leagues": {
     "uaap": {
       "league": "UAAP",
@@ -70,7 +70,7 @@
             "player": "K. Mongcopa",
             "gp": 4,
             "ppg": 15.2,
-            "rpg": 8.8,
+            "rpg": 8.2,
             "apg": 3.2,
             "spg": 0.5,
             "bpg": 0.5,
@@ -195,20 +195,6 @@
           },
           {
             "team": "FEU",
-            "player": "K. Mongcopa",
-            "gp": 4,
-            "ppg": 15.2,
-            "rpg": 8.8,
-            "apg": 3.2,
-            "spg": 0.5,
-            "bpg": 0.5,
-            "topg": 3.0,
-            "fgPct": 40.7,
-            "threePtPct": 29.2,
-            "ftPct": 60.0
-          },
-          {
-            "team": "FEU",
             "player": "C. Cabonilas",
             "gp": 4,
             "ppg": 11.2,
@@ -234,6 +220,20 @@
             "fgPct": 46.2,
             "threePtPct": 0.0,
             "ftPct": 54.5
+          },
+          {
+            "team": "FEU",
+            "player": "K. Mongcopa",
+            "gp": 4,
+            "ppg": 15.2,
+            "rpg": 8.2,
+            "apg": 3.2,
+            "spg": 0.5,
+            "bpg": 0.5,
+            "topg": 3.0,
+            "fgPct": 40.7,
+            "threePtPct": 29.2,
+            "ftPct": 60.0
           }
         ],
         "assists": [
@@ -608,9 +608,9 @@
               "threePtPct": 40.0,
               "ft": "4-6",
               "ftPct": 66.7,
-              "off": 4,
+              "off": 2,
               "def": 5,
-              "reb": 9,
+              "reb": 7,
               "ast": 3,
               "to": 3,
               "stl": 0,
@@ -815,9 +815,9 @@
               "threePtPct": 0.0,
               "ft": "0-0",
               "ftPct": 0.0,
-              "off": 1,
+              "off": 3,
               "def": 0,
-              "reb": 1,
+              "reb": 3,
               "ast": 1,
               "to": 0,
               "stl": 1,
@@ -1285,9 +1285,9 @@
                 "threePtPct": 40.0,
                 "ft": "4-6",
                 "ftPct": 66.7,
-                "off": 4,
+                "off": 2,
                 "def": 5,
-                "reb": 9,
+                "reb": 7,
                 "ast": 3,
                 "to": 3,
                 "stl": 0,
@@ -1492,9 +1492,9 @@
                 "threePtPct": 0.0,
                 "ft": "0-0",
                 "ftPct": 0.0,
-                "off": 1,
+                "off": 3,
                 "def": 0,
-                "reb": 1,
+                "reb": 3,
                 "ast": 1,
                 "to": 0,
                 "stl": 1,
@@ -9747,18 +9747,18 @@
               "displayValue": "25"
             },
             {
+              "player": "Cole Anthony",
+              "team": "",
+              "gp": null,
+              "value": 24.8,
+              "displayValue": "24.8"
+            },
+            {
               "player": "Elijah Pepper",
               "team": "",
               "gp": null,
               "value": 23.5,
               "displayValue": "23.5"
-            },
-            {
-              "player": "David Johnson",
-              "team": "",
-              "gp": null,
-              "value": 20.0,
-              "displayValue": "20"
             }
           ]
         }
@@ -11193,13 +11193,6 @@
               "displayValue": "967"
             },
             {
-              "player": "Tyler Shough",
-              "team": "NO",
-              "gp": null,
-              "value": 917.0,
-              "displayValue": "917"
-            },
-            {
               "player": "Geno Smith",
               "team": "NYJ",
               "gp": null,
@@ -11233,6 +11226,13 @@
               "gp": null,
               "value": 819.0,
               "displayValue": "819"
+            },
+            {
+              "player": "Jacoby Brissett",
+              "team": "ARI",
+              "gp": null,
+              "value": 818.0,
+              "displayValue": "818"
             }
           ]
         },
@@ -11269,6 +11269,13 @@
               "displayValue": "9"
             },
             {
+              "player": "Tyler Shough",
+              "team": "NO",
+              "gp": null,
+              "value": 9.0,
+              "displayValue": "9"
+            },
+            {
               "player": "Bryce Young",
               "team": "CAR",
               "gp": null,
@@ -11288,13 +11295,6 @@
               "gp": null,
               "value": 8.0,
               "displayValue": "8"
-            },
-            {
-              "player": "Trevor Lawrence",
-              "team": "JAX",
-              "gp": null,
-              "value": 8.0,
-              "displayValue": "8"
             }
           ]
         },
@@ -11308,6 +11308,13 @@
               "gp": null,
               "value": 537.0,
               "displayValue": "537"
+            },
+            {
+              "player": "Bijan Robinson",
+              "team": "ATL",
+              "gp": null,
+              "value": 494.0,
+              "displayValue": "494"
             },
             {
               "player": "James Cook III",
@@ -11338,13 +11345,6 @@
               "displayValue": "353"
             },
             {
-              "player": "Bijan Robinson",
-              "team": "ATL",
-              "gp": null,
-              "value": 349.0,
-              "displayValue": "349"
-            },
-            {
               "player": "Kyle Monangai",
               "team": "CHI",
               "gp": null,
@@ -11370,6 +11370,13 @@
               "gp": null,
               "value": 498.0,
               "displayValue": "498"
+            },
+            {
+              "player": "Chris Olave",
+              "team": "NO",
+              "gp": null,
+              "value": 491.0,
+              "displayValue": "491"
             },
             {
               "player": "Jaxon Smith-Njigba",
@@ -11400,11 +11407,11 @@
               "displayValue": "385"
             },
             {
-              "player": "Chris Olave",
-              "team": "NO",
+              "player": "Drake London",
+              "team": "ATL",
               "gp": null,
-              "value": 375.0,
-              "displayValue": "375"
+              "value": 370.0,
+              "displayValue": "370"
             },
             {
               "player": "Zay Flowers",
@@ -11412,13 +11419,6 @@
               "gp": null,
               "value": 352.0,
               "displayValue": "352"
-            },
-            {
-              "player": "Christian Watson",
-              "team": "GB",
-              "gp": null,
-              "value": 331.0,
-              "displayValue": "331"
             }
           ]
         }
