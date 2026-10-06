@@ -2,7 +2,7 @@
   "special": true,
   "league": "WTA Tour",
   "live": true,
-  "updatedAt": "2026-10-06T02:32:53.132203+00:00",
+  "updatedAt": "2026-10-06T02:32:58.394360+00:00",
   "sourceName": "WTA Official Scores scrape",
   "sourceUrl": "https://www.wtatennis.com/scores/",
   "verificationSource": "WTA Official Scores",
@@ -13,23 +13,23 @@
   "games": [
     {
       "eventId": "wta-scrape-0-m-uchijima-z-bai",
-      "date": "2026-10-06T02:32:53.129965+00:00",
+      "date": "2026-10-06T02:32:58.392104+00:00",
       "displayTime": "Suzhou Open • CHN",
       "away": "M. Uchijima",
       "home": "Z. Bai",
-      "awayScore": "2 · 40",
-      "homeScore": "2 · AD",
+      "awayScore": "2 · 0",
+      "homeScore": "3 · 0",
       "awaySets": [
         "2"
       ],
       "homeSets": [
-        "2"
+        "3"
       ],
-      "awayPoint": "40",
-      "homePoint": "AD",
+      "awayPoint": "0",
+      "homePoint": "0",
       "currentSet": 1,
       "awayCurrentSetGames": 2,
-      "homeCurrentSetGames": 2,
+      "homeCurrentSetGames": 3,
       "awaySetsWon": 0,
       "homeSetsWon": 0,
       "round": "Round of 32",
@@ -45,7 +45,7 @@
     },
     {
       "eventId": "wta-scrape-1-h-guo-a-falei",
-      "date": "2026-10-06T02:32:53.130154+00:00",
+      "date": "2026-10-06T02:32:58.392296+00:00",
       "displayTime": "Suzhou Open • CHN",
       "away": "H. Guo",
       "home": "A. Falei",
@@ -66,7 +66,7 @@
       "homeSetsWon": 0,
       "round": "Round of 32",
       "court": "Court 1",
-      "status": "Live Match: 0:19 · Round of 32 · Court 1",
+      "status": "Live Match: 0:20 · Round of 32 · Court 1",
       "state": "live",
       "eventOnly": false,
       "title": "Suzhou Open • CHN",
@@ -77,11 +77,11 @@
     },
     {
       "eventId": "wta-scrape-2-m-sawangkaew-l-fruhvirtova",
-      "date": "2026-10-06T02:32:53.130275+00:00",
+      "date": "2026-10-06T02:32:58.392417+00:00",
       "displayTime": "Suzhou Open • CHN",
       "away": "M. Sawangkaew",
       "home": "L. Fruhvirtova",
-      "awayScore": "2 · 0",
+      "awayScore": "2 · 15",
       "homeScore": "3 · 15",
       "awaySets": [
         "2"
@@ -89,7 +89,7 @@
       "homeSets": [
         "3"
       ],
-      "awayPoint": "0",
+      "awayPoint": "15",
       "homePoint": "15",
       "currentSet": 1,
       "awayCurrentSetGames": 2,
