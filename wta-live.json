@@ -2,22 +2,22 @@
   "special": true,
   "league": "WTA Tour",
   "live": true,
-  "updatedAt": "2026-10-06T02:31:22.692745+00:00",
+  "updatedAt": "2026-10-06T02:31:28.546278+00:00",
   "sourceName": "WTA Official Scores scrape",
   "sourceUrl": "https://www.wtatennis.com/scores/",
   "verificationSource": "WTA Official Scores",
   "verificationUrl": "https://www.wtatennis.com/scores/",
-  "pageLiveCount": 2,
-  "parsedMatchCount": 2,
+  "pageLiveCount": 3,
+  "parsedMatchCount": 3,
   "note": "GitHub scrape of the rendered WTA Scores page. Game points, current set number, current-set games and per-set scores are stored separately.",
   "games": [
     {
       "eventId": "wta-scrape-0-m-uchijima-z-bai",
-      "date": "2026-10-06T02:31:22.690647+00:00",
+      "date": "2026-10-06T02:31:28.544029+00:00",
       "displayTime": "Suzhou Open • CHN",
       "away": "M. Uchijima",
       "home": "Z. Bai",
-      "awayScore": "2 · AD",
+      "awayScore": "2 · 40",
       "homeScore": "2 · 40",
       "awaySets": [
         "2"
@@ -25,7 +25,7 @@
       "homeSets": [
         "2"
       ],
-      "awayPoint": "AD",
+      "awayPoint": "40",
       "homePoint": "40",
       "currentSet": 1,
       "awayCurrentSetGames": 2,
@@ -34,7 +34,7 @@
       "homeSetsWon": 0,
       "round": "Round of 32",
       "court": "Center Court",
-      "status": "Live Match: 0:21 · Round of 32 · Center Court",
+      "status": "Live Match: 0:22 · Round of 32 · Center Court",
       "state": "live",
       "eventOnly": false,
       "title": "Suzhou Open • CHN",
@@ -44,8 +44,40 @@
       "verificationUrl": "https://www.wtatennis.com/scores/"
     },
     {
-      "eventId": "wta-scrape-1-m-sawangkaew-l-fruhvirtova",
-      "date": "2026-10-06T02:31:22.690846+00:00",
+      "eventId": "wta-scrape-1-h-guo-a-falei",
+      "date": "2026-10-06T02:31:28.544220+00:00",
+      "displayTime": "Suzhou Open • CHN",
+      "away": "H. Guo",
+      "home": "A. Falei",
+      "awayScore": "2 · 15",
+      "homeScore": "1 · 0",
+      "awaySets": [
+        "2"
+      ],
+      "homeSets": [
+        "1"
+      ],
+      "awayPoint": "15",
+      "homePoint": "0",
+      "currentSet": 1,
+      "awayCurrentSetGames": 2,
+      "homeCurrentSetGames": 1,
+      "awaySetsWon": 0,
+      "homeSetsWon": 0,
+      "round": "Round of 32",
+      "court": "Court 1",
+      "status": "Live Match: 0:18 · Round of 32 · Court 1",
+      "state": "live",
+      "eventOnly": false,
+      "title": "Suzhou Open • CHN",
+      "sourceName": "WTA Official Scores scrape",
+      "sourceUrl": "https://www.wtatennis.com/scores/",
+      "verificationSource": "WTA Official Scores",
+      "verificationUrl": "https://www.wtatennis.com/scores/"
+    },
+    {
+      "eventId": "wta-scrape-2-m-sawangkaew-l-fruhvirtova",
+      "date": "2026-10-06T02:31:28.544339+00:00",
       "displayTime": "Suzhou Open • CHN",
       "away": "M. Sawangkaew",
       "home": "L. Fruhvirtova",
