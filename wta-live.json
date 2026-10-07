@@ -2,18 +2,18 @@
   "special": true,
   "league": "WTA Tour",
   "live": true,
-  "updatedAt": "2026-10-07T06:27:31.559973+00:00",
+  "updatedAt": "2026-10-07T06:27:37.247667+00:00",
   "sourceName": "WTA Official Scores scrape",
   "sourceUrl": "https://www.wtatennis.com/scores/",
   "verificationSource": "WTA Official Scores",
   "verificationUrl": "https://www.wtatennis.com/scores/",
-  "pageLiveCount": 6,
-  "parsedMatchCount": 6,
+  "pageLiveCount": 5,
+  "parsedMatchCount": 5,
   "note": "GitHub scrape of the rendered WTA Scores page. Game points, current set number, current-set games and per-set scores are stored separately.",
   "games": [
     {
-      "eventId": "wta-scrape-3-t-prozorova-k-okamura",
-      "date": "2026-10-07T06:27:31.556576+00:00",
+      "eventId": "wta-scrape-2-t-prozorova-k-okamura",
+      "date": "2026-10-07T06:27:37.244352+00:00",
       "displayTime": "Suzhou Open • CHN",
       "away": "T. Prozorova",
       "home": "K. Okamura",
@@ -50,8 +50,8 @@
       "verificationUrl": "https://www.wtatennis.com/scores/"
     },
     {
-      "eventId": "wta-scrape-4-upcoming-li-zhang-qu",
-      "date": "2026-10-07T06:27:31.556852+00:00",
+      "eventId": "wta-scrape-3-upcoming-li-zhang-qu",
+      "date": "2026-10-07T06:27:37.244633+00:00",
       "displayTime": "Suzhou Open • CHN",
       "away": "Upcoming / Li",
       "home": "Zhang / Qu",
@@ -85,12 +85,12 @@
     },
     {
       "eventId": "wta-scrape-0-i-jovic-i-swiatek",
-      "date": "2026-10-07T06:27:31.555408+00:00",
+      "date": "2026-10-07T06:27:37.243491+00:00",
       "displayTime": "China Open • CHN",
       "away": "I. Jovic",
       "home": "I. Swiatek",
       "awayScore": "1 3 · 0",
-      "homeScore": "6 3 · 0",
+      "homeScore": "6 3 · 15",
       "awaySets": [
         "1",
         "3"
@@ -100,7 +100,7 @@
         "3"
       ],
       "awayPoint": "0",
-      "homePoint": "0",
+      "homePoint": "15",
       "currentSet": 2,
       "awayCurrentSetGames": 3,
       "homeCurrentSetGames": 3,
@@ -118,23 +118,23 @@
       "verificationUrl": "https://www.wtatennis.com/scores/"
     },
     {
-      "eventId": "wta-scrape-1-upcoming-lotus-errani-paolini",
-      "date": "2026-10-07T06:27:31.556090+00:00",
+      "eventId": "wta-scrape-1-upcoming-hsbc-moon-routliffe-sutjiadi",
+      "date": "2026-10-07T06:27:37.244159+00:00",
       "displayTime": "China Open • CHN",
-      "away": "Upcoming / Lotus",
-      "home": "Errani / Paolini",
-      "awayScore": "7 5 · 40",
-      "homeScore": "7 5 · 40",
+      "away": "Upcoming / HSBC Moon",
+      "home": "Routliffe / Sutjiadi",
+      "awayScore": "6 5 · 0",
+      "homeScore": "6 5 · 0",
       "awaySets": [
-        "7",
+        "6",
         "5"
       ],
       "homeSets": [
-        "7",
+        "6",
         "5"
       ],
-      "awayPoint": "40",
-      "homePoint": "40",
+      "awayPoint": "0",
+      "homePoint": "0",
       "currentSet": 2,
       "awayCurrentSetGames": 5,
       "homeCurrentSetGames": 5,
@@ -142,7 +142,7 @@
       "homeSetsWon": 0,
       "round": "Round of 16",
       "court": "",
-      "status": "Live Match: 1:15 · Round of 16",
+      "status": "Live Match: 1:16 · Round of 16",
       "state": "live",
       "eventOnly": false,
       "title": "China Open • CHN",
@@ -152,42 +152,8 @@
       "verificationUrl": "https://www.wtatennis.com/scores/"
     },
     {
-      "eventId": "wta-scrape-2-upcoming-hsbc-moon-routliffe-sutjiadi",
-      "date": "2026-10-07T06:27:31.556411+00:00",
-      "displayTime": "China Open • CHN",
-      "away": "Upcoming / HSBC Moon",
-      "home": "Routliffe / Sutjiadi",
-      "awayScore": "6 4 · 40",
-      "homeScore": "6 4 · 40",
-      "awaySets": [
-        "6",
-        "4"
-      ],
-      "homeSets": [
-        "6",
-        "4"
-      ],
-      "awayPoint": "40",
-      "homePoint": "40",
-      "currentSet": 2,
-      "awayCurrentSetGames": 4,
-      "homeCurrentSetGames": 4,
-      "awaySetsWon": 0,
-      "homeSetsWon": 0,
-      "round": "Round of 16",
-      "court": "",
-      "status": "Live Match: 1:15 · Round of 16",
-      "state": "live",
-      "eventOnly": false,
-      "title": "China Open • CHN",
-      "sourceName": "WTA Official Scores scrape",
-      "sourceUrl": "https://www.wtatennis.com/scores/",
-      "verificationSource": "WTA Official Scores",
-      "verificationUrl": "https://www.wtatennis.com/scores/"
-    },
-    {
-      "eventId": "wta-scrape-5-c-buyukakcay-l-klimovicova",
-      "date": "2026-10-07T06:27:31.557015+00:00",
+      "eventId": "wta-scrape-4-c-buyukakcay-l-klimovicova",
+      "date": "2026-10-07T06:27:37.244796+00:00",
       "displayTime": "Samsun Open • TUR",
       "away": "C. Buyukakcay",
       "home": "L. Klimovicova",
