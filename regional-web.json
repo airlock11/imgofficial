@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-07T19:48:10+08:00",
+  "updated_at": "2026-10-08T07:16:08+08:00",
   "refresh_minutes": 15,
   "leagues": {
     "pba": {
@@ -86,24 +86,21 @@
       ],
       "automation": {
         "enabled": true,
-        "mode": "game-day",
-        "dataRefreshMinutes": 15,
-        "livestreamRefreshMinutes": 5,
+        "mode": "idle",
+        "dataRefreshMinutes": 180,
+        "livestreamRefreshMinutes": 0,
         "scheduleAware": {
           "enabled": true,
           "timezone": "Asia/Manila",
-          "mode": "game-day",
-          "gameDay": true,
-          "todayGameCount": 2,
-          "todayGames": [
-            "web-pba-20261007-2",
-            "web-pba-20261007-1"
-          ],
+          "mode": "idle",
+          "gameDay": false,
+          "todayGameCount": 0,
+          "todayGames": [],
           "nextGameAt": "2026-10-07T17:15:00+08:00",
           "idleDiscoveryMinutes": 180,
           "gameDayDataRefreshMinutes": 15,
           "gameDayLivestreamRefreshMinutes": 5,
-          "lastSlowCheckAt": "2026-10-07T19:47:14+08:00"
+          "lastSlowCheckAt": "2026-10-08T07:15:12+08:00"
         },
         "failClosed": true
       }
@@ -626,20 +623,6 @@
           "sourceUrl": "https://www.facebook.com/taguigcity/posts/1531288389037526/"
         },
         {
-          "eventId": "yt-nbl-NpAX2R-uC4Q",
-          "date": "2026-09-13T18:00:00+08:00",
-          "displayTime": "Sep 13",
-          "away": "Nueva Ecija Granary Buffalos",
-          "home": "CamSur Express",
-          "awayScore": "—",
-          "homeScore": "—",
-          "status": "Replay available · Jun Dueñas Gym Central Signal, Taguig City",
-          "state": "final",
-          "location": "Jun Dueñas Gym Central Signal, Taguig City",
-          "sourceName": "NBL-Pilipinas YouTube",
-          "sourceUrl": "https://www.youtube.com/watch?v=NpAX2R-uC4Q"
-        },
-        {
           "eventId": "verified-nbl-20260830-starhorse-tikas",
           "date": "2026-08-30T18:00:00+08:00",
           "displayTime": "Aug 30 · Final",
@@ -974,32 +957,6 @@
       "games": [
         {
           "eventId": "web-uaap-scheduled-7",
-          "date": "2026-10-07T14:30:00+08:00",
-          "displayTime": "Oct 7 · 2:30 PM",
-          "away": "NU Bulldogs",
-          "home": "Adamson Soaring Falcons",
-          "awayScore": "—",
-          "homeScore": "—",
-          "status": "Scheduled",
-          "state": "scheduled",
-          "sourceName": "SkedCheck",
-          "sourceUrl": "https://skedcheck.com/uaap-mens-basketball-schedule-scores/"
-        },
-        {
-          "eventId": "web-uaap-scheduled-8",
-          "date": "2026-10-07T17:30:00+08:00",
-          "displayTime": "Oct 7 · 5:30 PM",
-          "away": "De La Salle Green Archers",
-          "home": "Ateneo Blue Eagles",
-          "awayScore": "—",
-          "homeScore": "—",
-          "status": "Scheduled",
-          "state": "scheduled",
-          "sourceName": "SkedCheck",
-          "sourceUrl": "https://skedcheck.com/uaap-mens-basketball-schedule-scores/"
-        },
-        {
-          "eventId": "web-uaap-scheduled-9",
           "date": "2026-10-10T15:00:00+08:00",
           "displayTime": "Oct 10 · 3:00 PM",
           "away": "NU Bulldogs",
@@ -1012,7 +969,7 @@
           "sourceUrl": "https://skedcheck.com/uaap-mens-basketball-schedule-scores/"
         },
         {
-          "eventId": "web-uaap-scheduled-10",
+          "eventId": "web-uaap-scheduled-8",
           "date": "2026-10-10T17:30:00+08:00",
           "displayTime": "Oct 10 · 5:30 PM",
           "away": "Ateneo Blue Eagles",
@@ -1025,7 +982,7 @@
           "sourceUrl": "https://skedcheck.com/uaap-mens-basketball-schedule-scores/"
         },
         {
-          "eventId": "web-uaap-scheduled-11",
+          "eventId": "web-uaap-scheduled-9",
           "date": "2026-10-11T14:30:00+08:00",
           "displayTime": "Oct 11 · 2:30 PM",
           "away": "UE Red Warriors",
@@ -1038,7 +995,7 @@
           "sourceUrl": "https://skedcheck.com/uaap-mens-basketball-schedule-scores/"
         },
         {
-          "eventId": "web-uaap-scheduled-12",
+          "eventId": "web-uaap-scheduled-10",
           "date": "2026-10-11T17:30:00+08:00",
           "displayTime": "Oct 11 · 5:30 PM",
           "away": "De La Salle Green Archers",
@@ -1051,7 +1008,7 @@
           "sourceUrl": "https://skedcheck.com/uaap-mens-basketball-schedule-scores/"
         },
         {
-          "eventId": "web-uaap-scheduled-13",
+          "eventId": "web-uaap-scheduled-11",
           "date": "2026-10-14T15:00:00+08:00",
           "displayTime": "Oct 14 · 3:00 PM",
           "away": "FEU Tamaraws",
@@ -1064,7 +1021,7 @@
           "sourceUrl": "https://skedcheck.com/uaap-mens-basketball-schedule-scores/"
         },
         {
-          "eventId": "web-uaap-scheduled-14",
+          "eventId": "web-uaap-scheduled-12",
           "date": "2026-10-14T17:30:00+08:00",
           "displayTime": "Oct 14 · 5:30 PM",
           "away": "UP Fighting Maroons",
@@ -1077,7 +1034,7 @@
           "sourceUrl": "https://skedcheck.com/uaap-mens-basketball-schedule-scores/"
         },
         {
-          "eventId": "web-uaap-scheduled-15",
+          "eventId": "web-uaap-scheduled-13",
           "date": "2026-10-17T14:30:00+08:00",
           "displayTime": "Oct 17 · 2:30 PM",
           "away": "UE Red Warriors",
@@ -1090,7 +1047,7 @@
           "sourceUrl": "https://skedcheck.com/uaap-mens-basketball-schedule-scores/"
         },
         {
-          "eventId": "web-uaap-scheduled-16",
+          "eventId": "web-uaap-scheduled-14",
           "date": "2026-10-17T17:30:00+08:00",
           "displayTime": "Oct 17 · 5:30 PM",
           "away": "Ateneo Blue Eagles",
@@ -1103,7 +1060,7 @@
           "sourceUrl": "https://skedcheck.com/uaap-mens-basketball-schedule-scores/"
         },
         {
-          "eventId": "web-uaap-scheduled-17",
+          "eventId": "web-uaap-scheduled-15",
           "date": "2026-10-18T14:30:00+08:00",
           "displayTime": "Oct 18 · 2:30 PM",
           "away": "FEU Tamaraws",
@@ -1116,7 +1073,7 @@
           "sourceUrl": "https://skedcheck.com/uaap-mens-basketball-schedule-scores/"
         },
         {
-          "eventId": "web-uaap-scheduled-18",
+          "eventId": "web-uaap-scheduled-16",
           "date": "2026-10-18T17:30:00+08:00",
           "displayTime": "Oct 18 · 5:30 PM",
           "away": "Adamson Soaring Falcons",
@@ -1130,6 +1087,32 @@
         },
         {
           "eventId": "web-uaap-final-2",
+          "date": "2026-10-07T17:30:00+08:00",
+          "displayTime": "Oct 7 · Final",
+          "away": "De La Salle Green Archers",
+          "home": "Ateneo Blue Eagles",
+          "awayScore": "83",
+          "homeScore": "76",
+          "status": "Final",
+          "state": "final",
+          "sourceName": "SkedCheck",
+          "sourceUrl": "https://skedcheck.com/uaap-mens-basketball-schedule-scores/"
+        },
+        {
+          "eventId": "web-uaap-final-1",
+          "date": "2026-10-07T14:30:00+08:00",
+          "displayTime": "Oct 7 · Final",
+          "away": "NU Bulldogs",
+          "home": "Adamson Soaring Falcons",
+          "awayScore": "85",
+          "homeScore": "66",
+          "status": "Final",
+          "state": "final",
+          "sourceName": "SkedCheck",
+          "sourceUrl": "https://skedcheck.com/uaap-mens-basketball-schedule-scores/"
+        },
+        {
+          "eventId": "web-uaap-final-4",
           "date": "2026-10-04T17:30:00+08:00",
           "displayTime": "Oct 4 · Final",
           "away": "UP Fighting Maroons",
@@ -1142,7 +1125,7 @@
           "sourceUrl": "https://skedcheck.com/uaap-mens-basketball-schedule-scores/"
         },
         {
-          "eventId": "web-uaap-final-1",
+          "eventId": "web-uaap-final-3",
           "date": "2026-10-04T15:00:00+08:00",
           "displayTime": "Oct 4 · Final",
           "away": "De La Salle Green Archers",
@@ -1155,7 +1138,7 @@
           "sourceUrl": "https://skedcheck.com/uaap-mens-basketball-schedule-scores/"
         },
         {
-          "eventId": "web-uaap-final-4",
+          "eventId": "web-uaap-final-6",
           "date": "2026-10-03T17:30:00+08:00",
           "displayTime": "Oct 3 · Final",
           "away": "Ateneo Blue Eagles",
@@ -1168,7 +1151,7 @@
           "sourceUrl": "https://skedcheck.com/uaap-mens-basketball-schedule-scores/"
         },
         {
-          "eventId": "web-uaap-final-3",
+          "eventId": "web-uaap-final-5",
           "date": "2026-10-03T14:00:00+08:00",
           "displayTime": "Oct 3 · Final",
           "away": "Adamson Soaring Falcons",
@@ -1179,54 +1162,25 @@
           "state": "final",
           "sourceName": "SkedCheck",
           "sourceUrl": "https://skedcheck.com/uaap-mens-basketball-schedule-scores/"
-        },
-        {
-          "eventId": "web-uaap-final-6",
-          "date": "2026-09-30T17:30:00+08:00",
-          "displayTime": "Sep 30 · Final",
-          "away": "De La Salle Green Archers",
-          "home": "FEU Tamaraws",
-          "awayScore": "78",
-          "homeScore": "90",
-          "status": "Final",
-          "state": "final",
-          "sourceName": "SkedCheck",
-          "sourceUrl": "https://skedcheck.com/uaap-mens-basketball-schedule-scores/"
-        },
-        {
-          "eventId": "web-uaap-final-5",
-          "date": "2026-09-30T15:00:00+08:00",
-          "displayTime": "Sep 30 · Final",
-          "away": "UE Red Warriors",
-          "home": "UST Growling Tigers",
-          "awayScore": "87",
-          "homeScore": "98",
-          "status": "Final",
-          "state": "final",
-          "sourceName": "SkedCheck",
-          "sourceUrl": "https://skedcheck.com/uaap-mens-basketball-schedule-scores/"
         }
       ],
       "automation": {
         "enabled": true,
-        "mode": "game-day",
-        "dataRefreshMinutes": 15,
-        "livestreamRefreshMinutes": 5,
+        "mode": "idle",
+        "dataRefreshMinutes": 180,
+        "livestreamRefreshMinutes": 0,
         "scheduleAware": {
           "enabled": true,
           "timezone": "Asia/Manila",
-          "mode": "game-day",
-          "gameDay": true,
-          "todayGameCount": 2,
-          "todayGames": [
-            "web-uaap-scheduled-7",
-            "web-uaap-scheduled-8"
-          ],
+          "mode": "idle",
+          "gameDay": false,
+          "todayGameCount": 0,
+          "todayGames": [],
           "nextGameAt": "2026-10-10T15:00:00+08:00",
           "idleDiscoveryMinutes": 180,
           "gameDayDataRefreshMinutes": 15,
           "gameDayLivestreamRefreshMinutes": 5,
-          "lastSlowCheckAt": "2026-10-07T19:47:16+08:00"
+          "lastSlowCheckAt": "2026-10-08T07:15:15+08:00"
         },
         "failClosed": true
       }
@@ -1236,47 +1190,41 @@
   "adaptive": {
     "pba": {
       "enabled": true,
-      "mode": "game-day",
-      "dataRefreshMinutes": 15,
-      "livestreamRefreshMinutes": 5,
+      "mode": "idle",
+      "dataRefreshMinutes": 180,
+      "livestreamRefreshMinutes": 0,
       "scheduleAware": {
         "enabled": true,
         "timezone": "Asia/Manila",
-        "mode": "game-day",
-        "gameDay": true,
-        "todayGameCount": 2,
-        "todayGames": [
-          "web-pba-20261007-2",
-          "web-pba-20261007-1"
-        ],
+        "mode": "idle",
+        "gameDay": false,
+        "todayGameCount": 0,
+        "todayGames": [],
         "nextGameAt": "2026-10-07T17:15:00+08:00",
         "idleDiscoveryMinutes": 180,
         "gameDayDataRefreshMinutes": 15,
         "gameDayLivestreamRefreshMinutes": 5,
-        "lastSlowCheckAt": "2026-10-07T19:47:14+08:00"
+        "lastSlowCheckAt": "2026-10-08T07:15:12+08:00"
       },
       "failClosed": true
     },
     "uaap": {
       "enabled": true,
-      "mode": "game-day",
-      "dataRefreshMinutes": 15,
-      "livestreamRefreshMinutes": 5,
+      "mode": "idle",
+      "dataRefreshMinutes": 180,
+      "livestreamRefreshMinutes": 0,
       "scheduleAware": {
         "enabled": true,
         "timezone": "Asia/Manila",
-        "mode": "game-day",
-        "gameDay": true,
-        "todayGameCount": 2,
-        "todayGames": [
-          "web-uaap-scheduled-7",
-          "web-uaap-scheduled-8"
-        ],
+        "mode": "idle",
+        "gameDay": false,
+        "todayGameCount": 0,
+        "todayGames": [],
         "nextGameAt": "2026-10-10T15:00:00+08:00",
         "idleDiscoveryMinutes": 180,
         "gameDayDataRefreshMinutes": 15,
         "gameDayLivestreamRefreshMinutes": 5,
-        "lastSlowCheckAt": "2026-10-07T19:47:16+08:00"
+        "lastSlowCheckAt": "2026-10-08T07:15:15+08:00"
       },
       "failClosed": true
     }

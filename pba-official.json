@@ -349,24 +349,21 @@
   "headlinesUpdatedAt": "2026-09-23T16:15:14.073Z",
   "automation": {
     "enabled": true,
-    "mode": "game-day",
-    "dataRefreshMinutes": 15,
-    "livestreamRefreshMinutes": 5,
+    "mode": "idle",
+    "dataRefreshMinutes": 180,
+    "livestreamRefreshMinutes": 0,
     "scheduleAware": {
       "enabled": true,
       "timezone": "Asia/Manila",
-      "mode": "game-day",
-      "gameDay": true,
-      "todayGameCount": 2,
-      "todayGames": [
-        "web-pba-20261007-2",
-        "web-pba-20261007-1"
-      ],
+      "mode": "idle",
+      "gameDay": false,
+      "todayGameCount": 0,
+      "todayGames": [],
       "nextGameAt": "2026-10-07T17:15:00+08:00",
       "idleDiscoveryMinutes": 180,
       "gameDayDataRefreshMinutes": 15,
       "gameDayLivestreamRefreshMinutes": 5,
-      "lastSlowCheckAt": "2026-10-07T19:47:14+08:00"
+      "lastSlowCheckAt": "2026-10-08T07:15:12+08:00"
     },
     "failClosed": true
   }
