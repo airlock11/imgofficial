@@ -675,6 +675,30 @@ def load_previous():
  except Exception:
   return {}
 
+def one_sports_matchup_key(item):
+ title=str(item.get("title") or (item.get("stream") or {}).get("title") or "").upper()
+ head=title.split("|",1)[0]
+ head=re.sub(r"^\s*LIVE\s*:\s*","",head)
+ head=re.sub(r"[^A-Z0-9]+"," ",head)
+ return " ".join(head.split())
+
+def prefer_primary_one_sports_streams(items):
+ groups={}
+ passthrough=[]
+ for item in items:
+  league=str(item.get("leagueKey") or "")
+  channel_id=str((item.get("stream") or {}).get("sourceChannelId") or "")
+  if league not in {"pba","uaap"} or channel_id!=ONE_SPORTS_CHANNEL_ID:
+   passthrough.append(item)
+   continue
+  key=(league,one_sports_matchup_key(item))
+  groups.setdefault(key,[]).append(item)
+ selected=[]
+ for rows in groups.values():
+  primary=[x for x in rows if "INTERNATIONAL STREAM" not in str(x.get("title") or "").upper()]
+  selected.append((primary or rows)[0])
+ return passthrough+selected
+
 def verified_age_seconds(item, now=None):
  now=now or datetime.now(timezone.utc)
  value=item.get("lastVerifiedLiveAt") or (item.get("stream") or {}).get("lastVerifiedLiveAt")
@@ -888,6 +912,8 @@ try:
  streams.extend(previous_still_live(previous))
 except Exception as ex:
  print("youtube previous streams",ex)
+
+streams=prefer_primary_one_sports_streams(streams)
 
 one_sports_preferred={
  x.get("leagueKey") for x in streams
