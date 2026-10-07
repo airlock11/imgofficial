@@ -88,6 +88,19 @@ def source_title_allowed(source,title):
  includes=[str(x).upper() for x in source.get("includeAny",[]) if str(x).strip()]
  return not includes or any(token in upper for token in includes)
 
+def pba_one_sports_title_allowed(title):
+ upper=str(title or "").upper()
+ if not re.search(r"\bPBA\b",upper):return False
+ blocked=("HIGHLIGHTS","REPLAY","FULL GAME","PRESS CONFERENCE","INTERVIEW","PODCAST")
+ return not any(token in upper for token in blocked)
+
+def uaap_one_sports_title_allowed(title):
+ upper=str(title or "").upper()
+ if not re.search(r"\bUAAP\b",upper):return False
+ if "BASKETBALL" not in upper:return False
+ blocked=("WOMEN","WOMEN'S","WOMEN’S","JUNIOR","JUNIORS","BOYS","GIRLS","HIGHLIGHTS","REPLAY","FULL GAME","PRESS CONFERENCE","INTERVIEW","PODCAST")
+ return not any(token in upper for token in blocked)
+
 _LIVE_EVENT_MATCH_CACHE=None
 def _normalize_match_text(value):
  text=str(value or "").upper()
@@ -203,6 +216,43 @@ def source_schedule_gate_allowed(source):
   return tat_game_day_scan_allowed()
  if gate=="regional-web":
   return regional_game_day_scan_allowed(source.get("scheduleLeagueKey") or source.get("leagueKey"))
+ return True
+
+def regional_game_window_scan_allowed(league_key,early_minutes=45,late_hours=4):
+ key=str(league_key or "").strip()
+ if not key:return False
+ try:
+  data=json.loads(REGIONAL.read_text("utf-8"))
+  league=(data.get("leagues",{}) or {}).get(key,{})
+  manila=timezone(timedelta(hours=8))
+  now=datetime.now(timezone.utc).astimezone(manila)
+  for game in league.get("games",[]):
+   raw=str(game.get("date") or "").strip()
+   if not raw:continue
+   try:
+    if raw.endswith("Z"):raw=raw[:-1]+"+00:00"
+    dt=datetime.fromisoformat(raw)
+    if dt.tzinfo is None:dt=dt.replace(tzinfo=manila)
+    dt=dt.astimezone(manila)
+   except Exception:
+    continue
+   if dt-timedelta(minutes=early_minutes) <= now <= dt+timedelta(hours=late_hours):
+    return True
+ except Exception as ex:
+  print(key.upper(),"active game window unavailable",ex)
+ return False
+
+def one_sports_direct_search_due(previous):
+ if not (regional_game_window_scan_allowed("pba") or regional_game_window_scan_allowed("uaap")):
+  return False
+ raw=str(previous.get("scanner",{}).get("oneSportsLiveSearchCheckedAt") or "")
+ if raw:
+  try:
+   last=datetime.fromisoformat(raw.replace("Z","+00:00")).astimezone(timezone.utc)
+   if datetime.now(timezone.utc)-last < timedelta(minutes=15):
+    return False
+  except Exception:
+   pass
  return True
 
 def resolve_source_channel(source,previous):
@@ -400,7 +450,7 @@ def search(event):
   if not best or cand["matchScore"]>best["matchScore"]:best=cand
  return best
 
-def one_sports_live():
+def one_sports_live(previous):
  # Discover current One Sports broadcasts directly from its public channel surfaces.
  # Classify only the leagues IMG is explicitly tracking here.
  ids=[]
@@ -416,6 +466,16 @@ def one_sports_live():
   ids += channel_recent_video_ids(ONE_SPORTS_CHANNEL_ID,25)
  except Exception as ex:
   print("One Sports uploads",ex)
+
+ direct_search_checked_at=str(previous.get("scanner",{}).get("oneSportsLiveSearchCheckedAt") or "")
+ if one_sports_direct_search_due(previous):
+  try:
+   ids += [x.get("id",{}).get("videoId") for x in youtube_search(max_results=25,channel_id=ONE_SPORTS_CHANNEL_ID,event_type="live")]
+   direct_search_checked_at=datetime.now(timezone.utc).isoformat()
+   print("One Sports direct live search",len(ids),"candidate ids")
+  except Exception as ex:
+   print("One Sports direct live search",ex)
+
  ids=list(dict.fromkeys(x for x in ids if x))
  details=video_details(ids[:50])
  out=[]
@@ -433,11 +493,11 @@ def one_sports_live():
   embeddable=status.get("embeddable",True)
   if not is_live or ended:continue
   upper=title.upper()
-  if re.search(r"\bPBA\b",upper) and regional_game_day_scan_allowed("pba"):
+  if pba_one_sports_title_allowed(title) and regional_game_day_scan_allowed("pba"):
    league_key="pba"; sport="Basketball"; league="PBA"; prefix="pba"
   elif re.search(r"\bNCAA\b",upper) and ncaa_senior_title_allowed(title):
    league_key="ncaa_ph"; sport="Basketball"; league="NCAA Philippines"; prefix="ncaaph"
-  elif re.search(r"\bUAAP\b",upper) and regional_game_day_scan_allowed("uaap"):
+  elif uaap_one_sports_title_allowed(title) and regional_game_day_scan_allowed("uaap"):
    league_key="uaap"; sport="Basketball"; league="UAAP"; prefix="uaap"
   else:
    continue
@@ -446,7 +506,7 @@ def one_sports_live():
   stream={"videoId":vid,"watchUrl":watch,"provider":"YouTube","channel":channel,"title":title,"sourceChannelId":ONE_SPORTS_CHANNEL_ID,"verificationStatus":"verified","lastVerifiedLiveAt":verified_at}
   if embeddable:stream["embedUrl"]="https://www.youtube.com/embed/"+vid
   out.append({"eventId":prefix+"-youtube-"+vid,"sport":sport,"leagueKey":league_key,"league":league,"teams":[],"title":title,"verificationStatus":"verified","lastVerifiedLiveAt":verified_at,"stream":stream})
- return out
+ return out,direct_search_checked_at
 
 def wta_official_live():
  # WTA's own site identifies youtube.com/WTA as an official social channel.
@@ -588,9 +648,9 @@ def discover_live_event_streams(previous):
     league="Live Sports"
    if channel_id==ONE_SPORTS_CHANNEL_ID and not league_key:
     upper=title.upper()
-    if re.search(r"\bPBA\b",upper) and regional_game_day_scan_allowed("pba"): league_key="pba"; league="PBA"
+    if pba_one_sports_title_allowed(title) and regional_game_day_scan_allowed("pba"): league_key="pba"; league="PBA"
     elif re.search(r"\bNCAA\b",upper) and ncaa_senior_title_allowed(title): league_key="ncaa_ph"; league="NCAA Philippines"
-    elif re.search(r"\bUAAP\b",upper) and regional_game_day_scan_allowed("uaap"): league_key="uaap"; league="UAAP"
+    elif uaap_one_sports_title_allowed(title) and regional_game_day_scan_allowed("uaap"): league_key="uaap"; league="UAAP"
    if not league_key: continue
    verified_at=datetime.now(timezone.utc).isoformat()
    stream={
@@ -653,6 +713,13 @@ def previous_still_live(previous):
    if item.get("leagueKey")=="ncaa_ph":
     expected_channel=ONE_SPORTS_CHANNEL_ID
     if not ncaa_senior_title_allowed(sn.get("title","")):
+     continue
+   if item.get("leagueKey")=="pba" and expected_channel==ONE_SPORTS_CHANNEL_ID:
+    if not pba_one_sports_title_allowed(sn.get("title","")):
+     continue
+   if item.get("leagueKey")=="uaap":
+    expected_channel=ONE_SPORTS_CHANNEL_ID
+    if not uaap_one_sports_title_allowed(sn.get("title","")):
      continue
    if expected_channel and sn.get("channelId")!=expected_channel:
     continue
@@ -790,9 +857,14 @@ scanner_state={
 
 # One Sports is a verified multi-league channel and needs title-based league classification.
 try:
- streams.extend(one_sports_live())
+ one_sports_streams,one_sports_search_checked_at=one_sports_live(previous)
+ streams.extend(one_sports_streams)
+ if one_sports_search_checked_at:
+  scanner_state["oneSportsLiveSearchCheckedAt"]=one_sports_search_checked_at
 except Exception as ex:
  print("youtube One Sports",ex)
+ if previous.get("scanner",{}).get("oneSportsLiveSearchCheckedAt"):
+  scanner_state["oneSportsLiveSearchCheckedAt"]=previous["scanner"]["oneSportsLiveSearchCheckedAt"]
 
 # All single-league official channels are scanned through the IMG source registry.
 try:
@@ -815,8 +887,17 @@ try:
 except Exception as ex:
  print("youtube previous streams",ex)
 
+one_sports_preferred={
+ x.get("leagueKey") for x in streams
+ if x.get("leagueKey") in {"pba","uaap"}
+ and str((x.get("stream") or {}).get("sourceChannelId") or "")==ONE_SPORTS_CHANNEL_ID
+}
 seen=set(); dedup=[]
 for x in streams:
+ league_key_for_source=str(x.get("leagueKey") or "")
+ source_channel_for_item=str((x.get("stream") or {}).get("sourceChannelId") or "")
+ if league_key_for_source in one_sports_preferred and source_channel_for_item!=ONE_SPORTS_CHANNEL_ID:
+  continue
  # NCAA Philippines policy: only One Sports senior streams may be published.
  if x.get("leagueKey")=="ncaa_ph":
   stream=x.get("stream") or {}
