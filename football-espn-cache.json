@@ -1,7 +1,7 @@
 {
   "version": 1,
   "source": "ESPN public football data",
-  "updatedAt": "2026-10-07T19:27:49.537Z",
+  "updatedAt": "2026-10-07T23:43:42.901Z",
   "leagues": {
     "soccer": {
       "name": "Premier League",
@@ -648,6 +648,22 @@
           "venue": "St. James' Park",
           "competition": "Premier League",
           "category": "England"
+        },
+        {
+          "eventId": "401879242",
+          "date": "2026-11-06T20:00Z",
+          "displayTime": "",
+          "home": "Everton",
+          "away": "Coventry City",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/368.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/388.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "Hill Dickinson Stadium",
+          "competition": "Premier League",
+          "category": "England"
         }
       ],
       "standings": [
@@ -872,7 +888,7 @@
           "points": 2
         }
       ],
-      "verifiedAt": "2026-10-07T19:27:48.923Z"
+      "verifiedAt": "2026-10-07T23:43:42.021Z"
     },
     "laliga": {
       "name": "La Liga",
@@ -1759,7 +1775,7 @@
           "points": 3
         }
       ],
-      "verifiedAt": "2026-10-07T19:27:49.130Z"
+      "verifiedAt": "2026-10-07T23:43:42.452Z"
     },
     "bundesliga": {
       "name": "Bundesliga",
@@ -2342,6 +2358,22 @@
           "venue": "Deutsche Bank Park",
           "competition": "Bundesliga",
           "category": "Germany"
+        },
+        {
+          "eventId": "401884739",
+          "date": "2026-11-06T19:30Z",
+          "displayTime": "",
+          "home": "Hamburg SV",
+          "away": "Borussia Mönchengladbach",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/127.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/268.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "Volksparkstadion",
+          "competition": "Bundesliga",
+          "category": "Germany"
         }
       ],
       "standings": [
@@ -2544,7 +2576,7 @@
           "points": 0
         }
       ],
-      "verifiedAt": "2026-10-07T19:27:49.350Z"
+      "verifiedAt": "2026-10-07T23:43:42.729Z"
     },
     "seriea": {
       "name": "Serie A",
@@ -3351,6 +3383,22 @@
           "venue": "New Balance Arena",
           "competition": "Serie A",
           "category": "Italy"
+        },
+        {
+          "eventId": "401874815",
+          "date": "2026-11-06T19:45Z",
+          "displayTime": "",
+          "home": "Venezia",
+          "away": "Udinese",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/17530.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/118.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "Stadio Pier Luigi Penzo",
+          "competition": "Serie A",
+          "category": "Italy"
         }
       ],
       "standings": [
@@ -3575,7 +3623,7 @@
           "points": 0
         }
       ],
-      "verifiedAt": "2026-10-07T19:27:49.536Z"
+      "verifiedAt": "2026-10-07T23:43:42.901Z"
     }
   }
 }
