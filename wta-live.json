@@ -2,7 +2,7 @@
   "special": true,
   "league": "WTA Tour",
   "live": true,
-  "updatedAt": "2026-10-07T13:48:50.778307+00:00",
+  "updatedAt": "2026-10-07T13:48:57.904166+00:00",
   "sourceName": "WTA Official Scores scrape",
   "sourceUrl": "https://www.wtatennis.com/scores/",
   "verificationSource": "WTA Official Scores",
@@ -13,28 +13,28 @@
   "games": [
     {
       "eventId": "wta-scrape-0-a-li-e-svitolina",
-      "date": "2026-10-07T13:48:50.774764+00:00",
+      "date": "2026-10-07T13:48:57.900588+00:00",
       "displayTime": "China Open • CHN",
       "away": "A. Li",
       "home": "E. Svitolina",
-      "awayScore": "0 · 30",
-      "homeScore": "1 · 40",
+      "awayScore": "0 · 0",
+      "homeScore": "2 · 0",
       "awaySets": [
         "0"
       ],
       "homeSets": [
-        "1"
+        "2"
       ],
-      "awayPoint": "30",
-      "homePoint": "40",
+      "awayPoint": "0",
+      "homePoint": "0",
       "currentSet": 1,
       "awayCurrentSetGames": 0,
-      "homeCurrentSetGames": 1,
+      "homeCurrentSetGames": 2,
       "awaySetsWon": 0,
       "homeSetsWon": 0,
       "round": "Round of 16",
       "court": "",
-      "status": "Live Match: 0:05 · Round of 16",
+      "status": "Live Match: 0:06 · Round of 16",
       "state": "live",
       "eventOnly": false,
       "title": "China Open • CHN",
@@ -45,7 +45,7 @@
     },
     {
       "eventId": "wta-scrape-1-p-iatcenko-d-galfi",
-      "date": "2026-10-07T13:48:50.775031+00:00",
+      "date": "2026-10-07T13:48:57.900854+00:00",
       "displayTime": "Samsun Open • TUR",
       "away": "P. Iatcenko",
       "home": "D. Galfi",
@@ -81,11 +81,11 @@
     },
     {
       "eventId": "wta-scrape-2-upcoming-christie-silva-karamoko",
-      "date": "2026-10-07T13:48:50.775637+00:00",
+      "date": "2026-10-07T13:48:57.901456+00:00",
       "displayTime": "Samsun Open • TUR",
       "away": "Upcoming / Christie",
       "home": "Silva / Karamoko",
-      "awayScore": "2 2 · 0",
+      "awayScore": "2 2 · 15",
       "homeScore": "6 2 · 40",
       "awaySets": [
         "2",
@@ -95,7 +95,7 @@
         "6",
         "2"
       ],
-      "awayPoint": "0",
+      "awayPoint": "15",
       "homePoint": "40",
       "currentSet": 2,
       "awayCurrentSetGames": 2,
@@ -104,7 +104,7 @@
       "homeSetsWon": 1,
       "round": "Round of 16",
       "court": "",
-      "status": "Live Match: 0:44 · Round of 16",
+      "status": "Live Match: 0:45 · Round of 16",
       "state": "live",
       "eventOnly": false,
       "title": "Samsun Open • TUR",
