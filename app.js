@@ -287,7 +287,7 @@ async function specialSportsPayload(sport){
   if(!league.games.length)return null;
   return {special:true,games:league.games,sourceName:league.sourceName||'',sourceUrl:league.sourceUrl||'',note:league.note||''};
 }
-const specialScoreKeys=new Set(['atp','wta','ipl','volleyball_w','volleyball_m','asian_games','fiba','ncaa_ph','bleague','euroleague','pfl','australian_open','wimbledon','us_open','npb','kbo','khl','iihf','bigbash','cricket_world_cup','pvl','vleague_jp','motogp','formulae','one','wbc','wba','ibf','wbo']);
+const specialScoreKeys=new Set(['atp','wta','ipl','volleyball_w','volleyball_m','fiba','ncaa_ph','bleague','euroleague','pfl','australian_open','wimbledon','us_open','npb','kbo','khl','iihf','bigbash','cricket_world_cup','pvl','vleague_jp','motogp','formulae','one','wbc','wba','ibf','wbo']);
 const sportradarSoccerKeys=new Set(['jamaica_pl','mizoram_pl','laliga','el_salvador_reserves','seriea','bundesliga','champions','ucl_women','mls','pfl']);
 function scoreGameLooksGeneric(g){
   const names=[g?.away,g?.home].map(x=>String(x||'').trim().toLowerCase());
@@ -326,10 +326,6 @@ async function fetchWtaLiveScores(){
   };
 }
 
-async function fetchAsianGamesOfficial(){
-  const url='https://results.asiangames2026.org/#/schedule';
-  return {officialLive:true,sourceName:'Aichi-Nagoya 2026 Official Live Results',sourceUrl:url,games:[]};
-}
 function espnScoreDateKey(value){
   const d=new Date(value);
   const y=d.getUTCFullYear();
@@ -380,28 +376,6 @@ async function fetchScorePayload(sport,{fallbackOnly=false}={}){
   }
   if(sport==='wta'&&!fallbackOnly){
     try{return await fetchWtaLiveScores()}catch{}
-  }
-  if(sport==='asian_games'){
-    const local=await specialSportsPayload(sport);
-    let livePayload=null;
-    try{
-      const r=await fetch('https://raw.githubusercontent.com/airlock11/imgofficial/asian-games-live-data/asian-games-live.json?ts='+Date.now(),{cache:'no-store'});
-      if(r.ok)livePayload=await r.json();
-    }catch{}
-    if(local){
-      const base=Array.isArray(local.games)?local.games.filter(g=>g?.state!=='live'):[];
-      const live=Array.isArray(livePayload?.games)?livePayload.games.filter(g=>g?.state==='live'):[];
-      const liveIds=new Set(live.map(g=>String(g.eventId||'')));
-      local.games=[...live,...base.filter(g=>!liveIds.has(String(g.eventId||'')))];
-      local.officialLive=true;
-      local.sourceName='Aichi-Nagoya 2026 Official Live Results';
-      local.sourceUrl='https://results.asiangames2026.org/#/schedule/live';
-      return local;
-    }
-    if(livePayload&&Array.isArray(livePayload.games)){
-      return {special:true,games:livePayload.games,officialLive:true,sourceName:livePayload.sourceName||'Aichi-Nagoya 2026 Official Live Results',sourceUrl:livePayload.sourceUrl||'https://results.asiangames2026.org/#/schedule/live'};
-    }
-    return fetchAsianGamesOfficial();
   }
   if(sport==='boxing'){
     const [apiResult,webResult]=await Promise.allSettled([
@@ -507,7 +481,6 @@ const liveNowLabels={
   f1:{sport:'Motorsport',league:'Formula 1'},
   ufc:{sport:'Combat Sports',league:'UFC'},
   boxing:{sport:'Boxing',league:'Boxing'},
-  asian_games:{sport:'Special',league:'Asian Games'},
   fiba:{sport:'Special',league:'FIBA'},
   pba:{sport:'Basketball',league:'PBA'},
   ncaa_ph:{sport:'Basketball',league:'NCAA Philippines'},
@@ -545,20 +518,8 @@ const liveNowLabels={
   wbo:{sport:'Boxing',league:'WBO'},
   ring:{sport:'Boxing',league:'THE RING'}
 };
-function asianGamesSportLabel(game){
-  const title=String(game?.title||'').trim();
-  const divider=' — ';
-  const index=title.indexOf(divider);
-  return index>0?title.slice(0,index).trim():'Asian Games';
-}
-function asianGamesEventLabel(game){
-  const title=String(game?.title||'').trim();
-  const divider=' — ';
-  const index=title.indexOf(divider);
-  return index>0?title.slice(index+divider.length).trim():(title||'Asian Games event');
-}
-const scoreLeagueOrder=['asian_games','fiba','soccer','jamaica_pl','mizoram_pl','laliga','el_salvador_reserves','seriea','bundesliga','champions','ucl_women','mls','pfl','basketball','wnba','pba','ncaa_ph','uaap','mpbl','nbl','nblaus','vba','bleague','euroleague','tat','atp','wta','australian_open','wimbledon','us_open','ipl','bigbash','cricket_world_cup','volleyball_w','volleyball_m','pvl','vleague_jp','baseball','npb','kbo','hockey','khl','iihf','football','ncaaf','f1','motogp','formulae','ufc','one','wbc','wba','ibf','wbo','ring'];
-const specialScoreLeagueKeys=new Set(['asian_games','fiba']);
+const scoreLeagueOrder=['fiba','soccer','jamaica_pl','mizoram_pl','laliga','el_salvador_reserves','seriea','bundesliga','champions','ucl_women','mls','pfl','basketball','wnba','pba','ncaa_ph','uaap','mpbl','nbl','nblaus','vba','bleague','euroleague','tat','atp','wta','australian_open','wimbledon','us_open','ipl','bigbash','cricket_world_cup','volleyball_w','volleyball_m','pvl','vleague_jp','baseball','npb','kbo','hockey','khl','iihf','football','ncaaf','f1','motogp','formulae','ufc','one','wbc','wba','ibf','wbo','ring'];
+const specialScoreLeagueKeys=new Set(['fiba']);
 const scoreSportDefaultLeague={
   basketball:'basketball',
   football:'soccer',
@@ -614,7 +575,7 @@ function scoreLeagueFallback(key){
     soccer:'PL',jamaica_pl:'JPL',mizoram_pl:'MPL',laliga:'LAL',el_salvador_reserves:'ES-R',seriea:'SA',bundesliga:'BUN',champions:'UCL',ucl_women:'UWCL',mls:'MLS',
     basketball:'NBA',wnba:'WNBA',pba:'PBA',ncaa_ph:'NCAA-PH',uaap:'UAAP',mpbl:'MPBL',nbl:'NBL-PH',nblaus:'NBL',
     vba:'VBA',wbsl:'WBSL',fiba:'FIBA',atp:'ATP',wta:'WTA',ipl:'IPL',volleyball_w:'FIVB',volleyball_m:'FIVB',
-    baseball:'MLB',npb:'NPB',kbo:'KBO',hockey:'NHL',khl:'KHL',iihf:'IIHF',football:'NFL',ncaaf:'NCAA',f1:'F1',motogp:'MGP',formulae:'FE',ufc:'UFC',one:'ONE',wbc:'WBC',wba:'WBA',ibf:'IBF',wbo:'WBO',ring:'RING',pfl:'PFL',bleague:'B.LEAGUE',euroleague:'EL',tat:'TAT',australian_open:'AO',wimbledon:'WIM',us_open:'USO',bigbash:'BBL',cricket_world_cup:'ICC',pvl:'PVL',vleague_jp:'V.LEAGUE',asian_games:'AG26'
+    baseball:'MLB',npb:'NPB',kbo:'KBO',hockey:'NHL',khl:'KHL',iihf:'IIHF',football:'NFL',ncaaf:'NCAA',f1:'F1',motogp:'MGP',formulae:'FE',ufc:'UFC',one:'ONE',wbc:'WBC',wba:'WBA',ibf:'IBF',wbo:'WBO',ring:'RING',pfl:'PFL',bleague:'B.LEAGUE',euroleague:'EL',tat:'TAT',australian_open:'AO',wimbledon:'WIM',us_open:'USO',bigbash:'BBL',cricket_world_cup:'ICC',pvl:'PVL',vleague_jp:'V.LEAGUE'
   };
   return '<span class="score-league-fallback">'+esc(short[key]||label.slice(0,5).toUpperCase())+'</span>';
 }
@@ -629,7 +590,7 @@ function scoreLeagueLogoMarkup(key){
       '<span class="score-league-fallback score-league-fallback-hidden">FIVB</span>';
   }
 
-  const suppliedFirst=['atp','wta','ipl','boxing','asian_games','soccer','jamaica_pl','mizoram_pl','laliga','el_salvador_reserves','seriea','bundesliga','champions','ucl_women','mls','pfl','tat'].includes(key);
+  const suppliedFirst=['atp','wta','ipl','boxing','soccer','jamaica_pl','mizoram_pl','laliga','el_salvador_reserves','seriea','bundesliga','champions','ucl_women','mls','pfl','tat'].includes(key);
   const logo=suppliedFirst?(supplied||feedLogo):(feedLogo||supplied);
   if(!logo)return scoreLeagueFallback(key);
   return '<img class="score-league-logo" src="'+esc(logo)+'" alt="'+esc(liveNowLabels[key]?.league||key)+' logo" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'grid\'">'+
@@ -656,8 +617,8 @@ function scoreLeagueActivityMap(){
     map.set('wta',current);
   }
 
-  // Some official score feeds (especially Asian Games) can have verified live
-  // scores without any livestream. Treat those as live-score-only activity so
+  // Some official score feeds can have verified live scores without any livestream.
+  // Treat those as live-score-only activity so
   // the league receives the green indicator and follows stream-enabled leagues.
   for(const [key,league] of Object.entries(specialSportsDataCache?.leagues||{})){
     const games=Array.isArray(league?.games)?league.games:[];
@@ -1137,7 +1098,6 @@ const regionalWebSnapshots={
     league:'PBA',
     season:"2026 Governors' Cup",
     coverage:'Web-verified schedule and results snapshot · updated September 21, 2026',
-    note:"The PBA Governors' Cup is on its Asian Games break and is scheduled to resume October 7.",
     sources:[
       {name:'PBA Official',url:'https://pba.ph/'},
       {name:'SkedCheck',url:'https://skedcheck.com/pba-games-schedule-scores/'}
@@ -1550,30 +1510,9 @@ function verifySelectedLeagueLiveDelivery(){
   }
   return false;
 }
-let selectedAsianGamesVerifiedStreams=[];
-
-async function loadSelectedAsianGamesVerifiedStreams(){
-  try{
-    const verified=await loadVerifiedChannelLive();
-    if(!verified?.ok){
-      selectedAsianGamesVerifiedStreams=[];
-      return [];
-    }
-    selectedAsianGamesVerifiedStreams=verified.entries
-      .filter(x=>(x?.delivery?.leagueKey||x?.stream?.deliveryLeagueKey||x?.leagueKey)==='asian_games')
-      .map(x=>verifiedChannelLiveGame(x,verified.updatedAt))
-      .filter(Boolean)
-      .filter(liveNowItemIsCurrent);
-    return selectedAsianGamesVerifiedStreams;
-  }catch{
-    selectedAsianGamesVerifiedStreams=[];
-    return [];
-  }
-}
 
 function selectedLeagueLiveStreamMarkup(key){
   const candidates=[
-    ...(key==='asian_games'?selectedAsianGamesVerifiedStreams:[]),
     ...liveNowItems.filter(g=>g.sportKey===key&&liveNowItemIsCurrent(g)),
     ...allGames.filter(g=>g.state==='live')
   ];
@@ -1599,7 +1538,7 @@ function selectedLeagueLiveStreamMarkup(key){
   return cards.join('');
 }
 function openLiveStream(eventId){
-  const g=[...allGames,...selectedAsianGamesVerifiedStreams,...liveNowItems].find(x=>String(x.eventId)===String(eventId)&&liveStreamsForGame(x).length);
+  const g=[...allGames,...liveNowItems].find(x=>String(x.eventId)===String(eventId)&&liveStreamsForGame(x).length);
   if(!g)return;
   const stream=liveStreamsForGame(g)[0];
   const raw=stream?.watchUrl||stream?.embedUrl;
@@ -1740,14 +1679,6 @@ function normalizeBoxingFight(f,index=0){
     streamsChecked:true
   };
 }
-function normalizeAsianGamesExpiry(game){
-  // Asian Games live state is source-driven. Never expire a game by elapsed time.
-  return game;
-}
-function expireVisibleAsianGames(){
-  // Intentionally no fixed time-based expiry. The live feed removes ended streams
-  // after upstream verification says they are no longer live.
-}
 function normalizeScorePayload(sport,payload){
   if(payload?.special){
     return (payload.games||[]).map((g,i)=>{
@@ -1792,7 +1723,7 @@ function normalizeScorePayload(sport,payload){
         odds:null,oddsList:[],highlights:Array.isArray(g.highlights)?g.highlights:[],highlightsChecked:true,
         streams:Array.isArray(g.streams)?g.streams.filter(s=>s&&(s.watchUrl||s.embedUrl)):[],streamsChecked:Boolean(g.streamsChecked||Array.isArray(g.streams))
       };
-      return sport==='asian_games'?normalizeAsianGamesExpiry(game):game;
+      return game;
     });
   }
   if(sport==='boxing'){
@@ -2048,58 +1979,6 @@ function ensureMobileLiveToggle(){
   setMobileLiveExpanded(toggle.getAttribute('aria-expanded')==='true');
 }
 let externalLiveCache={time:0,streams:[]};
-async function loadExternalLiveData(){
-  if(Date.now()-externalLiveCache.time<60000)return externalLiveCache.streams;
-  try{
-    const r=await fetch('/external-live.json?ts='+Date.now(),{cache:'no-store'});
-    if(!r.ok)throw new Error('external live unavailable');
-    const j=await r.json();
-    const updated=Date.parse(j?.updatedAt||'');
-    const freshMinutes=Math.max(5,Number(j?.freshForMinutes)||20);
-    const fresh=Number.isFinite(updated)&&Date.now()-updated<=freshMinutes*60000;
-    const streams=fresh&&Array.isArray(j?.streams)?j.streams.filter(x=>x?.leagueKey==='asian_games'&&x?.stream?.watchUrl):[];
-    externalLiveCache={time:Date.now(),streams};
-    return streams;
-  }catch{
-    externalLiveCache={time:Date.now(),streams:[]};
-    return [];
-  }
-}
-function externalMatchTokens(value){
-  const ignore=new Set(['asian','games','live','women','womens','men','mens','team','final','round','group','match','game','sports','sport','aichi','nagoya','2026']);
-  return new Set(String(value||'').toLowerCase().replace(/[^a-z0-9]+/g,' ').split(/\s+/).filter(x=>x.length>2&&!ignore.has(x)));
-}
-function externalTeamsMatch(game,entry){
-  const teams=Array.isArray(entry?.teams)?entry.teams.filter(Boolean):[];
-  if(!teams.length)return null;
-  const sides=[game?.away,game?.home].map(externalMatchTokens);
-  const scoreTeam=t=>{
-    const tt=externalMatchTokens(t);
-    return Math.max(...sides.map(side=>[...tt].filter(x=>side.has(x)).length),0);
-  };
-  return teams.every(t=>scoreTeam(t)>0);
-}
-function attachExternalAsianGamesStreams(games,entries){
-  const list=Array.isArray(games)?games:[];
-  const sources=Array.isArray(entries)?entries:[];
-  for(const entry of sources){
-    if(!Number.isFinite(Date.parse(entry.expiresAt||''))||Date.now()>=Date.parse(entry.expiresAt))continue;
-    const sport=String(entry?.sport||'').trim().toLowerCase();
-    const candidates=list.filter(g=>g?.sportKey==='asian_games'&&g?.state==='live'&&String(g?.sportLabel||asianGamesSportLabel(g)).trim().toLowerCase()===sport);
-    if(!candidates.length)continue;
-    let target=null;
-    const teamMatched=candidates.filter(g=>externalTeamsMatch(g,entry)===true);
-    if(teamMatched.length===1)target=teamMatched[0];
-    else if(!Array.isArray(entry?.teams)||!entry.teams.length){
-      if(candidates.length===1)target=candidates[0];
-    }
-    if(!target)continue;
-    const stream=entry.stream;
-    const current=Array.isArray(target.streams)?target.streams:[];
-    if(!current.some(s=>String(s?.watchUrl||'')===String(stream?.watchUrl||'')))target.streams=[...current,stream];
-    target.streamsChecked=true;
-  }
-}
 
 
 function liveSportSlug(label){
@@ -2165,24 +2044,6 @@ function liveNowItemIsCurrent(g){
   const limit=maxHours[g.sportKey];
   if(Number.isFinite(start)&&limit&&now-start>limit*60*60*1000)return false;
 
-  if(g.sportKey==='asian_games'){
-    const streamList=Array.isArray(g.streams)?g.streams:[];
-    const directStream=String(g.eventId||'').startsWith('ag26-youtube-')
-      &&streamList.some(s=>s?.watchUrl&&s?.embedUrl);
-    if(directStream){
-      const fallback=String(g.verificationStatus||streamList[0]?.verificationStatus||'verified').toLowerCase()==='fallback';
-      if(fallback){
-        const deadline=Date.parse(g.fallbackExpiresAt||streamList[0]?.fallbackExpiresAt||'');
-        if(!Number.isFinite(deadline)||now>=deadline)return false;
-      }
-      // Verified Asian Games streams remain current until the automatic
-      // YouTube verifier removes them from youtube-live.json after the
-      // broadcast actually ends. Do not expire them locally by elapsed time.
-      return true;
-    }
-    const updated=Date.parse(specialSportsDataCache?.updatedAt||specialSportsDataCache?.updated_at||'');
-    if(!Number.isFinite(updated)||now-updated>30*60*1000)return false;
-  }
   return true;
 }
 
@@ -2251,17 +2112,8 @@ async function loadVerifiedChannelLive(){
       const feedFresh=Number.isFinite(updatedAtMs)&&now-updatedAtMs<=freshMinutes*60000;
       const entries=(Array.isArray(y?.streams)?y.streams:[]).filter(x=>{
         if(!x?.stream?.watchUrl||!feedFresh)return false;
-        const targetKey=x?.delivery?.leagueKey||x?.stream?.deliveryLeagueKey||x?.leagueKey;
-        const title=String(x?.title||x?.stream?.title||'');
-        if(targetKey==='asian_games'&&/ASIAN\s+GAMES\s+UPDATE/i.test(title))return false;
         const verifiedAt=Date.parse(x?.lastVerifiedLiveAt||x?.stream?.lastVerifiedLiveAt||y?.updatedAt||'');
         if(!Number.isFinite(verifiedAt)||now-verifiedAt>freshMinutes*60000)return false;
-        if(x?.leagueKey==='asian_games'){
-          const fallback=String(x?.verificationStatus||x?.stream?.verificationStatus||'verified').toLowerCase()==='fallback';
-          if(!fallback)return true;
-          const deadline=Date.parse(x?.fallbackExpiresAt||x?.stream?.fallbackExpiresAt||'');
-          return Number.isFinite(deadline)&&now<deadline;
-        }
         return true;
       });
       const result={ok:true,updatedAt:y?.updatedAt||'',entries};
@@ -2279,61 +2131,12 @@ async function loadVerifiedChannelLive(){
   }
   return {ok:false,updatedAt:'',entries:[]};
 }
-function asianGamesVerifiedStreamSport(entry){
-  const text=[entry?.sport,entry?.title,entry?.stream?.title].filter(Boolean).join(' ').toLowerCase();
-  const aliases=[
-    ['swimming',['swimming']],
-    ['gymnastics',['gymnastics','artistic gymnastics']],
-    ['basketball',['basketball','3x3']],
-    ['baseball',['baseball']],
-    ['volleyball',['volleyball']],
-    ['football',['football','soccer']],
-    ['tennis',['tennis']],
-    ['badminton',['badminton']],
-    ['boxing',['boxing']],
-    ['wrestling',['wrestling']],
-    ['athletics',['athletics','track and field']],
-    ['judo',['judo']],
-    ['karate',['karate']],
-    ['taekwondo',['taekwondo']],
-    ['table tennis',['table tennis']],
-    ['cycling',['cycling']],
-    ['rowing',['rowing']]
-  ];
-  for(const [sport,words] of aliases){
-    if(words.some(word=>text.includes(word)))return sport;
-  }
-  return '';
-}
-function attachVerifiedAsianGamesStreams(games,entries){
-  const asianLive=(Array.isArray(games)?games:[]).filter(g=>g?.sportKey==='asian_games'&&g?.state==='live');
-  for(const entry of Array.isArray(entries)?entries:[]){
-    const targetKey=entry?.delivery?.leagueKey||entry?.stream?.deliveryLeagueKey||entry?.leagueKey;
-    if(targetKey!=='asian_games'||!entry?.stream?.watchUrl)continue;
-
-    const wanted=asianGamesVerifiedStreamSport(entry);
-    if(!wanted)continue;
-
-    const candidates=asianLive.filter(g=>{
-      const sport=String(g?.sportLabel||asianGamesSportLabel(g)||'').toLowerCase();
-      return sport.includes(wanted)||wanted.includes(sport);
-    });
-    if(candidates.length!==1)continue;
-
-    const target=candidates[0];
-    const current=Array.isArray(target.streams)?target.streams:[];
-    if(!current.some(s=>String(s?.watchUrl||'')===String(entry.stream.watchUrl))){
-      target.streams=[...current,entry.stream];
-    }
-    target.streamsChecked=true;
-  }
-}
 
 function verifiedChannelLiveGame(x,updatedAt=''){
-  const allowed=new Set(['asian_games','fiba','pba','mpbl','nbl','ncaa_ph','uaap','wta','atp','one','ufc','basketball','wnba','bleague','euroleague','volleyball_w','volleyball_m']);
+  const allowed=new Set(['fiba','pba','mpbl','nbl','ncaa_ph','uaap','wta','atp','one','ufc','basketball','wnba','bleague','euroleague','volleyball_w','volleyball_m']);
   const targetKey=x?.delivery?.leagueKey||x?.stream?.deliveryLeagueKey||x?.leagueKey;
   if(!x?.stream?.watchUrl||!allowed.has(targetKey))return null;
-  const label=x.league||({asian_games:'2026 ASIAN GAMES',pba:'PBA',mpbl:'MPBL',nbl:'NBL Pilipinas',ncaa_ph:'NCAA Philippines',uaap:'UAAP',wta:'WTA Tour',atp:'ATP Tour',fiba:'FIBA',one:'ONE Championship',ufc:'UFC',basketball:'NBA',wnba:'WNBA',bleague:'B.League',euroleague:'EuroLeague',volleyball_w:'FIVB Women',volleyball_m:'FIVB Men'}[targetKey]);
+  const label=x.league||({pba:'PBA',mpbl:'MPBL',nbl:'NBL Pilipinas',ncaa_ph:'NCAA Philippines',uaap:'UAAP',wta:'WTA Tour',atp:'ATP Tour',fiba:'FIBA',one:'ONE Championship',ufc:'UFC',basketball:'NBA',wnba:'WNBA',bleague:'B.League',euroleague:'EuroLeague',volleyball_w:'FIVB Women',volleyball_m:'FIVB Men'}[targetKey]);
   const source=x.stream.channel||x.stream.provider||label;
   return {
     eventId:x.eventId,
@@ -2355,7 +2158,6 @@ function verifiedChannelLiveGame(x,updatedAt=''){
     state:'live',
     streams:[x.stream],
     streamsChecked:true,
-    standaloneStream:targetKey==='asian_games'
   };
 }
 async function loadAllLiveGames({silent=false}={}){
@@ -2382,15 +2184,6 @@ async function loadAllLiveGames({silent=false}={}){
     }));
   })();
 
-  const asianGamesPromise=(async()=>{
-    try{
-      const j=await fetchScorePayload('asian_games');
-      const labels=liveNowLabels.asian_games||{sport:'Special',league:'Asian Games'};
-      for(const game of normalizeScorePayload('asian_games',j)){
-        if(game.state==='live')live.push({...game,sportKey:'asian_games',sportLabel:asianGamesSportLabel(game),leagueLabel:labels.league});
-      }
-    }catch{}
-  })();
 
   const apiPromise=Promise.all(apiKeys.map(async key=>{
     try{
@@ -2414,16 +2207,10 @@ async function loadAllLiveGames({silent=false}={}){
     renderAllLiveGames(dedupeCurrentLiveItems([...liveNowItems,...verifiedGames]));
   }
 
-  await Promise.all([regionalPromise,apiPromise,asianGamesPromise]);
-
-  try{
-    const external=await loadExternalLiveData();
-    attachExternalAsianGamesStreams(live,external);
-  }catch{}
+  await Promise.all([regionalPromise,apiPromise]);
 
   if(verified.ok){
-    const nonAsianEntries=verified.entries.filter(x=>(x?.delivery?.leagueKey||x?.stream?.deliveryLeagueKey||x?.leagueKey)!=='asian_games');
-    const byId=new Map(nonAsianEntries.map(x=>[String(x.eventId),x.stream]));
+    const byId=new Map(verified.entries.map(x=>[String(x.eventId),x.stream]));
     for(const game of live){
       const stream=byId.get(String(game.eventId));
       if(stream?.watchUrl){
@@ -2431,22 +2218,7 @@ async function loadAllLiveGames({silent=false}={}){
         if(!current.some(x=>String(x?.watchUrl||'')===String(stream.watchUrl)))game.streams=[...current,stream];
       }
     }
-
-    // Try to attach Asian Games streams to one specific live event first.
-    attachVerifiedAsianGamesStreams(live,verified.entries);
-
-    const attachedUrls=new Set(
-      live.filter(g=>g?.sportKey==='asian_games')
-        .flatMap(g=>liveStreamsForGame(g))
-        .map(s=>String(s?.watchUrl||''))
-        .filter(Boolean)
-    );
-
     for(const game of verifiedGames){
-      if(game?.sportKey==='asian_games'){
-        const url=String(liveStreamsForGame(game)[0]?.watchUrl||'');
-        if(url&&attachedUrls.has(url))continue;
-      }
       if(!live.some(g=>String(g.eventId)===String(game.eventId)))live.push(game);
     }
   }else{
@@ -2486,22 +2258,6 @@ function renderGames(){
     :[];
 
   const renderCard=g=>{
-    if(currentScoreLeague==='asian_games'){
-      const score=value=>String(value??'—');
-      const hasAway=g.away&&g.away!=='Asian Games';
-      const hasHome=g.home&&g.home!=='Asian Games';
-      return '<article class="game asian-games-card'+(g.state==='live'?' game-is-live':'')+'" data-game-key="'+esc(gameDomKey(g))+'">'+
-        '<div class="time">'+esc(g.displayTime||new Date(g.date).toLocaleString([],{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}))+'</div>'+
-        '<div class="teams asian-games-event-copy">'+
-          '<div class="asian-games-sport-name">'+esc(asianGamesSportLabel(g))+'</div>'+
-          '<div class="asian-games-event-title">'+esc(asianGamesEventLabel(g))+'</div>'+
-          (hasAway?'<div class="team"><span>'+esc(g.away)+'</span>'+(score(g.awayScore)!=='—'?'<b data-score-side="away">'+esc(g.awayScore)+'</b>':'')+'</div>':'')+
-          (hasHome?'<div class="team"><span>'+esc(g.home)+'</span>'+(score(g.homeScore)!=='—'?'<b data-score-side="home">'+esc(g.homeScore)+'</b>':'')+'</div>':'')+
-        '</div>'+
-        '<div class="state '+(g.state==='live'?'live':'')+'">'+esc(g.status||'Scheduled')+'</div>'+
-        (liveStreamsForGame(g).length?'<button class="watch-live-btn" type="button" data-live-event="'+esc(g.eventId)+'"><span class="live-dot" aria-hidden="true"></span>'+(g.state==='live'?'Watch Live':'View Stream')+'</button>':'')+
-      '</article>';
-    }
 
     if(currentScoreLeague==='wta'){
       return '<article class="game wta-game-card'+(g.state==='live'?' game-is-live':g.state==='suspended'?' game-is-suspended':'')+'" data-game-key="'+esc(gameDomKey(g))+'">'+
@@ -2552,14 +2308,7 @@ function renderGames(){
     '</article>';
   };
 
-  const asianNow=Date.now();
-  const asianSchedule=currentScoreLeague==='asian_games'
-    ?scheduled.filter(g=>{
-        const t=Date.parse(g.date||'');
-        return !Number.isFinite(t)||t>=asianNow-6*60*60*1000;
-      }).sort(byDateAsc)
-    :null;
-  const scheduleItems=(asianSchedule||[...scheduled,...other]).slice(0,30);
+  const scheduleItems=[...scheduled,...other].slice(0,30);
   const nblHasScore=g=>/^\d{1,3}$/.test(String(g?.awayScore||''))&&/^\d{1,3}$/.test(String(g?.homeScore||''));
   const nblVerifiedScores=currentScoreLeague==='nbl'?finals.filter(nblHasScore).slice(0,30):[];
   const nblRecentReplays=currentScoreLeague==='nbl'?finals.filter(g=>!nblHasScore(g)).slice(0,20):[];
@@ -2567,34 +2316,6 @@ function renderGames(){
   const leagueName=liveNowLabels[currentScoreLeague]?.league||'League';
   const sections=[];
 
-  if(currentScoreLeague==='asian_games'){
-    const agData=specialSportsDataCache?.leagues?.asian_games;
-    const medalRows=Array.isArray(agData?.medals)?agData.medals:[];
-    // IMG ranks this view by TOTAL medals, highest first. Gold, silver and bronze
-    // are deterministic tie-breakers; the official source rank remains in the feed.
-    const medals=[...medalRows].sort((a,b)=>
-      (Number(b?.total)||0)-(Number(a?.total)||0)||
-      (Number(b?.gold)||0)-(Number(a?.gold)||0)||
-      (Number(b?.silver)||0)-(Number(a?.silver)||0)||
-      (Number(b?.bronze)||0)-(Number(a?.bronze)||0)||
-      String(a?.country||'').localeCompare(String(b?.country||''))
-    );
-    if(medals.length){
-      const medalPanelId='asian-games-medal-standings';
-      sections.push('<section class="league-games-group asian-medal-table league-standings-dropdown" aria-label="Asian Games medal standings">'+
-        '<button type="button" class="standings-dropdown-toggle" data-standings-toggle aria-expanded="false" aria-controls="'+medalPanelId+'">'+
-          '<span class="standings-dropdown-copy"><span class="standings-dropdown-kicker">Medal table</span><strong>Medal Standings</strong><small>Ranked by total medals · highest first</small></span>'+
-          '<span class="standings-dropdown-side"><span class="standings-dropdown-count">'+esc(medals.length)+' '+(medals.length===1?'country':'countries')+'</span><span class="standings-dropdown-chevron" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span></span>'+
-        '</button>'+
-        '<div id="'+medalPanelId+'" class="standings-dropdown-content">'+
-          '<div class="standings-dropdown-inner"><div class="medal-table-scroll">'+
-            '<div class="medal-table-head"><span>Rank</span><span>Country</span><b>Gold</b><b>Silver</b><b>Bronze</b><b>Total</b></div>'+
-            '<div class="medal-table-body">'+medals.map((m,index)=>'<div class="medal-table-row"><span>'+esc(index+1)+'</span><strong>'+esc(m.country)+'</strong><b>'+esc(m.gold)+'</b><b>'+esc(m.silver)+'</b><b>'+esc(m.bronze)+'</b><b>'+esc(m.total)+'</b></div>').join('')+'</div>'+
-          '</div></div>'+
-        '</div>'+
-      '</section>');
-    }
-  }
 
   const liveStreamHtml=selectedLeagueLiveStreamMarkup(currentScoreLeague);
 
@@ -2725,7 +2446,7 @@ function renderGames(){
   if(currentScoreLeague!=='nbl'&&currentScoreLeague!=='wta'&&scoreItems.length){
     sections.push(
       '<section class="league-games-group" aria-label="'+esc(leagueName)+' results">'+
-        '<div class="league-games-group-head"><h3>'+(currentScoreLeague==='asian_games'?'Results':'Scores')+'</h3><span>'+esc(leagueName)+'</span></div>'+
+        '<div class="league-games-group-head"><h3>'+'Scores'+'</h3><span>'+esc(leagueName)+'</span></div>'+
         '<div class="league-games-list">'+scoreItems.map(renderCard).join('')+'</div>'+
       '</section>'
     );
@@ -2866,7 +2587,6 @@ async function loadGames({silent=false,league=currentScoreLeague}={}){
   const sport=league||currentScoreLeague||'soccer';
   const previousStructure=scoreStructureSignature(allGames);
   await loadSportsStatsData();
-  if(sport==='asian_games')await loadSelectedAsianGamesVerifiedStreams();
   if(boxingHighlightKeys.has(sport)){
     await Promise.all([loadBoxingHighlightsData(),loadBoxingRankingsData(),loadSpecialSportsData()]);
   }
@@ -2976,14 +2696,6 @@ async function loadGames({silent=false,league=currentScoreLeague}={}){
       }
     }
 
-    if(sport==='asian_games'){
-      try{
-        const external=await loadExternalLiveData();
-        const liveDecorated=nextGames.map(g=>({...g,sportKey:'asian_games',sportLabel:asianGamesSportLabel(g)}));
-        attachExternalAsianGamesStreams(liveDecorated,external);
-        nextGames=liveDecorated.map(g=>{const {sportKey,sportLabel,...rest}=g;return rest;});
-      }catch{}
-    }
 
     if(!isCurrent())return;
     allGames=nextGames;
@@ -3064,26 +2776,6 @@ function renderNews(items,videos=[]){
   }
 }
 
-async function loadAsianGamesUpdateVideos(){
-  try{
-    const r=await fetch('https://img-api-proxy.magsipocarnie.workers.dev/live-streams',{cache:'no-store'});
-    if(!r.ok)return [];
-    const y=await r.json();
-    const rows=Array.isArray(y?.streams)?y.streams:[];
-    return rows.map(x=>{
-      const targetKey=x?.delivery?.leagueKey||x?.stream?.deliveryLeagueKey||x?.leagueKey;
-      const title=String(x?.title||x?.stream?.title||'');
-      const id=String(x?.stream?.videoId||'');
-      if(targetKey!=='asian_games'||!/ASIAN\s+GAMES\s+UPDATE/i.test(title)||!id)return null;
-      return {
-        id,
-        title,
-        source:x?.stream?.channel||'One Sports',
-        thumbnail:'https://i.ytimg.com/vi/'+encodeURIComponent(id)+'/hqdefault.jpg'
-      };
-    }).filter(Boolean);
-  }catch{return []}
-}
 
 async function loadNews(){
   const host=document.getElementById('newsFeed');
@@ -3091,7 +2783,6 @@ async function loadNews(){
   const ns=document.getElementById('newsStatus');
   ns?.closest('.news-livebar')?.classList.remove('is-empty');
   if(ns)ns.textContent='Updating';
-  const asianUpdateVideosPromise=loadAsianGamesUpdateVideos();
 
   const tryItems=async(url,type)=>{
     const r=await fetch(url,{cache:'no-store'});
@@ -3110,15 +2801,13 @@ async function loadNews(){
 
   try{
     const data=await tryItems('news-data.json?v='+Date.now(),'json');
-    const asianUpdateVideos=await asianUpdateVideosPromise;
-    renderNews(data.items,[...asianUpdateVideos,...data.videos]);
+    renderNews(data.items,data.videos);
     return;
   }catch{}
 
   try{
     const data=await tryItems('https://img-api-proxy.magsipocarnie.workers.dev/news','worker');
-    const asianUpdateVideos=await asianUpdateVideosPromise;
-    renderNews(data.items,[...asianUpdateVideos,...data.videos]);
+    renderNews(data.items,data.videos);
     return;
   }catch{}
 
@@ -3398,7 +3087,6 @@ async function discoverOdds(){
 
 if(document.getElementById('games')){
   // Expiry cannot depend on an upstream request completing successfully.
-  setInterval(expireVisibleAsianGames,1000);
   let scoreAutoRefreshTimer=0;
   let scoreRefreshInFlight=false;
   let lastAllLiveRefreshAt=0;
@@ -3443,7 +3131,6 @@ if(document.getElementById('games')){
   Promise.allSettled([loadTatAutoData(),loadGames(),loadAllLiveGames()]).finally(()=>{lastAllLiveRefreshAt=Date.now();renderScoreLeagueFilters();scheduleScoreAutoRefresh();});
 
   document.addEventListener('visibilitychange',()=>{
-    expireVisibleAsianGames();
     clearTimeout(scoreAutoRefreshTimer);
     if(!document.hidden)refreshScoresAutomatically();
   });
