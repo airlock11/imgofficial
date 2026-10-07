@@ -868,8 +868,10 @@ except Exception as ex:
 
 # All single-league official channels are scanned through the IMG source registry.
 try:
- official_streams,scanner_state=scan_official_registry(previous)
+ official_streams,registry_state=scan_official_registry(previous)
  streams.extend(official_streams)
+ scanner_state["sourcesChecked"]=registry_state.get("sourcesChecked",[])
+ scanner_state["resolvedChannels"]=registry_state.get("resolvedChannels",scanner_state.get("resolvedChannels",{}))
 except Exception as ex:
  print("youtube official registry",ex)
 
