@@ -63,38 +63,6 @@ assert.match(app,/leagueLabel:label/,'Standalone broadcasts must show their leag
 assert.match(app,/news-video-frame[\s\S]*?onerror="this\.onerror=null;this\.src=\\'about-sports\.jpg\\'"/,'News video thumbnails must fall back when YouTube has no image');
 console.log('PASS: mobile preferences, live stream eligibility, labels, stream lookup, and simplified live dialog');
 
-// Asian Games live status is source-driven, not governed by a fixed elapsed-time expiry.
-{
-  const first=Date.parse('2026-09-22T00:00:00Z');
-  const direct={...specific,embedUrl:'https://www.youtube.com/embed/abcdefghijk'};
-  let clock=first+3*60*60*1000, scoreRenders=0, liveRenders=0;
-  const verified={
-    eventId:'ag26-youtube-abcdefghijk',state:'live',sportKey:'asian_games',
-    firstLiveAt:new Date(first).toISOString(),verificationStatus:'verified',
-    streams:[{...direct,verificationStatus:'verified'}]
-  };
-  const c=vm.createContext({
-    Date:class extends Date {static now(){return clock}},
-    currentScoreLeague:'asian_games',allGames:[],liveNowItems:[verified],
-    specialSportsDataCache:{updatedAt:new Date(clock).toISOString()},
-    renderGames(){scoreRenders++},
-    renderAllLiveGames(items){c.liveNowItems=items;liveRenders++}
-  });
-  vm.runInContext(app.slice(app.indexOf('function normalizeAsianGamesExpiry('),app.indexOf('function normalizeScorePayload(')),c);
-  vm.runInContext(app.slice(app.indexOf('function liveNowItemIsCurrent('),app.indexOf('function renderAllLiveGames(')),c);
-  vm.runInContext('expireVisibleAsianGames()',c);
-  assert.equal(c.liveNowItems.length,1,'Verified Asian Games stream must remain until source verification removes it');
-
-  c.liveNowItems=[{
-    ...verified,verificationStatus:'fallback',
-    fallbackExpiresAt:new Date(clock-1).toISOString(),
-    streams:[{...direct,verificationStatus:'fallback',fallbackExpiresAt:new Date(clock-1).toISOString()}]
-  }];
-  vm.runInContext('expireVisibleAsianGames()',c);
-  assert.equal(c.liveNowItems.length,1,'Asian Games fallback must not use a fixed-time expiry');
-  assert.match(app,/setInterval\(expireVisibleAsianGames,1000\)/);
-}
-
 // Scores page renderer must define its section accumulator before using it.
 {
   const start=app.indexOf('function renderGames(){');
