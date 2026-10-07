@@ -7,7 +7,6 @@ ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/"youtube-live.json"
 KEY=os.environ["YOUTUBE_API_KEY"]
 UA="IMG-Sports-Live-Verify/3.0"
-ONE_SPORTS_CHANNEL_ID="UCXDG9ue-emCN8Ad3h7lERqQ"
 
 def get_json(url, attempts=3):
     last=None
@@ -42,12 +41,6 @@ def live_state(row):
     if live.get("actualStartTime") and not live.get("actualEndTime"):
         return "live"
     return "not_live"
-
-def valid_asian_title(title):
-    upper=str(title or "").upper()
-    tagged=("ASIAN GAMES" in upper or "AICHI-NAGOYA" in upper or "AICHI NAGOYA" in upper or "AICHI 2026" in upper)
-    blocked=("HIGHLIGHTS","REPLAY","FULL MATCH","FULL GAME","OPENING CEREMONY","CLOSING CEREMONY","DRAW CEREMONY","PRESS CONFERENCE","INTERVIEW","PODCAST")
-    return tagged and not any(x in upper for x in blocked)
 
 def age_seconds(value):
     try:
@@ -91,11 +84,6 @@ def main():
             channel=snippet.get("channelTitle") or stream.get("channel") or ""
             channel_id=snippet.get("channelId") or ""
             expected_channel=str(stream.get("sourceChannelId") or "")
-            if item.get("leagueKey")=="asian_games":
-                expected_channel=ONE_SPORTS_CHANNEL_ID
-                if not valid_asian_title(title):
-                    removed.append({"videoId":vid,"leagueKey":"asian_games","reason":"title_invalid"})
-                    continue
             if expected_channel and channel_id!=expected_channel:
                 removed.append({"videoId":vid,"leagueKey":item.get("leagueKey"),"reason":"official_channel_mismatch"})
                 continue
