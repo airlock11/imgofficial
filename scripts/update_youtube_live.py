@@ -4,7 +4,6 @@ import xml.etree.ElementTree as ET
 import html as html_lib
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
-from asian_live_expiry import expire_entries
 
 KEY=os.environ["YOUTUBE_API_KEY"]
 OUT=Path(__file__).resolve().parents[1]/"youtube-live.json"
@@ -15,7 +14,6 @@ ONE_SPORTS_CHANNEL_ID="UCXDG9ue-emCN8Ad3h7lERqQ"
 NBL_PILIPINAS_CHANNEL_ID="UCJDBLldRGVJPEvyjJdSHefw"
 WTA_YOUTUBE_USERNAME="WTA"
 MPBL_YOUTUBE_HANDLE="mpblofficial"
-PINNED_ASIAN_GAMES_VIDEO_IDS=["5mZlZtTk83E"]
 SCOREBOARDS={
  "Basketball":"https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard",
  "Football":"https://site.api.espn.com/apis/site/v2/sports/soccer/all/scoreboard",
@@ -418,7 +416,6 @@ def one_sports_live():
   ids += channel_recent_video_ids(ONE_SPORTS_CHANNEL_ID,25)
  except Exception as ex:
   print("One Sports uploads",ex)
- ids=PINNED_ASIAN_GAMES_VIDEO_IDS + ids
  ids=list(dict.fromkeys(x for x in ids if x))
  details=video_details(ids[:50])
  out=[]
@@ -434,13 +431,9 @@ def one_sports_live():
   is_live=dsn.get("liveBroadcastContent")=="live" or (live.get("actualStartTime") and not live.get("actualEndTime"))
   ended=bool(live.get("actualEndTime"))
   embeddable=status.get("embeddable",True)
-  if vid in PINNED_ASIAN_GAMES_VIDEO_IDS:
-   print("Pinned stream diagnostic",vid,repr(title),repr(channel),"live=",bool(is_live),"ended=",bool(ended),"api=",True)
   if not is_live or ended:continue
   upper=title.upper()
-  if "2026 ASIAN GAMES" in upper:
-   league_key="asian_games"; sport="Asian Games"; league="2026 ASIAN GAMES"; prefix="ag26"
-  elif re.search(r"\bPBA\b",upper) and regional_game_day_scan_allowed("pba"):
+  if re.search(r"\bPBA\b",upper) and regional_game_day_scan_allowed("pba"):
    league_key="pba"; sport="Basketball"; league="PBA"; prefix="pba"
   elif re.search(r"\bNCAA\b",upper) and ncaa_senior_title_allowed(title):
    league_key="ncaa_ph"; sport="Basketball"; league="NCAA Philippines"; prefix="ncaaph"
@@ -595,8 +588,7 @@ def discover_live_event_streams(previous):
     league="Live Sports"
    if channel_id==ONE_SPORTS_CHANNEL_ID and not league_key:
     upper=title.upper()
-    if "ASIAN GAMES" in upper: league_key="asian_games"; league="2026 ASIAN GAMES"
-    elif re.search(r"\bPBA\b",upper) and regional_game_day_scan_allowed("pba"): league_key="pba"; league="PBA"
+    if re.search(r"\bPBA\b",upper) and regional_game_day_scan_allowed("pba"): league_key="pba"; league="PBA"
     elif re.search(r"\bNCAA\b",upper) and ncaa_senior_title_allowed(title): league_key="ncaa_ph"; league="NCAA Philippines"
     elif re.search(r"\bUAAP\b",upper) and regional_game_day_scan_allowed("uaap"): league_key="uaap"; league="UAAP"
    if not league_key: continue
@@ -658,8 +650,6 @@ def previous_still_live(previous):
   if d:
    sn=d.get("snippet",{}); live=d.get("liveStreamingDetails",{}); status=d.get("status",{})
    expected_channel=str(stream.get("sourceChannelId") or "")
-   if item.get("leagueKey")=="asian_games":
-    expected_channel=ONE_SPORTS_CHANNEL_ID
    if item.get("leagueKey")=="ncaa_ph":
     expected_channel=ONE_SPORTS_CHANNEL_ID
     if not ncaa_senior_title_allowed(sn.get("title","")):
@@ -838,10 +828,6 @@ for x in streams:
  if vid and vid in seen:continue
  if vid:seen.add(vid)
  stream=x.get("stream",{})
- if x.get("leagueKey")=="asian_games":
-  # Preserve the verifier's state exactly. Never upgrade grace/fallback to verified.
-  x.pop("expiresAt",None); x.pop("fallbackExpiresAt",None)
-  stream.pop("expiresAt",None); stream.pop("fallbackExpiresAt",None)
  league_key=str(x.get("leagueKey") or "").strip()
  if league_key:
   x["delivery"]={
@@ -854,7 +840,8 @@ for x in streams:
    x["stream"]["deliveryPlacement"]="above_statistics"
  dedup.append(x)
 
-streams,expiry_ledger=expire_entries(dedup,previous,now,streams=True)
+streams=dedup
+expiry_ledger={}
 try:
  upcoming,upcoming_checked=nbl_pilipinas_upcoming(previous)
 except Exception as ex:
