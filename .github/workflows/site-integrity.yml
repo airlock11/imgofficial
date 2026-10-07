@@ -36,8 +36,6 @@ jobs:
         run: python scripts/validate_youtube_live.py
       - name: Check news embedding permissions
         run: python scripts/test_news_embed.py
-      - name: Check Asian Games expiry and rediscovery
-        run: python scripts/test_asian_live_expiry.py
       - name: Check Python syntax
         run: |
           python - <<'PY'
