@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-08T13:56:51+00:00",
+  "updated_at": "2026-10-08T23:31:36+00:00",
   "source": "Official boxing websites",
   "sources": [
     {
@@ -12,7 +12,7 @@
     }
   ],
   "source_counts": {
-    "Premier Boxing Champions": 3,
+    "Premier Boxing Champions": 4,
     "Matchroom Boxing": 2
   },
   "errors": {
@@ -82,8 +82,8 @@
       }
     },
     {
-      "id": "web-premier-boxing-champions-2026-10-17-jermall-charlo-koen-mazoudier",
-      "title": "Jermall Charlo vs. Koen Mazoudier",
+      "id": "web-premier-boxing-champions-2026-10-17-armando-resendiz-koen-mazoudier",
+      "title": "Armando Resendiz vs. Koen Mazoudier",
       "date": "2026-10-17T12:00:00Z",
       "displayTime": "Oct 17 · 8:00 PM ET",
       "status": "NOT_STARTED",
@@ -96,11 +96,42 @@
       },
       "fighters": {
         "fighter_1": {
-          "name": "Jermall Charlo",
+          "name": "Armando Resendiz",
           "winner": false
         },
         "fighter_2": {
           "name": "Koen Mazoudier",
+          "winner": false
+        }
+      },
+      "results": {
+        "outcome": null,
+        "outcome_long": null,
+        "round": null,
+        "time": null,
+        "scores": []
+      }
+    },
+    {
+      "id": "web-premier-boxing-champions-2026-10-17-marco-romero-braulio-ferreira",
+      "title": "Marco Romero vs. Braulio Ferreira",
+      "date": "2026-10-17T12:00:00Z",
+      "displayTime": "Oct 17 · 8:00 PM ET",
+      "status": "NOT_STARTED",
+      "sourceName": "Premier Boxing Champions",
+      "sourceUrl": "https://www.premierboxingchampions.com/boxing-schedule",
+      "event": {
+        "title": "Premier Boxing Champions",
+        "location": "",
+        "venue": ""
+      },
+      "fighters": {
+        "fighter_1": {
+          "name": "Marco Romero",
+          "winner": false
+        },
+        "fighter_2": {
+          "name": "Braulio Ferreira",
           "winner": false
         }
       },
