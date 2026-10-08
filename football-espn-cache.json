@@ -1,7 +1,7 @@
 {
   "version": 1,
   "source": "ESPN public football data",
-  "updatedAt": "2026-10-08T17:36:29.493Z",
+  "updatedAt": "2026-10-08T22:29:44.723Z",
   "leagues": {
     "soccer": {
       "name": "Premier League",
@@ -952,7 +952,7 @@
           "points": 2
         }
       ],
-      "verifiedAt": "2026-10-08T17:36:28.950Z"
+      "verifiedAt": "2026-10-08T22:29:43.577Z"
     },
     "laliga": {
       "name": "La Liga",
@@ -1839,7 +1839,7 @@
           "points": 3
         }
       ],
-      "verifiedAt": "2026-10-08T17:36:29.216Z"
+      "verifiedAt": "2026-10-08T22:29:43.898Z"
     },
     "bundesliga": {
       "name": "Bundesliga",
@@ -2720,7 +2720,7 @@
           "points": 0
         }
       ],
-      "verifiedAt": "2026-10-08T17:36:29.323Z"
+      "verifiedAt": "2026-10-08T22:29:44.321Z"
     },
     "seriea": {
       "name": "Serie A",
@@ -3591,6 +3591,22 @@
           "venue": "Ennio Tardini",
           "competition": "Serie A",
           "category": "Italy"
+        },
+        {
+          "eventId": "401874803",
+          "date": "2026-11-07T19:45Z",
+          "displayTime": "",
+          "home": "AS Roma",
+          "away": "Sassuolo",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/104.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/3997.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "Olimpico",
+          "competition": "Serie A",
+          "category": "Italy"
         }
       ],
       "standings": [
@@ -3815,7 +3831,7 @@
           "points": 0
         }
       ],
-      "verifiedAt": "2026-10-08T17:36:29.493Z"
+      "verifiedAt": "2026-10-08T22:29:44.722Z"
     }
   }
 }
