@@ -1,7 +1,7 @@
 {
   "version": 1,
   "source": "ESPN public football data",
-  "updatedAt": "2026-10-09T16:37:25.817Z",
+  "updatedAt": "2026-10-09T21:19:13.680Z",
   "leagues": {
     "soccer": {
       "name": "Premier League",
@@ -1032,7 +1032,7 @@
           "points": 2
         }
       ],
-      "verifiedAt": "2026-10-09T16:37:25.294Z"
+      "verifiedAt": "2026-10-09T21:19:13.076Z"
     },
     "laliga": {
       "name": "La Liga",
@@ -1048,10 +1048,10 @@
           "away": "Espanyol",
           "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/99.png",
           "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/88.png",
-          "homeScore": "0",
-          "awayScore": "0",
-          "state": "scheduled",
-          "status": "Scheduled",
+          "homeScore": "1",
+          "awayScore": "1",
+          "state": "final",
+          "status": "FT",
           "venue": "La Rosaleda",
           "competition": "La Liga",
           "category": "Spain"
@@ -1695,6 +1695,166 @@
           "venue": "Riazor",
           "competition": "La Liga",
           "category": "Spain"
+        },
+        {
+          "eventId": "401882816",
+          "date": "2026-11-08T20:00Z",
+          "displayTime": "",
+          "home": "Atlético Madrid",
+          "away": "Barcelona",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/1068.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/83.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "TBD",
+          "venue": "Riyadh Air Metropolitano",
+          "competition": "La Liga",
+          "category": "Spain"
+        },
+        {
+          "eventId": "401882815",
+          "date": "2026-11-08T20:00Z",
+          "displayTime": "",
+          "home": "Celta Vigo",
+          "away": "Levante",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/85.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/1538.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "TBD",
+          "venue": "Balaidos",
+          "competition": "La Liga",
+          "category": "Spain"
+        },
+        {
+          "eventId": "401882814",
+          "date": "2026-11-08T20:00Z",
+          "displayTime": "",
+          "home": "Elche",
+          "away": "Real Betis",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/3751.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/244.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "TBD",
+          "venue": "Estadio Martínez Valero",
+          "competition": "La Liga",
+          "category": "Spain"
+        },
+        {
+          "eventId": "401882813",
+          "date": "2026-11-08T20:00Z",
+          "displayTime": "",
+          "home": "Espanyol",
+          "away": "Deportivo",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/88.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/90.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "TBD",
+          "venue": "RCDE Stadium",
+          "competition": "La Liga",
+          "category": "Spain"
+        },
+        {
+          "eventId": "401882812",
+          "date": "2026-11-08T20:00Z",
+          "displayTime": "",
+          "home": "Málaga",
+          "away": "Racing Santander",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/99.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/87.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "TBD",
+          "venue": "La Rosaleda",
+          "competition": "La Liga",
+          "category": "Spain"
+        },
+        {
+          "eventId": "401882811",
+          "date": "2026-11-08T20:00Z",
+          "displayTime": "",
+          "home": "Osasuna",
+          "away": "Athletic Club",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/97.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/93.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "TBD",
+          "venue": "El Sadar",
+          "competition": "La Liga",
+          "category": "Spain"
+        },
+        {
+          "eventId": "401882810",
+          "date": "2026-11-08T20:00Z",
+          "displayTime": "",
+          "home": "Real Sociedad",
+          "away": "Rayo Vallecano",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/89.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/101.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "TBD",
+          "venue": "Reale Arena",
+          "competition": "La Liga",
+          "category": "Spain"
+        },
+        {
+          "eventId": "401882809",
+          "date": "2026-11-08T20:00Z",
+          "displayTime": "",
+          "home": "Sevilla",
+          "away": "Alavés",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/243.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/96.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "TBD",
+          "venue": "Ramón Sánchez Pizjuán Stadium",
+          "competition": "La Liga",
+          "category": "Spain"
+        },
+        {
+          "eventId": "401882808",
+          "date": "2026-11-08T20:00Z",
+          "displayTime": "",
+          "home": "Valencia",
+          "away": "Real Madrid",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/94.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/86.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "TBD",
+          "venue": "Mestalla Stadium",
+          "competition": "La Liga",
+          "category": "Spain"
+        },
+        {
+          "eventId": "401882807",
+          "date": "2026-11-08T20:00Z",
+          "displayTime": "",
+          "home": "Villarreal",
+          "away": "Getafe",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/102.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/2922.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "TBD",
+          "venue": "Estadio de la Cerámica",
+          "competition": "La Liga",
+          "category": "Spain"
         }
       ],
       "standings": [
@@ -1810,6 +1970,17 @@
         },
         {
           "rank": 11,
+          "team": "Espanyol",
+          "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/88.png",
+          "played": 8,
+          "wins": 2,
+          "draws": 2,
+          "losses": 4,
+          "goalDiff": 0,
+          "points": 8
+        },
+        {
+          "rank": 12,
           "team": "Getafe",
           "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2922.png",
           "played": 7,
@@ -1820,7 +1991,7 @@
           "points": 8
         },
         {
-          "rank": 12,
+          "rank": 13,
           "team": "Rayo Vallecano",
           "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/101.png",
           "played": 7,
@@ -1831,7 +2002,7 @@
           "points": 8
         },
         {
-          "rank": 13,
+          "rank": 14,
           "team": "Osasuna",
           "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/97.png",
           "played": 7,
@@ -1842,7 +2013,7 @@
           "points": 8
         },
         {
-          "rank": 14,
+          "rank": 15,
           "team": "Celta Vigo",
           "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/85.png",
           "played": 7,
@@ -1850,17 +2021,6 @@
           "draws": 4,
           "losses": 2,
           "goalDiff": 2,
-          "points": 7
-        },
-        {
-          "rank": 15,
-          "team": "Espanyol",
-          "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/88.png",
-          "played": 7,
-          "wins": 2,
-          "draws": 1,
-          "losses": 4,
-          "goalDiff": 0,
           "points": 7
         },
         {
@@ -1911,15 +2071,15 @@
           "rank": 20,
           "team": "Málaga",
           "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/99.png",
-          "played": 7,
+          "played": 8,
           "wins": 0,
-          "draws": 3,
+          "draws": 4,
           "losses": 4,
           "goalDiff": -9,
-          "points": 3
+          "points": 4
         }
       ],
-      "verifiedAt": "2026-10-09T16:37:25.447Z"
+      "verifiedAt": "2026-10-09T21:19:13.291Z"
     },
     "bundesliga": {
       "name": "Bundesliga",
@@ -1935,10 +2095,10 @@
           "away": "Werder Bremen",
           "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/124.png",
           "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/137.png",
-          "homeScore": "0",
-          "awayScore": "0",
-          "state": "scheduled",
-          "status": "Scheduled",
+          "homeScore": "2",
+          "awayScore": "2",
+          "state": "final",
+          "status": "FT",
           "venue": "Signal Iduna Park",
           "competition": "Bundesliga",
           "category": "Germany"
@@ -2630,6 +2790,22 @@
           "venue": "Europa-Park Stadion",
           "competition": "Bundesliga",
           "category": "Germany"
+        },
+        {
+          "eventId": "401884742",
+          "date": "2026-11-08T18:30Z",
+          "displayTime": "",
+          "home": "TSG Hoffenheim",
+          "away": "Schalke 04",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/7911.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/133.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "PreZero Arena",
+          "competition": "Bundesliga",
+          "category": "Germany"
         }
       ],
       "standings": [
@@ -2637,12 +2813,12 @@
           "rank": 1,
           "team": "Borussia Dortmund",
           "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/124.png",
-          "played": 4,
+          "played": 5,
           "wins": 4,
-          "draws": 0,
+          "draws": 1,
           "losses": 0,
           "goalDiff": 7,
-          "points": 12
+          "points": 13
         },
         {
           "rank": 2,
@@ -2668,6 +2844,17 @@
         },
         {
           "rank": 4,
+          "team": "Werder Bremen",
+          "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/137.png",
+          "played": 5,
+          "wins": 2,
+          "draws": 2,
+          "losses": 1,
+          "goalDiff": 0,
+          "points": 8
+        },
+        {
+          "rank": 5,
           "team": "FC Augsburg",
           "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3841.png",
           "played": 4,
@@ -2678,7 +2865,7 @@
           "points": 7
         },
         {
-          "rank": 5,
+          "rank": 6,
           "team": "Bayer Leverkusen",
           "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/131.png",
           "played": 4,
@@ -2689,7 +2876,7 @@
           "points": 7
         },
         {
-          "rank": 6,
+          "rank": 7,
           "team": "Mainz",
           "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2950.png",
           "played": 4,
@@ -2700,7 +2887,7 @@
           "points": 7
         },
         {
-          "rank": 7,
+          "rank": 8,
           "team": "SV Elversberg",
           "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/10388.png",
           "played": 4,
@@ -2708,17 +2895,6 @@
           "draws": 1,
           "losses": 1,
           "goalDiff": 1,
-          "points": 7
-        },
-        {
-          "rank": 8,
-          "team": "Werder Bremen",
-          "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/137.png",
-          "played": 4,
-          "wins": 2,
-          "draws": 1,
-          "losses": 1,
-          "goalDiff": 0,
           "points": 7
         },
         {
@@ -2832,7 +3008,7 @@
           "points": 0
         }
       ],
-      "verifiedAt": "2026-10-09T16:37:25.629Z"
+      "verifiedAt": "2026-10-09T21:19:13.502Z"
     },
     "seriea": {
       "name": "Serie A",
@@ -3767,6 +3943,38 @@
           "venue": "U-Power Stadium",
           "competition": "Serie A",
           "category": "Italy"
+        },
+        {
+          "eventId": "401874808",
+          "date": "2026-11-08T17:00Z",
+          "displayTime": "",
+          "home": "Internazionale",
+          "away": "Como",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/110.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/2572.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "San Siro",
+          "competition": "Serie A",
+          "category": "Italy"
+        },
+        {
+          "eventId": "401875003",
+          "date": "2026-11-08T19:45Z",
+          "displayTime": "",
+          "home": "Fiorentina",
+          "away": "Juventus",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/109.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/111.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "Stadio Artemio Franchi",
+          "competition": "Serie A",
+          "category": "Italy"
         }
       ],
       "standings": [
@@ -3991,7 +4199,7 @@
           "points": 0
         }
       ],
-      "verifiedAt": "2026-10-09T16:37:25.817Z"
+      "verifiedAt": "2026-10-09T21:19:13.680Z"
     }
   }
 }
