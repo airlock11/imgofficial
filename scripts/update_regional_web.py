@@ -132,7 +132,7 @@ def apply_adaptive_automation(league, key, prior_state=None, ran_slow=False):
             "gameDay": bool(state["gameDay"]),
             "todayGameCount": int(state.get("todayGameCount") or 0),
             "todayGames": state.get("todayGames") or [],
-            "nextGameAt": state.get("nextGameAt") or old_schedule.get("nextGameAt") or "",
+            "nextGameAt": state.get("nextGameAt") or "",
             "idleDiscoveryMinutes": ADAPTIVE_IDLE_MINUTES,
             "gameDayDataRefreshMinutes": 15,
             "gameDayLivestreamRefreshMinutes": 5,
