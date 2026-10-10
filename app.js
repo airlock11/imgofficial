@@ -1175,9 +1175,9 @@ const oddsFeeds={
   champions:'https://site.api.espn.com/apis/site/v2/sports/soccer/uefa.champions/scoreboard',
   mls:'https://site.api.espn.com/apis/site/v2/sports/soccer/usa.1/scoreboard'
 };let allGames=[];const liveStreamCache=new Map();
-const oddsLogoSportKey={nfl:'football',ncaaf:'ncaaf',nba:'basketball',wnba:'wnba',mlb:'baseball',nhl:'hockey',epl:'soccer',laliga:'laliga',seriea:'seriea',bundesliga:'bundesliga',champions:'champions'};
-const oddsLeagueNames={nfl:'NFL',ncaaf:'NCAA Football',nba:'NBA',wnba:'WNBA',ncaam:"NCAA Men's Basketball",mlb:'MLB',nhl:'NHL',epl:'Premier League',laliga:'La Liga',seriea:'Serie A',bundesliga:'Bundesliga',ligue1:'Ligue 1',champions:'UEFA Champions League',mls:'MLS'};
-const oddsLeagueSports={nfl:'American Football',ncaaf:'American Football',nba:'Basketball',wnba:'Basketball',ncaam:'Basketball',mlb:'Baseball',nhl:'Hockey',epl:'Football',laliga:'Football',seriea:'Football',bundesliga:'Football',ligue1:'Football',champions:'Football',mls:'Football'};
+const oddsLogoSportKey={nfl:'football',ncaaf:'ncaaf',nba:'basketball',wnba:'wnba',ncaa_ph:'ncaa_ph',mlb:'baseball',nhl:'hockey',epl:'soccer',laliga:'laliga',seriea:'seriea',bundesliga:'bundesliga',champions:'champions'};
+const oddsLeagueNames={nfl:'NFL',ncaaf:'NCAA Football',nba:'NBA',wnba:'WNBA',ncaam:"NCAA Men's Basketball",ncaa_ph:'NCAA Philippines',mlb:'MLB',nhl:'NHL',epl:'Premier League',laliga:'La Liga',seriea:'Serie A',bundesliga:'Bundesliga',ligue1:'Ligue 1',champions:'UEFA Champions League',mls:'MLS'};
+const oddsLeagueSports={nfl:'American Football',ncaaf:'American Football',nba:'Basketball',wnba:'Basketball',ncaam:'Basketball',ncaa_ph:'Basketball',mlb:'Baseball',nhl:'Hockey',epl:'Football',laliga:'Football',seriea:'Football',bundesliga:'Football',ligue1:'Football',champions:'Football',mls:'Football'};
 let availableOdds={},oddsLeagueLogos={},currentOddsSport='all',currentOddsLeague='',oddsLeaguePanelOpen=false,oddsLeaguePanelTimer=0;
 function mapOdds(o){return{provider:o.provider?.displayName||o.provider?.name||'Odds provider',details:o.details||'—',total:o.overUnder??'—',home:o.moneyline?.home?.close?.odds||'—',away:o.moneyline?.away?.close?.odds||'—',draw:o.moneyline?.draw?.close?.odds||'—'}}function teamLogoUrl(team){return team?.team?.logo||team?.team?.logos?.[0]?.href||team?.logo||team?.logos?.[0]?.href||''}
 const FOOTBALL_SCORE_TEAM_ALIASES={
