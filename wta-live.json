@@ -1,49 +1,14 @@
 {
   "special": true,
   "league": "WTA Tour",
-  "live": true,
-  "updatedAt": "2026-10-10T13:26:07.835183+00:00",
+  "live": false,
+  "updatedAt": "2026-10-10T13:26:12.708293+00:00",
   "sourceName": "WTA Official Scores scrape",
   "sourceUrl": "https://www.wtatennis.com/scores/",
   "verificationSource": "WTA Official Scores",
   "verificationUrl": "https://www.wtatennis.com/scores/",
-  "pageLiveCount": 1,
-  "parsedMatchCount": 1,
+  "pageLiveCount": null,
+  "parsedMatchCount": 0,
   "note": "GitHub scrape of the rendered WTA Scores page. Game points, current set number, current-set games and per-set scores are stored separately.",
-  "games": [
-    {
-      "eventId": "wta-scrape-0-l-stefanini-a-blinkova",
-      "date": "2026-10-10T13:26:07.833664+00:00",
-      "displayTime": "Samsun Open • TUR",
-      "away": "L. Stefanini",
-      "home": "A. Blinkova",
-      "awayScore": "6 4 · 15",
-      "homeScore": "2 2 · 30",
-      "awaySets": [
-        "6",
-        "4"
-      ],
-      "homeSets": [
-        "2",
-        "2"
-      ],
-      "awayPoint": "15",
-      "homePoint": "30",
-      "currentSet": 2,
-      "awayCurrentSetGames": 4,
-      "homeCurrentSetGames": 2,
-      "awaySetsWon": 1,
-      "homeSetsWon": 0,
-      "round": "Semifinals",
-      "court": "",
-      "status": "Live Match: 1:19 · Semifinals",
-      "state": "live",
-      "eventOnly": false,
-      "title": "Samsun Open • TUR",
-      "sourceName": "WTA Official Scores scrape",
-      "sourceUrl": "https://www.wtatennis.com/scores/",
-      "verificationSource": "WTA Official Scores",
-      "verificationUrl": "https://www.wtatennis.com/scores/"
-    }
-  ]
+  "games": []
 }
