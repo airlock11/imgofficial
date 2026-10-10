@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-10T05:52:02+00:00",
+  "updatedAt": "2026-10-10T11:53:47+00:00",
   "season": "Season 89 Men's Basketball",
   "sources": {
     "stats": "https://uaap.org/stats/uaap-season-89-men-s-basketball",
@@ -11,6 +11,11 @@
     "highlightsFallback": "https://www.youtube.com/channel/UCXDG9ue-emCN8Ad3h7lERqQ/videos"
   },
   "standings": [
+    {
+      "team": "NU Bulldogs",
+      "wins": 4,
+      "losses": 2
+    },
     {
       "team": "FEU Tamaraws",
       "wins": 3,
@@ -27,11 +32,6 @@
       "losses": 2
     },
     {
-      "team": "NU Bulldogs",
-      "wins": 3,
-      "losses": 2
-    },
-    {
       "team": "Adamson Soaring Falcons",
       "wins": 2,
       "losses": 2
@@ -44,7 +44,7 @@
     {
       "team": "UST Growling Tigers",
       "wins": 2,
-      "losses": 2
+      "losses": 3
     },
     {
       "team": "UE Red Warriors",
@@ -62,6 +62,14 @@
       "apg": 1.3
     },
     {
+      "player": "M. Konateh",
+      "team": "PERIOD 3 01:44 FEU",
+      "games": 1,
+      "ppg": 20.0,
+      "rpg": 7.0,
+      "apg": 2.0
+    },
+    {
       "player": "K. Mongcopa",
       "team": "FEU Tamaraws",
       "games": 3,
@@ -70,12 +78,28 @@
       "apg": 4.0
     },
     {
-      "player": "C. Akowe",
-      "team": "UST Growling Tigers",
+      "player": "K. Mongcopa",
+      "team": "PERIOD 3 01:44 FEU",
+      "games": 1,
+      "ppg": 16.0,
+      "rpg": 6.0,
+      "apg": 6.0
+    },
+    {
+      "player": "M. Montebon",
+      "team": "Adamson Soaring Falcons",
       "games": 2,
-      "ppg": 16.5,
-      "rpg": 13.0,
-      "apg": 2.0
+      "ppg": 16.0,
+      "rpg": 2.5,
+      "apg": 6.0
+    },
+    {
+      "player": "A. Acido",
+      "team": "UST Growling Tigers",
+      "games": 3,
+      "ppg": 15.7,
+      "rpg": 7.7,
+      "apg": 4.0
     },
     {
       "player": "M. Tanedo",
@@ -86,35 +110,11 @@
       "apg": 5.0
     },
     {
-      "player": "P. Francisco",
-      "team": "NU Bulldogs",
+      "player": "M. Llemit",
+      "team": "UST Growling Tigers",
       "games": 3,
-      "ppg": 14.0,
-      "rpg": 4.3,
-      "apg": 1.3
-    },
-    {
-      "player": "R. Jumamoy",
-      "team": "NU Bulldogs",
-      "games": 3,
-      "ppg": 13.7,
-      "rpg": 6.7,
-      "apg": 4.7
-    },
-    {
-      "player": "V. Pre",
-      "team": "UP Fighting Maroons",
-      "games": 3,
-      "ppg": 13.7,
-      "rpg": 5.3,
-      "apg": 1.3
-    },
-    {
-      "player": "J. Bautista",
-      "team": "FEU Tamaraws",
-      "games": 3,
-      "ppg": 13.7,
-      "rpg": 2.3,
+      "ppg": 15.0,
+      "rpg": 8.0,
       "apg": 2.7
     }
   ],
@@ -123,10 +123,10 @@
   "previousGamePhotos": [],
   "highlights": [
     {
-      "id": "4RprfeGTldI",
-      "title": "ATENEO vs DLSU | SMART PLAYS EXTENDED HIGHLIGHTS | UAAP SEASON 89 MEN’S BASKETBALL | OCT 7, 2026",
-      "url": "https://www.youtube.com/watch?v=4RprfeGTldI",
-      "thumbnail": "https://i.ytimg.com/vi/4RprfeGTldI/hqdefault.jpg",
+      "id": "VhADtCKHczA",
+      "title": "FEU vs ATENEO | FIRST HALF HIGHLIGHTS | UAAP SEASON 89 MEN’S BASKETBALL",
+      "url": "https://www.youtube.com/watch?v=VhADtCKHczA",
+      "thumbnail": "https://i.ytimg.com/vi/VhADtCKHczA/hqdefault.jpg",
       "published": "",
       "channel": "One Sports",
       "sourceName": "One Sports",
@@ -134,10 +134,10 @@
       "verificationStatus": "verified"
     },
     {
-      "id": "D7iKoRgmbC8",
-      "title": "Tuano STEPS UP 🦅🔥 with 17 PTS vs DLSU | UAAP SEASON 89 MEN'S BASKETBALL | HIGHLIGHTS",
-      "url": "https://www.youtube.com/watch?v=D7iKoRgmbC8",
-      "thumbnail": "https://i.ytimg.com/vi/D7iKoRgmbC8/hqdefault.jpg",
+      "id": "Ijtr_K4dxmA",
+      "title": "FEU vs ATENEO | 2ND QUARTER HIGHLIGHTS | UAAP SEASON 89 MEN’S BASKETBALL",
+      "url": "https://www.youtube.com/watch?v=Ijtr_K4dxmA",
+      "thumbnail": "https://i.ytimg.com/vi/Ijtr_K4dxmA/hqdefault.jpg",
       "published": "",
       "channel": "One Sports",
       "sourceName": "One Sports",
@@ -145,10 +145,10 @@
       "verificationStatus": "verified"
     },
     {
-      "id": "naLU7jQ98wA",
-      "title": "Tovera POSTS 15-4-4 🏹🔥 for DLSU vs Ateneo | UAAP SEASON 89 MEN'S BASKETBALL | HIGHLIGHTS",
-      "url": "https://www.youtube.com/watch?v=naLU7jQ98wA",
-      "thumbnail": "https://i.ytimg.com/vi/naLU7jQ98wA/hqdefault.jpg",
+      "id": "b4t-1QLgggM",
+      "title": "FEU vs ATENEO | 1ST QUARTER HIGHLIGHTS | UAAP SEASON 89 MEN’S BASKETBALL",
+      "url": "https://www.youtube.com/watch?v=b4t-1QLgggM",
+      "thumbnail": "https://i.ytimg.com/vi/b4t-1QLgggM/hqdefault.jpg",
       "published": "",
       "channel": "One Sports",
       "sourceName": "One Sports",
@@ -156,10 +156,10 @@
       "verificationStatus": "verified"
     },
     {
-      "id": "P4ThNMIaefI",
-      "title": "ATENEO vs DLSU | FULL GAME HIGHLIGHTS | UAAP SEASON 89 MEN’S BASKETBALL | OCTOBER 7, 2026",
-      "url": "https://www.youtube.com/watch?v=P4ThNMIaefI",
-      "thumbnail": "https://i.ytimg.com/vi/P4ThNMIaefI/hqdefault.jpg",
+      "id": "PmVMYQ6SUS8",
+      "title": "NU vs UST | SMART PLAYS EXTENDED HIGHLIGHTS | UAAP SEASON 89 MEN'S BASKETBALL | OCTOBER 10, 2026",
+      "url": "https://www.youtube.com/watch?v=PmVMYQ6SUS8",
+      "thumbnail": "https://i.ytimg.com/vi/PmVMYQ6SUS8/hqdefault.jpg",
       "published": "",
       "channel": "One Sports",
       "sourceName": "One Sports",
@@ -167,10 +167,10 @@
       "verificationStatus": "verified"
     },
     {
-      "id": "y7yDxAY_t0Y",
-      "title": "ATENEO vs DLSU | SECOND HALF HIGHLIGHTS | UAAP SEASON 89 MEN’S BASKETBALL",
-      "url": "https://www.youtube.com/watch?v=y7yDxAY_t0Y",
-      "thumbnail": "https://i.ytimg.com/vi/y7yDxAY_t0Y/hqdefault.jpg",
+      "id": "HB_WqnlMc1c",
+      "title": "Acido & Jumawan COMBINE for 42 points for UST vs NU | UAAP SEASON 89 MEN'S BASKETBALL | HIGHLIGHTS",
+      "url": "https://www.youtube.com/watch?v=HB_WqnlMc1c",
+      "thumbnail": "https://i.ytimg.com/vi/HB_WqnlMc1c/hqdefault.jpg",
       "published": "",
       "channel": "One Sports",
       "sourceName": "One Sports",
@@ -178,10 +178,10 @@
       "verificationStatus": "verified"
     },
     {
-      "id": "ycVNCZ1szec",
-      "title": "ATENEO vs DLSU | 4TH QUARTER HIGHLIGHTS | UAAP SEASON 89 MEN’S BASKETBALL",
-      "url": "https://www.youtube.com/watch?v=ycVNCZ1szec",
-      "thumbnail": "https://i.ytimg.com/vi/ycVNCZ1szec/hqdefault.jpg",
+      "id": "yO9FjyI-47M",
+      "title": "Jumamoy DROPS 19 points in NU’s OT WIN vs UST | UAAP SEASON 89 MEN'S BASKETBALL | HIGHLIGHTS",
+      "url": "https://www.youtube.com/watch?v=yO9FjyI-47M",
+      "thumbnail": "https://i.ytimg.com/vi/yO9FjyI-47M/hqdefault.jpg",
       "published": "",
       "channel": "One Sports",
       "sourceName": "One Sports",
@@ -189,10 +189,10 @@
       "verificationStatus": "verified"
     },
     {
-      "id": "8fZOW2yFSqQ",
-      "title": "ATENEO vs DLSU | 3RD QUARTER HIGHLIGHTS | UAAP SEASON 89 MEN’S BASKETBALL",
-      "url": "https://www.youtube.com/watch?v=8fZOW2yFSqQ",
-      "thumbnail": "https://i.ytimg.com/vi/8fZOW2yFSqQ/hqdefault.jpg",
+      "id": "eVENyJbYcuo",
+      "title": "UST vs NU | FULL GAME HIGHLIGHTS | UAAP SEASON 89 MEN'S BASKETBALL | OCTOBER 10, 2026",
+      "url": "https://www.youtube.com/watch?v=eVENyJbYcuo",
+      "thumbnail": "https://i.ytimg.com/vi/eVENyJbYcuo/hqdefault.jpg",
       "published": "",
       "channel": "One Sports",
       "sourceName": "One Sports",
@@ -200,10 +200,10 @@
       "verificationStatus": "verified"
     },
     {
-      "id": "bBHkgRFDxNY",
-      "title": "ATENEO vs DLSU | FIRST HALF HIGHLIGHTS | UAAP SEASON 89 MEN’S BASKETBALL",
-      "url": "https://www.youtube.com/watch?v=bBHkgRFDxNY",
-      "thumbnail": "https://i.ytimg.com/vi/bBHkgRFDxNY/hqdefault.jpg",
+      "id": "DRJ1ddo9tyw",
+      "title": "UST vs NU | SECOND HALF HIGHLIGHTS | UAAP SEASON 89 MEN’S BASKETBALL",
+      "url": "https://www.youtube.com/watch?v=DRJ1ddo9tyw",
+      "thumbnail": "https://i.ytimg.com/vi/DRJ1ddo9tyw/hqdefault.jpg",
       "published": "",
       "channel": "One Sports",
       "sourceName": "One Sports",
@@ -211,10 +211,10 @@
       "verificationStatus": "verified"
     },
     {
-      "id": "th3bxeywnWE",
-      "title": "ATENEO vs DLSU | 2ND QUARTER HIGHLIGHTS | UAAP SEASON 89 MEN’S BASKETBALL",
-      "url": "https://www.youtube.com/watch?v=th3bxeywnWE",
-      "thumbnail": "https://i.ytimg.com/vi/th3bxeywnWE/hqdefault.jpg",
+      "id": "tt6ZKdCJ6gg",
+      "title": "UST vs NU | OVERTIME HIGHLIGHTS | UAAP SEASON 89 MEN’S BASKETBALL",
+      "url": "https://www.youtube.com/watch?v=tt6ZKdCJ6gg",
+      "thumbnail": "https://i.ytimg.com/vi/tt6ZKdCJ6gg/hqdefault.jpg",
       "published": "",
       "channel": "One Sports",
       "sourceName": "One Sports",
@@ -222,10 +222,10 @@
       "verificationStatus": "verified"
     },
     {
-      "id": "6cHMjoitzBY",
-      "title": "ATENEO vs DLSU | 1ST QUARTER HIGHLIGHTS | UAAP SEASON 89 MEN’S BASKETBALL",
-      "url": "https://www.youtube.com/watch?v=6cHMjoitzBY",
-      "thumbnail": "https://i.ytimg.com/vi/6cHMjoitzBY/hqdefault.jpg",
+      "id": "cokiZcqwLAI",
+      "title": "UST vs NU | 4TH QUARTER HIGHLIGHTS | UAAP SEASON 89 MEN’S BASKETBALL",
+      "url": "https://www.youtube.com/watch?v=cokiZcqwLAI",
+      "thumbnail": "https://i.ytimg.com/vi/cokiZcqwLAI/hqdefault.jpg",
       "published": "",
       "channel": "One Sports",
       "sourceName": "One Sports",
@@ -235,6 +235,26 @@
   ],
   "topPlayersMode": "recent-official-boxscores",
   "liveStatsGames": [
+    {
+      "first": "PERIOD 3 01:44 FEU",
+      "firstScore": 64,
+      "second": "Ateneo Blue Eagles",
+      "secondScore": 52,
+      "status": "Live",
+      "state": "in",
+      "gameId": "21",
+      "url": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball?game_id=21"
+    },
+    {
+      "first": "UST Growling Tigers",
+      "firstScore": 85,
+      "second": "NU Bulldogs",
+      "secondScore": 87,
+      "status": "Final",
+      "state": "final",
+      "gameId": "20",
+      "url": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball?game_id=20"
+    },
     {
       "first": "Ateneo Blue Eagles",
       "firstScore": 76,
@@ -416,7 +436,7 @@
       "url": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball?game_id=1"
     }
   ],
-  "highlightsUpdatedAt": "2026-10-10T05:52:02+00:00",
+  "highlightsUpdatedAt": "2026-10-10T11:53:47+00:00",
   "automation": {
     "enabled": true,
     "mode": "game-day",
@@ -432,11 +452,11 @@
         "web-uaap-scheduled-7",
         "web-uaap-scheduled-8"
       ],
-      "nextGameAt": "2026-10-10T15:00:00+08:00",
+      "nextGameAt": "2026-10-11T14:30:00+08:00",
       "idleDiscoveryMinutes": 180,
       "gameDayDataRefreshMinutes": 15,
       "gameDayLivestreamRefreshMinutes": 5,
-      "lastSlowCheckAt": "2026-10-10T13:51:23+08:00"
+      "lastSlowCheckAt": "2026-10-10T19:53:08+08:00"
     },
     "failClosed": true
   }
