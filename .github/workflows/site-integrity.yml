@@ -55,6 +55,32 @@ jobs:
                   with p.open(encoding='utf-8') as f:
                       json.load(f)
           PY
+      - name: Check production homepage and retired Asian Games references
+        run: |
+          python - <<'PY'
+          import pathlib, re
+          bad=[]
+          home=pathlib.Path('index.html').read_text(encoding='utf-8',errors='replace')
+          for marker in ('IMG — System Down','System unavailable','window.location.replace("https://www.img.com/")'):
+              if marker in home:
+                  bad.append('index.html: temporary maintenance/redirect marker remains')
+          retired=[
+              pathlib.Path('sports/index.html'),
+              pathlib.Path('scores/index.html'),
+              pathlib.Path('app.js'),
+              pathlib.Path('score-league-user-logos.js'),
+              pathlib.Path('special-sports-data.json'),
+              pathlib.Path('youtube-live.json'),
+          ]
+          pattern=re.compile(r'Asian Games|asian_games|asiangames2026|Aichi-Nagoya|ag26-',re.I)
+          for p in retired:
+              if p.exists() and pattern.search(p.read_text(encoding='utf-8',errors='replace')):
+                  bad.append(f'{p}: retired Asian Games reference remains')
+          if pathlib.Path('asian-stream-accuracy.js').exists():
+              bad.append('asian-stream-accuracy.js: obsolete retired file still exists')
+          if bad:
+              raise SystemExit('\n'.join(bad))
+          PY
       - name: Check merge markers and accidental escaped newlines
         run: |
           python - <<'PY'
