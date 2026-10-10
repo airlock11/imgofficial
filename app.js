@@ -2972,7 +2972,10 @@ function renderOdds(){
     return (Date.parse(a.date||'')||0)-(Date.parse(b.date||'')||0);
   });
 
-  host.innerHTML=ordered.map((g,index)=>{
+  const leagueNotice=league==='ncaa_ph'
+    ?'<div class="responsible">NCAA Philippines: international reference odds only. PAGCOR-licensed Philippine sportsbooks are not expected to offer local collegiate NCAA markets.</div>'
+    :'';
+  host.innerHTML=leagueNotice+ordered.map((g,index)=>{
     const win=oddsMarketAvailable(g,'win'),spread=oddsMarketAvailable(g,'spread'),total=oddsMarketAvailable(g,'total');
     const initial=win?'win':spread?'spread':'total';
     const isLive=g.state==='live';
