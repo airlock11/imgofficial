@@ -2,7 +2,7 @@
   "special": true,
   "league": "WTA Tour",
   "live": true,
-  "updatedAt": "2026-10-10T06:55:59.729137+00:00",
+  "updatedAt": "2026-10-10T06:56:04.749922+00:00",
   "sourceName": "WTA Official Scores scrape",
   "sourceUrl": "https://www.wtatennis.com/scores/",
   "verificationSource": "WTA Official Scores",
@@ -13,24 +13,26 @@
   "games": [
     {
       "eventId": "wta-scrape-1-r-sramkova-r-zarazua",
-      "date": "2026-10-10T06:55:59.727640+00:00",
+      "date": "2026-10-10T06:56:04.748374+00:00",
       "displayTime": "Suzhou Open • CHN",
       "away": "R. Sramkova",
       "home": "R. Zarazua",
-      "awayScore": "6 · AD",
-      "homeScore": "5 · 40",
+      "awayScore": "7 0 · 0",
+      "homeScore": "5 0 · 0",
       "awaySets": [
-        "6"
+        "7",
+        "0"
       ],
       "homeSets": [
-        "5"
+        "5",
+        "0"
       ],
-      "awayPoint": "AD",
-      "homePoint": "40",
-      "currentSet": 1,
-      "awayCurrentSetGames": 6,
-      "homeCurrentSetGames": 5,
-      "awaySetsWon": 0,
+      "awayPoint": "0",
+      "homePoint": "0",
+      "currentSet": 2,
+      "awayCurrentSetGames": 0,
+      "homeCurrentSetGames": 0,
+      "awaySetsWon": 1,
       "homeSetsWon": 0,
       "round": "Semifinals",
       "court": "Center Court",
@@ -45,7 +47,7 @@
     },
     {
       "eventId": "wta-scrape-0-m-andreeva-n-bartunkova",
-      "date": "2026-10-10T06:55:59.727488+00:00",
+      "date": "2026-10-10T06:56:04.748219+00:00",
       "displayTime": "China Open • CHN",
       "away": "M. Andreeva",
       "home": "N. Bartunkova",
