@@ -2,7 +2,7 @@
   "special": true,
   "league": "WTA Tour",
   "live": true,
-  "updatedAt": "2026-10-11T12:45:59.023024+00:00",
+  "updatedAt": "2026-10-11T12:46:05.566184+00:00",
   "sourceName": "WTA Official Scores scrape",
   "sourceUrl": "https://www.wtatennis.com/scores/",
   "verificationSource": "WTA Official Scores",
@@ -13,24 +13,24 @@
   "games": [
     {
       "eventId": "wta-scrape-2-l-encheva-m-mettraux",
-      "date": "2026-10-11T12:45:59.018877+00:00",
+      "date": "2026-10-11T12:46:05.561988+00:00",
       "displayTime": "Vanda Pharmaceuticals Mallorca Women's Championships • ESP",
       "away": "L. Encheva",
       "home": "M. Mettraux",
-      "awayScore": "6 2 · AD",
-      "homeScore": "2 0 · 40",
+      "awayScore": "6 3 · 0",
+      "homeScore": "2 0 · 0",
       "awaySets": [
         "6",
-        "2"
+        "3"
       ],
       "homeSets": [
         "2",
         "0"
       ],
-      "awayPoint": "AD",
-      "homePoint": "40",
+      "awayPoint": "0",
+      "homePoint": "0",
       "currentSet": 2,
-      "awayCurrentSetGames": 2,
+      "awayCurrentSetGames": 3,
       "homeCurrentSetGames": 0,
       "awaySetsWon": 1,
       "homeSetsWon": 0,
@@ -47,11 +47,11 @@
     },
     {
       "eventId": "wta-scrape-3-i-serban-z-li",
-      "date": "2026-10-11T12:45:59.019055+00:00",
+      "date": "2026-10-11T12:46:05.562160+00:00",
       "displayTime": "China Open • CHN",
       "away": "I. Serban",
       "home": "Z. Li",
-      "awayScore": "2 1 · AD",
+      "awayScore": "2 1 · 40",
       "homeScore": "6 0 · 40",
       "awaySets": [
         "2",
@@ -61,7 +61,7 @@
         "6",
         "0"
       ],
-      "awayPoint": "AD",
+      "awayPoint": "40",
       "homePoint": "40",
       "currentSet": 2,
       "awayCurrentSetGames": 1,
@@ -70,7 +70,7 @@
       "homeSetsWon": 1,
       "round": "Qualifying",
       "court": "Centre Court",
-      "status": "Live Match: 0:47 · Qualifying · Centre Court",
+      "status": "Live Match: 0:48 · Qualifying · Centre Court",
       "state": "live",
       "eventOnly": false,
       "title": "China Open • CHN",
@@ -81,12 +81,12 @@
     },
     {
       "eventId": "wta-scrape-4-a-tamindzic-t-brockmann",
-      "date": "2026-10-11T12:45:59.019229+00:00",
+      "date": "2026-10-11T12:46:05.562328+00:00",
       "displayTime": "China Open • CHN",
       "away": "A. Tamindzic",
       "home": "T. Brockmann",
       "awayScore": "1 0 · 0",
-      "homeScore": "6 5 · 0",
+      "homeScore": "6 5 · 15",
       "awaySets": [
         "1",
         "0"
@@ -96,7 +96,7 @@
         "5"
       ],
       "awayPoint": "0",
-      "homePoint": "0",
+      "homePoint": "15",
       "currentSet": 2,
       "awayCurrentSetGames": 0,
       "homeCurrentSetGames": 5,
@@ -104,7 +104,7 @@
       "homeSetsWon": 1,
       "round": "Qualifying",
       "court": "Court 1",
-      "status": "Live Match: 0:41 · Qualifying · Court 1",
+      "status": "Live Match: 0:43 · Qualifying · Court 1",
       "state": "live",
       "eventOnly": false,
       "title": "China Open • CHN",
@@ -115,25 +115,25 @@
     },
     {
       "eventId": "wta-scrape-0-q-zheng-m-andreeva",
-      "date": "2026-10-11T12:45:59.018347+00:00",
+      "date": "2026-10-11T12:46:05.561494+00:00",
       "displayTime": "China Open • CHN",
       "away": "Q. Zheng",
       "home": "M. Andreeva",
-      "awayScore": "7 1 · 40",
-      "homeScore": "5 1 · AD",
+      "awayScore": "7 1 · 0",
+      "homeScore": "5 2 · 0",
       "awaySets": [
         "7",
         "1"
       ],
       "homeSets": [
         "5",
-        "1"
+        "2"
       ],
-      "awayPoint": "40",
-      "homePoint": "AD",
+      "awayPoint": "0",
+      "homePoint": "0",
       "currentSet": 2,
       "awayCurrentSetGames": 1,
-      "homeCurrentSetGames": 1,
+      "homeCurrentSetGames": 2,
       "awaySetsWon": 1,
       "homeSetsWon": 0,
       "round": "Final",
@@ -149,7 +149,7 @@
     },
     {
       "eventId": "wta-scrape-1-a-aksu-l-stefanini",
-      "date": "2026-10-11T12:45:59.018679+00:00",
+      "date": "2026-10-11T12:46:05.561800+00:00",
       "displayTime": "Samsun Open • TUR",
       "away": "A. Aksu",
       "home": "L. Stefanini",
@@ -185,7 +185,7 @@
     },
     {
       "eventId": "wta-scrape-5-a-voloshchuk-a-nagy",
-      "date": "2026-10-11T12:45:59.019407+00:00",
+      "date": "2026-10-11T12:46:05.562498+00:00",
       "displayTime": "Lisboa Belem Open • POR",
       "away": "A. Voloshchuk",
       "home": "A. Nagy",
@@ -219,7 +219,7 @@
     },
     {
       "eventId": "wta-scrape-6-s-cakarevic-k-tsygourova",
-      "date": "2026-10-11T12:45:59.019608+00:00",
+      "date": "2026-10-11T12:46:05.562693+00:00",
       "displayTime": "Lisboa Belem Open • POR",
       "away": "S. Cakarevic",
       "home": "K. Tsygourova",
@@ -251,7 +251,7 @@
     },
     {
       "eventId": "wta-scrape-7-g-feistel-e-nepliy",
-      "date": "2026-10-11T12:45:59.019777+00:00",
+      "date": "2026-10-11T12:46:05.562857+00:00",
       "displayTime": "Lisboa Belem Open • POR",
       "away": "G. Feistel",
       "home": "E. Nepliy",
