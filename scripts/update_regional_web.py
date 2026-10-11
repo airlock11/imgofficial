@@ -1050,7 +1050,12 @@ def _uaap_boxscore_players(soup, teams):
             })
     return out
 
+_UAAP_LIVESTATS_CACHE = None
+
 def fetch_uaap_livestats():
+    global _UAAP_LIVESTATS_CACHE
+    if _UAAP_LIVESTATS_CACHE is not None:
+        return _UAAP_LIVESTATS_CACHE
     base = URLS["uaap_live_stats"]
     soup = BeautifulSoup(fetch(base), "html.parser")
     games = []
@@ -1103,6 +1108,17 @@ def fetch_uaap_livestats():
     for game in detail_games:
         try:
             game_soup = BeautifulSoup(fetch(game["url"]), "html.parser")
+            detail_text = _uaap_text(game_soup.get_text(" ", strip=True))
+            dm = re.search(r"Game Details\s+(\d{1,2})/(\d{1,2})/(\d{2,4})\s+(\d{1,2}):(\d{2})\s*(AM|PM)", detail_text, re.I)
+            if dm:
+                month, day, year, hh, mm, ap = dm.groups()
+                year = int(year)
+                if year < 100:
+                    year += 2000
+                hour = int(hh)
+                if ap.upper()=="PM" and hour < 12: hour += 12
+                if ap.upper()=="AM" and hour == 12: hour = 0
+                game["date"] = datetime(year, int(month), int(day), hour, int(mm), tzinfo=PHT).isoformat()
             players = _uaap_boxscore_players(game_soup, [game["first"], game["second"]])
         except Exception as ex:
             print("UAAP livestats game", game.get("gameId"), type(ex).__name__, str(ex)[:100])
@@ -1130,7 +1146,8 @@ def fetch_uaap_livestats():
             "apg": round(agg["astTotal"]/gp, 1),
         })
     leaders.sort(key=lambda x:(x["ppg"],x["rpg"],x["apg"]), reverse=True)
-    return {"standings":standings,"topPlayers":leaders[:8],"games":games}
+    _UAAP_LIVESTATS_CACHE = {"standings":standings,"topPlayers":leaders[:8],"games":games}
+    return _UAAP_LIVESTATS_CACHE
 
 
 def _uaap_listing_links(url, prefix, limit=80):
@@ -1525,15 +1542,66 @@ def parse_uaap():
     if not games:
         existing = load().get("leagues", {}).get("uaap", {})
         if existing:
-            return existing
-        raise RuntimeError("No UAAP games parsed")
+            games = list(existing.get("games") or [])
+        else:
+            raise RuntimeError("No UAAP games parsed")
+
+    try:
+        official_live = fetch_uaap_livestats()
+    except Exception as ex:
+        print("UAAP official score merge", type(ex).__name__, str(ex)[:140])
+        official_live = {}
+
+    # Official live stats are authoritative for completed/live games. Replace
+    # stale scheduled rows for the same matchup once an official score exists.
+    official_games = []
+    for row in official_live.get("games") or []:
+        if row.get("state") not in ("final", "in") or not row.get("date"):
+            continue
+        official_games.append({
+            "eventId": "uaap-live-" + str(row.get("gameId") or len(official_games)+1),
+            "date": row.get("date"),
+            "displayTime": datetime.fromisoformat(row["date"]).strftime("%b %d · " + ("Final" if row.get("state")=="final" else "Live")).replace(" 0"," "),
+            "away": row.get("second"),
+            "home": row.get("first"),
+            "awayScore": str(row.get("secondScore")),
+            "homeScore": str(row.get("firstScore")),
+            "status": "Final" if row.get("state")=="final" else "Live",
+            "state": "final" if row.get("state")=="final" else "live",
+            "sourceName": "UAAP Live Stats",
+            "sourceUrl": row.get("url") or URLS["uaap_live_stats"],
+        })
+
+    def uaap_match_key(game):
+        return tuple(sorted([
+            _uaap_text(game.get("home")).lower(),
+            _uaap_text(game.get("away")).lower(),
+        ]))
+
+    authoritative = {}
+    for game in official_games:
+        authoritative[(uaap_match_key(game), str(game.get("date") or "")[:10])] = game
+
+    merged_games = []
+    for game in games:
+        key = (uaap_match_key(game), str(game.get("date") or "")[:10])
+        replacement = authoritative.pop(key, None)
+        merged_games.append(replacement or game)
+    merged_games.extend(authoritative.values())
+    games = dedupe_games(merged_games)
+
+    # Correct the currently verified Oct. 11 second-game tipoff from the current
+    # UAAP schedule/news reports when stale third-party schedule pages still say 5:30.
+    for game in games:
+        if str(game.get("date") or "").startswith("2026-10-11") and uaap_match_key(game)==tuple(sorted(["de la salle green archers","up fighting maroons"])):
+            game["date"] = "2026-10-11T18:00:00+08:00"
+            game["displayTime"] = "Oct 11 · 6:00 PM"
+
     scheduled = sorted([g for g in games if g.get("state")=="scheduled"], key=lambda x:x.get("date",""))
     finals = sorted([g for g in games if g.get("state")=="final"], key=lambda x:x.get("date",""), reverse=True)
 
-    # Preserve the last verified standings snapshot until a reliable machine-readable
-    # standings source is available in the updater.
     existing = load().get("leagues", {}).get("uaap", {})
-    standings = existing.get("standings", []) if isinstance(existing, dict) else []
+    standings = official_live.get("standings") or (existing.get("standings", []) if isinstance(existing, dict) else [])
 
     return {
         "league":"UAAP",
