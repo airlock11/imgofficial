@@ -473,6 +473,31 @@ def load_tournament_board(tournament_id, bookmaker_labels, log_key, extra_bookma
         return []
 
     merged = {}
+
+    # Fetch explicitly requested bookmakers at tournament scope too. This is
+    # important when a bookmaker carries a PBA fixture that is not present in
+    # the seed bookmaker's returned fixture list.
+    for bookmaker in extra_bookmakers:
+        try:
+            extra_payload = get_json("/odds-by-tournaments", {
+                "tournamentIds": str(tournament_id),
+                "bookmakers": bookmaker,
+                "language": "en",
+                "verbosity": 3,
+                "oddsFormat": "decimal",
+            })
+            extra_rows = as_list(extra_payload)
+            merge_fixture_rows(merged, extra_rows)
+            print(json.dumps({
+                log_key + "_tournament_bookmaker": bookmaker,
+                "fixtures": len(extra_rows),
+            }, ensure_ascii=False))
+        except Exception as exc:
+            print(json.dumps({
+                log_key + "_tournament_bookmaker": bookmaker,
+                "error": str(exc)[:300],
+            }, ensure_ascii=False))
+
     for seed in seed_rows[:12]:
         fixture_id = seed.get("fixtureId")
         if not fixture_id:
