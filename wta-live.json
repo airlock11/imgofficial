@@ -2,7 +2,7 @@
   "special": true,
   "league": "WTA Tour",
   "live": true,
-  "updatedAt": "2026-10-11T06:11:03.754518+00:00",
+  "updatedAt": "2026-10-11T06:11:10.887863+00:00",
   "sourceName": "WTA Official Scores scrape",
   "sourceUrl": "https://www.wtatennis.com/scores/",
   "verificationSource": "WTA Official Scores",
@@ -13,7 +13,7 @@
   "games": [
     {
       "eventId": "wta-scrape-0-c-osorio-k-volynets",
-      "date": "2026-10-11T06:11:03.750449+00:00",
+      "date": "2026-10-11T06:11:10.883890+00:00",
       "displayTime": "Dongfeng · Voyah Wuhan Open • CHN",
       "away": "C. Osorio",
       "home": "K. Volynets",
@@ -49,7 +49,7 @@
     },
     {
       "eventId": "wta-scrape-1-h-shi-k-rakhimova",
-      "date": "2026-10-11T06:11:03.750727+00:00",
+      "date": "2026-10-11T06:11:10.884151+00:00",
       "displayTime": "Dongfeng · Voyah Wuhan Open • CHN",
       "away": "H. Shi",
       "home": "K. Rakhimova",
@@ -84,7 +84,7 @@
     },
     {
       "eventId": "wta-scrape-2-l-tararudee-c-mcnally",
-      "date": "2026-10-11T06:11:03.750895+00:00",
+      "date": "2026-10-11T06:11:10.884316+00:00",
       "displayTime": "Dongfeng · Voyah Wuhan Open • CHN",
       "away": "L. Tararudee",
       "home": "C. McNally",
@@ -116,7 +116,7 @@
     },
     {
       "eventId": "wta-scrape-3-a-bondar-m-sawangkaew",
-      "date": "2026-10-11T06:11:03.751044+00:00",
+      "date": "2026-10-11T06:11:10.884455+00:00",
       "displayTime": "Dongfeng · Voyah Wuhan Open • CHN",
       "away": "A. Bondar",
       "home": "M. Sawangkaew",
@@ -148,16 +148,20 @@
     },
     {
       "eventId": "wta-scrape-4-upcoming-li-zhang-prozorova",
-      "date": "2026-10-11T06:11:03.751505+00:00",
+      "date": "2026-10-11T06:11:10.884936+00:00",
       "displayTime": "Suzhou Open • CHN",
       "away": "Upcoming / Li",
       "home": "Zhang / Prozorova",
-      "awayScore": "",
-      "homeScore": "",
-      "awaySets": [],
-      "homeSets": [],
-      "awayPoint": "—",
-      "homePoint": "—",
+      "awayScore": "0 · 15",
+      "homeScore": "0 · 0",
+      "awaySets": [
+        "0"
+      ],
+      "homeSets": [
+        "0"
+      ],
+      "awayPoint": "15",
+      "homePoint": "0",
       "currentSet": 1,
       "awayCurrentSetGames": 0,
       "homeCurrentSetGames": 0,
@@ -165,8 +169,8 @@
       "homeSetsWon": 0,
       "round": "Final",
       "court": "Center Court",
-      "status": "Warmup: 0:00 · Final · Center Court",
-      "state": "warmup",
+      "status": "Live Match: 0:00 · Final · Center Court",
+      "state": "live",
       "eventOnly": false,
       "title": "Suzhou Open • CHN",
       "sourceName": "WTA Official Scores scrape",
