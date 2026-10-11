@@ -3,7 +3,7 @@ name: Update multi-bookmaker odds data
 
 on:
   schedule:
-    - cron: "23 */6 * * *"
+    - cron: "*/5 * * * *"
   workflow_dispatch:
   push:
     branches:
@@ -17,7 +17,7 @@ permissions:
 
 concurrency:
   group: odds-data-publish
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   update:
