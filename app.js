@@ -1184,6 +1184,7 @@ const oddsLogoSportKey={nfl:'football',ncaaf:'ncaaf',nba:'basketball',wnba:'wnba
 const oddsLeagueNames={nfl:'NFL',ncaaf:'NCAA Football',nba:'NBA',wnba:'WNBA',ncaam:"NCAA Men's Basketball",pba:'PBA',ncaa_ph:'NCAA Philippines',mlb:'MLB',nhl:'NHL',epl:'Premier League',laliga:'La Liga',seriea:'Serie A',bundesliga:'Bundesliga',ligue1:'Ligue 1',champions:'UEFA Champions League',mls:'MLS'};
 const oddsLeagueSports={nfl:'American Football',ncaaf:'American Football',nba:'Basketball',wnba:'Basketball',ncaam:'Basketball',pba:'Basketball',ncaa_ph:'Basketball',mlb:'Baseball',nhl:'Hockey',epl:'Football',laliga:'Football',seriea:'Football',bundesliga:'Football',ligue1:'Football',champions:'Football',mls:'Football'};
 let availableOdds={},oddsLeagueLogos={},currentOddsSport='all',currentOddsLeague='',oddsLeaguePanelOpen=false,oddsLeaguePanelTimer=0;
+const persistentOddsLeagues=['ncaa_ph'];
 function mapOdds(o){return{provider:o.provider?.displayName||o.provider?.name||'Odds provider',details:o.details||'—',total:o.overUnder??'—',home:o.moneyline?.home?.close?.odds||'—',away:o.moneyline?.away?.close?.odds||'—',draw:o.moneyline?.draw?.close?.odds||'—'}}function teamLogoUrl(team){return team?.team?.logo||team?.team?.logos?.[0]?.href||team?.logo||team?.logos?.[0]?.href||''}
 const FOOTBALL_SCORE_TEAM_ALIASES={
   soccer:{"tottenham hotspur":"Tottenham Hotspur FC","brighton hove albion":"Brighton & Hove Albion FC","ipswich town":"Ipswich Town FC","newcastle united":"Newcastle United FC","hull city":"Hull City AFC","nottingham forest":"Nottingham Forest FC","coventry city":"Coventry City FC","leeds united":"Leeds United FC","manchester city":"Manchester City FC","manchester united":"Manchester United FC"},
@@ -2931,7 +2932,7 @@ function renderOddsFilters(){
   const leagueRow=document.querySelector('.odds-league-row');
   if(!sportHost||!leagueHost||!leagueRow)return;
 
-  const keys=Object.keys(availableOdds);
+  const keys=[...new Set([...Object.keys(availableOdds),...persistentOddsLeagues])];
   const sportOrder=['Football','Basketball','American Football','Baseball','Hockey'];
   const sports=[...new Set(keys.map(k=>oddsLeagueSports[k]).filter(Boolean))].sort((a,b)=>{
     const ai=sportOrder.indexOf(a),bi=sportOrder.indexOf(b);
@@ -2982,6 +2983,11 @@ function renderOddsFilters(){
 function renderOdds(){
   const host=document.getElementById('oddsFeed'),league=currentOddsLeague,items=availableOdds[league]||[];
   if(!host)return;
+  if(!items.length){
+    const leagueName=oddsLeagueNames[league]||league.toUpperCase();
+    host.innerHTML='<div class="odds-empty-league"><strong>'+esc(leagueName)+'</strong><span>No current bookmaker odds are available yet. IMG will display them automatically when the verified feed returns a market.</span></div>';
+    return;
+  }
 
   const ordered=[...items].sort((a,b)=>{
     const ar=a.state==='live'?0:1,br=b.state==='live'?0:1;
