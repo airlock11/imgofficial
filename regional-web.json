@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-11T14:16:21+08:00",
+  "updated_at": "2026-10-11T14:20:21+08:00",
   "refresh_minutes": 15,
   "leagues": {
     "pba": {
@@ -302,7 +302,7 @@
           "idleDiscoveryMinutes": 180,
           "gameDayDataRefreshMinutes": 15,
           "gameDayLivestreamRefreshMinutes": 5,
-          "lastSlowCheckAt": "2026-10-11T14:15:00+08:00"
+          "lastSlowCheckAt": "2026-10-11T14:19:03+08:00"
         },
         "failClosed": true
       }
@@ -749,6 +749,14 @@
         "images_matched": 0,
         "facebook_blocked": true,
         "error": "HTTP Error 403: Forbidden"
+      },
+      "automation": {
+        "enabled": true,
+        "dataRefreshMinutes": 15,
+        "livestreamRefreshMinutes": 5,
+        "timezone": "Asia/Manila",
+        "verifiedOfficialYouTube": true,
+        "failClosedLivestream": true
       },
       "broadcast": [],
       "games": [
@@ -1430,7 +1438,7 @@
           "idleDiscoveryMinutes": 180,
           "gameDayDataRefreshMinutes": 15,
           "gameDayLivestreamRefreshMinutes": 5,
-          "lastSlowCheckAt": "2026-10-11T14:15:38+08:00"
+          "lastSlowCheckAt": "2026-10-11T14:19:35+08:00"
         },
         "failClosed": true
       }
@@ -1457,7 +1465,7 @@
         "idleDiscoveryMinutes": 180,
         "gameDayDataRefreshMinutes": 15,
         "gameDayLivestreamRefreshMinutes": 5,
-        "lastSlowCheckAt": "2026-10-11T14:15:00+08:00"
+        "lastSlowCheckAt": "2026-10-11T14:19:03+08:00"
       },
       "failClosed": true
     },
@@ -1480,7 +1488,7 @@
         "idleDiscoveryMinutes": 180,
         "gameDayDataRefreshMinutes": 15,
         "gameDayLivestreamRefreshMinutes": 5,
-        "lastSlowCheckAt": "2026-10-11T14:15:38+08:00"
+        "lastSlowCheckAt": "2026-10-11T14:19:35+08:00"
       },
       "failClosed": true
     }
