@@ -1180,11 +1180,11 @@ const oddsFeeds={
   champions:'https://site.api.espn.com/apis/site/v2/sports/soccer/uefa.champions/scoreboard',
   mls:'https://site.api.espn.com/apis/site/v2/sports/soccer/usa.1/scoreboard'
 };let allGames=[];const liveStreamCache=new Map();
-const oddsLogoSportKey={nfl:'football',ncaaf:'ncaaf',nba:'basketball',wnba:'wnba',pba:'pba',ncaa_ph:'ncaa_ph',mlb:'baseball',nhl:'hockey',epl:'soccer',laliga:'laliga',seriea:'seriea',bundesliga:'bundesliga',champions:'champions'};
-const oddsLeagueNames={nfl:'NFL',ncaaf:'NCAA Football',nba:'NBA',wnba:'WNBA',ncaam:"NCAA Men's Basketball",pba:'PBA',ncaa_ph:'NCAA Philippines',mlb:'MLB',nhl:'NHL',epl:'Premier League',laliga:'La Liga',seriea:'Serie A',bundesliga:'Bundesliga',ligue1:'Ligue 1',champions:'UEFA Champions League',mls:'MLS'};
-const oddsLeagueSports={nfl:'American Football',ncaaf:'American Football',nba:'Basketball',wnba:'Basketball',ncaam:'Basketball',pba:'Basketball',ncaa_ph:'Basketball',mlb:'Baseball',nhl:'Hockey',epl:'Football',laliga:'Football',seriea:'Football',bundesliga:'Football',ligue1:'Football',champions:'Football',mls:'Football'};
+const oddsLogoSportKey={nfl:'football',ncaaf:'ncaaf',nba:'basketball',wnba:'wnba',pba:'pba',ncaa_ph:'ncaa_ph',uaap:'uaap',mlb:'baseball',nhl:'hockey',epl:'soccer',laliga:'laliga',seriea:'seriea',bundesliga:'bundesliga',champions:'champions'};
+const oddsLeagueNames={nfl:'NFL',ncaaf:'NCAA Football',nba:'NBA',wnba:'WNBA',ncaam:"NCAA Men's Basketball",pba:'PBA',ncaa_ph:'NCAA Philippines',uaap:'UAAP',mlb:'MLB',nhl:'NHL',epl:'Premier League',laliga:'La Liga',seriea:'Serie A',bundesliga:'Bundesliga',ligue1:'Ligue 1',champions:'UEFA Champions League',mls:'MLS'};
+const oddsLeagueSports={nfl:'American Football',ncaaf:'American Football',nba:'Basketball',wnba:'Basketball',ncaam:'Basketball',pba:'Basketball',ncaa_ph:'Basketball',uaap:'Basketball',mlb:'Baseball',nhl:'Hockey',epl:'Football',laliga:'Football',seriea:'Football',bundesliga:'Football',ligue1:'Football',champions:'Football',mls:'Football'};
 let availableOdds={},oddsLeagueLogos={},currentOddsSport='all',currentOddsLeague='',oddsLeaguePanelOpen=false,oddsLeaguePanelTimer=0;
-const persistentOddsLeagues=['ncaa_ph'];
+const persistentOddsLeagues=['ncaa_ph','uaap'];
 function mapOdds(o){return{provider:o.provider?.displayName||o.provider?.name||'Odds provider',details:o.details||'—',total:o.overUnder??'—',home:o.moneyline?.home?.close?.odds||'—',away:o.moneyline?.away?.close?.odds||'—',draw:o.moneyline?.draw?.close?.odds||'—'}}function teamLogoUrl(team){return team?.team?.logo||team?.team?.logos?.[0]?.href||team?.logo||team?.logos?.[0]?.href||''}
 const FOOTBALL_SCORE_TEAM_ALIASES={
   soccer:{"tottenham hotspur":"Tottenham Hotspur FC","brighton hove albion":"Brighton & Hove Albion FC","ipswich town":"Ipswich Town FC","newcastle united":"Newcastle United FC","hull city":"Hull City AFC","nottingham forest":"Nottingham Forest FC","coventry city":"Coventry City FC","leeds united":"Leeds United FC","manchester city":"Manchester City FC","manchester united":"Manchester United FC"},
@@ -3210,7 +3210,7 @@ if(document.getElementById('games')){
 
   const pbaOddsFastWindow=()=>{
     const now=Date.now();
-    return (availableOdds.pba||[]).some(game=>{
+    return [...(availableOdds.pba||[]),...(availableOdds.uaap||[])].some(game=>{
       const tip=Date.parse(game?.date||'');
       return Number.isFinite(tip)&&now>=tip-30*60*1000&&now<=tip+3*60*60*1000;
     });
