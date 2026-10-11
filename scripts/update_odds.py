@@ -5,7 +5,7 @@ import re
 import urllib.parse
 import urllib.request
 import urllib.error
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -77,6 +77,62 @@ PBA_BOOKMAKER_LABELS = {
 }
 
 MARKET_CATALOG_CACHE = {}
+
+REGIONAL_WEB = ROOT / "regional-web.json"
+PBA_FAST_BEFORE = timedelta(minutes=30)
+PBA_FAST_AFTER = timedelta(hours=3)
+ROUTINE_REFRESH = timedelta(hours=6)
+
+def parse_dt(value):
+    try:
+        return datetime.fromisoformat(str(value or "").replace("Z", "+00:00"))
+    except Exception:
+        return None
+
+def pba_fast_refresh_window(now=None):
+    now = now or datetime.now(timezone.utc)
+    try:
+        regional = json.loads(REGIONAL_WEB.read_text("utf-8"))
+    except Exception:
+        return False
+    games = (((regional or {}).get("leagues") or {}).get("pba") or {}).get("games") or []
+    for game in games:
+        state = str(game.get("state") or "").casefold()
+        if state == "live":
+            return True
+        if state != "scheduled":
+            continue
+        tip = parse_dt(game.get("date"))
+        if not tip:
+            continue
+        if tip.tzinfo is None:
+            tip = tip.replace(tzinfo=timezone.utc)
+        if tip - PBA_FAST_BEFORE <= now.astimezone(tip.tzinfo) <= tip + PBA_FAST_AFTER:
+            return True
+    return False
+
+def routine_refresh_due(now=None):
+    now = now or datetime.now(timezone.utc)
+    try:
+        current = json.loads(OUT.read_text("utf-8"))
+        stamp = parse_dt(current.get("updated_at"))
+    except Exception:
+        stamp = None
+    if not stamp:
+        return True
+    if stamp.tzinfo is None:
+        stamp = stamp.replace(tzinfo=timezone.utc)
+    return now - stamp.astimezone(timezone.utc) >= ROUTINE_REFRESH
+
+def should_refresh_now():
+    event = str(os.environ.get("GITHUB_EVENT_NAME") or "").strip().casefold()
+    if event and event != "schedule":
+        return True, event
+    if pba_fast_refresh_window():
+        return True, "pba-fast-window"
+    if routine_refresh_due():
+        return True, "routine-6h"
+    return False, "idle"
 
 def get_json(path, params):
     query = dict(params)
@@ -789,6 +845,11 @@ def merge_the_odds(leagues):
         }, ensure_ascii=False))
 
 def main():
+    refresh, refresh_mode = should_refresh_now()
+    print(json.dumps({"odds_refresh_mode": refresh_mode, "refresh": refresh}, ensure_ascii=False))
+    if not refresh:
+        return
+
     if not KEY:
         print("ODDSPAPI_KEY is not configured; preserving current odds-data.json")
         return
@@ -879,6 +940,8 @@ def main():
         "updated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "provider": "OddsPapi + The Odds API",
         "bookmaker": "Multiple",
+        "refresh_mode": refresh_mode,
+        "pba_fast_window": pba_fast_refresh_window(),
         "leagues": leagues,
         "errors": {},
     }
