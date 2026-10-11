@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-11T05:27:07+00:00",
+  "updated_at": "2026-10-11T05:30:49+00:00",
   "provider": "OddsPapi + The Odds API",
   "bookmaker": "Multiple",
   "leagues": {
@@ -86,9 +86,9 @@
             "provider": "BetOnline.ag",
             "details": "—",
             "total": "—",
-            "home": "2.98",
+            "home": "3.01",
             "away": "2.5",
-            "draw": "3.35"
+            "draw": "3.3"
           },
           {
             "provider": "LowVig.ag",
@@ -142,8 +142,8 @@
             "provider": "Bovada",
             "details": "—",
             "total": "—",
-            "home": "1.6",
-            "away": "5.6",
+            "home": "1.61",
+            "away": "5.45",
             "draw": "4.05"
           },
           {
@@ -238,9 +238,9 @@
             "provider": "Bovada",
             "details": "—",
             "total": "—",
-            "home": "1.5",
+            "home": "1.52",
             "away": "6.0",
-            "draw": "4.5"
+            "draw": "4.4"
           },
           {
             "provider": "DraftKings",
@@ -366,9 +366,9 @@
             "provider": "Bovada",
             "details": "—",
             "total": "—",
-            "home": "2.2",
-            "away": "3.15",
-            "draw": "3.55"
+            "home": "2.19",
+            "away": "3.2",
+            "draw": "3.5"
           },
           {
             "provider": "LowVig.ag",
@@ -936,8 +936,8 @@
             "provider": "Bet365",
             "details": "—",
             "total": "—",
-            "home": "3.4",
-            "away": "2.2",
+            "home": "3.7",
+            "away": "2.1",
             "draw": "3.3"
           }
         ]
@@ -2593,8 +2593,8 @@
             "provider": "BetOnline.ag",
             "details": "—",
             "total": "—",
-            "home": "1.99",
-            "away": "1.84"
+            "home": "2.0",
+            "away": "1.83"
           },
           {
             "provider": "LowVig.ag",
@@ -2867,8 +2867,8 @@
             "provider": "Bovada",
             "details": "—",
             "total": "—",
-            "home": "1.57",
-            "away": "2.5"
+            "home": "1.56",
+            "away": "2.55"
           }
         ]
       },
@@ -4249,7 +4249,14 @@
             "details": "1",
             "total": "190",
             "home": "1.884",
-            "away": "1.719"
+            "away": "1.719",
+            "spreadHomeLine": "1",
+            "spreadAwayLine": "1",
+            "spreadHomePrice": "1.757",
+            "spreadAwayPrice": "1.847",
+            "totalLine": "190",
+            "overPrice": "1.751",
+            "underPrice": "1.854"
           },
           {
             "provider": "Bet365",
@@ -4257,13 +4264,6 @@
             "total": "—",
             "home": "1.71",
             "away": "1.92"
-          },
-          {
-            "provider": "1xBet",
-            "details": "—",
-            "total": "—",
-            "home": "1.967",
-            "away": "1.782"
           },
           {
             "provider": "SBOBET",
