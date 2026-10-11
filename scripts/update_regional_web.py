@@ -1695,22 +1695,71 @@ def parse_mpbl_standings():
         print("MPBL standings", type(ex).__name__, str(ex)[:160])
     return previous if isinstance(previous, dict) else {}
 
+def mpbl_verified_current_baseline():
+    # Current public Forebet rows verified on 2026-10-11. These keep IMG from
+    # regressing to stale September cards if the source temporarily serves an
+    # old/cache-lagged page. Fresh parsed rows replace these by matchup/date.
+    return [
+        {"eventId":"mpbl-20261012-mindoro-binan","date":"2026-10-12T17:00:00+08:00","displayTime":"Oct 12","away":"Binan Tatak Gel","home":"Mindoro Tamaraws","awayScore":"—","homeScore":"—","status":"Scheduled","state":"scheduled","sourceName":"Forebet","sourceUrl":URLS["mpbl_fixtures"]},
+        {"eventId":"mpbl-20261012-gensan-rizal","date":"2026-10-12T19:00:00+08:00","displayTime":"Oct 12","away":"Rizal Golden Coolers","home":"GenSan Warriors","awayScore":"—","homeScore":"—","status":"Scheduled","state":"scheduled","sourceName":"Forebet","sourceUrl":URLS["mpbl_fixtures"]},
+        {"eventId":"mpbl-20261013-bataan-sanjuan","date":"2026-10-13T17:00:00+08:00","displayTime":"Oct 13","away":"San Juan Knights","home":"Bataan Risers","awayScore":"—","homeScore":"—","status":"Scheduled","state":"scheduled","sourceName":"Forebet","sourceUrl":URLS["mpbl_fixtures"]},
+        {"eventId":"mpbl-20261013-kankaloo-ilagan","date":"2026-10-13T19:00:00+08:00","displayTime":"Oct 13","away":"Ilagan Isabela Cowboys","home":"Batang Kankaloo","awayScore":"—","homeScore":"—","status":"Scheduled","state":"scheduled","sourceName":"Forebet","sourceUrl":URLS["mpbl_fixtures"]},
+        {"eventId":"mpbl-20261014-zamboanga-quezon","date":"2026-10-14T17:00:00+08:00","displayTime":"Oct 14","away":"Quezon Huskers","home":"Zamboanga Sikat","awayScore":"—","homeScore":"—","status":"Scheduled","state":"scheduled","sourceName":"Forebet","sourceUrl":URLS["mpbl_fixtures"]},
+        {"eventId":"mpbl-20261014-batangas-cebu","date":"2026-10-14T19:00:00+08:00","displayTime":"Oct 14","away":"Cebu Greats","home":"Batangas City","awayScore":"—","homeScore":"—","status":"Scheduled","state":"scheduled","sourceName":"Forebet","sourceUrl":URLS["mpbl_fixtures"]},
+        {"eventId":"mpbl-20261015-qc-abra","date":"2026-10-15T17:00:00+08:00","displayTime":"Oct 15","away":"Abra Weavers","home":"Quezon City","awayScore":"—","homeScore":"—","status":"Scheduled","state":"scheduled","sourceName":"Forebet","sourceUrl":URLS["mpbl_fixtures"]},
+        {"eventId":"mpbl-20261015-meycauayan-pasay","date":"2026-10-15T19:00:00+08:00","displayTime":"Oct 15","away":"Pasay Voyagers","home":"Meycauayan","awayScore":"—","homeScore":"—","status":"Scheduled","state":"scheduled","sourceName":"Forebet","sourceUrl":URLS["mpbl_fixtures"]},
+        {"eventId":"mpbl-20261009-abra-qc","date":"2026-10-09T19:00:00+08:00","displayTime":"Oct 9 · Final","away":"Quezon City","home":"Abra Weavers","awayScore":"54","homeScore":"106","status":"Final","state":"final","sourceName":"Forebet","sourceUrl":URLS["mpbl_results"]},
+        {"eventId":"mpbl-20261009-pasay-meycauayan","date":"2026-10-09T17:00:00+08:00","displayTime":"Oct 9 · Final","away":"Meycauayan","home":"Pasay Voyagers","awayScore":"64","homeScore":"66","status":"Final","state":"final","sourceName":"Forebet","sourceUrl":URLS["mpbl_results"]},
+        {"eventId":"mpbl-20261007-quezon-zamboanga","date":"2026-10-07T19:00:00+08:00","displayTime":"Oct 7 · Final","away":"Zamboanga Sikat","home":"Quezon Huskers","awayScore":"55","homeScore":"88","status":"Final","state":"final","sourceName":"Forebet","sourceUrl":URLS["mpbl_results"]},
+        {"eventId":"mpbl-20261007-cebu-batangas","date":"2026-10-07T17:00:00+08:00","displayTime":"Oct 7 · Final","away":"Batangas City","home":"Cebu Greats","awayScore":"77","homeScore":"78","status":"Final","state":"final","sourceName":"Forebet","sourceUrl":URLS["mpbl_results"]},
+        {"eventId":"mpbl-20261005-sanjuan-bataan","date":"2026-10-05T19:00:00+08:00","displayTime":"Oct 5 · Final","away":"Bataan Risers","home":"San Juan Knights","awayScore":"84","homeScore":"94","status":"Final","state":"final","sourceName":"Forebet","sourceUrl":URLS["mpbl_results"]},
+        {"eventId":"mpbl-20261005-ilagan-kankaloo","date":"2026-10-05T17:00:00+08:00","displayTime":"Oct 5 · Final","away":"Batang Kankaloo","home":"Ilagan Isabela Cowboys","awayScore":"81","homeScore":"76","status":"Final","state":"final","sourceName":"Forebet","sourceUrl":URLS["mpbl_results"]},
+    ]
+
+def _mpbl_game_key(game):
+    teams = tuple(sorted([str(game.get("home") or "").casefold().strip(), str(game.get("away") or "").casefold().strip()]))
+    return (teams, str(game.get("date") or "")[:10])
+
 def parse_mpbl():
     try:
-        games = parse_forebet(URLS["mpbl_fixtures"], "scheduled")[:24] + parse_forebet(URLS["mpbl_results"], "final")[:32]
+        parsed = parse_forebet(URLS["mpbl_fixtures"], "scheduled")[:24] + parse_forebet(URLS["mpbl_results"], "final")[:32]
     except Exception:
-        games = []
+        parsed = []
     existing = load().get("leagues", {}).get("mpbl", {})
     standings = parse_mpbl_standings()
-    if not games:
-        games = existing.get("games", []) if existing else []
+    now = datetime.now(PHT)
+    today = now.date()
+
+    # Merge fresh source rows with the verified current baseline and the last
+    # known-good snapshot. Prefer final rows over scheduled rows and newer source
+    # data over older cache content.
+    chosen = {}
+    for game in list(existing.get("games", []) if existing else []) + mpbl_verified_current_baseline() + parsed:
+        dt = _adaptive_dt(game.get("date"))
+        if not dt:
+            continue
+        state = str(game.get("state") or "").lower()
+        if state == "scheduled" and dt.date() < today:
+            continue
+        if state == "final" and dt < now - timedelta(days=45):
+            continue
+        key = _mpbl_game_key(game)
+        current = chosen.get(key)
+        if current is None or (state == "final" and str(current.get("state") or "").lower() != "final") or game in parsed:
+            chosen[key] = dict(game)
+
+    games = list(chosen.values())
+    scheduled = sorted([g for g in games if g.get("state")=="scheduled"], key=lambda x:x.get("date",""))
+    finals = sorted([g for g in games if g.get("state")=="final"], key=lambda x:x.get("date",""), reverse=True)
+    games = scheduled[:24] + finals[:32]
+
     if not games and not standings:
         raise RuntimeError("No MPBL games or standings parsed")
     return {
         "league":"MPBL",
         "season":"2026 Season",
         "coverage":"Upcoming fixtures, recent final scores, and North/South standings",
-        "note":"Automatically refreshed from public MPBL fixture/result and standings pages.",
+        "note":"Automatically refreshed from current public MPBL fixture/result and standings pages. Stale past scheduled rows are removed automatically.",
         "sources":[
             {"name":"MPBL Official","url":"https://mpbl.com.ph/"},
             {"name":"Forebet","url":"https://www.forebet.com/en/basketball/philippines/mpbl"},
