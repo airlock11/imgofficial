@@ -1,28 +1,57 @@
 {
-  "updatedAt": "2026-09-23T09:03:29.339660+00:00",
+  "updatedAt": "2026-10-11T01:08:36.532582+00:00",
   "freshForMinutes": 30,
   "streams": [
     {
-      "eventId": "fiba-youtube-QkNpu_nBnRg",
+      "eventId": "fiba-youtube-LQNgmdFV5Bk",
       "sport": "Basketball",
       "leagueKey": "fiba",
       "league": "FIBA",
       "teams": [],
-      "title": "LIVE - Shanghai Sharks v RSSB Tigers | FIBA Intercontinental Cup Beijing 2026",
+      "title": "LIVE - CD Jorge Guzm\u00e1n v Regatas | Liga Sudamericana de Baloncesto FIBA 2026 | Group Phase",
       "officialSourceId": "fiba",
       "verificationStatus": "verified",
-      "lastVerifiedLiveAt": "2026-09-23T09:03:29.339660+00:00",
+      "lastVerifiedLiveAt": "2026-10-11T01:08:36.532582+00:00",
       "stream": {
-        "videoId": "QkNpu_nBnRg",
-        "watchUrl": "https://www.youtube.com/watch?v=QkNpu_nBnRg",
+        "videoId": "LQNgmdFV5Bk",
+        "watchUrl": "https://www.youtube.com/watch?v=LQNgmdFV5Bk",
         "provider": "YouTube",
         "channel": "FIBA Basketball",
-        "title": "LIVE - Shanghai Sharks v RSSB Tigers | FIBA Intercontinental Cup Beijing 2026",
+        "title": "LIVE - CD Jorge Guzm\u00e1n v Regatas | Liga Sudamericana de Baloncesto FIBA 2026 | Group Phase",
         "officialSourceId": "fiba",
         "sourceChannelId": "UCtInrnU3QbWqFGsdKT1GZtg",
         "verificationStatus": "verified",
-        "lastVerifiedLiveAt": "2026-09-23T09:03:29.339660+00:00",
-        "embedUrl": "https://www.youtube.com/embed/QkNpu_nBnRg",
+        "lastVerifiedLiveAt": "2026-10-11T01:08:36.532582+00:00",
+        "deliveryLeagueKey": "fiba",
+        "deliveryPlacement": "above_statistics"
+      },
+      "delivery": {
+        "leagueKey": "fiba",
+        "url": "/scores/?league=fiba",
+        "placement": "above_statistics"
+      }
+    },
+    {
+      "eventId": "fiba-youtube-o2NhiKEcj48",
+      "sport": "Basketball",
+      "leagueKey": "fiba",
+      "league": "FIBA",
+      "teams": [],
+      "title": "LIVE - Northern K\u0101hu v Mainland Pou\u0101kai | Tauihi Basketball Aotearoa 2026",
+      "officialSourceId": "fiba",
+      "verificationStatus": "verified",
+      "lastVerifiedLiveAt": "2026-10-11T01:08:36.532582+00:00",
+      "stream": {
+        "videoId": "o2NhiKEcj48",
+        "watchUrl": "https://www.youtube.com/watch?v=o2NhiKEcj48",
+        "provider": "YouTube",
+        "channel": "FIBA Basketball",
+        "title": "LIVE - Northern K\u0101hu v Mainland Pou\u0101kai | Tauihi Basketball Aotearoa 2026",
+        "officialSourceId": "fiba",
+        "sourceChannelId": "UCtInrnU3QbWqFGsdKT1GZtg",
+        "verificationStatus": "verified",
+        "lastVerifiedLiveAt": "2026-10-11T01:08:36.532582+00:00",
+        "embedUrl": "https://www.youtube.com/embed/o2NhiKEcj48",
         "deliveryLeagueKey": "fiba",
         "deliveryPlacement": "above_statistics"
       },
@@ -33,39 +62,14 @@
       }
     }
   ],
-  "liveExpiryLedger": {
-    "ncaaph-youtube-jhZS19XiaPI": {
-      "lastVerifiedLiveAt": "2026-09-22T06:10:13.441019+00:00"
-    },
-    "ncaaph-youtube-AW-kMYvCJrc": {
-      "lastVerifiedLiveAt": "2026-09-22T06:50:29.097705+00:00"
-    },
-    "mpbl-youtube-mrDO0K9o320": {
-      "lastVerifiedLiveAt": "2026-09-22T06:50:29.097705+00:00"
-    },
-    "fiba-youtube-ofIa9Qwz0zc": {
-      "lastVerifiedLiveAt": "2026-09-22T07:22:08.850499+00:00"
-    },
-    "ncaaph-youtube-MzRZPtHRrsU": {
-      "lastVerifiedLiveAt": "2026-09-22T09:57:27.133676+00:00"
-    },
-    "mpbl-youtube-UP_EgMLP7B8": {
-      "lastVerifiedLiveAt": "2026-09-22T09:57:27.133676+00:00"
-    },
-    "fiba-youtube-vP1XJtfk6lc": {
-      "lastVerifiedLiveAt": "2026-09-22T12:09:56.852733+00:00"
-    },
-    "fiba-youtube-QkNpu_nBnRg": {
-      "lastVerifiedLiveAt": "2026-09-23T09:03:29.206648+00:00"
-    }
-  },
+  "liveExpiryLedger": {},
   "upcoming": [],
-  "upcomingCheckedAt": "2026-09-23T06:58:11.170617+00:00",
+  "upcomingCheckedAt": "2026-10-11T01:08:36.034812+00:00",
   "nblSchedule": [],
   "scanner": {
     "version": 3,
     "mode": "official-auto-discovery",
-    "checkedAt": "2026-09-23T09:03:05.836542+00:00",
+    "checkedAt": "2026-10-11T01:08:02.166615+00:00",
     "sourcesChecked": [
       "nbl-pilipinas",
       "mpbl",
@@ -74,12 +78,13 @@
       "fiba-3x3",
       "one-championship",
       "ufc",
-      "ncaa-philippines",
       "pba-official",
       "nba",
       "wnba",
+      "mlb",
       "atp",
       "euroleague",
+      "the-asian-tournament",
       "bleague-international",
       "volleyball-world-women",
       "volleyball-world-men"
@@ -92,21 +97,23 @@
       "fiba-3x3": "UC7LpyJP5fupiJu2CdzRQheg",
       "one-championship": "UCiormkBf3jm6mfb7k0yPbKA",
       "ufc": "UCvgfXK4nTYKudb0rFR6noLA",
-      "ncaa-philippines": "UC3Whnl6MzB0bJKwfbm43JMw",
       "pba-official": "UC9WkScCyThtumtf9XVO4eWQ",
       "nba": "UCWJ2lWNubArHWmf3FIHbfcQ",
       "wnba": "UCO9a_ryN_l7DIDS-VIt-zmw",
+      "mlb": "UCoLrcjPV5PbUrUyXq5mjc_A",
       "atp": "UCY_5h5zaSwN7Or4kIJDYNXA",
       "euroleague": "UCGr3nR_XH9r6E5b09ZJAT9w",
+      "the-asian-tournament": "UCU2n0Xm6Dz6aZ8O_gl8OQeA",
       "bleague-international": "UCx4M7pOU3Yhq9VAxmEbe1Vg",
       "volleyball-world-women": "UCNMg6XDhRZI2QzL4pWOvP_w",
       "volleyball-world-men": "UCNMg6XDhRZI2QzL4pWOvP_w"
-    }
+    },
+    "oneSportsLiveSearchCheckedAt": "2026-10-10T08:44:32.776677+00:00"
   },
   "liveVerification": {
-    "checkedAt": "2026-09-23T09:03:29.339660+00:00",
+    "checkedAt": "2026-10-11T01:08:36.532582+00:00",
     "method": "YouTube videos API exact-video verification",
-    "verifiedLiveCount": 3,
+    "verifiedLiveCount": 2,
     "graceCount": 0,
     "removedCount": 0,
     "removed": []
