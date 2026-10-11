@@ -2823,8 +2823,8 @@ function oddsHasValue(value){return value!==undefined&&value!==null&&String(valu
 function oddsMarketAvailable(game,market){
   const list=game?.oddsList||[];
   if(market==='win')return list.some(o=>oddsHasValue(o.away)||oddsHasValue(o.home)||oddsHasValue(o.draw));
-  if(market==='spread')return list.some(o=>oddsHasValue(o.details));
-  if(market==='total')return list.some(o=>oddsHasValue(o.total));
+  if(market==='spread')return list.some(o=>oddsHasValue(o.spreadHomePrice)&&oddsHasValue(o.spreadAwayPrice));
+  if(market==='total')return list.some(o=>oddsHasValue(o.overPrice)&&oddsHasValue(o.underPrice));
   return false;
 }
 function oddsTeamInitials(name){return String(name||'').split(/\s+/).filter(Boolean).slice(0,2).map(x=>x[0]).join('').toUpperCase()||'IMG'}
@@ -2834,8 +2834,8 @@ function oddsTeamVisual(url,name,side){
 function oddsMarketRows(game,market){
   const rows=(game.oddsList||[]).filter(o=>{
     if(market==='win')return oddsHasValue(o.away)||oddsHasValue(o.home)||oddsHasValue(o.draw);
-    if(market==='spread')return oddsHasValue(o.details);
-    return oddsHasValue(o.total);
+    if(market==='spread')return oddsHasValue(o.spreadHomePrice)&&oddsHasValue(o.spreadAwayPrice);
+    return oddsHasValue(o.overPrice)&&oddsHasValue(o.underPrice);
   });
   if(!rows.length)return '<div class="odds-market-empty">This market is not available from the connected feed.</div>';
 
@@ -2846,12 +2846,20 @@ function oddsMarketRows(game,market){
   }
 
   if(market==='spread'){
-    return '<div class="odds-table-head odds-table-two"><span>Bookmaker</span><span>Spread / line</span></div>'+
-      rows.map(o=>'<div class="odds-table-row odds-table-two"><strong>'+esc(o.provider)+'</strong><span class="odds-price">'+esc(o.details)+'</span></div>').join('');
+    return '<div class="odds-table-head odds-table-market"><span>Bookmaker</span><span>'+esc(game.away)+'</span><span>'+esc(game.home)+'</span></div>'+
+      rows.map(o=>
+        '<div class="odds-table-row odds-table-market"><strong>'+esc(o.provider)+'</strong>'+
+        '<span class="odds-price odds-line-price"><b>'+esc(o.spreadAwayLine||'—')+'</b><small>'+esc(o.spreadAwayPrice||'—')+'</small></span>'+
+        '<span class="odds-price odds-line-price"><b>'+esc(o.spreadHomeLine||'—')+'</b><small>'+esc(o.spreadHomePrice||'—')+'</small></span></div>'
+      ).join('');
   }
 
-  return '<div class="odds-table-head odds-table-two"><span>Bookmaker</span><span>Total</span></div>'+
-    rows.map(o=>'<div class="odds-table-row odds-table-two"><strong>'+esc(o.provider)+'</strong><span class="odds-price">'+esc(o.total)+'</span></div>').join('');
+  return '<div class="odds-table-head odds-table-market"><span>Bookmaker</span><span>Over</span><span>Under</span></div>'+
+    rows.map(o=>
+      '<div class="odds-table-row odds-table-market"><strong>'+esc(o.provider)+'</strong>'+
+      '<span class="odds-price odds-line-price"><b>O '+esc(o.totalLine||o.total||'—')+'</b><small>'+esc(o.overPrice||'—')+'</small></span>'+
+      '<span class="odds-price odds-line-price"><b>U '+esc(o.totalLine||o.total||'—')+'</b><small>'+esc(o.underPrice||'—')+'</small></span></div>'
+    ).join('');
 }
 function oddsSportIcon(label){
   const icons={
