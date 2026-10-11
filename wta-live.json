@@ -2,18 +2,18 @@
   "special": true,
   "league": "WTA Tour",
   "live": true,
-  "updatedAt": "2026-10-11T12:51:08.790295+00:00",
+  "updatedAt": "2026-10-11T12:51:15.501611+00:00",
   "sourceName": "WTA Official Scores scrape",
   "sourceUrl": "https://www.wtatennis.com/scores/",
   "verificationSource": "WTA Official Scores",
   "verificationUrl": "https://www.wtatennis.com/scores/",
-  "pageLiveCount": 8,
-  "parsedMatchCount": 8,
+  "pageLiveCount": 7,
+  "parsedMatchCount": 7,
   "note": "GitHub scrape of the rendered WTA Scores page. Game points, current set number, current-set games and per-set scores are stored separately.",
   "games": [
     {
       "eventId": "wta-scrape-2-l-encheva-m-mettraux",
-      "date": "2026-10-11T12:51:08.785768+00:00",
+      "date": "2026-10-11T12:51:15.497727+00:00",
       "displayTime": "Vanda Pharmaceuticals Mallorca Women's Championships • ESP",
       "away": "L. Encheva",
       "home": "M. Mettraux",
@@ -47,7 +47,7 @@
     },
     {
       "eventId": "wta-scrape-3-i-serban-z-li",
-      "date": "2026-10-11T12:51:08.785944+00:00",
+      "date": "2026-10-11T12:51:15.497903+00:00",
       "displayTime": "China Open • CHN",
       "away": "I. Serban",
       "home": "Z. Li",
@@ -80,42 +80,8 @@
       "verificationUrl": "https://www.wtatennis.com/scores/"
     },
     {
-      "eventId": "wta-scrape-4-a-tamindzic-t-brockmann",
-      "date": "2026-10-11T12:51:08.786115+00:00",
-      "displayTime": "China Open • CHN",
-      "away": "A. Tamindzic",
-      "home": "T. Brockmann",
-      "awayScore": "1 1 · 15",
-      "homeScore": "6 6 · 40",
-      "awaySets": [
-        "1",
-        "1"
-      ],
-      "homeSets": [
-        "6",
-        "6"
-      ],
-      "awayPoint": "15",
-      "homePoint": "40",
-      "currentSet": 2,
-      "awayCurrentSetGames": 1,
-      "homeCurrentSetGames": 6,
-      "awaySetsWon": 0,
-      "homeSetsWon": 1,
-      "round": "Qualifying",
-      "court": "Court 1",
-      "status": "Suspended · Qualifying · Court 1",
-      "state": "suspended",
-      "eventOnly": false,
-      "title": "China Open • CHN",
-      "sourceName": "WTA Official Scores scrape",
-      "sourceUrl": "https://www.wtatennis.com/scores/",
-      "verificationSource": "WTA Official Scores",
-      "verificationUrl": "https://www.wtatennis.com/scores/"
-    },
-    {
       "eventId": "wta-scrape-0-q-zheng-m-andreeva",
-      "date": "2026-10-11T12:51:08.785265+00:00",
+      "date": "2026-10-11T12:51:15.497228+00:00",
       "displayTime": "China Open • CHN",
       "away": "Q. Zheng",
       "home": "M. Andreeva",
@@ -149,7 +115,7 @@
     },
     {
       "eventId": "wta-scrape-1-a-aksu-l-stefanini",
-      "date": "2026-10-11T12:51:08.785576+00:00",
+      "date": "2026-10-11T12:51:15.497512+00:00",
       "displayTime": "Samsun Open • TUR",
       "away": "A. Aksu",
       "home": "L. Stefanini",
@@ -184,8 +150,8 @@
       "verificationUrl": "https://www.wtatennis.com/scores/"
     },
     {
-      "eventId": "wta-scrape-5-a-voloshchuk-a-nagy",
-      "date": "2026-10-11T12:51:08.786291+00:00",
+      "eventId": "wta-scrape-4-a-voloshchuk-a-nagy",
+      "date": "2026-10-11T12:51:15.498085+00:00",
       "displayTime": "Lisboa Belem Open • POR",
       "away": "A. Voloshchuk",
       "home": "A. Nagy",
@@ -218,8 +184,8 @@
       "verificationUrl": "https://www.wtatennis.com/scores/"
     },
     {
-      "eventId": "wta-scrape-6-s-cakarevic-k-tsygourova",
-      "date": "2026-10-11T12:51:08.786466+00:00",
+      "eventId": "wta-scrape-5-s-cakarevic-k-tsygourova",
+      "date": "2026-10-11T12:51:15.498263+00:00",
       "displayTime": "Lisboa Belem Open • POR",
       "away": "S. Cakarevic",
       "home": "K. Tsygourova",
@@ -250,8 +216,8 @@
       "verificationUrl": "https://www.wtatennis.com/scores/"
     },
     {
-      "eventId": "wta-scrape-7-g-feistel-e-nepliy",
-      "date": "2026-10-11T12:51:08.786652+00:00",
+      "eventId": "wta-scrape-6-g-feistel-e-nepliy",
+      "date": "2026-10-11T12:51:15.498431+00:00",
       "displayTime": "Lisboa Belem Open • POR",
       "away": "G. Feistel",
       "home": "E. Nepliy",
