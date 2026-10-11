@@ -2,7 +2,7 @@
   "special": true,
   "league": "WTA Tour",
   "live": true,
-  "updatedAt": "2026-10-11T06:12:27.845757+00:00",
+  "updatedAt": "2026-10-11T06:12:34.615139+00:00",
   "sourceName": "WTA Official Scores scrape",
   "sourceUrl": "https://www.wtatennis.com/scores/",
   "verificationSource": "WTA Official Scores",
@@ -13,7 +13,7 @@
   "games": [
     {
       "eventId": "wta-scrape-0-c-osorio-k-volynets",
-      "date": "2026-10-11T06:12:27.841833+00:00",
+      "date": "2026-10-11T06:12:34.611107+00:00",
       "displayTime": "Dongfeng · Voyah Wuhan Open • CHN",
       "away": "C. Osorio",
       "home": "K. Volynets",
@@ -38,7 +38,7 @@
       "homeSetsWon": 1,
       "round": "Qualifying",
       "court": "Court 3",
-      "status": "Live Match: 1:27 · Qualifying · Court 3",
+      "status": "Live Match: 1:28 · Qualifying · Court 3",
       "state": "live",
       "eventOnly": false,
       "title": "Dongfeng · Voyah Wuhan Open • CHN",
@@ -49,12 +49,12 @@
     },
     {
       "eventId": "wta-scrape-1-h-shi-k-rakhimova",
-      "date": "2026-10-11T06:12:27.842092+00:00",
+      "date": "2026-10-11T06:12:34.611361+00:00",
       "displayTime": "Dongfeng · Voyah Wuhan Open • CHN",
       "away": "H. Shi",
       "home": "K. Rakhimova",
-      "awayScore": "7 1 · 40",
-      "homeScore": "6 2 0 · AD",
+      "awayScore": "7 1 · 0",
+      "homeScore": "6 2 1 · 0",
       "awaySets": [
         "7",
         "1"
@@ -62,13 +62,13 @@
       "homeSets": [
         "6",
         "2",
-        "0"
+        "1"
       ],
-      "awayPoint": "40",
-      "homePoint": "AD",
+      "awayPoint": "0",
+      "homePoint": "0",
       "currentSet": 3,
       "awayCurrentSetGames": 0,
-      "homeCurrentSetGames": 0,
+      "homeCurrentSetGames": 1,
       "awaySetsWon": 1,
       "homeSetsWon": 0,
       "round": "Qualifying",
@@ -84,12 +84,12 @@
     },
     {
       "eventId": "wta-scrape-2-l-tararudee-c-mcnally",
-      "date": "2026-10-11T06:12:27.842257+00:00",
+      "date": "2026-10-11T06:12:34.611523+00:00",
       "displayTime": "Dongfeng · Voyah Wuhan Open • CHN",
       "away": "L. Tararudee",
       "home": "C. McNally",
       "awayScore": "4 · 0",
-      "homeScore": "2 · 0",
+      "homeScore": "2 · 15",
       "awaySets": [
         "4"
       ],
@@ -97,7 +97,7 @@
         "2"
       ],
       "awayPoint": "0",
-      "homePoint": "0",
+      "homePoint": "15",
       "currentSet": 1,
       "awayCurrentSetGames": 4,
       "homeCurrentSetGames": 2,
@@ -105,7 +105,7 @@
       "homeSetsWon": 0,
       "round": "Qualifying",
       "court": "Court 2",
-      "status": "Live Match: 0:34 · Qualifying · Court 2",
+      "status": "Live Match: 0:35 · Qualifying · Court 2",
       "state": "live",
       "eventOnly": false,
       "title": "Dongfeng · Voyah Wuhan Open • CHN",
@@ -116,7 +116,7 @@
     },
     {
       "eventId": "wta-scrape-3-a-bondar-m-sawangkaew",
-      "date": "2026-10-11T06:12:27.842395+00:00",
+      "date": "2026-10-11T06:12:34.611654+00:00",
       "displayTime": "Dongfeng · Voyah Wuhan Open • CHN",
       "away": "A. Bondar",
       "home": "M. Sawangkaew",
@@ -137,7 +137,7 @@
       "homeSetsWon": 0,
       "round": "Qualifying",
       "court": "Court 4",
-      "status": "Live Match: 0:21 · Qualifying · Court 4",
+      "status": "Live Match: 0:22 · Qualifying · Court 4",
       "state": "live",
       "eventOnly": false,
       "title": "Dongfeng · Voyah Wuhan Open • CHN",
@@ -148,7 +148,7 @@
     },
     {
       "eventId": "wta-scrape-4-upcoming-li-zhang-prozorova",
-      "date": "2026-10-11T06:12:27.842871+00:00",
+      "date": "2026-10-11T06:12:34.612158+00:00",
       "displayTime": "Suzhou Open • CHN",
       "away": "Upcoming / Li",
       "home": "Zhang / Prozorova",
