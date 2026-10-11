@@ -286,6 +286,29 @@ def load_tournament_board(tournament_id, bookmaker_labels, log_key):
     }, ensure_ascii=False))
     return rows
 
+def normalize_pba_odds_team(name):
+    raw = str(name or "").strip()
+    key = raw.casefold()
+    aliases = [
+        (("timplados hotshots", "magnolia"), "Magnolia Chicken Timplados Hotshots"),
+        (("barangay ginebra", "ginebra"), "Barangay Ginebra"),
+        (("rain or shine",), "Rain or Shine Elasto Painters"),
+        (("tnt",), "TNT Tropang 5G"),
+        (("terrafirma",), "Terrafirma Dyip"),
+        (("san miguel",), "San Miguel Beermen"),
+        (("nlex",), "NLEX Road Warriors"),
+        (("converge",), "Converge FiberXers"),
+        (("blackwater",), "Blackwater Bossing"),
+        (("meralco",), "Meralco Bolts"),
+        (("phoenix",), "Phoenix Super LPG Fuel Masters"),
+        (("titan",), "Titan Ultra Giant Risers"),
+        (("macau",), "Macau Black Knights"),
+    ]
+    for needles, canonical in aliases:
+        if any(token in key for token in needles):
+            return canonical
+    return raw
+
 def load_pba_odds(participants):
     tournament_id = discover_pba_tournament()
     if not tournament_id:
@@ -294,6 +317,9 @@ def load_pba_odds(participants):
     rows = load_tournament_board(tournament_id, PBA_BOOKMAKER_LABELS, "pba")
     save_meta_names(participants, rows)
     items = [x for x in (normalize_multi_book(row, participants, PBA_BOOKMAKER_LABELS) for row in rows) if x]
+    for item in items:
+        item["home"] = normalize_pba_odds_team(item.get("home"))
+        item["away"] = normalize_pba_odds_team(item.get("away"))
     print(json.dumps({
         "pba_tournament_id": tournament_id,
         "events": len(items),
