@@ -42,11 +42,26 @@ jobs:
           set -euo pipefail
           git config user.name "IMG League Data Bot"
           git config user.email "actions@users.noreply.github.com"
-          if git diff --quiet -- league-data-health.json; then
-            echo "No league health changes."
-            exit 0
-          fi
-          git add league-data-health.json
-          git commit -m "Update league data health"
-          git pull --rebase origin main
-          git push origin HEAD:main
+          for attempt in 1 2 3 4 5; do
+            git fetch origin main
+            git reset --hard origin/main
+            python scripts/update_league_health.py
+
+            if git diff --quiet -- league-data-health.json; then
+              echo "No league health changes."
+              exit 0
+            fi
+
+            git add league-data-health.json
+            git commit -m "Update league data health"
+
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+
+            echo "League-health publish raced with another automation (attempt $attempt)."
+            sleep $((attempt * 2))
+          done
+
+          echo "Unable to publish league health after retries."
+          exit 1
