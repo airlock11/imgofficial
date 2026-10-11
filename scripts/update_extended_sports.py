@@ -812,10 +812,184 @@ def boxing_org(org):
         "games": bouts[:20] + holders
     }
 
+
+NCAA_PH_URL = "https://www.teampilipinas.info/2019/07/ncaa-live-updates-schedule-standings.html?m=1"
+NCAA_GROUP_A = {"Benilde Blazers", "JRU Heavy Bombers", "San Beda Red Lions", "Mapua Cardinals", "Lyceum Pirates"}
+NCAA_GROUP_B = {"Letran Knights", "Arellano Chiefs", "Perpetual Altas", "EAC Generals", "San Sebastian Stags"}
+
+def ncaa_team_name(value):
+    raw = re.sub(r"\s+", " ", str(value or "")).strip(" .,-")
+    key = raw.lower()
+    aliases = [
+        (("benilde", "csb", "college of st. benilde"), "Benilde Blazers"),
+        (("jru", "jose rizal"), "JRU Heavy Bombers"),
+        (("san beda", "sbu"), "San Beda Red Lions"),
+        (("mapua", "mapúa", "mu"), "Mapua Cardinals"),
+        (("lyceum", "lpu"), "Lyceum Pirates"),
+        (("letran", "csjl"), "Letran Knights"),
+        (("arellano", "au"), "Arellano Chiefs"),
+        (("perpetual", "uphsd"), "Perpetual Altas"),
+        (("emilio aguinaldo", "eac"), "EAC Generals"),
+        (("san sebastian", "ssc-r", "sscr"), "San Sebastian Stags"),
+    ]
+    for needles, canonical in aliases:
+        if any(n in key for n in needles):
+            return canonical
+    return raw
+
+def ncaa_slug(value):
+    return re.sub(r"[^a-z0-9]+", "-", str(value or "").lower()).strip("-")
+
+def ncaa_ph():
+    html = fetch(NCAA_PH_URL)
+    soup = BeautifulSoup(html, "html.parser")
+    lines = [re.sub(r"\s+", " ", x).strip() for x in soup.get_text("\n").splitlines() if re.sub(r"\s+", " ", x).strip()]
+    pht = timezone(timedelta(hours=8))
+    now = datetime.now(pht)
+    current_date = None
+    current_venue = ""
+    games = []
+    seen = set()
+
+    month_re = r"(January|February|March|April|May|June|July|August|September|October|November|December)"
+    date_re = re.compile(month_re + r"\s+(\d{1,2}),\s*(2026)\b", re.I)
+    schedule_re = re.compile(r"^\((\d{1,2}:\d{2})\s*(am|pm)\)\s*(.+?)\s+vs\.?\s+(.+?)(?:\s+\[LIVE\])?(?:\s*\(\))?$", re.I)
+    result_re = re.compile(r"^(.+?)\s+def\.\s+(.+?),\s*(\d{1,3})-(\d{1,3})(?:\s*\(OT\))?", re.I)
+
+    for line in lines:
+        dm = date_re.search(line)
+        if dm:
+            try:
+                current_date = datetime.strptime(dm.group(0), "%B %d, %Y").date()
+            except Exception:
+                current_date = None
+            tail = line[dm.end():]
+            tail = re.sub(r"\([^)]*\)", " ", tail)
+            tail = re.sub(r"\bGame Results\b.*$", "", tail, flags=re.I)
+            current_venue = re.sub(r"\s+", " ", tail).strip(" ·-")
+            continue
+
+        if not current_date:
+            continue
+
+        rm = result_re.match(line)
+        if rm:
+            winner = ncaa_team_name(rm.group(1))
+            loser = ncaa_team_name(rm.group(2))
+            if winner not in NCAA_GROUP_A | NCAA_GROUP_B or loser not in NCAA_GROUP_A | NCAA_GROUP_B:
+                continue
+            event_key = (current_date.isoformat(), frozenset((winner, loser)))
+            if event_key in seen:
+                continue
+            seen.add(event_key)
+            games.append({
+                "eventId": "ncaa102-" + current_date.strftime("%Y%m%d") + "-" + ncaa_slug(winner) + "-" + ncaa_slug(loser),
+                "date": datetime.combine(current_date, datetime.min.time(), tzinfo=pht).replace(hour=12).isoformat(timespec="seconds"),
+                "displayTime": current_date.strftime("%b %-d · Final"),
+                "away": loser,
+                "home": winner,
+                "awayScore": rm.group(4),
+                "homeScore": rm.group(3),
+                "status": "Final" + (" · " + current_venue if current_venue else ""),
+                "state": "final",
+                "sourceName": "NCAA Season 102 schedule/results",
+                "sourceUrl": NCAA_PH_URL,
+            })
+            continue
+
+        sm = schedule_re.match(line)
+        if sm:
+            away = ncaa_team_name(sm.group(3))
+            home = ncaa_team_name(sm.group(4))
+            if away not in NCAA_GROUP_A | NCAA_GROUP_B or home not in NCAA_GROUP_A | NCAA_GROUP_B:
+                continue
+            try:
+                tip = datetime.strptime(sm.group(1) + sm.group(2).upper(), "%I:%M%p").time()
+                dt = datetime.combine(current_date, tip, tzinfo=pht)
+            except Exception:
+                continue
+            event_key = (current_date.isoformat(), frozenset((away, home)))
+            if event_key in seen:
+                continue
+            seen.add(event_key)
+            # Never infer LIVE from an article's stale [LIVE] label. The dedicated
+            # YouTube verifier owns real-time live status.
+            games.append({
+                "eventId": "ncaa102-" + current_date.strftime("%Y%m%d") + "-" + ncaa_slug(away) + "-" + ncaa_slug(home),
+                "date": dt.isoformat(timespec="seconds"),
+                "displayTime": dt.strftime("%b %-d · %-I:%M %p"),
+                "away": away,
+                "home": home,
+                "awayScore": "—",
+                "homeScore": "—",
+                "status": "Scheduled" + (" · " + current_venue if current_venue else ""),
+                "state": "scheduled",
+                "sourceName": "NCAA Season 102 schedule/results",
+                "sourceUrl": NCAA_PH_URL,
+            })
+
+    # Parse the published standings table when available.
+    standings = {"groupA": [], "groupB": []}
+    for tr in soup.find_all("tr"):
+        cells = [re.sub(r"\s+", " ", c.get_text(" ", strip=True)).strip() for c in tr.find_all(["th", "td"])]
+        if len(cells) < 3:
+            continue
+        team = ""
+        team_index = -1
+        for idx, cell in enumerate(cells):
+            candidate = ncaa_team_name(cell)
+            if candidate in NCAA_GROUP_A | NCAA_GROUP_B:
+                team, team_index = candidate, idx
+                break
+        if not team:
+            continue
+        nums = []
+        for cell in cells[team_index + 1:]:
+            if re.fullmatch(r"\d+", cell):
+                nums.append(int(cell))
+            if len(nums) >= 2:
+                break
+        if len(nums) < 2:
+            continue
+        row = {"team": team, "wins": nums[0], "losses": nums[1]}
+        target = "groupA" if team in NCAA_GROUP_A else "groupB"
+        if not any(x["team"] == team for x in standings[target]):
+            standings[target].append(row)
+
+    # Keep recent finals plus the next published fixtures. This prevents old
+    # September "Scheduled" cards from lingering indefinitely on Scores.
+    cutoff = now - timedelta(days=14)
+    horizon = now + timedelta(days=45)
+    filtered = []
+    for game in games:
+        dt = parse_iso(game.get("date"))
+        if not dt:
+            continue
+        dt = dt.astimezone(pht) if dt.tzinfo else dt.replace(tzinfo=pht)
+        if game.get("state") == "final":
+            if dt >= cutoff:
+                filtered.append(game)
+        elif now - timedelta(hours=4) <= dt <= horizon:
+            filtered.append(game)
+    filtered.sort(key=lambda g: g.get("date") or "")
+
+    if not filtered:
+        raise RuntimeError("NCAA Philippines page produced no current games")
+
+    return {
+        "league": "NCAA Philippines",
+        "sourceName": "NCAA Season 102 schedule/results",
+        "sourceUrl": NCAA_PH_URL,
+        "updatedAt": datetime.now(timezone.utc).isoformat(),
+        "note": "Schedule/results refresh automatically; real-time LIVE status is handled separately by IMG's verified One Sports livestream checker.",
+        "games": filtered[-30:],
+        "standings": standings if standings["groupA"] and standings["groupB"] else {},
+    }
+
 def main():
     data = load()
     leagues = data.setdefault("leagues", {})
-    jobs = [("soccer", premier_league_games), ("wta", wta_calendar_schedule), ("fiba", fiba_games), ("euroleague", euroleague), ("npb", npb), ("kbo", kbo)]
+    jobs = [("soccer", premier_league_games), ("wta", wta_calendar_schedule), ("fiba", fiba_games), ("euroleague", euroleague), ("npb", npb), ("kbo", kbo), ("ncaa_ph", ncaa_ph)]
     for key, builder in jobs:
         try:
             result = builder()
