@@ -3159,8 +3159,48 @@ if(document.getElementById('games')){
     if(!document.hidden)refreshScoresAutomatically();
   });
 }if(document.getElementById('newsFeed')){loadNews();setInterval(loadNews,300000)}if(document.getElementById('oddsFeed')){
-  discoverOdds();
-  setInterval(discoverOdds,300000);
+  let oddsAutoRefreshTimer=0;
+  let oddsRefreshInFlight=false;
+
+  const pbaOddsFastWindow=()=>{
+    const now=Date.now();
+    return (availableOdds.pba||[]).some(game=>{
+      const tip=Date.parse(game?.date||'');
+      return Number.isFinite(tip)&&now>=tip-30*60*1000&&now<=tip+3*60*60*1000;
+    });
+  };
+  const nextOddsRefreshDelay=()=>pbaOddsFastWindow()?60000:300000;
+  const scheduleOddsRefresh=(delay=nextOddsRefreshDelay())=>{
+    clearTimeout(oddsAutoRefreshTimer);
+    if(document.hidden)return;
+    oddsAutoRefreshTimer=setTimeout(refreshOddsAutomatically,delay);
+  };
+  async function refreshOddsAutomatically(){
+    if(oddsRefreshInFlight){
+      scheduleOddsRefresh(15000);
+      return;
+    }
+    oddsRefreshInFlight=true;
+    try{
+      await discoverOdds();
+    }finally{
+      oddsRefreshInFlight=false;
+      scheduleOddsRefresh();
+    }
+  }
+
+  discoverOdds().finally(scheduleOddsRefresh);
+
+  document.addEventListener('visibilitychange',()=>{
+    clearTimeout(oddsAutoRefreshTimer);
+    if(!document.hidden)refreshOddsAutomatically();
+  });
+  addEventListener('focus',()=>{
+    if(!document.hidden)refreshOddsAutomatically();
+  });
+  addEventListener('online',()=>{
+    if(!document.hidden)refreshOddsAutomatically();
+  });
 
   let oddsLastScrollY=scrollY;
   addEventListener('scroll',()=>{
