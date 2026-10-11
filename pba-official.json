@@ -360,24 +360,21 @@
   "headlinesUpdatedAt": "2026-10-10T19:43:19+00:00",
   "automation": {
     "enabled": true,
-    "mode": "game-day",
-    "dataRefreshMinutes": 15,
-    "livestreamRefreshMinutes": 5,
+    "mode": "idle",
+    "dataRefreshMinutes": 180,
+    "livestreamRefreshMinutes": 0,
     "scheduleAware": {
       "enabled": true,
       "timezone": "Asia/Manila",
-      "mode": "game-day",
-      "gameDay": true,
-      "todayGameCount": 2,
-      "todayGames": [
-        "web-pba-20261011-converge-titan",
-        "web-pba-20261011-ginebra-magnolia"
-      ],
+      "mode": "idle",
+      "gameDay": false,
+      "todayGameCount": 0,
+      "todayGames": [],
       "nextGameAt": "2026-10-13T17:15:00+08:00",
       "idleDiscoveryMinutes": 180,
       "gameDayDataRefreshMinutes": 15,
       "gameDayLivestreamRefreshMinutes": 5,
-      "lastSlowCheckAt": "2026-10-11T23:31:42+08:00"
+      "lastSlowCheckAt": "2026-10-12T03:43:51+08:00"
     },
     "failClosed": true
   },

@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-11T23:33:27+08:00",
+  "updated_at": "2026-10-12T03:44:38+08:00",
   "refresh_minutes": 15,
   "leagues": {
     "pba": {
@@ -285,24 +285,21 @@
       ],
       "automation": {
         "enabled": true,
-        "mode": "game-day",
-        "dataRefreshMinutes": 15,
-        "livestreamRefreshMinutes": 5,
+        "mode": "idle",
+        "dataRefreshMinutes": 180,
+        "livestreamRefreshMinutes": 0,
         "scheduleAware": {
           "enabled": true,
           "timezone": "Asia/Manila",
-          "mode": "game-day",
-          "gameDay": true,
-          "todayGameCount": 2,
-          "todayGames": [
-            "web-pba-20261011-converge-titan",
-            "web-pba-20261011-ginebra-magnolia"
-          ],
+          "mode": "idle",
+          "gameDay": false,
+          "todayGameCount": 0,
+          "todayGames": [],
           "nextGameAt": "2026-10-13T17:15:00+08:00",
           "idleDiscoveryMinutes": 180,
           "gameDayDataRefreshMinutes": 15,
           "gameDayLivestreamRefreshMinutes": 5,
-          "lastSlowCheckAt": "2026-10-11T23:31:42+08:00"
+          "lastSlowCheckAt": "2026-10-12T03:43:51+08:00"
         },
         "failClosed": true
       }
@@ -1507,24 +1504,21 @@
       ],
       "automation": {
         "enabled": true,
-        "mode": "game-day",
-        "dataRefreshMinutes": 15,
-        "livestreamRefreshMinutes": 5,
+        "mode": "idle",
+        "dataRefreshMinutes": 180,
+        "livestreamRefreshMinutes": 0,
         "scheduleAware": {
           "enabled": true,
           "timezone": "Asia/Manila",
-          "mode": "game-day",
-          "gameDay": true,
-          "todayGameCount": 2,
-          "todayGames": [
-            "uaap-live-23",
-            "uaap-live-22"
-          ],
+          "mode": "idle",
+          "gameDay": false,
+          "todayGameCount": 0,
+          "todayGames": [],
           "nextGameAt": "2026-10-14T15:00:00+08:00",
           "idleDiscoveryMinutes": 180,
           "gameDayDataRefreshMinutes": 15,
           "gameDayLivestreamRefreshMinutes": 5,
-          "lastSlowCheckAt": "2026-10-11T23:32:15+08:00"
+          "lastSlowCheckAt": "2026-10-12T03:44:23+08:00"
         },
         "failClosed": true
       }
@@ -1534,47 +1528,41 @@
   "adaptive": {
     "pba": {
       "enabled": true,
-      "mode": "game-day",
-      "dataRefreshMinutes": 15,
-      "livestreamRefreshMinutes": 5,
+      "mode": "idle",
+      "dataRefreshMinutes": 180,
+      "livestreamRefreshMinutes": 0,
       "scheduleAware": {
         "enabled": true,
         "timezone": "Asia/Manila",
-        "mode": "game-day",
-        "gameDay": true,
-        "todayGameCount": 2,
-        "todayGames": [
-          "web-pba-20261011-converge-titan",
-          "web-pba-20261011-ginebra-magnolia"
-        ],
+        "mode": "idle",
+        "gameDay": false,
+        "todayGameCount": 0,
+        "todayGames": [],
         "nextGameAt": "2026-10-13T17:15:00+08:00",
         "idleDiscoveryMinutes": 180,
         "gameDayDataRefreshMinutes": 15,
         "gameDayLivestreamRefreshMinutes": 5,
-        "lastSlowCheckAt": "2026-10-11T23:31:42+08:00"
+        "lastSlowCheckAt": "2026-10-12T03:43:51+08:00"
       },
       "failClosed": true
     },
     "uaap": {
       "enabled": true,
-      "mode": "game-day",
-      "dataRefreshMinutes": 15,
-      "livestreamRefreshMinutes": 5,
+      "mode": "idle",
+      "dataRefreshMinutes": 180,
+      "livestreamRefreshMinutes": 0,
       "scheduleAware": {
         "enabled": true,
         "timezone": "Asia/Manila",
-        "mode": "game-day",
-        "gameDay": true,
-        "todayGameCount": 2,
-        "todayGames": [
-          "uaap-live-23",
-          "uaap-live-22"
-        ],
+        "mode": "idle",
+        "gameDay": false,
+        "todayGameCount": 0,
+        "todayGames": [],
         "nextGameAt": "2026-10-14T15:00:00+08:00",
         "idleDiscoveryMinutes": 180,
         "gameDayDataRefreshMinutes": 15,
         "gameDayLivestreamRefreshMinutes": 5,
-        "lastSlowCheckAt": "2026-10-11T23:32:15+08:00"
+        "lastSlowCheckAt": "2026-10-12T03:44:23+08:00"
       },
       "failClosed": true
     }
