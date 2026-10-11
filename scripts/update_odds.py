@@ -76,6 +76,8 @@ PBA_BOOKMAKER_LABELS = {
     "sabasports": "SABA Sports",
 }
 
+MARKET_CATALOG_CACHE = {}
+
 def get_json(path, params):
     query = dict(params)
     query["apiKey"] = KEY
@@ -181,16 +183,124 @@ def merge_fixture_rows(target, rows):
                 if key != "bookmakerOdds" and current.get(key) in (None, "", []):
                     current[key] = value
 
-def normalize_multi_book(row, participants, bookmaker_labels):
+def market_catalog(sport_id):
+    cached = MARKET_CATALOG_CACHE.get(sport_id)
+    if cached is not None:
+        return cached
+    payload = get_json("/markets", {"sportId": sport_id})
+    rows = payload if isinstance(payload, list) else as_records(payload, ("data", "items", "results", "markets"))
+    catalog = {}
+    for row in rows:
+        if not isinstance(row, dict) or row.get("marketId") is None:
+            continue
+        catalog[str(row.get("marketId"))] = row
+    MARKET_CATALOG_CACHE[sport_id] = catalog
+    return catalog
+
+def _market_text(meta):
+    return " ".join(str(meta.get(k) or "") for k in ("marketName", "marketType", "period")).casefold()
+
+def _is_full_game_market(meta, kind):
+    if not isinstance(meta, dict):
+        return False
+    text = _market_text(meta)
+    period = str(meta.get("period") or "").casefold()
+    full_period = period in ("result", "fulltime", "full_time", "match", "")
+    if not full_period:
+        return False
+    # Explicitly reject partial/team/player markets.
+    if any(token in text for token in ("first half", "second half", "quarter", "team total", "player")):
+        return False
+    if kind == "spread":
+        return "handicap" in text or "spread" in text
+    return ("over under" in text or "total" in text) and ("team total" not in text)
+
+def _book_main_market(book, kind, catalog):
+    candidates = []
+    for market_id, market in ((book or {}).get("markets") or {}).items():
+        if not isinstance(market, dict) or market.get("marketActive") is False:
+            continue
+        meta = catalog.get(str(market_id)) or {}
+        if not _is_full_game_market(meta, kind):
+            continue
+
+        sides = {}
+        is_main = False
+        for outcome in (market.get("outcomes") or {}).values():
+            if not isinstance(outcome, dict):
+                continue
+            player = (outcome.get("players") or {}).get("0") or {}
+            if player.get("active") is False:
+                continue
+            price = player.get("price")
+            if not isinstance(price, (int, float)):
+                continue
+            raw_label = str(player.get("bookmakerOutcomeId") or "").casefold().strip()
+            m = re.match(r"^\s*([-+]?\d+(?:\.\d+)?)\s*/\s*(home|away|over|under)\s*$", raw_label)
+            if not m:
+                continue
+            line = float(m.group(1))
+            side = m.group(2)
+            if kind == "spread" and side not in ("home", "away"):
+                continue
+            if kind == "total" and side not in ("over", "under"):
+                continue
+            sides[side] = {"line": line, "price": price}
+            is_main = is_main or bool(player.get("mainLine"))
+
+        needed = ("home", "away") if kind == "spread" else ("over", "under")
+        if not all(side in sides for side in needed):
+            continue
+
+        # Prefer the bookmaker-designated main line. If the feed doesn't mark
+        # one, prefer the market definition flagged as a full-game overtime line
+        # and then the market with the most symmetric/standard pairing.
+        meta_text = _market_text(meta)
+        overtime = "overtime" in meta_text or "incl. overtime" in meta_text
+        if kind == "spread":
+            symmetry = abs(sides["home"]["line"] + sides["away"]["line"])
+        else:
+            symmetry = abs(sides["over"]["line"] - sides["under"]["line"])
+        candidates.append((0 if is_main else 1, 0 if overtime else 1, symmetry, sides))
+
+    if not candidates:
+        return None
+    candidates.sort(key=lambda x: (x[0], x[1], x[2]))
+    # Fail closed if several alternate ladders exist and the feed did not mark
+    # a main line. A wrong spread/total is worse than hiding the market.
+    if candidates[0][0] == 1 and len(candidates) > 1:
+        return None
+    sides = candidates[0][3]
+    if kind == "spread":
+        home_line = sides["home"]["line"]
+        away_line = sides["away"]["line"]
+        return {
+            "line": str(int(home_line)) if home_line.is_integer() else str(home_line),
+            "homeLine": str(int(home_line)) if home_line.is_integer() else str(home_line),
+            "awayLine": str(int(away_line)) if away_line.is_integer() else str(away_line),
+            "homePrice": str(sides["home"]["price"]),
+            "awayPrice": str(sides["away"]["price"]),
+        }
+    total_line = sides["over"]["line"]
+    return {
+        "line": str(int(total_line)) if total_line.is_integer() else str(total_line),
+        "overPrice": str(sides["over"]["price"]),
+        "underPrice": str(sides["under"]["price"]),
+    }
+
+def normalize_multi_book(row, participants, bookmaker_labels, catalog=None):
     sport_id = int(row.get("sportId") or 0)
+    catalog = catalog or {}
     odds_list = []
     for slug, label in bookmaker_labels.items():
         book = (row.get("bookmakerOdds") or {}).get(slug)
         if not isinstance(book, dict) or book.get("suspended") is True or book.get("bookmakerIsActive") is False:
             continue
         home, away, draw = generic_moneyline(book, sport_id)
-        spread = main_line_value(book, "spread")
-        total = main_line_value(book, "total")
+        spread_market = _book_main_market(book, "spread", catalog) if catalog else None
+        total_market = _book_main_market(book, "total", catalog) if catalog else None
+        spread = spread_market["line"] if spread_market else "—"
+        total = total_market["line"] if total_market else "—"
         if home is None and away is None and spread == total == "—":
             continue
         provider = {
@@ -200,6 +310,19 @@ def normalize_multi_book(row, participants, bookmaker_labels):
             "home": "—" if home is None else str(home),
             "away": "—" if away is None else str(away),
         }
+        if spread_market:
+            provider.update({
+                "spreadHomeLine": spread_market["homeLine"],
+                "spreadAwayLine": spread_market["awayLine"],
+                "spreadHomePrice": spread_market["homePrice"],
+                "spreadAwayPrice": spread_market["awayPrice"],
+            })
+        if total_market:
+            provider.update({
+                "totalLine": total_market["line"],
+                "overPrice": total_market["overPrice"],
+                "underPrice": total_market["underPrice"],
+            })
         if draw is not None:
             provider["draw"] = str(draw)
         odds_list.append(provider)
@@ -317,7 +440,8 @@ def load_pba_odds(participants):
         return []
     rows = load_tournament_board(tournament_id, PBA_BOOKMAKER_LABELS, "pba")
     save_meta_names(participants, rows)
-    items = [x for x in (normalize_multi_book(row, participants, PBA_BOOKMAKER_LABELS) for row in rows) if x]
+    catalog = market_catalog(PBA_SPORT_ID)
+    items = [x for x in (normalize_multi_book(row, participants, PBA_BOOKMAKER_LABELS, catalog) for row in rows) if x]
     for item in items:
         item["home"] = normalize_pba_odds_team(item.get("home"))
         item["away"] = normalize_pba_odds_team(item.get("away"))
@@ -335,7 +459,8 @@ def load_ncaa_ph_odds(participants):
         return []
     rows = load_tournament_board(tournament_id, NCAA_PH_BOOKMAKER_LABELS, "ncaa_ph")
     save_meta_names(participants, rows)
-    items = [x for x in (normalize_multi_book(row, participants, NCAA_PH_BOOKMAKER_LABELS) for row in rows) if x]
+    catalog = market_catalog(NCAA_PH_SPORT_ID)
+    items = [x for x in (normalize_multi_book(row, participants, NCAA_PH_BOOKMAKER_LABELS, catalog) for row in rows) if x]
     print(json.dumps({
         "ncaa_ph_tournament_id": tournament_id,
         "events": len(items),
