@@ -119,15 +119,18 @@ for rel in ["app.js","sports/index.html","score-league-user-logos.js"]:
             errors.append(f"{rel}:{i}: suspicious stray single-letter line {line.strip()!r}")
 
 # 5. Workflow command references: every local script/file invoked by a workflow must exist.
-workflow_cmd=re.compile(r"\b(?:python(?:3)?|node)\s+(?!-m\b)([^\s|;&]+)",re.I)
+workflow_cmd_line=re.compile(r"^\s*(?:python(?:3)?|node)\s+([^\s|;&]+)",re.I)
 workflow_local_use=re.compile(r"^\s*uses:\s*[\"']?(\./[^\"'\s]+)",re.M)
 for p in files:
     if ".github" not in p.parts or "workflows" not in p.parts or p.suffix.lower() not in (".yml",".yaml"):
         continue
     text=p.read_text("utf-8",errors="replace")
-    for raw in workflow_cmd.findall(text):
-        ref=raw.strip().strip('"\'')
-        if ref.startswith(("$","{","http://","https://")):
+    for line in text.splitlines():
+        m=workflow_cmd_line.match(line)
+        if not m:
+            continue
+        ref=m.group(1).strip().strip('"\'')
+        if ref.startswith(("-","$","{","http://","https://")):
             continue
         target=(ROOT/ref).resolve()
         if not target.exists():
