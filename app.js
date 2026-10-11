@@ -1564,7 +1564,36 @@ function openLiveStream(eventId){
   d.showModal();
 }
 
-async function hydrateLiveStreams(sport){const snapshot=allGames,now=Date.now(),candidates=snapshot.filter(g=>g.eventId&&(g.state==='live'||(g.state==='scheduled'&&Math.abs(Date.parse(g.date)-now)<=90*60000))).slice(0,4);if(!candidates.length)return;await Promise.allSettled(candidates.map(async g=>{const key=sport+':'+g.eventId,hit=liveStreamCache.get(key);if(hit&&Date.now()-hit.time<120000){g.streams=hit.items;g.streamsChecked=true;return}try{const q=new URLSearchParams({sport,event:g.eventId,home:g.home,away:g.away}),r=await fetch('https://img-api-proxy.magsipocarnie.workers.dev/streams?'+q.toString(),{cache:'no-store'});if(!r.ok)throw 0;const j=await r.json(),items=Array.isArray(j.items)?j.items.filter(x=>x?.embedUrl):[];g.streams=items;g.streamsChecked=true;liveStreamCache.set(key,{time:Date.now(),items})}catch{g.streams=[];g.streamsChecked=true}}));if(allGames===snapshot&&currentScoreLeague===sport)renderGames()}
+function nbaOfficialWatchStream(game){
+  if(!game||game.state!=='live')return null;
+  const broadcasts=(Array.isArray(game.broadcasts)?game.broadcasts:[]).map(x=>String(x||''));
+  const onNbaTv=broadcasts.some(x=>/\bNBA\s*TV\b/i.test(x));
+  return {
+    watchUrl:onNbaTv?'https://www.nba.com/watch/nba-tv':'https://www.nba.com/watch/league-pass-stream',
+    provider:onNbaTv?'NBA TV':'NBA League Pass',
+    channel:'NBA Official',
+    title:[game.away,game.home].filter(Boolean).join(' vs '),
+    status:'live',
+    verificationStatus:'official-nba-watch',
+    official:true
+  };
+}
+function attachNbaOfficialWatch(games){
+  for(const game of games||[]){
+    if(game?.state!=='live')continue;
+    const official=nbaOfficialWatchStream(game);
+    if(!official)continue;
+    const existing=Array.isArray(game.streams)?game.streams.filter(Boolean):[];
+    if(!existing.some(x=>String(x?.watchUrl||'').includes('nba.com/watch/'))){
+      game.streams=[official,...existing];
+    }else{
+      game.streams=existing;
+    }
+    game.streamsChecked=true;
+  }
+}
+
+async function hydrateLiveStreams(sport){const snapshot=allGames,now=Date.now(),candidates=snapshot.filter(g=>g.eventId&&(g.state==='live'||(g.state==='scheduled'&&Math.abs(Date.parse(g.date)-now)<=90*60000))).slice(0,4);if(!candidates.length)return;await Promise.allSettled(candidates.map(async g=>{const key=sport+':'+g.eventId,hit=liveStreamCache.get(key);if(hit&&Date.now()-hit.time<120000){g.streams=hit.items;g.streamsChecked=true;if(sport==='basketball')attachNbaOfficialWatch([g]);return}try{const q=new URLSearchParams({sport,event:g.eventId,home:g.home,away:g.away}),r=await fetch('https://img-api-proxy.magsipocarnie.workers.dev/streams?'+q.toString(),{cache:'no-store'});if(!r.ok)throw 0;const j=await r.json(),items=Array.isArray(j.items)?j.items.filter(x=>x&&(x.watchUrl||x.embedUrl)):[];g.streams=items;g.streamsChecked=true;if(sport==='basketball')attachNbaOfficialWatch([g]);liveStreamCache.set(key,{time:Date.now(),items:g.streams})}catch{g.streams=[];g.streamsChecked=true;if(sport==='basketball')attachNbaOfficialWatch([g])}}));if(allGames===snapshot&&currentScoreLeague===sport)renderGames()}
 function f1SessionName(comp){
   const abbr=String(comp?.type?.abbreviation||'').toUpperCase();
   if(abbr==='FP1')return 'Practice 1';
@@ -1651,6 +1680,11 @@ function normalizeCompetitionEvent(e,c,index=0,sport=''){
     state,
     odds:oddsList[0]||null,
     oddsList,
+    broadcasts:(Array.isArray(c?.broadcasts)?c.broadcasts:[]).flatMap(b=>{
+      if(typeof b==='string')return [b];
+      const names=Array.isArray(b?.names)?b.names:[b?.name,b?.shortName,b?.market].filter(Boolean);
+      return names.filter(Boolean).map(String);
+    }),
     highlights:[],
     highlightsChecked:false,
     streams:[],
@@ -2682,6 +2716,7 @@ async function loadGames({silent=false,league=currentScoreLeague}={}){
     }
 
     await hydrateTeamLogos(sport,nextGames);
+    if(sport==='basketball')attachNbaOfficialWatch(nextGames);
 
     if(hasRegionalSnapshot&&!nextGames.length){
       nextGames=regionalSnapshotGames(sport);
@@ -2703,6 +2738,7 @@ async function loadGames({silent=false,league=currentScoreLeague}={}){
           return{eventId:'',date:g.date,home,away,homeLogo:logoMap[String(home).toLowerCase()]||'',awayLogo:logoMap[String(away).toLowerCase()]||'',homeScore:g.home_team_score||'—',awayScore:g.visitor_team_score||'—',status:g.status||'Scheduled',state:/live|q[1-4]|half|quarter|ot|in progress/i.test(String(g.status||''))?'live':String(g.status||'').toLowerCase().includes('final')?'final':'scheduled',odds:null,highlights:[],highlightsChecked:true,streams:[],streamsChecked:true}
         });
       }
+      attachNbaOfficialWatch(nextGames);
     }
 
 
