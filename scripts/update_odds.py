@@ -89,29 +89,14 @@ def parse_dt(value):
     except Exception:
         return None
 
-def pba_fast_refresh_window(now=None):
-    now = now or datetime.now(timezone.utc)
+def pba_schedule_games():
     try:
         regional = json.loads(REGIONAL_WEB.read_text("utf-8"))
     except Exception:
-        return False
-    games = (((regional or {}).get("leagues") or {}).get("pba") or {}).get("games") or []
-    for game in games:
-        state = str(game.get("state") or "").casefold()
-        if state == "live":
-            return True
-        if state != "scheduled":
-            continue
-        tip = parse_dt(game.get("date"))
-        if not tip:
-            continue
-        if tip.tzinfo is None:
-            tip = tip.replace(tzinfo=timezone.utc)
-        if tip - PBA_FAST_BEFORE <= now.astimezone(tip.tzinfo) <= tip + PBA_FAST_AFTER:
-            return True
-    return False
+        return []
+    return (((regional or {}).get("leagues") or {}).get("pba") or {}).get("games") or []
 
-def routine_refresh_due(now=None):
+def odds_age(now=None):
     now = now or datetime.now(timezone.utc)
     try:
         current = json.loads(OUT.read_text("utf-8"))
@@ -119,20 +104,64 @@ def routine_refresh_due(now=None):
     except Exception:
         stamp = None
     if not stamp:
-        return True
+        return None
     if stamp.tzinfo is None:
         stamp = stamp.replace(tzinfo=timezone.utc)
-    return now - stamp.astimezone(timezone.utc) >= ROUTINE_REFRESH
+    return now - stamp.astimezone(timezone.utc)
+
+def pba_refresh_plan(now=None):
+    now = now or datetime.now(timezone.utc)
+    future = []
+    for game in pba_schedule_games():
+        state = str(game.get("state") or "").casefold()
+        tip = parse_dt(game.get("date"))
+        if tip and tip.tzinfo is None:
+            tip = tip.replace(tzinfo=timezone.utc)
+        if state == "live":
+            return timedelta(minutes=5), "pba-live"
+        if not tip:
+            continue
+        local_now = now.astimezone(tip.tzinfo)
+        delta = tip - local_now
+        # A schedule feed can remain "scheduled" after tipoff. Treat the normal
+        # basketball game window as live/in-play for odds refresh purposes.
+        if -PBA_FAST_AFTER <= delta <= PBA_FAST_BEFORE:
+            return timedelta(minutes=5), "pba-game-window"
+        if delta.total_seconds() > 0:
+            future.append(delta)
+
+    if future:
+        nearest = min(future)
+        if nearest <= timedelta(hours=2):
+            return timedelta(minutes=15), "pba-pre-tip"
+        if nearest <= timedelta(hours=24):
+            return timedelta(minutes=30), "pba-game-day"
+        if nearest <= timedelta(days=3):
+            return timedelta(hours=2), "pba-upcoming"
+    return ROUTINE_REFRESH, "routine-6h"
+
+def pba_fast_refresh_window(now=None):
+    interval, _ = pba_refresh_plan(now)
+    return interval <= timedelta(minutes=5)
+
+def routine_refresh_due(now=None):
+    now = now or datetime.now(timezone.utc)
+    age = odds_age(now)
+    if age is None:
+        return True
+    interval, _ = pba_refresh_plan(now)
+    return age >= interval
+
 
 def should_refresh_now():
     event = str(os.environ.get("GITHUB_EVENT_NAME") or "").strip().casefold()
     if event and event != "schedule":
         return True, event
-    if pba_fast_refresh_window():
-        return True, "pba-fast-window"
-    if routine_refresh_due():
-        return True, "routine-6h"
-    return False, "idle"
+    interval, mode = pba_refresh_plan()
+    age = odds_age()
+    if age is None or age >= interval:
+        return True, mode
+    return False, "idle-" + mode
 
 def get_json(path, params):
     query = dict(params)
@@ -417,7 +446,7 @@ def normalize_multi_book(row, participants, bookmaker_labels, catalog=None):
         "oddsList": odds_list,
     }
 
-def load_tournament_board(tournament_id, bookmaker_labels, log_key):
+def load_tournament_board(tournament_id, bookmaker_labels, log_key, extra_bookmakers=()):
     seed_rows = []
     seed_bookmaker = None
     for candidate in ("pinnacle", "bet365", "1xbet"):
@@ -466,6 +495,26 @@ def load_tournament_board(tournament_id, bookmaker_labels, log_key):
                 "error": str(exc)[:300],
             }, ensure_ascii=False))
 
+        for bookmaker in extra_bookmakers:
+            try:
+                direct = get_json("/odds", {
+                    "fixtureId": str(fixture_id),
+                    "bookmakers": bookmaker,
+                    "language": "en",
+                    "verbosity": 3,
+                    "oddsFormat": "decimal",
+                })
+                direct_rows = as_list(direct)
+                if not direct_rows and isinstance(direct, dict) and direct.get("fixtureId"):
+                    direct_rows = [direct]
+                merge_fixture_rows(merged, direct_rows)
+            except Exception as exc:
+                print(json.dumps({
+                    log_key + "_bookmaker": bookmaker,
+                    "fixtureId": str(fixture_id),
+                    "error": str(exc)[:300],
+                }, ensure_ascii=False))
+
     rows = list(merged.values())
     present_books = sorted({
         slug
@@ -508,7 +557,7 @@ def load_pba_odds(participants):
     if not tournament_id:
         print(json.dumps({"pba": "tournament not found"}, ensure_ascii=False))
         return []
-    rows = load_tournament_board(tournament_id, PBA_BOOKMAKER_LABELS, "pba")
+    rows = load_tournament_board(tournament_id, PBA_BOOKMAKER_LABELS, "pba", extra_bookmakers=("sabasports",))
     save_meta_names(participants, rows)
     catalog = market_catalog(PBA_SPORT_ID)
     items = [x for x in (normalize_multi_book(row, participants, PBA_BOOKMAKER_LABELS, catalog) for row in rows) if x]
