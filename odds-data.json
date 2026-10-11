@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-11T05:23:33+00:00",
+  "updated_at": "2026-10-11T05:24:41+00:00",
   "provider": "OddsPapi + The Odds API",
   "bookmaker": "Multiple",
   "leagues": {
@@ -158,7 +158,7 @@
             "provider": "BetMGM",
             "details": "—",
             "total": "—",
-            "home": "1.62",
+            "home": "1.61",
             "away": "5.25",
             "draw": "4.0"
           },
@@ -246,9 +246,9 @@
             "provider": "DraftKings",
             "details": "—",
             "total": "—",
-            "home": "1.51",
+            "home": "1.53",
             "away": "6.0",
-            "draw": "4.5"
+            "draw": "4.4"
           },
           {
             "provider": "BetMGM",
@@ -4228,6 +4228,90 @@
             "details": "—",
             "total": "—",
             "home": "1.95",
+            "away": "1.87"
+          }
+        ]
+      }
+    ],
+    "pba": [
+      {
+        "eventId": "id1100171272449476",
+        "date": "2026-10-11T11:30:00.000Z",
+        "home": "Timplados Hotshots",
+        "away": "Barangay Ginebra",
+        "participant1Id": 96587,
+        "participant2Id": 96577,
+        "homeLogo": "",
+        "awayLogo": "",
+        "oddsList": [
+          {
+            "provider": "Pinnacle",
+            "details": "-1",
+            "total": "91.5",
+            "home": "1.884",
+            "away": "1.719"
+          },
+          {
+            "provider": "Bet365",
+            "details": "—",
+            "total": "—",
+            "home": "1.71",
+            "away": "1.92"
+          },
+          {
+            "provider": "SBOBET",
+            "details": "—",
+            "total": "—",
+            "home": "1.92",
+            "away": "1.77"
+          },
+          {
+            "provider": "22Bet",
+            "details": "—",
+            "total": "—",
+            "home": "1.967",
+            "away": "1.782"
+          },
+          {
+            "provider": "BC.Game",
+            "details": "—",
+            "total": "—",
+            "home": "1.86",
+            "away": "1.78"
+          },
+          {
+            "provider": "Bwin",
+            "details": "—",
+            "total": "—",
+            "home": "1.8",
+            "away": "1.87"
+          },
+          {
+            "provider": "Roobet",
+            "details": "—",
+            "total": "—",
+            "home": "1.88",
+            "away": "1.8"
+          },
+          {
+            "provider": "Cloudbet",
+            "details": "—",
+            "total": "—",
+            "home": "1.84",
+            "away": "1.68"
+          },
+          {
+            "provider": "Dafabet",
+            "details": "—",
+            "total": "—",
+            "home": "1.97",
+            "away": "1.78"
+          },
+          {
+            "provider": "Marathonbet",
+            "details": "—",
+            "total": "—",
+            "home": "1.87",
             "away": "1.87"
           }
         ]
