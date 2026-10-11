@@ -1097,20 +1097,25 @@ const regionalWebSnapshots={
   pba:{
     league:'PBA',
     season:"2026 Governors' Cup",
-    coverage:'Web-verified schedule and results snapshot · updated September 21, 2026',
+    coverage:'Current schedule and verified final scores',
     sources:[
+      {name:'Team Pilipinas',url:'https://www.teampilipinas.info/2016/02/pba-live-updates-schedule-standings-pba.html?m=1'},
       {name:'PBA Official',url:'https://pba.ph/'},
       {name:'SkedCheck',url:'https://skedcheck.com/pba-games-schedule-scores/'}
     ],
     games:[
-      {eventId:'web-pba-20261007-1',date:'2026-10-07T17:15:00+08:00',displayTime:'Oct 7 · 5:15 PM',away:'NLEX Road Warriors',home:'Macau Black Knights',awayScore:'—',homeScore:'—',status:'Scheduled',state:'scheduled',sourceName:'SkedCheck',sourceUrl:'https://skedcheck.com/pba-games-schedule-scores/'},
-      {eventId:'web-pba-20261007-2',date:'2026-10-07T19:30:00+08:00',displayTime:'Oct 7 · 7:30 PM',away:'Terrafirma Dyip',home:'TNT Tropang 5G',awayScore:'—',homeScore:'—',status:'Scheduled',state:'scheduled',sourceName:'SkedCheck',sourceUrl:'https://skedcheck.com/pba-games-schedule-scores/'},
-      {eventId:'web-pba-20261009-1',date:'2026-10-09T17:15:00+08:00',displayTime:'Oct 9 · 5:15 PM',away:'Blackwater Bossing',home:'Magnolia Hotshots',awayScore:'—',homeScore:'—',status:'Scheduled',state:'scheduled',sourceName:'SkedCheck',sourceUrl:'https://skedcheck.com/pba-games-schedule-scores/'},
-      {eventId:'web-pba-20261009-2',date:'2026-10-09T19:30:00+08:00',displayTime:'Oct 9 · 7:30 PM',away:'Barangay Ginebra',home:'Rain or Shine',awayScore:'—',homeScore:'—',status:'Scheduled',state:'scheduled',sourceName:'SkedCheck',sourceUrl:'https://skedcheck.com/pba-games-schedule-scores/'},
-      {eventId:'web-pba-20260814-1',date:'2026-08-14T17:15:00+08:00',displayTime:'Aug 14 · Final',away:'NLEX Road Warriors',home:'Converge FiberXers',awayScore:'110',homeScore:'112',status:'Final',state:'final',sourceName:'SkedCheck',sourceUrl:'https://skedcheck.com/pba-games-schedule-scores/'},
-      {eventId:'web-pba-20260814-2',date:'2026-08-14T19:30:00+08:00',displayTime:'Aug 14 · Final',away:'Barangay Ginebra',home:'Meralco Bolts',awayScore:'88',homeScore:'97',status:'Final',state:'final',sourceName:'SkedCheck',sourceUrl:'https://skedcheck.com/pba-games-schedule-scores/'},
-      {eventId:'web-pba-20260812-1',date:'2026-08-12T17:15:00+08:00',displayTime:'Aug 12 · Final',away:'Titan Ultra Giant Risers',home:'San Miguel Beermen',awayScore:'113',homeScore:'143',status:'Final',state:'final',sourceName:'SkedCheck',sourceUrl:'https://skedcheck.com/pba-games-schedule-scores/'},
-      {eventId:'web-pba-20260812-2',date:'2026-08-12T19:30:00+08:00',displayTime:'Aug 12 · Final',away:'Phoenix Fuel Masters',home:'Magnolia Hotshots',awayScore:'101',homeScore:'115',status:'Final',state:'final',sourceName:'SkedCheck',sourceUrl:'https://skedcheck.com/pba-games-schedule-scores/'}
+      {eventId:'web-pba-20261007-nlex-macau',date:'2026-10-07T17:15:00+08:00',displayTime:'Oct 7 · Final',away:'Macau Black Knights',home:'NLEX Road Warriors',awayScore:'78',homeScore:'138',status:'Final',state:'final'},
+      {eventId:'web-pba-20261007-tnt-terrafirma',date:'2026-10-07T19:30:00+08:00',displayTime:'Oct 7 · Final',away:'Terrafirma Dyip',home:'TNT Tropang 5G',awayScore:'92',homeScore:'116',status:'Final',state:'final'},
+      {eventId:'web-pba-20261009-magnolia-blackwater',date:'2026-10-09T17:15:00+08:00',displayTime:'Oct 9 · Final',away:'Blackwater Bossing',home:'Magnolia Chicken Timplados Hotshots',awayScore:'101',homeScore:'107',status:'Final',state:'final'},
+      {eventId:'web-pba-20261009-ginebra-ros',date:'2026-10-09T19:30:00+08:00',displayTime:'Oct 9 · Final',away:'Rain or Shine Elasto Painters',home:'Barangay Ginebra',awayScore:'111',homeScore:'129',status:'Final',state:'final'},
+      {eventId:'web-pba-20261010-terrafirma-macau',date:'2026-10-10T17:15:00+08:00',displayTime:'Oct 10 · Final',away:'Macau Black Knights',home:'Terrafirma Dyip',awayScore:'127',homeScore:'146',status:'Final',state:'final'},
+      {eventId:'web-pba-20261010-tnt-smb',date:'2026-10-10T19:30:00+08:00',displayTime:'Oct 10 · Final',away:'San Miguel Beermen',home:'TNT Tropang 5G',awayScore:'98',homeScore:'116',status:'Final',state:'final'},
+      {eventId:'web-pba-20261011-converge-titan',date:'2026-10-11T17:15:00+08:00',displayTime:'Oct 11 · 5:15 PM',away:'Converge FiberXers',home:'Titan Ultra Giant Risers',awayScore:'—',homeScore:'—',status:'Scheduled · Smart Araneta Coliseum',state:'scheduled'},
+      {eventId:'web-pba-20261011-ginebra-magnolia',date:'2026-10-11T19:30:00+08:00',displayTime:'Oct 11 · 7:30 PM',away:'Barangay Ginebra',home:'Magnolia Chicken Timplados Hotshots',awayScore:'—',homeScore:'—',status:'Scheduled · Smart Araneta Coliseum',state:'scheduled'},
+      {eventId:'web-pba-20261013-meralco-blackwater',date:'2026-10-13T17:15:00+08:00',displayTime:'Oct 13 · 5:15 PM',away:'Meralco Bolts',home:'Blackwater Bossing',awayScore:'—',homeScore:'—',status:'Scheduled · Ninoy Aquino Stadium',state:'scheduled'},
+      {eventId:'web-pba-20261013-tnt-macau',date:'2026-10-13T19:30:00+08:00',displayTime:'Oct 13 · 7:30 PM',away:'TNT Tropang 5G',home:'Macau Black Knights',awayScore:'—',homeScore:'—',status:'Scheduled · Ninoy Aquino Stadium',state:'scheduled'},
+      {eventId:'web-pba-20261014-smb-terrafirma',date:'2026-10-14T17:15:00+08:00',displayTime:'Oct 14 · 5:15 PM',away:'San Miguel Beermen',home:'Terrafirma Dyip',awayScore:'—',homeScore:'—',status:'Scheduled · Ninoy Aquino Stadium',state:'scheduled'},
+      {eventId:'web-pba-20261014-nlex-titan',date:'2026-10-14T19:30:00+08:00',displayTime:'Oct 14 · 7:30 PM',away:'NLEX Road Warriors',home:'Titan Ultra Giant Risers',awayScore:'—',homeScore:'—',status:'Scheduled · Ninoy Aquino Stadium',state:'scheduled'}
     ]
   },
   mpbl:{
