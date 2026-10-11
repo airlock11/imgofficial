@@ -1233,6 +1233,9 @@ const teamLogoDirectoryCache=new Map();
 
 const verifiedTeamLogoOverrides={
   pba:{
+    'magnolia chicken timplados hotshots':'https://statsspace01.sgp1.digitaloceanspaces.com/basketball_organizer/images/t5nxurama30aptdnpvdncier9r3q',
+    'magnolia hotshots':'https://statsspace01.sgp1.digitaloceanspaces.com/basketball_organizer/images/t5nxurama30aptdnpvdncier9r3q',
+    'timplados hotshots':'https://statsspace01.sgp1.digitaloceanspaces.com/basketball_organizer/images/t5nxurama30aptdnpvdncier9r3q',
     'barangay ginebra':'https://statsspace01.sgp1.digitaloceanspaces.com/basketball_organizer/images/845go3mfbdxvlmrxq4jnv93ema08',
     'barangay ginebra san miguel':'https://statsspace01.sgp1.digitaloceanspaces.com/basketball_organizer/images/845go3mfbdxvlmrxq4jnv93ema08',
     'converge fiberxers':'/assets/logos/external/statsspace01.sgp1.digitaloceanspaces.com--logo_l1--57c409c1c7.png',
@@ -2879,7 +2882,8 @@ function oddsLeagueFallback(key){
 }
 
 function oddsLeagueLogoMarkup(key){
-  const logo=oddsLeagueLogos[key]||'';
+  const supplied=window.IMG_SCORE_LEAGUE_LOGOS?.[key]||'';
+  const logo=oddsLeagueLogos[key]||supplied||'';
   const fallback=oddsLeagueFallback(key);
   if(!logo)return fallback;
   return '<img class="odds-league-logo-img" src="'+esc(logo)+'" alt="'+esc(oddsLeagueNames[key]||key)+' logo" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'grid\'">'+
