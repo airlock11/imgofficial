@@ -841,7 +841,17 @@ def ncaa_slug(value):
     return re.sub(r"[^a-z0-9]+", "-", str(value or "").lower()).strip("-")
 
 def ncaa_ph():
-    html = fetch(NCAA_PH_URL)
+    req = urllib.request.Request(
+        NCAA_PH_URL,
+        headers={
+            "User-Agent": "Mozilla/5.0 (Linux; Android 16) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Mobile Safari/537.36",
+            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+            "Accept-Language": "en-US,en;q=0.9",
+            "Cache-Control": "no-cache",
+        },
+    )
+    with urllib.request.urlopen(req, timeout=30) as response:
+        html = response.read().decode("utf-8", errors="replace")
     soup = BeautifulSoup(html, "html.parser")
     lines = [re.sub(r"\s+", " ", x).strip() for x in soup.get_text("\n").splitlines() if re.sub(r"\s+", " ", x).strip()]
     pht = timezone(timedelta(hours=8))
