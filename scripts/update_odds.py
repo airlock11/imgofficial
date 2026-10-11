@@ -52,7 +52,9 @@ PBA_BOOKMAKER_GROUPS = [
     ("pinnacle", "bet365", "1xbet"),
     ("sbobet", "22bet", "bcgame"),
     ("betsson", "bwin", "betano"),
-    ("paddypower", "betclic", "sportsbet"),
+    ("paddypower", "roobet", "cloudbet"),
+    ("dafabet", "bovada", "fonbet"),
+    ("marathonbet",),
 ]
 PBA_BOOKMAKER_LABELS = {
     "pinnacle": "Pinnacle",
@@ -65,8 +67,12 @@ PBA_BOOKMAKER_LABELS = {
     "bwin": "Bwin",
     "betano": "Betano",
     "paddypower": "Paddy Power",
-    "betclic": "BetClic",
-    "sportsbet": "SportsBet",
+    "roobet": "Roobet",
+    "cloudbet": "Cloudbet",
+    "dafabet": "Dafabet",
+    "bovada": "Bovada",
+    "fonbet": "Fonbet",
+    "marathonbet": "Marathonbet",
 }
 
 def get_json(path, params):
