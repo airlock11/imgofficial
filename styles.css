@@ -693,6 +693,10 @@ main{min-height:calc(100svh - 68px)}
 .odds-table-head,.odds-table-row{display:grid;grid-template-columns:minmax(120px,1.3fr) repeat(2,minmax(86px,.8fr));align-items:stretch}
 .odds-table-head.has-draw,.odds-table-row.has-draw{grid-template-columns:minmax(120px,1.3fr) repeat(3,minmax(76px,.8fr))}
 .odds-table-head.odds-table-two,.odds-table-row.odds-table-two{grid-template-columns:minmax(120px,1.3fr) minmax(120px,1fr)}
+.odds-table-head.odds-table-market,.odds-table-row.odds-table-market{grid-template-columns:minmax(110px,1.1fr) repeat(2,minmax(100px,.9fr))}
+.odds-line-price{display:flex;flex-direction:column;justify-content:center;gap:2px;text-align:center}
+.odds-line-price b{font-size:.96rem;line-height:1;font-weight:850}
+.odds-line-price small{font-size:.72rem;line-height:1.1;color:#9aa4af;font-weight:750}
 .odds-table-head{background:#0d1115;color:#8f99a5;font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em}
 .odds-table-head span{padding:12px 14px;border-right:1px solid #2a323b}
 .odds-table-head span:last-child{border-right:0}
@@ -730,6 +734,7 @@ main{min-height:calc(100svh - 68px)}
 :root[data-theme="light"] .odds-table-head span,:root[data-theme="light"] .odds-table-row strong,:root[data-theme="light"] .odds-table-row>span{border-color:#dce2e8}
 :root[data-theme="light"] .odds-table-row{border-color:#dce2e8;color:#11161d}
 :root[data-theme="light"] .odds-table-row strong{background:#fafbfc}
+:root[data-theme="light"] .odds-line-price small{color:#687582}
 @media(max-width:760px){
   .odds-page section.content{padding:12px 0 30px}
   .odds-page .shell{width:100%}
@@ -765,6 +770,9 @@ main{min-height:calc(100svh - 68px)}
   .odds-table-head,.odds-table-row{grid-template-columns:minmax(92px,1.1fr) repeat(2,minmax(68px,.75fr))}
   .odds-table-head.has-draw,.odds-table-row.has-draw{grid-template-columns:minmax(82px,1fr) repeat(3,minmax(58px,.67fr))}
   .odds-table-head.odds-table-two,.odds-table-row.odds-table-two{grid-template-columns:minmax(100px,1fr) minmax(100px,1fr)}
+  .odds-table-head.odds-table-market,.odds-table-row.odds-table-market{grid-template-columns:minmax(92px,1fr) repeat(2,minmax(82px,.82fr))}
+  .odds-line-price b{font-size:.84rem}
+  .odds-line-price small{font-size:.67rem}
   .odds-table-head span{padding:10px 8px;font-size:.55rem;overflow-wrap:anywhere}
   .odds-table-row strong,.odds-table-row>span{min-height:54px;padding:10px 8px}
   .odds-table-row strong{font-size:.68rem}
