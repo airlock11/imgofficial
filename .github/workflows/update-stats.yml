@@ -31,9 +31,7 @@ jobs:
           python-version: "3.12"
       - name: Install parser
         run: python -m pip install --disable-pip-version-check beautifulsoup4 lxml
-      - name: Refresh sports statistics
-        run: python scripts/update_stats.py
-      - name: Publish statistics
+      - name: Refresh and publish statistics
         shell: bash
         run: |
           set -euo pipefail
