@@ -25,6 +25,7 @@ PHT = timezone(timedelta(hours=8))
 URLS = {
     "pba": "https://skedcheck.com/pba-games-schedule-scores/",
     "pba_news": "https://www.pba.ph/news",
+    "pba_current": "https://www.teampilipinas.info/2016/02/pba-live-updates-schedule-standings-pba.html?m=1",
     "uaap": "https://skedcheck.com/uaap-mens-basketball-schedule-scores/",
     "uaap_stats": "https://uaap.org/stats/uaap-season-89-men-s-basketball",
     "uaap_live_stats": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball",
@@ -173,7 +174,135 @@ def pht_iso_from_month(text, tm=None):
 def clean_team(s):
     return re.sub(r"\s+[A-Z]{2,5}$", "", s.strip()).strip()
 
-def parse_pba():
+def pba_team_name(value):
+    raw = re.sub(r"\s+", " ", str(value or "")).strip(" .,-")
+    key = raw.lower()
+    aliases = [
+        (("nlex",), "NLEX Road Warriors"),
+        (("macau",), "Macau Black Knights"),
+        (("tnt", "talk n text"), "TNT Tropang 5G"),
+        (("terrafirma",), "Terrafirma Dyip"),
+        (("magnolia",), "Magnolia Chicken Timplados Hotshots"),
+        (("blackwater",), "Blackwater Bossing"),
+        (("ginebra",), "Barangay Ginebra"),
+        (("rain or shine",), "Rain or Shine Elasto Painters"),
+        (("san miguel",), "San Miguel Beermen"),
+        (("converge",), "Converge FiberXers"),
+        (("titan",), "Titan Ultra Giant Risers"),
+        (("meralco",), "Meralco Bolts"),
+        (("phoenix",), "Phoenix Super LPG Fuel Masters"),
+    ]
+    for needles, canonical in aliases:
+        if any(n in key for n in needles):
+            return canonical
+    return raw
+
+def pba_slug(value):
+    return re.sub(r"[^a-z0-9]+", "-", str(value or "").lower()).strip("-")
+
+def parse_pba_current():
+    page = fetch(URLS["pba_current"])
+    soup = BeautifulSoup(page, "html.parser")
+    text_blob = soup.get_text("\n")
+    xs = [re.sub(r"\s+", " ", x).strip() for x in text_blob.splitlines() if re.sub(r"\s+", " ", x).strip()]
+    games = []
+    day = None
+    venue = ""
+    date_re = re.compile(r"(January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2},\s+2026", re.I)
+    result_re = re.compile(r"^(.+?)\s+def\.\s+(.+?),\s*(\d{2,3})-(\d{2,3})\b", re.I)
+    schedule_re = re.compile(r"^\((\d{1,2}:\d{2})\s*(am|pm)\)\s*(.+?)\s+vs\.?\s+(.+?)(?:\s+\[LIVE\])?(?:\s*\(\))?$", re.I)
+    venue_tokens = {
+        "NAS":"Ninoy Aquino Stadium",
+        "Araneta":"Smart Araneta Coliseum",
+        "Ynares A.":"Ynares Center - Antipolo",
+        "Ynares":"Ynares Center - Antipolo",
+    }
+
+    for line in xs:
+        dm = date_re.search(line)
+        if dm:
+            try:
+                day = datetime.strptime(dm.group(0), "%B %d, %Y").date()
+            except Exception:
+                day = None
+            venue = ""
+            for token, full in venue_tokens.items():
+                if re.search(r"\b" + re.escape(token) + r"\b", line, re.I):
+                    venue = full
+                    break
+            continue
+        if not day:
+            continue
+
+        rm = result_re.match(line)
+        if rm:
+            winner = pba_team_name(rm.group(1))
+            loser = pba_team_name(rm.group(2))
+            dt = datetime.combine(day, datetime.min.time(), tzinfo=PHT).replace(hour=12)
+            games.append({
+                "eventId":"web-pba-"+day.strftime("%Y%m%d")+"-"+pba_slug(winner)+"-"+pba_slug(loser),
+                "date":dt.isoformat(timespec="seconds"),
+                "displayTime":dt.strftime("%b %-d · Final"),
+                "away":loser,"home":winner,
+                "awayScore":rm.group(4),"homeScore":rm.group(3),
+                "status":"Final" + ((" · " + venue) if venue else ""),
+                "state":"final",
+                "sourceName":"Team Pilipinas",
+                "sourceUrl":URLS["pba_current"],
+            })
+            continue
+
+        sm = schedule_re.match(line)
+        if sm:
+            away = pba_team_name(sm.group(3))
+            home = pba_team_name(sm.group(4))
+            if away == home:
+                continue
+            try:
+                tip = datetime.strptime(sm.group(1)+sm.group(2).upper(), "%I:%M%p").time()
+                dt = datetime.combine(day, tip, tzinfo=PHT)
+            except Exception:
+                continue
+            games.append({
+                "eventId":"web-pba-"+day.strftime("%Y%m%d")+"-"+pba_slug(away)+"-"+pba_slug(home),
+                "date":dt.isoformat(timespec="seconds"),
+                "displayTime":dt.strftime("%b %-d · %-I:%M %p"),
+                "away":away,"home":home,
+                "awayScore":"—","homeScore":"—",
+                "status":"Scheduled" + ((" · " + venue) if venue else ""),
+                "state":"scheduled",
+                "sourceName":"Team Pilipinas",
+                "sourceUrl":URLS["pba_current"],
+            })
+
+    # Remove stale scheduled copies when a verified final exists for the same
+    # date/matchup and keep only recent finals plus current/upcoming fixtures.
+    final_keys={(g["date"][:10],frozenset((g["away"],g["home"]))) for g in games if g["state"]=="final"}
+    deduped=[]
+    seen=set()
+    now=datetime.now(PHT)
+    for game in games:
+        key=(game["date"][:10],frozenset((game["away"],game["home"])))
+        if game["state"]=="scheduled" and key in final_keys:
+            continue
+        if key in seen:
+            continue
+        seen.add(key)
+        dt=_adaptive_dt(game.get("date"))
+        if not dt:
+            continue
+        if game["state"]=="final" and dt < now-timedelta(days=14):
+            continue
+        if game["state"]=="scheduled" and dt < now-timedelta(hours=4):
+            continue
+        deduped.append(game)
+
+    if not deduped:
+        raise RuntimeError("No current PBA games parsed from Team Pilipinas")
+    deduped.sort(key=lambda g:g.get("date") or "")
+    return deduped
+
+def parse_pba_skedcheck():
     xs = lines(URLS["pba"])
     games, day = [], None
     date_re = re.compile(r"^(January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2},\s+2026(?:\s*\|\s*[A-Za-z]+)?$")
@@ -196,31 +325,63 @@ def parse_pba():
             games.append({"eventId":"web-pba-scheduled-"+str(len(games)+1),"date":iso,"displayTime":datetime.fromisoformat(iso).strftime("%b %d · %I:%M %p").replace(" 0"," "),"away":first,"home":second,"awayScore":"—","homeScore":"—","status":"Scheduled","state":"scheduled","sourceName":"SkedCheck","sourceUrl":URLS["pba"]})
             i += 3; continue
         i += 1
-    if not games:
+    return games
+
+def parse_pba():
+    current=[]
+    sked=[]
+    try:
+        current=parse_pba_current()
+    except Exception as ex:
+        print("PBA Team Pilipinas", type(ex).__name__, str(ex)[:160])
+    try:
+        sked=parse_pba_skedcheck()
+    except Exception as ex:
+        print("PBA SkedCheck", type(ex).__name__, str(ex)[:160])
+
+    games = dedupe_games(current + sked)
+    if current:
+        # Prefer the current source for the active schedule/results window. Keep
+        # SkedCheck only as a secondary/fallback source, not as stale duplicate cards.
+        current_dates={g.get("date","")[:10] for g in current}
+        current_matchups={(g.get("date","")[:10],frozenset((g.get("away",""),g.get("home","")))) for g in current}
+        games=[g for g in games if g.get("sourceName")!="SkedCheck" or (
+            g.get("date","")[:10] not in current_dates and
+            (g.get("date","")[:10],frozenset((g.get("away",""),g.get("home","")))) not in current_matchups
+        )]
+        games=current+[g for g in games if g not in current]
+
+    now=datetime.now(PHT)
+    cleaned=[]
+    for game in games:
+        dt=_adaptive_dt(game.get("date"))
+        if not dt:
+            continue
+        if game.get("state")=="final" and dt < now-timedelta(days=14):
+            continue
+        if game.get("state")=="scheduled" and dt < now-timedelta(hours=4):
+            continue
+        cleaned.append(game)
+    cleaned.sort(key=lambda g:g.get("date") or "")
+
+    if not cleaned:
         existing = load().get("leagues", {}).get("pba", {})
         if existing:
             return existing
         raise RuntimeError("No PBA games parsed")
 
-    # Preserve a verified recent final when the public page scraper temporarily
-    # exposes only the two Aug 14 results. dedupe_games removes this seed
-    # automatically once the same matchup is parsed directly from the source.
-    verified_recent = [{
-        "eventId":"verified-pba-20260812-magnolia-phoenix",
-        "date":"2026-08-12T19:30:00+08:00",
-        "displayTime":"Aug 12 · Final",
-        "away":"Phoenix",
-        "home":"Magnolia Chicken Timplados Hotshots",
-        "awayScore":"101",
-        "homeScore":"115",
-        "status":"Final",
-        "state":"final",
-        "sourceName":"SkedCheck",
-        "sourceUrl":URLS["pba"]
-    }]
-    games = dedupe_games(games + verified_recent)
-    return {"league":"PBA","season":"2026 Governors' Cup","coverage":"Schedule and final scores","note":"Automatically refreshed from public web schedule/results.","sources":[{"name":"SkedCheck","url":URLS["pba"]},{"name":"PBA Official","url":"https://www.pba.ph/"}],"games":games[:40]}
-
+    return {
+        "league":"PBA",
+        "season":"2026 Governors' Cup",
+        "coverage":"Current schedule and verified final scores",
+        "note":"Automatically refreshed from current public schedule/results. Real-time LIVE status is handled separately by IMG's verified livestream checker.",
+        "sources":[
+            {"name":"Team Pilipinas","url":URLS["pba_current"]},
+            {"name":"SkedCheck","url":URLS["pba"]},
+            {"name":"PBA Official","url":"https://www.pba.ph/"}
+        ],
+        "games":cleaned[:40]
+    }
 
 PBA_PHOTO_FEEDS = [
     {"name":"Philstar Sports","url":"https://www.philstar.com/rss/sports"},
