@@ -223,28 +223,75 @@ def normalize_multi_book(row, participants, bookmaker_labels):
         "oddsList": odds_list,
     }
 
+def load_tournament_board(tournament_id, bookmaker_labels, log_key):
+    seed_rows = []
+    seed_bookmaker = None
+    for candidate in ("pinnacle", "bet365", "1xbet"):
+        try:
+            payload = get_json("/odds-by-tournaments", {
+                "tournamentIds": str(tournament_id),
+                "bookmaker": candidate,
+                "language": "en",
+                "verbosity": 3,
+                "oddsFormat": "decimal",
+            })
+            seed_rows = as_list(payload)
+            if seed_rows:
+                seed_bookmaker = candidate
+                break
+        except Exception as exc:
+            print(json.dumps({
+                log_key + "_seed": candidate,
+                "error": str(exc)[:300],
+            }, ensure_ascii=False))
+
+    if not seed_rows:
+        print(json.dumps({log_key: "no priced fixtures returned"}, ensure_ascii=False))
+        return []
+
+    merged = {}
+    for seed in seed_rows[:12]:
+        fixture_id = seed.get("fixtureId")
+        if not fixture_id:
+            continue
+        merge_fixture_rows(merged, [seed])
+        try:
+            full = get_json("/odds", {
+                "fixtureId": str(fixture_id),
+                "language": "en",
+                "verbosity": 3,
+                "oddsFormat": "decimal",
+            })
+            rows = as_list(full)
+            if not rows and isinstance(full, dict) and full.get("fixtureId"):
+                rows = [full]
+            merge_fixture_rows(merged, rows)
+        except Exception as exc:
+            print(json.dumps({
+                log_key + "_fixture": str(fixture_id),
+                "error": str(exc)[:300],
+            }, ensure_ascii=False))
+
+    rows = list(merged.values())
+    present_books = sorted({
+        slug
+        for row in rows
+        for slug in (row.get("bookmakerOdds") or {}).keys()
+        if slug in bookmaker_labels
+    })
+    print(json.dumps({
+        log_key + "_seed_bookmaker": seed_bookmaker,
+        log_key + "_fixtures": len(rows),
+        log_key + "_target_books_present": present_books,
+    }, ensure_ascii=False))
+    return rows
+
 def load_pba_odds(participants):
     tournament_id = discover_pba_tournament()
     if not tournament_id:
         print(json.dumps({"pba": "tournament not found"}, ensure_ascii=False))
         return []
-    merged = {}
-    for group in PBA_BOOKMAKER_GROUPS:
-        try:
-            payload = get_json("/odds-by-tournaments", {
-                "tournamentIds": str(tournament_id),
-                "bookmakers": ",".join(group),
-                "language": "en",
-                "verbosity": 3,
-                "oddsFormat": "decimal",
-            })
-            merge_fixture_rows(merged, as_list(payload))
-        except Exception as exc:
-            print(json.dumps({
-                "pba_bookmakers": list(group),
-                "error": str(exc)[:300],
-            }, ensure_ascii=False))
-    rows = list(merged.values())
+    rows = load_tournament_board(tournament_id, PBA_BOOKMAKER_LABELS, "pba")
     save_meta_names(participants, rows)
     items = [x for x in (normalize_multi_book(row, participants, PBA_BOOKMAKER_LABELS) for row in rows) if x]
     print(json.dumps({
@@ -259,23 +306,7 @@ def load_ncaa_ph_odds(participants):
     if not tournament_id:
         print(json.dumps({"ncaa_ph": "tournament not found"}, ensure_ascii=False))
         return []
-    merged = {}
-    for group in NCAA_PH_BOOKMAKER_GROUPS:
-        try:
-            payload = get_json("/odds-by-tournaments", {
-                "tournamentIds": str(tournament_id),
-                "bookmakers": ",".join(group),
-                "language": "en",
-                "verbosity": 3,
-                "oddsFormat": "decimal",
-            })
-            merge_fixture_rows(merged, as_list(payload))
-        except Exception as exc:
-            print(json.dumps({
-                "ncaa_ph_bookmakers": list(group),
-                "error": str(exc)[:300],
-            }, ensure_ascii=False))
-    rows = list(merged.values())
+    rows = load_tournament_board(tournament_id, NCAA_PH_BOOKMAKER_LABELS, "ncaa_ph")
     save_meta_names(participants, rows)
     items = [x for x in (normalize_multi_book(row, participants, NCAA_PH_BOOKMAKER_LABELS) for row in rows) if x]
     print(json.dumps({
