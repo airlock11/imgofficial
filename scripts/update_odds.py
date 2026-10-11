@@ -47,6 +47,28 @@ NCAA_PH_BOOKMAKER_LABELS = {
     "marathonbet": "Marathonbet",
 }
 
+PBA_SPORT_ID = 11
+PBA_BOOKMAKER_GROUPS = [
+    ("pinnacle", "bet365", "1xbet"),
+    ("sbobet", "22bet", "bcgame"),
+    ("betsson", "bwin", "betano"),
+    ("paddypower", "betclic", "sportsbet"),
+]
+PBA_BOOKMAKER_LABELS = {
+    "pinnacle": "Pinnacle",
+    "bet365": "Bet365",
+    "1xbet": "1xBet",
+    "sbobet": "SBOBET",
+    "22bet": "22Bet",
+    "bcgame": "BC.Game",
+    "betsson": "Betsson",
+    "bwin": "Bwin",
+    "betano": "Betano",
+    "paddypower": "Paddy Power",
+    "betclic": "BetClic",
+    "sportsbet": "SportsBet",
+}
+
 def get_json(path, params):
     query = dict(params)
     query["apiKey"] = KEY
@@ -73,6 +95,42 @@ def as_records(payload, keys=("data", "items", "results", "tournaments")):
             if isinstance(value, list):
                 return [x for x in value if isinstance(x, dict)]
     return []
+
+def discover_tournament(sport_id, required_terms, preferred_terms=()):
+    rows = as_records(get_json("/tournaments", {"sportId": sport_id}))
+    candidates = []
+    for row in rows:
+        name = str(row.get("tournamentName") or row.get("name") or "")
+        slug = str(row.get("tournamentSlug") or row.get("slug") or "")
+        category = str(row.get("categoryName") or row.get("categorySlug") or "")
+        text = " ".join((name, slug, category)).casefold()
+        if not all(term.casefold() in text for term in required_terms):
+            continue
+        score = sum(4 for term in preferred_terms if term.casefold() in text)
+        score += min(int(row.get("futureFixtures") or 0), 10)
+        score += min(int(row.get("liveFixtures") or 0) * 2, 10)
+        candidates.append((score, row))
+    if not candidates:
+        return None
+    candidates.sort(key=lambda x: x[0], reverse=True)
+    try:
+        return int(candidates[0][1].get("tournamentId"))
+    except Exception:
+        return None
+
+def discover_pba_tournament():
+    tournament_id = discover_tournament(
+        PBA_SPORT_ID,
+        required_terms=("pba",),
+        preferred_terms=("philippines", "governors", "cup"),
+    )
+    if tournament_id:
+        return tournament_id
+    return discover_tournament(
+        PBA_SPORT_ID,
+        required_terms=("philipp", "basket"),
+        preferred_terms=("pba", "governors"),
+    )
 
 def discover_ncaa_ph_tournament():
     rows = as_records(get_json("/tournaments", {"sportId": NCAA_PH_SPORT_ID}))
@@ -158,6 +216,37 @@ def normalize_multi_book(row, participants, bookmaker_labels):
         "awayLogo": "",
         "oddsList": odds_list,
     }
+
+def load_pba_odds(participants):
+    tournament_id = discover_pba_tournament()
+    if not tournament_id:
+        print(json.dumps({"pba": "tournament not found"}, ensure_ascii=False))
+        return []
+    merged = {}
+    for group in PBA_BOOKMAKER_GROUPS:
+        try:
+            payload = get_json("/odds-by-tournaments", {
+                "tournamentIds": str(tournament_id),
+                "bookmakers": ",".join(group),
+                "language": "en",
+                "verbosity": 3,
+                "oddsFormat": "decimal",
+            })
+            merge_fixture_rows(merged, as_list(payload))
+        except Exception as exc:
+            print(json.dumps({
+                "pba_bookmakers": list(group),
+                "error": str(exc)[:300],
+            }, ensure_ascii=False))
+    rows = list(merged.values())
+    save_meta_names(participants, rows)
+    items = [x for x in (normalize_multi_book(row, participants, PBA_BOOKMAKER_LABELS) for row in rows) if x]
+    print(json.dumps({
+        "pba_tournament_id": tournament_id,
+        "events": len(items),
+        "bookmakers": sorted({b["provider"] for e in items for b in e["oddsList"]}),
+    }, ensure_ascii=False))
+    return sorted(items, key=lambda x: x.get("date") or "")[:20]
 
 def load_ncaa_ph_odds(participants):
     tournament_id = discover_ncaa_ph_tournament()
@@ -557,6 +646,13 @@ def main():
 
     for key in list(leagues):
         leagues[key] = sorted(leagues[key], key=lambda x: x.get("date") or "")[:12]
+
+    try:
+        pba_items = load_pba_odds(participants)
+        if pba_items:
+            leagues["pba"] = pba_items
+    except Exception as exc:
+        print(json.dumps({"pba": "update failed", "error": str(exc)[:300]}, ensure_ascii=False))
 
     try:
         ncaa_items = load_ncaa_ph_odds(participants)
