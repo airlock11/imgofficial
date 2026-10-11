@@ -118,7 +118,42 @@ for rel in ["app.js","sports/index.html","score-league-user-logos.js"]:
         if re.fullmatch(r"\s*[A-Za-z]\s*",line):
             errors.append(f"{rel}:{i}: suspicious stray single-letter line {line.strip()!r}")
 
-# 5. Exact duplicate files and zero-byte text files are maintenance warnings.
+# 5. Workflow command references: every local script/file invoked by a workflow must exist.
+workflow_cmd=re.compile(r"\b(?:python(?:3)?|node)\s+(?!-m\b)([^\s|;&]+)",re.I)
+workflow_local_use=re.compile(r"^\s*uses:\s*[\"']?(\./[^\"'\s]+)",re.M)
+for p in files:
+    if ".github" not in p.parts or "workflows" not in p.parts or p.suffix.lower() not in (".yml",".yaml"):
+        continue
+    text=p.read_text("utf-8",errors="replace")
+    for raw in workflow_cmd.findall(text):
+        ref=raw.strip().strip('"\'')
+        if ref.startswith(("$","{","http://","https://")):
+            continue
+        target=(ROOT/ref).resolve()
+        if not target.exists():
+            errors.append(f"{p.relative_to(ROOT)}: workflow command references missing file {ref}")
+    for raw in workflow_local_use.findall(text):
+        ref=raw[2:].rstrip("/")
+        target=(ROOT/ref).resolve()
+        if not target.exists():
+            errors.append(f"{p.relative_to(ROOT)}: workflow uses missing local action/path {raw}")
+
+# 6. Conservative static fetch() references in JavaScript: validate only literal
+# local assets with an explicit file extension. Dynamic/API routes are ignored.
+fetch_ref=re.compile(r"\bfetch\(\s*['\"]([^'\"]+)['\"]",re.I)
+for p in files:
+    if p.suffix.lower() not in (".js",".mjs",".cjs"):
+        continue
+    text=p.read_text("utf-8",errors="replace")
+    for ref in fetch_ref.findall(text):
+        target=local_path(ref,p)
+        if target is None:
+            continue
+        ext=pathlib.Path(urlsplit(ref).path).suffix.lower()
+        if ext in ASSET_EXTS and not target.exists():
+            errors.append(f"{p.relative_to(ROOT)}: fetch() references missing local asset {ref}")
+
+# 7. Exact duplicate files and zero-byte text files are maintenance warnings.
 groups={}
 for p in files:
     if p.suffix.lower() not in TEXT_EXTS:continue
