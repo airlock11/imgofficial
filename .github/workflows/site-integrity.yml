@@ -78,6 +78,10 @@ jobs:
                   bad.append(f'{p}: retired Asian Games reference remains')
           if pathlib.Path('asian-stream-accuracy.js').exists():
               bad.append('asian-stream-accuracy.js: obsolete retired file still exists')
+          if pathlib.Path('.github/workflows/update-asian-games-live.yml').exists():
+              bad.append('.github/workflows/update-asian-games-live.yml: retired workflow must not exist')
+          if pathlib.Path('scripts/update_asian_games_live.py').exists():
+              bad.append('scripts/update_asian_games_live.py: retired updater must not exist')
           if bad:
               raise SystemExit('\n'.join(bad))
           PY
