@@ -47,6 +47,20 @@ NCAA_PH_BOOKMAKER_LABELS = {
     "marathonbet": "Marathonbet",
 }
 
+UAAP_SPORT_ID = 11
+UAAP_BOOKMAKER_LABELS = {
+    "pinnacle": "Pinnacle",
+    "bet365": "Bet365",
+    "1xbet": "1xBet",
+    "sbobet": "SBOBET",
+    "22bet": "22Bet",
+    "bwin": "Bwin",
+    "cloudbet": "Cloudbet",
+    "dafabet": "Dafabet",
+    "marathonbet": "Marathonbet",
+    "sabasports": "SABA Sports",
+}
+
 PBA_SPORT_ID = 11
 PBA_BOOKMAKER_GROUPS = [
     ("pinnacle", "bet365", "1xbet"),
@@ -243,6 +257,39 @@ def discover_ncaa_ph_tournament():
             score += 4
         if "basketball" in text:
             score += 1
+        candidates.append((score, row))
+    if not candidates:
+        return None
+    candidates.sort(key=lambda x: x[0], reverse=True)
+    try:
+        return int(candidates[0][1].get("tournamentId"))
+    except Exception:
+        return None
+
+def discover_uaap_tournament():
+    rows = as_records(get_json("/tournaments", {"sportId": UAAP_SPORT_ID}))
+    candidates = []
+    for row in rows:
+        name = str(row.get("tournamentName") or row.get("name") or "")
+        slug = str(row.get("tournamentSlug") or row.get("slug") or "")
+        category = str(row.get("categoryName") or row.get("categorySlug") or "")
+        text = " ".join((name, slug, category)).casefold()
+        if "uaap" not in text:
+            continue
+        # Keep this strictly scoped to Philippine UAAP basketball.
+        if "philipp" not in text and "philippines" not in category.casefold():
+            continue
+        score = 0
+        if "philippines" in category.casefold():
+            score += 8
+        if "uaap" in name.casefold():
+            score += 6
+        if "basketball" in text:
+            score += 3
+        if "men" in text or "season 89" in text:
+            score += 2
+        score += min(int(row.get("futureFixtures") or 0), 10)
+        score += min(int(row.get("liveFixtures") or 0) * 2, 10)
         candidates.append((score, row))
     if not candidates:
         return None
@@ -607,6 +654,48 @@ def load_ncaa_ph_odds(participants):
     items = [x for x in (normalize_multi_book(row, participants, NCAA_PH_BOOKMAKER_LABELS, catalog) for row in rows) if x]
     print(json.dumps({
         "ncaa_ph_tournament_id": tournament_id,
+        "events": len(items),
+        "bookmakers": sorted({b["provider"] for e in items for b in e["oddsList"]}),
+    }, ensure_ascii=False))
+    return sorted(items, key=lambda x: x.get("date") or "")[:20]
+
+def normalize_uaap_odds_team(name):
+    raw = str(name or "").strip()
+    key = raw.casefold()
+    aliases = [
+        (("adamson",), "Adamson Soaring Falcons"),
+        (("ateneo", "admu"), "Ateneo Blue Eagles"),
+        (("de la salle", "dlsu", "la salle"), "De La Salle Green Archers"),
+        (("far eastern", "feu"), "FEU Tamaraws"),
+        (("national university", "nu bulldogs"), "NU Bulldogs"),
+        (("university of the east", "ue red warriors"), "UE Red Warriors"),
+        (("university of the philippines", "up fighting maroons"), "UP Fighting Maroons"),
+        (("university of santo tomas", "ust"), "UST Growling Tigers"),
+    ]
+    for needles, canonical in aliases:
+        if any(token in key for token in needles):
+            return canonical
+    return raw
+
+def load_uaap_odds(participants):
+    tournament_id = discover_uaap_tournament()
+    if not tournament_id:
+        print(json.dumps({"uaap": "tournament not found"}, ensure_ascii=False))
+        return []
+    rows = load_tournament_board(
+        tournament_id,
+        UAAP_BOOKMAKER_LABELS,
+        "uaap",
+        extra_bookmakers=("1xbet", "bet365", "sabasports"),
+    )
+    save_meta_names(participants, rows)
+    catalog = market_catalog(UAAP_SPORT_ID)
+    items = [x for x in (normalize_multi_book(row, participants, UAAP_BOOKMAKER_LABELS, catalog) for row in rows) if x]
+    for item in items:
+        item["home"] = normalize_uaap_odds_team(item.get("home"))
+        item["away"] = normalize_uaap_odds_team(item.get("away"))
+    print(json.dumps({
+        "uaap_tournament_id": tournament_id,
         "events": len(items),
         "bookmakers": sorted({b["provider"] for e in items for b in e["oddsList"]}),
     }, ensure_ascii=False))
@@ -998,6 +1087,13 @@ def main():
             leagues["ncaa_ph"] = ncaa_items
     except Exception as exc:
         print(json.dumps({"ncaa_ph": "update failed", "error": str(exc)[:300]}, ensure_ascii=False))
+
+    try:
+        uaap_items = load_uaap_odds(participants)
+        if uaap_items:
+            leagues["uaap"] = uaap_items
+    except Exception as exc:
+        print(json.dumps({"uaap": "update failed", "error": str(exc)[:300]}, ensure_ascii=False))
 
     merge_the_odds(leagues)
 
