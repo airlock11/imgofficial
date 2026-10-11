@@ -252,38 +252,52 @@ def _book_main_market(book, kind, catalog):
         if not all(side in sides for side in needed):
             continue
 
-        # Prefer the bookmaker-designated main line. If the feed doesn't mark
-        # one, prefer the market definition flagged as a full-game overtime line
-        # and then the market with the most symmetric/standard pairing.
         meta_text = _market_text(meta)
         overtime = "overtime" in meta_text or "incl. overtime" in meta_text
-        if kind == "spread":
-            symmetry = abs(sides["home"]["line"] + sides["away"]["line"])
-        else:
-            symmetry = abs(sides["over"]["line"] - sides["under"]["line"])
-        candidates.append((0 if is_main else 1, 0 if overtime else 1, symmetry, sides))
+        # When a bookmaker does not mark mainLine, the retail/main rung is
+        # normally the one with the most balanced two-way price. Use that as a
+        # deterministic fallback instead of taking the first alternate rung.
+        p1 = sides[needed[0]]["price"]
+        p2 = sides[needed[1]]["price"]
+        price_balance = abs(float(p1) - float(p2))
+        handicap = meta.get("handicap")
+        try:
+            handicap = float(handicap)
+        except Exception:
+            handicap = None
+        candidates.append((0 if is_main else 1, 0 if overtime else 1, price_balance, sides, handicap))
 
     if not candidates:
         return None
     candidates.sort(key=lambda x: (x[0], x[1], x[2]))
-    # Fail closed if several alternate ladders exist and the feed did not mark
-    # a main line. A wrong spread/total is worse than hiding the market.
-    if candidates[0][0] == 1 and len(candidates) > 1:
-        return None
     sides = candidates[0][3]
+    catalog_line = candidates[0][4]
+
+    def plain_line(value):
+        value = float(value)
+        return str(int(value)) if value.is_integer() else str(value)
+
+    def signed_line(value):
+        value = float(value)
+        raw = str(int(value)) if value.is_integer() else str(value)
+        return ("+" + raw) if value > 0 else raw
+
     if kind == "spread":
-        home_line = sides["home"]["line"]
-        away_line = sides["away"]["line"]
+        # OddsPapi's Handicap (incl. overtime) catalog stores the handicap from
+        # participant 1/home perspective. The away side is the exact opposite.
+        home_line = catalog_line if catalog_line is not None else sides["home"]["line"]
+        away_line = -home_line
         return {
-            "line": str(int(home_line)) if home_line.is_integer() else str(home_line),
-            "homeLine": str(int(home_line)) if home_line.is_integer() else str(home_line),
-            "awayLine": str(int(away_line)) if away_line.is_integer() else str(away_line),
+            "line": signed_line(home_line),
+            "homeLine": signed_line(home_line),
+            "awayLine": signed_line(away_line),
             "homePrice": str(sides["home"]["price"]),
             "awayPrice": str(sides["away"]["price"]),
         }
-    total_line = sides["over"]["line"]
+
+    total_line = catalog_line if catalog_line is not None else sides["over"]["line"]
     return {
-        "line": str(int(total_line)) if total_line.is_integer() else str(total_line),
+        "line": plain_line(total_line),
         "overPrice": str(sides["over"]["price"]),
         "underPrice": str(sides["under"]["price"]),
     }
