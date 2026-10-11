@@ -528,7 +528,7 @@ def load_tournament_board(tournament_id, bookmaker_labels, log_key, extra_bookma
         try:
             extra_payload = get_json("/odds-by-tournaments", {
                 "tournamentIds": str(tournament_id),
-                "bookmakers": bookmaker,
+                "bookmaker": bookmaker,
                 "language": "en",
                 "verbosity": 3,
                 "oddsFormat": "decimal",
@@ -571,7 +571,7 @@ def load_tournament_board(tournament_id, bookmaker_labels, log_key, extra_bookma
             try:
                 direct = get_json("/odds", {
                     "fixtureId": str(fixture_id),
-                    "bookmakers": bookmaker,
+                    "bookmaker": bookmaker,
                     "language": "en",
                     "verbosity": 3,
                     "oddsFormat": "decimal",
