@@ -1121,23 +1121,26 @@ const regionalWebSnapshots={
   mpbl:{
     league:'MPBL',
     season:'2026 Season',
-    coverage:'Web-verified fixtures and recent results · updated September 21, 2026',
-    note:'Only fixtures corroborated by current public schedule sources are shown.',
+    coverage:'Current fixtures, recent final scores and standings',
+    note:'Current MPBL schedule/results fallback. Past scheduled cards are not retained.',
     sources:[
       {name:'MPBL Official',url:'https://mpbl.com.ph/'},
-      {name:'Flashscore',url:'https://www.flashscore.ph/en/basketball/philippines/mpbl/fixtures/'},
-      {name:'Forebet',url:'https://www.forebet.com/en/basketball/philippines/mpbl/results'}
+      {name:'Forebet Fixtures',url:'https://www.forebet.com/en/basketball/philippines/mpbl/fixtures'},
+      {name:'Forebet Results',url:'https://www.forebet.com/en/basketball/philippines/mpbl/results'}
     ],
     games:[
-      {eventId:'web-mpbl-20260921-1',date:'2026-09-21T12:00:00+08:00',displayTime:'Sep 21 · Scheduled',away:'Sarangani Marlins',home:'Imus Braderhood',awayScore:'—',homeScore:'—',status:'Scheduled',state:'scheduled',sourceName:'Flashscore',sourceUrl:'https://www.flashscore.ph/en/basketball/philippines/mpbl/fixtures/'},
-      {eventId:'web-mpbl-20260921-2',date:'2026-09-21T14:00:00+08:00',displayTime:'Sep 21 · Scheduled',away:'Rizal Golden Coolers',home:'Quezon Huskers',awayScore:'—',homeScore:'—',status:'Scheduled',state:'scheduled',sourceName:'Flashscore',sourceUrl:'https://www.flashscore.ph/en/basketball/philippines/mpbl/fixtures/'},
-      {eventId:'web-mpbl-20260921-3',date:'2026-09-21T16:00:00+08:00',displayTime:'Sep 21 · Scheduled',away:'Bulacan Kuyas',home:'GenSan Warriors',awayScore:'—',homeScore:'—',status:'Scheduled',state:'scheduled',sourceName:'Flashscore',sourceUrl:'https://www.flashscore.ph/en/basketball/philippines/mpbl/fixtures/'},
-      {eventId:'web-mpbl-20260922-1',date:'2026-09-22T12:00:00+08:00',displayTime:'Sep 22 · Scheduled',away:'Batang Kankaloo',home:'Zamboanga Sikat',awayScore:'—',homeScore:'—',status:'Scheduled',state:'scheduled',sourceName:'Flashscore',sourceUrl:'https://www.flashscore.ph/en/basketball/philippines/mpbl/fixtures/'},
-      {eventId:'web-mpbl-20260922-2',date:'2026-09-22T14:00:00+08:00',displayTime:'Sep 22 · Scheduled',away:'Pasay Voyagers',home:'Pasig City',awayScore:'—',homeScore:'—',status:'Scheduled',state:'scheduled',sourceName:'Flashscore',sourceUrl:'https://www.flashscore.ph/en/basketball/philippines/mpbl/fixtures/'},
-      {eventId:'web-mpbl-20260918-1',date:'2026-09-18T18:00:00+08:00',displayTime:'Sep 18 · Final',away:'GenSan Warriors',home:'Batangas City',awayScore:'73',homeScore:'76',status:'Final',state:'final',sourceName:'Forebet',sourceUrl:'https://www.forebet.com/en/basketball/philippines/mpbl/results'},
-      {eventId:'web-mpbl-20260918-2',date:'2026-09-18T20:00:00+08:00',displayTime:'Sep 18 · Final',away:'Marikina Shoemasters',home:'Bulacan Kuyas',awayScore:'77',homeScore:'84',status:'Final',state:'final',sourceName:'Forebet',sourceUrl:'https://www.forebet.com/en/basketball/philippines/mpbl/results'},
-      {eventId:'web-mpbl-20260915-1',date:'2026-09-15T18:00:00+08:00',displayTime:'Sep 15 · Final',away:'Zamboanga Sikat',home:'Quezon Huskers',awayScore:'67',homeScore:'86',status:'Final',state:'final',sourceName:'Forebet',sourceUrl:'https://www.forebet.com/en/basketball/philippines/mpbl/results'},
-      {eventId:'web-mpbl-20260915-2',date:'2026-09-15T20:00:00+08:00',displayTime:'Sep 15 · Final',away:'Bulacan Kuyas',home:'San Juan Knights',awayScore:'67',homeScore:'120',status:'Final',state:'final',sourceName:'Forebet',sourceUrl:'https://www.forebet.com/en/basketball/philippines/mpbl/results'}
+      {eventId:'mpbl-20261012-mindoro-binan',date:'2026-10-12T17:00:00+08:00',displayTime:'Oct 12',away:'Binan Tatak Gel',home:'Mindoro Tamaraws',awayScore:'—',homeScore:'—',status:'Scheduled',state:'scheduled',sourceName:'Forebet',sourceUrl:'https://www.forebet.com/en/basketball/philippines/mpbl/fixtures'},
+      {eventId:'mpbl-20261012-gensan-rizal',date:'2026-10-12T19:00:00+08:00',displayTime:'Oct 12',away:'Rizal Golden Coolers',home:'GenSan Warriors',awayScore:'—',homeScore:'—',status:'Scheduled',state:'scheduled',sourceName:'Forebet',sourceUrl:'https://www.forebet.com/en/basketball/philippines/mpbl/fixtures'},
+      {eventId:'mpbl-20261013-bataan-sanjuan',date:'2026-10-13T17:00:00+08:00',displayTime:'Oct 13',away:'San Juan Knights',home:'Bataan Risers',awayScore:'—',homeScore:'—',status:'Scheduled',state:'scheduled',sourceName:'Forebet',sourceUrl:'https://www.forebet.com/en/basketball/philippines/mpbl/fixtures'},
+      {eventId:'mpbl-20261013-kankaloo-ilagan',date:'2026-10-13T19:00:00+08:00',displayTime:'Oct 13',away:'Ilagan Isabela Cowboys',home:'Batang Kankaloo',awayScore:'—',homeScore:'—',status:'Scheduled',state:'scheduled',sourceName:'Forebet',sourceUrl:'https://www.forebet.com/en/basketball/philippines/mpbl/fixtures'},
+      {eventId:'mpbl-20261014-zamboanga-quezon',date:'2026-10-14T17:00:00+08:00',displayTime:'Oct 14',away:'Quezon Huskers',home:'Zamboanga Sikat',awayScore:'—',homeScore:'—',status:'Scheduled',state:'scheduled',sourceName:'Forebet',sourceUrl:'https://www.forebet.com/en/basketball/philippines/mpbl/fixtures'},
+      {eventId:'mpbl-20261014-batangas-cebu',date:'2026-10-14T19:00:00+08:00',displayTime:'Oct 14',away:'Cebu Greats',home:'Batangas City',awayScore:'—',homeScore:'—',status:'Scheduled',state:'scheduled',sourceName:'Forebet',sourceUrl:'https://www.forebet.com/en/basketball/philippines/mpbl/fixtures'},
+      {eventId:'mpbl-20261015-qc-abra',date:'2026-10-15T17:00:00+08:00',displayTime:'Oct 15',away:'Abra Weavers',home:'Quezon City',awayScore:'—',homeScore:'—',status:'Scheduled',state:'scheduled',sourceName:'Forebet',sourceUrl:'https://www.forebet.com/en/basketball/philippines/mpbl/fixtures'},
+      {eventId:'mpbl-20261015-meycauayan-pasay',date:'2026-10-15T19:00:00+08:00',displayTime:'Oct 15',away:'Pasay Voyagers',home:'Meycauayan',awayScore:'—',homeScore:'—',status:'Scheduled',state:'scheduled',sourceName:'Forebet',sourceUrl:'https://www.forebet.com/en/basketball/philippines/mpbl/fixtures'},
+      {eventId:'mpbl-20261009-abra-qc',date:'2026-10-09T19:00:00+08:00',displayTime:'Oct 9 · Final',away:'Quezon City',home:'Abra Weavers',awayScore:'54',homeScore:'106',status:'Final',state:'final',sourceName:'Forebet',sourceUrl:'https://www.forebet.com/en/basketball/philippines/mpbl/results'},
+      {eventId:'mpbl-20261009-pasay-meycauayan',date:'2026-10-09T17:00:00+08:00',displayTime:'Oct 9 · Final',away:'Meycauayan',home:'Pasay Voyagers',awayScore:'64',homeScore:'66',status:'Final',state:'final',sourceName:'Forebet',sourceUrl:'https://www.forebet.com/en/basketball/philippines/mpbl/results'},
+      {eventId:'mpbl-20261007-quezon-zamboanga',date:'2026-10-07T19:00:00+08:00',displayTime:'Oct 7 · Final',away:'Zamboanga Sikat',home:'Quezon Huskers',awayScore:'55',homeScore:'88',status:'Final',state:'final',sourceName:'Forebet',sourceUrl:'https://www.forebet.com/en/basketball/philippines/mpbl/results'},
+      {eventId:'mpbl-20261007-cebu-batangas',date:'2026-10-07T17:00:00+08:00',displayTime:'Oct 7 · Final',away:'Batangas City',home:'Cebu Greats',awayScore:'77',homeScore:'78',status:'Final',state:'final',sourceName:'Forebet',sourceUrl:'https://www.forebet.com/en/basketball/philippines/mpbl/results'}
     ]
   },
   nbl:{
