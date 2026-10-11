@@ -2371,12 +2371,30 @@ def parse_nbl():
             if not ((b["date"], b["time"], b.get("title", "")) in seen_broadcast)
             and not seen_broadcast.add((b["date"], b["time"], b.get("title", "")))
         ]
+
+        # Never keep an old TV listing as an upcoming NBL broadcast. The live
+        # YouTube scanner independently verifies anything that is actually live.
+        today = datetime.now(PHT).date()
+        filtered_broadcast = []
+        for b in broadcast:
+            try:
+                bd = datetime.strptime(str(b.get("date") or ""), "%Y-%m-%d").date()
+            except Exception:
+                continue
+            if bd >= today:
+                filtered_broadcast.append(b)
+        broadcast = filtered_broadcast
     except Exception as ex:
         print("Tap Sports NBL schedule", type(ex).__name__, str(ex)[:120])
 
 
     games = dedupe_nbl_games(games)
-    scheduled = sorted([g for g in games if g.get("state") == "scheduled"], key=lambda x: x.get("date", ""))
+    now_nbl = datetime.now(PHT)
+    scheduled = sorted([
+        g for g in games
+        if g.get("state") == "scheduled"
+        and (_adaptive_dt(g.get("date")) is None or _adaptive_dt(g.get("date")) >= now_nbl - timedelta(hours=4))
+    ], key=lambda x: x.get("date", ""))
     finals = sorted([g for g in games if g.get("state") == "final"], key=lambda x: x.get("date", ""), reverse=True)
     games = scheduled[:12] + finals[:30]
     if not games and not broadcast:
@@ -2401,6 +2419,14 @@ def parse_nbl():
             {"name":"Tap Sports","url":URLS["tap"]}
         ],
         "image_scan": image_meta,
+        "automation":{
+            "enabled":True,
+            "dataRefreshMinutes":15,
+            "livestreamRefreshMinutes":5,
+            "timezone":"Asia/Manila",
+            "verifiedOfficialYouTube":True,
+            "failClosedLivestream":True
+        },
         "broadcast":broadcast[:20],
         "games":games
     }
