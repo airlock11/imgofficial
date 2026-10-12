@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-12T17:35:10+08:00",
+  "updated_at": "2026-10-13T03:21:35+08:00",
   "refresh_minutes": 15,
   "leagues": {
     "pba": {
@@ -285,21 +285,24 @@
       ],
       "automation": {
         "enabled": true,
-        "mode": "idle",
-        "dataRefreshMinutes": 180,
-        "livestreamRefreshMinutes": 0,
+        "mode": "game-day",
+        "dataRefreshMinutes": 15,
+        "livestreamRefreshMinutes": 5,
         "scheduleAware": {
           "enabled": true,
           "timezone": "Asia/Manila",
-          "mode": "idle",
-          "gameDay": false,
-          "todayGameCount": 0,
-          "todayGames": [],
+          "mode": "game-day",
+          "gameDay": true,
+          "todayGameCount": 2,
+          "todayGames": [
+            "web-pba-20261013-meralco-blackwater",
+            "web-pba-20261013-tnt-macau"
+          ],
           "nextGameAt": "2026-10-13T17:15:00+08:00",
           "idleDiscoveryMinutes": 180,
           "gameDayDataRefreshMinutes": 15,
           "gameDayLivestreamRefreshMinutes": 5,
-          "lastSlowCheckAt": "2026-10-12T17:34:24+08:00"
+          "lastSlowCheckAt": "2026-10-13T03:20:28+08:00"
         },
         "failClosed": true
       }
@@ -526,32 +529,6 @@
         ]
       },
       "games": [
-        {
-          "eventId": "mpbl-20261012-mindoro-binan",
-          "date": "2026-10-12T17:00:00+08:00",
-          "displayTime": "Oct 12",
-          "away": "Binan Tatak Gel",
-          "home": "Mindoro Tamaraws",
-          "awayScore": "—",
-          "homeScore": "—",
-          "status": "Scheduled",
-          "state": "scheduled",
-          "sourceName": "Forebet",
-          "sourceUrl": "https://www.forebet.com/en/basketball/philippines/mpbl/fixtures"
-        },
-        {
-          "eventId": "mpbl-20261012-gensan-rizal",
-          "date": "2026-10-12T19:00:00+08:00",
-          "displayTime": "Oct 12",
-          "away": "Rizal Golden Coolers",
-          "home": "GenSan Warriors",
-          "awayScore": "—",
-          "homeScore": "—",
-          "status": "Scheduled",
-          "state": "scheduled",
-          "sourceName": "Forebet",
-          "sourceUrl": "https://www.forebet.com/en/basketball/philippines/mpbl/fixtures"
-        },
         {
           "eventId": "mpbl-20261013-bataan-sanjuan",
           "date": "2026-10-13T17:00:00+08:00",
@@ -1518,7 +1495,7 @@
           "idleDiscoveryMinutes": 180,
           "gameDayDataRefreshMinutes": 15,
           "gameDayLivestreamRefreshMinutes": 5,
-          "lastSlowCheckAt": "2026-10-12T17:34:57+08:00"
+          "lastSlowCheckAt": "2026-10-13T03:20:57+08:00"
         },
         "failClosed": true
       }
@@ -1528,21 +1505,24 @@
   "adaptive": {
     "pba": {
       "enabled": true,
-      "mode": "idle",
-      "dataRefreshMinutes": 180,
-      "livestreamRefreshMinutes": 0,
+      "mode": "game-day",
+      "dataRefreshMinutes": 15,
+      "livestreamRefreshMinutes": 5,
       "scheduleAware": {
         "enabled": true,
         "timezone": "Asia/Manila",
-        "mode": "idle",
-        "gameDay": false,
-        "todayGameCount": 0,
-        "todayGames": [],
+        "mode": "game-day",
+        "gameDay": true,
+        "todayGameCount": 2,
+        "todayGames": [
+          "web-pba-20261013-meralco-blackwater",
+          "web-pba-20261013-tnt-macau"
+        ],
         "nextGameAt": "2026-10-13T17:15:00+08:00",
         "idleDiscoveryMinutes": 180,
         "gameDayDataRefreshMinutes": 15,
         "gameDayLivestreamRefreshMinutes": 5,
-        "lastSlowCheckAt": "2026-10-12T17:34:24+08:00"
+        "lastSlowCheckAt": "2026-10-13T03:20:28+08:00"
       },
       "failClosed": true
     },
@@ -1562,7 +1542,7 @@
         "idleDiscoveryMinutes": 180,
         "gameDayDataRefreshMinutes": 15,
         "gameDayLivestreamRefreshMinutes": 5,
-        "lastSlowCheckAt": "2026-10-12T17:34:57+08:00"
+        "lastSlowCheckAt": "2026-10-13T03:20:57+08:00"
       },
       "failClosed": true
     }
