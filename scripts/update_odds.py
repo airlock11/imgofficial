@@ -5,6 +5,7 @@ import re
 import urllib.parse
 import urllib.request
 import urllib.error
+import time
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
@@ -223,17 +224,28 @@ def get_json(path, params):
     query["apiKey"] = KEY
     url = API + path + "?" + urllib.parse.urlencode(query)
     req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept": "application/json"})
-    try:
-        with urllib.request.urlopen(req, timeout=60) as r:
-            return json.loads(r.read().decode("utf-8", errors="replace"))
-    except urllib.error.HTTPError as exc:
-        body = ""
+    for attempt in range(3):
         try:
-            body = exc.read().decode("utf-8", errors="replace")
-        except Exception:
-            pass
-        detail = body[:500] if body else str(exc)
-        raise RuntimeError(f"HTTP {exc.code}: {detail}")
+            with urllib.request.urlopen(req, timeout=60) as r:
+                return json.loads(r.read().decode("utf-8", errors="replace"))
+        except urllib.error.HTTPError as exc:
+            body = ""
+            try:
+                body = exc.read().decode("utf-8", errors="replace")
+            except Exception:
+                pass
+            # OddsPapi frequently requests a sub-second pause between queries.
+            # Back off only on 429; no fake/cached market data is substituted.
+            if exc.code == 429 and attempt < 2:
+                try:
+                    details = json.loads(body).get("error", {})
+                    delay = float(details.get("retryMs", 1000)) / 1000
+                except (TypeError, ValueError, AttributeError):
+                    delay = 1
+                time.sleep(min(3.0, max(0.4, delay + 0.2)))
+                continue
+            detail = body[:500] if body else str(exc)
+            raise RuntimeError(f"HTTP {exc.code}: {detail}")
 
 def as_records(payload, keys=("data", "items", "results", "tournaments")):
     if isinstance(payload, list):
