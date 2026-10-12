@@ -93,6 +93,7 @@ PBA_BOOKMAKER_LABELS = {
 MARKET_CATALOG_CACHE = {}
 
 REGIONAL_WEB = ROOT / "regional-web.json"
+SPECIAL_SPORTS = ROOT / "special-sports-data.json"
 PBA_FAST_BEFORE = timedelta(minutes=30)
 PBA_FAST_AFTER = timedelta(hours=3)
 ROUTINE_REFRESH = timedelta(hours=6)
@@ -154,6 +155,46 @@ def pba_refresh_plan(now=None):
             return timedelta(hours=2), "pba-upcoming"
     return ROUTINE_REFRESH, "routine-6h"
 
+def ncaa_ph_refresh_plan(now=None):
+    """Refresh Philippines NCAA odds independently of the PBA schedule."""
+    now = now or datetime.now(timezone.utc)
+    try:
+        payload = json.loads(SPECIAL_SPORTS.read_text("utf-8"))
+        games = ((payload.get("leagues") or {}).get("ncaa_ph") or {}).get("games") or []
+    except Exception:
+        return ROUTINE_REFRESH, "ncaa-ph-no-schedule"
+    future = []
+    for game in games:
+        state = str(game.get("state") or "").casefold()
+        if state in {"final", "finished", "cancelled", "canceled", "postponed"}:
+            continue
+        tip = parse_dt(game.get("date"))
+        if tip and tip.tzinfo is None:
+            tip = tip.replace(tzinfo=timezone(timedelta(hours=8)))
+        if state in {"live", "in", "in_progress"}:
+            return timedelta(minutes=5), "ncaa-ph-live"
+        if not tip:
+            continue
+        delta = tip.astimezone(timezone.utc) - now
+        if -timedelta(hours=4) <= delta <= timedelta(minutes=30):
+            return timedelta(minutes=5), "ncaa-ph-game-window"
+        if delta > timedelta(0):
+            future.append(delta)
+    if future:
+        nearest = min(future)
+        if nearest <= timedelta(hours=2):
+            return timedelta(minutes=15), "ncaa-ph-pre-tip"
+        if nearest <= timedelta(hours=24):
+            return timedelta(minutes=30), "ncaa-ph-game-day"
+        if nearest <= timedelta(days=3):
+            return timedelta(hours=2), "ncaa-ph-upcoming"
+    return ROUTINE_REFRESH, "ncaa-ph-routine"
+
+def active_odds_refresh_plan(now=None):
+    """Choose the most frequent needed refresh; do not make NCAA wait for PBA."""
+    plans = [pba_refresh_plan(now), ncaa_ph_refresh_plan(now)]
+    return min(plans, key=lambda plan: plan[0])
+
 def pba_fast_refresh_window(now=None):
     interval, _ = pba_refresh_plan(now)
     return interval <= timedelta(minutes=5)
@@ -163,7 +204,7 @@ def routine_refresh_due(now=None):
     age = odds_age(now)
     if age is None:
         return True
-    interval, _ = pba_refresh_plan(now)
+    interval, _ = active_odds_refresh_plan(now)
     return age >= interval
 
 
@@ -171,7 +212,7 @@ def should_refresh_now():
     event = str(os.environ.get("GITHUB_EVENT_NAME") or "").strip().casefold()
     if event and event != "schedule":
         return True, event
-    interval, mode = pba_refresh_plan()
+    interval, mode = active_odds_refresh_plan()
     age = odds_age()
     if age is None or age >= interval:
         return True, mode
@@ -240,31 +281,55 @@ def discover_pba_tournament():
         preferred_terms=("pba", "governors"),
     )
 
-def discover_ncaa_ph_tournament():
-    rows = as_records(get_json("/tournaments", {"sportId": NCAA_PH_SPORT_ID}))
+def _ncaa_ph_tournament_id(rows):
     candidates = []
     for row in rows:
         name = str(row.get("tournamentName") or row.get("name") or "")
         slug = str(row.get("tournamentSlug") or row.get("slug") or "")
         category = str(row.get("categoryName") or row.get("categorySlug") or "")
         text = " ".join((name, slug, category)).casefold()
-        if "philipp" not in text or "ncaa" not in text:
+        if "philipp" not in text or not ("ncaa" in text or "national collegiate athletic" in text):
             continue
-        score = 0
-        if "philippines" in category.casefold():
-            score += 5
-        if "ncaa" in name.casefold():
-            score += 4
-        if "basketball" in text:
-            score += 1
+        if any(token in text for token in ("women", "junior", "under-18", "under-19")):
+            continue
+        score = 5 * ("philipp" in category.casefold()) + 4 * ("ncaa" in name.casefold())
+        score += min(int(row.get("liveFixtures") or 0) * 2, 10)
+        score += min(int(row.get("futureFixtures") or 0), 10)
         candidates.append((score, row))
     if not candidates:
         return None
     candidates.sort(key=lambda x: x[0], reverse=True)
     try:
         return int(candidates[0][1].get("tournamentId"))
-    except Exception:
+    except (TypeError, ValueError):
         return None
+
+def discover_ncaa_ph_tournament():
+    """A league missing from /tournaments may still have currently-priced fixtures."""
+    rows = as_records(get_json("/tournaments", {"sportId": NCAA_PH_SPORT_ID}))
+    tournament_id = _ncaa_ph_tournament_id(rows)
+    if tournament_id:
+        return tournament_id
+    now = datetime.now(timezone.utc)
+    begin = now - timedelta(hours=6)
+    end = now + timedelta(hours=35)
+    # OddsPapi accepts a sport/date search when the window is under 48 hours.
+    # Never match USA NCAA or another country's collegiate league.
+    try:
+        fixtures = as_records(get_json("/fixtures", {
+            "sportId": NCAA_PH_SPORT_ID,
+            "from": begin.isoformat(timespec="seconds").replace("+00:00", "Z"),
+            "to": end.isoformat(timespec="seconds").replace("+00:00", "Z"),
+            "language": "en",
+        }), ("data", "items", "results", "fixtures"))
+        tournament_id = _ncaa_ph_tournament_id(fixtures)
+        print(json.dumps({"ncaa_ph_fixture_fallback": "found" if tournament_id else "not_found",
+                          "checked_fixtures": len(fixtures)}, ensure_ascii=False))
+        return tournament_id
+    except Exception as exc:
+        print(json.dumps({"ncaa_ph_fixture_fallback": "unavailable",
+                          "error": str(exc)[:240]}, ensure_ascii=False))
+    return None
 
 def discover_uaap_tournament():
     rows = as_records(get_json("/tournaments", {"sportId": UAAP_SPORT_ID}))
