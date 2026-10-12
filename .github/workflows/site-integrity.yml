@@ -34,6 +34,8 @@ jobs:
         run: node scripts/ads-readiness-tests.cjs
       - name: Validate YouTube live output contract
         run: python scripts/validate_youtube_live.py
+      - name: Test NCAA Philippines odds discovery and refresh
+        run: python scripts/test_ncaa_odds.py
       - name: Check news embedding permissions
         run: python scripts/test_news_embed.py
       - name: Check Python syntax
