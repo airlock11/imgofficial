@@ -1470,6 +1470,8 @@ function liveStreamsForGame(game){
   });
 }
 function inlineStreamUrl(stream){
+  // A verified live video can still prohibit embedding; use its watch link instead.
+  if(stream?.embeddable===false)return'';
   const raw=stream?.embedUrl||stream?.watchUrl||'';
   if(!raw)return'';
   try{
@@ -1526,7 +1528,8 @@ function verifySelectedLeagueLiveDelivery(){
 function selectedLeagueLiveStreamMarkup(key){
   const candidates=[
     ...liveNowItems.filter(g=>g.sportKey===key&&liveNowItemIsCurrent(g)),
-    ...allGames.filter(g=>g.state==='live')
+    // Do not show a cached game from another league in the selected league player.
+    ...allGames.filter(g=>g.state==='live'&&g.sportKey===key)
   ];
   const seen=new Set(),cards=[];
   for(const game of candidates){
@@ -1561,7 +1564,7 @@ function openLiveStream(eventId){
     if(u.hostname==='youtu.be')videoId=u.pathname.split('/').filter(Boolean)[0]||'';
     else if(u.hostname==='youtube.com'||u.hostname.endsWith('.youtube.com')||u.hostname==='youtube-nocookie.com'||u.hostname.endsWith('.youtube-nocookie.com'))videoId=u.searchParams.get('v')||((u.pathname.match(/\/(?:live|embed)\/([^/?]+)/)||[])[1]||'');
   }catch{}
-  if(!videoId){ window.open(raw,'_blank','noopener,noreferrer'); return; }
+  if(stream?.embeddable===false||!videoId){ window.open(raw,'_blank','noopener,noreferrer'); return; }
   const d=ensureLiveDialog(),host=d.querySelector('#liveContent');
   host.innerHTML='<div class="live-head"><span class="live-badge">LIVE</span></div><div class="live-player-wrap"><iframe class="live-player" src="https://www.youtube.com/embed/'+esc(videoId)+'?autoplay=1&playsinline=1&rel=0" title="Live video" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>';
   d.showModal();
@@ -2080,6 +2083,12 @@ function liveNowItemIsCurrent(g){
   if((g.sportKey==='atp'||g.sportKey==='wta')&&g.eventOnly)return false;
 
   const now=Date.now();
+  // Exact-video verification takes precedence over generic game-duration estimates.
+  // During a feed outage, never keep a supposedly verified broadcast indefinitely.
+  if(['verified','grace'].includes(g.verificationStatus)){
+    const verifiedAt=Date.parse(g.lastVerifiedLiveAt||g.streams?.[0]?.lastVerifiedLiveAt||'');
+    return Number.isFinite(verifiedAt)&&verifiedAt<=now+120000&&now-verifiedAt<=30*60000;
+  }
   const start=Date.parse(g.date||'');
   const maxHours={
     soccer:4,laliga:4,seriea:4,bundesliga:4,champions:4,mls:4,
@@ -2153,14 +2162,16 @@ async function loadVerifiedChannelLive(){
       clearTimeout(timer);
       if(!r.ok)continue;
       const y=await r.json();
-      const freshMinutes=Math.max(10,Number(y?.freshForMinutes)||30);
+      const freshMinutes=Math.min(45,Math.max(10,Number(y?.freshForMinutes)||30));
       const updatedAtMs=Date.parse(y?.updatedAt||'');
-      const feedFresh=Number.isFinite(updatedAtMs)&&now-updatedAtMs<=freshMinutes*60000;
-      const entries=(Array.isArray(y?.streams)?y.streams:[]).filter(x=>{
-        if(!x?.stream?.watchUrl||!feedFresh)return false;
-        const verifiedAt=Date.parse(x?.lastVerifiedLiveAt||x?.stream?.lastVerifiedLiveAt||y?.updatedAt||'');
-        if(!Number.isFinite(verifiedAt)||now-verifiedAt>freshMinutes*60000)return false;
-        return true;
+      const feedFresh=Number.isFinite(updatedAtMs)&&updatedAtMs<=now+120000&&now-updatedAtMs<=freshMinutes*60000;
+      // A proxy returning HTTP 200 with expired/malformed JSON must not block
+      // the newer live-data branch fallback.
+      if(!feedFresh||!Array.isArray(y?.streams))continue;
+      const entries=y.streams.filter(x=>{
+        if(!x?.stream?.watchUrl||!['verified','grace'].includes(x?.verificationStatus||x?.stream?.verificationStatus))return false;
+        const verifiedAt=Date.parse(x?.lastVerifiedLiveAt||x?.stream?.lastVerifiedLiveAt||'');
+        return Number.isFinite(verifiedAt)&&verifiedAt<=now+120000&&now-verifiedAt<=freshMinutes*60000;
       });
       const result={ok:true,updatedAt:y?.updatedAt||'',entries};
       verifiedChannelLiveCache={time:now,result};
@@ -2179,10 +2190,10 @@ async function loadVerifiedChannelLive(){
 }
 
 function verifiedChannelLiveGame(x,updatedAt=''){
-  const allowed=new Set(['fiba','pba','mpbl','nbl','ncaa_ph','uaap','wta','atp','one','ufc','basketball','wnba','bleague','euroleague','volleyball_w','volleyball_m']);
+  const allowed=new Set(['fiba','pba','mpbl','nbl','ncaa_ph','uaap','wta','atp','one','ufc','basketball','wnba','bleague','euroleague','volleyball_w','volleyball_m','baseball','tat']);
   const targetKey=x?.delivery?.leagueKey||x?.stream?.deliveryLeagueKey||x?.leagueKey;
   if(!x?.stream?.watchUrl||!allowed.has(targetKey))return null;
-  const label=x.league||({pba:'PBA',mpbl:'MPBL',nbl:'NBL Pilipinas',ncaa_ph:'NCAA Philippines',uaap:'UAAP',wta:'WTA Tour',atp:'ATP Tour',fiba:'FIBA',one:'ONE Championship',ufc:'UFC',basketball:'NBA',wnba:'WNBA',bleague:'B.League',euroleague:'EuroLeague',volleyball_w:'FIVB Women',volleyball_m:'FIVB Men'}[targetKey]);
+  const label=x.league||({pba:'PBA',mpbl:'MPBL',nbl:'NBL Pilipinas',ncaa_ph:'NCAA Philippines',uaap:'UAAP',wta:'WTA Tour',atp:'ATP Tour',fiba:'FIBA',one:'ONE Championship',ufc:'UFC',basketball:'NBA',wnba:'WNBA',bleague:'B.League',euroleague:'EuroLeague',volleyball_w:'FIVB Women',volleyball_m:'FIVB Men',baseball:'MLB',tat:'The Asian Tournament'}[targetKey]);
   const source=x.stream.channel||x.stream.provider||label;
   return {
     eventId:x.eventId,
@@ -2271,7 +2282,7 @@ async function loadAllLiveGames({silent=false}={}){
     // A temporary GitHub/network failure must not make a verified live stream vanish.
     // Keep the last known stream only while its own current/expiry rules still pass.
     for(const game of liveNowItems){
-      if(liveStreamsForGame(game).length&&liveNowItemIsCurrent(game))live.push(game);
+      if(['verified','grace'].includes(game.verificationStatus)&&liveStreamsForGame(game).length&&liveNowItemIsCurrent(game))live.push(game);
     }
   }
 
@@ -2602,7 +2613,7 @@ function nblBroadcastScheduleGames(){
 
 async function nblYoutubeScheduledGames(){
   try{
-    const r=await fetch('/youtube-live.json?ts='+Date.now(),{cache:'no-store'});
+    const r=await fetch('https://raw.githubusercontent.com/airlock11/imgofficial/live-data/youtube-live.json?ts='+Date.now(),{cache:'no-store'});
     if(!r.ok)return [];
     const y=await r.json();
     return (Array.isArray(y.upcoming)?y.upcoming:[])
