@@ -1007,6 +1007,32 @@ def main():
                 leagues[key] = result
             print("updated", key, len(result.get("games", [])))
         except Exception as ex:
+            # Preserve last-known-good data on source outages, but never allow an
+            # NCAA LIVE/scheduled card to remain stale indefinitely when the
+            # schedule source is rate-limiting GitHub Actions.
+            if key == "ncaa_ph" and isinstance(leagues.get(key), dict):
+                pht = timezone(timedelta(hours=8))
+                now_pht = datetime.now(pht)
+                kept = []
+                for game in leagues[key].get("games", []):
+                    dt = parse_iso(game.get("date"))
+                    if not dt:
+                        continue
+                    dt = dt.astimezone(pht) if dt.tzinfo else dt.replace(tzinfo=pht)
+                    state = str(game.get("state") or "").lower()
+                    if state == "final":
+                        if dt >= now_pht - timedelta(days=14):
+                            kept.append(game)
+                    elif state in ("live", "scheduled"):
+                        if dt >= now_pht - timedelta(hours=4):
+                            kept.append(game)
+                leagues[key]["games"] = kept
+                leagues[key]["note"] = (
+                    "NCAA source refresh temporarily unavailable; IMG preserved the "
+                    "last verified schedule/results and automatically expires stale "
+                    "LIVE/scheduled cards. Official One Sports livestream verification "
+                    "continues independently."
+                )
             print("preserved", key, type(ex).__name__, str(ex)[:160])
     for org in ("WBC", "WBA", "IBF", "WBO", "RING"):
         try:
