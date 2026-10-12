@@ -73,3 +73,36 @@ console.log('PASS: mobile preferences, live stream eligibility, labels, stream l
   assert.ok(block.indexOf('const sections=[]')<block.indexOf('sections.push'),'renderGames must build sections after card renderer');
   assert.ok(block.includes('const nextMarkup=sections.length')&&block.includes('host.innerHTML=nextMarkup'),'renderGames must render schedule/score sections');
 }
+
+
+// A stream belongs only on its verified league; the same video must not
+// leak from stale allGames content into another league's selected player.
+streamContext.currentScoreLeague='mpbl';
+streamContext.liveNowLabels={mpbl:{league:'MPBL'},ncaa_ph:{league:'NCAA Philippines'}};
+streamContext.liveNowItemIsCurrent=()=>true;
+streamContext.liveNowItems=[];
+streamContext.allGames=[{eventId:'ncaa-only',sportKey:'ncaa_ph',state:'live',streams:[specific]}];
+assert.equal(vm.runInContext("selectedLeagueLiveStreamMarkup('mpbl')",streamContext),'','NCAA livestream must not appear under MPBL');
+streamContext.liveNowItems=[{eventId:'mpbl-only',sportKey:'mpbl',state:'live',streams:[specific]}];
+assert.match(vm.runInContext("selectedLeagueLiveStreamMarkup('mpbl')",streamContext),/data-live-league="mpbl"/,'MPBL stream must remain available in MPBL');
+assert.equal(vm.runInContext("inlineStreamUrl({watchUrl:'https:\\/\\/www.youtube.com\\/watch?v=abcdefghijk',embeddable:false})",streamContext),'','Non-embeddable YouTube streams must never load as iframes');
+
+// A stream backed by a fresh exact-video verification is eligible even after
+// overtime, but stale or future-dated verifications are not trusted.
+{
+  const start=app.indexOf('function liveNowItemIsCurrent(');
+  const end=app.indexOf('function liveNowStableSignature(',start);
+  const context=vm.createContext({});
+  vm.runInContext(app.slice(start,end),context);
+  const now=Date.now();
+  const item={sportKey:'mpbl',state:'live',date:new Date(now-7*3600000).toISOString(),
+    verificationStatus:'verified',lastVerifiedLiveAt:new Date(now-60000).toISOString()};
+  context.item=item;
+  assert.equal(vm.runInContext('liveNowItemIsCurrent(item)',context),true,'A recently reverified long-running stream must remain visible');
+  item.lastVerifiedLiveAt=new Date(now-31*60000).toISOString();
+  assert.equal(vm.runInContext('liveNowItemIsCurrent(item)',context),false,'Stale YouTube verification must expire');
+  item.lastVerifiedLiveAt=new Date(now+10*60000).toISOString();
+  assert.equal(vm.runInContext('liveNowItemIsCurrent(item)',context),false,'Future-dated verification must not be trusted');
+}
+assert.match(app,/['"]baseball['"],['"]tat['"]/,'Verified MLB and TAT live streams must be displayable');
+assert.match(app,/if\(!feedFresh\|\|!Array\.isArray\(y\?\.streams\)\)continue;/,'Stale proxies must fall through to fresh backup feeds');

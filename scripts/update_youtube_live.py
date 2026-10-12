@@ -362,7 +362,8 @@ def scan_official_source(source,previous):
    "officialSourceId":source_id,
    "sourceChannelId":channel_id,
    "verificationStatus":"verified",
-   "lastVerifiedLiveAt":verified_at
+   "lastVerifiedLiveAt":verified_at,
+   "embeddable":bool(embeddable)
   }
   if embeddable:stream["embedUrl"]="https://www.youtube.com/embed/"+vid
   prefix=str(source.get("prefix") or source.get("leagueKey") or "live")
@@ -532,7 +533,7 @@ def one_sports_live(previous):
    continue
   watch="https://www.youtube.com/watch?v="+vid
   verified_at=datetime.now(timezone.utc).isoformat()
-  stream={"videoId":vid,"watchUrl":watch,"provider":"YouTube","channel":channel,"title":title,"sourceChannelId":ONE_SPORTS_CHANNEL_ID,"verificationStatus":"verified","lastVerifiedLiveAt":verified_at}
+  stream={"videoId":vid,"watchUrl":watch,"provider":"YouTube","channel":channel,"title":title,"sourceChannelId":ONE_SPORTS_CHANNEL_ID,"verificationStatus":"verified","lastVerifiedLiveAt":verified_at,"embeddable":bool(embeddable)}
   if embeddable:stream["embedUrl"]="https://www.youtube.com/embed/"+vid
   out.append({"eventId":prefix+"-youtube-"+vid,"sport":sport,"leagueKey":league_key,"league":league,"teams":[],"title":title,"verificationStatus":"verified","lastVerifiedLiveAt":verified_at,"stream":stream})
  return out,direct_search_checked_at
@@ -685,7 +686,8 @@ def discover_live_event_streams(previous):
    stream={
     "videoId":vid,"watchUrl":"https://www.youtube.com/watch?v="+vid,
     "provider":"YouTube","channel":sn.get("channelTitle",""),"title":title,
-    "sourceChannelId":channel_id,"verificationStatus":"verified","lastVerifiedLiveAt":verified_at
+    "sourceChannelId":channel_id,"verificationStatus":"verified","lastVerifiedLiveAt":verified_at,
+    "embeddable":bool(status.get("embeddable",True))
    }
    if status.get("embeddable",True): stream["embedUrl"]="https://www.youtube.com/embed/"+vid
    out.append({
@@ -783,7 +785,8 @@ def previous_still_live(previous):
    if sn.get("channelTitle"):stream["channel"]=sn.get("channelTitle")
    if sn.get("channelId"):stream["sourceChannelId"]=sn.get("channelId")
    if sn.get("title"):stream["title"]=sn.get("title"); item["title"]=sn.get("title")
-   if status.get("embeddable",True):stream["embedUrl"]="https://www.youtube.com/embed/"+vid
+   stream["embeddable"]=bool(status.get("embeddable",True))
+   if stream["embeddable"]:stream["embedUrl"]="https://www.youtube.com/embed/"+vid
    else:stream.pop("embedUrl",None)
    verified_at=now.isoformat()
    item["verificationStatus"]="verified"
@@ -892,7 +895,7 @@ def nbl_pilipinas_live():
    is_live=info["live"]; ended=False; embeddable=True
   if not is_live or ended:continue
   watch="https://www.youtube.com/watch?v="+vid
-  stream={"videoId":vid,"watchUrl":watch,"provider":"YouTube","channel":channel,"title":title}
+  stream={"videoId":vid,"watchUrl":watch,"provider":"YouTube","channel":channel,"title":title,"embeddable":bool(embeddable)}
   if embeddable:stream["embedUrl"]="https://www.youtube.com/embed/"+vid
   out.append({"eventId":"nblph-youtube-"+vid,"sport":"Basketball","leagueKey":"nbl","league":"NBL Pilipinas","teams":[],"title":title,"stream":stream})
  return out
