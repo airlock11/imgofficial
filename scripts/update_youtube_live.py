@@ -8,6 +8,7 @@ from pathlib import Path
 KEY=os.environ["YOUTUBE_API_KEY"]
 OUT=Path(__file__).resolve().parents[1]/"youtube-live.json"
 REGIONAL=Path(__file__).resolve().parents[1]/"regional-web.json"
+SPECIAL=Path(__file__).resolve().parents[1]/"special-sports-data.json"
 SOURCE_REGISTRY=Path(__file__).resolve().parents[1]/"live-stream-sources.json"
 UA="IMG-Sports-Live/1.0"
 ONE_SPORTS_CHANNEL_ID="UCXDG9ue-emCN8Ad3h7lERqQ"
@@ -242,8 +243,36 @@ def regional_game_window_scan_allowed(league_key,early_minutes=45,late_hours=4):
   print(key.upper(),"active game window unavailable",ex)
  return False
 
+def special_game_window_scan_allowed(league_key,early_minutes=45,late_hours=4):
+ key=str(league_key or "").strip()
+ if not key:return False
+ try:
+  data=json.loads(SPECIAL.read_text("utf-8"))
+  league=(data.get("leagues",{}) or {}).get(key,{})
+  manila=timezone(timedelta(hours=8))
+  now=datetime.now(timezone.utc).astimezone(manila)
+  for game in league.get("games",[]):
+   raw=str(game.get("date") or "").strip()
+   if not raw:continue
+   try:
+    if raw.endswith("Z"):raw=raw[:-1]+"+00:00"
+    dt=datetime.fromisoformat(raw)
+    if dt.tzinfo is None:dt=dt.replace(tzinfo=manila)
+    dt=dt.astimezone(manila)
+   except Exception:
+    continue
+   if dt-timedelta(minutes=early_minutes) <= now <= dt+timedelta(hours=late_hours):
+    return True
+ except Exception as ex:
+  print(key.upper(),"special active game window unavailable",ex)
+ return False
+
 def one_sports_direct_search_due(previous):
- if not (regional_game_window_scan_allowed("pba") or regional_game_window_scan_allowed("uaap")):
+ if not (
+  regional_game_window_scan_allowed("pba")
+  or regional_game_window_scan_allowed("uaap")
+  or special_game_window_scan_allowed("ncaa_ph")
+ ):
   return False
  raw=str(previous.get("scanner",{}).get("oneSportsLiveSearchCheckedAt") or "")
  if raw:
