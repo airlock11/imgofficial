@@ -3,14 +3,14 @@
   "provider": "Sportradar",
   "product": "Soccer API",
   "access": "trial",
-  "updatedAt": "2026-10-12T05:51:46.018Z",
+  "updatedAt": "2026-10-12T10:57:51.750Z",
   "requestsLastRun": 2,
   "leagues": {
     "laliga": {
       "league": "La Liga",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-12T05:51:46.018Z",
+      "updatedAt": "2026-10-12T10:57:51.750Z",
       "games": [
         {
           "eventId": "sr:sport_event:72477466",
@@ -432,7 +432,7 @@
       "league": "Serie A",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-12T05:51:46.018Z",
+      "updatedAt": "2026-10-12T10:57:51.750Z",
       "games": [
         {
           "eventId": "sr:sport_event:73094994",
@@ -624,31 +624,8 @@
       "league": "Bundesliga",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-12T05:51:46.018Z",
+      "updatedAt": "2026-10-12T10:57:51.750Z",
       "games": [
-        {
-          "eventId": "sr:sport_event:72726662",
-          "date": "2026-10-04T09:00:00+00:00",
-          "displayTime": "",
-          "title": "",
-          "home": "FC Ingolstadt 04",
-          "away": "VfL Bochum",
-          "homeLogo": "",
-          "awayLogo": "",
-          "homeScore": 3,
-          "awayScore": 3,
-          "status": "ended",
-          "state": "final",
-          "venue": "",
-          "round": 8,
-          "seasonId": "sr:season:143938",
-          "competitionId": "sr:competition:2322",
-          "competition": "2. Bundesliga, Women",
-          "category": "Germany Amateur",
-          "categoryId": "sr:category:122",
-          "sourceName": "Sportradar Soccer API",
-          "sourceUrl": "https://developer.sportradar.com/soccer"
-        },
         {
           "eventId": "sr:sport_event:72961022",
           "date": "2026-10-04T14:00:00+00:00",
@@ -275600,7 +275577,7 @@
       "league": "UEFA Champions League",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-12T05:51:46.018Z",
+      "updatedAt": "2026-10-12T10:57:51.750Z",
       "games": [],
       "competitionId": "sr:competition:7",
       "competition": {
@@ -339102,7 +339079,7 @@
       "league": "MLS",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-12T05:51:46.018Z",
+      "updatedAt": "2026-10-12T10:57:51.750Z",
       "games": [
         {
           "eventId": "sr:sport_event:72916688",
@@ -961345,14 +961322,14 @@
       "league": "PFL",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-12T05:51:46.018Z",
+      "updatedAt": "2026-10-12T10:57:51.750Z",
       "games": []
     },
     "jamaica_pl": {
       "league": "Jamaican Premier League",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-12T05:51:46.018Z",
+      "updatedAt": "2026-10-12T10:57:51.750Z",
       "games": [
         {
           "eventId": "sr:sport_event:74695442",
@@ -991176,7 +991153,7 @@
       "league": "Mizoram Premier League",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-12T05:51:46.018Z",
+      "updatedAt": "2026-10-12T10:57:51.750Z",
       "games": [
         {
           "eventId": "sr:sport_event:75074658",
@@ -991253,14 +991230,14 @@
       "league": "Primera Division, Reserves",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-12T05:51:46.018Z",
+      "updatedAt": "2026-10-12T10:57:51.750Z",
       "games": []
     },
     "ucl_women": {
       "league": "UEFA Champions League Women",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-12T05:51:46.018Z",
+      "updatedAt": "2026-10-12T10:57:51.750Z",
       "games": [],
       "competitionId": "sr:competition:696",
       "competition": {
@@ -1078752,7 +1078729,7 @@
     "updatedAt": "2026-09-22T16:50:47.840Z"
   },
   "requestBudget": 900,
-  "requestBudgetRemaining": 457,
+  "requestBudgetRemaining": 455,
   "harvestMode": "live",
   "usage": {
     "requests": [
@@ -1079260,10 +1079237,15 @@
         "at": "2026-10-12T05:51:46.018Z",
         "count": 2,
         "mode": "live"
+      },
+      {
+        "at": "2026-10-12T10:57:51.750Z",
+        "count": 2,
+        "mode": "live"
       }
     ],
-    "rolling30Day": 443,
-    "trackedRolling30Day": 329,
+    "rolling30Day": 445,
+    "trackedRolling30Day": 331,
     "preTrackingRolling30Day": 114
   },
   "runRequestCap": 6,
@@ -1079273,11 +1079255,156 @@
   },
   "latestFeeds": {
     "live": {
-      "generated_at": "2026-10-12T05:51:46+00:00",
-      "schedules": []
+      "generated_at": "2026-10-12T10:57:51+00:00",
+      "schedules": [
+        {
+          "sport_event": {
+            "id": "sr:sport_event:72409712",
+            "start_time": "2026-10-12T10:50:00+00:00",
+            "start_time_confirmed": true,
+            "date_confirmed": true,
+            "sport_event_context": {
+              "sport": {
+                "id": "sr:sport:1",
+                "name": "Soccer"
+              },
+              "category": {
+                "id": "sr:category:86",
+                "name": "Ukraine",
+                "country_code": "UKR"
+              },
+              "competition": {
+                "id": "sr:competition:218",
+                "name": "Premier League",
+                "gender": "men",
+                "alternative_name": "Ukrainian Premier League"
+              },
+              "season": {
+                "id": "sr:season:143338",
+                "name": "Premier League 26/27",
+                "start_date": "2026-07-31",
+                "end_date": "2027-06-09",
+                "year": "26/27",
+                "competition_id": "sr:competition:218"
+              },
+              "stage": {
+                "order": 1,
+                "type": "league",
+                "phase": "regular season",
+                "start_date": "2026-07-31",
+                "end_date": "2027-06-04",
+                "year": "26/27"
+              },
+              "round": {
+                "number": 8
+              },
+              "groups": [
+                {
+                  "id": "sr:league:109130",
+                  "name": "Premier League 26/27"
+                }
+              ]
+            },
+            "coverage": {
+              "type": "sport_event",
+              "sport_event_properties": {
+                "lineups": true,
+                "formations": false,
+                "venue": true,
+                "lineups_availability": "pre",
+                "ballspotting": false,
+                "commentary": false,
+                "fun_facts": true,
+                "game_clock": true,
+                "goal_scorers": true,
+                "goal_scorers_live": true,
+                "scores": "live",
+                "basic_play_by_play": true,
+                "basic_player_stats": true,
+                "basic_team_stats": true,
+                "deeper_play_by_play": false,
+                "deeper_player_stats": false,
+                "deeper_team_stats": false,
+                "extended_play_by_play": false,
+                "extended_player_stats": false,
+                "extended_team_stats": false
+              }
+            },
+            "competitors": [
+              {
+                "id": "sr:competitor:822006",
+                "name": "FC Livyi Bereh Kyiv",
+                "country": "Ukraine",
+                "country_code": "UKR",
+                "abbreviation": "LEV",
+                "qualifier": "home",
+                "gender": "male"
+              },
+              {
+                "id": "sr:competitor:5987",
+                "name": "FC Zorya Luhansk",
+                "country": "Ukraine",
+                "country_code": "UKR",
+                "abbreviation": "ZOR",
+                "qualifier": "away",
+                "gender": "male"
+              }
+            ],
+            "venue": {
+              "id": "sr:venue:72393",
+              "name": "Stadium Livyi Bereh",
+              "capacity": 5000,
+              "city_name": "Kiev",
+              "city_id": "sr:city:333",
+              "country_name": "Ukraine",
+              "map_coordinates": "50.336634928594, 30.624163256397",
+              "country_code": "UKR",
+              "timezone": "Europe/Kyiv"
+            },
+            "sport_event_conditions": {
+              "referees": [
+                {
+                  "id": "sr:referee:1750067",
+                  "name": "Balakin, Mikola",
+                  "nationality": "Ukraine",
+                  "country_code": "UKR",
+                  "type": "main_referee"
+                }
+              ],
+              "weather": {
+                "pitch_conditions": "good",
+                "overall_conditions": "medium"
+              },
+              "ground": {
+                "neutral": false
+              },
+              "lineups": {
+                "confirmed": true
+              }
+            }
+          },
+          "sport_event_status": {
+            "status": "live",
+            "match_status": "1st_half",
+            "home_score": 0,
+            "away_score": 0,
+            "period_scores": [
+              {
+                "home_score": 0,
+                "away_score": 0,
+                "type": "regular_period",
+                "number": 1
+              }
+            ],
+            "clock": {
+              "played": "05:20"
+            }
+          }
+        }
+      ]
     },
     "daily": {
-      "generated_at": "2026-10-12T05:50:56+00:00",
+      "generated_at": "2026-10-12T10:53:57+00:00",
       "schedules": [
         {
           "sport_event": {
@@ -1081395,7 +1081522,11 @@
             }
           },
           "sport_event_status": {
-            "status": "not_started"
+            "status": "closed",
+            "match_status": "ended",
+            "home_score": 1,
+            "away_score": 0,
+            "winner_id": "sr:competitor:297312"
           }
         },
         {
@@ -1081491,13 +1081622,35 @@
               }
             ],
             "sport_event_conditions": {
+              "weather": {
+                "pitch_conditions": "good",
+                "overall_conditions": "medium"
+              },
               "ground": {
                 "neutral": false
               }
             }
           },
           "sport_event_status": {
-            "status": "not_started"
+            "status": "closed",
+            "match_status": "ended",
+            "home_score": 2,
+            "away_score": 1,
+            "winner_id": "sr:competitor:965959",
+            "period_scores": [
+              {
+                "home_score": 1,
+                "away_score": 1,
+                "type": "regular_period",
+                "number": 1
+              },
+              {
+                "home_score": 1,
+                "away_score": 0,
+                "type": "regular_period",
+                "number": 2
+              }
+            ]
           }
         },
         {
@@ -1081593,13 +1081746,35 @@
               }
             ],
             "sport_event_conditions": {
+              "weather": {
+                "pitch_conditions": "good",
+                "overall_conditions": "good"
+              },
               "ground": {
                 "neutral": false
               }
             }
           },
           "sport_event_status": {
-            "status": "not_started"
+            "status": "closed",
+            "match_status": "ended",
+            "home_score": 2,
+            "away_score": 2,
+            "period_scores": [
+              {
+                "home_score": 0,
+                "away_score": 1,
+                "type": "regular_period",
+                "number": 1
+              },
+              {
+                "home_score": 2,
+                "away_score": 1,
+                "type": "regular_period",
+                "number": 2
+              }
+            ],
+            "match_tie": true
           }
         },
         {
@@ -1081695,13 +1081870,35 @@
               }
             ],
             "sport_event_conditions": {
+              "weather": {
+                "pitch_conditions": "good",
+                "overall_conditions": "good"
+              },
               "ground": {
                 "neutral": false
               }
             }
           },
           "sport_event_status": {
-            "status": "not_started"
+            "status": "closed",
+            "match_status": "ended",
+            "home_score": 3,
+            "away_score": 1,
+            "winner_id": "sr:competitor:1235673",
+            "period_scores": [
+              {
+                "home_score": 2,
+                "away_score": 1,
+                "type": "regular_period",
+                "number": 1
+              },
+              {
+                "home_score": 1,
+                "away_score": 0,
+                "type": "regular_period",
+                "number": 2
+              }
+            ]
           }
         },
         {
@@ -1081898,6 +1082095,10 @@
               }
             ],
             "sport_event_conditions": {
+              "weather": {
+                "pitch_conditions": "good",
+                "overall_conditions": "medium"
+              },
               "ground": {
                 "neutral": false
               }
@@ -1081905,130 +1082106,6 @@
           },
           "sport_event_status": {
             "status": "not_started"
-          }
-        },
-        {
-          "sport_event": {
-            "id": "sr:sport_event:72409712",
-            "start_time": "2026-10-12T10:00:00+00:00",
-            "start_time_confirmed": true,
-            "date_confirmed": true,
-            "sport_event_context": {
-              "sport": {
-                "id": "sr:sport:1",
-                "name": "Soccer"
-              },
-              "category": {
-                "id": "sr:category:86",
-                "name": "Ukraine",
-                "country_code": "UKR"
-              },
-              "competition": {
-                "id": "sr:competition:218",
-                "name": "Premier League",
-                "gender": "men",
-                "alternative_name": "Ukrainian Premier League"
-              },
-              "season": {
-                "id": "sr:season:143338",
-                "name": "Premier League 26/27",
-                "start_date": "2026-07-31",
-                "end_date": "2027-06-09",
-                "year": "26/27",
-                "competition_id": "sr:competition:218"
-              },
-              "stage": {
-                "order": 1,
-                "type": "league",
-                "phase": "regular season",
-                "start_date": "2026-07-31",
-                "end_date": "2027-06-04",
-                "year": "26/27"
-              },
-              "round": {
-                "number": 8
-              },
-              "groups": [
-                {
-                  "id": "sr:league:109130",
-                  "name": "Premier League 26/27"
-                }
-              ]
-            },
-            "coverage": {
-              "type": "sport_event",
-              "sport_event_properties": {
-                "lineups": true,
-                "formations": false,
-                "venue": true,
-                "lineups_availability": "pre",
-                "ballspotting": false,
-                "commentary": false,
-                "fun_facts": true,
-                "game_clock": true,
-                "goal_scorers": true,
-                "goal_scorers_live": true,
-                "scores": "live",
-                "basic_play_by_play": true,
-                "basic_player_stats": true,
-                "basic_team_stats": true,
-                "deeper_play_by_play": false,
-                "deeper_player_stats": false,
-                "deeper_team_stats": false,
-                "extended_play_by_play": false,
-                "extended_player_stats": false,
-                "extended_team_stats": false
-              }
-            },
-            "competitors": [
-              {
-                "id": "sr:competitor:822006",
-                "name": "FC Livyi Bereh Kyiv",
-                "country": "Ukraine",
-                "country_code": "UKR",
-                "abbreviation": "LEV",
-                "qualifier": "home",
-                "gender": "male"
-              },
-              {
-                "id": "sr:competitor:5987",
-                "name": "FC Zorya Luhansk",
-                "country": "Ukraine",
-                "country_code": "UKR",
-                "abbreviation": "ZOR",
-                "qualifier": "away",
-                "gender": "male"
-              }
-            ],
-            "venue": {
-              "id": "sr:venue:72393",
-              "name": "Stadium Livyi Bereh",
-              "capacity": 5000,
-              "city_name": "Kiev",
-              "city_id": "sr:city:333",
-              "country_name": "Ukraine",
-              "map_coordinates": "50.336634928594, 30.624163256397",
-              "country_code": "UKR",
-              "timezone": "Europe/Kyiv"
-            },
-            "sport_event_conditions": {
-              "referees": [
-                {
-                  "id": "sr:referee:1750067",
-                  "name": "Balakin, Mikola",
-                  "nationality": "Ukraine",
-                  "country_code": "UKR",
-                  "type": "main_referee"
-                }
-              ],
-              "ground": {
-                "neutral": false
-              }
-            }
-          },
-          "sport_event_status": {
-            "status": "not_started",
-            "match_status": "not_started"
           }
         },
         {
@@ -1082741,6 +1082818,10 @@
               }
             ],
             "sport_event_conditions": {
+              "weather": {
+                "pitch_conditions": "good",
+                "overall_conditions": "medium"
+              },
               "ground": {
                 "neutral": false
               }
@@ -1082748,6 +1082829,150 @@
           },
           "sport_event_status": {
             "status": "not_started"
+          }
+        },
+        {
+          "sport_event": {
+            "id": "sr:sport_event:72409712",
+            "start_time": "2026-10-12T10:50:00+00:00",
+            "start_time_confirmed": true,
+            "date_confirmed": true,
+            "sport_event_context": {
+              "sport": {
+                "id": "sr:sport:1",
+                "name": "Soccer"
+              },
+              "category": {
+                "id": "sr:category:86",
+                "name": "Ukraine",
+                "country_code": "UKR"
+              },
+              "competition": {
+                "id": "sr:competition:218",
+                "name": "Premier League",
+                "gender": "men",
+                "alternative_name": "Ukrainian Premier League"
+              },
+              "season": {
+                "id": "sr:season:143338",
+                "name": "Premier League 26/27",
+                "start_date": "2026-07-31",
+                "end_date": "2027-06-09",
+                "year": "26/27",
+                "competition_id": "sr:competition:218"
+              },
+              "stage": {
+                "order": 1,
+                "type": "league",
+                "phase": "regular season",
+                "start_date": "2026-07-31",
+                "end_date": "2027-06-04",
+                "year": "26/27"
+              },
+              "round": {
+                "number": 8
+              },
+              "groups": [
+                {
+                  "id": "sr:league:109130",
+                  "name": "Premier League 26/27"
+                }
+              ]
+            },
+            "coverage": {
+              "type": "sport_event",
+              "sport_event_properties": {
+                "lineups": true,
+                "formations": false,
+                "venue": true,
+                "lineups_availability": "pre",
+                "ballspotting": false,
+                "commentary": false,
+                "fun_facts": true,
+                "game_clock": true,
+                "goal_scorers": true,
+                "goal_scorers_live": true,
+                "scores": "live",
+                "basic_play_by_play": true,
+                "basic_player_stats": true,
+                "basic_team_stats": true,
+                "deeper_play_by_play": false,
+                "deeper_player_stats": false,
+                "deeper_team_stats": false,
+                "extended_play_by_play": false,
+                "extended_player_stats": false,
+                "extended_team_stats": false
+              }
+            },
+            "competitors": [
+              {
+                "id": "sr:competitor:822006",
+                "name": "FC Livyi Bereh Kyiv",
+                "country": "Ukraine",
+                "country_code": "UKR",
+                "abbreviation": "LEV",
+                "qualifier": "home",
+                "gender": "male"
+              },
+              {
+                "id": "sr:competitor:5987",
+                "name": "FC Zorya Luhansk",
+                "country": "Ukraine",
+                "country_code": "UKR",
+                "abbreviation": "ZOR",
+                "qualifier": "away",
+                "gender": "male"
+              }
+            ],
+            "venue": {
+              "id": "sr:venue:72393",
+              "name": "Stadium Livyi Bereh",
+              "capacity": 5000,
+              "city_name": "Kiev",
+              "city_id": "sr:city:333",
+              "country_name": "Ukraine",
+              "map_coordinates": "50.336634928594, 30.624163256397",
+              "country_code": "UKR",
+              "timezone": "Europe/Kyiv"
+            },
+            "sport_event_conditions": {
+              "referees": [
+                {
+                  "id": "sr:referee:1750067",
+                  "name": "Balakin, Mikola",
+                  "nationality": "Ukraine",
+                  "country_code": "UKR",
+                  "type": "main_referee"
+                }
+              ],
+              "weather": {
+                "pitch_conditions": "good",
+                "overall_conditions": "medium"
+              },
+              "ground": {
+                "neutral": false
+              },
+              "lineups": {
+                "confirmed": true
+              }
+            }
+          },
+          "sport_event_status": {
+            "status": "live",
+            "match_status": "1st_half",
+            "home_score": 0,
+            "away_score": 0,
+            "period_scores": [
+              {
+                "home_score": 0,
+                "away_score": 0,
+                "type": "regular_period",
+                "number": 1
+              }
+            ],
+            "clock": {
+              "played": "01:26"
+            }
           }
         },
         {
@@ -1083248,6 +1083473,10 @@
               }
             ],
             "sport_event_conditions": {
+              "weather": {
+                "pitch_conditions": "good",
+                "overall_conditions": "medium"
+              },
               "ground": {
                 "neutral": false
               }
@@ -1083465,6 +1083694,9 @@
             "sport_event_conditions": {
               "ground": {
                 "neutral": false
+              },
+              "lineups": {
+                "confirmed": true
               }
             }
           },
@@ -1089209,6 +1089441,7 @@
                 "age_group": "U21"
               }
             ],
+            "replaced_by": "sr:sport_event:75544260",
             "sport_event_conditions": {
               "ground": {
                 "neutral": false
@@ -1089216,7 +1089449,8 @@
             }
           },
           "sport_event_status": {
-            "status": "not_started"
+            "status": "postponed",
+            "match_status": "postponed"
           }
         },
         {
@@ -1089312,6 +1089546,7 @@
                 "age_group": "U21"
               }
             ],
+            "replaced_by": "sr:sport_event:75544298",
             "sport_event_conditions": {
               "ground": {
                 "neutral": false
@@ -1089319,7 +1089554,8 @@
             }
           },
           "sport_event_status": {
-            "status": "not_started"
+            "status": "postponed",
+            "match_status": "postponed"
           }
         },
         {
@@ -1100428,7 +1100664,7 @@
                 "type": "league",
                 "phase": "regular season",
                 "start_date": "2026-02-07",
-                "end_date": "2026-12-31",
+                "end_date": "2026-10-31",
                 "year": "2026"
               },
               "round": {
@@ -1101074,6 +1101310,6 @@
         }
       ]
     },
-    "updatedAt": "2026-10-12T05:51:46.018Z"
+    "updatedAt": "2026-10-12T10:57:51.750Z"
   }
 }
