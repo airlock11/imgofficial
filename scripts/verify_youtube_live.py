@@ -92,6 +92,12 @@ def main():
             stream["channel"]=channel
             if channel_id:
                 stream["sourceChannelId"]=channel_id
+            # Do not try to embed YouTube videos that explicitly disallow it.
+            stream["embeddable"]=bool(row.get("status",{}).get("embeddable",True))
+            if stream["embeddable"]:
+                stream["embedUrl"]="https://www.youtube.com/embed/"+vid
+            else:
+                stream.pop("embedUrl",None)
         else:
             # Brief fail-open for transient API omission only. Do NOT refresh
             # lastVerifiedLiveAt here; otherwise repeated API omissions could
