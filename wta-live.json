@@ -2,18 +2,18 @@
   "special": true,
   "league": "WTA Tour",
   "live": true,
-  "updatedAt": "2026-10-13T03:21:10.545837+00:00",
+  "updatedAt": "2026-10-13T03:21:16.203171+00:00",
   "sourceName": "WTA Official Scores scrape",
   "sourceUrl": "https://www.wtatennis.com/scores/",
   "verificationSource": "WTA Official Scores",
   "verificationUrl": "https://www.wtatennis.com/scores/",
-  "pageLiveCount": 4,
-  "parsedMatchCount": 4,
+  "pageLiveCount": 5,
+  "parsedMatchCount": 5,
   "note": "GitHub scrape of the rendered WTA Scores page. Game points, current set number, current-set games and per-set scores are stored separately.",
   "games": [
     {
       "eventId": "wta-scrape-0-upcoming-perez-schuurs-bouzkova",
-      "date": "2026-10-13T03:21:10.543971+00:00",
+      "date": "2026-10-13T03:21:16.201199+00:00",
       "displayTime": "Dongfeng · Voyah Wuhan Open • CHN",
       "away": "Upcoming / Perez",
       "home": "Schuurs / Bouzkova",
@@ -45,12 +45,12 @@
     },
     {
       "eventId": "wta-scrape-1-k-birrell-k-volynets",
-      "date": "2026-10-13T03:21:10.544121+00:00",
+      "date": "2026-10-13T03:21:16.201356+00:00",
       "displayTime": "Dongfeng · Voyah Wuhan Open • CHN",
       "away": "K. Birrell",
       "home": "K. Volynets",
       "awayScore": "1 · 15",
-      "homeScore": "1 · 30",
+      "homeScore": "1 · 40",
       "awaySets": [
         "1"
       ],
@@ -58,7 +58,7 @@
         "1"
       ],
       "awayPoint": "15",
-      "homePoint": "30",
+      "homePoint": "40",
       "currentSet": 1,
       "awayCurrentSetGames": 1,
       "homeCurrentSetGames": 1,
@@ -66,7 +66,7 @@
       "homeSetsWon": 0,
       "round": "Round of 64",
       "court": "Court 2",
-      "status": "Live Match: 0:12 · Round of 64 · Court 2",
+      "status": "Live Match: 0:13 · Round of 64 · Court 2",
       "state": "live",
       "eventOnly": false,
       "title": "Dongfeng · Voyah Wuhan Open • CHN",
@@ -77,11 +77,11 @@
     },
     {
       "eventId": "wta-scrape-3-upcoming-stollar-wu-routliffe",
-      "date": "2026-10-13T03:21:10.544356+00:00",
+      "date": "2026-10-13T03:21:16.201593+00:00",
       "displayTime": "Dongfeng · Voyah Wuhan Open • CHN",
       "away": "Upcoming / Stollar",
       "home": "Wu / Routliffe",
-      "awayScore": "1 · 0",
+      "awayScore": "1 · 15",
       "homeScore": "2 · 15",
       "awaySets": [
         "1"
@@ -89,7 +89,7 @@
       "homeSets": [
         "2"
       ],
-      "awayPoint": "0",
+      "awayPoint": "15",
       "homePoint": "15",
       "currentSet": 1,
       "awayCurrentSetGames": 1,
@@ -98,7 +98,39 @@
       "homeSetsWon": 0,
       "round": "Round of 32",
       "court": "Court 4",
-      "status": "Live Match: 0:11 · Round of 32 · Court 4",
+      "status": "Live Match: 0:12 · Round of 32 · Court 4",
+      "state": "live",
+      "eventOnly": false,
+      "title": "Dongfeng · Voyah Wuhan Open • CHN",
+      "sourceName": "WTA Official Scores scrape",
+      "sourceUrl": "https://www.wtatennis.com/scores/",
+      "verificationSource": "WTA Official Scores",
+      "verificationUrl": "https://www.wtatennis.com/scores/"
+    },
+    {
+      "eventId": "wta-scrape-4-d-yastremska-c-bucsa",
+      "date": "2026-10-13T03:21:16.201672+00:00",
+      "displayTime": "Dongfeng · Voyah Wuhan Open • CHN",
+      "away": "D. Yastremska",
+      "home": "C. Bucsa",
+      "awayScore": "2 · 0",
+      "homeScore": "1 · 0",
+      "awaySets": [
+        "2"
+      ],
+      "homeSets": [
+        "1"
+      ],
+      "awayPoint": "0",
+      "homePoint": "0",
+      "currentSet": 1,
+      "awayCurrentSetGames": 2,
+      "homeCurrentSetGames": 1,
+      "awaySetsWon": 0,
+      "homeSetsWon": 0,
+      "round": "Round of 64",
+      "court": "Court 1",
+      "status": "Live Match: 0:12 · Round of 64 · Court 1",
       "state": "live",
       "eventOnly": false,
       "title": "Dongfeng · Voyah Wuhan Open • CHN",
@@ -109,7 +141,7 @@
     },
     {
       "eventId": "wta-scrape-2-k-siniakova-l-samsonova",
-      "date": "2026-10-13T03:21:10.544211+00:00",
+      "date": "2026-10-13T03:21:16.201448+00:00",
       "displayTime": "Dongfeng · Voyah Wuhan Open • CHN",
       "away": "K. Siniakova",
       "home": "L. Samsonova",
