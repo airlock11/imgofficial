@@ -34,23 +34,20 @@
     .status-icon{width:38px;height:38px;display:grid;place-items:center;border:1px solid #d5d9dc;border-radius:50%;font-size:19px;font-weight:700;color:var(--red)}
     .status-row strong{display:block;text-transform:uppercase;font-size:12px;letter-spacing:.12em;color:#22282e}
     .status-row span{display:block;margin-top:6px;color:#747e88;font-size:13px}
-    .redirect-panel{width:100%;max-width:430px;min-height:480px;justify-self:end;background:#141a22;color:#f5f6f8;position:relative;isolation:isolate;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;padding:38px;border-radius:6px;box-shadow:0 24px 68px rgba(17,27,39,.13)}
+    .redirect-panel{width:100%;max-width:430px;min-height:440px;justify-self:end;background:#141a22;color:#f5f6f8;position:relative;isolation:isolate;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;padding:38px;border-radius:6px;box-shadow:0 24px 68px rgba(17,27,39,.13)}
     .redirect-panel::before{content:"";position:absolute;z-index:-1;inset:0;background:radial-gradient(circle at 82% 39%,rgba(230,58,72,.25),transparent 45%),repeating-linear-gradient(0deg,transparent 0,transparent 46px,rgba(255,255,255,.035) 47px,transparent 48px),repeating-linear-gradient(90deg,transparent 0,transparent 46px,rgba(255,255,255,.035) 47px,transparent 48px)}
     .panel-head{display:flex;align-items:center;justify-content:space-between;color:#c8cdd4;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:750}
     .panel-head .live-dot{height:7px;width:7px;border-radius:50%;background:var(--red);box-shadow:0 0 0 5px rgba(236,55,68,.12)}
-    .clock{text-align:center;padding:25px 0 10px}
-    .clock .number{display:block;font-size:clamp(108px,15vw,174px);line-height:1;font-weight:950;letter-spacing:-.105em;font-variant-numeric:tabular-nums;color:#fff;margin-right:.105em}
-    .clock .unit{display:block;margin-top:10px;text-transform:uppercase;letter-spacing:.32em;font-size:11px;font-weight:800;color:#aeb8c5}
-    .progress-track{margin-top:32px;width:100%;height:3px;background:#3a4654;overflow:hidden;border-radius:10px}
-    .progress-bar{height:100%;width:100%;background:var(--red);transform-origin:left;animation:elapsed 5s linear forwards}
-    .panel-foot{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:18px;color:#aeb8c5;text-transform:uppercase;letter-spacing:.08em;font-size:11px;font-weight:750}
-    .panel-foot strong{color:#fff;white-space:nowrap;font-size:11px}
+    .panel-art{display:flex;align-items:center;justify-content:center;flex:1;position:relative;min-height:200px}
+    .art-wordmark{position:relative;z-index:2;font-size:clamp(90px,12vw,150px);font-weight:950;letter-spacing:-.095em;line-height:1;color:#fff;text-shadow:0 12px 45px rgba(0,0,0,.55);margin-right:.095em}
+    .art-rule{position:absolute;top:50%;left:8%;right:8%;height:1px;background:linear-gradient(90deg,transparent,rgba(236,55,68,.7),transparent);transform:rotate(-14deg)}
+    .panel-message{border-top:1px solid rgba(255,255,255,.17);padding-top:20px;display:flex;flex-direction:column;gap:9px}
+    .panel-message span{font-size:10px;letter-spacing:.15em;color:#aeb8c5;font-weight:700}
+    .panel-message strong{font-size:14px;font-weight:900;letter-spacing:.1em;color:#fff}
     footer{border-top:1px solid #d5d8dc;padding:23px 0 29px;display:flex;justify-content:space-between;gap:15px;align-items:center;flex-wrap:wrap;color:#707a84;font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
     footer b{color:#252c33}
-    @keyframes elapsed{from{transform:scaleX(0)}to{transform:scaleX(1)}}
-    @media(max-width:900px){header,main,footer{width:min(700px,calc(100% - 48px))}main{grid-template-columns:1fr;gap:42px;padding:62px 0 55px}h1{font-size:clamp(64px,11vw,96px)}.redirect-panel{max-width:none;min-height:350px;justify-self:stretch;padding:28px}.clock{padding:5px 0}.clock .number{font-size:112px}.panel-foot{margin-top:10px}.status-row{margin-top:27px}}
-    @media(max-width:520px){header,main,footer{width:calc(100% - 40px)}header{padding:18px 0 17px}.brand{width:90px;height:48px}.top-label{font-size:9px;letter-spacing:.09em}main{padding:55px 0 45px;gap:34px}.eyebrow{font-size:10px;letter-spacing:.14em}h1{font-size:clamp(56px,13vw,72px);margin:27px 0 23px}h1 .stroke{-webkit-text-stroke:1.3px #20262b}.copy p{font-size:16px}.status-row span{font-size:12px}.redirect-panel{min-height:320px;padding:25px}.clock .number{font-size:100px}.panel-head,.panel-foot{font-size:10px}footer{font-size:9px;line-height:1.8}}
-    @media(prefers-reduced-motion:reduce){.progress-bar{animation:none;transform:scaleX(0)}}
+    @media(max-width:900px){header,main,footer{width:min(700px,calc(100% - 48px))}main{grid-template-columns:1fr;gap:42px;padding:62px 0 55px}h1{font-size:clamp(64px,11vw,96px)}.redirect-panel{max-width:none;min-height:350px;justify-self:stretch;padding:28px}.status-row{margin-top:27px}}
+    @media(max-width:520px){header,main,footer{width:calc(100% - 40px)}header{padding:18px 0 17px}.brand{width:90px;height:48px}.top-label{font-size:9px;letter-spacing:.09em}main{padding:55px 0 45px;gap:34px}.eyebrow{font-size:10px;letter-spacing:.14em}h1{font-size:clamp(56px,13vw,72px);margin:27px 0 23px}h1 .stroke{-webkit-text-stroke:1.3px #20262b}.copy p{font-size:16px}.status-row span{font-size:12px}.redirect-panel{min-height:320px;padding:25px}.panel-head{font-size:10px}footer{font-size:9px;line-height:1.8}}
   </style>
 </head>
 <body>
@@ -65,36 +62,18 @@
       <p>Our platform is temporarily unavailable while we make improvements. Thanks for your patience. You'll be redirected to IMG.com automatically.</p>
       <div class="status-row">
         <div class="status-icon" aria-hidden="true">↗</div>
-        <div><strong>Maintenance in progress</strong><span>Automatic redirect in 5 seconds</span></div>
+        <div><strong>Maintenance in progress</strong><span>Redirecting to IMG.com automatically</span></div>
       </div>
     </section>
-    <section class="redirect-panel" aria-label="Redirect countdown">
-      <div class="panel-head"><span>Redirect sequence</span><span class="live-dot" aria-hidden="true"></span></div>
-      <div class="clock">
-        <span class="number" id="countdown" aria-label="5 seconds remaining">05</span>
-        <span class="unit">Seconds remaining</span>
-      </div>
-      <div>
-        <div class="progress-track" aria-hidden="true"><div class="progress-bar"></div></div>
-        <div class="panel-foot"><span>Next destination</span><strong>IMG.COM ↗</strong></div>
-      </div>
-    </section>
+    <aside class="redirect-panel" aria-label="IMG maintenance notice">
+      <div class="panel-head"><span>IMG / SERVICE NOTICE</span><span class="live-dot" aria-hidden="true"></span></div>
+      <div class="panel-art" aria-hidden="true"><span class="art-wordmark">IMG</span><span class="art-rule"></span></div>
+      <div class="panel-message"><span>THE NEXT GENERATION OF SPORTS DATA</span><strong>UPDATING OUR PLATFORM</strong></div>
+    </aside>
   </main>
   <footer><span><b>IMG</b> / The next generation of sports data</span><span>Temporary service notice</span></footer>
   <script>
-    (function(){
-      "use strict";
-      var destination = "https://img.com/";
-      var clock = document.getElementById("countdown");
-      var deadline = Date.now() + 5000;
-      var ticker = setInterval(function(){
-        var remaining = Math.max(0,Math.ceil((deadline-Date.now())/1000));
-        clock.textContent = String(remaining).padStart(2,"0");
-        clock.setAttribute("aria-label",remaining+" seconds remaining");
-        if(remaining<=0) clearInterval(ticker);
-      },100);
-      setTimeout(function(){window.location.replace(destination);},5000);
-    })();
+    setTimeout(function(){ window.location.replace("https://img.com/"); },5000);
   </script>
 </body>
 </html>
