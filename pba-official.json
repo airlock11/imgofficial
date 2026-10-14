@@ -360,24 +360,21 @@
   "headlinesUpdatedAt": "2026-10-10T19:43:19+00:00",
   "automation": {
     "enabled": true,
-    "mode": "game-day",
-    "dataRefreshMinutes": 15,
-    "livestreamRefreshMinutes": 5,
+    "mode": "idle",
+    "dataRefreshMinutes": 180,
+    "livestreamRefreshMinutes": 0,
     "scheduleAware": {
       "enabled": true,
       "timezone": "Asia/Manila",
-      "mode": "game-day",
-      "gameDay": true,
-      "todayGameCount": 2,
-      "todayGames": [
-        "web-pba-20261014-smb-terrafirma",
-        "web-pba-20261014-nlex-titan"
-      ],
+      "mode": "idle",
+      "gameDay": false,
+      "todayGameCount": 0,
+      "todayGames": [],
       "nextGameAt": "2026-10-16T17:15:00+08:00",
       "idleDiscoveryMinutes": 180,
       "gameDayDataRefreshMinutes": 15,
       "gameDayLivestreamRefreshMinutes": 5,
-      "lastSlowCheckAt": "2026-10-14T23:21:23+08:00"
+      "lastSlowCheckAt": "2026-10-15T03:34:54+08:00"
     },
     "failClosed": true
   },
