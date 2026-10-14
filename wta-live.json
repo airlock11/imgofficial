@@ -2,22 +2,22 @@
   "special": true,
   "league": "WTA Tour",
   "live": true,
-  "updatedAt": "2026-10-14T06:19:23.448818+00:00",
+  "updatedAt": "2026-10-14T06:19:30.529133+00:00",
   "sourceName": "WTA Official Scores scrape",
   "sourceUrl": "https://www.wtatennis.com/scores/",
   "verificationSource": "WTA Official Scores",
   "verificationUrl": "https://www.wtatennis.com/scores/",
-  "pageLiveCount": 3,
-  "parsedMatchCount": 3,
+  "pageLiveCount": 4,
+  "parsedMatchCount": 4,
   "note": "GitHub scrape of the rendered WTA Scores page. Game points, current set number, current-set games and per-set scores are stored separately.",
   "games": [
     {
       "eventId": "wta-scrape-0-i-jovic-d-yastremska",
-      "date": "2026-10-14T06:19:23.446015+00:00",
+      "date": "2026-10-14T06:19:30.526107+00:00",
       "displayTime": "Dongfeng · Voyah Wuhan Open • CHN",
       "away": "I. Jovic",
       "home": "D. Yastremska",
-      "awayScore": "6 2 · 0",
+      "awayScore": "6 2 · 15",
       "homeScore": "4 0 · 0",
       "awaySets": [
         "6",
@@ -27,7 +27,7 @@
         "4",
         "0"
       ],
-      "awayPoint": "0",
+      "awayPoint": "15",
       "homePoint": "0",
       "currentSet": 2,
       "awayCurrentSetGames": 2,
@@ -47,7 +47,7 @@
     },
     {
       "eventId": "wta-scrape-2-y-putintseva-d-shnaider",
-      "date": "2026-10-14T06:19:23.446394+00:00",
+      "date": "2026-10-14T06:19:30.526500+00:00",
       "displayTime": "Dongfeng · Voyah Wuhan Open • CHN",
       "away": "Y. Putintseva",
       "home": "D. Shnaider",
@@ -80,8 +80,40 @@
       "verificationUrl": "https://www.wtatennis.com/scores/"
     },
     {
+      "eventId": "wta-scrape-3-j-paolini-n-bartunkova",
+      "date": "2026-10-14T06:19:30.526652+00:00",
+      "displayTime": "Dongfeng · Voyah Wuhan Open • CHN",
+      "away": "J. Paolini",
+      "home": "N. Bartunkova",
+      "awayScore": "4 · 0",
+      "homeScore": "5 · 0",
+      "awaySets": [
+        "4"
+      ],
+      "homeSets": [
+        "5"
+      ],
+      "awayPoint": "0",
+      "homePoint": "0",
+      "currentSet": 1,
+      "awayCurrentSetGames": 4,
+      "homeCurrentSetGames": 5,
+      "awaySetsWon": 0,
+      "homeSetsWon": 0,
+      "round": "Round of 32",
+      "court": "Court 1",
+      "status": "Live Match: 0:42 · Round of 32 · Court 1",
+      "state": "live",
+      "eventOnly": false,
+      "title": "Dongfeng · Voyah Wuhan Open • CHN",
+      "sourceName": "WTA Official Scores scrape",
+      "sourceUrl": "https://www.wtatennis.com/scores/",
+      "verificationSource": "WTA Official Scores",
+      "verificationUrl": "https://www.wtatennis.com/scores/"
+    },
+    {
       "eventId": "wta-scrape-1-k-muchova-c-mcnally",
-      "date": "2026-10-14T06:19:23.446250+00:00",
+      "date": "2026-10-14T06:19:30.526352+00:00",
       "displayTime": "Dongfeng · Voyah Wuhan Open • CHN",
       "away": "K. Muchova",
       "home": "C. McNally",
