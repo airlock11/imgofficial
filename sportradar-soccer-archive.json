@@ -3,14 +3,14 @@
   "provider": "Sportradar",
   "product": "Soccer API",
   "access": "trial",
-  "updatedAt": "2026-10-14T04:48:54.201Z",
+  "updatedAt": "2026-10-14T08:47:47.777Z",
   "requestsLastRun": 2,
   "leagues": {
     "laliga": {
       "league": "La Liga",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-14T04:48:54.201Z",
+      "updatedAt": "2026-10-14T08:47:47.777Z",
       "games": [
         {
           "eventId": "sr:sport_event:72478616",
@@ -340,7 +340,7 @@
       "league": "Serie A",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-14T04:48:54.201Z",
+      "updatedAt": "2026-10-14T08:47:47.777Z",
       "games": [
         {
           "eventId": "sr:sport_event:71945292",
@@ -509,7 +509,7 @@
       "league": "Bundesliga",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-14T04:48:54.201Z",
+      "updatedAt": "2026-10-14T08:47:47.777Z",
       "games": [
         {
           "eventId": "sr:sport_event:72513224",
@@ -275439,7 +275439,7 @@
       "league": "UEFA Champions League",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-14T04:48:54.201Z",
+      "updatedAt": "2026-10-14T08:47:47.777Z",
       "games": [
         {
           "eventId": "sr:sport_event:74165904",
@@ -339195,7 +339195,7 @@
       "league": "MLS",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-14T04:48:54.201Z",
+      "updatedAt": "2026-10-14T08:47:47.777Z",
       "games": [
         {
           "eventId": "sr:sport_event:72916688",
@@ -961438,14 +961438,14 @@
       "league": "PFL",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-14T04:48:54.201Z",
+      "updatedAt": "2026-10-14T08:47:47.777Z",
       "games": []
     },
     "jamaica_pl": {
       "league": "Jamaican Premier League",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-14T04:48:54.201Z",
+      "updatedAt": "2026-10-14T08:47:47.777Z",
       "games": [
         {
           "eventId": "sr:sport_event:74980120",
@@ -991246,7 +991246,7 @@
       "league": "Mizoram Premier League",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-14T04:48:54.201Z",
+      "updatedAt": "2026-10-14T08:47:47.777Z",
       "games": [
         {
           "eventId": "sr:sport_event:75074658",
@@ -991415,14 +991415,14 @@
       "league": "Primera Division, Reserves",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-14T04:48:54.201Z",
+      "updatedAt": "2026-10-14T08:47:47.777Z",
       "games": []
     },
     "ucl_women": {
       "league": "UEFA Champions League Women",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-14T04:48:54.201Z",
+      "updatedAt": "2026-10-14T08:47:47.777Z",
       "games": [],
       "competitionId": "sr:competition:696",
       "competition": {
@@ -1078914,7 +1078914,7 @@
     "updatedAt": "2026-09-22T16:50:47.840Z"
   },
   "requestBudget": 900,
-  "requestBudgetRemaining": 441,
+  "requestBudgetRemaining": 439,
   "harvestMode": "live",
   "usage": {
     "requests": [
@@ -1079462,10 +1079462,15 @@
         "at": "2026-10-14T04:48:54.201Z",
         "count": 2,
         "mode": "live"
+      },
+      {
+        "at": "2026-10-14T08:47:47.777Z",
+        "count": 2,
+        "mode": "live"
       }
     ],
-    "rolling30Day": 459,
-    "trackedRolling30Day": 345,
+    "rolling30Day": 461,
+    "trackedRolling30Day": 347,
     "preTrackingRolling30Day": 114
   },
   "runRequestCap": 6,
@@ -1079475,11 +1079480,198 @@
   },
   "latestFeeds": {
     "live": {
-      "generated_at": "2026-10-14T04:48:55+00:00",
-      "schedules": []
+      "generated_at": "2026-10-14T08:47:48+00:00",
+      "schedules": [
+        {
+          "sport_event": {
+            "id": "sr:sport_event:73835276",
+            "start_time": "2026-10-14T07:45:00+00:00",
+            "start_time_confirmed": true,
+            "date_confirmed": true,
+            "sport_event_context": {
+              "sport": {
+                "id": "sr:sport:1",
+                "name": "Soccer"
+              },
+              "category": {
+                "id": "sr:category:393",
+                "name": "International Clubs"
+              },
+              "competition": {
+                "id": "sr:competition:668",
+                "name": "AFC Champions League Two",
+                "gender": "men"
+              },
+              "season": {
+                "id": "sr:season:143524",
+                "name": "AFC Champions League Two 26/27",
+                "start_date": "2026-08-12",
+                "end_date": "2027-05-16",
+                "year": "26/27",
+                "competition_id": "sr:competition:668"
+              },
+              "stage": {
+                "order": 2,
+                "type": "league",
+                "phase": "regular season",
+                "start_date": "2026-09-15",
+                "end_date": "2026-12-09",
+                "year": "26/27"
+              },
+              "round": {
+                "number": 2
+              },
+              "groups": [
+                {
+                  "id": "sr:league:109458",
+                  "name": "AFC Champions League Two 26/27, Group E",
+                  "group_name": "E"
+                }
+              ]
+            },
+            "coverage": {
+              "type": "sport_event",
+              "sport_event_properties": {
+                "lineups": true,
+                "formations": false,
+                "venue": true,
+                "lineups_availability": "pre",
+                "ballspotting": true,
+                "commentary": true,
+                "fun_facts": true,
+                "game_clock": true,
+                "goal_scorers": true,
+                "goal_scorers_live": true,
+                "scores": "live",
+                "basic_play_by_play": true,
+                "basic_player_stats": true,
+                "basic_team_stats": true,
+                "deeper_play_by_play": true,
+                "deeper_player_stats": true,
+                "deeper_team_stats": true,
+                "extended_play_by_play": false,
+                "extended_player_stats": false,
+                "extended_team_stats": false
+              }
+            },
+            "competitors": [
+              {
+                "id": "sr:competitor:5970",
+                "name": "Melbourne Victory FC",
+                "country": "Australia",
+                "country_code": "AUS",
+                "abbreviation": "VIC",
+                "qualifier": "home",
+                "gender": "male"
+              },
+              {
+                "id": "sr:competitor:7646",
+                "name": "FC Seoul",
+                "country": "Republic of Korea",
+                "country_code": "KOR",
+                "abbreviation": "SEO",
+                "qualifier": "away",
+                "gender": "male"
+              }
+            ],
+            "venue": {
+              "id": "sr:venue:2153",
+              "name": "AAMI Park",
+              "capacity": 30050,
+              "city_name": "Melbourne",
+              "city_id": "sr:city:372",
+              "country_name": "Australia",
+              "map_coordinates": "-37.825278, 144.983889",
+              "country_code": "AUS",
+              "timezone": "Australia/Melbourne"
+            },
+            "sport_event_conditions": {
+              "referees": [
+                {
+                  "id": "sr:referee:872992",
+                  "name": "Postanes Daypuyat, Clifford",
+                  "nationality": "Philippines",
+                  "country_code": "PHL",
+                  "type": "main_referee"
+                }
+              ],
+              "weather": {
+                "pitch_conditions": "good",
+                "overall_conditions": "medium"
+              },
+              "ground": {
+                "neutral": false
+              },
+              "lineups": {
+                "confirmed": true
+              }
+            }
+          },
+          "sport_event_status": {
+            "status": "live",
+            "match_status": "2nd_half",
+            "home_score": 0,
+            "away_score": 0,
+            "period_scores": [
+              {
+                "home_score": 0,
+                "away_score": 0,
+                "type": "regular_period",
+                "number": 1
+              },
+              {
+                "home_score": 0,
+                "away_score": 0,
+                "type": "regular_period",
+                "number": 2
+              }
+            ],
+            "ball_locations": [
+              {
+                "order": 1,
+                "x": 38,
+                "y": 100,
+                "qualifier": "home"
+              },
+              {
+                "order": 2,
+                "x": 0,
+                "y": 100,
+                "qualifier": "away"
+              },
+              {
+                "order": 3,
+                "x": 10,
+                "y": 50,
+                "qualifier": "away"
+              },
+              {
+                "order": 4,
+                "x": 5,
+                "y": 50,
+                "qualifier": "home"
+              },
+              {
+                "order": 5,
+                "x": 21,
+                "y": 0,
+                "qualifier": "away"
+              }
+            ],
+            "match_situation": {
+              "status": "safe",
+              "qualifier": "away",
+              "updated_at": "2026-10-14T08:47:44+00:00"
+            },
+            "clock": {
+              "played": "45:10"
+            }
+          }
+        }
+      ]
     },
     "daily": {
-      "generated_at": "2026-10-14T04:48:57+00:00",
+      "generated_at": "2026-10-14T08:43:27+00:00",
       "schedules": [
         {
           "sport_event": {
@@ -1080490,14 +1080682,80 @@
               "timezone": "Australia/Melbourne"
             },
             "sport_event_conditions": {
+              "referees": [
+                {
+                  "id": "sr:referee:872992",
+                  "name": "Postanes Daypuyat, Clifford",
+                  "nationality": "Philippines",
+                  "country_code": "PHL",
+                  "type": "main_referee"
+                }
+              ],
+              "weather": {
+                "pitch_conditions": "good",
+                "overall_conditions": "medium"
+              },
               "ground": {
                 "neutral": false
+              },
+              "lineups": {
+                "confirmed": true
               }
             }
           },
           "sport_event_status": {
-            "status": "not_started",
-            "match_status": "not_started"
+            "status": "live",
+            "match_status": "halftime",
+            "home_score": 0,
+            "away_score": 0,
+            "period_scores": [
+              {
+                "home_score": 0,
+                "away_score": 0,
+                "type": "regular_period",
+                "number": 1
+              }
+            ],
+            "ball_locations": [
+              {
+                "order": 1,
+                "x": 38,
+                "y": 100,
+                "qualifier": "home"
+              },
+              {
+                "order": 2,
+                "x": 0,
+                "y": 100,
+                "qualifier": "away"
+              },
+              {
+                "order": 3,
+                "x": 10,
+                "y": 50,
+                "qualifier": "away"
+              },
+              {
+                "order": 4,
+                "x": 5,
+                "y": 50,
+                "qualifier": "home"
+              },
+              {
+                "order": 5,
+                "x": 21,
+                "y": 0,
+                "qualifier": "away"
+              }
+            ],
+            "match_situation": {
+              "status": "safe",
+              "qualifier": "home",
+              "updated_at": "2026-10-14T08:32:44+00:00"
+            },
+            "clock": {
+              "played": "45:00"
+            }
           }
         },
         {
@@ -1100863,6 +1101121,6 @@
         }
       ]
     },
-    "updatedAt": "2026-10-14T04:48:54.201Z"
+    "updatedAt": "2026-10-14T08:47:47.777Z"
   }
 }
