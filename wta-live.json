@@ -2,7 +2,7 @@
   "special": true,
   "league": "WTA Tour",
   "live": true,
-  "updatedAt": "2026-10-14T12:05:54.467266+00:00",
+  "updatedAt": "2026-10-14T12:06:01.511533+00:00",
   "sourceName": "WTA Official Scores scrape",
   "sourceUrl": "https://www.wtatennis.com/scores/",
   "verificationSource": "WTA Official Scores",
@@ -12,34 +12,34 @@
   "note": "GitHub scrape of the rendered WTA Scores page. Game points, current set number, current-set games and per-set scores are stored separately.",
   "games": [
     {
-      "eventId": "wta-scrape-1-a-geerlings-l-cortez-llorca",
-      "date": "2026-10-14T12:05:54.463097+00:00",
-      "displayTime": "Vanda Pharmaceuticals Mallorca Women's Championships • ESP",
-      "away": "A. Geerlings",
-      "home": "L. Cortez Llorca",
-      "awayScore": "6 1 · 0",
-      "homeScore": "4 2 · 0",
+      "eventId": "wta-scrape-0-a-krueger-l-tararudee",
+      "date": "2026-10-14T12:06:01.507348+00:00",
+      "displayTime": "Dongfeng · Voyah Wuhan Open • CHN",
+      "away": "A. Krueger",
+      "home": "L. Tararudee",
+      "awayScore": "2 5 · 0",
+      "homeScore": "6 0 · 0",
       "awaySets": [
-        "6",
-        "1"
+        "2",
+        "5"
       ],
       "homeSets": [
-        "4",
-        "2"
+        "6",
+        "0"
       ],
       "awayPoint": "0",
       "homePoint": "0",
       "currentSet": 2,
-      "awayCurrentSetGames": 1,
-      "homeCurrentSetGames": 2,
-      "awaySetsWon": 1,
-      "homeSetsWon": 0,
-      "round": "Round of 16",
+      "awayCurrentSetGames": 5,
+      "homeCurrentSetGames": 0,
+      "awaySetsWon": 0,
+      "homeSetsWon": 1,
+      "round": "Round of 32",
       "court": "Court 1",
-      "status": "Live Match: 1:19 · Round of 16 · Court 1",
+      "status": "Live Match: 0:56 · Round of 32 · Court 1",
       "state": "live",
       "eventOnly": false,
-      "title": "Vanda Pharmaceuticals Mallorca Women's Championships • ESP",
+      "title": "Dongfeng · Voyah Wuhan Open • CHN",
       "sourceName": "WTA Official Scores scrape",
       "sourceUrl": "https://www.wtatennis.com/scores/",
       "verificationSource": "WTA Official Scores",
@@ -47,7 +47,7 @@
     },
     {
       "eventId": "wta-scrape-2-j-grabher-l-encheva",
-      "date": "2026-10-14T12:05:54.463306+00:00",
+      "date": "2026-10-14T12:06:01.507819+00:00",
       "displayTime": "Vanda Pharmaceuticals Mallorca Women's Championships • ESP",
       "away": "J. Grabher",
       "home": "L. Encheva",
@@ -81,7 +81,7 @@
     },
     {
       "eventId": "wta-scrape-3-g-knutson-s-bandecchi",
-      "date": "2026-10-14T12:05:54.463480+00:00",
+      "date": "2026-10-14T12:06:01.507986+00:00",
       "displayTime": "Dongfeng · Voyah Wuhan Open • CHN",
       "away": "G. Knutson",
       "home": "S. Bandecchi",
@@ -114,8 +114,8 @@
       "verificationUrl": "https://www.wtatennis.com/scores/"
     },
     {
-      "eventId": "wta-scrape-0-a-sabalenka-a-li",
-      "date": "2026-10-14T12:05:54.462817+00:00",
+      "eventId": "wta-scrape-1-a-sabalenka-a-li",
+      "date": "2026-10-14T12:06:01.507636+00:00",
       "displayTime": "Dongfeng · Voyah Wuhan Open • CHN",
       "away": "A. Sabalenka",
       "home": "A. Li",
@@ -149,7 +149,7 @@
     },
     {
       "eventId": "wta-scrape-4-p-hercog-j-ortenzi",
-      "date": "2026-10-14T12:05:54.463659+00:00",
+      "date": "2026-10-14T12:06:01.508163+00:00",
       "displayTime": "Lisboa Belem Open • POR",
       "away": "P. Hercog",
       "home": "J. Ortenzi",
@@ -185,7 +185,7 @@
     },
     {
       "eventId": "wta-scrape-5-j-bouzas-maneiro-i-burillo",
-      "date": "2026-10-14T12:05:54.463848+00:00",
+      "date": "2026-10-14T12:06:01.508369+00:00",
       "displayTime": "Lisboa Belem Open • POR",
       "away": "J. Bouzas Maneiro",
       "home": "I. Burillo",
