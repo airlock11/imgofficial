@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-14T08:29:12+08:00",
+  "updated_at": "2026-10-14T13:15:53+08:00",
   "refresh_minutes": 15,
   "leagues": {
     "pba": {
@@ -302,7 +302,7 @@
           "idleDiscoveryMinutes": 180,
           "gameDayDataRefreshMinutes": 15,
           "gameDayLivestreamRefreshMinutes": 5,
-          "lastSlowCheckAt": "2026-10-14T08:28:26+08:00"
+          "lastSlowCheckAt": "2026-10-14T13:15:37+08:00"
         },
         "failClosed": true
       }
@@ -1185,7 +1185,7 @@
           "sourceUrl": "https://skedcheck.com/uaap-mens-basketball-schedule-scores/"
         },
         {
-          "eventId": "uaap-live-23",
+          "eventId": "web-uaap-final-2",
           "date": "2026-10-11T18:00:00+08:00",
           "displayTime": "Oct 11 · 6:00 PM",
           "away": "De La Salle Green Archers",
@@ -1194,11 +1194,11 @@
           "homeScore": "80",
           "status": "Final",
           "state": "final",
-          "sourceName": "UAAP Live Stats",
-          "sourceUrl": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball?game_id=23"
+          "sourceName": "SkedCheck",
+          "sourceUrl": "https://skedcheck.com/uaap-mens-basketball-schedule-scores/"
         },
         {
-          "eventId": "uaap-live-22",
+          "eventId": "web-uaap-final-1",
           "date": "2026-10-11T14:30:00+08:00",
           "displayTime": "Oct 11 · Final",
           "away": "UE Red Warriors",
@@ -1207,11 +1207,11 @@
           "homeScore": "71",
           "status": "Final",
           "state": "final",
-          "sourceName": "UAAP Live Stats",
-          "sourceUrl": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball?game_id=22"
+          "sourceName": "SkedCheck",
+          "sourceUrl": "https://skedcheck.com/uaap-mens-basketball-schedule-scores/"
         },
         {
-          "eventId": "uaap-live-21",
+          "eventId": "web-uaap-final-4",
           "date": "2026-10-10T17:30:00+08:00",
           "displayTime": "Oct 10 · Final",
           "away": "Ateneo Blue Eagles",
@@ -1220,11 +1220,11 @@
           "homeScore": "93",
           "status": "Final",
           "state": "final",
-          "sourceName": "UAAP Live Stats",
-          "sourceUrl": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball?game_id=21"
+          "sourceName": "SkedCheck",
+          "sourceUrl": "https://skedcheck.com/uaap-mens-basketball-schedule-scores/"
         },
         {
-          "eventId": "uaap-live-20",
+          "eventId": "web-uaap-final-3",
           "date": "2026-10-10T15:00:00+08:00",
           "displayTime": "Oct 10 · Final",
           "away": "NU Bulldogs",
@@ -1233,12 +1233,12 @@
           "homeScore": "85",
           "status": "Final",
           "state": "final",
-          "sourceName": "UAAP Live Stats",
-          "sourceUrl": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball?game_id=20"
+          "sourceName": "SkedCheck",
+          "sourceUrl": "https://skedcheck.com/uaap-mens-basketball-schedule-scores/"
         },
         {
-          "eventId": "uaap-live-19",
-          "date": "2026-10-07T18:00:00+08:00",
+          "eventId": "web-uaap-final-6",
+          "date": "2026-10-07T17:30:00+08:00",
           "displayTime": "Oct 7 · Final",
           "away": "De La Salle Green Archers",
           "home": "Ateneo Blue Eagles",
@@ -1246,11 +1246,11 @@
           "homeScore": "76",
           "status": "Final",
           "state": "final",
-          "sourceName": "UAAP Live Stats",
-          "sourceUrl": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball?game_id=19"
+          "sourceName": "SkedCheck",
+          "sourceUrl": "https://skedcheck.com/uaap-mens-basketball-schedule-scores/"
         },
         {
-          "eventId": "uaap-live-18",
+          "eventId": "web-uaap-final-5",
           "date": "2026-10-07T14:30:00+08:00",
           "displayTime": "Oct 7 · Final",
           "away": "NU Bulldogs",
@@ -1259,86 +1259,8 @@
           "homeScore": "66",
           "status": "Final",
           "state": "final",
-          "sourceName": "UAAP Live Stats",
-          "sourceUrl": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball?game_id=18"
-        },
-        {
-          "eventId": "uaap-live-17",
-          "date": "2026-10-04T17:30:00+08:00",
-          "displayTime": "Oct 4 · Final",
-          "away": "UP Fighting Maroons",
-          "home": "FEU Tamaraws",
-          "awayScore": "79",
-          "homeScore": "90",
-          "status": "Final",
-          "state": "final",
-          "sourceName": "UAAP Live Stats",
-          "sourceUrl": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball?game_id=17"
-        },
-        {
-          "eventId": "uaap-live-16",
-          "date": "2026-10-04T15:00:00+08:00",
-          "displayTime": "Oct 4 · Final",
-          "away": "De La Salle Green Archers",
-          "home": "UE Red Warriors",
-          "awayScore": "112",
-          "homeScore": "87",
-          "status": "Final",
-          "state": "final",
-          "sourceName": "UAAP Live Stats",
-          "sourceUrl": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball?game_id=16"
-        },
-        {
-          "eventId": "uaap-live-15",
-          "date": "2026-10-03T17:30:00+08:00",
-          "displayTime": "Oct 3 · Final",
-          "away": "Ateneo Blue Eagles",
-          "home": "NU Bulldogs",
-          "awayScore": "87",
-          "homeScore": "76",
-          "status": "Final",
-          "state": "final",
-          "sourceName": "UAAP Live Stats",
-          "sourceUrl": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball?game_id=15"
-        },
-        {
-          "eventId": "uaap-live-14",
-          "date": "2026-10-03T15:00:00+08:00",
-          "displayTime": "Oct 3 · Final",
-          "away": "Adamson Soaring Falcons",
-          "home": "UST Growling Tigers",
-          "awayScore": "85",
-          "homeScore": "57",
-          "status": "Final",
-          "state": "final",
-          "sourceName": "UAAP Live Stats",
-          "sourceUrl": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball?game_id=14"
-        },
-        {
-          "eventId": "uaap-live-12",
-          "date": "2026-09-30T17:30:00+08:00",
-          "displayTime": "Sep 30 · Final",
-          "away": "De La Salle Green Archers",
-          "home": "FEU Tamaraws",
-          "awayScore": "78",
-          "homeScore": "90",
-          "status": "Final",
-          "state": "final",
-          "sourceName": "UAAP Live Stats",
-          "sourceUrl": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball?game_id=12"
-        },
-        {
-          "eventId": "uaap-live-13",
-          "date": "2026-09-30T15:00:00+08:00",
-          "displayTime": "Sep 30 · Final",
-          "away": "UE Red Warriors",
-          "home": "UST Growling Tigers",
-          "awayScore": "87",
-          "homeScore": "98",
-          "status": "Final",
-          "state": "final",
-          "sourceName": "UAAP Live Stats",
-          "sourceUrl": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball?game_id=13"
+          "sourceName": "SkedCheck",
+          "sourceUrl": "https://skedcheck.com/uaap-mens-basketball-schedule-scores/"
         }
       ],
       "automation": {
@@ -1360,7 +1282,7 @@
           "idleDiscoveryMinutes": 180,
           "gameDayDataRefreshMinutes": 15,
           "gameDayLivestreamRefreshMinutes": 5,
-          "lastSlowCheckAt": "2026-10-14T08:28:59+08:00"
+          "lastSlowCheckAt": "2026-10-14T13:15:40+08:00"
         },
         "failClosed": true
       }
@@ -1387,7 +1309,7 @@
         "idleDiscoveryMinutes": 180,
         "gameDayDataRefreshMinutes": 15,
         "gameDayLivestreamRefreshMinutes": 5,
-        "lastSlowCheckAt": "2026-10-14T08:28:26+08:00"
+        "lastSlowCheckAt": "2026-10-14T13:15:37+08:00"
       },
       "failClosed": true
     },
@@ -1410,7 +1332,7 @@
         "idleDiscoveryMinutes": 180,
         "gameDayDataRefreshMinutes": 15,
         "gameDayLivestreamRefreshMinutes": 5,
-        "lastSlowCheckAt": "2026-10-14T08:28:59+08:00"
+        "lastSlowCheckAt": "2026-10-14T13:15:40+08:00"
       },
       "failClosed": true
     }
