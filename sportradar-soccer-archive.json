@@ -3,14 +3,14 @@
   "provider": "Sportradar",
   "product": "Soccer API",
   "access": "trial",
-  "updatedAt": "2026-10-16T04:27:05.926Z",
+  "updatedAt": "2026-10-16T08:15:32.387Z",
   "requestsLastRun": 2,
   "leagues": {
     "laliga": {
       "league": "La Liga",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-16T04:27:05.926Z",
+      "updatedAt": "2026-10-16T08:15:32.387Z",
       "games": [
         {
           "eventId": "sr:sport_event:72478616",
@@ -340,7 +340,7 @@
       "league": "Serie A",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-16T04:27:05.926Z",
+      "updatedAt": "2026-10-16T08:15:32.387Z",
       "games": [
         {
           "eventId": "sr:sport_event:71945292",
@@ -509,7 +509,7 @@
       "league": "Bundesliga",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-16T04:27:05.926Z",
+      "updatedAt": "2026-10-16T08:15:32.387Z",
       "games": [
         {
           "eventId": "sr:sport_event:72513224",
@@ -275439,7 +275439,7 @@
       "league": "UEFA Champions League",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-16T04:27:05.926Z",
+      "updatedAt": "2026-10-16T08:15:32.387Z",
       "games": [
         {
           "eventId": "sr:sport_event:74165904",
@@ -339356,7 +339356,7 @@
       "league": "MLS",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-16T04:27:05.926Z",
+      "updatedAt": "2026-10-16T08:15:32.387Z",
       "games": [
         {
           "eventId": "sr:sport_event:66299610",
@@ -961783,14 +961783,14 @@
       "league": "PFL",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-16T04:27:05.926Z",
+      "updatedAt": "2026-10-16T08:15:32.387Z",
       "games": []
     },
     "jamaica_pl": {
       "league": "Jamaican Premier League",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-16T04:27:05.926Z",
+      "updatedAt": "2026-10-16T08:15:32.387Z",
       "games": [
         {
           "eventId": "sr:sport_event:74980120",
@@ -991614,7 +991614,7 @@
       "league": "Mizoram Premier League",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-16T04:27:05.926Z",
+      "updatedAt": "2026-10-16T08:15:32.387Z",
       "games": [
         {
           "eventId": "sr:sport_event:75074658",
@@ -991829,7 +991829,7 @@
       "league": "Primera Division, Reserves",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-16T04:27:05.926Z",
+      "updatedAt": "2026-10-16T08:15:32.387Z",
       "games": [
         {
           "eventId": "sr:sport_event:75601346",
@@ -991860,7 +991860,7 @@
       "league": "UEFA Champions League Women",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-16T04:27:05.926Z",
+      "updatedAt": "2026-10-16T08:15:32.387Z",
       "games": [],
       "competitionId": "sr:competition:696",
       "competition": {
@@ -1079352,7 +1079352,7 @@
     "updatedAt": "2026-09-22T16:50:47.840Z"
   },
   "requestBudget": 900,
-  "requestBudgetRemaining": 421,
+  "requestBudgetRemaining": 419,
   "harvestMode": "live",
   "usage": {
     "requests": [
@@ -1079950,10 +1079950,15 @@
         "at": "2026-10-16T04:27:05.926Z",
         "count": 2,
         "mode": "live"
+      },
+      {
+        "at": "2026-10-16T08:15:32.387Z",
+        "count": 2,
+        "mode": "live"
       }
     ],
-    "rolling30Day": 479,
-    "trackedRolling30Day": 365,
+    "rolling30Day": 481,
+    "trackedRolling30Day": 367,
     "preTrackingRolling30Day": 114
   },
   "runRequestCap": 6,
@@ -1079963,11 +1079968,11 @@
   },
   "latestFeeds": {
     "live": {
-      "generated_at": "2026-10-16T04:27:08+00:00",
+      "generated_at": "2026-10-16T08:15:33+00:00",
       "schedules": []
     },
     "daily": {
-      "generated_at": "2026-10-16T04:27:10+00:00",
+      "generated_at": "2026-10-16T08:12:40+00:00",
       "schedules": [
         {
           "sport_event": {
@@ -1082100,7 +1082105,7 @@
                 "type": "league",
                 "phase": "regular season",
                 "start_date": "2026-07-25",
-                "end_date": "2026-11-25",
+                "end_date": "2026-11-28",
                 "year": "2026"
               },
               "round": {
@@ -1083239,7 +1083244,11 @@
             }
           },
           "sport_event_status": {
-            "status": "not_started"
+            "status": "closed",
+            "match_status": "ended",
+            "home_score": 3,
+            "away_score": 1,
+            "winner_id": "sr:competitor:452433"
           }
         },
         {
@@ -1083340,7 +1083349,11 @@
             }
           },
           "sport_event_status": {
-            "status": "not_started"
+            "status": "closed",
+            "match_status": "ended",
+            "home_score": 0,
+            "away_score": 2,
+            "winner_id": "sr:competitor:452443"
           }
         },
         {
@@ -1083441,7 +1083454,25 @@
             }
           },
           "sport_event_status": {
-            "status": "not_started"
+            "status": "closed",
+            "match_status": "ended",
+            "home_score": 1,
+            "away_score": 3,
+            "winner_id": "sr:competitor:1062076",
+            "period_scores": [
+              {
+                "home_score": 1,
+                "away_score": 2,
+                "type": "regular_period",
+                "number": 1
+              },
+              {
+                "home_score": 0,
+                "away_score": 1,
+                "type": "regular_period",
+                "number": 2
+              }
+            ]
           }
         },
         {
@@ -1083538,6 +1083569,10 @@
               }
             ],
             "sport_event_conditions": {
+              "weather": {
+                "pitch_conditions": "medium",
+                "overall_conditions": "bad"
+              },
               "ground": {
                 "neutral": false
               }
@@ -1083640,8 +1083675,20 @@
               }
             ],
             "sport_event_conditions": {
+              "referees": [
+                {
+                  "id": "sr:referee:3278434",
+                  "name": "Dapaherang, Gedion",
+                  "nationality": "Indonesia",
+                  "country_code": "IDN",
+                  "type": "main_referee"
+                }
+              ],
               "ground": {
                 "neutral": false
+              },
+              "lineups": {
+                "confirmed": true
               }
             }
           },
@@ -1083743,6 +1083790,10 @@
               }
             ],
             "sport_event_conditions": {
+              "weather": {
+                "pitch_conditions": "good",
+                "overall_conditions": "good"
+              },
               "ground": {
                 "neutral": false
               }
@@ -1084164,6 +1084215,9 @@
             "sport_event_conditions": {
               "ground": {
                 "neutral": false
+              },
+              "lineups": {
+                "confirmed": true
               }
             }
           },
@@ -1096004,7 +1096058,7 @@
                 "id": "sr:season:139342",
                 "name": "Superliga 2026",
                 "start_date": "2026-02-26",
-                "end_date": "2026-12-16",
+                "end_date": "2026-12-30",
                 "year": "2026",
                 "competition_id": "sr:competition:772"
               },
@@ -1096013,7 +1096067,7 @@
                 "type": "league",
                 "phase": "regular season",
                 "start_date": "2026-02-26",
-                "end_date": "2026-12-01",
+                "end_date": "2026-12-30",
                 "year": "2026"
               },
               "round": {
@@ -1096105,7 +1096159,7 @@
                 "id": "sr:season:139342",
                 "name": "Superliga 2026",
                 "start_date": "2026-02-26",
-                "end_date": "2026-12-16",
+                "end_date": "2026-12-30",
                 "year": "2026",
                 "competition_id": "sr:competition:772"
               },
@@ -1096114,7 +1096168,7 @@
                 "type": "league",
                 "phase": "regular season",
                 "start_date": "2026-02-26",
-                "end_date": "2026-12-01",
+                "end_date": "2026-12-30",
                 "year": "2026"
               },
               "round": {
@@ -1096206,7 +1096260,7 @@
                 "id": "sr:season:139342",
                 "name": "Superliga 2026",
                 "start_date": "2026-02-26",
-                "end_date": "2026-12-16",
+                "end_date": "2026-12-30",
                 "year": "2026",
                 "competition_id": "sr:competition:772"
               },
@@ -1096215,7 +1096269,7 @@
                 "type": "league",
                 "phase": "regular season",
                 "start_date": "2026-02-26",
-                "end_date": "2026-12-01",
+                "end_date": "2026-12-30",
                 "year": "2026"
               },
               "round": {
@@ -1100857,6 +1100911,6 @@
         }
       ]
     },
-    "updatedAt": "2026-10-16T04:27:05.926Z"
+    "updatedAt": "2026-10-16T08:15:32.387Z"
   }
 }
