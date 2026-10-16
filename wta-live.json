@@ -2,7 +2,7 @@
   "special": true,
   "league": "WTA Tour",
   "live": true,
-  "updatedAt": "2026-10-16T15:31:39.726413+00:00",
+  "updatedAt": "2026-10-16T15:31:46.489761+00:00",
   "sourceName": "WTA Official Scores scrape",
   "sourceUrl": "https://www.wtatennis.com/scores/",
   "verificationSource": "WTA Official Scores",
@@ -13,30 +13,32 @@
   "games": [
     {
       "eventId": "wta-scrape-0-t-zidansek-r-masarova",
-      "date": "2026-10-16T15:31:39.722548+00:00",
+      "date": "2026-10-16T15:31:46.485863+00:00",
       "displayTime": "Vanda Pharmaceuticals Mallorca Women's Championships • ESP",
       "away": "T. Zidansek",
       "home": "R. Masarova",
-      "awayScore": "6 3 · 40",
-      "homeScore": "4 5 · AD",
+      "awayScore": "6 3 0 · 0",
+      "homeScore": "4 6 0 · 0",
       "awaySets": [
         "6",
-        "3"
+        "3",
+        "0"
       ],
       "homeSets": [
         "4",
-        "5"
+        "6",
+        "0"
       ],
-      "awayPoint": "40",
-      "homePoint": "AD",
-      "currentSet": 2,
-      "awayCurrentSetGames": 3,
-      "homeCurrentSetGames": 5,
+      "awayPoint": "0",
+      "homePoint": "0",
+      "currentSet": 3,
+      "awayCurrentSetGames": 0,
+      "homeCurrentSetGames": 0,
       "awaySetsWon": 1,
-      "homeSetsWon": 0,
+      "homeSetsWon": 1,
       "round": "Quarterfinals",
       "court": "Court 1",
-      "status": "Live Match: 1:36 · Quarterfinals · Court 1",
+      "status": "Live Match: 1:37 · Quarterfinals · Court 1",
       "state": "live",
       "eventOnly": false,
       "title": "Vanda Pharmaceuticals Mallorca Women's Championships • ESP",
@@ -47,7 +49,7 @@
     },
     {
       "eventId": "wta-scrape-1-upcoming-haverlag-kubka-li",
-      "date": "2026-10-16T15:31:39.723232+00:00",
+      "date": "2026-10-16T15:31:46.486573+00:00",
       "displayTime": "Vanda Pharmaceuticals Mallorca Women's Championships • ESP",
       "away": "Upcoming / Haverlag",
       "home": "Kubka / Li",
@@ -84,7 +86,7 @@
     },
     {
       "eventId": "wta-scrape-2-upcoming-campo-lisboa-jakupovic-radisic",
-      "date": "2026-10-16T15:31:39.723552+00:00",
+      "date": "2026-10-16T15:31:46.486888+00:00",
       "displayTime": "Lisboa Belem Open • POR",
       "away": "Upcoming / Campo Lisboa",
       "home": "Jakupovic / Radisic",
