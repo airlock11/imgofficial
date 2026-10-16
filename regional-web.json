@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-16T22:31:48+08:00",
+  "updated_at": "2026-10-17T02:23:04+08:00",
   "refresh_minutes": 15,
   "leagues": {
     "pba": {
@@ -295,14 +295,14 @@
           "gameDay": true,
           "todayGameCount": 2,
           "todayGames": [
-            "web-pba-20261016-converge-macau",
-            "web-pba-20261016-phoenix-meralco"
+            "web-pba-20261017-titan-terrafirma",
+            "web-pba-20261017-blackwater-ros"
           ],
           "nextGameAt": "2026-10-17T17:15:00+08:00",
           "idleDiscoveryMinutes": 180,
           "gameDayDataRefreshMinutes": 15,
           "gameDayLivestreamRefreshMinutes": 5,
-          "lastSlowCheckAt": "2026-10-16T22:30:49+08:00"
+          "lastSlowCheckAt": "2026-10-17T02:22:20+08:00"
         },
         "failClosed": true
       }
@@ -1391,21 +1391,24 @@
       ],
       "automation": {
         "enabled": true,
-        "mode": "idle",
-        "dataRefreshMinutes": 180,
-        "livestreamRefreshMinutes": 0,
+        "mode": "game-day",
+        "dataRefreshMinutes": 15,
+        "livestreamRefreshMinutes": 5,
         "scheduleAware": {
           "enabled": true,
           "timezone": "Asia/Manila",
-          "mode": "idle",
-          "gameDay": false,
-          "todayGameCount": 0,
-          "todayGames": [],
+          "mode": "game-day",
+          "gameDay": true,
+          "todayGameCount": 2,
+          "todayGames": [
+            "web-uaap-scheduled-7",
+            "web-uaap-scheduled-8"
+          ],
           "nextGameAt": "2026-10-17T14:30:00+08:00",
           "idleDiscoveryMinutes": 180,
           "gameDayDataRefreshMinutes": 15,
           "gameDayLivestreamRefreshMinutes": 5,
-          "lastSlowCheckAt": "2026-10-16T22:31:21+08:00"
+          "lastSlowCheckAt": "2026-10-17T02:22:48+08:00"
         },
         "failClosed": true
       }
@@ -1425,34 +1428,37 @@
         "gameDay": true,
         "todayGameCount": 2,
         "todayGames": [
-          "web-pba-20261016-converge-macau",
-          "web-pba-20261016-phoenix-meralco"
+          "web-pba-20261017-titan-terrafirma",
+          "web-pba-20261017-blackwater-ros"
         ],
         "nextGameAt": "2026-10-17T17:15:00+08:00",
         "idleDiscoveryMinutes": 180,
         "gameDayDataRefreshMinutes": 15,
         "gameDayLivestreamRefreshMinutes": 5,
-        "lastSlowCheckAt": "2026-10-16T22:30:49+08:00"
+        "lastSlowCheckAt": "2026-10-17T02:22:20+08:00"
       },
       "failClosed": true
     },
     "uaap": {
       "enabled": true,
-      "mode": "idle",
-      "dataRefreshMinutes": 180,
-      "livestreamRefreshMinutes": 0,
+      "mode": "game-day",
+      "dataRefreshMinutes": 15,
+      "livestreamRefreshMinutes": 5,
       "scheduleAware": {
         "enabled": true,
         "timezone": "Asia/Manila",
-        "mode": "idle",
-        "gameDay": false,
-        "todayGameCount": 0,
-        "todayGames": [],
+        "mode": "game-day",
+        "gameDay": true,
+        "todayGameCount": 2,
+        "todayGames": [
+          "web-uaap-scheduled-7",
+          "web-uaap-scheduled-8"
+        ],
         "nextGameAt": "2026-10-17T14:30:00+08:00",
         "idleDiscoveryMinutes": 180,
         "gameDayDataRefreshMinutes": 15,
         "gameDayLivestreamRefreshMinutes": 5,
-        "lastSlowCheckAt": "2026-10-16T22:31:21+08:00"
+        "lastSlowCheckAt": "2026-10-17T02:22:48+08:00"
       },
       "failClosed": true
     }
