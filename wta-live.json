@@ -2,7 +2,7 @@
   "special": true,
   "league": "WTA Tour",
   "live": true,
-  "updatedAt": "2026-10-17T12:36:14.847707+00:00",
+  "updatedAt": "2026-10-17T12:36:21.388381+00:00",
   "sourceName": "WTA Official Scores scrape",
   "sourceUrl": "https://www.wtatennis.com/scores/",
   "verificationSource": "WTA Official Scores",
@@ -13,7 +13,7 @@
   "games": [
     {
       "eventId": "wta-scrape-1-m-kubka-d-salkova",
-      "date": "2026-10-17T12:36:14.844112+00:00",
+      "date": "2026-10-17T12:36:21.384826+00:00",
       "displayTime": "Dongfeng · Voyah Wuhan Open • CHN",
       "away": "M. Kubka",
       "home": "D. Salkova",
@@ -49,11 +49,11 @@
     },
     {
       "eventId": "wta-scrape-0-i-swiatek-m-chwalinska",
-      "date": "2026-10-17T12:36:14.843838+00:00",
+      "date": "2026-10-17T12:36:21.384544+00:00",
       "displayTime": "Dongfeng · Voyah Wuhan Open • CHN",
       "away": "I. Swiatek",
       "home": "M. Chwalinska",
-      "awayScore": "4 · 40",
+      "awayScore": "4 · AD",
       "homeScore": "3 · 40",
       "awaySets": [
         "4"
@@ -61,7 +61,7 @@
       "homeSets": [
         "3"
       ],
-      "awayPoint": "40",
+      "awayPoint": "AD",
       "homePoint": "40",
       "currentSet": 1,
       "awayCurrentSetGames": 4,
@@ -70,7 +70,7 @@
       "homeSetsWon": 0,
       "round": "Semifinals",
       "court": "",
-      "status": "Live Match: 0:50 · Semifinals",
+      "status": "Live Match: 0:51 · Semifinals",
       "state": "live",
       "eventOnly": false,
       "title": "Dongfeng · Voyah Wuhan Open • CHN",
@@ -81,25 +81,27 @@
     },
     {
       "eventId": "wta-scrape-2-j-bouzas-maneiro-c-burel",
-      "date": "2026-10-17T12:36:14.844341+00:00",
+      "date": "2026-10-17T12:36:21.385029+00:00",
       "displayTime": "Lisboa Belem Open • POR",
       "away": "J. Bouzas Maneiro",
       "home": "C. Burel",
-      "awayScore": "4 · 30",
-      "homeScore": "5 · 30",
+      "awayScore": "4 0 · 0",
+      "homeScore": "6 0 · 0",
       "awaySets": [
-        "4"
+        "4",
+        "0"
       ],
       "homeSets": [
-        "5"
+        "6",
+        "0"
       ],
-      "awayPoint": "30",
-      "homePoint": "30",
-      "currentSet": 1,
-      "awayCurrentSetGames": 4,
-      "homeCurrentSetGames": 5,
+      "awayPoint": "0",
+      "homePoint": "0",
+      "currentSet": 2,
+      "awayCurrentSetGames": 0,
+      "homeCurrentSetGames": 0,
       "awaySetsWon": 0,
-      "homeSetsWon": 0,
+      "homeSetsWon": 1,
       "round": "Semifinals",
       "court": "",
       "status": "Live Match: 0:42 · Semifinals",
