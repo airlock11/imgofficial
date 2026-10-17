@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-17T10:56:23+08:00",
+  "updated_at": "2026-10-17T15:31:52+08:00",
   "refresh_minutes": 15,
   "leagues": {
     "pba": {
@@ -302,7 +302,7 @@
           "idleDiscoveryMinutes": 180,
           "gameDayDataRefreshMinutes": 15,
           "gameDayLivestreamRefreshMinutes": 5,
-          "lastSlowCheckAt": "2026-10-17T10:55:32+08:00"
+          "lastSlowCheckAt": "2026-10-17T15:31:03+08:00"
         },
         "failClosed": true
       }
@@ -1195,8 +1195,8 @@
         },
         {
           "eventId": "web-uaap-scheduled-8",
-          "date": "2026-10-17T17:30:00+08:00",
-          "displayTime": "Oct 17 · 5:30 PM",
+          "date": "2026-10-17T18:00:00+08:00",
+          "displayTime": "Oct 17 · 6:00 PM",
           "away": "Ateneo Blue Eagles",
           "home": "UST Growling Tigers",
           "awayScore": "—",
@@ -1221,8 +1221,8 @@
         },
         {
           "eventId": "web-uaap-scheduled-10",
-          "date": "2026-10-18T17:30:00+08:00",
-          "displayTime": "Oct 18 · 5:30 PM",
+          "date": "2026-10-18T18:00:00+08:00",
+          "displayTime": "Oct 18 · 6:00 PM",
           "away": "Adamson Soaring Falcons",
           "home": "De La Salle Green Archers",
           "awayScore": "—",
@@ -1374,19 +1374,6 @@
           "state": "final",
           "sourceName": "UAAP Live Stats",
           "sourceUrl": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball?game_id=15"
-        },
-        {
-          "eventId": "uaap-live-14",
-          "date": "2026-10-03T15:00:00+08:00",
-          "displayTime": "Oct 3 · Final",
-          "away": "Adamson Soaring Falcons",
-          "home": "UST Growling Tigers",
-          "awayScore": "85",
-          "homeScore": "57",
-          "status": "Final",
-          "state": "final",
-          "sourceName": "UAAP Live Stats",
-          "sourceUrl": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball?game_id=14"
         }
       ],
       "automation": {
@@ -1404,11 +1391,11 @@
             "web-uaap-scheduled-7",
             "web-uaap-scheduled-8"
           ],
-          "nextGameAt": "2026-10-17T14:30:00+08:00",
+          "nextGameAt": "2026-10-17T18:00:00+08:00",
           "idleDiscoveryMinutes": 180,
           "gameDayDataRefreshMinutes": 15,
           "gameDayLivestreamRefreshMinutes": 5,
-          "lastSlowCheckAt": "2026-10-17T10:56:02+08:00"
+          "lastSlowCheckAt": "2026-10-17T15:31:38+08:00"
         },
         "failClosed": true
       }
@@ -1435,7 +1422,7 @@
         "idleDiscoveryMinutes": 180,
         "gameDayDataRefreshMinutes": 15,
         "gameDayLivestreamRefreshMinutes": 5,
-        "lastSlowCheckAt": "2026-10-17T10:55:32+08:00"
+        "lastSlowCheckAt": "2026-10-17T15:31:03+08:00"
       },
       "failClosed": true
     },
@@ -1454,11 +1441,11 @@
           "web-uaap-scheduled-7",
           "web-uaap-scheduled-8"
         ],
-        "nextGameAt": "2026-10-17T14:30:00+08:00",
+        "nextGameAt": "2026-10-17T18:00:00+08:00",
         "idleDiscoveryMinutes": 180,
         "gameDayDataRefreshMinutes": 15,
         "gameDayLivestreamRefreshMinutes": 5,
-        "lastSlowCheckAt": "2026-10-17T10:56:02+08:00"
+        "lastSlowCheckAt": "2026-10-17T15:31:38+08:00"
       },
       "failClosed": true
     }
