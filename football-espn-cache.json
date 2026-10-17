@@ -1,7 +1,7 @@
 {
   "version": 1,
   "source": "ESPN public football data",
-  "updatedAt": "2026-10-17T07:58:50.087Z",
+  "updatedAt": "2026-10-17T12:07:43.903Z",
   "leagues": {
     "soccer": {
       "name": "Premier League",
@@ -179,8 +179,8 @@
           "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/363.png",
           "homeScore": "0",
           "awayScore": "0",
-          "state": "scheduled",
-          "status": "Scheduled",
+          "state": "live",
+          "status": "35'",
           "venue": "Hill Dickinson Stadium",
           "competition": "Premier League",
           "category": "England"
@@ -1032,7 +1032,7 @@
           "points": 2
         }
       ],
-      "verifiedAt": "2026-10-17T07:58:49.544Z"
+      "verifiedAt": "2026-10-17T12:07:43.334Z"
     },
     "laliga": {
       "name": "La Liga",
@@ -1226,8 +1226,8 @@
           "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/1068.png",
           "homeScore": "0",
           "awayScore": "0",
-          "state": "scheduled",
-          "status": "Scheduled",
+          "state": "live",
+          "status": "6'",
           "venue": "RCDE Stadium",
           "competition": "La Liga",
           "category": "Spain"
@@ -2079,7 +2079,7 @@
           "points": 4
         }
       ],
-      "verifiedAt": "2026-10-17T07:58:49.714Z"
+      "verifiedAt": "2026-10-17T12:07:43.550Z"
     },
     "bundesliga": {
       "name": "Bundesliga",
@@ -3008,7 +3008,7 @@
           "points": 0
         }
       ],
-      "verifiedAt": "2026-10-17T07:58:49.898Z"
+      "verifiedAt": "2026-10-17T12:07:43.709Z"
     },
     "seriea": {
       "name": "Serie A",
@@ -4199,7 +4199,7 @@
           "points": 0
         }
       ],
-      "verifiedAt": "2026-10-17T07:58:50.086Z"
+      "verifiedAt": "2026-10-17T12:07:43.902Z"
     }
   }
 }
