@@ -2,7 +2,7 @@
   "special": true,
   "league": "WTA Tour",
   "live": true,
-  "updatedAt": "2026-10-17T12:37:45.275009+00:00",
+  "updatedAt": "2026-10-17T12:37:52.185714+00:00",
   "sourceName": "WTA Official Scores scrape",
   "sourceUrl": "https://www.wtatennis.com/scores/",
   "verificationSource": "WTA Official Scores",
@@ -13,12 +13,12 @@
   "games": [
     {
       "eventId": "wta-scrape-1-m-kubka-d-salkova",
-      "date": "2026-10-17T12:37:45.271580+00:00",
+      "date": "2026-10-17T12:37:52.182384+00:00",
       "displayTime": "Dongfeng · Voyah Wuhan Open • CHN",
       "away": "M. Kubka",
       "home": "D. Salkova",
-      "awayScore": "6 5 0 · 15",
-      "homeScore": "1 7 1 · 0",
+      "awayScore": "6 5 0 · 30",
+      "homeScore": "1 7 1 · 15",
       "awaySets": [
         "6",
         "5",
@@ -29,8 +29,8 @@
         "7",
         "1"
       ],
-      "awayPoint": "15",
-      "homePoint": "0",
+      "awayPoint": "30",
+      "homePoint": "15",
       "currentSet": 3,
       "awayCurrentSetGames": 0,
       "homeCurrentSetGames": 1,
@@ -38,7 +38,7 @@
       "homeSetsWon": 1,
       "round": "Semifinals",
       "court": "Centre Court",
-      "status": "Live Match: 1:29 · Semifinals · Centre Court",
+      "status": "Live Match: 1:30 · Semifinals · Centre Court",
       "state": "live",
       "eventOnly": false,
       "title": "Dongfeng · Voyah Wuhan Open • CHN",
@@ -49,22 +49,22 @@
     },
     {
       "eventId": "wta-scrape-0-i-swiatek-m-chwalinska",
-      "date": "2026-10-17T12:37:45.271297+00:00",
+      "date": "2026-10-17T12:37:52.182082+00:00",
       "displayTime": "Dongfeng · Voyah Wuhan Open • CHN",
       "away": "I. Swiatek",
       "home": "M. Chwalinska",
-      "awayScore": "4 · AD",
-      "homeScore": "3 · 40",
+      "awayScore": "5 · 0",
+      "homeScore": "3 · 0",
       "awaySets": [
-        "4"
+        "5"
       ],
       "homeSets": [
         "3"
       ],
-      "awayPoint": "AD",
-      "homePoint": "40",
+      "awayPoint": "0",
+      "homePoint": "0",
       "currentSet": 1,
-      "awayCurrentSetGames": 4,
+      "awayCurrentSetGames": 5,
       "homeCurrentSetGames": 3,
       "awaySetsWon": 0,
       "homeSetsWon": 0,
@@ -81,7 +81,7 @@
     },
     {
       "eventId": "wta-scrape-2-j-bouzas-maneiro-c-burel",
-      "date": "2026-10-17T12:37:45.271785+00:00",
+      "date": "2026-10-17T12:37:52.182585+00:00",
       "displayTime": "Lisboa Belem Open • POR",
       "away": "J. Bouzas Maneiro",
       "home": "C. Burel",
