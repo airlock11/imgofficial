@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-17T19:46:39+08:00",
+  "updated_at": "2026-10-17T22:56:23+08:00",
   "refresh_minutes": 15,
   "leagues": {
     "pba": {
@@ -302,7 +302,7 @@
           "idleDiscoveryMinutes": 180,
           "gameDayDataRefreshMinutes": 15,
           "gameDayLivestreamRefreshMinutes": 5,
-          "lastSlowCheckAt": "2026-10-17T19:45:45+08:00"
+          "lastSlowCheckAt": "2026-10-17T22:55:30+08:00"
         },
         "failClosed": true
       }
@@ -1154,12 +1154,12 @@
           "losses": 2
         },
         {
-          "team": "Adamson Soaring Falcons",
-          "wins": 3,
+          "team": "UST Growling Tigers",
+          "wins": 4,
           "losses": 3
         },
         {
-          "team": "Ateneo Blue Eagles",
+          "team": "Adamson Soaring Falcons",
           "wins": 3,
           "losses": 3
         },
@@ -1169,9 +1169,9 @@
           "losses": 3
         },
         {
-          "team": "UST Growling Tigers",
+          "team": "Ateneo Blue Eagles",
           "wins": 3,
-          "losses": 3
+          "losses": 4
         },
         {
           "team": "UE Red Warriors",
@@ -1181,20 +1181,7 @@
       ],
       "games": [
         {
-          "eventId": "web-uaap-scheduled-8",
-          "date": "2026-10-17T18:00:00+08:00",
-          "displayTime": "Oct 17 · 6:00 PM",
-          "away": "Ateneo Blue Eagles",
-          "home": "UST Growling Tigers",
-          "awayScore": "—",
-          "homeScore": "—",
-          "status": "Scheduled",
-          "state": "scheduled",
-          "sourceName": "SkedCheck",
-          "sourceUrl": "https://skedcheck.com/uaap-mens-basketball-schedule-scores/"
-        },
-        {
-          "eventId": "web-uaap-scheduled-9",
+          "eventId": "web-uaap-scheduled-7",
           "date": "2026-10-18T14:30:00+08:00",
           "displayTime": "Oct 18 · 2:30 PM",
           "away": "FEU Tamaraws",
@@ -1207,7 +1194,7 @@
           "sourceUrl": "https://skedcheck.com/uaap-mens-basketball-schedule-scores/"
         },
         {
-          "eventId": "web-uaap-scheduled-10",
+          "eventId": "web-uaap-scheduled-8",
           "date": "2026-10-18T18:00:00+08:00",
           "displayTime": "Oct 18 · 6:00 PM",
           "away": "Adamson Soaring Falcons",
@@ -1218,6 +1205,19 @@
           "state": "scheduled",
           "sourceName": "SkedCheck",
           "sourceUrl": "https://skedcheck.com/uaap-mens-basketball-schedule-scores/"
+        },
+        {
+          "eventId": "uaap-live-27",
+          "date": "2026-10-17T18:00:00+08:00",
+          "displayTime": "Oct 17 · Final",
+          "away": "Ateneo Blue Eagles",
+          "home": "UST Growling Tigers",
+          "awayScore": "68",
+          "homeScore": "80",
+          "status": "Final",
+          "state": "final",
+          "sourceName": "UAAP Live Stats",
+          "sourceUrl": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball?game_id=27"
         },
         {
           "eventId": "uaap-live-26",
@@ -1375,14 +1375,14 @@
           "gameDay": true,
           "todayGameCount": 2,
           "todayGames": [
-            "web-uaap-scheduled-8",
+            "uaap-live-27",
             "uaap-live-26"
           ],
           "nextGameAt": "2026-10-18T14:30:00+08:00",
           "idleDiscoveryMinutes": 180,
           "gameDayDataRefreshMinutes": 15,
           "gameDayLivestreamRefreshMinutes": 5,
-          "lastSlowCheckAt": "2026-10-17T19:46:15+08:00"
+          "lastSlowCheckAt": "2026-10-17T22:56:04+08:00"
         },
         "failClosed": true
       }
@@ -1409,7 +1409,7 @@
         "idleDiscoveryMinutes": 180,
         "gameDayDataRefreshMinutes": 15,
         "gameDayLivestreamRefreshMinutes": 5,
-        "lastSlowCheckAt": "2026-10-17T19:45:45+08:00"
+        "lastSlowCheckAt": "2026-10-17T22:55:30+08:00"
       },
       "failClosed": true
     },
@@ -1425,14 +1425,14 @@
         "gameDay": true,
         "todayGameCount": 2,
         "todayGames": [
-          "web-uaap-scheduled-8",
+          "uaap-live-27",
           "uaap-live-26"
         ],
         "nextGameAt": "2026-10-18T14:30:00+08:00",
         "idleDiscoveryMinutes": 180,
         "gameDayDataRefreshMinutes": 15,
         "gameDayLivestreamRefreshMinutes": 5,
-        "lastSlowCheckAt": "2026-10-17T19:46:15+08:00"
+        "lastSlowCheckAt": "2026-10-17T22:56:04+08:00"
       },
       "failClosed": true
     }
