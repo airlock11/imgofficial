@@ -354,6 +354,30 @@
         "PODCAST",
         "HIGHLIGHTS"
       ]
+    },
+    {
+      "id": "one-sports-pvl",
+      "channelId": "UCXDG9ue-emCN8Ad3h7lERqQ",
+      "leagueKey": "pvl",
+      "league": "PVL",
+      "sport": "Volleyball",
+      "prefix": "pvl",
+      "includeAny": [
+        "PVL",
+        "PREMIER VOLLEYBALL LEAGUE",
+        "VOLLEYBALL"
+      ],
+      "excludeAny": [
+        "HIGHLIGHTS",
+        "REPLAY",
+        "FULL GAME",
+        "PRESS CONFERENCE",
+        "INTERVIEW",
+        "PODCAST",
+        "PREVIEW",
+        "TRAILER",
+        "RECAP"
+      ]
     }
   ]
 }
