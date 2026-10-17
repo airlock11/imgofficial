@@ -1,7 +1,7 @@
 {
   "version": 1,
   "source": "ESPN public football data",
-  "updatedAt": "2026-10-17T17:56:30.133Z",
+  "updatedAt": "2026-10-17T20:21:48.925Z",
   "leagues": {
     "soccer": {
       "name": "Premier League",
@@ -243,8 +243,8 @@
           "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/362.png",
           "homeScore": "0",
           "awayScore": "1",
-          "state": "live",
-          "status": "69'",
+          "state": "final",
+          "status": "FT",
           "venue": "St. James' Park",
           "competition": "Premier League",
           "category": "England"
@@ -925,15 +925,26 @@
           "rank": 11,
           "team": "Newcastle United",
           "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/361.png",
-          "played": 6,
+          "played": 7,
           "wins": 2,
           "draws": 2,
-          "losses": 2,
-          "goalDiff": -3,
+          "losses": 3,
+          "goalDiff": -4,
           "points": 8
         },
         {
           "rank": 12,
+          "team": "Aston Villa",
+          "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/362.png",
+          "played": 7,
+          "wins": 2,
+          "draws": 2,
+          "losses": 3,
+          "goalDiff": -4,
+          "points": 8
+        },
+        {
+          "rank": 13,
           "team": "Crystal Palace",
           "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/384.png",
           "played": 6,
@@ -944,7 +955,7 @@
           "points": 7
         },
         {
-          "rank": 13,
+          "rank": 14,
           "team": "Manchester United",
           "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/360.png",
           "played": 6,
@@ -955,7 +966,7 @@
           "points": 6
         },
         {
-          "rank": 14,
+          "rank": 15,
           "team": "Coventry City",
           "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/388.png",
           "played": 6,
@@ -966,7 +977,7 @@
           "points": 6
         },
         {
-          "rank": 15,
+          "rank": 16,
           "team": "Fulham",
           "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/370.png",
           "played": 7,
@@ -977,7 +988,7 @@
           "points": 5
         },
         {
-          "rank": 16,
+          "rank": 17,
           "team": "Nottingham Forest",
           "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/393.png",
           "played": 6,
@@ -985,17 +996,6 @@
           "draws": 2,
           "losses": 3,
           "goalDiff": -3,
-          "points": 5
-        },
-        {
-          "rank": 17,
-          "team": "Aston Villa",
-          "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/362.png",
-          "played": 6,
-          "wins": 1,
-          "draws": 2,
-          "losses": 3,
-          "goalDiff": -5,
           "points": 5
         },
         {
@@ -1032,7 +1032,7 @@
           "points": 3
         }
       ],
-      "verifiedAt": "2026-10-17T17:56:29.361Z"
+      "verifiedAt": "2026-10-17T20:21:48.384Z"
     },
     "laliga": {
       "name": "La Liga",
@@ -1257,9 +1257,9 @@
           "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/244.png",
           "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/83.png",
           "homeScore": "2",
-          "awayScore": "3",
-          "state": "live",
-          "status": "60'",
+          "awayScore": "5",
+          "state": "final",
+          "status": "FT",
           "venue": "Estadio La Cartuja",
           "competition": "La Liga",
           "category": "Spain"
@@ -1274,8 +1274,8 @@
           "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/93.png",
           "homeScore": "0",
           "awayScore": "0",
-          "state": "scheduled",
-          "status": "Scheduled",
+          "state": "live",
+          "status": "62'",
           "venue": "Mestalla Stadium",
           "competition": "La Liga",
           "category": "Spain"
@@ -1862,12 +1862,12 @@
           "rank": 1,
           "team": "Barcelona",
           "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/83.png",
-          "played": 8,
-          "wins": 8,
+          "played": 9,
+          "wins": 9,
           "draws": 0,
           "losses": 0,
-          "goalDiff": 27,
-          "points": 24
+          "goalDiff": 30,
+          "points": 27
         },
         {
           "rank": 2,
@@ -1884,11 +1884,11 @@
           "rank": 3,
           "team": "Real Betis",
           "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/244.png",
-          "played": 8,
+          "played": 9,
           "wins": 6,
           "draws": 1,
-          "losses": 1,
-          "goalDiff": 5,
+          "losses": 2,
+          "goalDiff": 2,
           "points": 19
         },
         {
@@ -2079,7 +2079,7 @@
           "points": 4
         }
       ],
-      "verifiedAt": "2026-10-17T17:56:29.599Z"
+      "verifiedAt": "2026-10-17T20:21:48.575Z"
     },
     "bundesliga": {
       "name": "Bundesliga",
@@ -2335,10 +2335,10 @@
           "away": "RB Leipzig",
           "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/132.png",
           "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/11420.png",
-          "homeScore": "5",
-          "awayScore": "0",
-          "state": "live",
-          "status": "66'",
+          "homeScore": "6",
+          "awayScore": "1",
+          "state": "final",
+          "status": "FT",
           "venue": "Allianz Arena",
           "competition": "Bundesliga",
           "category": "Germany"
@@ -2811,6 +2811,17 @@
       "standings": [
         {
           "rank": 1,
+          "team": "Bayern Munich",
+          "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/132.png",
+          "played": 6,
+          "wins": 4,
+          "draws": 2,
+          "losses": 0,
+          "goalDiff": 17,
+          "points": 14
+        },
+        {
+          "rank": 2,
           "team": "Borussia Dortmund",
           "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/124.png",
           "played": 6,
@@ -2821,7 +2832,7 @@
           "points": 14
         },
         {
-          "rank": 2,
+          "rank": 3,
           "team": "SC Freiburg",
           "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/126.png",
           "played": 5,
@@ -2830,17 +2841,6 @@
           "losses": 0,
           "goalDiff": 10,
           "points": 13
-        },
-        {
-          "rank": 3,
-          "team": "Bayern Munich",
-          "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/132.png",
-          "played": 5,
-          "wins": 3,
-          "draws": 2,
-          "losses": 0,
-          "goalDiff": 12,
-          "points": 11
         },
         {
           "rank": 4,
@@ -2879,11 +2879,11 @@
           "rank": 7,
           "team": "RB Leipzig",
           "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/11420.png",
-          "played": 5,
+          "played": 6,
           "wins": 3,
           "draws": 0,
-          "losses": 2,
-          "goalDiff": 10,
+          "losses": 3,
+          "goalDiff": 5,
           "points": 9
         },
         {
@@ -3008,7 +3008,7 @@
           "points": 0
         }
       ],
-      "verifiedAt": "2026-10-17T17:56:29.940Z"
+      "verifiedAt": "2026-10-17T20:21:48.767Z"
     },
     "seriea": {
       "name": "Serie A",
@@ -3232,10 +3232,10 @@
           "away": "Genoa",
           "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/104.png",
           "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/3263.png",
-          "homeScore": "0",
+          "homeScore": "2",
           "awayScore": "0",
-          "state": "scheduled",
-          "status": "Scheduled",
+          "state": "live",
+          "status": "78'",
           "venue": "Olimpico",
           "competition": "Serie A",
           "category": "Italy"
@@ -4199,7 +4199,7 @@
           "points": 3
         }
       ],
-      "verifiedAt": "2026-10-17T17:56:30.133Z"
+      "verifiedAt": "2026-10-17T20:21:48.925Z"
     }
   }
 }
