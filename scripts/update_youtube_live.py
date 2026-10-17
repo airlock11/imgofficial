@@ -529,6 +529,10 @@ def one_sports_live(previous):
    league_key="ncaa_ph"; sport="Basketball"; league="NCAA Philippines"; prefix="ncaaph"
   elif uaap_one_sports_title_allowed(title) and regional_game_day_scan_allowed("uaap"):
    league_key="uaap"; sport="Basketball"; league="UAAP"; prefix="uaap"
+  elif re.search(r"\bPVL\b|PREMIER VOLLEYBALL LEAGUE",upper) and not any(token in upper for token in ("HIGHLIGHTS","REPLAY","FULL GAME","PRESS CONFERENCE","INTERVIEW","PODCAST","PREVIEW","TRAILER")):
+   # PVL is classified only from the verified One Sports channel and only
+   # while YouTube confirms this exact video is live and has not ended.
+   league_key="pvl"; sport="Volleyball"; league="PVL"; prefix="pvl"
   else:
    continue
   watch="https://www.youtube.com/watch?v="+vid
