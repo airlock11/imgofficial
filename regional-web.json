@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-17T15:31:52+08:00",
+  "updated_at": "2026-10-17T19:46:39+08:00",
   "refresh_minutes": 15,
   "leagues": {
     "pba": {
@@ -298,11 +298,11 @@
             "web-pba-20261017-titan-terrafirma",
             "web-pba-20261017-blackwater-ros"
           ],
-          "nextGameAt": "2026-10-17T17:15:00+08:00",
+          "nextGameAt": "2026-10-18T17:15:00+08:00",
           "idleDiscoveryMinutes": 180,
           "gameDayDataRefreshMinutes": 15,
           "gameDayLivestreamRefreshMinutes": 5,
-          "lastSlowCheckAt": "2026-10-17T15:31:03+08:00"
+          "lastSlowCheckAt": "2026-10-17T19:45:45+08:00"
         },
         "failClosed": true
       }
@@ -1139,17 +1139,17 @@
       ],
       "standings": [
         {
+          "team": "UP Fighting Maroons",
+          "wins": 5,
+          "losses": 2
+        },
+        {
           "team": "FEU Tamaraws",
           "wins": 4,
           "losses": 2
         },
         {
           "team": "NU Bulldogs",
-          "wins": 4,
-          "losses": 2
-        },
-        {
-          "team": "UP Fighting Maroons",
           "wins": 4,
           "losses": 2
         },
@@ -1176,23 +1176,10 @@
         {
           "team": "UE Red Warriors",
           "wins": 0,
-          "losses": 6
+          "losses": 7
         }
       ],
       "games": [
-        {
-          "eventId": "web-uaap-scheduled-7",
-          "date": "2026-10-17T14:30:00+08:00",
-          "displayTime": "Oct 17 · 2:30 PM",
-          "away": "UE Red Warriors",
-          "home": "UP Fighting Maroons",
-          "awayScore": "—",
-          "homeScore": "—",
-          "status": "Scheduled",
-          "state": "scheduled",
-          "sourceName": "SkedCheck",
-          "sourceUrl": "https://skedcheck.com/uaap-mens-basketball-schedule-scores/"
-        },
         {
           "eventId": "web-uaap-scheduled-8",
           "date": "2026-10-17T18:00:00+08:00",
@@ -1231,6 +1218,19 @@
           "state": "scheduled",
           "sourceName": "SkedCheck",
           "sourceUrl": "https://skedcheck.com/uaap-mens-basketball-schedule-scores/"
+        },
+        {
+          "eventId": "uaap-live-26",
+          "date": "2026-10-17T14:30:00+08:00",
+          "displayTime": "Oct 17 · Final",
+          "away": "UE Red Warriors",
+          "home": "UP Fighting Maroons",
+          "awayScore": "81",
+          "homeScore": "91",
+          "status": "Final",
+          "state": "final",
+          "sourceName": "UAAP Live Stats",
+          "sourceUrl": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball?game_id=26"
         },
         {
           "eventId": "uaap-live-25",
@@ -1361,19 +1361,6 @@
           "state": "final",
           "sourceName": "UAAP Live Stats",
           "sourceUrl": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball?game_id=16"
-        },
-        {
-          "eventId": "uaap-live-15",
-          "date": "2026-10-03T17:30:00+08:00",
-          "displayTime": "Oct 3 · Final",
-          "away": "Ateneo Blue Eagles",
-          "home": "NU Bulldogs",
-          "awayScore": "87",
-          "homeScore": "76",
-          "status": "Final",
-          "state": "final",
-          "sourceName": "UAAP Live Stats",
-          "sourceUrl": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball?game_id=15"
         }
       ],
       "automation": {
@@ -1388,14 +1375,14 @@
           "gameDay": true,
           "todayGameCount": 2,
           "todayGames": [
-            "web-uaap-scheduled-7",
-            "web-uaap-scheduled-8"
+            "web-uaap-scheduled-8",
+            "uaap-live-26"
           ],
-          "nextGameAt": "2026-10-17T18:00:00+08:00",
+          "nextGameAt": "2026-10-18T14:30:00+08:00",
           "idleDiscoveryMinutes": 180,
           "gameDayDataRefreshMinutes": 15,
           "gameDayLivestreamRefreshMinutes": 5,
-          "lastSlowCheckAt": "2026-10-17T15:31:38+08:00"
+          "lastSlowCheckAt": "2026-10-17T19:46:15+08:00"
         },
         "failClosed": true
       }
@@ -1418,11 +1405,11 @@
           "web-pba-20261017-titan-terrafirma",
           "web-pba-20261017-blackwater-ros"
         ],
-        "nextGameAt": "2026-10-17T17:15:00+08:00",
+        "nextGameAt": "2026-10-18T17:15:00+08:00",
         "idleDiscoveryMinutes": 180,
         "gameDayDataRefreshMinutes": 15,
         "gameDayLivestreamRefreshMinutes": 5,
-        "lastSlowCheckAt": "2026-10-17T15:31:03+08:00"
+        "lastSlowCheckAt": "2026-10-17T19:45:45+08:00"
       },
       "failClosed": true
     },
@@ -1438,14 +1425,14 @@
         "gameDay": true,
         "todayGameCount": 2,
         "todayGames": [
-          "web-uaap-scheduled-7",
-          "web-uaap-scheduled-8"
+          "web-uaap-scheduled-8",
+          "uaap-live-26"
         ],
-        "nextGameAt": "2026-10-17T18:00:00+08:00",
+        "nextGameAt": "2026-10-18T14:30:00+08:00",
         "idleDiscoveryMinutes": 180,
         "gameDayDataRefreshMinutes": 15,
         "gameDayLivestreamRefreshMinutes": 5,
-        "lastSlowCheckAt": "2026-10-17T15:31:38+08:00"
+        "lastSlowCheckAt": "2026-10-17T19:46:15+08:00"
       },
       "failClosed": true
     }
