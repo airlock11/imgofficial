@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-17T20:52:48+00:00",
+  "updated_at": "2026-10-18T05:02:20+00:00",
   "source": "Official boxing websites",
   "sources": [
     {
@@ -12,137 +12,14 @@
     }
   ],
   "source_counts": {
-    "Premier Boxing Champions": 4,
+    "Premier Boxing Champions": 0,
     "Matchroom Boxing": 2
   },
   "errors": {
+    "Premier Boxing Champions": "No current fights parsed",
     "Matchroom Boxing": "Parser returned no current rows; retained last verified official schedule"
   },
   "fights": [
-    {
-      "id": "web-premier-boxing-champions-2026-10-17-sebastian-fundora-ermal-hadribeaj",
-      "title": "Sebastian Fundora vs. Ermal Hadribeaj",
-      "date": "2026-10-17T12:00:00Z",
-      "displayTime": "Oct 17 · 8:00 PM ET",
-      "status": "NOT_STARTED",
-      "sourceName": "Premier Boxing Champions",
-      "sourceUrl": "https://www.premierboxingchampions.com/boxing-schedule",
-      "event": {
-        "title": "Premier Boxing Champions",
-        "location": "",
-        "venue": ""
-      },
-      "fighters": {
-        "fighter_1": {
-          "name": "Sebastian Fundora",
-          "winner": false
-        },
-        "fighter_2": {
-          "name": "Ermal Hadribeaj",
-          "winner": false
-        }
-      },
-      "results": {
-        "outcome": null,
-        "outcome_long": null,
-        "round": null,
-        "time": null,
-        "scores": []
-      }
-    },
-    {
-      "id": "web-premier-boxing-champions-2026-10-17-armando-resendiz-koen-mazoudier",
-      "title": "Armando Resendiz vs. Koen Mazoudier",
-      "date": "2026-10-17T12:00:00Z",
-      "displayTime": "Oct 17 · 8:00 PM ET",
-      "status": "NOT_STARTED",
-      "sourceName": "Premier Boxing Champions",
-      "sourceUrl": "https://www.premierboxingchampions.com/boxing-schedule",
-      "event": {
-        "title": "Premier Boxing Champions",
-        "location": "",
-        "venue": ""
-      },
-      "fighters": {
-        "fighter_1": {
-          "name": "Armando Resendiz",
-          "winner": false
-        },
-        "fighter_2": {
-          "name": "Koen Mazoudier",
-          "winner": false
-        }
-      },
-      "results": {
-        "outcome": null,
-        "outcome_long": null,
-        "round": null,
-        "time": null,
-        "scores": []
-      }
-    },
-    {
-      "id": "web-premier-boxing-champions-2026-10-17-marco-romero-matias-ferreira",
-      "title": "Marco Romero vs. Matias Ferreira",
-      "date": "2026-10-17T12:00:00Z",
-      "displayTime": "Oct 17 · 8:00 PM ET",
-      "status": "NOT_STARTED",
-      "sourceName": "Premier Boxing Champions",
-      "sourceUrl": "https://www.premierboxingchampions.com/boxing-schedule",
-      "event": {
-        "title": "Premier Boxing Champions",
-        "location": "",
-        "venue": ""
-      },
-      "fighters": {
-        "fighter_1": {
-          "name": "Marco Romero",
-          "winner": false
-        },
-        "fighter_2": {
-          "name": "Matias Ferreira",
-          "winner": false
-        }
-      },
-      "results": {
-        "outcome": null,
-        "outcome_long": null,
-        "round": null,
-        "time": null,
-        "scores": []
-      }
-    },
-    {
-      "id": "web-premier-boxing-champions-2026-10-17-jaime-osuna-cristian-cangelosi",
-      "title": "Jaime Osuna vs. Cristian Cangelosi",
-      "date": "2026-10-17T12:00:00Z",
-      "displayTime": "Oct 17 · 8:00 PM ET",
-      "status": "NOT_STARTED",
-      "sourceName": "Premier Boxing Champions",
-      "sourceUrl": "https://www.premierboxingchampions.com/boxing-schedule",
-      "event": {
-        "title": "Premier Boxing Champions",
-        "location": "",
-        "venue": ""
-      },
-      "fighters": {
-        "fighter_1": {
-          "name": "Jaime Osuna",
-          "winner": false
-        },
-        "fighter_2": {
-          "name": "Cristian Cangelosi",
-          "winner": false
-        }
-      },
-      "results": {
-        "outcome": null,
-        "outcome_long": null,
-        "round": null,
-        "time": null,
-        "scores": []
-      }
-    },
     {
       "id": "matchroom-20261024-smith-puello",
       "title": "Smith vs. Puello",
