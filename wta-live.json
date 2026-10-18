@@ -2,7 +2,7 @@
   "special": true,
   "league": "WTA Tour",
   "live": true,
-  "updatedAt": "2026-10-18T05:01:14.983834+00:00",
+  "updatedAt": "2026-10-18T05:01:21.504370+00:00",
   "sourceName": "WTA Official Scores scrape",
   "sourceUrl": "https://www.wtatennis.com/scores/",
   "verificationSource": "WTA Official Scores",
@@ -13,24 +13,24 @@
   "games": [
     {
       "eventId": "wta-scrape-0-a-parks-y-putintseva",
-      "date": "2026-10-18T05:01:14.979927+00:00",
+      "date": "2026-10-18T05:01:21.500372+00:00",
       "displayTime": "BNB Ningbo Open • CHN",
       "away": "A. Parks",
       "home": "Y. Putintseva",
-      "awayScore": "2 0 · 40",
-      "homeScore": "6 0 · 30",
+      "awayScore": "2 1 · 0",
+      "homeScore": "6 0 · 0",
       "awaySets": [
         "2",
-        "0"
+        "1"
       ],
       "homeSets": [
         "6",
         "0"
       ],
-      "awayPoint": "40",
-      "homePoint": "30",
+      "awayPoint": "0",
+      "homePoint": "0",
       "currentSet": 2,
-      "awayCurrentSetGames": 0,
+      "awayCurrentSetGames": 1,
       "homeCurrentSetGames": 0,
       "awaySetsWon": 0,
       "homeSetsWon": 1,
@@ -47,11 +47,11 @@
     },
     {
       "eventId": "wta-scrape-1-a-kalinina-a-sasnovich",
-      "date": "2026-10-18T05:01:14.980246+00:00",
+      "date": "2026-10-18T05:01:21.500663+00:00",
       "displayTime": "BNB Ningbo Open • CHN",
       "away": "A. Kalinina",
       "home": "A. Sasnovich",
-      "awayScore": "0 · 15",
+      "awayScore": "0 · 30",
       "homeScore": "1 · 15",
       "awaySets": [
         "0"
@@ -59,7 +59,7 @@
       "homeSets": [
         "1"
       ],
-      "awayPoint": "15",
+      "awayPoint": "30",
       "homePoint": "15",
       "currentSet": 1,
       "awayCurrentSetGames": 0,
@@ -68,7 +68,7 @@
       "homeSetsWon": 0,
       "round": "Qualifying",
       "court": "Grandstand",
-      "status": "Live Match: 0:05 · Qualifying · Grandstand",
+      "status": "Live Match: 0:06 · Qualifying · Grandstand",
       "state": "live",
       "eventOnly": false,
       "title": "BNB Ningbo Open • CHN",
@@ -79,12 +79,12 @@
     },
     {
       "eventId": "wta-scrape-2-c-liu-m-inglis",
-      "date": "2026-10-18T05:01:14.980431+00:00",
+      "date": "2026-10-18T05:01:21.500849+00:00",
       "displayTime": "Kinoshita Group Japan Open • JPN",
       "away": "C. Liu",
       "home": "M. Inglis",
       "awayScore": "6 5 · 15",
-      "homeScore": "4 3 · 0",
+      "homeScore": "4 3 · 15",
       "awaySets": [
         "6",
         "5"
@@ -94,7 +94,7 @@
         "3"
       ],
       "awayPoint": "15",
-      "homePoint": "0",
+      "homePoint": "15",
       "currentSet": 2,
       "awayCurrentSetGames": 5,
       "homeCurrentSetGames": 3,
@@ -102,7 +102,7 @@
       "homeSetsWon": 0,
       "round": "Qualifying",
       "court": "Court 2",
-      "status": "Live Match: 1:17 · Qualifying · Court 2",
+      "status": "Live Match: 1:18 · Qualifying · Court 2",
       "state": "live",
       "eventOnly": false,
       "title": "Kinoshita Group Japan Open • JPN",
@@ -113,12 +113,12 @@
     },
     {
       "eventId": "wta-scrape-3-h-dart-a-ito",
-      "date": "2026-10-18T05:01:14.980608+00:00",
+      "date": "2026-10-18T05:01:21.501049+00:00",
       "displayTime": "Kinoshita Group Japan Open • JPN",
       "away": "H. Dart",
       "home": "A. Ito",
       "awayScore": "3 · 40",
-      "homeScore": "0 · 40",
+      "homeScore": "0 · AD",
       "awaySets": [
         "3"
       ],
@@ -126,7 +126,7 @@
         "0"
       ],
       "awayPoint": "40",
-      "homePoint": "40",
+      "homePoint": "AD",
       "currentSet": 1,
       "awayCurrentSetGames": 3,
       "homeCurrentSetGames": 0,
@@ -134,7 +134,7 @@
       "homeSetsWon": 0,
       "round": "Qualifying",
       "court": "",
-      "status": "Live Match: 0:18 · Qualifying",
+      "status": "Live Match: 0:19 · Qualifying",
       "state": "live",
       "eventOnly": false,
       "title": "Kinoshita Group Japan Open • JPN",
@@ -145,7 +145,7 @@
     },
     {
       "eventId": "wta-scrape-4-s-kraus-s-kenin",
-      "date": "2026-10-18T05:01:14.980777+00:00",
+      "date": "2026-10-18T05:01:21.501224+00:00",
       "displayTime": "Kinoshita Group Japan Open • JPN",
       "away": "S. Kraus",
       "home": "S. Kenin",
