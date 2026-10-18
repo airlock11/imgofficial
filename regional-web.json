@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-18T19:45:17+08:00",
+  "updated_at": "2026-10-18T22:53:01+08:00",
   "refresh_minutes": 15,
   "leagues": {
     "pba": {
@@ -302,7 +302,7 @@
           "idleDiscoveryMinutes": 180,
           "gameDayDataRefreshMinutes": 15,
           "gameDayLivestreamRefreshMinutes": 5,
-          "lastSlowCheckAt": "2026-10-18T19:43:55+08:00"
+          "lastSlowCheckAt": "2026-10-18T22:52:12+08:00"
         },
         "failClosed": true
       }
@@ -1149,6 +1149,11 @@
           "losses": 2
         },
         {
+          "team": "Adamson Soaring Falcons",
+          "wins": 4,
+          "losses": 3
+        },
+        {
           "team": "FEU Tamaraws",
           "wins": 4,
           "losses": 3
@@ -1159,17 +1164,12 @@
           "losses": 3
         },
         {
-          "team": "Adamson Soaring Falcons",
+          "team": "Ateneo Blue Eagles",
           "wins": 3,
-          "losses": 3
+          "losses": 4
         },
         {
           "team": "De La Salle Green Archers",
-          "wins": 3,
-          "losses": 3
-        },
-        {
-          "team": "Ateneo Blue Eagles",
           "wins": 3,
           "losses": 4
         },
@@ -1181,17 +1181,17 @@
       ],
       "games": [
         {
-          "eventId": "web-uaap-scheduled-8",
+          "eventId": "uaap-live-29",
           "date": "2026-10-18T18:00:00+08:00",
-          "displayTime": "Oct 18 · 6:00 PM",
+          "displayTime": "Oct 18 · Final",
           "away": "Adamson Soaring Falcons",
           "home": "De La Salle Green Archers",
-          "awayScore": "—",
-          "homeScore": "—",
-          "status": "Scheduled",
-          "state": "scheduled",
-          "sourceName": "SkedCheck",
-          "sourceUrl": "https://skedcheck.com/uaap-mens-basketball-schedule-scores/"
+          "awayScore": "63",
+          "homeScore": "60",
+          "status": "Final",
+          "state": "final",
+          "sourceName": "UAAP Live Stats",
+          "sourceUrl": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball?game_id=29"
         },
         {
           "eventId": "uaap-live-28",
@@ -1349,14 +1349,14 @@
           "gameDay": true,
           "todayGameCount": 2,
           "todayGames": [
-            "web-uaap-scheduled-8",
+            "uaap-live-29",
             "uaap-live-28"
           ],
           "nextGameAt": "",
           "idleDiscoveryMinutes": 180,
           "gameDayDataRefreshMinutes": 15,
           "gameDayLivestreamRefreshMinutes": 5,
-          "lastSlowCheckAt": "2026-10-18T19:44:32+08:00"
+          "lastSlowCheckAt": "2026-10-18T22:52:46+08:00"
         },
         "failClosed": true
       }
@@ -1383,7 +1383,7 @@
         "idleDiscoveryMinutes": 180,
         "gameDayDataRefreshMinutes": 15,
         "gameDayLivestreamRefreshMinutes": 5,
-        "lastSlowCheckAt": "2026-10-18T19:43:55+08:00"
+        "lastSlowCheckAt": "2026-10-18T22:52:12+08:00"
       },
       "failClosed": true
     },
@@ -1399,14 +1399,14 @@
         "gameDay": true,
         "todayGameCount": 2,
         "todayGames": [
-          "web-uaap-scheduled-8",
+          "uaap-live-29",
           "uaap-live-28"
         ],
         "nextGameAt": "",
         "idleDiscoveryMinutes": 180,
         "gameDayDataRefreshMinutes": 15,
         "gameDayLivestreamRefreshMinutes": 5,
-        "lastSlowCheckAt": "2026-10-18T19:44:32+08:00"
+        "lastSlowCheckAt": "2026-10-18T22:52:46+08:00"
       },
       "failClosed": true
     }
