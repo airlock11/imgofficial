@@ -2,22 +2,58 @@
   "special": true,
   "league": "WTA Tour",
   "live": true,
-  "updatedAt": "2026-10-19T06:54:43.819039+00:00",
+  "updatedAt": "2026-10-19T06:54:50.256542+00:00",
   "sourceName": "WTA Official Scores scrape",
   "sourceUrl": "https://www.wtatennis.com/scores/",
   "verificationSource": "WTA Official Scores",
   "verificationUrl": "https://www.wtatennis.com/scores/",
-  "pageLiveCount": 4,
-  "parsedMatchCount": 4,
+  "pageLiveCount": 5,
+  "parsedMatchCount": 5,
   "note": "GitHub scrape of the rendered WTA Scores page. Game points, current set number, current-set games and per-set scores are stored separately.",
   "games": [
     {
-      "eventId": "wta-scrape-0-upcoming-mihalikova-nicholls-kozyreva",
-      "date": "2026-10-19T06:54:43.816310+00:00",
+      "eventId": "wta-scrape-0-e-mertens-l-fernandez",
+      "date": "2026-10-19T06:54:50.253347+00:00",
+      "displayTime": "BNB Ningbo Open • CHN",
+      "away": "E. Mertens",
+      "home": "L. Fernandez",
+      "awayScore": "6 3 5 · 0",
+      "homeScore": "2 6 6 · 15",
+      "awaySets": [
+        "6",
+        "3",
+        "5"
+      ],
+      "homeSets": [
+        "2",
+        "6",
+        "6"
+      ],
+      "awayPoint": "0",
+      "homePoint": "15",
+      "currentSet": 3,
+      "awayCurrentSetGames": 5,
+      "homeCurrentSetGames": 6,
+      "awaySetsWon": 1,
+      "homeSetsWon": 1,
+      "round": "Round of 32",
+      "court": "Center Court",
+      "status": "Live Match: 2:45 · Round of 32 · Center Court",
+      "state": "live",
+      "eventOnly": false,
+      "title": "BNB Ningbo Open • CHN",
+      "sourceName": "WTA Official Scores scrape",
+      "sourceUrl": "https://www.wtatennis.com/scores/",
+      "verificationSource": "WTA Official Scores",
+      "verificationUrl": "https://www.wtatennis.com/scores/"
+    },
+    {
+      "eventId": "wta-scrape-1-upcoming-mihalikova-nicholls-kozyreva",
+      "date": "2026-10-19T06:54:50.253824+00:00",
       "displayTime": "BNB Ningbo Open • CHN",
       "away": "Upcoming / Mihalikova",
       "home": "Nicholls / Kozyreva",
-      "awayScore": "4 · 15",
+      "awayScore": "4 · 30",
       "homeScore": "2 · 30",
       "awaySets": [
         "4"
@@ -25,7 +61,7 @@
       "homeSets": [
         "2"
       ],
-      "awayPoint": "15",
+      "awayPoint": "30",
       "homePoint": "30",
       "currentSet": 1,
       "awayCurrentSetGames": 4,
@@ -44,8 +80,8 @@
       "verificationUrl": "https://www.wtatennis.com/scores/"
     },
     {
-      "eventId": "wta-scrape-1-a-krueger-j-tjen",
-      "date": "2026-10-19T06:54:43.816501+00:00",
+      "eventId": "wta-scrape-2-a-krueger-j-tjen",
+      "date": "2026-10-19T06:54:50.253963+00:00",
       "displayTime": "Kinoshita Group Japan Open • JPN",
       "away": "A. Krueger",
       "home": "J. Tjen",
@@ -78,8 +114,8 @@
       "verificationUrl": "https://www.wtatennis.com/scores/"
     },
     {
-      "eventId": "wta-scrape-3-upcoming-neel-olmos-cho",
-      "date": "2026-10-19T06:54:43.816900+00:00",
+      "eventId": "wta-scrape-4-upcoming-neel-olmos-cho",
+      "date": "2026-10-19T06:54:50.254344+00:00",
       "displayTime": "Kinoshita Group Japan Open • JPN",
       "away": "Upcoming / Neel",
       "home": "Olmos / Cho",
@@ -110,8 +146,8 @@
       "verificationUrl": "https://www.wtatennis.com/scores/"
     },
     {
-      "eventId": "wta-scrape-2-upcoming-lee-wu-hontama",
-      "date": "2026-10-19T06:54:43.816701+00:00",
+      "eventId": "wta-scrape-3-upcoming-lee-wu-hontama",
+      "date": "2026-10-19T06:54:50.254157+00:00",
       "displayTime": "Kinoshita Group Japan Open • JPN",
       "away": "Upcoming / Lee",
       "home": "Wu / Hontama",
