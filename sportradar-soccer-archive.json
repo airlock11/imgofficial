@@ -3,14 +3,14 @@
   "provider": "Sportradar",
   "product": "Soccer API",
   "access": "trial",
-  "updatedAt": "2026-10-19T04:35:30.590Z",
+  "updatedAt": "2026-10-19T08:59:37.750Z",
   "requestsLastRun": 2,
   "leagues": {
     "laliga": {
       "league": "La Liga",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-19T04:35:30.590Z",
+      "updatedAt": "2026-10-19T08:59:37.750Z",
       "games": [
         {
           "eventId": "sr:sport_event:72477472",
@@ -501,7 +501,7 @@
       "league": "Serie A",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-19T04:35:30.590Z",
+      "updatedAt": "2026-10-19T08:59:37.750Z",
       "games": [
         {
           "eventId": "sr:sport_event:71945296",
@@ -762,7 +762,7 @@
       "league": "Bundesliga",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-19T04:35:30.590Z",
+      "updatedAt": "2026-10-19T08:59:37.750Z",
       "games": [
         {
           "eventId": "sr:sport_event:72513234",
@@ -275968,7 +275968,7 @@
       "league": "UEFA Champions League",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-19T04:35:30.590Z",
+      "updatedAt": "2026-10-19T08:59:37.750Z",
       "games": [
         {
           "eventId": "sr:sport_event:74165904",
@@ -339885,7 +339885,7 @@
       "league": "MLS",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-19T04:35:30.590Z",
+      "updatedAt": "2026-10-19T08:59:37.750Z",
       "games": [
         {
           "eventId": "sr:sport_event:66299638",
@@ -962243,14 +962243,14 @@
       "league": "PFL",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-19T04:35:30.590Z",
+      "updatedAt": "2026-10-19T08:59:37.750Z",
       "games": []
     },
     "jamaica_pl": {
       "league": "Jamaican Premier League",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-19T04:35:30.590Z",
+      "updatedAt": "2026-10-19T08:59:37.750Z",
       "games": [
         {
           "eventId": "sr:sport_event:74695452",
@@ -992051,7 +992051,7 @@
       "league": "Mizoram Premier League",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-19T04:35:30.590Z",
+      "updatedAt": "2026-10-19T08:59:37.750Z",
       "games": [
         {
           "eventId": "sr:sport_event:75074666",
@@ -992243,7 +992243,7 @@
       "league": "Primera Division, Reserves",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-19T04:35:30.590Z",
+      "updatedAt": "2026-10-19T08:59:37.750Z",
       "games": [
         {
           "eventId": "sr:sport_event:75601346",
@@ -992274,7 +992274,7 @@
       "league": "UEFA Champions League Women",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-19T04:35:30.590Z",
+      "updatedAt": "2026-10-19T08:59:37.750Z",
       "games": [],
       "competitionId": "sr:competition:696",
       "competition": {
@@ -1079766,7 +1079766,7 @@
     "updatedAt": "2026-09-22T16:50:47.840Z"
   },
   "requestBudget": 900,
-  "requestBudgetRemaining": 389,
+  "requestBudgetRemaining": 387,
   "harvestMode": "live",
   "usage": {
     "requests": [
@@ -1080444,10 +1080444,15 @@
         "at": "2026-10-19T04:35:30.590Z",
         "count": 2,
         "mode": "live"
+      },
+      {
+        "at": "2026-10-19T08:59:37.750Z",
+        "count": 2,
+        "mode": "live"
       }
     ],
-    "rolling30Day": 511,
-    "trackedRolling30Day": 397,
+    "rolling30Day": 513,
+    "trackedRolling30Day": 399,
     "preTrackingRolling30Day": 114
   },
   "runRequestCap": 6,
@@ -1080457,7 +1080462,7 @@
   },
   "latestFeeds": {
     "live": {
-      "generated_at": "2026-10-19T04:35:31+00:00",
+      "generated_at": "2026-10-19T08:59:38+00:00",
       "schedules": [
         {
           "sport_event": {
@@ -1080564,7 +1080569,7 @@
       ]
     },
     "daily": {
-      "generated_at": "2026-10-19T04:35:33+00:00",
+      "generated_at": "2026-10-19T08:57:38+00:00",
       "schedules": [
         {
           "sport_event": {
@@ -1081370,7 +1081375,11 @@
             }
           },
           "sport_event_status": {
-            "status": "not_started"
+            "status": "closed",
+            "match_status": "ended",
+            "home_score": 4,
+            "away_score": 0,
+            "winner_id": "sr:competitor:1290267"
           }
         },
         {
@@ -1082225,6 +1082234,7 @@
                 "gender": "male"
               }
             ],
+            "replaced_by": "sr:sport_event:75775634",
             "sport_event_conditions": {
               "ground": {
                 "neutral": false
@@ -1082232,7 +1082242,8 @@
             }
           },
           "sport_event_status": {
-            "status": "not_started"
+            "status": "postponed",
+            "match_status": "postponed"
           }
         },
         {
@@ -1082535,6 +1082546,7 @@
                 "gender": "male"
               }
             ],
+            "replaced_by": "sr:sport_event:75776158",
             "sport_event_conditions": {
               "ground": {
                 "neutral": false
@@ -1082542,7 +1082554,8 @@
             }
           },
           "sport_event_status": {
-            "status": "not_started"
+            "status": "postponed",
+            "match_status": "postponed"
           }
         },
         {
@@ -1082938,7 +1082951,11 @@
             }
           },
           "sport_event_status": {
-            "status": "not_started"
+            "status": "closed",
+            "match_status": "ended",
+            "home_score": 2,
+            "away_score": 0,
+            "winner_id": "sr:competitor:460733"
           }
         },
         {
@@ -1083040,7 +1083057,11 @@
             }
           },
           "sport_event_status": {
-            "status": "not_started"
+            "status": "closed",
+            "match_status": "ended",
+            "home_score": 2,
+            "away_score": 1,
+            "winner_id": "sr:competitor:1205767"
           }
         },
         {
@@ -1083262,6 +1083283,10 @@
               }
             ],
             "sport_event_conditions": {
+              "weather": {
+                "pitch_conditions": "good",
+                "overall_conditions": "good"
+              },
               "ground": {
                 "neutral": false
               }
@@ -1083874,13 +1083899,13 @@
               }
             ],
             "venue": {
-              "id": "sr:venue:53275",
-              "name": "Tsentralnyi Stadion",
-              "capacity": 20000,
-              "city_name": "Zhytomyr",
-              "city_id": "sr:city:19577",
+              "id": "sr:venue:72393",
+              "name": "Stadium Livyi Bereh",
+              "capacity": 5000,
+              "city_name": "Kiev",
+              "city_id": "sr:city:333",
               "country_name": "Ukraine",
-              "map_coordinates": "50.2461, 28.669106",
+              "map_coordinates": "50.336634928594, 30.624163256397",
               "country_code": "UKR",
               "timezone": "Europe/Kyiv"
             },
@@ -1086656,6 +1086681,107 @@
         },
         {
           "sport_event": {
+            "id": "sr:sport_event:75773986",
+            "start_time": "2026-10-19T13:00:00+00:00",
+            "start_time_confirmed": true,
+            "date_confirmed": true,
+            "sport_event_context": {
+              "sport": {
+                "id": "sr:sport:1",
+                "name": "Soccer"
+              },
+              "category": {
+                "id": "sr:category:806",
+                "name": "Mozambique",
+                "country_code": "MOZ"
+              },
+              "competition": {
+                "id": "sr:competition:20576",
+                "name": "Mocambola",
+                "gender": "men"
+              },
+              "season": {
+                "id": "sr:season:141340",
+                "name": "Mocambola 2026",
+                "start_date": "2026-05-01",
+                "end_date": "2026-12-28",
+                "year": "2026",
+                "competition_id": "sr:competition:20576"
+              },
+              "stage": {
+                "order": 1,
+                "type": "league",
+                "phase": "regular season",
+                "start_date": "2026-05-01",
+                "end_date": "2026-12-28",
+                "year": "2026"
+              },
+              "round": {
+                "number": 25
+              },
+              "groups": [
+                {
+                  "id": "sr:league:107152",
+                  "name": "Mocambola 2026"
+                }
+              ]
+            },
+            "coverage": {
+              "type": "sport_event",
+              "sport_event_properties": {
+                "lineups": false,
+                "formations": false,
+                "venue": false,
+                "ballspotting": false,
+                "commentary": false,
+                "fun_facts": false,
+                "game_clock": false,
+                "goal_scorers": false,
+                "goal_scorers_live": false,
+                "scores": "post",
+                "basic_play_by_play": false,
+                "basic_player_stats": false,
+                "basic_team_stats": false,
+                "deeper_play_by_play": false,
+                "deeper_player_stats": false,
+                "deeper_team_stats": false,
+                "extended_play_by_play": false,
+                "extended_player_stats": false,
+                "extended_team_stats": false
+              }
+            },
+            "competitors": [
+              {
+                "id": "sr:competitor:770952",
+                "name": "Ferroviario de Lichinga",
+                "country": "Mozambique",
+                "country_code": "MOZ",
+                "abbreviation": "FER",
+                "qualifier": "home",
+                "gender": "male"
+              },
+              {
+                "id": "sr:competitor:246137",
+                "name": "Ferroviario de Maputo",
+                "country": "Mozambique",
+                "country_code": "MOZ",
+                "abbreviation": "FMA",
+                "qualifier": "away",
+                "gender": "male"
+              }
+            ],
+            "sport_event_conditions": {
+              "ground": {
+                "neutral": false
+              }
+            }
+          },
+          "sport_event_status": {
+            "status": "not_started"
+          }
+        },
+        {
+          "sport_event": {
             "id": "sr:sport_event:74548662",
             "start_time": "2026-10-19T13:05:00+00:00",
             "start_time_confirmed": true,
@@ -1088290,8 +1088416,8 @@
         },
         {
           "sport_event": {
-            "id": "sr:sport_event:75773986",
-            "start_time": "2026-10-19T13:52:00+00:00",
+            "id": "sr:sport_event:72507508",
+            "start_time": "2026-10-19T14:00:00+00:00",
             "start_time_confirmed": true,
             "date_confirmed": true,
             "sport_event_context": {
@@ -1088300,38 +1088426,39 @@
                 "name": "Soccer"
               },
               "category": {
-                "id": "sr:category:806",
-                "name": "Mozambique",
-                "country_code": "MOZ"
+                "id": "sr:category:32",
+                "name": "Spain",
+                "country_code": "ESP"
               },
               "competition": {
-                "id": "sr:competition:20576",
-                "name": "Mocambola",
+                "id": "sr:competition:544",
+                "name": "Segunda Federacion",
                 "gender": "men"
               },
               "season": {
-                "id": "sr:season:141340",
-                "name": "Mocambola 2026",
-                "start_date": "2026-05-01",
-                "end_date": "2026-12-28",
-                "year": "2026",
-                "competition_id": "sr:competition:20576"
+                "id": "sr:season:143470",
+                "name": "Segunda Federacion 26/27",
+                "start_date": "2026-09-05",
+                "end_date": "2027-06-07",
+                "year": "26/27",
+                "competition_id": "sr:competition:544"
               },
               "stage": {
                 "order": 1,
                 "type": "league",
                 "phase": "regular season",
-                "start_date": "2026-05-01",
-                "end_date": "2026-12-28",
-                "year": "2026"
+                "start_date": "2026-09-05",
+                "end_date": "2027-05-10",
+                "year": "26/27"
               },
               "round": {
-                "number": 25
+                "number": 7
               },
               "groups": [
                 {
-                  "id": "sr:league:107152",
-                  "name": "Mocambola 2026"
+                  "id": "sr:league:109280",
+                  "name": "Segunda Federacion 26/27, Group 3",
+                  "group_name": "3"
                 }
               ]
             },
@@ -1088361,20 +1088488,20 @@
             },
             "competitors": [
               {
-                "id": "sr:competitor:770952",
-                "name": "Ferroviario de Lichinga",
-                "country": "Mozambique",
-                "country_code": "MOZ",
-                "abbreviation": "FER",
+                "id": "sr:competitor:116243",
+                "name": "SCR Pena Deportiva",
+                "country": "Spain",
+                "country_code": "ESP",
+                "abbreviation": "PEN",
                 "qualifier": "home",
                 "gender": "male"
               },
               {
-                "id": "sr:competitor:246137",
-                "name": "Ferroviario de Maputo",
-                "country": "Mozambique",
-                "country_code": "MOZ",
-                "abbreviation": "FMA",
+                "id": "sr:competitor:55785",
+                "name": "UCAM Murcia",
+                "country": "Spain",
+                "country_code": "ESP",
+                "abbreviation": "UCA",
                 "qualifier": "away",
                 "gender": "male"
               }
@@ -1088386,7 +1088513,8 @@
             }
           },
           "sport_event_status": {
-            "status": "not_started"
+            "status": "postponed",
+            "match_status": "postponed"
           }
         },
         {
@@ -1088936,13 +1089064,13 @@
               }
             ],
             "venue": {
-              "id": "sr:venue:19242",
-              "name": "Guru Nanak Stadium",
-              "capacity": 15000,
-              "city_name": "Ludhiana",
-              "city_id": "sr:city:14993",
+              "id": "sr:venue:36447",
+              "name": "Jawaharlal Nehru Stadium",
+              "capacity": 60000,
+              "city_name": "New Delhi",
+              "city_id": "sr:city:1170",
               "country_name": "India",
-              "map_coordinates": "30.910961, 75.845082",
+              "map_coordinates": "28.58293, 77.234459",
               "country_code": "IND",
               "timezone": "Asia/Kolkata"
             },
@@ -1090071,6 +1090199,7 @@
                 "age_group": "U21"
               }
             ],
+            "replaced_by": "sr:sport_event:75789324",
             "sport_event_conditions": {
               "ground": {
                 "neutral": false
@@ -1090078,7 +1090207,8 @@
             }
           },
           "sport_event_status": {
-            "status": "not_started"
+            "status": "postponed",
+            "match_status": "postponed"
           }
         },
         {
@@ -1096669,13 +1096799,13 @@
               }
             ],
             "venue": {
-              "id": "sr:venue:12067",
-              "name": "Stadion im. Kazimierza Gorskiego",
-              "capacity": 10978,
+              "id": "sr:venue:6590",
+              "name": "Orlen Arena",
+              "capacity": 5467,
               "city_name": "Plock",
               "city_id": "sr:city:4392",
               "country_name": "Poland",
-              "map_coordinates": "52.561978, 19.684206",
+              "map_coordinates": "52.56, 19.6825",
               "country_code": "POL",
               "timezone": "Europe/Warsaw"
             },
@@ -1099662,7 +1099792,7 @@
                 "id": "sr:season:139788",
                 "name": "U20 Mineiro, 1. Divisao 2026",
                 "start_date": "2026-03-20",
-                "end_date": "2026-10-24",
+                "end_date": "2026-10-26",
                 "year": "2026",
                 "competition_id": "sr:competition:46651"
               },
@@ -1099671,11 +1099801,12 @@
                 "type": "cup",
                 "phase": "playoffs",
                 "start_date": "2026-09-26",
-                "end_date": "2026-10-24",
+                "end_date": "2026-10-26",
                 "year": "2026"
               },
               "round": {
                 "name": "final",
+                "other_sport_event_id": "sr:sport_event:75335620",
                 "cup_round_sport_event_number": 1,
                 "cup_round_number_of_sport_events": 2,
                 "cup_round_id": "sr:cup_round:2659626"
@@ -1101963,112 +1102094,9 @@
           "sport_event_status": {
             "status": "not_started"
           }
-        },
-        {
-          "sport_event": {
-            "id": "sr:sport_event:75383956",
-            "start_time": "2026-10-19T18:45:00+00:00",
-            "start_time_confirmed": true,
-            "date_confirmed": true,
-            "sport_event_context": {
-              "sport": {
-                "id": "sr:sport:1",
-                "name": "Soccer"
-              },
-              "category": {
-                "id": "sr:category:51",
-                "name": "Ireland",
-                "country_code": "IRL"
-              },
-              "competition": {
-                "id": "sr:competition:192",
-                "name": "Premier Division",
-                "gender": "men",
-                "alternative_name": "League of Ireland Premier Division"
-              },
-              "season": {
-                "id": "sr:season:137994",
-                "name": "Premier Division 2026",
-                "start_date": "2026-02-06",
-                "end_date": "2026-11-08",
-                "year": "2026",
-                "competition_id": "sr:competition:192"
-              },
-              "stage": {
-                "order": 1,
-                "type": "league",
-                "phase": "regular season",
-                "start_date": "2026-02-06",
-                "end_date": "2026-10-30",
-                "year": "2026"
-              },
-              "round": {
-                "number": 33
-              },
-              "groups": [
-                {
-                  "id": "sr:league:103238",
-                  "name": "Premier Division 2026"
-                }
-              ]
-            },
-            "coverage": {
-              "type": "sport_event",
-              "sport_event_properties": {
-                "lineups": false,
-                "formations": false,
-                "venue": false,
-                "ballspotting": false,
-                "commentary": false,
-                "fun_facts": true,
-                "game_clock": true,
-                "goal_scorers": true,
-                "goal_scorers_live": true,
-                "scores": "live",
-                "basic_play_by_play": false,
-                "basic_player_stats": false,
-                "basic_team_stats": false,
-                "deeper_play_by_play": false,
-                "deeper_player_stats": false,
-                "deeper_team_stats": false,
-                "extended_play_by_play": false,
-                "extended_player_stats": false,
-                "extended_team_stats": false
-              }
-            },
-            "competitors": [
-              {
-                "id": "sr:competitor:3194",
-                "name": "Waterford FC",
-                "country": "Ireland",
-                "country_code": "IRL",
-                "abbreviation": "WAT",
-                "qualifier": "home",
-                "gender": "male"
-              },
-              {
-                "id": "sr:competitor:3172",
-                "name": "Galway United FC",
-                "country": "Ireland",
-                "country_code": "IRL",
-                "abbreviation": "GAL",
-                "qualifier": "away",
-                "gender": "male"
-              }
-            ],
-            "sport_event_conditions": {
-              "ground": {
-                "neutral": false
-              }
-            }
-          },
-          "sport_event_status": {
-            "status": "not_started",
-            "match_status": "not_started"
-          }
         }
       ]
     },
-    "updatedAt": "2026-10-19T04:35:30.590Z"
+    "updatedAt": "2026-10-19T08:59:37.750Z"
   }
 }
