@@ -1,49 +1,14 @@
 {
   "special": true,
   "league": "WTA Tour",
-  "live": true,
-  "updatedAt": "2026-10-19T20:09:59.823453+00:00",
+  "live": false,
+  "updatedAt": "2026-10-19T20:10:05.098705+00:00",
   "sourceName": "WTA Official Scores scrape",
   "sourceUrl": "https://www.wtatennis.com/scores/",
   "verificationSource": "WTA Official Scores",
   "verificationUrl": "https://www.wtatennis.com/scores/",
-  "pageLiveCount": 1,
-  "parsedMatchCount": 1,
+  "pageLiveCount": null,
+  "parsedMatchCount": 0,
   "note": "GitHub scrape of the rendered WTA Scores page. Game points, current set number, current-set games and per-set scores are stored separately.",
-  "games": [
-    {
-      "eventId": "wta-scrape-0-k-boulter-h-sakatsume",
-      "date": "2026-10-19T20:09:59.821247+00:00",
-      "displayTime": "Kinoshita Group Japan Open • JPN",
-      "away": "K. Boulter",
-      "home": "H. Sakatsume",
-      "awayScore": "6 3",
-      "homeScore": "3 1",
-      "awaySets": [
-        "6",
-        "3"
-      ],
-      "homeSets": [
-        "3",
-        "1"
-      ],
-      "awayPoint": "—",
-      "homePoint": "—",
-      "currentSet": 2,
-      "awayCurrentSetGames": 3,
-      "homeCurrentSetGames": 1,
-      "awaySetsWon": 1,
-      "homeSetsWon": 0,
-      "round": "Round of 32",
-      "court": "",
-      "status": "Suspended · Round of 32",
-      "state": "suspended",
-      "eventOnly": false,
-      "title": "Kinoshita Group Japan Open • JPN",
-      "sourceName": "WTA Official Scores scrape",
-      "sourceUrl": "https://www.wtatennis.com/scores/",
-      "verificationSource": "WTA Official Scores",
-      "verificationUrl": "https://www.wtatennis.com/scores/"
-    }
-  ]
+  "games": []
 }
