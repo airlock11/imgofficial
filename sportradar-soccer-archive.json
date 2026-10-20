@@ -3,14 +3,14 @@
   "provider": "Sportradar",
   "product": "Soccer API",
   "access": "trial",
-  "updatedAt": "2026-10-20T04:44:42.894Z",
+  "updatedAt": "2026-10-20T08:38:05.901Z",
   "requestsLastRun": 2,
   "leagues": {
     "laliga": {
       "league": "La Liga",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-20T04:44:42.894Z",
+      "updatedAt": "2026-10-20T08:38:05.901Z",
       "games": [
         {
           "eventId": "sr:sport_event:72477492",
@@ -432,7 +432,7 @@
       "league": "Serie A",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-20T04:44:42.894Z",
+      "updatedAt": "2026-10-20T08:38:05.901Z",
       "games": [
         {
           "eventId": "sr:sport_event:71945286",
@@ -624,7 +624,7 @@
       "league": "Bundesliga",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-20T04:44:42.894Z",
+      "updatedAt": "2026-10-20T08:38:05.901Z",
       "games": [
         {
           "eventId": "sr:sport_event:72513242",
@@ -275807,7 +275807,7 @@
       "league": "UEFA Champions League",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-20T04:44:42.894Z",
+      "updatedAt": "2026-10-20T08:38:05.901Z",
       "games": [
         {
           "eventId": "sr:sport_event:74165904",
@@ -339770,7 +339770,7 @@
       "league": "MLS",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-20T04:44:42.894Z",
+      "updatedAt": "2026-10-20T08:38:05.901Z",
       "games": [
         {
           "eventId": "sr:sport_event:66299652",
@@ -962105,14 +962105,14 @@
       "league": "PFL",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-20T04:44:42.894Z",
+      "updatedAt": "2026-10-20T08:38:05.901Z",
       "games": []
     },
     "jamaica_pl": {
       "league": "Jamaican Premier League",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-20T04:44:42.894Z",
+      "updatedAt": "2026-10-20T08:38:05.901Z",
       "games": [
         {
           "eventId": "sr:sport_event:74695452",
@@ -991959,7 +991959,7 @@
       "league": "Mizoram Premier League",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-20T04:44:42.894Z",
+      "updatedAt": "2026-10-20T08:38:05.901Z",
       "games": [
         {
           "eventId": "sr:sport_event:75074666",
@@ -992151,7 +992151,7 @@
       "league": "Primera Division, Reserves",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-20T04:44:42.894Z",
+      "updatedAt": "2026-10-20T08:38:05.901Z",
       "games": [
         {
           "eventId": "sr:sport_event:75601346",
@@ -992182,7 +992182,7 @@
       "league": "UEFA Champions League Women",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-20T04:44:42.894Z",
+      "updatedAt": "2026-10-20T08:38:05.901Z",
       "games": [],
       "competitionId": "sr:competition:696",
       "competition": {
@@ -1079674,7 +1079674,7 @@
     "updatedAt": "2026-09-22T16:50:47.840Z"
   },
   "requestBudget": 900,
-  "requestBudgetRemaining": 381,
+  "requestBudgetRemaining": 379,
   "harvestMode": "live",
   "usage": {
     "requests": [
@@ -1080372,10 +1080372,15 @@
         "at": "2026-10-20T04:44:42.894Z",
         "count": 2,
         "mode": "live"
+      },
+      {
+        "at": "2026-10-20T08:38:05.901Z",
+        "count": 2,
+        "mode": "live"
       }
     ],
-    "rolling30Day": 519,
-    "trackedRolling30Day": 405,
+    "rolling30Day": 521,
+    "trackedRolling30Day": 407,
     "preTrackingRolling30Day": 114
   },
   "runRequestCap": 6,
@@ -1080385,11 +1080390,144 @@
   },
   "latestFeeds": {
     "live": {
-      "generated_at": "2026-10-20T04:44:44+00:00",
-      "schedules": []
+      "generated_at": "2026-10-20T08:38:05+00:00",
+      "schedules": [
+        {
+          "sport_event": {
+            "id": "sr:sport_event:73577166",
+            "start_time": "2026-10-20T08:30:00+00:00",
+            "start_time_confirmed": true,
+            "date_confirmed": true,
+            "sport_event_context": {
+              "sport": {
+                "id": "sr:sport:1",
+                "name": "Soccer"
+              },
+              "category": {
+                "id": "sr:category:368",
+                "name": "Indonesia",
+                "country_code": "IDN"
+              },
+              "competition": {
+                "id": "sr:competition:1015",
+                "name": "Super League",
+                "gender": "men"
+              },
+              "season": {
+                "id": "sr:season:145226",
+                "name": "Super League 26/27",
+                "start_date": "2026-09-04",
+                "end_date": "2027-06-05",
+                "year": "26/27",
+                "competition_id": "sr:competition:1015"
+              },
+              "stage": {
+                "order": 1,
+                "type": "league",
+                "phase": "regular season",
+                "start_date": "2026-09-04",
+                "end_date": "2027-06-05",
+                "year": "26/27"
+              },
+              "round": {
+                "number": 6
+              },
+              "groups": [
+                {
+                  "id": "sr:league:111954",
+                  "name": "Super League 26/27"
+                }
+              ]
+            },
+            "coverage": {
+              "type": "sport_event",
+              "sport_event_properties": {
+                "lineups": true,
+                "formations": false,
+                "venue": false,
+                "lineups_availability": "pre",
+                "ballspotting": false,
+                "commentary": false,
+                "fun_facts": true,
+                "game_clock": true,
+                "goal_scorers": true,
+                "goal_scorers_live": true,
+                "scores": "live",
+                "basic_play_by_play": true,
+                "basic_player_stats": true,
+                "basic_team_stats": true,
+                "deeper_play_by_play": false,
+                "deeper_player_stats": false,
+                "deeper_team_stats": false,
+                "extended_play_by_play": false,
+                "extended_player_stats": false,
+                "extended_team_stats": false
+              }
+            },
+            "competitors": [
+              {
+                "id": "sr:competitor:881555",
+                "name": "Isenmulang Kalteng FC",
+                "country": "Indonesia",
+                "country_code": "IDN",
+                "abbreviation": "ADB",
+                "qualifier": "home",
+                "gender": "male"
+              },
+              {
+                "id": "sr:competitor:1055373",
+                "name": "Java United FC",
+                "country": "Indonesia",
+                "country_code": "IDN",
+                "abbreviation": "MAL",
+                "qualifier": "away",
+                "gender": "male"
+              }
+            ],
+            "sport_event_conditions": {
+              "referees": [
+                {
+                  "id": "sr:referee:3161048",
+                  "name": "Sanjaya, Bangkit",
+                  "nationality": "Indonesia",
+                  "country_code": "IDN",
+                  "type": "main_referee"
+                }
+              ],
+              "weather": {
+                "pitch_conditions": "good",
+                "overall_conditions": "good"
+              },
+              "ground": {
+                "neutral": false
+              },
+              "lineups": {
+                "confirmed": true
+              }
+            }
+          },
+          "sport_event_status": {
+            "status": "live",
+            "match_status": "1st_half",
+            "home_score": 0,
+            "away_score": 0,
+            "period_scores": [
+              {
+                "home_score": 0,
+                "away_score": 0,
+                "type": "regular_period",
+                "number": 1
+              }
+            ],
+            "clock": {
+              "played": "07:42"
+            }
+          }
+        }
+      ]
     },
     "daily": {
-      "generated_at": "2026-10-20T04:44:06+00:00",
+      "generated_at": "2026-10-20T08:38:09+00:00",
       "schedules": [
         {
           "sport_event": {
@@ -1082378,14 +1082516,43 @@
               }
             ],
             "sport_event_conditions": {
+              "referees": [
+                {
+                  "id": "sr:referee:3161048",
+                  "name": "Sanjaya, Bangkit",
+                  "nationality": "Indonesia",
+                  "country_code": "IDN",
+                  "type": "main_referee"
+                }
+              ],
+              "weather": {
+                "pitch_conditions": "good",
+                "overall_conditions": "good"
+              },
               "ground": {
                 "neutral": false
+              },
+              "lineups": {
+                "confirmed": true
               }
             }
           },
           "sport_event_status": {
-            "status": "not_started",
-            "match_status": "not_started"
+            "status": "live",
+            "match_status": "1st_half",
+            "home_score": 0,
+            "away_score": 0,
+            "period_scores": [
+              {
+                "home_score": 0,
+                "away_score": 0,
+                "type": "regular_period",
+                "number": 1
+              }
+            ],
+            "clock": {
+              "played": "07:46"
+            }
           }
         },
         {
@@ -1082579,6 +1082746,10 @@
               }
             ],
             "sport_event_conditions": {
+              "weather": {
+                "pitch_conditions": "good",
+                "overall_conditions": "medium"
+              },
               "ground": {
                 "neutral": false
               }
@@ -1085845,109 +1086016,6 @@
         },
         {
           "sport_event": {
-            "id": "sr:sport_event:75655412",
-            "start_time": "2026-10-20T13:00:00+00:00",
-            "start_time_confirmed": true,
-            "date_confirmed": true,
-            "sport_event_context": {
-              "sport": {
-                "id": "sr:sport:1",
-                "name": "Soccer"
-              },
-              "category": {
-                "id": "sr:category:393",
-                "name": "International Clubs"
-              },
-              "competition": {
-                "id": "sr:competition:1054",
-                "name": "CAF Champions League",
-                "gender": "men"
-              },
-              "season": {
-                "id": "sr:season:145326",
-                "name": "CAF Champions League 26/27",
-                "start_date": "2026-09-04",
-                "end_date": "2027-06-01",
-                "year": "26/27",
-                "competition_id": "sr:competition:1054"
-              },
-              "stage": {
-                "order": 1,
-                "type": "cup",
-                "phase": "qualification",
-                "start_date": "2026-09-04",
-                "end_date": "2026-10-26",
-                "year": "26/27"
-              },
-              "round": {
-                "number": 2,
-                "name": "qualification_round_2",
-                "other_sport_event_id": "sr:sport_event:75655414",
-                "cup_round_sport_event_number": 1,
-                "cup_round_number_of_sport_events": 2,
-                "cup_round_id": "sr:cup_round:2664452"
-              },
-              "groups": [
-                {
-                  "id": "sr:cup:201174",
-                  "name": "CAF Champions League 26/27, Qualification"
-                }
-              ]
-            },
-            "coverage": {
-              "type": "sport_event",
-              "sport_event_properties": {
-                "lineups": false,
-                "formations": false,
-                "venue": false,
-                "ballspotting": false,
-                "commentary": false,
-                "fun_facts": false,
-                "game_clock": false,
-                "goal_scorers": false,
-                "goal_scorers_live": false,
-                "scores": "post",
-                "basic_play_by_play": false,
-                "basic_player_stats": false,
-                "basic_team_stats": false,
-                "deeper_play_by_play": false,
-                "deeper_player_stats": false,
-                "deeper_team_stats": false,
-                "extended_play_by_play": false,
-                "extended_player_stats": false,
-                "extended_team_stats": false
-              }
-            },
-            "competitors": [
-              {
-                "id": "sr:competitor:1159645",
-                "name": "FC 15 de Agosto Guinea de Akonibe",
-                "abbreviation": "AGO",
-                "qualifier": "home",
-                "gender": "male"
-              },
-              {
-                "id": "sr:competitor:238670",
-                "name": "Simba SC",
-                "country": "Tanzania",
-                "country_code": "TZA",
-                "abbreviation": "SIM",
-                "qualifier": "away",
-                "gender": "male"
-              }
-            ],
-            "sport_event_conditions": {
-              "ground": {
-                "neutral": true
-              }
-            }
-          },
-          "sport_event_status": {
-            "status": "not_started"
-          }
-        },
-        {
-          "sport_event": {
             "id": "sr:sport_event:75798528",
             "start_time": "2026-10-20T13:00:00+00:00",
             "start_time_confirmed": true,
@@ -1086557,110 +1086625,6 @@
         },
         {
           "sport_event": {
-            "id": "sr:sport_event:73930360",
-            "start_time": "2026-10-20T13:45:00+00:00",
-            "start_time_confirmed": true,
-            "date_confirmed": true,
-            "sport_event_context": {
-              "sport": {
-                "id": "sr:sport:1",
-                "name": "Soccer"
-              },
-              "category": {
-                "id": "sr:category:66",
-                "name": "Israel",
-                "country_code": "ISR"
-              },
-              "competition": {
-                "id": "sr:competition:36195",
-                "name": "U19 Premier League",
-                "gender": "men"
-              },
-              "season": {
-                "id": "sr:season:145558",
-                "name": "U19 Premier League 26/27",
-                "start_date": "2026-08-15",
-                "end_date": "2027-05-23",
-                "year": "26/27",
-                "competition_id": "sr:competition:36195"
-              },
-              "stage": {
-                "order": 1,
-                "type": "league",
-                "phase": "regular season",
-                "start_date": "2026-08-15",
-                "end_date": "2027-01-17",
-                "year": "26/27"
-              },
-              "round": {
-                "number": 12
-              },
-              "groups": [
-                {
-                  "id": "sr:league:112500",
-                  "name": "U19 Premier League 26/27",
-                  "group_name": "Premier League"
-                }
-              ]
-            },
-            "coverage": {
-              "type": "sport_event",
-              "sport_event_properties": {
-                "lineups": false,
-                "formations": false,
-                "venue": false,
-                "ballspotting": false,
-                "commentary": false,
-                "fun_facts": false,
-                "game_clock": false,
-                "goal_scorers": false,
-                "goal_scorers_live": false,
-                "scores": "post",
-                "basic_play_by_play": false,
-                "basic_player_stats": false,
-                "basic_team_stats": false,
-                "deeper_play_by_play": false,
-                "deeper_player_stats": false,
-                "deeper_team_stats": false,
-                "extended_play_by_play": false,
-                "extended_player_stats": false,
-                "extended_team_stats": false
-              }
-            },
-            "competitors": [
-              {
-                "id": "sr:competitor:307302",
-                "name": "Hapoel Rishon Letzion",
-                "country": "Israel",
-                "country_code": "ISR",
-                "abbreviation": "LET",
-                "qualifier": "home",
-                "gender": "male",
-                "age_group": "U19"
-              },
-              {
-                "id": "sr:competitor:307290",
-                "name": "Maccabi Haifa",
-                "country": "Israel",
-                "country_code": "ISR",
-                "abbreviation": "MAC",
-                "qualifier": "away",
-                "gender": "male",
-                "age_group": "U19"
-              }
-            ],
-            "sport_event_conditions": {
-              "ground": {
-                "neutral": false
-              }
-            }
-          },
-          "sport_event_status": {
-            "status": "not_started"
-          }
-        },
-        {
-          "sport_event": {
             "id": "sr:sport_event:73930366",
             "start_time": "2026-10-20T13:45:00+00:00",
             "start_time_confirmed": true,
@@ -1086766,7 +1086730,7 @@
         {
           "sport_event": {
             "id": "sr:sport_event:73930370",
-            "start_time": "2026-10-20T13:45:00+00:00",
+            "start_time": "2026-10-20T13:50:00+00:00",
             "start_time_confirmed": true,
             "date_confirmed": true,
             "sport_event_context": {
@@ -1086852,6 +1086816,110 @@
                 "country": "Israel",
                 "country_code": "ISR",
                 "abbreviation": "MTA",
+                "qualifier": "away",
+                "gender": "male",
+                "age_group": "U19"
+              }
+            ],
+            "sport_event_conditions": {
+              "ground": {
+                "neutral": false
+              }
+            }
+          },
+          "sport_event_status": {
+            "status": "not_started"
+          }
+        },
+        {
+          "sport_event": {
+            "id": "sr:sport_event:73930360",
+            "start_time": "2026-10-20T13:55:00+00:00",
+            "start_time_confirmed": true,
+            "date_confirmed": true,
+            "sport_event_context": {
+              "sport": {
+                "id": "sr:sport:1",
+                "name": "Soccer"
+              },
+              "category": {
+                "id": "sr:category:66",
+                "name": "Israel",
+                "country_code": "ISR"
+              },
+              "competition": {
+                "id": "sr:competition:36195",
+                "name": "U19 Premier League",
+                "gender": "men"
+              },
+              "season": {
+                "id": "sr:season:145558",
+                "name": "U19 Premier League 26/27",
+                "start_date": "2026-08-15",
+                "end_date": "2027-05-23",
+                "year": "26/27",
+                "competition_id": "sr:competition:36195"
+              },
+              "stage": {
+                "order": 1,
+                "type": "league",
+                "phase": "regular season",
+                "start_date": "2026-08-15",
+                "end_date": "2027-01-17",
+                "year": "26/27"
+              },
+              "round": {
+                "number": 12
+              },
+              "groups": [
+                {
+                  "id": "sr:league:112500",
+                  "name": "U19 Premier League 26/27",
+                  "group_name": "Premier League"
+                }
+              ]
+            },
+            "coverage": {
+              "type": "sport_event",
+              "sport_event_properties": {
+                "lineups": false,
+                "formations": false,
+                "venue": false,
+                "ballspotting": false,
+                "commentary": false,
+                "fun_facts": false,
+                "game_clock": false,
+                "goal_scorers": false,
+                "goal_scorers_live": false,
+                "scores": "post",
+                "basic_play_by_play": false,
+                "basic_player_stats": false,
+                "basic_team_stats": false,
+                "deeper_play_by_play": false,
+                "deeper_player_stats": false,
+                "deeper_team_stats": false,
+                "extended_play_by_play": false,
+                "extended_player_stats": false,
+                "extended_team_stats": false
+              }
+            },
+            "competitors": [
+              {
+                "id": "sr:competitor:307302",
+                "name": "Hapoel Rishon Letzion",
+                "country": "Israel",
+                "country_code": "ISR",
+                "abbreviation": "LET",
+                "qualifier": "home",
+                "gender": "male",
+                "age_group": "U19"
+              },
+              {
+                "id": "sr:competitor:307290",
+                "name": "Maccabi Haifa",
+                "country": "Israel",
+                "country_code": "ISR",
+                "abbreviation": "MAC",
                 "qualifier": "away",
                 "gender": "male",
                 "age_group": "U19"
@@ -1101521,11 +1101589,116 @@
             }
           },
           "sport_event_status": {
-            "status": "not_started"
+            "status": "postponed",
+            "match_status": "postponed"
+          }
+        },
+        {
+          "sport_event": {
+            "id": "sr:sport_event:75142614",
+            "start_time": "2026-10-20T18:45:00+00:00",
+            "start_time_confirmed": true,
+            "date_confirmed": true,
+            "sport_event_context": {
+              "sport": {
+                "id": "sr:sport:1",
+                "name": "Soccer"
+              },
+              "category": {
+                "id": "sr:category:130",
+                "name": "Northern Ireland",
+                "country_code": "NIR"
+              },
+              "competition": {
+                "id": "sr:competition:200",
+                "name": "Premiership",
+                "gender": "men",
+                "alternative_name": "NIFL Premiership"
+              },
+              "season": {
+                "id": "sr:season:143256",
+                "name": "Premiership 26/27",
+                "start_date": "2026-08-07",
+                "end_date": "2027-05-12",
+                "year": "26/27",
+                "competition_id": "sr:competition:200"
+              },
+              "stage": {
+                "order": 1,
+                "type": "league",
+                "phase": "regular season",
+                "start_date": "2026-08-07",
+                "end_date": "2027-03-28",
+                "year": "26/27"
+              },
+              "round": {
+                "number": 10
+              },
+              "groups": [
+                {
+                  "id": "sr:league:109066",
+                  "name": "Premiership 26/27",
+                  "group_name": "Premiership"
+                }
+              ]
+            },
+            "coverage": {
+              "type": "sport_event",
+              "sport_event_properties": {
+                "lineups": false,
+                "formations": false,
+                "venue": false,
+                "ballspotting": false,
+                "commentary": false,
+                "fun_facts": true,
+                "game_clock": true,
+                "goal_scorers": false,
+                "goal_scorers_live": false,
+                "scores": "live",
+                "basic_play_by_play": false,
+                "basic_player_stats": false,
+                "basic_team_stats": false,
+                "deeper_play_by_play": false,
+                "deeper_player_stats": false,
+                "deeper_team_stats": false,
+                "extended_play_by_play": false,
+                "extended_player_stats": false,
+                "extended_team_stats": false
+              }
+            },
+            "competitors": [
+              {
+                "id": "sr:competitor:5184",
+                "name": "Larne FC",
+                "country": "Northern Ireland",
+                "country_code": "NIR",
+                "abbreviation": "LAR",
+                "qualifier": "home",
+                "gender": "male"
+              },
+              {
+                "id": "sr:competitor:5272",
+                "name": "Linfield FC",
+                "country": "Northern Ireland",
+                "country_code": "NIR",
+                "abbreviation": "LIN",
+                "qualifier": "away",
+                "gender": "male"
+              }
+            ],
+            "sport_event_conditions": {
+              "ground": {
+                "neutral": false
+              }
+            }
+          },
+          "sport_event_status": {
+            "status": "not_started",
+            "match_status": "not_started"
           }
         }
       ]
     },
-    "updatedAt": "2026-10-20T04:44:42.894Z"
+    "updatedAt": "2026-10-20T08:38:05.901Z"
   }
 }
