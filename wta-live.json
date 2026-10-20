@@ -2,7 +2,7 @@
   "special": true,
   "league": "WTA Tour",
   "live": true,
-  "updatedAt": "2026-10-20T07:29:25.698329+00:00",
+  "updatedAt": "2026-10-20T07:29:32.148228+00:00",
   "sourceName": "WTA Official Scores scrape",
   "sourceUrl": "https://www.wtatennis.com/scores/",
   "verificationSource": "WTA Official Scores",
@@ -13,24 +13,25 @@
   "games": [
     {
       "eventId": "wta-scrape-0-y-putintseva-d-shnaider",
-      "date": "2026-10-20T07:29:25.694744+00:00",
+      "date": "2026-10-20T07:29:32.144653+00:00",
       "displayTime": "BNB Ningbo Open • CHN",
       "away": "Y. Putintseva",
       "home": "D. Shnaider",
       "awayScore": "5 6 · 0",
-      "homeScore": "7 6 · 0",
+      "homeScore": "1 7 6",
       "awaySets": [
         "5",
         "6"
       ],
       "homeSets": [
+        "1",
         "7",
         "6"
       ],
       "awayPoint": "0",
-      "homePoint": "0",
-      "currentSet": 2,
-      "awayCurrentSetGames": 6,
+      "homePoint": "—",
+      "currentSet": 3,
+      "awayCurrentSetGames": 0,
       "homeCurrentSetGames": 6,
       "awaySetsWon": 0,
       "homeSetsWon": 1,
@@ -47,7 +48,7 @@
     },
     {
       "eventId": "wta-scrape-1-s-bejlek-a-parks",
-      "date": "2026-10-20T07:29:25.695021+00:00",
+      "date": "2026-10-20T07:29:32.144939+00:00",
       "displayTime": "BNB Ningbo Open • CHN",
       "away": "S. Bejlek",
       "home": "A. Parks",
@@ -83,7 +84,7 @@
     },
     {
       "eventId": "wta-scrape-3-m-joint-z-sonmez",
-      "date": "2026-10-20T07:29:25.695410+00:00",
+      "date": "2026-10-20T07:29:32.145337+00:00",
       "displayTime": "Kinoshita Group Japan Open • JPN",
       "away": "M. Joint",
       "home": "Z. Sonmez",
@@ -117,7 +118,7 @@
     },
     {
       "eventId": "wta-scrape-2-m-uchijima-e-shibahara",
-      "date": "2026-10-20T07:29:25.695229+00:00",
+      "date": "2026-10-20T07:29:32.145131+00:00",
       "displayTime": "Kinoshita Group Japan Open • JPN",
       "away": "M. Uchijima",
       "home": "E. Shibahara",
@@ -154,7 +155,7 @@
     },
     {
       "eventId": "wta-scrape-4-k-day-s-kenin",
-      "date": "2026-10-20T07:29:25.695570+00:00",
+      "date": "2026-10-20T07:29:32.145505+00:00",
       "displayTime": "Kinoshita Group Japan Open • JPN",
       "away": "K. Day",
       "home": "S. Kenin",
