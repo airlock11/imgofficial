@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-21T19:09:11+08:00",
+  "updated_at": "2026-10-21T23:58:37+08:00",
   "refresh_minutes": 15,
   "leagues": {
     "pba": {
@@ -298,11 +298,11 @@
             "web-pba-20261021-smb-nlex",
             "web-pba-20261021-magnolia-ros"
           ],
-          "nextGameAt": "2026-10-21T19:30:00+08:00",
+          "nextGameAt": "",
           "idleDiscoveryMinutes": 180,
           "gameDayDataRefreshMinutes": 15,
           "gameDayLivestreamRefreshMinutes": 5,
-          "lastSlowCheckAt": "2026-10-21T19:08:24+08:00"
+          "lastSlowCheckAt": "2026-10-21T23:57:47+08:00"
         },
         "failClosed": true
       }
@@ -654,7 +654,14 @@
         "verifiedOfficialYouTube": true,
         "failClosedLivestream": true
       },
-      "broadcast": [],
+      "broadcast": [
+        {
+          "date": "2026-10-23",
+          "time": "5:30 PM",
+          "title": "NBL PILIPINAS Governor's Cup 2026",
+          "source": "Tap Sports"
+        }
+      ],
       "games": [
         {
           "eventId": "yt-nbl-hvCuvEg6CTg",
@@ -1139,12 +1146,12 @@
       ],
       "standings": [
         {
-          "team": "NU Bulldogs",
-          "wins": 5,
+          "team": "UP Fighting Maroons",
+          "wins": 6,
           "losses": 2
         },
         {
-          "team": "UP Fighting Maroons",
+          "team": "NU Bulldogs",
           "wins": 5,
           "losses": 2
         },
@@ -1159,12 +1166,12 @@
           "losses": 3
         },
         {
-          "team": "UST Growling Tigers",
+          "team": "De La Salle Green Archers",
           "wins": 4,
-          "losses": 3
+          "losses": 4
         },
         {
-          "team": "De La Salle Green Archers",
+          "team": "UST Growling Tigers",
           "wins": 4,
           "losses": 4
         },
@@ -1180,19 +1187,6 @@
         }
       ],
       "games": [
-        {
-          "eventId": "web-uaap-scheduled-8",
-          "date": "2026-10-21T17:00:00+08:00",
-          "displayTime": "Oct 21 · 5:00 PM",
-          "away": "UST Growling Tigers",
-          "home": "UP Fighting Maroons",
-          "awayScore": "—",
-          "homeScore": "—",
-          "status": "Scheduled",
-          "state": "scheduled",
-          "sourceName": "SkedCheck",
-          "sourceUrl": "https://skedcheck.com/uaap-mens-basketball-schedule-scores/"
-        },
         {
           "eventId": "web-uaap-scheduled-9",
           "date": "2026-10-24T14:30:00+08:00",
@@ -1244,6 +1238,19 @@
           "state": "scheduled",
           "sourceName": "SkedCheck",
           "sourceUrl": "https://skedcheck.com/uaap-mens-basketball-schedule-scores/"
+        },
+        {
+          "eventId": "uaap-live-31",
+          "date": "2026-10-21T17:00:00+08:00",
+          "displayTime": "Oct 21 · Final",
+          "away": "UST Growling Tigers",
+          "home": "UP Fighting Maroons",
+          "awayScore": "101",
+          "homeScore": "103",
+          "status": "Final",
+          "state": "final",
+          "sourceName": "UAAP Live Stats",
+          "sourceUrl": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball?game_id=31"
         },
         {
           "eventId": "uaap-live-30",
@@ -1401,14 +1408,14 @@
           "gameDay": true,
           "todayGameCount": 2,
           "todayGames": [
-            "web-uaap-scheduled-8",
+            "uaap-live-31",
             "uaap-live-30"
           ],
           "nextGameAt": "2026-10-24T14:30:00+08:00",
           "idleDiscoveryMinutes": 180,
           "gameDayDataRefreshMinutes": 15,
           "gameDayLivestreamRefreshMinutes": 5,
-          "lastSlowCheckAt": "2026-10-21T19:08:55+08:00"
+          "lastSlowCheckAt": "2026-10-21T23:58:21+08:00"
         },
         "failClosed": true
       }
@@ -1431,11 +1438,11 @@
           "web-pba-20261021-smb-nlex",
           "web-pba-20261021-magnolia-ros"
         ],
-        "nextGameAt": "2026-10-21T19:30:00+08:00",
+        "nextGameAt": "",
         "idleDiscoveryMinutes": 180,
         "gameDayDataRefreshMinutes": 15,
         "gameDayLivestreamRefreshMinutes": 5,
-        "lastSlowCheckAt": "2026-10-21T19:08:24+08:00"
+        "lastSlowCheckAt": "2026-10-21T23:57:47+08:00"
       },
       "failClosed": true
     },
@@ -1451,14 +1458,14 @@
         "gameDay": true,
         "todayGameCount": 2,
         "todayGames": [
-          "web-uaap-scheduled-8",
+          "uaap-live-31",
           "uaap-live-30"
         ],
         "nextGameAt": "2026-10-24T14:30:00+08:00",
         "idleDiscoveryMinutes": 180,
         "gameDayDataRefreshMinutes": 15,
         "gameDayLivestreamRefreshMinutes": 5,
-        "lastSlowCheckAt": "2026-10-21T19:08:55+08:00"
+        "lastSlowCheckAt": "2026-10-21T23:58:21+08:00"
       },
       "failClosed": true
     }
