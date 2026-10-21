@@ -2,18 +2,18 @@
   "special": true,
   "league": "WTA Tour",
   "live": true,
-  "updatedAt": "2026-10-21T07:35:20.226567+00:00",
+  "updatedAt": "2026-10-21T07:35:25.622294+00:00",
   "sourceName": "WTA Official Scores scrape",
   "sourceUrl": "https://www.wtatennis.com/scores/",
   "verificationSource": "WTA Official Scores",
   "verificationUrl": "https://www.wtatennis.com/scores/",
-  "pageLiveCount": 4,
-  "parsedMatchCount": 4,
+  "pageLiveCount": 3,
+  "parsedMatchCount": 3,
   "note": "GitHub scrape of the rendered WTA Scores page. Game points, current set number, current-set games and per-set scores are stored separately.",
   "games": [
     {
       "eventId": "wta-scrape-0-l-fernandez-a-sasnovich",
-      "date": "2026-10-21T07:35:20.224372+00:00",
+      "date": "2026-10-21T07:35:25.620280+00:00",
       "displayTime": "BNB Ningbo Open • CHN",
       "away": "L. Fernandez",
       "home": "A. Sasnovich",
@@ -45,7 +45,7 @@
     },
     {
       "eventId": "wta-scrape-1-upcoming-eikeri-gleason-ye",
-      "date": "2026-10-21T07:35:20.224739+00:00",
+      "date": "2026-10-21T07:35:25.620653+00:00",
       "displayTime": "BNB Ningbo Open • CHN",
       "away": "Upcoming / Eikeri",
       "home": "Gleason / Ye",
@@ -76,49 +76,13 @@
       "verificationUrl": "https://www.wtatennis.com/scores/"
     },
     {
-      "eventId": "wta-scrape-2-upcoming-hunter-tjen-lee",
-      "date": "2026-10-21T07:35:20.224908+00:00",
-      "displayTime": "Kinoshita Group Japan Open • JPN",
-      "away": "Upcoming / Hunter",
-      "home": "Tjen / Lee",
-      "awayScore": "4 6 0",
-      "homeScore": "6 3 0",
-      "awaySets": [
-        "4",
-        "6",
-        "0"
-      ],
-      "homeSets": [
-        "6",
-        "3",
-        "0"
-      ],
-      "awayPoint": "—",
-      "homePoint": "—",
-      "currentSet": 3,
-      "awayCurrentSetGames": 0,
-      "homeCurrentSetGames": 0,
-      "awaySetsWon": 1,
-      "homeSetsWon": 1,
-      "round": "Quarterfinals",
-      "court": "Court 1",
-      "status": "Live Match: 1:03 · Quarterfinals · Court 1",
-      "state": "live",
-      "eventOnly": false,
-      "title": "Kinoshita Group Japan Open • JPN",
-      "sourceName": "WTA Official Scores scrape",
-      "sourceUrl": "https://www.wtatennis.com/scores/",
-      "verificationSource": "WTA Official Scores",
-      "verificationUrl": "https://www.wtatennis.com/scores/"
-    },
-    {
-      "eventId": "wta-scrape-3-upcoming-kobori-shimizu-chan",
-      "date": "2026-10-21T07:35:20.225062+00:00",
+      "eventId": "wta-scrape-2-upcoming-kobori-shimizu-chan",
+      "date": "2026-10-21T07:35:25.620821+00:00",
       "displayTime": "Kinoshita Group Japan Open • JPN",
       "away": "Upcoming / Kobori",
       "home": "Shimizu / Chan",
       "awayScore": "0 · 0",
-      "homeScore": "1 · 15",
+      "homeScore": "1 · 30",
       "awaySets": [
         "0"
       ],
@@ -126,7 +90,7 @@
         "1"
       ],
       "awayPoint": "0",
-      "homePoint": "15",
+      "homePoint": "30",
       "currentSet": 1,
       "awayCurrentSetGames": 0,
       "homeCurrentSetGames": 1,
