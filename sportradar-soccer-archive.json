@@ -3,14 +3,14 @@
   "provider": "Sportradar",
   "product": "Soccer API",
   "access": "trial",
-  "updatedAt": "2026-10-21T04:41:25.061Z",
+  "updatedAt": "2026-10-21T08:39:13.452Z",
   "requestsLastRun": 2,
   "leagues": {
     "laliga": {
       "league": "La Liga",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-21T04:41:25.061Z",
+      "updatedAt": "2026-10-21T08:39:13.452Z",
       "games": [
         {
           "eventId": "sr:sport_event:72477506",
@@ -340,7 +340,7 @@
       "league": "Serie A",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-21T04:41:25.061Z",
+      "updatedAt": "2026-10-21T08:39:13.452Z",
       "games": [
         {
           "eventId": "sr:sport_event:71945310",
@@ -486,7 +486,7 @@
       "league": "Bundesliga",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-21T04:41:25.061Z",
+      "updatedAt": "2026-10-21T08:39:13.452Z",
       "games": [
         {
           "eventId": "sr:sport_event:72513242",
@@ -275669,7 +275669,7 @@
       "league": "UEFA Champions League",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-21T04:41:25.061Z",
+      "updatedAt": "2026-10-21T08:39:13.452Z",
       "games": [
         {
           "eventId": "sr:sport_event:74165904",
@@ -339839,7 +339839,7 @@
       "league": "MLS",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-21T04:41:25.061Z",
+      "updatedAt": "2026-10-21T08:39:13.452Z",
       "games": [
         {
           "eventId": "sr:sport_event:66299652",
@@ -962174,14 +962174,14 @@
       "league": "PFL",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-21T04:41:25.061Z",
+      "updatedAt": "2026-10-21T08:39:13.452Z",
       "games": []
     },
     "jamaica_pl": {
       "league": "Jamaican Premier League",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-21T04:41:25.061Z",
+      "updatedAt": "2026-10-21T08:39:13.452Z",
       "games": [
         {
           "eventId": "sr:sport_event:74980116",
@@ -991982,7 +991982,7 @@
       "league": "Mizoram Premier League",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-21T04:41:25.061Z",
+      "updatedAt": "2026-10-21T08:39:13.452Z",
       "games": [
         {
           "eventId": "sr:sport_event:75074666",
@@ -992174,7 +992174,7 @@
       "league": "Primera Division, Reserves",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-21T04:41:25.061Z",
+      "updatedAt": "2026-10-21T08:39:13.452Z",
       "games": [
         {
           "eventId": "sr:sport_event:75601346",
@@ -992205,7 +992205,7 @@
       "league": "UEFA Champions League Women",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-21T04:41:25.061Z",
+      "updatedAt": "2026-10-21T08:39:13.452Z",
       "games": [],
       "competitionId": "sr:competition:696",
       "competition": {
@@ -1079697,7 +1079697,7 @@
     "updatedAt": "2026-09-22T16:50:47.840Z"
   },
   "requestBudget": 900,
-  "requestBudgetRemaining": 371,
+  "requestBudgetRemaining": 369,
   "harvestMode": "live",
   "usage": {
     "requests": [
@@ -1080420,10 +1080420,15 @@
         "at": "2026-10-21T04:41:25.061Z",
         "count": 2,
         "mode": "live"
+      },
+      {
+        "at": "2026-10-21T08:39:13.452Z",
+        "count": 2,
+        "mode": "live"
       }
     ],
-    "rolling30Day": 529,
-    "trackedRolling30Day": 415,
+    "rolling30Day": 531,
+    "trackedRolling30Day": 417,
     "preTrackingRolling30Day": 114
   },
   "runRequestCap": 6,
@@ -1080433,7 +1080438,7 @@
   },
   "latestFeeds": {
     "live": {
-      "generated_at": "2026-10-21T04:41:26+00:00",
+      "generated_at": "2026-10-21T08:39:14+00:00",
       "schedules": [
         {
           "sport_event": {
@@ -1080558,8 +1080563,8 @@
         },
         {
           "sport_event": {
-            "id": "sr:sport_event:72055248",
-            "start_time": "2026-10-21T03:10:00+00:00",
+            "id": "sr:sport_event:73577172",
+            "start_time": "2026-10-21T08:30:00+00:00",
             "start_time_confirmed": true,
             "date_confirmed": true,
             "sport_event_context": {
@@ -1080568,40 +1080573,38 @@
                 "name": "Soccer"
               },
               "category": {
-                "id": "sr:category:12",
-                "name": "Mexico",
-                "country_code": "MEX"
+                "id": "sr:category:368",
+                "name": "Indonesia",
+                "country_code": "IDN"
               },
               "competition": {
-                "id": "sr:competition:27464",
-                "name": "Liga MX",
-                "parent_id": "sr:competition:352",
+                "id": "sr:competition:1015",
+                "name": "Super League",
                 "gender": "men"
               },
               "season": {
-                "id": "sr:season:142544",
-                "name": "Liga MX 26/27",
-                "start_date": "2026-07-17",
-                "end_date": "2027-05-31",
-                "year": "2026",
-                "competition_id": "sr:competition:27464"
+                "id": "sr:season:145226",
+                "name": "Super League 26/27",
+                "start_date": "2026-09-04",
+                "end_date": "2027-06-05",
+                "year": "26/27",
+                "competition_id": "sr:competition:1015"
               },
               "stage": {
                 "order": 1,
                 "type": "league",
                 "phase": "regular season",
-                "start_date": "2026-07-17",
-                "end_date": "2026-11-23",
-                "year": "2026"
+                "start_date": "2026-09-04",
+                "end_date": "2027-06-05",
+                "year": "26/27"
               },
               "round": {
-                "number": 13
+                "number": 6
               },
               "groups": [
                 {
-                  "id": "sr:league:108522",
-                  "name": "Liga MX 26/27, Apertura",
-                  "group_name": "Apertura"
+                  "id": "sr:league:111954",
+                  "name": "Super League 26/27"
                 }
               ]
             },
@@ -1080609,11 +1080612,11 @@
               "type": "sport_event",
               "sport_event_properties": {
                 "lineups": true,
-                "formations": true,
-                "venue": true,
+                "formations": false,
+                "venue": false,
                 "lineups_availability": "pre",
-                "ballspotting": true,
-                "commentary": true,
+                "ballspotting": false,
+                "commentary": false,
                 "fun_facts": true,
                 "game_clock": true,
                 "goal_scorers": true,
@@ -1080622,204 +1080625,6 @@
                 "basic_play_by_play": true,
                 "basic_player_stats": true,
                 "basic_team_stats": true,
-                "deeper_play_by_play": true,
-                "deeper_player_stats": true,
-                "deeper_team_stats": true,
-                "extended_play_by_play": true,
-                "extended_player_stats": true,
-                "extended_team_stats": true
-              }
-            },
-            "competitors": [
-              {
-                "id": "sr:competitor:1940",
-                "name": "Tigres UANL",
-                "country": "Mexico",
-                "country_code": "MEX",
-                "abbreviation": "TIG",
-                "qualifier": "home",
-                "gender": "male"
-              },
-              {
-                "id": "sr:competitor:36534",
-                "name": "Club Leon",
-                "country": "Mexico",
-                "country_code": "MEX",
-                "abbreviation": "LEO",
-                "qualifier": "away",
-                "gender": "male"
-              }
-            ],
-            "venue": {
-              "id": "sr:venue:2398",
-              "name": "Estadio Universitario (UANL)",
-              "capacity": 42000,
-              "city_name": "Nuevo Leon",
-              "city_id": "sr:city:13009",
-              "country_name": "Mexico",
-              "map_coordinates": "25.722806, -100.312056",
-              "country_code": "MEX",
-              "timezone": "America/Mexico_City"
-            },
-            "channels": [
-              {
-                "name": "Universo",
-                "country": "United States",
-                "country_code": "USA"
-              },
-              {
-                "name": "Fox Deportes",
-                "url": "https://www.foxsports.com/presspass/latest-news/weekly-schedule/",
-                "country": "United States",
-                "country_code": "USA"
-              }
-            ],
-            "sport_event_conditions": {
-              "referees": [
-                {
-                  "id": "sr:referee:862902",
-                  "name": "Ortiz Nava, Marco Antonio",
-                  "nationality": "Mexico",
-                  "country_code": "MEX",
-                  "type": "main_referee"
-                }
-              ],
-              "weather": {
-                "pitch_conditions": "medium",
-                "overall_conditions": "medium"
-              },
-              "ground": {
-                "neutral": false
-              },
-              "lineups": {
-                "confirmed": true
-              }
-            }
-          },
-          "sport_event_status": {
-            "status": "live",
-            "match_status": "2nd_half",
-            "home_score": 0,
-            "away_score": 1,
-            "period_scores": [
-              {
-                "home_score": 0,
-                "away_score": 1,
-                "type": "regular_period",
-                "number": 1
-              },
-              {
-                "home_score": 0,
-                "away_score": 0,
-                "type": "regular_period",
-                "number": 2
-              }
-            ],
-            "ball_locations": [
-              {
-                "order": 1,
-                "x": 45,
-                "y": 74,
-                "qualifier": "away"
-              },
-              {
-                "order": 2,
-                "x": 30,
-                "y": 71,
-                "qualifier": "home"
-              },
-              {
-                "order": 3,
-                "x": 54,
-                "y": 41,
-                "qualifier": "home"
-              },
-              {
-                "order": 4,
-                "x": 77,
-                "y": 24,
-                "qualifier": "home"
-              },
-              {
-                "order": 5,
-                "x": 66,
-                "y": 45,
-                "qualifier": "home"
-              }
-            ],
-            "match_situation": {
-              "status": "safe",
-              "qualifier": "away",
-              "updated_at": "2026-10-21T04:41:24+00:00"
-            },
-            "clock": {
-              "played": "68:51"
-            }
-          }
-        },
-        {
-          "sport_event": {
-            "id": "sr:sport_event:72151248",
-            "start_time": "2026-10-21T04:00:00+00:00",
-            "start_time_confirmed": true,
-            "date_confirmed": true,
-            "sport_event_context": {
-              "sport": {
-                "id": "sr:sport:1",
-                "name": "Soccer"
-              },
-              "category": {
-                "id": "sr:category:52",
-                "name": "Japan",
-                "country_code": "JPN"
-              },
-              "competition": {
-                "id": "sr:competition:402",
-                "name": "J2 League",
-                "gender": "men"
-              },
-              "season": {
-                "id": "sr:season:142742",
-                "name": "J2 League 26/27",
-                "start_date": "2026-08-08",
-                "end_date": "2027-06-07",
-                "year": "26/27",
-                "competition_id": "sr:competition:402"
-              },
-              "stage": {
-                "order": 1,
-                "type": "league",
-                "phase": "regular season",
-                "start_date": "2026-08-08",
-                "end_date": "2027-05-31",
-                "year": "26/27"
-              },
-              "round": {
-                "number": 12
-              },
-              "groups": [
-                {
-                  "id": "sr:league:108592",
-                  "name": "J2 League 26/27"
-                }
-              ]
-            },
-            "coverage": {
-              "type": "sport_event",
-              "sport_event_properties": {
-                "lineups": false,
-                "formations": false,
-                "venue": false,
-                "ballspotting": false,
-                "commentary": false,
-                "fun_facts": true,
-                "game_clock": true,
-                "goal_scorers": true,
-                "goal_scorers_live": true,
-                "scores": "live",
-                "basic_play_by_play": false,
-                "basic_player_stats": false,
-                "basic_team_stats": false,
                 "deeper_play_by_play": false,
                 "deeper_player_stats": false,
                 "deeper_team_stats": false,
@@ -1080830,42 +1080635,43 @@
             },
             "competitors": [
               {
-                "id": "sr:competitor:21902",
-                "name": "Montedio Yamagata",
-                "country": "Japan",
-                "country_code": "JPN",
-                "abbreviation": "MON",
+                "id": "sr:competitor:64299",
+                "name": "Bali United",
+                "country": "Indonesia",
+                "country_code": "IDN",
+                "abbreviation": "BAU",
                 "qualifier": "home",
                 "gender": "male"
               },
               {
-                "id": "sr:competitor:3142",
-                "name": "Hokkaido Consadole Sapporo",
-                "country": "Japan",
-                "country_code": "JPN",
-                "abbreviation": "HCS",
+                "id": "sr:competitor:857165",
+                "name": "Garuda Yaksa",
+                "country": "Indonesia",
+                "country_code": "IDN",
+                "abbreviation": "GAR",
                 "qualifier": "away",
                 "gender": "male"
               }
             ],
-            "venue": {
-              "id": "sr:venue:11142",
-              "name": "ND Soft Stadium Yamagata",
-              "capacity": 21292,
-              "city_name": "Tendo",
-              "city_id": "sr:city:6956",
-              "country_name": "Japan",
-              "map_coordinates": "38.33585, 140.378235",
-              "country_code": "JPN",
-              "timezone": "Asia/Tokyo"
-            },
             "sport_event_conditions": {
+              "referees": [
+                {
+                  "id": "sr:referee:146787",
+                  "name": "Yamamoto, Yudai",
+                  "nationality": "Japan",
+                  "country_code": "JPN",
+                  "type": "main_referee"
+                }
+              ],
               "weather": {
                 "pitch_conditions": "good",
-                "overall_conditions": "medium"
+                "overall_conditions": "good"
               },
               "ground": {
                 "neutral": false
+              },
+              "lineups": {
+                "confirmed": true
               }
             }
           },
@@ -1080883,14 +1080689,14 @@
               }
             ],
             "clock": {
-              "played": "37:37"
+              "played": "08:47"
             }
           }
         }
       ]
     },
     "daily": {
-      "generated_at": "2026-10-21T04:41:28+00:00",
+      "generated_at": "2026-10-21T08:39:16+00:00",
       "schedules": [
         {
           "sport_event": {
@@ -1082733,7 +1082539,11 @@
             }
           },
           "sport_event_status": {
-            "status": "not_started"
+            "status": "closed",
+            "match_status": "ended",
+            "home_score": 1,
+            "away_score": 2,
+            "winner_id": "sr:competitor:249391"
           }
         },
         {
@@ -1082840,7 +1082650,25 @@
             }
           },
           "sport_event_status": {
-            "status": "not_started"
+            "status": "closed",
+            "match_status": "ended",
+            "home_score": 7,
+            "away_score": 0,
+            "winner_id": "sr:competitor:334071",
+            "period_scores": [
+              {
+                "home_score": 3,
+                "away_score": 0,
+                "type": "regular_period",
+                "number": 1
+              },
+              {
+                "home_score": 4,
+                "away_score": 0,
+                "type": "regular_period",
+                "number": 2
+              }
+            ]
           }
         },
         {
@@ -1082984,10 +1082812,11 @@
             }
           },
           "sport_event_status": {
-            "status": "live",
-            "match_status": "2nd_half",
+            "status": "closed",
+            "match_status": "ended",
             "home_score": 0,
-            "away_score": 1,
+            "away_score": 2,
+            "winner_id": "sr:competitor:36534",
             "period_scores": [
               {
                 "home_score": 0,
@@ -1082997,7 +1082826,7 @@
               },
               {
                 "home_score": 0,
-                "away_score": 0,
+                "away_score": 1,
                 "type": "regular_period",
                 "number": 2
               }
@@ -1083005,42 +1082834,39 @@
             "ball_locations": [
               {
                 "order": 1,
-                "x": 30,
-                "y": 71,
-                "qualifier": "home"
+                "x": 50,
+                "y": 93,
+                "qualifier": "away"
               },
               {
                 "order": 2,
-                "x": 54,
-                "y": 41,
-                "qualifier": "home"
+                "x": 32,
+                "y": 27,
+                "qualifier": "away"
               },
               {
                 "order": 3,
-                "x": 77,
-                "y": 24,
+                "x": 57,
+                "y": 64,
                 "qualifier": "home"
               },
               {
                 "order": 4,
-                "x": 69,
-                "y": 74,
+                "x": 59,
+                "y": 35,
                 "qualifier": "home"
               },
               {
                 "order": 5,
-                "x": 66,
-                "y": 45,
+                "x": 57,
+                "y": 74,
                 "qualifier": "home"
               }
             ],
             "match_situation": {
               "status": "safe",
               "qualifier": "away",
-              "updated_at": "2026-10-21T04:41:26+00:00"
-            },
-            "clock": {
-              "played": "68:53"
+              "updated_at": "2026-10-21T05:30:26+00:00"
             }
           }
         },
@@ -1083157,21 +1082983,25 @@
             }
           },
           "sport_event_status": {
-            "status": "live",
-            "match_status": "1st_half",
+            "status": "closed",
+            "match_status": "ended",
             "home_score": 0,
-            "away_score": 0,
+            "away_score": 2,
+            "winner_id": "sr:competitor:3142",
             "period_scores": [
               {
                 "home_score": 0,
                 "away_score": 0,
                 "type": "regular_period",
                 "number": 1
+              },
+              {
+                "home_score": 0,
+                "away_score": 2,
+                "type": "regular_period",
+                "number": 2
               }
-            ],
-            "clock": {
-              "played": "37:39"
-            }
+            ]
           }
         },
         {
@@ -1083276,7 +1083106,25 @@
             }
           },
           "sport_event_status": {
-            "status": "not_started"
+            "status": "closed",
+            "match_status": "ended",
+            "home_score": 2,
+            "away_score": 1,
+            "winner_id": "sr:competitor:38140",
+            "period_scores": [
+              {
+                "home_score": 0,
+                "away_score": 0,
+                "type": "regular_period",
+                "number": 1
+              },
+              {
+                "home_score": 2,
+                "away_score": 1,
+                "type": "regular_period",
+                "number": 2
+              }
+            ]
           }
         },
         {
@@ -1083381,7 +1083229,25 @@
             }
           },
           "sport_event_status": {
-            "status": "not_started"
+            "status": "closed",
+            "match_status": "ended",
+            "home_score": 1,
+            "away_score": 0,
+            "winner_id": "sr:competitor:26009",
+            "period_scores": [
+              {
+                "home_score": 0,
+                "away_score": 0,
+                "type": "regular_period",
+                "number": 1
+              },
+              {
+                "home_score": 1,
+                "away_score": 0,
+                "type": "regular_period",
+                "number": 2
+              }
+            ]
           }
         },
         {
@@ -1083486,7 +1083352,25 @@
             }
           },
           "sport_event_status": {
-            "status": "not_started"
+            "status": "closed",
+            "match_status": "ended",
+            "home_score": 0,
+            "away_score": 1,
+            "winner_id": "sr:competitor:44528",
+            "period_scores": [
+              {
+                "home_score": 0,
+                "away_score": 0,
+                "type": "regular_period",
+                "number": 1
+              },
+              {
+                "home_score": 0,
+                "away_score": 1,
+                "type": "regular_period",
+                "number": 2
+              }
+            ]
           }
         },
         {
@@ -1083591,7 +1083475,11 @@
             }
           },
           "sport_event_status": {
-            "status": "not_started"
+            "status": "closed",
+            "match_status": "ended",
+            "home_score": 1,
+            "away_score": 2,
+            "winner_id": "sr:competitor:249387"
           }
         },
         {
@@ -1084227,14 +1084115,43 @@
               }
             ],
             "sport_event_conditions": {
+              "referees": [
+                {
+                  "id": "sr:referee:146787",
+                  "name": "Yamamoto, Yudai",
+                  "nationality": "Japan",
+                  "country_code": "JPN",
+                  "type": "main_referee"
+                }
+              ],
+              "weather": {
+                "pitch_conditions": "good",
+                "overall_conditions": "good"
+              },
               "ground": {
                 "neutral": false
+              },
+              "lineups": {
+                "confirmed": true
               }
             }
           },
           "sport_event_status": {
-            "status": "not_started",
-            "match_status": "not_started"
+            "status": "live",
+            "match_status": "1st_half",
+            "home_score": 0,
+            "away_score": 0,
+            "period_scores": [
+              {
+                "home_score": 0,
+                "away_score": 0,
+                "type": "regular_period",
+                "number": 1
+              }
+            ],
+            "clock": {
+              "played": "08:49"
+            }
           }
         },
         {
@@ -1084980,6 +1084897,9 @@
             "sport_event_conditions": {
               "ground": {
                 "neutral": false
+              },
+              "lineups": {
+                "confirmed": true
               }
             }
           },
@@ -1085094,6 +1085014,9 @@
             "sport_event_conditions": {
               "ground": {
                 "neutral": false
+              },
+              "lineups": {
+                "confirmed": true
               }
             }
           },
@@ -1085322,6 +1085245,9 @@
             "sport_event_conditions": {
               "ground": {
                 "neutral": false
+              },
+              "lineups": {
+                "confirmed": true
               }
             }
           },
@@ -1089864,6 +1089790,915 @@
                 "country": "Ethiopia",
                 "country_code": "ETH",
                 "abbreviation": "ETH",
+                "qualifier": "away",
+                "gender": "male"
+              }
+            ],
+            "sport_event_conditions": {
+              "ground": {
+                "neutral": false
+              }
+            }
+          },
+          "sport_event_status": {
+            "status": "not_started"
+          }
+        },
+        {
+          "sport_event": {
+            "id": "sr:sport_event:75862528",
+            "start_time": "2026-10-21T12:00:00+00:00",
+            "start_time_confirmed": true,
+            "date_confirmed": true,
+            "sport_event_context": {
+              "sport": {
+                "id": "sr:sport:1",
+                "name": "Soccer"
+              },
+              "category": {
+                "id": "sr:category:565",
+                "name": "Kosovo",
+                "country_code": "KOS"
+              },
+              "competition": {
+                "id": "sr:competition:14231",
+                "name": "Liga e Pare",
+                "gender": "men"
+              },
+              "season": {
+                "id": "sr:season:144828",
+                "name": "Liga e Pare 26/27",
+                "start_date": "2026-08-15",
+                "end_date": "2027-05-30",
+                "year": "26/27",
+                "competition_id": "sr:competition:14231"
+              },
+              "stage": {
+                "order": 1,
+                "type": "league",
+                "phase": "regular season",
+                "start_date": "2026-08-15",
+                "end_date": "2027-05-30",
+                "year": "26/27"
+              },
+              "round": {
+                "number": 11
+              },
+              "groups": [
+                {
+                  "id": "sr:league:111296",
+                  "name": "Liga e Pare 26/27"
+                }
+              ]
+            },
+            "coverage": {
+              "type": "sport_event",
+              "sport_event_properties": {
+                "lineups": false,
+                "formations": false,
+                "venue": false,
+                "ballspotting": false,
+                "commentary": false,
+                "fun_facts": false,
+                "game_clock": false,
+                "goal_scorers": false,
+                "goal_scorers_live": false,
+                "scores": "post",
+                "basic_play_by_play": false,
+                "basic_player_stats": false,
+                "basic_team_stats": false,
+                "deeper_play_by_play": false,
+                "deeper_player_stats": false,
+                "deeper_team_stats": false,
+                "extended_play_by_play": false,
+                "extended_player_stats": false,
+                "extended_team_stats": false
+              }
+            },
+            "competitors": [
+              {
+                "id": "sr:competitor:1039703",
+                "name": "KF Prishtina e Re",
+                "country": "Kosovo",
+                "country_code": "KOS",
+                "abbreviation": "PRI",
+                "qualifier": "home",
+                "gender": "male"
+              },
+              {
+                "id": "sr:competitor:1208017",
+                "name": "KF Lepenci",
+                "country": "Kosovo",
+                "country_code": "KOS",
+                "abbreviation": "LEP",
+                "qualifier": "away",
+                "gender": "male"
+              }
+            ],
+            "sport_event_conditions": {
+              "ground": {
+                "neutral": false
+              }
+            }
+          },
+          "sport_event_status": {
+            "status": "not_started"
+          }
+        },
+        {
+          "sport_event": {
+            "id": "sr:sport_event:75862530",
+            "start_time": "2026-10-21T12:00:00+00:00",
+            "start_time_confirmed": true,
+            "date_confirmed": true,
+            "sport_event_context": {
+              "sport": {
+                "id": "sr:sport:1",
+                "name": "Soccer"
+              },
+              "category": {
+                "id": "sr:category:565",
+                "name": "Kosovo",
+                "country_code": "KOS"
+              },
+              "competition": {
+                "id": "sr:competition:14231",
+                "name": "Liga e Pare",
+                "gender": "men"
+              },
+              "season": {
+                "id": "sr:season:144828",
+                "name": "Liga e Pare 26/27",
+                "start_date": "2026-08-15",
+                "end_date": "2027-05-30",
+                "year": "26/27",
+                "competition_id": "sr:competition:14231"
+              },
+              "stage": {
+                "order": 1,
+                "type": "league",
+                "phase": "regular season",
+                "start_date": "2026-08-15",
+                "end_date": "2027-05-30",
+                "year": "26/27"
+              },
+              "round": {
+                "number": 11
+              },
+              "groups": [
+                {
+                  "id": "sr:league:111296",
+                  "name": "Liga e Pare 26/27"
+                }
+              ]
+            },
+            "coverage": {
+              "type": "sport_event",
+              "sport_event_properties": {
+                "lineups": false,
+                "formations": false,
+                "venue": false,
+                "ballspotting": false,
+                "commentary": false,
+                "fun_facts": false,
+                "game_clock": false,
+                "goal_scorers": false,
+                "goal_scorers_live": false,
+                "scores": "post",
+                "basic_play_by_play": false,
+                "basic_player_stats": false,
+                "basic_team_stats": false,
+                "deeper_play_by_play": false,
+                "deeper_player_stats": false,
+                "deeper_team_stats": false,
+                "extended_play_by_play": false,
+                "extended_player_stats": false,
+                "extended_team_stats": false
+              }
+            },
+            "competitors": [
+              {
+                "id": "sr:competitor:923253",
+                "name": "KF Vjosa",
+                "country": "Kosovo",
+                "country_code": "KOS",
+                "abbreviation": "VJO",
+                "qualifier": "home",
+                "gender": "male"
+              },
+              {
+                "id": "sr:competitor:1170093",
+                "name": "KF Mitrovica",
+                "country": "Kosovo",
+                "country_code": "KOS",
+                "abbreviation": "MIT",
+                "qualifier": "away",
+                "gender": "male"
+              }
+            ],
+            "sport_event_conditions": {
+              "ground": {
+                "neutral": false
+              }
+            }
+          },
+          "sport_event_status": {
+            "status": "not_started"
+          }
+        },
+        {
+          "sport_event": {
+            "id": "sr:sport_event:75862532",
+            "start_time": "2026-10-21T12:00:00+00:00",
+            "start_time_confirmed": true,
+            "date_confirmed": true,
+            "sport_event_context": {
+              "sport": {
+                "id": "sr:sport:1",
+                "name": "Soccer"
+              },
+              "category": {
+                "id": "sr:category:565",
+                "name": "Kosovo",
+                "country_code": "KOS"
+              },
+              "competition": {
+                "id": "sr:competition:14231",
+                "name": "Liga e Pare",
+                "gender": "men"
+              },
+              "season": {
+                "id": "sr:season:144828",
+                "name": "Liga e Pare 26/27",
+                "start_date": "2026-08-15",
+                "end_date": "2027-05-30",
+                "year": "26/27",
+                "competition_id": "sr:competition:14231"
+              },
+              "stage": {
+                "order": 1,
+                "type": "league",
+                "phase": "regular season",
+                "start_date": "2026-08-15",
+                "end_date": "2027-05-30",
+                "year": "26/27"
+              },
+              "round": {
+                "number": 11
+              },
+              "groups": [
+                {
+                  "id": "sr:league:111296",
+                  "name": "Liga e Pare 26/27"
+                }
+              ]
+            },
+            "coverage": {
+              "type": "sport_event",
+              "sport_event_properties": {
+                "lineups": false,
+                "formations": false,
+                "venue": false,
+                "ballspotting": false,
+                "commentary": false,
+                "fun_facts": false,
+                "game_clock": false,
+                "goal_scorers": false,
+                "goal_scorers_live": false,
+                "scores": "post",
+                "basic_play_by_play": false,
+                "basic_player_stats": false,
+                "basic_team_stats": false,
+                "deeper_play_by_play": false,
+                "deeper_player_stats": false,
+                "deeper_team_stats": false,
+                "extended_play_by_play": false,
+                "extended_player_stats": false,
+                "extended_team_stats": false
+              }
+            },
+            "competitors": [
+              {
+                "id": "sr:competitor:279975",
+                "name": "KF Istogu",
+                "country": "Kosovo",
+                "country_code": "KOS",
+                "abbreviation": "IST",
+                "qualifier": "home",
+                "gender": "male"
+              },
+              {
+                "id": "sr:competitor:280005",
+                "name": "KF Ramiz Sadiku",
+                "country": "Kosovo",
+                "country_code": "KOS",
+                "abbreviation": "RAM",
+                "qualifier": "away",
+                "gender": "male"
+              }
+            ],
+            "sport_event_conditions": {
+              "ground": {
+                "neutral": false
+              }
+            }
+          },
+          "sport_event_status": {
+            "status": "not_started"
+          }
+        },
+        {
+          "sport_event": {
+            "id": "sr:sport_event:75862534",
+            "start_time": "2026-10-21T12:00:00+00:00",
+            "start_time_confirmed": true,
+            "date_confirmed": true,
+            "sport_event_context": {
+              "sport": {
+                "id": "sr:sport:1",
+                "name": "Soccer"
+              },
+              "category": {
+                "id": "sr:category:565",
+                "name": "Kosovo",
+                "country_code": "KOS"
+              },
+              "competition": {
+                "id": "sr:competition:14231",
+                "name": "Liga e Pare",
+                "gender": "men"
+              },
+              "season": {
+                "id": "sr:season:144828",
+                "name": "Liga e Pare 26/27",
+                "start_date": "2026-08-15",
+                "end_date": "2027-05-30",
+                "year": "26/27",
+                "competition_id": "sr:competition:14231"
+              },
+              "stage": {
+                "order": 1,
+                "type": "league",
+                "phase": "regular season",
+                "start_date": "2026-08-15",
+                "end_date": "2027-05-30",
+                "year": "26/27"
+              },
+              "round": {
+                "number": 11
+              },
+              "groups": [
+                {
+                  "id": "sr:league:111296",
+                  "name": "Liga e Pare 26/27"
+                }
+              ]
+            },
+            "coverage": {
+              "type": "sport_event",
+              "sport_event_properties": {
+                "lineups": false,
+                "formations": false,
+                "venue": false,
+                "ballspotting": false,
+                "commentary": false,
+                "fun_facts": false,
+                "game_clock": false,
+                "goal_scorers": false,
+                "goal_scorers_live": false,
+                "scores": "post",
+                "basic_play_by_play": false,
+                "basic_player_stats": false,
+                "basic_team_stats": false,
+                "deeper_play_by_play": false,
+                "deeper_player_stats": false,
+                "deeper_team_stats": false,
+                "extended_play_by_play": false,
+                "extended_player_stats": false,
+                "extended_team_stats": false
+              }
+            },
+            "competitors": [
+              {
+                "id": "sr:competitor:1039701",
+                "name": "FC Suhareka",
+                "country": "Kosovo",
+                "country_code": "KOS",
+                "abbreviation": "SUH",
+                "qualifier": "home",
+                "gender": "male"
+              },
+              {
+                "id": "sr:competitor:923249",
+                "name": "KF Rilindja 1974",
+                "country": "Kosovo",
+                "country_code": "KOS",
+                "abbreviation": "RIL",
+                "qualifier": "away",
+                "gender": "male"
+              }
+            ],
+            "sport_event_conditions": {
+              "ground": {
+                "neutral": false
+              }
+            }
+          },
+          "sport_event_status": {
+            "status": "not_started"
+          }
+        },
+        {
+          "sport_event": {
+            "id": "sr:sport_event:75862536",
+            "start_time": "2026-10-21T12:00:00+00:00",
+            "start_time_confirmed": true,
+            "date_confirmed": true,
+            "sport_event_context": {
+              "sport": {
+                "id": "sr:sport:1",
+                "name": "Soccer"
+              },
+              "category": {
+                "id": "sr:category:565",
+                "name": "Kosovo",
+                "country_code": "KOS"
+              },
+              "competition": {
+                "id": "sr:competition:14231",
+                "name": "Liga e Pare",
+                "gender": "men"
+              },
+              "season": {
+                "id": "sr:season:144828",
+                "name": "Liga e Pare 26/27",
+                "start_date": "2026-08-15",
+                "end_date": "2027-05-30",
+                "year": "26/27",
+                "competition_id": "sr:competition:14231"
+              },
+              "stage": {
+                "order": 1,
+                "type": "league",
+                "phase": "regular season",
+                "start_date": "2026-08-15",
+                "end_date": "2027-05-30",
+                "year": "26/27"
+              },
+              "round": {
+                "number": 11
+              },
+              "groups": [
+                {
+                  "id": "sr:league:111296",
+                  "name": "Liga e Pare 26/27"
+                }
+              ]
+            },
+            "coverage": {
+              "type": "sport_event",
+              "sport_event_properties": {
+                "lineups": false,
+                "formations": false,
+                "venue": false,
+                "ballspotting": false,
+                "commentary": false,
+                "fun_facts": false,
+                "game_clock": false,
+                "goal_scorers": false,
+                "goal_scorers_live": false,
+                "scores": "post",
+                "basic_play_by_play": false,
+                "basic_player_stats": false,
+                "basic_team_stats": false,
+                "deeper_play_by_play": false,
+                "deeper_player_stats": false,
+                "deeper_team_stats": false,
+                "extended_play_by_play": false,
+                "extended_player_stats": false,
+                "extended_team_stats": false
+              }
+            },
+            "competitors": [
+              {
+                "id": "sr:competitor:277831",
+                "name": "KF Besa Peje",
+                "country": "Kosovo",
+                "country_code": "KOS",
+                "abbreviation": "PEJ",
+                "qualifier": "home",
+                "gender": "male"
+              },
+              {
+                "id": "sr:competitor:1208015",
+                "name": "KF Tefik Canga",
+                "country": "Kosovo",
+                "country_code": "KOS",
+                "abbreviation": "TEF",
+                "qualifier": "away",
+                "gender": "male"
+              }
+            ],
+            "sport_event_conditions": {
+              "ground": {
+                "neutral": false
+              }
+            }
+          },
+          "sport_event_status": {
+            "status": "not_started"
+          }
+        },
+        {
+          "sport_event": {
+            "id": "sr:sport_event:75862538",
+            "start_time": "2026-10-21T12:00:00+00:00",
+            "start_time_confirmed": true,
+            "date_confirmed": true,
+            "sport_event_context": {
+              "sport": {
+                "id": "sr:sport:1",
+                "name": "Soccer"
+              },
+              "category": {
+                "id": "sr:category:565",
+                "name": "Kosovo",
+                "country_code": "KOS"
+              },
+              "competition": {
+                "id": "sr:competition:14231",
+                "name": "Liga e Pare",
+                "gender": "men"
+              },
+              "season": {
+                "id": "sr:season:144828",
+                "name": "Liga e Pare 26/27",
+                "start_date": "2026-08-15",
+                "end_date": "2027-05-30",
+                "year": "26/27",
+                "competition_id": "sr:competition:14231"
+              },
+              "stage": {
+                "order": 1,
+                "type": "league",
+                "phase": "regular season",
+                "start_date": "2026-08-15",
+                "end_date": "2027-05-30",
+                "year": "26/27"
+              },
+              "round": {
+                "number": 11
+              },
+              "groups": [
+                {
+                  "id": "sr:league:111296",
+                  "name": "Liga e Pare 26/27"
+                }
+              ]
+            },
+            "coverage": {
+              "type": "sport_event",
+              "sport_event_properties": {
+                "lineups": false,
+                "formations": false,
+                "venue": false,
+                "ballspotting": false,
+                "commentary": false,
+                "fun_facts": false,
+                "game_clock": false,
+                "goal_scorers": false,
+                "goal_scorers_live": false,
+                "scores": "post",
+                "basic_play_by_play": false,
+                "basic_player_stats": false,
+                "basic_team_stats": false,
+                "deeper_play_by_play": false,
+                "deeper_player_stats": false,
+                "deeper_team_stats": false,
+                "extended_play_by_play": false,
+                "extended_player_stats": false,
+                "extended_team_stats": false
+              }
+            },
+            "competitors": [
+              {
+                "id": "sr:competitor:279977",
+                "name": "KF Vellaznimi",
+                "country": "Kosovo",
+                "country_code": "KOS",
+                "abbreviation": "VEL",
+                "qualifier": "home",
+                "gender": "male"
+              },
+              {
+                "id": "sr:competitor:279985",
+                "name": "KF 2 Korriku",
+                "country": "Kosovo",
+                "country_code": "KOS",
+                "abbreviation": "KOR",
+                "qualifier": "away",
+                "gender": "male"
+              }
+            ],
+            "sport_event_conditions": {
+              "ground": {
+                "neutral": false
+              }
+            }
+          },
+          "sport_event_status": {
+            "status": "not_started"
+          }
+        },
+        {
+          "sport_event": {
+            "id": "sr:sport_event:75862540",
+            "start_time": "2026-10-21T12:00:00+00:00",
+            "start_time_confirmed": true,
+            "date_confirmed": true,
+            "sport_event_context": {
+              "sport": {
+                "id": "sr:sport:1",
+                "name": "Soccer"
+              },
+              "category": {
+                "id": "sr:category:565",
+                "name": "Kosovo",
+                "country_code": "KOS"
+              },
+              "competition": {
+                "id": "sr:competition:14231",
+                "name": "Liga e Pare",
+                "gender": "men"
+              },
+              "season": {
+                "id": "sr:season:144828",
+                "name": "Liga e Pare 26/27",
+                "start_date": "2026-08-15",
+                "end_date": "2027-05-30",
+                "year": "26/27",
+                "competition_id": "sr:competition:14231"
+              },
+              "stage": {
+                "order": 1,
+                "type": "league",
+                "phase": "regular season",
+                "start_date": "2026-08-15",
+                "end_date": "2027-05-30",
+                "year": "26/27"
+              },
+              "round": {
+                "number": 11
+              },
+              "groups": [
+                {
+                  "id": "sr:league:111296",
+                  "name": "Liga e Pare 26/27"
+                }
+              ]
+            },
+            "coverage": {
+              "type": "sport_event",
+              "sport_event_properties": {
+                "lineups": false,
+                "formations": false,
+                "venue": false,
+                "ballspotting": false,
+                "commentary": false,
+                "fun_facts": false,
+                "game_clock": false,
+                "goal_scorers": false,
+                "goal_scorers_live": false,
+                "scores": "post",
+                "basic_play_by_play": false,
+                "basic_player_stats": false,
+                "basic_team_stats": false,
+                "deeper_play_by_play": false,
+                "deeper_player_stats": false,
+                "deeper_team_stats": false,
+                "extended_play_by_play": false,
+                "extended_player_stats": false,
+                "extended_team_stats": false
+              }
+            },
+            "competitors": [
+              {
+                "id": "sr:competitor:277849",
+                "name": "KF Trepca 89",
+                "country": "Kosovo",
+                "country_code": "KOS",
+                "abbreviation": "TRE",
+                "qualifier": "home",
+                "gender": "male"
+              },
+              {
+                "id": "sr:competitor:1039699",
+                "name": "KF Dinamo Ferizaj",
+                "country": "Kosovo",
+                "country_code": "KOS",
+                "abbreviation": "DIN",
+                "qualifier": "away",
+                "gender": "male"
+              }
+            ],
+            "sport_event_conditions": {
+              "ground": {
+                "neutral": false
+              }
+            }
+          },
+          "sport_event_status": {
+            "status": "not_started"
+          }
+        },
+        {
+          "sport_event": {
+            "id": "sr:sport_event:75862542",
+            "start_time": "2026-10-21T12:00:00+00:00",
+            "start_time_confirmed": true,
+            "date_confirmed": true,
+            "sport_event_context": {
+              "sport": {
+                "id": "sr:sport:1",
+                "name": "Soccer"
+              },
+              "category": {
+                "id": "sr:category:565",
+                "name": "Kosovo",
+                "country_code": "KOS"
+              },
+              "competition": {
+                "id": "sr:competition:14231",
+                "name": "Liga e Pare",
+                "gender": "men"
+              },
+              "season": {
+                "id": "sr:season:144828",
+                "name": "Liga e Pare 26/27",
+                "start_date": "2026-08-15",
+                "end_date": "2027-05-30",
+                "year": "26/27",
+                "competition_id": "sr:competition:14231"
+              },
+              "stage": {
+                "order": 1,
+                "type": "league",
+                "phase": "regular season",
+                "start_date": "2026-08-15",
+                "end_date": "2027-05-30",
+                "year": "26/27"
+              },
+              "round": {
+                "number": 11
+              },
+              "groups": [
+                {
+                  "id": "sr:league:111296",
+                  "name": "Liga e Pare 26/27"
+                }
+              ]
+            },
+            "coverage": {
+              "type": "sport_event",
+              "sport_event_properties": {
+                "lineups": false,
+                "formations": false,
+                "venue": false,
+                "ballspotting": false,
+                "commentary": false,
+                "fun_facts": false,
+                "game_clock": false,
+                "goal_scorers": false,
+                "goal_scorers_live": false,
+                "scores": "post",
+                "basic_play_by_play": false,
+                "basic_player_stats": false,
+                "basic_team_stats": false,
+                "deeper_play_by_play": false,
+                "deeper_player_stats": false,
+                "deeper_team_stats": false,
+                "extended_play_by_play": false,
+                "extended_player_stats": false,
+                "extended_team_stats": false
+              }
+            },
+            "competitors": [
+              {
+                "id": "sr:competitor:277843",
+                "name": "KF Liria Prizren",
+                "country": "Kosovo",
+                "country_code": "KOS",
+                "abbreviation": "LIR",
+                "qualifier": "home",
+                "gender": "male"
+              },
+              {
+                "id": "sr:competitor:370826",
+                "name": "KF Kika",
+                "country": "Kosovo",
+                "country_code": "KOS",
+                "abbreviation": "KIK",
+                "qualifier": "away",
+                "gender": "male"
+              }
+            ],
+            "sport_event_conditions": {
+              "ground": {
+                "neutral": false
+              }
+            }
+          },
+          "sport_event_status": {
+            "status": "not_started"
+          }
+        },
+        {
+          "sport_event": {
+            "id": "sr:sport_event:75862544",
+            "start_time": "2026-10-21T12:00:00+00:00",
+            "start_time_confirmed": true,
+            "date_confirmed": true,
+            "sport_event_context": {
+              "sport": {
+                "id": "sr:sport:1",
+                "name": "Soccer"
+              },
+              "category": {
+                "id": "sr:category:565",
+                "name": "Kosovo",
+                "country_code": "KOS"
+              },
+              "competition": {
+                "id": "sr:competition:14231",
+                "name": "Liga e Pare",
+                "gender": "men"
+              },
+              "season": {
+                "id": "sr:season:144828",
+                "name": "Liga e Pare 26/27",
+                "start_date": "2026-08-15",
+                "end_date": "2027-05-30",
+                "year": "26/27",
+                "competition_id": "sr:competition:14231"
+              },
+              "stage": {
+                "order": 1,
+                "type": "league",
+                "phase": "regular season",
+                "start_date": "2026-08-15",
+                "end_date": "2027-05-30",
+                "year": "26/27"
+              },
+              "round": {
+                "number": 11
+              },
+              "groups": [
+                {
+                  "id": "sr:league:111296",
+                  "name": "Liga e Pare 26/27"
+                }
+              ]
+            },
+            "coverage": {
+              "type": "sport_event",
+              "sport_event_properties": {
+                "lineups": false,
+                "formations": false,
+                "venue": false,
+                "ballspotting": false,
+                "commentary": false,
+                "fun_facts": false,
+                "game_clock": false,
+                "goal_scorers": false,
+                "goal_scorers_live": false,
+                "scores": "post",
+                "basic_play_by_play": false,
+                "basic_player_stats": false,
+                "basic_team_stats": false,
+                "deeper_play_by_play": false,
+                "deeper_player_stats": false,
+                "deeper_team_stats": false,
+                "extended_play_by_play": false,
+                "extended_player_stats": false,
+                "extended_team_stats": false
+              }
+            },
+            "competitors": [
+              {
+                "id": "sr:competitor:277837",
+                "name": "KF Ferizaj",
+                "country": "Kosovo",
+                "country_code": "KOS",
+                "abbreviation": "FER",
+                "qualifier": "home",
+                "gender": "male"
+              },
+              {
+                "id": "sr:competitor:278073",
+                "name": "KF Trepca Mitrovice",
+                "country": "Kosovo",
+                "country_code": "KOS",
+                "abbreviation": "MIT",
                 "qualifier": "away",
                 "gender": "male"
               }
@@ -1101529,997 +1102364,9 @@
           "sport_event_status": {
             "status": "not_started"
           }
-        },
-        {
-          "sport_event": {
-            "id": "sr:sport_event:73773740",
-            "start_time": "2026-10-21T18:00:00+00:00",
-            "start_time_confirmed": true,
-            "date_confirmed": true,
-            "sport_event_context": {
-              "sport": {
-                "id": "sr:sport:1",
-                "name": "Soccer"
-              },
-              "category": {
-                "id": "sr:category:13",
-                "name": "Brazil",
-                "country_code": "BRA"
-              },
-              "competition": {
-                "id": "sr:competition:48615",
-                "name": "U20 Carioca, Serie A2",
-                "gender": "men"
-              },
-              "season": {
-                "id": "sr:season:145538",
-                "name": "U20 Carioca, Serie A2 2026",
-                "start_date": "2026-09-02",
-                "end_date": "2026-11-22",
-                "year": "2026",
-                "competition_id": "sr:competition:48615"
-              },
-              "stage": {
-                "order": 1,
-                "type": "league",
-                "phase": "regular season",
-                "start_date": "2026-09-02",
-                "end_date": "2026-11-11",
-                "year": "2026"
-              },
-              "round": {
-                "number": 8
-              },
-              "groups": [
-                {
-                  "id": "sr:league:112482",
-                  "name": "U20 Carioca, Serie A2 2026"
-                }
-              ]
-            },
-            "coverage": {
-              "type": "sport_event",
-              "sport_event_properties": {
-                "lineups": false,
-                "formations": false,
-                "venue": false,
-                "ballspotting": false,
-                "commentary": false,
-                "fun_facts": false,
-                "game_clock": false,
-                "goal_scorers": false,
-                "goal_scorers_live": false,
-                "scores": "post",
-                "basic_play_by_play": false,
-                "basic_player_stats": false,
-                "basic_team_stats": false,
-                "deeper_play_by_play": false,
-                "deeper_player_stats": false,
-                "deeper_team_stats": false,
-                "extended_play_by_play": false,
-                "extended_player_stats": false,
-                "extended_team_stats": false
-              }
-            },
-            "competitors": [
-              {
-                "id": "sr:competitor:327337",
-                "name": "Sao Goncalo EC RJ",
-                "country": "Brazil",
-                "country_code": "BRA",
-                "abbreviation": "SAO",
-                "qualifier": "home",
-                "gender": "male",
-                "age_group": "U20"
-              },
-              {
-                "id": "sr:competitor:307394",
-                "name": "AD Cabofriense RJ",
-                "country": "Brazil",
-                "country_code": "BRA",
-                "abbreviation": "CAB",
-                "qualifier": "away",
-                "gender": "male",
-                "age_group": "U20"
-              }
-            ],
-            "sport_event_conditions": {
-              "ground": {
-                "neutral": false
-              }
-            }
-          },
-          "sport_event_status": {
-            "status": "not_started"
-          }
-        },
-        {
-          "sport_event": {
-            "id": "sr:sport_event:73773742",
-            "start_time": "2026-10-21T18:00:00+00:00",
-            "start_time_confirmed": true,
-            "date_confirmed": true,
-            "sport_event_context": {
-              "sport": {
-                "id": "sr:sport:1",
-                "name": "Soccer"
-              },
-              "category": {
-                "id": "sr:category:13",
-                "name": "Brazil",
-                "country_code": "BRA"
-              },
-              "competition": {
-                "id": "sr:competition:48615",
-                "name": "U20 Carioca, Serie A2",
-                "gender": "men"
-              },
-              "season": {
-                "id": "sr:season:145538",
-                "name": "U20 Carioca, Serie A2 2026",
-                "start_date": "2026-09-02",
-                "end_date": "2026-11-22",
-                "year": "2026",
-                "competition_id": "sr:competition:48615"
-              },
-              "stage": {
-                "order": 1,
-                "type": "league",
-                "phase": "regular season",
-                "start_date": "2026-09-02",
-                "end_date": "2026-11-11",
-                "year": "2026"
-              },
-              "round": {
-                "number": 8
-              },
-              "groups": [
-                {
-                  "id": "sr:league:112482",
-                  "name": "U20 Carioca, Serie A2 2026"
-                }
-              ]
-            },
-            "coverage": {
-              "type": "sport_event",
-              "sport_event_properties": {
-                "lineups": false,
-                "formations": false,
-                "venue": false,
-                "ballspotting": false,
-                "commentary": false,
-                "fun_facts": false,
-                "game_clock": false,
-                "goal_scorers": false,
-                "goal_scorers_live": false,
-                "scores": "post",
-                "basic_play_by_play": false,
-                "basic_player_stats": false,
-                "basic_team_stats": false,
-                "deeper_play_by_play": false,
-                "deeper_player_stats": false,
-                "deeper_team_stats": false,
-                "extended_play_by_play": false,
-                "extended_player_stats": false,
-                "extended_team_stats": false
-              }
-            },
-            "competitors": [
-              {
-                "id": "sr:competitor:397072",
-                "name": "Americano RJ",
-                "country": "Brazil",
-                "country_code": "BRA",
-                "abbreviation": "AME",
-                "qualifier": "home",
-                "gender": "male",
-                "age_group": "U20"
-              },
-              {
-                "id": "sr:competitor:445265",
-                "name": "Perolas Negras RJ",
-                "country": "Brazil",
-                "country_code": "BRA",
-                "abbreviation": "PER",
-                "qualifier": "away",
-                "gender": "male",
-                "age_group": "U20"
-              }
-            ],
-            "sport_event_conditions": {
-              "ground": {
-                "neutral": false
-              }
-            }
-          },
-          "sport_event_status": {
-            "status": "not_started"
-          }
-        },
-        {
-          "sport_event": {
-            "id": "sr:sport_event:73773744",
-            "start_time": "2026-10-21T18:00:00+00:00",
-            "start_time_confirmed": true,
-            "date_confirmed": true,
-            "sport_event_context": {
-              "sport": {
-                "id": "sr:sport:1",
-                "name": "Soccer"
-              },
-              "category": {
-                "id": "sr:category:13",
-                "name": "Brazil",
-                "country_code": "BRA"
-              },
-              "competition": {
-                "id": "sr:competition:48615",
-                "name": "U20 Carioca, Serie A2",
-                "gender": "men"
-              },
-              "season": {
-                "id": "sr:season:145538",
-                "name": "U20 Carioca, Serie A2 2026",
-                "start_date": "2026-09-02",
-                "end_date": "2026-11-22",
-                "year": "2026",
-                "competition_id": "sr:competition:48615"
-              },
-              "stage": {
-                "order": 1,
-                "type": "league",
-                "phase": "regular season",
-                "start_date": "2026-09-02",
-                "end_date": "2026-11-11",
-                "year": "2026"
-              },
-              "round": {
-                "number": 8
-              },
-              "groups": [
-                {
-                  "id": "sr:league:112482",
-                  "name": "U20 Carioca, Serie A2 2026"
-                }
-              ]
-            },
-            "coverage": {
-              "type": "sport_event",
-              "sport_event_properties": {
-                "lineups": false,
-                "formations": false,
-                "venue": false,
-                "ballspotting": false,
-                "commentary": false,
-                "fun_facts": false,
-                "game_clock": false,
-                "goal_scorers": false,
-                "goal_scorers_live": false,
-                "scores": "post",
-                "basic_play_by_play": false,
-                "basic_player_stats": false,
-                "basic_team_stats": false,
-                "deeper_play_by_play": false,
-                "deeper_player_stats": false,
-                "deeper_team_stats": false,
-                "extended_play_by_play": false,
-                "extended_player_stats": false,
-                "extended_team_stats": false
-              }
-            },
-            "competitors": [
-              {
-                "id": "sr:competitor:307388",
-                "name": "Resende FC RJ",
-                "country": "Brazil",
-                "country_code": "BRA",
-                "abbreviation": "RES",
-                "qualifier": "home",
-                "gender": "male",
-                "age_group": "U20"
-              },
-              {
-                "id": "sr:competitor:445257",
-                "name": "Araruama FC RJ",
-                "country": "Brazil",
-                "country_code": "BRA",
-                "abbreviation": "ARA",
-                "qualifier": "away",
-                "gender": "male",
-                "age_group": "U20"
-              }
-            ],
-            "sport_event_conditions": {
-              "ground": {
-                "neutral": false
-              }
-            }
-          },
-          "sport_event_status": {
-            "status": "not_started"
-          }
-        },
-        {
-          "sport_event": {
-            "id": "sr:sport_event:74124522",
-            "start_time": "2026-10-21T18:00:00+00:00",
-            "start_time_confirmed": true,
-            "date_confirmed": true,
-            "sport_event_context": {
-              "sport": {
-                "id": "sr:sport:1",
-                "name": "Soccer"
-              },
-              "category": {
-                "id": "sr:category:13",
-                "name": "Brazil",
-                "country_code": "BRA"
-              },
-              "competition": {
-                "id": "sr:competition:40677",
-                "name": "Carioca, Serie B1",
-                "gender": "men"
-              },
-              "season": {
-                "id": "sr:season:144422",
-                "name": "Carioca, Serie B1 2026",
-                "start_date": "2026-09-05",
-                "end_date": "2026-12-06",
-                "year": "2026",
-                "competition_id": "sr:competition:40677"
-              },
-              "stage": {
-                "order": 1,
-                "type": "league",
-                "phase": "regular season",
-                "start_date": "2026-09-05",
-                "end_date": "2026-11-08",
-                "year": "2026"
-              },
-              "round": {
-                "number": 8
-              },
-              "groups": [
-                {
-                  "id": "sr:league:110744",
-                  "name": "Carioca, Serie B1 2026"
-                }
-              ]
-            },
-            "coverage": {
-              "type": "sport_event",
-              "sport_event_properties": {
-                "lineups": false,
-                "formations": false,
-                "venue": false,
-                "ballspotting": false,
-                "commentary": false,
-                "fun_facts": false,
-                "game_clock": false,
-                "goal_scorers": false,
-                "goal_scorers_live": false,
-                "scores": "post",
-                "basic_play_by_play": false,
-                "basic_player_stats": false,
-                "basic_team_stats": false,
-                "deeper_play_by_play": false,
-                "deeper_player_stats": false,
-                "deeper_team_stats": false,
-                "extended_play_by_play": false,
-                "extended_player_stats": false,
-                "extended_team_stats": false
-              }
-            },
-            "competitors": [
-              {
-                "id": "sr:competitor:1125159",
-                "name": "Niteroiense FC RJ",
-                "country": "Brazil",
-                "country_code": "BRA",
-                "abbreviation": "NIT",
-                "qualifier": "home",
-                "gender": "male"
-              },
-              {
-                "id": "sr:competitor:85341",
-                "name": "Audax Rio EC RJ",
-                "country": "Brazil",
-                "country_code": "BRA",
-                "abbreviation": "ADX",
-                "qualifier": "away",
-                "gender": "male"
-              }
-            ],
-            "sport_event_conditions": {
-              "ground": {
-                "neutral": false
-              }
-            }
-          },
-          "sport_event_status": {
-            "status": "not_started"
-          }
-        },
-        {
-          "sport_event": {
-            "id": "sr:sport_event:74125528",
-            "start_time": "2026-10-21T18:00:00+00:00",
-            "start_time_confirmed": true,
-            "date_confirmed": true,
-            "sport_event_context": {
-              "sport": {
-                "id": "sr:sport:1",
-                "name": "Soccer"
-              },
-              "category": {
-                "id": "sr:category:252",
-                "name": "England Amateur",
-                "country_code": "ENG"
-              },
-              "competition": {
-                "id": "sr:competition:1592",
-                "name": "Premier League Cup",
-                "gender": "men",
-                "alternative_name": "Premier League Cup"
-              },
-              "season": {
-                "id": "sr:season:145372",
-                "name": "Premier League Cup 26/27",
-                "start_date": "2026-08-11",
-                "end_date": "2027-05-14",
-                "year": "26/27",
-                "competition_id": "sr:competition:1592"
-              },
-              "stage": {
-                "order": 1,
-                "type": "league",
-                "phase": "regular season",
-                "start_date": "2026-08-11",
-                "end_date": "2026-12-09",
-                "year": "26/27"
-              },
-              "round": {},
-              "groups": [
-                {
-                  "id": "sr:league:112226",
-                  "name": "U21 Premier League Cup 26/27, Group G",
-                  "group_name": "G"
-                }
-              ]
-            },
-            "coverage": {
-              "type": "sport_event",
-              "sport_event_properties": {
-                "lineups": false,
-                "formations": false,
-                "venue": false,
-                "ballspotting": false,
-                "commentary": false,
-                "fun_facts": false,
-                "game_clock": false,
-                "goal_scorers": false,
-                "goal_scorers_live": false,
-                "scores": "post",
-                "basic_play_by_play": false,
-                "basic_player_stats": false,
-                "basic_team_stats": false,
-                "deeper_play_by_play": false,
-                "deeper_player_stats": false,
-                "deeper_team_stats": false,
-                "extended_play_by_play": false,
-                "extended_player_stats": false,
-                "extended_team_stats": false
-              }
-            },
-            "competitors": [
-              {
-                "id": "sr:competitor:54367",
-                "name": "Norwich City FC",
-                "country": "England",
-                "country_code": "ENG",
-                "abbreviation": "NOR",
-                "qualifier": "home",
-                "gender": "male",
-                "age_group": "U21"
-              },
-              {
-                "id": "sr:competitor:297884",
-                "name": "Bristol City",
-                "abbreviation": "BRC",
-                "qualifier": "away",
-                "gender": "male",
-                "age_group": "U21"
-              }
-            ],
-            "sport_event_conditions": {
-              "ground": {
-                "neutral": false
-              }
-            }
-          },
-          "sport_event_status": {
-            "status": "not_started"
-          }
-        },
-        {
-          "sport_event": {
-            "id": "sr:sport_event:74801144",
-            "start_time": "2026-10-21T18:00:00+00:00",
-            "start_time_confirmed": true,
-            "date_confirmed": true,
-            "sport_event_context": {
-              "sport": {
-                "id": "sr:sport:1",
-                "name": "Soccer"
-              },
-              "category": {
-                "id": "sr:category:32",
-                "name": "Spain",
-                "country_code": "ESP"
-              },
-              "competition": {
-                "id": "sr:competition:8",
-                "name": "LaLiga",
-                "gender": "men"
-              },
-              "season": {
-                "id": "sr:season:142176",
-                "name": "LaLiga 26/27",
-                "start_date": "2026-08-15",
-                "end_date": "2027-05-30",
-                "year": "26/27",
-                "competition_id": "sr:competition:8"
-              },
-              "stage": {
-                "order": 1,
-                "type": "league",
-                "phase": "regular season",
-                "start_date": "2026-08-15",
-                "end_date": "2027-05-30",
-                "year": "26/27"
-              },
-              "round": {
-                "number": 6
-              },
-              "groups": [
-                {
-                  "id": "sr:league:109186",
-                  "name": "LaLiga 26/27"
-                }
-              ]
-            },
-            "coverage": {
-              "type": "sport_event",
-              "sport_event_properties": {
-                "lineups": true,
-                "formations": true,
-                "venue": true,
-                "lineups_availability": "pre",
-                "ballspotting": true,
-                "commentary": true,
-                "fun_facts": true,
-                "game_clock": true,
-                "goal_scorers": true,
-                "goal_scorers_live": true,
-                "scores": "live",
-                "basic_play_by_play": true,
-                "basic_player_stats": true,
-                "basic_team_stats": true,
-                "deeper_play_by_play": true,
-                "deeper_player_stats": true,
-                "deeper_team_stats": true,
-                "extended_play_by_play": true,
-                "extended_player_stats": true,
-                "extended_team_stats": true
-              }
-            },
-            "competitors": [
-              {
-                "id": "sr:competitor:2849",
-                "name": "Levante UD",
-                "country": "Spain",
-                "country_code": "ESP",
-                "abbreviation": "LEV",
-                "qualifier": "home",
-                "gender": "male"
-              },
-              {
-                "id": "sr:competitor:2825",
-                "name": "Athletic Bilbao",
-                "country": "Spain",
-                "country_code": "ESP",
-                "abbreviation": "ATH",
-                "qualifier": "away",
-                "gender": "male"
-              }
-            ],
-            "venue": {
-              "id": "sr:venue:607",
-              "name": "Ciutat de Valencia",
-              "capacity": 26354,
-              "city_name": "Valencia",
-              "city_id": "sr:city:74",
-              "country_name": "Spain",
-              "map_coordinates": "39.494686, -0.36382",
-              "country_code": "ESP",
-              "timezone": "Europe/Madrid"
-            },
-            "channels": [
-              {
-                "name": "M+ LaLiga - Astra 1C-1H / 2C (19.2E)",
-                "url": "https://www.movistarplus.es/programacion-tv",
-                "country": "Spain",
-                "country_code": "ESP"
-              },
-              {
-                "name": "ESPN Deportes",
-                "country": "United States",
-                "country_code": "USA"
-              },
-              {
-                "name": "ESPN+",
-                "url": "https://www.espn.com/where-to-watch/leagues/ger.1~eng.1~esp.1/_/dates/20240901",
-                "country": "United States",
-                "country_code": "USA"
-              }
-            ],
-            "sport_event_conditions": {
-              "referees": [
-                {
-                  "id": "sr:referee:1751755",
-                  "name": "Quintero Gonzalez, Alejandro",
-                  "nationality": "Spain",
-                  "country_code": "ESP",
-                  "type": "main_referee"
-                },
-                {
-                  "id": "sr:referee:1084394",
-                  "name": "Santiago Sacristan, Guillermo",
-                  "nationality": "Spain",
-                  "country_code": "ESP",
-                  "type": "first_assistant_referee"
-                },
-                {
-                  "id": "sr:referee:1137605",
-                  "name": "Garcia Lozano, Jose Francisco",
-                  "nationality": "Spain",
-                  "country_code": "ESP",
-                  "type": "second_assistant_referee"
-                },
-                {
-                  "id": "sr:referee:3105410",
-                  "name": "Arenas Mora, Pol",
-                  "nationality": "Spain",
-                  "country_code": "ESP",
-                  "type": "fourth_official"
-                },
-                {
-                  "id": "sr:referee:141701",
-                  "name": "Milla Alvendiz, Luis Mario",
-                  "nationality": "Spain",
-                  "country_code": "ESP",
-                  "type": "video_assistant_referee"
-                }
-              ],
-              "ground": {
-                "neutral": false
-              }
-            }
-          },
-          "sport_event_status": {
-            "status": "not_started",
-            "match_status": "not_started"
-          }
-        },
-        {
-          "sport_event": {
-            "id": "sr:sport_event:75123574",
-            "start_time": "2026-10-21T18:00:00+00:00",
-            "start_time_confirmed": true,
-            "date_confirmed": true,
-            "sport_event_context": {
-              "sport": {
-                "id": "sr:sport:1",
-                "name": "Soccer"
-              },
-              "category": {
-                "id": "sr:category:13",
-                "name": "Brazil",
-                "country_code": "BRA"
-              },
-              "competition": {
-                "id": "sr:competition:380",
-                "name": "Pernambucano",
-                "gender": "men"
-              },
-              "season": {
-                "id": "sr:season:147064",
-                "name": "Pernambucano 26/27",
-                "start_date": "2026-10-17",
-                "end_date": "2027-03-08",
-                "year": "26/27",
-                "competition_id": "sr:competition:380"
-              },
-              "stage": {
-                "order": 1,
-                "type": "league",
-                "phase": "regular season",
-                "start_date": "2026-10-17",
-                "end_date": "2026-11-07",
-                "year": "26/27"
-              },
-              "round": {
-                "number": 1
-              },
-              "groups": [
-                {
-                  "id": "sr:league:114172",
-                  "name": "Pernambucano 26/27, Group C",
-                  "group_name": "C"
-                }
-              ]
-            },
-            "coverage": {
-              "type": "sport_event",
-              "sport_event_properties": {
-                "lineups": false,
-                "formations": false,
-                "venue": false,
-                "ballspotting": false,
-                "commentary": false,
-                "fun_facts": false,
-                "game_clock": false,
-                "goal_scorers": false,
-                "goal_scorers_live": false,
-                "scores": "live",
-                "basic_play_by_play": false,
-                "basic_player_stats": false,
-                "basic_team_stats": false,
-                "deeper_play_by_play": false,
-                "deeper_player_stats": false,
-                "deeper_team_stats": false,
-                "extended_play_by_play": false,
-                "extended_player_stats": false,
-                "extended_team_stats": false
-              }
-            },
-            "competitors": [
-              {
-                "id": "sr:competitor:22425",
-                "name": "Serrano PE",
-                "country": "Brazil",
-                "country_code": "BRA",
-                "abbreviation": "SPE",
-                "qualifier": "home",
-                "gender": "male"
-              },
-              {
-                "id": "sr:competitor:925355",
-                "name": "Santa Fe PE",
-                "country": "Brazil",
-                "country_code": "BRA",
-                "abbreviation": "SAN",
-                "qualifier": "away",
-                "gender": "male"
-              }
-            ],
-            "sport_event_conditions": {
-              "ground": {
-                "neutral": false
-              }
-            }
-          },
-          "sport_event_status": {
-            "status": "not_started",
-            "match_status": "not_started"
-          }
-        },
-        {
-          "sport_event": {
-            "id": "sr:sport_event:75133508",
-            "start_time": "2026-10-21T18:00:00+00:00",
-            "start_time_confirmed": true,
-            "date_confirmed": true,
-            "sport_event_context": {
-              "sport": {
-                "id": "sr:sport:1",
-                "name": "Soccer"
-              },
-              "category": {
-                "id": "sr:category:48",
-                "name": "Argentina",
-                "country_code": "ARG"
-              },
-              "competition": {
-                "id": "sr:competition:36945",
-                "name": "Primera LPF, Reserves",
-                "gender": "men"
-              },
-              "season": {
-                "id": "sr:season:139094",
-                "name": "Primera LPF, Reserves 2026",
-                "start_date": "2026-02-03",
-                "end_date": "2026-12-08",
-                "year": "2026",
-                "competition_id": "sr:competition:36945"
-              },
-              "stage": {
-                "order": 3,
-                "type": "league",
-                "phase": "regular season",
-                "start_date": "2026-07-13",
-                "end_date": "2026-11-12",
-                "year": "2026"
-              },
-              "round": {
-                "number": 14
-              },
-              "groups": [
-                {
-                  "id": "sr:league:104626",
-                  "name": "Premiera LPF, Reserves 2026, Clausura, Group B",
-                  "group_name": "B"
-                }
-              ]
-            },
-            "coverage": {
-              "type": "sport_event",
-              "sport_event_properties": {
-                "lineups": false,
-                "formations": false,
-                "venue": false,
-                "ballspotting": false,
-                "commentary": false,
-                "fun_facts": false,
-                "game_clock": false,
-                "goal_scorers": false,
-                "goal_scorers_live": false,
-                "scores": "post",
-                "basic_play_by_play": false,
-                "basic_player_stats": false,
-                "basic_team_stats": false,
-                "deeper_play_by_play": false,
-                "deeper_player_stats": false,
-                "deeper_team_stats": false,
-                "extended_play_by_play": false,
-                "extended_player_stats": false,
-                "extended_team_stats": false
-              }
-            },
-            "competitors": [
-              {
-                "id": "sr:competitor:295176",
-                "name": "CA Belgrano",
-                "country": "Argentina",
-                "country_code": "ARG",
-                "abbreviation": "BEL",
-                "qualifier": "home",
-                "gender": "male"
-              },
-              {
-                "id": "sr:competitor:295190",
-                "name": "Estudiantes de LP Reserve",
-                "country": "Argentina",
-                "country_code": "ARG",
-                "abbreviation": "EST",
-                "qualifier": "away",
-                "gender": "male"
-              }
-            ],
-            "sport_event_conditions": {
-              "ground": {
-                "neutral": false
-              }
-            }
-          },
-          "sport_event_status": {
-            "status": "not_started"
-          }
-        },
-        {
-          "sport_event": {
-            "id": "sr:sport_event:75133510",
-            "start_time": "2026-10-21T18:00:00+00:00",
-            "start_time_confirmed": true,
-            "date_confirmed": true,
-            "sport_event_context": {
-              "sport": {
-                "id": "sr:sport:1",
-                "name": "Soccer"
-              },
-              "category": {
-                "id": "sr:category:48",
-                "name": "Argentina",
-                "country_code": "ARG"
-              },
-              "competition": {
-                "id": "sr:competition:36945",
-                "name": "Primera LPF, Reserves",
-                "gender": "men"
-              },
-              "season": {
-                "id": "sr:season:139094",
-                "name": "Primera LPF, Reserves 2026",
-                "start_date": "2026-02-03",
-                "end_date": "2026-12-08",
-                "year": "2026",
-                "competition_id": "sr:competition:36945"
-              },
-              "stage": {
-                "order": 3,
-                "type": "league",
-                "phase": "regular season",
-                "start_date": "2026-07-13",
-                "end_date": "2026-11-12",
-                "year": "2026"
-              },
-              "round": {
-                "number": 14
-              },
-              "groups": [
-                {
-                  "id": "sr:league:104626",
-                  "name": "Premiera LPF, Reserves 2026, Clausura, Group B",
-                  "group_name": "B"
-                }
-              ]
-            },
-            "coverage": {
-              "type": "sport_event",
-              "sport_event_properties": {
-                "lineups": false,
-                "formations": false,
-                "venue": false,
-                "ballspotting": false,
-                "commentary": false,
-                "fun_facts": false,
-                "game_clock": false,
-                "goal_scorers": false,
-                "goal_scorers_live": false,
-                "scores": "post",
-                "basic_play_by_play": false,
-                "basic_player_stats": false,
-                "basic_team_stats": false,
-                "deeper_play_by_play": false,
-                "deeper_player_stats": false,
-                "deeper_team_stats": false,
-                "extended_play_by_play": false,
-                "extended_player_stats": false,
-                "extended_team_stats": false
-              }
-            },
-            "competitors": [
-              {
-                "id": "sr:competitor:380922",
-                "name": "Ferro Carril Oeste",
-                "country": "Argentina",
-                "country_code": "ARG",
-                "abbreviation": "FCO",
-                "qualifier": "home",
-                "gender": "male"
-              },
-              {
-                "id": "sr:competitor:295184",
-                "name": "Colon de Santa Fe Reserve",
-                "country": "Argentina",
-                "country_code": "ARG",
-                "abbreviation": "COL",
-                "qualifier": "away",
-                "gender": "male"
-              }
-            ],
-            "sport_event_conditions": {
-              "ground": {
-                "neutral": false
-              }
-            }
-          },
-          "sport_event_status": {
-            "status": "not_started"
-          }
         }
       ]
     },
-    "updatedAt": "2026-10-21T04:41:25.061Z"
+    "updatedAt": "2026-10-21T08:39:13.452Z"
   }
 }
