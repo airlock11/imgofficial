@@ -1,7 +1,7 @@
 {
   "version": 1,
   "source": "ESPN public football data",
-  "updatedAt": "2026-10-22T19:57:23.911Z",
+  "updatedAt": "2026-10-22T23:10:16.139Z",
   "leagues": {
     "soccer": {
       "name": "Premier League",
@@ -1144,7 +1144,7 @@
           "points": 4
         }
       ],
-      "verifiedAt": "2026-10-22T19:57:23.332Z"
+      "verifiedAt": "2026-10-22T23:10:15.517Z"
     },
     "laliga": {
       "name": "La Liga",
@@ -2031,6 +2031,22 @@
           "venue": "Ramón Sánchez Pizjuán Stadium",
           "competition": "La Liga",
           "category": "Spain"
+        },
+        {
+          "eventId": "401882798",
+          "date": "2026-11-21T20:00Z",
+          "displayTime": "",
+          "home": "Real Madrid",
+          "away": "Celta Vigo",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/86.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/85.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "Santiago Bernabéu",
+          "competition": "La Liga",
+          "category": "Spain"
         }
       ],
       "standings": [
@@ -2255,7 +2271,7 @@
           "points": 4
         }
       ],
-      "verifiedAt": "2026-10-22T19:57:23.570Z"
+      "verifiedAt": "2026-10-22T23:10:15.758Z"
     },
     "bundesliga": {
       "name": "Bundesliga",
@@ -3296,7 +3312,7 @@
           "points": 0
         }
       ],
-      "verifiedAt": "2026-10-22T19:57:23.676Z"
+      "verifiedAt": "2026-10-22T23:10:15.900Z"
     },
     "seriea": {
       "name": "Serie A",
@@ -4551,7 +4567,7 @@
           "points": 3
         }
       ],
-      "verifiedAt": "2026-10-22T19:57:23.910Z"
+      "verifiedAt": "2026-10-22T23:10:16.138Z"
     }
   }
 }
