@@ -1,7 +1,7 @@
 {
   "version": 1,
   "source": "ESPN public football data",
-  "updatedAt": "2026-10-22T15:58:23.044Z",
+  "updatedAt": "2026-10-22T19:57:23.911Z",
   "leagues": {
     "soccer": {
       "name": "Premier League",
@@ -904,6 +904,22 @@
           "venue": "Tottenham Hotspur Stadium",
           "competition": "Premier League",
           "category": "England"
+        },
+        {
+          "eventId": "401879232",
+          "date": "2026-11-21T17:30Z",
+          "displayTime": "",
+          "home": "Newcastle United",
+          "away": "Arsenal",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/361.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/359.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "St. James' Park",
+          "competition": "Premier League",
+          "category": "England"
         }
       ],
       "standings": [
@@ -1128,7 +1144,7 @@
           "points": 4
         }
       ],
-      "verifiedAt": "2026-10-22T15:58:22.543Z"
+      "verifiedAt": "2026-10-22T19:57:23.332Z"
     },
     "laliga": {
       "name": "La Liga",
@@ -1999,6 +2015,22 @@
           "venue": "Estadio de Vallecas",
           "competition": "La Liga",
           "category": "Spain"
+        },
+        {
+          "eventId": "401882797",
+          "date": "2026-11-21T17:30Z",
+          "displayTime": "",
+          "home": "Sevilla",
+          "away": "Real Betis",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/243.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/244.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "Ramón Sánchez Pizjuán Stadium",
+          "competition": "La Liga",
+          "category": "Spain"
         }
       ],
       "standings": [
@@ -2223,7 +2255,7 @@
           "points": 4
         }
       ],
-      "verifiedAt": "2026-10-22T15:58:22.736Z"
+      "verifiedAt": "2026-10-22T19:57:23.570Z"
     },
     "bundesliga": {
       "name": "Bundesliga",
@@ -3046,6 +3078,22 @@
           "venue": "URSAPHARM-Arena an der Kaiserlinde",
           "competition": "Bundesliga",
           "category": "Germany"
+        },
+        {
+          "eventId": "401884729",
+          "date": "2026-11-21T17:30Z",
+          "displayTime": "",
+          "home": "Schalke 04",
+          "away": "VfB Stuttgart",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/133.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/134.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "Veltins Arena",
+          "competition": "Bundesliga",
+          "category": "Germany"
         }
       ],
       "standings": [
@@ -3248,7 +3296,7 @@
           "points": 0
         }
       ],
-      "verifiedAt": "2026-10-22T15:58:22.864Z"
+      "verifiedAt": "2026-10-22T19:57:23.676Z"
     },
     "seriea": {
       "name": "Serie A",
@@ -4247,6 +4295,38 @@
           "venue": "Olimpico",
           "competition": "Serie A",
           "category": "Italy"
+        },
+        {
+          "eventId": "401874967",
+          "date": "2026-11-21T17:00Z",
+          "displayTime": "",
+          "home": "Parma",
+          "away": "AS Roma",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/115.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/104.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "Ennio Tardini",
+          "competition": "Serie A",
+          "category": "Italy"
+        },
+        {
+          "eventId": "401875067",
+          "date": "2026-11-21T19:45Z",
+          "displayTime": "",
+          "home": "Napoli",
+          "away": "Torino",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/114.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/239.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "Stadio Diego Armando Maradona",
+          "competition": "Serie A",
+          "category": "Italy"
         }
       ],
       "standings": [
@@ -4471,7 +4551,7 @@
           "points": 3
         }
       ],
-      "verifiedAt": "2026-10-22T15:58:23.044Z"
+      "verifiedAt": "2026-10-22T19:57:23.910Z"
     }
   }
 }
