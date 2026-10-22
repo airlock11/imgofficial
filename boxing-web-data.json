@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-22T12:17:26+00:00",
+  "updated_at": "2026-10-22T17:32:49+00:00",
   "source": "Official boxing websites",
   "sources": [
     {
@@ -12,14 +12,168 @@
     }
   ],
   "source_counts": {
-    "Premier Boxing Champions": 0,
+    "Premier Boxing Champions": 5,
     "Matchroom Boxing": 2
   },
   "errors": {
-    "Premier Boxing Champions": "No current fights parsed",
     "Matchroom Boxing": "Parser returned no current rows; retained last verified official schedule"
   },
   "fights": [
+    {
+      "id": "web-premier-boxing-champions-2026-12-05-david-benavidez-michal-cieslak",
+      "title": "David Benavidez vs. Michal Cieslak",
+      "date": "2026-12-05T12:00:00Z",
+      "displayTime": "Dec 5 · 8:00 PM ET",
+      "status": "NOT_STARTED",
+      "sourceName": "Premier Boxing Champions",
+      "sourceUrl": "https://www.premierboxingchampions.com/boxing-schedule",
+      "event": {
+        "title": "Premier Boxing Champions",
+        "location": "",
+        "venue": ""
+      },
+      "fighters": {
+        "fighter_1": {
+          "name": "David Benavidez",
+          "winner": false
+        },
+        "fighter_2": {
+          "name": "Michal Cieslak",
+          "winner": false
+        }
+      },
+      "results": {
+        "outcome": null,
+        "outcome_long": null,
+        "round": null,
+        "time": null,
+        "scores": []
+      }
+    },
+    {
+      "id": "web-premier-boxing-champions-2026-12-05-vergil-ortiz-jr-keith-thurman",
+      "title": "Vergil Ortiz Jr. vs. Keith Thurman",
+      "date": "2026-12-05T12:00:00Z",
+      "displayTime": "Dec 5 · 8:00 PM ET",
+      "status": "NOT_STARTED",
+      "sourceName": "Premier Boxing Champions",
+      "sourceUrl": "https://www.premierboxingchampions.com/boxing-schedule",
+      "event": {
+        "title": "Premier Boxing Champions",
+        "location": "",
+        "venue": ""
+      },
+      "fighters": {
+        "fighter_1": {
+          "name": "Vergil Ortiz Jr.",
+          "winner": false
+        },
+        "fighter_2": {
+          "name": "Keith Thurman",
+          "winner": false
+        }
+      },
+      "results": {
+        "outcome": null,
+        "outcome_long": null,
+        "round": null,
+        "time": null,
+        "scores": []
+      }
+    },
+    {
+      "id": "web-premier-boxing-champions-2026-12-05-emiliano-vargas-opponent-tba",
+      "title": "Emiliano Vargas vs. Opponent TBA",
+      "date": "2026-12-05T12:00:00Z",
+      "displayTime": "Dec 5 · 8:00 PM ET",
+      "status": "NOT_STARTED",
+      "sourceName": "Premier Boxing Champions",
+      "sourceUrl": "https://www.premierboxingchampions.com/boxing-schedule",
+      "event": {
+        "title": "Premier Boxing Champions",
+        "location": "",
+        "venue": ""
+      },
+      "fighters": {
+        "fighter_1": {
+          "name": "Emiliano Vargas",
+          "winner": false
+        },
+        "fighter_2": {
+          "name": "Opponent TBA",
+          "winner": false
+        }
+      },
+      "results": {
+        "outcome": null,
+        "outcome_long": null,
+        "round": null,
+        "time": null,
+        "scores": []
+      }
+    },
+    {
+      "id": "web-premier-boxing-champions-2026-12-05-marco-romero-opponent-tba",
+      "title": "Marco Romero vs. Opponent TBA",
+      "date": "2026-12-05T12:00:00Z",
+      "displayTime": "Dec 5 · 8:00 PM ET",
+      "status": "NOT_STARTED",
+      "sourceName": "Premier Boxing Champions",
+      "sourceUrl": "https://www.premierboxingchampions.com/boxing-schedule",
+      "event": {
+        "title": "Premier Boxing Champions",
+        "location": "",
+        "venue": ""
+      },
+      "fighters": {
+        "fighter_1": {
+          "name": "Marco Romero",
+          "winner": false
+        },
+        "fighter_2": {
+          "name": "Opponent TBA",
+          "winner": false
+        }
+      },
+      "results": {
+        "outcome": null,
+        "outcome_long": null,
+        "round": null,
+        "time": null,
+        "scores": []
+      }
+    },
+    {
+      "id": "web-premier-boxing-champions-2026-12-05-nikita-tszyu-opponent-tba",
+      "title": "Nikita Tszyu vs. Opponent TBA",
+      "date": "2026-12-05T12:00:00Z",
+      "displayTime": "Dec 5 · 8:00 PM ET",
+      "status": "NOT_STARTED",
+      "sourceName": "Premier Boxing Champions",
+      "sourceUrl": "https://www.premierboxingchampions.com/boxing-schedule",
+      "event": {
+        "title": "Premier Boxing Champions",
+        "location": "",
+        "venue": ""
+      },
+      "fighters": {
+        "fighter_1": {
+          "name": "Nikita Tszyu",
+          "winner": false
+        },
+        "fighter_2": {
+          "name": "Opponent TBA",
+          "winner": false
+        }
+      },
+      "results": {
+        "outcome": null,
+        "outcome_long": null,
+        "round": null,
+        "time": null,
+        "scores": []
+      }
+    },
     {
       "id": "matchroom-20261024-smith-puello",
       "title": "Smith vs. Puello",
