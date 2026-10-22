@@ -3,14 +3,14 @@
   "provider": "Sportradar",
   "product": "Soccer API",
   "access": "trial",
-  "updatedAt": "2026-10-22T20:05:17.710Z",
+  "updatedAt": "2026-10-22T23:20:59.707Z",
   "requestsLastRun": 2,
   "leagues": {
     "laliga": {
       "league": "La Liga",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-22T20:05:17.710Z",
+      "updatedAt": "2026-10-22T23:20:59.707Z",
       "games": [
         {
           "eventId": "sr:sport_event:72477506",
@@ -340,7 +340,7 @@
       "league": "Serie A",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-22T20:05:17.710Z",
+      "updatedAt": "2026-10-22T23:20:59.707Z",
       "games": [
         {
           "eventId": "sr:sport_event:71945310",
@@ -486,7 +486,7 @@
       "league": "Bundesliga",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-22T20:05:17.710Z",
+      "updatedAt": "2026-10-22T23:20:59.707Z",
       "games": [
         {
           "eventId": "sr:sport_event:72513242",
@@ -275669,7 +275669,7 @@
       "league": "UEFA Champions League",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-22T20:05:17.710Z",
+      "updatedAt": "2026-10-22T23:20:59.707Z",
       "games": [
         {
           "eventId": "sr:sport_event:74165940",
@@ -339586,7 +339586,7 @@
       "league": "MLS",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-22T20:05:17.710Z",
+      "updatedAt": "2026-10-22T23:20:59.707Z",
       "games": [
         {
           "eventId": "sr:sport_event:66299652",
@@ -961944,14 +961944,14 @@
       "league": "PFL",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-22T20:05:17.710Z",
+      "updatedAt": "2026-10-22T23:20:59.707Z",
       "games": []
     },
     "jamaica_pl": {
       "league": "Jamaican Premier League",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-22T20:05:17.710Z",
+      "updatedAt": "2026-10-22T23:20:59.707Z",
       "games": [
         {
           "eventId": "sr:sport_event:74980116",
@@ -991752,7 +991752,7 @@
       "league": "Mizoram Premier League",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-22T20:05:17.710Z",
+      "updatedAt": "2026-10-22T23:20:59.707Z",
       "games": [
         {
           "eventId": "sr:sport_event:75074674",
@@ -991898,7 +991898,7 @@
       "league": "Primera Division, Reserves",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-22T20:05:17.710Z",
+      "updatedAt": "2026-10-22T23:20:59.707Z",
       "games": [
         {
           "eventId": "sr:sport_event:75601346",
@@ -991929,7 +991929,7 @@
       "league": "UEFA Champions League Women",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-22T20:05:17.710Z",
+      "updatedAt": "2026-10-22T23:20:59.707Z",
       "games": [],
       "competitionId": "sr:competition:696",
       "competition": {
@@ -1079426,11 +1079426,6 @@
   "usage": {
     "requests": [
       {
-        "at": "2026-09-22T22:55:32.518Z",
-        "count": 2,
-        "mode": "live"
-      },
-      {
         "at": "2026-09-23T08:38:58.871Z",
         "count": 2,
         "mode": "live"
@@ -1080114,6 +1080109,11 @@
         "at": "2026-10-22T20:05:17.710Z",
         "count": 2,
         "mode": "live"
+      },
+      {
+        "at": "2026-10-22T23:20:59.707Z",
+        "count": 2,
+        "mode": "live"
       }
     ],
     "rolling30Day": 297,
@@ -1080127,3927 +1080127,11 @@
   },
   "latestFeeds": {
     "live": {
-      "generated_at": "2026-10-22T20:05:18+00:00",
-      "schedules": [
-        {
-          "sport_event": {
-            "id": "sr:sport_event:71845982",
-            "start_time": "2026-10-22T18:00:00+00:00",
-            "start_time_confirmed": true,
-            "date_confirmed": true,
-            "sport_event_context": {
-              "sport": {
-                "id": "sr:sport:1",
-                "name": "Soccer"
-              },
-              "category": {
-                "id": "sr:category:392",
-                "name": "International Youth"
-              },
-              "competition": {
-                "id": "sr:competition:827",
-                "name": "U17 FIFA World Cup, Women",
-                "gender": "women"
-              },
-              "season": {
-                "id": "sr:season:142320",
-                "name": "U17 FIFA World Cup, Women 2026",
-                "start_date": "2026-10-17",
-                "end_date": "2026-11-08",
-                "year": "2026",
-                "competition_id": "sr:competition:827"
-              },
-              "stage": {
-                "order": 1,
-                "type": "league",
-                "phase": "regular season",
-                "start_date": "2026-10-17",
-                "end_date": "2026-10-25",
-                "year": "2026"
-              },
-              "round": {
-                "number": 2
-              },
-              "groups": [
-                {
-                  "id": "sr:league:108160",
-                  "name": "U17 FIFA World Cup, Women 2026, Group F",
-                  "group_name": "F"
-                }
-              ]
-            },
-            "coverage": {
-              "type": "sport_event",
-              "sport_event_properties": {
-                "lineups": false,
-                "formations": false,
-                "venue": true,
-                "ballspotting": false,
-                "commentary": false,
-                "fun_facts": true,
-                "game_clock": true,
-                "goal_scorers": true,
-                "goal_scorers_live": true,
-                "scores": "live",
-                "basic_play_by_play": false,
-                "basic_player_stats": false,
-                "basic_team_stats": false,
-                "deeper_play_by_play": false,
-                "deeper_player_stats": false,
-                "deeper_team_stats": false,
-                "extended_play_by_play": false,
-                "extended_player_stats": false,
-                "extended_team_stats": false
-              }
-            },
-            "competitors": [
-              {
-                "id": "sr:competitor:44557",
-                "name": "Chile",
-                "country": "Chile",
-                "country_code": "CHL",
-                "abbreviation": "CHI",
-                "qualifier": "home",
-                "gender": "female",
-                "age_group": "U17"
-              },
-              {
-                "id": "sr:competitor:44560",
-                "name": "Mexico",
-                "country": "Mexico",
-                "country_code": "MEX",
-                "abbreviation": "MEX",
-                "qualifier": "away",
-                "gender": "female",
-                "age_group": "U17"
-              }
-            ],
-            "channels": [
-              {
-                "name": "Fox Soccer Plus",
-                "url": "https://www.foxsports.com/presspass/latest-news/weekly-schedule/",
-                "country": "United States",
-                "country_code": "USA"
-              },
-              {
-                "name": "Fubo TV",
-                "url": "https://www.livesoccertv.com/channels/fubo-tv/",
-                "country": "United States",
-                "country_code": "USA"
-              }
-            ],
-            "sport_event_conditions": {
-              "ground": {
-                "neutral": true
-              }
-            }
-          },
-          "sport_event_status": {
-            "status": "closed",
-            "match_status": "ended",
-            "home_score": 1,
-            "away_score": 3,
-            "winner_id": "sr:competitor:44560",
-            "period_scores": [
-              {
-                "home_score": 1,
-                "away_score": 1,
-                "type": "regular_period",
-                "number": 1
-              },
-              {
-                "home_score": 0,
-                "away_score": 2,
-                "type": "regular_period",
-                "number": 2
-              }
-            ]
-          }
-        },
-        {
-          "sport_event": {
-            "id": "sr:sport_event:72894652",
-            "start_time": "2026-10-22T18:00:00+00:00",
-            "start_time_confirmed": true,
-            "date_confirmed": true,
-            "sport_event_context": {
-              "sport": {
-                "id": "sr:sport:1",
-                "name": "Soccer"
-              },
-              "category": {
-                "id": "sr:category:392",
-                "name": "International Youth"
-              },
-              "competition": {
-                "id": "sr:competition:827",
-                "name": "U17 FIFA World Cup, Women",
-                "gender": "women"
-              },
-              "season": {
-                "id": "sr:season:142320",
-                "name": "U17 FIFA World Cup, Women 2026",
-                "start_date": "2026-10-17",
-                "end_date": "2026-11-08",
-                "year": "2026",
-                "competition_id": "sr:competition:827"
-              },
-              "stage": {
-                "order": 1,
-                "type": "league",
-                "phase": "regular season",
-                "start_date": "2026-10-17",
-                "end_date": "2026-10-25",
-                "year": "2026"
-              },
-              "round": {
-                "number": 2
-              },
-              "groups": [
-                {
-                  "id": "sr:league:108158",
-                  "name": "U17 FIFA World Cup, Women 2026, Group E",
-                  "group_name": "E"
-                }
-              ]
-            },
-            "coverage": {
-              "type": "sport_event",
-              "sport_event_properties": {
-                "lineups": false,
-                "formations": false,
-                "venue": true,
-                "ballspotting": false,
-                "commentary": false,
-                "fun_facts": true,
-                "game_clock": true,
-                "goal_scorers": true,
-                "goal_scorers_live": true,
-                "scores": "live",
-                "basic_play_by_play": false,
-                "basic_player_stats": false,
-                "basic_team_stats": false,
-                "deeper_play_by_play": false,
-                "deeper_player_stats": false,
-                "deeper_team_stats": false,
-                "extended_play_by_play": false,
-                "extended_player_stats": false,
-                "extended_team_stats": false
-              }
-            },
-            "competitors": [
-              {
-                "id": "sr:competitor:48972",
-                "name": "USA",
-                "country": "USA",
-                "country_code": "USA",
-                "abbreviation": "USA",
-                "qualifier": "home",
-                "gender": "female",
-                "age_group": "U17"
-              },
-              {
-                "id": "sr:competitor:384928",
-                "name": "Kenya",
-                "country": "Kenya",
-                "country_code": "KEN",
-                "abbreviation": "KEN",
-                "qualifier": "away",
-                "gender": "female",
-                "age_group": "U17"
-              }
-            ],
-            "channels": [
-              {
-                "name": "Fox Sports 2",
-                "url": "https://www.foxsports.com/presspass/latest-news/weekly-schedule/",
-                "country": "United States",
-                "country_code": "USA"
-              },
-              {
-                "name": "Fubo TV",
-                "url": "https://www.livesoccertv.com/channels/fubo-tv/",
-                "country": "United States",
-                "country_code": "USA"
-              }
-            ],
-            "sport_event_conditions": {
-              "ground": {
-                "neutral": true
-              }
-            }
-          },
-          "sport_event_status": {
-            "status": "ended",
-            "match_status": "ended",
-            "home_score": 6,
-            "away_score": 1,
-            "winner_id": "sr:competitor:48972",
-            "period_scores": [
-              {
-                "home_score": 4,
-                "away_score": 0,
-                "type": "regular_period",
-                "number": 1
-              },
-              {
-                "home_score": 2,
-                "away_score": 1,
-                "type": "regular_period",
-                "number": 2
-              }
-            ]
-          }
-        },
-        {
-          "sport_event": {
-            "id": "sr:sport_event:72498290",
-            "start_time": "2026-10-22T18:30:00+00:00",
-            "start_time_confirmed": true,
-            "date_confirmed": true,
-            "sport_event_context": {
-              "sport": {
-                "id": "sr:sport:1",
-                "name": "Soccer"
-              },
-              "category": {
-                "id": "sr:category:134",
-                "name": "Malta",
-                "country_code": "MLT"
-              },
-              "competition": {
-                "id": "sr:competition:629",
-                "name": "Premier League",
-                "gender": "men",
-                "alternative_name": "Maltese Premier League"
-              },
-              "season": {
-                "id": "sr:season:143462",
-                "name": "Premier League 26/27",
-                "start_date": "2026-08-14",
-                "end_date": "2027-05-16",
-                "year": "26/27",
-                "competition_id": "sr:competition:629"
-              },
-              "stage": {
-                "order": 1,
-                "type": "league",
-                "phase": "regular season",
-                "start_date": "2026-08-14",
-                "end_date": "2026-11-02",
-                "year": "26/27"
-              },
-              "round": {
-                "number": 9
-              },
-              "groups": [
-                {
-                  "id": "sr:league:109258",
-                  "name": "Premier League 26/27, Opening Round",
-                  "group_name": "Opening Round"
-                }
-              ]
-            },
-            "coverage": {
-              "type": "sport_event",
-              "sport_event_properties": {
-                "lineups": false,
-                "formations": false,
-                "venue": false,
-                "ballspotting": false,
-                "commentary": false,
-                "fun_facts": true,
-                "game_clock": true,
-                "goal_scorers": true,
-                "goal_scorers_live": true,
-                "scores": "live",
-                "basic_play_by_play": false,
-                "basic_player_stats": false,
-                "basic_team_stats": false,
-                "deeper_play_by_play": false,
-                "deeper_player_stats": false,
-                "deeper_team_stats": false,
-                "extended_play_by_play": false,
-                "extended_player_stats": false,
-                "extended_team_stats": false
-              }
-            },
-            "competitors": [
-              {
-                "id": "sr:competitor:5331",
-                "name": "Hibernians FC Paola",
-                "country": "Malta",
-                "country_code": "MLT",
-                "abbreviation": "HIB",
-                "qualifier": "home",
-                "gender": "male"
-              },
-              {
-                "id": "sr:competitor:58327",
-                "name": "Gzira United FC",
-                "country": "Malta",
-                "country_code": "MLT",
-                "abbreviation": "GZI",
-                "qualifier": "away",
-                "gender": "male"
-              }
-            ],
-            "sport_event_conditions": {
-              "weather": {
-                "pitch_conditions": "good",
-                "overall_conditions": "medium"
-              },
-              "ground": {
-                "neutral": false
-              }
-            }
-          },
-          "sport_event_status": {
-            "status": "live",
-            "match_status": "2nd_half",
-            "home_score": 1,
-            "away_score": 1,
-            "period_scores": [
-              {
-                "home_score": 1,
-                "away_score": 1,
-                "type": "regular_period",
-                "number": 1
-              },
-              {
-                "home_score": 0,
-                "away_score": 0,
-                "type": "regular_period",
-                "number": 2
-              }
-            ],
-            "clock": {
-              "played": "75:42"
-            }
-          }
-        },
-        {
-          "sport_event": {
-            "id": "sr:sport_event:74173002",
-            "start_time": "2026-10-22T19:00:00+00:00",
-            "start_time_confirmed": true,
-            "date_confirmed": true,
-            "sport_event_context": {
-              "sport": {
-                "id": "sr:sport:1",
-                "name": "Soccer"
-              },
-              "category": {
-                "id": "sr:category:393",
-                "name": "International Clubs"
-              },
-              "competition": {
-                "id": "sr:competition:679",
-                "name": "UEFA Europa League",
-                "gender": "men"
-              },
-              "season": {
-                "id": "sr:season:142776",
-                "name": "UEFA Europa League 26/27",
-                "start_date": "2026-07-09",
-                "end_date": "2027-05-26",
-                "year": "26/27",
-                "competition_id": "sr:competition:679"
-              },
-              "stage": {
-                "order": 3,
-                "type": "league",
-                "phase": "regular season",
-                "start_date": "2026-09-16",
-                "end_date": "2027-01-28",
-                "year": "26/27"
-              },
-              "round": {
-                "number": 3
-              },
-              "groups": [
-                {
-                  "id": "sr:league:108670",
-                  "name": "UEFA Europa League 26/27"
-                }
-              ]
-            },
-            "coverage": {
-              "type": "sport_event",
-              "sport_event_properties": {
-                "lineups": true,
-                "formations": true,
-                "venue": true,
-                "lineups_availability": "pre",
-                "ballspotting": true,
-                "commentary": true,
-                "fun_facts": true,
-                "game_clock": true,
-                "goal_scorers": true,
-                "goal_scorers_live": true,
-                "scores": "live",
-                "basic_play_by_play": true,
-                "basic_player_stats": true,
-                "basic_team_stats": true,
-                "deeper_play_by_play": true,
-                "deeper_player_stats": true,
-                "deeper_team_stats": true,
-                "extended_play_by_play": true,
-                "extended_player_stats": true,
-                "extended_team_stats": true
-              }
-            },
-            "competitors": [
-              {
-                "id": "sr:competitor:60",
-                "name": "AFC Bournemouth",
-                "country": "England",
-                "country_code": "ENG",
-                "abbreviation": "BOU",
-                "qualifier": "home",
-                "gender": "male"
-              },
-              {
-                "id": "sr:competitor:2692",
-                "name": "AC Milan",
-                "country": "Italy",
-                "country_code": "ITA",
-                "abbreviation": "ACM",
-                "qualifier": "away",
-                "gender": "male"
-              }
-            ],
-            "venue": {
-              "id": "sr:venue:2990",
-              "name": "Vitality Stadium",
-              "capacity": 11307,
-              "city_name": "Bournemouth",
-              "city_id": "sr:city:1287",
-              "country_name": "England",
-              "map_coordinates": "50.735278, -1.838333",
-              "country_code": "ENG",
-              "timezone": "Europe/London"
-            },
-            "sport_event_conditions": {
-              "referees": [
-                {
-                  "id": "sr:referee:909586",
-                  "name": "Fotias, Vassilis",
-                  "nationality": "Greece",
-                  "country_code": "GRC",
-                  "type": "main_referee"
-                }
-              ],
-              "weather": {
-                "pitch_conditions": "good",
-                "overall_conditions": "medium"
-              },
-              "ground": {
-                "neutral": false
-              },
-              "lineups": {
-                "confirmed": true
-              }
-            }
-          },
-          "sport_event_status": {
-            "status": "live",
-            "match_status": "halftime",
-            "home_score": 2,
-            "away_score": 0,
-            "period_scores": [
-              {
-                "home_score": 2,
-                "away_score": 0,
-                "type": "regular_period",
-                "number": 1
-              }
-            ],
-            "ball_locations": [
-              {
-                "order": 1,
-                "x": 61,
-                "y": 94,
-                "qualifier": "away"
-              },
-              {
-                "order": 2,
-                "x": 58,
-                "y": 95,
-                "qualifier": "away"
-              },
-              {
-                "order": 3,
-                "x": 58,
-                "y": 88,
-                "qualifier": "away"
-              },
-              {
-                "order": 4,
-                "x": 57,
-                "y": 91,
-                "qualifier": "home"
-              },
-              {
-                "order": 5,
-                "x": 32,
-                "y": 18,
-                "qualifier": "home"
-              }
-            ],
-            "match_situation": {
-              "status": "safe",
-              "qualifier": "away",
-              "updated_at": "2026-10-22T20:05:17+00:00"
-            },
-            "clock": {
-              "played": "45:00"
-            }
-          }
-        },
-        {
-          "sport_event": {
-            "id": "sr:sport_event:74173004",
-            "start_time": "2026-10-22T19:00:00+00:00",
-            "start_time_confirmed": true,
-            "date_confirmed": true,
-            "sport_event_context": {
-              "sport": {
-                "id": "sr:sport:1",
-                "name": "Soccer"
-              },
-              "category": {
-                "id": "sr:category:393",
-                "name": "International Clubs"
-              },
-              "competition": {
-                "id": "sr:competition:679",
-                "name": "UEFA Europa League",
-                "gender": "men"
-              },
-              "season": {
-                "id": "sr:season:142776",
-                "name": "UEFA Europa League 26/27",
-                "start_date": "2026-07-09",
-                "end_date": "2027-05-26",
-                "year": "26/27",
-                "competition_id": "sr:competition:679"
-              },
-              "stage": {
-                "order": 3,
-                "type": "league",
-                "phase": "regular season",
-                "start_date": "2026-09-16",
-                "end_date": "2027-01-28",
-                "year": "26/27"
-              },
-              "round": {
-                "number": 3
-              },
-              "groups": [
-                {
-                  "id": "sr:league:108670",
-                  "name": "UEFA Europa League 26/27"
-                }
-              ]
-            },
-            "coverage": {
-              "type": "sport_event",
-              "sport_event_properties": {
-                "lineups": true,
-                "formations": true,
-                "venue": true,
-                "lineups_availability": "pre",
-                "ballspotting": true,
-                "commentary": true,
-                "fun_facts": true,
-                "game_clock": true,
-                "goal_scorers": true,
-                "goal_scorers_live": true,
-                "scores": "live",
-                "basic_play_by_play": true,
-                "basic_player_stats": true,
-                "basic_team_stats": true,
-                "deeper_play_by_play": true,
-                "deeper_player_stats": true,
-                "deeper_team_stats": true,
-                "extended_play_by_play": true,
-                "extended_player_stats": true,
-                "extended_team_stats": true
-              }
-            },
-            "competitors": [
-              {
-                "id": "sr:competitor:3050",
-                "name": "Besiktas Istanbul",
-                "country": "Turkiye",
-                "country_code": "TUR",
-                "abbreviation": "BES",
-                "qualifier": "home",
-                "gender": "male"
-              },
-              {
-                "id": "sr:competitor:7",
-                "name": "Crystal Palace",
-                "country": "England",
-                "country_code": "ENG",
-                "abbreviation": "CRY",
-                "qualifier": "away",
-                "gender": "male"
-              }
-            ],
-            "venue": {
-              "id": "sr:venue:18071",
-              "name": "Tupras Stadium",
-              "capacity": 42590,
-              "city_name": "Istanbul",
-              "city_id": "sr:city:326",
-              "country_name": "Turkiye",
-              "map_coordinates": "41.039206, 28.994742",
-              "country_code": "TUR",
-              "timezone": "Europe/Istanbul"
-            },
-            "sport_event_conditions": {
-              "referees": [
-                {
-                  "id": "sr:referee:72792",
-                  "name": "Makkelie, Danny",
-                  "nationality": "Netherlands",
-                  "country_code": "NLD",
-                  "type": "main_referee"
-                }
-              ],
-              "weather": {
-                "pitch_conditions": "good",
-                "overall_conditions": "medium"
-              },
-              "ground": {
-                "neutral": false
-              },
-              "lineups": {
-                "confirmed": true
-              }
-            }
-          },
-          "sport_event_status": {
-            "status": "live",
-            "match_status": "halftime",
-            "home_score": 1,
-            "away_score": 0,
-            "period_scores": [
-              {
-                "home_score": 1,
-                "away_score": 0,
-                "type": "regular_period",
-                "number": 1
-              }
-            ],
-            "ball_locations": [
-              {
-                "order": 1,
-                "x": 90,
-                "y": 84,
-                "qualifier": "home"
-              },
-              {
-                "order": 2,
-                "x": 81,
-                "y": 91,
-                "qualifier": "home"
-              },
-              {
-                "order": 3,
-                "x": 81,
-                "y": 83,
-                "qualifier": "home"
-              },
-              {
-                "order": 4,
-                "x": 76,
-                "y": 91,
-                "qualifier": "home"
-              },
-              {
-                "order": 5,
-                "x": 61,
-                "y": 79,
-                "qualifier": "home"
-              }
-            ],
-            "match_situation": {
-              "status": "safe",
-              "qualifier": "away",
-              "updated_at": "2026-10-22T20:04:52+00:00"
-            },
-            "clock": {
-              "played": "45:00"
-            }
-          }
-        },
-        {
-          "sport_event": {
-            "id": "sr:sport_event:74173006",
-            "start_time": "2026-10-22T19:00:00+00:00",
-            "start_time_confirmed": true,
-            "date_confirmed": true,
-            "sport_event_context": {
-              "sport": {
-                "id": "sr:sport:1",
-                "name": "Soccer"
-              },
-              "category": {
-                "id": "sr:category:393",
-                "name": "International Clubs"
-              },
-              "competition": {
-                "id": "sr:competition:679",
-                "name": "UEFA Europa League",
-                "gender": "men"
-              },
-              "season": {
-                "id": "sr:season:142776",
-                "name": "UEFA Europa League 26/27",
-                "start_date": "2026-07-09",
-                "end_date": "2027-05-26",
-                "year": "26/27",
-                "competition_id": "sr:competition:679"
-              },
-              "stage": {
-                "order": 3,
-                "type": "league",
-                "phase": "regular season",
-                "start_date": "2026-09-16",
-                "end_date": "2027-01-28",
-                "year": "26/27"
-              },
-              "round": {
-                "number": 3
-              },
-              "groups": [
-                {
-                  "id": "sr:league:108670",
-                  "name": "UEFA Europa League 26/27"
-                }
-              ]
-            },
-            "coverage": {
-              "type": "sport_event",
-              "sport_event_properties": {
-                "lineups": true,
-                "formations": true,
-                "venue": true,
-                "lineups_availability": "pre",
-                "ballspotting": true,
-                "commentary": true,
-                "fun_facts": true,
-                "game_clock": true,
-                "goal_scorers": true,
-                "goal_scorers_live": true,
-                "scores": "live",
-                "basic_play_by_play": true,
-                "basic_player_stats": true,
-                "basic_team_stats": true,
-                "deeper_play_by_play": true,
-                "deeper_player_stats": true,
-                "deeper_team_stats": true,
-                "extended_play_by_play": true,
-                "extended_player_stats": true,
-                "extended_team_stats": true
-              }
-            },
-            "competitors": [
-              {
-                "id": "sr:competitor:2352",
-                "name": "Celtic Glasgow",
-                "country": "Scotland",
-                "country_code": "SCO",
-                "abbreviation": "CEL",
-                "qualifier": "home",
-                "gender": "male"
-              },
-              {
-                "id": "sr:competitor:2821",
-                "name": "RC Celta de Vigo",
-                "country": "Spain",
-                "country_code": "ESP",
-                "abbreviation": "RCC",
-                "qualifier": "away",
-                "gender": "male"
-              }
-            ],
-            "venue": {
-              "id": "sr:venue:916",
-              "name": "Celtic Park",
-              "capacity": 60411,
-              "city_name": "Glasgow",
-              "city_id": "sr:city:297",
-              "country_name": "Scotland",
-              "map_coordinates": "55.849711, -4.205589",
-              "country_code": "SCO",
-              "timezone": "Europe/London"
-            },
-            "sport_event_conditions": {
-              "referees": [
-                {
-                  "id": "sr:referee:76626",
-                  "name": "Nikolov Kabakov, Georgi",
-                  "nationality": "Bulgaria",
-                  "country_code": "BGR",
-                  "type": "main_referee"
-                }
-              ],
-              "weather": {
-                "pitch_conditions": "medium",
-                "overall_conditions": "medium"
-              },
-              "ground": {
-                "neutral": false
-              },
-              "lineups": {
-                "confirmed": true
-              }
-            }
-          },
-          "sport_event_status": {
-            "status": "live",
-            "match_status": "2nd_half",
-            "home_score": 1,
-            "away_score": 0,
-            "period_scores": [
-              {
-                "home_score": 0,
-                "away_score": 0,
-                "type": "regular_period",
-                "number": 1
-              },
-              {
-                "home_score": 1,
-                "away_score": 0,
-                "type": "regular_period",
-                "number": 2
-              }
-            ],
-            "ball_locations": [
-              {
-                "order": 1,
-                "x": 26,
-                "y": 45,
-                "qualifier": "away"
-              },
-              {
-                "order": 2,
-                "x": 90,
-                "y": 89,
-                "qualifier": "home"
-              },
-              {
-                "order": 3,
-                "x": 15,
-                "y": 15,
-                "qualifier": "away"
-              },
-              {
-                "order": 4,
-                "x": 9,
-                "y": 32,
-                "qualifier": "away"
-              },
-              {
-                "order": 5,
-                "x": 5,
-                "y": 27,
-                "qualifier": "away"
-              }
-            ],
-            "match_situation": {
-              "status": "safe",
-              "qualifier": "home",
-              "updated_at": "2026-10-22T20:05:13+00:00"
-            },
-            "clock": {
-              "played": "47:33"
-            }
-          }
-        },
-        {
-          "sport_event": {
-            "id": "sr:sport_event:74173008",
-            "start_time": "2026-10-22T19:00:00+00:00",
-            "start_time_confirmed": true,
-            "date_confirmed": true,
-            "sport_event_context": {
-              "sport": {
-                "id": "sr:sport:1",
-                "name": "Soccer"
-              },
-              "category": {
-                "id": "sr:category:393",
-                "name": "International Clubs"
-              },
-              "competition": {
-                "id": "sr:competition:679",
-                "name": "UEFA Europa League",
-                "gender": "men"
-              },
-              "season": {
-                "id": "sr:season:142776",
-                "name": "UEFA Europa League 26/27",
-                "start_date": "2026-07-09",
-                "end_date": "2027-05-26",
-                "year": "26/27",
-                "competition_id": "sr:competition:679"
-              },
-              "stage": {
-                "order": 3,
-                "type": "league",
-                "phase": "regular season",
-                "start_date": "2026-09-16",
-                "end_date": "2027-01-28",
-                "year": "26/27"
-              },
-              "round": {
-                "number": 3
-              },
-              "groups": [
-                {
-                  "id": "sr:league:108670",
-                  "name": "UEFA Europa League 26/27"
-                }
-              ]
-            },
-            "coverage": {
-              "type": "sport_event",
-              "sport_event_properties": {
-                "lineups": true,
-                "formations": true,
-                "venue": true,
-                "lineups_availability": "pre",
-                "ballspotting": true,
-                "commentary": true,
-                "fun_facts": true,
-                "game_clock": true,
-                "goal_scorers": true,
-                "goal_scorers_live": true,
-                "scores": "live",
-                "basic_play_by_play": true,
-                "basic_player_stats": true,
-                "basic_team_stats": true,
-                "deeper_play_by_play": true,
-                "deeper_player_stats": true,
-                "deeper_team_stats": true,
-                "extended_play_by_play": true,
-                "extended_player_stats": true,
-                "extended_team_stats": true
-              }
-            },
-            "competitors": [
-              {
-                "id": "sr:competitor:4502",
-                "name": "FC Viktoria Plzen",
-                "country": "Czechia",
-                "country_code": "CZE",
-                "abbreviation": "VIK",
-                "qualifier": "home",
-                "gender": "male"
-              },
-              {
-                "id": "sr:competitor:3273",
-                "name": "PFC Levski Sofia",
-                "country": "Bulgaria",
-                "country_code": "BGR",
-                "abbreviation": "LEV",
-                "qualifier": "away",
-                "gender": "male"
-              }
-            ],
-            "venue": {
-              "id": "sr:venue:1260",
-              "name": "Doosan Arena",
-              "capacity": 11700,
-              "city_name": "Plzen",
-              "city_id": "sr:city:684",
-              "country_name": "Czechia",
-              "map_coordinates": "49.75, 13.385556",
-              "country_code": "CZE",
-              "timezone": "Europe/Prague"
-            },
-            "sport_event_conditions": {
-              "referees": [
-                {
-                  "id": "sr:referee:86571",
-                  "name": "Hernandez, Alejandro",
-                  "nationality": "Spain",
-                  "country_code": "ESP",
-                  "type": "main_referee"
-                }
-              ],
-              "weather": {
-                "pitch_conditions": "good",
-                "overall_conditions": "good"
-              },
-              "ground": {
-                "neutral": false
-              },
-              "lineups": {
-                "confirmed": true
-              }
-            }
-          },
-          "sport_event_status": {
-            "status": "live",
-            "match_status": "2nd_half",
-            "home_score": 0,
-            "away_score": 1,
-            "period_scores": [
-              {
-                "home_score": 0,
-                "away_score": 1,
-                "type": "regular_period",
-                "number": 1
-              },
-              {
-                "home_score": 0,
-                "away_score": 0,
-                "type": "regular_period",
-                "number": 2
-              }
-            ],
-            "ball_locations": [
-              {
-                "order": 1,
-                "x": 9,
-                "y": 71,
-                "qualifier": "away"
-              },
-              {
-                "order": 2,
-                "x": 78,
-                "y": 40,
-                "qualifier": "away"
-              },
-              {
-                "order": 3,
-                "x": 58,
-                "y": 57,
-                "qualifier": "away"
-              },
-              {
-                "order": 4,
-                "x": 0,
-                "y": 0,
-                "qualifier": "away"
-              },
-              {
-                "order": 5,
-                "x": 6,
-                "y": 2,
-                "qualifier": "away"
-              }
-            ],
-            "match_situation": {
-              "status": "safe",
-              "qualifier": "home",
-              "updated_at": "2026-10-22T20:05:18+00:00"
-            },
-            "clock": {
-              "played": "47:56"
-            }
-          }
-        },
-        {
-          "sport_event": {
-            "id": "sr:sport_event:74173010",
-            "start_time": "2026-10-22T19:00:00+00:00",
-            "start_time_confirmed": true,
-            "date_confirmed": true,
-            "sport_event_context": {
-              "sport": {
-                "id": "sr:sport:1",
-                "name": "Soccer"
-              },
-              "category": {
-                "id": "sr:category:393",
-                "name": "International Clubs"
-              },
-              "competition": {
-                "id": "sr:competition:679",
-                "name": "UEFA Europa League",
-                "gender": "men"
-              },
-              "season": {
-                "id": "sr:season:142776",
-                "name": "UEFA Europa League 26/27",
-                "start_date": "2026-07-09",
-                "end_date": "2027-05-26",
-                "year": "26/27",
-                "competition_id": "sr:competition:679"
-              },
-              "stage": {
-                "order": 3,
-                "type": "league",
-                "phase": "regular season",
-                "start_date": "2026-09-16",
-                "end_date": "2027-01-28",
-                "year": "26/27"
-              },
-              "round": {
-                "number": 3
-              },
-              "groups": [
-                {
-                  "id": "sr:league:108670",
-                  "name": "UEFA Europa League 26/27"
-                }
-              ]
-            },
-            "coverage": {
-              "type": "sport_event",
-              "sport_event_properties": {
-                "lineups": true,
-                "formations": true,
-                "venue": true,
-                "lineups_availability": "pre",
-                "ballspotting": true,
-                "commentary": true,
-                "fun_facts": true,
-                "game_clock": true,
-                "goal_scorers": true,
-                "goal_scorers_live": true,
-                "scores": "live",
-                "basic_play_by_play": true,
-                "basic_player_stats": true,
-                "basic_team_stats": true,
-                "deeper_play_by_play": true,
-                "deeper_player_stats": true,
-                "deeper_team_stats": true,
-                "extended_play_by_play": true,
-                "extended_player_stats": true,
-                "extended_team_stats": true
-              }
-            },
-            "competitors": [
-              {
-                "id": "sr:competitor:7691",
-                "name": "Jagiellonia Bialystok",
-                "country": "Poland",
-                "country_code": "POL",
-                "abbreviation": "JAG",
-                "qualifier": "home",
-                "gender": "male"
-              },
-              {
-                "id": "sr:competitor:2900",
-                "name": "RSC Anderlecht",
-                "country": "Belgium",
-                "country_code": "BEL",
-                "abbreviation": "RSC",
-                "qualifier": "away",
-                "gender": "male"
-              }
-            ],
-            "venue": {
-              "id": "sr:venue:2276",
-              "name": "Bialystok City Stadium",
-              "capacity": 22372,
-              "city_name": "Bialystok",
-              "city_id": "sr:city:1201",
-              "country_name": "Poland",
-              "map_coordinates": "53.105556, 23.148889",
-              "country_code": "POL",
-              "timezone": "Europe/Warsaw"
-            },
-            "sport_event_conditions": {
-              "referees": [
-                {
-                  "id": "sr:referee:157979",
-                  "name": "Berka, Ondrej",
-                  "nationality": "Czechia",
-                  "country_code": "CZE",
-                  "type": "main_referee"
-                }
-              ],
-              "weather": {
-                "pitch_conditions": "good",
-                "overall_conditions": "medium"
-              },
-              "ground": {
-                "neutral": false
-              },
-              "lineups": {
-                "confirmed": true
-              }
-            }
-          },
-          "sport_event_status": {
-            "status": "live",
-            "match_status": "2nd_half",
-            "home_score": 0,
-            "away_score": 1,
-            "period_scores": [
-              {
-                "home_score": 0,
-                "away_score": 1,
-                "type": "regular_period",
-                "number": 1
-              },
-              {
-                "home_score": 0,
-                "away_score": 0,
-                "type": "regular_period",
-                "number": 2
-              }
-            ],
-            "ball_locations": [
-              {
-                "order": 1,
-                "x": 53,
-                "y": 56,
-                "qualifier": "away"
-              },
-              {
-                "order": 2,
-                "x": 44,
-                "y": 86,
-                "qualifier": "away"
-              },
-              {
-                "order": 3,
-                "x": 42,
-                "y": 69,
-                "qualifier": "away"
-              },
-              {
-                "order": 4,
-                "x": 30,
-                "y": 26,
-                "qualifier": "away"
-              },
-              {
-                "order": 5,
-                "x": 40,
-                "y": 37,
-                "qualifier": "away"
-              }
-            ],
-            "match_situation": {
-              "status": "safe",
-              "qualifier": "home",
-              "updated_at": "2026-10-22T20:05:07+00:00"
-            },
-            "clock": {
-              "played": "46:54"
-            }
-          }
-        },
-        {
-          "sport_event": {
-            "id": "sr:sport_event:74173012",
-            "start_time": "2026-10-22T19:00:00+00:00",
-            "start_time_confirmed": true,
-            "date_confirmed": true,
-            "sport_event_context": {
-              "sport": {
-                "id": "sr:sport:1",
-                "name": "Soccer"
-              },
-              "category": {
-                "id": "sr:category:393",
-                "name": "International Clubs"
-              },
-              "competition": {
-                "id": "sr:competition:679",
-                "name": "UEFA Europa League",
-                "gender": "men"
-              },
-              "season": {
-                "id": "sr:season:142776",
-                "name": "UEFA Europa League 26/27",
-                "start_date": "2026-07-09",
-                "end_date": "2027-05-26",
-                "year": "26/27",
-                "competition_id": "sr:competition:679"
-              },
-              "stage": {
-                "order": 3,
-                "type": "league",
-                "phase": "regular season",
-                "start_date": "2026-09-16",
-                "end_date": "2027-01-28",
-                "year": "26/27"
-              },
-              "round": {
-                "number": 3
-              },
-              "groups": [
-                {
-                  "id": "sr:league:108670",
-                  "name": "UEFA Europa League 26/27"
-                }
-              ]
-            },
-            "coverage": {
-              "type": "sport_event",
-              "sport_event_properties": {
-                "lineups": true,
-                "formations": true,
-                "venue": true,
-                "lineups_availability": "pre",
-                "ballspotting": true,
-                "commentary": true,
-                "fun_facts": true,
-                "game_clock": true,
-                "goal_scorers": true,
-                "goal_scorers_live": true,
-                "scores": "live",
-                "basic_play_by_play": true,
-                "basic_player_stats": true,
-                "basic_team_stats": true,
-                "deeper_play_by_play": true,
-                "deeper_player_stats": true,
-                "deeper_team_stats": true,
-                "extended_play_by_play": true,
-                "extended_player_stats": true,
-                "extended_team_stats": true
-              }
-            },
-            "competitors": [
-              {
-                "id": "sr:competitor:664",
-                "name": "Lillestroem SK",
-                "country": "Norway",
-                "country_code": "NOR",
-                "abbreviation": "LSK",
-                "qualifier": "home",
-                "gender": "male"
-              },
-              {
-                "id": "sr:competitor:2824",
-                "name": "Real Sociedad San Sebastian",
-                "country": "Spain",
-                "country_code": "ESP",
-                "abbreviation": "RSO",
-                "qualifier": "away",
-                "gender": "male"
-              }
-            ],
-            "venue": {
-              "id": "sr:venue:1074",
-              "name": "Åråsen",
-              "capacity": 12234,
-              "city_name": "Lillestrom",
-              "city_id": "sr:city:530",
-              "country_name": "Norway",
-              "map_coordinates": "59.962752, 11.063458",
-              "country_code": "NOR",
-              "timezone": "Europe/Oslo"
-            },
-            "sport_event_conditions": {
-              "referees": [
-                {
-                  "id": "sr:referee:559846",
-                  "name": "Al-Emara, Mohammad",
-                  "nationality": "Finland",
-                  "country_code": "FIN",
-                  "type": "main_referee"
-                }
-              ],
-              "weather": {
-                "pitch_conditions": "good",
-                "overall_conditions": "medium"
-              },
-              "ground": {
-                "neutral": false
-              },
-              "lineups": {
-                "confirmed": true
-              }
-            }
-          },
-          "sport_event_status": {
-            "status": "live",
-            "match_status": "2nd_half",
-            "home_score": 0,
-            "away_score": 3,
-            "period_scores": [
-              {
-                "home_score": 0,
-                "away_score": 3,
-                "type": "regular_period",
-                "number": 1
-              },
-              {
-                "home_score": 0,
-                "away_score": 0,
-                "type": "regular_period",
-                "number": 2
-              }
-            ],
-            "ball_locations": [
-              {
-                "order": 1,
-                "x": 40,
-                "y": 94,
-                "qualifier": "away"
-              },
-              {
-                "order": 2,
-                "x": 24,
-                "y": 96,
-                "qualifier": "away"
-              },
-              {
-                "order": 3,
-                "x": 54,
-                "y": 84,
-                "qualifier": "away"
-              },
-              {
-                "order": 4,
-                "x": 52,
-                "y": 73,
-                "qualifier": "away"
-              },
-              {
-                "order": 5,
-                "x": 60,
-                "y": 53,
-                "qualifier": "away"
-              }
-            ],
-            "match_situation": {
-              "status": "attack",
-              "qualifier": "away",
-              "updated_at": "2026-10-22T20:05:18+00:00"
-            },
-            "clock": {
-              "played": "49:51"
-            }
-          }
-        },
-        {
-          "sport_event": {
-            "id": "sr:sport_event:74173014",
-            "start_time": "2026-10-22T19:00:00+00:00",
-            "start_time_confirmed": true,
-            "date_confirmed": true,
-            "sport_event_context": {
-              "sport": {
-                "id": "sr:sport:1",
-                "name": "Soccer"
-              },
-              "category": {
-                "id": "sr:category:393",
-                "name": "International Clubs"
-              },
-              "competition": {
-                "id": "sr:competition:679",
-                "name": "UEFA Europa League",
-                "gender": "men"
-              },
-              "season": {
-                "id": "sr:season:142776",
-                "name": "UEFA Europa League 26/27",
-                "start_date": "2026-07-09",
-                "end_date": "2027-05-26",
-                "year": "26/27",
-                "competition_id": "sr:competition:679"
-              },
-              "stage": {
-                "order": 3,
-                "type": "league",
-                "phase": "regular season",
-                "start_date": "2026-09-16",
-                "end_date": "2027-01-28",
-                "year": "26/27"
-              },
-              "round": {
-                "number": 3
-              },
-              "groups": [
-                {
-                  "id": "sr:league:108670",
-                  "name": "UEFA Europa League 26/27"
-                }
-              ]
-            },
-            "coverage": {
-              "type": "sport_event",
-              "sport_event_properties": {
-                "lineups": true,
-                "formations": true,
-                "venue": true,
-                "lineups_availability": "pre",
-                "ballspotting": true,
-                "commentary": true,
-                "fun_facts": true,
-                "game_clock": true,
-                "goal_scorers": true,
-                "goal_scorers_live": true,
-                "scores": "live",
-                "basic_play_by_play": true,
-                "basic_player_stats": true,
-                "basic_team_stats": true,
-                "deeper_play_by_play": true,
-                "deeper_player_stats": true,
-                "deeper_team_stats": true,
-                "extended_play_by_play": true,
-                "extended_player_stats": true,
-                "extended_team_stats": true
-              }
-            },
-            "competitors": [
-              {
-                "id": "sr:competitor:2413",
-                "name": "NK Celje",
-                "country": "Slovenia",
-                "country_code": "SVN",
-                "abbreviation": "CEL",
-                "qualifier": "home",
-                "gender": "male"
-              },
-              {
-                "id": "sr:competitor:2046",
-                "name": "FC Salzburg",
-                "country": "Austria",
-                "country_code": "AUT",
-                "abbreviation": "RBS",
-                "qualifier": "away",
-                "gender": "male"
-              }
-            ],
-            "venue": {
-              "id": "sr:venue:933",
-              "name": "Arena Z’dezele",
-              "capacity": 13059,
-              "city_name": "Celje",
-              "city_id": "sr:city:347",
-              "country_name": "Slovenia",
-              "map_coordinates": "46.245426, 15.269767",
-              "country_code": "SVN",
-              "timezone": "Europe/Ljubljana"
-            },
-            "sport_event_conditions": {
-              "referees": [
-                {
-                  "id": "sr:referee:229470",
-                  "name": "Brooks, John",
-                  "nationality": "England",
-                  "country_code": "ENG",
-                  "type": "main_referee"
-                }
-              ],
-              "weather": {
-                "pitch_conditions": "good",
-                "overall_conditions": "medium"
-              },
-              "ground": {
-                "neutral": false
-              },
-              "lineups": {
-                "confirmed": true
-              }
-            }
-          },
-          "sport_event_status": {
-            "status": "live",
-            "match_status": "2nd_half",
-            "home_score": 0,
-            "away_score": 2,
-            "period_scores": [
-              {
-                "home_score": 0,
-                "away_score": 1,
-                "type": "regular_period",
-                "number": 1
-              },
-              {
-                "home_score": 0,
-                "away_score": 1,
-                "type": "regular_period",
-                "number": 2
-              }
-            ],
-            "ball_locations": [
-              {
-                "order": 1,
-                "x": 14,
-                "y": 59,
-                "qualifier": "home"
-              },
-              {
-                "order": 2,
-                "x": 80,
-                "y": 100,
-                "qualifier": "away"
-              },
-              {
-                "order": 3,
-                "x": 52,
-                "y": 100,
-                "qualifier": "away"
-              },
-              {
-                "order": 4,
-                "x": 36,
-                "y": 30,
-                "qualifier": "home"
-              },
-              {
-                "order": 5,
-                "x": 26,
-                "y": 21,
-                "qualifier": "home"
-              }
-            ],
-            "match_situation": {
-              "status": "safe",
-              "qualifier": "away",
-              "updated_at": "2026-10-22T20:05:18+00:00"
-            },
-            "clock": {
-              "played": "47:10"
-            }
-          }
-        },
-        {
-          "sport_event": {
-            "id": "sr:sport_event:74173016",
-            "start_time": "2026-10-22T19:00:00+00:00",
-            "start_time_confirmed": true,
-            "date_confirmed": true,
-            "sport_event_context": {
-              "sport": {
-                "id": "sr:sport:1",
-                "name": "Soccer"
-              },
-              "category": {
-                "id": "sr:category:393",
-                "name": "International Clubs"
-              },
-              "competition": {
-                "id": "sr:competition:679",
-                "name": "UEFA Europa League",
-                "gender": "men"
-              },
-              "season": {
-                "id": "sr:season:142776",
-                "name": "UEFA Europa League 26/27",
-                "start_date": "2026-07-09",
-                "end_date": "2027-05-26",
-                "year": "26/27",
-                "competition_id": "sr:competition:679"
-              },
-              "stage": {
-                "order": 3,
-                "type": "league",
-                "phase": "regular season",
-                "start_date": "2026-09-16",
-                "end_date": "2027-01-28",
-                "year": "26/27"
-              },
-              "round": {
-                "number": 3
-              },
-              "groups": [
-                {
-                  "id": "sr:league:108670",
-                  "name": "UEFA Europa League 26/27"
-                }
-              ]
-            },
-            "coverage": {
-              "type": "sport_event",
-              "sport_event_properties": {
-                "lineups": true,
-                "formations": true,
-                "venue": true,
-                "lineups_availability": "pre",
-                "ballspotting": true,
-                "commentary": true,
-                "fun_facts": true,
-                "game_clock": true,
-                "goal_scorers": true,
-                "goal_scorers_live": true,
-                "scores": "live",
-                "basic_play_by_play": true,
-                "basic_player_stats": true,
-                "basic_team_stats": true,
-                "deeper_play_by_play": true,
-                "deeper_player_stats": true,
-                "deeper_team_stats": true,
-                "extended_play_by_play": true,
-                "extended_player_stats": true,
-                "extended_team_stats": true
-              }
-            },
-            "competitors": [
-              {
-                "id": "sr:competitor:3245",
-                "name": "Olympiacos Piraeus",
-                "country": "Greece",
-                "country_code": "GRC",
-                "abbreviation": "OLY",
-                "qualifier": "home",
-                "gender": "male"
-              },
-              {
-                "id": "sr:competitor:2218",
-                "name": "Sparta Prague",
-                "country": "Czechia",
-                "country_code": "CZE",
-                "abbreviation": "SPA",
-                "qualifier": "away",
-                "gender": "male"
-              }
-            ],
-            "venue": {
-              "id": "sr:venue:906",
-              "name": "Karaiskakis Stadium",
-              "capacity": 32115,
-              "city_name": "Piraeus",
-              "city_id": "sr:city:588",
-              "country_name": "Greece",
-              "map_coordinates": "37.946447, 23.664317",
-              "country_code": "GRC",
-              "timezone": "Europe/Athens"
-            },
-            "sport_event_conditions": {
-              "referees": [
-                {
-                  "id": "sr:referee:92295",
-                  "name": "Eskas, Espen Andreas",
-                  "nationality": "Norway",
-                  "country_code": "NOR",
-                  "type": "main_referee"
-                }
-              ],
-              "weather": {
-                "pitch_conditions": "good",
-                "overall_conditions": "medium"
-              },
-              "ground": {
-                "neutral": false
-              },
-              "lineups": {
-                "confirmed": true
-              }
-            }
-          },
-          "sport_event_status": {
-            "status": "live",
-            "match_status": "2nd_half",
-            "home_score": 0,
-            "away_score": 0,
-            "period_scores": [
-              {
-                "home_score": 0,
-                "away_score": 0,
-                "type": "regular_period",
-                "number": 1
-              },
-              {
-                "home_score": 0,
-                "away_score": 0,
-                "type": "regular_period",
-                "number": 2
-              }
-            ],
-            "ball_locations": [
-              {
-                "order": 1,
-                "x": 42,
-                "y": 27,
-                "qualifier": "home"
-              },
-              {
-                "order": 2,
-                "x": 45,
-                "y": 22,
-                "qualifier": "home"
-              },
-              {
-                "order": 3,
-                "x": 56,
-                "y": 0,
-                "qualifier": "away"
-              },
-              {
-                "order": 4,
-                "x": 38,
-                "y": 29,
-                "qualifier": "home"
-              },
-              {
-                "order": 5,
-                "x": 63,
-                "y": 23,
-                "qualifier": "home"
-              }
-            ],
-            "match_situation": {
-              "status": "safe",
-              "qualifier": "away",
-              "updated_at": "2026-10-22T20:05:17+00:00"
-            },
-            "clock": {
-              "played": "48:39"
-            }
-          }
-        },
-        {
-          "sport_event": {
-            "id": "sr:sport_event:74173018",
-            "start_time": "2026-10-22T19:00:00+00:00",
-            "start_time_confirmed": true,
-            "date_confirmed": true,
-            "sport_event_context": {
-              "sport": {
-                "id": "sr:sport:1",
-                "name": "Soccer"
-              },
-              "category": {
-                "id": "sr:category:393",
-                "name": "International Clubs"
-              },
-              "competition": {
-                "id": "sr:competition:679",
-                "name": "UEFA Europa League",
-                "gender": "men"
-              },
-              "season": {
-                "id": "sr:season:142776",
-                "name": "UEFA Europa League 26/27",
-                "start_date": "2026-07-09",
-                "end_date": "2027-05-26",
-                "year": "26/27",
-                "competition_id": "sr:competition:679"
-              },
-              "stage": {
-                "order": 3,
-                "type": "league",
-                "phase": "regular season",
-                "start_date": "2026-09-16",
-                "end_date": "2027-01-28",
-                "year": "26/27"
-              },
-              "round": {
-                "number": 3
-              },
-              "groups": [
-                {
-                  "id": "sr:league:108670",
-                  "name": "UEFA Europa League 26/27"
-                }
-              ]
-            },
-            "coverage": {
-              "type": "sport_event",
-              "sport_event_properties": {
-                "lineups": true,
-                "formations": true,
-                "venue": true,
-                "lineups_availability": "pre",
-                "ballspotting": true,
-                "commentary": true,
-                "fun_facts": true,
-                "game_clock": true,
-                "goal_scorers": true,
-                "goal_scorers_live": true,
-                "scores": "live",
-                "basic_play_by_play": true,
-                "basic_player_stats": true,
-                "basic_team_stats": true,
-                "deeper_play_by_play": true,
-                "deeper_player_stats": true,
-                "deeper_team_stats": true,
-                "extended_play_by_play": true,
-                "extended_player_stats": true,
-                "extended_team_stats": true
-              }
-            },
-            "competitors": [
-              {
-                "id": "sr:competitor:3395",
-                "name": "AC Omonia Nicosia",
-                "country": "Cyprus",
-                "country_code": "CYP",
-                "abbreviation": "OMO",
-                "qualifier": "home",
-                "gender": "male"
-              },
-              {
-                "id": "sr:competitor:3006",
-                "name": "SL Benfica",
-                "country": "Portugal",
-                "country_code": "PRT",
-                "abbreviation": "BEN",
-                "qualifier": "away",
-                "gender": "male"
-              }
-            ],
-            "venue": {
-              "id": "sr:venue:929",
-              "name": "GSP Stadium",
-              "capacity": 22859,
-              "city_name": "Nicosia",
-              "city_id": "sr:city:343",
-              "country_name": "Cyprus",
-              "map_coordinates": "35.114542, 33.362864",
-              "country_code": "CYP",
-              "timezone": "Asia/Nicosia"
-            },
-            "sport_event_conditions": {
-              "referees": [
-                {
-                  "id": "sr:referee:1299550",
-                  "name": "Vergoote, Jasper",
-                  "nationality": "Belgium",
-                  "country_code": "BEL",
-                  "type": "main_referee"
-                }
-              ],
-              "weather": {
-                "pitch_conditions": "medium",
-                "overall_conditions": "medium"
-              },
-              "ground": {
-                "neutral": false
-              },
-              "lineups": {
-                "confirmed": true
-              }
-            }
-          },
-          "sport_event_status": {
-            "status": "live",
-            "match_status": "halftime",
-            "home_score": 1,
-            "away_score": 1,
-            "period_scores": [
-              {
-                "home_score": 1,
-                "away_score": 1,
-                "type": "regular_period",
-                "number": 1
-              }
-            ],
-            "ball_locations": [
-              {
-                "order": 1,
-                "x": 29,
-                "y": 93,
-                "qualifier": "away"
-              },
-              {
-                "order": 2,
-                "x": 28,
-                "y": 67,
-                "qualifier": "away"
-              },
-              {
-                "order": 3,
-                "x": 39,
-                "y": 71,
-                "qualifier": "away"
-              },
-              {
-                "order": 4,
-                "x": 42,
-                "y": 64,
-                "qualifier": "away"
-              },
-              {
-                "order": 5,
-                "x": 13,
-                "y": 91,
-                "qualifier": "away"
-              }
-            ],
-            "match_situation": {
-              "status": "safe",
-              "qualifier": "away",
-              "updated_at": "2026-10-22T20:04:39+00:00"
-            },
-            "clock": {
-              "played": "45:00"
-            }
-          }
-        },
-        {
-          "sport_event": {
-            "id": "sr:sport_event:74173020",
-            "start_time": "2026-10-22T19:00:00+00:00",
-            "start_time_confirmed": true,
-            "date_confirmed": true,
-            "sport_event_context": {
-              "sport": {
-                "id": "sr:sport:1",
-                "name": "Soccer"
-              },
-              "category": {
-                "id": "sr:category:393",
-                "name": "International Clubs"
-              },
-              "competition": {
-                "id": "sr:competition:679",
-                "name": "UEFA Europa League",
-                "gender": "men"
-              },
-              "season": {
-                "id": "sr:season:142776",
-                "name": "UEFA Europa League 26/27",
-                "start_date": "2026-07-09",
-                "end_date": "2027-05-26",
-                "year": "26/27",
-                "competition_id": "sr:competition:679"
-              },
-              "stage": {
-                "order": 3,
-                "type": "league",
-                "phase": "regular season",
-                "start_date": "2026-09-16",
-                "end_date": "2027-01-28",
-                "year": "26/27"
-              },
-              "round": {
-                "number": 3
-              },
-              "groups": [
-                {
-                  "id": "sr:league:108670",
-                  "name": "UEFA Europa League 26/27"
-                }
-              ]
-            },
-            "coverage": {
-              "type": "sport_event",
-              "sport_event_properties": {
-                "lineups": true,
-                "formations": true,
-                "venue": true,
-                "lineups_availability": "pre",
-                "ballspotting": true,
-                "commentary": true,
-                "fun_facts": true,
-                "game_clock": true,
-                "goal_scorers": true,
-                "goal_scorers_live": true,
-                "scores": "live",
-                "basic_play_by_play": true,
-                "basic_player_stats": true,
-                "basic_team_stats": true,
-                "deeper_play_by_play": true,
-                "deeper_player_stats": true,
-                "deeper_team_stats": true,
-                "extended_play_by_play": true,
-                "extended_player_stats": true,
-                "extended_team_stats": true
-              }
-            },
-            "competitors": [
-              {
-                "id": "sr:competitor:2569",
-                "name": "TSG Hoffenheim",
-                "country": "Germany",
-                "country_code": "DEU",
-                "abbreviation": "TSG",
-                "qualifier": "home",
-                "gender": "male"
-              },
-              {
-                "id": "sr:competitor:1649",
-                "name": "Olympique Lyon",
-                "country": "France",
-                "country_code": "FRA",
-                "abbreviation": "OL",
-                "qualifier": "away",
-                "gender": "male"
-              }
-            ],
-            "venue": {
-              "id": "sr:venue:1089",
-              "name": "SNP Arena",
-              "capacity": 30150,
-              "city_name": "Sinsheim",
-              "city_id": "sr:city:541",
-              "country_name": "Germany",
-              "map_coordinates": "49.238312, 8.887622",
-              "country_code": "DEU",
-              "timezone": "Europe/Berlin"
-            },
-            "sport_event_conditions": {
-              "referees": [
-                {
-                  "id": "sr:referee:365890",
-                  "name": "Meler, Halil Umut",
-                  "nationality": "Turkiye",
-                  "country_code": "TUR",
-                  "type": "main_referee"
-                }
-              ],
-              "weather": {
-                "pitch_conditions": "good",
-                "overall_conditions": "medium"
-              },
-              "ground": {
-                "neutral": false
-              },
-              "lineups": {
-                "confirmed": true
-              }
-            }
-          },
-          "sport_event_status": {
-            "status": "live",
-            "match_status": "halftime",
-            "home_score": 1,
-            "away_score": 0,
-            "period_scores": [
-              {
-                "home_score": 1,
-                "away_score": 0,
-                "type": "regular_period",
-                "number": 1
-              }
-            ],
-            "ball_locations": [
-              {
-                "order": 1,
-                "x": 14,
-                "y": 75,
-                "qualifier": "away"
-              },
-              {
-                "order": 2,
-                "x": 19,
-                "y": 15,
-                "qualifier": "home"
-              },
-              {
-                "order": 3,
-                "x": 8,
-                "y": 45,
-                "qualifier": "home"
-              },
-              {
-                "order": 4,
-                "x": 32,
-                "y": 96,
-                "qualifier": "away"
-              },
-              {
-                "order": 5,
-                "x": 75,
-                "y": 97,
-                "qualifier": "home"
-              }
-            ],
-            "match_situation": {
-              "status": "safe",
-              "qualifier": "away",
-              "updated_at": "2026-10-22T20:05:14+00:00"
-            },
-            "clock": {
-              "played": "45:00"
-            }
-          }
-        },
-        {
-          "sport_event": {
-            "id": "sr:sport_event:74173250",
-            "start_time": "2026-10-22T19:00:00+00:00",
-            "start_time_confirmed": true,
-            "date_confirmed": true,
-            "sport_event_context": {
-              "sport": {
-                "id": "sr:sport:1",
-                "name": "Soccer"
-              },
-              "category": {
-                "id": "sr:category:393",
-                "name": "International Clubs"
-              },
-              "competition": {
-                "id": "sr:competition:34480",
-                "name": "UEFA Conference League",
-                "gender": "men"
-              },
-              "season": {
-                "id": "sr:season:142778",
-                "name": "UEFA Conference League 26/27",
-                "start_date": "2026-07-07",
-                "end_date": "2027-06-02",
-                "year": "26/27",
-                "competition_id": "sr:competition:34480"
-              },
-              "stage": {
-                "order": 3,
-                "type": "league",
-                "phase": "regular season",
-                "start_date": "2026-10-15",
-                "end_date": "2026-12-17",
-                "year": "26/27"
-              },
-              "round": {
-                "number": 2
-              },
-              "groups": [
-                {
-                  "id": "sr:league:108672",
-                  "name": "UEFA Conference League 26/27"
-                }
-              ]
-            },
-            "coverage": {
-              "type": "sport_event",
-              "sport_event_properties": {
-                "lineups": true,
-                "formations": true,
-                "venue": true,
-                "lineups_availability": "pre",
-                "ballspotting": true,
-                "commentary": true,
-                "fun_facts": true,
-                "game_clock": true,
-                "goal_scorers": true,
-                "goal_scorers_live": true,
-                "scores": "live",
-                "basic_play_by_play": true,
-                "basic_player_stats": true,
-                "basic_team_stats": true,
-                "deeper_play_by_play": true,
-                "deeper_player_stats": true,
-                "deeper_team_stats": true,
-                "extended_play_by_play": true,
-                "extended_player_stats": true,
-                "extended_team_stats": true
-              }
-            },
-            "competitors": [
-              {
-                "id": "sr:competitor:2953",
-                "name": "Ajax Amsterdam",
-                "country": "Netherlands",
-                "country_code": "NLD",
-                "abbreviation": "AJA",
-                "qualifier": "home",
-                "gender": "male"
-              },
-              {
-                "id": "sr:competitor:2686",
-                "name": "Atalanta BC",
-                "country": "Italy",
-                "country_code": "ITA",
-                "abbreviation": "ATA",
-                "qualifier": "away",
-                "gender": "male"
-              }
-            ],
-            "venue": {
-              "id": "sr:venue:577",
-              "name": "Johan Cruijff ArenA",
-              "capacity": 55865,
-              "city_name": "Amsterdam",
-              "city_id": "sr:city:49",
-              "country_name": "Netherlands",
-              "map_coordinates": "52.314167, 4.941944",
-              "country_code": "NLD",
-              "timezone": "Europe/Brussels"
-            },
-            "sport_event_conditions": {
-              "referees": [
-                {
-                  "id": "sr:referee:587322",
-                  "name": "Nobre, Antonio",
-                  "nationality": "Portugal",
-                  "country_code": "PRT",
-                  "type": "main_referee"
-                },
-                {
-                  "id": "sr:referee:1635102",
-                  "name": "Pereira Cunha, Nelson",
-                  "nationality": "Portugal",
-                  "country_code": "PRT",
-                  "type": "first_assistant_referee"
-                },
-                {
-                  "id": "sr:referee:2299701",
-                  "name": "Serra Jorge Pereira, Francisco Joao",
-                  "nationality": "Portugal",
-                  "country_code": "PRT",
-                  "type": "second_assistant_referee"
-                },
-                {
-                  "id": "sr:referee:1794262",
-                  "name": "Oliveira da Silva, David Rafael",
-                  "nationality": "Portugal",
-                  "country_code": "PRT",
-                  "type": "fourth_official"
-                },
-                {
-                  "id": "sr:referee:129521",
-                  "name": "Munuera Montero, Jose Luis",
-                  "nationality": "Spain",
-                  "country_code": "ESP",
-                  "type": "video_assistant_referee"
-                }
-              ],
-              "weather": {
-                "pitch_conditions": "good",
-                "overall_conditions": "medium"
-              },
-              "ground": {
-                "neutral": false
-              },
-              "lineups": {
-                "confirmed": true
-              }
-            }
-          },
-          "sport_event_status": {
-            "status": "live",
-            "match_status": "2nd_half",
-            "home_score": 0,
-            "away_score": 0,
-            "period_scores": [
-              {
-                "home_score": 0,
-                "away_score": 0,
-                "type": "regular_period",
-                "number": 1
-              },
-              {
-                "home_score": 0,
-                "away_score": 0,
-                "type": "regular_period",
-                "number": 2
-              }
-            ],
-            "ball_locations": [
-              {
-                "order": 1,
-                "x": 71,
-                "y": 85,
-                "qualifier": "home"
-              },
-              {
-                "order": 2,
-                "x": 12,
-                "y": 41,
-                "qualifier": "home"
-              },
-              {
-                "order": 3,
-                "x": 70,
-                "y": 61,
-                "qualifier": "home"
-              },
-              {
-                "order": 4,
-                "x": 66,
-                "y": 61,
-                "qualifier": "home"
-              },
-              {
-                "order": 5,
-                "x": 25,
-                "y": 14,
-                "qualifier": "home"
-              }
-            ],
-            "match_situation": {
-              "status": "safe",
-              "qualifier": "home",
-              "updated_at": "2026-10-22T20:05:18+00:00"
-            },
-            "clock": {
-              "played": "48:11"
-            }
-          }
-        },
-        {
-          "sport_event": {
-            "id": "sr:sport_event:74173254",
-            "start_time": "2026-10-22T19:00:00+00:00",
-            "start_time_confirmed": true,
-            "date_confirmed": true,
-            "sport_event_context": {
-              "sport": {
-                "id": "sr:sport:1",
-                "name": "Soccer"
-              },
-              "category": {
-                "id": "sr:category:393",
-                "name": "International Clubs"
-              },
-              "competition": {
-                "id": "sr:competition:34480",
-                "name": "UEFA Conference League",
-                "gender": "men"
-              },
-              "season": {
-                "id": "sr:season:142778",
-                "name": "UEFA Conference League 26/27",
-                "start_date": "2026-07-07",
-                "end_date": "2027-06-02",
-                "year": "26/27",
-                "competition_id": "sr:competition:34480"
-              },
-              "stage": {
-                "order": 3,
-                "type": "league",
-                "phase": "regular season",
-                "start_date": "2026-10-15",
-                "end_date": "2026-12-17",
-                "year": "26/27"
-              },
-              "round": {
-                "number": 2
-              },
-              "groups": [
-                {
-                  "id": "sr:league:108672",
-                  "name": "UEFA Conference League 26/27"
-                }
-              ]
-            },
-            "coverage": {
-              "type": "sport_event",
-              "sport_event_properties": {
-                "lineups": true,
-                "formations": true,
-                "venue": true,
-                "lineups_availability": "pre",
-                "ballspotting": true,
-                "commentary": true,
-                "fun_facts": true,
-                "game_clock": true,
-                "goal_scorers": true,
-                "goal_scorers_live": true,
-                "scores": "live",
-                "basic_play_by_play": true,
-                "basic_player_stats": true,
-                "basic_team_stats": true,
-                "deeper_play_by_play": true,
-                "deeper_player_stats": true,
-                "deeper_team_stats": true,
-                "extended_play_by_play": true,
-                "extended_player_stats": true,
-                "extended_team_stats": true
-              }
-            },
-            "competitors": [
-              {
-                "id": "sr:competitor:1291",
-                "name": "AGF Aarhus",
-                "country": "Denmark",
-                "country_code": "DNK",
-                "abbreviation": "AGF",
-                "qualifier": "home",
-                "gender": "male"
-              },
-              {
-                "id": "sr:competitor:372056",
-                "name": "KF Egnatia Rrogozhine",
-                "country": "Albania",
-                "country_code": "ALB",
-                "abbreviation": "EGR",
-                "qualifier": "away",
-                "gender": "male"
-              }
-            ],
-            "venue": {
-              "id": "sr:venue:4510",
-              "name": "Vejlby Stadion",
-              "capacity": 5200,
-              "city_name": "Aarhus",
-              "city_id": "sr:city:344",
-              "country_name": "Denmark",
-              "map_coordinates": "56.192452, 10.210268",
-              "country_code": "DNK",
-              "timezone": "Europe/Copenhagen"
-            },
-            "sport_event_conditions": {
-              "referees": [
-                {
-                  "id": "sr:referee:1872294",
-                  "name": "Culina, Ante",
-                  "nationality": "Croatia",
-                  "country_code": "HRV",
-                  "type": "main_referee"
-                },
-                {
-                  "id": "sr:referee:1594288",
-                  "name": "Kolarevic, Dario",
-                  "nationality": "Croatia",
-                  "country_code": "HRV",
-                  "type": "first_assistant_referee"
-                },
-                {
-                  "id": "sr:referee:906134",
-                  "name": "Novosel, Kristijan",
-                  "nationality": "Croatia",
-                  "country_code": "HRV",
-                  "type": "second_assistant_referee"
-                },
-                {
-                  "id": "sr:referee:2059057",
-                  "name": "Erceg, Mateo",
-                  "nationality": "Croatia",
-                  "country_code": "HRV",
-                  "type": "fourth_official"
-                },
-                {
-                  "id": "sr:referee:70217",
-                  "name": "Zebec, Mario",
-                  "nationality": "Croatia",
-                  "country_code": "HRV",
-                  "type": "video_assistant_referee"
-                }
-              ],
-              "weather": {
-                "pitch_conditions": "medium",
-                "overall_conditions": "medium"
-              },
-              "ground": {
-                "neutral": false
-              },
-              "lineups": {
-                "confirmed": true
-              }
-            }
-          },
-          "sport_event_status": {
-            "status": "live",
-            "match_status": "halftime",
-            "home_score": 0,
-            "away_score": 1,
-            "period_scores": [
-              {
-                "home_score": 0,
-                "away_score": 1,
-                "type": "regular_period",
-                "number": 1
-              }
-            ],
-            "ball_locations": [
-              {
-                "order": 1,
-                "x": 12,
-                "y": 13,
-                "qualifier": "away"
-              },
-              {
-                "order": 2,
-                "x": 23,
-                "y": 30,
-                "qualifier": "away"
-              },
-              {
-                "order": 3,
-                "x": 21,
-                "y": 56,
-                "qualifier": "away"
-              },
-              {
-                "order": 4,
-                "x": 28,
-                "y": 76,
-                "qualifier": "away"
-              },
-              {
-                "order": 5,
-                "x": 4,
-                "y": 82,
-                "qualifier": "away"
-              }
-            ],
-            "match_situation": {
-              "status": "safe",
-              "qualifier": "away",
-              "updated_at": "2026-10-22T20:04:47+00:00"
-            },
-            "clock": {
-              "played": "45:00"
-            }
-          }
-        },
-        {
-          "sport_event": {
-            "id": "sr:sport_event:74173258",
-            "start_time": "2026-10-22T19:00:00+00:00",
-            "start_time_confirmed": true,
-            "date_confirmed": true,
-            "sport_event_context": {
-              "sport": {
-                "id": "sr:sport:1",
-                "name": "Soccer"
-              },
-              "category": {
-                "id": "sr:category:393",
-                "name": "International Clubs"
-              },
-              "competition": {
-                "id": "sr:competition:34480",
-                "name": "UEFA Conference League",
-                "gender": "men"
-              },
-              "season": {
-                "id": "sr:season:142778",
-                "name": "UEFA Conference League 26/27",
-                "start_date": "2026-07-07",
-                "end_date": "2027-06-02",
-                "year": "26/27",
-                "competition_id": "sr:competition:34480"
-              },
-              "stage": {
-                "order": 3,
-                "type": "league",
-                "phase": "regular season",
-                "start_date": "2026-10-15",
-                "end_date": "2026-12-17",
-                "year": "26/27"
-              },
-              "round": {
-                "number": 2
-              },
-              "groups": [
-                {
-                  "id": "sr:league:108672",
-                  "name": "UEFA Conference League 26/27"
-                }
-              ]
-            },
-            "coverage": {
-              "type": "sport_event",
-              "sport_event_properties": {
-                "lineups": true,
-                "formations": true,
-                "venue": true,
-                "lineups_availability": "pre",
-                "ballspotting": true,
-                "commentary": true,
-                "fun_facts": true,
-                "game_clock": true,
-                "goal_scorers": true,
-                "goal_scorers_live": true,
-                "scores": "live",
-                "basic_play_by_play": true,
-                "basic_player_stats": true,
-                "basic_team_stats": true,
-                "deeper_play_by_play": true,
-                "deeper_player_stats": true,
-                "deeper_team_stats": true,
-                "extended_play_by_play": true,
-                "extended_player_stats": true,
-                "extended_team_stats": true
-              }
-            },
-            "competitors": [
-              {
-                "id": "sr:competitor:1653",
-                "name": "AS Monaco",
-                "country": "France",
-                "country_code": "FRA",
-                "abbreviation": "ASM",
-                "qualifier": "home",
-                "gender": "male"
-              },
-              {
-                "id": "sr:competitor:2538",
-                "name": "SC Freiburg",
-                "country": "Germany",
-                "country_code": "DEU",
-                "abbreviation": "SCF",
-                "qualifier": "away",
-                "gender": "male"
-              }
-            ],
-            "venue": {
-              "id": "sr:venue:831",
-              "name": "Stade Louis II",
-              "capacity": 18523,
-              "city_name": "Fontvieille",
-              "city_id": "sr:city:10757",
-              "country_name": "Monaco",
-              "map_coordinates": "43.727606, 7.415614",
-              "country_code": "MCO",
-              "timezone": "Europe/Paris"
-            },
-            "sport_event_conditions": {
-              "referees": [
-                {
-                  "id": "sr:referee:1972503",
-                  "name": "Barrott, Samuel",
-                  "nationality": "England",
-                  "country_code": "ENG",
-                  "type": "main_referee"
-                },
-                {
-                  "id": "sr:referee:102306",
-                  "name": "Nunn, Adam",
-                  "nationality": "England",
-                  "country_code": "ENG",
-                  "type": "first_assistant_referee"
-                },
-                {
-                  "id": "sr:referee:2208914",
-                  "name": "Smith, Wade",
-                  "nationality": "England",
-                  "country_code": "ENG",
-                  "type": "second_assistant_referee"
-                },
-                {
-                  "id": "sr:referee:84853",
-                  "name": "Harrington, Tony",
-                  "nationality": "England",
-                  "country_code": "ENG",
-                  "type": "fourth_official"
-                },
-                {
-                  "id": "sr:referee:144315",
-                  "name": "Salisbury, Michael",
-                  "nationality": "England",
-                  "country_code": "ENG",
-                  "type": "video_assistant_referee"
-                }
-              ],
-              "weather": {
-                "pitch_conditions": "good",
-                "overall_conditions": "medium"
-              },
-              "ground": {
-                "neutral": false
-              },
-              "lineups": {
-                "confirmed": true
-              }
-            }
-          },
-          "sport_event_status": {
-            "status": "live",
-            "match_status": "halftime",
-            "home_score": 1,
-            "away_score": 0,
-            "period_scores": [
-              {
-                "home_score": 1,
-                "away_score": 0,
-                "type": "regular_period",
-                "number": 1
-              }
-            ],
-            "ball_locations": [
-              {
-                "order": 1,
-                "x": 73,
-                "y": 35,
-                "qualifier": "away"
-              },
-              {
-                "order": 2,
-                "x": 68,
-                "y": 55,
-                "qualifier": "away"
-              },
-              {
-                "order": 3,
-                "x": 71,
-                "y": 55,
-                "qualifier": "away"
-              },
-              {
-                "order": 4,
-                "x": 86,
-                "y": 45,
-                "qualifier": "away"
-              },
-              {
-                "order": 5,
-                "x": 68,
-                "y": 28,
-                "qualifier": "away"
-              }
-            ],
-            "match_situation": {
-              "status": "safe",
-              "qualifier": "away",
-              "updated_at": "2026-10-22T20:05:09+00:00"
-            },
-            "clock": {
-              "played": "45:00"
-            }
-          }
-        },
-        {
-          "sport_event": {
-            "id": "sr:sport_event:74173262",
-            "start_time": "2026-10-22T19:00:00+00:00",
-            "start_time_confirmed": true,
-            "date_confirmed": true,
-            "sport_event_context": {
-              "sport": {
-                "id": "sr:sport:1",
-                "name": "Soccer"
-              },
-              "category": {
-                "id": "sr:category:393",
-                "name": "International Clubs"
-              },
-              "competition": {
-                "id": "sr:competition:34480",
-                "name": "UEFA Conference League",
-                "gender": "men"
-              },
-              "season": {
-                "id": "sr:season:142778",
-                "name": "UEFA Conference League 26/27",
-                "start_date": "2026-07-07",
-                "end_date": "2027-06-02",
-                "year": "26/27",
-                "competition_id": "sr:competition:34480"
-              },
-              "stage": {
-                "order": 3,
-                "type": "league",
-                "phase": "regular season",
-                "start_date": "2026-10-15",
-                "end_date": "2026-12-17",
-                "year": "26/27"
-              },
-              "round": {
-                "number": 2
-              },
-              "groups": [
-                {
-                  "id": "sr:league:108672",
-                  "name": "UEFA Conference League 26/27"
-                }
-              ]
-            },
-            "coverage": {
-              "type": "sport_event",
-              "sport_event_properties": {
-                "lineups": true,
-                "formations": true,
-                "venue": true,
-                "lineups_availability": "pre",
-                "ballspotting": true,
-                "commentary": true,
-                "fun_facts": true,
-                "game_clock": true,
-                "goal_scorers": true,
-                "goal_scorers_live": true,
-                "scores": "live",
-                "basic_play_by_play": true,
-                "basic_player_stats": true,
-                "basic_team_stats": true,
-                "deeper_play_by_play": true,
-                "deeper_player_stats": true,
-                "deeper_team_stats": true,
-                "extended_play_by_play": true,
-                "extended_player_stats": true,
-                "extended_team_stats": true
-              }
-            },
-            "competitors": [
-              {
-                "id": "sr:competitor:1289",
-                "name": "FC Midtjylland",
-                "country": "Denmark",
-                "country_code": "DNK",
-                "abbreviation": "FCM",
-                "qualifier": "home",
-                "gender": "male"
-              },
-              {
-                "id": "sr:competitor:2895",
-                "name": "St. Truidense VV",
-                "country": "Belgium",
-                "country_code": "BEL",
-                "abbreviation": "STT",
-                "qualifier": "away",
-                "gender": "male"
-              }
-            ],
-            "venue": {
-              "id": "sr:venue:1041",
-              "name": "MCH Arena",
-              "capacity": 11809,
-              "city_name": "Herning",
-              "city_id": "sr:city:484",
-              "country_name": "Denmark",
-              "map_coordinates": "56.11691, 8.951817",
-              "country_code": "DNK",
-              "timezone": "Europe/Copenhagen"
-            },
-            "sport_event_conditions": {
-              "referees": [
-                {
-                  "id": "sr:referee:204902",
-                  "name": "Xhaja, Juxhin",
-                  "nationality": "Albania",
-                  "country_code": "ALB",
-                  "type": "main_referee"
-                },
-                {
-                  "id": "sr:referee:1081922",
-                  "name": "Zalla, Arber",
-                  "nationality": "Albania",
-                  "country_code": "ALB",
-                  "type": "first_assistant_referee"
-                },
-                {
-                  "id": "sr:referee:1136903",
-                  "name": "Shazivari, Mario",
-                  "nationality": "Albania",
-                  "country_code": "ALB",
-                  "type": "second_assistant_referee"
-                },
-                {
-                  "id": "sr:referee:88230",
-                  "name": "Jorgji, Enea",
-                  "nationality": "Albania",
-                  "country_code": "ALB",
-                  "type": "fourth_official"
-                },
-                {
-                  "id": "sr:referee:79484",
-                  "name": "Doveri, Daniele",
-                  "nationality": "Italy",
-                  "country_code": "ITA",
-                  "type": "video_assistant_referee"
-                }
-              ],
-              "weather": {
-                "pitch_conditions": "medium",
-                "overall_conditions": "medium"
-              },
-              "ground": {
-                "neutral": false
-              },
-              "lineups": {
-                "confirmed": true
-              }
-            }
-          },
-          "sport_event_status": {
-            "status": "live",
-            "match_status": "2nd_half",
-            "home_score": 0,
-            "away_score": 1,
-            "period_scores": [
-              {
-                "home_score": 0,
-                "away_score": 1,
-                "type": "regular_period",
-                "number": 1
-              },
-              {
-                "home_score": 0,
-                "away_score": 0,
-                "type": "regular_period",
-                "number": 2
-              }
-            ],
-            "ball_locations": [
-              {
-                "order": 1,
-                "x": 7,
-                "y": 41,
-                "qualifier": "home"
-              },
-              {
-                "order": 2,
-                "x": 91,
-                "y": 100,
-                "qualifier": "home"
-              },
-              {
-                "order": 3,
-                "x": 35,
-                "y": 37,
-                "qualifier": "home"
-              },
-              {
-                "order": 4,
-                "x": 61,
-                "y": 52,
-                "qualifier": "home"
-              },
-              {
-                "order": 5,
-                "x": 75,
-                "y": 67,
-                "qualifier": "home"
-              }
-            ],
-            "match_situation": {
-              "status": "dangerous",
-              "qualifier": "home",
-              "updated_at": "2026-10-22T20:05:17+00:00"
-            },
-            "clock": {
-              "played": "47:00"
-            }
-          }
-        },
-        {
-          "sport_event": {
-            "id": "sr:sport_event:74173266",
-            "start_time": "2026-10-22T19:00:00+00:00",
-            "start_time_confirmed": true,
-            "date_confirmed": true,
-            "sport_event_context": {
-              "sport": {
-                "id": "sr:sport:1",
-                "name": "Soccer"
-              },
-              "category": {
-                "id": "sr:category:393",
-                "name": "International Clubs"
-              },
-              "competition": {
-                "id": "sr:competition:34480",
-                "name": "UEFA Conference League",
-                "gender": "men"
-              },
-              "season": {
-                "id": "sr:season:142778",
-                "name": "UEFA Conference League 26/27",
-                "start_date": "2026-07-07",
-                "end_date": "2027-06-02",
-                "year": "26/27",
-                "competition_id": "sr:competition:34480"
-              },
-              "stage": {
-                "order": 3,
-                "type": "league",
-                "phase": "regular season",
-                "start_date": "2026-10-15",
-                "end_date": "2026-12-17",
-                "year": "26/27"
-              },
-              "round": {
-                "number": 2
-              },
-              "groups": [
-                {
-                  "id": "sr:league:108672",
-                  "name": "UEFA Conference League 26/27"
-                }
-              ]
-            },
-            "coverage": {
-              "type": "sport_event",
-              "sport_event_properties": {
-                "lineups": true,
-                "formations": true,
-                "venue": true,
-                "lineups_availability": "pre",
-                "ballspotting": true,
-                "commentary": true,
-                "fun_facts": true,
-                "game_clock": true,
-                "goal_scorers": true,
-                "goal_scorers_live": true,
-                "scores": "live",
-                "basic_play_by_play": true,
-                "basic_player_stats": true,
-                "basic_team_stats": true,
-                "deeper_play_by_play": true,
-                "deeper_player_stats": true,
-                "deeper_team_stats": true,
-                "extended_play_by_play": true,
-                "extended_player_stats": true,
-                "extended_team_stats": true
-              }
-            },
-            "competitors": [
-              {
-                "id": "sr:competitor:2454",
-                "name": "FC Thun",
-                "country": "Switzerland",
-                "country_code": "CHE",
-                "abbreviation": "THU",
-                "qualifier": "home",
-                "gender": "male"
-              },
-              {
-                "id": "sr:competitor:2036",
-                "name": "HNK Hajduk Split",
-                "country": "Croatia",
-                "country_code": "HRV",
-                "abbreviation": "HAJ",
-                "qualifier": "away",
-                "gender": "male"
-              }
-            ],
-            "venue": {
-              "id": "sr:venue:2407",
-              "name": "Visana Stadion",
-              "capacity": 10398,
-              "city_name": "Thun",
-              "city_id": "sr:city:132",
-              "country_name": "Switzerland",
-              "map_coordinates": "46.744817, 7.606075",
-              "country_code": "CHE",
-              "timezone": "Europe/Zurich"
-            },
-            "sport_event_conditions": {
-              "referees": [
-                {
-                  "id": "sr:referee:138289",
-                  "name": "Gillett, Jarred",
-                  "nationality": "Australia",
-                  "country_code": "AUS",
-                  "type": "main_referee"
-                },
-                {
-                  "id": "sr:referee:1568960",
-                  "name": "Davies, Neil",
-                  "nationality": "England",
-                  "country_code": "ENG",
-                  "type": "first_assistant_referee"
-                },
-                {
-                  "id": "sr:referee:81631",
-                  "name": "Greenhalgh, Nicholas",
-                  "nationality": "England",
-                  "country_code": "ENG",
-                  "type": "second_assistant_referee"
-                },
-                {
-                  "id": "sr:referee:2604579",
-                  "name": "Hallam, Farai",
-                  "nationality": "England",
-                  "country_code": "ENG",
-                  "type": "fourth_official"
-                },
-                {
-                  "id": "sr:referee:84326",
-                  "name": "Bankes, Peter",
-                  "nationality": "England",
-                  "country_code": "ENG",
-                  "type": "video_assistant_referee"
-                }
-              ],
-              "weather": {
-                "pitch_conditions": "good",
-                "overall_conditions": "medium"
-              },
-              "ground": {
-                "neutral": false
-              },
-              "lineups": {
-                "confirmed": true
-              }
-            }
-          },
-          "sport_event_status": {
-            "status": "live",
-            "match_status": "2nd_half",
-            "home_score": 0,
-            "away_score": 1,
-            "period_scores": [
-              {
-                "home_score": 0,
-                "away_score": 1,
-                "type": "regular_period",
-                "number": 1
-              },
-              {
-                "home_score": 0,
-                "away_score": 0,
-                "type": "regular_period",
-                "number": 2
-              }
-            ],
-            "ball_locations": [
-              {
-                "order": 1,
-                "x": 38,
-                "y": 76,
-                "qualifier": "away"
-              },
-              {
-                "order": 2,
-                "x": 18,
-                "y": 91,
-                "qualifier": "away"
-              },
-              {
-                "order": 3,
-                "x": 56,
-                "y": 4,
-                "qualifier": "away"
-              },
-              {
-                "order": 4,
-                "x": 56,
-                "y": 4,
-                "qualifier": "away"
-              },
-              {
-                "order": 5,
-                "x": 39,
-                "y": 90,
-                "qualifier": "away"
-              }
-            ],
-            "match_situation": {
-              "status": "safe",
-              "qualifier": "away",
-              "updated_at": "2026-10-22T20:05:16+00:00"
-            },
-            "clock": {
-              "played": "47:05"
-            }
-          }
-        },
-        {
-          "sport_event": {
-            "id": "sr:sport_event:74173270",
-            "start_time": "2026-10-22T19:00:00+00:00",
-            "start_time_confirmed": true,
-            "date_confirmed": true,
-            "sport_event_context": {
-              "sport": {
-                "id": "sr:sport:1",
-                "name": "Soccer"
-              },
-              "category": {
-                "id": "sr:category:393",
-                "name": "International Clubs"
-              },
-              "competition": {
-                "id": "sr:competition:34480",
-                "name": "UEFA Conference League",
-                "gender": "men"
-              },
-              "season": {
-                "id": "sr:season:142778",
-                "name": "UEFA Conference League 26/27",
-                "start_date": "2026-07-07",
-                "end_date": "2027-06-02",
-                "year": "26/27",
-                "competition_id": "sr:competition:34480"
-              },
-              "stage": {
-                "order": 3,
-                "type": "league",
-                "phase": "regular season",
-                "start_date": "2026-10-15",
-                "end_date": "2026-12-17",
-                "year": "26/27"
-              },
-              "round": {
-                "number": 2
-              },
-              "groups": [
-                {
-                  "id": "sr:league:108672",
-                  "name": "UEFA Conference League 26/27"
-                }
-              ]
-            },
-            "coverage": {
-              "type": "sport_event",
-              "sport_event_properties": {
-                "lineups": true,
-                "formations": true,
-                "venue": true,
-                "lineups_availability": "pre",
-                "ballspotting": true,
-                "commentary": true,
-                "fun_facts": true,
-                "game_clock": true,
-                "goal_scorers": true,
-                "goal_scorers_live": true,
-                "scores": "live",
-                "basic_play_by_play": true,
-                "basic_player_stats": true,
-                "basic_team_stats": true,
-                "deeper_play_by_play": true,
-                "deeper_player_stats": true,
-                "deeper_team_stats": true,
-                "extended_play_by_play": true,
-                "extended_player_stats": true,
-                "extended_team_stats": true
-              }
-            },
-            "competitors": [
-              {
-                "id": "sr:competitor:5235",
-                "name": "FK Borac Banja Luka",
-                "country": "Bosnia & Herzegovina",
-                "country_code": "BIH",
-                "abbreviation": "BBL",
-                "qualifier": "home",
-                "gender": "male"
-              },
-              {
-                "id": "sr:competitor:2244",
-                "name": "Kuopion Palloseura",
-                "country": "Finland",
-                "country_code": "FIN",
-                "abbreviation": "KUPS",
-                "qualifier": "away",
-                "gender": "male"
-              }
-            ],
-            "venue": {
-              "id": "sr:venue:1937",
-              "name": "Banja Luka City Stadium",
-              "capacity": 9730,
-              "city_name": "Banja Luka",
-              "city_id": "sr:city:1577",
-              "country_name": "Bosnia & Herzegovina",
-              "map_coordinates": "44.7761, 17.1996",
-              "country_code": "BIH",
-              "timezone": "Europe/Sarajevo"
-            },
-            "sport_event_conditions": {
-              "referees": [
-                {
-                  "id": "sr:referee:153794",
-                  "name": "Kristjansson, Ivar Orri",
-                  "nationality": "Iceland",
-                  "country_code": "ISL",
-                  "type": "main_referee"
-                },
-                {
-                  "id": "sr:referee:116847",
-                  "name": "Sigurdarson, Birkir",
-                  "nationality": "Iceland",
-                  "country_code": "ISL",
-                  "type": "first_assistant_referee"
-                },
-                {
-                  "id": "sr:referee:62640",
-                  "name": "Sigurdsson, Gylfi Mar",
-                  "nationality": "Iceland",
-                  "country_code": "ISL",
-                  "type": "second_assistant_referee"
-                },
-                {
-                  "id": "sr:referee:62633",
-                  "name": "Thorarinsson, Vilhjalmur Alvar",
-                  "nationality": "Iceland",
-                  "country_code": "ISL",
-                  "type": "fourth_official"
-                },
-                {
-                  "id": "sr:referee:66473",
-                  "name": "Kehlet, Jakob",
-                  "nationality": "Denmark",
-                  "country_code": "DNK",
-                  "type": "video_assistant_referee"
-                }
-              ],
-              "weather": {
-                "pitch_conditions": "good",
-                "overall_conditions": "good"
-              },
-              "ground": {
-                "neutral": false
-              },
-              "lineups": {
-                "confirmed": true
-              }
-            }
-          },
-          "sport_event_status": {
-            "status": "live",
-            "match_status": "2nd_half",
-            "home_score": 1,
-            "away_score": 0,
-            "period_scores": [
-              {
-                "home_score": 1,
-                "away_score": 0,
-                "type": "regular_period",
-                "number": 1
-              },
-              {
-                "home_score": 0,
-                "away_score": 0,
-                "type": "regular_period",
-                "number": 2
-              }
-            ],
-            "ball_locations": [
-              {
-                "order": 1,
-                "x": 41,
-                "y": 44,
-                "qualifier": "away"
-              },
-              {
-                "order": 2,
-                "x": 61,
-                "y": 60,
-                "qualifier": "away"
-              },
-              {
-                "order": 3,
-                "x": 48,
-                "y": 80,
-                "qualifier": "away"
-              },
-              {
-                "order": 4,
-                "x": 23,
-                "y": 94,
-                "qualifier": "away"
-              },
-              {
-                "order": 5,
-                "x": 11,
-                "y": 88,
-                "qualifier": "away"
-              }
-            ],
-            "match_situation": {
-              "status": "safe",
-              "qualifier": "away",
-              "updated_at": "2026-10-22T20:05:16+00:00"
-            },
-            "clock": {
-              "played": "48:10"
-            }
-          }
-        },
-        {
-          "sport_event": {
-            "id": "sr:sport_event:74173272",
-            "start_time": "2026-10-22T19:00:00+00:00",
-            "start_time_confirmed": true,
-            "date_confirmed": true,
-            "sport_event_context": {
-              "sport": {
-                "id": "sr:sport:1",
-                "name": "Soccer"
-              },
-              "category": {
-                "id": "sr:category:393",
-                "name": "International Clubs"
-              },
-              "competition": {
-                "id": "sr:competition:34480",
-                "name": "UEFA Conference League",
-                "gender": "men"
-              },
-              "season": {
-                "id": "sr:season:142778",
-                "name": "UEFA Conference League 26/27",
-                "start_date": "2026-07-07",
-                "end_date": "2027-06-02",
-                "year": "26/27",
-                "competition_id": "sr:competition:34480"
-              },
-              "stage": {
-                "order": 3,
-                "type": "league",
-                "phase": "regular season",
-                "start_date": "2026-10-15",
-                "end_date": "2026-12-17",
-                "year": "26/27"
-              },
-              "round": {
-                "number": 2
-              },
-              "groups": [
-                {
-                  "id": "sr:league:108672",
-                  "name": "UEFA Conference League 26/27"
-                }
-              ]
-            },
-            "coverage": {
-              "type": "sport_event",
-              "sport_event_properties": {
-                "lineups": true,
-                "formations": true,
-                "venue": true,
-                "lineups_availability": "pre",
-                "ballspotting": true,
-                "commentary": true,
-                "fun_facts": true,
-                "game_clock": true,
-                "goal_scorers": true,
-                "goal_scorers_live": true,
-                "scores": "live",
-                "basic_play_by_play": true,
-                "basic_player_stats": true,
-                "basic_team_stats": true,
-                "deeper_play_by_play": true,
-                "deeper_player_stats": true,
-                "deeper_team_stats": true,
-                "extended_play_by_play": true,
-                "extended_player_stats": true,
-                "extended_team_stats": true
-              }
-            },
-            "competitors": [
-              {
-                "id": "sr:competitor:126304",
-                "name": "Lincoln Red Imps",
-                "country": "Gibraltar",
-                "country_code": "GIB",
-                "abbreviation": "LIN",
-                "qualifier": "home",
-                "gender": "male"
-              },
-              {
-                "id": "sr:competitor:2955",
-                "name": "FC Twente Enschede",
-                "country": "Netherlands",
-                "country_code": "NLD",
-                "abbreviation": "TWE",
-                "qualifier": "away",
-                "gender": "male"
-              }
-            ],
-            "venue": {
-              "id": "sr:venue:13246",
-              "name": "Victoria Stadium",
-              "capacity": 5000,
-              "city_name": "Gibraltar",
-              "city_id": "sr:city:8270",
-              "country_name": "Gibraltar",
-              "map_coordinates": "36.149356, -5.350342",
-              "country_code": "GIB",
-              "timezone": "Europe/Gibraltar"
-            },
-            "sport_event_conditions": {
-              "referees": [
-                {
-                  "id": "sr:referee:1272788",
-                  "name": "Marcenaro, Matteo",
-                  "nationality": "Italy",
-                  "country_code": "ITA",
-                  "type": "main_referee"
-                },
-                {
-                  "id": "sr:referee:958222",
-                  "name": "Tegoni, Alberto",
-                  "nationality": "Italy",
-                  "country_code": "ITA",
-                  "type": "first_assistant_referee"
-                },
-                {
-                  "id": "sr:referee:76009",
-                  "name": "Peretti, Giorgio",
-                  "nationality": "Italy",
-                  "country_code": "ITA",
-                  "type": "second_assistant_referee"
-                },
-                {
-                  "id": "sr:referee:926666",
-                  "name": "Feliciani, Ermanno",
-                  "nationality": "Italy",
-                  "country_code": "ITA",
-                  "type": "fourth_official"
-                },
-                {
-                  "id": "sr:referee:132233",
-                  "name": "Marini, Valerio",
-                  "nationality": "Italy",
-                  "country_code": "ITA",
-                  "type": "video_assistant_referee"
-                }
-              ],
-              "weather": {
-                "pitch_conditions": "good",
-                "overall_conditions": "medium"
-              },
-              "ground": {
-                "neutral": false
-              },
-              "lineups": {
-                "confirmed": true
-              }
-            }
-          },
-          "sport_event_status": {
-            "status": "live",
-            "match_status": "2nd_half",
-            "home_score": 1,
-            "away_score": 2,
-            "period_scores": [
-              {
-                "home_score": 1,
-                "away_score": 2,
-                "type": "regular_period",
-                "number": 1
-              },
-              {
-                "home_score": 0,
-                "away_score": 0,
-                "type": "regular_period",
-                "number": 2
-              }
-            ],
-            "ball_locations": [
-              {
-                "order": 1,
-                "x": 22,
-                "y": 28,
-                "qualifier": "away"
-              },
-              {
-                "order": 2,
-                "x": 25,
-                "y": 21,
-                "qualifier": "away"
-              },
-              {
-                "order": 3,
-                "x": 18,
-                "y": 35,
-                "qualifier": "away"
-              },
-              {
-                "order": 4,
-                "x": 58,
-                "y": 45,
-                "qualifier": "away"
-              },
-              {
-                "order": 5,
-                "x": 58,
-                "y": 30,
-                "qualifier": "away"
-              }
-            ],
-            "match_situation": {
-              "status": "dangerous",
-              "qualifier": "away",
-              "updated_at": "2026-10-22T20:05:18+00:00"
-            },
-            "clock": {
-              "played": "46:49"
-            }
-          }
-        },
-        {
-          "sport_event": {
-            "id": "sr:sport_event:74173274",
-            "start_time": "2026-10-22T19:00:00+00:00",
-            "start_time_confirmed": true,
-            "date_confirmed": true,
-            "sport_event_context": {
-              "sport": {
-                "id": "sr:sport:1",
-                "name": "Soccer"
-              },
-              "category": {
-                "id": "sr:category:393",
-                "name": "International Clubs"
-              },
-              "competition": {
-                "id": "sr:competition:34480",
-                "name": "UEFA Conference League",
-                "gender": "men"
-              },
-              "season": {
-                "id": "sr:season:142778",
-                "name": "UEFA Conference League 26/27",
-                "start_date": "2026-07-07",
-                "end_date": "2027-06-02",
-                "year": "26/27",
-                "competition_id": "sr:competition:34480"
-              },
-              "stage": {
-                "order": 3,
-                "type": "league",
-                "phase": "regular season",
-                "start_date": "2026-10-15",
-                "end_date": "2026-12-17",
-                "year": "26/27"
-              },
-              "round": {
-                "number": 2
-              },
-              "groups": [
-                {
-                  "id": "sr:league:108672",
-                  "name": "UEFA Conference League 26/27"
-                }
-              ]
-            },
-            "coverage": {
-              "type": "sport_event",
-              "sport_event_properties": {
-                "lineups": true,
-                "formations": true,
-                "venue": true,
-                "lineups_availability": "pre",
-                "ballspotting": true,
-                "commentary": true,
-                "fun_facts": true,
-                "game_clock": true,
-                "goal_scorers": true,
-                "goal_scorers_live": true,
-                "scores": "live",
-                "basic_play_by_play": true,
-                "basic_player_stats": true,
-                "basic_team_stats": true,
-                "deeper_play_by_play": true,
-                "deeper_player_stats": true,
-                "deeper_team_stats": true,
-                "extended_play_by_play": true,
-                "extended_player_stats": true,
-                "extended_team_stats": true
-              }
-            },
-            "competitors": [
-              {
-                "id": "sr:competitor:2999",
-                "name": "SC Braga",
-                "country": "Portugal",
-                "country_code": "PRT",
-                "abbreviation": "BRA",
-                "qualifier": "home",
-                "gender": "male"
-              },
-              {
-                "id": "sr:competitor:2903",
-                "name": "KAA Gent",
-                "country": "Belgium",
-                "country_code": "BEL",
-                "abbreviation": "KAA",
-                "qualifier": "away",
-                "gender": "male"
-              }
-            ],
-            "venue": {
-              "id": "sr:venue:951",
-              "name": "Braga Municipal",
-              "capacity": 30286,
-              "city_name": "Braga",
-              "city_id": "sr:city:355",
-              "country_name": "Portugal",
-              "map_coordinates": "41.562565, -8.430133",
-              "country_code": "PRT",
-              "timezone": "Europe/Lisbon"
-            },
-            "sport_event_conditions": {
-              "referees": [
-                {
-                  "id": "sr:referee:62626",
-                  "name": "Treimanis, Andris",
-                  "nationality": "Latvia",
-                  "country_code": "LVA",
-                  "type": "main_referee"
-                },
-                {
-                  "id": "sr:referee:65871",
-                  "name": "Gudermanis, Haralds",
-                  "nationality": "Latvia",
-                  "country_code": "LVA",
-                  "type": "first_assistant_referee"
-                },
-                {
-                  "id": "sr:referee:331959",
-                  "name": "Sakurovs, Arturs",
-                  "nationality": "Latvia",
-                  "country_code": "LVA",
-                  "type": "second_assistant_referee"
-                },
-                {
-                  "id": "sr:referee:62623",
-                  "name": "Golubevs, Aleksandrs",
-                  "nationality": "Latvia",
-                  "country_code": "LVA",
-                  "type": "fourth_official"
-                },
-                {
-                  "id": "sr:referee:133978",
-                  "name": "Evangelou, Angelos",
-                  "nationality": "Greece",
-                  "country_code": "GRC",
-                  "type": "video_assistant_referee"
-                }
-              ],
-              "weather": {
-                "pitch_conditions": "good",
-                "overall_conditions": "medium"
-              },
-              "ground": {
-                "neutral": false
-              },
-              "lineups": {
-                "confirmed": true
-              }
-            }
-          },
-          "sport_event_status": {
-            "status": "live",
-            "match_status": "2nd_half",
-            "home_score": 1,
-            "away_score": 0,
-            "period_scores": [
-              {
-                "home_score": 1,
-                "away_score": 0,
-                "type": "regular_period",
-                "number": 1
-              },
-              {
-                "home_score": 0,
-                "away_score": 0,
-                "type": "regular_period",
-                "number": 2
-              }
-            ],
-            "ball_locations": [
-              {
-                "order": 1,
-                "x": 75,
-                "y": 27,
-                "qualifier": "away"
-              },
-              {
-                "order": 2,
-                "x": 45,
-                "y": 61,
-                "qualifier": "away"
-              },
-              {
-                "order": 3,
-                "x": 36,
-                "y": 93,
-                "qualifier": "away"
-              },
-              {
-                "order": 4,
-                "x": 89,
-                "y": 52,
-                "qualifier": "away"
-              },
-              {
-                "order": 5,
-                "x": 40,
-                "y": 22,
-                "qualifier": "away"
-              }
-            ],
-            "match_situation": {
-              "status": "dangerous",
-              "qualifier": "home",
-              "updated_at": "2026-10-22T20:05:18+00:00"
-            },
-            "clock": {
-              "played": "46:05"
-            }
-          }
-        }
-      ]
+      "generated_at": "2026-10-22T23:21:00+00:00",
+      "schedules": []
     },
     "daily": {
-      "generated_at": "2026-10-22T20:05:21+00:00",
+      "generated_at": "2026-10-22T23:21:03+00:00",
       "schedules": [
         {
           "sport_event": {
@@ -1101571,7 +1097655,7 @@
             }
           },
           "sport_event_status": {
-            "status": "ended",
+            "status": "closed",
             "match_status": "ended",
             "home_score": 6,
             "away_score": 1,
@@ -1101690,7 +1097774,11 @@
             }
           },
           "sport_event_status": {
-            "status": "not_started"
+            "status": "closed",
+            "match_status": "ended",
+            "home_score": 2,
+            "away_score": 1,
+            "winner_id": "sr:competitor:475432"
           }
         },
         {
@@ -1102561,10 +1098649,11 @@
             }
           },
           "sport_event_status": {
-            "status": "live",
-            "match_status": "2nd_half",
-            "home_score": 1,
+            "status": "closed",
+            "match_status": "ended",
+            "home_score": 2,
             "away_score": 1,
+            "winner_id": "sr:competitor:5331",
             "period_scores": [
               {
                 "home_score": 1,
@@ -1102573,15 +1098662,12 @@
                 "number": 1
               },
               {
-                "home_score": 0,
+                "home_score": 1,
                 "away_score": 0,
                 "type": "regular_period",
                 "number": 2
               }
-            ],
-            "clock": {
-              "played": "75:45"
-            }
+            ]
           }
         },
         {
@@ -1102687,7 +1098773,11 @@
             }
           },
           "sport_event_status": {
-            "status": "not_started"
+            "status": "closed",
+            "match_status": "ended",
+            "home_score": 2,
+            "away_score": 0,
+            "winner_id": "sr:competitor:889265"
           }
         },
         {
@@ -1102793,7 +1098883,11 @@
             }
           },
           "sport_event_status": {
-            "status": "not_started"
+            "status": "closed",
+            "match_status": "ended",
+            "home_score": 2,
+            "away_score": 2,
+            "match_tie": true
           }
         },
         {
@@ -1102899,7 +1098993,11 @@
             }
           },
           "sport_event_status": {
-            "status": "not_started"
+            "status": "closed",
+            "match_status": "ended",
+            "home_score": 3,
+            "away_score": 3,
+            "match_tie": true
           }
         },
         {
@@ -1103000,7 +1099098,11 @@
             }
           },
           "sport_event_status": {
-            "status": "not_started"
+            "status": "closed",
+            "match_status": "ended",
+            "home_score": 0,
+            "away_score": 4,
+            "winner_id": "sr:competitor:452477"
           }
         },
         {
@@ -1103202,7 +1099304,11 @@
             }
           },
           "sport_event_status": {
-            "status": "not_started"
+            "status": "closed",
+            "match_status": "ended",
+            "home_score": 2,
+            "away_score": 1,
+            "winner_id": "sr:competitor:452419"
           }
         },
         {
@@ -1103317,6 +1099423,9 @@
                   "type": "main_referee"
                 }
               ],
+              "attendance": {
+                "count": 12130
+              },
               "weather": {
                 "pitch_conditions": "good",
                 "overall_conditions": "medium"
@@ -1103330,57 +1099439,61 @@
             }
           },
           "sport_event_status": {
-            "status": "live",
-            "match_status": "halftime",
-            "home_score": 2,
+            "status": "closed",
+            "match_status": "ended",
+            "home_score": 3,
             "away_score": 0,
+            "winner_id": "sr:competitor:60",
             "period_scores": [
               {
                 "home_score": 2,
                 "away_score": 0,
                 "type": "regular_period",
                 "number": 1
+              },
+              {
+                "home_score": 1,
+                "away_score": 0,
+                "type": "regular_period",
+                "number": 2
               }
             ],
             "ball_locations": [
               {
                 "order": 1,
-                "x": 61,
-                "y": 94,
+                "x": 53,
+                "y": 21,
                 "qualifier": "away"
               },
               {
                 "order": 2,
-                "x": 58,
-                "y": 95,
-                "qualifier": "away"
+                "x": 31,
+                "y": 54,
+                "qualifier": "home"
               },
               {
                 "order": 3,
-                "x": 58,
-                "y": 88,
-                "qualifier": "away"
+                "x": 37,
+                "y": 56,
+                "qualifier": "home"
               },
               {
                 "order": 4,
-                "x": 57,
-                "y": 91,
+                "x": 30,
+                "y": 27,
                 "qualifier": "home"
               },
               {
                 "order": 5,
-                "x": 32,
-                "y": 18,
+                "x": 10,
+                "y": 36,
                 "qualifier": "home"
               }
             ],
             "match_situation": {
               "status": "safe",
               "qualifier": "away",
-              "updated_at": "2026-10-22T20:05:17+00:00"
-            },
-            "clock": {
-              "played": "45:00"
+              "updated_at": "2026-10-22T21:30:26+00:00"
             }
           }
         },
@@ -1103496,6 +1099609,9 @@
                   "type": "main_referee"
                 }
               ],
+              "attendance": {
+                "count": 38622
+              },
               "weather": {
                 "pitch_conditions": "good",
                 "overall_conditions": "medium"
@@ -1103509,57 +1099625,61 @@
             }
           },
           "sport_event_status": {
-            "status": "live",
-            "match_status": "halftime",
-            "home_score": 1,
-            "away_score": 0,
+            "status": "closed",
+            "match_status": "ended",
+            "home_score": 2,
+            "away_score": 2,
             "period_scores": [
               {
                 "home_score": 1,
                 "away_score": 0,
                 "type": "regular_period",
                 "number": 1
+              },
+              {
+                "home_score": 1,
+                "away_score": 2,
+                "type": "regular_period",
+                "number": 2
               }
             ],
+            "match_tie": true,
             "ball_locations": [
               {
                 "order": 1,
-                "x": 90,
-                "y": 84,
+                "x": 55,
+                "y": 22,
                 "qualifier": "home"
               },
               {
                 "order": 2,
-                "x": 81,
-                "y": 91,
+                "x": 20,
+                "y": 30,
                 "qualifier": "home"
               },
               {
                 "order": 3,
-                "x": 81,
-                "y": 83,
+                "x": 93,
+                "y": 7,
                 "qualifier": "home"
               },
               {
                 "order": 4,
-                "x": 76,
-                "y": 91,
+                "x": 30,
+                "y": 62,
                 "qualifier": "home"
               },
               {
                 "order": 5,
                 "x": 61,
-                "y": 79,
-                "qualifier": "home"
+                "y": 33,
+                "qualifier": "away"
               }
             ],
             "match_situation": {
               "status": "safe",
-              "qualifier": "away",
-              "updated_at": "2026-10-22T20:04:52+00:00"
-            },
-            "clock": {
-              "played": "45:00"
+              "qualifier": "home",
+              "updated_at": "2026-10-22T21:30:26+00:00"
             }
           }
         },
@@ -1103688,10 +1099808,11 @@
             }
           },
           "sport_event_status": {
-            "status": "live",
-            "match_status": "2nd_half",
+            "status": "closed",
+            "match_status": "ended",
             "home_score": 1,
-            "away_score": 0,
+            "away_score": 2,
+            "winner_id": "sr:competitor:2821",
             "period_scores": [
               {
                 "home_score": 0,
@@ -1103701,7 +1099822,7 @@
               },
               {
                 "home_score": 1,
-                "away_score": 0,
+                "away_score": 2,
                 "type": "regular_period",
                 "number": 2
               }
@@ -1103709,42 +1099830,39 @@
             "ball_locations": [
               {
                 "order": 1,
-                "x": 90,
-                "y": 89,
-                "qualifier": "home"
+                "x": 57,
+                "y": 60,
+                "qualifier": "away"
               },
               {
                 "order": 2,
-                "x": 15,
-                "y": 15,
+                "x": 56,
+                "y": 76,
                 "qualifier": "away"
               },
               {
                 "order": 3,
-                "x": 9,
-                "y": 32,
+                "x": 42,
+                "y": 77,
                 "qualifier": "away"
               },
               {
                 "order": 4,
-                "x": 5,
-                "y": 27,
+                "x": 27,
+                "y": 95,
                 "qualifier": "away"
               },
               {
                 "order": 5,
-                "x": 40,
-                "y": 64,
+                "x": 11,
+                "y": 85,
                 "qualifier": "away"
               }
             ],
             "match_situation": {
               "status": "safe",
-              "qualifier": "home",
-              "updated_at": "2026-10-22T20:05:19+00:00"
-            },
-            "clock": {
-              "played": "47:36"
+              "qualifier": "away",
+              "updated_at": "2026-10-22T21:13:09+00:00"
             }
           }
         },
@@ -1103873,10 +1099991,11 @@
             }
           },
           "sport_event_status": {
-            "status": "live",
-            "match_status": "2nd_half",
-            "home_score": 0,
-            "away_score": 1,
+            "status": "closed",
+            "match_status": "ended",
+            "home_score": 1,
+            "away_score": 2,
+            "winner_id": "sr:competitor:3273",
             "period_scores": [
               {
                 "home_score": 0,
@@ -1103885,8 +1100004,8 @@
                 "number": 1
               },
               {
-                "home_score": 0,
-                "away_score": 0,
+                "home_score": 1,
+                "away_score": 1,
                 "type": "regular_period",
                 "number": 2
               }
@@ -1103894,42 +1100013,39 @@
             "ball_locations": [
               {
                 "order": 1,
-                "x": 9,
-                "y": 71,
+                "x": 41,
+                "y": 55,
                 "qualifier": "away"
               },
               {
                 "order": 2,
-                "x": 78,
-                "y": 40,
+                "x": 29,
+                "y": 87,
                 "qualifier": "away"
               },
               {
                 "order": 3,
-                "x": 58,
-                "y": 57,
+                "x": 27,
+                "y": 83,
                 "qualifier": "away"
               },
               {
                 "order": 4,
-                "x": 0,
-                "y": 0,
+                "x": 28,
+                "y": 84,
                 "qualifier": "away"
               },
               {
                 "order": 5,
-                "x": 6,
-                "y": 2,
-                "qualifier": "away"
+                "x": 23,
+                "y": 63,
+                "qualifier": "home"
               }
             ],
             "match_situation": {
               "status": "safe",
-              "qualifier": "away",
-              "updated_at": "2026-10-22T20:05:20+00:00"
-            },
-            "clock": {
-              "played": "47:59"
+              "qualifier": "home",
+              "updated_at": "2026-10-22T21:30:26+00:00"
             }
           }
         },
@@ -1104045,6 +1100161,9 @@
                   "type": "main_referee"
                 }
               ],
+              "attendance": {
+                "count": 15621
+              },
               "weather": {
                 "pitch_conditions": "good",
                 "overall_conditions": "medium"
@@ -1104058,10 +1100177,11 @@
             }
           },
           "sport_event_status": {
-            "status": "live",
-            "match_status": "2nd_half",
+            "status": "closed",
+            "match_status": "ended",
             "home_score": 0,
-            "away_score": 1,
+            "away_score": 3,
+            "winner_id": "sr:competitor:2900",
             "period_scores": [
               {
                 "home_score": 0,
@@ -1104071,7 +1100191,7 @@
               },
               {
                 "home_score": 0,
-                "away_score": 0,
+                "away_score": 2,
                 "type": "regular_period",
                 "number": 2
               }
@@ -1104079,42 +1100199,39 @@
             "ball_locations": [
               {
                 "order": 1,
-                "x": 53,
-                "y": 56,
+                "x": 55,
+                "y": 43,
                 "qualifier": "away"
               },
               {
                 "order": 2,
-                "x": 44,
-                "y": 86,
+                "x": 35,
+                "y": 53,
                 "qualifier": "away"
               },
               {
                 "order": 3,
-                "x": 42,
-                "y": 69,
+                "x": 72,
+                "y": 83,
                 "qualifier": "away"
               },
               {
                 "order": 4,
-                "x": 30,
-                "y": 26,
+                "x": 86,
+                "y": 63,
                 "qualifier": "away"
               },
               {
                 "order": 5,
-                "x": 40,
-                "y": 37,
+                "x": 28,
+                "y": 79,
                 "qualifier": "away"
               }
             ],
             "match_situation": {
               "status": "safe",
-              "qualifier": "home",
-              "updated_at": "2026-10-22T20:05:07+00:00"
-            },
-            "clock": {
-              "played": "46:57"
+              "qualifier": "away",
+              "updated_at": "2026-10-22T21:12:06+00:00"
             }
           }
         },
@@ -1104230,6 +1100347,9 @@
                   "type": "main_referee"
                 }
               ],
+              "attendance": {
+                "count": 9657
+              },
               "weather": {
                 "pitch_conditions": "good",
                 "overall_conditions": "medium"
@@ -1104243,10 +1100363,11 @@
             }
           },
           "sport_event_status": {
-            "status": "live",
-            "match_status": "2nd_half",
+            "status": "closed",
+            "match_status": "ended",
             "home_score": 0,
-            "away_score": 3,
+            "away_score": 6,
+            "winner_id": "sr:competitor:2824",
             "period_scores": [
               {
                 "home_score": 0,
@@ -1104256,7 +1100377,7 @@
               },
               {
                 "home_score": 0,
-                "away_score": 0,
+                "away_score": 3,
                 "type": "regular_period",
                 "number": 2
               }
@@ -1104264,42 +1100385,39 @@
             "ball_locations": [
               {
                 "order": 1,
-                "x": 54,
-                "y": 84,
-                "qualifier": "away"
+                "x": 51,
+                "y": 37,
+                "qualifier": "home"
               },
               {
                 "order": 2,
-                "x": 52,
-                "y": 73,
-                "qualifier": "away"
+                "x": 58,
+                "y": 49,
+                "qualifier": "home"
               },
               {
                 "order": 3,
-                "x": 74,
-                "y": 64,
+                "x": 88,
+                "y": 67,
                 "qualifier": "home"
               },
               {
                 "order": 4,
-                "x": 60,
-                "y": 53,
-                "qualifier": "away"
+                "x": 85,
+                "y": 72,
+                "qualifier": "home"
               },
               {
                 "order": 5,
-                "x": 74,
-                "y": 31,
-                "qualifier": "away"
+                "x": 77,
+                "y": 50,
+                "qualifier": "home"
               }
             ],
             "match_situation": {
-              "status": "attack",
+              "status": "safe",
               "qualifier": "away",
-              "updated_at": "2026-10-22T20:05:20+00:00"
-            },
-            "clock": {
-              "played": "49:54"
+              "updated_at": "2026-10-22T21:30:26+00:00"
             }
           }
         },
@@ -1104415,6 +1100533,9 @@
                   "type": "main_referee"
                 }
               ],
+              "attendance": {
+                "count": 4050
+              },
               "weather": {
                 "pitch_conditions": "good",
                 "overall_conditions": "medium"
@@ -1104428,9 +1100549,9 @@
             }
           },
           "sport_event_status": {
-            "status": "live",
-            "match_status": "2nd_half",
-            "home_score": 0,
+            "status": "closed",
+            "match_status": "ended",
+            "home_score": 2,
             "away_score": 2,
             "period_scores": [
               {
@@ -1104440,51 +1100561,49 @@
                 "number": 1
               },
               {
-                "home_score": 0,
+                "home_score": 2,
                 "away_score": 1,
                 "type": "regular_period",
                 "number": 2
               }
             ],
+            "match_tie": true,
             "ball_locations": [
               {
                 "order": 1,
-                "x": 14,
-                "y": 59,
-                "qualifier": "home"
+                "x": 76,
+                "y": 78,
+                "qualifier": "away"
               },
               {
                 "order": 2,
-                "x": 80,
-                "y": 100,
-                "qualifier": "away"
+                "x": 49,
+                "y": 90,
+                "qualifier": "home"
               },
               {
                 "order": 3,
-                "x": 52,
-                "y": 100,
-                "qualifier": "away"
+                "x": 20,
+                "y": 77,
+                "qualifier": "home"
               },
               {
                 "order": 4,
-                "x": 36,
-                "y": 30,
-                "qualifier": "home"
+                "x": 91,
+                "y": 51,
+                "qualifier": "away"
               },
               {
                 "order": 5,
-                "x": 26,
-                "y": 21,
-                "qualifier": "home"
+                "x": 81,
+                "y": 71,
+                "qualifier": "away"
               }
             ],
             "match_situation": {
               "status": "safe",
-              "qualifier": "away",
-              "updated_at": "2026-10-22T20:05:18+00:00"
-            },
-            "clock": {
-              "played": "47:13"
+              "qualifier": "home",
+              "updated_at": "2026-10-22T21:30:26+00:00"
             }
           }
         },
@@ -1104600,6 +1100719,9 @@
                   "type": "main_referee"
                 }
               ],
+              "attendance": {
+                "count": 31993
+              },
               "weather": {
                 "pitch_conditions": "good",
                 "overall_conditions": "medium"
@@ -1104613,10 +1100735,11 @@
             }
           },
           "sport_event_status": {
-            "status": "live",
-            "match_status": "2nd_half",
-            "home_score": 0,
+            "status": "closed",
+            "match_status": "ended",
+            "home_score": 1,
             "away_score": 0,
+            "winner_id": "sr:competitor:3245",
             "period_scores": [
               {
                 "home_score": 0,
@@ -1104625,7 +1100748,7 @@
                 "number": 1
               },
               {
-                "home_score": 0,
+                "home_score": 1,
                 "away_score": 0,
                 "type": "regular_period",
                 "number": 2
@@ -1104634,42 +1100757,39 @@
             "ball_locations": [
               {
                 "order": 1,
-                "x": 45,
-                "y": 22,
+                "x": 64,
+                "y": 18,
                 "qualifier": "home"
               },
               {
                 "order": 2,
-                "x": 56,
-                "y": 0,
-                "qualifier": "away"
+                "x": 75,
+                "y": 20,
+                "qualifier": "home"
               },
               {
                 "order": 3,
-                "x": 38,
-                "y": 29,
+                "x": 66,
+                "y": 18,
                 "qualifier": "home"
               },
               {
                 "order": 4,
-                "x": 63,
-                "y": 23,
-                "qualifier": "home"
+                "x": 82,
+                "y": 14,
+                "qualifier": "away"
               },
               {
                 "order": 5,
-                "x": 69,
-                "y": 12,
+                "x": 78,
+                "y": 5,
                 "qualifier": "home"
               }
             ],
             "match_situation": {
               "status": "safe",
               "qualifier": "away",
-              "updated_at": "2026-10-22T20:05:19+00:00"
-            },
-            "clock": {
-              "played": "48:42"
+              "updated_at": "2026-10-22T21:15:04+00:00"
             }
           }
         },
@@ -1104785,6 +1100905,9 @@
                   "type": "main_referee"
                 }
               ],
+              "attendance": {
+                "count": 14378
+              },
               "weather": {
                 "pitch_conditions": "medium",
                 "overall_conditions": "medium"
@@ -1104798,57 +1100921,61 @@
             }
           },
           "sport_event_status": {
-            "status": "live",
-            "match_status": "halftime",
+            "status": "closed",
+            "match_status": "ended",
             "home_score": 1,
-            "away_score": 1,
+            "away_score": 4,
+            "winner_id": "sr:competitor:3006",
             "period_scores": [
               {
                 "home_score": 1,
                 "away_score": 1,
                 "type": "regular_period",
                 "number": 1
+              },
+              {
+                "home_score": 0,
+                "away_score": 3,
+                "type": "regular_period",
+                "number": 2
               }
             ],
             "ball_locations": [
               {
                 "order": 1,
-                "x": 29,
-                "y": 93,
-                "qualifier": "away"
+                "x": 13,
+                "y": 74,
+                "qualifier": "home"
               },
               {
                 "order": 2,
-                "x": 28,
-                "y": 67,
-                "qualifier": "away"
+                "x": 36,
+                "y": 63,
+                "qualifier": "home"
               },
               {
                 "order": 3,
-                "x": 39,
-                "y": 71,
-                "qualifier": "away"
+                "x": 38,
+                "y": 15,
+                "qualifier": "home"
               },
               {
                 "order": 4,
-                "x": 42,
-                "y": 64,
-                "qualifier": "away"
+                "x": 40,
+                "y": 28,
+                "qualifier": "home"
               },
               {
                 "order": 5,
-                "x": 13,
-                "y": 91,
-                "qualifier": "away"
+                "x": 29,
+                "y": 27,
+                "qualifier": "home"
               }
             ],
             "match_situation": {
               "status": "safe",
               "qualifier": "away",
-              "updated_at": "2026-10-22T20:04:39+00:00"
-            },
-            "clock": {
-              "played": "45:00"
+              "updated_at": "2026-10-22T21:30:26+00:00"
             }
           }
         },
@@ -1104964,6 +1101091,9 @@
                   "type": "main_referee"
                 }
               ],
+              "attendance": {
+                "count": 21029
+              },
               "weather": {
                 "pitch_conditions": "good",
                 "overall_conditions": "medium"
@@ -1104977,57 +1101107,61 @@
             }
           },
           "sport_event_status": {
-            "status": "live",
-            "match_status": "halftime",
-            "home_score": 1,
+            "status": "closed",
+            "match_status": "ended",
+            "home_score": 3,
             "away_score": 0,
+            "winner_id": "sr:competitor:2569",
             "period_scores": [
               {
                 "home_score": 1,
                 "away_score": 0,
                 "type": "regular_period",
                 "number": 1
+              },
+              {
+                "home_score": 2,
+                "away_score": 0,
+                "type": "regular_period",
+                "number": 2
               }
             ],
             "ball_locations": [
               {
                 "order": 1,
-                "x": 14,
-                "y": 75,
+                "x": 54,
+                "y": 67,
                 "qualifier": "away"
               },
               {
                 "order": 2,
-                "x": 19,
-                "y": 15,
-                "qualifier": "home"
-              },
-              {
-                "order": 3,
-                "x": 8,
+                "x": 23,
                 "y": 45,
                 "qualifier": "home"
               },
               {
+                "order": 3,
+                "x": 34,
+                "y": 43,
+                "qualifier": "home"
+              },
+              {
                 "order": 4,
-                "x": 32,
-                "y": 96,
-                "qualifier": "away"
+                "x": 60,
+                "y": 92,
+                "qualifier": "home"
               },
               {
                 "order": 5,
-                "x": 75,
-                "y": 97,
+                "x": 54,
+                "y": 85,
                 "qualifier": "home"
               }
             ],
             "match_situation": {
               "status": "safe",
               "qualifier": "away",
-              "updated_at": "2026-10-22T20:05:14+00:00"
-            },
-            "clock": {
-              "played": "45:00"
+              "updated_at": "2026-10-22T21:01:06+00:00"
             }
           }
         },
@@ -1105171,6 +1101305,9 @@
                   "type": "video_assistant_referee"
                 }
               ],
+              "attendance": {
+                "count": 51739
+              },
               "weather": {
                 "pitch_conditions": "good",
                 "overall_conditions": "medium"
@@ -1105184,10 +1101321,11 @@
             }
           },
           "sport_event_status": {
-            "status": "live",
-            "match_status": "2nd_half",
-            "home_score": 0,
+            "status": "closed",
+            "match_status": "ended",
+            "home_score": 2,
             "away_score": 0,
+            "winner_id": "sr:competitor:2953",
             "period_scores": [
               {
                 "home_score": 0,
@@ -1105196,7 +1101334,7 @@
                 "number": 1
               },
               {
-                "home_score": 0,
+                "home_score": 2,
                 "away_score": 0,
                 "type": "regular_period",
                 "number": 2
@@ -1105205,42 +1101343,39 @@
             "ball_locations": [
               {
                 "order": 1,
-                "x": 25,
-                "y": 14,
-                "qualifier": "home"
+                "x": 57,
+                "y": 73,
+                "qualifier": "away"
               },
               {
                 "order": 2,
-                "x": 70,
-                "y": 61,
+                "x": 57,
+                "y": 78,
                 "qualifier": "home"
               },
               {
                 "order": 3,
-                "x": 77,
-                "y": 70,
+                "x": 46,
+                "y": 55,
                 "qualifier": "home"
               },
               {
                 "order": 4,
-                "x": 76,
-                "y": 88,
-                "qualifier": "home"
+                "x": 40,
+                "y": 55,
+                "qualifier": "away"
               },
               {
                 "order": 5,
-                "x": 29,
-                "y": 4,
-                "qualifier": "home"
+                "x": 16,
+                "y": 82,
+                "qualifier": "away"
               }
             ],
             "match_situation": {
               "status": "safe",
-              "qualifier": "home",
-              "updated_at": "2026-10-22T20:05:19+00:00"
-            },
-            "clock": {
-              "played": "48:14"
+              "qualifier": "away",
+              "updated_at": "2026-10-22T21:30:26+00:00"
             }
           }
         },
@@ -1105397,9 +1101532,9 @@
             }
           },
           "sport_event_status": {
-            "status": "live",
-            "match_status": "halftime",
-            "home_score": 0,
+            "status": "closed",
+            "match_status": "ended",
+            "home_score": 1,
             "away_score": 1,
             "period_scores": [
               {
@@ -1105407,47 +1101542,51 @@
                 "away_score": 1,
                 "type": "regular_period",
                 "number": 1
+              },
+              {
+                "home_score": 1,
+                "away_score": 0,
+                "type": "regular_period",
+                "number": 2
               }
             ],
+            "match_tie": true,
             "ball_locations": [
               {
                 "order": 1,
-                "x": 12,
-                "y": 13,
-                "qualifier": "away"
+                "x": 58,
+                "y": 60,
+                "qualifier": "home"
               },
               {
                 "order": 2,
-                "x": 23,
-                "y": 30,
-                "qualifier": "away"
+                "x": 46,
+                "y": 3,
+                "qualifier": "home"
               },
               {
                 "order": 3,
-                "x": 21,
-                "y": 56,
+                "x": 45,
+                "y": 88,
                 "qualifier": "away"
               },
               {
                 "order": 4,
-                "x": 28,
-                "y": 76,
-                "qualifier": "away"
+                "x": 90,
+                "y": 2,
+                "qualifier": "home"
               },
               {
                 "order": 5,
-                "x": 4,
-                "y": 82,
+                "x": 39,
+                "y": 62,
                 "qualifier": "away"
               }
             ],
             "match_situation": {
               "status": "safe",
               "qualifier": "away",
-              "updated_at": "2026-10-22T20:04:47+00:00"
-            },
-            "clock": {
-              "played": "45:00"
+              "updated_at": "2026-10-22T21:04:05+00:00"
             }
           }
         },
@@ -1105591,6 +1101730,9 @@
                   "type": "video_assistant_referee"
                 }
               ],
+              "attendance": {
+                "count": 4783
+              },
               "weather": {
                 "pitch_conditions": "good",
                 "overall_conditions": "medium"
@@ -1105604,57 +1101746,61 @@
             }
           },
           "sport_event_status": {
-            "status": "live",
-            "match_status": "halftime",
-            "home_score": 1,
+            "status": "closed",
+            "match_status": "ended",
+            "home_score": 3,
             "away_score": 0,
+            "winner_id": "sr:competitor:1653",
             "period_scores": [
               {
                 "home_score": 1,
                 "away_score": 0,
                 "type": "regular_period",
                 "number": 1
+              },
+              {
+                "home_score": 2,
+                "away_score": 0,
+                "type": "regular_period",
+                "number": 2
               }
             ],
             "ball_locations": [
               {
                 "order": 1,
-                "x": 73,
+                "x": 61,
                 "y": 35,
-                "qualifier": "away"
+                "qualifier": "home"
               },
               {
                 "order": 2,
-                "x": 68,
-                "y": 55,
+                "x": 79,
+                "y": 36,
                 "qualifier": "away"
               },
               {
                 "order": 3,
-                "x": 71,
-                "y": 55,
+                "x": 68,
+                "y": 34,
                 "qualifier": "away"
               },
               {
                 "order": 4,
-                "x": 86,
-                "y": 45,
+                "x": 62,
+                "y": 41,
                 "qualifier": "away"
               },
               {
                 "order": 5,
-                "x": 68,
-                "y": 28,
+                "x": 53,
+                "y": 32,
                 "qualifier": "away"
               }
             ],
             "match_situation": {
               "status": "safe",
               "qualifier": "away",
-              "updated_at": "2026-10-22T20:05:09+00:00"
-            },
-            "clock": {
-              "played": "45:00"
+              "updated_at": "2026-10-22T21:30:26+00:00"
             }
           }
         },
@@ -1105811,10 +1101957,11 @@
             }
           },
           "sport_event_status": {
-            "status": "live",
-            "match_status": "2nd_half",
+            "status": "closed",
+            "match_status": "ended",
             "home_score": 0,
             "away_score": 1,
+            "winner_id": "sr:competitor:2895",
             "period_scores": [
               {
                 "home_score": 0,
@@ -1105832,42 +1101979,39 @@
             "ball_locations": [
               {
                 "order": 1,
-                "x": 7,
-                "y": 41,
+                "x": 38,
+                "y": 27,
                 "qualifier": "home"
               },
               {
                 "order": 2,
-                "x": 91,
-                "y": 100,
+                "x": 65,
+                "y": 87,
                 "qualifier": "home"
               },
               {
                 "order": 3,
-                "x": 35,
-                "y": 37,
+                "x": 91,
+                "y": 27,
                 "qualifier": "home"
               },
               {
                 "order": 4,
-                "x": 61,
-                "y": 52,
+                "x": 86,
+                "y": 15,
                 "qualifier": "home"
               },
               {
                 "order": 5,
-                "x": 75,
-                "y": 67,
+                "x": 77,
+                "y": 17,
                 "qualifier": "home"
               }
             ],
             "match_situation": {
-              "status": "dangerous",
-              "qualifier": "home",
-              "updated_at": "2026-10-22T20:05:19+00:00"
-            },
-            "clock": {
-              "played": "47:03"
+              "status": "safe",
+              "qualifier": "away",
+              "updated_at": "2026-10-22T21:30:26+00:00"
             }
           }
         },
@@ -1106024,10 +1102168,11 @@
             }
           },
           "sport_event_status": {
-            "status": "live",
-            "match_status": "2nd_half",
+            "status": "closed",
+            "match_status": "ended",
             "home_score": 0,
             "away_score": 1,
+            "winner_id": "sr:competitor:2036",
             "period_scores": [
               {
                 "home_score": 0,
@@ -1106045,42 +1102190,39 @@
             "ball_locations": [
               {
                 "order": 1,
-                "x": 56,
-                "y": 4,
+                "x": 62,
+                "y": 11,
                 "qualifier": "away"
               },
               {
                 "order": 2,
-                "x": 56,
-                "y": 4,
-                "qualifier": "away"
+                "x": 29,
+                "y": 19,
+                "qualifier": "home"
               },
               {
                 "order": 3,
-                "x": 39,
-                "y": 90,
-                "qualifier": "away"
+                "x": 11,
+                "y": 32,
+                "qualifier": "home"
               },
               {
                 "order": 4,
-                "x": 56,
-                "y": 4,
+                "x": 9,
+                "y": 14,
                 "qualifier": "home"
               },
               {
                 "order": 5,
-                "x": 56,
-                "y": 4,
-                "qualifier": "home"
+                "x": 91,
+                "y": 52,
+                "qualifier": "away"
               }
             ],
             "match_situation": {
-              "status": "attack",
+              "status": "safe",
               "qualifier": "home",
-              "updated_at": "2026-10-22T20:05:20+00:00"
-            },
-            "clock": {
-              "played": "47:08"
+              "updated_at": "2026-10-22T21:30:26+00:00"
             }
           }
         },
@@ -1106224,6 +1102366,9 @@
                   "type": "video_assistant_referee"
                 }
               ],
+              "attendance": {
+                "count": 8224
+              },
               "weather": {
                 "pitch_conditions": "good",
                 "overall_conditions": "good"
@@ -1106237,10 +1102382,11 @@
             }
           },
           "sport_event_status": {
-            "status": "live",
-            "match_status": "2nd_half",
-            "home_score": 1,
+            "status": "closed",
+            "match_status": "ended",
+            "home_score": 2,
             "away_score": 0,
+            "winner_id": "sr:competitor:5235",
             "period_scores": [
               {
                 "home_score": 1,
@@ -1106249,7 +1102395,7 @@
                 "number": 1
               },
               {
-                "home_score": 0,
+                "home_score": 1,
                 "away_score": 0,
                 "type": "regular_period",
                 "number": 2
@@ -1106258,42 +1102404,39 @@
             "ball_locations": [
               {
                 "order": 1,
-                "x": 41,
-                "y": 44,
+                "x": 93,
+                "y": 9,
                 "qualifier": "away"
               },
               {
                 "order": 2,
-                "x": 61,
-                "y": 60,
+                "x": 81,
+                "y": 83,
                 "qualifier": "away"
               },
               {
                 "order": 3,
-                "x": 48,
-                "y": 80,
-                "qualifier": "away"
+                "x": 80,
+                "y": 10,
+                "qualifier": "home"
               },
               {
                 "order": 4,
-                "x": 23,
-                "y": 94,
+                "x": 71,
+                "y": 71,
                 "qualifier": "away"
               },
               {
                 "order": 5,
-                "x": 11,
-                "y": 88,
+                "x": 56,
+                "y": 95,
                 "qualifier": "away"
               }
             ],
             "match_situation": {
-              "status": "dangerous",
+              "status": "safe",
               "qualifier": "away",
-              "updated_at": "2026-10-22T20:05:20+00:00"
-            },
-            "clock": {
-              "played": "48:13"
+              "updated_at": "2026-10-22T21:14:09+00:00"
             }
           }
         },
@@ -1106450,10 +1102593,11 @@
             }
           },
           "sport_event_status": {
-            "status": "live",
-            "match_status": "2nd_half",
+            "status": "closed",
+            "match_status": "ended",
             "home_score": 1,
-            "away_score": 2,
+            "away_score": 4,
+            "winner_id": "sr:competitor:2955",
             "period_scores": [
               {
                 "home_score": 1,
@@ -1106463,7 +1102607,7 @@
               },
               {
                 "home_score": 0,
-                "away_score": 0,
+                "away_score": 2,
                 "type": "regular_period",
                 "number": 2
               }
@@ -1106471,42 +1102615,39 @@
             "ball_locations": [
               {
                 "order": 1,
-                "x": 22,
-                "y": 28,
-                "qualifier": "away"
+                "x": 30,
+                "y": 71,
+                "qualifier": "home"
               },
               {
                 "order": 2,
-                "x": 25,
-                "y": 21,
-                "qualifier": "away"
+                "x": 15,
+                "y": 43,
+                "qualifier": "home"
               },
               {
                 "order": 3,
-                "x": 18,
-                "y": 35,
-                "qualifier": "away"
+                "x": 88,
+                "y": 89,
+                "qualifier": "home"
               },
               {
                 "order": 4,
-                "x": 58,
-                "y": 45,
-                "qualifier": "away"
+                "x": 41,
+                "y": 14,
+                "qualifier": "home"
               },
               {
                 "order": 5,
-                "x": 58,
-                "y": 30,
-                "qualifier": "away"
+                "x": 17,
+                "y": 84,
+                "qualifier": "home"
               }
             ],
             "match_situation": {
-              "status": "dangerous",
-              "qualifier": "away",
-              "updated_at": "2026-10-22T20:05:18+00:00"
-            },
-            "clock": {
-              "played": "46:52"
+              "status": "safe",
+              "qualifier": "home",
+              "updated_at": "2026-10-22T21:30:26+00:00"
             }
           }
         },
@@ -1106650,6 +1102791,9 @@
                   "type": "video_assistant_referee"
                 }
               ],
+              "attendance": {
+                "count": 10449
+              },
               "weather": {
                 "pitch_conditions": "good",
                 "overall_conditions": "medium"
@@ -1106663,10 +1102807,11 @@
             }
           },
           "sport_event_status": {
-            "status": "live",
-            "match_status": "2nd_half",
-            "home_score": 1,
+            "status": "closed",
+            "match_status": "ended",
+            "home_score": 2,
             "away_score": 0,
+            "winner_id": "sr:competitor:2999",
             "period_scores": [
               {
                 "home_score": 1,
@@ -1106675,7 +1102820,7 @@
                 "number": 1
               },
               {
-                "home_score": 0,
+                "home_score": 1,
                 "away_score": 0,
                 "type": "regular_period",
                 "number": 2
@@ -1106684,42 +1102829,39 @@
             "ball_locations": [
               {
                 "order": 1,
-                "x": 36,
-                "y": 93,
-                "qualifier": "away"
+                "x": 66,
+                "y": 43,
+                "qualifier": "home"
               },
               {
                 "order": 2,
-                "x": 89,
-                "y": 52,
-                "qualifier": "away"
+                "x": 61,
+                "y": 22,
+                "qualifier": "home"
               },
               {
                 "order": 3,
-                "x": 45,
-                "y": 61,
-                "qualifier": "away"
+                "x": 27,
+                "y": 63,
+                "qualifier": "home"
               },
               {
                 "order": 4,
-                "x": 40,
-                "y": 22,
-                "qualifier": "away"
+                "x": 24,
+                "y": 64,
+                "qualifier": "home"
               },
               {
                 "order": 5,
-                "x": 78,
-                "y": 92,
-                "qualifier": "away"
+                "x": 77,
+                "y": 23,
+                "qualifier": "home"
               }
             ],
             "match_situation": {
               "status": "safe",
               "qualifier": "away",
-              "updated_at": "2026-10-22T20:05:19+00:00"
-            },
-            "clock": {
-              "played": "46:08"
+              "updated_at": "2026-10-22T21:30:26+00:00"
             }
           }
         },
@@ -1106828,7 +1102970,32 @@
             }
           },
           "sport_event_status": {
-            "status": "not_started"
+            "status": "closed",
+            "match_status": "ap",
+            "home_score": 1,
+            "away_score": 1,
+            "home_normaltime_score": 1,
+            "away_normaltime_score": 1,
+            "winner_id": "sr:competitor:908321",
+            "period_scores": [
+              {
+                "home_score": 0,
+                "away_score": 1,
+                "type": "regular_period",
+                "number": 1
+              },
+              {
+                "home_score": 1,
+                "away_score": 0,
+                "type": "regular_period",
+                "number": 2
+              },
+              {
+                "home_score": 3,
+                "away_score": 4,
+                "type": "penalties"
+              }
+            ]
           }
         },
         {
@@ -1106939,7 +1103106,11 @@
             }
           },
           "sport_event_status": {
-            "status": "not_started"
+            "status": "closed",
+            "match_status": "ended",
+            "home_score": 2,
+            "away_score": 4,
+            "winner_id": "sr:competitor:210346"
           }
         },
         {
@@ -1107040,7 +1103211,11 @@
             }
           },
           "sport_event_status": {
-            "status": "not_started"
+            "status": "closed",
+            "match_status": "ended",
+            "home_score": 1,
+            "away_score": 0,
+            "winner_id": "sr:competitor:452269"
           }
         },
         {
@@ -1107141,7 +1103316,11 @@
             }
           },
           "sport_event_status": {
-            "status": "not_started"
+            "status": "closed",
+            "match_status": "ended",
+            "home_score": 2,
+            "away_score": 0,
+            "winner_id": "sr:competitor:492986"
           }
         },
         {
@@ -1107242,7 +1103421,11 @@
             }
           },
           "sport_event_status": {
-            "status": "not_started"
+            "status": "closed",
+            "match_status": "ended",
+            "home_score": 2,
+            "away_score": 2,
+            "match_tie": true
           }
         },
         {
@@ -1107343,7 +1103526,11 @@
             }
           },
           "sport_event_status": {
-            "status": "not_started"
+            "status": "closed",
+            "match_status": "ended",
+            "home_score": 3,
+            "away_score": 1,
+            "winner_id": "sr:competitor:452235"
           }
         },
         {
@@ -1107438,7 +1103625,7 @@
             "sport_event_conditions": {
               "weather": {
                 "pitch_conditions": "bad",
-                "overall_conditions": "medium"
+                "overall_conditions": "bad"
               },
               "ground": {
                 "neutral": false
@@ -1107446,7 +1103633,25 @@
             }
           },
           "sport_event_status": {
-            "status": "not_started"
+            "status": "ended",
+            "match_status": "ended",
+            "home_score": 2,
+            "away_score": 2,
+            "period_scores": [
+              {
+                "home_score": 2,
+                "away_score": 0,
+                "type": "regular_period",
+                "number": 1
+              },
+              {
+                "home_score": 0,
+                "away_score": 2,
+                "type": "regular_period",
+                "number": 2
+              }
+            ],
+            "match_tie": true
           }
         },
         {
@@ -1107551,7 +1103756,11 @@
             }
           },
           "sport_event_status": {
-            "status": "not_started"
+            "status": "closed",
+            "match_status": "ended",
+            "home_score": 2,
+            "away_score": 3,
+            "winner_id": "sr:competitor:613982"
           }
         },
         {
@@ -1107754,7 +1103963,11 @@
             }
           },
           "sport_event_status": {
-            "status": "not_started"
+            "status": "closed",
+            "match_status": "ended",
+            "home_score": 2,
+            "away_score": 0,
+            "winner_id": "sr:competitor:452501"
           }
         },
         {
@@ -1108358,6 +1104571,10 @@
               }
             ],
             "sport_event_conditions": {
+              "weather": {
+                "pitch_conditions": "good",
+                "overall_conditions": "medium"
+              },
               "ground": {
                 "neutral": false
               }
@@ -1109273,6 +1105490,10 @@
               }
             ],
             "sport_event_conditions": {
+              "weather": {
+                "pitch_conditions": "good",
+                "overall_conditions": "medium"
+              },
               "ground": {
                 "neutral": false
               }
@@ -1110395,6 +1106616,6 @@
         }
       ]
     },
-    "updatedAt": "2026-10-22T20:05:17.710Z"
+    "updatedAt": "2026-10-22T23:20:59.707Z"
   }
 }
