@@ -3,14 +3,14 @@
   "provider": "Sportradar",
   "product": "Soccer API",
   "access": "trial",
-  "updatedAt": "2026-10-22T08:41:28.616Z",
+  "updatedAt": "2026-10-22T13:45:20.884Z",
   "requestsLastRun": 2,
   "leagues": {
     "laliga": {
       "league": "La Liga",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-22T08:41:28.616Z",
+      "updatedAt": "2026-10-22T13:45:20.884Z",
       "games": [
         {
           "eventId": "sr:sport_event:72477506",
@@ -340,7 +340,7 @@
       "league": "Serie A",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-22T08:41:28.616Z",
+      "updatedAt": "2026-10-22T13:45:20.884Z",
       "games": [
         {
           "eventId": "sr:sport_event:71945310",
@@ -486,7 +486,7 @@
       "league": "Bundesliga",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-22T08:41:28.616Z",
+      "updatedAt": "2026-10-22T13:45:20.884Z",
       "games": [
         {
           "eventId": "sr:sport_event:72513242",
@@ -275669,7 +275669,7 @@
       "league": "UEFA Champions League",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-22T08:41:28.616Z",
+      "updatedAt": "2026-10-22T13:45:20.884Z",
       "games": [
         {
           "eventId": "sr:sport_event:74165922",
@@ -339793,7 +339793,7 @@
       "league": "MLS",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-22T08:41:28.616Z",
+      "updatedAt": "2026-10-22T13:45:20.884Z",
       "games": [
         {
           "eventId": "sr:sport_event:66299652",
@@ -962151,14 +962151,14 @@
       "league": "PFL",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-22T08:41:28.616Z",
+      "updatedAt": "2026-10-22T13:45:20.884Z",
       "games": []
     },
     "jamaica_pl": {
       "league": "Jamaican Premier League",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-22T08:41:28.616Z",
+      "updatedAt": "2026-10-22T13:45:20.884Z",
       "games": [
         {
           "eventId": "sr:sport_event:74980116",
@@ -991959,54 +991959,8 @@
       "league": "Mizoram Premier League",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-22T08:41:28.616Z",
+      "updatedAt": "2026-10-22T13:45:20.884Z",
       "games": [
-        {
-          "eventId": "sr:sport_event:75074670",
-          "date": "2026-10-14T09:30:00+00:00",
-          "displayTime": "",
-          "title": "",
-          "home": "Mls FC Lawtngtlai",
-          "away": "Ramthar Veng FC",
-          "homeLogo": "",
-          "awayLogo": "",
-          "homeScore": 1,
-          "awayScore": 2,
-          "status": "ended",
-          "state": "final",
-          "venue": "",
-          "round": 13,
-          "seasonId": "sr:season:145544",
-          "competitionId": "sr:competition:48619",
-          "competition": "Mizoram Premier League",
-          "category": "India",
-          "categoryId": "sr:category:352",
-          "sourceName": "Sportradar Soccer API",
-          "sourceUrl": "https://developer.sportradar.com/soccer"
-        },
-        {
-          "eventId": "sr:sport_event:75074672",
-          "date": "2026-10-14T13:30:00+00:00",
-          "displayTime": "",
-          "title": "",
-          "home": "Kanan FC Aizawl",
-          "away": "Chanmari FC",
-          "homeLogo": "",
-          "awayLogo": "",
-          "homeScore": 0,
-          "awayScore": 0,
-          "status": "ended",
-          "state": "final",
-          "venue": "",
-          "round": 13,
-          "seasonId": "sr:season:145544",
-          "competitionId": "sr:competition:48619",
-          "competition": "Mizoram Premier League",
-          "category": "India",
-          "categoryId": "sr:category:352",
-          "sourceName": "Sportradar Soccer API",
-          "sourceUrl": "https://developer.sportradar.com/soccer"
-        },
         {
           "eventId": "sr:sport_event:75074674",
           "date": "2026-10-16T09:30:00+00:00",
@@ -992098,6 +992052,52 @@
           "categoryId": "sr:category:352",
           "sourceName": "Sportradar Soccer API",
           "sourceUrl": "https://developer.sportradar.com/soccer"
+        },
+        {
+          "eventId": "sr:sport_event:75904316",
+          "date": "2026-10-22T14:00:00+00:00",
+          "displayTime": "",
+          "title": "",
+          "home": "Chanmari FC",
+          "away": "Ramthar Veng FC",
+          "homeLogo": "",
+          "awayLogo": "",
+          "homeScore": "—",
+          "awayScore": "—",
+          "status": "not_started",
+          "state": "scheduled",
+          "venue": "",
+          "round": "semifinal",
+          "seasonId": "sr:season:145544",
+          "competitionId": "sr:competition:48619",
+          "competition": "Mizoram Premier League",
+          "category": "India",
+          "categoryId": "sr:category:352",
+          "sourceName": "Sportradar Soccer API",
+          "sourceUrl": "https://developer.sportradar.com/soccer"
+        },
+        {
+          "eventId": "sr:sport_event:75904318",
+          "date": "2026-10-22T14:00:00+00:00",
+          "displayTime": "",
+          "title": "",
+          "home": "Mizoram Police FC",
+          "away": "Dinthar FC",
+          "homeLogo": "",
+          "awayLogo": "",
+          "homeScore": "—",
+          "awayScore": "—",
+          "status": "not_started",
+          "state": "scheduled",
+          "venue": "",
+          "round": "semifinal",
+          "seasonId": "sr:season:145544",
+          "competitionId": "sr:competition:48619",
+          "competition": "Mizoram Premier League",
+          "category": "India",
+          "categoryId": "sr:category:352",
+          "sourceName": "Sportradar Soccer API",
+          "sourceUrl": "https://developer.sportradar.com/soccer"
         }
       ]
     },
@@ -992105,7 +992105,7 @@
       "league": "Primera Division, Reserves",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-22T08:41:28.616Z",
+      "updatedAt": "2026-10-22T13:45:20.884Z",
       "games": [
         {
           "eventId": "sr:sport_event:75601346",
@@ -992136,7 +992136,7 @@
       "league": "UEFA Champions League Women",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-22T08:41:28.616Z",
+      "updatedAt": "2026-10-22T13:45:20.884Z",
       "games": [],
       "competitionId": "sr:competition:696",
       "competition": {
@@ -1079628,7 +1079628,7 @@
     "updatedAt": "2026-09-22T16:50:47.840Z"
   },
   "requestBudget": 900,
-  "requestBudgetRemaining": 359,
+  "requestBudgetRemaining": 357,
   "harvestMode": "live",
   "usage": {
     "requests": [
@@ -1080381,10 +1080381,15 @@
         "at": "2026-10-22T08:41:28.616Z",
         "count": 2,
         "mode": "live"
+      },
+      {
+        "at": "2026-10-22T13:45:20.884Z",
+        "count": 2,
+        "mode": "live"
       }
     ],
-    "rolling30Day": 541,
-    "trackedRolling30Day": 427,
+    "rolling30Day": 543,
+    "trackedRolling30Day": 429,
     "preTrackingRolling30Day": 114
   },
   "runRequestCap": 6,
@@ -1080394,12 +1080399,12 @@
   },
   "latestFeeds": {
     "live": {
-      "generated_at": "2026-10-22T08:41:29+00:00",
+      "generated_at": "2026-10-22T13:45:23+00:00",
       "schedules": [
         {
           "sport_event": {
-            "id": "sr:sport_event:73577176",
-            "start_time": "2026-10-22T08:30:00+00:00",
+            "id": "sr:sport_event:73577180",
+            "start_time": "2026-10-22T12:00:00+00:00",
             "start_time_confirmed": true,
             "date_confirmed": true,
             "sport_event_context": {
@@ -1080470,20 +1080475,20 @@
             },
             "competitors": [
               {
-                "id": "sr:competitor:135864",
-                "name": "PSM Makassar",
+                "id": "sr:competitor:86578",
+                "name": "Madura United",
                 "country": "Indonesia",
                 "country_code": "IDN",
-                "abbreviation": "MAK",
+                "abbreviation": "MAU",
                 "qualifier": "home",
                 "gender": "male"
               },
               {
-                "id": "sr:competitor:76319",
-                "name": "Persebaya Surabaya",
+                "id": "sr:competitor:64289",
+                "name": "Persib Bandung",
                 "country": "Indonesia",
                 "country_code": "IDN",
-                "abbreviation": "PER",
+                "abbreviation": "PBA",
                 "qualifier": "away",
                 "gender": "male"
               }
@@ -1080491,8 +1080496,8 @@
             "sport_event_conditions": {
               "referees": [
                 {
-                  "id": "sr:referee:994521",
-                  "name": "Nurcahya, Yudi",
+                  "id": "sr:referee:2864393",
+                  "name": "Hidayat, Dika Rahmat",
                   "nationality": "Indonesia",
                   "country_code": "IDN",
                   "type": "main_referee"
@@ -1080512,6 +1080517,368 @@
           },
           "sport_event_status": {
             "status": "live",
+            "match_status": "2nd_half",
+            "home_score": 0,
+            "away_score": 0,
+            "period_scores": [
+              {
+                "home_score": 0,
+                "away_score": 0,
+                "type": "regular_period",
+                "number": 1
+              },
+              {
+                "home_score": 0,
+                "away_score": 0,
+                "type": "regular_period",
+                "number": 2
+              }
+            ],
+            "clock": {
+              "played": "84:57"
+            }
+          }
+        },
+        {
+          "sport_event": {
+            "id": "sr:sport_event:74090462",
+            "start_time": "2026-10-22T12:15:00+00:00",
+            "start_time_confirmed": true,
+            "date_confirmed": true,
+            "sport_event_context": {
+              "sport": {
+                "id": "sr:sport:1",
+                "name": "Soccer"
+              },
+              "category": {
+                "id": "sr:category:366",
+                "name": "Vietnam",
+                "country_code": "VNM"
+              },
+              "competition": {
+                "id": "sr:competition:626",
+                "name": "V-League 1",
+                "gender": "men"
+              },
+              "season": {
+                "id": "sr:season:145192",
+                "name": "V-League 1 26/27",
+                "start_date": "2026-09-04",
+                "end_date": "2027-05-23",
+                "year": "26/27",
+                "competition_id": "sr:competition:626"
+              },
+              "stage": {
+                "order": 1,
+                "type": "league",
+                "phase": "regular season",
+                "start_date": "2026-09-04",
+                "end_date": "2027-05-23",
+                "year": "26/27"
+              },
+              "round": {
+                "number": 5
+              },
+              "groups": [
+                {
+                  "id": "sr:league:111902",
+                  "name": "V-League 1 26/27"
+                }
+              ]
+            },
+            "coverage": {
+              "type": "sport_event",
+              "sport_event_properties": {
+                "lineups": false,
+                "formations": false,
+                "venue": false,
+                "ballspotting": false,
+                "commentary": false,
+                "fun_facts": true,
+                "game_clock": true,
+                "goal_scorers": true,
+                "goal_scorers_live": true,
+                "scores": "live",
+                "basic_play_by_play": false,
+                "basic_player_stats": false,
+                "basic_team_stats": false,
+                "deeper_play_by_play": false,
+                "deeper_player_stats": false,
+                "deeper_team_stats": false,
+                "extended_play_by_play": false,
+                "extended_player_stats": false,
+                "extended_team_stats": false
+              }
+            },
+            "competitors": [
+              {
+                "id": "sr:competitor:196371",
+                "name": "Cong An Ha Noi FC",
+                "country": "Vietnam",
+                "country_code": "VNM",
+                "abbreviation": "CON",
+                "qualifier": "home",
+                "gender": "male"
+              },
+              {
+                "id": "sr:competitor:33030",
+                "name": "Thanh Hoa FC",
+                "country": "Vietnam",
+                "country_code": "VNM",
+                "abbreviation": "TTH",
+                "qualifier": "away",
+                "gender": "male"
+              }
+            ],
+            "sport_event_conditions": {
+              "weather": {
+                "pitch_conditions": "good",
+                "overall_conditions": "medium"
+              },
+              "ground": {
+                "neutral": false
+              }
+            }
+          },
+          "sport_event_status": {
+            "status": "live",
+            "match_status": "2nd_half",
+            "home_score": 1,
+            "away_score": 1,
+            "period_scores": [
+              {
+                "home_score": 1,
+                "away_score": 0,
+                "type": "regular_period",
+                "number": 1
+              },
+              {
+                "home_score": 0,
+                "away_score": 1,
+                "type": "regular_period",
+                "number": 2
+              }
+            ],
+            "clock": {
+              "played": "72:51"
+            }
+          }
+        },
+        {
+          "sport_event": {
+            "id": "sr:sport_event:73086684",
+            "start_time": "2026-10-22T13:00:00+00:00",
+            "start_time_confirmed": true,
+            "date_confirmed": true,
+            "sport_event_context": {
+              "sport": {
+                "id": "sr:sport:1",
+                "name": "Soccer"
+              },
+              "category": {
+                "id": "sr:category:77",
+                "name": "Romania",
+                "country_code": "ROU"
+              },
+              "competition": {
+                "id": "sr:competition:562",
+                "name": "Liga 2",
+                "gender": "men"
+              },
+              "season": {
+                "id": "sr:season:144492",
+                "name": "Liga 2 26/27",
+                "start_date": "2026-08-01",
+                "end_date": "2027-05-23",
+                "year": "26/27",
+                "competition_id": "sr:competition:562"
+              },
+              "stage": {
+                "order": 1,
+                "type": "league",
+                "phase": "regular season",
+                "start_date": "2026-08-01",
+                "end_date": "2027-03-14",
+                "year": "26/27"
+              },
+              "round": {
+                "number": 11
+              },
+              "groups": [
+                {
+                  "id": "sr:league:110828",
+                  "name": "Liga 2 26/27",
+                  "group_name": "Liga 2"
+                }
+              ]
+            },
+            "coverage": {
+              "type": "sport_event",
+              "sport_event_properties": {
+                "lineups": false,
+                "formations": false,
+                "venue": false,
+                "ballspotting": false,
+                "commentary": false,
+                "fun_facts": true,
+                "game_clock": true,
+                "goal_scorers": false,
+                "goal_scorers_live": false,
+                "scores": "live",
+                "basic_play_by_play": false,
+                "basic_player_stats": false,
+                "basic_team_stats": false,
+                "deeper_play_by_play": false,
+                "deeper_player_stats": false,
+                "deeper_team_stats": false,
+                "extended_play_by_play": false,
+                "extended_player_stats": false,
+                "extended_team_stats": false
+              }
+            },
+            "competitors": [
+              {
+                "id": "sr:competitor:5335",
+                "name": "FC Bihor Oradea",
+                "country": "Romania",
+                "country_code": "ROU",
+                "abbreviation": "ORA",
+                "qualifier": "home",
+                "gender": "male"
+              },
+              {
+                "id": "sr:competitor:55371",
+                "name": "ACSM Resita",
+                "country": "Romania",
+                "country_code": "ROU",
+                "abbreviation": "RES",
+                "qualifier": "away",
+                "gender": "male"
+              }
+            ],
+            "sport_event_conditions": {
+              "ground": {
+                "neutral": false
+              }
+            }
+          },
+          "sport_event_status": {
+            "status": "live",
+            "match_status": "1st_half",
+            "home_score": 2,
+            "away_score": 0,
+            "period_scores": [
+              {
+                "home_score": 2,
+                "away_score": 0,
+                "type": "regular_period",
+                "number": 1
+              }
+            ],
+            "clock": {
+              "played": "37:18"
+            }
+          }
+        },
+        {
+          "sport_event": {
+            "id": "sr:sport_event:74726252",
+            "start_time": "2026-10-22T13:30:00+00:00",
+            "start_time_confirmed": true,
+            "date_confirmed": true,
+            "sport_event_context": {
+              "sport": {
+                "id": "sr:sport:1",
+                "name": "Soccer"
+              },
+              "category": {
+                "id": "sr:category:301",
+                "name": "Iran",
+                "country_code": "IRN"
+              },
+              "competition": {
+                "id": "sr:competition:915",
+                "name": "Pro League",
+                "gender": "men"
+              },
+              "season": {
+                "id": "sr:season:144946",
+                "name": "Pro League 26/27",
+                "start_date": "2026-08-14",
+                "end_date": "2027-06-29",
+                "year": "26/27",
+                "competition_id": "sr:competition:915"
+              },
+              "stage": {
+                "order": 1,
+                "type": "league",
+                "phase": "regular season",
+                "start_date": "2026-08-14",
+                "end_date": "2027-03-14",
+                "year": "26/27"
+              },
+              "round": {
+                "number": 10
+              },
+              "groups": [
+                {
+                  "id": "sr:league:111480",
+                  "name": "Pro League 26/27"
+                }
+              ]
+            },
+            "coverage": {
+              "type": "sport_event",
+              "sport_event_properties": {
+                "lineups": false,
+                "formations": false,
+                "venue": false,
+                "ballspotting": false,
+                "commentary": false,
+                "fun_facts": true,
+                "game_clock": true,
+                "goal_scorers": true,
+                "goal_scorers_live": true,
+                "scores": "live",
+                "basic_play_by_play": false,
+                "basic_player_stats": false,
+                "basic_team_stats": false,
+                "deeper_play_by_play": false,
+                "deeper_player_stats": false,
+                "deeper_team_stats": false,
+                "extended_play_by_play": false,
+                "extended_player_stats": false,
+                "extended_team_stats": false
+              }
+            },
+            "competitors": [
+              {
+                "id": "sr:competitor:53715",
+                "name": "Tractor Tabriz",
+                "country": "Iran",
+                "country_code": "IRN",
+                "abbreviation": "TRA",
+                "qualifier": "home",
+                "gender": "male"
+              },
+              {
+                "id": "sr:competitor:53701",
+                "name": "Sanat Naft Abadan FC",
+                "country": "Iran",
+                "country_code": "IRN",
+                "abbreviation": "SNA",
+                "qualifier": "away",
+                "gender": "male"
+              }
+            ],
+            "sport_event_conditions": {
+              "ground": {
+                "neutral": false
+              }
+            }
+          },
+          "sport_event_status": {
+            "status": "live",
             "match_status": "1st_half",
             "home_score": 0,
             "away_score": 0,
@@ -1080524,14 +1080891,14 @@
               }
             ],
             "clock": {
-              "played": "10:42"
+              "played": "13:22"
             }
           }
         },
         {
           "sport_event": {
-            "id": "sr:sport_event:73577178",
-            "start_time": "2026-10-22T08:30:00+00:00",
+            "id": "sr:sport_event:73215806",
+            "start_time": "2026-10-22T13:40:00+00:00",
             "start_time_confirmed": true,
             "date_confirmed": true,
             "sport_event_context": {
@@ -1080540,38 +1080907,38 @@
                 "name": "Soccer"
               },
               "category": {
-                "id": "sr:category:368",
-                "name": "Indonesia",
-                "country_code": "IDN"
+                "id": "sr:category:310",
+                "name": "Saudi Arabia",
+                "country_code": "SAU"
               },
               "competition": {
-                "id": "sr:competition:1015",
-                "name": "Super League",
+                "id": "sr:competition:955",
+                "name": "Saudi Pro League",
                 "gender": "men"
               },
               "season": {
-                "id": "sr:season:145226",
-                "name": "Super League 26/27",
-                "start_date": "2026-09-04",
-                "end_date": "2027-06-05",
+                "id": "sr:season:144678",
+                "name": "Saudi Pro League 26/27",
+                "start_date": "2026-08-13",
+                "end_date": "2027-05-29",
                 "year": "26/27",
-                "competition_id": "sr:competition:1015"
+                "competition_id": "sr:competition:955"
               },
               "stage": {
                 "order": 1,
                 "type": "league",
                 "phase": "regular season",
-                "start_date": "2026-09-04",
-                "end_date": "2027-06-05",
+                "start_date": "2026-08-13",
+                "end_date": "2027-05-29",
                 "year": "26/27"
               },
               "round": {
-                "number": 6
+                "number": 11
               },
               "groups": [
                 {
-                  "id": "sr:league:111954",
-                  "name": "Super League 26/27"
+                  "id": "sr:league:111044",
+                  "name": "Saudi League 26/27"
                 }
               ]
             },
@@ -1080579,11 +1080946,11 @@
               "type": "sport_event",
               "sport_event_properties": {
                 "lineups": true,
-                "formations": false,
-                "venue": false,
+                "formations": true,
+                "venue": true,
                 "lineups_availability": "pre",
-                "ballspotting": false,
-                "commentary": false,
+                "ballspotting": true,
+                "commentary": true,
                 "fun_facts": true,
                 "game_clock": true,
                 "goal_scorers": true,
@@ -1080592,9 +1080959,9 @@
                 "basic_play_by_play": true,
                 "basic_player_stats": true,
                 "basic_team_stats": true,
-                "deeper_play_by_play": false,
-                "deeper_player_stats": false,
-                "deeper_team_stats": false,
+                "deeper_play_by_play": true,
+                "deeper_player_stats": true,
+                "deeper_team_stats": true,
                 "extended_play_by_play": false,
                 "extended_player_stats": false,
                 "extended_team_stats": false
@@ -1080602,34 +1080969,36 @@
             },
             "competitors": [
               {
-                "id": "sr:competitor:135866",
-                "name": "Persik Kediri",
-                "country": "Indonesia",
-                "country_code": "IDN",
-                "abbreviation": "PKE",
+                "id": "sr:competitor:168086",
+                "name": "Al-Hazm",
+                "country": "Saudi Arabia",
+                "country_code": "SAU",
+                "abbreviation": "HAZ",
                 "qualifier": "home",
                 "gender": "male"
               },
               {
-                "id": "sr:competitor:181638",
-                "name": "PSS Sleman",
-                "country": "Indonesia",
-                "country_code": "IDN",
-                "abbreviation": "SLE",
+                "id": "sr:competitor:168094",
+                "name": "Al-Fayha FC",
+                "country": "Saudi Arabia",
+                "country_code": "SAU",
+                "abbreviation": "FAY",
                 "qualifier": "away",
                 "gender": "male"
               }
             ],
+            "venue": {
+              "id": "sr:venue:38724",
+              "name": "Al Hazem Club Stadium",
+              "capacity": 8000,
+              "city_name": "Ar Rass",
+              "city_id": "sr:city:10686",
+              "country_name": "Saudi Arabia",
+              "map_coordinates": "25.860278, 43.502222",
+              "country_code": "SAU",
+              "timezone": "Asia/Riyadh"
+            },
             "sport_event_conditions": {
-              "referees": [
-                {
-                  "id": "sr:referee:2032105",
-                  "name": "Sinaga, Axel Febrian",
-                  "nationality": "Indonesia",
-                  "country_code": "IDN",
-                  "type": "main_referee"
-                }
-              ],
               "weather": {
                 "pitch_conditions": "good",
                 "overall_conditions": "good"
@@ -1080655,15 +1081024,52 @@
                 "number": 1
               }
             ],
+            "ball_locations": [
+              {
+                "order": 1,
+                "x": 79,
+                "y": 37,
+                "qualifier": "home"
+              },
+              {
+                "order": 2,
+                "x": 100,
+                "y": 100,
+                "qualifier": "home"
+              },
+              {
+                "order": 3,
+                "x": 95,
+                "y": 50,
+                "qualifier": "away"
+              },
+              {
+                "order": 4,
+                "x": 100,
+                "y": 100,
+                "qualifier": "home"
+              },
+              {
+                "order": 5,
+                "x": 92,
+                "y": 60,
+                "qualifier": "home"
+              }
+            ],
+            "match_situation": {
+              "status": "dangerous",
+              "qualifier": "home",
+              "updated_at": "2026-10-22T13:44:52+00:00"
+            },
             "clock": {
-              "played": "10:49"
+              "played": "05:18"
             }
           }
         }
       ]
     },
     "daily": {
-      "generated_at": "2026-10-22T08:41:31+00:00",
+      "generated_at": "2026-10-22T13:45:25+00:00",
       "schedules": [
         {
           "sport_event": {
@@ -1085076,21 +1085482,25 @@
             }
           },
           "sport_event_status": {
-            "status": "live",
-            "match_status": "1st_half",
-            "home_score": 0,
+            "status": "closed",
+            "match_status": "ended",
+            "home_score": 1,
             "away_score": 0,
+            "winner_id": "sr:competitor:135864",
             "period_scores": [
               {
                 "home_score": 0,
                 "away_score": 0,
                 "type": "regular_period",
                 "number": 1
+              },
+              {
+                "home_score": 1,
+                "away_score": 0,
+                "type": "regular_period",
+                "number": 2
               }
-            ],
-            "clock": {
-              "played": "10:44"
-            }
+            ]
           }
         },
         {
@@ -1085208,21 +1085618,25 @@
             }
           },
           "sport_event_status": {
-            "status": "live",
-            "match_status": "1st_half",
-            "home_score": 1,
-            "away_score": 0,
+            "status": "closed",
+            "match_status": "ended",
+            "home_score": 2,
+            "away_score": 1,
+            "winner_id": "sr:competitor:135866",
             "period_scores": [
               {
-                "home_score": 1,
-                "away_score": 0,
+                "home_score": 2,
+                "away_score": 1,
                 "type": "regular_period",
                 "number": 1
+              },
+              {
+                "home_score": 0,
+                "away_score": 0,
+                "type": "regular_period",
+                "number": 2
               }
-            ],
-            "clock": {
-              "played": "10:51"
-            }
+            ]
           }
         },
         {
@@ -1085328,7 +1085742,25 @@
             }
           },
           "sport_event_status": {
-            "status": "not_started"
+            "status": "closed",
+            "match_status": "ended",
+            "home_score": 2,
+            "away_score": 1,
+            "winner_id": "sr:competitor:47708",
+            "period_scores": [
+              {
+                "home_score": 0,
+                "away_score": 0,
+                "type": "regular_period",
+                "number": 1
+              },
+              {
+                "home_score": 2,
+                "away_score": 1,
+                "type": "regular_period",
+                "number": 2
+              }
+            ]
           }
         },
         {
@@ -1085431,7 +1085863,25 @@
             }
           },
           "sport_event_status": {
-            "status": "not_started"
+            "status": "closed",
+            "match_status": "ended",
+            "home_score": 3,
+            "away_score": 6,
+            "winner_id": "sr:competitor:352036",
+            "period_scores": [
+              {
+                "home_score": 0,
+                "away_score": 3,
+                "type": "regular_period",
+                "number": 1
+              },
+              {
+                "home_score": 3,
+                "away_score": 3,
+                "type": "regular_period",
+                "number": 2
+              }
+            ]
           }
         },
         {
@@ -1085532,7 +1085982,25 @@
             }
           },
           "sport_event_status": {
-            "status": "not_started"
+            "status": "closed",
+            "match_status": "ended",
+            "home_score": 2,
+            "away_score": 3,
+            "winner_id": "sr:competitor:888261",
+            "period_scores": [
+              {
+                "home_score": 2,
+                "away_score": 2,
+                "type": "regular_period",
+                "number": 1
+              },
+              {
+                "home_score": 0,
+                "away_score": 1,
+                "type": "regular_period",
+                "number": 2
+              }
+            ]
           }
         },
         {
@@ -1085633,7 +1086101,25 @@
             }
           },
           "sport_event_status": {
-            "status": "not_started"
+            "status": "closed",
+            "match_status": "ended",
+            "home_score": 2,
+            "away_score": 3,
+            "winner_id": "sr:competitor:5361",
+            "period_scores": [
+              {
+                "home_score": 2,
+                "away_score": 2,
+                "type": "regular_period",
+                "number": 1
+              },
+              {
+                "home_score": 0,
+                "away_score": 1,
+                "type": "regular_period",
+                "number": 2
+              }
+            ]
           }
         },
         {
@@ -1085736,7 +1086222,25 @@
             }
           },
           "sport_event_status": {
-            "status": "not_started"
+            "status": "closed",
+            "match_status": "ended",
+            "home_score": 2,
+            "away_score": 3,
+            "winner_id": "sr:competitor:352058",
+            "period_scores": [
+              {
+                "home_score": 0,
+                "away_score": 1,
+                "type": "regular_period",
+                "number": 1
+              },
+              {
+                "home_score": 2,
+                "away_score": 2,
+                "type": "regular_period",
+                "number": 2
+              }
+            ]
           }
         },
         {
@@ -1085837,7 +1086341,25 @@
             }
           },
           "sport_event_status": {
-            "status": "not_started"
+            "status": "closed",
+            "match_status": "ended",
+            "home_score": 0,
+            "away_score": 2,
+            "winner_id": "sr:competitor:555228",
+            "period_scores": [
+              {
+                "home_score": 0,
+                "away_score": 2,
+                "type": "regular_period",
+                "number": 1
+              },
+              {
+                "home_score": 0,
+                "away_score": 0,
+                "type": "regular_period",
+                "number": 2
+              }
+            ]
           }
         },
         {
@@ -1085939,7 +1086461,25 @@
             }
           },
           "sport_event_status": {
-            "status": "not_started"
+            "status": "closed",
+            "match_status": "ended",
+            "home_score": 2,
+            "away_score": 3,
+            "winner_id": "sr:competitor:352044",
+            "period_scores": [
+              {
+                "home_score": 1,
+                "away_score": 2,
+                "type": "regular_period",
+                "number": 1
+              },
+              {
+                "home_score": 1,
+                "away_score": 1,
+                "type": "regular_period",
+                "number": 2
+              }
+            ]
           }
         },
         {
@@ -1086040,7 +1086580,25 @@
             }
           },
           "sport_event_status": {
-            "status": "not_started"
+            "status": "closed",
+            "match_status": "ended",
+            "home_score": 1,
+            "away_score": 2,
+            "winner_id": "sr:competitor:890153",
+            "period_scores": [
+              {
+                "home_score": 0,
+                "away_score": 1,
+                "type": "regular_period",
+                "number": 1
+              },
+              {
+                "home_score": 1,
+                "away_score": 1,
+                "type": "regular_period",
+                "number": 2
+              }
+            ]
           }
         },
         {
@@ -1086143,7 +1086701,25 @@
             }
           },
           "sport_event_status": {
-            "status": "not_started"
+            "status": "closed",
+            "match_status": "ended",
+            "home_score": 1,
+            "away_score": 5,
+            "winner_id": "sr:competitor:22596",
+            "period_scores": [
+              {
+                "home_score": 0,
+                "away_score": 4,
+                "type": "regular_period",
+                "number": 1
+              },
+              {
+                "home_score": 1,
+                "away_score": 1,
+                "type": "regular_period",
+                "number": 2
+              }
+            ]
           }
         },
         {
@@ -1086246,7 +1086822,25 @@
             }
           },
           "sport_event_status": {
-            "status": "not_started"
+            "status": "closed",
+            "match_status": "ended",
+            "home_score": 0,
+            "away_score": 1,
+            "winner_id": "sr:competitor:22582",
+            "period_scores": [
+              {
+                "home_score": 0,
+                "away_score": 1,
+                "type": "regular_period",
+                "number": 1
+              },
+              {
+                "home_score": 0,
+                "away_score": 0,
+                "type": "regular_period",
+                "number": 2
+              }
+            ]
           }
         },
         {
@@ -1086341,13 +1086935,35 @@
               }
             ],
             "sport_event_conditions": {
+              "weather": {
+                "pitch_conditions": "medium",
+                "overall_conditions": "medium"
+              },
               "ground": {
                 "neutral": false
               }
             }
           },
           "sport_event_status": {
-            "status": "not_started"
+            "status": "closed",
+            "match_status": "ended",
+            "home_score": 3,
+            "away_score": 2,
+            "winner_id": "sr:competitor:1116389",
+            "period_scores": [
+              {
+                "home_score": 2,
+                "away_score": 0,
+                "type": "regular_period",
+                "number": 1
+              },
+              {
+                "home_score": 1,
+                "away_score": 2,
+                "type": "regular_period",
+                "number": 2
+              }
+            ]
           }
         },
         {
@@ -1086442,13 +1087058,35 @@
               }
             ],
             "sport_event_conditions": {
+              "weather": {
+                "pitch_conditions": "good",
+                "overall_conditions": "good"
+              },
               "ground": {
                 "neutral": false
               }
             }
           },
           "sport_event_status": {
-            "status": "not_started"
+            "status": "closed",
+            "match_status": "ended",
+            "home_score": 5,
+            "away_score": 2,
+            "winner_id": "sr:competitor:1193645",
+            "period_scores": [
+              {
+                "home_score": 2,
+                "away_score": 0,
+                "type": "regular_period",
+                "number": 1
+              },
+              {
+                "home_score": 3,
+                "away_score": 2,
+                "type": "regular_period",
+                "number": 2
+              }
+            ]
           }
         },
         {
@@ -1086549,7 +1087187,25 @@
             }
           },
           "sport_event_status": {
-            "status": "not_started"
+            "status": "closed",
+            "match_status": "ended",
+            "home_score": 7,
+            "away_score": 0,
+            "winner_id": "sr:competitor:1080920",
+            "period_scores": [
+              {
+                "home_score": 3,
+                "away_score": 0,
+                "type": "regular_period",
+                "number": 1
+              },
+              {
+                "home_score": 4,
+                "away_score": 0,
+                "type": "regular_period",
+                "number": 2
+              }
+            ]
           }
         },
         {
@@ -1086650,7 +1087306,25 @@
             }
           },
           "sport_event_status": {
-            "status": "not_started"
+            "status": "closed",
+            "match_status": "ended",
+            "home_score": 3,
+            "away_score": 1,
+            "winner_id": "sr:competitor:37752",
+            "period_scores": [
+              {
+                "home_score": 0,
+                "away_score": 1,
+                "type": "regular_period",
+                "number": 1
+              },
+              {
+                "home_score": 3,
+                "away_score": 0,
+                "type": "regular_period",
+                "number": 2
+              }
+            ]
           }
         },
         {
@@ -1086745,13 +1087419,35 @@
               }
             ],
             "sport_event_conditions": {
+              "weather": {
+                "pitch_conditions": "good",
+                "overall_conditions": "medium"
+              },
               "ground": {
                 "neutral": false
               }
             }
           },
           "sport_event_status": {
-            "status": "not_started"
+            "status": "closed",
+            "match_status": "ended",
+            "home_score": 2,
+            "away_score": 3,
+            "winner_id": "sr:competitor:340516",
+            "period_scores": [
+              {
+                "home_score": 2,
+                "away_score": 2,
+                "type": "regular_period",
+                "number": 1
+              },
+              {
+                "home_score": 0,
+                "away_score": 1,
+                "type": "regular_period",
+                "number": 2
+              }
+            ]
           }
         },
         {
@@ -1086948,14 +1087644,49 @@
               }
             ],
             "sport_event_conditions": {
+              "referees": [
+                {
+                  "id": "sr:referee:2864393",
+                  "name": "Hidayat, Dika Rahmat",
+                  "nationality": "Indonesia",
+                  "country_code": "IDN",
+                  "type": "main_referee"
+                }
+              ],
+              "weather": {
+                "pitch_conditions": "good",
+                "overall_conditions": "good"
+              },
               "ground": {
                 "neutral": false
+              },
+              "lineups": {
+                "confirmed": true
               }
             }
           },
           "sport_event_status": {
-            "status": "not_started",
-            "match_status": "not_started"
+            "status": "live",
+            "match_status": "2nd_half",
+            "home_score": 0,
+            "away_score": 0,
+            "period_scores": [
+              {
+                "home_score": 0,
+                "away_score": 0,
+                "type": "regular_period",
+                "number": 1
+              },
+              {
+                "home_score": 0,
+                "away_score": 0,
+                "type": "regular_period",
+                "number": 2
+              }
+            ],
+            "clock": {
+              "played": "84:59"
+            }
           }
         },
         {
@@ -1087153,6 +1087884,10 @@
               }
             ],
             "sport_event_conditions": {
+              "weather": {
+                "pitch_conditions": "good",
+                "overall_conditions": "good"
+              },
               "ground": {
                 "neutral": false
               }
@@ -1087255,6 +1087990,10 @@
               }
             ],
             "sport_event_conditions": {
+              "weather": {
+                "pitch_conditions": "good",
+                "overall_conditions": "bad"
+              },
               "ground": {
                 "neutral": false
               }
@@ -1087459,6 +1088198,10 @@
               }
             ],
             "sport_event_conditions": {
+              "weather": {
+                "pitch_conditions": "good",
+                "overall_conditions": "good"
+              },
               "ground": {
                 "neutral": false
               }
@@ -1087561,108 +1088304,10 @@
               }
             ],
             "sport_event_conditions": {
-              "ground": {
-                "neutral": false
-              }
-            }
-          },
-          "sport_event_status": {
-            "status": "not_started"
-          }
-        },
-        {
-          "sport_event": {
-            "id": "sr:sport_event:75798540",
-            "start_time": "2026-10-22T12:00:00+00:00",
-            "start_time_confirmed": true,
-            "date_confirmed": true,
-            "sport_event_context": {
-              "sport": {
-                "id": "sr:sport:1",
-                "name": "Soccer"
+              "weather": {
+                "pitch_conditions": "good",
+                "overall_conditions": "good"
               },
-              "category": {
-                "id": "sr:category:914",
-                "name": "Ethiopia",
-                "country_code": "ETH"
-              },
-              "competition": {
-                "id": "sr:competition:33656",
-                "name": "Premier League",
-                "gender": "men",
-                "alternative_name": "Ethiopian Premier League"
-              },
-              "season": {
-                "id": "sr:season:147146",
-                "name": "Premier League 26/27",
-                "start_date": "2026-10-09",
-                "end_date": "2027-07-04",
-                "year": "26/27",
-                "competition_id": "sr:competition:33656"
-              },
-              "stage": {
-                "order": 1,
-                "type": "league",
-                "phase": "regular season",
-                "start_date": "2026-10-09",
-                "end_date": "2027-07-04",
-                "year": "26/27"
-              },
-              "round": {
-                "number": 3
-              },
-              "groups": [
-                {
-                  "id": "sr:league:114304",
-                  "name": "Premier League 26/27"
-                }
-              ]
-            },
-            "coverage": {
-              "type": "sport_event",
-              "sport_event_properties": {
-                "lineups": false,
-                "formations": false,
-                "venue": false,
-                "ballspotting": false,
-                "commentary": false,
-                "fun_facts": false,
-                "game_clock": false,
-                "goal_scorers": false,
-                "goal_scorers_live": false,
-                "scores": "post",
-                "basic_play_by_play": false,
-                "basic_player_stats": false,
-                "basic_team_stats": false,
-                "deeper_play_by_play": false,
-                "deeper_player_stats": false,
-                "deeper_team_stats": false,
-                "extended_play_by_play": false,
-                "extended_player_stats": false,
-                "extended_team_stats": false
-              }
-            },
-            "competitors": [
-              {
-                "id": "sr:competitor:381272",
-                "name": "Wolaita Dicha SC",
-                "country": "Ethiopia",
-                "country_code": "ETH",
-                "abbreviation": "WDI",
-                "qualifier": "home",
-                "gender": "male"
-              },
-              {
-                "id": "sr:competitor:558872",
-                "name": "Bahir Dar Kenema FC",
-                "country": "Ethiopia",
-                "country_code": "ETH",
-                "abbreviation": "BAH",
-                "qualifier": "away",
-                "gender": "male"
-              }
-            ],
-            "sport_event_conditions": {
               "ground": {
                 "neutral": false
               }
@@ -1087764,14 +1088409,37 @@
               }
             ],
             "sport_event_conditions": {
+              "weather": {
+                "pitch_conditions": "good",
+                "overall_conditions": "medium"
+              },
               "ground": {
                 "neutral": false
               }
             }
           },
           "sport_event_status": {
-            "status": "not_started",
-            "match_status": "not_started"
+            "status": "live",
+            "match_status": "2nd_half",
+            "home_score": 1,
+            "away_score": 1,
+            "period_scores": [
+              {
+                "home_score": 1,
+                "away_score": 0,
+                "type": "regular_period",
+                "number": 1
+              },
+              {
+                "home_score": 0,
+                "away_score": 1,
+                "type": "regular_period",
+                "number": 2
+              }
+            ],
+            "clock": {
+              "played": "72:53"
+            }
           }
         },
         {
@@ -1087866,6 +1088534,10 @@
               }
             ],
             "sport_event_conditions": {
+              "weather": {
+                "pitch_conditions": "good",
+                "overall_conditions": "good"
+              },
               "ground": {
                 "neutral": false
               }
@@ -1087967,6 +1088639,10 @@
               }
             ],
             "sport_event_conditions": {
+              "weather": {
+                "pitch_conditions": "good",
+                "overall_conditions": "good"
+              },
               "ground": {
                 "neutral": false
               }
@@ -1088068,6 +1088744,10 @@
               }
             ],
             "sport_event_conditions": {
+              "weather": {
+                "pitch_conditions": "good",
+                "overall_conditions": "good"
+              },
               "ground": {
                 "neutral": false
               }
@@ -1088169,6 +1088849,10 @@
               }
             ],
             "sport_event_conditions": {
+              "weather": {
+                "pitch_conditions": "good",
+                "overall_conditions": "medium"
+              },
               "ground": {
                 "neutral": false
               }
@@ -1088270,6 +1088954,10 @@
               }
             ],
             "sport_event_conditions": {
+              "weather": {
+                "pitch_conditions": "good",
+                "overall_conditions": "good"
+              },
               "ground": {
                 "neutral": false
               }
@@ -1088371,6 +1089059,10 @@
               }
             ],
             "sport_event_conditions": {
+              "weather": {
+                "pitch_conditions": "good",
+                "overall_conditions": "medium"
+              },
               "ground": {
                 "neutral": false
               }
@@ -1088473,6 +1089165,10 @@
               }
             ],
             "sport_event_conditions": {
+              "weather": {
+                "pitch_conditions": "medium",
+                "overall_conditions": "bad"
+              },
               "ground": {
                 "neutral": false
               }
@@ -1088581,8 +1089277,21 @@
             }
           },
           "sport_event_status": {
-            "status": "not_started",
-            "match_status": "not_started"
+            "status": "live",
+            "match_status": "1st_half",
+            "home_score": 2,
+            "away_score": 0,
+            "period_scores": [
+              {
+                "home_score": 2,
+                "away_score": 0,
+                "type": "regular_period",
+                "number": 1
+              }
+            ],
+            "clock": {
+              "played": "37:20"
+            }
           }
         },
         {
@@ -1088679,6 +1089388,10 @@
               }
             ],
             "sport_event_conditions": {
+              "weather": {
+                "pitch_conditions": "good",
+                "overall_conditions": "medium"
+              },
               "ground": {
                 "neutral": false
               }
@@ -1088781,6 +1089494,10 @@
               }
             ],
             "sport_event_conditions": {
+              "weather": {
+                "pitch_conditions": "good",
+                "overall_conditions": "medium"
+              },
               "ground": {
                 "neutral": false
               }
@@ -1088883,6 +1089600,10 @@
               }
             ],
             "sport_event_conditions": {
+              "weather": {
+                "pitch_conditions": "medium",
+                "overall_conditions": "good"
+              },
               "ground": {
                 "neutral": false
               }
@@ -1088987,6 +1089708,10 @@
               }
             ],
             "sport_event_conditions": {
+              "weather": {
+                "pitch_conditions": "good",
+                "overall_conditions": "good"
+              },
               "ground": {
                 "neutral": false
               }
@@ -1089086,6 +1089811,112 @@
                 "country": "United Arab Emirates",
                 "country_code": "ARE",
                 "abbreviation": "AJM",
+                "qualifier": "away",
+                "gender": "male"
+              }
+            ],
+            "sport_event_conditions": {
+              "weather": {
+                "pitch_conditions": "good",
+                "overall_conditions": "medium"
+              },
+              "ground": {
+                "neutral": false
+              }
+            }
+          },
+          "sport_event_status": {
+            "status": "not_started"
+          }
+        },
+        {
+          "sport_event": {
+            "id": "sr:sport_event:75798540",
+            "start_time": "2026-10-22T13:00:00+00:00",
+            "start_time_confirmed": true,
+            "date_confirmed": true,
+            "sport_event_context": {
+              "sport": {
+                "id": "sr:sport:1",
+                "name": "Soccer"
+              },
+              "category": {
+                "id": "sr:category:914",
+                "name": "Ethiopia",
+                "country_code": "ETH"
+              },
+              "competition": {
+                "id": "sr:competition:33656",
+                "name": "Premier League",
+                "gender": "men",
+                "alternative_name": "Ethiopian Premier League"
+              },
+              "season": {
+                "id": "sr:season:147146",
+                "name": "Premier League 26/27",
+                "start_date": "2026-10-09",
+                "end_date": "2027-07-04",
+                "year": "26/27",
+                "competition_id": "sr:competition:33656"
+              },
+              "stage": {
+                "order": 1,
+                "type": "league",
+                "phase": "regular season",
+                "start_date": "2026-10-09",
+                "end_date": "2027-07-04",
+                "year": "26/27"
+              },
+              "round": {
+                "number": 3
+              },
+              "groups": [
+                {
+                  "id": "sr:league:114304",
+                  "name": "Premier League 26/27"
+                }
+              ]
+            },
+            "coverage": {
+              "type": "sport_event",
+              "sport_event_properties": {
+                "lineups": false,
+                "formations": false,
+                "venue": false,
+                "ballspotting": false,
+                "commentary": false,
+                "fun_facts": false,
+                "game_clock": false,
+                "goal_scorers": false,
+                "goal_scorers_live": false,
+                "scores": "post",
+                "basic_play_by_play": false,
+                "basic_player_stats": false,
+                "basic_team_stats": false,
+                "deeper_play_by_play": false,
+                "deeper_player_stats": false,
+                "deeper_team_stats": false,
+                "extended_play_by_play": false,
+                "extended_player_stats": false,
+                "extended_team_stats": false
+              }
+            },
+            "competitors": [
+              {
+                "id": "sr:competitor:381272",
+                "name": "Wolaita Dicha SC",
+                "country": "Ethiopia",
+                "country_code": "ETH",
+                "abbreviation": "WDI",
+                "qualifier": "home",
+                "gender": "male"
+              },
+              {
+                "id": "sr:competitor:558872",
+                "name": "Bahir Dar Kenema FC",
+                "country": "Ethiopia",
+                "country_code": "ETH",
+                "abbreviation": "BAH",
                 "qualifier": "away",
                 "gender": "male"
               }
@@ -1089294,6 +1090125,10 @@
               }
             ],
             "sport_event_conditions": {
+              "weather": {
+                "pitch_conditions": "good",
+                "overall_conditions": "good"
+              },
               "ground": {
                 "neutral": false
               }
@@ -1089395,6 +1090230,10 @@
               }
             ],
             "sport_event_conditions": {
+              "weather": {
+                "pitch_conditions": "good",
+                "overall_conditions": "good"
+              },
               "ground": {
                 "neutral": false
               }
@@ -1089502,8 +1090341,21 @@
             }
           },
           "sport_event_status": {
-            "status": "not_started",
-            "match_status": "not_started"
+            "status": "live",
+            "match_status": "1st_half",
+            "home_score": 0,
+            "away_score": 0,
+            "period_scores": [
+              {
+                "home_score": 0,
+                "away_score": 0,
+                "type": "regular_period",
+                "number": 1
+              }
+            ],
+            "clock": {
+              "played": "13:24"
+            }
           }
         },
         {
@@ -1089610,14 +1090462,71 @@
               "timezone": "Asia/Riyadh"
             },
             "sport_event_conditions": {
+              "weather": {
+                "pitch_conditions": "good",
+                "overall_conditions": "good"
+              },
               "ground": {
                 "neutral": false
+              },
+              "lineups": {
+                "confirmed": true
               }
             }
           },
           "sport_event_status": {
-            "status": "not_started",
-            "match_status": "not_started"
+            "status": "live",
+            "match_status": "1st_half",
+            "home_score": 1,
+            "away_score": 0,
+            "period_scores": [
+              {
+                "home_score": 1,
+                "away_score": 0,
+                "type": "regular_period",
+                "number": 1
+              }
+            ],
+            "ball_locations": [
+              {
+                "order": 1,
+                "x": 79,
+                "y": 37,
+                "qualifier": "home"
+              },
+              {
+                "order": 2,
+                "x": 100,
+                "y": 100,
+                "qualifier": "home"
+              },
+              {
+                "order": 3,
+                "x": 95,
+                "y": 50,
+                "qualifier": "away"
+              },
+              {
+                "order": 4,
+                "x": 100,
+                "y": 100,
+                "qualifier": "home"
+              },
+              {
+                "order": 5,
+                "x": 92,
+                "y": 60,
+                "qualifier": "home"
+              }
+            ],
+            "match_situation": {
+              "status": "dangerous",
+              "qualifier": "home",
+              "updated_at": "2026-10-22T13:44:52+00:00"
+            },
+            "clock": {
+              "played": "05:20"
+            }
           }
         },
         {
@@ -1089809,6 +1090718,214 @@
                 "country": "Panama",
                 "country_code": "PAN",
                 "abbreviation": "UNI",
+                "qualifier": "away",
+                "gender": "male"
+              }
+            ],
+            "sport_event_conditions": {
+              "ground": {
+                "neutral": false
+              }
+            }
+          },
+          "sport_event_status": {
+            "status": "not_started"
+          }
+        },
+        {
+          "sport_event": {
+            "id": "sr:sport_event:75904316",
+            "start_time": "2026-10-22T14:00:00+00:00",
+            "start_time_confirmed": false,
+            "date_confirmed": false,
+            "sport_event_context": {
+              "sport": {
+                "id": "sr:sport:1",
+                "name": "Soccer"
+              },
+              "category": {
+                "id": "sr:category:352",
+                "name": "India",
+                "country_code": "IND"
+              },
+              "competition": {
+                "id": "sr:competition:48619",
+                "name": "Mizoram Premier League",
+                "gender": "men"
+              },
+              "season": {
+                "id": "sr:season:145544",
+                "name": "Mizoram Premier League 2026",
+                "start_date": "2026-08-25",
+                "end_date": "2026-11-01",
+                "year": "2026",
+                "competition_id": "sr:competition:48619"
+              },
+              "stage": {
+                "order": 2,
+                "type": "cup",
+                "phase": "playoffs",
+                "start_date": "2026-10-22",
+                "end_date": "2026-11-01",
+                "year": "2026"
+              },
+              "round": {
+                "name": "semifinal",
+                "cup_round_sport_event_number": 1,
+                "cup_round_number_of_sport_events": 2,
+                "cup_round_id": "sr:cup_round:2668332"
+              },
+              "groups": [
+                {
+                  "id": "sr:cup:201474",
+                  "name": "Mizoram Premier League 26/27, Playoffs"
+                }
+              ]
+            },
+            "coverage": {
+              "type": "sport_event",
+              "sport_event_properties": {
+                "lineups": false,
+                "formations": false,
+                "venue": false,
+                "ballspotting": false,
+                "commentary": false,
+                "fun_facts": false,
+                "game_clock": false,
+                "goal_scorers": false,
+                "goal_scorers_live": false,
+                "scores": "post",
+                "basic_play_by_play": false,
+                "basic_player_stats": false,
+                "basic_team_stats": false,
+                "deeper_play_by_play": false,
+                "deeper_player_stats": false,
+                "deeper_team_stats": false,
+                "extended_play_by_play": false,
+                "extended_player_stats": false,
+                "extended_team_stats": false
+              }
+            },
+            "competitors": [
+              {
+                "id": "sr:competitor:633526",
+                "name": "Chanmari FC",
+                "country": "India",
+                "country_code": "IND",
+                "abbreviation": "CHA",
+                "qualifier": "home",
+                "gender": "male"
+              },
+              {
+                "id": "sr:competitor:1376362",
+                "name": "Ramthar Veng FC",
+                "country": "India",
+                "country_code": "IND",
+                "abbreviation": "RAM",
+                "qualifier": "away",
+                "gender": "male"
+              }
+            ],
+            "sport_event_conditions": {
+              "ground": {
+                "neutral": false
+              }
+            }
+          },
+          "sport_event_status": {
+            "status": "not_started"
+          }
+        },
+        {
+          "sport_event": {
+            "id": "sr:sport_event:75904318",
+            "start_time": "2026-10-22T14:00:00+00:00",
+            "start_time_confirmed": false,
+            "date_confirmed": false,
+            "sport_event_context": {
+              "sport": {
+                "id": "sr:sport:1",
+                "name": "Soccer"
+              },
+              "category": {
+                "id": "sr:category:352",
+                "name": "India",
+                "country_code": "IND"
+              },
+              "competition": {
+                "id": "sr:competition:48619",
+                "name": "Mizoram Premier League",
+                "gender": "men"
+              },
+              "season": {
+                "id": "sr:season:145544",
+                "name": "Mizoram Premier League 2026",
+                "start_date": "2026-08-25",
+                "end_date": "2026-11-01",
+                "year": "2026",
+                "competition_id": "sr:competition:48619"
+              },
+              "stage": {
+                "order": 2,
+                "type": "cup",
+                "phase": "playoffs",
+                "start_date": "2026-10-22",
+                "end_date": "2026-11-01",
+                "year": "2026"
+              },
+              "round": {
+                "name": "semifinal",
+                "cup_round_sport_event_number": 1,
+                "cup_round_number_of_sport_events": 2,
+                "cup_round_id": "sr:cup_round:2668330"
+              },
+              "groups": [
+                {
+                  "id": "sr:cup:201474",
+                  "name": "Mizoram Premier League 26/27, Playoffs"
+                }
+              ]
+            },
+            "coverage": {
+              "type": "sport_event",
+              "sport_event_properties": {
+                "lineups": false,
+                "formations": false,
+                "venue": false,
+                "ballspotting": false,
+                "commentary": false,
+                "fun_facts": false,
+                "game_clock": false,
+                "goal_scorers": false,
+                "goal_scorers_live": false,
+                "scores": "post",
+                "basic_play_by_play": false,
+                "basic_player_stats": false,
+                "basic_team_stats": false,
+                "deeper_play_by_play": false,
+                "deeper_player_stats": false,
+                "deeper_team_stats": false,
+                "extended_play_by_play": false,
+                "extended_player_stats": false,
+                "extended_team_stats": false
+              }
+            },
+            "competitors": [
+              {
+                "id": "sr:competitor:396600",
+                "name": "Mizoram Police FC",
+                "country": "India",
+                "country_code": "IND",
+                "abbreviation": "MIZ",
+                "qualifier": "home",
+                "gender": "male"
+              },
+              {
+                "id": "sr:competitor:1285561",
+                "name": "Dinthar FC",
+                "country": "India",
+                "country_code": "IND",
+                "abbreviation": "DIN",
                 "qualifier": "away",
                 "gender": "male"
               }
@@ -1090067,6 +1091184,9 @@
               ],
               "ground": {
                 "neutral": false
+              },
+              "lineups": {
+                "confirmed": true
               }
             }
           },
@@ -1095749,8 +1096869,8 @@
             }
           },
           "sport_event_status": {
-            "status": "not_started",
-            "match_status": "not_started"
+            "status": "postponed",
+            "match_status": "postponed"
           }
         },
         {
@@ -1100017,6 +1101137,107 @@
         },
         {
           "sport_event": {
+            "id": "sr:sport_event:73249322",
+            "start_time": "2026-10-22T20:00:00+00:00",
+            "start_time_confirmed": true,
+            "date_confirmed": true,
+            "sport_event_context": {
+              "sport": {
+                "id": "sr:sport:1",
+                "name": "Soccer"
+              },
+              "category": {
+                "id": "sr:category:26",
+                "name": "USA",
+                "country_code": "USA"
+              },
+              "competition": {
+                "id": "sr:competition:26178",
+                "name": "NCAA Regular Season, Women",
+                "parent_id": "sr:competition:34230",
+                "gender": "women"
+              },
+              "season": {
+                "id": "sr:season:144930",
+                "name": "NCAA Regular Season, Women 2026",
+                "start_date": "2026-08-12",
+                "end_date": "2026-11-30",
+                "year": "2026",
+                "competition_id": "sr:competition:26178"
+              },
+              "stage": {
+                "order": 1,
+                "type": "league",
+                "phase": "conference",
+                "start_date": "2026-08-12",
+                "end_date": "2026-11-30",
+                "year": "2026"
+              },
+              "round": {},
+              "groups": [
+                {
+                  "id": "sr:league:111448",
+                  "name": "Atlantic 10 Conference Women 2026",
+                  "group_name": "Atlantic 10"
+                }
+              ]
+            },
+            "coverage": {
+              "type": "sport_event",
+              "sport_event_properties": {
+                "lineups": false,
+                "formations": false,
+                "venue": false,
+                "ballspotting": false,
+                "commentary": false,
+                "fun_facts": false,
+                "game_clock": false,
+                "goal_scorers": false,
+                "goal_scorers_live": false,
+                "scores": "post",
+                "basic_play_by_play": false,
+                "basic_player_stats": false,
+                "basic_team_stats": false,
+                "deeper_play_by_play": false,
+                "deeper_player_stats": false,
+                "deeper_team_stats": false,
+                "extended_play_by_play": false,
+                "extended_player_stats": false,
+                "extended_team_stats": false
+              }
+            },
+            "competitors": [
+              {
+                "id": "sr:competitor:492986",
+                "name": "Richmond Spiders",
+                "country": "USA",
+                "country_code": "USA",
+                "abbreviation": "RIC",
+                "qualifier": "home",
+                "gender": "female"
+              },
+              {
+                "id": "sr:competitor:475136",
+                "name": "VCU Rams",
+                "country": "USA",
+                "country_code": "USA",
+                "abbreviation": "VCU",
+                "qualifier": "away",
+                "gender": "female"
+              }
+            ],
+            "sport_event_conditions": {
+              "ground": {
+                "neutral": false
+              }
+            }
+          },
+          "sport_event_status": {
+            "status": "not_started"
+          }
+        },
+        {
+          "sport_event": {
             "id": "sr:sport_event:73251310",
             "start_time": "2026-10-22T20:00:00+00:00",
             "start_time_confirmed": true,
@@ -1100507,107 +1101728,6 @@
                 "abbreviation": "ELN",
                 "qualifier": "away",
                 "gender": "male"
-              }
-            ],
-            "sport_event_conditions": {
-              "ground": {
-                "neutral": false
-              }
-            }
-          },
-          "sport_event_status": {
-            "status": "not_started"
-          }
-        },
-        {
-          "sport_event": {
-            "id": "sr:sport_event:73249322",
-            "start_time": "2026-10-22T21:00:00+00:00",
-            "start_time_confirmed": true,
-            "date_confirmed": true,
-            "sport_event_context": {
-              "sport": {
-                "id": "sr:sport:1",
-                "name": "Soccer"
-              },
-              "category": {
-                "id": "sr:category:26",
-                "name": "USA",
-                "country_code": "USA"
-              },
-              "competition": {
-                "id": "sr:competition:26178",
-                "name": "NCAA Regular Season, Women",
-                "parent_id": "sr:competition:34230",
-                "gender": "women"
-              },
-              "season": {
-                "id": "sr:season:144930",
-                "name": "NCAA Regular Season, Women 2026",
-                "start_date": "2026-08-12",
-                "end_date": "2026-11-30",
-                "year": "2026",
-                "competition_id": "sr:competition:26178"
-              },
-              "stage": {
-                "order": 1,
-                "type": "league",
-                "phase": "conference",
-                "start_date": "2026-08-12",
-                "end_date": "2026-11-30",
-                "year": "2026"
-              },
-              "round": {},
-              "groups": [
-                {
-                  "id": "sr:league:111448",
-                  "name": "Atlantic 10 Conference Women 2026",
-                  "group_name": "Atlantic 10"
-                }
-              ]
-            },
-            "coverage": {
-              "type": "sport_event",
-              "sport_event_properties": {
-                "lineups": false,
-                "formations": false,
-                "venue": false,
-                "ballspotting": false,
-                "commentary": false,
-                "fun_facts": false,
-                "game_clock": false,
-                "goal_scorers": false,
-                "goal_scorers_live": false,
-                "scores": "post",
-                "basic_play_by_play": false,
-                "basic_player_stats": false,
-                "basic_team_stats": false,
-                "deeper_play_by_play": false,
-                "deeper_player_stats": false,
-                "deeper_team_stats": false,
-                "extended_play_by_play": false,
-                "extended_player_stats": false,
-                "extended_team_stats": false
-              }
-            },
-            "competitors": [
-              {
-                "id": "sr:competitor:492986",
-                "name": "Richmond Spiders",
-                "country": "USA",
-                "country_code": "USA",
-                "abbreviation": "RIC",
-                "qualifier": "home",
-                "gender": "female"
-              },
-              {
-                "id": "sr:competitor:475136",
-                "name": "VCU Rams",
-                "country": "USA",
-                "country_code": "USA",
-                "abbreviation": "VCU",
-                "qualifier": "away",
-                "gender": "female"
               }
             ],
             "sport_event_conditions": {
@@ -1103154,211 +1104274,9 @@
           "sport_event_status": {
             "status": "not_started"
           }
-        },
-        {
-          "sport_event": {
-            "id": "sr:sport_event:73251318",
-            "start_time": "2026-10-22T23:00:00+00:00",
-            "start_time_confirmed": true,
-            "date_confirmed": true,
-            "sport_event_context": {
-              "sport": {
-                "id": "sr:sport:1",
-                "name": "Soccer"
-              },
-              "category": {
-                "id": "sr:category:26",
-                "name": "USA",
-                "country_code": "USA"
-              },
-              "competition": {
-                "id": "sr:competition:26178",
-                "name": "NCAA Regular Season, Women",
-                "parent_id": "sr:competition:34230",
-                "gender": "women"
-              },
-              "season": {
-                "id": "sr:season:144930",
-                "name": "NCAA Regular Season, Women 2026",
-                "start_date": "2026-08-12",
-                "end_date": "2026-11-30",
-                "year": "2026",
-                "competition_id": "sr:competition:26178"
-              },
-              "stage": {
-                "order": 1,
-                "type": "league",
-                "phase": "conference",
-                "start_date": "2026-08-12",
-                "end_date": "2026-11-30",
-                "year": "2026"
-              },
-              "round": {},
-              "groups": [
-                {
-                  "id": "sr:league:111452",
-                  "name": "Atlantic Sun Conference Women 2026",
-                  "group_name": "Atlantic Sun"
-                }
-              ]
-            },
-            "coverage": {
-              "type": "sport_event",
-              "sport_event_properties": {
-                "lineups": false,
-                "formations": false,
-                "venue": false,
-                "ballspotting": false,
-                "commentary": false,
-                "fun_facts": false,
-                "game_clock": false,
-                "goal_scorers": false,
-                "goal_scorers_live": false,
-                "scores": "post",
-                "basic_play_by_play": false,
-                "basic_player_stats": false,
-                "basic_team_stats": false,
-                "deeper_play_by_play": false,
-                "deeper_player_stats": false,
-                "deeper_team_stats": false,
-                "extended_play_by_play": false,
-                "extended_player_stats": false,
-                "extended_team_stats": false
-              }
-            },
-            "competitors": [
-              {
-                "id": "sr:competitor:452503",
-                "name": "Lipscomb Bisons",
-                "country": "USA",
-                "country_code": "USA",
-                "abbreviation": "LIP",
-                "qualifier": "home",
-                "gender": "female"
-              },
-              {
-                "id": "sr:competitor:939573",
-                "name": "Queens (NC) Royals",
-                "country": "USA",
-                "country_code": "USA",
-                "abbreviation": "QUE",
-                "qualifier": "away",
-                "gender": "female"
-              }
-            ],
-            "sport_event_conditions": {
-              "ground": {
-                "neutral": false
-              }
-            }
-          },
-          "sport_event_status": {
-            "status": "not_started"
-          }
-        },
-        {
-          "sport_event": {
-            "id": "sr:sport_event:73251320",
-            "start_time": "2026-10-22T23:00:00+00:00",
-            "start_time_confirmed": true,
-            "date_confirmed": true,
-            "sport_event_context": {
-              "sport": {
-                "id": "sr:sport:1",
-                "name": "Soccer"
-              },
-              "category": {
-                "id": "sr:category:26",
-                "name": "USA",
-                "country_code": "USA"
-              },
-              "competition": {
-                "id": "sr:competition:26178",
-                "name": "NCAA Regular Season, Women",
-                "parent_id": "sr:competition:34230",
-                "gender": "women"
-              },
-              "season": {
-                "id": "sr:season:144930",
-                "name": "NCAA Regular Season, Women 2026",
-                "start_date": "2026-08-12",
-                "end_date": "2026-11-30",
-                "year": "2026",
-                "competition_id": "sr:competition:26178"
-              },
-              "stage": {
-                "order": 1,
-                "type": "league",
-                "phase": "conference",
-                "start_date": "2026-08-12",
-                "end_date": "2026-11-30",
-                "year": "2026"
-              },
-              "round": {},
-              "groups": [
-                {
-                  "id": "sr:league:111454",
-                  "name": "Big 12 Conference Women 2026",
-                  "group_name": "Big 12"
-                }
-              ]
-            },
-            "coverage": {
-              "type": "sport_event",
-              "sport_event_properties": {
-                "lineups": false,
-                "formations": false,
-                "venue": false,
-                "ballspotting": false,
-                "commentary": false,
-                "fun_facts": false,
-                "game_clock": false,
-                "goal_scorers": false,
-                "goal_scorers_live": false,
-                "scores": "post",
-                "basic_play_by_play": false,
-                "basic_player_stats": false,
-                "basic_team_stats": false,
-                "deeper_play_by_play": false,
-                "deeper_player_stats": false,
-                "deeper_team_stats": false,
-                "extended_play_by_play": false,
-                "extended_player_stats": false,
-                "extended_team_stats": false
-              }
-            },
-            "competitors": [
-              {
-                "id": "sr:competitor:452475",
-                "name": "Iowa State Cyclones",
-                "country": "USA",
-                "country_code": "USA",
-                "abbreviation": "IOW",
-                "qualifier": "home",
-                "gender": "female"
-              },
-              {
-                "id": "sr:competitor:452487",
-                "name": "Kansas State Wildcats",
-                "country": "USA",
-                "country_code": "USA",
-                "abbreviation": "KAN",
-                "qualifier": "away",
-                "gender": "female"
-              }
-            ],
-            "sport_event_conditions": {
-              "ground": {
-                "neutral": false
-              }
-            }
-          },
-          "sport_event_status": {
-            "status": "not_started"
-          }
         }
       ]
     },
-    "updatedAt": "2026-10-22T08:41:28.616Z"
+    "updatedAt": "2026-10-22T13:45:20.884Z"
   }
 }
