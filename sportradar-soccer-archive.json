@@ -3,14 +3,14 @@
   "provider": "Sportradar",
   "product": "Soccer API",
   "access": "trial",
-  "updatedAt": "2026-10-22T04:38:41.651Z",
+  "updatedAt": "2026-10-22T08:41:28.616Z",
   "requestsLastRun": 2,
   "leagues": {
     "laliga": {
       "league": "La Liga",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-22T04:38:41.651Z",
+      "updatedAt": "2026-10-22T08:41:28.616Z",
       "games": [
         {
           "eventId": "sr:sport_event:72477506",
@@ -340,7 +340,7 @@
       "league": "Serie A",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-22T04:38:41.651Z",
+      "updatedAt": "2026-10-22T08:41:28.616Z",
       "games": [
         {
           "eventId": "sr:sport_event:71945310",
@@ -486,7 +486,7 @@
       "league": "Bundesliga",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-22T04:38:41.651Z",
+      "updatedAt": "2026-10-22T08:41:28.616Z",
       "games": [
         {
           "eventId": "sr:sport_event:72513242",
@@ -275669,7 +275669,7 @@
       "league": "UEFA Champions League",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-22T04:38:41.651Z",
+      "updatedAt": "2026-10-22T08:41:28.616Z",
       "games": [
         {
           "eventId": "sr:sport_event:74165922",
@@ -339793,7 +339793,7 @@
       "league": "MLS",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-22T04:38:41.651Z",
+      "updatedAt": "2026-10-22T08:41:28.616Z",
       "games": [
         {
           "eventId": "sr:sport_event:66299652",
@@ -962151,14 +962151,14 @@
       "league": "PFL",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-22T04:38:41.651Z",
+      "updatedAt": "2026-10-22T08:41:28.616Z",
       "games": []
     },
     "jamaica_pl": {
       "league": "Jamaican Premier League",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-22T04:38:41.651Z",
+      "updatedAt": "2026-10-22T08:41:28.616Z",
       "games": [
         {
           "eventId": "sr:sport_event:74980116",
@@ -991959,7 +991959,7 @@
       "league": "Mizoram Premier League",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-22T04:38:41.651Z",
+      "updatedAt": "2026-10-22T08:41:28.616Z",
       "games": [
         {
           "eventId": "sr:sport_event:75074670",
@@ -992105,7 +992105,7 @@
       "league": "Primera Division, Reserves",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-22T04:38:41.651Z",
+      "updatedAt": "2026-10-22T08:41:28.616Z",
       "games": [
         {
           "eventId": "sr:sport_event:75601346",
@@ -992136,7 +992136,7 @@
       "league": "UEFA Champions League Women",
       "sourceName": "Sportradar Soccer API",
       "sourceUrl": "https://developer.sportradar.com/soccer",
-      "updatedAt": "2026-10-22T04:38:41.651Z",
+      "updatedAt": "2026-10-22T08:41:28.616Z",
       "games": [],
       "competitionId": "sr:competition:696",
       "competition": {
@@ -1079628,7 +1079628,7 @@
     "updatedAt": "2026-09-22T16:50:47.840Z"
   },
   "requestBudget": 900,
-  "requestBudgetRemaining": 361,
+  "requestBudgetRemaining": 359,
   "harvestMode": "live",
   "usage": {
     "requests": [
@@ -1080376,10 +1080376,15 @@
         "at": "2026-10-22T04:38:41.651Z",
         "count": 2,
         "mode": "live"
+      },
+      {
+        "at": "2026-10-22T08:41:28.616Z",
+        "count": 2,
+        "mode": "live"
       }
     ],
-    "rolling30Day": 539,
-    "trackedRolling30Day": 425,
+    "rolling30Day": 541,
+    "trackedRolling30Day": 427,
     "preTrackingRolling30Day": 114
   },
   "runRequestCap": 6,
@@ -1080389,12 +1080394,12 @@
   },
   "latestFeeds": {
     "live": {
-      "generated_at": "2026-10-22T04:38:41+00:00",
+      "generated_at": "2026-10-22T08:41:29+00:00",
       "schedules": [
         {
           "sport_event": {
-            "id": "sr:sport_event:72055258",
-            "start_time": "2026-10-22T03:10:00+00:00",
+            "id": "sr:sport_event:73577176",
+            "start_time": "2026-10-22T08:30:00+00:00",
             "start_time_confirmed": true,
             "date_confirmed": true,
             "sport_event_context": {
@@ -1080403,40 +1080408,38 @@
                 "name": "Soccer"
               },
               "category": {
-                "id": "sr:category:12",
-                "name": "Mexico",
-                "country_code": "MEX"
+                "id": "sr:category:368",
+                "name": "Indonesia",
+                "country_code": "IDN"
               },
               "competition": {
-                "id": "sr:competition:27464",
-                "name": "Liga MX",
-                "parent_id": "sr:competition:352",
+                "id": "sr:competition:1015",
+                "name": "Super League",
                 "gender": "men"
               },
               "season": {
-                "id": "sr:season:142544",
-                "name": "Liga MX 26/27",
-                "start_date": "2026-07-17",
-                "end_date": "2027-05-31",
-                "year": "2026",
-                "competition_id": "sr:competition:27464"
+                "id": "sr:season:145226",
+                "name": "Super League 26/27",
+                "start_date": "2026-09-04",
+                "end_date": "2027-06-05",
+                "year": "26/27",
+                "competition_id": "sr:competition:1015"
               },
               "stage": {
                 "order": 1,
                 "type": "league",
                 "phase": "regular season",
-                "start_date": "2026-07-17",
-                "end_date": "2026-11-23",
-                "year": "2026"
+                "start_date": "2026-09-04",
+                "end_date": "2027-06-05",
+                "year": "26/27"
               },
               "round": {
-                "number": 13
+                "number": 6
               },
               "groups": [
                 {
-                  "id": "sr:league:108522",
-                  "name": "Liga MX 26/27, Apertura",
-                  "group_name": "Apertura"
+                  "id": "sr:league:111954",
+                  "name": "Super League 26/27"
                 }
               ]
             },
@@ -1080444,11 +1080447,11 @@
               "type": "sport_event",
               "sport_event_properties": {
                 "lineups": true,
-                "formations": true,
-                "venue": true,
+                "formations": false,
+                "venue": false,
                 "lineups_availability": "pre",
-                "ballspotting": true,
-                "commentary": true,
+                "ballspotting": false,
+                "commentary": false,
                 "fun_facts": true,
                 "game_clock": true,
                 "goal_scorers": true,
@@ -1080457,65 +1080460,47 @@
                 "basic_play_by_play": true,
                 "basic_player_stats": true,
                 "basic_team_stats": true,
-                "deeper_play_by_play": true,
-                "deeper_player_stats": true,
-                "deeper_team_stats": true,
-                "extended_play_by_play": true,
-                "extended_player_stats": true,
-                "extended_team_stats": true
+                "deeper_play_by_play": false,
+                "deeper_player_stats": false,
+                "deeper_team_stats": false,
+                "extended_play_by_play": false,
+                "extended_player_stats": false,
+                "extended_team_stats": false
               }
             },
             "competitors": [
               {
-                "id": "sr:competitor:1936",
-                "name": "CF Pachuca",
-                "country": "Mexico",
-                "country_code": "MEX",
-                "abbreviation": "PAC",
+                "id": "sr:competitor:135864",
+                "name": "PSM Makassar",
+                "country": "Indonesia",
+                "country_code": "IDN",
+                "abbreviation": "MAK",
                 "qualifier": "home",
                 "gender": "male"
               },
               {
-                "id": "sr:competitor:1947",
-                "name": "CF Cruz Azul",
-                "country": "Mexico",
-                "country_code": "MEX",
-                "abbreviation": "CRA",
+                "id": "sr:competitor:76319",
+                "name": "Persebaya Surabaya",
+                "country": "Indonesia",
+                "country_code": "IDN",
+                "abbreviation": "PER",
                 "qualifier": "away",
                 "gender": "male"
-              }
-            ],
-            "venue": {
-              "id": "sr:venue:2044",
-              "name": "Estadio Hidalgo",
-              "capacity": 30000,
-              "city_name": "Pachuca de Soto",
-              "city_id": "sr:city:1004",
-              "country_name": "Mexico",
-              "map_coordinates": "20.105331, -98.756706",
-              "country_code": "MEX",
-              "timezone": "America/Mexico_City"
-            },
-            "channels": [
-              {
-                "name": "ViX+",
-                "country": "United States",
-                "country_code": "USA"
               }
             ],
             "sport_event_conditions": {
               "referees": [
                 {
-                  "id": "sr:referee:1959395",
-                  "name": "Huitron, Daniel Quintero",
-                  "nationality": "Mexico",
-                  "country_code": "MEX",
+                  "id": "sr:referee:994521",
+                  "name": "Nurcahya, Yudi",
+                  "nationality": "Indonesia",
+                  "country_code": "IDN",
                   "type": "main_referee"
                 }
               ],
               "weather": {
                 "pitch_conditions": "good",
-                "overall_conditions": "bad"
+                "overall_conditions": "good"
               },
               "ground": {
                 "neutral": false
@@ -1080527,69 +1080512,26 @@
           },
           "sport_event_status": {
             "status": "live",
-            "match_status": "2nd_half",
-            "home_score": 1,
-            "away_score": 1,
+            "match_status": "1st_half",
+            "home_score": 0,
+            "away_score": 0,
             "period_scores": [
-              {
-                "home_score": 1,
-                "away_score": 1,
-                "type": "regular_period",
-                "number": 1
-              },
               {
                 "home_score": 0,
                 "away_score": 0,
                 "type": "regular_period",
-                "number": 2
+                "number": 1
               }
             ],
-            "ball_locations": [
-              {
-                "order": 1,
-                "x": 15,
-                "y": 13,
-                "qualifier": "away"
-              },
-              {
-                "order": 2,
-                "x": 15,
-                "y": 13,
-                "qualifier": "away"
-              },
-              {
-                "order": 3,
-                "x": 17,
-                "y": 20,
-                "qualifier": "away"
-              },
-              {
-                "order": 4,
-                "x": 5,
-                "y": 50,
-                "qualifier": "home"
-              },
-              {
-                "order": 5,
-                "x": 12,
-                "y": 6,
-                "qualifier": "away"
-              }
-            ],
-            "match_situation": {
-              "status": "safe",
-              "qualifier": "home",
-              "updated_at": "2026-10-22T04:38:40+00:00"
-            },
             "clock": {
-              "played": "65:01"
+              "played": "10:42"
             }
           }
         },
         {
           "sport_event": {
-            "id": "sr:sport_event:72055260",
-            "start_time": "2026-10-22T03:10:00+00:00",
+            "id": "sr:sport_event:73577178",
+            "start_time": "2026-10-22T08:30:00+00:00",
             "start_time_confirmed": true,
             "date_confirmed": true,
             "sport_event_context": {
@@ -1080598,40 +1080540,38 @@
                 "name": "Soccer"
               },
               "category": {
-                "id": "sr:category:12",
-                "name": "Mexico",
-                "country_code": "MEX"
+                "id": "sr:category:368",
+                "name": "Indonesia",
+                "country_code": "IDN"
               },
               "competition": {
-                "id": "sr:competition:27464",
-                "name": "Liga MX",
-                "parent_id": "sr:competition:352",
+                "id": "sr:competition:1015",
+                "name": "Super League",
                 "gender": "men"
               },
               "season": {
-                "id": "sr:season:142544",
-                "name": "Liga MX 26/27",
-                "start_date": "2026-07-17",
-                "end_date": "2027-05-31",
-                "year": "2026",
-                "competition_id": "sr:competition:27464"
+                "id": "sr:season:145226",
+                "name": "Super League 26/27",
+                "start_date": "2026-09-04",
+                "end_date": "2027-06-05",
+                "year": "26/27",
+                "competition_id": "sr:competition:1015"
               },
               "stage": {
                 "order": 1,
                 "type": "league",
                 "phase": "regular season",
-                "start_date": "2026-07-17",
-                "end_date": "2026-11-23",
-                "year": "2026"
+                "start_date": "2026-09-04",
+                "end_date": "2027-06-05",
+                "year": "26/27"
               },
               "round": {
-                "number": 13
+                "number": 6
               },
               "groups": [
                 {
-                  "id": "sr:league:108522",
-                  "name": "Liga MX 26/27, Apertura",
-                  "group_name": "Apertura"
+                  "id": "sr:league:111954",
+                  "name": "Super League 26/27"
                 }
               ]
             },
@@ -1080639,11 +1080579,11 @@
               "type": "sport_event",
               "sport_event_properties": {
                 "lineups": true,
-                "formations": true,
-                "venue": true,
+                "formations": false,
+                "venue": false,
                 "lineups_availability": "pre",
-                "ballspotting": true,
-                "commentary": true,
+                "ballspotting": false,
+                "commentary": false,
                 "fun_facts": true,
                 "game_clock": true,
                 "goal_scorers": true,
@@ -1080652,66 +1080592,47 @@
                 "basic_play_by_play": true,
                 "basic_player_stats": true,
                 "basic_team_stats": true,
-                "deeper_play_by_play": true,
-                "deeper_player_stats": true,
-                "deeper_team_stats": true,
-                "extended_play_by_play": true,
-                "extended_player_stats": true,
-                "extended_team_stats": true
+                "deeper_play_by_play": false,
+                "deeper_player_stats": false,
+                "deeper_team_stats": false,
+                "extended_play_by_play": false,
+                "extended_player_stats": false,
+                "extended_team_stats": false
               }
             },
             "competitors": [
               {
-                "id": "sr:competitor:1948",
-                "name": "Club Santos Laguna",
-                "country": "Mexico",
-                "country_code": "MEX",
-                "abbreviation": "SLA",
+                "id": "sr:competitor:135866",
+                "name": "Persik Kediri",
+                "country": "Indonesia",
+                "country_code": "IDN",
+                "abbreviation": "PKE",
                 "qualifier": "home",
                 "gender": "male"
               },
               {
-                "id": "sr:competitor:1933",
-                "name": "Pumas UNAM",
-                "country": "Mexico",
-                "country_code": "MEX",
-                "abbreviation": "PUM",
+                "id": "sr:competitor:181638",
+                "name": "PSS Sleman",
+                "country": "Indonesia",
+                "country_code": "IDN",
+                "abbreviation": "SLE",
                 "qualifier": "away",
                 "gender": "male"
-              }
-            ],
-            "venue": {
-              "id": "sr:venue:2400",
-              "name": "Estadio TSM Corona",
-              "capacity": 30000,
-              "city_name": "Torreon",
-              "city_id": "sr:city:1347",
-              "country_name": "Mexico",
-              "map_coordinates": "25.628754, -103.380068",
-              "country_code": "MEX",
-              "timezone": "America/Mexico_City"
-            },
-            "channels": [
-              {
-                "name": "TUDN",
-                "url": "https://www.tudn.com/futbol/liga-mx",
-                "country": "United States",
-                "country_code": "USA"
               }
             ],
             "sport_event_conditions": {
               "referees": [
                 {
-                  "id": "sr:referee:1672455",
-                  "name": "Pacheco Larios, Guillermo",
-                  "nationality": "Mexico",
-                  "country_code": "MEX",
+                  "id": "sr:referee:2032105",
+                  "name": "Sinaga, Axel Febrian",
+                  "nationality": "Indonesia",
+                  "country_code": "IDN",
                   "type": "main_referee"
                 }
               ],
               "weather": {
                 "pitch_conditions": "good",
-                "overall_conditions": "medium"
+                "overall_conditions": "good"
               },
               "ground": {
                 "neutral": false
@@ -1080723,7 +1080644,7 @@
           },
           "sport_event_status": {
             "status": "live",
-            "match_status": "2nd_half",
+            "match_status": "1st_half",
             "home_score": 1,
             "away_score": 0,
             "period_scores": [
@@ -1080732,60 +1080653,17 @@
                 "away_score": 0,
                 "type": "regular_period",
                 "number": 1
-              },
-              {
-                "home_score": 0,
-                "away_score": 0,
-                "type": "regular_period",
-                "number": 2
               }
             ],
-            "ball_locations": [
-              {
-                "order": 1,
-                "x": 56,
-                "y": 23,
-                "qualifier": "away"
-              },
-              {
-                "order": 2,
-                "x": 67,
-                "y": 62,
-                "qualifier": "away"
-              },
-              {
-                "order": 3,
-                "x": 58,
-                "y": 82,
-                "qualifier": "away"
-              },
-              {
-                "order": 4,
-                "x": 67,
-                "y": 58,
-                "qualifier": "away"
-              },
-              {
-                "order": 5,
-                "x": 62,
-                "y": 24,
-                "qualifier": "away"
-              }
-            ],
-            "match_situation": {
-              "status": "safe",
-              "qualifier": "home",
-              "updated_at": "2026-10-22T04:37:48+00:00"
-            },
             "clock": {
-              "played": "60:31"
+              "played": "10:49"
             }
           }
         }
       ]
     },
     "daily": {
-      "generated_at": "2026-10-22T04:38:44+00:00",
+      "generated_at": "2026-10-22T08:41:31+00:00",
       "schedules": [
         {
           "sport_event": {
@@ -1082507,6 +1082385,15 @@
               }
             ],
             "sport_event_conditions": {
+              "referees": [
+                {
+                  "id": "sr:referee:2594135",
+                  "name": "Vizcarra Armenta, Joaquin Alberto",
+                  "nationality": "Mexico",
+                  "country_code": "MEX",
+                  "type": "main_referee"
+                }
+              ],
               "weather": {
                 "pitch_conditions": "good",
                 "overall_conditions": "medium"
@@ -1083615,7 +1083502,11 @@
             }
           },
           "sport_event_status": {
-            "status": "not_started"
+            "status": "closed",
+            "match_status": "ended",
+            "home_score": 4,
+            "away_score": 0,
+            "winner_id": "sr:competitor:452303"
           }
         },
         {
@@ -1083925,7 +1083816,11 @@
             }
           },
           "sport_event_status": {
-            "status": "not_started"
+            "status": "closed",
+            "match_status": "ended",
+            "home_score": 3,
+            "away_score": 2,
+            "winner_id": "sr:competitor:456885"
           }
         },
         {
@@ -1084018,6 +1083913,7 @@
                 "gender": "male"
               }
             ],
+            "replaced_by": "sr:sport_event:75892760",
             "sport_event_conditions": {
               "ground": {
                 "neutral": false
@@ -1084025,7 +1083921,8 @@
             }
           },
           "sport_event_status": {
-            "status": "not_started"
+            "status": "postponed",
+            "match_status": "postponed"
           }
         },
         {
@@ -1084126,7 +1084023,11 @@
             }
           },
           "sport_event_status": {
-            "status": "not_started"
+            "status": "closed",
+            "match_status": "ended",
+            "home_score": 2,
+            "away_score": 0,
+            "winner_id": "sr:competitor:460717"
           }
         },
         {
@@ -1084226,7 +1084127,11 @@
             }
           },
           "sport_event_status": {
-            "status": "not_started"
+            "status": "closed",
+            "match_status": "ended",
+            "home_score": 8,
+            "away_score": 1,
+            "winner_id": "sr:competitor:460617"
           }
         },
         {
@@ -1084536,7 +1084441,11 @@
             }
           },
           "sport_event_status": {
-            "status": "not_started"
+            "status": "closed",
+            "match_status": "ended",
+            "home_score": 2,
+            "away_score": 2,
+            "match_tie": true
           }
         },
         {
@@ -1084800,10 +1084709,11 @@
             }
           },
           "sport_event_status": {
-            "status": "live",
-            "match_status": "2nd_half",
+            "status": "closed",
+            "match_status": "ended",
             "home_score": 1,
-            "away_score": 1,
+            "away_score": 2,
+            "winner_id": "sr:competitor:1947",
             "period_scores": [
               {
                 "home_score": 1,
@@ -1084813,7 +1084723,7 @@
               },
               {
                 "home_score": 0,
-                "away_score": 0,
+                "away_score": 1,
                 "type": "regular_period",
                 "number": 2
               }
@@ -1084821,42 +1084731,39 @@
             "ball_locations": [
               {
                 "order": 1,
-                "x": 15,
-                "y": 13,
-                "qualifier": "away"
+                "x": 33,
+                "y": 64,
+                "qualifier": "home"
               },
               {
                 "order": 2,
-                "x": 15,
-                "y": 13,
-                "qualifier": "away"
+                "x": 42,
+                "y": 65,
+                "qualifier": "home"
               },
               {
                 "order": 3,
-                "x": 17,
-                "y": 20,
+                "x": 13,
+                "y": 100,
                 "qualifier": "away"
               },
               {
                 "order": 4,
-                "x": 5,
-                "y": 50,
-                "qualifier": "home"
+                "x": 89,
+                "y": 74,
+                "qualifier": "away"
               },
               {
                 "order": 5,
-                "x": 12,
-                "y": 6,
-                "qualifier": "away"
+                "x": 64,
+                "y": 63,
+                "qualifier": "home"
               }
             ],
             "match_situation": {
               "status": "safe",
-              "qualifier": "home",
-              "updated_at": "2026-10-22T04:38:41+00:00"
-            },
-            "clock": {
-              "played": "65:04"
+              "qualifier": "away",
+              "updated_at": "2026-10-22T05:30:26+00:00"
             }
           }
         },
@@ -1084996,10 +1084903,11 @@
             }
           },
           "sport_event_status": {
-            "status": "live",
-            "match_status": "2nd_half",
-            "home_score": 1,
+            "status": "closed",
+            "match_status": "ended",
+            "home_score": 2,
             "away_score": 0,
+            "winner_id": "sr:competitor:1948",
             "period_scores": [
               {
                 "home_score": 1,
@@ -1085008,7 +1084916,7 @@
                 "number": 1
               },
               {
-                "home_score": 0,
+                "home_score": 1,
                 "away_score": 0,
                 "type": "regular_period",
                 "number": 2
@@ -1085017,42 +1084925,39 @@
             "ball_locations": [
               {
                 "order": 1,
-                "x": 56,
-                "y": 23,
+                "x": 26,
+                "y": 11,
                 "qualifier": "away"
               },
               {
                 "order": 2,
-                "x": 67,
-                "y": 62,
-                "qualifier": "away"
+                "x": 34,
+                "y": 28,
+                "qualifier": "home"
               },
               {
                 "order": 3,
-                "x": 58,
-                "y": 82,
-                "qualifier": "away"
+                "x": 33,
+                "y": 44,
+                "qualifier": "home"
               },
               {
                 "order": 4,
-                "x": 67,
-                "y": 58,
-                "qualifier": "away"
+                "x": 36,
+                "y": 26,
+                "qualifier": "home"
               },
               {
                 "order": 5,
-                "x": 62,
-                "y": 24,
-                "qualifier": "away"
+                "x": 14,
+                "y": 46,
+                "qualifier": "home"
               }
             ],
             "match_situation": {
-              "status": "attack",
+              "status": "safe",
               "qualifier": "home",
-              "updated_at": "2026-10-22T04:38:44+00:00"
-            },
-            "clock": {
-              "played": "60:34"
+              "updated_at": "2026-10-22T05:22:34+00:00"
             }
           }
         },
@@ -1085149,14 +1085054,43 @@
               }
             ],
             "sport_event_conditions": {
+              "referees": [
+                {
+                  "id": "sr:referee:994521",
+                  "name": "Nurcahya, Yudi",
+                  "nationality": "Indonesia",
+                  "country_code": "IDN",
+                  "type": "main_referee"
+                }
+              ],
+              "weather": {
+                "pitch_conditions": "good",
+                "overall_conditions": "good"
+              },
               "ground": {
                 "neutral": false
+              },
+              "lineups": {
+                "confirmed": true
               }
             }
           },
           "sport_event_status": {
-            "status": "not_started",
-            "match_status": "not_started"
+            "status": "live",
+            "match_status": "1st_half",
+            "home_score": 0,
+            "away_score": 0,
+            "period_scores": [
+              {
+                "home_score": 0,
+                "away_score": 0,
+                "type": "regular_period",
+                "number": 1
+              }
+            ],
+            "clock": {
+              "played": "10:44"
+            }
           }
         },
         {
@@ -1085252,14 +1085186,43 @@
               }
             ],
             "sport_event_conditions": {
+              "referees": [
+                {
+                  "id": "sr:referee:2032105",
+                  "name": "Sinaga, Axel Febrian",
+                  "nationality": "Indonesia",
+                  "country_code": "IDN",
+                  "type": "main_referee"
+                }
+              ],
+              "weather": {
+                "pitch_conditions": "good",
+                "overall_conditions": "good"
+              },
               "ground": {
                 "neutral": false
+              },
+              "lineups": {
+                "confirmed": true
               }
             }
           },
           "sport_event_status": {
-            "status": "not_started",
-            "match_status": "not_started"
+            "status": "live",
+            "match_status": "1st_half",
+            "home_score": 1,
+            "away_score": 0,
+            "period_scores": [
+              {
+                "home_score": 1,
+                "away_score": 0,
+                "type": "regular_period",
+                "number": 1
+              }
+            ],
+            "clock": {
+              "played": "10:51"
+            }
           }
         },
         {
@@ -1085355,6 +1085318,10 @@
               }
             ],
             "sport_event_conditions": {
+              "weather": {
+                "pitch_conditions": "medium",
+                "overall_conditions": "bad"
+              },
               "ground": {
                 "neutral": false
               }
@@ -1087197,6 +1087164,108 @@
         },
         {
           "sport_event": {
+            "id": "sr:sport_event:74583896",
+            "start_time": "2026-10-22T12:00:00+00:00",
+            "start_time_confirmed": true,
+            "date_confirmed": true,
+            "sport_event_context": {
+              "sport": {
+                "id": "sr:sport:1",
+                "name": "Soccer"
+              },
+              "category": {
+                "id": "sr:category:78",
+                "name": "Bulgaria",
+                "country_code": "BGR"
+              },
+              "competition": {
+                "id": "sr:competition:47656",
+                "name": "Treta Liga",
+                "gender": "men"
+              },
+              "season": {
+                "id": "sr:season:144056",
+                "name": "Treta Liga 26/27",
+                "start_date": "2026-08-01",
+                "end_date": "2027-05-30",
+                "year": "26/27",
+                "competition_id": "sr:competition:47656"
+              },
+              "stage": {
+                "order": 1,
+                "type": "league",
+                "phase": "regular season",
+                "start_date": "2026-08-01",
+                "end_date": "2027-05-30",
+                "year": "26/27"
+              },
+              "round": {
+                "number": 10
+              },
+              "groups": [
+                {
+                  "id": "sr:league:110194",
+                  "name": "Treta Liga 26/27, Group North West",
+                  "group_name": "Group North West"
+                }
+              ]
+            },
+            "coverage": {
+              "type": "sport_event",
+              "sport_event_properties": {
+                "lineups": false,
+                "formations": false,
+                "venue": false,
+                "ballspotting": false,
+                "commentary": false,
+                "fun_facts": false,
+                "game_clock": false,
+                "goal_scorers": false,
+                "goal_scorers_live": false,
+                "scores": "post",
+                "basic_play_by_play": false,
+                "basic_player_stats": false,
+                "basic_team_stats": false,
+                "deeper_play_by_play": false,
+                "deeper_player_stats": false,
+                "deeper_team_stats": false,
+                "extended_play_by_play": false,
+                "extended_player_stats": false,
+                "extended_team_stats": false
+              }
+            },
+            "competitors": [
+              {
+                "id": "sr:competitor:731925",
+                "name": "Etar Veliko Tarnovo II",
+                "country": "Bulgaria",
+                "country_code": "BGR",
+                "abbreviation": "ETA",
+                "qualifier": "home",
+                "gender": "male"
+              },
+              {
+                "id": "sr:competitor:233038",
+                "name": "FK Levski 2007",
+                "country": "Bulgaria",
+                "country_code": "BGR",
+                "abbreviation": "LEV",
+                "qualifier": "away",
+                "gender": "male"
+              }
+            ],
+            "sport_event_conditions": {
+              "ground": {
+                "neutral": false
+              }
+            }
+          },
+          "sport_event_status": {
+            "status": "not_started"
+          }
+        },
+        {
+          "sport_event": {
             "id": "sr:sport_event:74583900",
             "start_time": "2026-10-22T12:00:00+00:00",
             "start_time_confirmed": true,
@@ -1088825,108 +1088894,6 @@
         },
         {
           "sport_event": {
-            "id": "sr:sport_event:74583896",
-            "start_time": "2026-10-22T13:00:00+00:00",
-            "start_time_confirmed": true,
-            "date_confirmed": true,
-            "sport_event_context": {
-              "sport": {
-                "id": "sr:sport:1",
-                "name": "Soccer"
-              },
-              "category": {
-                "id": "sr:category:78",
-                "name": "Bulgaria",
-                "country_code": "BGR"
-              },
-              "competition": {
-                "id": "sr:competition:47656",
-                "name": "Treta Liga",
-                "gender": "men"
-              },
-              "season": {
-                "id": "sr:season:144056",
-                "name": "Treta Liga 26/27",
-                "start_date": "2026-08-01",
-                "end_date": "2027-05-30",
-                "year": "26/27",
-                "competition_id": "sr:competition:47656"
-              },
-              "stage": {
-                "order": 1,
-                "type": "league",
-                "phase": "regular season",
-                "start_date": "2026-08-01",
-                "end_date": "2027-05-30",
-                "year": "26/27"
-              },
-              "round": {
-                "number": 10
-              },
-              "groups": [
-                {
-                  "id": "sr:league:110194",
-                  "name": "Treta Liga 26/27, Group North West",
-                  "group_name": "Group North West"
-                }
-              ]
-            },
-            "coverage": {
-              "type": "sport_event",
-              "sport_event_properties": {
-                "lineups": false,
-                "formations": false,
-                "venue": false,
-                "ballspotting": false,
-                "commentary": false,
-                "fun_facts": false,
-                "game_clock": false,
-                "goal_scorers": false,
-                "goal_scorers_live": false,
-                "scores": "post",
-                "basic_play_by_play": false,
-                "basic_player_stats": false,
-                "basic_team_stats": false,
-                "deeper_play_by_play": false,
-                "deeper_player_stats": false,
-                "deeper_team_stats": false,
-                "extended_play_by_play": false,
-                "extended_player_stats": false,
-                "extended_team_stats": false
-              }
-            },
-            "competitors": [
-              {
-                "id": "sr:competitor:731925",
-                "name": "Etar Veliko Tarnovo II",
-                "country": "Bulgaria",
-                "country_code": "BGR",
-                "abbreviation": "ETA",
-                "qualifier": "home",
-                "gender": "male"
-              },
-              {
-                "id": "sr:competitor:233038",
-                "name": "FK Levski 2007",
-                "country": "Bulgaria",
-                "country_code": "BGR",
-                "abbreviation": "LEV",
-                "qualifier": "away",
-                "gender": "male"
-              }
-            ],
-            "sport_event_conditions": {
-              "ground": {
-                "neutral": false
-              }
-            }
-          },
-          "sport_event_status": {
-            "status": "not_started"
-          }
-        },
-        {
-          "sport_event": {
             "id": "sr:sport_event:75516404",
             "start_time": "2026-10-22T13:00:00+00:00",
             "start_time_confirmed": true,
@@ -1089221,6 +1089188,107 @@
                 "country": "Ethiopia",
                 "country_code": "ETH",
                 "abbreviation": "DEF",
+                "qualifier": "away",
+                "gender": "male"
+              }
+            ],
+            "sport_event_conditions": {
+              "ground": {
+                "neutral": false
+              }
+            }
+          },
+          "sport_event_status": {
+            "status": "not_started"
+          }
+        },
+        {
+          "sport_event": {
+            "id": "sr:sport_event:75893046",
+            "start_time": "2026-10-22T13:00:00+00:00",
+            "start_time_confirmed": true,
+            "date_confirmed": true,
+            "sport_event_context": {
+              "sport": {
+                "id": "sr:sport:1",
+                "name": "Soccer"
+              },
+              "category": {
+                "id": "sr:category:806",
+                "name": "Mozambique",
+                "country_code": "MOZ"
+              },
+              "competition": {
+                "id": "sr:competition:20576",
+                "name": "Mocambola",
+                "gender": "men"
+              },
+              "season": {
+                "id": "sr:season:141340",
+                "name": "Mocambola 2026",
+                "start_date": "2026-05-01",
+                "end_date": "2026-12-28",
+                "year": "2026",
+                "competition_id": "sr:competition:20576"
+              },
+              "stage": {
+                "order": 1,
+                "type": "league",
+                "phase": "regular season",
+                "start_date": "2026-05-01",
+                "end_date": "2026-12-28",
+                "year": "2026"
+              },
+              "round": {
+                "number": 25
+              },
+              "groups": [
+                {
+                  "id": "sr:league:107152",
+                  "name": "Mocambola 2026"
+                }
+              ]
+            },
+            "coverage": {
+              "type": "sport_event",
+              "sport_event_properties": {
+                "lineups": false,
+                "formations": false,
+                "venue": false,
+                "ballspotting": false,
+                "commentary": false,
+                "fun_facts": false,
+                "game_clock": false,
+                "goal_scorers": false,
+                "goal_scorers_live": false,
+                "scores": "post",
+                "basic_play_by_play": false,
+                "basic_player_stats": false,
+                "basic_team_stats": false,
+                "deeper_play_by_play": false,
+                "deeper_player_stats": false,
+                "deeper_team_stats": false,
+                "extended_play_by_play": false,
+                "extended_player_stats": false,
+                "extended_team_stats": false
+              }
+            },
+            "competitors": [
+              {
+                "id": "sr:competitor:1296919",
+                "name": "Liga Desportiva De Sofala",
+                "country": "Mozambique",
+                "country_code": "MOZ",
+                "abbreviation": "SOF",
+                "qualifier": "home",
+                "gender": "male"
+              },
+              {
+                "id": "sr:competitor:554140",
+                "name": "Baia de Pemba FC",
+                "country": "Mozambique",
+                "country_code": "MOZ",
+                "abbreviation": "BAI",
                 "qualifier": "away",
                 "gender": "male"
               }
@@ -1096490,6 +1096558,7 @@
                 "gender": "female"
               }
             ],
+            "replaced_by": "sr:sport_event:75896708",
             "sport_event_conditions": {
               "ground": {
                 "neutral": false
@@ -1096497,7 +1096566,8 @@
             }
           },
           "sport_event_status": {
-            "status": "not_started"
+            "status": "postponed",
+            "match_status": "postponed"
           }
         },
         {
@@ -1103286,110 +1103356,9 @@
           "sport_event_status": {
             "status": "not_started"
           }
-        },
-        {
-          "sport_event": {
-            "id": "sr:sport_event:73251322",
-            "start_time": "2026-10-22T23:00:00+00:00",
-            "start_time_confirmed": true,
-            "date_confirmed": true,
-            "sport_event_context": {
-              "sport": {
-                "id": "sr:sport:1",
-                "name": "Soccer"
-              },
-              "category": {
-                "id": "sr:category:26",
-                "name": "USA",
-                "country_code": "USA"
-              },
-              "competition": {
-                "id": "sr:competition:26178",
-                "name": "NCAA Regular Season, Women",
-                "parent_id": "sr:competition:34230",
-                "gender": "women"
-              },
-              "season": {
-                "id": "sr:season:144930",
-                "name": "NCAA Regular Season, Women 2026",
-                "start_date": "2026-08-12",
-                "end_date": "2026-11-30",
-                "year": "2026",
-                "competition_id": "sr:competition:26178"
-              },
-              "stage": {
-                "order": 1,
-                "type": "league",
-                "phase": "conference",
-                "start_date": "2026-08-12",
-                "end_date": "2026-11-30",
-                "year": "2026"
-              },
-              "round": {},
-              "groups": [
-                {
-                  "id": "sr:league:111454",
-                  "name": "Big 12 Conference Women 2026",
-                  "group_name": "Big 12"
-                }
-              ]
-            },
-            "coverage": {
-              "type": "sport_event",
-              "sport_event_properties": {
-                "lineups": false,
-                "formations": false,
-                "venue": false,
-                "ballspotting": false,
-                "commentary": false,
-                "fun_facts": false,
-                "game_clock": false,
-                "goal_scorers": false,
-                "goal_scorers_live": false,
-                "scores": "post",
-                "basic_play_by_play": false,
-                "basic_player_stats": false,
-                "basic_team_stats": false,
-                "deeper_play_by_play": false,
-                "deeper_player_stats": false,
-                "deeper_team_stats": false,
-                "extended_play_by_play": false,
-                "extended_player_stats": false,
-                "extended_team_stats": false
-              }
-            },
-            "competitors": [
-              {
-                "id": "sr:competitor:452485",
-                "name": "Kansas Jayhawks",
-                "country": "USA",
-                "country_code": "USA",
-                "abbreviation": "KAN",
-                "qualifier": "home",
-                "gender": "female"
-              },
-              {
-                "id": "sr:competitor:452289",
-                "name": "BYU Cougars",
-                "country": "USA",
-                "country_code": "USA",
-                "abbreviation": "BYU",
-                "qualifier": "away",
-                "gender": "female"
-              }
-            ],
-            "sport_event_conditions": {
-              "ground": {
-                "neutral": false
-              }
-            }
-          },
-          "sport_event_status": {
-            "status": "not_started"
-          }
         }
       ]
     },
-    "updatedAt": "2026-10-22T04:38:41.651Z"
+    "updatedAt": "2026-10-22T08:41:28.616Z"
   }
 }
