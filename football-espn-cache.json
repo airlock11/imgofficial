@@ -1,7 +1,7 @@
 {
   "version": 1,
   "source": "ESPN public football data",
-  "updatedAt": "2026-10-23T17:08:20.915Z",
+  "updatedAt": "2026-10-23T20:27:06.553Z",
   "leagues": {
     "soccer": {
       "name": "Premier League",
@@ -337,10 +337,10 @@
           "away": "Nottingham Forest",
           "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/373.png",
           "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/393.png",
-          "homeScore": "0",
-          "awayScore": "0",
-          "state": "scheduled",
-          "status": "Scheduled",
+          "homeScore": "1",
+          "awayScore": "1",
+          "state": "live",
+          "status": "68'",
           "venue": "Portman Road",
           "competition": "Premier League",
           "category": "England"
@@ -1176,7 +1176,7 @@
           "points": 4
         }
       ],
-      "verifiedAt": "2026-10-23T17:08:20.116Z"
+      "verifiedAt": "2026-10-23T20:27:05.814Z"
     },
     "laliga": {
       "name": "La Liga",
@@ -1184,22 +1184,6 @@
       "espn": "esp.1",
       "leagueLogo": "https://a.espncdn.com/i/leaguelogos/soccer/500/15.png",
       "games": [
-        {
-          "eventId": "401882851",
-          "date": "2026-10-09T19:00Z",
-          "displayTime": "",
-          "home": "Málaga",
-          "away": "Espanyol",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/99.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/88.png",
-          "homeScore": "1",
-          "awayScore": "1",
-          "state": "final",
-          "status": "FT",
-          "venue": "La Rosaleda",
-          "competition": "La Liga",
-          "category": "Spain"
-        },
         {
           "eventId": "401882849",
           "date": "2026-10-10T12:00Z",
@@ -1529,9 +1513,9 @@
           "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/96.png",
           "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/99.png",
           "homeScore": "0",
-          "awayScore": "0",
-          "state": "scheduled",
-          "status": "Scheduled",
+          "awayScore": "1",
+          "state": "live",
+          "status": "68'",
           "venue": "Mendizorrotza",
           "competition": "La Liga",
           "category": "Spain"
@@ -2111,6 +2095,38 @@
           "venue": "El Sardineros",
           "competition": "La Liga",
           "category": "Spain"
+        },
+        {
+          "eventId": "401882801",
+          "date": "2026-11-22T17:30Z",
+          "displayTime": "",
+          "home": "Osasuna",
+          "away": "Málaga",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/97.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/99.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "El Sadar",
+          "competition": "La Liga",
+          "category": "Spain"
+        },
+        {
+          "eventId": "401882803",
+          "date": "2026-11-22T20:00Z",
+          "displayTime": "",
+          "home": "Getafe",
+          "away": "Atlético Madrid",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/2922.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/1068.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "Estadio Coliseum",
+          "competition": "La Liga",
+          "category": "Spain"
         }
       ],
       "standings": [
@@ -2335,7 +2351,7 @@
           "points": 4
         }
       ],
-      "verifiedAt": "2026-10-23T17:08:20.516Z"
+      "verifiedAt": "2026-10-23T20:27:06.217Z"
     },
     "bundesliga": {
       "name": "Bundesliga",
@@ -2343,22 +2359,6 @@
       "espn": "ger.1",
       "leagueLogo": "https://a.espncdn.com/i/leaguelogos/soccer/500/10.png",
       "games": [
-        {
-          "eventId": "401884781",
-          "date": "2026-10-09T18:30Z",
-          "displayTime": "",
-          "home": "Borussia Dortmund",
-          "away": "Werder Bremen",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/124.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/137.png",
-          "homeScore": "2",
-          "awayScore": "2",
-          "state": "final",
-          "status": "FT",
-          "venue": "Signal Iduna Park",
-          "competition": "Bundesliga",
-          "category": "Germany"
-        },
         {
           "eventId": "401884775",
           "date": "2026-10-10T13:30Z",
@@ -2639,10 +2639,10 @@
           "away": "Borussia Mönchengladbach",
           "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/134.png",
           "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/268.png",
-          "homeScore": "0",
-          "awayScore": "0",
-          "state": "scheduled",
-          "status": "Scheduled",
+          "homeScore": "2",
+          "awayScore": "3",
+          "state": "final",
+          "status": "FT",
           "venue": "MHPArena",
           "competition": "Bundesliga",
           "category": "Germany"
@@ -3343,23 +3343,23 @@
         },
         {
           "rank": 13,
-          "team": "VfB Stuttgart",
-          "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/134.png",
-          "played": 6,
-          "wins": 2,
-          "draws": 0,
-          "losses": 4,
-          "goalDiff": -2,
-          "points": 6
-        },
-        {
-          "rank": 14,
           "team": "TSG Hoffenheim",
           "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/7911.png",
           "played": 6,
           "wins": 2,
           "draws": 0,
           "losses": 4,
+          "goalDiff": -3,
+          "points": 6
+        },
+        {
+          "rank": 14,
+          "team": "VfB Stuttgart",
+          "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/134.png",
+          "played": 7,
+          "wins": 2,
+          "draws": 0,
+          "losses": 5,
           "goalDiff": -3,
           "points": 6
         },
@@ -3400,15 +3400,15 @@
           "rank": 18,
           "team": "Borussia Mönchengladbach",
           "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/268.png",
-          "played": 6,
-          "wins": 0,
+          "played": 7,
+          "wins": 1,
           "draws": 0,
           "losses": 6,
-          "goalDiff": -12,
-          "points": 0
+          "goalDiff": -11,
+          "points": 3
         }
       ],
-      "verifiedAt": "2026-10-23T17:08:20.718Z"
+      "verifiedAt": "2026-10-23T20:27:06.374Z"
     },
     "seriea": {
       "name": "Serie A",
@@ -3744,10 +3744,10 @@
           "away": "Monza",
           "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/239.png",
           "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/4007.png",
-          "homeScore": "0",
-          "awayScore": "0",
-          "state": "scheduled",
-          "status": "Scheduled",
+          "homeScore": "3",
+          "awayScore": "1",
+          "state": "live",
+          "status": "82'",
           "venue": "Stadio Olimpico Grande Torino",
           "competition": "Serie A",
           "category": "Italy"
@@ -4503,6 +4503,22 @@
           "venue": "San Siro",
           "competition": "Serie A",
           "category": "Italy"
+        },
+        {
+          "eventId": "401875001",
+          "date": "2026-11-22T19:45Z",
+          "displayTime": "",
+          "home": "Atalanta",
+          "away": "Internazionale",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/105.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/110.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "New Balance Arena",
+          "competition": "Serie A",
+          "category": "Italy"
         }
       ],
       "standings": [
@@ -4727,7 +4743,7 @@
           "points": 3
         }
       ],
-      "verifiedAt": "2026-10-23T17:08:20.914Z"
+      "verifiedAt": "2026-10-23T20:27:06.552Z"
     }
   }
 }
