@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-23T12:49:22+00:00",
+  "updatedAt": "2026-10-23T17:30:59+00:00",
   "season": "Season 89 Men's Basketball",
   "sources": {
     "stats": "https://uaap.org/stats/uaap-season-89-men-s-basketball",
@@ -182,17 +182,6 @@
       "title": "UP vs UST | SECOND HALF HIGHLIGHTS | UAAP SEASON 89 MEN'S BASKETBALL | OCT 21, 2026",
       "url": "https://www.youtube.com/watch?v=XQLwOYJm-gs",
       "thumbnail": "https://i.ytimg.com/vi/XQLwOYJm-gs/hqdefault.jpg",
-      "published": "",
-      "channel": "One Sports",
-      "sourceName": "One Sports",
-      "sourceChannelId": "UCXDG9ue-emCN8Ad3h7lERqQ",
-      "verificationStatus": "verified"
-    },
-    {
-      "id": "sp7o5X_FIF4",
-      "title": "UP vs UST | 4TH QUARTER HIGHLIGHTS | UAAP SEASON 89 MEN'S BASKETBALL | OCT 21, 2026",
-      "url": "https://www.youtube.com/watch?v=sp7o5X_FIF4",
-      "thumbnail": "https://i.ytimg.com/vi/sp7o5X_FIF4/hqdefault.jpg",
       "published": "",
       "channel": "One Sports",
       "sourceName": "One Sports",
@@ -515,24 +504,27 @@
       "url": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball?game_id=1"
     }
   ],
-  "highlightsUpdatedAt": "2026-10-23T12:49:22+00:00",
+  "highlightsUpdatedAt": "2026-10-23T17:30:59+00:00",
   "automation": {
     "enabled": true,
-    "mode": "idle",
-    "dataRefreshMinutes": 180,
-    "livestreamRefreshMinutes": 0,
+    "mode": "game-day",
+    "dataRefreshMinutes": 15,
+    "livestreamRefreshMinutes": 5,
     "scheduleAware": {
       "enabled": true,
       "timezone": "Asia/Manila",
-      "mode": "idle",
-      "gameDay": false,
-      "todayGameCount": 0,
-      "todayGames": [],
+      "mode": "game-day",
+      "gameDay": true,
+      "todayGameCount": 2,
+      "todayGames": [
+        "web-uaap-scheduled-7",
+        "web-uaap-scheduled-8"
+      ],
       "nextGameAt": "2026-10-24T14:30:00+08:00",
       "idleDiscoveryMinutes": 180,
       "gameDayDataRefreshMinutes": 15,
       "gameDayLivestreamRefreshMinutes": 5,
-      "lastSlowCheckAt": "2026-10-23T20:49:11+08:00"
+      "lastSlowCheckAt": "2026-10-24T01:30:44+08:00"
     },
     "failClosed": true
   }
