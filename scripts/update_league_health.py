@@ -36,13 +36,12 @@ def freshest_source(sources):
 reg=json.loads(REG.read_text("utf-8"))
 extended=league_map(load("extended-sports-data.json"))
 special=league_map(load("special-sports-data.json"))
-sportradar=league_map(load("sportradar-soccer-data.json"))
 regional=league_map(load("regional-web.json"))
 stats=league_map(load("stats-data.json"))
 
 rows={}
 for key,meta in reg.get("leagues",{}).items():
-    sources=[x for x in (extended.get(key),special.get(key),sportradar.get(key),regional.get(key)) if isinstance(x,dict)]
+    sources=[x for x in (extended.get(key),special.get(key),regional.get(key)) if isinstance(x,dict)]
     pipeline=meta.get("pipeline","")
     game_ready=any(has_games(x) for x in sources) or pipeline=="direct_espn"
     standings_ready=any(has_any(x,"standings") for x in sources)

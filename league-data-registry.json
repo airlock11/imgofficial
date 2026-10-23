@@ -33,10 +33,6 @@
       "description": "Statistics/leader collector",
       "freshMinutes": 20
     },
-    "sportradar": {
-      "description": "Quota-limited soccer enrichment collector",
-      "freshMinutes": 300
-    },
     "youtube": {
       "description": "Verified official live-stream scanner",
       "freshMinutes": 10
@@ -101,8 +97,8 @@
     "jamaica_pl": {
       "label": "Jamaican Premier League",
       "sport": "Football",
-      "pipeline": "sportradar",
-      "automatic": true,
+      "pipeline": "extended",
+      "automatic": false,
       "required": [
         "scores",
         "schedule"
@@ -118,8 +114,8 @@
     "mizoram_pl": {
       "label": "Mizoram Premier League",
       "sport": "Football",
-      "pipeline": "sportradar",
-      "automatic": true,
+      "pipeline": "extended",
+      "automatic": false,
       "required": [
         "scores",
         "schedule"
@@ -152,8 +148,8 @@
     "el_salvador_reserves": {
       "label": "Primera Division, Reserves",
       "sport": "Football",
-      "pipeline": "sportradar",
-      "automatic": true,
+      "pipeline": "extended",
+      "automatic": false,
       "required": [
         "scores",
         "schedule"
@@ -169,7 +165,7 @@
     "seriea": {
       "label": "Serie A",
       "sport": "Football",
-      "pipeline": "sportradar",
+      "pipeline": "direct_espn",
       "automatic": true,
       "required": [
         "scores",
@@ -186,7 +182,7 @@
     "bundesliga": {
       "label": "Bundesliga",
       "sport": "Football",
-      "pipeline": "sportradar",
+      "pipeline": "direct_espn",
       "automatic": true,
       "required": [
         "scores",
@@ -203,7 +199,7 @@
     "champions": {
       "label": "UEFA Champions League",
       "sport": "Football",
-      "pipeline": "sportradar",
+      "pipeline": "direct_espn",
       "automatic": true,
       "required": [
         "scores",
@@ -220,8 +216,8 @@
     "ucl_women": {
       "label": "UEFA Champions League Women",
       "sport": "Football",
-      "pipeline": "sportradar",
-      "automatic": true,
+      "pipeline": "extended",
+      "automatic": false,
       "required": [
         "scores",
         "schedule"
@@ -237,7 +233,7 @@
     "mls": {
       "label": "MLS",
       "sport": "Football",
-      "pipeline": "sportradar",
+      "pipeline": "direct_espn",
       "automatic": true,
       "required": [
         "scores",
@@ -254,7 +250,7 @@
     "pfl": {
       "label": "PFL",
       "sport": "Football",
-      "pipeline": "sportradar",
+      "pipeline": "extended",
       "automatic": true,
       "required": [
         "scores",

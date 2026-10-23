@@ -2165,7 +2165,7 @@ html[data-theme="light"] .logo img{filter:brightness(0)}
 /* IMG_APPROVED_SOCCER_LOGO_END */
 
 
-/* Sportradar soccer standings */
+/* Soccer standings */
 .soccer-standings-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
 .soccer-standings-head,.soccer-standings-row{display:grid;grid-template-columns:34px minmax(150px,1fr) repeat(6,44px);gap:8px;align-items:center;min-width:520px}
 .soccer-standings-head{padding:8px 6px;color:var(--muted);font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid var(--line)}

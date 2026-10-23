@@ -191,47 +191,39 @@ async function loadSpecialSportsData(){
   if(specialSportsDataPromise)return specialSportsDataPromise;
   specialSportsDataPromise=Promise.allSettled([
     fetch('special-sports-data.json?v='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null),
-    fetch('extended-sports-data.json?v='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null),
-    fetch('sportradar-soccer-data.json?v='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null)
+    fetch('extended-sports-data.json?v='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null)
   ]).then(results=>{
     const base=results[0]?.status==='fulfilled'&&results[0].value?results[0].value:{};
     const extended=results[1]?.status==='fulfilled'&&results[1].value?results[1].value:{};
-    const sportradar=results[2]?.status==='fulfilled'&&results[2].value?results[2].value:{};
     const baseLeagues=base.leagues||{};
     const extendedLeagues=extended.leagues||{};
-    const sportradarLeagues=sportradar.leagues||{};
-    const leagueKeys=new Set([...Object.keys(baseLeagues),...Object.keys(extendedLeagues),...Object.keys(sportradarLeagues)]);
+    const leagueKeys=new Set([...Object.keys(baseLeagues),...Object.keys(extendedLeagues)]);
     const mergedLeagues={};
     for(const key of leagueKeys){
       const baseLeague=baseLeagues[key]||{};
       const extendedLeague=extendedLeagues[key]||{};
-      const sportradarLeague=sportradarLeagues[key]||{};
-      const mergedLeague={...baseLeague,...extendedLeague,...sportradarLeague};
+      const mergedLeague={...baseLeague,...extendedLeague};
 
-      const srGames=Array.isArray(sportradarLeague.games)?sportradarLeague.games:[];
       const extendedGames=Array.isArray(extendedLeague.games)?extendedLeague.games:[];
       const baseGames=Array.isArray(baseLeague.games)?baseLeague.games:[];
-      if(!srGames.length){
-        mergedLeague.games=extendedGames.length?extendedGames:baseGames;
-        if(extendedGames.length){
-          mergedLeague.sourceName=extendedLeague.sourceName||mergedLeague.sourceName;
-          mergedLeague.sourceUrl=extendedLeague.sourceUrl||mergedLeague.sourceUrl;
-        }else if(baseGames.length){
-          mergedLeague.sourceName=baseLeague.sourceName||mergedLeague.sourceName;
-          mergedLeague.sourceUrl=baseLeague.sourceUrl||mergedLeague.sourceUrl;
-        }
+      mergedLeague.games=extendedGames.length?extendedGames:baseGames;
+      if(extendedGames.length){
+        mergedLeague.sourceName=extendedLeague.sourceName||mergedLeague.sourceName;
+        mergedLeague.sourceUrl=extendedLeague.sourceUrl||mergedLeague.sourceUrl;
+      }else if(baseGames.length){
+        mergedLeague.sourceName=baseLeague.sourceName||mergedLeague.sourceName;
+        mergedLeague.sourceUrl=baseLeague.sourceUrl||mergedLeague.sourceUrl;
       }
 
-      const srStandings=Array.isArray(sportradarLeague.standings)?sportradarLeague.standings:[];
       const extendedStandings=Array.isArray(extendedLeague.standings)?extendedLeague.standings:[];
       const baseStandings=Array.isArray(baseLeague.standings)?baseLeague.standings:[];
-      if(!srStandings.length&&(extendedStandings.length||baseStandings.length)){
+      if(extendedStandings.length||baseStandings.length){
         mergedLeague.standings=extendedStandings.length?extendedStandings:baseStandings;
       }
 
       mergedLeagues[key]=mergedLeague;
     }
-    const merged={...base,...extended,sportradar,leagues:mergedLeagues};
+    const merged={...base,...extended,leagues:mergedLeagues};
     specialSportsDataCache=merged;
     specialSportsDataTime=Date.now();
     if(document.getElementById('scoreLeagueFilters'))renderScoreLeagueFilters();
@@ -288,7 +280,8 @@ async function specialSportsPayload(sport){
   return {special:true,games:league.games,sourceName:league.sourceName||'',sourceUrl:league.sourceUrl||'',note:league.note||''};
 }
 const specialScoreKeys=new Set(['atp','wta','ipl','volleyball_w','volleyball_m','fiba','ncaa_ph','bleague','euroleague','pfl','australian_open','wimbledon','us_open','npb','kbo','khl','iihf','bigbash','cricket_world_cup','pvl','vleague_jp','motogp','formulae','one','wbc','wba','ibf','wbo']);
-const sportradarSoccerKeys=new Set(['jamaica_pl','mizoram_pl','laliga','el_salvador_reserves','seriea','bundesliga','champions','ucl_women','mls','pfl']);
+const soccerLeagueKeys=new Set(['jamaica_pl','mizoram_pl','laliga','el_salvador_reserves','seriea','bundesliga','champions','ucl_women','mls','pfl']);
+const localSoccerFallbackKeys=new Set(['jamaica_pl','mizoram_pl','el_salvador_reserves','ucl_women','pfl']);
 function scoreGameLooksGeneric(g){
   const names=[g?.away,g?.home].map(x=>String(x||'').trim().toLowerCase());
   const generic=new Set(['','away','home','tbd','team 1','team 2','player 1','player 2']);
@@ -407,10 +400,10 @@ async function fetchScorePayload(sport,{fallbackOnly=false}={}){
     };
   }
 
-  if(!fallbackOnly&&sportradarSoccerKeys.has(sport)){
+  if(!fallbackOnly&&localSoccerFallbackKeys.has(sport)){
     try{
-      const sportradar=await specialSportsPayload(sport);
-      if(sportradar?.games?.length)return sportradar;
+      const local=await specialSportsPayload(sport);
+      if(local?.games?.length)return local;
     }catch{}
   }
 
@@ -2410,7 +2403,7 @@ function renderGames(){
     );
   }
 
-  if(sportradarSoccerKeys.has(currentScoreLeague)||currentScoreLeague==='soccer'){
+  if(soccerLeagueKeys.has(currentScoreLeague)||currentScoreLeague==='soccer'){
     const soccerStandings=soccerStandingsMarkup(currentScoreLeague);
     if(soccerStandings)sections.push(soccerStandings);
   }

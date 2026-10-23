@@ -132,14 +132,13 @@ async function fetchGames(){
     }
     if(cached.length)return cached;
   }
-  const local=await getJSON("/sportradar-soccer-data.json",{});
-  const localGames=(local?.leagues?.[key]?.games||[]).filter(validLocalGame).map(normalizeLocalGame);
+  const [special,extended]=await Promise.all([
+    getJSON("/special-sports-data.json",{}),
+    getJSON("/extended-sports-data.json",{})
+  ]);
+  const localLeague={...(special?.leagues?.[key]||{}),...(extended?.leagues?.[key]||{})};
+  const localGames=(localLeague.games||[]).filter(validLocalGame).map(normalizeLocalGame);
   if(localGames.length)return localGames;
-  if(key==="pfl"){
-    const extended=await getJSON("/extended-sports-data.json",{});
-    const verified=(extended?.leagues?.pfl?.games||[]).map(normalizeLocalGame);
-    if(verified.length)return verified;
-  }
   return [];
 }
 
@@ -582,8 +581,9 @@ function renderNews(news){
 
 async function load(){
   if(cfg.logo)setLeagueLogo(cfg.logo);
-  const [local,stats,news,highlightData,games]=await Promise.all([
-    getJSON("/sportradar-soccer-data.json",{}),
+  const [special,extended,stats,news,highlightData,games]=await Promise.all([
+    getJSON("/special-sports-data.json",{}),
+    getJSON("/extended-sports-data.json",{}),
     getJSON("/stats-data.json",{}),
     getJSON("/news-data.json",{}),
     getJSON("/"+cfg.highlightsFile,{highlights:[]}),
@@ -594,7 +594,7 @@ async function load(){
   renderGames(games);
   renderPreviousGames(games);
 
-  const localLeague=local?.leagues?.[key]||{};
+  const localLeague={...(special?.leagues?.[key]||{}),...(extended?.leagues?.[key]||{})};
   const standings=await fetchStandings(localLeague);
   renderStandings(standings,localLeague?.sourceName|| (cfg.espn?"ESPN public football data":""));
   const highlights=(Array.isArray(highlightData?.highlights)?highlightData.highlights:[]).filter(x=>x?.verified===true);
