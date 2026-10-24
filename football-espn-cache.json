@@ -1,7 +1,7 @@
 {
   "version": 1,
   "source": "ESPN public football data",
-  "updatedAt": "2026-10-24T06:57:14.849Z",
+  "updatedAt": "2026-10-24T11:55:46.624Z",
   "leagues": {
     "soccer": {
       "name": "Premier League",
@@ -9,22 +9,6 @@
       "espn": "eng.1",
       "leagueLogo": "https://a.espncdn.com/i/leaguelogos/soccer/500/23.png",
       "games": [
-        {
-          "eventId": "401879268",
-          "date": "2026-10-10T11:30Z",
-          "displayTime": "",
-          "home": "Arsenal",
-          "away": "Leeds United",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/359.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/357.png",
-          "homeScore": "2",
-          "awayScore": "1",
-          "state": "final",
-          "status": "FT",
-          "venue": "Emirates Stadium",
-          "competition": "Premier League",
-          "category": "England"
-        },
         {
           "eventId": "401878776",
           "date": "2026-10-10T14:00Z",
@@ -353,10 +337,10 @@
           "away": "Manchester City",
           "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/362.png",
           "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/382.png",
-          "homeScore": "0",
+          "homeScore": "1",
           "awayScore": "0",
-          "state": "scheduled",
-          "status": "Scheduled",
+          "state": "live",
+          "status": "24'",
           "venue": "Villa Park",
           "competition": "Premier League",
           "category": "England"
@@ -1176,7 +1160,7 @@
           "points": 4
         }
       ],
-      "verifiedAt": "2026-10-24T06:57:13.882Z"
+      "verifiedAt": "2026-10-24T11:55:46.149Z"
     },
     "laliga": {
       "name": "La Liga",
@@ -2351,7 +2335,7 @@
           "points": 5
         }
       ],
-      "verifiedAt": "2026-10-24T06:57:14.283Z"
+      "verifiedAt": "2026-10-24T11:55:46.320Z"
     },
     "bundesliga": {
       "name": "Bundesliga",
@@ -3408,7 +3392,7 @@
           "points": 3
         }
       ],
-      "verifiedAt": "2026-10-24T06:57:14.573Z"
+      "verifiedAt": "2026-10-24T11:55:46.464Z"
     },
     "seriea": {
       "name": "Serie A",
@@ -4743,7 +4727,7 @@
           "points": 3
         }
       ],
-      "verifiedAt": "2026-10-24T06:57:14.849Z"
+      "verifiedAt": "2026-10-24T11:55:46.624Z"
     }
   }
 }
