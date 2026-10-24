@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-24T20:01:19+08:00",
+  "updated_at": "2026-10-24T23:50:20+08:00",
   "refresh_minutes": 15,
   "leagues": {
     "pba": {
@@ -299,7 +299,7 @@
           "idleDiscoveryMinutes": 180,
           "gameDayDataRefreshMinutes": 15,
           "gameDayLivestreamRefreshMinutes": 5,
-          "lastSlowCheckAt": "2026-10-24T20:00:29+08:00"
+          "lastSlowCheckAt": "2026-10-24T23:49:05+08:00"
         },
         "failClosed": true
       }
@@ -1143,19 +1143,19 @@
       ],
       "standings": [
         {
+          "team": "NU Bulldogs",
+          "wins": 6,
+          "losses": 2
+        },
+        {
           "team": "UP Fighting Maroons",
           "wins": 6,
           "losses": 2
         },
         {
-          "team": "NU Bulldogs",
-          "wins": 5,
-          "losses": 2
-        },
-        {
           "team": "Adamson Soaring Falcons",
           "wins": 4,
-          "losses": 3
+          "losses": 4
         },
         {
           "team": "Ateneo Blue Eagles",
@@ -1185,19 +1185,6 @@
       ],
       "games": [
         {
-          "eventId": "web-uaap-scheduled-8",
-          "date": "2026-10-24T18:00:00+08:00",
-          "displayTime": "Oct 24 · 6:00 PM",
-          "away": "Adamson Soaring Falcons",
-          "home": "NU Bulldogs",
-          "awayScore": "—",
-          "homeScore": "—",
-          "status": "Scheduled",
-          "state": "scheduled",
-          "sourceName": "SkedCheck",
-          "sourceUrl": "https://skedcheck.com/uaap-mens-basketball-schedule-scores/"
-        },
-        {
           "eventId": "web-uaap-scheduled-9",
           "date": "2026-10-25T14:30:00+08:00",
           "displayTime": "Oct 25 · 2:30 PM",
@@ -1222,6 +1209,19 @@
           "state": "scheduled",
           "sourceName": "SkedCheck",
           "sourceUrl": "https://skedcheck.com/uaap-mens-basketball-schedule-scores/"
+        },
+        {
+          "eventId": "uaap-live-33",
+          "date": "2026-10-24T18:00:00+08:00",
+          "displayTime": "Oct 24 · Final",
+          "away": "Adamson Soaring Falcons",
+          "home": "NU Bulldogs",
+          "awayScore": "43",
+          "homeScore": "79",
+          "status": "Final",
+          "state": "final",
+          "sourceName": "UAAP Live Stats",
+          "sourceUrl": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball?game_id=33"
         },
         {
           "eventId": "uaap-live-32",
@@ -1379,14 +1379,14 @@
           "gameDay": true,
           "todayGameCount": 2,
           "todayGames": [
-            "web-uaap-scheduled-8",
+            "uaap-live-33",
             "uaap-live-32"
           ],
           "nextGameAt": "2026-10-25T14:30:00+08:00",
           "idleDiscoveryMinutes": 180,
           "gameDayDataRefreshMinutes": 15,
           "gameDayLivestreamRefreshMinutes": 5,
-          "lastSlowCheckAt": "2026-10-24T20:01:01+08:00"
+          "lastSlowCheckAt": "2026-10-24T23:49:35+08:00"
         },
         "failClosed": true
       }
@@ -1410,7 +1410,7 @@
         "idleDiscoveryMinutes": 180,
         "gameDayDataRefreshMinutes": 15,
         "gameDayLivestreamRefreshMinutes": 5,
-        "lastSlowCheckAt": "2026-10-24T20:00:29+08:00"
+        "lastSlowCheckAt": "2026-10-24T23:49:05+08:00"
       },
       "failClosed": true
     },
@@ -1426,14 +1426,14 @@
         "gameDay": true,
         "todayGameCount": 2,
         "todayGames": [
-          "web-uaap-scheduled-8",
+          "uaap-live-33",
           "uaap-live-32"
         ],
         "nextGameAt": "2026-10-25T14:30:00+08:00",
         "idleDiscoveryMinutes": 180,
         "gameDayDataRefreshMinutes": 15,
         "gameDayLivestreamRefreshMinutes": 5,
-        "lastSlowCheckAt": "2026-10-24T20:01:01+08:00"
+        "lastSlowCheckAt": "2026-10-24T23:49:35+08:00"
       },
       "failClosed": true
     }
