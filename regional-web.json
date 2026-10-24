@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-24T15:10:28+08:00",
+  "updated_at": "2026-10-24T20:01:19+08:00",
   "refresh_minutes": 15,
   "leagues": {
     "pba": {
@@ -299,7 +299,7 @@
           "idleDiscoveryMinutes": 180,
           "gameDayDataRefreshMinutes": 15,
           "gameDayLivestreamRefreshMinutes": 5,
-          "lastSlowCheckAt": "2026-10-24T15:09:46+08:00"
+          "lastSlowCheckAt": "2026-10-24T20:00:29+08:00"
         },
         "failClosed": true
       }
@@ -1158,12 +1158,17 @@
           "losses": 3
         },
         {
-          "team": "FEU Tamaraws",
+          "team": "Ateneo Blue Eagles",
           "wins": 4,
-          "losses": 3
+          "losses": 4
         },
         {
           "team": "De La Salle Green Archers",
+          "wins": 4,
+          "losses": 4
+        },
+        {
+          "team": "FEU Tamaraws",
           "wins": 4,
           "losses": 4
         },
@@ -1173,30 +1178,12 @@
           "losses": 4
         },
         {
-          "team": "Ateneo Blue Eagles",
-          "wins": 3,
-          "losses": 4
-        },
-        {
           "team": "UE Red Warriors",
           "wins": 0,
           "losses": 8
         }
       ],
       "games": [
-        {
-          "eventId": "web-uaap-scheduled-7",
-          "date": "2026-10-24T14:30:00+08:00",
-          "displayTime": "Oct 24 · 2:30 PM",
-          "away": "Ateneo Blue Eagles",
-          "home": "FEU Tamaraws",
-          "awayScore": "—",
-          "homeScore": "—",
-          "status": "Scheduled",
-          "state": "scheduled",
-          "sourceName": "SkedCheck",
-          "sourceUrl": "https://skedcheck.com/uaap-mens-basketball-schedule-scores/"
-        },
         {
           "eventId": "web-uaap-scheduled-8",
           "date": "2026-10-24T18:00:00+08:00",
@@ -1235,6 +1222,19 @@
           "state": "scheduled",
           "sourceName": "SkedCheck",
           "sourceUrl": "https://skedcheck.com/uaap-mens-basketball-schedule-scores/"
+        },
+        {
+          "eventId": "uaap-live-32",
+          "date": "2026-10-24T14:30:00+08:00",
+          "displayTime": "Oct 24 · Final",
+          "away": "Ateneo Blue Eagles",
+          "home": "FEU Tamaraws",
+          "awayScore": "75",
+          "homeScore": "72",
+          "status": "Final",
+          "state": "final",
+          "sourceName": "UAAP Live Stats",
+          "sourceUrl": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball?game_id=32"
         },
         {
           "eventId": "uaap-live-31",
@@ -1365,19 +1365,6 @@
           "state": "final",
           "sourceName": "UAAP Live Stats",
           "sourceUrl": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball?game_id=22"
-        },
-        {
-          "eventId": "uaap-live-21",
-          "date": "2026-10-10T17:30:00+08:00",
-          "displayTime": "Oct 10 · Final",
-          "away": "Ateneo Blue Eagles",
-          "home": "FEU Tamaraws",
-          "awayScore": "70",
-          "homeScore": "93",
-          "status": "Final",
-          "state": "final",
-          "sourceName": "UAAP Live Stats",
-          "sourceUrl": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball?game_id=21"
         }
       ],
       "automation": {
@@ -1392,14 +1379,14 @@
           "gameDay": true,
           "todayGameCount": 2,
           "todayGames": [
-            "web-uaap-scheduled-7",
-            "web-uaap-scheduled-8"
+            "web-uaap-scheduled-8",
+            "uaap-live-32"
           ],
-          "nextGameAt": "2026-10-24T18:00:00+08:00",
+          "nextGameAt": "2026-10-25T14:30:00+08:00",
           "idleDiscoveryMinutes": 180,
           "gameDayDataRefreshMinutes": 15,
           "gameDayLivestreamRefreshMinutes": 5,
-          "lastSlowCheckAt": "2026-10-24T15:10:14+08:00"
+          "lastSlowCheckAt": "2026-10-24T20:01:01+08:00"
         },
         "failClosed": true
       }
@@ -1423,7 +1410,7 @@
         "idleDiscoveryMinutes": 180,
         "gameDayDataRefreshMinutes": 15,
         "gameDayLivestreamRefreshMinutes": 5,
-        "lastSlowCheckAt": "2026-10-24T15:09:46+08:00"
+        "lastSlowCheckAt": "2026-10-24T20:00:29+08:00"
       },
       "failClosed": true
     },
@@ -1439,14 +1426,14 @@
         "gameDay": true,
         "todayGameCount": 2,
         "todayGames": [
-          "web-uaap-scheduled-7",
-          "web-uaap-scheduled-8"
+          "web-uaap-scheduled-8",
+          "uaap-live-32"
         ],
-        "nextGameAt": "2026-10-24T18:00:00+08:00",
+        "nextGameAt": "2026-10-25T14:30:00+08:00",
         "idleDiscoveryMinutes": 180,
         "gameDayDataRefreshMinutes": 15,
         "gameDayLivestreamRefreshMinutes": 5,
-        "lastSlowCheckAt": "2026-10-24T15:10:14+08:00"
+        "lastSlowCheckAt": "2026-10-24T20:01:01+08:00"
       },
       "failClosed": true
     }
