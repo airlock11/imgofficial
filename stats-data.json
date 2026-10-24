@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-24T11:05:35.549701+00:00",
+  "updatedAt": "2026-10-24T14:33:07.476863+00:00",
   "leagues": {
     "uaap": {
       "league": "UAAP",
@@ -9703,18 +9703,18 @@
           "suffix": "PPG",
           "rows": [
             {
+              "player": "Bryce Cotton",
+              "team": "",
+              "gp": null,
+              "value": 27.4,
+              "displayValue": "27.4"
+            },
+            {
               "player": "Parker Jackson-Cartwright",
               "team": "",
               "gp": null,
               "value": 26.6,
               "displayValue": "26.6"
-            },
-            {
-              "player": "Bryce Cotton",
-              "team": "",
-              "gp": null,
-              "value": 24.8,
-              "displayValue": "24.8"
             },
             {
               "player": "Sam Mennenga",
@@ -11474,11 +11474,25 @@
           "suffix": "YDS",
           "rows": [
             {
+              "player": "Nate Sheppard",
+              "team": "DUKE",
+              "gp": null,
+              "value": 875.0,
+              "displayValue": "875"
+            },
+            {
               "player": "Jamal Roberts",
               "team": "MIZ",
               "gp": null,
               "value": 867.0,
               "displayValue": "867"
+            },
+            {
+              "player": "Cale Hellums",
+              "team": "ARMY",
+              "gp": null,
+              "value": 840.0,
+              "displayValue": "840"
             },
             {
               "player": "Torrance Burgess Jr.",
@@ -11514,20 +11528,6 @@
               "gp": null,
               "value": 833.0,
               "displayValue": "833"
-            },
-            {
-              "player": "George Pettaway",
-              "team": "JMU",
-              "gp": null,
-              "value": 824.0,
-              "displayValue": "824"
-            },
-            {
-              "player": "Nate Sheppard",
-              "team": "DUKE",
-              "gp": null,
-              "value": 820.0,
-              "displayValue": "820"
             }
           ]
         },
