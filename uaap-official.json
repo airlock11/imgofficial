@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-24T02:00:34+00:00",
+  "updatedAt": "2026-10-24T07:10:24+00:00",
   "season": "Season 89 Men's Basketball",
   "sources": {
     "stats": "https://uaap.org/stats/uaap-season-89-men-s-basketball",
@@ -64,10 +64,10 @@
     {
       "player": "M. Llemit",
       "team": "UST Growling Tigers",
-      "games": 4,
-      "ppg": 21.8,
-      "rpg": 7.5,
-      "apg": 3.2
+      "games": 3,
+      "ppg": 22.0,
+      "rpg": 7.0,
+      "apg": 2.7
     },
     {
       "player": "M. Konateh",
@@ -78,6 +78,14 @@
       "apg": 2.3
     },
     {
+      "player": "C. Akowe",
+      "team": "UST Growling Tigers",
+      "games": 3,
+      "ppg": 18.3,
+      "rpg": 17.3,
+      "apg": 3.0
+    },
+    {
       "player": "V. Pre",
       "team": "UP Fighting Maroons",
       "games": 4,
@@ -86,36 +94,28 @@
       "apg": 3.2
     },
     {
-      "player": "K. Alas",
-      "team": "Ateneo Blue Eagles",
-      "games": 2,
-      "ppg": 17.0,
-      "rpg": 4.0,
-      "apg": 3.5
+      "player": "M. Alfanta",
+      "team": "NU Bulldogs",
+      "games": 1,
+      "ppg": 14.0,
+      "rpg": 2.0,
+      "apg": 1.0
     },
     {
-      "player": "C. Akowe",
-      "team": "UST Growling Tigers",
+      "player": "R. Remogat",
+      "team": "UP Fighting Maroons",
       "games": 4,
-      "ppg": 16.5,
-      "rpg": 15.0,
-      "apg": 2.5
+      "ppg": 13.5,
+      "rpg": 2.8,
+      "apg": 3.8
     },
     {
-      "player": "R. Jumamoy",
-      "team": "NU Bulldogs",
-      "games": 2,
-      "ppg": 15.5,
-      "rpg": 5.0,
-      "apg": 6.5
-    },
-    {
-      "player": "P. Palacielo",
-      "team": "NU Bulldogs",
-      "games": 2,
-      "ppg": 14.5,
-      "rpg": 7.0,
-      "apg": 2.5
+      "player": "K. Mongcopa",
+      "team": "FEU Tamaraws",
+      "games": 3,
+      "ppg": 13.3,
+      "rpg": 6.0,
+      "apg": 3.0
     }
   ],
   "headlines": [],
@@ -143,54 +143,21 @@
       "sourceName": "One Sports",
       "sourceChannelId": "UCXDG9ue-emCN8Ad3h7lERqQ",
       "verificationStatus": "verified"
-    },
-    {
-      "id": "l_4aY_thSvU",
-      "title": "UP vs UST | FULL GAME HIGHLIGHTS | UAAP SEASON 89 MEN'S BASKETBALL | OCT 21, 2026",
-      "url": "https://www.youtube.com/watch?v=l_4aY_thSvU",
-      "thumbnail": "https://i.ytimg.com/vi/l_4aY_thSvU/hqdefault.jpg",
-      "published": "",
-      "channel": "One Sports",
-      "sourceName": "One Sports",
-      "sourceChannelId": "UCXDG9ue-emCN8Ad3h7lERqQ",
-      "verificationStatus": "verified"
-    },
-    {
-      "id": "nxhG51lFiOc",
-      "title": "Llemit DROPS CAREER-HIGH 33 PTS 💥 vs UP in double OT | UAAP SEASON 89 MEN'S BASKETBALL | HIGHLIGHTS",
-      "url": "https://www.youtube.com/watch?v=nxhG51lFiOc",
-      "thumbnail": "https://i.ytimg.com/vi/nxhG51lFiOc/hqdefault.jpg",
-      "published": "",
-      "channel": "One Sports",
-      "sourceName": "One Sports",
-      "sourceChannelId": "UCXDG9ue-emCN8Ad3h7lERqQ",
-      "verificationStatus": "verified"
-    },
-    {
-      "id": "TVlcaE2rnXA",
-      "title": "UP vs UST | DOUBLE OVERTIME HIGHLIGHTS | UAAP SEASON 89 MEN'S BASKETBALL | OCT 21, 2026",
-      "url": "https://www.youtube.com/watch?v=TVlcaE2rnXA",
-      "thumbnail": "https://i.ytimg.com/vi/TVlcaE2rnXA/hqdefault.jpg",
-      "published": "",
-      "channel": "One Sports",
-      "sourceName": "One Sports",
-      "sourceChannelId": "UCXDG9ue-emCN8Ad3h7lERqQ",
-      "verificationStatus": "verified"
-    },
-    {
-      "id": "XQLwOYJm-gs",
-      "title": "UP vs UST | SECOND HALF HIGHLIGHTS | UAAP SEASON 89 MEN'S BASKETBALL | OCT 21, 2026",
-      "url": "https://www.youtube.com/watch?v=XQLwOYJm-gs",
-      "thumbnail": "https://i.ytimg.com/vi/XQLwOYJm-gs/hqdefault.jpg",
-      "published": "",
-      "channel": "One Sports",
-      "sourceName": "One Sports",
-      "sourceChannelId": "UCXDG9ue-emCN8Ad3h7lERqQ",
-      "verificationStatus": "verified"
     }
   ],
   "topPlayersMode": "recent-official-boxscores",
   "liveStatsGames": [
+    {
+      "first": "PERIOD 1 09:42 FEU",
+      "firstScore": 0,
+      "second": "Ateneo Blue Eagles",
+      "secondScore": 0,
+      "status": "Live",
+      "state": "in",
+      "gameId": "32",
+      "url": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball?game_id=32",
+      "date": "2026-10-24T14:30:00+08:00"
+    },
     {
       "first": "UP Fighting Maroons",
       "firstScore": 103,
@@ -320,8 +287,7 @@
       "status": "Final",
       "state": "final",
       "gameId": "20",
-      "url": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball?game_id=20",
-      "date": "2026-10-10T15:00:00+08:00"
+      "url": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball?game_id=20"
     },
     {
       "first": "Ateneo Blue Eagles",
@@ -504,7 +470,7 @@
       "url": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball?game_id=1"
     }
   ],
-  "highlightsUpdatedAt": "2026-10-24T02:00:34+00:00",
+  "highlightsUpdatedAt": "2026-10-24T07:10:24+00:00",
   "automation": {
     "enabled": true,
     "mode": "game-day",
@@ -520,11 +486,11 @@
         "web-uaap-scheduled-7",
         "web-uaap-scheduled-8"
       ],
-      "nextGameAt": "2026-10-24T14:30:00+08:00",
+      "nextGameAt": "2026-10-24T18:00:00+08:00",
       "idleDiscoveryMinutes": 180,
       "gameDayDataRefreshMinutes": 15,
       "gameDayLivestreamRefreshMinutes": 5,
-      "lastSlowCheckAt": "2026-10-24T10:00:24+08:00"
+      "lastSlowCheckAt": "2026-10-24T15:10:14+08:00"
     },
     "failClosed": true
   }
