@@ -1,7 +1,7 @@
 {
   "version": 1,
   "source": "ESPN public football data",
-  "updatedAt": "2026-10-25T21:48:41.378Z",
+  "updatedAt": "2026-10-25T23:53:59.000Z",
   "leagues": {
     "soccer": {
       "name": "Premier League",
@@ -1048,7 +1048,7 @@
           "points": 5
         }
       ],
-      "verifiedAt": "2026-10-25T21:48:40.559Z"
+      "verifiedAt": "2026-10-25T23:53:58.096Z"
     },
     "laliga": {
       "name": "La Liga",
@@ -1385,9 +1385,9 @@
           "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/83.png",
           "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/86.png",
           "homeScore": "1",
-          "awayScore": "1",
-          "state": "live",
-          "status": "85'",
+          "awayScore": "2",
+          "state": "final",
+          "status": "FT",
           "venue": "Spotify Camp Nou",
           "competition": "La Liga",
           "category": "Spain"
@@ -1894,11 +1894,11 @@
           "rank": 1,
           "team": "Barcelona",
           "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/83.png",
-          "played": 9,
+          "played": 10,
           "wins": 9,
           "draws": 0,
-          "losses": 0,
-          "goalDiff": 30,
+          "losses": 1,
+          "goalDiff": 29,
           "points": 27
         },
         {
@@ -1916,12 +1916,12 @@
           "rank": 3,
           "team": "Real Madrid",
           "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/86.png",
-          "played": 9,
-          "wins": 7,
+          "played": 10,
+          "wins": 8,
           "draws": 0,
           "losses": 2,
-          "goalDiff": 14,
-          "points": 21
+          "goalDiff": 15,
+          "points": 24
         },
         {
           "rank": 4,
@@ -2111,7 +2111,7 @@
           "points": 5
         }
       ],
-      "verifiedAt": "2026-10-25T21:48:40.910Z"
+      "verifiedAt": "2026-10-25T23:53:58.428Z"
     },
     "bundesliga": {
       "name": "Bundesliga",
@@ -3040,7 +3040,7 @@
           "points": 3
         }
       ],
-      "verifiedAt": "2026-10-25T21:48:41.102Z"
+      "verifiedAt": "2026-10-25T23:53:58.705Z"
     },
     "seriea": {
       "name": "Serie A",
@@ -4263,7 +4263,7 @@
           "points": 3
         }
       ],
-      "verifiedAt": "2026-10-25T21:48:41.378Z"
+      "verifiedAt": "2026-10-25T23:53:59.000Z"
     }
   }
 }
