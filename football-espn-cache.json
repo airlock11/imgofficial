@@ -1,7 +1,7 @@
 {
   "version": 1,
   "source": "ESPN public football data",
-  "updatedAt": "2026-10-25T06:37:29.701Z",
+  "updatedAt": "2026-10-25T12:01:41.860Z",
   "leagues": {
     "soccer": {
       "name": "Premier League",
@@ -1096,7 +1096,7 @@
           "points": 4
         }
       ],
-      "verifiedAt": "2026-10-25T06:37:29.035Z"
+      "verifiedAt": "2026-10-25T12:01:41.380Z"
     },
     "laliga": {
       "name": "La Liga",
@@ -1104,22 +1104,6 @@
       "espn": "esp.1",
       "leagueLogo": "https://a.espncdn.com/i/leaguelogos/soccer/500/15.png",
       "games": [
-        {
-          "eventId": "401882854",
-          "date": "2026-10-11T12:00Z",
-          "displayTime": "",
-          "home": "Elche",
-          "away": "Celta Vigo",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/3751.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/85.png",
-          "homeScore": "0",
-          "awayScore": "0",
-          "state": "final",
-          "status": "FT",
-          "venue": "Estadio Martínez Valero",
-          "competition": "La Liga",
-          "category": "Spain"
-        },
         {
           "eventId": "401882847",
           "date": "2026-10-11T14:15Z",
@@ -2223,7 +2207,7 @@
           "points": 5
         }
       ],
-      "verifiedAt": "2026-10-25T06:37:29.267Z"
+      "verifiedAt": "2026-10-25T12:01:41.569Z"
     },
     "bundesliga": {
       "name": "Bundesliga",
@@ -3184,7 +3168,7 @@
           "points": 3
         }
       ],
-      "verifiedAt": "2026-10-25T06:37:29.513Z"
+      "verifiedAt": "2026-10-25T12:01:41.725Z"
     },
     "seriea": {
       "name": "Serie A",
@@ -3192,22 +3176,6 @@
       "espn": "ita.1",
       "leagueLogo": "https://a.espncdn.com/i/leaguelogos/soccer/500/12.png",
       "games": [
-        {
-          "eventId": "401874940",
-          "date": "2026-10-11T10:30Z",
-          "displayTime": "",
-          "home": "Como",
-          "away": "AS Roma",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/2572.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/104.png",
-          "homeScore": "0",
-          "awayScore": "0",
-          "state": "final",
-          "status": "FT",
-          "venue": "Giuseppe Sinigaglia",
-          "competition": "Serie A",
-          "category": "Italy"
-        },
         {
           "eventId": "401874951",
           "date": "2026-10-11T13:00Z",
@@ -3554,8 +3522,8 @@
           "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/109.png",
           "homeScore": "0",
           "awayScore": "0",
-          "state": "scheduled",
-          "status": "Scheduled",
+          "state": "live",
+          "status": "29'",
           "venue": "San Siro",
           "competition": "Serie A",
           "category": "Italy"
@@ -4487,7 +4455,7 @@
           "points": 3
         }
       ],
-      "verifiedAt": "2026-10-25T06:37:29.701Z"
+      "verifiedAt": "2026-10-25T12:01:41.859Z"
     }
   }
 }
