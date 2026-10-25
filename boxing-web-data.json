@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-24T21:07:17+00:00",
+  "updated_at": "2026-10-25T05:09:55+00:00",
   "source": "Official boxing websites",
   "sources": [
     {
@@ -13,7 +13,7 @@
   ],
   "source_counts": {
     "Premier Boxing Champions": 5,
-    "Matchroom Boxing": 2
+    "Matchroom Boxing": 1
   },
   "errors": {
     "Matchroom Boxing": "Parser returned no current rows; retained last verified official schedule"
@@ -163,37 +163,6 @@
         },
         "fighter_2": {
           "name": "Opponent TBA",
-          "winner": false
-        }
-      },
-      "results": {
-        "outcome": null,
-        "outcome_long": null,
-        "round": null,
-        "time": null,
-        "scores": []
-      }
-    },
-    {
-      "id": "matchroom-20261024-smith-puello",
-      "title": "Smith vs. Puello",
-      "date": "2026-10-24T12:00:00Z",
-      "displayTime": "Oct 24 · Time TBA",
-      "status": "NOT_STARTED",
-      "sourceName": "Matchroom Boxing",
-      "sourceUrl": "https://www.matchroomboxing.com/events/",
-      "event": {
-        "title": "Smith vs. Puello",
-        "location": "Sheffield, UK",
-        "venue": "Utilita Arena"
-      },
-      "fighters": {
-        "fighter_1": {
-          "name": "Smith",
-          "winner": false
-        },
-        "fighter_2": {
-          "name": "Puello",
           "winner": false
         }
       },
