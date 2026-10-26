@@ -2,7 +2,7 @@
   "special": true,
   "league": "WTA Tour",
   "live": true,
-  "updatedAt": "2026-10-26T21:39:35.112988+00:00",
+  "updatedAt": "2026-10-26T21:39:41.782888+00:00",
   "sourceName": "WTA Official Scores scrape",
   "sourceUrl": "https://www.wtatennis.com/scores/",
   "verificationSource": "WTA Official Scores",
@@ -13,16 +13,20 @@
   "games": [
     {
       "eventId": "wta-scrape-0-v-rodriguez-j-hinojosa-gomez",
-      "date": "2026-10-26T21:39:35.109839+00:00",
+      "date": "2026-10-26T21:39:41.779787+00:00",
       "displayTime": "Queretaro Open • MEX",
       "away": "V. Rodriguez",
       "home": "J. Hinojosa Gomez",
-      "awayScore": "",
-      "homeScore": "",
-      "awaySets": [],
-      "homeSets": [],
-      "awayPoint": "—",
-      "homePoint": "—",
+      "awayScore": "0 · 15",
+      "homeScore": "0 · 0",
+      "awaySets": [
+        "0"
+      ],
+      "homeSets": [
+        "0"
+      ],
+      "awayPoint": "15",
+      "homePoint": "0",
       "currentSet": 1,
       "awayCurrentSetGames": 0,
       "homeCurrentSetGames": 0,
@@ -41,7 +45,7 @@
     },
     {
       "eventId": "wta-scrape-1-l-giovannini-l-bronzetti",
-      "date": "2026-10-26T21:39:35.110156+00:00",
+      "date": "2026-10-26T21:39:41.780096+00:00",
       "displayTime": "Curitiba Open • BRA",
       "away": "L. Giovannini",
       "home": "L. Bronzetti",
