@@ -2,23 +2,23 @@
   "special": true,
   "league": "WTA Tour",
   "live": true,
-  "updatedAt": "2026-10-26T04:42:35.661816+00:00",
+  "updatedAt": "2026-10-26T04:42:41.478671+00:00",
   "sourceName": "WTA Official Scores scrape",
   "sourceUrl": "https://www.wtatennis.com/scores/",
   "verificationSource": "WTA Official Scores",
   "verificationUrl": "https://www.wtatennis.com/scores/",
-  "pageLiveCount": 3,
-  "parsedMatchCount": 3,
+  "pageLiveCount": 2,
+  "parsedMatchCount": 2,
   "note": "GitHub scrape of the rendered WTA Scores page. Game points, current set number, current-set games and per-set scores are stored separately.",
   "games": [
     {
       "eventId": "wta-scrape-1-m-timofeeva-t-kostovic",
-      "date": "2026-10-26T04:42:35.657679+00:00",
+      "date": "2026-10-26T04:42:41.475468+00:00",
       "displayTime": "Guangzhou Open • CHN",
       "away": "M. Timofeeva",
       "home": "T. Kostovic",
       "awayScore": "6 5 · 40",
-      "homeScore": "4 1 · 15",
+      "homeScore": "4 1 · 40",
       "awaySets": [
         "6",
         "5"
@@ -28,7 +28,7 @@
         "1"
       ],
       "awayPoint": "40",
-      "homePoint": "15",
+      "homePoint": "40",
       "currentSet": 2,
       "awayCurrentSetGames": 5,
       "homeCurrentSetGames": 1,
@@ -46,45 +46,13 @@
       "verificationUrl": "https://www.wtatennis.com/scores/"
     },
     {
-      "eventId": "wta-scrape-2-upcoming-kozyreva-lumsden-bhosale",
-      "date": "2026-10-26T04:42:35.658282+00:00",
-      "displayTime": "Guangzhou Open • CHN",
-      "away": "Upcoming / Kozyreva",
-      "home": "Lumsden / Bhosale",
-      "awayScore": "3 · 0",
-      "homeScore": "0 · 0",
-      "awaySets": [
-        "3"
-      ],
-      "homeSets": [
-        "0"
-      ],
-      "awayPoint": "0",
-      "homePoint": "0",
-      "currentSet": 1,
-      "awayCurrentSetGames": 3,
-      "homeCurrentSetGames": 0,
-      "awaySetsWon": 0,
-      "homeSetsWon": 0,
-      "round": "Round of 16",
-      "court": "Court 2",
-      "status": "Live Match: 0:08 · Round of 16 · Court 2",
-      "state": "live",
-      "eventOnly": false,
-      "title": "Guangzhou Open • CHN",
-      "sourceName": "WTA Official Scores scrape",
-      "sourceUrl": "https://www.wtatennis.com/scores/",
-      "verificationSource": "WTA Official Scores",
-      "verificationUrl": "https://www.wtatennis.com/scores/"
-    },
-    {
       "eventId": "wta-scrape-0-d-kasatkina-t-gibson",
-      "date": "2026-10-26T04:42:35.657388+00:00",
+      "date": "2026-10-26T04:42:41.475173+00:00",
       "displayTime": "Toray Pan Pacific Open Tennis • JPN",
       "away": "D. Kasatkina",
       "home": "T. Gibson",
       "awayScore": "0 4 · 0",
-      "homeScore": "6 4 · 15",
+      "homeScore": "6 4 · 40",
       "awaySets": [
         "0",
         "4"
@@ -94,7 +62,7 @@
         "4"
       ],
       "awayPoint": "0",
-      "homePoint": "15",
+      "homePoint": "40",
       "currentSet": 2,
       "awayCurrentSetGames": 4,
       "homeCurrentSetGames": 4,
@@ -102,7 +70,7 @@
       "homeSetsWon": 1,
       "round": "Round of 32",
       "court": "",
-      "status": "Live Match: 1:14 · Round of 32",
+      "status": "Live Match: 1:15 · Round of 32",
       "state": "live",
       "eventOnly": false,
       "title": "Toray Pan Pacific Open Tennis • JPN",
