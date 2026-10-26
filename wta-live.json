@@ -2,7 +2,7 @@
   "special": true,
   "league": "WTA Tour",
   "live": true,
-  "updatedAt": "2026-10-26T17:04:49.273909+00:00",
+  "updatedAt": "2026-10-26T17:04:57.314535+00:00",
   "sourceName": "WTA Official Scores scrape",
   "sourceUrl": "https://www.wtatennis.com/scores/",
   "verificationSource": "WTA Official Scores",
@@ -13,7 +13,7 @@
   "games": [
     {
       "eventId": "wta-scrape-0-v-rodriguez-m-herazo",
-      "date": "2026-10-26T17:04:49.269504+00:00",
+      "date": "2026-10-26T17:04:57.310280+00:00",
       "displayTime": "Queretaro Open • MEX",
       "away": "V. Rodriguez",
       "home": "M. Herazo",
@@ -48,7 +48,7 @@
     },
     {
       "eventId": "wta-scrape-1-m-torres-murcia-m-navarro-oliva",
-      "date": "2026-10-26T17:04:49.269780+00:00",
+      "date": "2026-10-26T17:04:57.310547+00:00",
       "displayTime": "Queretaro Open • MEX",
       "away": "M. Torres Murcia",
       "home": "M. Navarro Oliva",
@@ -83,7 +83,7 @@
     },
     {
       "eventId": "wta-scrape-2-l-zaar-a-aksu",
-      "date": "2026-10-26T17:04:49.269936+00:00",
+      "date": "2026-10-26T17:04:57.310702+00:00",
       "displayTime": "Valle D'Aosta Ladies Open • ITA",
       "away": "L. Zaar",
       "home": "A. Aksu",
@@ -115,12 +115,12 @@
     },
     {
       "eventId": "wta-scrape-4-f-labrana-g-ce",
-      "date": "2026-10-26T17:04:49.270233+00:00",
+      "date": "2026-10-26T17:04:57.310981+00:00",
       "displayTime": "Curitiba Open • BRA",
       "away": "F. Labrana",
       "home": "G. Ce",
       "awayScore": "4 0 · 40",
-      "homeScore": "6 2 · 40",
+      "homeScore": "6 2 · AD",
       "awaySets": [
         "4",
         "0"
@@ -130,7 +130,7 @@
         "2"
       ],
       "awayPoint": "40",
-      "homePoint": "40",
+      "homePoint": "AD",
       "currentSet": 2,
       "awayCurrentSetGames": 0,
       "homeCurrentSetGames": 2,
@@ -138,7 +138,7 @@
       "homeSetsWon": 1,
       "round": "Round of 32",
       "court": "",
-      "status": "Live Match: 1:09 · Round of 32",
+      "status": "Live Match: 1:10 · Round of 32",
       "state": "live",
       "eventOnly": false,
       "title": "Curitiba Open • BRA",
@@ -149,12 +149,12 @@
     },
     {
       "eventId": "wta-scrape-5-v-bosio-j-ortenzi",
-      "date": "2026-10-26T17:04:49.270388+00:00",
+      "date": "2026-10-26T17:04:57.311145+00:00",
       "displayTime": "Curitiba Open • BRA",
       "away": "V. Bosio",
       "home": "J. Ortenzi",
       "awayScore": "2 · 30",
-      "homeScore": "3 · 15",
+      "homeScore": "3 · 30",
       "awaySets": [
         "2"
       ],
@@ -162,7 +162,7 @@
         "3"
       ],
       "awayPoint": "30",
-      "homePoint": "15",
+      "homePoint": "30",
       "currentSet": 1,
       "awayCurrentSetGames": 2,
       "homeCurrentSetGames": 3,
@@ -170,7 +170,7 @@
       "homeSetsWon": 0,
       "round": "Round of 32",
       "court": "",
-      "status": "Live Match: 0:25 · Round of 32",
+      "status": "Live Match: 0:26 · Round of 32",
       "state": "live",
       "eventOnly": false,
       "title": "Curitiba Open • BRA",
@@ -181,7 +181,7 @@
     },
     {
       "eventId": "wta-scrape-3-z-li-g-maduzzi",
-      "date": "2026-10-26T17:04:49.270095+00:00",
+      "date": "2026-10-26T17:04:57.310847+00:00",
       "displayTime": "Valle D'Aosta Ladies Open • ITA",
       "away": "Z. Li",
       "home": "G. Maduzzi",
