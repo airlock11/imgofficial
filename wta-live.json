@@ -2,18 +2,18 @@
   "special": true,
   "league": "WTA Tour",
   "live": true,
-  "updatedAt": "2026-10-27T16:37:12.726164+00:00",
+  "updatedAt": "2026-10-27T16:37:18.778733+00:00",
   "sourceName": "WTA Official Scores scrape",
   "sourceUrl": "https://www.wtatennis.com/scores/",
   "verificationSource": "WTA Official Scores",
   "verificationUrl": "https://www.wtatennis.com/scores/",
-  "pageLiveCount": 6,
-  "parsedMatchCount": 6,
+  "pageLiveCount": 7,
+  "parsedMatchCount": 7,
   "note": "GitHub scrape of the rendered WTA Scores page. Game points, current set number, current-set games and per-set scores are stored separately.",
   "games": [
     {
       "eventId": "wta-scrape-0-m-colmegna-z-pawlikowska",
-      "date": "2026-10-27T16:37:12.723122+00:00",
+      "date": "2026-10-27T16:37:18.775459+00:00",
       "displayTime": "Queretaro Open • MEX",
       "away": "M. Colmegna",
       "home": "Z. Pawlikowska",
@@ -36,7 +36,7 @@
       "homeSetsWon": 0,
       "round": "Round of 32",
       "court": "Court 2",
-      "status": "Live Match: 0:58 · Round of 32 · Court 2",
+      "status": "Live Match: 0:59 · Round of 32 · Court 2",
       "state": "live",
       "eventOnly": false,
       "title": "Queretaro Open • MEX",
@@ -47,12 +47,12 @@
     },
     {
       "eventId": "wta-scrape-1-a-reami-l-mi",
-      "date": "2026-10-27T16:37:12.723319+00:00",
+      "date": "2026-10-27T16:37:18.775657+00:00",
       "displayTime": "Queretaro Open • MEX",
       "away": "A. Reami",
       "home": "L. Mi",
       "awayScore": "6 4 · 0",
-      "homeScore": "1 2 · 0",
+      "homeScore": "1 2 · 15",
       "awaySets": [
         "6",
         "4"
@@ -62,7 +62,7 @@
         "2"
       ],
       "awayPoint": "0",
-      "homePoint": "0",
+      "homePoint": "15",
       "currentSet": 2,
       "awayCurrentSetGames": 4,
       "homeCurrentSetGames": 2,
@@ -70,10 +70,44 @@
       "homeSetsWon": 0,
       "round": "Round of 32",
       "court": "Court 3",
-      "status": "Live Match: 0:59 · Round of 32 · Court 3",
+      "status": "Live Match: 1:00 · Round of 32 · Court 3",
       "state": "live",
       "eventOnly": false,
       "title": "Queretaro Open • MEX",
+      "sourceName": "WTA Official Scores scrape",
+      "sourceUrl": "https://www.wtatennis.com/scores/",
+      "verificationSource": "WTA Official Scores",
+      "verificationUrl": "https://www.wtatennis.com/scores/"
+    },
+    {
+      "eventId": "wta-scrape-3-a-blinkova-d-galfi",
+      "date": "2026-10-27T16:37:18.775923+00:00",
+      "displayTime": "Valle D'Aosta Ladies Open • ITA",
+      "away": "A. Blinkova",
+      "home": "D. Galfi",
+      "awayScore": "6 0 · 0",
+      "homeScore": "3 0 · 15",
+      "awaySets": [
+        "6",
+        "0"
+      ],
+      "homeSets": [
+        "3",
+        "0"
+      ],
+      "awayPoint": "0",
+      "homePoint": "15",
+      "currentSet": 2,
+      "awayCurrentSetGames": 0,
+      "homeCurrentSetGames": 0,
+      "awaySetsWon": 1,
+      "homeSetsWon": 0,
+      "round": "Round of 32",
+      "court": "Grandstand",
+      "status": "Live Match: 0:29 · Round of 32 · Grandstand",
+      "state": "live",
+      "eventOnly": false,
+      "title": "Valle D'Aosta Ladies Open • ITA",
       "sourceName": "WTA Official Scores scrape",
       "sourceUrl": "https://www.wtatennis.com/scores/",
       "verificationSource": "WTA Official Scores",
@@ -81,12 +115,12 @@
     },
     {
       "eventId": "wta-scrape-2-e-mandlik-e-arango",
-      "date": "2026-10-27T16:37:12.723454+00:00",
+      "date": "2026-10-27T16:37:18.775791+00:00",
       "displayTime": "Queretaro Open • MEX",
       "away": "E. Mandlik",
       "home": "E. Arango",
       "awayScore": "1 · 15",
-      "homeScore": "0 · 0",
+      "homeScore": "0 · 15",
       "awaySets": [
         "1"
       ],
@@ -94,7 +128,7 @@
         "0"
       ],
       "awayPoint": "15",
-      "homePoint": "0",
+      "homePoint": "15",
       "currentSet": 1,
       "awayCurrentSetGames": 1,
       "homeCurrentSetGames": 0,
@@ -102,7 +136,7 @@
       "homeSetsWon": 0,
       "round": "Round of 32",
       "court": "",
-      "status": "Live Match: 0:04 · Round of 32",
+      "status": "Live Match: 0:05 · Round of 32",
       "state": "live",
       "eventOnly": false,
       "title": "Queretaro Open • MEX",
@@ -112,8 +146,8 @@
       "verificationUrl": "https://www.wtatennis.com/scores/"
     },
     {
-      "eventId": "wta-scrape-4-a-candiotto-l-cinalli",
-      "date": "2026-10-27T16:37:12.723680+00:00",
+      "eventId": "wta-scrape-5-a-candiotto-l-cinalli",
+      "date": "2026-10-27T16:37:18.776159+00:00",
       "displayTime": "Curitiba Open • BRA",
       "away": "A. Candiotto",
       "home": "L. Cinalli",
@@ -144,8 +178,8 @@
       "verificationUrl": "https://www.wtatennis.com/scores/"
     },
     {
-      "eventId": "wta-scrape-5-j-gonzalez-daniele-s-sierra",
-      "date": "2026-10-27T16:37:12.723797+00:00",
+      "eventId": "wta-scrape-6-j-gonzalez-daniele-s-sierra",
+      "date": "2026-10-27T16:37:18.776278+00:00",
       "displayTime": "Curitiba Open • BRA",
       "away": "J. Gonzalez Daniele",
       "home": "S. Sierra",
@@ -176,8 +210,8 @@
       "verificationUrl": "https://www.wtatennis.com/scores/"
     },
     {
-      "eventId": "wta-scrape-3-s-bandecchi-a-sobolieva",
-      "date": "2026-10-27T16:37:12.723569+00:00",
+      "eventId": "wta-scrape-4-s-bandecchi-a-sobolieva",
+      "date": "2026-10-27T16:37:18.776044+00:00",
       "displayTime": "Valle D'Aosta Ladies Open • ITA",
       "away": "S. Bandecchi",
       "home": "A. Sobolieva",
