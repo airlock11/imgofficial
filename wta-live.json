@@ -2,7 +2,7 @@
   "special": true,
   "league": "WTA Tour",
   "live": true,
-  "updatedAt": "2026-10-27T11:06:38.875110+00:00",
+  "updatedAt": "2026-10-27T11:06:44.959831+00:00",
   "sourceName": "WTA Official Scores scrape",
   "sourceUrl": "https://www.wtatennis.com/scores/",
   "verificationSource": "WTA Official Scores",
@@ -13,7 +13,7 @@
   "games": [
     {
       "eventId": "wta-scrape-0-l-tagger-v-williams",
-      "date": "2026-10-27T11:06:38.871201+00:00",
+      "date": "2026-10-27T11:06:44.955910+00:00",
       "displayTime": "Guangzhou Open • CHN",
       "away": "L. Tagger",
       "home": "V. Williams",
@@ -47,7 +47,7 @@
     },
     {
       "eventId": "wta-scrape-1-upcoming-bondar-sonmez-cho",
-      "date": "2026-10-27T11:06:38.871859+00:00",
+      "date": "2026-10-27T11:06:44.956564+00:00",
       "displayTime": "Guangzhou Open • CHN",
       "away": "Upcoming / Bondar",
       "home": "Sonmez / Cho",
@@ -79,12 +79,12 @@
     },
     {
       "eventId": "wta-scrape-2-d-kovinic-n-noha-akugue",
-      "date": "2026-10-27T11:06:38.872046+00:00",
+      "date": "2026-10-27T11:06:44.956747+00:00",
       "displayTime": "Valle D'Aosta Ladies Open • ITA",
       "away": "D. Kovinic",
       "home": "N. Noha Akugue",
-      "awayScore": "6 4 0 · 40",
-      "homeScore": "7 0 · AD",
+      "awayScore": "6 4 0 · 0",
+      "homeScore": "7 1 · 0",
       "awaySets": [
         "6",
         "4",
@@ -92,10 +92,10 @@
       ],
       "homeSets": [
         "7",
-        "0"
+        "1"
       ],
-      "awayPoint": "40",
-      "homePoint": "AD",
+      "awayPoint": "0",
+      "homePoint": "0",
       "currentSet": 3,
       "awayCurrentSetGames": 0,
       "homeCurrentSetGames": 0,
@@ -114,11 +114,11 @@
     },
     {
       "eventId": "wta-scrape-3-l-stefanini-i-serban",
-      "date": "2026-10-27T11:06:38.872226+00:00",
+      "date": "2026-10-27T11:06:44.956930+00:00",
       "displayTime": "Valle D'Aosta Ladies Open • ITA",
       "away": "L. Stefanini",
       "home": "I. Serban",
-      "awayScore": "6 0 · AD",
+      "awayScore": "6 0 · 40",
       "homeScore": "3 0 · 40",
       "awaySets": [
         "6",
@@ -128,7 +128,7 @@
         "3",
         "0"
       ],
-      "awayPoint": "AD",
+      "awayPoint": "40",
       "homePoint": "40",
       "currentSet": 2,
       "awayCurrentSetGames": 0,
@@ -137,7 +137,7 @@
       "homeSetsWon": 0,
       "round": "Round of 32",
       "court": "Grandstand",
-      "status": "Live Match: 0:55 · Round of 32 · Grandstand",
+      "status": "Live Match: 0:56 · Round of 32 · Grandstand",
       "state": "live",
       "eventOnly": false,
       "title": "Valle D'Aosta Ladies Open • ITA",
