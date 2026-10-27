@@ -2,7 +2,7 @@
   "special": true,
   "league": "WTA Tour",
   "live": true,
-  "updatedAt": "2026-10-27T11:06:07.055986+00:00",
+  "updatedAt": "2026-10-27T11:06:13.366492+00:00",
   "sourceName": "WTA Official Scores scrape",
   "sourceUrl": "https://www.wtatennis.com/scores/",
   "verificationSource": "WTA Official Scores",
@@ -13,7 +13,7 @@
   "games": [
     {
       "eventId": "wta-scrape-0-l-tagger-v-williams",
-      "date": "2026-10-27T11:06:07.051990+00:00",
+      "date": "2026-10-27T11:06:13.362239+00:00",
       "displayTime": "Guangzhou Open • CHN",
       "away": "L. Tagger",
       "home": "V. Williams",
@@ -47,7 +47,7 @@
     },
     {
       "eventId": "wta-scrape-1-upcoming-bondar-sonmez-cho",
-      "date": "2026-10-27T11:06:07.052700+00:00",
+      "date": "2026-10-27T11:06:13.362911+00:00",
       "displayTime": "Guangzhou Open • CHN",
       "away": "Upcoming / Bondar",
       "home": "Sonmez / Cho",
@@ -79,12 +79,12 @@
     },
     {
       "eventId": "wta-scrape-2-d-kovinic-n-noha-akugue",
-      "date": "2026-10-27T11:06:07.052885+00:00",
+      "date": "2026-10-27T11:06:13.363099+00:00",
       "displayTime": "Valle D'Aosta Ladies Open • ITA",
       "away": "D. Kovinic",
       "home": "N. Noha Akugue",
       "awayScore": "6 4 0 · 40",
-      "homeScore": "7 0 · 40",
+      "homeScore": "7 0 · AD",
       "awaySets": [
         "6",
         "4",
@@ -95,7 +95,7 @@
         "0"
       ],
       "awayPoint": "40",
-      "homePoint": "40",
+      "homePoint": "AD",
       "currentSet": 3,
       "awayCurrentSetGames": 0,
       "homeCurrentSetGames": 0,
@@ -114,11 +114,11 @@
     },
     {
       "eventId": "wta-scrape-3-l-stefanini-i-serban",
-      "date": "2026-10-27T11:06:07.053064+00:00",
+      "date": "2026-10-27T11:06:13.363281+00:00",
       "displayTime": "Valle D'Aosta Ladies Open • ITA",
       "away": "L. Stefanini",
       "home": "I. Serban",
-      "awayScore": "6 0 · 40",
+      "awayScore": "6 0 · AD",
       "homeScore": "3 0 · 40",
       "awaySets": [
         "6",
@@ -128,7 +128,7 @@
         "3",
         "0"
       ],
-      "awayPoint": "40",
+      "awayPoint": "AD",
       "homePoint": "40",
       "currentSet": 2,
       "awayCurrentSetGames": 0,
