@@ -2,7 +2,7 @@
   "special": true,
   "league": "WTA Tour",
   "live": true,
-  "updatedAt": "2026-10-27T21:02:41.275209+00:00",
+  "updatedAt": "2026-10-27T21:02:47.923698+00:00",
   "sourceName": "WTA Official Scores scrape",
   "sourceUrl": "https://www.wtatennis.com/scores/",
   "verificationSource": "WTA Official Scores",
@@ -13,30 +13,30 @@
   "games": [
     {
       "eventId": "wta-scrape-1-c-monnet-l-jeanjean",
-      "date": "2026-10-27T21:02:41.273060+00:00",
+      "date": "2026-10-27T21:02:47.921520+00:00",
       "displayTime": "Queretaro Open • MEX",
       "away": "C. Monnet",
       "home": "L. Jeanjean",
-      "awayScore": "6 3 · 40",
-      "homeScore": "4 1 · 40",
+      "awayScore": "6 4 · 0",
+      "homeScore": "4 1 · 0",
       "awaySets": [
         "6",
-        "3"
+        "4"
       ],
       "homeSets": [
         "4",
         "1"
       ],
-      "awayPoint": "40",
-      "homePoint": "40",
+      "awayPoint": "0",
+      "homePoint": "0",
       "currentSet": 2,
-      "awayCurrentSetGames": 3,
+      "awayCurrentSetGames": 4,
       "homeCurrentSetGames": 1,
       "awaySetsWon": 1,
       "homeSetsWon": 0,
       "round": "Round of 32",
       "court": "Court 3",
-      "status": "Live Match: 1:33 · Round of 32 · Court 3",
+      "status": "Live Match: 1:34 · Round of 32 · Court 3",
       "state": "live",
       "eventOnly": false,
       "title": "Queretaro Open • MEX",
@@ -47,7 +47,7 @@
     },
     {
       "eventId": "wta-scrape-2-v-strakhova-s-costoulas",
-      "date": "2026-10-27T21:02:41.273161+00:00",
+      "date": "2026-10-27T21:02:47.921618+00:00",
       "displayTime": "Queretaro Open • MEX",
       "away": "V. Strakhova",
       "home": "S. Costoulas",
@@ -79,7 +79,7 @@
     },
     {
       "eventId": "wta-scrape-0-m-gomez-pezuela-cano-c-herea",
-      "date": "2026-10-27T21:02:41.272878+00:00",
+      "date": "2026-10-27T21:02:47.921331+00:00",
       "displayTime": "Queretaro Open • MEX",
       "away": "M. Gomez Pezuela Cano",
       "home": "C. Herea",
@@ -116,11 +116,11 @@
     },
     {
       "eventId": "wta-scrape-3-m-carle-l-pigossi",
-      "date": "2026-10-27T21:02:41.273251+00:00",
+      "date": "2026-10-27T21:02:47.921704+00:00",
       "displayTime": "Curitiba Open • BRA",
       "away": "M. Carle",
       "home": "L. Pigossi",
-      "awayScore": "7 0 · 40",
+      "awayScore": "7 0 · AD",
       "homeScore": "5 0 · 40",
       "awaySets": [
         "7",
@@ -130,7 +130,7 @@
         "5",
         "0"
       ],
-      "awayPoint": "40",
+      "awayPoint": "AD",
       "homePoint": "40",
       "currentSet": 2,
       "awayCurrentSetGames": 0,
@@ -139,7 +139,7 @@
       "homeSetsWon": 0,
       "round": "Round of 32",
       "court": "",
-      "status": "Live Match: 1:19 · Round of 32",
+      "status": "Live Match: 1:20 · Round of 32",
       "state": "live",
       "eventOnly": false,
       "title": "Curitiba Open • BRA",
