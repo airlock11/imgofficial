@@ -2,18 +2,18 @@
   "special": true,
   "league": "WTA Tour",
   "live": true,
-  "updatedAt": "2026-10-27T05:44:04.073878+00:00",
+  "updatedAt": "2026-10-27T05:44:10.095784+00:00",
   "sourceName": "WTA Official Scores scrape",
   "sourceUrl": "https://www.wtatennis.com/scores/",
   "verificationSource": "WTA Official Scores",
   "verificationUrl": "https://www.wtatennis.com/scores/",
-  "pageLiveCount": 5,
-  "parsedMatchCount": 5,
+  "pageLiveCount": 6,
+  "parsedMatchCount": 6,
   "note": "GitHub scrape of the rendered WTA Scores page. Game points, current set number, current-set games and per-set scores are stored separately.",
   "games": [
     {
-      "eventId": "wta-scrape-0-upcoming-aoyama-liang-neel",
-      "date": "2026-10-27T05:44:04.070836+00:00",
+      "eventId": "wta-scrape-1-upcoming-aoyama-liang-neel",
+      "date": "2026-10-27T05:44:10.092834+00:00",
       "displayTime": "Toray Pan Pacific Open Tennis • JPN",
       "away": "Upcoming / Aoyama",
       "home": "Liang / Neel",
@@ -50,8 +50,8 @@
       "verificationUrl": "https://www.wtatennis.com/scores/"
     },
     {
-      "eventId": "wta-scrape-2-k-quevedo-s-kenin",
-      "date": "2026-10-27T05:44:04.071165+00:00",
+      "eventId": "wta-scrape-3-k-quevedo-s-kenin",
+      "date": "2026-10-27T05:44:10.093091+00:00",
       "displayTime": "Guangzhou Open • CHN",
       "away": "K. Quevedo",
       "home": "S. Kenin",
@@ -77,7 +77,7 @@
       "homeSetsWon": 1,
       "round": "Round of 32",
       "court": "Center Court",
-      "status": "Live Match: 2:33 · Round of 32 · Center Court",
+      "status": "Live Match: 2:34 · Round of 32 · Center Court",
       "state": "live",
       "eventOnly": false,
       "title": "Guangzhou Open • CHN",
@@ -87,12 +87,12 @@
       "verificationUrl": "https://www.wtatennis.com/scores/"
     },
     {
-      "eventId": "wta-scrape-3-upcoming-kichenok-ninomiya-maleckova",
-      "date": "2026-10-27T05:44:04.071373+00:00",
+      "eventId": "wta-scrape-4-upcoming-kichenok-ninomiya-maleckova",
+      "date": "2026-10-27T05:44:10.093299+00:00",
       "displayTime": "Guangzhou Open • CHN",
       "away": "Upcoming / Kichenok",
       "home": "Ninomiya / Maleckova",
-      "awayScore": "3 · 0",
+      "awayScore": "3 · 15",
       "homeScore": "5 · 15",
       "awaySets": [
         "3"
@@ -100,7 +100,7 @@
       "homeSets": [
         "5"
       ],
-      "awayPoint": "0",
+      "awayPoint": "15",
       "homePoint": "15",
       "currentSet": 1,
       "awayCurrentSetGames": 3,
@@ -119,13 +119,13 @@
       "verificationUrl": "https://www.wtatennis.com/scores/"
     },
     {
-      "eventId": "wta-scrape-4-s-sorribes-tormo-z-sonmez",
-      "date": "2026-10-27T05:44:04.071555+00:00",
+      "eventId": "wta-scrape-5-s-sorribes-tormo-z-sonmez",
+      "date": "2026-10-27T05:44:10.093415+00:00",
       "displayTime": "Guangzhou Open • CHN",
       "away": "S. Sorribes Tormo",
       "home": "Z. Sonmez",
       "awayScore": "1 · 40",
-      "homeScore": "4 · 40",
+      "homeScore": "4 · AD",
       "awaySets": [
         "1"
       ],
@@ -133,7 +133,7 @@
         "4"
       ],
       "awayPoint": "40",
-      "homePoint": "40",
+      "homePoint": "AD",
       "currentSet": 1,
       "awayCurrentSetGames": 1,
       "homeCurrentSetGames": 4,
@@ -141,7 +141,7 @@
       "homeSetsWon": 0,
       "round": "Round of 32",
       "court": "Court 2",
-      "status": "Live Match: 0:24 · Round of 32 · Court 2",
+      "status": "Live Match: 0:25 · Round of 32 · Court 2",
       "state": "live",
       "eventOnly": false,
       "title": "Guangzhou Open • CHN",
@@ -151,8 +151,44 @@
       "verificationUrl": "https://www.wtatennis.com/scores/"
     },
     {
-      "eventId": "wta-scrape-1-a-sasnovich-n-bartunkova",
-      "date": "2026-10-27T05:44:04.071045+00:00",
+      "eventId": "wta-scrape-0-y-putintseva-m-sakkari",
+      "date": "2026-10-27T05:44:10.092346+00:00",
+      "displayTime": "Toray Pan Pacific Open Tennis • JPN",
+      "away": "Y. Putintseva",
+      "home": "M. Sakkari",
+      "awayScore": "6 3 4 · 15",
+      "homeScore": "4 6 1 · 0",
+      "awaySets": [
+        "6",
+        "3",
+        "4"
+      ],
+      "homeSets": [
+        "4",
+        "6",
+        "1"
+      ],
+      "awayPoint": "15",
+      "homePoint": "0",
+      "currentSet": 3,
+      "awayCurrentSetGames": 4,
+      "homeCurrentSetGames": 1,
+      "awaySetsWon": 1,
+      "homeSetsWon": 1,
+      "round": "Round of 32",
+      "court": "",
+      "status": "Live Match: 2:17 · Round of 32",
+      "state": "live",
+      "eventOnly": false,
+      "title": "Toray Pan Pacific Open Tennis • JPN",
+      "sourceName": "WTA Official Scores scrape",
+      "sourceUrl": "https://www.wtatennis.com/scores/",
+      "verificationSource": "WTA Official Scores",
+      "verificationUrl": "https://www.wtatennis.com/scores/"
+    },
+    {
+      "eventId": "wta-scrape-2-a-sasnovich-n-bartunkova",
+      "date": "2026-10-27T05:44:10.092974+00:00",
       "displayTime": "Toray Pan Pacific Open Tennis • JPN",
       "away": "A. Sasnovich",
       "home": "N. Bartunkova",
@@ -173,7 +209,7 @@
       "homeSetsWon": 0,
       "round": "Round of 32",
       "court": "",
-      "status": "Live Match: 0:11 · Round of 32",
+      "status": "Live Match: 0:12 · Round of 32",
       "state": "live",
       "eventOnly": false,
       "title": "Toray Pan Pacific Open Tennis • JPN",
