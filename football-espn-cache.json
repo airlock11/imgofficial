@@ -1,7 +1,7 @@
 {
   "version": 1,
   "source": "ESPN public football data",
-  "updatedAt": "2026-10-28T12:55:51.646Z",
+  "updatedAt": "2026-10-28T18:42:31.105Z",
   "leagues": {
     "soccer": {
       "name": "Premier League",
@@ -1032,7 +1032,7 @@
           "points": 5
         }
       ],
-      "verifiedAt": "2026-10-28T12:55:50.523Z"
+      "verifiedAt": "2026-10-28T18:42:30.150Z"
     },
     "laliga": {
       "name": "La Liga",
@@ -2079,7 +2079,7 @@
           "points": 5
         }
       ],
-      "verifiedAt": "2026-10-28T12:55:50.967Z"
+      "verifiedAt": "2026-10-28T18:42:30.458Z"
     },
     "bundesliga": {
       "name": "Bundesliga",
@@ -3008,7 +3008,7 @@
           "points": 3
         }
       ],
-      "verifiedAt": "2026-10-28T12:55:51.176Z"
+      "verifiedAt": "2026-10-28T18:42:30.695Z"
     },
     "seriea": {
       "name": "Serie A",
@@ -3392,10 +3392,10 @@
           "away": "Bologna",
           "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/103.png",
           "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/107.png",
-          "homeScore": "0",
-          "awayScore": "0",
-          "state": "scheduled",
-          "status": "Scheduled",
+          "homeScore": "2",
+          "awayScore": "1",
+          "state": "live",
+          "status": "53'",
           "venue": "San Siro",
           "competition": "Serie A",
           "category": "Italy"
@@ -3410,8 +3410,8 @@
           "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/118.png",
           "homeScore": "0",
           "awayScore": "0",
-          "state": "scheduled",
-          "status": "Scheduled",
+          "state": "live",
+          "status": "55'",
           "venue": "Ennio Tardini",
           "competition": "Serie A",
           "category": "Italy"
@@ -3426,8 +3426,8 @@
           "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/110.png",
           "homeScore": "0",
           "awayScore": "0",
-          "state": "scheduled",
-          "status": "Scheduled",
+          "state": "live",
+          "status": "55'",
           "venue": "Stadio Pier Luigi Penzo",
           "competition": "Serie A",
           "category": "Italy"
@@ -4199,7 +4199,7 @@
           "points": 3
         }
       ],
-      "verifiedAt": "2026-10-28T12:55:51.646Z"
+      "verifiedAt": "2026-10-28T18:42:31.105Z"
     }
   }
 }
