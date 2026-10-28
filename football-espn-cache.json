@@ -1,7 +1,7 @@
 {
   "version": 1,
   "source": "ESPN public football data",
-  "updatedAt": "2026-10-27T20:45:52.263Z",
+  "updatedAt": "2026-10-28T00:17:03.401Z",
   "leagues": {
     "soccer": {
       "name": "Premier League",
@@ -1032,7 +1032,7 @@
           "points": 5
         }
       ],
-      "verifiedAt": "2026-10-27T20:45:51.510Z"
+      "verifiedAt": "2026-10-28T00:17:02.742Z"
     },
     "laliga": {
       "name": "La Liga",
@@ -2079,7 +2079,7 @@
           "points": 5
         }
       ],
-      "verifiedAt": "2026-10-27T20:45:51.781Z"
+      "verifiedAt": "2026-10-28T00:17:03.021Z"
     },
     "bundesliga": {
       "name": "Bundesliga",
@@ -3008,7 +3008,7 @@
           "points": 3
         }
       ],
-      "verifiedAt": "2026-10-27T20:45:51.984Z"
+      "verifiedAt": "2026-10-28T00:17:03.228Z"
     },
     "seriea": {
       "name": "Serie A",
@@ -3360,10 +3360,10 @@
           "away": "Cagliari",
           "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/104.png",
           "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/2925.png",
-          "homeScore": "2",
-          "awayScore": "1",
-          "state": "live",
-          "status": "HT",
+          "homeScore": "4",
+          "awayScore": "2",
+          "state": "final",
+          "status": "FT",
           "venue": "Olimpico",
           "competition": "Serie A",
           "category": "Italy"
@@ -3377,9 +3377,9 @@
           "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/239.png",
           "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/2572.png",
           "homeScore": "1",
-          "awayScore": "0",
-          "state": "live",
-          "status": "HT",
+          "awayScore": "3",
+          "state": "final",
+          "status": "FT",
           "venue": "Stadio Olimpico Grande Torino",
           "competition": "Serie A",
           "category": "Italy"
@@ -4004,15 +4004,26 @@
           "rank": 3,
           "team": "AS Roma",
           "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/104.png",
-          "played": 8,
-          "wins": 5,
+          "played": 9,
+          "wins": 6,
           "draws": 3,
           "losses": 0,
-          "goalDiff": 13,
-          "points": 18
+          "goalDiff": 15,
+          "points": 21
         },
         {
           "rank": 4,
+          "team": "Como",
+          "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2572.png",
+          "played": 9,
+          "wins": 6,
+          "draws": 2,
+          "losses": 1,
+          "goalDiff": 9,
+          "points": 20
+        },
+        {
+          "rank": 5,
           "team": "AC Milan",
           "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/103.png",
           "played": 8,
@@ -4021,17 +4032,6 @@
           "losses": 0,
           "goalDiff": 9,
           "points": 18
-        },
-        {
-          "rank": 5,
-          "team": "Como",
-          "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2572.png",
-          "played": 8,
-          "wins": 5,
-          "draws": 2,
-          "losses": 1,
-          "goalDiff": 7,
-          "points": 17
         },
         {
           "rank": 6,
@@ -4059,22 +4059,22 @@
           "rank": 8,
           "team": "Torino",
           "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/239.png",
-          "played": 8,
+          "played": 9,
           "wins": 4,
           "draws": 1,
-          "losses": 3,
-          "goalDiff": 2,
+          "losses": 4,
+          "goalDiff": 0,
           "points": 13
         },
         {
           "rank": 9,
           "team": "Cagliari",
           "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2925.png",
-          "played": 8,
+          "played": 9,
           "wins": 4,
           "draws": 1,
-          "losses": 3,
-          "goalDiff": -3,
+          "losses": 4,
+          "goalDiff": -5,
           "points": 13
         },
         {
@@ -4199,7 +4199,7 @@
           "points": 3
         }
       ],
-      "verifiedAt": "2026-10-27T20:45:52.263Z"
+      "verifiedAt": "2026-10-28T00:17:03.400Z"
     }
   }
 }
