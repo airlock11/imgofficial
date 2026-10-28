@@ -1,14 +1,120 @@
 {
   "special": true,
   "league": "WTA Tour",
-  "live": false,
-  "updatedAt": "2026-10-28T12:43:48.468186+00:00",
+  "live": true,
+  "updatedAt": "2026-10-28T12:43:55.993146+00:00",
   "sourceName": "WTA Official Scores scrape",
   "sourceUrl": "https://www.wtatennis.com/scores/",
   "verificationSource": "WTA Official Scores",
   "verificationUrl": "https://www.wtatennis.com/scores/",
-  "pageLiveCount": null,
-  "parsedMatchCount": 0,
+  "pageLiveCount": 3,
+  "parsedMatchCount": 3,
   "note": "GitHub scrape of the rendered WTA Scores page. Game points, current set number, current-set games and per-set scores are stored separately.",
-  "games": []
+  "games": [
+    {
+      "eventId": "wta-scrape-0-h-shi-d-yastremska",
+      "date": "2026-10-28T12:43:55.989967+00:00",
+      "displayTime": "Guangzhou Open • CHN",
+      "away": "H. Shi",
+      "home": "D. Yastremska",
+      "awayScore": "7 3 · 40",
+      "homeScore": "5 2 · 0",
+      "awaySets": [
+        "7",
+        "3"
+      ],
+      "homeSets": [
+        "5",
+        "2"
+      ],
+      "awayPoint": "40",
+      "homePoint": "0",
+      "currentSet": 2,
+      "awayCurrentSetGames": 3,
+      "homeCurrentSetGames": 2,
+      "awaySetsWon": 1,
+      "homeSetsWon": 0,
+      "round": "Round of 16",
+      "court": "Center Court",
+      "status": "Live Match: 1:15 · Round of 16 · Center Court",
+      "state": "live",
+      "eventOnly": false,
+      "title": "Guangzhou Open • CHN",
+      "sourceName": "WTA Official Scores scrape",
+      "sourceUrl": "https://www.wtatennis.com/scores/",
+      "verificationSource": "WTA Official Scores",
+      "verificationUrl": "https://www.wtatennis.com/scores/"
+    },
+    {
+      "eventId": "wta-scrape-1-y-kotliar-e-andreeva",
+      "date": "2026-10-28T12:43:55.990244+00:00",
+      "displayTime": "Valle D'Aosta Ladies Open • ITA",
+      "away": "Y. Kotliar",
+      "home": "E. Andreeva",
+      "awayScore": "6 2 1 · 40",
+      "homeScore": "7 3 · 30",
+      "awaySets": [
+        "6",
+        "2",
+        "1"
+      ],
+      "homeSets": [
+        "7",
+        "3"
+      ],
+      "awayPoint": "40",
+      "homePoint": "30",
+      "currentSet": 3,
+      "awayCurrentSetGames": 1,
+      "homeCurrentSetGames": 0,
+      "awaySetsWon": 0,
+      "homeSetsWon": 1,
+      "round": "Round of 32",
+      "court": "Grandstand",
+      "status": "Live Match: 1:36 · Round of 32 · Grandstand",
+      "state": "live",
+      "eventOnly": false,
+      "title": "Valle D'Aosta Ladies Open • ITA",
+      "sourceName": "WTA Official Scores scrape",
+      "sourceUrl": "https://www.wtatennis.com/scores/",
+      "verificationSource": "WTA Official Scores",
+      "verificationUrl": "https://www.wtatennis.com/scores/"
+    },
+    {
+      "eventId": "wta-scrape-2-r-montgomery-l-pigato",
+      "date": "2026-10-28T12:43:55.990431+00:00",
+      "displayTime": "Valle D'Aosta Ladies Open • ITA",
+      "away": "R. Montgomery",
+      "home": "L. Pigato",
+      "awayScore": "7 0 6",
+      "homeScore": "7 6 6",
+      "awaySets": [
+        "7",
+        "0",
+        "6"
+      ],
+      "homeSets": [
+        "7",
+        "6",
+        "6"
+      ],
+      "awayPoint": "—",
+      "homePoint": "—",
+      "currentSet": 3,
+      "awayCurrentSetGames": 6,
+      "homeCurrentSetGames": 6,
+      "awaySetsWon": 0,
+      "homeSetsWon": 1,
+      "round": "Round of 32",
+      "court": "Centre court",
+      "status": "Live Match: 1:35 · Round of 32 · Centre court",
+      "state": "live",
+      "eventOnly": false,
+      "title": "Valle D'Aosta Ladies Open • ITA",
+      "sourceName": "WTA Official Scores scrape",
+      "sourceUrl": "https://www.wtatennis.com/scores/",
+      "verificationSource": "WTA Official Scores",
+      "verificationUrl": "https://www.wtatennis.com/scores/"
+    }
+  ]
 }
