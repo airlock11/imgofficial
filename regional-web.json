@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-28T16:51:47+08:00",
+  "updated_at": "2026-10-28T23:44:40+08:00",
   "refresh_minutes": 15,
   "leagues": {
     "pba": {
@@ -299,7 +299,7 @@
           "idleDiscoveryMinutes": 180,
           "gameDayDataRefreshMinutes": 15,
           "gameDayLivestreamRefreshMinutes": 5,
-          "lastSlowCheckAt": "2026-10-28T16:51:03+08:00"
+          "lastSlowCheckAt": "2026-10-28T23:43:54+08:00"
         },
         "failClosed": true
       }
@@ -1156,14 +1156,14 @@
           "losses": 4
         },
         {
-          "team": "Adamson Soaring Falcons",
-          "wins": 4,
+          "team": "FEU Tamaraws",
+          "wins": 5,
           "losses": 4
         },
         {
-          "team": "FEU Tamaraws",
+          "team": "Adamson Soaring Falcons",
           "wins": 4,
-          "losses": 4
+          "losses": 5
         },
         {
           "team": "UST Growling Tigers",
@@ -1177,6 +1177,19 @@
         }
       ],
       "games": [
+        {
+          "eventId": "uaap-live-37",
+          "date": "2026-10-28T17:00:00+08:00",
+          "displayTime": "Oct 28 · Final",
+          "away": "FEU Tamaraws",
+          "home": "Adamson Soaring Falcons",
+          "awayScore": "73",
+          "homeScore": "66",
+          "status": "Final",
+          "state": "final",
+          "sourceName": "UAAP Live Stats",
+          "sourceUrl": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball?game_id=37"
+        },
         {
           "eventId": "uaap-live-36",
           "date": "2026-10-28T14:30:00+08:00",
@@ -1319,19 +1332,6 @@
           "state": "final",
           "sourceName": "UAAP Live Stats",
           "sourceUrl": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball?game_id=26"
-        },
-        {
-          "eventId": "uaap-live-25",
-          "date": "2026-10-14T17:30:00+08:00",
-          "displayTime": "Oct 14 · Final",
-          "away": "UP Fighting Maroons",
-          "home": "Adamson Soaring Falcons",
-          "awayScore": "69",
-          "homeScore": "67",
-          "status": "Final",
-          "state": "final",
-          "sourceName": "UAAP Live Stats",
-          "sourceUrl": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball?game_id=25"
         }
       ],
       "automation": {
@@ -1344,15 +1344,16 @@
           "timezone": "Asia/Manila",
           "mode": "game-day",
           "gameDay": true,
-          "todayGameCount": 1,
+          "todayGameCount": 2,
           "todayGames": [
+            "uaap-live-37",
             "uaap-live-36"
           ],
           "nextGameAt": "",
           "idleDiscoveryMinutes": 180,
           "gameDayDataRefreshMinutes": 15,
           "gameDayLivestreamRefreshMinutes": 5,
-          "lastSlowCheckAt": "2026-10-28T16:51:32+08:00"
+          "lastSlowCheckAt": "2026-10-28T23:44:24+08:00"
         },
         "failClosed": true
       }
@@ -1376,7 +1377,7 @@
         "idleDiscoveryMinutes": 180,
         "gameDayDataRefreshMinutes": 15,
         "gameDayLivestreamRefreshMinutes": 5,
-        "lastSlowCheckAt": "2026-10-28T16:51:03+08:00"
+        "lastSlowCheckAt": "2026-10-28T23:43:54+08:00"
       },
       "failClosed": true
     },
@@ -1390,15 +1391,16 @@
         "timezone": "Asia/Manila",
         "mode": "game-day",
         "gameDay": true,
-        "todayGameCount": 1,
+        "todayGameCount": 2,
         "todayGames": [
+          "uaap-live-37",
           "uaap-live-36"
         ],
         "nextGameAt": "",
         "idleDiscoveryMinutes": 180,
         "gameDayDataRefreshMinutes": 15,
         "gameDayLivestreamRefreshMinutes": 5,
-        "lastSlowCheckAt": "2026-10-28T16:51:32+08:00"
+        "lastSlowCheckAt": "2026-10-28T23:44:24+08:00"
       },
       "failClosed": true
     }
