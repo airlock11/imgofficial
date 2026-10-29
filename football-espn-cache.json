@@ -1,7 +1,7 @@
 {
   "version": 1,
   "source": "ESPN public football data",
-  "updatedAt": "2026-10-29T08:31:53.825Z",
+  "updatedAt": "2026-10-29T15:34:34.980Z",
   "leagues": {
     "soccer": {
       "name": "Premier League",
@@ -824,6 +824,38 @@
           "venue": "The City Ground",
           "competition": "Premier League",
           "category": "England"
+        },
+        {
+          "eventId": "401879227",
+          "date": "2026-11-28T15:00Z",
+          "displayTime": "",
+          "home": "Leeds United",
+          "away": "Coventry City",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/357.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/388.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "Elland Road",
+          "competition": "Premier League",
+          "category": "England"
+        },
+        {
+          "eventId": "401879226",
+          "date": "2026-11-28T15:00Z",
+          "displayTime": "",
+          "home": "Manchester United",
+          "away": "Brentford",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/360.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/337.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "Old Trafford",
+          "competition": "Premier League",
+          "category": "England"
         }
       ],
       "standings": [
@@ -1048,7 +1080,7 @@
           "points": 5
         }
       ],
-      "verifiedAt": "2026-10-29T08:31:53.474Z"
+      "verifiedAt": "2026-10-29T15:34:34.335Z"
     },
     "laliga": {
       "name": "La Liga",
@@ -2095,7 +2127,7 @@
           "points": 5
         }
       ],
-      "verifiedAt": "2026-10-29T08:31:53.609Z"
+      "verifiedAt": "2026-10-29T15:34:34.563Z"
     },
     "bundesliga": {
       "name": "Bundesliga",
@@ -2838,6 +2870,70 @@
           "venue": "Weserstadion",
           "competition": "Bundesliga",
           "category": "Germany"
+        },
+        {
+          "eventId": "401884721",
+          "date": "2026-11-28T14:30Z",
+          "displayTime": "",
+          "home": "FC Cologne",
+          "away": "SV Elversberg",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/122.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/10388.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "RheinEnergieStadion",
+          "competition": "Bundesliga",
+          "category": "Germany"
+        },
+        {
+          "eventId": "401884722",
+          "date": "2026-11-28T14:30Z",
+          "displayTime": "",
+          "home": "Hamburg SV",
+          "away": "Bayern Munich",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/127.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/132.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "Volksparkstadion",
+          "competition": "Bundesliga",
+          "category": "Germany"
+        },
+        {
+          "eventId": "401884723",
+          "date": "2026-11-28T14:30Z",
+          "displayTime": "",
+          "home": "Mainz",
+          "away": "1. FC Union Berlin",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/2950.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/598.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "MEWA ARENA",
+          "competition": "Bundesliga",
+          "category": "Germany"
+        },
+        {
+          "eventId": "401884719",
+          "date": "2026-11-28T14:30Z",
+          "displayTime": "",
+          "home": "SC Paderborn 07",
+          "away": "Schalke 04",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/3307.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/133.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "Home Deluxe Arena",
+          "competition": "Bundesliga",
+          "category": "Germany"
         }
       ],
       "standings": [
@@ -3040,7 +3136,7 @@
           "points": 3
         }
       ],
-      "verifiedAt": "2026-10-29T08:31:53.713Z"
+      "verifiedAt": "2026-10-29T15:34:34.783Z"
     },
     "seriea": {
       "name": "Serie A",
@@ -4023,6 +4119,22 @@
           "venue": "Stadio Pier Luigi Penzo",
           "competition": "Serie A",
           "category": "Italy"
+        },
+        {
+          "eventId": "401875081",
+          "date": "2026-11-28T14:00Z",
+          "displayTime": "",
+          "home": "Frosinone",
+          "away": "Parma",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/4057.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/115.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "Stadio Benito Stirpe",
+          "competition": "Serie A",
+          "category": "Italy"
         }
       ],
       "standings": [
@@ -4247,7 +4359,7 @@
           "points": 3
         }
       ],
-      "verifiedAt": "2026-10-29T08:31:53.825Z"
+      "verifiedAt": "2026-10-29T15:34:34.980Z"
     }
   }
 }
