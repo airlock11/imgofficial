@@ -2,7 +2,7 @@
   "special": true,
   "league": "WTA Tour",
   "live": true,
-  "updatedAt": "2026-10-30T05:50:06.455625+00:00",
+  "updatedAt": "2026-10-30T05:50:12.127804+00:00",
   "sourceName": "WTA Official Scores scrape",
   "sourceUrl": "https://www.wtatennis.com/scores/",
   "verificationSource": "WTA Official Scores",
@@ -13,24 +13,26 @@
   "games": [
     {
       "eventId": "wta-scrape-2-p-badosa-h-dart",
-      "date": "2026-10-30T05:50:06.454233+00:00",
+      "date": "2026-10-30T05:50:12.126407+00:00",
       "displayTime": "Guangzhou Open • CHN",
       "away": "P. Badosa",
       "home": "H. Dart",
-      "awayScore": "5 · AD",
-      "homeScore": "3 · 40",
+      "awayScore": "6 0 · 0",
+      "homeScore": "3 0 · 0",
       "awaySets": [
-        "5"
+        "6",
+        "0"
       ],
       "homeSets": [
-        "3"
+        "3",
+        "0"
       ],
-      "awayPoint": "AD",
-      "homePoint": "40",
-      "currentSet": 1,
-      "awayCurrentSetGames": 5,
-      "homeCurrentSetGames": 3,
-      "awaySetsWon": 0,
+      "awayPoint": "0",
+      "homePoint": "0",
+      "currentSet": 2,
+      "awayCurrentSetGames": 0,
+      "homeCurrentSetGames": 0,
+      "awaySetsWon": 1,
       "homeSetsWon": 0,
       "round": "Quarterfinals",
       "court": "Center Court",
@@ -45,7 +47,7 @@
     },
     {
       "eventId": "wta-scrape-0-m-pohankova-a-parks",
-      "date": "2026-10-30T05:50:06.453781+00:00",
+      "date": "2026-10-30T05:50:12.125959+00:00",
       "displayTime": "Toray Pan Pacific Open Tennis • JPN",
       "away": "M. Pohankova",
       "home": "A. Parks",
@@ -80,7 +82,7 @@
     },
     {
       "eventId": "wta-scrape-1-upcoming-muhammad-zhang-errani",
-      "date": "2026-10-30T05:50:06.454135+00:00",
+      "date": "2026-10-30T05:50:12.126313+00:00",
       "displayTime": "Toray Pan Pacific Open Tennis • JPN",
       "away": "Upcoming / Muhammad",
       "home": "Zhang / Errani",
