@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-30T17:01:08+08:00",
+  "updated_at": "2026-10-30T23:49:38+08:00",
   "refresh_minutes": 15,
   "leagues": {
     "pba": {
@@ -299,7 +299,7 @@
           "idleDiscoveryMinutes": 180,
           "gameDayDataRefreshMinutes": 15,
           "gameDayLivestreamRefreshMinutes": 5,
-          "lastSlowCheckAt": "2026-10-30T17:00:24+08:00"
+          "lastSlowCheckAt": "2026-10-30T23:48:53+08:00"
         },
         "failClosed": true
       }
@@ -651,7 +651,62 @@
         "verifiedOfficialYouTube": true,
         "failClosedLivestream": true
       },
-      "broadcast": [],
+      "broadcast": [
+        {
+          "date": "2026-11-01",
+          "time": "12:00 AM",
+          "title": "NBL PILIPINAS Governor's Cup 2026",
+          "source": "Tap Sports"
+        },
+        {
+          "date": "2026-11-01",
+          "time": "11:00 AM",
+          "title": "NBL PILIPINAS Governor's Cup 2026",
+          "source": "Tap Sports"
+        },
+        {
+          "date": "2026-11-01",
+          "time": "7:00 PM",
+          "title": "NBL PILIPINAS Governor's Cup 2026",
+          "source": "Tap Sports"
+        },
+        {
+          "date": "2026-11-02",
+          "time": "12:00 AM",
+          "title": "NBL PILIPINAS Governor's Cup 2026",
+          "source": "Tap Sports"
+        },
+        {
+          "date": "2026-11-02",
+          "time": "11:00 AM",
+          "title": "NBL PILIPINAS Governor's Cup 2026",
+          "source": "Tap Sports"
+        },
+        {
+          "date": "2026-11-02",
+          "time": "6:00 PM",
+          "title": "NBL PILIPINAS Governor's Cup 2026",
+          "source": "Tap Sports"
+        },
+        {
+          "date": "2026-11-03",
+          "time": "12:00 AM",
+          "title": "NBL PILIPINAS Governor's Cup 2026",
+          "source": "Tap Sports"
+        },
+        {
+          "date": "2026-11-03",
+          "time": "12:00 PM",
+          "title": "NBL PILIPINAS Governor's Cup 2026",
+          "source": "Tap Sports"
+        },
+        {
+          "date": "2026-11-03",
+          "time": "6:00 PM",
+          "title": "NBL PILIPINAS Governor's Cup 2026",
+          "source": "Tap Sports"
+        }
+      ],
       "games": [
         {
           "eventId": "yt-nbl-hvCuvEg6CTg",
@@ -1350,7 +1405,7 @@
           "idleDiscoveryMinutes": 180,
           "gameDayDataRefreshMinutes": 15,
           "gameDayLivestreamRefreshMinutes": 5,
-          "lastSlowCheckAt": "2026-10-30T17:00:54+08:00"
+          "lastSlowCheckAt": "2026-10-30T23:49:21+08:00"
         },
         "failClosed": true
       }
@@ -1374,7 +1429,7 @@
         "idleDiscoveryMinutes": 180,
         "gameDayDataRefreshMinutes": 15,
         "gameDayLivestreamRefreshMinutes": 5,
-        "lastSlowCheckAt": "2026-10-30T17:00:24+08:00"
+        "lastSlowCheckAt": "2026-10-30T23:48:53+08:00"
       },
       "failClosed": true
     },
@@ -1394,7 +1449,7 @@
         "idleDiscoveryMinutes": 180,
         "gameDayDataRefreshMinutes": 15,
         "gameDayLivestreamRefreshMinutes": 5,
-        "lastSlowCheckAt": "2026-10-30T17:00:54+08:00"
+        "lastSlowCheckAt": "2026-10-30T23:49:21+08:00"
       },
       "failClosed": true
     }
