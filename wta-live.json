@@ -2,7 +2,7 @@
   "special": true,
   "league": "WTA Tour",
   "live": true,
-  "updatedAt": "2026-10-30T21:37:33.199143+00:00",
+  "updatedAt": "2026-10-30T21:37:42.091116+00:00",
   "sourceName": "WTA Official Scores scrape",
   "sourceUrl": "https://www.wtatennis.com/scores/",
   "verificationSource": "WTA Official Scores",
@@ -13,7 +13,7 @@
   "games": [
     {
       "eventId": "wta-scrape-0-t-maria-v-strakhova",
-      "date": "2026-10-30T21:37:33.195990+00:00",
+      "date": "2026-10-30T21:37:42.087653+00:00",
       "displayTime": "Queretaro Open • MEX",
       "away": "T. Maria",
       "home": "V. Strakhova",
@@ -48,12 +48,12 @@
     },
     {
       "eventId": "wta-scrape-1-a-tubello-j-ortenzi",
-      "date": "2026-10-30T21:37:33.196236+00:00",
+      "date": "2026-10-30T21:37:42.087907+00:00",
       "displayTime": "Curitiba Open • BRA",
       "away": "A. Tubello",
       "home": "J. Ortenzi",
       "awayScore": "2 6 0 · 40",
-      "homeScore": "6 2 0 · 40",
+      "homeScore": "6 2 0 · 30",
       "awaySets": [
         "2",
         "6",
@@ -65,7 +65,7 @@
         "0"
       ],
       "awayPoint": "40",
-      "homePoint": "40",
+      "homePoint": "30",
       "currentSet": 3,
       "awayCurrentSetGames": 0,
       "homeCurrentSetGames": 0,
@@ -73,8 +73,8 @@
       "homeSetsWon": 1,
       "round": "Quarterfinals",
       "court": "",
-      "status": "Live Match: 1:13 · Quarterfinals",
-      "state": "live",
+      "status": "Suspended · Quarterfinals",
+      "state": "suspended",
       "eventOnly": false,
       "title": "Curitiba Open • BRA",
       "sourceName": "WTA Official Scores scrape",
@@ -84,12 +84,12 @@
     },
     {
       "eventId": "wta-scrape-2-upcoming-jakupovic-radisic-carle",
-      "date": "2026-10-30T21:37:33.196729+00:00",
+      "date": "2026-10-30T21:37:42.088387+00:00",
       "displayTime": "Curitiba Open • BRA",
       "away": "Upcoming / Jakupovic",
       "home": "Radisic / Carle",
       "awayScore": "7 0 · 40",
-      "homeScore": "6 4 3 · 40",
+      "homeScore": "6 4 3 · 30",
       "awaySets": [
         "7",
         "0"
@@ -100,7 +100,7 @@
         "3"
       ],
       "awayPoint": "40",
-      "homePoint": "40",
+      "homePoint": "30",
       "currentSet": 3,
       "awayCurrentSetGames": 0,
       "homeCurrentSetGames": 3,
