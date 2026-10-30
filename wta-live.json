@@ -1,121 +1,14 @@
 {
   "special": true,
   "league": "WTA Tour",
-  "live": true,
-  "updatedAt": "2026-10-30T21:38:48.583366+00:00",
+  "live": false,
+  "updatedAt": "2026-10-30T21:38:57.647699+00:00",
   "sourceName": "WTA Official Scores scrape",
   "sourceUrl": "https://www.wtatennis.com/scores/",
   "verificationSource": "WTA Official Scores",
   "verificationUrl": "https://www.wtatennis.com/scores/",
-  "pageLiveCount": 3,
-  "parsedMatchCount": 3,
+  "pageLiveCount": null,
+  "parsedMatchCount": 0,
   "note": "GitHub scrape of the rendered WTA Scores page. Game points, current set number, current-set games and per-set scores are stored separately.",
-  "games": [
-    {
-      "eventId": "wta-scrape-0-t-maria-v-strakhova",
-      "date": "2026-10-30T21:38:48.580201+00:00",
-      "displayTime": "Queretaro Open • MEX",
-      "away": "T. Maria",
-      "home": "V. Strakhova",
-      "awayScore": "7 2 · 0",
-      "homeScore": "6 2 3 · 0",
-      "awaySets": [
-        "7",
-        "2"
-      ],
-      "homeSets": [
-        "6",
-        "2",
-        "3"
-      ],
-      "awayPoint": "0",
-      "homePoint": "0",
-      "currentSet": 3,
-      "awayCurrentSetGames": 0,
-      "homeCurrentSetGames": 3,
-      "awaySetsWon": 1,
-      "homeSetsWon": 0,
-      "round": "Quarterfinals",
-      "court": "",
-      "status": "Live Match: 1:28 · Quarterfinals",
-      "state": "live",
-      "eventOnly": false,
-      "title": "Queretaro Open • MEX",
-      "sourceName": "WTA Official Scores scrape",
-      "sourceUrl": "https://www.wtatennis.com/scores/",
-      "verificationSource": "WTA Official Scores",
-      "verificationUrl": "https://www.wtatennis.com/scores/"
-    },
-    {
-      "eventId": "wta-scrape-1-a-tubello-j-ortenzi",
-      "date": "2026-10-30T21:38:48.580460+00:00",
-      "displayTime": "Curitiba Open • BRA",
-      "away": "A. Tubello",
-      "home": "J. Ortenzi",
-      "awayScore": "2 6 0 · 40",
-      "homeScore": "6 2 0 · 40",
-      "awaySets": [
-        "2",
-        "6",
-        "0"
-      ],
-      "homeSets": [
-        "6",
-        "2",
-        "0"
-      ],
-      "awayPoint": "40",
-      "homePoint": "40",
-      "currentSet": 3,
-      "awayCurrentSetGames": 0,
-      "homeCurrentSetGames": 0,
-      "awaySetsWon": 1,
-      "homeSetsWon": 1,
-      "round": "Quarterfinals",
-      "court": "",
-      "status": "Live Match: 1:14 · Quarterfinals",
-      "state": "live",
-      "eventOnly": false,
-      "title": "Curitiba Open • BRA",
-      "sourceName": "WTA Official Scores scrape",
-      "sourceUrl": "https://www.wtatennis.com/scores/",
-      "verificationSource": "WTA Official Scores",
-      "verificationUrl": "https://www.wtatennis.com/scores/"
-    },
-    {
-      "eventId": "wta-scrape-2-upcoming-jakupovic-radisic-carle",
-      "date": "2026-10-30T21:38:48.580946+00:00",
-      "displayTime": "Curitiba Open • BRA",
-      "away": "Upcoming / Jakupovic",
-      "home": "Radisic / Carle",
-      "awayScore": "7 1 · 0",
-      "homeScore": "6 4 3 · 30",
-      "awaySets": [
-        "7",
-        "1"
-      ],
-      "homeSets": [
-        "6",
-        "4",
-        "3"
-      ],
-      "awayPoint": "0",
-      "homePoint": "30",
-      "currentSet": 3,
-      "awayCurrentSetGames": 0,
-      "homeCurrentSetGames": 3,
-      "awaySetsWon": 1,
-      "homeSetsWon": 0,
-      "round": "Semifinals",
-      "court": "",
-      "status": "Live Match: 1:14 · Semifinals",
-      "state": "live",
-      "eventOnly": false,
-      "title": "Curitiba Open • BRA",
-      "sourceName": "WTA Official Scores scrape",
-      "sourceUrl": "https://www.wtatennis.com/scores/",
-      "verificationSource": "WTA Official Scores",
-      "verificationUrl": "https://www.wtatennis.com/scores/"
-    }
-  ]
+  "games": []
 }
