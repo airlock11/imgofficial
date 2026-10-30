@@ -2,7 +2,7 @@
   "special": true,
   "league": "WTA Tour",
   "live": true,
-  "updatedAt": "2026-10-30T17:18:49.170041+00:00",
+  "updatedAt": "2026-10-30T17:18:56.123845+00:00",
   "sourceName": "WTA Official Scores scrape",
   "sourceUrl": "https://www.wtatennis.com/scores/",
   "verificationSource": "WTA Official Scores",
@@ -13,7 +13,7 @@
   "games": [
     {
       "eventId": "wta-scrape-0-e-jacquemot-e-yaneva",
-      "date": "2026-10-30T17:18:49.167621+00:00",
+      "date": "2026-10-30T17:18:56.121407+00:00",
       "displayTime": "Valle D'Aosta Ladies Open • ITA",
       "away": "E. Jacquemot",
       "home": "E. Yaneva",
@@ -39,7 +39,7 @@
       "homeSetsWon": 1,
       "round": "Quarterfinals",
       "court": "Grandstand",
-      "status": "Medical Timeout: 1:59 · Quarterfinals · Grandstand",
+      "status": "Medical Timeout: 2:02 · Quarterfinals · Grandstand",
       "state": "live",
       "eventOnly": false,
       "title": "Valle D'Aosta Ladies Open • ITA",
@@ -50,26 +50,26 @@
     },
     {
       "eventId": "wta-scrape-1-l-romero-gormaz-j-grabher",
-      "date": "2026-10-30T17:18:49.167847+00:00",
+      "date": "2026-10-30T17:18:56.121633+00:00",
       "displayTime": "Curitiba Open • BRA",
       "away": "L. Romero Gormaz",
       "home": "J. Grabher",
-      "awayScore": "6 4 0 · 40",
-      "homeScore": "1 6 0 · 30",
+      "awayScore": "6 4 1 · 0",
+      "homeScore": "1 6 0 · 0",
       "awaySets": [
         "6",
         "4",
-        "0"
+        "1"
       ],
       "homeSets": [
         "1",
         "6",
         "0"
       ],
-      "awayPoint": "40",
-      "homePoint": "30",
+      "awayPoint": "0",
+      "homePoint": "0",
       "currentSet": 3,
-      "awayCurrentSetGames": 0,
+      "awayCurrentSetGames": 1,
       "homeCurrentSetGames": 0,
       "awaySetsWon": 1,
       "homeSetsWon": 1,
@@ -86,11 +86,11 @@
     },
     {
       "eventId": "wta-scrape-2-j-riera-s-sierra",
-      "date": "2026-10-30T17:18:49.168003+00:00",
+      "date": "2026-10-30T17:18:56.121777+00:00",
       "displayTime": "Curitiba Open • BRA",
       "away": "J. Riera",
       "home": "S. Sierra",
-      "awayScore": "1 0 · 15",
+      "awayScore": "1 0 · 40",
       "homeScore": "6 2 · 0",
       "awaySets": [
         "1",
@@ -100,7 +100,7 @@
         "6",
         "2"
       ],
-      "awayPoint": "15",
+      "awayPoint": "40",
       "homePoint": "0",
       "currentSet": 2,
       "awayCurrentSetGames": 0,
@@ -109,7 +109,7 @@
       "homeSetsWon": 1,
       "round": "Quarterfinals",
       "court": "",
-      "status": "Live Match: 0:48 · Quarterfinals",
+      "status": "Live Match: 0:49 · Quarterfinals",
       "state": "live",
       "eventOnly": false,
       "title": "Curitiba Open • BRA",
