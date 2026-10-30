@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-30T07:15:18.559629+00:00",
+  "updatedAt": "2026-10-30T14:17:12.252305+00:00",
   "leagues": {
     "uaap": {
       "league": "UAAP",
@@ -9706,15 +9706,8 @@
               "player": "Bryce Cotton",
               "team": "",
               "gp": null,
-              "value": 27.4,
-              "displayValue": "27.4"
-            },
-            {
-              "player": "Parker Jackson-Cartwright",
-              "team": "",
-              "gp": null,
-              "value": 24.5,
-              "displayValue": "24.5"
+              "value": 27.8,
+              "displayValue": "27.8"
             },
             {
               "player": "Cole Anthony",
@@ -9727,15 +9720,22 @@
               "player": "Sam Mennenga",
               "team": "",
               "gp": null,
-              "value": 23.1,
-              "displayValue": "23.1"
+              "value": 23.6,
+              "displayValue": "23.6"
+            },
+            {
+              "player": "Parker Jackson-Cartwright",
+              "team": "",
+              "gp": null,
+              "value": 22.3,
+              "displayValue": "22.3"
             },
             {
               "player": "Kendric Davis",
               "team": "",
               "gp": null,
-              "value": 21.8,
-              "displayValue": "21.8"
+              "value": 21.6,
+              "displayValue": "21.6"
             }
           ]
         }
@@ -10826,6 +10826,68 @@
           ]
         },
         {
+          "title": "Batting Average",
+          "suffix": "AVG",
+          "rows": [
+            {
+              "player": "Victor Mederos",
+              "team": "ATL",
+              "gp": null,
+              "value": 1.0,
+              "displayValue": "1.000"
+            },
+            {
+              "player": "Vimael Machin",
+              "team": "COL",
+              "gp": null,
+              "value": 0.5,
+              "displayValue": ".500"
+            },
+            {
+              "player": "Jihwan Bae",
+              "team": "MIL",
+              "gp": null,
+              "value": 0.5,
+              "displayValue": ".500"
+            },
+            {
+              "player": "Jair Camargo",
+              "team": "ATL",
+              "gp": null,
+              "value": 0.5,
+              "displayValue": ".500"
+            },
+            {
+              "player": "Justin Dean",
+              "team": "CHC",
+              "gp": null,
+              "value": 0.375,
+              "displayValue": ".375"
+            },
+            {
+              "player": "Michael Arroyo",
+              "team": "SEA",
+              "gp": null,
+              "value": 0.371,
+              "displayValue": ".371"
+            },
+            {
+              "player": "Joshua Kuroda-Grauer",
+              "team": "ATH",
+              "gp": null,
+              "value": 0.366,
+              "displayValue": ".366"
+            },
+            {
+              "player": "Gustavo Campero",
+              "team": "LAA",
+              "gp": null,
+              "value": 0.364,
+              "displayValue": ".364"
+            }
+          ]
+        },
+        {
           "title": "Stolen Bases",
           "suffix": "SB",
           "rows": [
@@ -11163,6 +11225,13 @@
               "displayValue": "16"
             },
             {
+              "player": "Jordan Love",
+              "team": "GB",
+              "gp": null,
+              "value": 16.0,
+              "displayValue": "16"
+            },
+            {
               "player": "Joe Burrow",
               "team": "CIN",
               "gp": null,
@@ -11200,13 +11269,6 @@
             {
               "player": "Aaron Rodgers",
               "team": "PIT",
-              "gp": null,
-              "value": 13.0,
-              "displayValue": "13"
-            },
-            {
-              "player": "Dak Prescott",
-              "team": "DAL",
               "gp": null,
               "value": 13.0,
               "displayValue": "13"
@@ -11357,6 +11419,20 @@
               "displayValue": "24"
             },
             {
+              "player": "Caden Veltkamp",
+              "team": "FAU",
+              "gp": null,
+              "value": 23.0,
+              "displayValue": "23"
+            },
+            {
+              "player": "Tayven Jackson",
+              "team": "UNT",
+              "gp": null,
+              "value": 22.0,
+              "displayValue": "22"
+            },
+            {
               "player": "Darian Mensah",
               "team": "MIA",
               "gp": null,
@@ -11387,20 +11463,6 @@
             {
               "player": "Jayden Maiava",
               "team": "USC",
-              "gp": null,
-              "value": 19.0,
-              "displayValue": "19"
-            },
-            {
-              "player": "Julian Sayin",
-              "team": "OSU",
-              "gp": null,
-              "value": 19.0,
-              "displayValue": "19"
-            },
-            {
-              "player": "Kevin Jennings",
-              "team": "SMU",
               "gp": null,
               "value": 19.0,
               "displayValue": "19"
@@ -11488,6 +11550,13 @@
               "displayValue": "952"
             },
             {
+              "player": "Easton Messer",
+              "team": "FAU",
+              "gp": null,
+              "value": 898.0,
+              "displayValue": "898"
+            },
+            {
               "player": "Umari Hatcher",
               "team": "SYR",
               "gp": null,
@@ -11509,25 +11578,18 @@
               "displayValue": "800"
             },
             {
+              "player": "Justin Stevenson",
+              "team": "UNT",
+              "gp": null,
+              "value": 781.0,
+              "displayValue": "781"
+            },
+            {
               "player": "KJ Duff",
               "team": "RUTG",
               "gp": null,
               "value": 774.0,
               "displayValue": "774"
-            },
-            {
-              "player": "Charlie Becker",
-              "team": "IU",
-              "gp": null,
-              "value": 726.0,
-              "displayValue": "726"
-            },
-            {
-              "player": "Carlos Hernandez",
-              "team": "WAKE",
-              "gp": null,
-              "value": 720.0,
-              "displayValue": "720"
             }
           ]
         }
@@ -11546,14 +11608,14 @@
             {
               "player": "Lionel Messi",
               "team": "Inter Miami CF",
-              "gp": 28,
+              "gp": 29,
               "value": 25.0,
               "displayValue": "25"
             },
             {
               "player": "Petar Musa",
               "team": "FC Dallas",
-              "gp": 27,
+              "gp": 28,
               "value": 22.0,
               "displayValue": "22"
             },
@@ -11565,6 +11627,13 @@
               "displayValue": "19"
             },
             {
+              "player": "Kelvin Yeboah",
+              "team": "Minnesota United FC",
+              "gp": 31,
+              "value": 18.0,
+              "displayValue": "18"
+            },
+            {
               "player": "Denis Bouanga",
               "team": "LAFC",
               "gp": 30,
@@ -11572,30 +11641,23 @@
               "displayValue": "18"
             },
             {
-              "player": "Sam Surridge",
-              "team": "Nashville SC",
-              "gp": 25,
+              "player": "Brian White",
+              "team": "Vancouver Whitecaps FC",
+              "gp": 30,
               "value": 18.0,
               "displayValue": "18"
             },
             {
-              "player": "Kelvin Yeboah",
-              "team": "Minnesota United FC",
-              "gp": 30,
-              "value": 17.0,
-              "displayValue": "17"
+              "player": "Sam Surridge",
+              "team": "Nashville SC",
+              "gp": 26,
+              "value": 18.0,
+              "displayValue": "18"
             },
             {
-              "player": "Kévin Denkey",
-              "team": "FC Cincinnati",
-              "gp": 29,
-              "value": 17.0,
-              "displayValue": "17"
-            },
-            {
-              "player": "Brian White",
-              "team": "Vancouver Whitecaps FC",
-              "gp": 29,
+              "player": "Hany Mukhtar",
+              "team": "Nashville SC",
+              "gp": 32,
               "value": 17.0,
               "displayValue": "17"
             }
@@ -11606,9 +11668,37 @@
           "suffix": "A",
           "rows": [
             {
+              "player": "Evander",
+              "team": "FC Cincinnati",
+              "gp": 29,
+              "value": 16.0,
+              "displayValue": "16"
+            },
+            {
+              "player": "Rodrigo De Paul",
+              "team": "Inter Miami CF",
+              "gp": 27,
+              "value": 16.0,
+              "displayValue": "16"
+            },
+            {
+              "player": "Joaquín Pereyra",
+              "team": "Minnesota United FC",
+              "gp": 30,
+              "value": 15.0,
+              "displayValue": "15"
+            },
+            {
               "player": "Anders Dreyer",
               "team": "San Diego FC",
-              "gp": 30,
+              "gp": 31,
+              "value": 14.0,
+              "displayValue": "14"
+            },
+            {
+              "player": "Lionel Messi",
+              "team": "Inter Miami CF",
+              "gp": 29,
               "value": 14.0,
               "displayValue": "14"
             },
@@ -11620,44 +11710,16 @@
               "displayValue": "14"
             },
             {
-              "player": "Joaquín Pereyra",
-              "team": "Minnesota United FC",
-              "gp": 29,
-              "value": 14.0,
-              "displayValue": "14"
-            },
-            {
-              "player": "Lionel Messi",
-              "team": "Inter Miami CF",
-              "gp": 28,
-              "value": 14.0,
-              "displayValue": "14"
-            },
-            {
-              "player": "Evander",
-              "team": "FC Cincinnati",
-              "gp": 28,
-              "value": 14.0,
-              "displayValue": "14"
-            },
-            {
               "player": "Cristian Espinoza",
               "team": "Nashville SC",
-              "gp": 27,
+              "gp": 28,
               "value": 14.0,
               "displayValue": "14"
             },
             {
-              "player": "Rodrigo De Paul",
-              "team": "Inter Miami CF",
-              "gp": 26,
-              "value": 14.0,
-              "displayValue": "14"
-            },
-            {
-              "player": "Albert Rusnák",
-              "team": "Seattle Sounders FC",
-              "gp": 30,
+              "player": "Pep Biel",
+              "team": "Charlotte FC",
+              "gp": 32,
               "value": 13.0,
               "displayValue": "13"
             }
