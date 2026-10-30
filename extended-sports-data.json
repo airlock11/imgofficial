@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-30T16:13:07.564939+00:00",
+  "updated_at": "2026-10-30T20:49:55.273801+00:00",
   "source": "Official and verified public sports sources",
   "leagues": {
     "bleague": {
@@ -1020,39 +1020,39 @@
         {
           "eventId": "euroleague-86",
           "date": "2026-10-30T19:00:00",
-          "displayTime": "Oct 30 · 19:00",
+          "displayTime": "Oct 30 · Final",
           "away": "Partizan Mozzart Bet Belgrade",
           "home": "Zalgiris Kaunas",
-          "awayScore": "0",
-          "homeScore": "0",
-          "status": "Scheduled",
-          "state": "scheduled",
+          "awayScore": "80",
+          "homeScore": "87",
+          "status": "Final",
+          "state": "final",
           "sourceName": "EuroLeague Official API",
           "sourceUrl": "https://api-live.euroleague.net/v2/competitions/E/seasons/E2026/games"
         },
         {
           "eventId": "euroleague-88",
           "date": "2026-10-30T18:30:00",
-          "displayTime": "Oct 30 · 18:30",
+          "displayTime": "Oct 30 · Final",
           "away": "Panathinaikos AKTOR Athens",
           "home": "Anadolu Efes Istanbul",
-          "awayScore": "0",
-          "homeScore": "0",
-          "status": "Scheduled",
-          "state": "scheduled",
+          "awayScore": "68",
+          "homeScore": "83",
+          "status": "Final",
+          "state": "final",
           "sourceName": "EuroLeague Official API",
           "sourceUrl": "https://api-live.euroleague.net/v2/competitions/E/seasons/E2026/games"
         },
         {
           "eventId": "euroleague-84",
           "date": "2026-10-30T17:00:00",
-          "displayTime": "Oct 30 · 17:00",
+          "displayTime": "Oct 30 · Final",
           "away": "Hapoel IBI Tel Aviv",
           "home": "Dubai Basketball",
-          "awayScore": "0",
-          "homeScore": "0",
-          "status": "Scheduled",
-          "state": "scheduled",
+          "awayScore": "83",
+          "homeScore": "97",
+          "status": "Final",
+          "state": "final",
           "sourceName": "EuroLeague Official API",
           "sourceUrl": "https://api-live.euroleague.net/v2/competitions/E/seasons/E2026/games"
         },
@@ -1610,45 +1610,6 @@
           "home": "Fenerbahce Tarfin Istanbul",
           "awayScore": "80",
           "homeScore": "99",
-          "status": "Final",
-          "state": "final",
-          "sourceName": "EuroLeague Official API",
-          "sourceUrl": "https://api-live.euroleague.net/v2/competitions/E/seasons/E2026/games"
-        },
-        {
-          "eventId": "euroleague-39",
-          "date": "2026-10-09T20:30:00",
-          "displayTime": "Oct 09 · Final",
-          "away": "Zalgiris Kaunas",
-          "home": "FC Barcelona",
-          "awayScore": "88",
-          "homeScore": "81",
-          "status": "Final",
-          "state": "final",
-          "sourceName": "EuroLeague Official API",
-          "sourceUrl": "https://api-live.euroleague.net/v2/competitions/E/seasons/E2026/games"
-        },
-        {
-          "eventId": "euroleague-38",
-          "date": "2026-10-09T20:30:00",
-          "displayTime": "Oct 09 · Final",
-          "away": "Besiktas Istanbul",
-          "home": "Kosner Baskonia Vitoria-Gasteiz",
-          "awayScore": "92",
-          "homeScore": "84",
-          "status": "Final",
-          "state": "final",
-          "sourceName": "EuroLeague Official API",
-          "sourceUrl": "https://api-live.euroleague.net/v2/competitions/E/seasons/E2026/games"
-        },
-        {
-          "eventId": "euroleague-40",
-          "date": "2026-10-09T20:15:00",
-          "displayTime": "Oct 09 · Final",
-          "away": "Anadolu Efes Istanbul",
-          "home": "Olympiacos Piraeus",
-          "awayScore": "66",
-          "homeScore": "89",
           "status": "Final",
           "state": "final",
           "sourceName": "EuroLeague Official API",
@@ -4039,7 +4000,7 @@
       "league": "WTA Tour",
       "sourceName": "WTA Official Calendar",
       "sourceUrl": "https://wtafiles.wtatennis.com/pdf/calendar/calendar.pdf",
-      "updatedAt": "2026-10-30T16:12:55.417502+00:00",
+      "updatedAt": "2026-10-30T20:49:46.544670+00:00",
       "note": "Current and upcoming WTA Tour tournaments scraped automatically from the official WTA calendar PDF.",
       "games": [
         {
@@ -4123,12 +4084,12 @@
       "league": "FIBA",
       "sourceName": "FIBA Official",
       "sourceUrl": "https://www.fiba.basketball/en/games",
-      "updatedAt": "2026-10-30T16:12:59.892960+00:00",
+      "updatedAt": "2026-10-30T20:49:49.356169+00:00",
       "note": "Automatically refreshed from official FIBA competition game cards.",
       "games": [
         {
           "eventId": "fiba-fiba-intercontinental-cup-2026-2026-10-30-viln-glu",
-          "date": "2026-10-30T16:12:55.417529+00:00",
+          "date": "2026-10-30T20:49:46.544697+00:00",
           "displayTime": "Final · Final",
           "away": "VILN",
           "home": "GLU",
@@ -4144,7 +4105,7 @@
         },
         {
           "eventId": "fiba-fiba-intercontinental-cup-2026-2026-10-30-boc-rssb",
-          "date": "2026-10-30T16:12:55.417529+00:00",
+          "date": "2026-10-30T20:49:46.544697+00:00",
           "displayTime": "Final · Final",
           "away": "BOC",
           "home": "RSSB",
@@ -4160,7 +4121,7 @@
         },
         {
           "eventId": "fiba-fiba-intercontinental-cup-2026-2026-10-30-viln-boc",
-          "date": "2026-10-30T16:12:55.417529+00:00",
+          "date": "2026-10-30T20:49:46.544697+00:00",
           "displayTime": "Final · Final",
           "away": "VILN",
           "home": "BOC",
@@ -4176,7 +4137,7 @@
         },
         {
           "eventId": "fiba-fiba-intercontinental-cup-2026-2026-10-30-rssb-glu",
-          "date": "2026-10-30T16:12:55.417529+00:00",
+          "date": "2026-10-30T20:49:46.544697+00:00",
           "displayTime": "Final · Final",
           "away": "RSSB",
           "home": "GLU",
@@ -4192,7 +4153,7 @@
         },
         {
           "eventId": "fiba-fiba-intercontinental-cup-2026-2026-10-30-bjbg-shs",
-          "date": "2026-10-30T16:12:55.417529+00:00",
+          "date": "2026-10-30T20:49:46.544697+00:00",
           "displayTime": "Final · Final",
           "away": "BJBG",
           "home": "SHS",
@@ -4208,7 +4169,7 @@
         },
         {
           "eventId": "fiba-fiba-intercontinental-cup-2026-2026-10-30-boc-glu",
-          "date": "2026-10-30T16:12:55.417529+00:00",
+          "date": "2026-10-30T20:49:46.544697+00:00",
           "displayTime": "Final · Final",
           "away": "BOC",
           "home": "GLU",
@@ -4224,7 +4185,7 @@
         },
         {
           "eventId": "fiba-fiba-intercontinental-cup-2026-2026-10-30-viln-shs",
-          "date": "2026-10-30T16:12:55.417529+00:00",
+          "date": "2026-10-30T20:49:46.544697+00:00",
           "displayTime": "Final · Final",
           "away": "VILN",
           "home": "SHS",
@@ -4240,7 +4201,7 @@
         },
         {
           "eventId": "fiba-fiba-intercontinental-cup-2026-2026-10-30-bjbg-glu",
-          "date": "2026-10-30T16:12:55.417529+00:00",
+          "date": "2026-10-30T20:49:46.544697+00:00",
           "displayTime": "Final · Final",
           "away": "BJBG",
           "home": "GLU",
@@ -4256,7 +4217,7 @@
         },
         {
           "eventId": "fiba-fiba-intercontinental-cup-2026-2026-10-30-shs-rssb",
-          "date": "2026-10-30T16:12:55.417529+00:00",
+          "date": "2026-10-30T20:49:46.544697+00:00",
           "displayTime": "Final · Final",
           "away": "SHS",
           "home": "RSSB",
@@ -4272,7 +4233,7 @@
         },
         {
           "eventId": "fiba-fiba-intercontinental-cup-2026-2026-10-30-bjbg-boc",
-          "date": "2026-10-30T16:12:55.417529+00:00",
+          "date": "2026-10-30T20:49:46.544697+00:00",
           "displayTime": "Final · Final",
           "away": "BJBG",
           "home": "BOC",
@@ -4288,7 +4249,7 @@
         },
         {
           "eventId": "fiba-fiba-intercontinental-cup-2026-2026-10-30-viln-rssb",
-          "date": "2026-10-30T16:12:55.417529+00:00",
+          "date": "2026-10-30T20:49:46.544697+00:00",
           "displayTime": "Final · Final",
           "away": "VILN",
           "home": "RSSB",
