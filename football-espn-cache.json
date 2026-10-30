@@ -1,7 +1,7 @@
 {
   "version": 1,
   "source": "ESPN public football data",
-  "updatedAt": "2026-10-30T06:16:15.857Z",
+  "updatedAt": "2026-10-30T13:21:48.572Z",
   "leagues": {
     "soccer": {
       "name": "Premier League",
@@ -872,6 +872,22 @@
           "venue": "Portman Road",
           "competition": "Premier League",
           "category": "England"
+        },
+        {
+          "eventId": "401879229",
+          "date": "2026-11-29T12:00Z",
+          "displayTime": "",
+          "home": "Everton",
+          "away": "Liverpool",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/368.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/364.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "Hill Dickinson Stadium",
+          "competition": "Premier League",
+          "category": "England"
         }
       ],
       "standings": [
@@ -1096,7 +1112,7 @@
           "points": 5
         }
       ],
-      "verifiedAt": "2026-10-30T06:16:14.926Z"
+      "verifiedAt": "2026-10-30T13:21:44.410Z"
     },
     "laliga": {
       "name": "La Liga",
@@ -2143,7 +2159,7 @@
           "points": 5
         }
       ],
-      "verifiedAt": "2026-10-30T06:16:15.327Z"
+      "verifiedAt": "2026-10-30T13:21:44.599Z"
     },
     "bundesliga": {
       "name": "Bundesliga",
@@ -3168,7 +3184,7 @@
           "points": 3
         }
       ],
-      "verifiedAt": "2026-10-30T06:16:15.596Z"
+      "verifiedAt": "2026-10-30T13:21:46.181Z"
     },
     "seriea": {
       "name": "Serie A",
@@ -4199,6 +4215,22 @@
           "venue": "San Siro",
           "competition": "Serie A",
           "category": "Italy"
+        },
+        {
+          "eventId": "401875031",
+          "date": "2026-11-29T11:30Z",
+          "displayTime": "",
+          "home": "Udinese",
+          "away": "Fiorentina",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/118.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/109.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "Stadio Friuli",
+          "competition": "Serie A",
+          "category": "Italy"
         }
       ],
       "standings": [
@@ -4423,7 +4455,7 @@
           "points": 3
         }
       ],
-      "verifiedAt": "2026-10-30T06:16:15.856Z"
+      "verifiedAt": "2026-10-30T13:21:48.571Z"
     }
   }
 }
