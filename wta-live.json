@@ -1,14 +1,81 @@
 {
   "special": true,
   "league": "WTA Tour",
-  "live": false,
-  "updatedAt": "2026-10-31T06:59:14.433918+00:00",
+  "live": true,
+  "updatedAt": "2026-10-31T06:59:20.640527+00:00",
   "sourceName": "WTA Official Scores scrape",
   "sourceUrl": "https://www.wtatennis.com/scores/",
   "verificationSource": "WTA Official Scores",
   "verificationUrl": "https://www.wtatennis.com/scores/",
-  "pageLiveCount": null,
-  "parsedMatchCount": 0,
+  "pageLiveCount": 2,
+  "parsedMatchCount": 2,
   "note": "GitHub scrape of the rendered WTA Scores page. Game points, current set number, current-set games and per-set scores are stored separately.",
-  "games": []
+  "games": [
+    {
+      "eventId": "wta-scrape-1-upcoming-kudermetova-timofeeva-tjen",
+      "date": "2026-10-31T06:59:20.638603+00:00",
+      "displayTime": "Guangzhou Open • CHN",
+      "away": "Upcoming / Kudermetova",
+      "home": "Timofeeva / Tjen",
+      "awayScore": "4 · 0",
+      "homeScore": "2 · 0",
+      "awaySets": [
+        "4"
+      ],
+      "homeSets": [
+        "2"
+      ],
+      "awayPoint": "0",
+      "homePoint": "0",
+      "currentSet": 1,
+      "awayCurrentSetGames": 4,
+      "homeCurrentSetGames": 2,
+      "awaySetsWon": 0,
+      "homeSetsWon": 0,
+      "round": "Semifinals",
+      "court": "Center Court",
+      "status": "Live Match: 0:19 · Semifinals · Center Court",
+      "state": "live",
+      "eventOnly": false,
+      "title": "Guangzhou Open • CHN",
+      "sourceName": "WTA Official Scores scrape",
+      "sourceUrl": "https://www.wtatennis.com/scores/",
+      "verificationSource": "WTA Official Scores",
+      "verificationUrl": "https://www.wtatennis.com/scores/"
+    },
+    {
+      "eventId": "wta-scrape-0-d-shnaider-m-pohankova",
+      "date": "2026-10-31T06:59:20.638151+00:00",
+      "displayTime": "Toray Pan Pacific Open Tennis • JPN",
+      "away": "D. Shnaider",
+      "home": "M. Pohankova",
+      "awayScore": "6 6 · 0",
+      "homeScore": "4 6 · 0",
+      "awaySets": [
+        "6",
+        "6"
+      ],
+      "homeSets": [
+        "4",
+        "6"
+      ],
+      "awayPoint": "0",
+      "homePoint": "0",
+      "currentSet": 2,
+      "awayCurrentSetGames": 6,
+      "homeCurrentSetGames": 6,
+      "awaySetsWon": 1,
+      "homeSetsWon": 0,
+      "round": "Semifinals",
+      "court": "",
+      "status": "Live Match: 1:35 · Semifinals",
+      "state": "live",
+      "eventOnly": false,
+      "title": "Toray Pan Pacific Open Tennis • JPN",
+      "sourceName": "WTA Official Scores scrape",
+      "sourceUrl": "https://www.wtatennis.com/scores/",
+      "verificationSource": "WTA Official Scores",
+      "verificationUrl": "https://www.wtatennis.com/scores/"
+    }
+  ]
 }
