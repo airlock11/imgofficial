@@ -1,28 +1,29 @@
 {
-  "updatedAt": "2026-09-23T09:03:29.339660+00:00",
+  "updatedAt": "2026-10-31T06:56:22.828843+00:00",
   "freshForMinutes": 30,
   "streams": [
     {
-      "eventId": "fiba-youtube-QkNpu_nBnRg",
+      "eventId": "fiba-youtube-LyhfzV7Kfx0",
       "sport": "Basketball",
       "leagueKey": "fiba",
       "league": "FIBA",
       "teams": [],
-      "title": "LIVE - Shanghai Sharks v RSSB Tigers | FIBA Intercontinental Cup Beijing 2026",
+      "title": "LIVE - Tauranga Whai v Mainland Pou\u0101kai | Tauihi Basketball Aotearoa 2026",
       "officialSourceId": "fiba",
       "verificationStatus": "verified",
-      "lastVerifiedLiveAt": "2026-09-23T09:03:29.339660+00:00",
+      "lastVerifiedLiveAt": "2026-10-31T06:56:22.828843+00:00",
       "stream": {
-        "videoId": "QkNpu_nBnRg",
-        "watchUrl": "https://www.youtube.com/watch?v=QkNpu_nBnRg",
+        "videoId": "LyhfzV7Kfx0",
+        "watchUrl": "https://www.youtube.com/watch?v=LyhfzV7Kfx0",
         "provider": "YouTube",
         "channel": "FIBA Basketball",
-        "title": "LIVE - Shanghai Sharks v RSSB Tigers | FIBA Intercontinental Cup Beijing 2026",
+        "title": "LIVE - Tauranga Whai v Mainland Pou\u0101kai | Tauihi Basketball Aotearoa 2026",
         "officialSourceId": "fiba",
         "sourceChannelId": "UCtInrnU3QbWqFGsdKT1GZtg",
         "verificationStatus": "verified",
-        "lastVerifiedLiveAt": "2026-09-23T09:03:29.339660+00:00",
-        "embedUrl": "https://www.youtube.com/embed/QkNpu_nBnRg",
+        "lastVerifiedLiveAt": "2026-10-31T06:56:22.828843+00:00",
+        "embeddable": true,
+        "embedUrl": "https://www.youtube.com/embed/LyhfzV7Kfx0",
         "deliveryLeagueKey": "fiba",
         "deliveryPlacement": "above_statistics"
       },
@@ -31,41 +32,47 @@
         "url": "/scores/?league=fiba",
         "placement": "above_statistics"
       }
+    },
+    {
+      "eventId": "ufc-youtube-GD43EXL6NPs",
+      "sport": "Combat Sports",
+      "leagueKey": "ufc",
+      "league": "UFC",
+      "teams": [],
+      "title": "SCARIEST UFC KNOCKOUTS TO WATCH ON HALLOWEEN \ud83c\udf83",
+      "officialSourceId": "ufc",
+      "verificationStatus": "verified",
+      "lastVerifiedLiveAt": "2026-10-31T06:56:22.828843+00:00",
+      "stream": {
+        "videoId": "GD43EXL6NPs",
+        "watchUrl": "https://www.youtube.com/watch?v=GD43EXL6NPs",
+        "provider": "YouTube",
+        "channel": "UFC",
+        "title": "SCARIEST UFC KNOCKOUTS TO WATCH ON HALLOWEEN \ud83c\udf83",
+        "officialSourceId": "ufc",
+        "sourceChannelId": "UCvgfXK4nTYKudb0rFR6noLA",
+        "verificationStatus": "verified",
+        "lastVerifiedLiveAt": "2026-10-31T06:56:22.828843+00:00",
+        "embeddable": true,
+        "embedUrl": "https://www.youtube.com/embed/GD43EXL6NPs",
+        "deliveryLeagueKey": "ufc",
+        "deliveryPlacement": "above_statistics"
+      },
+      "delivery": {
+        "leagueKey": "ufc",
+        "url": "/scores/?league=ufc",
+        "placement": "above_statistics"
+      }
     }
   ],
-  "liveExpiryLedger": {
-    "ncaaph-youtube-jhZS19XiaPI": {
-      "lastVerifiedLiveAt": "2026-09-22T06:10:13.441019+00:00"
-    },
-    "ncaaph-youtube-AW-kMYvCJrc": {
-      "lastVerifiedLiveAt": "2026-09-22T06:50:29.097705+00:00"
-    },
-    "mpbl-youtube-mrDO0K9o320": {
-      "lastVerifiedLiveAt": "2026-09-22T06:50:29.097705+00:00"
-    },
-    "fiba-youtube-ofIa9Qwz0zc": {
-      "lastVerifiedLiveAt": "2026-09-22T07:22:08.850499+00:00"
-    },
-    "ncaaph-youtube-MzRZPtHRrsU": {
-      "lastVerifiedLiveAt": "2026-09-22T09:57:27.133676+00:00"
-    },
-    "mpbl-youtube-UP_EgMLP7B8": {
-      "lastVerifiedLiveAt": "2026-09-22T09:57:27.133676+00:00"
-    },
-    "fiba-youtube-vP1XJtfk6lc": {
-      "lastVerifiedLiveAt": "2026-09-22T12:09:56.852733+00:00"
-    },
-    "fiba-youtube-QkNpu_nBnRg": {
-      "lastVerifiedLiveAt": "2026-09-23T09:03:29.206648+00:00"
-    }
-  },
+  "liveExpiryLedger": {},
   "upcoming": [],
-  "upcomingCheckedAt": "2026-09-23T06:58:11.170617+00:00",
+  "upcomingCheckedAt": "2026-10-31T06:56:22.463472+00:00",
   "nblSchedule": [],
   "scanner": {
     "version": 3,
     "mode": "official-auto-discovery",
-    "checkedAt": "2026-09-23T09:03:05.836542+00:00",
+    "checkedAt": "2026-10-31T06:55:53.193762+00:00",
     "sourcesChecked": [
       "nbl-pilipinas",
       "mpbl",
@@ -74,15 +81,17 @@
       "fiba-3x3",
       "one-championship",
       "ufc",
-      "ncaa-philippines",
       "pba-official",
       "nba",
       "wnba",
+      "mlb",
       "atp",
       "euroleague",
+      "the-asian-tournament",
       "bleague-international",
       "volleyball-world-women",
-      "volleyball-world-men"
+      "volleyball-world-men",
+      "one-sports-pvl"
     ],
     "resolvedChannels": {
       "nbl-pilipinas": "UCJDBLldRGVJPEvyjJdSHefw",
@@ -92,21 +101,24 @@
       "fiba-3x3": "UC7LpyJP5fupiJu2CdzRQheg",
       "one-championship": "UCiormkBf3jm6mfb7k0yPbKA",
       "ufc": "UCvgfXK4nTYKudb0rFR6noLA",
-      "ncaa-philippines": "UC3Whnl6MzB0bJKwfbm43JMw",
       "pba-official": "UC9WkScCyThtumtf9XVO4eWQ",
       "nba": "UCWJ2lWNubArHWmf3FIHbfcQ",
       "wnba": "UCO9a_ryN_l7DIDS-VIt-zmw",
+      "mlb": "UCoLrcjPV5PbUrUyXq5mjc_A",
       "atp": "UCY_5h5zaSwN7Or4kIJDYNXA",
       "euroleague": "UCGr3nR_XH9r6E5b09ZJAT9w",
+      "the-asian-tournament": "UCU2n0Xm6Dz6aZ8O_gl8OQeA",
       "bleague-international": "UCx4M7pOU3Yhq9VAxmEbe1Vg",
       "volleyball-world-women": "UCNMg6XDhRZI2QzL4pWOvP_w",
-      "volleyball-world-men": "UCNMg6XDhRZI2QzL4pWOvP_w"
-    }
+      "volleyball-world-men": "UCNMg6XDhRZI2QzL4pWOvP_w",
+      "one-sports-pvl": "UCXDG9ue-emCN8Ad3h7lERqQ"
+    },
+    "oneSportsLiveSearchCheckedAt": "2026-10-25T12:31:32.861789+00:00"
   },
   "liveVerification": {
-    "checkedAt": "2026-09-23T09:03:29.339660+00:00",
+    "checkedAt": "2026-10-31T06:56:22.828843+00:00",
     "method": "YouTube videos API exact-video verification",
-    "verifiedLiveCount": 3,
+    "verifiedLiveCount": 2,
     "graceCount": 0,
     "removedCount": 0,
     "removed": []
