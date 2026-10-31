@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-31T18:38:16+08:00",
+  "updated_at": "2026-10-31T23:54:34+08:00",
   "refresh_minutes": 15,
   "leagues": {
     "pba": {
@@ -299,7 +299,7 @@
           "idleDiscoveryMinutes": 180,
           "gameDayDataRefreshMinutes": 15,
           "gameDayLivestreamRefreshMinutes": 5,
-          "lastSlowCheckAt": "2026-10-31T18:37:22+08:00"
+          "lastSlowCheckAt": "2026-10-31T23:53:40+08:00"
         },
         "failClosed": true
       }
@@ -1201,19 +1201,19 @@
           "losses": 3
         },
         {
-          "team": "Ateneo Blue Eagles",
-          "wins": 5,
-          "losses": 4
-        },
-        {
           "team": "De La Salle Green Archers",
-          "wins": 5,
+          "wins": 6,
           "losses": 4
         },
         {
           "team": "FEU Tamaraws",
           "wins": 5,
           "losses": 4
+        },
+        {
+          "team": "Ateneo Blue Eagles",
+          "wins": 5,
+          "losses": 5
         },
         {
           "team": "Adamson Soaring Falcons",
@@ -1232,6 +1232,19 @@
         }
       ],
       "games": [
+        {
+          "eventId": "uaap-live-39",
+          "date": "2026-10-31T18:00:00+08:00",
+          "displayTime": "Oct 31 · Final",
+          "away": "De La Salle Green Archers",
+          "home": "Ateneo Blue Eagles",
+          "awayScore": "76",
+          "homeScore": "73",
+          "status": "Final",
+          "state": "final",
+          "sourceName": "UAAP Live Stats",
+          "sourceUrl": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball?game_id=39"
+        },
         {
           "eventId": "uaap-live-38",
           "date": "2026-10-31T14:30:00+08:00",
@@ -1386,15 +1399,16 @@
           "timezone": "Asia/Manila",
           "mode": "game-day",
           "gameDay": true,
-          "todayGameCount": 1,
+          "todayGameCount": 2,
           "todayGames": [
+            "uaap-live-39",
             "uaap-live-38"
           ],
           "nextGameAt": "",
           "idleDiscoveryMinutes": 180,
           "gameDayDataRefreshMinutes": 15,
           "gameDayLivestreamRefreshMinutes": 5,
-          "lastSlowCheckAt": "2026-10-31T18:37:54+08:00"
+          "lastSlowCheckAt": "2026-10-31T23:54:08+08:00"
         },
         "failClosed": true
       }
@@ -1418,7 +1432,7 @@
         "idleDiscoveryMinutes": 180,
         "gameDayDataRefreshMinutes": 15,
         "gameDayLivestreamRefreshMinutes": 5,
-        "lastSlowCheckAt": "2026-10-31T18:37:22+08:00"
+        "lastSlowCheckAt": "2026-10-31T23:53:40+08:00"
       },
       "failClosed": true
     },
@@ -1432,15 +1446,16 @@
         "timezone": "Asia/Manila",
         "mode": "game-day",
         "gameDay": true,
-        "todayGameCount": 1,
+        "todayGameCount": 2,
         "todayGames": [
+          "uaap-live-39",
           "uaap-live-38"
         ],
         "nextGameAt": "",
         "idleDiscoveryMinutes": 180,
         "gameDayDataRefreshMinutes": 15,
         "gameDayLivestreamRefreshMinutes": 5,
-        "lastSlowCheckAt": "2026-10-31T18:37:54+08:00"
+        "lastSlowCheckAt": "2026-10-31T23:54:08+08:00"
       },
       "failClosed": true
     }
