@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-02T02:07:43.107017+00:00",
+  "updatedAt": "2026-11-02T09:30:45.889219+00:00",
   "leagues": {
     "uaap": {
       "league": "UAAP",
@@ -11156,6 +11156,13 @@
           "suffix": "YDS",
           "rows": [
             {
+              "player": "Jayden Daniels",
+              "team": "WSH",
+              "gp": null,
+              "value": 976.0,
+              "displayValue": "976"
+            },
+            {
               "player": "Lamar Jackson",
               "team": "BAL",
               "gp": null,
@@ -11177,20 +11184,6 @@
               "displayValue": "933"
             },
             {
-              "player": "Kyler Murray",
-              "team": "MIN",
-              "gp": null,
-              "value": 812.0,
-              "displayValue": "812"
-            },
-            {
-              "player": "Jayden Daniels",
-              "team": "WSH",
-              "gp": null,
-              "value": 759.0,
-              "displayValue": "759"
-            },
-            {
               "player": "Tyler Huntley",
               "team": "BAL",
               "gp": null,
@@ -11203,6 +11196,13 @@
               "gp": null,
               "value": 679.0,
               "displayValue": "679"
+            },
+            {
+              "player": "Tanner McKee",
+              "team": "PHI",
+              "gp": null,
+              "value": 638.0,
+              "displayValue": "638"
             },
             {
               "player": "Jalon Daniels",
@@ -11218,11 +11218,25 @@
           "suffix": "TD",
           "rows": [
             {
+              "player": "Joe Burrow",
+              "team": "CIN",
+              "gp": null,
+              "value": 20.0,
+              "displayValue": "20"
+            },
+            {
               "player": "Kirk Cousins",
               "team": "LV",
               "gp": null,
-              "value": 16.0,
-              "displayValue": "16"
+              "value": 19.0,
+              "displayValue": "19"
+            },
+            {
+              "player": "Trevor Lawrence",
+              "team": "JAX",
+              "gp": null,
+              "value": 17.0,
+              "displayValue": "17"
             },
             {
               "player": "Jordan Love",
@@ -11232,8 +11246,15 @@
               "displayValue": "16"
             },
             {
-              "player": "Joe Burrow",
-              "team": "CIN",
+              "player": "Matthew Stafford",
+              "team": "LAR",
+              "gp": null,
+              "value": 15.0,
+              "displayValue": "15"
+            },
+            {
+              "player": "Jared Goff",
+              "team": "DET",
               "gp": null,
               "value": 15.0,
               "displayValue": "15"
@@ -11246,32 +11267,11 @@
               "displayValue": "15"
             },
             {
-              "player": "Matthew Stafford",
-              "team": "LAR",
+              "player": "Drake Maye",
+              "team": "NE",
               "gp": null,
-              "value": 14.0,
-              "displayValue": "14"
-            },
-            {
-              "player": "Jared Goff",
-              "team": "DET",
-              "gp": null,
-              "value": 14.0,
-              "displayValue": "14"
-            },
-            {
-              "player": "Trevor Lawrence",
-              "team": "JAX",
-              "gp": null,
-              "value": 14.0,
-              "displayValue": "14"
-            },
-            {
-              "player": "Aaron Rodgers",
-              "team": "PIT",
-              "gp": null,
-              "value": 13.0,
-              "displayValue": "13"
+              "value": 15.0,
+              "displayValue": "15"
             }
           ]
         },
@@ -11283,57 +11283,57 @@
               "player": "Bijan Robinson",
               "team": "ATL",
               "gp": null,
-              "value": 704.0,
-              "displayValue": "704"
-            },
-            {
-              "player": "Kenneth Walker III",
-              "team": "KC",
-              "gp": null,
-              "value": 701.0,
-              "displayValue": "701"
-            },
-            {
-              "player": "James Cook III",
-              "team": "BUF",
-              "gp": null,
-              "value": 627.0,
-              "displayValue": "627"
+              "value": 780.0,
+              "displayValue": "780"
             },
             {
               "player": "Jahmyr Gibbs",
               "team": "DET",
               "gp": null,
-              "value": 620.0,
-              "displayValue": "620"
+              "value": 773.0,
+              "displayValue": "773"
             },
             {
-              "player": "Jonathan Taylor",
-              "team": "IND",
+              "player": "Kenneth Walker III",
+              "team": "KC",
               "gp": null,
-              "value": 587.0,
-              "displayValue": "587"
-            },
-            {
-              "player": "Derrick Henry",
-              "team": "BAL",
-              "gp": null,
-              "value": 579.0,
-              "displayValue": "579"
-            },
-            {
-              "player": "Jaylen Warren",
-              "team": "PIT",
-              "gp": null,
-              "value": 561.0,
-              "displayValue": "561"
+              "value": 770.0,
+              "displayValue": "770"
             },
             {
               "player": "Bucky Irving",
               "team": "TB",
               "gp": null,
-              "value": 558.0,
-              "displayValue": "558"
+              "value": 728.0,
+              "displayValue": "728"
+            },
+            {
+              "player": "James Cook III",
+              "team": "BUF",
+              "gp": null,
+              "value": 707.0,
+              "displayValue": "707"
+            },
+            {
+              "player": "Jaylen Warren",
+              "team": "PIT",
+              "gp": null,
+              "value": 704.0,
+              "displayValue": "704"
+            },
+            {
+              "player": "Derrick Henry",
+              "team": "BAL",
+              "gp": null,
+              "value": 632.0,
+              "displayValue": "632"
+            },
+            {
+              "player": "Jonathan Taylor",
+              "team": "IND",
+              "gp": null,
+              "value": 610.0,
+              "displayValue": "610"
             }
           ]
         },
@@ -11349,18 +11349,25 @@
               "displayValue": "867"
             },
             {
-              "player": "Christian Watson",
-              "team": "GB",
+              "player": "Tee Higgins",
+              "team": "CIN",
               "gp": null,
-              "value": 708.0,
-              "displayValue": "708"
+              "value": 726.0,
+              "displayValue": "726"
             },
             {
               "player": "CeeDee Lamb",
               "team": "DAL",
               "gp": null,
-              "value": 651.0,
-              "displayValue": "651"
+              "value": 709.0,
+              "displayValue": "709"
+            },
+            {
+              "player": "Christian Watson",
+              "team": "GB",
+              "gp": null,
+              "value": 708.0,
+              "displayValue": "708"
             },
             {
               "player": "Chris Olave",
@@ -11370,6 +11377,13 @@
               "displayValue": "636"
             },
             {
+              "player": "Drake London",
+              "team": "ATL",
+              "gp": null,
+              "value": 624.0,
+              "displayValue": "624"
+            },
+            {
               "player": "Matthew Golden",
               "team": "GB",
               "gp": null,
@@ -11377,25 +11391,11 @@
               "displayValue": "619"
             },
             {
-              "player": "Drake London",
-              "team": "ATL",
-              "gp": null,
-              "value": 616.0,
-              "displayValue": "616"
-            },
-            {
               "player": "Zay Flowers",
               "team": "BAL",
               "gp": null,
               "value": 608.0,
               "displayValue": "608"
-            },
-            {
-              "player": "Malik Nabers",
-              "team": "NYG",
-              "gp": null,
-              "value": 605.0,
-              "displayValue": "605"
             }
           ]
         }
