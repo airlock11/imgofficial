@@ -2,7 +2,7 @@
   "special": true,
   "league": "WTA Tour",
   "live": true,
-  "updatedAt": "2026-11-03T16:11:42.743895+00:00",
+  "updatedAt": "2026-11-03T16:11:49.259728+00:00",
   "sourceName": "WTA Official Scores scrape",
   "sourceUrl": "https://www.wtatennis.com/scores/",
   "verificationSource": "WTA Official Scores",
@@ -13,7 +13,7 @@
   "games": [
     {
       "eventId": "wta-scrape-0-a-falei-m-linette",
-      "date": "2026-11-03T16:11:42.740534+00:00",
+      "date": "2026-11-03T16:11:49.256565+00:00",
       "displayTime": "Chennai Open • India",
       "away": "A. Falei",
       "home": "M. Linette",
@@ -48,7 +48,7 @@
     },
     {
       "eventId": "wta-scrape-1-m-rajeshwaran-revathi-k-kawa",
-      "date": "2026-11-03T16:11:42.740710+00:00",
+      "date": "2026-11-03T16:11:49.256735+00:00",
       "displayTime": "Chennai Open • India",
       "away": "M. Rajeshwaran Revathi",
       "home": "K. Kawa",
@@ -84,7 +84,7 @@
     },
     {
       "eventId": "wta-scrape-2-m-sawangkaew-m-hontama",
-      "date": "2026-11-03T16:11:42.740817+00:00",
+      "date": "2026-11-03T16:11:49.256839+00:00",
       "displayTime": "Chennai Open • India",
       "away": "M. Sawangkaew",
       "home": "M. Hontama",
@@ -119,11 +119,11 @@
     },
     {
       "eventId": "wta-scrape-7-z-li-a-s-nchez",
-      "date": "2026-11-03T16:11:42.741277+00:00",
+      "date": "2026-11-03T16:11:49.257280+00:00",
       "displayTime": "Angola Ladies Open • Angola",
       "away": "Z. Li",
       "home": "A. Sánchez",
-      "awayScore": "6 4 · 0",
+      "awayScore": "6 4 · 15",
       "homeScore": "2 4 · 0",
       "awaySets": [
         "6",
@@ -133,7 +133,7 @@
         "2",
         "4"
       ],
-      "awayPoint": "0",
+      "awayPoint": "15",
       "homePoint": "0",
       "currentSet": 2,
       "awayCurrentSetGames": 4,
@@ -153,11 +153,11 @@
     },
     {
       "eventId": "wta-scrape-8-upcoming-kroitor-shinikova-bohner",
-      "date": "2026-11-03T16:11:42.741596+00:00",
+      "date": "2026-11-03T16:11:49.257576+00:00",
       "displayTime": "Angola Ladies Open • Angola",
       "away": "Upcoming / Kroitor",
       "home": "Shinikova / Bohner",
-      "awayScore": "1 · 0",
+      "awayScore": "1 · 15",
       "homeScore": "0 · 0",
       "awaySets": [
         "1"
@@ -165,7 +165,7 @@
       "homeSets": [
         "0"
       ],
-      "awayPoint": "0",
+      "awayPoint": "15",
       "homePoint": "0",
       "currentSet": 1,
       "awayCurrentSetGames": 1,
@@ -174,7 +174,7 @@
       "homeSetsWon": 0,
       "round": "Round of 16",
       "court": "Court 3",
-      "status": "Live Match: 0:02 · Round of 16 · Court 3",
+      "status": "Live Match: 0:03 · Round of 16 · Court 3",
       "state": "live",
       "eventOnly": false,
       "title": "Angola Ladies Open • Angola",
@@ -185,7 +185,7 @@
     },
     {
       "eventId": "wta-scrape-3-e-kalieva-i-burillo",
-      "date": "2026-11-03T16:11:42.740915+00:00",
+      "date": "2026-11-03T16:11:49.256935+00:00",
       "displayTime": "Reto Win Tennis Cali Open • Colombia",
       "away": "E. Kalieva",
       "home": "I. Burillo",
@@ -217,7 +217,7 @@
     },
     {
       "eventId": "wta-scrape-4-j-ortenzi-e-mandlik",
-      "date": "2026-11-03T16:11:42.741000+00:00",
+      "date": "2026-11-03T16:11:49.257016+00:00",
       "displayTime": "Reto Win Tennis Cali Open • Colombia",
       "away": "J. Ortenzi",
       "home": "E. Mandlik",
@@ -249,7 +249,7 @@
     },
     {
       "eventId": "wta-scrape-5-k-scott-r-zarazua",
-      "date": "2026-11-03T16:11:42.741086+00:00",
+      "date": "2026-11-03T16:11:49.257100+00:00",
       "displayTime": "Reto Win Tennis Cali Open • Colombia",
       "away": "K. Scott",
       "home": "R. Zarazua",
@@ -281,25 +281,25 @@
     },
     {
       "eventId": "wta-scrape-6-j-mikulskyte-m-laron",
-      "date": "2026-11-03T16:11:42.741187+00:00",
+      "date": "2026-11-03T16:11:49.257193+00:00",
       "displayTime": "Angola Ladies Open • Angola",
       "away": "J. Mikulskyte",
       "home": "M. Laron",
       "awayScore": "7 3 · 0",
-      "homeScore": "5 4 · 30",
+      "homeScore": "5 5 · 0",
       "awaySets": [
         "7",
         "3"
       ],
       "homeSets": [
         "5",
-        "4"
+        "5"
       ],
       "awayPoint": "0",
-      "homePoint": "30",
+      "homePoint": "0",
       "currentSet": 2,
       "awayCurrentSetGames": 3,
-      "homeCurrentSetGames": 4,
+      "homeCurrentSetGames": 5,
       "awaySetsWon": 1,
       "homeSetsWon": 0,
       "round": "Round of 32",
