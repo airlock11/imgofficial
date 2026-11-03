@@ -2,7 +2,7 @@
   "special": true,
   "league": "WTA Tour",
   "live": true,
-  "updatedAt": "2026-11-03T07:57:09.647868+00:00",
+  "updatedAt": "2026-11-03T07:57:16.169723+00:00",
   "sourceName": "WTA Official Scores scrape",
   "sourceUrl": "https://www.wtatennis.com/scores/",
   "verificationSource": "WTA Official Scores",
@@ -13,15 +13,15 @@
   "games": [
     {
       "eventId": "wta-scrape-0-t-gibson-o-oliynykova",
-      "date": "2026-11-03T07:57:09.645164+00:00",
+      "date": "2026-11-03T07:57:16.167302+00:00",
       "displayTime": "Prudential Hong Kong Tennis Open • HKG",
       "away": "T. Gibson",
       "home": "O. Oliynykova",
-      "awayScore": "7 5 · 40",
+      "awayScore": "7 6 · 40",
       "homeScore": "6 5 1 · 0",
       "awaySets": [
         "7",
-        "5"
+        "6"
       ],
       "homeSets": [
         "6",
@@ -37,8 +37,8 @@
       "homeSetsWon": 0,
       "round": "Round of 32",
       "court": "Centre Court",
-      "status": "Live Match: 1:27 · Round of 32 · Centre Court",
-      "state": "live",
+      "status": "Suspended · Round of 32 · Centre Court",
+      "state": "suspended",
       "eventOnly": false,
       "title": "Prudential Hong Kong Tennis Open • HKG",
       "sourceName": "WTA Official Scores scrape",
@@ -48,12 +48,12 @@
     },
     {
       "eventId": "wta-scrape-1-upcoming-jiang-wong-neel",
-      "date": "2026-11-03T07:57:09.645549+00:00",
+      "date": "2026-11-03T07:57:16.167674+00:00",
       "displayTime": "Prudential Hong Kong Tennis Open • HKG",
       "away": "Upcoming / Jiang",
       "home": "Wong / Neel",
       "awayScore": "1 · 15",
-      "homeScore": "0 · 0",
+      "homeScore": "0 · 15",
       "awaySets": [
         "1"
       ],
@@ -61,7 +61,7 @@
         "0"
       ],
       "awayPoint": "15",
-      "homePoint": "0",
+      "homePoint": "15",
       "currentSet": 1,
       "awayCurrentSetGames": 1,
       "homeCurrentSetGames": 0,
@@ -80,7 +80,7 @@
     },
     {
       "eventId": "wta-scrape-2-j-vandromme-k-okamura",
-      "date": "2026-11-03T07:57:09.645643+00:00",
+      "date": "2026-11-03T07:57:16.167784+00:00",
       "displayTime": "Chennai Open • IND",
       "away": "J. Vandromme",
       "home": "K. Okamura",
@@ -112,7 +112,7 @@
     },
     {
       "eventId": "wta-scrape-3-a-zakharova-p-iatcenko",
-      "date": "2026-11-03T07:57:09.645742+00:00",
+      "date": "2026-11-03T07:57:16.167870+00:00",
       "displayTime": "Chennai Open • IND",
       "away": "A. Zakharova",
       "home": "P. Iatcenko",
@@ -144,7 +144,7 @@
     },
     {
       "eventId": "wta-scrape-4-l-fruhvirtova-w-falkowska",
-      "date": "2026-11-03T07:57:09.645828+00:00",
+      "date": "2026-11-03T07:57:16.167950+00:00",
       "displayTime": "Chennai Open • IND",
       "away": "L. Fruhvirtova",
       "home": "W. Falkowska",
