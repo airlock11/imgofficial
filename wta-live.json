@@ -2,7 +2,7 @@
   "special": true,
   "league": "WTA Tour",
   "live": true,
-  "updatedAt": "2026-11-03T16:08:45.145463+00:00",
+  "updatedAt": "2026-11-03T16:08:52.344280+00:00",
   "sourceName": "WTA Official Scores scrape",
   "sourceUrl": "https://www.wtatennis.com/scores/",
   "verificationSource": "WTA Official Scores",
@@ -13,7 +13,7 @@
   "games": [
     {
       "eventId": "wta-scrape-0-a-falei-m-linette",
-      "date": "2026-11-03T16:08:45.142661+00:00",
+      "date": "2026-11-03T16:08:52.341655+00:00",
       "displayTime": "Chennai Open • India",
       "away": "A. Falei",
       "home": "M. Linette",
@@ -48,7 +48,7 @@
     },
     {
       "eventId": "wta-scrape-1-m-rajeshwaran-revathi-k-kawa",
-      "date": "2026-11-03T16:08:45.142827+00:00",
+      "date": "2026-11-03T16:08:52.341820+00:00",
       "displayTime": "Chennai Open • India",
       "away": "M. Rajeshwaran Revathi",
       "home": "K. Kawa",
@@ -84,7 +84,7 @@
     },
     {
       "eventId": "wta-scrape-2-m-sawangkaew-m-hontama",
-      "date": "2026-11-03T16:08:45.142928+00:00",
+      "date": "2026-11-03T16:08:52.341920+00:00",
       "displayTime": "Chennai Open • India",
       "away": "M. Sawangkaew",
       "home": "M. Hontama",
@@ -119,11 +119,11 @@
     },
     {
       "eventId": "wta-scrape-7-z-li-a-s-nchez",
-      "date": "2026-11-03T16:08:45.143359+00:00",
+      "date": "2026-11-03T16:08:52.342346+00:00",
       "displayTime": "Angola Ladies Open • Angola",
       "away": "Z. Li",
       "home": "A. Sánchez",
-      "awayScore": "6 3 · 30",
+      "awayScore": "6 3 · 40",
       "homeScore": "2 4 · 15",
       "awaySets": [
         "6",
@@ -133,7 +133,7 @@
         "2",
         "4"
       ],
-      "awayPoint": "30",
+      "awayPoint": "40",
       "homePoint": "15",
       "currentSet": 2,
       "awayCurrentSetGames": 3,
@@ -142,7 +142,7 @@
       "homeSetsWon": 0,
       "round": "Round of 32",
       "court": "Court 1",
-      "status": "Live Match: 1:23 · Round of 32 · Court 1",
+      "status": "Live Match: 1:24 · Round of 32 · Court 1",
       "state": "live",
       "eventOnly": false,
       "title": "Angola Ladies Open • Angola",
@@ -153,16 +153,20 @@
     },
     {
       "eventId": "wta-scrape-8-upcoming-kroitor-shinikova-bohner",
-      "date": "2026-11-03T16:08:45.143647+00:00",
+      "date": "2026-11-03T16:08:52.342637+00:00",
       "displayTime": "Angola Ladies Open • Angola",
       "away": "Upcoming / Kroitor",
       "home": "Shinikova / Bohner",
-      "awayScore": "",
-      "homeScore": "",
-      "awaySets": [],
-      "homeSets": [],
-      "awayPoint": "—",
-      "homePoint": "—",
+      "awayScore": "0 · 30",
+      "homeScore": "0 · 15",
+      "awaySets": [
+        "0"
+      ],
+      "homeSets": [
+        "0"
+      ],
+      "awayPoint": "30",
+      "homePoint": "15",
       "currentSet": 1,
       "awayCurrentSetGames": 0,
       "homeCurrentSetGames": 0,
@@ -181,7 +185,7 @@
     },
     {
       "eventId": "wta-scrape-3-j-ortenzi-e-mandlik",
-      "date": "2026-11-03T16:08:45.143016+00:00",
+      "date": "2026-11-03T16:08:52.342007+00:00",
       "displayTime": "Reto Win Tennis Cali Open • Colombia",
       "away": "J. Ortenzi",
       "home": "E. Mandlik",
@@ -213,7 +217,7 @@
     },
     {
       "eventId": "wta-scrape-4-k-scott-r-zarazua",
-      "date": "2026-11-03T16:08:45.143100+00:00",
+      "date": "2026-11-03T16:08:52.342091+00:00",
       "displayTime": "Reto Win Tennis Cali Open • Colombia",
       "away": "K. Scott",
       "home": "R. Zarazua",
@@ -245,7 +249,7 @@
     },
     {
       "eventId": "wta-scrape-6-j-mikulskyte-m-laron",
-      "date": "2026-11-03T16:08:45.143273+00:00",
+      "date": "2026-11-03T16:08:52.342262+00:00",
       "displayTime": "Angola Ladies Open • Angola",
       "away": "J. Mikulskyte",
       "home": "M. Laron",
@@ -279,7 +283,7 @@
     },
     {
       "eventId": "wta-scrape-5-e-kalieva-i-burillo",
-      "date": "2026-11-03T16:08:45.143192+00:00",
+      "date": "2026-11-03T16:08:52.342181+00:00",
       "displayTime": "Reto Win Tennis Cali Open • Colombia",
       "away": "E. Kalieva",
       "home": "I. Burillo",
