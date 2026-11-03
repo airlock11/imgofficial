@@ -15,13 +15,13 @@
 - `privacy/index.html` — **different IMG website** privacy/advertising policy
 
 ## Blocking checks before public release
-- [ ] Verify the **actual contracting operator** and its legal name, physical contact address, jurisdiction, applicable governing law and appropriate dispute process. "IMG LIVE Studio" is a product name, not evidence of incorporation.
+- [ ] Proposed customer-facing operator name: **IMGGlobal** (unverified as a registered legal entity). Verify the **actual contracting operator** and its legal name, physical contact address, jurisdiction, applicable governing law and appropriate dispute process. "IMG LIVE Studio" is a product name, not evidence of incorporation.
 - [ ] Confirm contact mailbox `imgglobal@imgofficial.com` is staffed and tested for privacy, abuse and subscription complaints.
 - [ ] Confirm actual subscription channels (Google Play, direct website, or other), checkout disclosures, merchant identity, payment processor, tax treatment, any trial length, fees and currencies. **Do not claim billing works until verified.**
 - [ ] Implement and test easy online cancellation for each active billing channel, including an in-app account-settings or equivalent cancellation route where platform policy requires. Verify successful cancellation prevents future renewal and properly preserves already-paid entitlements.
 - [ ] Verify refund handling and no-voluntary-money-back-guarantee wording against mandatory local consumer rights; seek counsel on EU withdrawal rights and other key markets before accepting subscriptions.
 - [ ] Verify precise Android/Cloudflare/Facebook/YouTube data flows, permissions, backend storage, token handling, session deletion behavior, retention periods, hosting logs, backups and subprocessor roles. Resolve discrepancies between existing October 26 privacy disclosures and the released app.
-- [ ] Determine whether IMG acts as a controller or processor in each service relationship; obtain applicable data processing agreements and international transfer safeguards.
+- [ ] Determine whether IMGGlobal (through its actual legal operator) acts as a controller or processor in each service relationship; obtain applicable data processing agreements and international transfer safeguards.
 - [ ] Confirm minor/child account eligibility and youth-event notice/consent processes; assess child-privacy rules in target markets.
 - [ ] Validate user authorization, content reporting, repeat-infringer policies and formal notice procedures where laws require them.
 - [ ] Legal review of aggregate liability cap, indemnification, exclusions, consumer rights, arbitration/forum selection and statutory duties in priority countries. Disclaimers cannot waive non-excludable liabilities.
