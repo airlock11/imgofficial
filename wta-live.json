@@ -2,18 +2,18 @@
   "special": true,
   "league": "WTA Tour",
   "live": true,
-  "updatedAt": "2026-11-03T16:09:57.756156+00:00",
+  "updatedAt": "2026-11-03T16:10:03.895172+00:00",
   "sourceName": "WTA Official Scores scrape",
   "sourceUrl": "https://www.wtatennis.com/scores/",
   "verificationSource": "WTA Official Scores",
   "verificationUrl": "https://www.wtatennis.com/scores/",
-  "pageLiveCount": 8,
-  "parsedMatchCount": 8,
+  "pageLiveCount": 9,
+  "parsedMatchCount": 9,
   "note": "GitHub scrape of the rendered WTA Scores page. Game points, current set number, current-set games and per-set scores are stored separately.",
   "games": [
     {
       "eventId": "wta-scrape-0-a-falei-m-linette",
-      "date": "2026-11-03T16:09:57.753259+00:00",
+      "date": "2026-11-03T16:10:03.891941+00:00",
       "displayTime": "Chennai Open • India",
       "away": "A. Falei",
       "home": "M. Linette",
@@ -37,7 +37,7 @@
       "homeSetsWon": 1,
       "round": "Round of 32",
       "court": "Court 1",
-      "status": "Live Match: 2:15 · Round of 32 · Court 1",
+      "status": "Live Match: 2:16 · Round of 32 · Court 1",
       "state": "live",
       "eventOnly": false,
       "title": "Chennai Open • India",
@@ -47,13 +47,49 @@
       "verificationUrl": "https://www.wtatennis.com/scores/"
     },
     {
-      "eventId": "wta-scrape-1-m-sawangkaew-m-hontama",
-      "date": "2026-11-03T16:09:57.753431+00:00",
+      "eventId": "wta-scrape-1-m-rajeshwaran-revathi-k-kawa",
+      "date": "2026-11-03T16:10:03.892114+00:00",
+      "displayTime": "Chennai Open • India",
+      "away": "M. Rajeshwaran Revathi",
+      "home": "K. Kawa",
+      "awayScore": "6 2 0 · 0",
+      "homeScore": "4 6 0 · 0",
+      "awaySets": [
+        "6",
+        "2",
+        "0"
+      ],
+      "homeSets": [
+        "4",
+        "6",
+        "0"
+      ],
+      "awayPoint": "0",
+      "homePoint": "0",
+      "currentSet": 3,
+      "awayCurrentSetGames": 0,
+      "homeCurrentSetGames": 0,
+      "awaySetsWon": 1,
+      "homeSetsWon": 1,
+      "round": "Round of 32",
+      "court": "Centre Court",
+      "status": "Live Match: 1:25 · Round of 32 · Centre Court",
+      "state": "live",
+      "eventOnly": false,
+      "title": "Chennai Open • India",
+      "sourceName": "WTA Official Scores scrape",
+      "sourceUrl": "https://www.wtatennis.com/scores/",
+      "verificationSource": "WTA Official Scores",
+      "verificationUrl": "https://www.wtatennis.com/scores/"
+    },
+    {
+      "eventId": "wta-scrape-2-m-sawangkaew-m-hontama",
+      "date": "2026-11-03T16:10:03.892229+00:00",
       "displayTime": "Chennai Open • India",
       "away": "M. Sawangkaew",
       "home": "M. Hontama",
       "awayScore": "6 3 1 · 0",
-      "homeScore": "7 3 · 15",
+      "homeScore": "7 3 · 30",
       "awaySets": [
         "6",
         "3",
@@ -64,7 +100,7 @@
         "3"
       ],
       "awayPoint": "0",
-      "homePoint": "15",
+      "homePoint": "30",
       "currentSet": 3,
       "awayCurrentSetGames": 1,
       "homeCurrentSetGames": 0,
@@ -72,7 +108,7 @@
       "homeSetsWon": 1,
       "round": "Round of 32",
       "court": "Court 2",
-      "status": "Live Match: 1:23 · Round of 32 · Court 2",
+      "status": "Live Match: 1:24 · Round of 32 · Court 2",
       "state": "live",
       "eventOnly": false,
       "title": "Chennai Open • India",
@@ -82,8 +118,8 @@
       "verificationUrl": "https://www.wtatennis.com/scores/"
     },
     {
-      "eventId": "wta-scrape-6-z-li-a-s-nchez",
-      "date": "2026-11-03T16:09:57.753865+00:00",
+      "eventId": "wta-scrape-7-z-li-a-s-nchez",
+      "date": "2026-11-03T16:10:03.892683+00:00",
       "displayTime": "Angola Ladies Open • Angola",
       "away": "Z. Li",
       "home": "A. Sánchez",
@@ -116,8 +152,8 @@
       "verificationUrl": "https://www.wtatennis.com/scores/"
     },
     {
-      "eventId": "wta-scrape-7-upcoming-kroitor-shinikova-bohner",
-      "date": "2026-11-03T16:09:57.754161+00:00",
+      "eventId": "wta-scrape-8-upcoming-kroitor-shinikova-bohner",
+      "date": "2026-11-03T16:10:03.892992+00:00",
       "displayTime": "Angola Ladies Open • Angola",
       "away": "Upcoming / Kroitor",
       "home": "Shinikova / Bohner",
@@ -148,8 +184,8 @@
       "verificationUrl": "https://www.wtatennis.com/scores/"
     },
     {
-      "eventId": "wta-scrape-2-e-kalieva-i-burillo",
-      "date": "2026-11-03T16:09:57.753531+00:00",
+      "eventId": "wta-scrape-3-e-kalieva-i-burillo",
+      "date": "2026-11-03T16:10:03.892325+00:00",
       "displayTime": "Reto Win Tennis Cali Open • Colombia",
       "away": "E. Kalieva",
       "home": "I. Burillo",
@@ -180,8 +216,8 @@
       "verificationUrl": "https://www.wtatennis.com/scores/"
     },
     {
-      "eventId": "wta-scrape-3-j-ortenzi-e-mandlik",
-      "date": "2026-11-03T16:09:57.753613+00:00",
+      "eventId": "wta-scrape-4-j-ortenzi-e-mandlik",
+      "date": "2026-11-03T16:10:03.892407+00:00",
       "displayTime": "Reto Win Tennis Cali Open • Colombia",
       "away": "J. Ortenzi",
       "home": "E. Mandlik",
@@ -212,8 +248,8 @@
       "verificationUrl": "https://www.wtatennis.com/scores/"
     },
     {
-      "eventId": "wta-scrape-4-k-scott-r-zarazua",
-      "date": "2026-11-03T16:09:57.753697+00:00",
+      "eventId": "wta-scrape-5-k-scott-r-zarazua",
+      "date": "2026-11-03T16:10:03.892491+00:00",
       "displayTime": "Reto Win Tennis Cali Open • Colombia",
       "away": "K. Scott",
       "home": "R. Zarazua",
@@ -244,8 +280,8 @@
       "verificationUrl": "https://www.wtatennis.com/scores/"
     },
     {
-      "eventId": "wta-scrape-5-j-mikulskyte-m-laron",
-      "date": "2026-11-03T16:09:57.753780+00:00",
+      "eventId": "wta-scrape-6-j-mikulskyte-m-laron",
+      "date": "2026-11-03T16:10:03.892583+00:00",
       "displayTime": "Angola Ladies Open • Angola",
       "away": "J. Mikulskyte",
       "home": "M. Laron",
