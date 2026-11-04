@@ -2,7 +2,7 @@
   "special": true,
   "league": "WTA Tour",
   "live": true,
-  "updatedAt": "2026-11-04T08:10:42.615073+00:00",
+  "updatedAt": "2026-11-04T08:10:48.920358+00:00",
   "sourceName": "WTA Official Scores scrape",
   "sourceUrl": "https://www.wtatennis.com/scores/",
   "verificationSource": "WTA Official Scores",
@@ -13,12 +13,12 @@
   "games": [
     {
       "eventId": "wta-scrape-0-m-stojsavljevic-s-kenin",
-      "date": "2026-11-04T08:10:42.612344+00:00",
+      "date": "2026-11-04T08:10:48.918029+00:00",
       "displayTime": "Prudential Hong Kong Tennis Open • Hong Kong",
       "away": "M. Stojsavljevic",
       "home": "S. Kenin",
-      "awayScore": "6 4 4 · 30",
-      "homeScore": "3 6 1 · 40",
+      "awayScore": "6 4 4 · 0",
+      "homeScore": "3 6 2 · 0",
       "awaySets": [
         "6",
         "4",
@@ -27,18 +27,18 @@
       "homeSets": [
         "3",
         "6",
-        "1"
+        "2"
       ],
-      "awayPoint": "30",
-      "homePoint": "40",
+      "awayPoint": "0",
+      "homePoint": "0",
       "currentSet": 3,
       "awayCurrentSetGames": 4,
-      "homeCurrentSetGames": 1,
+      "homeCurrentSetGames": 2,
       "awaySetsWon": 1,
       "homeSetsWon": 1,
       "round": "Round of 32",
       "court": "Centre Court",
-      "status": "Live Match: 1:59 · Round of 32 · Centre Court",
+      "status": "Live Match: 2:00 · Round of 32 · Centre Court",
       "state": "live",
       "eventOnly": false,
       "title": "Prudential Hong Kong Tennis Open • Hong Kong",
@@ -49,22 +49,22 @@
     },
     {
       "eventId": "wta-scrape-1-a-ruzic-a-charaeva",
-      "date": "2026-11-04T08:10:42.612555+00:00",
+      "date": "2026-11-04T08:10:48.918263+00:00",
       "displayTime": "Prudential Hong Kong Tennis Open • Hong Kong",
       "away": "A. Ruzic",
       "home": "A. Charaeva",
-      "awayScore": "7 4 · 30",
+      "awayScore": "7 5 · 0",
       "homeScore": "6 5 3 · 0",
       "awaySets": [
         "7",
-        "4"
+        "5"
       ],
       "homeSets": [
         "6",
         "5",
         "3"
       ],
-      "awayPoint": "30",
+      "awayPoint": "0",
       "homePoint": "0",
       "currentSet": 3,
       "awayCurrentSetGames": 0,
