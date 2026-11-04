@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-03T19:45:17+00:00",
+  "updated_at": "2026-11-04T06:55:25+00:00",
   "source": "Official boxing websites",
   "sources": [
     {
@@ -12,7 +12,7 @@
     }
   ],
   "source_counts": {
-    "Premier Boxing Champions": 5,
+    "Premier Boxing Champions": 8,
     "Matchroom Boxing": 1
   },
   "errors": {
@@ -163,6 +163,99 @@
         },
         "fighter_2": {
           "name": "Cruse Stewart",
+          "winner": false
+        }
+      },
+      "results": {
+        "outcome": null,
+        "outcome_long": null,
+        "round": null,
+        "time": null,
+        "scores": []
+      }
+    },
+    {
+      "id": "web-premier-boxing-champions-2026-12-12-erislandy-lara-tim-tszyu",
+      "title": "Erislandy Lara vs. Tim Tszyu",
+      "date": "2026-12-12T12:00:00Z",
+      "displayTime": "Dec 12 · 7:30 PM ET",
+      "status": "NOT_STARTED",
+      "sourceName": "Premier Boxing Champions",
+      "sourceUrl": "https://www.premierboxingchampions.com/boxing-schedule",
+      "event": {
+        "title": "Premier Boxing Champions",
+        "location": "",
+        "venue": ""
+      },
+      "fighters": {
+        "fighter_1": {
+          "name": "Erislandy Lara",
+          "winner": false
+        },
+        "fighter_2": {
+          "name": "Tim Tszyu",
+          "winner": false
+        }
+      },
+      "results": {
+        "outcome": null,
+        "outcome_long": null,
+        "round": null,
+        "time": null,
+        "scores": []
+      }
+    },
+    {
+      "id": "web-premier-boxing-champions-2026-12-12-jermell-charlo-brock-jarvis",
+      "title": "Jermell Charlo vs. Brock Jarvis",
+      "date": "2026-12-12T12:00:00Z",
+      "displayTime": "Dec 12 · 7:30 PM ET",
+      "status": "NOT_STARTED",
+      "sourceName": "Premier Boxing Champions",
+      "sourceUrl": "https://www.premierboxingchampions.com/boxing-schedule",
+      "event": {
+        "title": "Premier Boxing Champions",
+        "location": "",
+        "venue": ""
+      },
+      "fighters": {
+        "fighter_1": {
+          "name": "Jermell Charlo",
+          "winner": false
+        },
+        "fighter_2": {
+          "name": "Brock Jarvis",
+          "winner": false
+        }
+      },
+      "results": {
+        "outcome": null,
+        "outcome_long": null,
+        "round": null,
+        "time": null,
+        "scores": []
+      }
+    },
+    {
+      "id": "web-premier-boxing-champions-2026-12-12-elnur-samedov-liam-wilson",
+      "title": "Elnur Samedov vs. Liam Wilson",
+      "date": "2026-12-12T12:00:00Z",
+      "displayTime": "Dec 12 · 7:30 PM ET",
+      "status": "NOT_STARTED",
+      "sourceName": "Premier Boxing Champions",
+      "sourceUrl": "https://www.premierboxingchampions.com/boxing-schedule",
+      "event": {
+        "title": "Premier Boxing Champions",
+        "location": "",
+        "venue": ""
+      },
+      "fighters": {
+        "fighter_1": {
+          "name": "Elnur Samedov",
+          "winner": false
+        },
+        "fighter_2": {
+          "name": "Liam Wilson",
           "winner": false
         }
       },
