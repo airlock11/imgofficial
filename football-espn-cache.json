@@ -1,7 +1,7 @@
 {
   "version": 1,
   "source": "ESPN public football data",
-  "updatedAt": "2026-11-04T17:51:36.655Z",
+  "updatedAt": "2026-11-04T23:19:24.692Z",
   "leagues": {
     "soccer": {
       "name": "Premier League",
@@ -1192,7 +1192,7 @@
           "points": 5
         }
       ],
-      "verifiedAt": "2026-11-04T17:51:36.004Z"
+      "verifiedAt": "2026-11-04T23:19:24.128Z"
     },
     "laliga": {
       "name": "La Liga",
@@ -1200,22 +1200,6 @@
       "espn": "esp.1",
       "leagueLogo": "https://a.espncdn.com/i/leaguelogos/soccer/500/15.png",
       "games": [
-        {
-          "eventId": "401882870",
-          "date": "2026-10-21T18:00Z",
-          "displayTime": "",
-          "home": "Levante",
-          "away": "Athletic Club",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/1538.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/93.png",
-          "homeScore": "3",
-          "awayScore": "1",
-          "state": "final",
-          "status": "FT",
-          "venue": "Estadi Ciutat de València",
-          "competition": "La Liga",
-          "category": "Spain"
-        },
         {
           "eventId": "401882836",
           "date": "2026-10-23T19:00Z",
@@ -2239,7 +2223,7 @@
           "points": 5
         }
       ],
-      "verifiedAt": "2026-11-04T17:51:36.188Z"
+      "verifiedAt": "2026-11-04T23:19:24.337Z"
     },
     "bundesliga": {
       "name": "Bundesliga",
@@ -3168,7 +3152,7 @@
           "points": 4
         }
       ],
-      "verifiedAt": "2026-11-04T17:51:36.459Z"
+      "verifiedAt": "2026-11-04T23:19:24.505Z"
     },
     "seriea": {
       "name": "Serie A",
@@ -4135,6 +4119,22 @@
           "venue": "Unipol Domus",
           "competition": "Serie A",
           "category": "Italy"
+        },
+        {
+          "eventId": "401874984",
+          "date": "2026-12-04T19:45Z",
+          "displayTime": "",
+          "home": "Bologna",
+          "away": "AS Roma",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/107.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/104.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "Renato Dall'Ara",
+          "competition": "Serie A",
+          "category": "Italy"
         }
       ],
       "standings": [
@@ -4359,7 +4359,7 @@
           "points": 3
         }
       ],
-      "verifiedAt": "2026-11-04T17:51:36.654Z"
+      "verifiedAt": "2026-11-04T23:19:24.692Z"
     }
   }
 }
