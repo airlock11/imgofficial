@@ -2,7 +2,7 @@
   "special": true,
   "league": "WTA Tour",
   "live": true,
-  "updatedAt": "2026-11-04T16:21:53.014361+00:00",
+  "updatedAt": "2026-11-04T16:22:00.715275+00:00",
   "sourceName": "WTA Official Scores scrape",
   "sourceUrl": "https://www.wtatennis.com/scores/",
   "verificationSource": "WTA Official Scores",
@@ -13,30 +13,30 @@
   "games": [
     {
       "eventId": "wta-scrape-0-w-falkowska-m-rajeshwaran-revathi",
-      "date": "2026-11-04T16:21:53.010548+00:00",
+      "date": "2026-11-04T16:22:00.711530+00:00",
       "displayTime": "Chennai Open • India",
       "away": "W. Falkowska",
       "home": "M. Rajeshwaran Revathi",
-      "awayScore": "4 0 · AD",
-      "homeScore": "6 2 · 40",
+      "awayScore": "4 1 · 0",
+      "homeScore": "6 2 · 0",
       "awaySets": [
         "4",
-        "0"
+        "1"
       ],
       "homeSets": [
         "6",
         "2"
       ],
-      "awayPoint": "AD",
-      "homePoint": "40",
+      "awayPoint": "0",
+      "homePoint": "0",
       "currentSet": 2,
-      "awayCurrentSetGames": 0,
+      "awayCurrentSetGames": 1,
       "homeCurrentSetGames": 2,
       "awaySetsWon": 0,
       "homeSetsWon": 1,
       "round": "Round of 16",
       "court": "Centre Court",
-      "status": "Live Match: 1:06 · Round of 16 · Centre Court",
+      "status": "Live Match: 1:07 · Round of 16 · Centre Court",
       "state": "live",
       "eventOnly": false,
       "title": "Chennai Open • India",
@@ -47,7 +47,7 @@
     },
     {
       "eventId": "wta-scrape-1-l-samson-c-monnet",
-      "date": "2026-11-04T16:21:53.010857+00:00",
+      "date": "2026-11-04T16:22:00.711842+00:00",
       "displayTime": "Reto Win Tennis Cali Open • Colombia",
       "away": "L. Samson",
       "home": "C. Monnet",
@@ -79,7 +79,7 @@
     },
     {
       "eventId": "wta-scrape-2-l-jeanjean-c-alves",
-      "date": "2026-11-04T16:21:53.011045+00:00",
+      "date": "2026-11-04T16:22:00.712022+00:00",
       "displayTime": "Reto Win Tennis Cali Open • Colombia",
       "away": "L. Jeanjean",
       "home": "C. Alves",
@@ -111,7 +111,7 @@
     },
     {
       "eventId": "wta-scrape-3-i-burillo-l-giovannini",
-      "date": "2026-11-04T16:21:53.011208+00:00",
+      "date": "2026-11-04T16:22:00.712183+00:00",
       "displayTime": "Reto Win Tennis Cali Open • Colombia",
       "away": "I. Burillo",
       "home": "L. Giovannini",
@@ -143,11 +143,11 @@
     },
     {
       "eventId": "wta-scrape-4-d-martynov-y-kabbaj",
-      "date": "2026-11-04T16:21:53.011375+00:00",
+      "date": "2026-11-04T16:22:00.712349+00:00",
       "displayTime": "Angola Ladies Open • Angola",
       "away": "D. Martynov",
       "home": "Y. Kabbaj",
-      "awayScore": "2 0 · 15",
+      "awayScore": "2 0 · 30",
       "homeScore": "6 0 · 0",
       "awaySets": [
         "2",
@@ -157,7 +157,7 @@
         "6",
         "0"
       ],
-      "awayPoint": "15",
+      "awayPoint": "30",
       "homePoint": "0",
       "currentSet": 2,
       "awayCurrentSetGames": 0,
