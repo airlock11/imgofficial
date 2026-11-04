@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-04T17:54:26+08:00",
+  "updated_at": "2026-11-05T01:45:13+08:00",
   "refresh_minutes": 15,
   "leagues": {
     "pba": {
@@ -299,7 +299,7 @@
           "idleDiscoveryMinutes": 180,
           "gameDayDataRefreshMinutes": 15,
           "gameDayLivestreamRefreshMinutes": 5,
-          "lastSlowCheckAt": "2026-11-04T17:53:42+08:00"
+          "lastSlowCheckAt": "2026-11-05T01:44:26+08:00"
         },
         "failClosed": true
       }
@@ -1137,7 +1137,7 @@
       "standings": [
         {
           "team": "UP Fighting Maroons",
-          "wins": 7,
+          "wins": 8,
           "losses": 2
         },
         {
@@ -1163,7 +1163,7 @@
         {
           "team": "Adamson Soaring Falcons",
           "wins": 4,
-          "losses": 5
+          "losses": 6
         },
         {
           "team": "UST Growling Tigers",
@@ -1177,6 +1177,19 @@
         }
       ],
       "games": [
+        {
+          "eventId": "uaap-live-41",
+          "date": "2026-11-04T17:00:00+08:00",
+          "displayTime": "Nov 4 · Final",
+          "away": "Adamson Soaring Falcons",
+          "home": "UP Fighting Maroons",
+          "awayScore": "70",
+          "homeScore": "82",
+          "status": "Final",
+          "state": "final",
+          "sourceName": "UAAP Live Stats",
+          "sourceUrl": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball?game_id=41"
+        },
         {
           "eventId": "uaap-live-40",
           "date": "2026-11-04T14:30:00+08:00",
@@ -1323,23 +1336,21 @@
       ],
       "automation": {
         "enabled": true,
-        "mode": "game-day",
-        "dataRefreshMinutes": 15,
-        "livestreamRefreshMinutes": 5,
+        "mode": "idle",
+        "dataRefreshMinutes": 180,
+        "livestreamRefreshMinutes": 0,
         "scheduleAware": {
           "enabled": true,
           "timezone": "Asia/Manila",
-          "mode": "game-day",
-          "gameDay": true,
-          "todayGameCount": 1,
-          "todayGames": [
-            "uaap-live-40"
-          ],
+          "mode": "idle",
+          "gameDay": false,
+          "todayGameCount": 0,
+          "todayGames": [],
           "nextGameAt": "",
           "idleDiscoveryMinutes": 180,
           "gameDayDataRefreshMinutes": 15,
           "gameDayLivestreamRefreshMinutes": 5,
-          "lastSlowCheckAt": "2026-11-04T17:54:13+08:00"
+          "lastSlowCheckAt": "2026-11-05T01:44:58+08:00"
         },
         "failClosed": true
       }
@@ -1363,29 +1374,27 @@
         "idleDiscoveryMinutes": 180,
         "gameDayDataRefreshMinutes": 15,
         "gameDayLivestreamRefreshMinutes": 5,
-        "lastSlowCheckAt": "2026-11-04T17:53:42+08:00"
+        "lastSlowCheckAt": "2026-11-05T01:44:26+08:00"
       },
       "failClosed": true
     },
     "uaap": {
       "enabled": true,
-      "mode": "game-day",
-      "dataRefreshMinutes": 15,
-      "livestreamRefreshMinutes": 5,
+      "mode": "idle",
+      "dataRefreshMinutes": 180,
+      "livestreamRefreshMinutes": 0,
       "scheduleAware": {
         "enabled": true,
         "timezone": "Asia/Manila",
-        "mode": "game-day",
-        "gameDay": true,
-        "todayGameCount": 1,
-        "todayGames": [
-          "uaap-live-40"
-        ],
+        "mode": "idle",
+        "gameDay": false,
+        "todayGameCount": 0,
+        "todayGames": [],
         "nextGameAt": "",
         "idleDiscoveryMinutes": 180,
         "gameDayDataRefreshMinutes": 15,
         "gameDayLivestreamRefreshMinutes": 5,
-        "lastSlowCheckAt": "2026-11-04T17:54:13+08:00"
+        "lastSlowCheckAt": "2026-11-05T01:44:58+08:00"
       },
       "failClosed": true
     }
