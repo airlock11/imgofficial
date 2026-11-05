@@ -1,79 +1,14 @@
 {
   "special": true,
   "league": "WTA Tour",
-  "live": true,
-  "updatedAt": "2026-11-05T17:42:35.587062+00:00",
+  "live": false,
+  "updatedAt": "2026-11-05T17:42:42.121152+00:00",
   "sourceName": "WTA Official Scores scrape",
   "sourceUrl": "https://www.wtatennis.com/scores/",
   "verificationSource": "WTA Official Scores",
   "verificationUrl": "https://www.wtatennis.com/scores/",
-  "pageLiveCount": 2,
-  "parsedMatchCount": 2,
+  "pageLiveCount": null,
+  "parsedMatchCount": 0,
   "note": "GitHub scrape of the rendered WTA Scores page. Game points, current set number, current-set games and per-set scores are stored separately.",
-  "games": [
-    {
-      "eventId": "wta-scrape-0-j-riera-r-zarazua",
-      "date": "2026-11-05T17:42:35.583795+00:00",
-      "displayTime": "Reto Win Tennis Cali Open • Colombia",
-      "away": "J. Riera",
-      "home": "R. Zarazua",
-      "awayScore": "2 · 30",
-      "homeScore": "4 · 15",
-      "awaySets": [
-        "2"
-      ],
-      "homeSets": [
-        "4"
-      ],
-      "awayPoint": "30",
-      "homePoint": "15",
-      "currentSet": 1,
-      "awayCurrentSetGames": 2,
-      "homeCurrentSetGames": 4,
-      "awaySetsWon": 0,
-      "homeSetsWon": 0,
-      "round": "Quarterfinals",
-      "court": "",
-      "status": "Live Match: 0:33 · Quarterfinals",
-      "state": "live",
-      "eventOnly": false,
-      "title": "Reto Win Tennis Cali Open • Colombia",
-      "sourceName": "WTA Official Scores scrape",
-      "sourceUrl": "https://www.wtatennis.com/scores/",
-      "verificationSource": "WTA Official Scores",
-      "verificationUrl": "https://www.wtatennis.com/scores/"
-    },
-    {
-      "eventId": "wta-scrape-1-c-monnet-l-romero-gormaz",
-      "date": "2026-11-05T17:42:35.584070+00:00",
-      "displayTime": "Reto Win Tennis Cali Open • Colombia",
-      "away": "C. Monnet",
-      "home": "L. Romero Gormaz",
-      "awayScore": "4 · 0",
-      "homeScore": "3 · 0",
-      "awaySets": [
-        "4"
-      ],
-      "homeSets": [
-        "3"
-      ],
-      "awayPoint": "0",
-      "homePoint": "0",
-      "currentSet": 1,
-      "awayCurrentSetGames": 4,
-      "homeCurrentSetGames": 3,
-      "awaySetsWon": 0,
-      "homeSetsWon": 0,
-      "round": "Quarterfinals",
-      "court": "",
-      "status": "Live Match: 0:31 · Quarterfinals",
-      "state": "live",
-      "eventOnly": false,
-      "title": "Reto Win Tennis Cali Open • Colombia",
-      "sourceName": "WTA Official Scores scrape",
-      "sourceUrl": "https://www.wtatennis.com/scores/",
-      "verificationSource": "WTA Official Scores",
-      "verificationUrl": "https://www.wtatennis.com/scores/"
-    }
-  ]
+  "games": []
 }
