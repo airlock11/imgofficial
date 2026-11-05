@@ -2,7 +2,7 @@
   "special": true,
   "league": "WTA Tour",
   "live": true,
-  "updatedAt": "2026-11-05T17:40:01.844567+00:00",
+  "updatedAt": "2026-11-05T17:40:07.965679+00:00",
   "sourceName": "WTA Official Scores scrape",
   "sourceUrl": "https://www.wtatennis.com/scores/",
   "verificationSource": "WTA Official Scores",
@@ -13,22 +13,22 @@
   "games": [
     {
       "eventId": "wta-scrape-0-j-riera-r-zarazua",
-      "date": "2026-11-05T17:40:01.841409+00:00",
+      "date": "2026-11-05T17:40:07.962667+00:00",
       "displayTime": "Reto Win Tennis Cali Open • Colombia",
       "away": "J. Riera",
       "home": "R. Zarazua",
-      "awayScore": "1 · 40",
-      "homeScore": "4 · 30",
+      "awayScore": "2 · 0",
+      "homeScore": "4 · 0",
       "awaySets": [
-        "1"
+        "2"
       ],
       "homeSets": [
         "4"
       ],
-      "awayPoint": "40",
-      "homePoint": "30",
+      "awayPoint": "0",
+      "homePoint": "0",
       "currentSet": 1,
-      "awayCurrentSetGames": 1,
+      "awayCurrentSetGames": 2,
       "homeCurrentSetGames": 4,
       "awaySetsWon": 0,
       "homeSetsWon": 0,
@@ -45,12 +45,12 @@
     },
     {
       "eventId": "wta-scrape-1-c-monnet-l-romero-gormaz",
-      "date": "2026-11-05T17:40:01.841706+00:00",
+      "date": "2026-11-05T17:40:07.962959+00:00",
       "displayTime": "Reto Win Tennis Cali Open • Colombia",
       "away": "C. Monnet",
       "home": "L. Romero Gormaz",
       "awayScore": "4 · 40",
-      "homeScore": "2 · 40",
+      "homeScore": "2 · AD",
       "awaySets": [
         "4"
       ],
@@ -58,7 +58,7 @@
         "2"
       ],
       "awayPoint": "40",
-      "homePoint": "40",
+      "homePoint": "AD",
       "currentSet": 1,
       "awayCurrentSetGames": 4,
       "homeCurrentSetGames": 2,
@@ -66,7 +66,7 @@
       "homeSetsWon": 0,
       "round": "Quarterfinals",
       "court": "",
-      "status": "Live Match: 0:30 · Quarterfinals",
+      "status": "Live Match: 0:31 · Quarterfinals",
       "state": "live",
       "eventOnly": false,
       "title": "Reto Win Tennis Cali Open • Colombia",
