@@ -2,7 +2,7 @@
   "special": true,
   "league": "WTA Tour",
   "live": true,
-  "updatedAt": "2026-11-05T09:39:56.896940+00:00",
+  "updatedAt": "2026-11-05T09:40:02.231357+00:00",
   "sourceName": "WTA Official Scores scrape",
   "sourceUrl": "https://www.wtatennis.com/scores/",
   "verificationSource": "WTA Official Scores",
@@ -13,12 +13,12 @@
   "games": [
     {
       "eventId": "wta-scrape-0-m-stojsavljevic-z-sonmez",
-      "date": "2026-11-05T09:39:56.894574+00:00",
+      "date": "2026-11-05T09:40:02.228994+00:00",
       "displayTime": "Prudential Hong Kong Tennis Open • Hong Kong",
       "away": "M. Stojsavljevic",
       "home": "Z. Sonmez",
       "awayScore": "4 · 15",
-      "homeScore": "5 · 0",
+      "homeScore": "5 · 30",
       "awaySets": [
         "4"
       ],
@@ -26,7 +26,7 @@
         "5"
       ],
       "awayPoint": "15",
-      "homePoint": "0",
+      "homePoint": "30",
       "currentSet": 1,
       "awayCurrentSetGames": 4,
       "homeCurrentSetGames": 5,
@@ -34,7 +34,7 @@
       "homeSetsWon": 0,
       "round": "Round of 16",
       "court": "Centre Court",
-      "status": "Live Match: 0:49 · Round of 16 · Centre Court",
+      "status": "Live Match: 0:50 · Round of 16 · Centre Court",
       "state": "live",
       "eventOnly": false,
       "title": "Prudential Hong Kong Tennis Open • Hong Kong",
@@ -45,12 +45,12 @@
     },
     {
       "eventId": "wta-scrape-1-upcoming-gibson-inglis-tang",
-      "date": "2026-11-05T09:39:56.894935+00:00",
+      "date": "2026-11-05T09:40:02.229355+00:00",
       "displayTime": "Prudential Hong Kong Tennis Open • Hong Kong",
       "away": "Upcoming / Gibson",
       "home": "Inglis / Tang",
       "awayScore": "4 · 15",
-      "homeScore": "1 · 0",
+      "homeScore": "1 · 15",
       "awaySets": [
         "4"
       ],
@@ -58,7 +58,7 @@
         "1"
       ],
       "awayPoint": "15",
-      "homePoint": "0",
+      "homePoint": "15",
       "currentSet": 1,
       "awayCurrentSetGames": 4,
       "homeCurrentSetGames": 1,
@@ -66,7 +66,7 @@
       "homeSetsWon": 0,
       "round": "Quarterfinals",
       "court": "Court 1",
-      "status": "Live Match: 0:22 · Quarterfinals · Court 1",
+      "status": "Live Match: 0:23 · Quarterfinals · Court 1",
       "state": "live",
       "eventOnly": false,
       "title": "Prudential Hong Kong Tennis Open • Hong Kong",
@@ -76,12 +76,44 @@
       "verificationUrl": "https://www.wtatennis.com/scores/"
     },
     {
+      "eventId": "wta-scrape-2-m-uchijima-m-linette",
+      "date": "2026-11-05T09:40:02.229453+00:00",
+      "displayTime": "Chennai Open • India",
+      "away": "M. Uchijima",
+      "home": "M. Linette",
+      "awayScore": "0 · 15",
+      "homeScore": "0 · 0",
+      "awaySets": [
+        "0"
+      ],
+      "homeSets": [
+        "0"
+      ],
+      "awayPoint": "15",
+      "homePoint": "0",
+      "currentSet": 1,
+      "awayCurrentSetGames": 0,
+      "homeCurrentSetGames": 0,
+      "awaySetsWon": 0,
+      "homeSetsWon": 0,
+      "round": "Round of 16",
+      "court": "Centre Court",
+      "status": "Live Match: 0:00 · Round of 16 · Centre Court",
+      "state": "live",
+      "eventOnly": false,
+      "title": "Chennai Open • India",
+      "sourceName": "WTA Official Scores scrape",
+      "sourceUrl": "https://www.wtatennis.com/scores/",
+      "verificationSource": "WTA Official Scores",
+      "verificationUrl": "https://www.wtatennis.com/scores/"
+    },
+    {
       "eventId": "wta-scrape-5-k-kroitor-k-zaytseva",
-      "date": "2026-11-05T09:39:56.895293+00:00",
+      "date": "2026-11-05T09:40:02.229706+00:00",
       "displayTime": "Angola Ladies Open • Angola",
       "away": "K. Kroitor",
       "home": "K. Zaytseva",
-      "awayScore": "2 · 15",
+      "awayScore": "2 · 0",
       "homeScore": "3 · 30",
       "awaySets": [
         "2"
@@ -89,7 +121,7 @@
       "homeSets": [
         "3"
       ],
-      "awayPoint": "15",
+      "awayPoint": "0",
       "homePoint": "30",
       "currentSet": 1,
       "awayCurrentSetGames": 2,
@@ -109,7 +141,7 @@
     },
     {
       "eventId": "wta-scrape-4-a-blinkova-z-li",
-      "date": "2026-11-05T09:39:56.895211+00:00",
+      "date": "2026-11-05T09:40:02.229624+00:00",
       "displayTime": "Angola Ladies Open • Angola",
       "away": "A. Blinkova",
       "home": "Z. Li",
@@ -140,36 +172,8 @@
       "verificationUrl": "https://www.wtatennis.com/scores/"
     },
     {
-      "eventId": "wta-scrape-2-m-uchijima-m-linette",
-      "date": "2026-11-05T09:39:56.895040+00:00",
-      "displayTime": "Chennai Open • India",
-      "away": "M. Uchijima",
-      "home": "M. Linette",
-      "awayScore": "",
-      "homeScore": "",
-      "awaySets": [],
-      "homeSets": [],
-      "awayPoint": "—",
-      "homePoint": "—",
-      "currentSet": 1,
-      "awayCurrentSetGames": 0,
-      "homeCurrentSetGames": 0,
-      "awaySetsWon": 0,
-      "homeSetsWon": 0,
-      "round": "Round of 16",
-      "court": "Centre Court",
-      "status": "Warmup: 0:00 · Round of 16 · Centre Court",
-      "state": "warmup",
-      "eventOnly": false,
-      "title": "Chennai Open • India",
-      "sourceName": "WTA Official Scores scrape",
-      "sourceUrl": "https://www.wtatennis.com/scores/",
-      "verificationSource": "WTA Official Scores",
-      "verificationUrl": "https://www.wtatennis.com/scores/"
-    },
-    {
       "eventId": "wta-scrape-3-m-hontama-z-kulambayeva",
-      "date": "2026-11-05T09:39:56.895124+00:00",
+      "date": "2026-11-05T09:40:02.229536+00:00",
       "displayTime": "Chennai Open • India",
       "away": "M. Hontama",
       "home": "Z. Kulambayeva",
