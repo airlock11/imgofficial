@@ -1,7 +1,7 @@
 {
   "version": 1,
   "source": "ESPN public football data",
-  "updatedAt": "2026-11-06T06:47:42.522Z",
+  "updatedAt": "2026-11-06T14:49:38.892Z",
   "leagues": {
     "soccer": {
       "name": "Premier League",
@@ -1080,6 +1080,38 @@
           "venue": "Gtech Community Stadium",
           "competition": "Premier League",
           "category": "England"
+        },
+        {
+          "eventId": "401879212",
+          "date": "2026-12-06T14:00Z",
+          "displayTime": "",
+          "home": "Everton",
+          "away": "Fulham",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/368.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/370.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "Hill Dickinson Stadium",
+          "competition": "Premier League",
+          "category": "England"
+        },
+        {
+          "eventId": "401878748",
+          "date": "2026-12-06T14:00Z",
+          "displayTime": "",
+          "home": "Newcastle United",
+          "away": "Sunderland",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/361.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/366.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "St. James' Park",
+          "competition": "Premier League",
+          "category": "England"
         }
       ],
       "standings": [
@@ -1304,7 +1336,7 @@
           "points": 5
         }
       ],
-      "verifiedAt": "2026-11-06T06:47:41.845Z"
+      "verifiedAt": "2026-11-06T14:49:38.527Z"
     },
     "laliga": {
       "name": "La Liga",
@@ -2335,7 +2367,7 @@
           "points": 5
         }
       ],
-      "verifiedAt": "2026-11-06T06:47:42.031Z"
+      "verifiedAt": "2026-11-06T14:49:38.683Z"
     },
     "bundesliga": {
       "name": "Bundesliga",
@@ -3174,6 +3206,22 @@
           "venue": "Deutsche Bank Park",
           "competition": "Bundesliga",
           "category": "Germany"
+        },
+        {
+          "eventId": "401884711",
+          "date": "2026-12-06T14:30Z",
+          "displayTime": "",
+          "home": "Schalke 04",
+          "away": "Borussia Dortmund",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/133.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/124.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "Veltins Arena",
+          "competition": "Bundesliga",
+          "category": "Germany"
         }
       ],
       "standings": [
@@ -3376,7 +3424,7 @@
           "points": 4
         }
       ],
-      "verifiedAt": "2026-11-06T06:47:42.254Z"
+      "verifiedAt": "2026-11-06T14:49:38.763Z"
     },
     "seriea": {
       "name": "Serie A",
@@ -4407,6 +4455,38 @@
           "venue": "Stadio Diego Armando Maradona",
           "competition": "Serie A",
           "category": "Italy"
+        },
+        {
+          "eventId": "401875017",
+          "date": "2026-12-06T11:30Z",
+          "displayTime": "",
+          "home": "Genoa",
+          "away": "Torino",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/3263.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/239.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "Stadio Luigi Ferraris",
+          "competition": "Serie A",
+          "category": "Italy"
+        },
+        {
+          "eventId": "401875029",
+          "date": "2026-12-06T14:00Z",
+          "displayTime": "",
+          "home": "Lazio",
+          "away": "Atalanta",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/112.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/105.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "Olimpico",
+          "competition": "Serie A",
+          "category": "Italy"
         }
       ],
       "standings": [
@@ -4631,7 +4711,7 @@
           "points": 3
         }
       ],
-      "verifiedAt": "2026-11-06T06:47:42.521Z"
+      "verifiedAt": "2026-11-06T14:49:38.891Z"
     }
   }
 }
