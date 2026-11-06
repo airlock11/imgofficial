@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-06T12:51:15+00:00",
+  "updatedAt": "2026-11-06T19:51:20+00:00",
   "season": "Season 89 Men's Basketball",
   "sources": {
     "stats": "https://uaap.org/stats/uaap-season-89-men-s-basketball",
@@ -204,28 +204,6 @@
       "title": "UP vs ADAMSON | 2ND QUARTER HIGHLIGHTS | UAAP SEASON 89 MEN'S BASKETBALL",
       "url": "https://www.youtube.com/watch?v=aQ7KHyAsHow",
       "thumbnail": "https://i.ytimg.com/vi/aQ7KHyAsHow/hqdefault.jpg",
-      "published": "",
-      "channel": "One Sports",
-      "sourceName": "One Sports",
-      "sourceChannelId": "UCXDG9ue-emCN8Ad3h7lERqQ",
-      "verificationStatus": "verified"
-    },
-    {
-      "id": "CccYsZ2hnWE",
-      "title": "UP vs ADAMSON | 1ST QUARTER HIGHLIGHTS | UAAP SEASON 89 MEN'S BASKETBALL",
-      "url": "https://www.youtube.com/watch?v=CccYsZ2hnWE",
-      "thumbnail": "https://i.ytimg.com/vi/CccYsZ2hnWE/hqdefault.jpg",
-      "published": "",
-      "channel": "One Sports",
-      "sourceName": "One Sports",
-      "sourceChannelId": "UCXDG9ue-emCN8Ad3h7lERqQ",
-      "verificationStatus": "verified"
-    },
-    {
-      "id": "mok-4J3ih9I",
-      "title": "FEU vs UE | SMART PLAYS EXTENDED HIGHLIGHTS | UAAP SEASON 89 MEN’S BASKETBALL | NOV 4, 2026",
-      "url": "https://www.youtube.com/watch?v=mok-4J3ih9I",
-      "thumbnail": "https://i.ytimg.com/vi/mok-4J3ih9I/hqdefault.jpg",
       "published": "",
       "channel": "One Sports",
       "sourceName": "One Sports",
@@ -648,24 +626,27 @@
       "url": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball?game_id=1"
     }
   ],
-  "highlightsUpdatedAt": "2026-11-06T12:51:15+00:00",
+  "highlightsUpdatedAt": "2026-11-06T19:51:20+00:00",
   "automation": {
     "enabled": true,
-    "mode": "idle",
-    "dataRefreshMinutes": 180,
-    "livestreamRefreshMinutes": 0,
+    "mode": "game-day",
+    "dataRefreshMinutes": 15,
+    "livestreamRefreshMinutes": 5,
     "scheduleAware": {
       "enabled": true,
       "timezone": "Asia/Manila",
-      "mode": "idle",
-      "gameDay": false,
-      "todayGameCount": 0,
-      "todayGames": [],
+      "mode": "game-day",
+      "gameDay": true,
+      "todayGameCount": 2,
+      "todayGames": [
+        "web-uaap-scheduled-7",
+        "web-uaap-scheduled-8"
+      ],
       "nextGameAt": "2026-11-07T14:30:00+08:00",
       "idleDiscoveryMinutes": 180,
       "gameDayDataRefreshMinutes": 15,
       "gameDayLivestreamRefreshMinutes": 5,
-      "lastSlowCheckAt": "2026-11-06T20:51:04+08:00"
+      "lastSlowCheckAt": "2026-11-07T03:51:09+08:00"
     },
     "failClosed": true
   }
