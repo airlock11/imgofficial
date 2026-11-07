@@ -1,7 +1,7 @@
 {
   "version": 1,
   "source": "ESPN public football data",
-  "updatedAt": "2026-11-07T06:24:19.122Z",
+  "updatedAt": "2026-11-07T13:25:27.204Z",
   "leagues": {
     "soccer": {
       "name": "Premier League",
@@ -9,22 +9,6 @@
       "espn": "eng.1",
       "leagueLogo": "https://a.espncdn.com/i/leaguelogos/soccer/500/23.png",
       "games": [
-        {
-          "eventId": "401879256",
-          "date": "2026-10-24T11:30Z",
-          "displayTime": "",
-          "home": "Aston Villa",
-          "away": "Manchester City",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/362.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/382.png",
-          "homeScore": "2",
-          "awayScore": "1",
-          "state": "final",
-          "status": "FT",
-          "venue": "Villa Park",
-          "competition": "Premier League",
-          "category": "England"
-        },
         {
           "eventId": "401878768",
           "date": "2026-10-24T14:00Z",
@@ -339,8 +323,8 @@
           "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/367.png",
           "homeScore": "0",
           "awayScore": "0",
-          "state": "scheduled",
-          "status": "Scheduled",
+          "state": "live",
+          "status": "HT",
           "venue": "Elland Road",
           "competition": "Premier League",
           "category": "England"
@@ -1336,7 +1320,7 @@
           "points": 5
         }
       ],
-      "verifiedAt": "2026-11-07T06:24:17.789Z"
+      "verifiedAt": "2026-11-07T13:25:26.840Z"
     },
     "laliga": {
       "name": "La Liga",
@@ -1344,22 +1328,6 @@
       "espn": "esp.1",
       "leagueLogo": "https://a.espncdn.com/i/leaguelogos/soccer/500/15.png",
       "games": [
-        {
-          "eventId": "401882830",
-          "date": "2026-10-24T12:00Z",
-          "displayTime": "",
-          "home": "Rayo Vallecano",
-          "away": "Elche",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/101.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/3751.png",
-          "homeScore": "0",
-          "awayScore": "3",
-          "state": "final",
-          "status": "FT",
-          "venue": "Estadio de Vallecas",
-          "competition": "La Liga",
-          "category": "Spain"
-        },
         {
           "eventId": "401882831",
           "date": "2026-10-24T14:15Z",
@@ -1674,8 +1642,8 @@
           "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/87.png",
           "homeScore": "0",
           "awayScore": "0",
-          "state": "scheduled",
-          "status": "Scheduled",
+          "state": "live",
+          "status": "24'",
           "venue": "La Rosaleda",
           "competition": "La Liga",
           "category": "Spain"
@@ -2543,7 +2511,7 @@
           "points": 5
         }
       ],
-      "verifiedAt": "2026-11-07T06:24:18.264Z"
+      "verifiedAt": "2026-11-07T13:25:26.967Z"
     },
     "bundesliga": {
       "name": "Bundesliga",
@@ -3600,7 +3568,7 @@
           "points": 4
         }
       ],
-      "verifiedAt": "2026-11-07T06:24:18.961Z"
+      "verifiedAt": "2026-11-07T13:25:27.070Z"
     },
     "seriea": {
       "name": "Serie A",
@@ -3608,38 +3576,6 @@
       "espn": "ita.1",
       "leagueLogo": "https://a.espncdn.com/i/leaguelogos/soccer/500/12.png",
       "games": [
-        {
-          "eventId": "401874958",
-          "date": "2026-10-24T13:00Z",
-          "displayTime": "",
-          "home": "Cagliari",
-          "away": "Bologna",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/2925.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/107.png",
-          "homeScore": "0",
-          "awayScore": "2",
-          "state": "final",
-          "status": "FT",
-          "venue": "Unipol Domus",
-          "competition": "Serie A",
-          "category": "Italy"
-        },
-        {
-          "eventId": "401874961",
-          "date": "2026-10-24T13:00Z",
-          "displayTime": "",
-          "home": "Como",
-          "away": "Sassuolo",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/2572.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/3997.png",
-          "homeScore": "2",
-          "awayScore": "0",
-          "state": "final",
-          "status": "FT",
-          "venue": "Giuseppe Sinigaglia",
-          "competition": "Serie A",
-          "category": "Italy"
-        },
         {
           "eventId": "401874948",
           "date": "2026-10-24T16:00Z",
@@ -4903,7 +4839,7 @@
           "points": 5
         }
       ],
-      "verifiedAt": "2026-11-07T06:24:19.121Z"
+      "verifiedAt": "2026-11-07T13:25:27.204Z"
     }
   }
 }
