@@ -2,7 +2,7 @@
   "special": true,
   "league": "WTA Tour",
   "live": true,
-  "updatedAt": "2026-11-07T15:38:51.618883+00:00",
+  "updatedAt": "2026-11-07T15:38:58.539801+00:00",
   "sourceName": "WTA Official Scores scrape",
   "sourceUrl": "https://www.wtatennis.com/scores/",
   "verificationSource": "WTA Official Scores",
@@ -13,30 +13,32 @@
   "games": [
     {
       "eventId": "wta-scrape-0-m-linette-a-zakharova",
-      "date": "2026-11-07T15:38:51.615451+00:00",
+      "date": "2026-11-07T15:38:58.536307+00:00",
       "displayTime": "Chennai Open • India",
       "away": "M. Linette",
       "home": "A. Zakharova",
-      "awayScore": "2 5 · 40",
-      "homeScore": "6 2 · 15",
+      "awayScore": "2 6 0 · 0",
+      "homeScore": "6 2 0 · 0",
       "awaySets": [
         "2",
-        "5"
+        "6",
+        "0"
       ],
       "homeSets": [
         "6",
-        "2"
+        "2",
+        "0"
       ],
-      "awayPoint": "40",
-      "homePoint": "15",
-      "currentSet": 2,
-      "awayCurrentSetGames": 5,
-      "homeCurrentSetGames": 2,
-      "awaySetsWon": 0,
+      "awayPoint": "0",
+      "homePoint": "0",
+      "currentSet": 3,
+      "awayCurrentSetGames": 0,
+      "homeCurrentSetGames": 0,
+      "awaySetsWon": 1,
       "homeSetsWon": 1,
       "round": "Semifinals",
       "court": "Centre Court",
-      "status": "Live Match: 1:14 · Semifinals · Centre Court",
+      "status": "Live Match: 1:15 · Semifinals · Centre Court",
       "state": "live",
       "eventOnly": false,
       "title": "Chennai Open • India",
@@ -47,24 +49,24 @@
     },
     {
       "eventId": "wta-scrape-1-upcoming-mediorreal-arias-perez-garcia-rogers",
-      "date": "2026-11-07T15:38:51.616090+00:00",
+      "date": "2026-11-07T15:38:58.536980+00:00",
       "displayTime": "Reto Win Tennis Cali Open • Colombia",
       "away": "Upcoming / Mediorreal Arias",
       "home": "Perez Garcia / Rogers",
-      "awayScore": "2 0 · 40",
-      "homeScore": "6 0 · 40",
+      "awayScore": "2 1 · 0",
+      "homeScore": "6 0 · 0",
       "awaySets": [
         "2",
-        "0"
+        "1"
       ],
       "homeSets": [
         "6",
         "0"
       ],
-      "awayPoint": "40",
-      "homePoint": "40",
+      "awayPoint": "0",
+      "homePoint": "0",
       "currentSet": 2,
-      "awayCurrentSetGames": 0,
+      "awayCurrentSetGames": 1,
       "homeCurrentSetGames": 0,
       "awaySetsWon": 0,
       "homeSetsWon": 1,
@@ -81,7 +83,7 @@
     },
     {
       "eventId": "wta-scrape-2-a-blinkova-g-feistel",
-      "date": "2026-11-07T15:38:51.616274+00:00",
+      "date": "2026-11-07T15:38:58.537164+00:00",
       "displayTime": "Angola Ladies Open • Angola",
       "away": "A. Blinkova",
       "home": "G. Feistel",
