@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-07T07:21:34+00:00",
+  "updated_at": "2026-11-07T14:16:06+00:00",
   "provider": "OddsPapi + The Odds API",
   "bookmaker": "Multiple",
   "refresh_mode": "routine-6h",
@@ -7,114 +7,54 @@
   "leagues": {
     "epl": [
       {
-        "eventId": "id1000001772221384",
-        "date": "2026-11-07T12:30:00.000Z",
+        "eventId": "5c87852253fd11eea5d34ad723356607",
+        "date": "2026-11-07T12:30:00Z",
         "home": "Leeds United",
         "away": "Tottenham Hotspur",
-        "participant1Id": 34,
-        "participant2Id": 33,
+        "participant1Id": null,
+        "participant2Id": null,
         "homeLogo": "",
         "awayLogo": "",
         "oddsList": [
           {
-            "provider": "Bet365",
-            "details": "—",
-            "total": "—",
-            "home": "2.75",
-            "away": "2.6",
-            "draw": "3.25"
-          },
-          {
             "provider": "FanDuel",
             "details": "—",
             "total": "—",
-            "home": "2.75",
-            "away": "2.55",
-            "draw": "3.3"
+            "home": "1.14",
+            "away": "41.0",
+            "draw": "6.0"
           },
           {
             "provider": "MyBookie.ag",
             "details": "—",
             "total": "—",
-            "home": "2.72",
-            "away": "2.58",
-            "draw": "3.28"
+            "home": "1.16",
+            "away": "12.0",
+            "draw": "5.0"
           },
           {
             "provider": "BetMGM",
             "details": "—",
             "total": "—",
-            "home": "2.7",
-            "away": "2.55",
-            "draw": "3.4"
+            "home": "1.14",
+            "away": "46.0",
+            "draw": "6.0"
           },
           {
             "provider": "DraftKings",
             "details": "—",
             "total": "—",
-            "home": "2.8",
-            "away": "2.55",
-            "draw": "3.4"
-          },
-          {
-            "provider": "BetRivers",
-            "details": "—",
-            "total": "—",
-            "home": "2.8",
-            "away": "2.5",
-            "draw": "3.4"
+            "home": "1.14",
+            "away": "41.0",
+            "draw": "6.0"
           },
           {
             "provider": "Bovada",
             "details": "—",
             "total": "—",
-            "home": "2.75",
-            "away": "2.6",
-            "draw": "3.35"
-          },
-          {
-            "provider": "BetUS",
-            "details": "—",
-            "total": "—",
-            "home": "2.67",
-            "away": "2.61",
-            "draw": "3.4"
-          },
-          {
-            "provider": "LowVig.ag",
-            "details": "—",
-            "total": "—",
-            "home": "2.8",
-            "away": "2.6",
-            "draw": "3.41"
-          },
-          {
-            "provider": "BetOnline.ag",
-            "details": "—",
-            "total": "—",
-            "home": "2.8",
-            "away": "2.6",
-            "draw": "3.41"
-          }
-        ]
-      },
-      {
-        "eventId": "id1000001772221372",
-        "date": "2026-11-07T15:00:00.000Z",
-        "home": "Arsenal FC",
-        "away": "Hull City",
-        "participant1Id": 42,
-        "participant2Id": 96,
-        "homeLogo": "",
-        "awayLogo": "",
-        "oddsList": [
-          {
-            "provider": "Bet365",
-            "details": "—",
-            "total": "—",
-            "home": "1.11",
-            "away": "19.0",
-            "draw": "8.0"
+            "home": "1.14",
+            "away": "51.0",
+            "draw": "5.5"
           }
         ]
       },
@@ -133,7 +73,7 @@
             "details": "—",
             "total": "—",
             "home": "1.97",
-            "away": "3.5",
+            "away": "3.6",
             "draw": "3.7"
           }
         ]
@@ -152,9 +92,9 @@
             "provider": "MyBookie.ag",
             "details": "—",
             "total": "—",
-            "home": "1.14",
-            "away": "18.25",
-            "draw": "8.0"
+            "home": "1.13",
+            "away": "18.5",
+            "draw": "8.1"
           },
           {
             "provider": "FanDuel",
@@ -176,16 +116,16 @@
             "provider": "DraftKings",
             "details": "—",
             "total": "—",
-            "home": "1.15",
-            "away": "18.0",
+            "home": "1.14",
+            "away": "20.0",
             "draw": "8.0"
           },
           {
             "provider": "BetRivers",
             "details": "—",
             "total": "—",
-            "home": "1.15",
-            "away": "19.0",
+            "home": "1.14",
+            "away": "21.0",
             "draw": "8.0"
           },
           {
@@ -193,23 +133,23 @@
             "details": "—",
             "total": "—",
             "home": "1.15",
-            "away": "19.0",
-            "draw": "7.75"
+            "away": "20.0",
+            "draw": "8.0"
           },
           {
             "provider": "BetUS",
             "details": "—",
             "total": "—",
             "home": "1.14",
-            "away": "17.75",
-            "draw": "8.25"
+            "away": "21.0",
+            "draw": "8.3"
           },
           {
             "provider": "LowVig.ag",
             "details": "—",
             "total": "—",
             "home": "1.15",
-            "away": "19.0",
+            "away": "20.0",
             "draw": "8.75"
           },
           {
@@ -217,7 +157,7 @@
             "details": "—",
             "total": "—",
             "home": "1.15",
-            "away": "19.0",
+            "away": "20.0",
             "draw": "8.75"
           }
         ]
@@ -236,8 +176,8 @@
             "provider": "BetMGM",
             "details": "—",
             "total": "—",
-            "home": "1.98",
-            "away": "3.5",
+            "home": "2.0",
+            "away": "3.3",
             "draw": "3.6"
           },
           {
@@ -245,24 +185,24 @@
             "details": "—",
             "total": "—",
             "home": "2.0",
-            "away": "3.6",
-            "draw": "3.6"
+            "away": "3.5",
+            "draw": "3.7"
           },
           {
             "provider": "MyBookie.ag",
             "details": "—",
             "total": "—",
             "home": "2.03",
-            "away": "3.44",
-            "draw": "3.6"
+            "away": "3.42",
+            "draw": "3.65"
           },
           {
             "provider": "DraftKings",
             "details": "—",
             "total": "—",
-            "home": "2.0",
-            "away": "3.55",
-            "draw": "3.7"
+            "home": "2.05",
+            "away": "3.45",
+            "draw": "3.65"
           },
           {
             "provider": "BetRivers",
@@ -270,14 +210,14 @@
             "total": "—",
             "home": "1.97",
             "away": "3.7",
-            "draw": "3.65"
+            "draw": "3.6"
           },
           {
             "provider": "Bovada",
             "details": "—",
             "total": "—",
-            "home": "2.0",
-            "away": "3.55",
+            "home": "2.05",
+            "away": "3.5",
             "draw": "3.7"
           },
           {
@@ -285,24 +225,24 @@
             "details": "—",
             "total": "—",
             "home": "2.0",
-            "away": "3.55",
-            "draw": "3.7"
+            "away": "3.72",
+            "draw": "3.6"
           },
           {
             "provider": "BetOnline.ag",
             "details": "—",
             "total": "—",
-            "home": "2.03",
-            "away": "3.65",
-            "draw": "3.73"
+            "home": "2.05",
+            "away": "3.52",
+            "draw": "3.8"
           },
           {
             "provider": "LowVig.ag",
             "details": "—",
             "total": "—",
-            "home": "2.03",
-            "away": "3.65",
-            "draw": "3.73"
+            "home": "2.05",
+            "away": "3.52",
+            "draw": "3.8"
           }
         ]
       },
@@ -320,8 +260,8 @@
             "provider": "Bet365",
             "details": "—",
             "total": "—",
-            "home": "4.75",
-            "away": "1.69",
+            "home": "4.5",
+            "away": "1.72",
             "draw": "3.8"
           },
           {
@@ -329,22 +269,22 @@
             "details": "—",
             "total": "—",
             "home": "4.7",
-            "away": "1.71",
-            "draw": "3.9"
+            "away": "1.69",
+            "draw": "4.0"
           },
           {
             "provider": "MyBookie.ag",
             "details": "—",
             "total": "—",
-            "home": "4.4",
-            "away": "1.73",
-            "draw": "3.9"
+            "home": "4.5",
+            "away": "1.71",
+            "draw": "3.95"
           },
           {
             "provider": "BetMGM",
             "details": "—",
             "total": "—",
-            "home": "4.33",
+            "home": "4.2",
             "away": "1.74",
             "draw": "3.9"
           },
@@ -352,7 +292,7 @@
             "provider": "DraftKings",
             "details": "—",
             "total": "—",
-            "home": "4.5",
+            "home": "4.6",
             "away": "1.74",
             "draw": "4.0"
           },
@@ -360,15 +300,15 @@
             "provider": "BetRivers",
             "details": "—",
             "total": "—",
-            "home": "4.75",
-            "away": "1.7",
-            "draw": "4.0"
+            "home": "4.7",
+            "away": "1.68",
+            "draw": "4.1"
           },
           {
             "provider": "Bovada",
             "details": "—",
             "total": "—",
-            "home": "4.6",
+            "home": "4.5",
             "away": "1.74",
             "draw": "3.95"
           },
@@ -376,25 +316,25 @@
             "provider": "BetUS",
             "details": "—",
             "total": "—",
-            "home": "4.45",
-            "away": "1.74",
+            "home": "4.75",
+            "away": "1.71",
             "draw": "3.95"
           },
           {
             "provider": "LowVig.ag",
             "details": "—",
             "total": "—",
-            "home": "4.6",
-            "away": "1.75",
-            "draw": "4.05"
+            "home": "4.82",
+            "away": "1.71",
+            "draw": "4.11"
           },
           {
             "provider": "BetOnline.ag",
             "details": "—",
             "total": "—",
-            "home": "4.6",
-            "away": "1.75",
-            "draw": "4.05"
+            "home": "4.82",
+            "away": "1.71",
+            "draw": "4.11"
           }
         ]
       },
@@ -493,16 +433,16 @@
             "details": "—",
             "total": "—",
             "home": "4.0",
-            "away": "1.91",
+            "away": "1.87",
             "draw": "3.6"
           },
           {
             "provider": "MyBookie.ag",
             "details": "—",
             "total": "—",
-            "home": "3.65",
-            "away": "1.89",
-            "draw": "3.6"
+            "home": "3.75",
+            "away": "1.92",
+            "draw": "3.7"
           },
           {
             "provider": "BetMGM",
@@ -525,8 +465,8 @@
             "details": "—",
             "total": "—",
             "home": "3.95",
-            "away": "1.87",
-            "draw": "3.8"
+            "away": "1.85",
+            "draw": "3.85"
           },
           {
             "provider": "Bovada",
@@ -541,8 +481,8 @@
             "details": "—",
             "total": "—",
             "home": "4.09",
-            "away": "1.93",
-            "draw": "3.74"
+            "away": "1.92",
+            "draw": "3.75"
           },
           {
             "provider": "LowVig.ag",
@@ -576,9 +516,9 @@
             "provider": "MyBookie.ag",
             "details": "—",
             "total": "—",
-            "home": "1.88",
-            "away": "3.55",
-            "draw": "3.75"
+            "home": "1.91",
+            "away": "3.65",
+            "draw": "3.8"
           },
           {
             "provider": "FanDuel",
@@ -626,7 +566,7 @@
             "total": "—",
             "home": "1.92",
             "away": "3.89",
-            "draw": "3.94"
+            "draw": "3.95"
           },
           {
             "provider": "LowVig.ag",
@@ -660,17 +600,17 @@
             "provider": "FanDuel",
             "details": "—",
             "total": "—",
-            "home": "3.6",
+            "home": "3.8",
             "away": "1.95",
-            "draw": "3.7"
+            "draw": "3.6"
           },
           {
             "provider": "MyBookie.ag",
             "details": "—",
             "total": "—",
-            "home": "3.55",
+            "home": "3.7",
             "away": "1.95",
-            "draw": "3.5"
+            "draw": "3.6"
           },
           {
             "provider": "BetMGM",
@@ -692,25 +632,25 @@
             "provider": "BetRivers",
             "details": "—",
             "total": "—",
-            "home": "3.9",
+            "home": "3.75",
             "away": "1.93",
-            "draw": "3.65"
+            "draw": "3.7"
           },
           {
             "provider": "Bovada",
             "details": "—",
             "total": "—",
             "home": "3.7",
-            "away": "2.0",
+            "away": "1.95",
             "draw": "3.65"
           },
           {
             "provider": "BetUS",
             "details": "—",
             "total": "—",
-            "home": "3.73",
-            "away": "2.02",
-            "draw": "3.73"
+            "home": "3.78",
+            "away": "1.99",
+            "draw": "3.76"
           },
           {
             "provider": "BetOnline.ag",
@@ -744,9 +684,9 @@
             "provider": "MyBookie.ag",
             "details": "—",
             "total": "—",
-            "home": "5.2",
-            "away": "1.53",
-            "draw": "4.3"
+            "home": "5.3",
+            "away": "1.56",
+            "draw": "4.4"
           },
           {
             "provider": "FanDuel",
@@ -760,8 +700,8 @@
             "provider": "DraftKings",
             "details": "—",
             "total": "—",
-            "home": "5.25",
-            "away": "1.59",
+            "home": "5.5",
+            "away": "1.56",
             "draw": "4.4"
           },
           {
@@ -784,17 +724,17 @@
             "provider": "Bovada",
             "details": "—",
             "total": "—",
-            "home": "5.2",
-            "away": "1.59",
+            "home": "5.4",
+            "away": "1.58",
             "draw": "4.4"
           },
           {
             "provider": "BetUS",
             "details": "—",
             "total": "—",
-            "home": "5.82",
+            "home": "5.83",
             "away": "1.56",
-            "draw": "4.49"
+            "draw": "4.51"
           },
           {
             "provider": "BetOnline.ag",
@@ -829,16 +769,16 @@
             "details": "—",
             "total": "—",
             "home": "2.1",
-            "away": "3.3",
-            "draw": "3.6"
+            "away": "3.2",
+            "draw": "3.7"
           },
           {
             "provider": "MyBookie.ag",
             "details": "—",
             "total": "—",
             "home": "2.12",
-            "away": "3.06",
-            "draw": "3.55"
+            "away": "3.04",
+            "draw": "3.6"
           },
           {
             "provider": "FanDuel",
@@ -862,31 +802,31 @@
             "total": "—",
             "home": "2.1",
             "away": "3.1",
-            "draw": "3.7"
+            "draw": "3.75"
           },
           {
             "provider": "BetRivers",
             "details": "—",
             "total": "—",
-            "home": "2.15",
-            "away": "3.2",
+            "home": "2.17",
+            "away": "3.15",
             "draw": "3.65"
           },
           {
             "provider": "Bovada",
             "details": "—",
             "total": "—",
-            "home": "2.15",
+            "home": "2.1",
             "away": "3.2",
-            "draw": "3.7"
+            "draw": "3.75"
           },
           {
             "provider": "BetUS",
             "details": "—",
             "total": "—",
-            "home": "2.15",
-            "away": "3.26",
-            "draw": "3.87"
+            "home": "2.14",
+            "away": "3.25",
+            "draw": "3.88"
           },
           {
             "provider": "BetOnline.ag",
@@ -983,6 +923,26 @@
         ]
       },
       {
+        "eventId": "id1000001772221394",
+        "date": "2026-11-21T15:00:00.000Z",
+        "home": "AFC Bournemouth",
+        "away": "Nottingham Forest",
+        "participant1Id": 60,
+        "participant2Id": 14,
+        "homeLogo": "",
+        "awayLogo": "",
+        "oddsList": [
+          {
+            "provider": "Bet365",
+            "details": "—",
+            "total": "—",
+            "home": "1.97",
+            "away": "3.6",
+            "draw": "3.5"
+          }
+        ]
+      },
+      {
         "eventId": "id1000001772221398",
         "date": "2026-11-21T15:00:00.000Z",
         "home": "Chelsea FC",
@@ -1003,50 +963,12 @@
         ]
       },
       {
-        "eventId": "b8d6ab6ecc8bb356c6335d3f417d0ecf",
-        "date": "2026-11-21T15:00:00Z",
-        "home": "Aston Villa",
-        "away": "Sunderland",
-        "participant1Id": null,
-        "participant2Id": null,
-        "homeLogo": "",
-        "awayLogo": "",
-        "oddsList": [
-          {
-            "provider": "BetRivers",
-            "details": "—",
-            "total": "—",
-            "home": "1.78",
-            "away": "4.5",
-            "draw": "4.0"
-          },
-          {
-            "provider": "DraftKings",
-            "details": "—",
-            "total": "—",
-            "home": "1.71",
-            "away": "4.5",
-            "draw": "3.85"
-          },
-          {
-            "provider": "MyBookie.ag",
-            "details": "—",
-            "total": "—",
-            "home": "1.72",
-            "away": "4.3",
-            "draw": "3.7"
-          }
-        ]
-      }
-    ],
-    "laliga": [
-      {
-        "eventId": "id1000000872478694",
-        "date": "2026-11-07T13:00:00.000Z",
-        "home": "Malaga CF",
-        "away": "Racing Santander",
-        "participant1Id": 2830,
-        "participant2Id": 2835,
+        "eventId": "id1000001772221400",
+        "date": "2026-11-21T15:00:00.000Z",
+        "home": "Coventry City",
+        "away": "Crystal Palace",
+        "participant1Id": 11,
+        "participant2Id": 7,
         "homeLogo": "",
         "awayLogo": "",
         "oddsList": [
@@ -1054,12 +976,38 @@
             "provider": "Bet365",
             "details": "—",
             "total": "—",
-            "home": "2.4",
-            "away": "2.75",
+            "home": "2.25",
+            "away": "3.0",
+            "draw": "3.5"
+          },
+          {
+            "provider": "BetRivers",
+            "details": "—",
+            "total": "—",
+            "home": "2.23",
+            "away": "3.05",
             "draw": "3.6"
+          },
+          {
+            "provider": "DraftKings",
+            "details": "—",
+            "total": "—",
+            "home": "2.35",
+            "away": "2.85",
+            "draw": "3.45"
+          },
+          {
+            "provider": "MyBookie.ag",
+            "details": "—",
+            "total": "—",
+            "home": "2.32",
+            "away": "2.79",
+            "draw": "3.44"
           }
         ]
-      },
+      }
+    ],
+    "laliga": [
       {
         "eventId": "de935794b7d93f3607ac9ad54d18f4c7",
         "date": "2026-11-07T13:00:00Z",
@@ -1074,65 +1022,33 @@
             "provider": "FanDuel",
             "details": "—",
             "total": "—",
-            "home": "2.4",
-            "away": "2.9",
-            "draw": "3.5"
+            "home": "3.0",
+            "away": "3.0",
+            "draw": "2.5"
           },
           {
             "provider": "Bovada",
             "details": "—",
             "total": "—",
-            "home": "2.4",
-            "away": "2.93",
-            "draw": "3.35"
+            "home": "3.0",
+            "away": "2.85",
+            "draw": "2.6"
           },
           {
             "provider": "DraftKings",
             "details": "—",
             "total": "—",
-            "home": "2.4",
-            "away": "2.85",
-            "draw": "3.55"
-          },
-          {
-            "provider": "BetRivers",
-            "details": "—",
-            "total": "—",
-            "home": "2.38",
-            "away": "2.85",
-            "draw": "3.5"
+            "home": "3.1",
+            "away": "2.9",
+            "draw": "2.55"
           },
           {
             "provider": "BetMGM",
             "details": "—",
             "total": "—",
-            "home": "2.38",
-            "away": "2.8",
-            "draw": "3.5"
-          },
-          {
-            "provider": "BetUS",
-            "details": "—",
-            "total": "—",
-            "home": "2.4",
-            "away": "2.85",
-            "draw": "3.5"
-          },
-          {
-            "provider": "BetOnline.ag",
-            "details": "—",
-            "total": "—",
-            "home": "2.45",
-            "away": "2.9",
-            "draw": "3.55"
-          },
-          {
-            "provider": "LowVig.ag",
-            "details": "—",
-            "total": "—",
-            "home": "2.45",
-            "away": "2.9",
-            "draw": "3.55"
+            "home": "2.95",
+            "away": "3.0",
+            "draw": "2.38"
           }
         ]
       },
@@ -1151,7 +1067,7 @@
             "details": "—",
             "total": "—",
             "home": "2.45",
-            "away": "3.1",
+            "away": "3.0",
             "draw": "3.2"
           }
         ]
@@ -1180,22 +1096,22 @@
             "total": "—",
             "home": "2.46",
             "away": "3.0",
-            "draw": "3.15"
+            "draw": "3.2"
           },
           {
             "provider": "DraftKings",
             "details": "—",
             "total": "—",
-            "home": "2.45",
-            "away": "3.0",
-            "draw": "3.3"
+            "home": "2.5",
+            "away": "2.95",
+            "draw": "3.25"
           },
           {
             "provider": "BetRivers",
             "details": "—",
             "total": "—",
-            "home": "2.28",
-            "away": "3.15",
+            "home": "2.43",
+            "away": "2.95",
             "draw": "3.3"
           },
           {
@@ -1210,25 +1126,25 @@
             "provider": "BetUS",
             "details": "—",
             "total": "—",
-            "home": "2.4",
-            "away": "3.05",
-            "draw": "3.25"
+            "home": "2.5",
+            "away": "3.0",
+            "draw": "3.2"
           },
           {
             "provider": "BetOnline.ag",
             "details": "—",
             "total": "—",
-            "home": "2.4",
-            "away": "3.05",
-            "draw": "3.3"
+            "home": "2.52",
+            "away": "3.08",
+            "draw": "3.2"
           },
           {
             "provider": "LowVig.ag",
             "details": "—",
             "total": "—",
-            "home": "2.4",
-            "away": "3.05",
-            "draw": "3.3"
+            "home": "2.52",
+            "away": "3.08",
+            "draw": "3.2"
           }
         ]
       },
@@ -1246,33 +1162,33 @@
             "provider": "Bet365",
             "details": "—",
             "total": "—",
-            "home": "3.6",
-            "away": "2.02",
+            "home": "3.7",
+            "away": "1.97",
             "draw": "3.5"
           },
           {
             "provider": "FanDuel",
             "details": "—",
             "total": "—",
-            "home": "3.8",
+            "home": "3.9",
             "away": "2.0",
-            "draw": "3.4"
+            "draw": "3.3"
           },
           {
             "provider": "Bovada",
             "details": "—",
             "total": "—",
             "home": "3.8",
-            "away": "2.03",
+            "away": "2.02",
             "draw": "3.35"
           },
           {
             "provider": "DraftKings",
             "details": "—",
             "total": "—",
-            "home": "3.6",
-            "away": "2.1",
-            "draw": "3.45"
+            "home": "3.75",
+            "away": "2.05",
+            "draw": "3.4"
           },
           {
             "provider": "BetRivers",
@@ -1294,25 +1210,25 @@
             "provider": "BetUS",
             "details": "—",
             "total": "—",
-            "home": "3.65",
+            "home": "3.75",
             "away": "2.05",
-            "draw": "3.45"
+            "draw": "3.4"
           },
           {
             "provider": "BetOnline.ag",
             "details": "—",
             "total": "—",
-            "home": "3.69",
-            "away": "2.06",
-            "draw": "3.59"
+            "home": "3.84",
+            "away": "2.05",
+            "draw": "3.48"
           },
           {
             "provider": "LowVig.ag",
             "details": "—",
             "total": "—",
-            "home": "3.69",
-            "away": "2.06",
-            "draw": "3.59"
+            "home": "3.84",
+            "away": "2.05",
+            "draw": "3.48"
           }
         ]
       },
@@ -1330,8 +1246,8 @@
             "provider": "Bet365",
             "details": "—",
             "total": "—",
-            "home": "9.5",
-            "away": "1.22",
+            "home": "9.0",
+            "away": "1.24",
             "draw": "6.5"
           }
         ]
@@ -1359,8 +1275,8 @@
             "details": "—",
             "total": "—",
             "home": "11.0",
-            "away": "1.24",
-            "draw": "6.25"
+            "away": "1.25",
+            "draw": "6.0"
           },
           {
             "provider": "DraftKings",
@@ -1374,9 +1290,9 @@
             "provider": "BetRivers",
             "details": "—",
             "total": "—",
-            "home": "9.5",
-            "away": "1.27",
-            "draw": "6.25"
+            "home": "10.5",
+            "away": "1.24",
+            "draw": "6.5"
           },
           {
             "provider": "BetMGM",
@@ -1390,25 +1306,25 @@
             "provider": "BetUS",
             "details": "—",
             "total": "—",
-            "home": "10.45",
-            "away": "1.25",
-            "draw": "6.45"
+            "home": "10.6",
+            "away": "1.26",
+            "draw": "6.35"
           },
           {
             "provider": "BetOnline.ag",
             "details": "—",
             "total": "—",
             "home": "10.9",
-            "away": "1.25",
-            "draw": "6.85"
+            "away": "1.26",
+            "draw": "6.65"
           },
           {
             "provider": "LowVig.ag",
             "details": "—",
             "total": "—",
             "home": "10.9",
-            "away": "1.25",
-            "draw": "6.85"
+            "away": "1.26",
+            "draw": "6.65"
           }
         ]
       },
@@ -1462,7 +1378,7 @@
             "provider": "Bovada",
             "details": "—",
             "total": "—",
-            "home": "3.35",
+            "home": "3.4",
             "away": "2.02",
             "draw": "3.8"
           },
@@ -1478,17 +1394,17 @@
             "provider": "BetRivers",
             "details": "—",
             "total": "—",
-            "home": "3.2",
-            "away": "2.08",
+            "home": "3.35",
+            "away": "2.04",
             "draw": "3.75"
           },
           {
             "provider": "BetUS",
             "details": "—",
             "total": "—",
-            "home": "3.46",
-            "away": "2.06",
-            "draw": "3.91"
+            "home": "3.47",
+            "away": "2.05",
+            "draw": "3.9"
           },
           {
             "provider": "LowVig.ag",
@@ -1542,25 +1458,25 @@
             "provider": "FanDuel",
             "details": "—",
             "total": "—",
-            "home": "1.71",
-            "away": "4.5",
-            "draw": "4.1"
+            "home": "1.74",
+            "away": "4.4",
+            "draw": "4.0"
           },
           {
             "provider": "BetMGM",
             "details": "—",
             "total": "—",
-            "home": "1.69",
-            "away": "4.4",
-            "draw": "4.2"
+            "home": "1.74",
+            "away": "4.2",
+            "draw": "4.1"
           },
           {
             "provider": "Bovada",
             "details": "—",
             "total": "—",
-            "home": "1.7",
-            "away": "4.45",
-            "draw": "4.15"
+            "home": "1.73",
+            "away": "4.35",
+            "draw": "4.1"
           },
           {
             "provider": "DraftKings",
@@ -1582,9 +1498,9 @@
             "provider": "BetUS",
             "details": "—",
             "total": "—",
-            "home": "1.72",
-            "away": "4.59",
-            "draw": "4.24"
+            "home": "1.75",
+            "away": "4.45",
+            "draw": "4.19"
           },
           {
             "provider": "LowVig.ag",
@@ -1674,9 +1590,9 @@
             "provider": "Bovada",
             "details": "—",
             "total": "—",
-            "home": "1.88",
-            "away": "3.95",
-            "draw": "3.7"
+            "home": "1.87",
+            "away": "4.0",
+            "draw": "3.75"
           },
           {
             "provider": "DraftKings",
@@ -1690,17 +1606,17 @@
             "provider": "BetRivers",
             "details": "—",
             "total": "—",
-            "home": "1.85",
-            "away": "4.0",
+            "home": "1.83",
+            "away": "4.1",
             "draw": "3.75"
           },
           {
             "provider": "BetUS",
             "details": "—",
             "total": "—",
-            "home": "1.91",
-            "away": "4.08",
-            "draw": "3.8"
+            "home": "1.9",
+            "away": "4.09",
+            "draw": "3.83"
           },
           {
             "provider": "BetOnline.ag",
@@ -1750,7 +1666,7 @@
             "provider": "Bovada",
             "details": "—",
             "total": "—",
-            "home": "1.42",
+            "home": "1.43",
             "away": "7.25",
             "draw": "4.65"
           },
@@ -1775,8 +1691,8 @@
             "details": "—",
             "total": "—",
             "home": "1.44",
-            "away": "7.65",
-            "draw": "4.78"
+            "away": "7.62",
+            "draw": "4.75"
           },
           {
             "provider": "LowVig.ag",
@@ -1846,8 +1762,8 @@
             "provider": "Bovada",
             "details": "—",
             "total": "—",
-            "home": "3.9",
-            "away": "1.77",
+            "home": "3.85",
+            "away": "1.79",
             "draw": "4.3"
           },
           {
@@ -1870,9 +1786,9 @@
             "provider": "BetUS",
             "details": "—",
             "total": "—",
-            "home": "3.98",
+            "home": "3.94",
             "away": "1.81",
-            "draw": "4.4"
+            "draw": "4.41"
           },
           {
             "provider": "LowVig.ag",
@@ -1893,26 +1809,6 @@
         ]
       },
       {
-        "eventId": "id1000000872478708",
-        "date": "2026-11-20T20:00:00.000Z",
-        "home": "Athletic Bilbao",
-        "away": "Espanyol Barcelona",
-        "participant1Id": 2825,
-        "participant2Id": 2814,
-        "homeLogo": "",
-        "awayLogo": "",
-        "oddsList": [
-          {
-            "provider": "Bet365",
-            "details": "—",
-            "total": "—",
-            "home": "1.54",
-            "away": "5.75",
-            "draw": "3.75"
-          }
-        ]
-      },
-      {
         "eventId": "dcee36f9b8a9989972b6d4ddde76c4c7",
         "date": "2026-11-20T20:00:00Z",
         "home": "Athletic Bilbao",
@@ -1926,35 +1822,71 @@
             "provider": "Bovada",
             "details": "—",
             "total": "—",
-            "home": "1.6",
-            "away": "5.5",
-            "draw": "4.1"
+            "home": "1.49",
+            "away": "6.5",
+            "draw": "4.4"
           },
           {
             "provider": "DraftKings",
             "details": "—",
             "total": "—",
-            "home": "1.57",
-            "away": "5.5",
-            "draw": "4.0"
+            "home": "1.48",
+            "away": "6.5",
+            "draw": "4.3"
           },
           {
             "provider": "FanDuel",
             "details": "—",
             "total": "—",
-            "home": "1.57",
-            "away": "5.5",
-            "draw": "4.0"
+            "home": "1.48",
+            "away": "6.0",
+            "draw": "4.3"
+          },
+          {
+            "provider": "BetMGM",
+            "details": "—",
+            "total": "—",
+            "home": "1.53",
+            "away": "6.25",
+            "draw": "4.2"
           }
         ]
       },
       {
-        "eventId": "id1000000872478706",
-        "date": "2026-11-21T13:00:00.000Z",
-        "home": "Deportivo Alaves",
-        "away": "RC Deportivo de A Coruna",
-        "participant1Id": 2885,
-        "participant2Id": 2832,
+        "eventId": "9881e56a732493272e688663b26cd37f",
+        "date": "2026-11-21T13:00:00Z",
+        "home": "Alavés",
+        "away": "Deportivo La Coruña",
+        "participant1Id": null,
+        "participant2Id": null,
+        "homeLogo": "",
+        "awayLogo": "",
+        "oddsList": [
+          {
+            "provider": "Bovada",
+            "details": "—",
+            "total": "—",
+            "home": "2.1",
+            "away": "3.5",
+            "draw": "3.4"
+          },
+          {
+            "provider": "DraftKings",
+            "details": "—",
+            "total": "—",
+            "home": "2.05",
+            "away": "3.5",
+            "draw": "3.4"
+          }
+        ]
+      },
+      {
+        "eventId": "id1000000872478720",
+        "date": "2026-11-21T15:15:00.000Z",
+        "home": "Rayo Vallecano",
+        "away": "Valencia CF",
+        "participant1Id": 2818,
+        "participant2Id": 2828,
         "homeLogo": "",
         "awayLogo": "",
         "oddsList": [
@@ -1962,9 +1894,37 @@
             "provider": "Bet365",
             "details": "—",
             "total": "—",
-            "home": "1.97",
-            "away": "3.6",
-            "draw": "3.25"
+            "home": "1.92",
+            "away": "3.8",
+            "draw": "3.4"
+          }
+        ]
+      },
+      {
+        "eventId": "ebe638278f4d70eaf211ad5be9795fa0",
+        "date": "2026-11-21T15:15:00Z",
+        "home": "Rayo Vallecano",
+        "away": "Valencia",
+        "participant1Id": null,
+        "participant2Id": null,
+        "homeLogo": "",
+        "awayLogo": "",
+        "oddsList": [
+          {
+            "provider": "Bovada",
+            "details": "—",
+            "total": "—",
+            "home": "1.96",
+            "away": "3.9",
+            "draw": "3.45"
+          },
+          {
+            "provider": "DraftKings",
+            "details": "—",
+            "total": "—",
+            "home": "1.95",
+            "away": "3.75",
+            "draw": "3.4"
           }
         ]
       }
@@ -1984,15 +1944,15 @@
             "provider": "Bet365",
             "details": "—",
             "total": "—",
-            "home": "3.25",
-            "away": "1.33"
+            "home": "3.3",
+            "away": "1.32"
           },
           {
             "provider": "FanDuel",
             "details": "—",
             "total": "—",
-            "home": "3.25",
-            "away": "1.36"
+            "home": "3.35",
+            "away": "1.34"
           },
           {
             "provider": "BetRivers",
@@ -2012,29 +1972,29 @@
             "provider": "BetOnline.ag",
             "details": "—",
             "total": "—",
-            "home": "3.34",
-            "away": "1.35"
+            "home": "3.37",
+            "away": "1.34"
           },
           {
             "provider": "LowVig.ag",
             "details": "—",
             "total": "—",
-            "home": "3.37",
+            "home": "3.41",
             "away": "1.35"
           },
           {
             "provider": "BetUS",
             "details": "—",
             "total": "—",
-            "home": "3.38",
-            "away": "1.35"
+            "home": "3.4",
+            "away": "1.34"
           },
           {
             "provider": "MyBookie.ag",
             "details": "—",
             "total": "—",
-            "home": "3.18",
-            "away": "1.34"
+            "home": "3.28",
+            "away": "1.32"
           },
           {
             "provider": "Bovada",
@@ -2048,7 +2008,7 @@
             "details": "—",
             "total": "—",
             "home": "3.3",
-            "away": "1.35"
+            "away": "1.34"
           }
         ]
       },
@@ -2067,7 +2027,7 @@
             "details": "—",
             "total": "—",
             "home": "1.34",
-            "away": "3.15"
+            "away": "3.2"
           },
           {
             "provider": "FanDuel",
@@ -2080,56 +2040,56 @@
             "provider": "MyBookie.ag",
             "details": "—",
             "total": "—",
-            "home": "1.37",
-            "away": "3.04"
+            "home": "1.36",
+            "away": "3.1"
           },
           {
             "provider": "LowVig.ag",
             "details": "—",
             "total": "—",
-            "home": "1.4",
-            "away": "3.1"
+            "home": "1.39",
+            "away": "3.18"
           },
           {
             "provider": "BetOnline.ag",
             "details": "—",
             "total": "—",
-            "home": "1.4",
-            "away": "3.07"
+            "home": "1.38",
+            "away": "3.15"
           },
           {
             "provider": "BetRivers",
             "details": "—",
             "total": "—",
             "home": "1.41",
-            "away": "2.9"
+            "away": "2.95"
           },
           {
             "provider": "DraftKings",
             "details": "—",
             "total": "—",
-            "home": "1.39",
-            "away": "3.12"
+            "home": "1.37",
+            "away": "3.21"
           },
           {
             "provider": "Bovada",
             "details": "—",
             "total": "—",
-            "home": "1.36",
-            "away": "3.25"
+            "home": "1.37",
+            "away": "3.2"
           },
           {
             "provider": "BetUS",
             "details": "—",
             "total": "—",
-            "home": "1.4",
-            "away": "3.1"
+            "home": "1.38",
+            "away": "3.18"
           },
           {
             "provider": "BetMGM",
             "details": "—",
             "total": "—",
-            "home": "1.35",
+            "home": "1.36",
             "away": "3.25"
           }
         ]
@@ -2148,36 +2108,36 @@
             "provider": "Bet365",
             "details": "—",
             "total": "—",
-            "home": "2.62",
-            "away": "1.48"
+            "home": "2.65",
+            "away": "1.47"
           },
           {
             "provider": "FanDuel",
             "details": "—",
             "total": "—",
-            "home": "2.56",
-            "away": "1.53"
+            "home": "2.72",
+            "away": "1.49"
           },
           {
             "provider": "MyBookie.ag",
             "details": "—",
             "total": "—",
-            "home": "2.57",
-            "away": "1.49"
+            "home": "2.61",
+            "away": "1.48"
           },
           {
             "provider": "LowVig.ag",
             "details": "—",
             "total": "—",
-            "home": "2.69",
-            "away": "1.52"
+            "home": "2.75",
+            "away": "1.5"
           },
           {
             "provider": "BetOnline.ag",
             "details": "—",
             "total": "—",
-            "home": "2.61",
-            "away": "1.54"
+            "home": "2.74",
+            "away": "1.5"
           },
           {
             "provider": "DraftKings",
@@ -2191,28 +2151,28 @@
             "details": "—",
             "total": "—",
             "home": "2.65",
-            "away": "1.48"
+            "away": "1.49"
           },
           {
             "provider": "Bovada",
             "details": "—",
             "total": "—",
-            "home": "2.65",
-            "away": "1.51"
+            "home": "2.7",
+            "away": "1.5"
           },
           {
             "provider": "BetUS",
             "details": "—",
             "total": "—",
-            "home": "2.59",
-            "away": "1.54"
+            "home": "2.7",
+            "away": "1.5"
           },
           {
             "provider": "BetMGM",
             "details": "—",
             "total": "—",
-            "home": "2.55",
-            "away": "1.53"
+            "home": "2.7",
+            "away": "1.48"
           }
         ]
       },
@@ -2230,71 +2190,71 @@
             "provider": "Bet365",
             "details": "—",
             "total": "—",
-            "home": "1.17",
-            "away": "4.65"
+            "home": "1.16",
+            "away": "4.9"
           },
           {
             "provider": "FanDuel",
             "details": "—",
             "total": "—",
-            "home": "1.22",
-            "away": "4.6"
+            "home": "1.2",
+            "away": "4.8"
           },
           {
             "provider": "MyBookie.ag",
             "details": "—",
             "total": "—",
-            "home": "1.21",
-            "away": "4.3"
+            "home": "1.19",
+            "away": "4.5"
           },
           {
             "provider": "BetRivers",
             "details": "—",
             "total": "—",
             "home": "1.2",
-            "away": "4.6"
+            "away": "4.5"
           },
           {
             "provider": "DraftKings",
             "details": "—",
             "total": "—",
-            "home": "1.22",
-            "away": "4.49"
+            "home": "1.18",
+            "away": "5.11"
           },
           {
             "provider": "Bovada",
             "details": "—",
             "total": "—",
-            "home": "1.18",
-            "away": "4.9"
+            "home": "1.19",
+            "away": "4.75"
           },
           {
             "provider": "BetMGM",
             "details": "—",
             "total": "—",
-            "home": "1.2",
-            "away": "4.75"
+            "home": "1.17",
+            "away": "5.25"
           },
           {
             "provider": "BetOnline.ag",
             "details": "—",
             "total": "—",
-            "home": "1.22",
-            "away": "4.5"
+            "home": "1.19",
+            "away": "5.0"
           },
           {
             "provider": "LowVig.ag",
             "details": "—",
             "total": "—",
-            "home": "1.23",
-            "away": "4.56"
+            "home": "1.19",
+            "away": "5.08"
           },
           {
             "provider": "BetUS",
             "details": "—",
             "total": "—",
-            "home": "1.22",
-            "away": "4.55"
+            "home": "1.19",
+            "away": "5.05"
           }
         ]
       },
@@ -2312,71 +2272,71 @@
             "provider": "Bet365",
             "details": "—",
             "total": "—",
-            "home": "1.37",
-            "away": "3.05"
+            "home": "1.35",
+            "away": "3.1"
           },
           {
             "provider": "FanDuel",
             "details": "—",
             "total": "—",
-            "home": "1.43",
-            "away": "2.9"
+            "home": "1.47",
+            "away": "2.8"
           },
           {
             "provider": "BetOnline.ag",
             "details": "—",
             "total": "—",
-            "home": "1.4",
-            "away": "3.07"
+            "home": "1.43",
+            "away": "2.92"
           },
           {
             "provider": "LowVig.ag",
             "details": "—",
             "total": "—",
-            "home": "1.4",
-            "away": "3.1"
+            "home": "1.44",
+            "away": "2.95"
           },
           {
             "provider": "MyBookie.ag",
             "details": "—",
             "total": "—",
-            "home": "1.38",
-            "away": "2.97"
+            "home": "1.42",
+            "away": "2.8"
           },
           {
             "provider": "BetRivers",
             "details": "—",
             "total": "—",
-            "home": "1.41",
-            "away": "2.9"
+            "home": "1.5",
+            "away": "2.6"
           },
           {
             "provider": "DraftKings",
             "details": "—",
             "total": "—",
-            "home": "1.39",
-            "away": "3.12"
+            "home": "1.44",
+            "away": "2.9"
           },
           {
             "provider": "BetUS",
             "details": "—",
             "total": "—",
-            "home": "1.4",
-            "away": "3.1"
+            "home": "1.43",
+            "away": "2.95"
           },
           {
             "provider": "Bovada",
             "details": "—",
             "total": "—",
-            "home": "1.38",
-            "away": "3.15"
+            "home": "1.45",
+            "away": "2.8"
           },
           {
             "provider": "BetMGM",
             "details": "—",
             "total": "—",
-            "home": "1.4",
-            "away": "3.0"
+            "home": "1.44",
+            "away": "2.85"
           }
         ]
       },
@@ -2394,64 +2354,64 @@
             "provider": "Bet365",
             "details": "—",
             "total": "—",
-            "home": "3.4",
-            "away": "1.3"
+            "home": "3.5",
+            "away": "1.29"
           },
           {
             "provider": "FanDuel",
             "details": "—",
             "total": "—",
-            "home": "3.5",
-            "away": "1.32"
+            "home": "3.4",
+            "away": "1.34"
           },
           {
             "provider": "LowVig.ag",
             "details": "—",
             "total": "—",
-            "home": "3.48",
-            "away": "1.34"
+            "home": "3.33",
+            "away": "1.36"
           },
           {
             "provider": "BetOnline.ag",
             "details": "—",
             "total": "—",
-            "home": "3.45",
-            "away": "1.33"
+            "home": "3.3",
+            "away": "1.36"
           },
           {
             "provider": "BetRivers",
             "details": "—",
             "total": "—",
-            "home": "3.15",
-            "away": "1.36"
+            "home": "2.85",
+            "away": "1.43"
           },
           {
             "provider": "DraftKings",
             "details": "—",
             "total": "—",
-            "home": "3.49",
-            "away": "1.32"
+            "home": "3.31",
+            "away": "1.35"
           },
           {
             "provider": "MyBookie.ag",
             "details": "—",
             "total": "—",
-            "home": "3.32",
-            "away": "1.32"
+            "home": "3.2",
+            "away": "1.34"
           },
           {
             "provider": "BetUS",
             "details": "—",
             "total": "—",
-            "home": "3.5",
-            "away": "1.33"
+            "home": "3.35",
+            "away": "1.36"
           },
           {
             "provider": "Bovada",
             "details": "—",
             "total": "—",
-            "home": "3.55",
-            "away": "1.32"
+            "home": "3.35",
+            "away": "1.35"
           },
           {
             "provider": "BetMGM",
@@ -2476,64 +2436,71 @@
             "provider": "Bet365",
             "details": "—",
             "total": "—",
-            "home": "2.15",
-            "away": "1.71"
+            "home": "2.75",
+            "away": "1.44"
           },
           {
             "provider": "FanDuel",
             "details": "—",
             "total": "—",
-            "home": "2.64",
-            "away": "1.51"
+            "home": "2.72",
+            "away": "1.49"
           },
           {
             "provider": "BetOnline.ag",
             "details": "—",
             "total": "—",
-            "home": "2.65",
-            "away": "1.53"
+            "home": "2.77",
+            "away": "1.49"
           },
           {
             "provider": "LowVig.ag",
             "details": "—",
             "total": "—",
-            "home": "2.66",
-            "away": "1.53"
+            "home": "2.79",
+            "away": "1.49"
+          },
+          {
+            "provider": "BetUS",
+            "details": "—",
+            "total": "—",
+            "home": "2.75",
+            "away": "1.49"
           },
           {
             "provider": "DraftKings",
             "details": "—",
             "total": "—",
-            "home": "2.46",
-            "away": "1.58"
+            "home": "2.8",
+            "away": "1.46"
           },
           {
             "provider": "BetRivers",
             "details": "—",
             "total": "—",
-            "home": "2.38",
-            "away": "1.57"
+            "home": "2.75",
+            "away": "1.45"
           },
           {
             "provider": "MyBookie.ag",
             "details": "—",
             "total": "—",
-            "home": "2.58",
-            "away": "1.49"
+            "home": "2.66",
+            "away": "1.46"
           },
           {
             "provider": "Bovada",
             "details": "—",
             "total": "—",
-            "home": "2.55",
-            "away": "1.56"
+            "home": "2.85",
+            "away": "1.44"
           },
           {
             "provider": "BetMGM",
             "details": "—",
             "total": "—",
-            "home": "2.55",
-            "away": "1.53"
+            "home": "2.65",
+            "away": "1.5"
           }
         ]
       },
@@ -2636,8 +2603,8 @@
             "provider": "DraftKings",
             "details": "—",
             "total": "—",
-            "home": "2.5",
-            "away": "1.56"
+            "home": "2.54",
+            "away": "1.54"
           },
           {
             "provider": "FanDuel",
@@ -2657,15 +2624,15 @@
             "provider": "BetUS",
             "details": "—",
             "total": "—",
-            "home": "2.42",
-            "away": "1.61"
+            "home": "2.46",
+            "away": "1.59"
           },
           {
             "provider": "MyBookie.ag",
             "details": "—",
             "total": "—",
-            "home": "2.4",
-            "away": "1.58"
+            "home": "2.43",
+            "away": "1.57"
           },
           {
             "provider": "BetOnline.ag",
@@ -2685,15 +2652,15 @@
             "provider": "BetRivers",
             "details": "—",
             "total": "—",
-            "home": "2.48",
-            "away": "1.54"
+            "home": "2.38",
+            "away": "1.57"
           },
           {
             "provider": "Bovada",
             "details": "—",
             "total": "—",
-            "home": "2.45",
-            "away": "1.59"
+            "home": "2.55",
+            "away": "1.56"
           }
         ]
       },
@@ -2711,15 +2678,15 @@
             "provider": "Bet365",
             "details": "—",
             "total": "—",
-            "home": "2.26",
-            "away": "1.63"
+            "home": "2.23",
+            "away": "1.65"
           },
           {
             "provider": "DraftKings",
             "details": "—",
             "total": "—",
-            "home": "2.3",
-            "away": "1.65"
+            "home": "2.24",
+            "away": "1.68"
           },
           {
             "provider": "BetUS",
@@ -2807,8 +2774,8 @@
             "provider": "BetUS",
             "details": "—",
             "total": "—",
-            "home": "2.9",
-            "away": "1.44"
+            "home": "3.03",
+            "away": "1.42"
           },
           {
             "provider": "FanDuel",
@@ -2835,7 +2802,7 @@
             "provider": "BetRivers",
             "details": "—",
             "total": "—",
-            "home": "2.9",
+            "home": "2.95",
             "away": "1.41"
           },
           {
@@ -2875,15 +2842,15 @@
             "provider": "Bet365",
             "details": "—",
             "total": "—",
-            "home": "1.15",
-            "away": "5.0"
+            "home": "1.17",
+            "away": "4.75"
           },
           {
             "provider": "DraftKings",
             "details": "—",
             "total": "—",
-            "home": "1.22",
-            "away": "4.5"
+            "home": "1.21",
+            "away": "4.6"
           },
           {
             "provider": "FanDuel",
@@ -2896,22 +2863,22 @@
             "provider": "BetUS",
             "details": "—",
             "total": "—",
-            "home": "1.21",
-            "away": "4.8"
+            "home": "1.19",
+            "away": "5.1"
           },
           {
             "provider": "BetOnline.ag",
             "details": "—",
             "total": "—",
-            "home": "1.21",
-            "away": "4.74"
+            "home": "1.19",
+            "away": "5.03"
           },
           {
             "provider": "LowVig.ag",
             "details": "—",
             "total": "—",
-            "home": "1.21",
-            "away": "4.74"
+            "home": "1.19",
+            "away": "5.03"
           },
           {
             "provider": "BetRivers",
@@ -2938,8 +2905,8 @@
             "provider": "Bovada",
             "details": "—",
             "total": "—",
-            "home": "1.18",
-            "away": "5.1"
+            "home": "1.19",
+            "away": "5.0"
           }
         ]
       },
@@ -2964,8 +2931,8 @@
             "provider": "DraftKings",
             "details": "—",
             "total": "—",
-            "home": "3.35",
-            "away": "1.34"
+            "home": "3.45",
+            "away": "1.33"
           },
           {
             "provider": "FanDuel",
@@ -3006,22 +2973,22 @@
             "provider": "MyBookie.ag",
             "details": "—",
             "total": "—",
-            "home": "3.36",
-            "away": "1.33"
+            "home": "3.27",
+            "away": "1.35"
           },
           {
             "provider": "BetMGM",
             "details": "—",
             "total": "—",
-            "home": "3.4",
-            "away": "1.34"
+            "home": "3.5",
+            "away": "1.33"
           },
           {
             "provider": "Bovada",
             "details": "—",
             "total": "—",
-            "home": "3.35",
-            "away": "1.35"
+            "home": "3.65",
+            "away": "1.3"
           }
         ]
       },
@@ -3046,8 +3013,8 @@
             "provider": "DraftKings",
             "details": "—",
             "total": "—",
-            "home": "1.59",
-            "away": "2.42"
+            "home": "1.57",
+            "away": "2.45"
           },
           {
             "provider": "FanDuel",
@@ -3081,8 +3048,8 @@
             "provider": "BetRivers",
             "details": "—",
             "total": "—",
-            "home": "1.61",
-            "away": "2.33"
+            "home": "1.54",
+            "away": "2.48"
           },
           {
             "provider": "MyBookie.ag",
@@ -3102,8 +3069,8 @@
             "provider": "Bovada",
             "details": "—",
             "total": "—",
-            "home": "1.56",
-            "away": "2.53"
+            "home": "1.59",
+            "away": "2.45"
           }
         ]
       },
@@ -3128,15 +3095,15 @@
             "provider": "DraftKings",
             "details": "—",
             "total": "—",
-            "home": "2.3",
-            "away": "1.65"
+            "home": "2.36",
+            "away": "1.62"
           },
           {
             "provider": "BetUS",
             "details": "—",
             "total": "—",
-            "home": "2.46",
-            "away": "1.59"
+            "home": "2.38",
+            "away": "1.62"
           },
           {
             "provider": "FanDuel",
@@ -3149,15 +3116,15 @@
             "provider": "BetOnline.ag",
             "details": "—",
             "total": "—",
-            "home": "2.48",
-            "away": "1.6"
+            "home": "2.38",
+            "away": "1.63"
           },
           {
             "provider": "LowVig.ag",
             "details": "—",
             "total": "—",
-            "home": "2.48",
-            "away": "1.6"
+            "home": "2.38",
+            "away": "1.63"
           },
           {
             "provider": "BetRivers",
@@ -3170,22 +3137,22 @@
             "provider": "MyBookie.ag",
             "details": "—",
             "total": "—",
-            "home": "2.41",
-            "away": "1.57"
+            "home": "2.37",
+            "away": "1.59"
           },
           {
             "provider": "BetMGM",
             "details": "—",
             "total": "—",
-            "home": "2.4",
-            "away": "1.57"
+            "home": "2.38",
+            "away": "1.61"
           },
           {
             "provider": "Bovada",
             "details": "—",
             "total": "—",
-            "home": "2.45",
-            "away": "1.59"
+            "home": "2.35",
+            "away": "1.62"
           }
         ]
       },
@@ -3210,8 +3177,8 @@
             "provider": "DraftKings",
             "details": "—",
             "total": "—",
-            "home": "2.8",
-            "away": "1.46"
+            "home": "2.9",
+            "away": "1.43"
           },
           {
             "provider": "BetUS",
@@ -3252,22 +3219,22 @@
             "provider": "MyBookie.ag",
             "details": "—",
             "total": "—",
-            "home": "2.78",
+            "home": "2.76",
             "away": "1.45"
           },
           {
             "provider": "BetMGM",
             "details": "—",
             "total": "—",
-            "home": "2.85",
+            "home": "2.9",
             "away": "1.44"
           },
           {
             "provider": "Bovada",
             "details": "—",
             "total": "—",
-            "home": "2.85",
-            "away": "1.44"
+            "home": "2.95",
+            "away": "1.43"
           }
         ]
       },
@@ -3368,7 +3335,7 @@
             "details": "—",
             "total": "—",
             "home": "1.17",
-            "away": "4.75"
+            "away": "4.7"
           },
           {
             "provider": "DraftKings",
@@ -3425,6 +3392,13 @@
             "total": "—",
             "home": "1.21",
             "away": "4.75"
+          },
+          {
+            "provider": "Bovada",
+            "details": "—",
+            "total": "—",
+            "home": "1.19",
+            "away": "4.9"
           }
         ]
       },
@@ -3442,8 +3416,8 @@
             "provider": "Bet365",
             "details": "—",
             "total": "—",
-            "home": "1.54",
-            "away": "2.47"
+            "home": "1.53",
+            "away": "2.48"
           },
           {
             "provider": "DraftKings",
@@ -3505,8 +3479,8 @@
             "provider": "Bovada",
             "details": "—",
             "total": "—",
-            "home": "1.59",
-            "away": "2.45"
+            "home": "1.58",
+            "away": "2.48"
           }
         ]
       },
@@ -3573,8 +3547,8 @@
             "provider": "MyBookie.ag",
             "details": "—",
             "total": "—",
-            "home": "1.24",
-            "away": "4.05"
+            "home": "1.23",
+            "away": "4.24"
           },
           {
             "provider": "BetMGM",
@@ -3606,8 +3580,8 @@
             "provider": "DraftKings",
             "details": "—",
             "total": "—",
-            "home": "1.35",
-            "away": "3.3"
+            "home": "1.37",
+            "away": "3.2"
           },
           {
             "provider": "FanDuel",
