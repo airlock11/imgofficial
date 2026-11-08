@@ -1,7 +1,7 @@
 {
   "version": 1,
   "source": "ESPN public football data",
-  "updatedAt": "2026-11-08T14:27:01.816Z",
+  "updatedAt": "2026-11-08T18:59:24.312Z",
   "leagues": {
     "soccer": {
       "name": "Premier League",
@@ -9,22 +9,6 @@
       "espn": "eng.1",
       "leagueLogo": "https://a.espncdn.com/i/leaguelogos/soccer/500/23.png",
       "games": [
-        {
-          "eventId": "401878764",
-          "date": "2026-10-25T16:30Z",
-          "displayTime": "",
-          "home": "Sunderland",
-          "away": "Leeds United",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/366.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/357.png",
-          "homeScore": "0",
-          "awayScore": "0",
-          "state": "final",
-          "status": "FT",
-          "venue": "Stadium of Light",
-          "competition": "Premier League",
-          "category": "England"
-        },
         {
           "eventId": "401879248",
           "date": "2026-10-31T12:30Z",
@@ -273,10 +257,10 @@
           "away": "Brentford",
           "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/331.png",
           "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/337.png",
-          "homeScore": "1",
+          "homeScore": "2",
           "awayScore": "0",
-          "state": "live",
-          "status": "26'",
+          "state": "final",
+          "status": "FT",
           "venue": "American Express Stadium",
           "competition": "Premier League",
           "category": "England"
@@ -289,10 +273,10 @@
           "away": "Liverpool",
           "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/384.png",
           "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/364.png",
-          "homeScore": "0",
-          "awayScore": "0",
-          "state": "live",
-          "status": "26'",
+          "homeScore": "1",
+          "awayScore": "3",
+          "state": "final",
+          "status": "FT",
           "venue": "Selhurst Park",
           "competition": "Premier League",
           "category": "England"
@@ -305,10 +289,10 @@
           "away": "AFC Bournemouth",
           "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/373.png",
           "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/349.png",
-          "homeScore": "0",
-          "awayScore": "1",
-          "state": "live",
-          "status": "26'",
+          "homeScore": "1",
+          "awayScore": "2",
+          "state": "final",
+          "status": "FT",
           "venue": "Portman Road",
           "competition": "Premier League",
           "category": "England"
@@ -321,10 +305,10 @@
           "away": "Chelsea",
           "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/366.png",
           "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/363.png",
-          "homeScore": "0",
+          "homeScore": "1",
           "awayScore": "0",
-          "state": "live",
-          "status": "25'",
+          "state": "final",
+          "status": "FT",
           "venue": "Stadium of Light",
           "competition": "Premier League",
           "category": "England"
@@ -337,10 +321,10 @@
           "away": "Aston Villa",
           "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/360.png",
           "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/362.png",
-          "homeScore": "0",
-          "awayScore": "0",
-          "state": "scheduled",
-          "status": "Scheduled",
+          "homeScore": "4",
+          "awayScore": "4",
+          "state": "final",
+          "status": "FT",
           "venue": "Old Trafford",
           "competition": "Premier League",
           "category": "England"
@@ -1000,6 +984,17 @@
         },
         {
           "rank": 2,
+          "team": "Brighton & Hove Albion",
+          "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/331.png",
+          "played": 10,
+          "wins": 7,
+          "draws": 1,
+          "losses": 2,
+          "goalDiff": 19,
+          "points": 22
+        },
+        {
+          "rank": 3,
           "team": "Manchester City",
           "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/382.png",
           "played": 10,
@@ -1010,29 +1005,29 @@
           "points": 21
         },
         {
-          "rank": 3,
-          "team": "Brighton & Hove Albion",
-          "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/331.png",
-          "played": 9,
-          "wins": 6,
-          "draws": 1,
-          "losses": 2,
-          "goalDiff": 17,
-          "points": 19
-        },
-        {
           "rank": 4,
-          "team": "Chelsea",
-          "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/363.png",
-          "played": 9,
+          "team": "Liverpool",
+          "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/364.png",
+          "played": 10,
           "wins": 5,
-          "draws": 1,
-          "losses": 3,
+          "draws": 3,
+          "losses": 2,
           "goalDiff": 4,
-          "points": 16
+          "points": 18
         },
         {
           "rank": 5,
+          "team": "Chelsea",
+          "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/363.png",
+          "played": 10,
+          "wins": 5,
+          "draws": 1,
+          "losses": 4,
+          "goalDiff": 3,
+          "points": 16
+        },
+        {
+          "rank": 6,
           "team": "Everton",
           "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/368.png",
           "played": 10,
@@ -1043,29 +1038,29 @@
           "points": 16
         },
         {
-          "rank": 6,
-          "team": "Liverpool",
-          "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/364.png",
-          "played": 9,
+          "rank": 7,
+          "team": "AFC Bournemouth",
+          "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/349.png",
+          "played": 10,
           "wins": 4,
           "draws": 3,
-          "losses": 2,
+          "losses": 3,
           "goalDiff": 2,
           "points": 15
         },
         {
-          "rank": 7,
+          "rank": 8,
           "team": "Brentford",
           "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/337.png",
-          "played": 9,
+          "played": 10,
           "wins": 3,
           "draws": 5,
-          "losses": 1,
-          "goalDiff": 7,
+          "losses": 2,
+          "goalDiff": 5,
           "points": 14
         },
         {
-          "rank": 8,
+          "rank": 9,
           "team": "Leeds United",
           "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/357.png",
           "played": 10,
@@ -1076,18 +1071,18 @@
           "points": 14
         },
         {
-          "rank": 9,
-          "team": "AFC Bournemouth",
-          "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/349.png",
-          "played": 9,
+          "rank": 10,
+          "team": "Aston Villa",
+          "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/362.png",
+          "played": 10,
           "wins": 3,
-          "draws": 3,
+          "draws": 4,
           "losses": 3,
-          "goalDiff": 1,
-          "points": 12
+          "goalDiff": -3,
+          "points": 13
         },
         {
-          "rank": 10,
+          "rank": 11,
           "team": "Tottenham Hotspur",
           "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/367.png",
           "played": 10,
@@ -1098,24 +1093,13 @@
           "points": 12
         },
         {
-          "rank": 11,
+          "rank": 12,
           "team": "Newcastle United",
           "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/361.png",
           "played": 10,
           "wins": 3,
           "draws": 3,
           "losses": 4,
-          "goalDiff": -3,
-          "points": 12
-        },
-        {
-          "rank": 12,
-          "team": "Aston Villa",
-          "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/362.png",
-          "played": 9,
-          "wins": 3,
-          "draws": 3,
-          "losses": 3,
           "goalDiff": -3,
           "points": 12
         },
@@ -1134,11 +1118,11 @@
           "rank": 14,
           "team": "Ipswich Town",
           "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/373.png",
-          "played": 9,
+          "played": 10,
           "wins": 3,
           "draws": 2,
-          "losses": 4,
-          "goalDiff": -4,
+          "losses": 5,
+          "goalDiff": -5,
           "points": 11
         },
         {
@@ -1178,37 +1162,37 @@
           "rank": 18,
           "team": "Manchester United",
           "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/360.png",
-          "played": 9,
+          "played": 10,
           "wins": 1,
-          "draws": 4,
+          "draws": 5,
           "losses": 4,
           "goalDiff": -5,
-          "points": 7
+          "points": 8
         },
         {
           "rank": 19,
-          "team": "Crystal Palace",
-          "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/384.png",
-          "played": 9,
+          "team": "Sunderland",
+          "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/366.png",
+          "played": 10,
           "wins": 2,
-          "draws": 1,
+          "draws": 2,
           "losses": 6,
-          "goalDiff": -12,
-          "points": 7
+          "goalDiff": -9,
+          "points": 8
         },
         {
           "rank": 20,
-          "team": "Sunderland",
-          "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/366.png",
-          "played": 9,
-          "wins": 1,
-          "draws": 2,
-          "losses": 6,
-          "goalDiff": -10,
-          "points": 5
+          "team": "Crystal Palace",
+          "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/384.png",
+          "played": 10,
+          "wins": 2,
+          "draws": 1,
+          "losses": 7,
+          "goalDiff": -14,
+          "points": 7
         }
       ],
-      "verifiedAt": "2026-11-08T14:27:01.128Z"
+      "verifiedAt": "2026-11-08T18:59:23.836Z"
     },
     "laliga": {
       "name": "La Liga",
@@ -1216,38 +1200,6 @@
       "espn": "esp.1",
       "leagueLogo": "https://a.espncdn.com/i/leaguelogos/soccer/500/15.png",
       "games": [
-        {
-          "eventId": "401882833",
-          "date": "2026-10-25T15:15Z",
-          "displayTime": "",
-          "home": "Celta Vigo",
-          "away": "Real Betis",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/85.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/244.png",
-          "homeScore": "0",
-          "awayScore": "0",
-          "state": "final",
-          "status": "FT",
-          "venue": "Balaidos",
-          "competition": "La Liga",
-          "category": "Spain"
-        },
-        {
-          "eventId": "401882829",
-          "date": "2026-10-25T17:30Z",
-          "displayTime": "",
-          "home": "Real Sociedad",
-          "away": "Levante",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/89.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/1538.png",
-          "homeScore": "2",
-          "awayScore": "1",
-          "state": "final",
-          "status": "FT",
-          "venue": "Reale Arena",
-          "competition": "La Liga",
-          "category": "Spain"
-        },
         {
           "eventId": "401882832",
           "date": "2026-10-25T20:00Z",
@@ -1529,9 +1481,9 @@
           "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/3751.png",
           "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/244.png",
           "homeScore": "0",
-          "awayScore": "0",
-          "state": "live",
-          "status": "68'",
+          "awayScore": "2",
+          "state": "final",
+          "status": "FT",
           "venue": "Estadio Martínez Valero",
           "competition": "La Liga",
           "category": "Spain"
@@ -1544,10 +1496,10 @@
           "away": "Rayo Vallecano",
           "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/89.png",
           "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/101.png",
-          "homeScore": "0",
+          "homeScore": "1",
           "awayScore": "0",
-          "state": "scheduled",
-          "status": "Scheduled",
+          "state": "final",
+          "status": "FT",
           "venue": "Reale Arena",
           "competition": "La Liga",
           "category": "Spain"
@@ -1562,8 +1514,8 @@
           "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/1538.png",
           "homeScore": "0",
           "awayScore": "0",
-          "state": "scheduled",
-          "status": "Scheduled",
+          "state": "live",
+          "status": "65'",
           "venue": "Balaidos",
           "competition": "La Liga",
           "category": "Spain"
@@ -1578,8 +1530,8 @@
           "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/2922.png",
           "homeScore": "0",
           "awayScore": "0",
-          "state": "scheduled",
-          "status": "Scheduled",
+          "state": "live",
+          "status": "70'",
           "venue": "Estadio de la Cerámica",
           "competition": "La Liga",
           "category": "Spain"
@@ -2151,23 +2103,23 @@
           "rank": 4,
           "team": "Real Betis",
           "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/244.png",
-          "played": 11,
-          "wins": 7,
+          "played": 12,
+          "wins": 8,
           "draws": 2,
           "losses": 2,
-          "goalDiff": 3,
-          "points": 23
+          "goalDiff": 5,
+          "points": 26
         },
         {
           "rank": 5,
           "team": "Real Sociedad",
           "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/89.png",
-          "played": 11,
-          "wins": 6,
+          "played": 12,
+          "wins": 7,
           "draws": 1,
           "losses": 4,
-          "goalDiff": 0,
-          "points": 19
+          "goalDiff": 1,
+          "points": 22
         },
         {
           "rank": 6,
@@ -2261,11 +2213,11 @@
           "rank": 14,
           "team": "Rayo Vallecano",
           "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/101.png",
-          "played": 10,
+          "played": 11,
           "wins": 3,
           "draws": 3,
-          "losses": 4,
-          "goalDiff": -5,
+          "losses": 5,
+          "goalDiff": -6,
           "points": 12
         },
         {
@@ -2292,17 +2244,6 @@
         },
         {
           "rank": 17,
-          "team": "Elche",
-          "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3751.png",
-          "played": 11,
-          "wins": 2,
-          "draws": 4,
-          "losses": 5,
-          "goalDiff": -4,
-          "points": 10
-        },
-        {
-          "rank": 18,
           "team": "Levante",
           "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/1538.png",
           "played": 11,
@@ -2310,6 +2251,17 @@
           "draws": 4,
           "losses": 5,
           "goalDiff": -5,
+          "points": 10
+        },
+        {
+          "rank": 18,
+          "team": "Elche",
+          "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3751.png",
+          "played": 12,
+          "wins": 2,
+          "draws": 4,
+          "losses": 6,
+          "goalDiff": -6,
           "points": 10
         },
         {
@@ -2335,7 +2287,7 @@
           "points": 5
         }
       ],
-      "verifiedAt": "2026-11-08T14:27:01.357Z"
+      "verifiedAt": "2026-11-08T18:59:23.999Z"
     },
     "bundesliga": {
       "name": "Bundesliga",
@@ -2343,38 +2295,6 @@
       "espn": "ger.1",
       "leagueLogo": "https://a.espncdn.com/i/leaguelogos/soccer/500/10.png",
       "games": [
-        {
-          "eventId": "401884760",
-          "date": "2026-10-25T14:30Z",
-          "displayTime": "",
-          "home": "TSG Hoffenheim",
-          "away": "Bayer Leverkusen",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/7911.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/131.png",
-          "homeScore": "3",
-          "awayScore": "0",
-          "state": "final",
-          "status": "FT",
-          "venue": "PreZero Arena",
-          "competition": "Bundesliga",
-          "category": "Germany"
-        },
-        {
-          "eventId": "401884759",
-          "date": "2026-10-25T16:30Z",
-          "displayTime": "",
-          "home": "SC Freiburg",
-          "away": "Bayern Munich",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/126.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/132.png",
-          "homeScore": "1",
-          "awayScore": "3",
-          "state": "final",
-          "status": "FT",
-          "venue": "Europa-Park Stadion",
-          "competition": "Bundesliga",
-          "category": "Germany"
-        },
         {
           "eventId": "401884746",
           "date": "2026-10-30T19:30Z",
@@ -2623,10 +2543,10 @@
           "away": "Bayer Leverkusen",
           "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/122.png",
           "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/131.png",
-          "homeScore": "0",
-          "awayScore": "0",
-          "state": "scheduled",
-          "status": "Scheduled",
+          "homeScore": "1",
+          "awayScore": "2",
+          "state": "final",
+          "status": "FT",
           "venue": "RheinEnergieStadion",
           "competition": "Bundesliga",
           "category": "Germany"
@@ -2639,10 +2559,10 @@
           "away": "1. FC Union Berlin",
           "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/126.png",
           "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/598.png",
-          "homeScore": "0",
+          "homeScore": "2",
           "awayScore": "0",
-          "state": "scheduled",
-          "status": "Scheduled",
+          "state": "final",
+          "status": "FT",
           "venue": "Europa-Park Stadion",
           "competition": "Bundesliga",
           "category": "Germany"
@@ -2655,10 +2575,10 @@
           "away": "Schalke 04",
           "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/7911.png",
           "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/133.png",
-          "homeScore": "0",
+          "homeScore": "2",
           "awayScore": "0",
-          "state": "scheduled",
-          "status": "Scheduled",
+          "state": "live",
+          "status": "29'",
           "venue": "PreZero Arena",
           "competition": "Bundesliga",
           "category": "Germany"
@@ -3121,6 +3041,17 @@
         },
         {
           "rank": 3,
+          "team": "SC Freiburg",
+          "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/126.png",
+          "played": 9,
+          "wins": 6,
+          "draws": 1,
+          "losses": 2,
+          "goalDiff": 10,
+          "points": 19
+        },
+        {
+          "rank": 4,
           "team": "RB Leipzig",
           "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/11420.png",
           "played": 9,
@@ -3131,18 +3062,18 @@
           "points": 18
         },
         {
-          "rank": 4,
-          "team": "SC Freiburg",
-          "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/126.png",
-          "played": 8,
+          "rank": 5,
+          "team": "Bayer Leverkusen",
+          "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/131.png",
+          "played": 9,
           "wins": 5,
           "draws": 1,
-          "losses": 2,
-          "goalDiff": 8,
+          "losses": 3,
+          "goalDiff": 3,
           "points": 16
         },
         {
-          "rank": 5,
+          "rank": 6,
           "team": "Werder Bremen",
           "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/137.png",
           "played": 9,
@@ -3151,17 +3082,6 @@
           "losses": 2,
           "goalDiff": 2,
           "points": 15
-        },
-        {
-          "rank": 6,
-          "team": "Bayer Leverkusen",
-          "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/131.png",
-          "played": 8,
-          "wins": 4,
-          "draws": 1,
-          "losses": 3,
-          "goalDiff": 2,
-          "points": 13
         },
         {
           "rank": 7,
@@ -3255,22 +3175,22 @@
           "rank": 15,
           "team": "FC Cologne",
           "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/122.png",
-          "played": 8,
+          "played": 9,
           "wins": 2,
           "draws": 3,
-          "losses": 3,
-          "goalDiff": -3,
+          "losses": 4,
+          "goalDiff": -4,
           "points": 9
         },
         {
           "rank": 16,
           "team": "1. FC Union Berlin",
           "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/598.png",
-          "played": 8,
+          "played": 9,
           "wins": 1,
           "draws": 4,
-          "losses": 3,
-          "goalDiff": -12,
+          "losses": 4,
+          "goalDiff": -14,
           "points": 7
         },
         {
@@ -3296,7 +3216,7 @@
           "points": 4
         }
       ],
-      "verifiedAt": "2026-11-08T14:27:01.561Z"
+      "verifiedAt": "2026-11-08T18:59:24.168Z"
     },
     "seriea": {
       "name": "Serie A",
@@ -3304,22 +3224,6 @@
       "espn": "ita.1",
       "leagueLogo": "https://a.espncdn.com/i/leaguelogos/soccer/500/12.png",
       "games": [
-        {
-          "eventId": "401874772",
-          "date": "2026-10-25T17:00Z",
-          "displayTime": "",
-          "home": "Lecce",
-          "away": "Juventus",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/113.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/111.png",
-          "homeScore": "0",
-          "awayScore": "2",
-          "state": "final",
-          "status": "FT",
-          "venue": "Via Del Mare",
-          "competition": "Serie A",
-          "category": "Italy"
-        },
         {
           "eventId": "401874779",
           "date": "2026-10-25T19:45Z",
@@ -3760,10 +3664,10 @@
           "away": "AC Milan",
           "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/3263.png",
           "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/103.png",
-          "homeScore": "0",
+          "homeScore": "1",
           "awayScore": "2",
-          "state": "live",
-          "status": "24'",
+          "state": "final",
+          "status": "FT",
           "venue": "Stadio Luigi Ferraris",
           "competition": "Serie A",
           "category": "Italy"
@@ -3777,9 +3681,9 @@
           "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/4007.png",
           "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/105.png",
           "homeScore": "0",
-          "awayScore": "0",
-          "state": "live",
-          "status": "24'",
+          "awayScore": "1",
+          "state": "final",
+          "status": "FT",
           "venue": "U-Power Stadium",
           "competition": "Serie A",
           "category": "Italy"
@@ -3792,10 +3696,10 @@
           "away": "Como",
           "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/110.png",
           "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/2572.png",
-          "homeScore": "0",
+          "homeScore": "2",
           "awayScore": "0",
-          "state": "scheduled",
-          "status": "Scheduled",
+          "state": "final",
+          "status": "FT",
           "venue": "San Siro",
           "competition": "Serie A",
           "category": "Italy"
@@ -4333,6 +4237,17 @@
         },
         {
           "rank": 4,
+          "team": "AC Milan",
+          "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/103.png",
+          "played": 11,
+          "wins": 7,
+          "draws": 3,
+          "losses": 1,
+          "goalDiff": 10,
+          "points": 24
+        },
+        {
+          "rank": 5,
           "team": "Como",
           "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2572.png",
           "played": 10,
@@ -4341,17 +4256,6 @@
           "losses": 1,
           "goalDiff": 10,
           "points": 23
-        },
-        {
-          "rank": 5,
-          "team": "AC Milan",
-          "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/103.png",
-          "played": 10,
-          "wins": 6,
-          "draws": 3,
-          "losses": 1,
-          "goalDiff": 9,
-          "points": 21
         },
         {
           "rank": 6,
@@ -4421,25 +4325,25 @@
         },
         {
           "rank": 12,
-          "team": "Genoa",
-          "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3263.png",
-          "played": 10,
+          "team": "Atalanta",
+          "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/105.png",
+          "played": 11,
           "wins": 4,
-          "draws": 1,
+          "draws": 2,
           "losses": 5,
-          "goalDiff": -4,
-          "points": 13
+          "goalDiff": -3,
+          "points": 14
         },
         {
           "rank": 13,
-          "team": "Atalanta",
-          "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/105.png",
-          "played": 10,
-          "wins": 3,
-          "draws": 2,
-          "losses": 5,
-          "goalDiff": -4,
-          "points": 11
+          "team": "Genoa",
+          "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3263.png",
+          "played": 11,
+          "wins": 4,
+          "draws": 1,
+          "losses": 6,
+          "goalDiff": -5,
+          "points": 13
         },
         {
           "rank": 14,
@@ -4489,11 +4393,11 @@
           "rank": 18,
           "team": "Monza",
           "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/4007.png",
-          "played": 10,
+          "played": 11,
           "wins": 2,
           "draws": 1,
-          "losses": 7,
-          "goalDiff": -7,
+          "losses": 8,
+          "goalDiff": -8,
           "points": 7
         },
         {
@@ -4519,7 +4423,7 @@
           "points": 5
         }
       ],
-      "verifiedAt": "2026-11-08T14:27:01.816Z"
+      "verifiedAt": "2026-11-08T18:59:24.311Z"
     }
   }
 }
