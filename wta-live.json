@@ -2,7 +2,7 @@
   "special": true,
   "league": "WTA Tour",
   "live": true,
-  "updatedAt": "2026-11-09T05:39:22.263649+00:00",
+  "updatedAt": "2026-11-09T05:39:27.413748+00:00",
   "sourceName": "WTA Official Scores scrape",
   "sourceUrl": "https://www.wtatennis.com/scores/",
   "verificationSource": "WTA Official Scores",
@@ -13,16 +13,20 @@
   "games": [
     {
       "eventId": "wta-scrape-0-j-tjen-m-linette",
-      "date": "2026-11-09T05:39:22.261951+00:00",
+      "date": "2026-11-09T05:39:27.412038+00:00",
       "displayTime": "Chennai Open • India",
       "away": "J. Tjen",
       "home": "M. Linette",
-      "awayScore": "",
-      "homeScore": "",
-      "awaySets": [],
-      "homeSets": [],
-      "awayPoint": "—",
-      "homePoint": "—",
+      "awayScore": "0 · 0",
+      "homeScore": "0 · 15",
+      "awaySets": [
+        "0"
+      ],
+      "homeSets": [
+        "0"
+      ],
+      "awayPoint": "0",
+      "homePoint": "15",
       "currentSet": 1,
       "awayCurrentSetGames": 0,
       "homeCurrentSetGames": 0,
@@ -30,8 +34,8 @@
       "homeSetsWon": 0,
       "round": "Final",
       "court": "Centre Court",
-      "status": "Warmup: 0:00 · Final · Centre Court",
-      "state": "warmup",
+      "status": "Live Match: 0:00 · Final · Centre Court",
+      "state": "live",
       "eventOnly": false,
       "title": "Chennai Open • India",
       "sourceName": "WTA Official Scores scrape",
