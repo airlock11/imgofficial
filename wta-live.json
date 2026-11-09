@@ -1,49 +1,14 @@
 {
   "special": true,
   "league": "WTA Tour",
-  "live": true,
-  "updatedAt": "2026-11-09T00:01:17.840558+00:00",
+  "live": false,
+  "updatedAt": "2026-11-09T00:01:24.773953+00:00",
   "sourceName": "WTA Official Scores scrape",
   "sourceUrl": "https://www.wtatennis.com/scores/",
   "verificationSource": "WTA Official Scores",
   "verificationUrl": "https://www.wtatennis.com/scores/",
-  "pageLiveCount": 1,
-  "parsedMatchCount": 1,
+  "pageLiveCount": null,
+  "parsedMatchCount": 0,
   "note": "GitHub scrape of the rendered WTA Scores page. Game points, current set number, current-set games and per-set scores are stored separately.",
-  "games": [
-    {
-      "eventId": "wta-scrape-0-c-gauff-j-pegula",
-      "date": "2026-11-09T00:01:17.838247+00:00",
-      "displayTime": "WTA Live",
-      "away": "C. Gauff",
-      "home": "J. Pegula",
-      "awayScore": "6 6",
-      "homeScore": "4 6",
-      "awaySets": [
-        "6",
-        "6"
-      ],
-      "homeSets": [
-        "4",
-        "6"
-      ],
-      "awayPoint": "—",
-      "homePoint": "—",
-      "currentSet": 2,
-      "awayCurrentSetGames": 6,
-      "homeCurrentSetGames": 6,
-      "awaySetsWon": 1,
-      "homeSetsWon": 0,
-      "round": "Round of 16",
-      "court": "",
-      "status": "Live Match: 1:54 · Round of 16",
-      "state": "live",
-      "eventOnly": false,
-      "title": "WTA",
-      "sourceName": "WTA Official Scores scrape",
-      "sourceUrl": "https://www.wtatennis.com/scores/",
-      "verificationSource": "WTA Official Scores",
-      "verificationUrl": "https://www.wtatennis.com/scores/"
-    }
-  ]
+  "games": []
 }
