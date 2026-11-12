@@ -1,7 +1,7 @@
 {
   "version": 1,
   "source": "ESPN public football data",
-  "updatedAt": "2026-11-12T16:59:26.665Z",
+  "updatedAt": "2026-11-12T22:40:26.679Z",
   "leagues": {
     "soccer": {
       "name": "Premier League",
@@ -1016,6 +1016,22 @@
           "venue": "Anfield",
           "competition": "Premier League",
           "category": "England"
+        },
+        {
+          "eventId": "401878742",
+          "date": "2026-12-12T17:30Z",
+          "displayTime": "",
+          "home": "Manchester City",
+          "away": "Chelsea",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/382.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/363.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "Etihad Stadium",
+          "competition": "Premier League",
+          "category": "England"
         }
       ],
       "standings": [
@@ -1240,7 +1256,7 @@
           "points": 7
         }
       ],
-      "verifiedAt": "2026-11-12T16:59:26.053Z"
+      "verifiedAt": "2026-11-12T22:40:26.017Z"
     },
     "laliga": {
       "name": "La Liga",
@@ -2319,7 +2335,7 @@
           "points": 5
         }
       ],
-      "verifiedAt": "2026-11-12T16:59:26.327Z"
+      "verifiedAt": "2026-11-12T22:40:26.421Z"
     },
     "bundesliga": {
       "name": "Bundesliga",
@@ -3126,6 +3142,22 @@
           "venue": "MHPArena",
           "competition": "Bundesliga",
           "category": "Germany"
+        },
+        {
+          "eventId": "401884705",
+          "date": "2026-12-12T17:30Z",
+          "displayTime": "",
+          "home": "Borussia Mönchengladbach",
+          "away": "Eintracht Frankfurt",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/268.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/125.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "BORUSSIA-PARK",
+          "competition": "Bundesliga",
+          "category": "Germany"
         }
       ],
       "standings": [
@@ -3328,7 +3360,7 @@
           "points": 4
         }
       ],
-      "verifiedAt": "2026-11-12T16:59:26.459Z"
+      "verifiedAt": "2026-11-12T22:40:26.543Z"
     },
     "seriea": {
       "name": "Serie A",
@@ -3336,38 +3368,6 @@
       "espn": "ita.1",
       "leagueLogo": "https://a.espncdn.com/i/leaguelogos/soccer/500/12.png",
       "games": [
-        {
-          "eventId": "401874976",
-          "date": "2026-10-29T17:30Z",
-          "displayTime": "",
-          "home": "Frosinone",
-          "away": "Lecce",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/4057.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/113.png",
-          "homeScore": "5",
-          "awayScore": "1",
-          "state": "final",
-          "status": "FT",
-          "venue": "Stadio Benito Stirpe",
-          "competition": "Serie A",
-          "category": "Italy"
-        },
-        {
-          "eventId": "401874969",
-          "date": "2026-10-29T19:45Z",
-          "displayTime": "",
-          "home": "Fiorentina",
-          "away": "Atalanta",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/109.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/105.png",
-          "homeScore": "2",
-          "awayScore": "2",
-          "state": "final",
-          "status": "FT",
-          "venue": "Stadio Artemio Franchi",
-          "competition": "Serie A",
-          "category": "Italy"
-        },
         {
           "eventId": "401874798",
           "date": "2026-10-31T14:00Z",
@@ -4199,6 +4199,38 @@
           "venue": "Unipol Domus",
           "competition": "Serie A",
           "category": "Italy"
+        },
+        {
+          "eventId": "401874982",
+          "date": "2026-12-12T17:00Z",
+          "displayTime": "",
+          "home": "Lecce",
+          "away": "Sassuolo",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/113.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/3997.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "Via Del Mare",
+          "competition": "Serie A",
+          "category": "Italy"
+        },
+        {
+          "eventId": "401874821",
+          "date": "2026-12-12T19:45Z",
+          "displayTime": "",
+          "home": "Como",
+          "away": "Bologna",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/2572.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/107.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "Giuseppe Sinigaglia",
+          "competition": "Serie A",
+          "category": "Italy"
         }
       ],
       "standings": [
@@ -4423,7 +4455,7 @@
           "points": 5
         }
       ],
-      "verifiedAt": "2026-11-12T16:59:26.664Z"
+      "verifiedAt": "2026-11-12T22:40:26.678Z"
     }
   }
 }
