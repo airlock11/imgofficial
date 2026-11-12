@@ -1,7 +1,7 @@
 {
   "version": 1,
   "source": "ESPN public football data",
-  "updatedAt": "2026-11-11T18:35:14.184Z",
+  "updatedAt": "2026-11-12T01:01:26.975Z",
   "leagues": {
     "soccer": {
       "name": "Premier League",
@@ -1192,7 +1192,7 @@
           "points": 7
         }
       ],
-      "verifiedAt": "2026-11-11T18:35:12.349Z"
+      "verifiedAt": "2026-11-12T01:01:26.367Z"
     },
     "laliga": {
       "name": "La Liga",
@@ -2271,7 +2271,7 @@
           "points": 5
         }
       ],
-      "verifiedAt": "2026-11-11T18:35:13.872Z"
+      "verifiedAt": "2026-11-12T01:01:26.569Z"
     },
     "bundesliga": {
       "name": "Bundesliga",
@@ -2998,6 +2998,22 @@
           "venue": "URSAPHARM-Arena an der Kaiserlinde",
           "competition": "Bundesliga",
           "category": "Germany"
+        },
+        {
+          "eventId": "401884704",
+          "date": "2026-12-11T19:30Z",
+          "displayTime": "",
+          "home": "Hamburg SV",
+          "away": "Schalke 04",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/127.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/133.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "Volksparkstadion",
+          "competition": "Bundesliga",
+          "category": "Germany"
         }
       ],
       "standings": [
@@ -3200,7 +3216,7 @@
           "points": 4
         }
       ],
-      "verifiedAt": "2026-11-11T18:35:14.059Z"
+      "verifiedAt": "2026-11-12T01:01:26.763Z"
     },
     "seriea": {
       "name": "Serie A",
@@ -3208,38 +3224,6 @@
       "espn": "ita.1",
       "leagueLogo": "https://a.espncdn.com/i/leaguelogos/soccer/500/12.png",
       "games": [
-        {
-          "eventId": "401874988",
-          "date": "2026-10-28T19:45Z",
-          "displayTime": "",
-          "home": "Genoa",
-          "away": "Juventus",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/3263.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/111.png",
-          "homeScore": "2",
-          "awayScore": "0",
-          "state": "final",
-          "status": "FT",
-          "venue": "Stadio Luigi Ferraris",
-          "competition": "Serie A",
-          "category": "Italy"
-        },
-        {
-          "eventId": "401874799",
-          "date": "2026-10-28T19:45Z",
-          "displayTime": "",
-          "home": "Monza",
-          "away": "Napoli",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/4007.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/114.png",
-          "homeScore": "1",
-          "awayScore": "4",
-          "state": "final",
-          "status": "FT",
-          "venue": "U-Power Stadium",
-          "competition": "Serie A",
-          "category": "Italy"
-        },
         {
           "eventId": "401874976",
           "date": "2026-10-29T17:30Z",
@@ -4071,6 +4055,22 @@
           "venue": "Stadio Artemio Franchi",
           "competition": "Serie A",
           "category": "Italy"
+        },
+        {
+          "eventId": "401874775",
+          "date": "2026-12-11T19:45Z",
+          "displayTime": "",
+          "home": "Udinese",
+          "away": "Frosinone",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/118.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/4057.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "Stadio Friuli",
+          "competition": "Serie A",
+          "category": "Italy"
         }
       ],
       "standings": [
@@ -4295,7 +4295,7 @@
           "points": 5
         }
       ],
-      "verifiedAt": "2026-11-11T18:35:14.183Z"
+      "verifiedAt": "2026-11-12T01:01:26.974Z"
     }
   }
 }
