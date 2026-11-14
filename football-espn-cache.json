@@ -1,7 +1,7 @@
 {
   "version": 1,
   "source": "ESPN public football data",
-  "updatedAt": "2026-11-14T16:57:36.135Z",
+  "updatedAt": "2026-11-14T21:16:38.976Z",
   "leagues": {
     "soccer": {
       "name": "Premier League",
@@ -9,38 +9,6 @@
       "espn": "eng.1",
       "leagueLogo": "https://a.espncdn.com/i/leaguelogos/soccer/500/23.png",
       "games": [
-        {
-          "eventId": "401878761",
-          "date": "2026-10-31T17:30Z",
-          "displayTime": "",
-          "home": "Tottenham Hotspur",
-          "away": "Crystal Palace",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/367.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/384.png",
-          "homeScore": "2",
-          "awayScore": "0",
-          "state": "final",
-          "status": "FT",
-          "venue": "Tottenham Hotspur Stadium",
-          "competition": "Premier League",
-          "category": "England"
-        },
-        {
-          "eventId": "401879250",
-          "date": "2026-10-31T20:00Z",
-          "displayTime": "",
-          "home": "Aston Villa",
-          "away": "Fulham",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/362.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/370.png",
-          "homeScore": "1",
-          "awayScore": "1",
-          "state": "final",
-          "status": "FT",
-          "venue": "Villa Park",
-          "competition": "Premier League",
-          "category": "England"
-        },
         {
           "eventId": "401879246",
           "date": "2026-11-01T16:30Z",
@@ -1016,6 +984,22 @@
           "venue": "Selhurst Park",
           "competition": "Premier League",
           "category": "England"
+        },
+        {
+          "eventId": "401879205",
+          "date": "2026-12-14T20:00Z",
+          "displayTime": "",
+          "home": "Hull City",
+          "away": "Tottenham Hotspur",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/306.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/367.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "The MKM Stadium",
+          "competition": "Premier League",
+          "category": "England"
         }
       ],
       "standings": [
@@ -1240,7 +1224,7 @@
           "points": 7
         }
       ],
-      "verifiedAt": "2026-11-14T16:57:35.510Z"
+      "verifiedAt": "2026-11-14T21:16:38.401Z"
     },
     "laliga": {
       "name": "La Liga",
@@ -1248,38 +1232,6 @@
       "espn": "esp.1",
       "leagueLogo": "https://a.espncdn.com/i/leaguelogos/soccer/500/15.png",
       "games": [
-        {
-          "eventId": "401882825",
-          "date": "2026-10-31T17:30Z",
-          "displayTime": "",
-          "home": "Real Betis",
-          "away": "Málaga",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/244.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/99.png",
-          "homeScore": "2",
-          "awayScore": "1",
-          "state": "final",
-          "status": "FT",
-          "venue": "Estadio La Cartuja",
-          "competition": "La Liga",
-          "category": "Spain"
-        },
-        {
-          "eventId": "401882822",
-          "date": "2026-10-31T20:00Z",
-          "displayTime": "",
-          "home": "Barcelona",
-          "away": "Alavés",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/83.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/96.png",
-          "homeScore": "6",
-          "awayScore": "1",
-          "state": "final",
-          "status": "FT",
-          "venue": "Spotify Camp Nou",
-          "competition": "La Liga",
-          "category": "Spain"
-        },
         {
           "eventId": "401882821",
           "date": "2026-11-01T13:00Z",
@@ -2431,7 +2383,7 @@
           "points": 5
         }
       ],
-      "verifiedAt": "2026-11-14T16:57:35.724Z"
+      "verifiedAt": "2026-11-14T21:16:38.600Z"
     },
     "bundesliga": {
       "name": "Bundesliga",
@@ -2439,22 +2391,6 @@
       "espn": "ger.1",
       "leagueLogo": "https://a.espncdn.com/i/leaguelogos/soccer/500/10.png",
       "games": [
-        {
-          "eventId": "401884754",
-          "date": "2026-10-31T17:30Z",
-          "displayTime": "",
-          "home": "Bayern Munich",
-          "away": "Borussia Dortmund",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/132.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/124.png",
-          "homeScore": "2",
-          "awayScore": "2",
-          "state": "final",
-          "status": "FT",
-          "venue": "Allianz Arena",
-          "competition": "Bundesliga",
-          "category": "Germany"
-        },
         {
           "eventId": "401884750",
           "date": "2026-11-01T14:30Z",
@@ -3408,7 +3344,7 @@
           "points": 4
         }
       ],
-      "verifiedAt": "2026-11-14T16:57:35.882Z"
+      "verifiedAt": "2026-11-14T21:16:38.791Z"
     },
     "seriea": {
       "name": "Serie A",
@@ -3416,38 +3352,6 @@
       "espn": "ita.1",
       "leagueLogo": "https://a.espncdn.com/i/leaguelogos/soccer/500/12.png",
       "games": [
-        {
-          "eventId": "401874990",
-          "date": "2026-10-31T17:00Z",
-          "displayTime": "",
-          "home": "Udinese",
-          "away": "AS Roma",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/118.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/104.png",
-          "homeScore": "2",
-          "awayScore": "5",
-          "state": "final",
-          "status": "FT",
-          "venue": "Stadio Friuli",
-          "competition": "Serie A",
-          "category": "Italy"
-        },
-        {
-          "eventId": "401874795",
-          "date": "2026-10-31T19:45Z",
-          "displayTime": "",
-          "home": "AC Milan",
-          "away": "Internazionale",
-          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/103.png",
-          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/110.png",
-          "homeScore": "3",
-          "awayScore": "1",
-          "state": "final",
-          "status": "FT",
-          "venue": "San Siro",
-          "competition": "Serie A",
-          "category": "Italy"
-        },
         {
           "eventId": "401875002",
           "date": "2026-11-01T11:30Z",
@@ -4327,6 +4231,38 @@
           "venue": "Stadio Diego Armando Maradona",
           "competition": "Serie A",
           "category": "Italy"
+        },
+        {
+          "eventId": "401875032",
+          "date": "2026-12-14T17:30Z",
+          "displayTime": "",
+          "home": "Atalanta",
+          "away": "Genoa",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/105.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/3263.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "New Balance Arena",
+          "competition": "Serie A",
+          "category": "Italy"
+        },
+        {
+          "eventId": "401874783",
+          "date": "2026-12-14T19:45Z",
+          "displayTime": "",
+          "home": "Juventus",
+          "away": "Monza",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/111.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/4007.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "Allianz Stadium",
+          "competition": "Serie A",
+          "category": "Italy"
         }
       ],
       "standings": [
@@ -4551,7 +4487,7 @@
           "points": 5
         }
       ],
-      "verifiedAt": "2026-11-14T16:57:36.135Z"
+      "verifiedAt": "2026-11-14T21:16:38.976Z"
     }
   }
 }
