@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-15T14:19:37.783658+00:00",
+  "updated_at": "2026-11-15T19:50:57.179746+00:00",
   "source": "Official and verified public sports sources",
   "leagues": {
     "bleague": {
@@ -55,6 +55,19 @@
       "sourceUrl": "https://api-live.euroleague.net/v2/competitions/E/seasons/E2026/games",
       "note": "Automatically refreshed from the official EuroLeague competition feed.",
       "games": [
+        {
+          "eventId": "euroleague-197",
+          "date": "2026-12-30T18:30:00",
+          "displayTime": "Dec 30 · 18:30",
+          "away": "FC Barcelona",
+          "home": "Anadolu Efes Istanbul",
+          "awayScore": "0",
+          "homeScore": "0",
+          "status": "Scheduled",
+          "state": "scheduled",
+          "sourceName": "EuroLeague Official API",
+          "sourceUrl": "https://api-live.euroleague.net/v2/competitions/E/seasons/E2026/games"
+        },
         {
           "eventId": "euroleague-195",
           "date": "2026-12-29T21:00:00",
@@ -4065,7 +4078,7 @@
       "league": "WTA Tour",
       "sourceName": "WTA Official Calendar",
       "sourceUrl": "https://wtafiles.wtatennis.com/pdf/calendar/calendar.pdf",
-      "updatedAt": "2026-11-15T14:19:25.546724+00:00",
+      "updatedAt": "2026-11-15T19:50:43.076780+00:00",
       "note": "Current and upcoming WTA Tour tournaments scraped automatically from the official WTA calendar PDF.",
       "games": [
         {
@@ -4089,12 +4102,12 @@
       "league": "FIBA",
       "sourceName": "FIBA Official",
       "sourceUrl": "https://www.fiba.basketball/en/games",
-      "updatedAt": "2026-11-15T14:19:32.584916+00:00",
+      "updatedAt": "2026-11-15T19:50:49.988119+00:00",
       "note": "Automatically refreshed from official FIBA competition game cards.",
       "games": [
         {
           "eventId": "fiba-fiba-intercontinental-cup-2026-2026-11-15-viln-glu",
-          "date": "2026-11-15T14:19:25.546750+00:00",
+          "date": "2026-11-15T19:50:43.076803+00:00",
           "displayTime": "Final · Final",
           "away": "VILN",
           "home": "GLU",
@@ -4110,7 +4123,7 @@
         },
         {
           "eventId": "fiba-fiba-intercontinental-cup-2026-2026-11-15-boc-rssb",
-          "date": "2026-11-15T14:19:25.546750+00:00",
+          "date": "2026-11-15T19:50:43.076803+00:00",
           "displayTime": "Final · Final",
           "away": "BOC",
           "home": "RSSB",
@@ -4126,7 +4139,7 @@
         },
         {
           "eventId": "fiba-fiba-intercontinental-cup-2026-2026-11-15-viln-boc",
-          "date": "2026-11-15T14:19:25.546750+00:00",
+          "date": "2026-11-15T19:50:43.076803+00:00",
           "displayTime": "Final · Final",
           "away": "VILN",
           "home": "BOC",
@@ -4142,7 +4155,7 @@
         },
         {
           "eventId": "fiba-fiba-intercontinental-cup-2026-2026-11-15-rssb-glu",
-          "date": "2026-11-15T14:19:25.546750+00:00",
+          "date": "2026-11-15T19:50:43.076803+00:00",
           "displayTime": "Final · Final",
           "away": "RSSB",
           "home": "GLU",
@@ -4158,7 +4171,7 @@
         },
         {
           "eventId": "fiba-fiba-intercontinental-cup-2026-2026-11-15-bjbg-shs",
-          "date": "2026-11-15T14:19:25.546750+00:00",
+          "date": "2026-11-15T19:50:43.076803+00:00",
           "displayTime": "Final · Final",
           "away": "BJBG",
           "home": "SHS",
@@ -4174,7 +4187,7 @@
         },
         {
           "eventId": "fiba-fiba-intercontinental-cup-2026-2026-11-15-boc-glu",
-          "date": "2026-11-15T14:19:25.546750+00:00",
+          "date": "2026-11-15T19:50:43.076803+00:00",
           "displayTime": "Final · Final",
           "away": "BOC",
           "home": "GLU",
@@ -4190,7 +4203,7 @@
         },
         {
           "eventId": "fiba-fiba-intercontinental-cup-2026-2026-11-15-viln-shs",
-          "date": "2026-11-15T14:19:25.546750+00:00",
+          "date": "2026-11-15T19:50:43.076803+00:00",
           "displayTime": "Final · Final",
           "away": "VILN",
           "home": "SHS",
@@ -4206,7 +4219,7 @@
         },
         {
           "eventId": "fiba-fiba-intercontinental-cup-2026-2026-11-15-bjbg-glu",
-          "date": "2026-11-15T14:19:25.546750+00:00",
+          "date": "2026-11-15T19:50:43.076803+00:00",
           "displayTime": "Final · Final",
           "away": "BJBG",
           "home": "GLU",
@@ -4222,7 +4235,7 @@
         },
         {
           "eventId": "fiba-fiba-intercontinental-cup-2026-2026-11-15-shs-rssb",
-          "date": "2026-11-15T14:19:25.546750+00:00",
+          "date": "2026-11-15T19:50:43.076803+00:00",
           "displayTime": "Final · Final",
           "away": "SHS",
           "home": "RSSB",
@@ -4238,7 +4251,7 @@
         },
         {
           "eventId": "fiba-fiba-intercontinental-cup-2026-2026-11-15-bjbg-boc",
-          "date": "2026-11-15T14:19:25.546750+00:00",
+          "date": "2026-11-15T19:50:43.076803+00:00",
           "displayTime": "Final · Final",
           "away": "BJBG",
           "home": "BOC",
@@ -4254,7 +4267,7 @@
         },
         {
           "eventId": "fiba-fiba-intercontinental-cup-2026-2026-11-15-viln-rssb",
-          "date": "2026-11-15T14:19:25.546750+00:00",
+          "date": "2026-11-15T19:50:43.076803+00:00",
           "displayTime": "Final · Final",
           "away": "VILN",
           "home": "RSSB",
