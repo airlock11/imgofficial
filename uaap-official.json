@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-15T00:44:40+00:00",
+  "updatedAt": "2026-11-15T07:15:30+00:00",
   "season": "Season 89 Men's Basketball",
   "sources": {
     "stats": "https://uaap.org/stats/uaap-season-89-men-s-basketball",
@@ -54,6 +54,14 @@
   ],
   "topPlayers": [
     {
+      "player": "A. Acido",
+      "team": "UST Growling Tigers",
+      "games": 2,
+      "ppg": 22.5,
+      "rpg": 4.5,
+      "apg": 3.0
+    },
+    {
       "player": "T. Lagat",
       "team": "UE Red Warriors",
       "games": 4,
@@ -70,20 +78,20 @@
       "apg": 2.0
     },
     {
-      "player": "A. Acido",
-      "team": "UST Growling Tigers",
-      "games": 3,
-      "ppg": 19.3,
-      "rpg": 4.7,
-      "apg": 2.7
-    },
-    {
       "player": "P. Osang",
       "team": "UST Growling Tigers",
       "games": 1,
       "ppg": 19.0,
       "rpg": 10.0,
       "apg": 0.0
+    },
+    {
+      "player": "L. Jumawan",
+      "team": "UST Growling Tigers",
+      "games": 2,
+      "ppg": 17.0,
+      "rpg": 4.0,
+      "apg": 2.5
     },
     {
       "player": "J. Tovera",
@@ -94,28 +102,20 @@
       "apg": 4.5
     },
     {
-      "player": "M. Diassana",
+      "player": "R. Jumamoy",
       "team": "NU Bulldogs",
-      "games": 3,
-      "ppg": 14.7,
-      "rpg": 11.3,
-      "apg": 0.3
+      "games": 2,
+      "ppg": 16.0,
+      "rpg": 6.0,
+      "apg": 6.5
     },
     {
-      "player": "K. Mongcopa",
-      "team": "FEU Tamaraws",
-      "games": 3,
-      "ppg": 14.0,
-      "rpg": 8.0,
-      "apg": 1.3
-    },
-    {
-      "player": "D. Ududo",
-      "team": "UP Fighting Maroons",
-      "games": 3,
-      "ppg": 13.7,
-      "rpg": 8.3,
-      "apg": 0.3
+      "player": "T. Garcia",
+      "team": "NU Bulldogs",
+      "games": 2,
+      "ppg": 14.5,
+      "rpg": 2.0,
+      "apg": 4.5
     }
   ],
   "headlines": [],
@@ -235,6 +235,17 @@
   ],
   "topPlayersMode": "recent-official-boxscores",
   "liveStatsGames": [
+    {
+      "first": "PERIOD 2 08:06 LA SALLE",
+      "firstScore": 27,
+      "second": "Adamson Soaring Falcons",
+      "secondScore": 15,
+      "status": "Live",
+      "state": "in",
+      "gameId": "50",
+      "url": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball?game_id=50",
+      "date": "2026-11-15T14:30:00+08:00"
+    },
     {
       "first": "FEU Tamaraws",
       "firstScore": 71,
@@ -364,8 +375,7 @@
       "status": "Final",
       "state": "final",
       "gameId": "38",
-      "url": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball?game_id=38",
-      "date": "2026-10-31T14:30:00+08:00"
+      "url": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball?game_id=38"
     },
     {
       "first": "Adamson Soaring Falcons",
@@ -728,7 +738,7 @@
       "url": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball?game_id=1"
     }
   ],
-  "highlightsUpdatedAt": "2026-11-15T00:44:40+00:00",
+  "highlightsUpdatedAt": "2026-11-15T07:15:30+00:00",
   "automation": {
     "enabled": true,
     "mode": "game-day",
@@ -744,11 +754,11 @@
         "web-uaap-scheduled-7",
         "web-uaap-scheduled-8"
       ],
-      "nextGameAt": "2026-11-15T14:30:00+08:00",
+      "nextGameAt": "2026-11-15T17:00:00+08:00",
       "idleDiscoveryMinutes": 180,
       "gameDayDataRefreshMinutes": 15,
       "gameDayLivestreamRefreshMinutes": 5,
-      "lastSlowCheckAt": "2026-11-15T08:44:29+08:00"
+      "lastSlowCheckAt": "2026-11-15T15:15:20+08:00"
     },
     "failClosed": true
   }

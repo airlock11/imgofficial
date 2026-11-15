@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-15T08:44:43+08:00",
+  "updated_at": "2026-11-15T15:15:34+08:00",
   "refresh_minutes": 15,
   "leagues": {
     "pba": {
@@ -299,7 +299,7 @@
           "idleDiscoveryMinutes": 180,
           "gameDayDataRefreshMinutes": 15,
           "gameDayLivestreamRefreshMinutes": 5,
-          "lastSlowCheckAt": "2026-11-15T08:44:03+08:00"
+          "lastSlowCheckAt": "2026-11-15T15:14:51+08:00"
         },
         "failClosed": true
       }
@@ -1271,19 +1271,6 @@
           "state": "final",
           "sourceName": "UAAP Live Stats",
           "sourceUrl": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball?game_id=39"
-        },
-        {
-          "eventId": "uaap-live-38",
-          "date": "2026-10-31T14:30:00+08:00",
-          "displayTime": "Oct 31 · Final",
-          "away": "UST Growling Tigers",
-          "home": "NU Bulldogs",
-          "awayScore": "71",
-          "homeScore": "75",
-          "status": "Final",
-          "state": "final",
-          "sourceName": "UAAP Live Stats",
-          "sourceUrl": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball?game_id=38"
         }
       ],
       "automation": {
@@ -1301,11 +1288,11 @@
             "web-uaap-scheduled-7",
             "web-uaap-scheduled-8"
           ],
-          "nextGameAt": "2026-11-15T14:30:00+08:00",
+          "nextGameAt": "2026-11-15T17:00:00+08:00",
           "idleDiscoveryMinutes": 180,
           "gameDayDataRefreshMinutes": 15,
           "gameDayLivestreamRefreshMinutes": 5,
-          "lastSlowCheckAt": "2026-11-15T08:44:29+08:00"
+          "lastSlowCheckAt": "2026-11-15T15:15:20+08:00"
         },
         "failClosed": true
       }
@@ -1329,7 +1316,7 @@
         "idleDiscoveryMinutes": 180,
         "gameDayDataRefreshMinutes": 15,
         "gameDayLivestreamRefreshMinutes": 5,
-        "lastSlowCheckAt": "2026-11-15T08:44:03+08:00"
+        "lastSlowCheckAt": "2026-11-15T15:14:51+08:00"
       },
       "failClosed": true
     },
@@ -1348,11 +1335,11 @@
           "web-uaap-scheduled-7",
           "web-uaap-scheduled-8"
         ],
-        "nextGameAt": "2026-11-15T14:30:00+08:00",
+        "nextGameAt": "2026-11-15T17:00:00+08:00",
         "idleDiscoveryMinutes": 180,
         "gameDayDataRefreshMinutes": 15,
         "gameDayLivestreamRefreshMinutes": 5,
-        "lastSlowCheckAt": "2026-11-15T08:44:29+08:00"
+        "lastSlowCheckAt": "2026-11-15T15:15:20+08:00"
       },
       "failClosed": true
     }
