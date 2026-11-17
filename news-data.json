@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-16T15:59:00+00:00",
+  "updated_at": "2026-11-17T00:05:24+00:00",
   "refresh_minutes": 20,
   "counts": {
     "total": 30,
@@ -15,6 +15,9 @@
     }
   },
   "errors": {
+    "league:soccer": "No league-specific articles returned",
+    "league:seriea": "No league-specific articles returned",
+    "league:jamaica_pl": "No league-specific articles returned",
     "ESPN": "No articles returned"
   },
   "videos": [],
@@ -260,7 +263,7 @@
         "league_key": "laliga",
         "league": "La Liga",
         "image": "",
-        "published": "2026-08-14T07:00:00+00:00"
+        "published": "2026-08-15T07:00:00+00:00"
       },
       {
         "title": "2026-27 La Liga Start Date and Fixtures Release Date - Groundhopper Guides",
@@ -287,10 +290,10 @@
         "published": "2026-06-21T07:00:00+00:00"
       },
       {
-        "title": "Barcelona takes La Liga title after beating Real Madrid - Le Monde.fr",
-        "link": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxPVGRidzVBd1laUnlIdnlSM1dCV0hJZHQzN3Q5cU4ybnRqVTNmVER2ZUt2RWtJRkNqUFVQdVZOb0xkbTZ2MlppVldQNGtYZ1ppMjFPYlFYZ1VremJ2VjMxUGR2MkhZWVVCaHRXMmxaUEs0TW5UX2gya2tPNm50Z18zVVBrWmQwa29zaHIwMnFKUENEc1pvMUhfeDY3WDJsbWJZemJCM0h4ZThNYVplUW1qbFgzOWJyRjBlQ1pUZzZkRHljQXl4VlFNRA?oc=5",
-        "description": "Barcelona takes La Liga title after beating Real Madrid Le Monde.fr",
-        "source": "Le Monde.fr",
+        "title": "Who has more titles: Real Madrid or FC Barcelona? - LALIGA",
+        "link": "https://news.google.com/rss/articles/CBMiggFBVV95cUxNOFJuZGpwYl9KNVRoRm16OUtPVUJkcmRZRXY5cWUzVF9HZmg1aWhmVklERVZVb2tGVjNjT2RDTDM0cFlTTlVINXJVY2JUdnl4MElRSVZMTW15MjlNaU9YV0JMSW45V2k3Nmo3SmE5Rm9aN2RDU0d4QmEtUWdKRGlBLUV3?oc=5",
+        "description": "Who has more titles: Real Madrid or FC Barcelona? LALIGA",
+        "source": "LALIGA",
         "sport": "Football",
         "region": "Spain",
         "league_key": "laliga",
@@ -299,10 +302,10 @@
         "published": "2026-05-11T07:00:00+00:00"
       },
       {
-        "title": "Who has more titles: Real Madrid or FC Barcelona? - LALIGA",
-        "link": "https://news.google.com/rss/articles/CBMiggFBVV95cUxNOFJuZGpwYl9KNVRoRm16OUtPVUJkcmRZRXY5cWUzVF9HZmg1aWhmVklERVZVb2tGVjNjT2RDTDM0cFlTTlVINXJVY2JUdnl4MElRSVZMTW15MjlNaU9YV0JMSW45V2k3Nmo3SmE5Rm9aN2RDU0d4QmEtUWdKRGlBLUV3?oc=5",
-        "description": "Who has more titles: Real Madrid or FC Barcelona? LALIGA",
-        "source": "LALIGA",
+        "title": "Barcelona takes La Liga title after beating Real Madrid - Le Monde.fr",
+        "link": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxPVGRidzVBd1laUnlIdnlSM1dCV0hJZHQzN3Q5cU4ybnRqVTNmVER2ZUt2RWtJRkNqUFVQdVZOb0xkbTZ2MlppVldQNGtYZ1ppMjFPYlFYZ1VremJ2VjMxUGR2MkhZWVVCaHRXMmxaUEs0TW5UX2gya2tPNm50Z18zVVBrWmQwa29zaHIwMnFKUENEc1pvMUhfeDY3WDJsbWJZemJCM0h4ZThNYVplUW1qbFgzOWJyRjBlQ1pUZzZkRHljQXl4VlFNRA?oc=5",
+        "description": "Barcelona takes La Liga title after beating Real Madrid Le Monde.fr",
+        "source": "Le Monde.fr",
         "sport": "Football",
         "region": "Spain",
         "league_key": "laliga",
@@ -322,19 +325,7 @@
         "league_key": "bundesliga",
         "league": "Bundesliga",
         "image": "",
-        "published": "2026-11-16T08:00:44+00:00"
-      },
-      {
-        "title": "Germany vs. Netherlands: UEFA Nations League preview and live blog - Bundesliga | official website",
-        "link": "https://news.google.com/rss/articles/CBMipgFBVV95cUxPQ0dHZi1ubEhuQW53Wl9NaFFrT1pRTFg3R0xFa19IbDJXTjRWa2FmLVBCeFo4UTBSdUNTRHZ1amRNYjNEcXFERDZBVm1HRDVaakNzOWN0XzBCUlBHYzNha1ZkUXlqdW8wZUtjZVFTRDVZMzIxdmZIWkdnVi1mTHZ1U3docmxMMnlEaG84UkV2SElCSDNVOGJKalAwdWwtcTh4VDNpNlpR?oc=5",
-        "description": "Germany vs. Netherlands: UEFA Nations League preview and live blog Bundesliga | official website",
-        "source": "Bundesliga | official website",
-        "sport": "Football",
-        "region": "Germany",
-        "league_key": "bundesliga",
-        "league": "Bundesliga",
-        "image": "",
-        "published": "2026-11-16T07:59:16+00:00"
+        "published": "2026-11-16T20:04:13+00:00"
       },
       {
         "title": "Hoffenheim’s Cajetan Lenz embraces challenger role after impressive Germany U21 debut - Yahoo Sports",
@@ -373,18 +364,6 @@
         "published": "2026-11-08T08:00:00+00:00"
       },
       {
-        "title": "Bundesliga and Bundesliga 2 fixture times confirmed up until Matchday 18 - Bundesliga | official website",
-        "link": "https://news.google.com/rss/articles/CBMioAFBVV95cUxNSy1vVE94MDNrMXNsUnIwV1ZiamRuYUxQUVlyR3JjSGhsZE02cFRsYUJPb21RVVlBSHZFTFhweW03bmVCaFBlZmxUM1J1amdwc1VKOUdKR3RtZ2ZmVFcyOWRQVnJZSGVqYy10TXhYckFpaU5oWXpiQ3c4VjM4dHVHN2NWMTNjd2l0TTJsZ2xCTnZwQ3JYQmI5TnZBUXJDVlN0?oc=5",
-        "description": "Bundesliga and Bundesliga 2 fixture times confirmed up until Matchday 18 Bundesliga | official website",
-        "source": "Bundesliga | official website",
-        "sport": "Football",
-        "region": "Germany",
-        "league_key": "bundesliga",
-        "league": "Bundesliga",
-        "image": "",
-        "published": "2026-11-05T08:00:00+00:00"
-      },
-      {
         "title": "German football: The leagues where champions aren't promoted - BBC",
         "link": "https://news.google.com/rss/articles/CBMiaEFVX3lxTFAxWUg4S2hNRkJISUQyaEJ0QWhQdTJzNlNnWG5XLXVNb2cwVHpETUl6NG1oN0luTHVxWXpQTk9DeGJJRnJ2ck9ranRJQ1dMZmR0OVdha2ZSREJfaW1jWk45RnM2QlpJdnBB?oc=5",
         "description": "German football: The leagues where champions aren't promoted BBC",
@@ -409,6 +388,18 @@
         "published": "2026-09-24T07:00:00+00:00"
       },
       {
+        "title": "Jürgen Klopp names two squads with 16 uncapped players for Germany's UEFA Nations League fixtures - Bundesliga | official website",
+        "link": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPaFZ4ckRVUVBhMjNJV3BIVWxiX0diZW9YUm5fSmJBakItLV9yaWdYTi1xWkdoX2k0UEdVVGlSVXhzQWxvR0ZVUmtzTTNyWTFneHFZNXdPRFp6UzBsZFdqQmxPSkRPVVd2QzE4OHdZa0lqTmU5a0Z2WVIxRWh6aHdfWXdKLTBKNDkycmstaEtGZUJoT3BWMUVyYkdIM0dzNnRBbW1XelhFaTNpcW0xbmZRNkpuWQ?oc=5",
+        "description": "Jürgen Klopp names two squads with 16 uncapped players for Germany's UEFA Nations League fixtures Bundesliga | official website",
+        "source": "Bundesliga | official website",
+        "sport": "Football",
+        "region": "Germany",
+        "league_key": "bundesliga",
+        "league": "Bundesliga",
+        "image": "",
+        "published": "2026-09-17T07:00:00+00:00"
+      },
+      {
         "title": "German football sets new ticket sales record in 2025/26 season - Bundesliga | official website",
         "link": "https://news.google.com/rss/articles/CBMipgFBVV95cUxPWmxDSjhWRF9uTWk3QU0yUnFKbnFvdkNXVk0ydE85X1gyb3N0WGUzdVczZnllMlZJaDg4T2NaelE3eEM5aWRKdlZ5U0RYVE5maEs3RTdjSG0xSjBER1dCWmxhSTVNaXlpZ1BUdVhVSUpMdl9KYTF6ZC0xZ3dCNHNubmJtNDJoN2Y4RUhKZElGRnMzbXYzVHpUaWZ3TVBkZE5XRUIzal9n?oc=5",
         "description": "German football sets new ticket sales record in 2025/26 season Bundesliga | official website",
@@ -419,6 +410,30 @@
         "league": "Bundesliga",
         "image": "",
         "published": "2026-07-30T07:00:00+00:00"
+      },
+      {
+        "title": "Niklas Süle joins German amateur football team SV Tiefenbach - Bundesliga | official website",
+        "link": "https://news.google.com/rss/articles/CBMisgFBVV95cUxNN29KenF2aUxNaDU0NW9KU3hieS1keWhmaEM4aUhvLXVGVzBsejQ4MkJkdUdIN0dvX0ppZjVfZDk0QTZUWUlUOEdoNG5hbVJDbUdNUDlTOGVmOXdocUdnd2dkM0VhVmNOZGp3X0pOdjBVQWVVZkFfNExhYnJKNEZCRGVkMW93XzZkMlc4N19fQzNzZTZRTUM1Smw3OXlGaHNGOWJ4M0x3UXA4d2dSZ1ppNTlB?oc=5",
+        "description": "Niklas Süle joins German amateur football team SV Tiefenbach Bundesliga | official website",
+        "source": "Bundesliga | official website",
+        "sport": "Football",
+        "region": "Germany",
+        "league_key": "bundesliga",
+        "league": "Bundesliga",
+        "image": "",
+        "published": "2026-07-05T07:00:00+00:00"
+      },
+      {
+        "title": "Nathaniel Brown: Who is Bayern Munich's Germany international defender with an American background? - Bundesliga | official website",
+        "link": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxOc0xQNFI3NXZYdk1yNkxtbXlfVlpFNGxheDFrRmlBNElmQzhKUWNLUjR2WjJMclJIVUl0WmR4dXUzelhyMEl0VUZHbl9aZHRfZ1hFY1lWRm9UZTRfV2ZqakswVFc1azFkYnR2MVFKcG9PTXdLUmZVMTQzQVR1YTRwWGlEN1ZDVXdhRTFrc0d1WU01RW9mdUhVUlpJTXlUQkNjWFo2V01vb0d6OE9RdlZMTGhDWlRmM0lReEFhZm5uMVU?oc=5",
+        "description": "Nathaniel Brown: Who is Bayern Munich's Germany international defender with an American background? Bundesliga | official website",
+        "source": "Bundesliga | official website",
+        "sport": "Football",
+        "region": "Germany",
+        "league_key": "bundesliga",
+        "league": "Bundesliga",
+        "image": "",
+        "published": "2026-07-03T07:00:00+00:00"
       },
       {
         "title": "How will Germany line up at the FIFA World Cup 2026? - Bundesliga | official website",
@@ -443,18 +458,6 @@
         "league": "Bundesliga",
         "image": "",
         "published": "2026-05-21T07:05:04+00:00"
-      },
-      {
-        "title": "Germany's cult clubs explained: St. Pauli, Union Berlin and Co. - Bundesliga | official website",
-        "link": "https://news.google.com/rss/articles/CBMisAFBVV95cUxPbVhTcHhaODZ6T0VCbTY0NGdiUmk3NnZmUExMd2x3bDF1am9LSmlSZG16ZWd4anVTa2RUanZTUlB1ZEcyZEl3MVpobW44bUl0RnhYVHh3UGU0SmRBbHFzUmpIeFR6S2pibkRLRVJOU0VpU3llbDZYTk9VS3JuaWstRGVDQU1aTVUxTEZ6NTJqUVByR3M1N055TE9pUFZaeXVCT2tKU0JIUlF1UDFDVEhFTQ?oc=5",
-        "description": "Germany's cult clubs explained: St. Pauli, Union Berlin and Co. Bundesliga | official website",
-        "source": "Bundesliga | official website",
-        "sport": "Football",
-        "region": "Germany",
-        "league_key": "bundesliga",
-        "league": "Bundesliga",
-        "image": "",
-        "published": "2026-04-02T07:00:00+00:00"
       }
     ],
     "seriea": [
@@ -862,6 +865,36 @@
   },
   "items": [
     {
+      "title": "Nxled eyes semifinal bonus, stakes streak vs Creamline",
+      "link": "https://sports.inquirer.net/707306/nxled-eyes-semifinal-bonus-stakes-streak-vs-creamline",
+      "description": "Unbeaten Nxled seeks to strengthen its hold on a top-two finish when it faces struggling powerhouse Creamline on Tuesday in the PVL All-Filipino Conference at Philsports Arena in Pasig City. The Chameleons, who have already secured a semifinal berth with a 6-0",
+      "source": "Inquirer Sports",
+      "sport": "Sports",
+      "region": "Philippines",
+      "image": "https://sports.inquirer.net/files/2026/11/NXLED-16November2026.jpg",
+      "published": "2026-11-17T04:30:51+00:00"
+    },
+    {
+      "title": "Local pro season wraps up with Match Play at Anvaya",
+      "link": "https://sports.inquirer.net/707303/local-pro-season-wraps-up-with-match-play-at-anvaya",
+      "description": "Justin Quiban, fresh off a top 10 finish in the recent 108th Philippine Open, banners a star-studded PGT cast in the season-ending ICTSI Match Play Championship that gets going at Anvaya Cove in Morong, Bataan on Wednesday. The long-hitting Quiban comes in as ",
+      "source": "Inquirer Sports",
+      "sport": "Sports",
+      "region": "Philippines",
+      "image": "https://sports.inquirer.net/files/2024/03/golf-stock-photo-2-e1710413964918.png",
+      "published": "2026-11-17T04:10:50+00:00"
+    },
+    {
+      "title": "San Beda shows Perpetual the door",
+      "link": "https://sports.inquirer.net/707304/san-beda-shows-perpetual-the-door",
+      "description": "San Beda kept its NCAA Season 102 men’s basketball title defense alive on Monday, edging Perpetual Help, 73-71, in the quarterfinals at San Juan Arena. The Red Lions, who held a twice-to-beat advantage as Group A’s top seed, advanced to the semifinals behind A",
+      "source": "Inquirer Sports",
+      "sport": "Sports",
+      "region": "Philippines",
+      "image": "https://sports.inquirer.net/files/2026/11/san-beda-ncaa-scaled.jpg",
+      "published": "2026-11-17T04:05:51+00:00"
+    },
+    {
       "title": "Lakers star Luka Doncic drawing warranted MVP attention",
       "link": "https://sports.inquirer.net/707301/lakers-star-luka-doncic-drawing-warranted-mvp-attention",
       "description": "Luka Doncic couldn’t help but smile, the Los Angeles Lakers’ star clearly appreciative of the roars of a crowd saluting his incredible start to the season. “M-V-P!” “M-V-P!” “M-V-P!” That was the cry from the fans, over and over. He’s heard it before, countles",
@@ -870,6 +903,206 @@
       "region": "Philippines",
       "image": "https://sports.inquirer.net/files/2026/11/AP26320022776258.jpg",
       "published": "2026-11-16T23:30:05+00:00"
+    },
+    {
+      "title": "Police searching for three stolen Melbourne Cup trophies worth $1m each",
+      "link": "https://www.theguardian.com/sport/2026/nov/17/makybe-diva-melbourne-cup-trophies-stolen-flemington-raid-mount-waverley-ntwnfb",
+      "description": "Officers searched a Mount Waverley home in Melbourne after trophies belonging to winning horse Makybe Diva were stolen from Flemington racecourse Get our breaking news email , free app or daily news podcast A police raid has failed to locate three Melbourne Cu",
+      "source": "The Guardian Sport",
+      "sport": "Sports",
+      "region": "International",
+      "image": "https://i.guim.co.uk/img/media/e49f8bece2e7b1d85728a821a413a8a1eab7bcad/432_0_5917_4734/master/5917.jpg?width=140&quality=85&auto=format&fit=max&s=928772887ec5806a71f3328e0b226f1f",
+      "published": "2026-11-16T23:15:07+00:00"
+    },
+    {
+      "title": "'Is that not match-fixing?' - Erasmus questions officiating",
+      "link": "https://www.bbc.co.uk/sport/rugby-union/articles/ck0jx1dnd38go?at_medium=RSS&at_campaign=rss",
+      "description": "South Africa head coach Rassie Erasmus predicts Ireland fly-half Sam Prendergast will not face a ban after being cited, and questions standards in officiating.",
+      "source": "BBC Sport",
+      "sport": "Sports",
+      "region": "International",
+      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/07e0/live/84fc2000-e1fc-11f1-ba8d-01314a590f72.jpg",
+      "published": "2026-11-16T23:14:48+00:00"
+    },
+    {
+      "title": "Pochettino: I’d tell Guardiola to ‘take it’ if he’s offered US coaching job",
+      "link": "https://www.theguardian.com/football/2026/nov/16/mauricio-pochettino-pep-guardiola-usmnt-manchester-united",
+      "description": "As he prepares to depart for Manchester United, the outgoing US coach held court on a number of topics, including what he’d change about soccer in America Outgoing US head coach Mauricio Pochettino and former Manchester City head coach Pep Guardiola have a lon",
+      "source": "The Guardian Sport",
+      "sport": "Sports",
+      "region": "International",
+      "image": "https://i.guim.co.uk/img/media/667f6d6e4370c5c51303aa0b6a6de310b51d6982/593_399_3891_3113/master/3891.jpg?width=140&quality=85&auto=format&fit=max&s=ab5d9586500639fe2c5df1219289788c",
+      "published": "2026-11-16T23:01:52+00:00"
+    },
+    {
+      "title": "Littler hits triple-bull, but Price checkout doesn't add up",
+      "link": "https://www.bbc.co.uk/sport/darts/articles/cwkgr9m0d0e5o?at_medium=RSS&at_campaign=rss",
+      "description": "Gerwyn Price and Luke Littler make it through to the Grand Slam of Darts knockout stage after a rare counting error and a sensational triple-bull checkout in Wolverhampton.",
+      "source": "BBC Sport",
+      "sport": "Sports",
+      "region": "International",
+      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/c9e3/live/2db86ef0-e20d-11f1-b023-f7d19fda92c1.png",
+      "published": "2026-11-16T22:54:37+00:00"
+    },
+    {
+      "title": "NBA: Chicago Bulls forward Matas Buzelis fined $25K for obscene gesture",
+      "link": "https://www.gmanetwork.com/news/sports/basketball/1009738/nba-chicago-bulls-forward-matas-buzelis-fined-25k-for-obscene-gesture/story/",
+      "description": "The NBA issued a $25,000 fine to Chicago Bulls forward Matas Buzelis on Monday for making an obscene gesture toward spectators.",
+      "source": "GMA News Sports",
+      "sport": "Sports",
+      "region": "Philippines",
+      "image": "https://images.gmanews.tv/webpics/2026/11/BullsvsTimberwolves_2026_11_17_06_52_53.jpg",
+      "published": "2026-11-16T22:53:33+00:00"
+    },
+    {
+      "title": "Carlos Alcaraz blazes past Frances Tiafoe in ATP Finals tennis group stage – as it happened",
+      "link": "https://www.theguardian.com/sport/live/2026/nov/16/carlos-alcaraz-v-frances-tiafoe-atp-finals-tennis-group-stage-live",
+      "description": "Carlos Alcaraz was far too good for Francis Tiafoe, thrashing the American debutant 6-2 6-2 in just over an hour So where is the game? Alcaraz will do his usual thing, looking to unleash that forehand; Tiafoe will look to target the backhand, keep him moving, ",
+      "source": "The Guardian Sport",
+      "sport": "Sports",
+      "region": "International",
+      "image": "https://i.guim.co.uk/img/media/9bf64e16e924f464b740c92b8db8fa1358b93e91/672_0_4489_3592/master/4489.jpg?width=140&quality=85&auto=format&fit=max&s=0d3331e22c499d96b0539da48cbb04f9",
+      "published": "2026-11-16T22:46:10+00:00"
+    },
+    {
+      "title": "Pocognoli wants patience but Scotland 'don't have time' says Robertson",
+      "link": "https://www.bbc.co.uk/sport/football/articles/cwnv432qy0l1o?at_medium=RSS&at_campaign=rss",
+      "description": "Angry captain Andy Robertson says Scotland do not have time to turn things around after a brutal 4-0 defeat by Switzerland consigns them to a third-place finish in their Nations League group.",
+      "source": "BBC Sport",
+      "sport": "Sports",
+      "region": "International",
+      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/9cdd/live/1fc24180-e20e-11f1-99b6-a35a62fa4264.jpg",
+      "published": "2026-11-16T22:36:26+00:00"
+    },
+    {
+      "title": "Nations League: Wirtz doubles up as Germany rout Netherlands to top group",
+      "link": "https://www.theguardian.com/football/2026/nov/16/nations-league-roundup-germany-netherlands-greece-serbia",
+      "description": "Jürgen Klopp’s side make statement with 5-0 triumph Dutch advance, Greece miss out despite win over Serbia Florian Wirtz scored twice as Germany delivered a 5-0 rout of the Netherlands in Berlin on Monday, reaching the Nations League quarter-finals as group wi",
+      "source": "The Guardian Sport",
+      "sport": "Sports",
+      "region": "International",
+      "image": "https://i.guim.co.uk/img/media/b4b5263c15e103e3e2d7b8f2484796c915620135/456_421_2777_2222/master/2777.jpg?width=140&quality=85&auto=format&fit=max&s=df12c67ac1c9724f16e43fbf5014e229",
+      "published": "2026-11-16T22:33:26+00:00"
+    },
+    {
+      "title": "Robertson makes history with record 103rd Scotland cap",
+      "link": "https://www.skysports.com/football/news/12040/13612913/andy-robertson-scotland-captain-breaks-national-appearance-record-by-winning-103rd-senior-cap-vs-switzerland",
+      "description": "Andy Robertson has broken the record for the most senior Scotland men's team caps, surpassing the feat held by Sir Kenny Dalglish for 40 years.",
+      "source": "Sky Sports",
+      "sport": "Sports",
+      "region": "International",
+      "image": "https://e1.365dm.com/26/11/1920x1080/skysports-football-scotland_7402989.jpg?20261110115123",
+      "published": "2026-11-16T22:30:00+00:00"
+    },
+    {
+      "title": "'I didn't know' - Price's controversial 145 checkout at Grand Slam explained",
+      "link": "https://www.skysports.com/darts/news/12040/13612949/grand-slam-of-darts-gerwyn-price-produces-controversial-145-checkout-en-route-to-routine-victory-over-sebastian-bialecki",
+      "description": "Gerwyn Price produced a controversial 145 checkout en route to a routine Grand Slam of Darts victory over Sebastian Bialecki on Monday night in Wolverhampton.",
+      "source": "Sky Sports",
+      "sport": "Sports",
+      "region": "International",
+      "image": "https://e0.365dm.com/26/11/1920x1080/skysports-gerwyn-price-sebastian-bialecki_7408162.jpg?20261116213534",
+      "published": "2026-11-16T22:25:00+00:00"
+    },
+    {
+      "title": "Watch as Scotland slump to 4-0 defeat in Switzerland",
+      "link": "https://www.bbc.co.uk/sport/football/videos/cmp3e19v734wo?at_medium=RSS&at_campaign=rss",
+      "description": "Watch the highlights as Scotland lose 4-0 to Switzerland in the Nations League in St Gallen.",
+      "source": "BBC Sport",
+      "sport": "Sports",
+      "region": "International",
+      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/fe26/live/f9c8c1f0-e20a-11f1-b023-f7d19fda92c1.jpg",
+      "published": "2026-11-16T22:14:34+00:00"
+    },
+    {
+      "title": "Man Utd to resurrect Hall interest - Tuesday's gossip",
+      "link": "https://www.bbc.co.uk/sport/football/articles/c6d91x7nz85jo?at_medium=RSS&at_campaign=rss",
+      "description": "Manchester United may struggle to prise defender Lewis Hall from Newcastle, Arsenal midfielder Martin Zubimendi is pondering his future, Chelsea eye a double swoop for Barcelona duo, plus more.",
+      "source": "BBC Sport",
+      "sport": "Sports",
+      "region": "International",
+      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/833e/live/92b22870-e201-11f1-ba8d-01314a590f72.png",
+      "published": "2026-11-16T22:06:32+00:00"
+    },
+    {
+      "title": "'Three bulls, shall I do it?' - Littler asks team then DELIVERS on incredible checkout!",
+      "link": "https://www.skysports.com/watch/video/13613033/grand-slam-of-darts-luke-littler-asks-the-crowd-before-incredible-150-checkout",
+      "description": "Incredible scenes in Wolverhampton as Luke Littler appeared to ask his team if he should go for three bullseyes, then duly delivered on the incredible 150 checkout!",
+      "source": "Sky Sports",
+      "sport": "Sports",
+      "region": "International",
+      "image": "https://e0.365dm.com/26/11/1920x1080/skysports-littler-bullseye_7408189.jpg?20261116220024",
+      "published": "2026-11-16T22:02:00+00:00"
+    },
+    {
+      "title": "Switzerland roll over sorry Scotland to increase the pressure on Pocognoli",
+      "link": "https://www.theguardian.com/football/2026/nov/16/switzerland-scotland-nations-league-match-report",
+      "description": "A match that should have been about 103 was instead about four. Andy Robertson is due acclaim for becoming the most capped player in Scotland’s history but how the full-back will wish the moment had arrived in different circumstances. A second-string Switzerla",
+      "source": "The Guardian Sport",
+      "sport": "Sports",
+      "region": "International",
+      "image": "https://i.guim.co.uk/img/media/b486fbca2fb986e208151a2612cd6207d9dfd494/481_224_1871_1497/master/1871.jpg?width=140&quality=85&auto=format&fit=max&s=99bb52d357f39ae4ebb7e3ec81f18494",
+      "published": "2026-11-16T21:53:32+00:00"
+    },
+    {
+      "title": "Record-breaker Robertson speaks out after Scotland's bad loss to Switzerland",
+      "link": "https://www.skysports.com/football/switzerland-vs-scotland/report/554127",
+      "description": "Andy Robertson created Scotland history then delievered a scathing assessment of their Nations League collapse against Switzerland.",
+      "source": "Sky Sports",
+      "sport": "Sports",
+      "region": "International",
+      "image": "https://e1.365dm.com/26/11/1920x1080/skysports-scotland-robertson_7408181.jpg?20261116215135",
+      "published": "2026-11-16T21:35:00+00:00"
+    },
+    {
+      "title": "Rice verbally agrees new Arsenal contract",
+      "link": "https://www.skysports.com/football/news/12040/13612986/declan-rice-contract-arsenal-midfielder-verbally-agrees-new-320000-a-week-deal-with-the-premier-league-champions",
+      "description": "Declan Rice has verbally agreed terms on a new long-term contract at Arsenal, Sky Sports News can reveal.",
+      "source": "Sky Sports",
+      "sport": "Sports",
+      "region": "International",
+      "image": "https://e1.365dm.com/26/10/1920x1080/skysports-declan-rice-arsenal_7383215.jpg?20261021214729",
+      "published": "2026-11-16T21:12:00+00:00"
+    },
+    {
+      "title": "Portugal boss responds to criticism from Ronaldo's mum",
+      "link": "https://www.bbc.co.uk/sport/football/articles/ck87984g3x1po?at_medium=RSS&at_campaign=rss",
+      "description": "Jorge Jesus responds to claims by Cristiano Ronaldo's mother, Dolores Aveiro, that her son had been \"deceived\" by the Portugal manager.",
+      "source": "BBC Sport",
+      "sport": "Sports",
+      "region": "International",
+      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/6ca3/live/b14c4cf0-e1f9-11f1-ac6e-e9777cdcbb4f.jpg",
+      "published": "2026-11-16T21:08:06+00:00"
+    },
+    {
+      "title": "USA thrash Canada to win women’s hockey worlds and complete historic golden double",
+      "link": "https://www.theguardian.com/sport/2026/nov/16/usa-canada-womens-ice-hockey-world-championship-final",
+      "description": "USA beat Canada 6-2 to claim 12th world title Knight and Pannek score twice each in victory United States 6-2 Canada – as it happened The United States beat Canada 6-2 on Monday to win the women’s ice hockey world championship in Herning, Denmark, becoming the",
+      "source": "The Guardian Sport",
+      "sport": "Sports",
+      "region": "International",
+      "image": "https://i.guim.co.uk/img/media/9b374cb803e9028dd22810c17874a88777d2aeb0/468_0_4680_3744/master/4680.jpg?width=140&quality=85&auto=format&fit=max&s=b89f9d20bcdfa74333d3b6267b8832be",
+      "published": "2026-11-16T20:40:16+00:00"
+    },
+    {
+      "title": "British doubles No 1 criticises ATP bosses at trophy presentation absence",
+      "link": "https://www.skysports.com/tennis/news/12040/13612925/henry-patten-british-doubles-no-1-takes-swipe-at-atp-chairman-and-ceo-for-absence-from-trophy-presentation",
+      "description": "British doubles No 1 Henry Patten has taken a swipe at ATP bosses for their absence from a trophy presentation in Turin on Monday.",
+      "source": "Sky Sports",
+      "sport": "Sports",
+      "region": "International",
+      "image": "https://e2.365dm.com/26/11/1920x1080/skysports-henry-patten-tennis_7408082.jpg?20261116195328",
+      "published": "2026-11-16T20:05:00+00:00"
+    },
+    {
+      "title": "Tuchel and England must learn lessons of history, Seville and Southgateism | Barney Ronay",
+      "link": "https://www.theguardian.com/football/2026/nov/16/thomas-tuchel-england-must-learn-lessons-history-seville-gareth-southgate",
+      "description": "Another 3-2 win in Spain brings the lure of a golden new hyper-future – but it did not pan out that way last time I may have the body of a weak and feeble German, but I have the heart and stomach of a manager of England. And I think it foul scorn that Spain sh",
+      "source": "The Guardian Football",
+      "sport": "Football",
+      "region": "International",
+      "image": "https://i.guim.co.uk/img/media/2da6290508ecb301f58fd9d4e84a22546c832f77/0_0_5000_4000/master/5000.jpg?width=140&quality=85&auto=format&fit=max&s=b7622478b18f18a9417b4da5e374190c",
+      "published": "2026-11-16T20:02:09+00:00"
     },
     {
       "title": "Kiyan Anthony shines in MSG debut, where he cheered his dad as a kid",
@@ -882,284 +1115,54 @@
       "published": "2026-11-16T19:25:38+00:00"
     },
     {
-      "title": "Klopp says Infantino worse than Blatter",
-      "link": "https://www.bbc.co.uk/sport/football/articles/cjr4gr2k41dxo?at_medium=RSS&at_campaign=rss",
-      "description": "Germany manager Jurgen Klopp says he \"didn't think things could get worse after Sepp Blatter, but someone has managed to do just that\" as he calls for Fifa president Gianni Infantino to be replaced.",
-      "source": "BBC Sport",
-      "sport": "Sports",
-      "region": "International",
-      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/217d/live/86082020-e1ac-11f1-8ee3-23d0d09d2796.jpg",
-      "published": "2026-11-16T15:54:36+00:00"
-    },
-    {
-      "title": "Alcaraz 'best I've felt' in statement start at ATP Finals",
-      "link": "https://www.bbc.co.uk/sport/tennis/articles/ckvg294x5yzqo?at_medium=RSS&at_campaign=rss",
-      "description": "Carlos Alcaraz warns his rivals he has never felt better at this stage of a season after beginning his ATP Finals bid with a statement win over Frances Tiafoe.",
-      "source": "BBC Sport",
-      "sport": "Sports",
-      "region": "International",
-      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/46e0/live/60e9a200-e1cf-11f1-b8c8-67fa35f5afdb.jpg",
-      "published": "2026-11-16T15:43:54+00:00"
-    },
-    {
-      "title": "Vanie Gandler urges Capital1 to trust the process amid struggles",
-      "link": "https://tiebreakertimes.com.ph/tbt/vanie-gandler-urges-capital1-to-trust-the-process-amid-struggles/390101",
-      "description": "Now more than ever, Vanie Gandler believes Capital1 must trust the process. With the Solar Spikers’ promising new-look lineup yet to translate into victories in the 2026 Premier Volleyball League All-Filipino Conference Siklab series, Gandler is urging patienc",
-      "source": "Tiebreaker Times",
-      "sport": "Sports",
-      "region": "Philippines",
-      "image": "https://cdn.tiebreakertimes.com.ph/wp-content/uploads/2026/11/PVL-AFC-2026-Farm-Fresh-vs.-Capital1-Vanie-Gandler-8708.jpg",
-      "published": "2026-11-16T15:33:09+00:00"
-    },
-    {
-      "title": "French football head Philippe Diallo to fight Infantino for Fifa presidency",
-      "link": "https://www.theguardian.com/football/2026/nov/16/philippe-diallo-fifa-gianni-infantino-president-french-football-federation",
-      "description": "Diallo confirmed by Uefa as its chosen candidate He accused Infantino of seriously damaging football The French Football Federation president, Philippe Diallo, has been confirmed as Uefa’s surprise late choice to run for the Fifa presidency. The search for a U",
-      "source": "The Guardian Sport",
-      "sport": "Sports",
-      "region": "International",
-      "image": "https://i.guim.co.uk/img/media/2af2c421a8ac472e90c00fe9d19ee86b55893989/396_0_5000_4000/master/5000.jpg?width=140&quality=85&auto=format&fit=max&s=45be3250b5b1fb9fbbdbf8b21cf7fbd4",
-      "published": "2026-11-16T15:27:30+00:00"
-    },
-    {
-      "title": "How Frank can restore reputation and save Crystal Palace",
-      "link": "https://www.bbc.co.uk/sport/football/articles/cmge3y2qjlyro?at_medium=RSS&at_campaign=rss",
-      "description": "Will Thomas Frank rebuild his reputation at Crystal Palace after a bruising time in charge of Tottenham?",
-      "source": "BBC Sport",
-      "sport": "Sports",
-      "region": "International",
-      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/a30c/live/69f709f0-df63-11f1-a8af-15d7a25dc0d1.png",
-      "published": "2026-11-16T15:15:57+00:00"
-    },
-    {
-      "title": "Filipino racer Iñigo Anton bringing pride to Philippines in Formula 4",
-      "link": "https://www.gmanetwork.com/news/sports/othersports/1009722/filipino-racer-i-igo-anton-bringing-pride-to-philippines-in-formula-4/story/",
-      "description": "As athletes like Alex Eala, Carlos Yulo, and EJ Obiena continue to make history for the Philippines, another Filipino in Iñigo Anton brings another milestone for the Philippines, this time on the race track.",
-      "source": "GMA News Sports",
-      "sport": "Sports",
-      "region": "Philippines",
-      "image": "https://images.gmanews.tv/webpics/2026/11/Inigo_Anton_Formula_4_2026_11_16_23_13_08.jpg",
-      "published": "2026-11-16T15:13:55+00:00"
-    },
-    {
-      "title": "Jewel Encarnacion finds her place in Choco Mucho",
-      "link": "https://tiebreakertimes.com.ph/tbt/jewel-encarnacion-finds-her-place-in-choco-mucho/390097",
-      "description": "Jewel Encarnacion found a new home in Choco Mucho following an abrupt exit from Cignal, and she is determined to give back the trust and warmth she received from her new family. The 25-year-old outside hitter repaid that embrace in the best way possible on Thu",
-      "source": "Tiebreaker Times",
-      "sport": "Sports",
-      "region": "Philippines",
-      "image": "https://cdn.tiebreakertimes.com.ph/wp-content/uploads/2026/11/PVL-AFC-2026-Creamline-vs.-Choco-Mucho-Jewel-Encarnacion-6864.jpg",
-      "published": "2026-11-16T15:08:36+00:00"
-    },
-    {
-      "title": "Hutchinson celebration results in season-ending injury",
-      "link": "https://www.skysports.com/nfl/news/12040/13612573/nfl-detroit-lions-star-aidan-hutchinson-out-for-rest-of-season-after-suffering-knee-injury-during-celebration",
-      "description": "Detroit Lions star Aidan Hutchinson has been ruled out for the season after suffering a knee injury while celebrating a sack against the New England Patriots.",
-      "source": "Sky Sports",
-      "sport": "Sports",
-      "region": "International",
-      "image": "https://e0.365dm.com/26/11/1920x1080/skysports-aidan-hutchinson_7407856.jpg?20261116150924",
-      "published": "2026-11-16T15:00:00+00:00"
-    },
-    {
-      "title": "Rugby League World Cup was a triumph in Australia and invisible in the UK | Aaron Bower",
-      "link": "https://www.theguardian.com/sport/2026/nov/16/rugby-league-world-cup-triumph-australia-invisible-uk",
-      "description": "No free-to-air coverage and uncompetitive teams meant England fans all but missed a tournament that caught fire in the southern hemisphere So, that was the Rugby League World Cup. It may have gripped you from start to finish or it may have passed you by withou",
-      "source": "The Guardian Sport",
-      "sport": "Sports",
-      "region": "International",
-      "image": "https://i.guim.co.uk/img/media/6b123017cf2792d4b163900ac66c5f79c6b98f7f/355_0_3548_2839/master/3548.jpg?width=140&quality=85&auto=format&fit=max&s=850f8492971ca8d133bb5f0de2eacd97",
-      "published": "2026-11-16T14:56:48+00:00"
-    },
-    {
-      "title": "Carlos Alcaraz blazes past Frances Tiafoe in ATP Finals tennis group stage – as it happened",
-      "link": "https://www.theguardian.com/sport/live/2026/nov/16/carlos-alcaraz-v-frances-tiafoe-atp-finals-tennis-group-stage-live",
-      "description": "Carlos Alcaraz was far too good for Francis Tiafoe, thrashing the American debutant 6-2 6-2 in just over an hour So where is the game? Alcaraz will do his usual thing, looking to unleash that forehand; Tiafoe will look to target the backhand, keep him moving, ",
-      "source": "The Guardian Sport",
-      "sport": "Sports",
-      "region": "International",
-      "image": "https://i.guim.co.uk/img/media/9bf64e16e924f464b740c92b8db8fa1358b93e91/672_0_4489_3592/master/4489.jpg?width=140&quality=85&auto=format&fit=max&s=0d3331e22c499d96b0539da48cbb04f9",
-      "published": "2026-11-16T14:55:54+00:00"
-    },
-    {
-      "title": "Given a second chance by Arellano, T-Mc Ongotan now reaches for PBA dream",
-      "link": "https://tiebreakertimes.com.ph/tbt/given-a-second-chance-by-arellano-t-mc-ongotan-now-reaches-for-pba-dream/390093",
-      "description": "T-Mc Ongotan fought back tears as he reflected on the end of his collegiate career, knowing that Arellano University’s 70-81 quarterfinal defeat to José Rizal University in the NCAA Season 102 Seniors Basketball Tournament on Monday was not how he envisioned h",
-      "source": "Tiebreaker Times",
-      "sport": "Sports",
-      "region": "Philippines",
-      "image": "https://cdn.tiebreakertimes.com.ph/wp-content/uploads/2026/11/NCAA102-Srs-Basketball-Quarterfinals_-JRU-vs-AU_-ONGOTAN-T-MC-02629.jpg",
-      "published": "2026-11-16T14:43:32+00:00"
-    },
-    {
-      "title": "Prendergast cited and could miss South Africa game",
-      "link": "https://www.bbc.co.uk/sport/rugby-union/articles/c3pw42zrp4peo?at_medium=RSS&at_campaign=rss",
-      "description": "Ireland fly-half Sam Prendergast is in danger of missing Saturday's Nations Championship match against South Africa after being cited for a tackle against Fiji.",
-      "source": "BBC Sport",
-      "sport": "Sports",
-      "region": "International",
-      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/9cda/live/230309b0-e1c3-11f1-8a52-0b287ff76f43.jpg",
-      "published": "2026-11-16T14:31:37+00:00"
-    },
-    {
-      "title": "Ratcliffe's Ineos settles £180m boat claim with Ainslie",
-      "link": "https://www.bbc.co.uk/sport/sailing/articles/cwg5r2q5dz3zo?at_medium=RSS&at_campaign=rss",
-      "description": "Sir Jim Ratcliffe's Ineos group settles a High Court claim with Sir Ben Ainslie's Athena Racing over a £180m boat used in the America's Cup.",
-      "source": "BBC Sport",
-      "sport": "Sports",
-      "region": "International",
-      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/8c18/live/ec959930-e1c5-11f1-8a52-0b287ff76f43.jpg",
-      "published": "2026-11-16T14:28:00+00:00"
-    },
-    {
-      "title": "Brilliant Alcaraz dominates Tiafoe for first win at ATP Finals",
-      "link": "https://www.skysports.com/watch/video/13612863/carlos-alcaraz-vs-frances-tiafoe-atp-finals-highlights",
-      "description": "Highlights of the ATP Finals match between Carlos Alcaraz and Frances Tiafoe.",
-      "source": "Sky Sports",
-      "sport": "Sports",
-      "region": "International",
-      "image": "https://e1.365dm.com/26/11/1920x1080/skysports-carlos-alcaraz_7407808.jpg?20261116143132",
-      "published": "2026-11-16T14:27:00+00:00"
-    },
-    {
-      "title": "Has Tuchel learnt from Argentina disaster and fixed England's 'DNA problem'?",
-      "link": "https://www.skysports.com/watch/video/13612859/thomas-tuchel-has-england-boss-learnt-from-argentina-disaster-and-fixed-dna-problem",
-      "description": "Sky Sports' David Reed breaks down whether Thomas Tuchel has already fixed England's 'DNA problem'.",
-      "source": "Sky Sports",
-      "sport": "Sports",
-      "region": "International",
-      "image": "https://e2.365dm.com/26/11/1920x1080/skysports-england-thomas-tuchel_7407807.jpg?20261116143006",
-      "published": "2026-11-16T14:22:00+00:00"
-    },
-    {
-      "title": "Svitolina, drained by war and a split, ends season with WTA Finals loss",
-      "link": "https://sports.inquirer.net/707295/svitolina-drained-by-war-and-a-split-ends-season-with-wta-finals-loss",
-      "description": "INDIAN WELLS, California — Elina Svitolina is ready to call it a year. Carrying the emotional weight of playing top-level tennis while her home country of Ukraine is at war and navigating a public split with her husband at the same time they co-parent their ch",
-      "source": "Inquirer Sports",
-      "sport": "Sports",
-      "region": "Philippines",
-      "image": "https://sports.inquirer.net/files/2026/11/AP26319823053613.jpg",
-      "published": "2026-11-16T14:15:43+00:00"
-    },
-    {
-      "title": "UFC 334: Ciryl Gane beats Josh Hokit, keeps heavyweight title",
-      "link": "https://sports.inquirer.net/707292/ufc-334-ciryl-gane-beats-josh-hokit-keeps-heavyweight-title",
-      "description": "NEW YORK — Josh Hokit wore an American flag bandana and sunglasses as he extended his hand toward Ciryl Gane and briefly dropped his outrageous “Incredible Hok” persona. “You’re tougher than I thought,” Hokit said. Gane was tough. And he’s still the champ. REA",
-      "source": "Inquirer Sports",
-      "sport": "Sports",
-      "region": "Philippines",
-      "image": "https://sports.inquirer.net/files/2026/11/AP26319220060739.jpg",
-      "published": "2026-11-16T14:09:14+00:00"
-    },
-    {
-      "title": "Union of European Clubs escalates fight for football influence with formal complaint",
-      "link": "https://www.theguardian.com/football/2026/nov/16/union-of-european-clubs-complaint-european-commission-uefa-european-football-clubs",
-      "description": "Body of 138 members complains to European Commission Uefa and the European Football Clubs power targeted The Union of European Clubs has submitted a formal complaint against the stranglehold Uefa and European Football Clubs maintain on football within the cont",
+      "title": "Spain in pain as historic run ends but De la Fuente feels best is yet to come",
+      "link": "https://www.theguardian.com/football/2026/nov/16/luis-de-la-fuente-spain-england-nations-league",
+      "description": "While the head coach, players and Spanish press were magnanimous in defeat, there was pride mixed in with disappointment – and confidence the future is still bright “With every game, defeat gets closer,” Luis de la Fuente had said and on Sunday night it finall",
       "source": "The Guardian Football",
       "sport": "Football",
       "region": "International",
-      "image": "https://i.guim.co.uk/img/media/b4bc9411434ffb34398bb73d16010761437ea0e3/338_0_4252_3401/master/4252.jpg?width=140&quality=85&auto=format&fit=max&s=88ad06aed894baf521343367cbdbf751",
-      "published": "2026-11-16T14:02:53+00:00"
+      "image": "https://i.guim.co.uk/img/media/5055106e3f335a2765a72e6325123929ec3bf675/1097_1299_2055_1644/master/2055.jpg?width=140&quality=85&auto=format&fit=max&s=00d28b349e15be87b6a433e59c0a076a",
+      "published": "2026-11-16T17:48:38+00:00"
     },
     {
-      "title": "Patriots QB Maye feared to be out for season with ankle injury",
-      "link": "https://www.skysports.com/nfl/news/12040/13612836/nfl-new-england-patriots-quarterback-drake-maye-could-miss-rest-of-the-season-with-ankle-injury-suffered-against-detroit-lions",
-      "description": "New England Patriots quarterback Drake Maye could miss the remainder of the 2026 NFL season after suffering a suspected ankle fracture in Sunday's loss to the Detroit Lions.",
-      "source": "Sky Sports",
-      "sport": "Sports",
-      "region": "International",
-      "image": "https://e0.365dm.com/26/11/1920x1080/skysports-drake-maye-new-england-patriots_7407792.jpg?20261116140859",
-      "published": "2026-11-16T14:00:00+00:00"
-    },
-    {
-      "title": "Jim Ratcliffe’s Ineos Group settles with Ben Ainslie over America’s Cup dispute",
-      "link": "https://www.theguardian.com/sport/2026/nov/16/jim-ratcliffe-ineos-group-settles-ben-ainslie-americas-cup-dispute-sailing",
-      "description": "Ineos wanted £10m for alleged refusal to return yacht Out-of-court settlement ends plan for a 2028 trial Sir Jim Ratcliffe’s Ineos Group has reached an out-of-court settlement with Sir Ben Ainslie over the £180m yacht their companies built for the 2024 America",
-      "source": "The Guardian Sport",
-      "sport": "Sports",
-      "region": "International",
-      "image": "https://i.guim.co.uk/img/media/b04feb898f9f044b3efa6a8252df0ebfd214332c/355_0_3750_3000/master/3750.jpg?width=140&quality=85&auto=format&fit=max&s=7684a83a16fc290ca22822aa44e339aa",
-      "published": "2026-11-16T13:55:19+00:00"
-    },
-    {
-      "title": "Beckham firm sues after fragrance found for sale in Poundland",
+      "title": "Beckham firm sues after fragrance found for sale in discount store",
       "link": "https://www.theguardian.com/football/2026/nov/16/david-beckham-fragrance-sale-poundland-bargain-bin-gas-station",
-      "description": "Brand reacted with ‘shock and dismay’ after products were also found in a ‘bargain bin inside a gas station’ Business live – latest updates David Beckham’s company reacted with “shock and dismay” after discovering his branded fragrance range was on sale in pet",
+      "description": "Brand reacted with ‘shock and dismay’ after products were also found in a ‘bargain bin inside a gas station’ David Beckham’s company reacted with “shock and dismay” after discovering his branded fragrance range was on sale in petrol stations and in the British",
       "source": "The Guardian Football",
       "sport": "Football",
       "region": "International",
       "image": "https://i.guim.co.uk/img/media/b545f9d7a790ea86d7c205a1aa43db5a001f1e42/1779_175_2064_1652/master/2064.jpg?width=140&quality=85&auto=format&fit=max&s=5f3ca0f86022053fc18d97cfa7ce756f",
-      "published": "2026-11-16T13:26:35+00:00"
+      "published": "2026-11-16T17:35:59+00:00"
     },
     {
-      "title": "US basketball player arrested with 75lb of marijuana at Nigerian airport, say authorities",
-      "link": "https://www.theguardian.com/sport/2026/nov/16/us-basketball-player-arrested-with-75lb-of-marijuana-at-nigerian-airport-say-authorities",
-      "description": "Suspect named as Greene Da’monte Khiree Drug smuggling carries life sentence in Nigeria An American basketball player has been arrested in Nigeria for allegedly attempting to smuggle 33.95kg (75lb) of marijuana into the country. Nigeria’s National Drug Law Enf",
-      "source": "The Guardian Sport",
-      "sport": "Sports",
-      "region": "International",
-      "image": "https://i.guim.co.uk/img/media/f8ab1096511b7369e43e30e2c53a8576e6387f0a/388_0_1349_1080/master/1349.jpg?width=140&quality=85&auto=format&fit=max&s=fdab6c4c99348017c50d3c16acc3e027",
-      "published": "2026-11-16T13:16:36+00:00"
-    },
-    {
-      "title": "Has Trafford replaced Pickford as England No 1?",
-      "link": "https://www.bbc.co.uk/sport/football/articles/cmvg2r752ykzo?at_medium=RSS&at_campaign=rss",
-      "description": "James Trafford was given a chance to stake his claim as England's new number one - and away to the world champions, he absolutely took it.",
-      "source": "BBC Sport",
-      "sport": "Sports",
-      "region": "International",
-      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/0930/live/36ea8540-e1b7-11f1-9a3f-99aca912798e.jpg",
-      "published": "2026-11-16T13:01:41+00:00"
-    },
-    {
-      "title": "Ratcliffe's Ineos Group settles £10m-plus claim with Ainslie's firm over yacht",
-      "link": "https://www.skysports.com/sailing/news/12040/13612816/jim-ratcliffes-ineos-group-settles-10m-plus-claim-with-sir-ben-ainslies-athena-racing-over-alleged-non-return-of-yacht",
-      "description": "A company connected to Sir Jim Ratcliffe's Ineos Group said it has settled a High Court claim against a firm founded by Sir Ben Ainslie.",
-      "source": "Sky Sports",
-      "sport": "Sports",
-      "region": "International",
-      "image": "https://e0.365dm.com/26/02/1920x1080/skysports-ratcliffe-man-utd_7162443.jpg?20260220173735",
-      "published": "2026-11-16T12:50:00+00:00"
-    },
-    {
-      "title": "A long wait, some magic and that smile: Ronaldinho savours Ravenna debut at 46",
-      "link": "https://www.theguardian.com/football/2026/nov/16/ronaldinho-ravenna-debut-serie-c-report",
-      "description": "Brazilian legend, an investor at Serie C club, showed glimpses of old brilliance as he played 45 minutes for the promotion-chasing side It may have been the longest buildup in world football. In June, the former Barcelona and Brazil legend Ronaldinho was unvei",
+      "title": "Thomas Frank confirmed as Crystal Palace manager after Pierre Sage’s sacking",
+      "link": "https://www.theguardian.com/football/2026/nov/16/thomas-frank-confirmed-crystal-palace-manager-pierre-sage",
+      "description": "Frank’s first job since Spurs dismissal in February He has been promised funds for January signings Thomas Frank has been confirmed as Crystal Palace’s manager after Pierre Sage was sacked last week. Frank, out of work since being dismissed by Tottenham in Feb",
       "source": "The Guardian Football",
       "sport": "Football",
       "region": "International",
-      "image": "https://i.guim.co.uk/img/media/142df54e2b36ae32ac4ec77532eb405638a11b2a/311_0_6654_5324/master/6654.jpg?width=140&quality=85&auto=format&fit=max&s=a80e1b4e4233b4637ddad5a0a6a8cabe",
-      "published": "2026-11-16T12:49:11+00:00"
+      "image": "https://i.guim.co.uk/img/media/f3cfc1ef196ba14cbcbadf32bbde611199980266/329_66_1267_1014/master/1267.jpg?width=140&quality=85&auto=format&fit=max&s=e772fe19c2db3b4704ada828ced28229",
+      "published": "2026-11-16T17:03:14+00:00"
     },
     {
-      "title": "Who is the best female tennis player of 2026?",
-      "link": "https://www.skysports.com/watch/video/13612814/tennis-who-is-the-best-female-player-of-2026",
-      "description": "Tim Henman and Jamie Murray discuss who they think is the best female tennis player this year.",
-      "source": "Sky Sports",
+      "title": "Trisha Tubu hungry for more as Farm Fresh sets sights on twice-to-beat edge",
+      "link": "https://tiebreakertimes.com.ph/tbt/trisha-tubu-hungry-for-more-as-farm-fresh-sets-sights-on-twice-to-beat-edge/390105",
+      "description": "With their semifinals spot secured, Trisha Tubu and Farm Fresh are now setting their sights on a twice-to-beat advantage as they look to carry their momentum into their final elimination-round game of the 2026 Premier Volleyball League All-Filipino Conference ",
+      "source": "Tiebreaker Times",
       "sport": "Sports",
-      "region": "International",
-      "image": "https://e1.365dm.com/26/11/1920x1080/skysports-tennis-players_7407757.jpg?20261116125034",
-      "published": "2026-11-16T12:42:00+00:00"
+      "region": "Philippines",
+      "image": "https://cdn.tiebreakertimes.com.ph/wp-content/uploads/2026/11/PVL-AFC-2026-Farm-Fresh-vs.-Capital1-9533.jpg",
+      "published": "2026-11-16T16:01:01+00:00"
     },
     {
-      "title": "WSL talking points: Chelsea’s gamble pays off and have Arsenal lost fear factor?",
-      "link": "https://www.theguardian.com/football/2026/nov/16/wsl-talking-points-chelseas-gamble-pays-off-and-have-arsenal-lost-fear-factor",
-      "description": "Blues beat champions after bold substitution and Gunners’ home struggles continue with fifth consecutive WSL draw Sonia Bompastor attempted to deflect suggestions that the removal of Kadeisha Buchanan 12 minutes into Chelsea’s top-of-the-table clash with Manch",
-      "source": "The Guardian Football",
-      "sport": "Football",
-      "region": "International",
-      "image": "https://i.guim.co.uk/img/media/33a98f66690812de06692c4eb85ed18a6eb18106/0_0_5000_4000/master/5000.jpg?width=140&quality=85&auto=format&fit=max&s=b018aad6b6e9d478daed227587d3077a",
-      "published": "2026-11-16T12:30:57+00:00"
-    },
-    {
-      "title": "Jay Shah re-elected unopposed as ICC chair after board clears way for bigger IPL",
-      "link": "https://www.theguardian.com/sport/2026/nov/16/jay-shah-icc-chair-bigger-ipl-cricket",
-      "description": "Global cricket tournaments will avoid March to May IPL expected to expand to 12 teams from 2028 Jay Shah has been re-elected unopposed as chair of the International Cricket Council after a board meeting in Bali that has also paved the way for the expansion of ",
-      "source": "The Guardian Sport",
+      "title": "Laying out semis battlegrounds",
+      "link": "https://www.philstar.com/sports/2026/11/17/2570578/laying-out-semis-battlegrounds",
+      "description": "The PBA Governors Cup semifinals will reel off on Dec. 4 at the Ninoy Aquino Stadium with Barangay Ginebra facing defending champion TNT and Converge taking on NLEX in a pair of best-of-five series. But it’s not just PBA that’s gearing for the semis.",
+      "source": "Philstar Sports",
       "sport": "Sports",
-      "region": "International",
-      "image": "https://i.guim.co.uk/img/media/14c0671e7aaaf538b7fc00c79534f140352ec8a4/580_0_3120_2496/master/3120.jpg?width=140&quality=85&auto=format&fit=max&s=3684d30dbcfa19a235ba94e20db6fd69",
-      "published": "2026-11-16T11:53:36+00:00"
+      "region": "Philippines",
+      "image": "",
+      "published": "2026-11-16T16:00:00+00:00"
     }
   ]
 }
