@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-17T08:49:32.413175+00:00",
+  "updatedAt": "2026-11-17T08:50:48.965151+00:00",
   "policy": {
     "publishVerifiedOnly": true,
     "preserveLastValidOnFailure": true,
@@ -9,10 +9,10 @@
   },
   "summary": {
     "leagues": 54,
-    "visible": 32,
-    "suspended": 22,
+    "visible": 38,
+    "suspended": 16,
     "activeFixtures": 8,
-    "staleFixtures": 16,
+    "staleFixtures": 10,
     "needsSource": 0,
     "liveApiUnverified": 17,
     "offSeason": 7
@@ -912,8 +912,8 @@
       "sport": "Combat Sports",
       "pipeline": "extended",
       "automatic": true,
-      "status": "stale-fixtures",
-      "publicVisible": false,
+      "status": "reference-coverage",
+      "publicVisible": true,
       "fixtureCount": 5,
       "recentOrUpcomingFixtureCount": 0,
       "lastRecordedFixtureAt": "2026-09-25T12:30:00+00:00",
@@ -925,15 +925,15 @@
       "statisticsPublished": false,
       "standingsPublished": false,
       "rankingsPublished": true,
-      "note": "Latest recorded fixtures are too old; a JSON update is not a new fixture."
+      "note": "Verified rankings or titleholder reference coverage remains available between events."
     },
     "wbc": {
       "label": "WBC",
       "sport": "Boxing",
       "pipeline": "boxing",
       "automatic": true,
-      "status": "stale-fixtures",
-      "publicVisible": false,
+      "status": "reference-coverage",
+      "publicVisible": true,
       "fixtureCount": 26,
       "recentOrUpcomingFixtureCount": 0,
       "lastRecordedFixtureAt": "2026-10-25T03:00:00+00:00",
@@ -944,15 +944,15 @@
       "statisticsPublished": false,
       "standingsPublished": false,
       "rankingsPublished": false,
-      "note": "Latest recorded fixtures are too old; a JSON update is not a new fixture."
+      "note": "Verified rankings or titleholder reference coverage remains available between events."
     },
     "wba": {
       "label": "WBA",
       "sport": "Boxing",
       "pipeline": "boxing",
       "automatic": true,
-      "status": "stale-fixtures",
-      "publicVisible": false,
+      "status": "reference-coverage",
+      "publicVisible": true,
       "fixtureCount": 20,
       "recentOrUpcomingFixtureCount": 0,
       "lastRecordedFixtureAt": "2026-10-23T08:30:49+00:00",
@@ -963,15 +963,15 @@
       "statisticsPublished": false,
       "standingsPublished": false,
       "rankingsPublished": false,
-      "note": "Latest recorded fixtures are too old; a JSON update is not a new fixture."
+      "note": "Verified rankings or titleholder reference coverage remains available between events."
     },
     "ibf": {
       "label": "IBF",
       "sport": "Boxing",
       "pipeline": "boxing",
       "automatic": true,
-      "status": "stale-fixtures",
-      "publicVisible": false,
+      "status": "reference-coverage",
+      "publicVisible": true,
       "fixtureCount": 16,
       "recentOrUpcomingFixtureCount": 0,
       "lastRecordedFixtureAt": "2026-10-25T03:00:00+00:00",
@@ -982,15 +982,15 @@
       "statisticsPublished": false,
       "standingsPublished": false,
       "rankingsPublished": false,
-      "note": "Latest recorded fixtures are too old; a JSON update is not a new fixture."
+      "note": "Verified rankings or titleholder reference coverage remains available between events."
     },
     "wbo": {
       "label": "WBO",
       "sport": "Boxing",
       "pipeline": "boxing",
       "automatic": true,
-      "status": "stale-fixtures",
-      "publicVisible": false,
+      "status": "reference-coverage",
+      "publicVisible": true,
       "fixtureCount": 20,
       "recentOrUpcomingFixtureCount": 0,
       "lastRecordedFixtureAt": "2026-10-25T03:00:00+00:00",
@@ -1001,15 +1001,15 @@
       "statisticsPublished": false,
       "standingsPublished": false,
       "rankingsPublished": false,
-      "note": "Latest recorded fixtures are too old; a JSON update is not a new fixture."
+      "note": "Verified rankings or titleholder reference coverage remains available between events."
     },
     "ring": {
       "label": "THE RING",
       "sport": "Boxing",
       "pipeline": "boxing",
       "automatic": true,
-      "status": "stale-fixtures",
-      "publicVisible": false,
+      "status": "reference-coverage",
+      "publicVisible": true,
       "fixtureCount": 6,
       "recentOrUpcomingFixtureCount": 0,
       "lastRecordedFixtureAt": "2026-10-23T08:30:49+00:00",
@@ -1020,7 +1020,7 @@
       "statisticsPublished": false,
       "standingsPublished": false,
       "rankingsPublished": false,
-      "note": "Latest recorded fixtures are too old; a JSON update is not a new fixture."
+      "note": "Verified rankings or titleholder reference coverage remains available between events."
     }
   }
 }
