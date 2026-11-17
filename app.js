@@ -88,7 +88,7 @@ document.querySelectorAll('.bottomnav a').forEach(a=>{let label=a.textContent.tr
 document.querySelectorAll('.navlinks a').forEach(a=>{const label=a.textContent.trim();if(a.classList.contains('active'))a.setAttribute('aria-current','page')});
 document.querySelector('header nav')?.setAttribute('aria-label','Primary navigation');document.querySelectorAll('.bottomnav').forEach(n=>{n.setAttribute('role','navigation');n.setAttribute('aria-label','Mobile navigation')});
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const leagues={Basketball:[['NBA','United States / Canada'],['WNBA','United States / Canada'],['PBA','Philippines'],['MPBL','Philippines'],['NBL-Pilipinas','Philippines'],['NBL Australia','Australia / New Zealand'],['VBA','Vietnam'],['B.League','Japan'],['EuroLeague','Europe'],['The Asian Tournament','Asia / International'],['WBSL','International']],Football:[['Premier League','England'],['La Liga','Spain'],['Serie A','Italy'],['Bundesliga','Germany'],['UEFA Champions League','Europe'],['PFL','Philippines']],Tennis:[['ATP Tour','International'],['WTA Tour','International'],['Australian Open','Australia'],['Wimbledon','United Kingdom'],['US Open','United States']],Baseball:[['MLB','USA / Canada'],['NPB','Japan'],['KBO League','South Korea']],Hockey:[['NHL','USA / Canada'],['KHL','Eurasia'],['IIHF World Championship','International']],Cricket:[['IPL','India'],['Big Bash League','Australia'],['ICC Cricket World Cup','International']],Volleyball:[['Volleyball Nations League','International'],['PVL','Philippines'],['V.League','Japan']],Motorsport:[['Formula 1','International'],['MotoGP','International'],['Formula E','International']],Boxing:[['WBC','International'],['WBA','International'],['IBF','International'],['WBO','International'],['Professional Boxing','Worldwide']],'Combat Sports':[['UFC','International'],['ONE Championship','Asia']],'American Football':[['NFL','United States'],['NCAA Football','United States']]};
+const leagues={Basketball:[['NBA','United States / Canada'],['WNBA','United States / Canada'],['PBA','Philippines'],['MPBL','Philippines'],['NBL-Pilipinas','Philippines'],['NBL Australia','Australia / New Zealand'],['VBA','Vietnam'],['B.League','Japan'],['EuroLeague','Europe'],['The Asian Tournament','Asia / International']],Football:[['Premier League','England'],['La Liga','Spain'],['Serie A','Italy'],['Bundesliga','Germany'],['UEFA Champions League','Europe'],['PFL','Philippines']],Tennis:[['ATP Tour','International'],['WTA Tour','International'],['Australian Open','Australia'],['Wimbledon','United Kingdom'],['US Open','United States']],Baseball:[['MLB','USA / Canada'],['NPB','Japan'],['KBO League','South Korea']],Hockey:[['NHL','USA / Canada'],['KHL','Eurasia'],['IIHF World Championship','International']],Cricket:[['IPL','India'],['Big Bash League','Australia'],['ICC Cricket World Cup','International']],Volleyball:[['Volleyball Nations League','International'],['PVL','Philippines'],['V.League','Japan']],Motorsport:[['Formula 1','International'],['MotoGP','International'],['Formula E','International']],Boxing:[['WBC','International'],['WBA','International'],['IBF','International'],['WBO','International'],['Professional Boxing','Worldwide']],'Combat Sports':[['UFC','International'],['ONE Championship','Asia']],'American Football':[['NFL','United States'],['NCAA Football','United States']]};
 function openSport(name){if(name==='Boxing'){location.href='/boxing/';return}const modal=document.getElementById('sportModal');if(!modal)return;modal.querySelector('h2').textContent=name;modal.querySelector('.modalbody').innerHTML=(leagues[name]||[]).map(x=>'<div class="league-row"><strong>'+esc(x[0])+'</strong><small>'+esc(x[1])+'</small></div>').join('');modal.showModal()}
 document.addEventListener('click',e=>{
   const statsToggle=e.target.closest('[data-stats-toggle]');
@@ -511,7 +511,28 @@ const liveNowLabels={
   wbo:{sport:'Boxing',league:'WBO'},
   ring:{sport:'Boxing',league:'THE RING'}
 };
-const scoreLeagueOrder=['fiba','soccer','jamaica_pl','mizoram_pl','laliga','el_salvador_reserves','seriea','bundesliga','champions','ucl_women','mls','pfl','basketball','wnba','pba','ncaa_ph','uaap','mpbl','nbl','nblaus','vba','bleague','euroleague','tat','atp','wta','australian_open','wimbledon','us_open','ipl','bigbash','cricket_world_cup','volleyball_w','volleyball_m','pvl','vleague_jp','baseball','npb','kbo','hockey','khl','iihf','football','ncaaf','f1','motogp','formulae','ufc','one','wbc','wba','ibf','wbo','ring'];
+let scoreLeagueOrder=['fiba','soccer','laliga','seriea','bundesliga','champions','mls','pfl','basketball','wnba','pba','uaap','mpbl','nbl','nblaus','vba','bleague','euroleague','tat','atp','wta','australian_open','wimbledon','us_open','ipl','bigbash','cricket_world_cup','volleyball_w','volleyball_m','pvl','vleague_jp','baseball','npb','kbo','hockey','khl','iihf','football','ncaaf','f1','motogp','formulae','ufc','one','wbc','wba','ibf','wbo','ring'];
+
+/* Only leagues with independently verified dated fixtures appear in public filters.
+   Source snapshots and deep links remain for possible recovery. */
+async function refreshLeagueVisibility(){
+  try{
+    const response=await fetch('/league-data-health.json?v='+Date.now(),{cache:'no-store'});
+    if(!response.ok)return;
+    const report=await response.json();
+    const hidden=new Set(Object.entries(report?.leagues||{}).filter(([,v])=>v?.publicVisible===false).map(([k])=>k));
+    const before=scoreLeagueOrder.length;
+    scoreLeagueOrder=scoreLeagueOrder.filter(k=>!hidden.has(k));
+    if(before===scoreLeagueOrder.length)return;
+    if(!scoreLeagueOrder.includes(currentScoreLeague)){
+      currentScoreLeague=scoreLeagueOrder.includes('soccer')?'soccer':scoreLeagueOrder[0]||'soccer';
+      allGames=[];
+      await loadGames({league:currentScoreLeague});
+    }
+    renderScoreLeagueFilters();
+  }catch(e){console.warn('League coverage report unavailable',e)}
+}
+
 const specialScoreLeagueKeys=new Set(['fiba']);
 const scoreSportDefaultLeague={
   basketball:'basketball',
@@ -3198,6 +3219,7 @@ if(document.getElementById('games')){
   }
 
   renderScoreLeagueFilters();
+  void refreshLeagueVisibility();
   void loadScoreLeagueLogos();
   Promise.allSettled([loadTatAutoData(),loadGames(),loadAllLiveGames()]).finally(()=>{lastAllLiveRefreshAt=Date.now();renderScoreLeagueFilters();scheduleScoreAutoRefresh();});
 
