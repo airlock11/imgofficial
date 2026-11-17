@@ -46,12 +46,14 @@ jobs:
             git reset --hard origin/main
             python scripts/update_league_health.py
 
-            if git diff --quiet -- league-data-health.json; then
+            # Stage before checking: a newly generated report is untracked.
+            # The previous git diff check wrongly called that case unchanged.
+            git add -- league-data-health.json
+            if git diff --cached --quiet -- league-data-health.json; then
               echo "No league health changes."
               exit 0
             fi
 
-            git add league-data-health.json
             git commit -m "Update league data health"
 
             if git push origin HEAD:main; then
