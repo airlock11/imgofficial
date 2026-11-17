@@ -2,7 +2,7 @@
   "special": true,
   "league": "WTA Tour",
   "live": true,
-  "updatedAt": "2026-11-17T19:36:23.569487+00:00",
+  "updatedAt": "2026-11-17T19:36:30.230565+00:00",
   "sourceName": "WTA Official Scores scrape",
   "sourceUrl": "https://www.wtatennis.com/scores/",
   "verificationSource": "WTA Official Scores",
@@ -13,28 +13,30 @@
   "games": [
     {
       "eventId": "wta-scrape-0-m-carle-v-erjavec",
-      "date": "2026-11-17T19:36:23.567664+00:00",
+      "date": "2026-11-17T19:36:30.228693+00:00",
       "displayTime": "LP Open by IND • Chile",
       "away": "M. Carle",
       "home": "V. Erjavec",
-      "awayScore": "6 · 40",
-      "homeScore": "5 · 30",
+      "awayScore": "7 0 · 0",
+      "homeScore": "5 0 · 0",
       "awaySets": [
-        "6"
+        "7",
+        "0"
       ],
       "homeSets": [
-        "5"
+        "5",
+        "0"
       ],
-      "awayPoint": "40",
-      "homePoint": "30",
-      "currentSet": 1,
-      "awayCurrentSetGames": 6,
-      "homeCurrentSetGames": 5,
-      "awaySetsWon": 0,
+      "awayPoint": "0",
+      "homePoint": "0",
+      "currentSet": 2,
+      "awayCurrentSetGames": 0,
+      "homeCurrentSetGames": 0,
+      "awaySetsWon": 1,
       "homeSetsWon": 0,
       "round": "Round of 32",
       "court": "Center Court",
-      "status": "Live Match: 0:57 · Round of 32 · Center Court",
+      "status": "Live Match: 0:58 · Round of 32 · Center Court",
       "state": "live",
       "eventOnly": false,
       "title": "LP Open by IND • Chile",
