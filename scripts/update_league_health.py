@@ -78,6 +78,12 @@ for key, meta in registry.get("leagues", {}).items():
         # ESPN is fetched at runtime and may have a working proxy fallback.
         # A local snapshot cannot establish whether either endpoint works.
         status = "live-api-unverified"
+    elif pipeline == "boxing" and games:
+        # A sanctioning body is not a season-long fixture league. Verified
+        # titleholder/bout reference cards remain useful between fights.
+        status = "reference-coverage"
+    elif key == "one" and any(has_any(item, "titleholders", "rankings") for _, item in entries):
+        status = "reference-coverage"
     elif not games:
         status = "needs-source"
     elif active_dates:
@@ -98,6 +104,8 @@ for key, meta in registry.get("leagues", {}).items():
         note = "Latest recorded fixtures are too old; a JSON update is not a new fixture."
     elif status == "off-season":
         note = "Seasonal calendar: historical data is preserved during the break."
+    elif status == "reference-coverage":
+        note = "Verified rankings or titleholder reference coverage remains available between events."
     else:
         note = "Dated fixtures are present near the current coverage window."
 
