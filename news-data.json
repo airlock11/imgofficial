@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-17T17:40:28+00:00",
+  "updated_at": "2026-11-17T23:58:43+00:00",
   "refresh_minutes": 20,
   "counts": {
     "total": 30,
@@ -10,11 +10,13 @@
       "laliga": 12,
       "bundesliga": 12,
       "seriea": 12,
-      "jamaica_pl": 9,
+      "jamaica_pl": 6,
       "pfl": 12
     }
   },
-  "errors": {},
+  "errors": {
+    "ESPN": "No articles returned"
+  },
   "videos": [],
   "leagues": {
     "soccer": [
@@ -29,30 +31,6 @@
         "league": "Premier League",
         "image": "",
         "published": "2026-11-17T17:13:15+00:00"
-      },
-      {
-        "title": "Chiellini on Premier League economic power, Italy problems and England pressure - Yahoo Sports",
-        "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPV19ReHZJSVFOaW8wb1lqWVZpTzRtVUl6VDl1VS0yWEN4Sml6QUl3YWNSSU1vbzJrZDNNNXVFYUY0aVV5OVRSa19fZjM0UXo1aDd6YWxYZWMxOFRXaEwya05sdU0yZlZ5YXhYM053VVJ5Umk0dVREWnVHUHNKdFR0UTJBRUFTSU9rZmRTYVRsZ2tiZw?oc=5",
-        "description": "Chiellini on Premier League economic power, Italy problems and England pressure Yahoo Sports",
-        "source": "Yahoo Sports",
-        "sport": "Football",
-        "region": "England",
-        "league_key": "soccer",
-        "league": "Premier League",
-        "image": "",
-        "published": "2026-11-17T16:53:00+00:00"
-      },
-      {
-        "title": "Ben White’s ‘Remontada’. The story of his rejuvenation for England and Arsenal - The New York Times",
-        "link": "https://news.google.com/rss/articles/CBMihAFBVV95cUxPQWd5YV82WkVEdUNQaFd0VUFJQWczUGtZWmJzblRkT1V1X1ZuVG0tLS1NbDhjSXRrendqYS1ldVhWYnNNSl9NUmlxTnVZNlN4R3Q2SkE5T3MwTVNxdWhHVVdvLTBWUGNxdXN4S09ZR3ZsZk9hRlk5c3NOdks2MXAxQWxTX2Q?oc=5",
-        "description": "Ben White’s ‘Remontada’. The story of his rejuvenation for England and Arsenal The New York Times",
-        "source": "The New York Times",
-        "sport": "Football",
-        "region": "England",
-        "league_key": "soccer",
-        "league": "Premier League",
-        "image": "",
-        "published": "2026-11-17T12:00:28+00:00"
       },
       {
         "title": "Premier League: Growing amount of players out to emulate David Beckham - BBC",
@@ -79,16 +57,16 @@
         "published": "2026-11-17T11:21:46+00:00"
       },
       {
-        "title": "Tara Bourne: Defender switches allegiance to Wales from England - BBC",
-        "link": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE5iX3pnQThOazE4OHRRd1dMalVNWVVfUlNILTBpTDhwR0tWXzF0MVpXR3VONVdLNDlfTXQzN0l1X25VdlZMdEFHeVpLSE94ZHBPZnFKVnFWU0psS0dpVWx2VjE4cHdwZ1p0?oc=5",
-        "description": "Tara Bourne: Defender switches allegiance to Wales from England BBC",
-        "source": "BBC",
+        "title": "Gavin Bazunu will play Premier League again, says ex-England keeper David James - Yahoo",
+        "link": "https://news.google.com/rss/articles/CBMihwFBVV95cUxOcnUyTXpYUmVpbnNjWEF3R2pRdGU2a0MxbDBrX29KTnlZMW1SUkJYTUg5cHgteGVmc2kxVFlveTlSTVhJY2VSSWRBZFo3czFHeFM5dTdTcXFVampPYVR2eG91RG16dDNqWm1xLXZPQ0Q5ODVJek80enRXZ3piM2NodWNDaC1MTHM?oc=5",
+        "description": "Gavin Bazunu will play Premier League again, says ex-England keeper David James Yahoo",
+        "source": "Yahoo",
         "sport": "Football",
         "region": "England",
         "league_key": "soccer",
         "league": "Premier League",
         "image": "",
-        "published": "2026-11-17T11:09:57+00:00"
+        "published": "2026-11-17T05:00:00+00:00"
       },
       {
         "title": "'I would urge a bit of caution': UK PM against eliminating TV blackouts for Premier League - Yahoo Sports",
@@ -115,6 +93,18 @@
         "published": "2026-11-16T19:00:53+00:00"
       },
       {
+        "title": "Andy Burnham is correct: English football’s 3pm blackout is worth protecting - The Athletic - The New York Times",
+        "link": "https://news.google.com/rss/articles/CBMimwFBVV95cUxPd2hMSUREcG5pcktJQjlYbHFMMnJkdGFXT0RobC1rWldqdm5EQ2tmMTRDTkF3Um5LV05DSjJCeVNXVURsdmVGQlVReVZhTTc0RC1oTlB4LXpBRWN6VFZOb2hLblNucjBJblRIa1YySlZmd250QWY2cFg4RDdzV2k4RHkyaWRkRkw5R0FwVDRhc2JOdXpjS1ZKc045MA?oc=5",
+        "description": "Andy Burnham is correct: English football’s 3pm blackout is worth protecting - The Athletic The New York Times",
+        "source": "The New York Times",
+        "sport": "Football",
+        "region": "England",
+        "league_key": "soccer",
+        "league": "Premier League",
+        "image": "",
+        "published": "2026-11-16T17:00:01+00:00"
+      },
+      {
         "title": "How England put in a Premier League performance to overwhelm Spain - The New York Times",
         "link": "https://news.google.com/rss/articles/CBMilAFBVV95cUxNcTNOeFl3UWNBS0NHb0tWTXZPZ0N4eWNmUVR6a1htcS04VWQyT09xaGk5RGMyUG1Rc2w1OU8yLTBSYkdPVHN1TWJsRHNscVFTVEk0N1BkeHF4dUpIVmlVVEdDeEowVEdMYVE0cGU3RjN5OUNTYloxZS1hQU4tVk5BU1J0YklQLTZqNUlaenN6WlN6dG9G?oc=5",
         "description": "How England put in a Premier League performance to overwhelm Spain The New York Times",
@@ -139,16 +129,28 @@
         "published": "2026-11-16T11:19:34+00:00"
       },
       {
-        "title": "James Trafford: Has Leeds goalkeeper overtaken Jordan Pickford as England's No 1 after starring display against Spain? - Sky Sports",
-        "link": "https://news.google.com/rss/articles/CBMi9wFBVV95cUxPYmF0VDY2S09OTlNHWkM3WlpFbkhsTWxST3p0LS1Bam16WDQ4azhHT0VuUjRSZjdkcW00QWhYUXl3dnRMRl9BLTU3cGhwenNQdVNhMWNsUEo3SFNiS1hlOElGRHdOby1ud08zZHEya0xpN29Dd2thbE1NMGlKZ1NsVkx3RV91aXg4Y0pNQnhTcGpMVU1HZnRhNmczVlYxX2xOSDhTZ2RGRjNRSkpSMG5vbDRBV0xtcTJYZDlHQ0VDZ0ZUX0RsVlI2TGYwYUw3bVJUZkRsYW5LSDRxTm9kX1ZWY01pTDlPNk45REtnNHZ4WFEyMWxpUGRZ?oc=5",
-        "description": "James Trafford: Has Leeds goalkeeper overtaken Jordan Pickford as England's No 1 after starring display against Spain? Sky Sports",
-        "source": "Sky Sports",
+        "title": "Former Celtic striker Maeda discusses ‘different level’ after Premier League move - Yahoo Sports",
+        "link": "https://news.google.com/rss/articles/CBMijwFBVV95cUxNZnJWdE1TMkEtS01aY3J4V040am5ETHR1TkdoeDB5d2lDM2xGbmNYMDZqYzRERWliclhzczNxOXBWWXl4SUJkejlzOUcyZWxGZm82QWVBTmxaQk04SWZrNUF2SjdRaUFVZUViei1PUmZRZ3VKV2ZGblZZZmhpaDFYZGJxZmMwZFppSEZldGN4TQ?oc=5",
+        "description": "Former Celtic striker Maeda discusses ‘different level’ after Premier League move Yahoo Sports",
+        "source": "Yahoo Sports",
         "sport": "Football",
         "region": "England",
         "league_key": "soccer",
         "league": "Premier League",
         "image": "",
-        "published": "2026-11-16T00:13:32+00:00"
+        "published": "2026-11-16T10:02:00+00:00"
+      },
+      {
+        "title": "Homophobia in football: Reports of abuse on the rise in English football - BBC",
+        "link": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE00ZXBkVlZuN3FpNGxUaURSc3NuN3NTZm1UU1Y0UHBBVnJGZjlXdzZYaDBsczFMbXg3MUUyM1pjM2ZmSFJRX3B0emZRR0tNdFZCZHZDNWd1LTZQaVBRZ3hDa2JpRUh2UW04?oc=5",
+        "description": "Homophobia in football: Reports of abuse on the rise in English football BBC",
+        "source": "BBC",
+        "sport": "Football",
+        "region": "England",
+        "league_key": "soccer",
+        "league": "Premier League",
+        "image": "",
+        "published": "2026-11-16T07:26:27+00:00"
       },
       {
         "title": "When are the international breaks in 2026/27 Premier League season? - Premier League",
@@ -164,6 +166,18 @@
       }
     ],
     "laliga": [
+      {
+        "title": "Real Madrid star Kylian Mbappe’s racial abuser handed an 11-month prison sentence - Football Today",
+        "link": "https://news.google.com/rss/articles/CBMitgFBVV95cUxPaGl5YWR1T1pPZDJYQjhTYWlTbnhyS08xRzhEYTdERVpPbFRQREttTVZpa2FmSFV5SnhVM2I1MDIxUWtJaXc0OWN2akZhbl9Hei1wMVNNYzZ0bExCT054UFZRcmd4WEdTZ09FcXRub1pXN2R2WU9iSUFQd2ZKTm9jRFFuYUpyZmxJZGs2REhkazEya2NGOUthaUZrNmxCUm5nRVpVeXVoWGtKWS1NellYNDRVelZGZw?oc=5",
+        "description": "Real Madrid star Kylian Mbappe’s racial abuser handed an 11-month prison sentence Football Today",
+        "source": "Football Today",
+        "sport": "Football",
+        "region": "Spain",
+        "league_key": "laliga",
+        "league": "La Liga",
+        "image": "",
+        "published": "2026-11-17T15:58:19+00:00"
+      },
       {
         "title": "Football fan convicted of hate crime for shouting racist chants against Real Madrid's Mbappe during La Liga match - Olive Press News Spain",
         "link": "https://news.google.com/rss/articles/CBMisgFBVV95cUxQcTNPY3A5NFBlQ0FvcHRiYVI3UFozTmdJbl91LVpNdFlEazRvM2theTNLVGtuWnZZbmpZc3lGTEtZeF9UbE9lTEtsOVNOdF80VzdRdnlZQjBuZ1BWLVFQemVuV1ZGMXI1aEwwc0Y2N1dnZXNEQVc5ZDNZX2xscmV5UTFLbHV1a1ZqOWRybEswUVhEVlRwNXZha3dBeTVCMC1ZNVVRTjgtWjlwUmx6WTRxYnZB?oc=5",
@@ -199,6 +213,18 @@
         "league": "La Liga",
         "image": "",
         "published": "2026-11-16T10:00:00+00:00"
+      },
+      {
+        "title": "De la Fuente denies racism in Spain despite Yamal, Vinicius avowals - Al Jazeera",
+        "link": "https://news.google.com/rss/articles/CBMirwFBVV95cUxNRFlVb1I0QU90RTNKVmRBSWRNR2RYRkFPMjB4dHpvTkJfTEhYb0RPekswdjVEc1VqdUcwSG9SU1BFUFJEYjd3RzBBYTBYX2tFdmlrT2g5UThTOHlIQXQzTWpLbG9qSEx5amRJbXB2aEY1R1VkczVTNGktM054dzFXSFB1aTZ3YXJWTHp1QnU4aGtRc0dDVktKSndodmMyMUl5NkZpY0tOajNva2RwQ2440gG0AUFVX3lxTFBJemo4V3BCaGNtaWxSb3VIcUJ6bEdGODdUX19zdEFOV1NrMkE5ckJ2eXk2aW9tZFd4cmdyRS01MWlDaThadGFzQ2RYT1YtWXVocURJRjgxQ1JQc19jS281ZFdibnAxdzlzR21LRF9pWHlZWE9tV2FZQUpuelFWRk1QbFNrNEdDZEZSRC1KSU8zXzd1MkRiOWFJc2ZURUhDZmdudi1xN0JRSlpPU0MtX00xRkpySg?oc=5",
+        "description": "De la Fuente denies racism in Spain despite Yamal, Vinicius avowals Al Jazeera",
+        "source": "Al Jazeera",
+        "sport": "Football",
+        "region": "Spain",
+        "league_key": "laliga",
+        "league": "La Liga",
+        "image": "",
+        "published": "2026-11-15T08:32:34+00:00"
       },
       {
         "title": "La Liga star labels Barcelona ‘the club of my heart’ - Yahoo Sports",
@@ -261,30 +287,6 @@
         "published": "2026-09-26T07:00:00+00:00"
       },
       {
-        "title": "How Malaga returned to La Liga after dropping into Spain's third tier - BBC",
-        "link": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE5jVHJYUzBMV0ZFb2p5Rk9aMHBfN0VQZmU1RllFeTFTUUh3WUFyeWJJWTU4akJVSnJzMHYzNFRkUGRkUzVLM3BvNS16Y01zbmt2WGxkN1lWRC1OOVI1ekpqWGlPUjVoQ3M?oc=5",
-        "description": "How Malaga returned to La Liga after dropping into Spain's third tier BBC",
-        "source": "BBC",
-        "sport": "Football",
-        "region": "Spain",
-        "league_key": "laliga",
-        "league": "La Liga",
-        "image": "",
-        "published": "2026-08-19T07:00:00+00:00"
-      },
-      {
-        "title": "Why are Barcelona and Real Madrid not playing in La Liga’s opening weekend? - The New York Times",
-        "link": "https://news.google.com/rss/articles/CBMipAFBVV95cUxNby1HcFNibVhrdVM3Q0NLRU81bXFtSDlVNkRaY3JHT1ZUbF9ZajBEbVhQVW1VY3ZMSkpIbWk4a2p4VGRyNjdYYktsYUE4ajNnYlVrN2t0VENheXh6dWZOMmdwWGNUQk1kNmRBLUlIWTE3dzBsM2MydG1McHdQTnR1ejZFRC1jY2ViUDVYSGN0R2gyOERVR2tMOWhVaUpNaGVyYWF5TA?oc=5",
-        "description": "Why are Barcelona and Real Madrid not playing in La Liga’s opening weekend? The New York Times",
-        "source": "The New York Times",
-        "sport": "Football",
-        "region": "Spain",
-        "league_key": "laliga",
-        "league": "La Liga",
-        "image": "",
-        "published": "2026-08-15T07:00:00+00:00"
-      },
-      {
         "title": "La Liga chief Tebas accuses FIFA of 'destroying football industry', calls for Infantino to quit - Reuters",
         "link": "https://news.google.com/rss/articles/CBMixgFBVV95cUxOSk9sSjIzeU9ZV0dyWjU2dDVYYkVKYUZnMnpPUm1ReEEyR3ltLXNkemZHVUFFVnQ3MXFQeFFzVVJnYnluWUlLM015VWRaeDQ5Rk85NXdNZFpOYkFQR2RTQ09EdV92NkRoOEZRYUZfR3lkX0RMbDRkTDhWM3lsczhTNW9oVTNkTC1NcE1EN1FnOW9NUW9ERms0NjdDeTFHa0Z3US1QeHNaeEJLQk1FRDhUalJrcEJ5WXdZdDB6SEtISFRhUzV1dHc?oc=5",
         "description": "La Liga chief Tebas accuses FIFA of 'destroying football industry', calls for Infantino to quit Reuters",
@@ -320,7 +322,7 @@
         "league_key": "bundesliga",
         "league": "Bundesliga",
         "image": "",
-        "published": "2026-11-17T17:00:00+00:00"
+        "published": "2026-11-17T20:30:00+00:00"
       },
       {
         "title": "‘Z’ and Bundesliga bring FC Augsburg coaches to Thane for grassroots football development programme - MediaNews4U",
@@ -335,18 +337,6 @@
         "published": "2026-11-17T12:22:54+00:00"
       },
       {
-        "title": "Zee and Bundesliga take football development clinic to Thane - Indian Television Dot Com",
-        "link": "https://news.google.com/rss/articles/CBMiowFBVV95cUxQTDQtTFhUc1NfT2g3OXE0WGYwY3QxNzJMVFBMQlBWMk9SZ182ZTBBZWFZUy0tNzlHQUFVNkhjd0lfVE1odnZXcng1ZGRMWlFUcWlFTkJoUDJKcVdoQXgtengtU3lrUVpBSk1ScXFYc19yRVhuTndCTWZ1b0JnUEp2OHJJRXB0b0RkU2NCWUFHRVRfYXZQNXJraHZTSlJkZWxzNlFn?oc=5",
-        "description": "Zee and Bundesliga take football development clinic to Thane Indian Television Dot Com",
-        "source": "Indian Television Dot Com",
-        "sport": "Football",
-        "region": "Germany",
-        "league_key": "bundesliga",
-        "league": "Bundesliga",
-        "image": "",
-        "published": "2026-11-17T11:48:34+00:00"
-      },
-      {
         "title": "Germany into UEFA Nations League quarter-finals with Netherlands rout - Bundesliga | official website",
         "link": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPbk1MVEc1b19KZWNoUHJKVWlrRW5rSW9GdEdmSl9kLXRTc2tvdEh0UV8xUUVRTVg0amN6UFAwN3FSRzFKWXRUQXR1b2hYYzd4X3Atbml5LWdlMXV6OS1TZ2FwUHVRVzhEUFZIQ2xOdTRWQTFQN0NaOTZIbFY2MngtSUdOR01Fd3IxRWpoc3lZVG1DakpqY09EVTAzamtaTGdXenB3N04zbEhkYjBMOF93MTZydw?oc=5",
         "description": "Germany into UEFA Nations League quarter-finals with Netherlands rout Bundesliga | official website",
@@ -356,19 +346,19 @@
         "league_key": "bundesliga",
         "league": "Bundesliga",
         "image": "",
-        "published": "2026-11-17T09:34:11+00:00"
+        "published": "2026-11-16T13:15:35+00:00"
       },
       {
-        "title": "Germany vs. Netherlands: UEFA Nations League preview and live blog - Bundesliga | official website",
-        "link": "https://news.google.com/rss/articles/CBMipgFBVV95cUxPQ0dHZi1ubEhuQW53Wl9NaFFrT1pRTFg3R0xFa19IbDJXTjRWa2FmLVBCeFo4UTBSdUNTRHZ1amRNYjNEcXFERDZBVm1HRDVaakNzOWN0XzBCUlBHYzNha1ZkUXlqdW8wZUtjZVFTRDVZMzIxdmZIWkdnVi1mTHZ1U3docmxMMnlEaG84UkV2SElCSDNVOGJKalAwdWwtcTh4VDNpNlpR?oc=5",
-        "description": "Germany vs. Netherlands: UEFA Nations League preview and live blog Bundesliga | official website",
-        "source": "Bundesliga | official website",
+        "title": "Jamal Musiala set for Bayern Munich return - Yahoo Sports",
+        "link": "https://news.google.com/rss/articles/CBMihwFBVV95cUxOeWFtNnMyTFhUZEp6TUJhQi10SUFHS2FfMUU5WHhJTkt3LTI3R29kaG45dHlEM203bExuUXJRRm4tRElFRTMyNkZfQzBVZm9vZWJvakZIV1hIUW9wYk1sem83SjJaYnNjSjNKQ0xYSnh0QXMxVzM3S0dDWEstTHNERVFFWldlMDg?oc=5",
+        "description": "Jamal Musiala set for Bayern Munich return Yahoo Sports",
+        "source": "Yahoo Sports",
         "sport": "Football",
         "region": "Germany",
         "league_key": "bundesliga",
         "league": "Bundesliga",
         "image": "",
-        "published": "2026-11-16T07:59:16+00:00"
+        "published": "2026-11-16T09:43:00+00:00"
       },
       {
         "title": "English football players in Germany: The 2026/27 edition - Bundesliga | official website",
@@ -393,6 +383,18 @@
         "league": "Bundesliga",
         "image": "",
         "published": "2026-11-08T08:00:00+00:00"
+      },
+      {
+        "title": "Bundesliga and Bundesliga 2 fixture times confirmed up until Matchday 18 - Bundesliga | official website",
+        "link": "https://news.google.com/rss/articles/CBMioAFBVV95cUxNSy1vVE94MDNrMXNsUnIwV1ZiamRuYUxQUVlyR3JjSGhsZE02cFRsYUJPb21RVVlBSHZFTFhweW03bmVCaFBlZmxUM1J1amdwc1VKOUdKR3RtZ2ZmVFcyOWRQVnJZSGVqYy10TXhYckFpaU5oWXpiQ3c4VjM4dHVHN2NWMTNjd2l0TTJsZ2xCTnZwQ3JYQmI5TnZBUXJDVlN0?oc=5",
+        "description": "Bundesliga and Bundesliga 2 fixture times confirmed up until Matchday 18 Bundesliga | official website",
+        "source": "Bundesliga | official website",
+        "sport": "Football",
+        "region": "Germany",
+        "league_key": "bundesliga",
+        "league": "Bundesliga",
+        "image": "",
+        "published": "2026-11-05T08:00:00+00:00"
       },
       {
         "title": "German football: The leagues where champions aren't promoted - BBC",
@@ -457,28 +459,40 @@
     ],
     "seriea": [
       {
-        "title": "De Bruyne given extra time off before Napoli training - LiveScore",
-        "link": "https://news.google.com/rss/articles/CBMivgFBVV95cUxOUEdRRGwwN0E4c090MXdzX1FzZkg0ZmlnZmJ2NTM3Qlhrc3FxVFBfX3V2YXE5TkZudXVFb3d4YXJqaHozQm1EOEpfbzluWnY3d2pnd2syNkZOX1JOaTF3QmhSU1JiLXZMS1ZuSTliWmYtZ25VLTctVVAtZFFia0wzNmpIakY5TGE5MHA5Zm5LSHE5eGNHUEhucE9LZHdWOVdTUENLVkVUOTlwSUM2YVZJSzA0WWtsajVoOXozZEV3?oc=5",
-        "description": "De Bruyne given extra time off before Napoli training LiveScore",
+        "title": "Marotta: \"A winning model at Inter; at Juve, or I saw corporate management. The Under-23s, the stadium and the Growth Decree...\" - LiveScore",
+        "link": "https://news.google.com/rss/articles/CBMihgJBVV95cUxNbVpLMEdkWEtxRS00bDNPNUN5RVZDVzRsNjFvYURpdG1kRmFGRUhrVHg3dGIxeHpiWGtjclJnNDZYLUxLdmlBU2ttTHhud3A3aWpRWUJ1TGtlZ0l1Y2RDLWpVNkRycjlqdmtzZ0NuMndiQ25QcTFYODF5Z1lmQzZnbDUxMHlaVi1aaGRtODVFTXlBTV9zYjVQR21YZHN2RzIxMFB1cXVxZ19BZ3lCTlJIcTlzdkpudUN5UWNDSF9ONHczQmxRRWR6aHlDdGFYZnNCLTlsNmlHWXgwU21RZVJDMFcwWWdoME1yNUdyclZXN3Zxel9RSEsyOVVhV3VGM2xXNk54WjVB?oc=5",
+        "description": "Marotta: \"A winning model at Inter; at Juve, or I saw corporate management. The Under-23s, the stadium and the Growth Decree...\" LiveScore",
         "source": "LiveScore",
         "sport": "Football",
         "region": "Italy",
         "league_key": "seriea",
         "league": "Serie A",
         "image": "",
-        "published": "2026-11-17T17:23:57+00:00"
+        "published": "2026-11-17T22:41:33+00:00"
       },
       {
-        "title": "Chiellini on Premier League economic power, Italy problems and England pressure - LiveScore",
-        "link": "https://news.google.com/rss/articles/CBMi6AFBVV95cUxONUo5M25PN2V4cEt1YktHTUc3SnJDenExNWNiZjJHbG5EWGVHMF9ieFJvNm9BUFZDcFVxZWZtcHZ4LThwMEl5UGkxV1VEYXhVY0I4ZHRsVHZ6b1BqMDFENWtpTnprd1RFMUFVWGJMSUZVcmI2Nk44WmZnWFBEREJHMGxlRG9Xdnp1T0t6NjM3eVB4WC1Qd1VkVEVJeTVuVkRrSmNKQ3pmMkNRVmU0RFg5NHJYV3MwY29OWEYyNGc3cWdDbExuUTFFUlUtLXRoeE5fYkpwTlNWajhObU5KemlXeklzSEdYVXVL?oc=5",
-        "description": "Chiellini on Premier League economic power, Italy problems and England pressure LiveScore",
+        "title": "Chelsea chase Serie A talent they wanted in the summer – but Gittens may need to leave first - LiveScore",
+        "link": "https://news.google.com/rss/articles/CBMi6wFBVV95cUxPSjdidHNWTFQtNWtnY1l4OHpFdWlEV3A3ZmQxbm9JRGRYY2JKYWxTb2xlc2FENHExSEVicldGUmUzVDhKN3dJaUpaeDk3eUh5LWlHMWo5MzBHZnBjQnZac1h4Nk9fRTZzckl1eGFQWU11MTAtN0hYbWJjM1Yyc2NERTNmcGJjY25ncUdPTG5UUjZLUFNyVlN0OTFFS1UyRUJjZEdrdGNFRnFFd2FBYlNkWkktR243anpCZF94ekE2TjNLakpidTJCelNaV0FxUndhWEdWR2hpYW1TWFIzcnhvNl93Vk8xNnFLemlF?oc=5",
+        "description": "Chelsea chase Serie A talent they wanted in the summer – but Gittens may need to leave first LiveScore",
         "source": "LiveScore",
         "sport": "Football",
         "region": "Italy",
         "league_key": "seriea",
         "league": "Serie A",
         "image": "",
-        "published": "2026-11-17T17:13:15+00:00"
+        "published": "2026-11-17T20:20:29+00:00"
+      },
+      {
+        "title": "Chiellini on Premier League economic power, Italy problems and England pressure - Yahoo Sports",
+        "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPV19ReHZJSVFOaW8wb1lqWVZpTzRtVUl6VDl1VS0yWEN4Sml6QUl3YWNSSU1vbzJrZDNNNXVFYUY0aVV5OVRSa19fZjM0UXo1aDd6YWxYZWMxOFRXaEwya05sdU0yZlZ5YXhYM053VVJ5Umk0dVREWnVHUHNKdFR0UTJBRUFTSU9rZmRTYVRsZ2tiZw?oc=5",
+        "description": "Chiellini on Premier League economic power, Italy problems and England pressure Yahoo Sports",
+        "source": "Yahoo Sports",
+        "sport": "Football",
+        "region": "Italy",
+        "league_key": "seriea",
+        "league": "Serie A",
+        "image": "",
+        "published": "2026-11-17T16:53:00+00:00"
       },
       {
         "title": "FIGC moves closer to vote after months of crisis - Inside The Games",
@@ -577,18 +591,6 @@
         "published": "2026-08-22T07:00:00+00:00"
       },
       {
-        "title": "Inter win Serie A title: Italy’s team of the decade regain Scudetto after 2025 heartbreak - The New York Times",
-        "link": "https://news.google.com/rss/articles/CBMikAFBVV95cUxQOUtuaWZadnM2ZGp0R0pVaGg4c3RralJLcmtxblczRUgzVEhzcnRvZXlPQzRJb1FnN0kwdnRZWk13emVaYS1POVJ3OFQ0VGhDdjQ2Q1lfWFBqUWRVT3FtdHU5T09YR0EwblFXXy10RW5SaG9BUEQwRGJiZUY0TEQ4aWlCM3B0d0k2MkFYcW5jc2o?oc=5",
-        "description": "Inter win Serie A title: Italy’s team of the decade regain Scudetto after 2025 heartbreak The New York Times",
-        "source": "The New York Times",
-        "sport": "Football",
-        "region": "Italy",
-        "league_key": "seriea",
-        "league": "Serie A",
-        "image": "",
-        "published": "2026-05-03T07:00:00+00:00"
-      },
-      {
         "title": "Italy’s Serie A soccer league sounds out private equity for stake in overseas media unit, sources say - Reuters",
         "link": "https://news.google.com/rss/articles/CBMixwFBVV95cUxOUWIxc2dydlM4Z3FCRHZXa1ZaeDJnZ0JpcjZXcC1GY1QwR3F5Z0RZNE52akw1XzBMRnBjMFRsMklyVW9JR29qUVVoUFNBanIwTXpGSUZvUXRsaVEweVhMbGRtaWdnUVItcmpmMS1XeDBXTzdXTlZ6T29iZkViTndiMWVpTUo0MEZmbi1kZ291Ylh6ZmI3TU5iV3d6c2VxWVdHYWFBQXhodHl4REUwSElsRTdUZnN6ZndrQUJCMWllOFh1RmNkZnlB?oc=5",
         "description": "Italy’s Serie A soccer league sounds out private equity for stake in overseas media unit, sources say Reuters",
@@ -651,30 +653,6 @@
         "published": "2021-02-12T08:00:00+00:00"
       },
       {
-        "title": "English Women's Super League Table 2026-27 - ESPN India",
-        "link": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE1rSTgtdlNNWHp0UG1VUGtPdjFmUGFIdE9FVXVLc2M2TXF5NlJpbk5lM05ucUhZQ0VQQ19vRHhqM1ZlcDRqV3MzM1JYUkdQNjQxTzgxcmNwQjcwYzgwNlFQSQ?oc=5",
-        "description": "English Women's Super League Table 2026-27 ESPN India",
-        "source": "ESPN India",
-        "sport": "Football",
-        "region": "Jamaica",
-        "league_key": "jamaica_pl",
-        "league": "Jamaican Premier League",
-        "image": "",
-        "published": "2019-06-02T16:31:57+00:00"
-      },
-      {
-        "title": "Italian Serie A Table 2026-27 - ESPN India",
-        "link": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1jX2RleDZzWmNPZm1RRm00U1NvY09YRmg2WmJaWmFLd09WOEdWRll1bFRqeVJHWmNyWHJGLVZZOThPMHp1Zy1qSk9vVzBkcjBCb3ZDMENKMk5PZXlyMWc?oc=5",
-        "description": "Italian Serie A Table 2026-27 ESPN India",
-        "source": "ESPN India",
-        "sport": "Football",
-        "region": "Jamaica",
-        "league_key": "jamaica_pl",
-        "league": "Jamaican Premier League",
-        "image": "",
-        "published": "2016-07-03T19:13:43+00:00"
-      },
-      {
         "title": "2026-27 Russian Premier League Standings - ESPN India",
         "link": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1IZlVYNTNJdkRVV2RpczNGZkxXaDZCb3g0WExRek9KSVlnNGZKYThkZHV3OGpHQjRCcnpFVDhfTndMb0N4WWdIWlZRWDhud1F6Q0dmb2swd3RTbTBfQXc?oc=5",
         "description": "2026-27 Russian Premier League Standings ESPN India",
@@ -697,18 +675,6 @@
         "league": "Jamaican Premier League",
         "image": "",
         "published": "2016-07-03T16:18:17+00:00"
-      },
-      {
-        "title": "English League Championship Table 2026-27 - ESPN India",
-        "link": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFB6RlY2Y1VkXzYzQ284QjRqOF9wdXkzb0MxTTFhRXZlMGdkM29hNDJJLWQ0czVONkNRaWFiRzJidVRlUG90aU5wU0Z5OE1fbXdBXzY4RzFkRF9JQTVuNEE?oc=5",
-        "description": "English League Championship Table 2026-27 ESPN India",
-        "source": "ESPN India",
-        "sport": "Football",
-        "region": "Jamaica",
-        "league_key": "jamaica_pl",
-        "league": "Jamaican Premier League",
-        "image": "",
-        "published": "2016-07-02T15:20:48+00:00"
       }
     ],
     "pfl": [
@@ -773,30 +739,6 @@
         "published": "2024-02-08T08:00:00+00:00"
       },
       {
-        "title": "UCFC withdraws from the Philippines Football League - Cebu Daily News",
-        "link": "https://news.google.com/rss/articles/CBMimAFBVV95cUxOZGdydnduYUpPdk05VEpSTFVETHA5WURVR0c3d3FqeFUxUzZCZU13OUZWU2dLb01Ra0EySVZqS3ZOMlVUNEl1ZXFBQzh5WXJSVkNHclh6UVhmMFpMVFNjcGRNZjEtcUl6UWlQcFh4Y200bmk2dTdmcUhuY0J1QkRnWFdpa0Nnc0hzNUtJOEVMVnRUZEJTcEtXT9IBngFBVV95cUxPNjNyN0xkNGJZQmpqUFFoc2RTZHdFdWR0VXdZNFNhdGFsa21BV1FnZkZMVTM2Z0gzcGptV3p5dVE1Q01ZVmNBYkMwNTl5dW9tNm55NWV2eHpDRzI1ZVZZdWZmQ2VDM2lJckltLVlSVzdTR1lLclB2VUVuRHN0TGJ0eGM1eHI2ZlVLMWRxbkRmbHRiZHZzaWFsMmZLS1NBUQ?oc=5",
-        "description": "UCFC withdraws from the Philippines Football League Cebu Daily News",
-        "source": "Cebu Daily News",
-        "sport": "Football",
-        "region": "Philippines",
-        "league_key": "pfl",
-        "league": "Philippines Football League",
-        "image": "",
-        "published": "2023-02-17T08:00:00+00:00"
-      },
-      {
-        "title": "Philippines Football League targets 5th season kick off in July - Rappler",
-        "link": "https://news.google.com/rss/articles/CBMilwFBVV95cUxQWllGTk5FblNfam1JTXdGNTlYamdmUmJnOUR2UmJibnpaYUhLZlRtQ1JtbnJ4TGtJLUNhV1VCTDVjcm52NjVEWnJBY1ZQajRJLVQySkZ2cjFxc1p3N2MzXzk5TjctX0l4NkhSb3NNN3BCZm4zeVJwZnQ3MFVZYWlmSGxQX003U0JVcGFkMS1OQW5MSlh6VU1V?oc=5",
-        "description": "Philippines Football League targets 5th season kick off in July Rappler",
-        "source": "Rappler",
-        "sport": "Football",
-        "region": "Philippines",
-        "league_key": "pfl",
-        "league": "Philippines Football League",
-        "image": "",
-        "published": "2021-12-14T03:33:33+00:00"
-      },
-      {
         "title": "United City win 2020 Philippines Football League title - The AFC",
         "link": "https://news.google.com/rss/articles/CBMinAFBVV95cUxNUFg2bUhsQzk4c2c1UFVCR0tFTjFzVFdSbEZRZ0MxbEtOODdFci03NENqbXZhU3Bmekt4NlBjWWhiSDdaT09TaUQ1WGYtdjhHbnBxTmxMZ000Q1B1eVBreERSWDlYczZWVW14MjZRWTBrUF9CcmdkQmRlMGNsOWkzN3A1Zzg2MGNzQ3RPUU4yNlgyQ2xnUGdEeDl2Q1U?oc=5",
         "description": "United City win 2020 Philippines Football League title The AFC",
@@ -855,10 +797,144 @@
         "league": "Philippines Football League",
         "image": "",
         "published": "2018-02-22T08:00:00+00:00"
+      },
+      {
+        "title": "Red Card Global named as strategic partner for media and sponsorship for the Philippines Football League - The Drum",
+        "link": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQdGltR0ZEVlQxd1RGVFJzY3F3Zi1HaEJtbEtUUmR2VkhIZU4zUURCTk9PZEtiaHFDeHQ1S3VLYnVSdDFaSVM2OUJEbS04UVEwam5pZ2R1V0JqdUZ3Wno2cTdNODkwVGdyS3NOZ1c0LUZ4QTRBSy1yQjdlSFVMMm5uNlBkOVV2eDlJUThNclRyd3V0aE9Hd1dLN3l3Uk8wa0VBTkZ3ckpRcThyZw?oc=5",
+        "description": "Red Card Global named as strategic partner for media and sponsorship for the Philippines Football League The Drum",
+        "source": "The Drum",
+        "sport": "Football",
+        "region": "Philippines",
+        "league_key": "pfl",
+        "league": "Philippines Football League",
+        "image": "",
+        "published": "2017-04-26T07:00:00+00:00"
+      },
+      {
+        "title": "Ideas for marketing the Philippines Football League - Rappler",
+        "link": "https://news.google.com/rss/articles/CBMilgFBVV95cUxOdG1OVVpJdVd3cVVfdUhRMFBCdHZXei1rRlJDbWJtZS1jQzZnUUNDWmFtdVBGd0cxc3I5UElzNlRYSmtVcjlDbW9IZjZhbzBmYXY1Ym4yZl9HM3hSR1Y4ZDJLanVVLXNTamFMNTc1Rmd2RnlBa0FCbXVCcjZFMGVidHFnemhibE43cnI4VHJQOGhXTk5leVE?oc=5",
+        "description": "Ideas for marketing the Philippines Football League Rappler",
+        "source": "Rappler",
+        "sport": "Football",
+        "region": "Philippines",
+        "league_key": "pfl",
+        "league": "Philippines Football League",
+        "image": "",
+        "published": "2016-09-21T07:00:00+00:00"
       }
     ]
   },
   "items": [
+    {
+      "title": "PVL: Nxled deals Creamline an unlikely third straight defeat",
+      "link": "https://sports.inquirer.net/707496/pvl-nxled-deals-creamline-an-unlikely-third-straight-defeat",
+      "description": "ZUS Coffee may have an underwheling PVL All-Filipino Conference Siklab series, but Jovelyn Gonzaga believes that her young team has yet to scratch the surface of their full potential. Although they are already out of contention with a 0-5 start, ZUS Coffee rem",
+      "source": "Inquirer Sports",
+      "sport": "Sports",
+      "region": "Philippines",
+      "image": "https://sports.inquirer.net/files/2026/11/IMG_1199_PVL-All-Filipino-Conference-Siklab-series-Creamline-NXLED_Bernadeth-Pons-scaled.jpg",
+      "published": "2026-11-18T04:30:27+00:00"
+    },
+    {
+      "title": "Quiban has some momentum heading into season-ender",
+      "link": "https://sports.inquirer.net/707492/quiban-has-some-momentum-heading-into-season-ender",
+      "description": "Justin Quiban and Micah Shin head into the ICTSI Anvaya Cove Match Play Invitational on Wednesday, coming off contrasting fortunes in the biggest professional tournament in the land—with one finishing strongly and the other closing out his stint in inconsisten",
+      "source": "Inquirer Sports",
+      "sport": "Sports",
+      "region": "Philippines",
+      "image": "https://sports.inquirer.net/files/2026/11/QUIBAN-18November2026_2.jpg",
+      "published": "2026-11-18T04:20:24+00:00"
+    },
+    {
+      "title": "Belief and bench help Northern Ireland scale new heights as promotion secured",
+      "link": "https://www.bbc.co.uk/sport/football/articles/cwp9dxr80p3po?at_medium=RSS&at_campaign=rss",
+      "description": "Manager Michael O'Neill hails the belief shown by his side after they came from behind against Hungary to seal the draw they needed for promotion to Nations League A.",
+      "source": "BBC Sport",
+      "sport": "Sports",
+      "region": "International",
+      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/9a30/live/f5d9d9d0-e2e1-11f1-a094-5fdc692f3e33.jpg",
+      "published": "2026-11-17T23:49:31+00:00"
+    },
+    {
+      "title": "Wales' Nations League campaign boosts Bellamy's belief despite loss to Portugal",
+      "link": "https://www.bbc.co.uk/sport/football/articles/cmn507wn6gg3o?at_medium=RSS&at_campaign=rss",
+      "description": "Wales finished bottom of their Nations League group, but boss Craig Bellamy believes his team showed they belong in the top flight.",
+      "source": "BBC Sport",
+      "sport": "Sports",
+      "region": "International",
+      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/c7ba/live/73fea0c0-e2d3-11f1-99ed-7de3e5932968.jpg",
+      "published": "2026-11-17T23:37:45+00:00"
+    },
+    {
+      "title": "Nations League roundup: Devenny’s divine strike lifts Northern Ireland to top tier",
+      "link": "https://www.theguardian.com/football/2026/nov/17/nations-league-northern-ireland-hungary-norway-denmark",
+      "description": "Haaland’s late penalty grabs Norway last-eight spot Parrott penalties help Republic of Ireland secure playoff A wonder strike from Justin Devenny earned Northern Ireland top spot in Nations League Group B2 and promotion to the top tier of the competition. The ",
+      "source": "The Guardian Sport",
+      "sport": "Sports",
+      "region": "International",
+      "image": "https://i.guim.co.uk/img/media/1764032c2d905d34982ec12a555989209aac38cb/912_0_4561_3649/master/4561.jpg?width=140&quality=85&auto=format&fit=max&s=d13ec33ca681a41bc1dfc668337ca770",
+      "published": "2026-11-17T23:35:42+00:00"
+    },
+    {
+      "title": "Republic of Ireland talisman Parrott caps dream year with two more goals",
+      "link": "https://www.bbc.co.uk/sport/football/articles/cqzjr3yr2z0eo?at_medium=RSS&at_campaign=rss",
+      "description": "Republic of Ireland striker Troy Parrott reflects on a transformative 12 months for both club and country after scoring a double in the win against Kosovo.",
+      "source": "BBC Sport",
+      "sport": "Sports",
+      "region": "International",
+      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/8700/live/18d492f0-e2d2-11f1-99ed-7de3e5932968.jpg",
+      "published": "2026-11-17T23:10:33+00:00"
+    },
+    {
+      "title": "Papers: Poch to appoint Man Utd's first-ever female coach",
+      "link": "https://www.skysports.com/football/news/12040/13613427/man-utd-boss-mauricio-pochettino-to-appoint-clubs-first-ever-female-coach-paper-talk",
+      "description": "The top stories and transfer rumours from Wednesday's newspapers...",
+      "source": "Sky Sports",
+      "sport": "Sports",
+      "region": "International",
+      "image": "https://e2.365dm.com/26/08/1920x1080/skysports-paper-talk-football_7317647.jpg?20260809160824",
+      "published": "2026-11-17T22:58:00+00:00"
+    },
+    {
+      "title": "Humphries and Van Gerwen into Grand Slam knockouts",
+      "link": "https://www.bbc.co.uk/sport/darts/articles/c6jd7el8d9kyo?at_medium=RSS&at_campaign=rss",
+      "description": "Luke Humphries and Michael van Gerwen book their places in the last 16 of the Grand Slam of Darts with victories in their final group matches.",
+      "source": "BBC Sport",
+      "sport": "Sports",
+      "region": "International",
+      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/e72f/live/32bf1870-e2d2-11f1-99ed-7de3e5932968.jpg",
+      "published": "2026-11-17T22:57:02+00:00"
+    },
+    {
+      "title": "Former world boxing champion Jorge Linares detained by ICE in Texas",
+      "link": "https://www.theguardian.com/sport/2026/nov/17/jorge-linares-boxing-champion-ice-detention-texas",
+      "description": "Venezuelan boxer, 41, held at El Paso facility Lawyers insist former champion is legally in US ICE has not disclosed reason for his detention Linares won world titles in three weight classes Former world boxing champion Jorge Linares has been detained by US im",
+      "source": "The Guardian Sport",
+      "sport": "Sports",
+      "region": "International",
+      "image": "https://i.guim.co.uk/img/media/9e4e58b7c084584eadb3fe2799ab9e7086488a16/0_146_2673_2136/master/2673.jpg?width=140&quality=85&auto=format&fit=max&s=5741f44774fc5ffcdb6c6f818e586b66",
+      "published": "2026-11-17T22:43:15+00:00"
+    },
+    {
+      "title": "Ruthless Zverev through to ATP Finals knockout stage",
+      "link": "https://www.bbc.co.uk/sport/tennis/articles/c6x2eveyyxp0o?at_medium=RSS&at_campaign=rss",
+      "description": "World number one Alexander Zverev produces a serving masterclass to defeat Ben Shelton and qualify for the ATP Finals knockout stage with a match to spare.",
+      "source": "BBC Sport",
+      "sport": "Sports",
+      "region": "International",
+      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/aa9e/live/2f3ee070-e2d4-11f1-99ed-7de3e5932968.jpg",
+      "published": "2026-11-17T22:30:24+00:00"
+    },
+    {
+      "title": "Liverpool lead Chelsea in Camara race - Wednesday's gossip",
+      "link": "https://www.bbc.co.uk/sport/football/articles/cvx2xwx604y0o?at_medium=RSS&at_campaign=rss",
+      "description": "Liverpool leading Chelsea in race for Monaco's Lamine Camara, Barcelona rule out moves for Virgil van Dijk and Bruno Fernandes, and ex-Crystal Palace winger Wilfried Zaha could rejoin the club.",
+      "source": "BBC Sport",
+      "sport": "Sports",
+      "region": "International",
+      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/acd1/live/eaa3d110-e2d2-11f1-99ed-7de3e5932968.png",
+      "published": "2026-11-17T22:25:16+00:00"
+    },
     {
       "title": "PVL: Endgame errors continue to haunt Creamline, admits Pons",
       "link": "https://sports.inquirer.net/707506/pvl-endgame-errors-continue-to-haunt-creamline-admits-pons",
@@ -868,6 +944,16 @@
       "region": "Philippines",
       "image": "https://sports.inquirer.net/files/2026/11/IMG_2055_PVL-All-Filipino-Conference-Siklab-series-Creamline-NXLED_Bernadeth-Pons-Erin-Pangilinan-Myla-Pablo-scaled.jpg",
       "published": "2026-11-17T22:16:20+00:00"
+    },
+    {
+      "title": "Portugal’s new No 7 Forbs channels Ronaldo for winner as Wales are denied",
+      "link": "https://www.theguardian.com/football/2026/nov/17/wales-portugal-nations-league-match-report",
+      "description": "One way or another, Portugal’s No 7 shirt has caused quite the commotion in recent weeks and months, if not years. Perhaps it was inevitable, then, that the first win of the post-Cristiano Ronaldo era would come courtesy of the player wearing the updated jerse",
+      "source": "The Guardian Sport",
+      "sport": "Sports",
+      "region": "International",
+      "image": "https://i.guim.co.uk/img/media/5beb80441b956fe467728ebd075621765d220be1/158_0_2217_1773/master/2217.jpg?width=140&quality=85&auto=format&fit=max&s=6732f1836fb69a60d3fbea6405cf35e5",
+      "published": "2026-11-17T22:14:37+00:00"
     },
     {
       "title": "Sixers now early East leaders after Celtics take upset loss at home",
@@ -890,6 +976,26 @@
       "published": "2026-11-17T22:03:47+00:00"
     },
     {
+      "title": "Zverev takes straight-sets win against Shelton in ATP Finals group stage – as it happened",
+      "link": "https://www.theguardian.com/sport/live/2026/nov/17/alexander-zverev-v-ben-shelton-atp-finals-tennis-group-stage-live",
+      "description": "The world No 1 prevailed 6-2, 7-6 (4) in a rematch of the US Open final earlier this year, after Arthur Fils came from behind to beat Rafael Jódar Ready … play. Shelton’s backhand was pretty nifty against Arthur Fils in his first match. If it’s on tonight, he’",
+      "source": "The Guardian Sport",
+      "sport": "Sports",
+      "region": "International",
+      "image": "https://i.guim.co.uk/img/media/b2f504bc134befe847541df52ceec761ebcb2f50/298_0_3020_2416/master/3020.jpg?width=140&quality=85&auto=format&fit=max&s=d07fd64e3f671c56c0c24fcea517adb8",
+      "published": "2026-11-17T22:03:25+00:00"
+    },
+    {
+      "title": "Northern Ireland promoted to Nations League top tier with draw in Hungary",
+      "link": "https://www.skysports.com/football/hungary-vs-northern-ireland/report/554131",
+      "description": "Justin Devenny's superb strike saw Northern Ireland earn promotion to the top tier of the Nations League with a hard-fought 1-1 draw away to closest challengers Hungary in Budapest.",
+      "source": "Sky Sports",
+      "sport": "Sports",
+      "region": "International",
+      "image": "https://e1.365dm.com/26/11/1920x1080/skysports-northern-ireland_7409115.jpg?20261117215219",
+      "published": "2026-11-17T21:49:00+00:00"
+    },
+    {
       "title": "PVL: Gel Cayuna relishes growing connection with Nxled",
       "link": "https://sports.inquirer.net/707484/pvl-gel-cayuna-relishes-growing-connection-with-nxled",
       "description": "MANILA, Philippines — Gel Cayuna relished her stronger connection with Brooke Van Sickle and the Nxled Chameleons as they delivered the franchise’s first win against Creamline to stay unbeaten in the 2026 PVL All-Filipino Conference Siklab Series. Cayuna dishe",
@@ -900,134 +1006,34 @@
       "published": "2026-11-17T21:47:50+00:00"
     },
     {
-      "title": "PVL: Nxled frustrates Creamline to clinch top seed, twice-to-beat",
-      "link": "https://sports.inquirer.net/707448/pvl-nxled-frustrates-creamline-to-clinch-top-seed-twice-to-beat",
-      "description": "MANILA, Philippines — Nxled made franchise history at the perfect time on Tuesday night. The Chameleons took down defending champion Creamline for the first time, 25-20, 12-25, 25-21, 25-19, and secured the No. 1 seed and a twice-to-beat advantage in the 2026 ",
-      "source": "Inquirer Sports",
-      "sport": "Sports",
-      "region": "Philippines",
-      "image": "https://sports.inquirer.net/files/2026/11/IMG_2447_PVL-All-Filipino-Conference-Siklab-series-Creamline-NXLED_MJ-Phillips-scaled.jpg",
-      "published": "2026-11-17T20:41:15+00:00"
-    },
-    {
-      "title": "NCAA: Letran eliminates Mapua, books Final Four berth",
-      "link": "https://sports.inquirer.net/707447/ncaa-letran-eliminates-mapua-books-final-four-berth",
-      "description": "MANILA, Philippines–Letran continued its redemption run in the NCAA Season 102 men’s basketball tournament, eliminating Mapua with an 86-75 victory in the quarterfinals at San Juan Arena on Tuesday. The Knights advanced to the best-of-three semifinals against ",
-      "source": "Inquirer Sports",
-      "sport": "Sports",
-      "region": "Philippines",
-      "image": "https://sports.inquirer.net/files/2026/11/IMG_4038-scaled.jpg",
-      "published": "2026-11-17T20:14:40+00:00"
-    },
-    {
-      "title": "Hamilton says Ravens 'disgracing' standards after embarrassing loss to Chargers",
-      "link": "https://www.espn.com/nfl/story/_/id/50508744/kyle-hamilton-says-ravens-disgracing-standards-loss-previously-winless-chargers",
-      "description": "Pro Bowl safety Kyle Hamilton vented after the Ravens' 23-20 loss to the previously winless Chargers on Monday night, which was one of the most embarrassing defeats in team history.",
-      "source": "ESPN",
+      "title": "Parrott fires Republic of Ireland into Nations League play-offs",
+      "link": "https://www.skysports.com/football/republic-of-ireland-vs-kosovo/report/554134",
+      "description": "Troy Parrott fired the Republic of Ireland into a Nations League play-off berth with two penalties in their 3-0 victory over 10-man Kosovo at the Aviva Stadium in Dublin.",
+      "source": "Sky Sports",
       "sport": "Sports",
       "region": "International",
-      "image": "",
-      "published": "2026-11-17T17:35:41+00:00"
+      "image": "https://e1.365dm.com/26/11/1920x1080/skysports-ireland-kosovo_7409108.jpg?20261117214636",
+      "published": "2026-11-17T21:44:00+00:00"
     },
     {
-      "title": "Arsenal Double winner Storey dies aged 81",
-      "link": "https://www.bbc.co.uk/sport/football/articles/c63eg3ekxnpyo?at_medium=RSS&at_campaign=rss",
-      "description": "Former Arsenal and England midfielder Peter Storey - who helped the Gunners win the Double in 1970-71 - has died at the age of 81.",
-      "source": "BBC Sport",
+      "title": "Wales beaten by 10-man Portugal as Neto scores but is sent off",
+      "link": "https://www.skysports.com/football/wales-vs-portugal/report/554136",
+      "description": "Wales ended their Nations League group campaign with a 3-2 defeat against 10-man Portugal in Cardiff after Chelsea's Pedro Neto was sent off.",
+      "source": "Sky Sports",
       "sport": "Sports",
       "region": "International",
-      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/2835/live/0a8db170-e2a7-11f1-8226-87dfa5049e9a.jpg",
-      "published": "2026-11-17T17:33:41+00:00"
+      "image": "https://e2.365dm.com/26/11/1920x1080/skysports-wales-portugal_7409090.jpg?20261117212441",
+      "published": "2026-11-17T21:40:00+00:00"
     },
     {
-      "title": "What the NBA's first month has revealed about all 30 teams",
-      "link": "https://www.espn.com/nba/story/_/id/50502518/first-month-lakers-knicks-spurs-celtics",
-      "description": "With the season's first month nearly in the books, Ben Golliver examines the biggest storyline so far for all 30 teams.",
-      "source": "ESPN",
-      "sport": "Sports",
-      "region": "International",
-      "image": "",
-      "published": "2026-11-17T17:23:02+00:00"
-    },
-    {
-      "title": "Steph Curry confronts his 'basketball mortality'",
-      "link": "https://www.espn.com/nba/story/_/id/50503111/steph-curry-warriors-race-injuries",
-      "description": "At 38, Curry is still brilliant -- but managing his body has become the biggest battle of his career.",
-      "source": "ESPN",
-      "sport": "Sports",
-      "region": "International",
-      "image": "",
-      "published": "2026-11-17T17:23:02+00:00"
-    },
-    {
-      "title": "Back on course: Tiger to return for Hero World Challenge next month",
-      "link": "https://www.espn.com/golf/story/_/id/50511075/tiger-woods-return-next-month-hero-world-challenge",
-      "description": "Tiger Woods is returning to competitive golf in next month's Hero World Challenge in the Bahamas. The 50-year-old 15-time major winner has not played in a PGA Tour event since 2024.",
-      "source": "ESPN",
-      "sport": "Sports",
-      "region": "International",
-      "image": "",
-      "published": "2026-11-17T17:22:00+00:00"
-    },
-    {
-      "title": "Campbell says Hutchinson injury won't prompt celly ban: 'We're not talking to 8-year-olds'",
-      "link": "https://www.espn.com/nfl/story/_/id/50510660/dan-campbell-hutchinson-injury-prompt-celebration-ban",
-      "description": "Although Aidan Hutchinson's knee injury is a \"gut punch\" to the Lions, Dan Campbell said he won't tell his players to change the way they celebrate.",
-      "source": "ESPN",
-      "sport": "Sports",
-      "region": "International",
-      "image": "",
-      "published": "2026-11-17T17:22:00+00:00"
-    },
-    {
-      "title": "DeChambeau to join European tour in 2027 after demise of LIV Golf",
-      "link": "https://www.espn.com/golf/story/_/id/50510068/bryson-dechambeau-join-european-tour-2027-liv-demise",
-      "description": "Bryson DeChambeau will play on the European tour for the 2027 season following the demise of LIV Golf.",
-      "source": "ESPN",
-      "sport": "Sports",
-      "region": "International",
-      "image": "",
-      "published": "2026-11-17T17:22:00+00:00"
-    },
-    {
-      "title": "‘I’m entering to win’: Philippe Diallo launches campaign to topple Gianni Infantino",
-      "link": "https://www.theguardian.com/football/2026/nov/17/im-entering-to-win-philippe-diallo-launches-campaign-to-topple-gianni-infantino",
-      "description": "French FA chief officially begins bid for Fifa presidency Uefa’s choice hints at ‘support from other continents’ Philippe Diallo, Europe’s candidate to fight Gianni Infantino for the Fifa presidency, said he had received “strong signs of support from other con",
+      "title": "Ben Earl calls for future Nations Championship finals in Las Vegas, Hong Kong or Brazil",
+      "link": "https://www.theguardian.com/sport/2026/nov/17/rugby-union-ben-earl-england-future-nations-championship-finals-las-vegas",
+      "description": "England flanker says new destination would grow sport ‘Las Vegas would be fun … let’s try and grow the game’ Ben Earl has called on Nations Championship organisers to introduce a destination finals weekend, with Las Vegas, Hong Kong and Brazil among the Englan",
       "source": "The Guardian Sport",
       "sport": "Sports",
       "region": "International",
-      "image": "https://i.guim.co.uk/img/media/bf0462e1d6f8566b9dc8a1afa762b366a86f08b0/1094_5_1531_1225/master/1531.jpg?width=140&quality=85&auto=format&fit=max&s=051af6012b0ca6e517d8a74b63acf851",
-      "published": "2026-11-17T17:18:18+00:00"
-    },
-    {
-      "title": "Ramsay-Peaty headlines as revived ISL wary not to overstretch",
-      "link": "https://www.bbc.co.uk/sport/swimming/articles/ck1wvzryg015o?at_medium=RSS&at_campaign=rss",
-      "description": "Adam Ramsay-Peaty will headline the International Swimming League's comeback All-Star Match, as organisers vow not to \"overstretch\" after past financial issues.",
-      "source": "BBC Sport",
-      "sport": "Sports",
-      "region": "International",
-      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/beb5/live/2f9cb0b0-d1e5-11f1-8e07-c79267b33d55.jpg",
-      "published": "2026-11-17T17:17:18+00:00"
-    },
-    {
-      "title": "Last chance to vote for BBC Women's Footballer of the Year 2026",
-      "link": "https://www.bbc.co.uk/sport/football/articles/cj20velkgnypo?at_medium=RSS&at_campaign=rss",
-      "description": "Voting is now open for the BBC Women's Footballer of the Year 2026, with five players on the shortlist.",
-      "source": "BBC Sport",
-      "sport": "Sports",
-      "region": "International",
-      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/3773/live/8814cc60-dc43-11f1-93e1-3b657b665bcf.jpg",
-      "published": "2026-11-17T17:13:24+00:00"
-    },
-    {
-      "title": "Wayne Rooney says he contemplated taking own life during playing career",
-      "link": "https://www.theguardian.com/football/2026/nov/17/wayne-rooney-contemplated-taking-own-life-during-playing-career-mental-health",
-      "description": "Former England footballer opens up on mental health ‘It was probably the lowest point’ at Manchester United Wayne Rooney has revealed there was a period in his Manchester United career where he contemplated taking his own life. The former England striker said ",
-      "source": "The Guardian Sport",
-      "sport": "Sports",
-      "region": "International",
-      "image": "https://i.guim.co.uk/img/media/e788f0eebf8d41cd52201f027acd7c97808d26c4/564_362_4045_3235/master/4045.jpg?width=140&quality=85&auto=format&fit=max&s=c8cb258e68e2b21aa3db100114f1a4d7",
-      "published": "2026-11-17T17:13:23+00:00"
+      "image": "https://i.guim.co.uk/img/media/e42f707dfe4f172b12ed469b22c7695ee0c57fe9/222_0_2911_2330/master/2911.jpg?width=140&quality=85&auto=format&fit=max&s=e77a6d56a3a846486bd66ab6c12f1cc0",
+      "published": "2026-11-17T21:22:43+00:00"
     },
     {
       "title": "Rassie Erasmus’s tired ref-blaming act is wearing thin – South Africa deserve better | Robert Kitson",
@@ -1037,87 +1043,67 @@
       "sport": "Sports",
       "region": "International",
       "image": "https://i.guim.co.uk/img/media/60f6a0cb8eb59b4553aefdf792e90d309e177403/506_164_4391_3513/master/4391.jpg?width=140&quality=85&auto=format&fit=max&s=b57565a6dbb69a29dbe1557c05a33506",
-      "published": "2026-11-17T17:10:48+00:00"
+      "published": "2026-11-17T20:59:19+00:00"
     },
     {
-      "title": "Pocognoli’s aspiration for how Scotland must play is in danger of becoming unworkable",
-      "link": "https://www.theguardian.com/football/2026/nov/17/sebastien-pocognoli-scotland-nations-league-switzerland",
-      "description": "The 4-0 debacle against Switzerland has added to the tactical concerns about the head coach’s suitability, just six games into the job The Scottish Football Association can only cling to a lesson from the past when assessing a worrying international window. St",
-      "source": "The Guardian Sport",
-      "sport": "Sports",
-      "region": "International",
-      "image": "https://i.guim.co.uk/img/media/937a6b991116ddc51f03a76a9172fbd7b94cd245/333_0_3051_2441/master/3051.jpg?width=140&quality=85&auto=format&fit=max&s=7f148df44059414372387846d2ab1299",
-      "published": "2026-11-17T16:59:54+00:00"
-    },
-    {
-      "title": "A clash to savour at Ffos Las on Wednesday",
-      "link": "https://www.skysports.com/racing/news/12040/13613341/old-park-star-sober-glory-and-baron-noir-clash-at-ffos-las",
-      "description": "Cheltenham's loss is Ffos Las' gain on Wednesday as old rivals Old Park Star, Sober Glory and Baron Noir are set to face-off on chase debut and At The Races' Declan Rix previewed the contest.",
+      "title": "Ecclestone ruled out of WBBL",
+      "link": "https://www.skysports.com/cricket/news/12040/13613385/sophie-ecclestone-adelaide-strikers-spinner-ruled-out-of-entire-wbbl-tournament-with-injury",
+      "description": "Sophie Ecclestone has been ruled out of the remainder of the WBBL season due to a back injury.",
       "source": "Sky Sports",
       "sport": "Sports",
       "region": "International",
-      "image": "https://e1.365dm.com/26/03/1920x1080/skysports-old-park-star-supreme_7187897.jpg?20260310134134",
-      "published": "2026-11-17T16:51:00+00:00"
+      "image": "https://e1.365dm.com/26/07/1920x1080/skysports-sophie-ecclestone_7296970.jpg?20260713212140",
+      "published": "2026-11-17T20:14:00+00:00"
     },
     {
-      "title": "Strasbourg close to appointing Swansea boss Matos in £5m deal",
-      "link": "https://www.skysports.com/football/live-blog/12040/13163353/championship-news-transfer-latest-and-gossip-plus-efl-updates-from-league-one-and-league-two",
-      "description": "",
+      "title": "‘The game is in danger’: PFA head Maheta Molango on Fifa, Infantino and football’s future",
+      "link": "https://www.theguardian.com/football/2026/nov/17/pfa-maheta-molango-interview-fifa-gianni-infantino-interview",
+      "description": "At a potentially critical juncture for football, the PFA chief executive talks about the organisation, wider fears in the game and why the Folarin Balogun affair was ‘scandalous’ After five years in charge of the Professional Footballers’ Association, what has",
+      "source": "The Guardian Football",
+      "sport": "Football",
+      "region": "International",
+      "image": "https://i.guim.co.uk/img/media/f18616c2ee33d82b41cc54ddf97daf9d04c66d02/0_1421_4928_3941/master/4928.jpg?width=140&quality=85&auto=format&fit=max&s=6615af7c4ca8f9746b6967ebb35dd2bd",
+      "published": "2026-11-17T20:00:20+00:00"
+    },
+    {
+      "title": "JJ Gabriel confirms Manchester United exit: ‘You gave me moments I will always treasure’",
+      "link": "https://www.theguardian.com/football/2026/nov/17/jj-gabriel-confirms-manchester-united-exit-video",
+      "description": "Teenager says ‘thank you for everything’ in video Gabriel expected to join Real Madrid JJ Gabriel has announced his departure from Manchester United by posting a farewell message to the club on social media. The teenager, who has not played a competitive game ",
+      "source": "The Guardian Football",
+      "sport": "Football",
+      "region": "International",
+      "image": "https://i.guim.co.uk/img/media/67d60e119375343c39832edf622a8a13ea400c1a/215_0_3630_2904/master/3630.jpg?width=140&quality=85&auto=format&fit=max&s=0177839e4d439acb09b3faece6549aa7",
+      "published": "2026-11-17T19:50:48+00:00"
+    },
+    {
+      "title": "Sloppy Socceroos given a reality check as Jordan dominate in friendly win",
+      "link": "https://www.theguardian.com/football/2026/nov/17/australia-jordan-scocceroos-international-friendly",
+      "description": "Jordan 2-0 Australia (Al-Taamari 34, Ali Olwan 90+3) Socceroos had just one effort on target in defeat In their final game of 2026, the Socceroos were given a reminder that they remain a work in progress, beaten 2-0 by Jordan in an international friendly where",
+      "source": "The Guardian Football",
+      "sport": "Football",
+      "region": "International",
+      "image": "https://i.guim.co.uk/img/media/f9fee3497223c3350a15d7dd09f85c688679b1aa/152_0_3176_2540/master/3176.jpg?width=140&quality=85&auto=format&fit=max&s=0e3f1d458425440499bc57cde0006a7a",
+      "published": "2026-11-17T19:14:54+00:00"
+    },
+    {
+      "title": "Jockey De Boinville 'escorted to his vehicle' after threat received",
+      "link": "https://www.skysports.com/racing/news/12040/13613369/nico-de-boinville-escorted-to-his-vehicle-and-given-security-support-after-threat-received",
+      "description": "Nico de Boinville was given security support at Plumpton on Monday after a threat against the jockey was received and passed on to authorities.",
       "source": "Sky Sports",
       "sport": "Sports",
       "region": "International",
-      "image": "https://e0.365dm.com/26/07/1920x1080/skysports-vitor-matos_7311346.jpg?20261117125438",
-      "published": "2026-11-17T16:35:00+00:00"
+      "image": "https://e1.365dm.com/26/11/1920x1080/skysports-nico-de-boinville_7409018.jpg?20261117190726",
+      "published": "2026-11-17T18:55:00+00:00"
     },
     {
-      "title": "Rising star Fils earns first ATP Finals win",
-      "link": "https://www.bbc.co.uk/sport/tennis/articles/c6x2eveyyxp0o?at_medium=RSS&at_campaign=rss",
-      "description": "Rising star Arthur Fils claims his first career win at the ATP Finals by battling to a comeback victory over Rafael Jodar to remain in contention in Turin.",
-      "source": "BBC Sport",
-      "sport": "Sports",
+      "title": "‘I’m entering to win’: Philippe Diallo launches campaign to topple Gianni Infantino",
+      "link": "https://www.theguardian.com/football/2026/nov/17/im-entering-to-win-philippe-diallo-launches-campaign-to-topple-gianni-infantino",
+      "description": "French FA chief officially begins bid for Fifa presidency Uefa’s choice hints at ‘support from other continents’ Philippe Diallo, Europe’s candidate to fight Gianni Infantino for the Fifa presidency, said he had received “strong signs of support from other con",
+      "source": "The Guardian Football",
+      "sport": "Football",
       "region": "International",
-      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/f8d9/live/f7b8bc80-e2a0-11f1-8dda-8925a81c3da5.jpg",
-      "published": "2026-11-17T16:28:20+00:00"
-    },
-    {
-      "title": "Rassie Erasmus banned for six matches over ‘match-fixing’ diatribe after France defeat",
-      "link": "https://www.theguardian.com/sport/2026/nov/17/rassie-erasmus-south-africa-rugby-union-match-officials",
-      "description": "Springboks’ coach made contentious remarks in tirade Misses Nations Championship finals at Twickenham Rassie Erasmus has been banned for six international matches with immediate effect by World Rugby after an investigation into his remarkable rant on Monday in",
-      "source": "The Guardian Sport",
-      "sport": "Sports",
-      "region": "International",
-      "image": "https://i.guim.co.uk/img/media/4c96097ede3a55b0c3cc412b4e27a67b44c3da0c/291_236_6579_5263/master/6579.jpg?width=140&quality=85&auto=format&fit=max&s=015f5c97aa7adef592a15ee14879f3bb",
-      "published": "2026-11-17T16:28:14+00:00"
-    },
-    {
-      "title": "Arsenal close to new deals for Raya, Timber and Hincapie",
-      "link": "https://www.skysports.com/football/news/12040/13613327/arsenal-transfer-news-david-raya-jurrien-timber-and-piero-hincapie-close-to-finalising-new-contracts",
-      "description": "Arsenal are close to finalising new deals with David Raya, Jurrien Timber and Piero Hincapie.",
-      "source": "Sky Sports",
-      "sport": "Sports",
-      "region": "International",
-      "image": "https://e1.365dm.com/26/11/1920x1080/skysports-raya-timber_7408927.jpg?20261117162721",
-      "published": "2026-11-17T16:23:00+00:00"
-    },
-    {
-      "title": "Springboks boss Erasmus given six-game ban",
-      "link": "https://www.skysports.com/rugby-union/news/12040/13613321/rassie-erasmus-south-africa-coach-suspended-for-six-international-matches-after-comments-about-officiating-double-standards",
-      "description": "South Africa head coach Rassie Erasmus has been suspended for six international matches with immediate effect, following the extraordinary comments he made about the officiating of his side’s 21-19 defeat to France.",
-      "source": "Sky Sports",
-      "sport": "Sports",
-      "region": "International",
-      "image": "https://e1.365dm.com/26/11/1920x1080/skysports-rassie-erasmus_7408938.jpg?20261117164442",
-      "published": "2026-11-17T16:16:00+00:00"
-    },
-    {
-      "title": "South Africa head coach Erasmus banned for six matches",
-      "link": "https://www.bbc.co.uk/sport/rugby-union/articles/cj752w5q7z90o?at_medium=RSS&at_campaign=rss",
-      "description": "South Africa head coach Rassie Erasmus has been banned for six matches by World Rugby over comments he made about match officials.",
-      "source": "BBC Sport",
-      "sport": "Sports",
-      "region": "International",
-      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/107e/live/acefa850-e2a3-11f1-8226-87dfa5049e9a.jpg",
-      "published": "2026-11-17T16:09:24+00:00"
+      "image": "https://i.guim.co.uk/img/media/bf0462e1d6f8566b9dc8a1afa762b366a86f08b0/1094_5_1531_1225/master/1531.jpg?width=140&quality=85&auto=format&fit=max&s=051af6012b0ca6e517d8a74b63acf851",
+      "published": "2026-11-17T17:18:18+00:00"
     },
     {
       "title": "Martin relinquishes WBC belt",
@@ -1138,26 +1124,6 @@
       "region": "Philippines",
       "image": "",
       "published": "2026-11-17T16:00:00+00:00"
-    },
-    {
-      "title": "Woods set to return next month after two years out",
-      "link": "https://www.bbc.co.uk/sport/golf/articles/cm93080ep703o?at_medium=RSS&at_campaign=rss",
-      "description": "Tiger Woods is set to return to competitive golf in December for the first time in more than two years.",
-      "source": "BBC Sport",
-      "sport": "Sports",
-      "region": "International",
-      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/45ef/live/8e1fe4f0-e297-11f1-8dda-8925a81c3da5.jpg",
-      "published": "2026-11-17T15:54:36+00:00"
-    },
-    {
-      "title": "Peter Storey, Arsenal Double winner and England international, dies aged 81",
-      "link": "https://www.theguardian.com/football/2026/nov/17/peter-storey-arsenal-england-dies-aged-81",
-      "description": "Storey made 501 appearances for Arsenal from 1965 He won 19 England caps and finished career at Fulham Arsenal have paid tribute to Peter Storey, a key member of their 1971 Double-winning team, after the death of the former England midfielder at the age of 81.",
-      "source": "The Guardian Sport",
-      "sport": "Sports",
-      "region": "International",
-      "image": "https://i.guim.co.uk/img/media/ef28ddae28cdd34bccfe47ed75c386c4b8afd8d4/88_74_2499_1999/master/2499.jpg?width=140&quality=85&auto=format&fit=max&s=2407e665ba970e1eb6a7c7940057cef4",
-      "published": "2026-11-17T15:46:45+00:00"
     }
   ]
 }
