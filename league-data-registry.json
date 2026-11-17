@@ -58,7 +58,9 @@
         "standings",
         "liveStreams",
         "highlights"
-      ]
+      ],
+      "publicVisible": false,
+      "visibilityReason": "No current verified event source published"
     },
     "fiba": {
       "label": "FIBA",
@@ -109,7 +111,9 @@
         "standings",
         "liveStreams",
         "highlights"
-      ]
+      ],
+      "publicVisible": false,
+      "visibilityReason": "No current score or schedule feed; historical highlights are archived"
     },
     "mizoram_pl": {
       "label": "Mizoram Premier League",
@@ -126,7 +130,9 @@
         "standings",
         "liveStreams",
         "highlights"
-      ]
+      ],
+      "publicVisible": false,
+      "visibilityReason": "No current score or schedule feed"
     },
     "laliga": {
       "label": "La Liga",
@@ -160,7 +166,9 @@
         "standings",
         "liveStreams",
         "highlights"
-      ]
+      ],
+      "publicVisible": false,
+      "visibilityReason": "No current score or schedule feed"
     },
     "seriea": {
       "label": "Serie A",
@@ -228,7 +236,9 @@
         "standings",
         "liveStreams",
         "highlights"
-      ]
+      ],
+      "publicVisible": false,
+      "visibilityReason": "No current score or schedule feed; highlights are archived"
     },
     "mls": {
       "label": "MLS",
@@ -330,7 +340,9 @@
         "standings",
         "liveStreams",
         "highlights"
-      ]
+      ],
+      "publicVisible": false,
+      "visibilityReason": "Official fixture feed not advancing; last published game is outdated"
     },
     "uaap": {
       "label": "UAAP",
