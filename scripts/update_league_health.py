@@ -1,101 +1,148 @@
 #!/usr/bin/env python3
+"""IMG league coverage audit.
+
+Do not mistake a freshly rewritten JSON file for up-to-date league fixtures.
+Public visibility depends on published, dated fixtures and source availability.
+Do not delete historical league data when a public listing is suspended.
+"""
 import json
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
-ROOT=Path(__file__).resolve().parents[1]
-REG=ROOT/"league-data-registry.json"
-OUT=ROOT/"league-data-health.json"
+ROOT = Path(__file__).resolve().parents[1]
+NOW = datetime.now(timezone.utc)
+OUT = ROOT / "league-data-health.json"
+PAST_WINDOW = timedelta(days=21)
+UPCOMING_WINDOW = timedelta(days=90)
+
+# Limited tournaments and genuinely seasonal calendars retain archive listings
+# between seasons. For continuing leagues, a 21-day fixture gap is suspicious.
+SEASONAL = {
+    "asian_games", "wnba", "mls", "atp", "wta", "australian_open",
+    "wimbledon", "us_open", "ipl", "bigbash", "cricket_world_cup",
+    "volleyball_w", "volleyball_m", "npb", "kbo", "iihf", "f1",
+    "motogp", "formulae", "ufc",
+}
 
 def load(name):
-    p=ROOT/name
-    try:return json.loads(p.read_text("utf-8"))
-    except Exception:return {}
+    try:
+        return json.loads((ROOT / name).read_text("utf-8"))
+    except (OSError, ValueError):
+        return {}
 
-def league_map(data):
-    return data.get("leagues",{}) if isinstance(data,dict) else {}
+def parse_date(value):
+    if not value:
+        return None
+    try:
+        value = datetime.fromisoformat(str(value).replace("Z", "+00:00"))
+        return value.replace(tzinfo=timezone.utc) if value.tzinfo is None else value.astimezone(timezone.utc)
+    except (ValueError, TypeError):
+        return None
 
-def has_games(x):
-    return isinstance(x,dict) and isinstance(x.get("games"),list) and len(x.get("games"))>0
+def league_entry(data, key):
+    leagues = data.get("leagues", {})
+    return leagues.get(key, {}) if isinstance(leagues, dict) else {}
 
-def has_any(x,*keys):
-    return isinstance(x,dict) and any(bool(x.get(k)) for k in keys)
+def has_any(item, *keys):
+    return isinstance(item, dict) and any(bool(item.get(k)) for k in keys)
 
-def parse_time(value):
-    if not value:return None
-    try:return datetime.fromisoformat(str(value).replace("Z","+00:00"))
-    except Exception:return None
+registry = load("league-data-registry.json")
+sources = {
+    "extended": load("extended-sports-data.json"),
+    "regional": load("regional-web.json"),
+    "special": load("special-sports-data.json"),
+    "espn-cache": load("football-espn-cache.json"),
+}
+stats = load("stats-data.json")
+rows = {}
+for key, meta in registry.get("leagues", {}).items():
+    entries = [(name, league_entry(data, key)) for name, data in sources.items()]
+    entries = [(name, item) for name, item in entries if isinstance(item, dict) and item]
+    games = [g for _, item in entries for g in item.get("games", []) if isinstance(g, dict)]
+    dates = sorted({
+        event_date for game in games
+        if (event_date := parse_date(game.get("date") or game.get("startTime")))
+    })
+    active_dates = [
+        dt for dt in dates
+        if NOW - PAST_WINDOW <= dt <= NOW + UPCOMING_WINDOW
+    ]
+    previous = [dt for dt in dates if dt < NOW]
+    future = [dt for dt in dates if dt >= NOW]
+    pipeline = meta.get("pipeline", "")
+    manually_hidden = meta.get("publicVisible") is False
 
-def freshest_source(sources):
-    best=None
-    for source in sources:
-        stamp=parse_time(source.get("updatedAt") or source.get("updated_at") or source.get("lastUpdated"))
-        if stamp and (best is None or stamp>best):best=stamp
-    return best
-
-reg=json.loads(REG.read_text("utf-8"))
-extended=league_map(load("extended-sports-data.json"))
-special=league_map(load("special-sports-data.json"))
-regional=league_map(load("regional-web.json"))
-stats=league_map(load("stats-data.json"))
-
-rows={}
-for key,meta in reg.get("leagues",{}).items():
-    sources=[x for x in (extended.get(key),special.get(key),regional.get(key)) if isinstance(x,dict)]
-    pipeline=meta.get("pipeline","")
-    game_ready=any(has_games(x) for x in sources) or pipeline=="direct_espn"
-    standings_ready=any(has_any(x,"standings") for x in sources)
-    stats_ready=isinstance(stats.get(key),dict) and has_any(stats.get(key),"groups","leaders")
-    ranking_ready=any(has_any(x,"rankings","ranking","titleholders","medals") for x in sources)
-
-    pipe_meta=(reg.get("pipelines") or {}).get(pipeline,{})
-    fresh_limit=max(5,int(pipe_meta.get("freshMinutes") or 60))
-    newest=freshest_source(sources)
-    age_minutes=None
-    stale=False
-    if newest:
-        now=datetime.now(timezone.utc)
-        if newest.tzinfo is None:newest=newest.replace(tzinfo=timezone.utc)
-        age_minutes=max(0,int((now-newest.astimezone(timezone.utc)).total_seconds()//60))
-        stale=age_minutes>fresh_limit
-    elif pipeline!="direct_espn":
-        stale=bool(sources)
-
-    if not game_ready:
-        status="needs-source"
-    elif stale:
-        status="stale"
+    if manually_hidden:
+        status = "unavailable"
+    elif pipeline == "direct_espn":
+        # ESPN is fetched at runtime and may have a working proxy fallback.
+        # A local snapshot cannot establish whether either endpoint works.
+        status = "live-api-unverified"
+    elif not games:
+        status = "needs-source"
+    elif active_dates:
+        status = "active-fixtures"
+    elif key in SEASONAL:
+        status = "off-season"
     else:
-        status="healthy"
+        status = "stale-fixtures"
 
-    rows[key]={
-      "label":meta.get("label",key),
-      "sport":meta.get("sport",""),
-      "pipeline":pipeline,
-      "automatic":bool(meta.get("automatic")),
-      "scoresScheduleConfigured":game_ready,
-      "statisticsPublished":stats_ready,
-      "standingsPublished":standings_ready,
-      "rankingsPublished":ranking_ready,
-      "latestPublishedAt":newest.isoformat() if newest else None,
-      "ageMinutes":age_minutes,
-      "freshnessLimitMinutes":fresh_limit,
-      "status":status,
-      "note":"Optional dimensions publish only when a verified source supplies them."
+    visible = not manually_hidden and status not in ("needs-source", "stale-fixtures")
+    if manually_hidden:
+        note = meta.get("visibilityReason", "Feed unavailable")
+    elif pipeline == "direct_espn":
+        note = "Client-side API and its fallback require independent live checks."
+    elif status == "needs-source":
+        note = "No published scores or scheduled fixtures from known sources."
+    elif status == "stale-fixtures":
+        note = "Latest recorded fixtures are too old; a JSON update is not a new fixture."
+    elif status == "off-season":
+        note = "Seasonal calendar: historical data is preserved during the break."
+    else:
+        note = "Dated fixtures are present near the current coverage window."
+
+    rows[key] = {
+        "label": meta.get("label", key),
+        "sport": meta.get("sport", ""),
+        "pipeline": pipeline,
+        "automatic": bool(meta.get("automatic")),
+        "status": status,
+        "publicVisible": visible,
+        "fixtureCount": len(games),
+        "recentOrUpcomingFixtureCount": len(active_dates),
+        "lastRecordedFixtureAt": previous[-1].isoformat() if previous else None,
+        "nextRecordedFixtureAt": future[0].isoformat() if future else None,
+        "sourceFiles": [name for name, _ in entries],
+        "statisticsPublished": has_any(league_entry(stats, key), "groups", "leaders"),
+        "standingsPublished": any(has_any(item, "standings") for _, item in entries),
+        "rankingsPublished": any(has_any(item, "rankings", "ranking", "titleholders", "medals") for _, item in entries),
+        "note": note,
     }
 
-payload={
-  "updatedAt":datetime.now(timezone.utc).isoformat(),
-  "policy":reg.get("policy",{}),
-  "summary":{
-    "leagues":len(rows),
-    "automatic":sum(1 for x in rows.values() if x["automatic"]),
-    "scoreScheduleConfigured":sum(1 for x in rows.values() if x["scoresScheduleConfigured"]),
-    "needsSource":sum(1 for x in rows.values() if x["status"]=="needs-source"),
-    "stale":sum(1 for x in rows.values() if x["status"]=="stale"),
-    "healthy":sum(1 for x in rows.values() if x["status"]=="healthy")
-  },
-  "leagues":rows
+summary = {
+    "leagues": len(rows),
+    "visible": sum(1 for x in rows.values() if x["publicVisible"]),
+    "suspended": sum(1 for x in rows.values() if not x["publicVisible"]),
+    "activeFixtures": sum(1 for x in rows.values() if x["status"] == "active-fixtures"),
+    "staleFixtures": sum(1 for x in rows.values() if x["status"] == "stale-fixtures"),
+    "needsSource": sum(1 for x in rows.values() if x["status"] == "needs-source"),
+    "liveApiUnverified": sum(1 for x in rows.values() if x["status"] == "live-api-unverified"),
+    "offSeason": sum(1 for x in rows.values() if x["status"] == "off-season"),
 }
-OUT.write_text(json.dumps(payload,indent=2,ensure_ascii=False)+"\n","utf-8")
-print(json.dumps(payload["summary"]))
+previous_report = load("league-data-health.json")
+last_report = parse_date(previous_report.get("updatedAt"))
+# Avoid committing a new report on every 5-minute scheduled run when
+# the underlying publication decisions and source fixtures are unchanged.
+if (previous_report.get("summary") == summary and
+        previous_report.get("leagues") == rows and
+        last_report and NOW - last_report < timedelta(hours=6)):
+    print(json.dumps({"unchanged": True, **summary}))
+else:
+    payload = {
+        "updatedAt": NOW.isoformat(),
+        "policy": registry.get("policy", {}),
+        "summary": summary,
+        "leagues": rows,
+    }
+    OUT.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", "utf-8")
+    print(json.dumps(summary))
