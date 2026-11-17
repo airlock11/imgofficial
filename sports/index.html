@@ -73,10 +73,10 @@ const sportsDirectory={
     ['FIBA','International','fiba']
   ],
   Football:[
-    ['Premier League','England','soccer'],['Jamaican Premier League','Jamaica','jamaica_pl'],['Mizoram Premier League','India','mizoram_pl'],['La Liga','Spain','laliga'],['Primera Division, Reserves','El Salvador','el_salvador_reserves'],['Serie A','Italy','seriea'],['Bundesliga','Germany','bundesliga'],['UEFA Champions League','Europe','champions'],['UEFA Champions League Women','Europe','ucl_women'],['MLS','United States / Canada','mls'],['PFL','Philippines','pfl']
+    ['Premier League','England','soccer'],['La Liga','Spain','laliga'],['Serie A','Italy','seriea'],['Bundesliga','Germany','bundesliga'],['UEFA Champions League','Europe','champions'],['MLS','United States / Canada','mls'],['PFL','Philippines','pfl']
   ],
   Basketball:[
-    ['NBA','United States / Canada','basketball'],['WNBA','United States / Canada','wnba'],['PBA','Philippines','pba'],['NCAA Philippines','Philippines','ncaa_ph'],['UAAP','Philippines','uaap'],['MPBL','Philippines','mpbl'],['NBL-Pilipinas','Philippines','nbl'],['NBL Australia','Australia / New Zealand','nblaus'],['VBA','Vietnam','vba'],['B.League','Japan','bleague'],['EuroLeague','Europe','euroleague'],['The Asian Tournament','Asia / International','tat'],['WBSL','International','wbsl']
+    ['NBA','United States / Canada','basketball'],['WNBA','United States / Canada','wnba'],['PBA','Philippines','pba'],['UAAP','Philippines','uaap'],['MPBL','Philippines','mpbl'],['NBL-Pilipinas','Philippines','nbl'],['NBL Australia','Australia / New Zealand','nblaus'],['VBA','Vietnam','vba'],['B.League','Japan','bleague'],['EuroLeague','Europe','euroleague'],['The Asian Tournament','Asia / International','tat']
   ],
   Tennis:[
     ['ATP Tour','International','atp'],['WTA Tour','International','wta'],['Australian Open','Australia','australian_open'],['Wimbledon','United Kingdom','wimbledon'],['US Open','United States','us_open']
@@ -273,7 +273,23 @@ document.addEventListener('click',e=>{
     selected?.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
   });
 });
+
+/* Generated league report excludes missing and outdated competition feeds. */
+async function refreshSportsVisibility(){
+  try{
+    const r=await fetch('/league-data-health.json?v='+Date.now(),{cache:'no-store'});
+    if(!r.ok)return;
+    const report=await r.json();
+    const hidden=new Set(Object.entries(report?.leagues||{}).filter(([,v])=>v?.publicVisible===false).map(([k])=>k));
+    for(const sport of Object.keys(sportsDirectory)){
+      sportsDirectory[sport]=sportsDirectory[sport].filter(league=>!hidden.has(league[2]));
+    }
+    renderSports();hydrateLogos();
+  }catch(error){console.warn('League availability report unavailable',error)}
+}
+
 renderSports();
 hydrateLogos();
 loadStatsAvailability();
-</script></body></html>
+void refreshSportsVisibility();
+</script><script src="/nav-icons.js?v=20261117" defer></script></body></html>
