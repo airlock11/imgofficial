@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-17T08:24:00+00:00",
+  "updated_at": "2026-11-17T21:15:51+00:00",
   "source": "Official boxing websites",
   "sources": [
     {
@@ -12,7 +12,7 @@
     }
   ],
   "source_counts": {
-    "Premier Boxing Champions": 8,
+    "Premier Boxing Champions": 10,
     "Matchroom Boxing": 1
   },
   "errors": {
@@ -163,6 +163,68 @@
         },
         "fighter_2": {
           "name": "Cruse Stewart",
+          "winner": false
+        }
+      },
+      "results": {
+        "outcome": null,
+        "outcome_long": null,
+        "round": null,
+        "time": null,
+        "scores": []
+      }
+    },
+    {
+      "id": "web-premier-boxing-champions-2026-12-05-elijah-garcia-thomas-o-toole",
+      "title": "Elijah Garcia vs. Thomas O'Toole",
+      "date": "2026-12-05T12:00:00Z",
+      "displayTime": "Dec 5 · 8:00 PM ET",
+      "status": "NOT_STARTED",
+      "sourceName": "Premier Boxing Champions",
+      "sourceUrl": "https://www.premierboxingchampions.com/boxing-schedule",
+      "event": {
+        "title": "Premier Boxing Champions",
+        "location": "",
+        "venue": ""
+      },
+      "fighters": {
+        "fighter_1": {
+          "name": "Elijah Garcia",
+          "winner": false
+        },
+        "fighter_2": {
+          "name": "Thomas O'Toole",
+          "winner": false
+        }
+      },
+      "results": {
+        "outcome": null,
+        "outcome_long": null,
+        "round": null,
+        "time": null,
+        "scores": []
+      }
+    },
+    {
+      "id": "web-premier-boxing-champions-2026-12-05-luis-nunez-toshiki-shimomachi",
+      "title": "Luis Nunez vs. Toshiki Shimomachi",
+      "date": "2026-12-05T12:00:00Z",
+      "displayTime": "Dec 5 · 8:00 PM ET",
+      "status": "NOT_STARTED",
+      "sourceName": "Premier Boxing Champions",
+      "sourceUrl": "https://www.premierboxingchampions.com/boxing-schedule",
+      "event": {
+        "title": "Premier Boxing Champions",
+        "location": "",
+        "venue": ""
+      },
+      "fighters": {
+        "fighter_1": {
+          "name": "Luis Nunez",
+          "winner": false
+        },
+        "fighter_2": {
+          "name": "Toshiki Shimomachi",
           "winner": false
         }
       },
