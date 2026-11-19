@@ -1,7 +1,7 @@
 {
   "version": 1,
   "source": "ESPN public football data",
-  "updatedAt": "2026-11-19T04:32:00.803Z",
+  "updatedAt": "2026-11-19T13:55:50.163Z",
   "leagues": {
     "soccer": {
       "name": "Premier League",
@@ -968,6 +968,22 @@
           "venue": "The MKM Stadium",
           "competition": "Premier League",
           "category": "England"
+        },
+        {
+          "eventId": "401879203",
+          "date": "2026-12-19T12:30Z",
+          "displayTime": "",
+          "home": "Brentford",
+          "away": "Newcastle United",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/337.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/361.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "Gtech Community Stadium",
+          "competition": "Premier League",
+          "category": "England"
         }
       ],
       "standings": [
@@ -1192,7 +1208,7 @@
           "points": 7
         }
       ],
-      "verifiedAt": "2026-11-19T04:31:58.897Z"
+      "verifiedAt": "2026-11-19T13:55:49.724Z"
     },
     "laliga": {
       "name": "La Liga",
@@ -2271,7 +2287,7 @@
           "points": 5
         }
       ],
-      "verifiedAt": "2026-11-19T04:31:59.664Z"
+      "verifiedAt": "2026-11-19T13:55:49.844Z"
     },
     "bundesliga": {
       "name": "Bundesliga",
@@ -3216,7 +3232,7 @@
           "points": 4
         }
       ],
-      "verifiedAt": "2026-11-19T04:31:59.841Z"
+      "verifiedAt": "2026-11-19T13:55:50.027Z"
     },
     "seriea": {
       "name": "Serie A",
@@ -4279,7 +4295,7 @@
           "points": 5
         }
       ],
-      "verifiedAt": "2026-11-19T04:32:00.802Z"
+      "verifiedAt": "2026-11-19T13:55:50.162Z"
     }
   }
 }
