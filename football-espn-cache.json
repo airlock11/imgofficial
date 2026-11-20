@@ -1,7 +1,7 @@
 {
   "version": 1,
   "source": "ESPN public football data",
-  "updatedAt": "2026-11-20T11:21:11.995Z",
+  "updatedAt": "2026-11-20T19:13:16.464Z",
   "leagues": {
     "soccer": {
       "name": "Premier League",
@@ -1048,6 +1048,70 @@
           "venue": "Anfield",
           "competition": "Premier League",
           "category": "England"
+        },
+        {
+          "eventId": "401878739",
+          "date": "2026-12-20T14:00Z",
+          "displayTime": "",
+          "home": "Brighton & Hove Albion",
+          "away": "Ipswich Town",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/331.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/373.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "American Express Stadium",
+          "competition": "Premier League",
+          "category": "England"
+        },
+        {
+          "eventId": "401879198",
+          "date": "2026-12-20T14:00Z",
+          "displayTime": "",
+          "home": "Nottingham Forest",
+          "away": "Everton",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/393.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/368.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "The City Ground",
+          "competition": "Premier League",
+          "category": "England"
+        },
+        {
+          "eventId": "401878738",
+          "date": "2026-12-20T14:00Z",
+          "displayTime": "",
+          "home": "Sunderland",
+          "away": "Crystal Palace",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/366.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/384.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "Stadium of Light",
+          "competition": "Premier League",
+          "category": "England"
+        },
+        {
+          "eventId": "401879204",
+          "date": "2026-12-20T16:30Z",
+          "displayTime": "",
+          "home": "Arsenal",
+          "away": "Manchester United",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/359.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/360.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "Emirates Stadium",
+          "competition": "Premier League",
+          "category": "England"
         }
       ],
       "standings": [
@@ -1272,7 +1336,7 @@
           "points": 7
         }
       ],
-      "verifiedAt": "2026-11-20T11:21:11.235Z"
+      "verifiedAt": "2026-11-20T19:13:16.011Z"
     },
     "laliga": {
       "name": "La Liga",
@@ -2351,7 +2415,7 @@
           "points": 5
         }
       ],
-      "verifiedAt": "2026-11-20T11:21:11.502Z"
+      "verifiedAt": "2026-11-20T19:13:16.192Z"
     },
     "bundesliga": {
       "name": "Bundesliga",
@@ -3174,6 +3238,54 @@
           "venue": "Red Bull Arena",
           "competition": "Bundesliga",
           "category": "Germany"
+        },
+        {
+          "eventId": "401884697",
+          "date": "2026-12-20T14:30Z",
+          "displayTime": "",
+          "home": "SC Freiburg",
+          "away": "VfB Stuttgart",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/126.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/134.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "Europa-Park Stadion",
+          "competition": "Bundesliga",
+          "category": "Germany"
+        },
+        {
+          "eventId": "401884694",
+          "date": "2026-12-20T16:30Z",
+          "displayTime": "",
+          "home": "1. FC Union Berlin",
+          "away": "TSG Hoffenheim",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/598.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/7911.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "Stadion An der Alten Försterei",
+          "competition": "Bundesliga",
+          "category": "Germany"
+        },
+        {
+          "eventId": "401884693",
+          "date": "2026-12-20T18:30Z",
+          "displayTime": "",
+          "home": "Schalke 04",
+          "away": "Borussia Mönchengladbach",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/133.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/268.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "Veltins Arena",
+          "competition": "Bundesliga",
+          "category": "Germany"
         }
       ],
       "standings": [
@@ -3376,7 +3488,7 @@
           "points": 4
         }
       ],
-      "verifiedAt": "2026-11-20T11:21:11.750Z"
+      "verifiedAt": "2026-11-20T19:13:16.329Z"
     },
     "seriea": {
       "name": "Serie A",
@@ -4263,6 +4375,70 @@
           "venue": "Olimpico",
           "competition": "Serie A",
           "category": "Italy"
+        },
+        {
+          "eventId": "401874836",
+          "date": "2026-12-20T11:30Z",
+          "displayTime": "",
+          "home": "Fiorentina",
+          "away": "Bologna",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/109.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/107.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "Stadio Artemio Franchi",
+          "competition": "Serie A",
+          "category": "Italy"
+        },
+        {
+          "eventId": "401874785",
+          "date": "2026-12-20T14:00Z",
+          "displayTime": "",
+          "home": "Torino",
+          "away": "Cagliari",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/239.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/2925.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "Stadio Olimpico Grande Torino",
+          "competition": "Serie A",
+          "category": "Italy"
+        },
+        {
+          "eventId": "401875118",
+          "date": "2026-12-20T14:00Z",
+          "displayTime": "",
+          "home": "Venezia",
+          "away": "Monza",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/17530.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/4007.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "Stadio Pier Luigi Penzo",
+          "competition": "Serie A",
+          "category": "Italy"
+        },
+        {
+          "eventId": "401875045",
+          "date": "2026-12-20T17:00Z",
+          "displayTime": "",
+          "home": "Genoa",
+          "away": "Udinese",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/3263.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/118.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "Stadio Luigi Ferraris",
+          "competition": "Serie A",
+          "category": "Italy"
         }
       ],
       "standings": [
@@ -4487,7 +4663,7 @@
           "points": 5
         }
       ],
-      "verifiedAt": "2026-11-20T11:21:11.995Z"
+      "verifiedAt": "2026-11-20T19:13:16.463Z"
     }
   }
 }
