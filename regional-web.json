@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-21T12:09:06+08:00",
+  "updated_at": "2026-11-21T20:38:18+08:00",
   "refresh_minutes": 15,
   "leagues": {
     "pba": {
@@ -299,7 +299,7 @@
           "idleDiscoveryMinutes": 180,
           "gameDayDataRefreshMinutes": 15,
           "gameDayLivestreamRefreshMinutes": 5,
-          "lastSlowCheckAt": "2026-11-21T12:08:20+08:00"
+          "lastSlowCheckAt": "2026-11-21T20:37:33+08:00"
         },
         "failClosed": true
       }
@@ -547,32 +547,6 @@
           "home": "Pasay Voyagers",
           "awayScore": "64",
           "homeScore": "66",
-          "status": "Final",
-          "state": "final",
-          "sourceName": "Forebet",
-          "sourceUrl": "https://www.forebet.com/en/basketball/philippines/mpbl/results"
-        },
-        {
-          "eventId": "mpbl-20261007-quezon-zamboanga",
-          "date": "2026-10-07T19:00:00+08:00",
-          "displayTime": "Oct 7 · Final",
-          "away": "Zamboanga Sikat",
-          "home": "Quezon Huskers",
-          "awayScore": "55",
-          "homeScore": "88",
-          "status": "Final",
-          "state": "final",
-          "sourceName": "Forebet",
-          "sourceUrl": "https://www.forebet.com/en/basketball/philippines/mpbl/results"
-        },
-        {
-          "eventId": "mpbl-20261007-cebu-batangas",
-          "date": "2026-10-07T17:00:00+08:00",
-          "displayTime": "Oct 7 · Final",
-          "away": "Batangas City",
-          "home": "Cebu Greats",
-          "awayScore": "77",
-          "homeScore": "78",
           "status": "Final",
           "state": "final",
           "sourceName": "Forebet",
@@ -1376,7 +1350,7 @@
           "idleDiscoveryMinutes": 180,
           "gameDayDataRefreshMinutes": 15,
           "gameDayLivestreamRefreshMinutes": 5,
-          "lastSlowCheckAt": "2026-11-21T12:08:53+08:00"
+          "lastSlowCheckAt": "2026-11-21T20:38:01+08:00"
         },
         "failClosed": true
       }
@@ -1400,7 +1374,7 @@
         "idleDiscoveryMinutes": 180,
         "gameDayDataRefreshMinutes": 15,
         "gameDayLivestreamRefreshMinutes": 5,
-        "lastSlowCheckAt": "2026-11-21T12:08:20+08:00"
+        "lastSlowCheckAt": "2026-11-21T20:37:33+08:00"
       },
       "failClosed": true
     },
@@ -1420,7 +1394,7 @@
         "idleDiscoveryMinutes": 180,
         "gameDayDataRefreshMinutes": 15,
         "gameDayLivestreamRefreshMinutes": 5,
-        "lastSlowCheckAt": "2026-11-21T12:08:53+08:00"
+        "lastSlowCheckAt": "2026-11-21T20:38:01+08:00"
       },
       "failClosed": true
     }
