@@ -1,28 +1,29 @@
 {
-  "updatedAt": "2026-09-23T09:03:29.339660+00:00",
+  "updatedAt": "2026-11-21T16:42:12.859072+00:00",
   "freshForMinutes": 30,
   "streams": [
     {
-      "eventId": "fiba-youtube-QkNpu_nBnRg",
+      "eventId": "fiba-youtube-dq_bdVfAeBg",
       "sport": "Basketball",
       "leagueKey": "fiba",
       "league": "FIBA",
       "teams": [],
-      "title": "LIVE - Shanghai Sharks v RSSB Tigers | FIBA Intercontinental Cup Beijing 2026",
+      "title": "LIVE \ud83d\udd34 FIBA #3x3WorldTour Manama 2026 | Finals | #3x3Basketball",
       "officialSourceId": "fiba",
       "verificationStatus": "verified",
-      "lastVerifiedLiveAt": "2026-09-23T09:03:29.339660+00:00",
+      "lastVerifiedLiveAt": "2026-11-21T16:42:12.859072+00:00",
       "stream": {
-        "videoId": "QkNpu_nBnRg",
-        "watchUrl": "https://www.youtube.com/watch?v=QkNpu_nBnRg",
+        "videoId": "dq_bdVfAeBg",
+        "watchUrl": "https://www.youtube.com/watch?v=dq_bdVfAeBg",
         "provider": "YouTube",
         "channel": "FIBA Basketball",
-        "title": "LIVE - Shanghai Sharks v RSSB Tigers | FIBA Intercontinental Cup Beijing 2026",
+        "title": "LIVE \ud83d\udd34 FIBA #3x3WorldTour Manama 2026 | Finals | #3x3Basketball",
         "officialSourceId": "fiba",
         "sourceChannelId": "UCtInrnU3QbWqFGsdKT1GZtg",
         "verificationStatus": "verified",
-        "lastVerifiedLiveAt": "2026-09-23T09:03:29.339660+00:00",
-        "embedUrl": "https://www.youtube.com/embed/QkNpu_nBnRg",
+        "lastVerifiedLiveAt": "2026-11-21T16:42:12.859072+00:00",
+        "embeddable": true,
+        "embedUrl": "https://www.youtube.com/embed/dq_bdVfAeBg",
         "deliveryLeagueKey": "fiba",
         "deliveryPlacement": "above_statistics"
       },
@@ -31,41 +32,140 @@
         "url": "/scores/?league=fiba",
         "placement": "above_statistics"
       }
+    },
+    {
+      "eventId": "fiba3x3-youtube-1rHwDoGJBvU",
+      "sport": "Basketball",
+      "leagueKey": "fiba",
+      "league": "FIBA",
+      "teams": [],
+      "title": "LIVE \ud83d\udd34 Skyliners \ud83c\udde9\ud83c\uddea vs Toronto \ud83c\udde8\ud83c\udde6 | Semi-Finals Game | FIBA #3x3WTManama 2026 | 3x3 Basketball",
+      "officialSourceId": "fiba-3x3",
+      "verificationStatus": "verified",
+      "lastVerifiedLiveAt": "2026-11-21T16:42:12.859072+00:00",
+      "stream": {
+        "videoId": "1rHwDoGJBvU",
+        "watchUrl": "https://www.youtube.com/watch?v=1rHwDoGJBvU",
+        "provider": "YouTube",
+        "channel": "FIBA3x3 - The 3x3 Basketball Channel",
+        "title": "LIVE \ud83d\udd34 Skyliners \ud83c\udde9\ud83c\uddea vs Toronto \ud83c\udde8\ud83c\udde6 | Semi-Finals Game | FIBA #3x3WTManama 2026 | 3x3 Basketball",
+        "officialSourceId": "fiba-3x3",
+        "sourceChannelId": "UC7LpyJP5fupiJu2CdzRQheg",
+        "verificationStatus": "verified",
+        "lastVerifiedLiveAt": "2026-11-21T16:42:12.859072+00:00",
+        "embeddable": true,
+        "embedUrl": "https://www.youtube.com/embed/1rHwDoGJBvU",
+        "deliveryLeagueKey": "fiba",
+        "deliveryPlacement": "above_statistics"
+      },
+      "delivery": {
+        "leagueKey": "fiba",
+        "url": "/scores/?league=fiba",
+        "placement": "above_statistics"
+      }
+    },
+    {
+      "eventId": "fiba3x3-youtube-O6GkIcvbx3A",
+      "sport": "Basketball",
+      "leagueKey": "fiba",
+      "league": "FIBA",
+      "teams": [],
+      "title": "LIVE \ud83d\udd34 FIBA #3x3WorldTour Manama 2026 | Finals | #3x3Basketball",
+      "officialSourceId": "fiba-3x3",
+      "verificationStatus": "verified",
+      "lastVerifiedLiveAt": "2026-11-21T16:42:12.859072+00:00",
+      "stream": {
+        "videoId": "O6GkIcvbx3A",
+        "watchUrl": "https://www.youtube.com/watch?v=O6GkIcvbx3A",
+        "provider": "YouTube",
+        "channel": "FIBA3x3 - The 3x3 Basketball Channel",
+        "title": "LIVE \ud83d\udd34 FIBA #3x3WorldTour Manama 2026 | Finals | #3x3Basketball",
+        "officialSourceId": "fiba-3x3",
+        "sourceChannelId": "UC7LpyJP5fupiJu2CdzRQheg",
+        "verificationStatus": "verified",
+        "lastVerifiedLiveAt": "2026-11-21T16:42:12.859072+00:00",
+        "embeddable": true,
+        "embedUrl": "https://www.youtube.com/embed/O6GkIcvbx3A",
+        "deliveryLeagueKey": "fiba",
+        "deliveryPlacement": "above_statistics"
+      },
+      "delivery": {
+        "leagueKey": "fiba",
+        "url": "/scores/?league=fiba",
+        "placement": "above_statistics"
+      }
+    },
+    {
+      "eventId": "atp-youtube-z9VxzFGSUvk",
+      "sport": "Tennis",
+      "leagueKey": "atp",
+      "league": "ATP Tour",
+      "teams": [],
+      "title": "2026 Nitto ATP Finals Live Practice Stream: Fan Village",
+      "officialSourceId": "atp",
+      "verificationStatus": "verified",
+      "lastVerifiedLiveAt": "2026-11-21T16:42:12.859072+00:00",
+      "stream": {
+        "videoId": "z9VxzFGSUvk",
+        "watchUrl": "https://www.youtube.com/watch?v=z9VxzFGSUvk",
+        "provider": "YouTube",
+        "channel": "ATP Tour",
+        "title": "2026 Nitto ATP Finals Live Practice Stream: Fan Village",
+        "officialSourceId": "atp",
+        "sourceChannelId": "UCY_5h5zaSwN7Or4kIJDYNXA",
+        "verificationStatus": "verified",
+        "lastVerifiedLiveAt": "2026-11-21T16:42:12.859072+00:00",
+        "embeddable": true,
+        "embedUrl": "https://www.youtube.com/embed/z9VxzFGSUvk",
+        "deliveryLeagueKey": "atp",
+        "deliveryPlacement": "above_statistics"
+      },
+      "delivery": {
+        "leagueKey": "atp",
+        "url": "/scores/?league=atp",
+        "placement": "above_statistics"
+      }
+    },
+    {
+      "eventId": "atp-youtube-lLp26mI9vJE",
+      "sport": "Tennis",
+      "leagueKey": "atp",
+      "league": "ATP Tour",
+      "teams": [],
+      "title": "2026 Nitto ATP Finals Live Practice Stream: Sebastopoli",
+      "officialSourceId": "atp",
+      "verificationStatus": "verified",
+      "lastVerifiedLiveAt": "2026-11-21T16:42:12.859072+00:00",
+      "stream": {
+        "videoId": "lLp26mI9vJE",
+        "watchUrl": "https://www.youtube.com/watch?v=lLp26mI9vJE",
+        "provider": "YouTube",
+        "channel": "ATP Tour",
+        "title": "2026 Nitto ATP Finals Live Practice Stream: Sebastopoli",
+        "officialSourceId": "atp",
+        "sourceChannelId": "UCY_5h5zaSwN7Or4kIJDYNXA",
+        "verificationStatus": "verified",
+        "lastVerifiedLiveAt": "2026-11-21T16:42:12.859072+00:00",
+        "embeddable": true,
+        "embedUrl": "https://www.youtube.com/embed/lLp26mI9vJE",
+        "deliveryLeagueKey": "atp",
+        "deliveryPlacement": "above_statistics"
+      },
+      "delivery": {
+        "leagueKey": "atp",
+        "url": "/scores/?league=atp",
+        "placement": "above_statistics"
+      }
     }
   ],
-  "liveExpiryLedger": {
-    "ncaaph-youtube-jhZS19XiaPI": {
-      "lastVerifiedLiveAt": "2026-09-22T06:10:13.441019+00:00"
-    },
-    "ncaaph-youtube-AW-kMYvCJrc": {
-      "lastVerifiedLiveAt": "2026-09-22T06:50:29.097705+00:00"
-    },
-    "mpbl-youtube-mrDO0K9o320": {
-      "lastVerifiedLiveAt": "2026-09-22T06:50:29.097705+00:00"
-    },
-    "fiba-youtube-ofIa9Qwz0zc": {
-      "lastVerifiedLiveAt": "2026-09-22T07:22:08.850499+00:00"
-    },
-    "ncaaph-youtube-MzRZPtHRrsU": {
-      "lastVerifiedLiveAt": "2026-09-22T09:57:27.133676+00:00"
-    },
-    "mpbl-youtube-UP_EgMLP7B8": {
-      "lastVerifiedLiveAt": "2026-09-22T09:57:27.133676+00:00"
-    },
-    "fiba-youtube-vP1XJtfk6lc": {
-      "lastVerifiedLiveAt": "2026-09-22T12:09:56.852733+00:00"
-    },
-    "fiba-youtube-QkNpu_nBnRg": {
-      "lastVerifiedLiveAt": "2026-09-23T09:03:29.206648+00:00"
-    }
-  },
+  "liveExpiryLedger": {},
   "upcoming": [],
-  "upcomingCheckedAt": "2026-09-23T06:58:11.170617+00:00",
+  "upcomingCheckedAt": "2026-11-21T16:42:12.599054+00:00",
   "nblSchedule": [],
   "scanner": {
     "version": 3,
     "mode": "official-auto-discovery",
-    "checkedAt": "2026-09-23T09:03:05.836542+00:00",
+    "checkedAt": "2026-11-21T16:41:37.007135+00:00",
     "sourcesChecked": [
       "nbl-pilipinas",
       "mpbl",
@@ -74,15 +174,17 @@
       "fiba-3x3",
       "one-championship",
       "ufc",
-      "ncaa-philippines",
       "pba-official",
       "nba",
       "wnba",
+      "mlb",
       "atp",
       "euroleague",
+      "the-asian-tournament",
       "bleague-international",
       "volleyball-world-women",
-      "volleyball-world-men"
+      "volleyball-world-men",
+      "one-sports-pvl"
     ],
     "resolvedChannels": {
       "nbl-pilipinas": "UCJDBLldRGVJPEvyjJdSHefw",
@@ -92,21 +194,24 @@
       "fiba-3x3": "UC7LpyJP5fupiJu2CdzRQheg",
       "one-championship": "UCiormkBf3jm6mfb7k0yPbKA",
       "ufc": "UCvgfXK4nTYKudb0rFR6noLA",
-      "ncaa-philippines": "UC3Whnl6MzB0bJKwfbm43JMw",
       "pba-official": "UC9WkScCyThtumtf9XVO4eWQ",
       "nba": "UCWJ2lWNubArHWmf3FIHbfcQ",
       "wnba": "UCO9a_ryN_l7DIDS-VIt-zmw",
+      "mlb": "UCoLrcjPV5PbUrUyXq5mjc_A",
       "atp": "UCY_5h5zaSwN7Or4kIJDYNXA",
       "euroleague": "UCGr3nR_XH9r6E5b09ZJAT9w",
+      "the-asian-tournament": "UCU2n0Xm6Dz6aZ8O_gl8OQeA",
       "bleague-international": "UCx4M7pOU3Yhq9VAxmEbe1Vg",
       "volleyball-world-women": "UCNMg6XDhRZI2QzL4pWOvP_w",
-      "volleyball-world-men": "UCNMg6XDhRZI2QzL4pWOvP_w"
-    }
+      "volleyball-world-men": "UCNMg6XDhRZI2QzL4pWOvP_w",
+      "one-sports-pvl": "UCXDG9ue-emCN8Ad3h7lERqQ"
+    },
+    "oneSportsLiveSearchCheckedAt": "2026-11-15T09:50:11.938223+00:00"
   },
   "liveVerification": {
-    "checkedAt": "2026-09-23T09:03:29.339660+00:00",
+    "checkedAt": "2026-11-21T16:42:12.859072+00:00",
     "method": "YouTube videos API exact-video verification",
-    "verifiedLiveCount": 3,
+    "verifiedLiveCount": 5,
     "graceCount": 0,
     "removedCount": 0,
     "removed": []
