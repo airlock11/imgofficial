@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-22T08:31:15.369157+00:00",
+  "updatedAt": "2026-11-22T16:39:24.427094+00:00",
   "leagues": {
     "uaap": {
       "league": "UAAP",
@@ -11412,18 +11412,18 @@
           "suffix": "TD",
           "rows": [
             {
+              "player": "Caden Veltkamp",
+              "team": "FAU",
+              "gp": null,
+              "value": 33.0,
+              "displayValue": "33"
+            },
+            {
               "player": "Drew Mestemaker",
               "team": "OKST",
               "gp": null,
               "value": 30.0,
               "displayValue": "30"
-            },
-            {
-              "player": "Caden Veltkamp",
-              "team": "FAU",
-              "gp": null,
-              "value": 29.0,
-              "displayValue": "29"
             },
             {
               "player": "Darian Mensah",
@@ -11440,6 +11440,13 @@
               "displayValue": "28"
             },
             {
+              "player": "Noah Fifita",
+              "team": "ARIZ",
+              "gp": null,
+              "value": 26.0,
+              "displayValue": "26"
+            },
+            {
               "player": "Kevin Jennings",
               "team": "SMU",
               "gp": null,
@@ -11454,18 +11461,11 @@
               "displayValue": "25"
             },
             {
-              "player": "Braden Atkinson",
-              "team": "ORST",
+              "player": "Austin Simmons",
+              "team": "MIZ",
               "gp": null,
               "value": 25.0,
               "displayValue": "25"
-            },
-            {
-              "player": "Noah Fifita",
-              "team": "ARIZ",
-              "gp": null,
-              "value": 24.0,
-              "displayValue": "24"
             }
           ]
         },
@@ -11474,11 +11474,11 @@
           "suffix": "YDS",
           "rows": [
             {
-              "player": "Cole Tabb",
-              "team": "CIN",
+              "player": "Jadan Baugh",
+              "team": "FLA",
               "gp": null,
-              "value": 977.0,
-              "displayValue": "977"
+              "value": 981.0,
+              "displayValue": "981"
             },
             {
               "player": "Jalen Buckley",
@@ -11488,11 +11488,18 @@
               "displayValue": "972"
             },
             {
-              "player": "Michael Hawkins Jr.",
-              "team": "WVU",
+              "player": "Cale Hellums",
+              "team": "ARMY",
               "gp": null,
-              "value": 957.0,
-              "displayValue": "957"
+              "value": 970.0,
+              "displayValue": "970"
+            },
+            {
+              "player": "Steven Robinson",
+              "team": "USM",
+              "gp": null,
+              "value": 958.0,
+              "displayValue": "958"
             },
             {
               "player": "Jordan Gant",
@@ -11502,32 +11509,25 @@
               "displayValue": "942"
             },
             {
-              "player": "Cale Hellums",
-              "team": "ARMY",
+              "player": "Antwan Raymond",
+              "team": "RUTG",
               "gp": null,
-              "value": 908.0,
-              "displayValue": "908"
+              "value": 911.0,
+              "displayValue": "911"
             },
             {
-              "player": "Jadan Baugh",
-              "team": "FLA",
+              "player": "Kendrick Raphael",
+              "team": "SMU",
               "gp": null,
-              "value": 905.0,
-              "displayValue": "905"
+              "value": 909.0,
+              "displayValue": "909"
             },
             {
-              "player": "Micah Ford",
-              "team": "STAN",
+              "player": "Jeffrey Overton Jr.",
+              "team": "VT",
               "gp": null,
-              "value": 900.0,
-              "displayValue": "900"
-            },
-            {
-              "player": "Steven Robinson",
-              "team": "USM",
-              "gp": null,
-              "value": 876.0,
-              "displayValue": "876"
+              "value": 907.0,
+              "displayValue": "907"
             }
           ]
         },
@@ -11536,25 +11536,46 @@
           "suffix": "YDS",
           "rows": [
             {
-              "player": "Reed Harris",
-              "team": "ASU",
+              "player": "Junior Sherrill",
+              "team": "VAN",
               "gp": null,
-              "value": 987.0,
-              "displayValue": "987"
+              "value": 996.0,
+              "displayValue": "996"
             },
             {
-              "player": "Charlie Becker",
-              "team": "IU",
+              "player": "Isaiah Mizell",
+              "team": "ARIZ",
               "gp": null,
-              "value": 950.0,
-              "displayValue": "950"
+              "value": 990.0,
+              "displayValue": "990"
             },
             {
-              "player": "Collin Dixon",
-              "team": "ILL",
+              "player": "Justin Bowick",
+              "team": "OKST",
               "gp": null,
-              "value": 946.0,
-              "displayValue": "946"
+              "value": 963.0,
+              "displayValue": "963"
+            },
+            {
+              "player": "Mario Sanders",
+              "team": "USM",
+              "gp": null,
+              "value": 960.0,
+              "displayValue": "960"
+            },
+            {
+              "player": "Cayden Lee",
+              "team": "MIZ",
+              "gp": null,
+              "value": 940.0,
+              "displayValue": "940"
+            },
+            {
+              "player": "Rasean Jones",
+              "team": "BOIS",
+              "gp": null,
+              "value": 940.0,
+              "displayValue": "940"
             },
             {
               "player": "Justin Stevenson",
@@ -11564,32 +11585,11 @@
               "displayValue": "937"
             },
             {
-              "player": "Joseph Williams",
-              "team": "COLO",
+              "player": "Anthony Evans III",
+              "team": "MSST",
               "gp": null,
-              "value": 933.0,
-              "displayValue": "933"
-            },
-            {
-              "player": "Kelby Valsin",
-              "team": "FAU",
-              "gp": null,
-              "value": 923.0,
-              "displayValue": "923"
-            },
-            {
-              "player": "Rasean Jones",
-              "team": "BOIS",
-              "gp": null,
-              "value": 900.0,
-              "displayValue": "900"
-            },
-            {
-              "player": "Gavin Freeman",
-              "team": "BAY",
-              "gp": null,
-              "value": 889.0,
-              "displayValue": "889"
+              "value": 929.0,
+              "displayValue": "929"
             }
           ]
         }
