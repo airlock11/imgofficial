@@ -1,119 +1,14 @@
 {
   "special": true,
   "league": "WTA Tour",
-  "live": true,
-  "updatedAt": "2026-11-22T02:27:47.640310+00:00",
+  "live": false,
+  "updatedAt": "2026-11-22T02:27:52.601556+00:00",
   "sourceName": "WTA Official Scores scrape",
   "sourceUrl": "https://www.wtatennis.com/scores/",
   "verificationSource": "WTA Official Scores",
   "verificationUrl": "https://www.wtatennis.com/scores/",
-  "pageLiveCount": 0,
-  "parsedMatchCount": 3,
+  "pageLiveCount": null,
+  "parsedMatchCount": 0,
   "note": "GitHub scrape of the rendered WTA Scores page. Game points, current set number, current-set games and per-set scores are stored separately.",
-  "games": [
-    {
-      "eventId": "wta-scrape-0-g-maristany-zuleta-de-reales-r-masarova",
-      "date": "2026-11-22T02:27:47.638488+00:00",
-      "displayTime": "LP Open by IND • Chile",
-      "away": "G. Maristany Zuleta De Reales",
-      "home": "R. Masarova",
-      "awayScore": "2 4",
-      "homeScore": "6 6",
-      "awaySets": [
-        "2",
-        "4"
-      ],
-      "homeSets": [
-        "6",
-        "6"
-      ],
-      "awayPoint": "—",
-      "homePoint": "—",
-      "currentSet": 2,
-      "awayCurrentSetGames": 4,
-      "homeCurrentSetGames": 6,
-      "awaySetsWon": 0,
-      "homeSetsWon": 1,
-      "round": "Semifinals",
-      "court": "Center Court",
-      "status": "Suspended · Semifinals · Center Court",
-      "state": "suspended",
-      "eventOnly": false,
-      "title": "LP Open by IND • Chile",
-      "sourceName": "WTA Official Scores scrape",
-      "sourceUrl": "https://www.wtatennis.com/scores/",
-      "verificationSource": "WTA Official Scores",
-      "verificationUrl": "https://www.wtatennis.com/scores/"
-    },
-    {
-      "eventId": "wta-scrape-1-l-romero-gormaz-l-bronzetti",
-      "date": "2026-11-22T02:27:47.638646+00:00",
-      "displayTime": "LP Open by IND • Chile",
-      "away": "L. Romero Gormaz",
-      "home": "L. Bronzetti",
-      "awayScore": "6 3 7",
-      "homeScore": "3 6 5",
-      "awaySets": [
-        "6",
-        "3",
-        "7"
-      ],
-      "homeSets": [
-        "3",
-        "6",
-        "5"
-      ],
-      "awayPoint": "—",
-      "homePoint": "—",
-      "currentSet": 3,
-      "awayCurrentSetGames": 7,
-      "homeCurrentSetGames": 5,
-      "awaySetsWon": 1,
-      "homeSetsWon": 1,
-      "round": "Semifinals",
-      "court": "Center Court",
-      "status": "Suspended · Semifinals · Center Court",
-      "state": "suspended",
-      "eventOnly": false,
-      "title": "LP Open by IND • Chile",
-      "sourceName": "WTA Official Scores scrape",
-      "sourceUrl": "https://www.wtatennis.com/scores/",
-      "verificationSource": "WTA Official Scores",
-      "verificationUrl": "https://www.wtatennis.com/scores/"
-    },
-    {
-      "eventId": "wta-scrape-2-upcoming-strakhova-tikhonova-erjavec",
-      "date": "2026-11-22T02:27:47.638976+00:00",
-      "displayTime": "LP Open by IND • Chile",
-      "away": "Upcoming / Strakhova",
-      "home": "Tikhonova / Erjavec",
-      "awayScore": "4 3",
-      "homeScore": "6 6",
-      "awaySets": [
-        "4",
-        "3"
-      ],
-      "homeSets": [
-        "6",
-        "6"
-      ],
-      "awayPoint": "—",
-      "homePoint": "—",
-      "currentSet": 2,
-      "awayCurrentSetGames": 3,
-      "homeCurrentSetGames": 6,
-      "awaySetsWon": 0,
-      "homeSetsWon": 1,
-      "round": "Final",
-      "court": "Center Court",
-      "status": "Suspended · Final · Center Court",
-      "state": "suspended",
-      "eventOnly": false,
-      "title": "LP Open by IND • Chile",
-      "sourceName": "WTA Official Scores scrape",
-      "sourceUrl": "https://www.wtatennis.com/scores/",
-      "verificationSource": "WTA Official Scores",
-      "verificationUrl": "https://www.wtatennis.com/scores/"
-    }
-  ]
+  "games": []
 }
