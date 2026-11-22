@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-22T08:47:21+00:00",
+  "updated_at": "2026-11-22T16:53:37+00:00",
   "refresh_minutes": 20,
   "counts": {
     "total": 30,
@@ -14,10 +14,24 @@
       "pfl": 12
     }
   },
-  "errors": {},
+  "errors": {
+    "ESPN": "No articles returned"
+  },
   "videos": [],
   "leagues": {
     "soccer": [
+      {
+        "title": "Sources: Jack Grealish keen to join Premier League rival if Everton deal collapses - Yahoo Sports",
+        "link": "https://news.google.com/rss/articles/CBMihwFBVV95cUxNOEw3bUNSTEJtbllVWHFPdk1WT25SVDJLMFVybnhsa0Jrd3M2WXVPWjhMM0dyM2NQM1FGN0FwS1c4R0RsaVJHOHVCWllNdGNJZUtnSTJkMmxoNURNSW5INm01ZWEtZlQzb0ZuamM5SERGcy1mU1lGSkJaa2ZRNkhHT1lJVTNtem8?oc=5",
+        "description": "Sources: Jack Grealish keen to join Premier League rival if Everton deal collapses Yahoo Sports",
+        "source": "Yahoo Sports",
+        "sport": "Football",
+        "region": "England",
+        "league_key": "soccer",
+        "league": "Premier League",
+        "image": "",
+        "published": "2026-11-22T13:20:20+00:00"
+      },
       {
         "title": "Arteta sends message to Pochettino and reveals what new United coach told him - Yahoo Sports",
         "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPRnkxb0ZZaVpNV29TMjJ3RmdScGdrelVMZUFjeUk2ZVNkc2psLVVlVFdrMFFkS3RDRXA3S1NSZEg1UGZ6SlVFZC1rUEUtX3JXMFdFRWtxbkpfTDMxZkJtVlJPVVlvZUlKZWJQY0xCR1d4LVFvbC11Y2hUODZyQ0loV0ZWamNSbU9mWGhibzAwQmRYdw?oc=5",
@@ -29,18 +43,6 @@
         "league": "Premier League",
         "image": "",
         "published": "2026-11-21T16:12:56+00:00"
-      },
-      {
-        "title": "Manchester City 1-1 Fulham highlights & rate the players - Sky Sports",
-        "link": "https://news.google.com/rss/articles/CBMixwFBVV95cUxOTFFlejJNRW5McU9RNGl3NGhuRmo1S1dvN01tNkZtMU5BQnZVLWJ3QjgwS3B4VlhmM3JvZ1NYVDVienM2N2I0MmlaSVUwci00ZWtkWi13NTJFSWZWNDQ2OTdOaVhFcURzZmVJVzIwQkJ0eDZfU2hwOFlHem44bGJYWWJzWWR2dDItOUlVeEN6VFd1UERxaS10SlA4RnpTOGlqM3BCaVhmdWdfSkx1UkhnRklRSkc5aWstVHpFckVZaFliUlNNRm1j?oc=5",
-        "description": "Manchester City 1-1 Fulham highlights & rate the players Sky Sports",
-        "source": "Sky Sports",
-        "sport": "Football",
-        "region": "England",
-        "league_key": "soccer",
-        "league": "Premier League",
-        "image": "",
-        "published": "2026-11-21T16:07:04+00:00"
       },
       {
         "title": "NFL legend Tom Brady makes stunning Chelsea move after Birmingham City exit - Yahoo Sports",
@@ -55,9 +57,9 @@
         "published": "2026-11-21T05:53:00+00:00"
       },
       {
-        "title": "Florian Wirtz and the curious requirements of ‘Premier League citizenship’ - The Athletic - The New York Times",
+        "title": "Florian Wirtz and the curious requirements of ‘Premier League citizenship’ - The New York Times",
         "link": "https://news.google.com/rss/articles/CBMimwFBVV95cUxOR2YyOEhZQ2RIZjVZcFkwdUtidkx0ZzUwejBjWUFCUVBKbHRpamNPTFUwOU55V1hMN0VBVUNXM3pkcTljZHlMcUYtWm9WUEpybk1hbmtHX0VKa19yWlN1TE83TG1SVC11NTh6Zkp3bEprWE9VQnJ3OUlWSzJvOHRTZXhaMHRHS05ITHc1WU9VMmxNeXNzRG5FQ0dVQQ?oc=5",
-        "description": "Florian Wirtz and the curious requirements of ‘Premier League citizenship’ - The Athletic The New York Times",
+        "description": "Florian Wirtz and the curious requirements of ‘Premier League citizenship’ The New York Times",
         "source": "The New York Times",
         "sport": "Football",
         "region": "England",
@@ -65,18 +67,6 @@
         "league": "Premier League",
         "image": "",
         "published": "2026-11-20T05:06:21+00:00"
-      },
-      {
-        "title": "Premier League predictions & Jones Knows' best bets: Newcastle vs Arsenal, Liverpool vs Manchester United and much more! - Sky Sports",
-        "link": "https://news.google.com/rss/articles/CBMi-wFBVV95cUxPVXprSFFfTTlwLUVkeU9feDFKWkFrSUtSd0pPaEUtemw0aXlqUjVkR2dKRW9hZG9VNnVOZ25wUDlhUThEb0RNMi0xT3FOalFJQVNXdXVWMEhjeWxTOGtBcHhEa0cyX2U0LWZ4NzlsZkFJRmNJeWVybFBMOXFDWERJM09zdTBVNElpRnZYNi0xYTlwMTZvUm5XMkJuQ2dGTktqdEQ2SktURUl4bWhxajF6QnB4cHhMSHNXRWUwM2h1aE1oaHhUT0t1YThKTGxBZkJEVXpWQ3MydVhaTzd0TDNWcHVGVmpBQ2NvNG8tdmE0TmZ1dmhiUWlHck5pTQ?oc=5",
-        "description": "Premier League predictions & Jones Knows' best bets: Newcastle vs Arsenal, Liverpool vs Manchester United and much more! Sky Sports",
-        "source": "Sky Sports",
-        "sport": "Football",
-        "region": "England",
-        "league_key": "soccer",
-        "league": "Premier League",
-        "image": "",
-        "published": "2026-11-19T20:02:55+00:00"
       },
       {
         "title": "Premier League Fans Fund promoting connection, inclusion and belonging - Premier League",
@@ -89,6 +79,18 @@
         "league": "Premier League",
         "image": "",
         "published": "2026-11-19T09:59:19+00:00"
+      },
+      {
+        "title": "Robert Pattinson and other famous fans of Premier League clubs - Premier League",
+        "link": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQdk1KQTRhUkxOaFVieGFPeTBEOUo1dTdZVDJ6Y1hDQ3dxS2tUMWtuMXlaX0toWmFCZDF6V0YxTC1DZ3hGUWdqUzBna1FZcjM1NVRuZHFpMUZEbGplY3drT3NmUElkZ256X2N1Tmt3a0Z1Umk0UjBVby1vMjVRQjlWanJZX3dMS2tPbXlNNGdic24xQUxyQUQzdHBsSWJYenhpMkswM1RIRDVWNFht?oc=5",
+        "description": "Robert Pattinson and other famous fans of Premier League clubs Premier League",
+        "source": "Premier League",
+        "sport": "Football",
+        "region": "England",
+        "league_key": "soccer",
+        "league": "Premier League",
+        "image": "",
+        "published": "2026-11-16T08:00:00+00:00"
       },
       {
         "title": "When are the international breaks in 2026/27 Premier League season? - Premier League",
@@ -139,18 +141,6 @@
         "published": "2026-08-18T07:00:00+00:00"
       },
       {
-        "title": "See EVERY Premier League club's pre-season results - Premier League",
-        "link": "https://news.google.com/rss/articles/CBMipgFBVV95cUxPNXFXbWdMREpEZmdVOWM3TXg5TlFCRjhRVXpPZ0pMNEJnaDdIeTdLLVR0NGNwLXd3TEVaYzRGZ2lrOXUzdEg4YVh0Snk0XzJ0cUNMd3BqdjUyOXFOSnhMNUFURG52SVEtY1hMdEstc1gyWVhGYmZkcE16aHV3SDlHRFVlTmVHaEJLb2pCWlBDSTVka0xQOHV4US0zZU1TRXhhMk9haVln?oc=5",
-        "description": "See EVERY Premier League club's pre-season results Premier League",
-        "source": "Premier League",
-        "sport": "Football",
-        "region": "England",
-        "league_key": "soccer",
-        "league": "Premier League",
-        "image": "",
-        "published": "2026-08-16T07:00:00+00:00"
-      },
-      {
         "title": "Premier League explained - Premier League",
         "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE0tcXR2VmM1bVYwTmVGMVU3Z09Jbktjd1ZDd0FuaGFWeUYwN0g0Y05NS1pMWGJYTjk1QW1VRFh2N2pjLUl5Y2k4c0xPd01uYWMyazZwME9B?oc=5",
         "description": "Premier League explained Premier League",
@@ -161,9 +151,33 @@
         "league": "Premier League",
         "image": "",
         "published": "2026-05-24T07:00:00+00:00"
+      },
+      {
+        "title": "Trophy, medals, golden badge: What do Arsenal get for winning Premier League title? - Premier League",
+        "link": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE5UNGRYSWFYSzM3Z3NhRi1vbFQ3TzlRSVVqbDlkQ1VRLXBlaXB1NjV5MktRREowN01WRG1heHlpa2JZbUFDY0dOUVZPNjRWV0FVaDJwdDJvS2Y?oc=5",
+        "description": "Trophy, medals, golden badge: What do Arsenal get for winning Premier League title? Premier League",
+        "source": "Premier League",
+        "sport": "Football",
+        "region": "England",
+        "league_key": "soccer",
+        "league": "Premier League",
+        "image": "",
+        "published": "2026-05-19T07:00:00+00:00"
       }
     ],
     "laliga": [
+      {
+        "title": "Barcelona Rally Past Villarreal to Reach La Liga Summit - cwibc.co.id",
+        "link": "https://news.google.com/rss/articles/CBMibkFVX3lxTE5kMmFmR1FhMnZveWFUM1BMYlNxeWtZN3RvN0tNWmEzUzFkX3NqU2lkRTVSLUpaWVI0VjVqSy0yYTNRbzB5M2Z5M2VIRWR6ZkdVS1RfWkJnSHU2alVVMzBLTkFlcG5ZdDRxQ1Fva0RB?oc=5",
+        "description": "Barcelona Rally Past Villarreal to Reach La Liga Summit cwibc.co.id",
+        "source": "cwibc.co.id",
+        "sport": "Football",
+        "region": "Spain",
+        "league_key": "laliga",
+        "league": "La Liga",
+        "image": "",
+        "published": "2026-11-22T15:27:04+00:00"
+      },
       {
         "title": "Jude Bellingham matches former Barcelona star’s all-time La Liga record - Get Spanish Football News",
         "link": "https://news.google.com/rss/articles/CBMipwFBVV95cUxPVC1USmZRWktadEQtSEZsbHU1VUlIOU1IV3F2dHBWSGhxenVPcHNPLWo2WS1RTkFxUnRvbUYtb21mU09FSVU2MFUybHNDUldCSmVjT29teFVQYVJScUZLdVJyOUppdHFzWnBLcGdoNVZNdEJnakdzMHVtMjd1Yngzd0xTV2s3Q0l2Z0Q3U0o4WHd0X2xvUVl6WkdJTnJuOVl0dTV0empOdw?oc=5",
@@ -187,18 +201,6 @@
         "league": "La Liga",
         "image": "",
         "published": "2026-11-21T15:11:45+00:00"
-      },
-      {
-        "title": "Bayern Munich fire transfer warning to Real Madrid - Yahoo Sports",
-        "link": "https://news.google.com/rss/articles/CBMijAFBVV95cUxQLVNBQmxRZnpZdndKUXU2SUl4VTFlRVFnSU9lNEFWaDhjcWdkWGxCOU1naHdWVHlqaWxIUmN4UzJpbHFOTHBjT1czbnNnd1NSblhBN1VVNXpCVXR3bE0yQmhKOG50SnEzRkFBaXFQbFhsSE5SeEZObDd3blZvYjR4d2Z4aGRHWnJxbXIzMw?oc=5",
-        "description": "Bayern Munich fire transfer warning to Real Madrid Yahoo Sports",
-        "source": "Yahoo Sports",
-        "sport": "Football",
-        "region": "Spain",
-        "league_key": "laliga",
-        "league": "La Liga",
-        "image": "",
-        "published": "2026-11-19T20:00:00+00:00"
       },
       {
         "title": "Barcelona training confirms double injury boost before Villarreal - Yahoo Sports",
@@ -249,18 +251,6 @@
         "published": "2026-09-26T07:00:00+00:00"
       },
       {
-        "title": "How Malaga returned to La Liga after dropping into Spain's third tier - BBC",
-        "link": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE5jVHJYUzBMV0ZFb2p5Rk9aMHBfN0VQZmU1RllFeTFTUUh3WUFyeWJJWTU4akJVSnJzMHYzNFRkUGRkUzVLM3BvNS16Y01zbmt2WGxkN1lWRC1OOVI1ekpqWGlPUjVoQ3M?oc=5",
-        "description": "How Malaga returned to La Liga after dropping into Spain's third tier BBC",
-        "source": "BBC",
-        "sport": "Football",
-        "region": "Spain",
-        "league_key": "laliga",
-        "league": "La Liga",
-        "image": "",
-        "published": "2026-08-19T07:00:00+00:00"
-      },
-      {
         "title": "Why are Barcelona and Real Madrid not playing in La Liga’s opening weekend? - The New York Times",
         "link": "https://news.google.com/rss/articles/CBMipAFBVV95cUxNby1HcFNibVhrdVM3Q0NLRU81bXFtSDlVNkRaY3JHT1ZUbF9ZajBEbVhQVW1VY3ZMSkpIbWk4a2p4VGRyNjdYYktsYUE4ajNnYlVrN2t0VENheXh6dWZOMmdwWGNUQk1kNmRBLUlIWTE3dzBsM2MydG1McHdQTnR1ejZFRC1jY2ViUDVYSGN0R2gyOERVR2tMOWhVaUpNaGVyYWF5TA?oc=5",
         "description": "Why are Barcelona and Real Madrid not playing in La Liga’s opening weekend? The New York Times",
@@ -307,6 +297,18 @@
         "league": "La Liga",
         "image": "",
         "published": "2026-05-11T07:00:00+00:00"
+      },
+      {
+        "title": "Who has more titles: Real Madrid or FC Barcelona? - LALIGA",
+        "link": "https://news.google.com/rss/articles/CBMiggFBVV95cUxNOFJuZGpwYl9KNVRoRm16OUtPVUJkcmRZRXY5cWUzVF9HZmg1aWhmVklERVZVb2tGVjNjT2RDTDM0cFlTTlVINXJVY2JUdnl4MElRSVZMTW15MjlNaU9YV0JMSW45V2k3Nmo3SmE5Rm9aN2RDU0d4QmEtUWdKRGlBLUV3?oc=5",
+        "description": "Who has more titles: Real Madrid or FC Barcelona? LALIGA",
+        "source": "LALIGA",
+        "sport": "Football",
+        "region": "Spain",
+        "league_key": "laliga",
+        "league": "La Liga",
+        "image": "",
+        "published": "2026-05-11T07:00:00+00:00"
       }
     ],
     "bundesliga": [
@@ -323,16 +325,16 @@
         "published": "2026-11-21T02:17:11+00:00"
       },
       {
-        "title": "Guardiola: Bayern Munich are an exceptional club, and I learned a lot from German football - LiveScore",
-        "link": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxNY2RORlBDUTRsckVFUnZRZVlydXZ0VnI3SzV4RUtGY3l4ZkdvNDR0bUhNZC1FbHAxVEhBVVZfUlI2d1J4S0YwX2NvMERJV0pSVkxzZUpHSDZmTmQwVnJZd01GQ04wOW9iUFprWWZMVFJaTmcwYnkwMjNYbUNsdE5fRmxubWN2U000M0JuRl93YlRZZ0I3Ymt1NlJjWlpXSWNBVTNsTXpFTW9ndWJzZjFSb1NYTVVSdkcxX1ZBbWNKSkdpbjRDZVFGSkM4SV80RmJ2c3M5RU5zcnh5LXpyRU45WDJB?oc=5",
-        "description": "Guardiola: Bayern Munich are an exceptional club, and I learned a lot from German football LiveScore",
-        "source": "LiveScore",
+        "title": "Matchday 10 - Bundesliga | official website",
+        "link": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFB6aFFUc1VqX25waWl3c1JfNHZhS3VIdVJaZlNSUndJY0IzWHhiRmtUeVJxNVVRejk5ZDZyV0pIRlRKS2VBbUpFNUd0UzNKWlZCdUdsTHZtVjl3TzJObEE?oc=5",
+        "description": "Matchday 10 Bundesliga | official website",
+        "source": "Bundesliga | official website",
         "sport": "Football",
         "region": "Germany",
         "league_key": "bundesliga",
         "league": "Bundesliga",
         "image": "",
-        "published": "2026-11-20T00:56:56+00:00"
+        "published": "2026-11-20T08:00:00+00:00"
       },
       {
         "title": "English football players in Germany: The 2026/27 edition - Bundesliga | official website",
@@ -359,16 +361,16 @@
         "published": "2026-11-08T08:00:00+00:00"
       },
       {
-        "title": "Bundesliga and Bundesliga 2 fixture times confirmed up until Matchday 18 - Bundesliga | official website",
-        "link": "https://news.google.com/rss/articles/CBMioAFBVV95cUxNSy1vVE94MDNrMXNsUnIwV1ZiamRuYUxQUVlyR3JjSGhsZE02cFRsYUJPb21RVVlBSHZFTFhweW03bmVCaFBlZmxUM1J1amdwc1VKOUdKR3RtZ2ZmVFcyOWRQVnJZSGVqYy10TXhYckFpaU5oWXpiQ3c4VjM4dHVHN2NWMTNjd2l0TTJsZ2xCTnZwQ3JYQmI5TnZBUXJDVlN0?oc=5",
-        "description": "Bundesliga and Bundesliga 2 fixture times confirmed up until Matchday 18 Bundesliga | official website",
-        "source": "Bundesliga | official website",
+        "title": "Philipp Lahm: German football is built around the 50+1 rule. It is more valuable than ever - The New York Times",
+        "link": "https://news.google.com/rss/articles/CBMiowFBVV95cUxNNUdMRXBZR21pdW5IeG9HWW9CamliUWRydWtOdXVlVTFFUWN6WHo5TDNrTmxKd2lsNEhua1dtY0FxUmNNQldnOEE5cVh3ZnNoeWd0Y3puX2lkY2JKVmpwN0dHVHN3LWl2aDdYZGdhQ0toR0Z6N1Jzbzk0em5zeThla1QxVkxVQUJSZDhWR2lKdHFsNzZxVDNLcWJTZVRaOURTcnBj?oc=5",
+        "description": "Philipp Lahm: German football is built around the 50+1 rule. It is more valuable than ever The New York Times",
+        "source": "The New York Times",
         "sport": "Football",
         "region": "Germany",
         "league_key": "bundesliga",
         "league": "Bundesliga",
         "image": "",
-        "published": "2026-11-05T08:00:00+00:00"
+        "published": "2026-10-13T07:00:00+00:00"
       },
       {
         "title": "'He's thinking about the future of German football' - Lothar Matthäus discusses Jürgen Klopp's start to life as Germany head coach - Bundesliga | official website",
@@ -393,6 +395,18 @@
         "league": "Bundesliga",
         "image": "",
         "published": "2026-09-17T07:00:00+00:00"
+      },
+      {
+        "title": "What is the Bundesliga's 50+1 ownership rule? - BBC",
+        "link": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE5GbTAxaDZsYmF2QTRTVDhNX2VkM0Y3QXE3MnNsSzRvWTdIOU51a2Zad01HZ0hmU0FBb1BWYjVsamJPUHc3em51cWFxdHhmYlFhYXhaTU5rQnc4d09CazBaR1M2WjNmSTQ?oc=5",
+        "description": "What is the Bundesliga's 50+1 ownership rule? BBC",
+        "source": "BBC",
+        "sport": "Football",
+        "region": "Germany",
+        "league_key": "bundesliga",
+        "league": "Bundesliga",
+        "image": "",
+        "published": "2026-08-28T07:00:00+00:00"
       },
       {
         "title": "German football sets new ticket sales record in 2025/26 season - Bundesliga | official website",
@@ -441,18 +455,6 @@
         "league": "Bundesliga",
         "image": "",
         "published": "2026-04-13T07:00:00+00:00"
-      },
-      {
-        "title": "Englische Woche: What is behind the German term for midweek football? - Bundesliga | official website",
-        "link": "https://news.google.com/rss/articles/CBMipwFBVV95cUxOd1B5c3VhVXFPUlFwSmxoay1jd3hUbHVfV3pISlVpQ3IyUERfOHN5YU44OTU2NWRFZThjS0hGZlUzcnhzbTJtd01DbHN6NWFaTFZlQ3g4LVR0TFItNjdYaEVESzliNF9sdlZJRTRZOC0tMzlxd2x4ZG5xaVNUREIza0JPajhpaHl2ME92cFBtaW41aUVPcVR4UmY1Vmt1aXd1eHllTkF2VQ?oc=5",
-        "description": "Englische Woche: What is behind the German term for midweek football? Bundesliga | official website",
-        "source": "Bundesliga | official website",
-        "sport": "Football",
-        "region": "Germany",
-        "league_key": "bundesliga",
-        "league": "Bundesliga",
-        "image": "",
-        "published": "2025-12-10T08:00:00+00:00"
       }
     ],
     "seriea": [
@@ -466,19 +468,55 @@
         "league_key": "seriea",
         "league": "Serie A",
         "image": "",
-        "published": "2026-11-21T22:35:37+00:00"
+        "published": "2026-11-22T14:03:39+00:00"
       },
       {
-        "title": "Unstoppable Lazio win again, Malen nets four as Roma thump Parma - CNA",
-        "link": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQZjJnbEZiZ3VuM19pZWRzekl1TnlMR0NNSDVlbWZiZk16YlR6a3Z2WVhVUURoRktiNVptMFRSTnc5WFR2el9EMzMtTkRKcUhWdHVJSmFMZXhtdW5VNC1LamdmeV9PYXd1ckJQUlRuZ1lEQTk3MkFBQlhCUFZiVURISm1nQ2hUSlZRb1NNWEc0WkttQ2lqMHlwMUVvTWs1U1c0MzdkaG5kanYwZw?oc=5",
-        "description": "Unstoppable Lazio win again, Malen nets four as Roma thump Parma CNA",
-        "source": "CNA",
+        "title": "Serie A: Atalanta vs. Inter – probable line-ups, where to watch on TV - Yahoo Sports",
+        "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxOdXZweDlnVFpnR0ZkUGg4UTMwMFRiN3R6bXZlbEpMSmdZX2Q3VlUyM2pMU2Q5czMzMU1EZkM5Y2s5SExQQ3QwdjlLYmM0c2k2eEpnYTE1ajRVb0xtZ0pqNnhQX0F3enZJRmdRT29QWmdDOW5pUW8zQjRQLUdzNDBjWHo1bVpTN2lV?oc=5",
+        "description": "Serie A: Atalanta vs. Inter – probable line-ups, where to watch on TV Yahoo Sports",
+        "source": "Yahoo Sports",
         "sport": "Football",
         "region": "Italy",
         "league_key": "seriea",
         "league": "Serie A",
         "image": "",
-        "published": "2026-11-21T17:02:07+00:00"
+        "published": "2026-11-22T09:48:00+00:00"
+      },
+      {
+        "title": "Serie A: Milan vs. Frosinone – probable line-ups, where to watch on TV - Yahoo Sports",
+        "link": "https://news.google.com/rss/articles/CBMiigFBVV95cUxQR2VTODl6T0NqRThXajh0TUlvZGx4T3dnU1pIelRvZWdGLUpKRFFudng4SVpBRjFzUk52UUdoY3gzS3YybVBJemJfbWhUc3BBSWxCMXZGcGd1TUdrazFjQTI5VjM4ZUpPcXp6LTlxY2lYZUdoVnZXT2JKbC1FR1FTb2dobE9ZYzl6OUE?oc=5",
+        "description": "Serie A: Milan vs. Frosinone – probable line-ups, where to watch on TV Yahoo Sports",
+        "source": "Yahoo Sports",
+        "sport": "Football",
+        "region": "Italy",
+        "league_key": "seriea",
+        "league": "Serie A",
+        "image": "",
+        "published": "2026-11-22T09:35:00+00:00"
+      },
+      {
+        "title": "Serie A: Juventus vs. Venezia – probable line-ups, where to watch on TV - Yahoo Sports",
+        "link": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxOVzF0d0FxZllmaXVNUWU2ZzVtQW5wN3RYLXA4VFdzUTJDVEdpMlVHazI2NE9qLUpWNzl0NjUyM1ZMcFlNdEpqRXg1WXJzZFp0LUlKa2ZoWVR4WHl1V2FrQS1kcTRRUFUtS2dSUGtFZnhUeDh3XzZfdmZNSWZ4WGx5RTN1WDJ6cG1jQ1NV?oc=5",
+        "description": "Serie A: Juventus vs. Venezia – probable line-ups, where to watch on TV Yahoo Sports",
+        "source": "Yahoo Sports",
+        "sport": "Football",
+        "region": "Italy",
+        "league_key": "seriea",
+        "league": "Serie A",
+        "image": "",
+        "published": "2026-11-22T08:50:00+00:00"
+      },
+      {
+        "title": "Serie A football match: Parma vs. Roma - Xinhua",
+        "link": "https://news.google.com/rss/articles/CBMifEFVX3lxTE1xNFRnQV9Uby1leEFUMUVuZjZzSDRvbG1FeGVBbXFGNWd6YzRkdDlYdjlSVnVXemJkQkhuTWcxeW16VzRvMzlQVnhLWHo2TFJ4a2x4dTZock5adU5YYzcwbXhtZXk0X3pYb05aQ2RuSzRLMDBocDRwbDF1SVg?oc=5",
+        "description": "Serie A football match: Parma vs. Roma Xinhua",
+        "source": "Xinhua",
+        "sport": "Football",
+        "region": "Italy",
+        "league_key": "seriea",
+        "league": "Serie A",
+        "image": "",
+        "published": "2026-11-22T05:44:17+00:00"
       },
       {
         "title": "Why Serie A players are wearing red paint on their faces in Week 12 fixtures - Yahoo Sports",
@@ -505,6 +543,54 @@
         "published": "2026-11-20T11:08:00+00:00"
       },
       {
+        "title": "AC Milan want to snatch Scott McTominay from Serie A rivals Napoli - Yahoo Sports",
+        "link": "https://news.google.com/rss/articles/CBMigAFBVV95cUxOcWxfdVJhNFl6WmZjdkNlT2tzZkJyVzlkVEFfRTNqYVRWSnNCSXVOb0FyeXRUbDhDR0xHMjc4OGZ3M2ZGdmJKYVF6bUpGRlNfaG9xRHlUX3BrUThpYXd1MXAwQTU0RFlIbVZRLTY2VnBhWkRYaG1IaEVTM0lvdE9fUg?oc=5",
+        "description": "AC Milan want to snatch Scott McTominay from Serie A rivals Napoli Yahoo Sports",
+        "source": "Yahoo Sports",
+        "sport": "Football",
+        "region": "Italy",
+        "league_key": "seriea",
+        "league": "Serie A",
+        "image": "",
+        "published": "2026-11-20T00:00:00+00:00"
+      },
+      {
+        "title": "Chiellini on Premier League economic power, Italy problems and England pressure - Yahoo Sports",
+        "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPV19ReHZJSVFOaW8wb1lqWVZpTzRtVUl6VDl1VS0yWEN4Sml6QUl3YWNSSU1vbzJrZDNNNXVFYUY0aVV5OVRSa19fZjM0UXo1aDd6YWxYZWMxOFRXaEwya05sdU0yZlZ5YXhYM053VVJ5Umk0dVREWnVHUHNKdFR0UTJBRUFTSU9rZmRTYVRsZ2tiZw?oc=5",
+        "description": "Chiellini on Premier League economic power, Italy problems and England pressure Yahoo Sports",
+        "source": "Yahoo Sports",
+        "sport": "Football",
+        "region": "Italy",
+        "league_key": "seriea",
+        "league": "Serie A",
+        "image": "",
+        "published": "2026-11-17T16:53:00+00:00"
+      },
+      {
+        "title": "Is Serie A Europe's most exciting league?! Italian football might just be on the rise again after hitting rock bottom - Goal.com",
+        "link": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxOOUpibVVjTDN5Q3VsRVhIN0F4X0pwQzNhb3dSVDBZTEJYTUpYaG9od1VIXzc3QmJWMEx6cWZsUjJNQmNLV1Q4b202YlhlY05TVmNMaXI3SC16ajBnZWN6bGFyWE1QdEczcHlXM2xLZmxqNnkzMWx1cXI0SVQ2aTA5VGVnYzZQWG9lZHZ0WTl1UTFYdVhFTHU3Ul9WRmVxc3V5aG9OZnIxVUJrcXoxOGVKSnl6MTVqUGhvNHo2bFBELXA0TXY1eDJ3U19PalZKQlRGbTRpUWNyT25YNzJPNmc?oc=5",
+        "description": "Is Serie A Europe's most exciting league?! Italian football might just be on the rise again after hitting rock bottom Goal.com",
+        "source": "Goal.com",
+        "sport": "Football",
+        "region": "Italy",
+        "league_key": "seriea",
+        "league": "Serie A",
+        "image": "",
+        "published": "2026-11-05T08:00:00+00:00"
+      },
+      {
+        "title": "Serie A returns to British TV tonight: Watch Milan vs. Inter live on BBC2 - Yahoo Sports",
+        "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPbTZNVDhnTTlVMzFMWjEtaWFJNlowSkh5b0dtT1lJV0VrMEdOUEt1Qjh1ODVBV0tiaVZyY3hQRXdkVWZGOXZJcEhJMG1nWWNYV29qbWJnbkJOTl9yVWJjc0hTRmx0SFpRWXRPTm0wbGlhUWRPWU9UdW1TY2I5eHlfN1c1V1BDeEJL?oc=5",
+        "description": "Serie A returns to British TV tonight: Watch Milan vs. Inter live on BBC2 Yahoo Sports",
+        "source": "Yahoo Sports",
+        "sport": "Football",
+        "region": "Italy",
+        "league_key": "seriea",
+        "league": "Serie A",
+        "image": "",
+        "published": "2026-10-31T07:00:00+00:00"
+      },
+      {
         "title": "Serie A preview: Clubs splash out on extravagant young talent as Italian football attempts to reassert itself - The Athletic - The New York Times",
         "link": "https://news.google.com/rss/articles/CBMirgFBVV95cUxOTjN5cHZTODFGR1lLR2xBSzIwQ2tMODFteHZpUy02QmVWUUlpWkQ0TEhWTlZYQlhqTDJVS29KVng1dFAtRlhYb0ZCSUJQNXpQQXFiSEFMV216N1hoR3I4MWx1TlZCLUp3TFZiaG5VUDF6TXVsMWVNRW5tUS10VlNUVzdPajVQd2Rjak1Jbm1RdDdkX0lDb1NnLUpCSUN4X0pfVG9tWEpZNW5lem5VbkE?oc=5",
         "description": "Serie A preview: Clubs splash out on extravagant young talent as Italian football attempts to reassert itself - The Athletic The New York Times",
@@ -515,90 +601,6 @@
         "league": "Serie A",
         "image": "",
         "published": "2026-08-21T07:00:00+00:00"
-      },
-      {
-        "title": "Can a managerial merry-go-round in Serie A stop Inter’s dominance? - The Guardian",
-        "link": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPdnZUbEVTdDV5b3VNUVJfM3ZSZkh4RkVzaDFZbEJ4bmtwMXdKSFlSbDdjNEVib1I2V21zLWtCTzUzcGFqMWtRUFhEWE9TZnN1bDRYdHRQLXpQV1JVRVN4Z0kzZ3F1SkEwNVlnT0JISHdYcmRBQWtOb1RGZ3B6blFyNmVhdXJ4MFltX2FYTlpjaHRuUHRkc2ZMSUg5dTdCWlRHSk94Zw?oc=5",
-        "description": "Can a managerial merry-go-round in Serie A stop Inter’s dominance? The Guardian",
-        "source": "The Guardian",
-        "sport": "Football",
-        "region": "Italy",
-        "league_key": "seriea",
-        "league": "Serie A",
-        "image": "",
-        "published": "2026-08-20T07:00:00+00:00"
-      },
-      {
-        "title": "How Serie A Continues to Shape Football Despite Italy’s World Cup Flop - Yahoo Sports",
-        "link": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOVVJvLUJ4Szl4ZW1ja1lNQWpSTVhKUE1sOXBwZW5BMk1fN2ZvdjNLNlFDRmYwTV9JMkZtZnJBTTZndlRPSnBmMG5DaENpeG5EQmx1SUNjdkpFUmRIVXRjMFVsVjZTS2FDWnFYa3pIdkhlTXpfYnhYRUkxVG05c004YTROLXIzbDRCbzh2di1GX0g?oc=5",
-        "description": "How Serie A Continues to Shape Football Despite Italy’s World Cup Flop Yahoo Sports",
-        "source": "Yahoo Sports",
-        "sport": "Football",
-        "region": "Italy",
-        "league_key": "seriea",
-        "league": "Serie A",
-        "image": "",
-        "published": "2026-06-29T07:00:00+00:00"
-      },
-      {
-        "title": "2026-27 Serie A Start Date and Fixtures - Groundhopper Guides",
-        "link": "https://news.google.com/rss/articles/CBMigAFBVV95cUxQeHBxeEM3YVlaOGpETjdOLWlmYVVoTGh0NEZDUmZvX0tpcHVmc1RNWHlySjZRTUZ2YlJnMUhxOWVJR3hxdWhpQzR6Tm5tSGxiUUpaam1TU2NKUXdEV21nSS1MbUItOTFWQnN0cFlTOGhRNjFCNExSNy1pU2I1UTR5Uw?oc=5",
-        "description": "2026-27 Serie A Start Date and Fixtures Groundhopper Guides",
-        "source": "Groundhopper Guides",
-        "sport": "Football",
-        "region": "Italy",
-        "league_key": "seriea",
-        "league": "Serie A",
-        "image": "",
-        "published": "2026-06-05T07:00:00+00:00"
-      },
-      {
-        "title": "Italian Football Ups & Downs 2025-26: Promotions, Relegations & European Places - Groundhopper Guides",
-        "link": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQZjBVeUs0NzgyUWNKQnRva1pJVWRMUjUxUEdXU2d1ZHBYVTlheGdEWWtTSF9rMTE2Ulpia3FZSTFCWWxyWDVpNkl2eTdXNGNZU05xSExYYlRrTFlQNXBYNnRCOHp2dVZINC1kY0VLc1NkNXU3R2JCREdueVJ3RFJVUlhR?oc=5",
-        "description": "Italian Football Ups & Downs 2025-26: Promotions, Relegations & European Places Groundhopper Guides",
-        "source": "Groundhopper Guides",
-        "sport": "Football",
-        "region": "Italy",
-        "league_key": "seriea",
-        "league": "Serie A",
-        "image": "",
-        "published": "2026-06-01T07:00:00+00:00"
-      },
-      {
-        "title": "Serie A finish in chaos, worsened by clash with Italian Open tennis final - Al Jazeera",
-        "link": "https://news.google.com/rss/articles/CBMiugFBVV95cUxQYTBWZW5JUFI2azAyVHdFOUJHeGR4RVNsck1kUUJjVVkxUDdBOU52Wm00Vmh1RkxlSzI5NjNRcnBYdERRTFFnUEdqc19BRDdfamlYclBfQTlmRUduQkVLWnlxV3NVeFpnbjVETTZXbXlaM1JZRkQyR3Fud0phT2FxNVNZT2lOaktNNzdtT0tPUzdqXzdDMG14ZGc5TVJLNms1Vkp1T1hzRDVGVzFrN2lEMkVhWFF3V3BwcVHSAb8BQVVfeXFMUHRjXzhyYWt2RF8xcWloMEcyTmp4T2V2eVFOV0h1YldRZmRLV05HWHJJc05lY203Tk5GcG9ueWxpbXRYajNiWlhHMUJwMlRWc2cwWkJhX3pTTTRyVDdLS3hIOFRlQmFlVG1lcGc4UjVmN0I5V0llSWxPOGlhMzVMLWJwNFJQUkt4dTRTWU5uOXFrUDYtVHdueERDTEhRLVdQSmJidDZjTm1XQnMwaUt0X2FTV1lrQk9rUHMxNzMxa0E?oc=5",
-        "description": "Serie A finish in chaos, worsened by clash with Italian Open tennis final Al Jazeera",
-        "source": "Al Jazeera",
-        "sport": "Football",
-        "region": "Italy",
-        "league_key": "seriea",
-        "league": "Serie A",
-        "image": "",
-        "published": "2026-05-14T07:00:00+00:00"
-      },
-      {
-        "title": "Italy’s Serie A soccer league sounds out private equity for stake in overseas media unit, sources say - Reuters",
-        "link": "https://news.google.com/rss/articles/CBMixwFBVV95cUxOUWIxc2dydlM4Z3FCRHZXa1ZaeDJnZ0JpcjZXcC1GY1QwR3F5Z0RZNE52akw1XzBMRnBjMFRsMklyVW9JR29qUVVoUFNBanIwTXpGSUZvUXRsaVEweVhMbGRtaWdnUVItcmpmMS1XeDBXTzdXTlZ6T29iZkViTndiMWVpTUo0MEZmbi1kZ291Ylh6ZmI3TU5iV3d6c2VxWVdHYWFBQXhodHl4REUwSElsRTdUZnN6ZndrQUJCMWllOFh1RmNkZnlB?oc=5",
-        "description": "Italy’s Serie A soccer league sounds out private equity for stake in overseas media unit, sources say Reuters",
-        "source": "Reuters",
-        "sport": "Football",
-        "region": "Italy",
-        "league_key": "seriea",
-        "league": "Serie A",
-        "image": "",
-        "published": "2026-04-08T07:00:00+00:00"
-      },
-      {
-        "title": "Italy have themselves to blame for third straight World Cup miss - ESPN",
-        "link": "https://news.google.com/rss/articles/CBMitAFBVV95cUxQR3JEb3EzQjdnY3BkUTNINzJmMGVUSEJ0dGVyYmpmMzhkLTEwU0d2VEgzTGJYdTZBU2pxc2NGWUpLUk1OenVndnA4WWVEVlNvdnkwTUdJY3lOdmlKZGtMSjNvN213YzlNZEFLNGFqcUJxV1NmaFRRQUdJLXU2M3BUT0xXSGVxRjlfcGx4UU5VbExaMnluMDlxbExmcDJ2UGR0M3V6N1VETFU4c2NHTW9UZTVUQmE?oc=5",
-        "description": "Italy have themselves to blame for third straight World Cup miss ESPN",
-        "source": "ESPN",
-        "sport": "Football",
-        "region": "Italy",
-        "league_key": "seriea",
-        "league": "Serie A",
-        "image": "",
-        "published": "2026-04-01T07:00:00+00:00"
       }
     ],
     "jamaica_pl": [
@@ -689,100 +691,16 @@
     ],
     "pfl": [
       {
-        "title": "Mendiola FC vs DH Cebu FC live score, H2H and lineups - Sofascore",
-        "link": "https://news.google.com/rss/articles/CBMikAFBVV95cUxQMmVuNkRSU21yRVkwbnhqUkhaT3hiOHhrdUIyd2QxVWxuN3JDem96VzNKZVppUl9scWQtMWloZDh5eUpyUFBKRUt0WWFILVVCdjg5X1p3X1R5aElSc0hBVFhDZS1kQzVIU2kyeHJSZG1tcXpNY3U1WHRFcERXY1F1NmN6dUVxMWxhbzRweHZUNWc?oc=5",
-        "description": "Mendiola FC vs DH Cebu FC live score, H2H and lineups Sofascore",
+        "title": "Mendiola FC vs Maharlika Manila FC live score, H2H and lineups - Sofascore",
+        "link": "https://news.google.com/rss/articles/CBMinAFBVV95cUxOSTlUTG5TMmFLb0NDYW93czVPWER4bTN3TUhQQlNBaGpzR0NQVG1hZ21HMm9PaFpURU81X2dZbVU2cmt2akhQd21vZkZieGhUbjJ5MXFPbkcxdks0SEJVU2ktdXlXVW5mM2hqcjFBZTFNTTRVbENVekduVDFCcUNLcDFKM3Z4czNlQlhNbWRUSHEyYkxpSllLOE5VVGo?oc=5",
+        "description": "Mendiola FC vs Maharlika Manila FC live score, H2H and lineups Sofascore",
         "source": "Sofascore",
         "sport": "Football",
         "region": "Philippines",
         "league_key": "pfl",
         "league": "Philippines Football League",
         "image": "",
-        "published": "2026-11-04T08:00:00+00:00"
-      },
-      {
-        "title": "Christopher Pedimonte - Transfermarkt",
-        "link": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOWjIwMkZjWnNxV1p6aElIblk4NDhWdDdraVZ0bzRvam5KT1ktMHlrTm9xcWpubTE3dUhnQ3NZUE9iYjJpQW1FaW1PNnJZT3IydGo0cndPcUI1UC1UUFpNZm41azV6RHZlb184SGtDenBQODgtbkZPVkM3SGJmeHNUcTFMOUhyVUVWbnNpdHR4NVo?oc=5",
-        "description": "Christopher Pedimonte Transfermarkt",
-        "source": "Transfermarkt",
-        "sport": "Football",
-        "region": "Philippines",
-        "league_key": "pfl",
-        "league": "Philippines Football League",
-        "image": "",
-        "published": "2026-10-27T20:48:25+00:00"
-      },
-      {
-        "title": "Philippine Army FC - Maharlika FC, 07/03/2026 - Philippines Football League - Match sheet - Transfermarkt",
-        "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxOZzBzREFXcl9OV0hhODVvZjRxMk9TbGxjSnlCU0lDbEgwbmRXMkkyNU9MZWJQeExRY3BDX0U1Q2QxWERlM01Gb1I5d25BMjVIS21JSVN1bFl0aFRRVWl3T0ptMDVTRnNnMzUtYjY1Y2ZlNzBOLTI5RXU1Y2ltaE9sNTlDNEt4RC02aGdfR1ZfZVBUZw?oc=5",
-        "description": "Philippine Army FC - Maharlika FC, 07/03/2026 - Philippines Football League - Match sheet Transfermarkt",
-        "source": "Transfermarkt",
-        "sport": "Football",
-        "region": "Philippines",
-        "league_key": "pfl",
-        "league": "Philippines Football League",
-        "image": "",
-        "published": "2026-10-09T23:28:14+00:00"
-      },
-      {
-        "title": "Philippine Army vs Tuloy FC live score, H2H and lineups - Sofascore",
-        "link": "https://news.google.com/rss/articles/CBMigAFBVV95cUxNX1JHR2FFRGM1NTd0VXQySkVCQXlqUlV5eXE3b2tTN3phVTR3Znp4TzBHX1RoZ3JXYVY0NjU5ajBobnc2SXV6V3RjMHdJaWxNTGVnWm91QTM1YzFnY3VySU8zYUVzaUhaZWhNZ3kyOHJVc3BiQXpNVEZpcjZkMHlUUQ?oc=5",
-        "description": "Philippine Army vs Tuloy FC live score, H2H and lineups Sofascore",
-        "source": "Sofascore",
-        "sport": "Football",
-        "region": "Philippines",
-        "league_key": "pfl",
-        "league": "Philippines Football League",
-        "image": "",
-        "published": "2026-09-20T07:00:00+00:00"
-      },
-      {
-        "title": "Cebu Football Club unveils new faces in season-opening loss to Maharlika - Cebu Daily News",
-        "link": "https://news.google.com/rss/articles/CBMitAFBVV95cUxQdWNxcXM0X1cyUDY2YTB0OW9FRWREVlNkUGhZcEJHcUVvQ3dfQzdHLUFiRlRXVHFKdFl3Q2RoQU1UZktxTVlxQ1h0QUhCZUtnX0JLSWxvbWplX1VCUS1wRGk4WUh6X0lSMnNaeno2RG56R0R1UmNPY1d5UmI1OTFsMHJiaHE3TlR1RFlxSDdhVVJnSzNFV2ZHYm9vUnJkSlBaQ2ZyY3NvYlRnWkFhUVJMcU96RDPSAboBQVVfeXFMTWJpaUNjTE1FS1BEaFRLbGR4Nk9xODRFSUtkNWxTM1dzdXlxczhXRjhKbHBrLXNwN3pNd1lkY2VlMlNMcERPejIza0tRT1lXSjFHQkhBOUg2SkQtMDZnQVVYeEJBTW1kT3J3WGk5emYxZGJNQnE1QXBIb2o2VWdRdFZ5TDhfdW1PS2dUVHpYd292Z2lRR1ZVRTNxWVh6VmZjY3FoZW5ramVXb1lEQk9SODB3SEppWkdvVGVR?oc=5",
-        "description": "Cebu Football Club unveils new faces in season-opening loss to Maharlika Cebu Daily News",
-        "source": "Cebu Daily News",
-        "sport": "Football",
-        "region": "Philippines",
-        "league_key": "pfl",
-        "league": "Philippines Football League",
-        "image": "",
-        "published": "2026-09-17T07:00:00+00:00"
-      },
-      {
-        "title": "Stallion Laguna FC - ADC Live - Philippines Football League: Football Scores & Highlights - 12/09/2026 - TNT Sports",
-        "link": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxOX2lxbVBHZ3dNbW45UlpKbWYweGR3b2lEQ1hNVnJ2b0VhN1hJQzFXbkRpcGJtNmVjYmVtblEwYkVNVTVVTVRHOWtNUEVFbFdzV0JUb1RmNm8zRTBNdl9NYnloUUVvM0prVlhpQ3IwMFZqemUtZjNWTWRrZEJpazdkZmwtbzJWelJLcFlaM3RJanVsZjZKYVFndVNueTEzZEU1RktUTk5Ra2E1UlVoREN2dnZNVDZOaWZlOUlmaTUxOHU4c0U?oc=5",
-        "description": "Stallion Laguna FC - ADC Live - Philippines Football League: Football Scores & Highlights - 12/09/2026 TNT Sports",
-        "source": "TNT Sports",
-        "sport": "Football",
-        "region": "Philippines",
-        "league_key": "pfl",
-        "league": "Philippines Football League",
-        "image": "",
-        "published": "2026-09-12T07:00:00+00:00"
-      },
-      {
-        "title": "Philippine Army vs Azkals Development Team live score, H2H and lineups - Sofascore",
-        "link": "https://news.google.com/rss/articles/CBMilAFBVV95cUxNQWQ3NnNMSVdiVS1Ic0RqbEFWaklBdVk4eHBSRE5LaFJnRExya2RraVBydFZXaUptM1c4Qjd1SzgxaUZ0Wlc4Y1dfa2p3SjE5Z1Rsdl9lR2NTVzRHaGNVZkxudlI2VTE1Zk9Ecjc1OVhxWjRJN0JvQkRlMjV1aGdPNlgxM2d3VGNGbF92YzB5LXZPQmtf?oc=5",
-        "description": "Philippine Army vs Azkals Development Team live score, H2H and lineups Sofascore",
-        "source": "Sofascore",
-        "sport": "Football",
-        "region": "Philippines",
-        "league_key": "pfl",
-        "league": "Philippines Football League",
-        "image": "",
-        "published": "2026-09-11T08:09:36+00:00"
-      },
-      {
-        "title": "Azkals Development Club - Aguilas-UMak FC, 25/10/2026 - Philippines Football League - Match sheet - Transfermarkt",
-        "link": "https://news.google.com/rss/articles/CBMieEFVX3lxTE5yT0ZfNzR1eFdsN2NIenJ1aExGMk1JekMzckFlSmxnMVZ2UG9SMG9leFJJNG5LckRqUm9LNDZvRVFmbTh4c3ZGbklIV0FWQ1lqa2laM2dQM2JLSG1jcFhLMDE4Y29KZGtoa3VzSGlpZU1HaWZMLVVaNQ?oc=5",
-        "description": "Azkals Development Club - Aguilas-UMak FC, 25/10/2026 - Philippines Football League - Match sheet Transfermarkt",
-        "source": "Transfermarkt",
-        "sport": "Football",
-        "region": "Philippines",
-        "league_key": "pfl",
-        "league": "Philippines Football League",
-        "image": "",
-        "published": "2026-09-10T09:33:18+00:00"
+        "published": "2026-08-31T07:00:00+00:00"
       },
       {
         "title": "What Is Holding the Philippine Football League Back? - RunPee",
@@ -797,44 +715,218 @@
         "published": "2026-08-04T07:00:00+00:00"
       },
       {
-        "title": "Stephan Schröck - Titles & achievements - Transfermarkt",
-        "link": "https://news.google.com/rss/articles/CBMidkFVX3lxTE1XeklaM3R4LWlZWDhNbWVzMmRtVnZITV9TeEVybW5QQk50dXIydFdFVzdhTTZfM0ZTenhyMUh3YWhDM0h2YlJqY3lYcHhYY1lZTkd3X2FWRERCZ0EyUmo2bENRRkh3SEUwOWxvcU42cGFBNVIweXc?oc=5",
-        "description": "Stephan Schröck - Titles & achievements Transfermarkt",
-        "source": "Transfermarkt",
+        "title": "The Philippines Football League announces the postponement of its matches Sunday night (Nov. 9, 2025) at Rizal Memorial Stadium in Manila due to Super Typhoon #UwanPH. | Ivan Salda",
+        "link": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxOM0NJYV8wSVBKUDhiaWI0S3U2LVpPbDRWd0M5Q3pNdTVOV1Y1bFFpdGxZajN5NWlJMzN5Tnc2X2czcktJQXAxYVp6RnJjVHZjc29haWdwQkhBM2FRaFFmbEh4c2czQlRnQmRyOENiR1VhZ2EzaWFMblhxSjhIY2szU1ZpY1RYU0tZMnp3NHRVOFZxM1EzZ0g0VmxxVzMxd1NSUTZOTkRNa2MwTFVlTjh5dXVDaXV0T3REUDhqVXNGMkZvSXdLRzNiLTZUZWVjbFNJbXNqUQ?oc=5",
+        "description": "The Philippines Football League announces the postponement of its matches Sunday night (Nov. 9, 2025) at Rizal Memorial Stadium in Manila due to Super Typhoon #UwanPH. | Ivan Saldajeno; 📸: PFL Facebook",
+        "source": "Facebook",
         "sport": "Football",
         "region": "Philippines",
         "league_key": "pfl",
         "league": "Philippines Football League",
         "image": "",
-        "published": "2026-06-09T07:00:00+00:00"
+        "published": "2025-11-08T08:00:00+00:00"
       },
       {
-        "title": "Aguilas-UMak FC vs Taguig FC live score, H2H and lineups - Sofascore",
-        "link": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQUG9ucWFmVW9Dc0FwVGFPS1JEVXFDOTdvX19DdHk4VVlfS0FReV84MEs3N2ZrOU9KOWNfSkZlU3poMG1hdkxMcS1jd1NHQTdGSXBPMWlUakc4YVY4NHBFd1Z2ekpweWpObHI0Q1JXcEQtaVVGRVJnanlpckZ2SGt5ZHN3?oc=5",
-        "description": "Aguilas-UMak FC vs Taguig FC live score, H2H and lineups Sofascore",
-        "source": "Sofascore",
+        "title": "Philippines Football League 2025-2026 Table & Standings - Football Rankings - TNT Sports",
+        "link": "https://news.google.com/rss/articles/CBMilAFBVV95cUxNMm1feW5mc2NQSXBNd3ZBMDhNbWxYWkJBYlBfci1WZFliaFRaRmJnSWh6cG1vVFJFT3JaZW9EelAwU3NBVDdKU1Bkc0JEZkJZYjQ0RnJsaXhXd2h2b0lhM2NBaDJla294MUJlY3FfQ3VoUVFhLUNCYmZhZXdRdmlEdTM2MzhHUnljR0wtNExTRW9xZUtD?oc=5",
+        "description": "Philippines Football League 2025-2026 Table & Standings - Football Rankings TNT Sports",
+        "source": "TNT Sports",
         "sport": "Football",
         "region": "Philippines",
         "league_key": "pfl",
         "league": "Philippines Football League",
         "image": "",
-        "published": "2026-05-27T07:00:00+00:00"
+        "published": "2025-10-01T14:47:58+00:00"
       },
       {
-        "title": "Cebu FC holds top-ranked Taguig to 1–1 draw - Cebu Daily News",
-        "link": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNSUNGVjFqWW5EaW0zclBXMVdEc0YzNjk0OGxjT0FhX1NkUWdia2RoT2NaVFdyUmNxS0NBMHpRdkJHZEpPYkx0YVhsMm5leWZObW5FS1BYcnhWTDFFMVJiRXNBQkp1LXJZOFFzRUNDdkRpUXdQZmFRY3RTTnF6bjBzZzFmVTBGSFEtZTNleFZB0gGTAUFVX3lxTE8yWXpsYXVXNWxfeUY2ekxvMk0tTTl5OE1Pb3BxOFkzNkQwMDhpeUROQjEwV3NKZjA2UGxWSHZldU9ZQjhDbDlNWWd2ZmNSaV9wLUNiX1pvUnhWdnJIbVNWYV9aWWluelhfWUpTelUxRVMzUVh4VFFTSUIxdjFXRFdzVG9XbWxJMmtOWmFjMTlzWDBmWQ?oc=5",
-        "description": "Cebu FC holds top-ranked Taguig to 1–1 draw Cebu Daily News",
+        "title": "UCFC withdraws from the Philippines Football League - Cebu Daily News",
+        "link": "https://news.google.com/rss/articles/CBMimAFBVV95cUxOZGdydnduYUpPdk05VEpSTFVETHA5WURVR0c3d3FqeFUxUzZCZU13OUZWU2dLb01Ra0EySVZqS3ZOMlVUNEl1ZXFBQzh5WXJSVkNHclh6UVhmMFpMVFNjcGRNZjEtcUl6UWlQcFh4Y200bmk2dTdmcUhuY0J1QkRnWFdpa0Nnc0hzNUtJOEVMVnRUZEJTcEtXT9IBngFBVV95cUxPNjNyN0xkNGJZQmpqUFFoc2RTZHdFdWR0VXdZNFNhdGFsa21BV1FnZkZMVTM2Z0gzcGptV3p5dVE1Q01ZVmNBYkMwNTl5dW9tNm55NWV2eHpDRzI1ZVZZdWZmQ2VDM2lJckltLVlSVzdTR1lLclB2VUVuRHN0TGJ0eGM1eHI2ZlVLMWRxbkRmbHRiZHZzaWFsMmZLS1NBUQ?oc=5",
+        "description": "UCFC withdraws from the Philippines Football League Cebu Daily News",
         "source": "Cebu Daily News",
         "sport": "Football",
         "region": "Philippines",
         "league_key": "pfl",
         "league": "Philippines Football League",
         "image": "",
-        "published": "2026-05-21T07:00:00+00:00"
+        "published": "2023-02-17T08:00:00+00:00"
+      },
+      {
+        "title": "Ceres Negros win inaugural Philippines Football League 2017 - The AFC",
+        "link": "https://news.google.com/rss/articles/CBMivwFBVV95cUxOTVEtSjZzczFaTVdtS1QzUkdzTmhhSDlMQmJPNmdzTjBEQVB0NTk4UVIwOFp1U2x6cV9QZDEzREt5YjhOX2lJMS0wWk81MG9zYTMtUFpaWklLbF82c2VlOFlBMW91Y0JCd3JRN2l1RXhqOFlKWjVkeUFLeHJhMWI1S0g2R3RXT1U4bFExT0hMRWJtaE11NVRvRzdPY182Sk1Ecjl2V0dkUl9iR2tmNzdEYWZNamF2Y00yQW5raDcwVQ?oc=5",
+        "description": "Ceres Negros win inaugural Philippines Football League 2017 The AFC",
+        "source": "The AFC",
+        "sport": "Football",
+        "region": "Philippines",
+        "league_key": "pfl",
+        "league": "Philippines Football League",
+        "image": "",
+        "published": "2021-10-28T07:00:00+00:00"
+      },
+      {
+        "title": "United City win 2020 Philippines Football League title - The AFC",
+        "link": "https://news.google.com/rss/articles/CBMinAFBVV95cUxNUFg2bUhsQzk4c2c1UFVCR0tFTjFzVFdSbEZRZ0MxbEtOODdFci03NENqbXZhU3Bmekt4NlBjWWhiSDdaT09TaUQ1WGYtdjhHbnBxTmxMZ000Q1B1eVBreERSWDlYczZWVW14MjZRWTBrUF9CcmdkQmRlMGNsOWkzN3A1Zzg2MGNzQ3RPUU4yNlgyQ2xnUGdEeDl2Q1U?oc=5",
+        "description": "United City win 2020 Philippines Football League title The AFC",
+        "source": "The AFC",
+        "sport": "Football",
+        "region": "Philippines",
+        "league_key": "pfl",
+        "league": "Philippines Football League",
+        "image": "",
+        "published": "2020-11-07T08:00:00+00:00"
+      },
+      {
+        "title": "Qatar Airways to sponsor Philippines Football League - www.aseanfootball.org",
+        "link": "https://news.google.com/rss/articles/CBMijwFBVV95cUxOeWh6Rjc2ZWZWcjhQdDdSVVVFTktkRkFEbnllNzlJXzdVd1Azd0otTGxpWG9BLVlnc0hJNFVlVzFkelJtX3ZGTTRvTm5OZk16aHRROWpZWVhVY1Y3NEh5UDhJMWpNRFgyREhVUFN5aFJ0V3BjX3dXM1BUYTYySFhhNmJObThfcjdOb2J1cW53Zw?oc=5",
+        "description": "Qatar Airways to sponsor Philippines Football League www.aseanfootball.org",
+        "source": "www.aseanfootball.org",
+        "sport": "Football",
+        "region": "Philippines",
+        "league_key": "pfl",
+        "league": "Philippines Football League",
+        "image": "",
+        "published": "2019-11-27T08:00:00+00:00"
+      },
+      {
+        "title": "Philippines Football League - Transfers 26/27 - transfermarkt.us",
+        "link": "https://news.google.com/rss/articles/CBMiigFBVV95cUxQZ2tRRUpzMF9HR0dkamZTLU1saFJTcDV4VVJod0cyNDktZW8xcDFXbnJ5WDVwME13M2IxUE5ndzhiMEw4QnhLYXRaNHJ0Y2lwQnZIRG5KZk9TbktWb3hkMU5sUjJtVmwtbFYyalRHbXFHSXZ0TmJKdFhlbEl1NjQ4LVo5TTRZTDc3YVE?oc=5",
+        "description": "Philippines Football League - Transfers 26/27 transfermarkt.us",
+        "source": "transfermarkt.us",
+        "sport": "Football",
+        "region": "Philippines",
+        "league_key": "pfl",
+        "league": "Philippines Football League",
+        "image": "",
+        "published": "2019-06-13T22:31:11+00:00"
+      },
+      {
+        "title": "Philippines Football League 26/27 - transfermarkt.us",
+        "link": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxOelRubWdIVG5zYnFHQUdxaGh6cHpRUF9Md0JCRkxHQ1pMYTdQeEYyT0tFUzBnZi13OXg3b0VPbmt4a19pMllnQUJfdl9iN3VKTWVTeWpBUXpGNXU3enNHNkZVMDBVc1dDejRmWHdMaHJ3OTlwaXgwazhmZ3JNVklreTRHQ0xNQWZtR2lZ?oc=5",
+        "description": "Philippines Football League 26/27 transfermarkt.us",
+        "source": "transfermarkt.us",
+        "sport": "Football",
+        "region": "Philippines",
+        "league_key": "pfl",
+        "league": "Philippines Football League",
+        "image": "",
+        "published": "2019-05-02T08:29:41+00:00"
+      },
+      {
+        "title": "Philippines Football League (PFL) partners Sportradar for Multiyear Data, OTT and Integrity Services - LawInSport",
+        "link": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxOOUJhY0dMeGZCcllkcnVQSjNHYi1malUyT05BVW9Pc3Y1dW9rZkRPck55OG5xeTVVY3R3SmxLRkZsMEhYSFdfcEN4TzFWOU1YQWlwLTlOSXJuYVk4d3pHbHBMZWZSa1NwSGdENE5YOFZwODB0Y0VEalltZ0hKUm5wcmtxOU5UeS1qSTlTZVZzYWkzR0VMWnE4Y0JqY19DRElldVFRSXVnQmNSTkRNemFmODhqUExuaU9Od0F3aFV4WDlPdmR3T09sQzkyck1WN01BSlRZakxXZm4?oc=5",
+        "description": "Philippines Football League (PFL) partners Sportradar for Multiyear Data, OTT and Integrity Services LawInSport",
+        "source": "LawInSport",
+        "sport": "Football",
+        "region": "Philippines",
+        "league_key": "pfl",
+        "league": "Philippines Football League",
+        "image": "",
+        "published": "2018-02-22T08:00:00+00:00"
+      },
+      {
+        "title": "Red Card Global named as strategic partner for media and sponsorship for the Philippines Football League - The Drum",
+        "link": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQdGltR0ZEVlQxd1RGVFJzY3F3Zi1HaEJtbEtUUmR2VkhIZU4zUURCTk9PZEtiaHFDeHQ1S3VLYnVSdDFaSVM2OUJEbS04UVEwam5pZ2R1V0JqdUZ3Wno2cTdNODkwVGdyS3NOZ1c0LUZ4QTRBSy1yQjdlSFVMMm5uNlBkOVV2eDlJUThNclRyd3V0aE9Hd1dLN3l3Uk8wa0VBTkZ3ckpRcThyZw?oc=5",
+        "description": "Red Card Global named as strategic partner for media and sponsorship for the Philippines Football League The Drum",
+        "source": "The Drum",
+        "sport": "Football",
+        "region": "Philippines",
+        "league_key": "pfl",
+        "league": "Philippines Football League",
+        "image": "",
+        "published": "2017-04-26T07:00:00+00:00"
       }
     ]
   },
   "items": [
+    {
+      "title": "UAAP: Staying ready, Luke Felipe helps FEU nail crucial win",
+      "link": "https://sports.inquirer.net/708234/uaap-staying-ready-luke-felipe-helps-feu-nail-crucial-win",
+      "description": "MANILA, Philippines—Far Eastern University’s Final Four bid got a spark from an unsung hero on Sunday. Facing top team National University, young gunslinger Luke Felipe gave the Tamaraws a big lift in an 85-63 rout of the Bulldogs. Felipe said his readiness al",
+      "source": "Inquirer Sports",
+      "sport": "Sports",
+      "region": "Philippines",
+      "image": "https://sports.inquirer.net/files/2026/11/IMG_0115_UAAP-89-mens-basketball-FEU-NU_Luke-Felipe-scaled.jpg",
+      "published": "2026-11-22T22:45:48+00:00"
+    },
+    {
+      "title": "UAAP Final Four race reaches fever pitch",
+      "link": "https://sports.inquirer.net/708220/uaap-final-four-race-reaches-fever-pitch",
+      "description": "MANILA, Philippines—The UAAP Season 89 Final Four race just took an interesting turn after Sunday night’s doubleheader at Smart Araneta Coliseum. Far Eastern University and defending champion La Salle bolstered their Final Four bids on Sunday with big wins ove",
+      "source": "Inquirer Sports",
+      "sport": "Sports",
+      "region": "Philippines",
+      "image": "https://sports.inquirer.net/files/2026/11/UAAP89-MBB-JORICK-BAUTISTA-8056.jpg",
+      "published": "2026-11-22T22:29:49+00:00"
+    },
+    {
+      "title": "UAAP: La Salle inches closer to Final Four, beats UP",
+      "link": "https://sports.inquirer.net/708181/uaap-la-salle-inches-closer-to-final-four-beats-up",
+      "description": "SCHEDULE: UAAP Season 89 men’s basketball second round MANILA, Philippines—La Salle leaned on its backcourt duo of Doy Dungo and Jacob Cortez to beat University of the Philippines, 88-80, and boost its Final Four bid on Sunday night at Araneta Coliseum. Dungo ",
+      "source": "Inquirer Sports",
+      "sport": "Sports",
+      "region": "Philippines",
+      "image": "https://sports.inquirer.net/files/2026/11/IMG_1555_UAAP-89-mens-basketball-UP-DLSU_Jacob-Cortez-scaled.jpg",
+      "published": "2026-11-22T21:29:42+00:00"
+    },
+    {
+      "title": "UAAP: FEU secures at least a playoff for Final Four, routs NU",
+      "link": "https://sports.inquirer.net/708165/uaap-feu-secures-at-least-a-playoff-for-final-four-routs-nu",
+      "description": "MANILA, Philippines—Far Eastern University secured at least a playoff for a Final Four spot after dispatching National University, 85-63, in the UAAP Season 89 men’s basketball tournament Sunday at Araneta Coliseum. The Tamaraws improved to 8-5 after beating t",
+      "source": "Inquirer Sports",
+      "sport": "Sports",
+      "region": "Philippines",
+      "image": "https://sports.inquirer.net/files/2026/11/IMG_0562_UAAP-89-mens-basketball-FEU-NU_Jorick-Bautista-scaled.jpg",
+      "published": "2026-11-22T17:41:46+00:00"
+    },
+    {
+      "title": "ATP Finals tennis: Alexander Zverev v Carlos Alcaraz in the final – live",
+      "link": "https://www.theguardian.com/sport/live/2026/nov/22/atp-finals-tennis-alexander-zverev-carlos-alcaraz-final-live",
+      "description": "Updates as top two seeds battle for trophy Mail Daniel | Men’s $350m prize money boost I wonder which flank Zverev will target. On the one hand, Alcaraz’s forehand is one of the best shots in the game; on the other, if he goes for too much on it, it can get hi",
+      "source": "The Guardian Tennis",
+      "sport": "Tennis",
+      "region": "International",
+      "image": "https://i.guim.co.uk/img/media/94da412ab1ba538c956181228d1a1e7a7c5a2b82/741_0_4491_3592/master/4491.jpg?width=140&quality=85&auto=format&fit=max&s=7e6257ea7bcd3555af7af3a27f8e63ee",
+      "published": "2026-11-22T16:51:35+00:00"
+    },
+    {
+      "title": "Liverpool v Manchester United: Premier League – live",
+      "link": "https://www.theguardian.com/football/live/2026/nov/22/liverpool-v-manchester-united-premier-league-live",
+      "description": "Premier League updates from the 4.30pm GMT kick-off Live scores | Latest table | And follow us over on TikTok “Rob ‘Bob’ Smyth, as I live and breathe,” writes Ian Copestake. “Glad this game is in such .... hands. I will miss it, though. I am in the city as I n",
+      "source": "The Guardian Sport",
+      "sport": "Sports",
+      "region": "International",
+      "image": "https://i.guim.co.uk/img/media/c670d31831e3654298808959d3090ae33978346b/206_0_3891_3111/master/3891.jpg?width=140&quality=85&auto=format&fit=max&s=1efefbd7625ef501dcd1b4a03cbc3812",
+      "published": "2026-11-22T16:39:54+00:00"
+    },
+    {
+      "title": "Arsenal 0-0 West Ham, Manchester City 1-3 Tottenham: WSL clockwatch – live",
+      "link": "https://www.theguardian.com/football/live/2026/nov/22/wsl-manchester-city-tottenham-birmingham-manchester-united-arsenal-west-ham-live",
+      "description": "Man City 1-3 Tottenham: match report Live scores | Table | And email John Shaw strikes for City! Rose wins the ball high up the pitch before passing to Shaw, who is left in plenty of space in the box. The striker then has plenty of time to slide the ball home.",
+      "source": "The Guardian Sport",
+      "sport": "Sports",
+      "region": "International",
+      "image": "https://i.guim.co.uk/img/media/7ab4dc7049511ddfac950d07fb846013cf69e6de/458_491_1886_1509/master/1886.jpg?width=140&quality=85&auto=format&fit=max&s=780deb113a78709c8224663ee69854f0",
+      "published": "2026-11-22T16:37:28+00:00"
+    },
+    {
+      "title": "Spurs 'a match for anyone' as European hopes boosted",
+      "link": "https://www.bbc.co.uk/sport/football/articles/c6n901w453nlo?at_medium=RSS&at_campaign=rss",
+      "description": "With the Women's Super League big four firmly established, and London City Lionesses spending their way into European contention, Champions League dreams could have seemed more fanciful than ever for Tottenham Hotspur. But they are firmly in the mix.",
+      "source": "BBC Sport",
+      "sport": "Sports",
+      "region": "International",
+      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/d8bf/live/e5be34d0-e686-11f1-99b6-a35a62fa4264.jpg",
+      "published": "2026-11-22T16:25:35+00:00"
+    },
+    {
+      "title": "Hull City 2-0 Brighton: Premier League – as it happened",
+      "link": "https://www.theguardian.com/football/live/2026/nov/22/hull-city-v-brighton-premier-league-live",
+      "description": "Brighton’s top-four hopes took a hit as Oli McBurnie grabbed two stoppage-time goals after Costinha was sent off Fabian Hürzeler sounded a little way of Hull in his pre-match press conference, citing the Tigers’ narrow 1-0 defeat to table-topping (and possible",
+      "source": "The Guardian Sport",
+      "sport": "Sports",
+      "region": "International",
+      "image": "https://i.guim.co.uk/img/media/76d3c665d355710829468ed90a4ed011c740f316/809_299_2440_1953/master/2440.jpg?width=140&quality=85&auto=format&fit=max&s=a1ef5c10ede4a64108c56e92fd70916d",
+      "published": "2026-11-22T16:15:25+00:00"
+    },
     {
       "title": "Bennie Boatwright joins Gilas Pilipinas’ build up in Malaysia",
       "link": "https://sports.inquirer.net/708154/bennie-boatwright-joins-gilas-pilipinas-build-up-in-malaysia",
@@ -846,294 +938,204 @@
       "published": "2026-11-22T16:15:16+00:00"
     },
     {
-      "title": "NBA: Keegan Murray’s late putback lifts Kings over Celtics",
-      "link": "https://sports.inquirer.net/708151/nba-keegan-murrays-late-putback-lifts-kings-over-celtics",
-      "description": "SACRAMENTO, California — Keegan Murray’s putback over three defenders with 5 seconds left lifted the Sacramento Kings to a 97-96 victory over the Boston Celtics on Saturday. The Kings snapped an eight-game losing streak and earned their first home win this sea",
-      "source": "Inquirer Sports",
-      "sport": "Sports",
-      "region": "Philippines",
-      "image": "https://sports.inquirer.net/files/2026/11/AFP__20261122__2306299106__v1__HighRes__BostonCelticsVSacramentoKings.jpg",
-      "published": "2026-11-22T14:54:52+00:00"
-    },
-    {
-      "title": "Spikers’ Turf: Lirick Mendoza keeps FEU’s campaign going",
-      "link": "https://sports.inquirer.net/708138/spikers-turf-lirick-mendoza-keeps-feus-campaign-going",
-      "description": "MANILA, Philippines — Far Eastern University–DN Steel still has more songs to play after punching its ticket to the semifinals of the 2026 Spikers’ Turf Invitational Conference, all thanks to Lirick Mendoza’s heroics. With their backs against the wall, Mendoza",
-      "source": "Inquirer Sports",
-      "sport": "Sports",
-      "region": "Philippines",
-      "image": "https://sports.inquirer.net/files/2026/11/ST-INV-Criss-Cross-vs.-FEU-Lirick-Mendoza-8632.jpg",
-      "published": "2026-11-22T14:41:45+00:00"
-    },
-    {
-      "title": "PVL: Streak ends but Tubu, Farm Fresh upbeat ahead of Nxled clash",
-      "link": "https://sports.inquirer.net/708136/pvl-streak-ends-but-tubu-farm-fresh-upbeat-ahead-of-nxled-clash",
-      "description": "MANILA, Philippines — Trisha Tubu and the Farm Fresh Foxies got an eye-opener from defending champion Creamline before facing a tall order against the twice-to-beat No. 1 seed Nxled in the PVL All-Filipino Conference Siklab Series semifinals on Tuesday at Phil",
-      "source": "Inquirer Sports",
-      "sport": "Sports",
-      "region": "Philippines",
-      "image": "https://sports.inquirer.net/files/2026/11/PVL-AFC-2026-Farm-Fresh-vs.-Creamline-Trisha-Tubu-2092.jpg",
-      "published": "2026-11-22T14:09:13+00:00"
-    },
-    {
-      "title": "NBA: Jaden McDaniels, Timberwolves beat short-handed Grizzlies",
-      "link": "https://sports.inquirer.net/708135/nba-jaden-mcdaniels-timberwolves-beat-short-handed-grizzlies",
-      "description": "MINNEAPOLIS — Jaden McDaniels scored 25 points, Ayo Dosunmu added 19 and the Minnesota Timberwolves beat the short-handed Memphis Grizzlies 104-95 on Saturday night. Jonathan Kuminga scored 16 points, Terrence Shannon Jr. added 15 and LaMelo Ball had 12 as Min",
-      "source": "Inquirer Sports",
-      "sport": "Sports",
-      "region": "Philippines",
-      "image": "https://sports.inquirer.net/files/2026/11/AP26326079985193-scaled.jpg",
-      "published": "2026-11-22T13:20:28+00:00"
-    },
-    {
-      "title": "NBA: Kyrie Irving, Cooper Flagg help Mavericks top Clippers",
-      "link": "https://sports.inquirer.net/708131/nba-kyrie-irving-cooper-flagg-help-mavericks-top-clippers",
-      "description": "DALLAS — Kyrie Irving scored 25 points and Cooper Flagg had 22 points, eight rebounds and six assists as the Dallas Mavericks used a late 11-0 run to beat the Los Angeles Clippers 110-100 on Saturday night. Walter Clayton Jr. added 16 points and Max Christie f",
-      "source": "Inquirer Sports",
-      "sport": "Sports",
-      "region": "Philippines",
-      "image": "https://sports.inquirer.net/files/2026/11/AP26326128186522.jpg",
-      "published": "2026-11-22T13:09:22+00:00"
-    },
-    {
-      "title": "'Not the right time' - Fernandes pauses Man Utd contract talks",
-      "link": "https://www.bbc.co.uk/sport/football/articles/c6x2e8devk1po?at_medium=RSS&at_campaign=rss",
-      "description": "Manchester United captain Bruno Fernandes says he has been offered a new contract by the club but feels it \"is not the right time\" for discussions about his future.",
-      "source": "BBC Sport",
+      "title": "McBurnie's late double stuns 10-man Brighton after Tzolakis heroics",
+      "link": "https://www.skysports.com/football/hull-city-vs-brighton-and-hove-albion/report/559549",
+      "description": "A Konstantinos Tzolakis goalkeeping masterclass teed up Oli McBurnie to score two late goals as Hull stunned dominant Brighton in a smash-and-grab 2-0 win at the MKM Stadium.",
+      "source": "Sky Sports",
       "sport": "Sports",
       "region": "International",
-      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/104e/live/c689eea0-e64b-11f1-a563-e14cd8b02601.jpg",
-      "published": "2026-11-22T08:41:20+00:00"
+      "image": "https://e2.365dm.com/26/11/1920x1080/skysports-oli-mcburnie-hull-city_7413617.jpg?20261122155755",
+      "published": "2026-11-22T16:15:00+00:00"
     },
     {
-      "title": "NBA: Mavericks finish strong to hold off Clippers",
-      "link": "https://www.gmanetwork.com/news/sports/basketball/1010415/nba-mavericks-finish-strong-to-hold-off-clippers/story/",
-      "description": "Kyrie Irving had a game-high 25 points, Zaccharie Risacher contributed two dunks and a steal to a late flurry and the Dallas Mavericks shook off a challenge from the visiting Los Angeles Clippers for a 110-100 victory Saturday night.",
-      "source": "GMA News Sports",
-      "sport": "Sports",
-      "region": "Philippines",
-      "image": "https://images.gmanews.tv/webpics/2026/11/2026-11-22T022703Z_123356737_MT1USATODAY30420952_RTRMADP_3_NBA-LOS-ANGELES-CLIPPERS-AT-DALLAS-MAVERICKS_2026_11_22_16_31_51.jpeg",
-      "published": "2026-11-22T08:34:15+00:00"
-    },
-    {
-      "title": "Liverpool v Manchester United buildup and more Premier League news – matchday live",
-      "link": "https://www.theguardian.com/football/live/2026/nov/22/liverpool-v-manchester-united-buildup-and-more-premier-league-news-matchday-live",
-      "description": "All the latest match news and buildup for today’s games Today’s games | Tables | Follow on TikTok | And mail us Elsewhere, Leeds United stunned Chelsea to earn a 4-1 win at Stamford Bridge. Arsenal suffered a blow during the match against Newcastle when goalke",
-      "source": "The Guardian Sport",
-      "sport": "Sports",
-      "region": "International",
-      "image": "https://i.guim.co.uk/img/media/c52e9462116c9ce61c5bf2b76fd668162b9d8b66/0_0_5000_4000/master/5000.jpg?width=140&quality=85&auto=format&fit=max&s=66b4110aae276ebcec4b424ad4921c47",
-      "published": "2026-11-22T08:32:43+00:00"
-    },
-    {
-      "title": "FEU deals NU crushing loss, moves closer to UAAP men’s basketball Final Four",
-      "link": "https://tiebreakertimes.com.ph/tbt/feu-deals-nu-crushing-loss-moves-closer-to-uaap-mens-basketball-final-four/390561",
-      "description": "Far Eastern University moved a step closer to its Final Four dream, delivering a statement 85-63 victory over National University late in the UAAP Season 89 Collegiate Men’s Basketball elimination round on Sunday at the SMART Araneta Coliseum. The Tamaraws imp",
-      "source": "Tiebreaker Times",
-      "sport": "Sports",
-      "region": "Philippines",
-      "image": "",
-      "published": "2026-11-22T08:31:13+00:00"
-    },
-    {
-      "title": "Robins ‘aims for the stars’ as Stoke dream of Premier League return",
-      "link": "https://www.theguardian.com/football/2026/nov/22/mark-robins-stoke-birmingham-championship-premier-league-promotion",
-      "description": "The Championship’s form side climbed to second after holding on resiliently with 10 men to knock Birmingham off the summit There have been false dawns before. Plenty of them. This time last year, with Christmas on the near horizon, Stoke sat second in the Cham",
+      "title": "McBurnie’s late double snatches shock win for Hull to crush 10-man Brighton",
+      "link": "https://www.theguardian.com/football/2026/nov/22/hull-brighton-premier-league-match-report",
+      "description": "Oli McBurnie’s injury-time brace helped Hull to a dramatic victory over Brighton but the Tigers had the heroics of their goalkeeper Konstantinos Tzolakis to thank for a result which continued their unbeaten home start since returning to the Premier League. Fab",
       "source": "The Guardian Football",
       "sport": "Football",
       "region": "International",
-      "image": "https://i.guim.co.uk/img/media/af7fbf085ba15e87e4e285c14565ba656a8028b7/187_0_2238_1791/master/2238.jpg?width=140&quality=85&auto=format&fit=max&s=e6ac373650668b6b5e5ec4160fd006a3",
-      "published": "2026-11-22T08:00:22+00:00"
+      "image": "https://i.guim.co.uk/img/media/76d3c665d355710829468ed90a4ed011c740f316/111_0_2941_2353/master/2941.jpg?width=140&quality=85&auto=format&fit=max&s=a8c083358d411636d65b169aed1b9ca6",
+      "published": "2026-11-22T16:10:48+00:00"
+    },
+    {
+      "title": "AQ Prime chess heading for epic finish",
+      "link": "https://www.philstar.com/sports/2026/11/23/2571961/aq-prime-chess-heading-epic-finish",
+      "description": "With seeded foreign Grandmasters falling like dominoes, Filipinos – seven of them in the top 10 – are putting up a strong fight in what could be a tight, epic race for the AQ Prime International Open Chess Championship crown.",
+      "source": "Philstar Sports",
+      "sport": "Sports",
+      "region": "Philippines",
+      "image": "",
+      "published": "2026-11-22T16:00:00+00:00"
+    },
+    {
+      "title": "Depth vs depth: Abra, Quezon clash for crown",
+      "link": "https://www.philstar.com/sports/2026/11/23/2571963/depth-vs-depth-abra-quezon-clash-crown",
+      "description": "That’s what awaits when the Abra Solid North Weavers and the Quezon Huskers collide in the SportsPlus MPBL National Finals starting tomorrow at the Gov. Andres Bernos Memorial Gymnasium in Bangued, Abra.",
+      "source": "Philstar Sports",
+      "sport": "Sports",
+      "region": "Philippines",
+      "image": "",
+      "published": "2026-11-22T16:00:00+00:00"
+    },
+    {
+      "title": "Cone relishes full Gilas",
+      "link": "https://www.philstar.com/sports/2026/11/23/2571965/cone-relishes-full-gilas",
+      "description": "Bennie Boatwright has checked in and Gilas Pilipinas coach Tim Cone is relishing having a full complement for the buildup for Friday’s FIBA World Cup Qualifiers fifth-window opener against Syria in Malaysia.",
+      "source": "Philstar Sports",
+      "sport": "Sports",
+      "region": "Philippines",
+      "image": "",
+      "published": "2026-11-22T16:00:00+00:00"
+    },
+    {
+      "title": "2-0 down, Yamal misses pen, but Barcelona STILL beat Villarreal",
+      "link": "https://www.skysports.com/watch/video/13615299/barcelona-3-2-villarreal-la-liga-highlights",
+      "description": "Watch highlights of Barcelona 3-2 Villarreal, as the home side come from 2-0 down, Lamine Yamal misses a penalty, but still come back to win.",
+      "source": "Sky Sports",
+      "sport": "Sports",
+      "region": "International",
+      "image": "https://e2.365dm.com/26/11/1920x1080/skysports-barcelona-villarreal_7413635.jpg?20261122160427",
+      "published": "2026-11-22T15:56:00+00:00"
+    },
+    {
+      "title": "Final Demand battles back to win Punchestown thriller",
+      "link": "https://www.skysports.com/racing/news/12040/13615295/punchestown-final-demand-battles-back-to-win-thrilling-john-durkan-memorial-punchestown-chase",
+      "description": "Final Demand emerged best of the army of returning Willie Mullins stars on show after a thrilling finish to the John Durkan Memorial Punchestown Chase.",
+      "source": "Sky Sports",
+      "sport": "Sports",
+      "region": "International",
+      "image": "https://e2.365dm.com/26/11/1920x1080/skysports-final-demand-racing_7413605.jpg?20261122155257",
+      "published": "2026-11-22T15:51:00+00:00"
+    },
+    {
+      "title": "PSG's Doue to have surgery on ruptured ACL",
+      "link": "https://www.bbc.co.uk/sport/football/articles/cw0k6x0764ero?at_medium=RSS&at_campaign=rss",
+      "description": "Paris St-Germain forward Desire Doue will have surgery later this month after rupturing the anterior cruciate ligament in his right knee.",
+      "source": "BBC Sport",
+      "sport": "Sports",
+      "region": "International",
+      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/fb0e/live/e990a750-e68b-11f1-936e-1fd1d31671db.jpg",
+      "published": "2026-11-22T15:50:05+00:00"
+    },
+    {
+      "title": "Marc Márquez claims record-equalling eighth MotoGP world title in Portugal",
+      "link": "https://www.theguardian.com/sport/2026/nov/22/marc-marquez-claims-eighth-motogp-world-title",
+      "description": "Spaniard matches Giacomo Agostini’s premier-class tally Márquez defends his title despite double surgery in May Marc Márquez sealed the 2026 MotoGP world title at the Portuguese Grand Prix on Sunday, after his eighth-placed finish proved enough to establish an",
+      "source": "The Guardian Sport",
+      "sport": "Sports",
+      "region": "International",
+      "image": "https://i.guim.co.uk/img/media/2117e7846babfe872897b50715741c9d6e22e48a/457_0_4819_3857/master/4819.jpg?width=140&quality=85&auto=format&fit=max&s=fad94dc6a5c482e05aa7252cce42cb9f",
+      "published": "2026-11-22T15:26:16+00:00"
+    },
+    {
+      "title": "Liu Wenwei suspended amid match-fixing investigation",
+      "link": "https://www.bbc.co.uk/sport/snooker/articles/c9p83k06160xo?at_medium=RSS&at_campaign=rss",
+      "description": "Chinese snooker player Liu Wenwei is suspended from \"attending or competing on the World Snooker Tour with immediate effect\" amid an investigation into match-fixing.",
+      "source": "BBC Sport",
+      "sport": "Sports",
+      "region": "International",
+      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/c2e4/live/299e0eb0-e681-11f1-a5bc-ddaec99ca2c4.jpg",
+      "published": "2026-11-22T15:17:49+00:00"
+    },
+    {
+      "title": "Blackburn earn derby draw for Mowbray and extend Burnley’s wait for home win",
+      "link": "https://www.theguardian.com/football/2026/nov/22/burnley-blackburn-championship-match-report",
+      "description": "Todd Cantwell’s penalty earned Blackburn a 2-2 draw at Burnley in their first match since head coach Tony Mowbray stepped back because of health issues. In a gripping, physical East Lancashire derby, the home side led twice, through Largie Ramazani’s rising fi",
+      "source": "The Guardian Football",
+      "sport": "Football",
+      "region": "International",
+      "image": "https://i.guim.co.uk/img/media/2c45cfda91deef2290dded2e8a84f5f69bbb04dd/96_0_2585_2069/master/2585.jpg?width=140&quality=85&auto=format&fit=max&s=ee137eb9a99b3726a3c384e66f03ef10",
+      "published": "2026-11-22T15:12:24+00:00"
+    },
+    {
+      "title": "Did beaten Wales still show they have come a long way?",
+      "link": "https://www.bbc.co.uk/sport/rugby-union/articles/cjr4gn7yd9d5o?at_medium=RSS&at_campaign=rss",
+      "description": "Wales believe they are on the up despite failing to back up their win against New Zealand when beaten by Australia in the Nations Championship.",
+      "source": "BBC Sport",
+      "sport": "Sports",
+      "region": "International",
+      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/a1a3/live/f4c9b4c0-e683-11f1-a8fd-13fffcb9ff5a.jpg",
+      "published": "2026-11-22T15:07:06+00:00"
+    },
+    {
+      "title": "Marquez wins record-equalling eighth MotoGP title",
+      "link": "https://www.bbc.co.uk/sport/motorsport/articles/c64gnrdzq8zzo?at_medium=RSS&at_campaign=rss",
+      "description": "Marc Marquez secures a record-equalling eighth MotoGP championship and moves level with Giacomo Agostini.",
+      "source": "BBC Sport",
+      "sport": "Sports",
+      "region": "International",
+      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/a339/live/e2d16000-e684-11f1-a8fd-13fffcb9ff5a.jpg",
+      "published": "2026-11-22T14:58:23+00:00"
+    },
+    {
+      "title": "Burnley’s wait for a home win goes on as Blackburn twice hit back in derby",
+      "link": "https://www.skysports.com/football/burnley-vs-blackburn-rovers/report/560679",
+      "description": "Todd Cantwell's penalty earned Blackburn a 2-2 draw at Burnley in their first match since head coach Tony Mowbray stepped back because of health issues.",
+      "source": "Sky Sports",
+      "sport": "Sports",
+      "region": "International",
+      "image": "https://e2.365dm.com/26/11/1920x1080/skysports-todd-cantwell-blackburn-rovers_7413453.jpg?20261122135146",
+      "published": "2026-11-22T14:15:00+00:00"
+    },
+    {
+      "title": "Man City lose again as home WSL record crumbles with Spurs defeat",
+      "link": "https://www.skysports.com/football/manchester-city-women-vs-tottenham-hotspur-women/report/575831",
+      "description": "Manchester City lost for a second WSL game in a row, beaten 3-1 by Tottenham, with their 100 per cent home league record under Andree Jeglertz coming to an abrupt end.",
+      "source": "Sky Sports",
+      "sport": "Sports",
+      "region": "International",
+      "image": "https://e0.365dm.com/26/11/1920x1080/skysports-jess-naz-spurs-wsl_7413465.jpg?20261122135954",
+      "published": "2026-11-22T14:15:00+00:00"
+    },
+    {
+      "title": "Tyson Fury looks back: ‘Once the Anthony Joshua fight is over, what will I do next? Walking the dog ain’t gonna cut it’",
+      "link": "https://www.theguardian.com/lifeandstyle/2026/nov/22/tyson-fury-boxer-looks-back-after-anthony-joshua-fight-what-next",
+      "description": "The former heavyweight boxing champion on falling in love at first sight, being diagnosed with schizophrenia and bipolar disorder, and the much-anticipated match Born in Manchester in 1988, Tyson Fury – known as the Gypsy King – is a former unified heavyweight",
+      "source": "The Guardian Sport",
+      "sport": "Sports",
+      "region": "International",
+      "image": "https://i.guim.co.uk/img/media/66df667c196a1481e98a6f50eb15bb62b4bb8e63/295_445_4468_3574/master/4468.jpg?width=140&quality=85&auto=format&fit=max&s=cf402fe7b74d81a3bf8c87d95148f670",
+      "published": "2026-11-22T14:00:29+00:00"
+    },
+    {
+      "title": "NFL’s Jaylen Harrell reportedly assaulted driver before crash that left player seriously injured",
+      "link": "https://www.theguardian.com/sport/2026/nov/22/titans-jaylen-harrell-reportedly-assaulted-driver-before-crash-that-left-player-seriously-injured",
+      "description": "Incident occurred in Tampa on Friday morning Crash leaves linebacker with serious injuries Tampa police are investigating whether Tennessee Titans linebacker Jaylen Harrell assaulted a rideshare driver before a crash that left the NFL player in hospital. The T",
+      "source": "The Guardian Sport",
+      "sport": "Sports",
+      "region": "International",
+      "image": "https://i.guim.co.uk/img/media/14bce411e4743792ae90c93a826dfa5d2b57373c/441_0_4413_3531/master/4413.jpg?width=140&quality=85&auto=format&fit=max&s=a0365066d5bf960064ac5f14e925ceaf",
+      "published": "2026-11-22T13:25:37+00:00"
+    },
+    {
+      "title": "England will not get carried away by beating All Blacks",
+      "link": "https://www.bbc.co.uk/sport/rugby-union/articles/ckr5gdpm1q5no?at_medium=RSS&at_campaign=rss",
+      "description": "In his latest BBC Sport column, England World Cup winner Matt Dawson reflects on Steve Borthwick's side's record win over New Zealand and previews the final round of Nations Championship fixtures.",
+      "source": "BBC Sport",
+      "sport": "Sports",
+      "region": "International",
+      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/ec8a/live/e4531aa0-f1de-11ef-9e61-71ee71f26eb1.png",
+      "published": "2026-11-22T12:45:57+00:00"
+    },
+    {
+      "title": "Price or Van Veen to win? Pundits split ahead of Grand Slam of Darts final",
+      "link": "https://www.skysports.com/darts/live-blog/12040/13615194/grand-slam-of-darts-commentary-updates-scores-analysis-with-michael-van-gerwen-gian-van-veen-gerwyn-price-kevin-doets-in-action",
+      "description": "",
+      "source": "Sky Sports",
+      "sport": "Sports",
+      "region": "International",
+      "image": "https://e1.365dm.com/26/07/1920x1080/skysports-darts-world-matchplay_7306393.jpg?20260725111823",
+      "published": "2026-11-22T12:30:00+00:00"
     },
     {
       "title": "César Azpilicueta: ‘At Chelsea a draw was a catastrophe – if you can’t perform, you’re out’",
       "link": "https://www.theguardian.com/football/2026/nov/22/cesar-azpilicueta-at-chelsea-a-draw-was-a-catastrophe-if-you-cant-perform-youre-out",
       "description": "Former defender reflects on his record-breaking longevity, kicking Eden Hazard in training, and life after retirement César Azpilicueta looks well. César Azpilicueta always looks well – “ah, Captain Handsome,” one Chelsea fan says when told who’s turning up – ",
-      "source": "The Guardian Sport",
-      "sport": "Sports",
+      "source": "The Guardian Football",
+      "sport": "Football",
       "region": "International",
       "image": "https://i.guim.co.uk/img/media/af3248e2ee441e7d2f137ca7fb9611270fe9bb7e/792_360_4551_3640/master/4551.jpg?width=140&quality=85&auto=format&fit=max&s=8aefea8ca5efaeeabc5ee70bed2bfac5",
       "published": "2026-11-22T08:00:21+00:00"
-    },
-    {
-      "title": "'Completely unacceptable! - Vasseur slams Leclerc for Hamilton collision",
-      "link": "https://www.skysports.com/f1/news/12040/13615085/ferrari-boss-frederic-vasseur-blames-charles-leclerc-for-unacceptable-collision-with-lewis-hamilton-in-las-vegas-gp",
-      "description": "Ferrari team principal Frederic Vasseur blamed Charles Leclerc for a \"completely unacceptable\" collision with team-mate Lewis Hamilton in the Las Vegas Grand Prix.",
-      "source": "Sky Sports",
-      "sport": "Sports",
-      "region": "International",
-      "image": "https://e1.365dm.com/26/11/1920x1080/skysports-lewis-hamilton-charles_7413150.jpg?20261122060105",
-      "published": "2026-11-22T07:50:00+00:00"
-    },
-    {
-      "title": "'He's so far below my level' - Verstappen taunts Russell over Las Vegas GP error",
-      "link": "https://www.skysports.com/f1/news/12040/13615084/max-verstappen-says-george-russell-so-far-below-his-level-after-poking-fun-at-rival-for-major-error-during-las-vegas-gp",
-      "description": "Max Verstappen says George Russell is \"so far below my level\" in a scathing response to the Mercedes driver after winning the Las Vegas Grand Prix.",
-      "source": "Sky Sports",
-      "sport": "Sports",
-      "region": "International",
-      "image": "https://e2.365dm.com/26/11/1920x1080/skysports-f1-max-verstappen_7413226.jpg?20261122073953",
-      "published": "2026-11-22T07:45:00+00:00"
-    },
-    {
-      "title": "Wemby makes history in 18 minutes, finishes game with 50 points",
-      "link": "https://www.espn.com/nba/story/_/id/50559763/victor-wembanyama-shows-50-point-5-block-performance",
-      "description": "Victor Wembanyama had his third career 50-point outing in Sunday's win vs. the Pelicans, to go along with 19 rebounds, five blocks and four steals.",
-      "source": "ESPN",
-      "sport": "Sports",
-      "region": "International",
-      "image": "",
-      "published": "2026-11-22T07:43:00+00:00"
-    },
-    {
-      "title": "Indiana's CFP, Big Ten title hopes in peril after OT loss at Washington",
-      "link": "https://www.espn.com/college-football/story/_/id/50556327/indiana-cfp-hopes-take-hit-ot-loss-washington",
-      "description": "Indiana might not get a chance to defend its national championship after losing 27-24 at Washington on Saturday.",
-      "source": "ESPN",
-      "sport": "Sports",
-      "region": "International",
-      "image": "",
-      "published": "2026-11-22T07:43:00+00:00"
-    },
-    {
-      "title": "Verstappen fends off rivals in Vegas GP thriller for third win in 4 years",
-      "link": "https://www.espn.com/racing/story/_/id/50560262/max-verstappen-wins-las-vegas-grand-prix-3rd-4-years",
-      "description": "In a race that featured 35 lead changes, Max Verstappen kept finding ways to gain an advantage and emerged victorious in the Las Vegas Grand Prix on Saturday night.",
-      "source": "ESPN",
-      "sport": "Sports",
-      "region": "International",
-      "image": "",
-      "published": "2026-11-22T07:43:00+00:00"
-    },
-    {
-      "title": "Sources: Nacua needs 4-5 months to recover from knee surgery, out for playoffs",
-      "link": "https://www.espn.com/nfl/story/_/id/50556613/sources-rams-puka-nacua-4-5-months-knee-surgery",
-      "description": "Puka Nacua's recovery time from MCL surgery is considered to be four to five months, sources told ESPN, meaning he will miss the playoffs.",
-      "source": "ESPN",
-      "sport": "Sports",
-      "region": "International",
-      "image": "",
-      "published": "2026-11-22T07:43:00+00:00"
-    },
-    {
-      "title": "No. 1 Georgia clinches 6th straight SEC title game berth with win at No. 21 South Carolina",
-      "link": "https://www.espn.com/college-football/story/_/id/50558713/georgia-clinches-sec-title-game-berth-win-south-carolina",
-      "description": "Nate Frazier ran for 94 yards and two touchdowns, and No. 1 Georgia clinched a spot in the final SEC championship game with a victory over South Carolina on Saturday night.",
-      "source": "ESPN",
-      "sport": "Sports",
-      "region": "International",
-      "image": "",
-      "published": "2026-11-22T07:43:00+00:00"
-    },
-    {
-      "title": "Police investigating whether Titans' Harrell assaulted driver before crash",
-      "link": "https://www.espn.com/nfl/story/_/id/50558496/police-probing-whether-titans-de-harrell-assaulted-driver",
-      "description": "Police are investigating whether Titans DE Jaylen Harrell assaulted a rideshare driver before a serious car crash that left him hospitalized.",
-      "source": "ESPN",
-      "sport": "Sports",
-      "region": "International",
-      "image": "",
-      "published": "2026-11-22T07:43:00+00:00"
-    },
-    {
-      "title": "‘Showing off for Selena Gomez’ - Wembanyama hits 50 points in Spurs win",
-      "link": "https://www.bbc.co.uk/sport/basketball/articles/c6x20yeqg18vo?at_medium=RSS&at_campaign=rss",
-      "description": "San Antonio Spurs star Victor Wembanyama hits 50 points as his side beats the New Orleans Pelicans 114-91.",
-      "source": "BBC Sport",
-      "sport": "Sports",
-      "region": "International",
-      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/e2f6/live/9c2a9300-e63f-11f1-9f30-29998dff46e7.jpg",
-      "published": "2026-11-22T07:42:24+00:00"
-    },
-    {
-      "title": "Who am I? Guess WSL star No 13",
-      "link": "https://www.bbc.co.uk/sport/football/articles/cq770yn580j3o?at_medium=RSS&at_campaign=rss",
-      "description": "Work out the identity of today's player in as few attempts as possible.",
-      "source": "BBC Sport",
-      "sport": "Sports",
-      "region": "International",
-      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/87e1/live/1b00e450-9afe-11f1-a291-b542ee92de7c.jpg",
-      "published": "2026-11-22T07:19:58+00:00"
-    },
-    {
-      "title": "Why Arsenal are behind in race for Women's Champions League spots",
-      "link": "https://www.bbc.co.uk/sport/football/articles/c8752llr1ed1o?at_medium=RSS&at_campaign=rss",
-      "description": "Arsenal were open about their aim to win the WSL this season but they find themselves well adrift - where have things gone wrong?",
-      "source": "BBC Sport",
-      "sport": "Sports",
-      "region": "International",
-      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/bf84/live/b3a1cf10-e01f-11f1-ad34-45f8f10f7c55.jpg",
-      "published": "2026-11-22T07:17:10+00:00"
-    },
-    {
-      "title": "Argentina midfielder Paredes collapses during TV interview",
-      "link": "https://www.bbc.co.uk/sport/football/articles/cwnv45818z59o?at_medium=RSS&at_campaign=rss",
-      "description": "World Cup winning midfielder Leandro Paredes collapses while giving a post-match interview minutes after winning a trophy with Boca Juniors.",
-      "source": "BBC Sport",
-      "sport": "Sports",
-      "region": "International",
-      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/c81e/live/26d6d700-e642-11f1-acea-8b4bc3bc92cd.jpg",
-      "published": "2026-11-22T07:13:34+00:00"
-    },
-    {
-      "title": "Verstappen RIPS into Russell as feud reignited",
-      "link": "https://www.skysports.com/watch/video/13615135/las-vegas-gp-max-verstappen-rips-into-george-russell-after-grand-prix-win",
-      "description": "Max Verstappen had a choice few words for long-time foe George Russell after winning the Las Vegas Grand Prix.",
-      "source": "Sky Sports",
-      "sport": "Sports",
-      "region": "International",
-      "image": "https://e2.365dm.com/26/11/1920x1080/skysports-max-verstappen_7413191.jpg?20261122071217",
-      "published": "2026-11-22T07:04:00+00:00"
-    },
-    {
-      "title": "Harrison: The animosity Fury and AJ have is genuine",
-      "link": "https://www.skysports.com/boxing/news/12040/13615082/tyson-fury-and-anthony-joshua-have-a-genuine-animosity-says-olympic-gold-medallist-audley-harrison-we-need-to-see-it",
-      "description": "Audley Harrison has backed Anthony Joshua and Tyson Fury to deliver when they fight on December 11 in Cardiff.",
-      "source": "Sky Sports",
-      "sport": "Sports",
-      "region": "International",
-      "image": "https://e1.365dm.com/26/10/1920x1080/skysports-fury-joshua-boxing_7365941.jpg?20261001174117",
-      "published": "2026-11-22T07:00:00+00:00"
-    },
-    {
-      "title": "Fernandes: Man Utd have offered new deal but now is not time for talks",
-      "link": "https://www.skysports.com/football/news/12040/13614990/bruno-fernandes-man-utd-captain-confirms-contract-offer-but-says-negotiations-are-on-hold",
-      "description": "Bruno Fernandes exclusively told Sky Sports that Manchester United have offered him a new contract but he has put discussions on hold as he insists the club's priority must be returning to winning ways.",
-      "source": "Sky Sports",
-      "sport": "Sports",
-      "region": "International",
-      "image": "https://e2.365dm.com/26/11/1920x1080/skysports-bruno-fernandes-manchester-united_7412899.jpg?20261121194818",
-      "published": "2026-11-22T07:00:00+00:00"
-    },
-    {
-      "title": "Verstappen wins extraordinary race as Ferraris collide",
-      "link": "https://www.bbc.co.uk/sport/formula1/articles/cqx2ex25pvn9o?at_medium=RSS&at_campaign=rss",
-      "description": "Red Bull's Max Verstappen wins an extraordinary Las Vegas Grand Prix that featured 34 lead changes and another collision between the Ferraris.",
-      "source": "BBC Sport",
-      "sport": "Sports",
-      "region": "International",
-      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/53c5/live/4cf95270-e631-11f1-9a7b-83df752dd747.jpg",
-      "published": "2026-11-22T06:27:06+00:00"
-    },
-    {
-      "title": "Max Verstappen touches perfection in dramatic Las Vegas Grand Prix win",
-      "link": "https://www.theguardian.com/sport/2026/nov/22/max-verstappen-touches-perfection-in-dramatic-las-vegas-grand-prix-win",
-      "description": "The Dutchman was under siege before pulling clear in the final lap Charles Leclerc and Lewis Hamilton once again clashed on the track Max Verstappen won the Las Vegas Grand Prix with a remarkable, determined drive for Red Bull. He did battle in a thrilling con",
-      "source": "The Guardian Sport",
-      "sport": "Sports",
-      "region": "International",
-      "image": "https://i.guim.co.uk/img/media/4f224009927a167cc5d49ee8a21ca8deb84bdb76/323_0_4356_3484/master/4356.jpg?width=140&quality=85&auto=format&fit=max&s=f9f7df586a3c3cc945a48ef0567c5e4a",
-      "published": "2026-11-22T06:08:03+00:00"
-    },
-    {
-      "title": "Las Vegas Grand Prix - Race highlights",
-      "link": "https://www.skysports.com/watch/video/13615112/las-vegas-grand-prix-race-highlights",
-      "description": "Highlights from the 2026 Las Vegas Grand Prix.",
-      "source": "Sky Sports",
-      "sport": "Sports",
-      "region": "International",
-      "image": "https://e2.365dm.com/26/11/1920x1080/skysports-motorsport-f1_7413137.jpg?20261122054421",
-      "published": "2026-11-22T05:42:00+00:00"
     }
   ]
 }
