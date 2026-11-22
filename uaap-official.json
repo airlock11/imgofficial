@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-22T00:05:28+00:00",
+  "updatedAt": "2026-11-22T06:45:50+00:00",
   "season": "Season 89 Men's Basketball",
   "sources": {
     "stats": "https://uaap.org/stats/uaap-season-89-men-s-basketball",
@@ -62,20 +62,12 @@
       "apg": 2.7
     },
     {
-      "player": "T. Lagat",
-      "team": "UE Red Warriors",
-      "games": 4,
-      "ppg": 20.2,
-      "rpg": 4.8,
-      "apg": 2.0
-    },
-    {
       "player": "J. Bautista",
       "team": "FEU Tamaraws",
-      "games": 3,
-      "ppg": 19.7,
-      "rpg": 2.7,
-      "apg": 2.0
+      "games": 2,
+      "ppg": 20.5,
+      "rpg": 2.0,
+      "apg": 3.0
     },
     {
       "player": "P. Osang",
@@ -86,12 +78,12 @@
       "apg": 0.0
     },
     {
-      "player": "R. Jumamoy",
-      "team": "NU Bulldogs",
-      "games": 2,
-      "ppg": 16.0,
-      "rpg": 6.0,
-      "apg": 6.5
+      "player": "T. Lagat",
+      "team": "UE Red Warriors",
+      "games": 3,
+      "ppg": 19.0,
+      "rpg": 4.3,
+      "apg": 1.7
     },
     {
       "player": "M. Llemit",
@@ -116,6 +108,14 @@
       "ppg": 14.5,
       "rpg": 2.0,
       "apg": 4.5
+    },
+    {
+      "player": "D. Ududo",
+      "team": "UP Fighting Maroons",
+      "games": 3,
+      "ppg": 13.7,
+      "rpg": 8.3,
+      "apg": 0.3
     }
   ],
   "headlines": [],
@@ -224,6 +224,17 @@
   ],
   "topPlayersMode": "recent-official-boxscores",
   "liveStatsGames": [
+    {
+      "first": "PERIOD 1 08:16 FEU",
+      "firstScore": 2,
+      "second": "NU Bulldogs",
+      "secondScore": 7,
+      "status": "Live",
+      "state": "in",
+      "gameId": "52",
+      "url": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball?game_id=52",
+      "date": "2026-11-22T14:30:00+08:00"
+    },
     {
       "first": "Ateneo Blue Eagles",
       "firstScore": 84,
@@ -353,8 +364,7 @@
       "status": "Final",
       "state": "final",
       "gameId": "40",
-      "url": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball?game_id=40",
-      "date": "2026-11-04T14:30:00+08:00"
+      "url": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball?game_id=40"
     },
     {
       "first": "Ateneo Blue Eagles",
@@ -753,11 +763,11 @@
         "web-uaap-scheduled-7",
         "web-uaap-scheduled-8"
       ],
-      "nextGameAt": "2026-11-22T14:30:00+08:00",
+      "nextGameAt": "2026-11-22T18:00:00+08:00",
       "idleDiscoveryMinutes": 180,
       "gameDayDataRefreshMinutes": 15,
       "gameDayLivestreamRefreshMinutes": 5,
-      "lastSlowCheckAt": "2026-11-22T08:05:18+08:00"
+      "lastSlowCheckAt": "2026-11-22T14:45:36+08:00"
     },
     "failClosed": true
   }
