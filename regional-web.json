@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-22T22:56:28+08:00",
+  "updated_at": "2026-11-23T04:55:59+08:00",
   "refresh_minutes": 15,
   "leagues": {
     "pba": {
@@ -299,7 +299,7 @@
           "idleDiscoveryMinutes": 180,
           "gameDayDataRefreshMinutes": 15,
           "gameDayLivestreamRefreshMinutes": 5,
-          "lastSlowCheckAt": "2026-11-22T22:55:42+08:00"
+          "lastSlowCheckAt": "2026-11-23T04:55:14+08:00"
         },
         "failClosed": true
       }
@@ -1310,24 +1310,21 @@
       ],
       "automation": {
         "enabled": true,
-        "mode": "game-day",
-        "dataRefreshMinutes": 15,
-        "livestreamRefreshMinutes": 5,
+        "mode": "idle",
+        "dataRefreshMinutes": 180,
+        "livestreamRefreshMinutes": 0,
         "scheduleAware": {
           "enabled": true,
           "timezone": "Asia/Manila",
-          "mode": "game-day",
-          "gameDay": true,
-          "todayGameCount": 2,
-          "todayGames": [
-            "uaap-live-53",
-            "uaap-live-52"
-          ],
+          "mode": "idle",
+          "gameDay": false,
+          "todayGameCount": 0,
+          "todayGames": [],
           "nextGameAt": "2026-11-25T14:30:00+08:00",
           "idleDiscoveryMinutes": 180,
           "gameDayDataRefreshMinutes": 15,
           "gameDayLivestreamRefreshMinutes": 5,
-          "lastSlowCheckAt": "2026-11-22T22:56:09+08:00"
+          "lastSlowCheckAt": "2026-11-23T04:55:45+08:00"
         },
         "failClosed": true
       }
@@ -1351,30 +1348,27 @@
         "idleDiscoveryMinutes": 180,
         "gameDayDataRefreshMinutes": 15,
         "gameDayLivestreamRefreshMinutes": 5,
-        "lastSlowCheckAt": "2026-11-22T22:55:42+08:00"
+        "lastSlowCheckAt": "2026-11-23T04:55:14+08:00"
       },
       "failClosed": true
     },
     "uaap": {
       "enabled": true,
-      "mode": "game-day",
-      "dataRefreshMinutes": 15,
-      "livestreamRefreshMinutes": 5,
+      "mode": "idle",
+      "dataRefreshMinutes": 180,
+      "livestreamRefreshMinutes": 0,
       "scheduleAware": {
         "enabled": true,
         "timezone": "Asia/Manila",
-        "mode": "game-day",
-        "gameDay": true,
-        "todayGameCount": 2,
-        "todayGames": [
-          "uaap-live-53",
-          "uaap-live-52"
-        ],
+        "mode": "idle",
+        "gameDay": false,
+        "todayGameCount": 0,
+        "todayGames": [],
         "nextGameAt": "2026-11-25T14:30:00+08:00",
         "idleDiscoveryMinutes": 180,
         "gameDayDataRefreshMinutes": 15,
         "gameDayLivestreamRefreshMinutes": 5,
-        "lastSlowCheckAt": "2026-11-22T22:56:09+08:00"
+        "lastSlowCheckAt": "2026-11-23T04:55:45+08:00"
       },
       "failClosed": true
     }
