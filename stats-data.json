@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-23T02:45:45.559247+00:00",
+  "updatedAt": "2026-11-23T11:21:24.708862+00:00",
   "leagues": {
     "uaap": {
       "league": "UAAP",
@@ -11170,20 +11170,6 @@
               "displayValue": "933"
             },
             {
-              "player": "Baker Mayfield",
-              "team": "TB",
-              "gp": null,
-              "value": 922.0,
-              "displayValue": "922"
-            },
-            {
-              "player": "J.J. McCarthy",
-              "team": "NYG",
-              "gp": null,
-              "value": 915.0,
-              "displayValue": "915"
-            },
-            {
               "player": "Drew Lock",
               "team": "SEA",
               "gp": null,
@@ -11210,6 +11196,20 @@
               "gp": null,
               "value": 501.0,
               "displayValue": "501"
+            },
+            {
+              "player": "Fernando Mendoza",
+              "team": "LV",
+              "gp": null,
+              "value": 458.0,
+              "displayValue": "458"
+            },
+            {
+              "player": "Tyson Bagent",
+              "team": "CHI",
+              "gp": null,
+              "value": 409.0,
+              "displayValue": "409"
             }
           ]
         },
@@ -11225,8 +11225,36 @@
               "displayValue": "27"
             },
             {
+              "player": "Dak Prescott",
+              "team": "DAL",
+              "gp": null,
+              "value": 25.0,
+              "displayValue": "25"
+            },
+            {
+              "player": "Brock Purdy",
+              "team": "SF",
+              "gp": null,
+              "value": 23.0,
+              "displayValue": "23"
+            },
+            {
               "player": "Kirk Cousins",
               "team": "MIN",
+              "gp": null,
+              "value": 22.0,
+              "displayValue": "22"
+            },
+            {
+              "player": "Patrick Mahomes",
+              "team": "KC",
+              "gp": null,
+              "value": 22.0,
+              "displayValue": "22"
+            },
+            {
+              "player": "Trevor Lawrence",
+              "team": "JAX",
               "gp": null,
               "value": 22.0,
               "displayValue": "22"
@@ -11239,39 +11267,11 @@
               "displayValue": "22"
             },
             {
-              "player": "Dak Prescott",
-              "team": "DAL",
-              "gp": null,
-              "value": 21.0,
-              "displayValue": "21"
-            },
-            {
-              "player": "Trevor Lawrence",
-              "team": "JAX",
-              "gp": null,
-              "value": 21.0,
-              "displayValue": "21"
-            },
-            {
-              "player": "Jordan Love",
-              "team": "GB",
+              "player": "Jared Goff",
+              "team": "DET",
               "gp": null,
               "value": 20.0,
               "displayValue": "20"
-            },
-            {
-              "player": "Brock Purdy",
-              "team": "SF",
-              "gp": null,
-              "value": 20.0,
-              "displayValue": "20"
-            },
-            {
-              "player": "Matthew Stafford",
-              "team": "LAR",
-              "gp": null,
-              "value": 19.0,
-              "displayValue": "19"
             }
           ]
         },
@@ -11280,18 +11280,18 @@
           "suffix": "YDS",
           "rows": [
             {
-              "player": "James Cook III",
-              "team": "BUF",
-              "gp": null,
-              "value": 971.0,
-              "displayValue": "971"
-            },
-            {
               "player": "Bijan Robinson",
               "team": "ATL",
               "gp": null,
               "value": 951.0,
               "displayValue": "951"
+            },
+            {
+              "player": "Bucky Irving",
+              "team": "TB",
+              "gp": null,
+              "value": 893.0,
+              "displayValue": "893"
             },
             {
               "player": "Kenneth Walker III",
@@ -11301,11 +11301,18 @@
               "displayValue": "872"
             },
             {
-              "player": "Bucky Irving",
-              "team": "TB",
+              "player": "Chuba Hubbard",
+              "team": "CAR",
               "gp": null,
-              "value": 825.0,
-              "displayValue": "825"
+              "value": 831.0,
+              "displayValue": "831"
+            },
+            {
+              "player": "Derrick Henry",
+              "team": "BAL",
+              "gp": null,
+              "value": 793.0,
+              "displayValue": "793"
             },
             {
               "player": "Jonathan Taylor",
@@ -11315,25 +11322,18 @@
               "displayValue": "760"
             },
             {
+              "player": "Javonte Williams",
+              "team": "DAL",
+              "gp": null,
+              "value": 759.0,
+              "displayValue": "759"
+            },
+            {
               "player": "Jaylen Warren",
               "team": "PIT",
               "gp": null,
-              "value": 719.0,
-              "displayValue": "719"
-            },
-            {
-              "player": "Chuba Hubbard",
-              "team": "CAR",
-              "gp": null,
-              "value": 711.0,
-              "displayValue": "711"
-            },
-            {
-              "player": "Derrick Henry",
-              "team": "BAL",
-              "gp": null,
-              "value": 699.0,
-              "displayValue": "699"
+              "value": 747.0,
+              "displayValue": "747"
             }
           ]
         },
@@ -11341,13 +11341,6 @@
           "title": "Receiving Yards",
           "suffix": "YDS",
           "rows": [
-            {
-              "player": "CeeDee Lamb",
-              "team": "DAL",
-              "gp": null,
-              "value": 976.0,
-              "displayValue": "976"
-            },
             {
               "player": "Christian Watson",
               "team": "GB",
@@ -11361,6 +11354,13 @@
               "gp": null,
               "value": 878.0,
               "displayValue": "878"
+            },
+            {
+              "player": "Chris Olave",
+              "team": "NO",
+              "gp": null,
+              "value": 866.0,
+              "displayValue": "866"
             },
             {
               "player": "Matthew Golden",
@@ -11384,18 +11384,18 @@
               "displayValue": "801"
             },
             {
-              "player": "Chris Olave",
-              "team": "NO",
-              "gp": null,
-              "value": 764.0,
-              "displayValue": "764"
-            },
-            {
               "player": "Amon-Ra St. Brown",
               "team": "DET",
               "gp": null,
-              "value": 755.0,
-              "displayValue": "755"
+              "value": 792.0,
+              "displayValue": "792"
+            },
+            {
+              "player": "Zay Flowers",
+              "team": "BAL",
+              "gp": null,
+              "value": 785.0,
+              "displayValue": "785"
             }
           ]
         }
@@ -11477,8 +11477,8 @@
               "player": "Jadan Baugh",
               "team": "FLA",
               "gp": null,
-              "value": 981.0,
-              "displayValue": "981"
+              "value": 980.0,
+              "displayValue": "980"
             },
             {
               "player": "Jalen Buckley",
