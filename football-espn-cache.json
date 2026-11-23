@@ -1,7 +1,7 @@
 {
   "version": 1,
   "source": "ESPN public football data",
-  "updatedAt": "2026-11-23T12:12:23.284Z",
+  "updatedAt": "2026-11-23T23:57:37.665Z",
   "leagues": {
     "soccer": {
       "name": "Premier League",
@@ -161,10 +161,10 @@
           "away": "Everton",
           "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/337.png",
           "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/368.png",
-          "homeScore": "0",
+          "homeScore": "4",
           "awayScore": "0",
-          "state": "scheduled",
-          "status": "Scheduled",
+          "state": "final",
+          "status": "FT",
           "venue": "Gtech Community Stadium",
           "competition": "Premier League",
           "category": "England"
@@ -1028,6 +1028,17 @@
         },
         {
           "rank": 6,
+          "team": "Brentford",
+          "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/337.png",
+          "played": 11,
+          "wins": 4,
+          "draws": 5,
+          "losses": 2,
+          "goalDiff": 9,
+          "points": 17
+        },
+        {
+          "rank": 7,
           "team": "Leeds United",
           "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/357.png",
           "played": 11,
@@ -1036,17 +1047,6 @@
           "losses": 2,
           "goalDiff": 5,
           "points": 17
-        },
-        {
-          "rank": 7,
-          "team": "Everton",
-          "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/368.png",
-          "played": 10,
-          "wins": 4,
-          "draws": 4,
-          "losses": 2,
-          "goalDiff": 2,
-          "points": 16
         },
         {
           "rank": 8,
@@ -1061,6 +1061,17 @@
         },
         {
           "rank": 9,
+          "team": "Everton",
+          "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/368.png",
+          "played": 11,
+          "wins": 4,
+          "draws": 4,
+          "losses": 3,
+          "goalDiff": -2,
+          "points": 16
+        },
+        {
+          "rank": 10,
           "team": "Tottenham Hotspur",
           "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/367.png",
           "played": 11,
@@ -1069,17 +1080,6 @@
           "losses": 4,
           "goalDiff": 1,
           "points": 15
-        },
-        {
-          "rank": 10,
-          "team": "Brentford",
-          "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/337.png",
-          "played": 10,
-          "wins": 3,
-          "draws": 5,
-          "losses": 2,
-          "goalDiff": 5,
-          "points": 14
         },
         {
           "rank": 11,
@@ -1192,7 +1192,7 @@
           "points": 7
         }
       ],
-      "verifiedAt": "2026-11-23T12:12:22.804Z"
+      "verifiedAt": "2026-11-23T23:57:36.705Z"
     },
     "laliga": {
       "name": "La Liga",
@@ -1352,10 +1352,10 @@
           "away": "Elche",
           "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/1538.png",
           "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/3751.png",
-          "homeScore": "0",
-          "awayScore": "0",
-          "state": "scheduled",
-          "status": "Scheduled",
+          "homeScore": "1",
+          "awayScore": "1",
+          "state": "final",
+          "status": "FT",
           "venue": "Estadi Ciutat de València",
           "competition": "La Liga",
           "category": "Spain"
@@ -2206,6 +2206,17 @@
         },
         {
           "rank": 15,
+          "team": "Levante",
+          "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/1538.png",
+          "played": 13,
+          "wins": 2,
+          "draws": 6,
+          "losses": 5,
+          "goalDiff": -5,
+          "points": 12
+        },
+        {
+          "rank": 16,
           "team": "Rayo Vallecano",
           "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/101.png",
           "played": 12,
@@ -2216,7 +2227,7 @@
           "points": 12
         },
         {
-          "rank": 16,
+          "rank": 17,
           "team": "Valencia",
           "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/94.png",
           "played": 13,
@@ -2227,7 +2238,7 @@
           "points": 12
         },
         {
-          "rank": 17,
+          "rank": 18,
           "team": "Getafe",
           "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2922.png",
           "played": 13,
@@ -2238,26 +2249,15 @@
           "points": 12
         },
         {
-          "rank": 18,
-          "team": "Levante",
-          "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/1538.png",
-          "played": 12,
-          "wins": 2,
-          "draws": 5,
-          "losses": 5,
-          "goalDiff": -5,
-          "points": 11
-        },
-        {
           "rank": 19,
           "team": "Elche",
           "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3751.png",
-          "played": 12,
+          "played": 13,
           "wins": 2,
-          "draws": 4,
+          "draws": 5,
           "losses": 6,
           "goalDiff": -6,
-          "points": 10
+          "points": 11
         },
         {
           "rank": 20,
@@ -2271,7 +2271,7 @@
           "points": 5
         }
       ],
-      "verifiedAt": "2026-11-23T12:12:22.959Z"
+      "verifiedAt": "2026-11-23T23:57:37.039Z"
     },
     "bundesliga": {
       "name": "Bundesliga",
@@ -3200,7 +3200,7 @@
           "points": 4
         }
       ],
-      "verifiedAt": "2026-11-23T12:12:23.121Z"
+      "verifiedAt": "2026-11-23T23:57:37.401Z"
     },
     "seriea": {
       "name": "Serie A",
@@ -3360,10 +3360,10 @@
           "away": "Fiorentina",
           "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/4007.png",
           "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/109.png",
-          "homeScore": "0",
+          "homeScore": "3",
           "awayScore": "0",
-          "state": "scheduled",
-          "status": "Scheduled",
+          "state": "final",
+          "status": "FT",
           "venue": "U-Power Stadium",
           "competition": "Serie A",
           "category": "Italy"
@@ -4155,6 +4155,17 @@
         },
         {
           "rank": 14,
+          "team": "Monza",
+          "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/4007.png",
+          "played": 12,
+          "wins": 3,
+          "draws": 1,
+          "losses": 8,
+          "goalDiff": -5,
+          "points": 10
+        },
+        {
+          "rank": 15,
           "team": "Lecce",
           "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/113.png",
           "played": 12,
@@ -4165,18 +4176,18 @@
           "points": 10
         },
         {
-          "rank": 15,
+          "rank": 16,
           "team": "Fiorentina",
           "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/109.png",
-          "played": 11,
+          "played": 12,
           "wins": 2,
           "draws": 3,
-          "losses": 6,
-          "goalDiff": -8,
+          "losses": 7,
+          "goalDiff": -11,
           "points": 9
         },
         {
-          "rank": 16,
+          "rank": 17,
           "team": "Parma",
           "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/115.png",
           "played": 12,
@@ -4187,7 +4198,7 @@
           "points": 8
         },
         {
-          "rank": 17,
+          "rank": 18,
           "team": "Sassuolo",
           "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3997.png",
           "played": 12,
@@ -4196,17 +4207,6 @@
           "losses": 8,
           "goalDiff": -15,
           "points": 8
-        },
-        {
-          "rank": 18,
-          "team": "Monza",
-          "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/4007.png",
-          "played": 11,
-          "wins": 2,
-          "draws": 1,
-          "losses": 8,
-          "goalDiff": -8,
-          "points": 7
         },
         {
           "rank": 19,
@@ -4231,7 +4231,7 @@
           "points": 6
         }
       ],
-      "verifiedAt": "2026-11-23T12:12:23.284Z"
+      "verifiedAt": "2026-11-23T23:57:37.665Z"
     }
   }
 }
