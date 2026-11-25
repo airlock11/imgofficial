@@ -1,7 +1,7 @@
 {
   "version": 1,
   "source": "ESPN public football data",
-  "updatedAt": "2026-11-25T13:32:17.334Z",
+  "updatedAt": "2026-11-25T22:48:08.835Z",
   "leagues": {
     "soccer": {
       "name": "Premier League",
@@ -1192,7 +1192,7 @@
           "points": 7
         }
       ],
-      "verifiedAt": "2026-11-25T13:32:15.730Z"
+      "verifiedAt": "2026-11-25T22:48:08.235Z"
     },
     "laliga": {
       "name": "La Liga",
@@ -1722,8 +1722,8 @@
           "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/93.png",
           "homeScore": "0",
           "awayScore": "0",
-          "state": "final",
-          "status": "Susp",
+          "state": "scheduled",
+          "status": "Scheduled",
           "venue": "Estadio de Vallecas",
           "competition": "La Liga",
           "category": "Spain"
@@ -2271,7 +2271,7 @@
           "points": 5
         }
       ],
-      "verifiedAt": "2026-11-25T13:32:15.876Z"
+      "verifiedAt": "2026-11-25T22:48:08.434Z"
     },
     "bundesliga": {
       "name": "Bundesliga",
@@ -3200,7 +3200,7 @@
           "points": 4
         }
       ],
-      "verifiedAt": "2026-11-25T13:32:16.061Z"
+      "verifiedAt": "2026-11-25T22:48:08.625Z"
     },
     "seriea": {
       "name": "Serie A",
@@ -4231,7 +4231,7 @@
           "points": 6
         }
       ],
-      "verifiedAt": "2026-11-25T13:32:17.333Z"
+      "verifiedAt": "2026-11-25T22:48:08.835Z"
     }
   }
 }
