@@ -1,7 +1,7 @@
 {
   "version": 1,
   "source": "ESPN public football data",
-  "updatedAt": "2026-11-26T04:43:45.427Z",
+  "updatedAt": "2026-11-26T14:31:46.323Z",
   "leagues": {
     "soccer": {
       "name": "Premier League",
@@ -968,6 +968,22 @@
           "venue": "Stamford Bridge",
           "competition": "Premier League",
           "category": "England"
+        },
+        {
+          "eventId": "401878737",
+          "date": "2026-12-26T12:30Z",
+          "displayTime": "",
+          "home": "Aston Villa",
+          "away": "Leeds United",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/362.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/357.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "Villa Park",
+          "competition": "Premier League",
+          "category": "England"
         }
       ],
       "standings": [
@@ -1192,7 +1208,7 @@
           "points": 7
         }
       ],
-      "verifiedAt": "2026-11-26T04:43:44.948Z"
+      "verifiedAt": "2026-11-26T14:31:45.838Z"
     },
     "laliga": {
       "name": "La Liga",
@@ -2271,7 +2287,7 @@
           "points": 5
         }
       ],
-      "verifiedAt": "2026-11-26T04:43:45.111Z"
+      "verifiedAt": "2026-11-26T14:31:46.032Z"
     },
     "bundesliga": {
       "name": "Bundesliga",
@@ -3200,7 +3216,7 @@
           "points": 4
         }
       ],
-      "verifiedAt": "2026-11-26T04:43:45.269Z"
+      "verifiedAt": "2026-11-26T14:31:46.170Z"
     },
     "seriea": {
       "name": "Serie A",
@@ -4231,7 +4247,7 @@
           "points": 6
         }
       ],
-      "verifiedAt": "2026-11-26T04:43:45.427Z"
+      "verifiedAt": "2026-11-26T14:31:46.323Z"
     }
   }
 }
