@@ -2,7 +2,7 @@
   "special": true,
   "league": "WTA Tour",
   "live": true,
-  "updatedAt": "2026-11-26T23:54:10.381265+00:00",
+  "updatedAt": "2026-11-26T23:54:17.993279+00:00",
   "sourceName": "WTA Official Scores scrape",
   "sourceUrl": "https://www.wtatennis.com/scores/",
   "verificationSource": "WTA Official Scores",
@@ -13,12 +13,12 @@
   "games": [
     {
       "eventId": "wta-scrape-0-m-carle-n-podoroska",
-      "date": "2026-11-26T23:54:10.379200+00:00",
+      "date": "2026-11-26T23:54:17.991207+00:00",
       "displayTime": "IEB+ Argentina Open • Argentina",
       "away": "M. Carle",
       "home": "N. Podoroska",
-      "awayScore": "6 5 · 40",
-      "homeScore": "4 6 · 30",
+      "awayScore": "6 5 · AD",
+      "homeScore": "4 6 · 40",
       "awaySets": [
         "6",
         "5"
@@ -27,8 +27,8 @@
         "4",
         "6"
       ],
-      "awayPoint": "40",
-      "homePoint": "30",
+      "awayPoint": "AD",
+      "homePoint": "40",
       "currentSet": 2,
       "awayCurrentSetGames": 5,
       "homeCurrentSetGames": 6,
@@ -36,7 +36,7 @@
       "homeSetsWon": 0,
       "round": "Round of 16",
       "court": "",
-      "status": "Live Match: 1:59 · Round of 16",
+      "status": "Live Match: 2:00 · Round of 16",
       "state": "live",
       "eventOnly": false,
       "title": "IEB+ Argentina Open • Argentina",
@@ -47,11 +47,11 @@
     },
     {
       "eventId": "wta-scrape-1-upcoming-akli-rencheli-costoulas",
-      "date": "2026-11-26T23:54:10.379677+00:00",
+      "date": "2026-11-26T23:54:17.991691+00:00",
       "displayTime": "IEB+ Argentina Open • Argentina",
       "away": "Upcoming / Akli",
       "home": "Rencheli / Costoulas",
-      "awayScore": "6 2 · 0",
+      "awayScore": "6 2 · 30",
       "homeScore": "3 0 · 15",
       "awaySets": [
         "6",
@@ -61,7 +61,7 @@
         "3",
         "0"
       ],
-      "awayPoint": "0",
+      "awayPoint": "30",
       "homePoint": "15",
       "currentSet": 2,
       "awayCurrentSetGames": 2,
@@ -70,7 +70,7 @@
       "homeSetsWon": 0,
       "round": "Quarterfinals",
       "court": "",
-      "status": "Live Match: 0:45 · Quarterfinals",
+      "status": "Live Match: 0:46 · Quarterfinals",
       "state": "live",
       "eventOnly": false,
       "title": "IEB+ Argentina Open • Argentina",
