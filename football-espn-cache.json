@@ -1,7 +1,7 @@
 {
   "version": 1,
   "source": "ESPN public football data",
-  "updatedAt": "2026-11-27T05:14:51.893Z",
+  "updatedAt": "2026-11-27T15:15:41.764Z",
   "leagues": {
     "soccer": {
       "name": "Premier League",
@@ -1080,6 +1080,22 @@
           "venue": "St. James' Park",
           "competition": "Premier League",
           "category": "England"
+        },
+        {
+          "eventId": "401878736",
+          "date": "2026-12-27T14:00Z",
+          "displayTime": "",
+          "home": "Coventry City",
+          "away": "Chelsea",
+          "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/388.png",
+          "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/363.png",
+          "homeScore": "0",
+          "awayScore": "0",
+          "state": "scheduled",
+          "status": "Scheduled",
+          "venue": "Coventry Building Society Arena",
+          "competition": "Premier League",
+          "category": "England"
         }
       ],
       "standings": [
@@ -1304,7 +1320,7 @@
           "points": 7
         }
       ],
-      "verifiedAt": "2026-11-27T05:14:50.872Z"
+      "verifiedAt": "2026-11-27T15:15:41.282Z"
     },
     "laliga": {
       "name": "La Liga",
@@ -2383,7 +2399,7 @@
           "points": 5
         }
       ],
-      "verifiedAt": "2026-11-27T05:14:51.081Z"
+      "verifiedAt": "2026-11-27T15:15:41.520Z"
     },
     "bundesliga": {
       "name": "Bundesliga",
@@ -3312,7 +3328,7 @@
           "points": 4
         }
       ],
-      "verifiedAt": "2026-11-27T05:14:51.188Z"
+      "verifiedAt": "2026-11-27T15:15:41.644Z"
     },
     "seriea": {
       "name": "Serie A",
@@ -4343,7 +4359,7 @@
           "points": 6
         }
       ],
-      "verifiedAt": "2026-11-27T05:14:51.892Z"
+      "verifiedAt": "2026-11-27T15:15:41.763Z"
     }
   }
 }
