@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-26T18:40:38.015723+00:00",
+  "updatedAt": "2026-11-27T01:57:19.648872+00:00",
   "policy": {
     "publishVerifiedOnly": true,
     "preserveLastValidOnFailure": true,
@@ -11,11 +11,11 @@
     "leagues": 54,
     "visible": 38,
     "suspended": 16,
-    "activeFixtures": 8,
+    "activeFixtures": 7,
     "staleFixtures": 10,
     "needsSource": 0,
     "liveApiUnverified": 17,
-    "offSeason": 7
+    "offSeason": 8
   },
   "leagues": {
     "asian_games": {
@@ -44,7 +44,7 @@
       "publicVisible": true,
       "fixtureCount": 17,
       "recentOrUpcomingFixtureCount": 1,
-      "lastRecordedFixtureAt": "2026-11-26T14:12:12.723676+00:00",
+      "lastRecordedFixtureAt": "2026-11-26T22:59:27.596115+00:00",
       "nextRecordedFixtureAt": null,
       "sourceFiles": [
         "extended",
@@ -62,8 +62,8 @@
       "automatic": true,
       "status": "active-fixtures",
       "publicVisible": true,
-      "fixtureCount": 61,
-      "recentOrUpcomingFixtureCount": 35,
+      "fixtureCount": 67,
+      "recentOrUpcomingFixtureCount": 38,
       "lastRecordedFixtureAt": "2026-11-23T20:00:00+00:00",
       "nextRecordedFixtureAt": "2026-11-27T20:00:00+00:00",
       "sourceFiles": [
@@ -447,8 +447,8 @@
       "automatic": true,
       "status": "active-fixtures",
       "publicVisible": true,
-      "fixtureCount": 119,
-      "recentOrUpcomingFixtureCount": 104,
+      "fixtureCount": 114,
+      "recentOrUpcomingFixtureCount": 100,
       "lastRecordedFixtureAt": "2026-11-25T20:45:00+00:00",
       "nextRecordedFixtureAt": "2026-12-03T18:30:00+00:00",
       "sourceFiles": [
@@ -854,10 +854,10 @@
       "sport": "Motorsport",
       "pipeline": "extended",
       "automatic": true,
-      "status": "active-fixtures",
+      "status": "off-season",
       "publicVisible": true,
       "fixtureCount": 6,
-      "recentOrUpcomingFixtureCount": 1,
+      "recentOrUpcomingFixtureCount": 0,
       "lastRecordedFixtureAt": "2026-11-05T21:00:00+00:00",
       "nextRecordedFixtureAt": null,
       "sourceFiles": [
@@ -866,7 +866,7 @@
       "statisticsPublished": false,
       "standingsPublished": false,
       "rankingsPublished": false,
-      "note": "Dated fixtures are present near the current coverage window."
+      "note": "Seasonal calendar: historical data is preserved during the break."
     },
     "formulae": {
       "label": "Formula E",
