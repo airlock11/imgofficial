@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-28T11:27:50+08:00",
+  "updated_at": "2026-11-28T20:10:40+08:00",
   "refresh_minutes": 15,
   "leagues": {
     "pba": {
@@ -299,7 +299,7 @@
           "idleDiscoveryMinutes": 180,
           "gameDayDataRefreshMinutes": 15,
           "gameDayLivestreamRefreshMinutes": 5,
-          "lastSlowCheckAt": "2026-11-28T11:27:00+08:00"
+          "lastSlowCheckAt": "2026-11-28T20:09:48+08:00"
         },
         "failClosed": true
       }
@@ -1071,24 +1071,24 @@
       ],
       "standings": [
         {
-          "team": "NU Bulldogs",
-          "wins": 9,
+          "team": "UP Fighting Maroons",
+          "wins": 10,
           "losses": 4
         },
         {
-          "team": "UP Fighting Maroons",
+          "team": "FEU Tamaraws",
           "wins": 9,
-          "losses": 4
+          "losses": 5
+        },
+        {
+          "team": "NU Bulldogs",
+          "wins": 9,
+          "losses": 5
         },
         {
           "team": "De La Salle Green Archers",
           "wins": 8,
-          "losses": 5
-        },
-        {
-          "team": "FEU Tamaraws",
-          "wins": 8,
-          "losses": 5
+          "losses": 6
         },
         {
           "team": "UST Growling Tigers",
@@ -1112,6 +1112,32 @@
         }
       ],
       "games": [
+        {
+          "eventId": "uaap-live-57",
+          "date": "2026-11-28T17:00:00+08:00",
+          "displayTime": "Nov 28 · Final",
+          "away": "UP Fighting Maroons",
+          "home": "NU Bulldogs",
+          "awayScore": "77",
+          "homeScore": "67",
+          "status": "Final",
+          "state": "final",
+          "sourceName": "UAAP Live Stats",
+          "sourceUrl": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball?game_id=57"
+        },
+        {
+          "eventId": "uaap-live-56",
+          "date": "2026-11-28T14:30:00+08:00",
+          "displayTime": "Nov 28 · Final",
+          "away": "De La Salle Green Archers",
+          "home": "FEU Tamaraws",
+          "awayScore": "72",
+          "homeScore": "74",
+          "status": "Final",
+          "state": "final",
+          "sourceName": "UAAP Live Stats",
+          "sourceUrl": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball?game_id=56"
+        },
         {
           "eventId": "uaap-live-55",
           "date": "2026-11-25T17:00:00+08:00",
@@ -1241,51 +1267,28 @@
           "state": "final",
           "sourceName": "UAAP Live Stats",
           "sourceUrl": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball?game_id=46"
-        },
-        {
-          "eventId": "uaap-live-45",
-          "date": "2026-11-08T17:00:00+08:00",
-          "displayTime": "Nov 8 · Final",
-          "away": "FEU Tamaraws",
-          "home": "UST Growling Tigers",
-          "awayScore": "85",
-          "homeScore": "86",
-          "status": "Final",
-          "state": "final",
-          "sourceName": "UAAP Live Stats",
-          "sourceUrl": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball?game_id=45"
-        },
-        {
-          "eventId": "uaap-live-44",
-          "date": "2026-11-08T14:30:00+08:00",
-          "displayTime": "Nov 8 · Final",
-          "away": "NU Bulldogs",
-          "home": "De La Salle Green Archers",
-          "awayScore": "84",
-          "homeScore": "80",
-          "status": "Final",
-          "state": "final",
-          "sourceName": "UAAP Live Stats",
-          "sourceUrl": "https://uaap.livestats.ph/tournaments/uaap-season-89-men-s-basketball?game_id=44"
         }
       ],
       "automation": {
         "enabled": true,
-        "mode": "idle",
-        "dataRefreshMinutes": 180,
-        "livestreamRefreshMinutes": 0,
+        "mode": "game-day",
+        "dataRefreshMinutes": 15,
+        "livestreamRefreshMinutes": 5,
         "scheduleAware": {
           "enabled": true,
           "timezone": "Asia/Manila",
-          "mode": "idle",
-          "gameDay": false,
-          "todayGameCount": 0,
-          "todayGames": [],
+          "mode": "game-day",
+          "gameDay": true,
+          "todayGameCount": 2,
+          "todayGames": [
+            "uaap-live-57",
+            "uaap-live-56"
+          ],
           "nextGameAt": "",
           "idleDiscoveryMinutes": 180,
           "gameDayDataRefreshMinutes": 15,
           "gameDayLivestreamRefreshMinutes": 5,
-          "lastSlowCheckAt": "2026-11-28T11:27:35+08:00"
+          "lastSlowCheckAt": "2026-11-28T20:10:26+08:00"
         },
         "failClosed": true
       }
@@ -1309,27 +1312,30 @@
         "idleDiscoveryMinutes": 180,
         "gameDayDataRefreshMinutes": 15,
         "gameDayLivestreamRefreshMinutes": 5,
-        "lastSlowCheckAt": "2026-11-28T11:27:00+08:00"
+        "lastSlowCheckAt": "2026-11-28T20:09:48+08:00"
       },
       "failClosed": true
     },
     "uaap": {
       "enabled": true,
-      "mode": "idle",
-      "dataRefreshMinutes": 180,
-      "livestreamRefreshMinutes": 0,
+      "mode": "game-day",
+      "dataRefreshMinutes": 15,
+      "livestreamRefreshMinutes": 5,
       "scheduleAware": {
         "enabled": true,
         "timezone": "Asia/Manila",
-        "mode": "idle",
-        "gameDay": false,
-        "todayGameCount": 0,
-        "todayGames": [],
+        "mode": "game-day",
+        "gameDay": true,
+        "todayGameCount": 2,
+        "todayGames": [
+          "uaap-live-57",
+          "uaap-live-56"
+        ],
         "nextGameAt": "",
         "idleDiscoveryMinutes": 180,
         "gameDayDataRefreshMinutes": 15,
         "gameDayLivestreamRefreshMinutes": 5,
-        "lastSlowCheckAt": "2026-11-28T11:27:35+08:00"
+        "lastSlowCheckAt": "2026-11-28T20:10:26+08:00"
       },
       "failClosed": true
     }
